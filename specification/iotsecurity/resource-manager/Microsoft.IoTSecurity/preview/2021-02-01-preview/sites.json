@@ -94,7 +94,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SitesModel"
+              "$ref": "#/definitions/SiteModel"
             }
           },
           "default": {
@@ -124,20 +124,20 @@
             "$ref": "#/parameters/SiteScope"
           },
           {
-            "$ref": "#/parameters/SitesModel"
+            "$ref": "#/parameters/SiteModel"
           }
         ],
         "responses": {
           "200": {
             "description": "Updated IoT site",
             "schema": {
-              "$ref": "#/definitions/SitesModel"
+              "$ref": "#/definitions/SiteModel"
             }
           },
           "201": {
             "description": "Created IoT site",
             "schema": {
-              "$ref": "#/definitions/SitesModel"
+              "$ref": "#/definitions/SiteModel"
             }
           },
           "default": {
@@ -194,12 +194,12 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SitesModel"
+            "$ref": "#/definitions/SiteModel"
           }
         }
       }
     },
-    "SitesModel": {
+    "SiteModel": {
       "type": "object",
       "description": "IoT site model",
       "properties": {
@@ -252,13 +252,13 @@
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
-    "SitesModel": {
-      "name": "sitesModel",
+    "SiteModel": {
+      "name": "siteModel",
       "in": "body",
       "required": true,
       "description": "The IoT sites model",
       "schema": {
-        "$ref": "#/definitions/SitesModel"
+        "$ref": "#/definitions/SiteModel"
       },
       "x-ms-parameter-location": "method"
     }

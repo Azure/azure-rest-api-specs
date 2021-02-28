@@ -97,7 +97,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SensorsModel"
+              "$ref": "#/definitions/SensorModel"
             }
           },
           "default": {
@@ -130,20 +130,20 @@
             "$ref": "#/parameters/SensorName"
           },
           {
-            "$ref": "#/parameters/SensorsModel"
+            "$ref": "#/parameters/SensorModel"
           }
         ],
         "responses": {
           "200": {
             "description": "Updated IoT sensor",
             "schema": {
-              "$ref": "#/definitions/SensorsModel"
+              "$ref": "#/definitions/SensorModel"
             }
           },
           "201": {
             "description": "Created IoT sensor",
             "schema": {
-              "$ref": "#/definitions/SensorsModel"
+              "$ref": "#/definitions/SensorModel"
             }
           },
           "default": {
@@ -335,12 +335,12 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SensorsModel"
+            "$ref": "#/definitions/SensorModel"
           }
         }
       }
     },
-    "SensorsModel": {
+    "SensorModel": {
       "type": "object",
       "description": "IoT sensor model",
       "properties": {
@@ -348,6 +348,12 @@
           "x-ms-client-flatten": true,
           "description": "IoT sensor properties",
           "$ref": "#/definitions/SensorProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -362,12 +368,6 @@
       "properties": {
         "connectivityTime": {
           "description": "Last connectivity time of the IoT sensor",
-          "readOnly": true,
-          "type": "string",
-          "example": "2020-11-17T12:31:25Z"
-        },
-        "creationTime": {
-          "description": "Creation time of the IoT sensor",
           "readOnly": true,
           "type": "string",
           "example": "2020-11-17T12:31:25Z"
@@ -493,13 +493,13 @@
       "description": "Name of the IoT sensor",
       "x-ms-parameter-location": "method"
     },
-    "SensorsModel": {
-      "name": "sensorsModel",
+    "SensorModel": {
+      "name": "sensorModel",
       "in": "body",
       "required": true,
       "description": "The IoT sensor model",
       "schema": {
-        "$ref": "#/definitions/SensorsModel"
+        "$ref": "#/definitions/SensorModel"
       },
       "x-ms-parameter-location": "method"
     }
