@@ -1,0 +1,334 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-03-01",
+    "title": "ManagedPrivateEndpointsClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints/{managedPrivateEndpointName}": {
+      "get": {
+        "operationId": "ManagedPrivateEndpoints_ListByWorkspace",
+        "description": "Returns a list of managed private endpoints",
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Get",
+        "description": "Get Managed Private Endpoints",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedVirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedPrivateEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Get a managed private endpoint": {
+            "$ref": "./examples/GetManagedPrivateEndpoint.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Create",
+        "description": "Create Managed Private Endpoints",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedVirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedPrivateEndpointNameParameter"
+          },
+          {
+            "name": "managedPrivateEndpoint",
+            "in": "body",
+            "required": true,
+            "description": "Managed private endpoint properties.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Create a managed private endpoint": {
+            "$ref": "./examples/CreateManagedPrivateEndpoint.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_Delete",
+        "description": "Delete Managed Private Endpoints",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedVirtualNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedPrivateEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Already deleted"
+          }
+        },
+        "x-ms-examples": {
+          "Delete a managed private endpoint": {
+            "$ref": "./examples/DeleteManagedPrivateEndpoint.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints": {
+      "get": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "operationId": "ManagedPrivateEndpoints_ListByWorkspace",
+        "description": "List Managed Private Endpoints",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedVirtualNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointListResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed private endpoints": {
+            "$ref": "./examples/ListManagedPrivateEndpoints.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedPrivateEndpointListResponse": {
+      "description": "A list of managed private endpoints",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of managed private endpoints",
+          "items": {
+            "$ref": "#/definitions/ManagedPrivateEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedPrivateEndpoint": {
+      "description": "Managed private endpoint",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedPrivateEndpointProperties",
+          "description": "Managed private endpoint properties"
+        }
+      }
+    },
+    "ManagedPrivateEndpointProperties": {
+      "description": "Properties of a managed private endpoint",
+      "type": "object",
+      "properties": {
+        "privateLinkResourceId": {
+          "description": "The ARM resource ID of the resource to which the managed private endpoint is created",
+          "type": "string"
+        },
+        "groupId": {
+          "description": "The groupId to which the managed private endpoint is created",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The managed private endpoint provisioning state",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionState": {
+          "description": "The managed private endpoint connection state",
+          "$ref": "#/definitions/ManagedPrivateEndpointConnectionState"
+        },
+        "isReserved": {
+          "description": "Denotes whether the managed private endpoint is reserved",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedPrivateEndpointConnectionState": {
+      "description": "The connection state of a managed private endpoint",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The approval status",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The managed private endpoint description",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required on the managed private endpoint",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "ManagedVirtualNetworkNameParameter": {
+      "name": "managedVirtualNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-client-default": "default",
+      "description": "Managed virtual network name",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedPrivateEndpointNameParameter": {
+      "name": "managedPrivateEndpointName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Managed private endpoint name",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
