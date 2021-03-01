@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_express_route_global_reach000001",
+    "circuitName": "er1",
+    "peeringName": "AzurePrivatePeering",
+    "connectionName": "conn12",
+    "expressRouteCircuitConnectionParameters": {
+      "properties": {
+        "expressRouteCircuitPeering": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_global_reach000001/providers/Microsoft.Network/expressRouteCircuits/er1/peerings/AzurePrivatePeering"
+        },
+        "peerExpressRouteCircuitPeering": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_global_reach000001/providers/Microsoft.Network/expressRouteCircuits/er2/peerings/AzurePrivatePeering"
+        },
+        "addressPrefix": "104.0.0.0/29"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "conn12",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_global_reach000001/providers/Microsoft.Network/expressRouteCircuits/er1/peerings/AzurePrivatePeering/connections/conn12",
+      "etag": "W/\"b8381148-2b29-4244-bd77-2daa1f04493f\"",
+      "properties": {
+        "provisioningState": "Failed",
+        "expressRouteCircuitPeering": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_global_reach000001/providers/Microsoft.Network/expressRouteCircuits/er1/peerings/AzurePrivatePeering"
+        },
+        "peerExpressRouteCircuitPeering": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_global_reach000001/providers/Microsoft.Network/expressRouteCircuits/er2/peerings/AzurePrivatePeering"
+        },
+        "addressPrefix": "104.0.0.0/29",
+        "circuitConnectionStatus": "Connected"
+      },
+      "type": "Microsoft.Network/expressRouteCircuits/peerings/connections"
+    }
+  }
+}

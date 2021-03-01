@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_express_route_ipv6_peering2000001",
+    "circuitName": "test_circuit",
+    "parameters": {
+      "location": "eastus",
+      "sku": {
+        "name": "Premium_MeteredData",
+        "tier": "Premium",
+        "family": "MeteredData"
+      },
+      "properties": {
+        "serviceProviderProperties": {
+          "serviceProviderName": "Ibiza Test Provider",
+          "peeringLocation": "Area51",
+          "bandwidthInMbps": 50
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "test_circuit",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_ipv6_peering2000001/providers/Microsoft.Network/expressRouteCircuits/test_circuit",
+      "etag": "W/\"4b86f708-6eb2-490e-ac2e-19987c481543\"",
+      "type": "Microsoft.Network/expressRouteCircuits",
+      "location": "eastus",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "5a70b181-e5f2-4a71-b710-963d120aa2cc",
+        "peerings": [],
+        "authorizations": [],
+        "serviceProviderProperties": {
+          "serviceProviderName": "Ibiza Test Provider",
+          "peeringLocation": "Area51",
+          "bandwidthInMbps": 50
+        },
+        "circuitProvisioningState": "Enabled",
+        "allowClassicOperations": false,
+        "gatewayManagerEtag": "",
+        "serviceKey": "04bc83af-d1b1-4eae-acfc-ffafcfcb2db0",
+        "serviceProviderProvisioningState": "NotProvisioned",
+        "allowGlobalReach": false,
+        "globalReachEnabled": false,
+        "stag": 3
+      },
+      "sku": {
+        "name": "Premium_MeteredData",
+        "tier": "Premium",
+        "family": "MeteredData"
+      }
+    }
+  }
+}

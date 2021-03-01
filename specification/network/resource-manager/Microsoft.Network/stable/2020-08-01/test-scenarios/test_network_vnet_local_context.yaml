@@ -1,0 +1,36 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vnet_local_context
+    steps:
+      - step: RawStep_2528
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:01:29 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:01:27Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet-000002
+        resourceName: virtualNetworks_vnet-000002
+        exampleFile: ../examples/Create_virtualNetworks_vnet-000002_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_2530
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Subnets_Delete_2531
+        exampleFile: ../examples/Subnets_Delete_2485_Generated.json
+        operationId: Subnets_Delete
+      - step: VirtualNetworks_Delete_2532
+        exampleFile: ../examples/VirtualNetworks_Delete_2419_Generated.json
+        operationId: VirtualNetworks_Delete
+    variables:
+      virtualNetworkName: vnet-000002
+      subnetName: subnet-000003

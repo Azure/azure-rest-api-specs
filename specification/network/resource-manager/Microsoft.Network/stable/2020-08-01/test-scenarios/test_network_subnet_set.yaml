@@ -1,0 +1,74 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_subnet_set
+    steps:
+      - step: RawStep_2408
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_subnet_set_test000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:04:48 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_subnet_set_test000001","name":"cli_subnet_set_test000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T14:04:45Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2410.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2411
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_subnet_set_test000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:04:58 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_subnet_set_test000001","name":"cli_subnet_set_test000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T14:04:45Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkSecurityGroups_test-vnet-nsg
+        resourceName: networkSecurityGroups_test-vnet-nsg
+        exampleFile: ../examples/Create_networkSecurityGroups_test-vnet-nsg_Generated.json
+        operationId: NetworkSecurityGroups_CreateOrUpdate
+      - step: Subnets_Get_2413
+        exampleFile: ../examples/Subnets_Get_2413_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_default
+        resourceName: subnets_default
+        exampleFile: ../examples/Create_subnets_default_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: Update_subnets_default_2416
+        resourceName: subnets_default
+        operationId: Subnets_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/addressPrefix
+            value: 123.0.0.0/24
+      - step: Update_subnets_default_2418
+        resourceName: subnets_default
+        operationId: Subnets_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/addressPrefix
+            value: 123.0.5.0/24
+          - remove: /properties/networkSecurityGroup
+      - step: VirtualNetworks_Delete_2419
+        exampleFile: ../examples/VirtualNetworks_Delete_2419_Generated.json
+        operationId: VirtualNetworks_Delete
+      - step: NetworkSecurityGroups_Delete_2420
+        exampleFile: ../examples/NetworkSecurityGroups_Delete_2216_Generated.json
+        operationId: NetworkSecurityGroups_Delete
+    variables:
+      virtualNetworkName: vnet1
+      networkSecurityGroupName: test-vnet-nsg
+      subnetName: default

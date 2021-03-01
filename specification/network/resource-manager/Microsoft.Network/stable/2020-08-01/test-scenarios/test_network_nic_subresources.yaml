@@ -1,0 +1,374 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_nic_subresources
+    steps:
+      - step: RawStep_2155
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_subresource000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:42:52 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001","name":"cli_test_nic_subresource000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T15:42:49Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2157.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2158
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_subresource000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:43:03 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001","name":"cli_test_nic_subresource000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T15:42:49Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkInterfaces_nic1
+        resourceName: networkInterfaces_nic1
+        exampleFile: ../examples/Create_networkInterfaces_nic1_Generated_2160.json
+        operationId: NetworkInterfaces_CreateOrUpdate
+      - step: Update_networkInterfaces_nic1_2162
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/ipConfigurations/0
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig2
+              name: ipconfig2
+              properties:
+                privateIPAddress: 10.0.0.5
+                privateIPAllocationMethod: Dynamic
+                privateIPAddressVersion: IPv4
+                subnet:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+                primary: true
+                provisioningState: Succeeded
+              type: Microsoft.Network/networkInterfaces/ipConfigurations
+          - replace: /properties/ipConfigurations/1/properties/primary
+            value: false
+      - step: Update_networkInterfaces_nic1_2164
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/ipConfigurations/1
+          - add: /properties/ipConfigurations/0
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1
+              name: ipconfig1
+              properties:
+                privateIPAddress: 10.0.0.4
+                privateIPAllocationMethod: Dynamic
+                privateIPAddressVersion: IPv4
+                subnet:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+                primary: true
+                provisioningState: Succeeded
+              type: Microsoft.Network/networkInterfaces/ipConfigurations
+          - replace: /properties/ipConfigurations/1/properties/primary
+            value: false
+      - step: Update_networkInterfaces_nic1_2166
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/ipConfigurations/1
+      - step: RawStep_2167
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_subresource000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:45:25 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001","name":"cli_test_nic_subresource000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T15:42:49Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet2
+        resourceName: virtualNetworks_vnet2
+        exampleFile: ../examples/Create_virtualNetworks_vnet2_Generated_2169.json
+        operationId: VirtualNetworks_CreateOrUpdate
+        variables:
+          virtualNetworkName: vnet2
+      - step: RawStep_2170
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_subresource000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:45:36 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001","name":"cli_test_nic_subresource000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T15:42:49Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_publicip2
+        resourceName: publicIPAddresses_publicip2
+        exampleFile: ../examples/Create_publicIPAddresses_publicip2_Generated_2172.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2173
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_subresource000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:45:46 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001","name":"cli_test_nic_subresource000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T15:42:49Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2174
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_nic_subresource000001%27%20and%20name%20eq%20%27None%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FpublicIPAddresses%27&api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '12'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:45:47 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"value":[]}'
+      - step: RawStep_2175
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_subresource000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{},"resources":[{"apiVersion":"2020-08-01","type":"Microsoft.Network/publicIPAddresses","name":"PublicIPlb1","location":"westus","tags":{},"dependsOn":[],"properties":{"publicIPAllocationMethod":"Dynamic"},"sku":{"name":"Basic"}},{"type":"Microsoft.Network/loadBalancers","name":"lb1","location":"westus","tags":{},"apiVersion":"2020-08-01","dependsOn":["Microsoft.Network/publicIpAddresses/PublicIPlb1"],"properties":{"backendAddressPools":[{"name":"lb1bepool"}],"frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","properties":{"publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"},"privateIPAddressVersion":"IPv4"}}]},"sku":{"name":"Basic"}}],"outputs":{"loadBalancer":{"type":"object","value":"[reference('lb1')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_subresource000001/providers/Microsoft.Resources/deployments/lb_deploy_Vfc4F1CqbceLrwa8l7716Q8jQqrP0l47/operationStatuses/08585874253360367777?api-version=2020-10-01
+          cache-control: no-cache
+          content-length: '1346'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:45:52 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1189'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Resources/deployments/lb_deploy_Vfc4F1CqbceLrwa8l7716Q8jQqrP0l47","name":"lb_deploy_Vfc4F1CqbceLrwa8l7716Q8jQqrP0l47","type":"Microsoft.Resources/deployments","properties":{"templateHash":"1964258039096274628","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-02-24T15:45:51.3489779Z","duration":"PT1.9081281S","correlationId":"2200ad43-3333-4302-b988-f8d8c7090391","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"publicIPAddresses","locations":["westus"]},{"resourceType":"loadBalancers","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"PublicIPlb1"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1","resourceType":"Microsoft.Network/loadBalancers","resourceName":"lb1"}]}}
+      - step: RawStep_2176
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_subresource000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874253360367777?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '22'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:46:22 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_2177
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_subresource000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '3192'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:46:23 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Resources/deployments/lb_deploy_Vfc4F1CqbceLrwa8l7716Q8jQqrP0l47","name":"lb_deploy_Vfc4F1CqbceLrwa8l7716Q8jQqrP0l47","type":"Microsoft.Resources/deployments","properties":{"templateHash":"1964258039096274628","parameters":{},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-02-24T15:46:09.1089858Z","duration":"PT19.668136S","correlationId":"2200ad43-3333-4302-b988-f8d8c7090391","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"publicIPAddresses","locations":["westus"]},{"resourceType":"loadBalancers","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"PublicIPlb1"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1","resourceType":"Microsoft.Network/loadBalancers","resourceName":"lb1"}],"outputs":{"loadBalancer":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"fdf74eff-84c2-4e79-8dcc-4a73395f155c","frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd","etag":"W/\"a3400815-4c62-430c-a329-195f8a6d6c9d\"","type":"Microsoft.Network/loadBalancers/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAllocationMethod":"Dynamic","publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"},"privateIPAddressVersion":"IPv4"}}],"backendAddressPools":[{"name":"lb1bepool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool","etag":"W/\"a3400815-4c62-430c-a329-195f8a6d6c9d\"","properties":{"provisioningState":"Succeeded"},"type":"Microsoft.Network/loadBalancers/backendAddressPools"}],"loadBalancingRules":[],"probes":[],"inboundNatRules":[],"inboundNatPools":[]}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"}]}}
+      - step: LoadBalancers_Get_2178
+        exampleFile: ../examples/LoadBalancers_Get_2178_Generated.json
+        operationId: LoadBalancers_Get
+      - step: Create_loadBalancers_lb1
+        resourceName: loadBalancers_lb1
+        exampleFile: ../examples/Create_loadBalancers_lb1_Generated_2180.json
+        operationId: LoadBalancers_CreateOrUpdate
+      - step: Update_loadBalancers_lb1_2182
+        resourceName: loadBalancers_lb1
+        operationId: LoadBalancers_CreateOrUpdate
+        resourceUpdate:
+          - add: >-
+              /properties/frontendIPConfigurations/0/properties/inboundNatRules/1
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/inboundNatRules/rule2
+          - add: /properties/inboundNatRules/1
+            value:
+              name: rule2
+              properties:
+                frontendIPConfiguration:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd
+                  name: LoadBalancerFrontEnd
+                  properties:
+                    privateIPAllocationMethod: Dynamic
+                    privateIPAddressVersion: IPv4
+                    publicIPAddress:
+                      id: >-
+                        /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1
+                protocol: Tcp
+                frontendPort: 200
+                backendPort: 200
+                provisioningState: Succeeded
+                enableFloatingIP: false
+                idleTimeoutInMinutes: 4
+                enableDestinationServiceEndpoint: false
+                enableTcpReset: false
+                allowBackendPortConflict: false
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/inboundNatRules/rule2
+              type: Microsoft.Network/loadBalancers/inboundNatRules
+      - step: Update_loadBalancers_lb1_2184
+        resourceName: loadBalancers_lb1
+        operationId: LoadBalancers_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/backendAddressPools/1
+            value:
+              name: bap1
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bap1
+              properties:
+                provisioningState: Succeeded
+              type: Microsoft.Network/loadBalancers/backendAddressPools
+      - step: Update_loadBalancers_lb1_2186
+        resourceName: loadBalancers_lb1
+        operationId: LoadBalancers_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/backendAddressPools/2
+            value:
+              name: bap2
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bap2
+              properties:
+                provisioningState: Succeeded
+              type: Microsoft.Network/loadBalancers/backendAddressPools
+      - step: LoadBalancerBackendAddressPools_Get_2187
+        exampleFile: ../examples/LoadBalancerBackendAddressPools_Get_1773_Generated.json
+        operationId: LoadBalancerBackendAddressPools_Get
+      - step: NetworkInterfaces_Get_2188
+        exampleFile: ../examples/NetworkInterfaces_Get_2188_Generated.json
+        operationId: NetworkInterfaces_Get
+      - step: Update_networkInterfaces_nic1_2190
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/ipConfigurations/0/properties/privateIPAddress
+            value: 10.0.0.15
+          - replace: >-
+              /properties/ipConfigurations/0/properties/privateIPAllocationMethod
+            value: Static
+          - add: >-
+              /properties/ipConfigurations/0/properties/loadBalancerBackendAddressPools
+            value:
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bap1
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bap2
+          - add: >-
+              /properties/ipConfigurations/0/properties/loadBalancerInboundNatRules
+            value:
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/inboundNatRules/rule1
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/inboundNatRules/rule2
+      - step: Update_networkInterfaces_nic1_2192
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/ipConfigurations/0/properties/privateIPAddress
+            value: 10.0.0.50
+      - step: Update_networkInterfaces_nic1_2194
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - remove: >-
+              /properties/ipConfigurations/0/properties/loadBalancerInboundNatRules/0
+      - step: Update_networkInterfaces_nic1_2196
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - add: >-
+              /properties/ipConfigurations/0/properties/loadBalancerInboundNatRules/1
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/inboundNatRules/rule1
+      - step: Update_networkInterfaces_nic1_2198
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - remove: >-
+              /properties/ipConfigurations/0/properties/loadBalancerBackendAddressPools/0
+      - step: Update_networkInterfaces_nic1_2200
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - add: >-
+              /properties/ipConfigurations/0/properties/loadBalancerBackendAddressPools/1
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bap1
+      - step: Update_networkInterfaces_nic1_2202
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - replace: >-
+              /properties/ipConfigurations/0/properties/privateIPAllocationMethod
+            value: Dynamic
+          - add: /properties/ipConfigurations/0/properties/publicIPAddress
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/publicIPAddresses/publicip2
+      - step: Update_networkInterfaces_nic1_2204
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/ipConfigurations/0/properties/privateIPAddress
+            value: 10.0.0.4
+          - replace: /properties/ipConfigurations/0/properties/subnet/id
+            value: >-
+              /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_subresource000001/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/subnet2
+    variables:
+      virtualNetworkName: vnet1
+      networkInterfaceName: nic1
+      publicIpAddressName: publicip2
+      loadBalancerName: lb1
+      backendAddressPoolName: bap1

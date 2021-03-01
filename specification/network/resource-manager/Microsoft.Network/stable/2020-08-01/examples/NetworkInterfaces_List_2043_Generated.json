@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_nic_scenario000001"
+  },
+  "responses": {
+    "200": {
+      "value": [
+        {
+          "name": "cli-test-nic",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/networkInterfaces/cli-test-nic",
+          "etag": "W/\"d31834c4-c490-491f-b1e5-9b8eab13ce2d\"",
+          "location": "westus",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "resourceGuid": "2f60b9c6-94dc-44e4-a060-9bb28ca3d8fd",
+            "ipConfigurations": [
+              {
+                "name": "ipconfig1",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/networkInterfaces/cli-test-nic/ipConfigurations/ipconfig1",
+                "etag": "W/\"d31834c4-c490-491f-b1e5-9b8eab13ce2d\"",
+                "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+                "properties": {
+                  "provisioningState": "Succeeded",
+                  "privateIPAddress": "10.0.0.15",
+                  "privateIPAllocationMethod": "Dynamic",
+                  "publicIPAddress": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/publicIPAddresses/publicip1"
+                  },
+                  "subnet": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet"
+                  },
+                  "primary": true,
+                  "privateIPAddressVersion": "IPv4"
+                }
+              }
+            ],
+            "dnsSettings": {
+              "dnsServers": [],
+              "appliedDnsServers": [],
+              "internalDomainNameSuffix": "iwl1jcosckgudiybppuv1zb4nc.dx.internal.cloudapp.net"
+            },
+            "enableAcceleratedNetworking": false,
+            "enableIPForwarding": false,
+            "networkSecurityGroup": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/networkSecurityGroups/mynsg"
+            },
+            "hostedWorkloads": [],
+            "tapConfigurations": [],
+            "nicType": "Standard"
+          },
+          "type": "Microsoft.Network/networkInterfaces"
+        }
+      ]
+    }
+  }
+}

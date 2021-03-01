@@ -1,0 +1,59 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_private_link_resource_acr
+    steps:
+      - step: RawStep_3276
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_sa_plr000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 09:18:52 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_plr000001","name":"cli_test_sa_plr000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-08T09:18:50Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_3277
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_plr000001/providers/Microsoft.ContainerRegistry/registries/testreg000002?api-version=2020-11-01-preview
+        requestBody: >-
+          {"location":"westus","sku":{"name":"Premium"},"properties":{"adminUserEnabled":false,"publicNetworkAccess":"Enabled","networkRuleBypassOptions":"AzureServices"}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1300'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 09:18:59 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1179'
+        responseExpected: >-
+          {"sku":{"name":"Premium","tier":"Premium"},"type":"Microsoft.ContainerRegistry/registries","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_plr000001/providers/Microsoft.ContainerRegistry/registries/testreg000002","name":"testreg000002","location":"westus","tags":{},"systemData":{"createdBy":"yuchaoyan@microsoft.com","createdByType":"User","createdAt":"2021-02-08T09:18:57.1511249+00:00","lastModifiedBy":"yuchaoyan@microsoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-08T09:18:57.1511249+00:00"},"properties":{"loginServer":"testreg000002.azurecr.io","creationDate":"2021-02-08T09:18:57.1511249Z","provisioningState":"Succeeded","adminUserEnabled":false,"networkRuleSet":{"defaultAction":"Allow","virtualNetworkRules":[],"ipRules":[]},"policies":{"quarantinePolicy":{"status":"disabled"},"trustPolicy":{"type":"Notary","status":"disabled"},"retentionPolicy":{"days":7,"lastUpdatedTime":"2021-02-08T09:18:59.5205754+00:00","status":"disabled"}},"encryption":{"status":"disabled"},"dataEndpointEnabled":false,"dataEndpointHostNames":[],"privateEndpointConnections":[],"publicNetworkAccess":"Enabled","networkRuleBypassOptions":"AzureServices","zoneRedundancy":"Disabled"}}
+      - step: RawStep_3278
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_plr000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateLinkResources?api-version=2019-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '487'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 09:19:02 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"type":"Microsoft.ContainerRegistry/registries/privateLinkResources","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_plr000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateLinkResources/registry","name":"registry","properties":{"groupId":"registry","requiredMembers":["registry_data_westus","registry"],"requiredZoneNames":["privatelink.azurecr.io"]}}]}

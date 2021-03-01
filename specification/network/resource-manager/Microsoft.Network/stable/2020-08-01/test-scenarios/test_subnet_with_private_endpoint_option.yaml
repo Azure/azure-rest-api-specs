@@ -1,0 +1,68 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_subnet_with_private_endpoint_option
+    steps:
+      - step: RawStep_3333
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_subnet_with_private_endpoint_option000001?api-version=2020-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 02 Sep 2020 04:35:43 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001","name":"test_subnet_with_private_endpoint_option000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2020-09-02T04:35:38Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_3334
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet?api-version=2020-05-01
+        requestBody: >-
+          {"location":"westus","tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{}}}
+        requestHeaders:
+          azure-asyncnotification: Enabled
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/bc3a3c0c-a97a-4164-8600-9a7365ebe3e4?api-version=2020-05-01
+          cache-control: no-cache
+          content-length: '768'
+          content-type: application/json; charset=utf-8
+          date: Wed, 02 Sep 2020 04:35:50 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-arm-service-request-id: 49336de1-4e64-4b00-981b-4a96dce25398
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"MyVnet","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet","etag":"W/\"c67ebab2-e3df-4dd7-95c5-ca347dc55b97\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"33fbc4d1-e596-4bfc-ae13-826d83e4c2bf","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_3335
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet?api-version=2020-05-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet","location":"westus","tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[{"properties":{"addressPrefix":"10.0.1.0/24","privateEndpointNetworkPolicies":"Disabled"},"name":"MySubnet"}],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/70a41484-d313-49b3-8e9a-bce74da0aef3?api-version=2020-05-01
+          cache-control: no-cache
+          content-length: '1443'
+          content-type: application/json; charset=utf-8
+          date: Wed, 02 Sep 2020 04:35:57 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-arm-service-request-id: e799cac7-8288-4005-81cf-8d01d1843b8b
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        responseExpected: >-
+          {"name":"MyVnet","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet","etag":"W/\"243c98e1-0869-4e02-8129-c002e28b7b44\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"33fbc4d1-e596-4bfc-ae13-826d83e4c2bf","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[{"name":"MySubnet","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet/subnets/MySubnet","etag":"W/\"243c98e1-0869-4e02-8129-c002e28b7b44\"","properties":{"provisioningState":"Updating","addressPrefix":"10.0.1.0/24","delegations":[],"privateEndpointNetworkPolicies":"Disabled","privateLinkServiceNetworkPolicies":"Enabled"},"type":"Microsoft.Network/virtualNetworks/subnets"}],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}

@@ -1,0 +1,141 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_service_endpoints
+    steps:
+      - step: AvailableEndpointServices_List_2365
+        exampleFile: ../examples/AvailableEndpointServices_List_2365_Generated.json
+        operationId: AvailableEndpointServices_List
+      - step: RawStep_2366
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/network_service_endpoint_scenario_test000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:43:42 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/network_service_endpoint_scenario_test000001","name":"network_service_endpoint_scenario_test000001","type":"Microsoft.Resources/resourceGroups","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:43:38Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_serviceEndpointPolicies_policy1
+        resourceName: serviceEndpointPolicies_policy1
+        exampleFile: ../examples/Create_serviceEndpointPolicies_policy1_Generated.json
+        operationId: ServiceEndpointPolicies_CreateOrUpdate
+      - step: Update_serviceEndpointPolicies_policy1_2369
+        resourceName: serviceEndpointPolicies_policy1
+        operationId: ServiceEndpointPolicies_CreateOrUpdate
+        resourceUpdate:
+          - replace: /tags/test
+            value: nest
+      - step: ServiceEndpointPolicies_ListByResourceGroup_2370
+        exampleFile: >-
+          ../examples/ServiceEndpointPolicies_ListByResourceGroup_2370_Generated.json
+        operationId: ServiceEndpointPolicies_ListByResourceGroup
+      - step: ServiceEndpointPolicies_Delete_2371
+        exampleFile: ../examples/ServiceEndpointPolicies_Delete_2371_Generated.json
+        operationId: ServiceEndpointPolicies_Delete
+      - step: ServiceEndpointPolicies_ListByResourceGroup_2372
+        exampleFile: >-
+          ../examples/ServiceEndpointPolicies_ListByResourceGroup_2372_Generated.json
+        operationId: ServiceEndpointPolicies_ListByResourceGroup
+      - step: RawStep_2373
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/network_service_endpoint_scenario_test000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:44:55 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/network_service_endpoint_scenario_test000001","name":"network_service_endpoint_scenario_test000001","type":"Microsoft.Resources/resourceGroups","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:43:38Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_serviceEndpointPolicies_policy1_2375
+        resourceName: serviceEndpointPolicies_policy1_2375
+        exampleFile: ../examples/Create_serviceEndpointPolicies_policy1_2375_Generated.json
+        operationId: ServiceEndpointPolicies_CreateOrUpdate
+      - step: Create_serviceEndpointPolicyDefinitions_storage-def
+        resourceName: serviceEndpointPolicyDefinitions_storage-def
+        exampleFile: >-
+          ../examples/Create_serviceEndpointPolicyDefinitions_storage-def_Generated.json
+        operationId: ServiceEndpointPolicyDefinitions_CreateOrUpdate
+      - step: Update_serviceEndpointPolicyDefinitions_storage-def_2378
+        resourceName: serviceEndpointPolicyDefinitions_storage-def
+        operationId: ServiceEndpointPolicyDefinitions_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/description
+            value: Better description
+      - step: ServiceEndpointPolicyDefinitions_ListByResourceGroup_2379
+        exampleFile: >-
+          ../examples/ServiceEndpointPolicyDefinitions_ListByResourceGroup_2379_Generated.json
+        operationId: ServiceEndpointPolicyDefinitions_ListByResourceGroup
+      - step: ServiceEndpointPolicyDefinitions_Delete_2380
+        exampleFile: >-
+          ../examples/ServiceEndpointPolicyDefinitions_Delete_2380_Generated.json
+        operationId: ServiceEndpointPolicyDefinitions_Delete
+      - step: ServiceEndpointPolicyDefinitions_ListByResourceGroup_2381
+        exampleFile: >-
+          ../examples/ServiceEndpointPolicyDefinitions_ListByResourceGroup_2381_Generated.json
+        operationId: ServiceEndpointPolicyDefinitions_ListByResourceGroup
+      - step: Create_serviceEndpointPolicyDefinitions_storage-def_2383
+        resourceName: serviceEndpointPolicyDefinitions_storage-def_2383
+        exampleFile: >-
+          ../examples/Create_serviceEndpointPolicyDefinitions_storage-def_2383_Generated.json
+        operationId: ServiceEndpointPolicyDefinitions_CreateOrUpdate
+      - step: RawStep_2384
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/network_service_endpoint_scenario_test000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:46:03 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/network_service_endpoint_scenario_test000001","name":"network_service_endpoint_scenario_test000001","type":"Microsoft.Resources/resourceGroups","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:43:38Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2386.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Update_virtualNetworks_vnet1_2388
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/0
+            value:
+              name: subnet1
+              properties:
+                addressPrefix: 10.0.0.0/24
+                serviceEndpoints:
+                  - service: Microsoft.Storage
+                    provisioningState: Succeeded
+                    locations:
+                      - '*'
+                serviceEndpointPolicies:
+                  - id: >-
+                      /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/network_service_endpoint_scenario_test000001/providers/Microsoft.Network/serviceEndpointPolicies/policy1
+                provisioningState: Succeeded
+                delegations: []
+                privateEndpointNetworkPolicies: Enabled
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/network_service_endpoint_scenario_test000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+              type: Microsoft.Network/virtualNetworks/subnets
+    variables:
+      location: westcentralus
+      serviceEndpointPolicyName: policy1
+      serviceEndpointPolicyDefinitionName: storage-def
+      virtualNetworkName: vnet1

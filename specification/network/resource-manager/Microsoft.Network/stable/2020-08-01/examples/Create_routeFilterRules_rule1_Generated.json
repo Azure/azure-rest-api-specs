@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_network_route_filter000001",
+    "routeFilterName": "filter1",
+    "ruleName": "rule1",
+    "routeFilterRuleParameters": {
+      "location": "westus",
+      "properties": {
+        "access": "Allow",
+        "communities": [
+          "12076:5040",
+          "12076:5030"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "rule1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_route_filter000001/providers/Microsoft.Network/routeFilters/filter1/routeFilterRules/rule1",
+      "etag": "W/\"6196b35b-0393-4b2b-a9d2-11fabe52ef29\"",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "access": "Allow",
+        "routeFilterRuleType": "Community",
+        "communities": [
+          "12076:5040",
+          "12076:5030"
+        ]
+      },
+      "type": "Microsoft.Network/routeFilters/routeFilterRules"
+    }
+  }
+}

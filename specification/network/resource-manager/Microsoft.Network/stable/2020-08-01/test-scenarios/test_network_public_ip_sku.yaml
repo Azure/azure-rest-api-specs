@@ -1,0 +1,28 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_public_ip_sku
+    steps:
+      - step: Create_publicIPAddresses_pubip1
+        resourceName: publicIPAddresses_pubip1
+        exampleFile: ../examples/Create_publicIPAddresses_pubip1_Generated_2319.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: Create_publicIPAddresses_pubip2
+        resourceName: publicIPAddresses_pubip2
+        exampleFile: ../examples/Create_publicIPAddresses_pubip2_Generated_2321.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+        variables:
+          publicIpAddressName: pubip2
+      - step: Create_publicIPAddresses_pubip3
+        resourceName: publicIPAddresses_pubip3
+        exampleFile: ../examples/Create_publicIPAddresses_pubip3_Generated.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+        variables:
+          publicIpAddressName: pubip3
+      - step: Create_publicIPAddresses_pubip4
+        resourceName: publicIPAddresses_pubip4
+        exampleFile: ../examples/Create_publicIPAddresses_pubip4_Generated.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+        variables:
+          publicIpAddressName: pubip4
+    variables:
+      publicIpAddressName: pubip1

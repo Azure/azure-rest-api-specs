@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_cross_region_lb_address_pool_addresses000001",
+    "loadBalancerName": "cross_region_lb000004"
+  },
+  "responses": {
+    "200": {
+      "value": [
+        {
+          "name": "cross_region_lb000004bepool",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool_addresses000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000004/backendAddressPools/cross_region_lb000004bepool",
+          "etag": "W/\"194ea349-285c-4a8c-925b-533dbd000218\"",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "loadBalancerBackendAddresses": []
+          },
+          "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+        },
+        {
+          "name": "address_pool000005",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool_addresses000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000004/backendAddressPools/address_pool000005",
+          "etag": "W/\"194ea349-285c-4a8c-925b-533dbd000218\"",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "loadBalancerBackendAddresses": [
+              {
+                "name": "backend_address000006",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool_addresses000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000004/backendAddressPools/address_pool000005/loadBalancerBackendAddresses/backend_address000006",
+                "etag": "W/\"194ea349-285c-4a8c-925b-533dbd000218\"",
+                "properties": {
+                  "provisioningState": "Succeeded",
+                  "loadBalancerFrontendIPConfiguration": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool_addresses000001/providers/Microsoft.Network/loadBalancers/regional_lb000002/frontendIPConfigurations/LoadBalancerFrontEnd"
+                  },
+                  "ipAddress": "13.91.226.169"
+                },
+                "type": "Microsoft.Network/loadBalancers/backendAddressPools/loadBalancerBackendAddresses"
+              }
+            ]
+          },
+          "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+        }
+      ]
+    }
+  }
+}

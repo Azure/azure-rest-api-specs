@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_vnet_peering000001",
+    "virtualNetworkName": "vnet2"
+  },
+  "responses": {
+    "200": {
+      "value": [
+        {
+          "name": "peering2",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet2/virtualNetworkPeerings/peering2",
+          "etag": "W/\"b9f27e6a-e7c4-4a1b-a41d-1478333cb7cb\"",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "resourceGuid": "8e3723e5-f920-0973-2f37-5c8524ac26be",
+            "peeringState": "Connected",
+            "remoteVirtualNetwork": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet1"
+            },
+            "allowVirtualNetworkAccess": false,
+            "allowForwardedTraffic": false,
+            "allowGatewayTransit": true,
+            "useRemoteGateways": false,
+            "doNotVerifyRemoteGateways": false,
+            "remoteAddressSpace": {
+              "addressPrefixes": [
+                "10.0.0.0/16"
+              ]
+            },
+            "routeServiceVips": {}
+          },
+          "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings"
+        }
+      ]
+    }
+  }
+}

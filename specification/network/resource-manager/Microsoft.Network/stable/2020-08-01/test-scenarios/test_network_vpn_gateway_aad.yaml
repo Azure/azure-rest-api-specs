@@ -1,0 +1,89 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vpn_gateway_aad
+    steps:
+      - step: RawStep_2655
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway_aad_000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:19:50 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway_aad_000001","name":"cli_test_vpn_gateway_aad_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T14:19:48Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_ip
+        resourceName: publicIPAddresses_ip
+        exampleFile: ../examples/Create_publicIPAddresses_ip_Generated_2657.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2658
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway_aad_000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:19:59 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway_aad_000001","name":"cli_test_vpn_gateway_aad_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T14:19:48Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet
+        resourceName: virtualNetworks_vnet
+        exampleFile: ../examples/Create_virtualNetworks_vnet_Generated_2660.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2661
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway_aad_000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:20:09 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway_aad_000001","name":"cli_test_vpn_gateway_aad_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T14:19:48Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gw
+        resourceName: virtualNetworkGateways_gw
+        exampleFile: ../examples/Create_virtualNetworkGateways_gw_Generated.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+      - step: Update_virtualNetworkGateways_gw_2664
+        resourceName: virtualNetworkGateways_gw
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/vpnClientConfiguration/vpnAuthenticationTypes/0
+            value: AAD
+          - add: /properties/vpnClientConfiguration/aadTenant
+            value: >-
+              https://login.microsoftonline.com/0ab2c4f4-81e6-44cc-a0b2-b3a47a1443f4
+          - add: /properties/vpnClientConfiguration/aadAudience
+            value: a21fce82-76af-45e6-8583-a08cb3b956f9
+          - add: /properties/vpnClientConfiguration/aadIssuer
+            value: https://sts.windows.net/0ab2c4f4-81e6-44cc-a0b2-b3a47a1443f4/
+      - step: Update_virtualNetworkGateways_gw_2666
+        resourceName: virtualNetworkGateways_gw
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/vpnClientConfiguration/vpnAuthenticationTypes/0
+          - remove: /properties/vpnClientConfiguration/aadTenant
+          - remove: /properties/vpnClientConfiguration/aadAudience
+          - remove: /properties/vpnClientConfiguration/aadIssuer
+    variables:
+      publicIpAddressName: ip
+      virtualNetworkName: vnet
+      virtualNetworkGatewayName: gw

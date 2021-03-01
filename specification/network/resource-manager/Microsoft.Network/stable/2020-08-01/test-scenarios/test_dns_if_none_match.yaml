@@ -1,0 +1,862 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_dns_if_none_match
+    steps:
+      - step: RawStep_154
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/dnszones?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '1778'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:11 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-entities-read: '59997'
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone2_importqrzei3qy36tb6tw723d2egusj4upjcrs7hxlpfluxhbdvdqyzdczlvc/providers/Microsoft.Network/dnszones/zone2.com","name":"zone2.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-057a-56eaedfdd601","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-01.azure-dns.com.","ns2-01.azure-dns.net.","ns3-01.azure-dns.org.","ns4-01.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone4_importynvzjdpa4lrqgy2ursldu3wiun6w3pafaadkrt3tfp25q6ryvjoiigj/providers/Microsoft.Network/dnszones/zone4.com","name":"zone4.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-ffe2-22d9edfdd601","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-02.azure-dns.com.","ns2-02.azure-dns.net.","ns3-02.azure-dns.org.","ns4-02.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/yyc/providers/Microsoft.Network/dnszones/zonex.com","name":"zonex.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-eafd-fac79afed601","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-03.azure-dns.com.","ns2-03.azure-dns.net.","ns3-03.azure-dns.org.","ns4-03.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}]}
+      - step: RawStep_155
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com?api-version=2018-05-01
+        requestBody: '{"location":"global","properties":{"zoneType":"Public"}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '616'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:18 GMT
+          etag: 00000002-0000-0000-add0-45df9afed601
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11998'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com","name":"myzonex.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-add0-45df9afed601","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-07.azure-dns.com.","ns2-07.azure-dns.net.","ns3-07.azure-dns.org.","ns4-07.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_156
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '628'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:20 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-entities-read: '59999'
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com","name":"myzonex.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-add0-45df9afed601","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-07.azure-dns.com.","ns2-07.azure-dns.net.","ns3-07.azure-dns.org.","ns4-07.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}]}
+      - step: RawStep_157
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '616'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:22 GMT
+          etag: 00000002-0000-0000-add0-45df9afed601
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '498'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com","name":"myzonex.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-add0-45df9afed601","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-07.azure-dns.com.","ns2-07.azure-dns.net.","ns3-07.azure-dns.org.","ns4-07.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_158
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:25 GMT
+          etag: 93f86573-64c7-4f4f-b65d-1e53e8b1e54a
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"93f86573-64c7-4f4f-b65d-1e53e8b1e54a","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_159
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/AAAA/myrsaaaa?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"AAAARecords":[{"ipv6Address":"2001:db8:0:1:1:1:1:1"}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '495'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:27 GMT
+          etag: 28b94864-92a3-474b-8028-5f8dc1dd3d00
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/AAAA/myrsaaaa","name":"myrsaaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"28b94864-92a3-474b-8028-5f8dc1dd3d00","properties":{"fqdn":"myrsaaaa.myzonex.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:db8:0:1:1:1:1:1"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_160
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/CAA/myrscaa?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"caaRecords":[{"flags":0,"tag":"foo","value":"my
+          value"}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '493'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:30 GMT
+          etag: 6f029dc6-1ce4-4215-806e-4a37aef943d2
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/CAA/myrscaa","name":"myrscaa","type":"Microsoft.Network/dnszones/CAA","etag":"6f029dc6-1ce4-4215-806e-4a37aef943d2","properties":{"fqdn":"myrscaa.myzonex.com.","TTL":3600,"caaRecords":[{"flags":0,"tag":"foo","value":"my
+          value"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_161
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/CNAME/myrscname?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"mycname"}}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '479'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:32 GMT
+          etag: d8b0e606-ea06-46f1-984d-3ef84d9dd1cf
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/CNAME/myrscname","name":"myrscname","type":"Microsoft.Network/dnszones/CNAME","etag":"d8b0e606-ea06-46f1-984d-3ef84d9dd1cf","properties":{"fqdn":"myrscname.myzonex.com.","TTL":3600,"CNAMERecord":{"cname":"mycname"},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_162
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/MX/myrsmx?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"MXRecords":[{"preference":13,"exchange":"12"}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '478'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:35 GMT
+          etag: f124c36b-9c52-4959-982c-447ec71bbc82
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/MX/myrsmx","name":"myrsmx","type":"Microsoft.Network/dnszones/MX","etag":"f124c36b-9c52-4959-982c-447ec71bbc82","properties":{"fqdn":"myrsmx.myzonex.com.","TTL":3600,"MXRecords":[{"exchange":"12","preference":13}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_163
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/NS/myrsns?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"NSRecords":[{"nsdname":"foobar.com"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '469'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:37 GMT
+          etag: 07e567ef-d5fc-49b1-9a65-02f01774f86e
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/NS/myrsns","name":"myrsns","type":"Microsoft.Network/dnszones/NS","etag":"07e567ef-d5fc-49b1-9a65-02f01774f86e","properties":{"fqdn":"myrsns.myzonex.com.","TTL":3600,"NSRecords":[{"nsdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_164
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/PTR/myrsptr?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"PTRRecords":[{"ptrdname":"foobar.com"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '476'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:40 GMT
+          etag: 268f327a-8320-4c53-a5ae-abec0c6a8c83
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/PTR/myrsptr","name":"myrsptr","type":"Microsoft.Network/dnszones/PTR","etag":"268f327a-8320-4c53-a5ae-abec0c6a8c83","properties":{"fqdn":"myrsptr.myzonex.com.","TTL":3600,"PTRRecords":[{"ptrdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_165
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/SRV/myrssrv?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SRVRecords":[{"priority":1,"weight":50,"port":1234,"target":"target.com"}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '511'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:43 GMT
+          etag: f98aa585-2645-4829-b6b9-b22715b88b4b
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/SRV/myrssrv","name":"myrssrv","type":"Microsoft.Network/dnszones/SRV","etag":"f98aa585-2645-4829-b6b9-b22715b88b4b","properties":{"fqdn":"myrssrv.myzonex.com.","TTL":3600,"SRVRecords":[{"port":1234,"priority":1,"target":"target.com","weight":50}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_166
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT/myrstxt?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"TXTRecords":[{"value":["some_text"]}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '474'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:45 GMT
+          etag: 02587058-bd7e-4704-a784-95b78440b987
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxt","name":"myrstxt","type":"Microsoft.Network/dnszones/TXT","etag":"02587058-bd7e-4704-a784-95b78440b987","properties":{"fqdn":"myrstxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["some_text"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_167
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:46 GMT
+          etag: 93f86573-64c7-4f4f-b65d-1e53e8b1e54a
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '498'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"93f86573-64c7-4f4f-b65d-1e53e8b1e54a","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_168
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"93f86573-64c7-4f4f-b65d-1e53e8b1e54a","properties":{"TTL":3600,"targetResource":{},"ARecords":[{"ipv4Address":"10.0.0.10"},{"ipv4Address":"10.0.0.11"}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '494'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:48 GMT
+          etag: 8eb98f56-f75b-4ef0-a06d-ecffe048a6c0
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"8eb98f56-f75b-4ef0-a06d-ecffe048a6c0","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"},{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_169
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/SOA/@?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '594'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:49 GMT
+          etag: 4c3787b5-cad7-40ec-94bd-f3f31d3258fc
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"4c3787b5-cad7-40ec-94bd-f3f31d3258fc","properties":{"fqdn":"myzonex.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.microsoft.com","expireTime":2419200,"host":"ns1-07.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_170
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/SOA/@?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '594'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:50 GMT
+          etag: 4c3787b5-cad7-40ec-94bd-f3f31d3258fc
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"4c3787b5-cad7-40ec-94bd-f3f31d3258fc","properties":{"fqdn":"myzonex.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.microsoft.com","expireTime":2419200,"host":"ns1-07.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_171
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/SOA/@?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"4c3787b5-cad7-40ec-94bd-f3f31d3258fc","properties":{"TTL":3600,"targetResource":{},"SOARecord":{"host":"ns1-07.azure-dns.com.","email":"foo.com","serialNumber":123,"refreshTime":60,"retryTime":90,"expireTime":30,"minimumTTL":20}}}
+        requestHeaders:
+          cache-control: private
+          content-length: '561'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:51 GMT
+          etag: a29295fd-cbfc-43cf-9b76-c5693068d68a
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"a29295fd-cbfc-43cf-9b76-c5693068d68a","properties":{"fqdn":"myzonex.com.","TTL":3600,"SOARecord":{"email":"foo.com","expireTime":30,"host":"ns1-07.azure-dns.com.","minimumTTL":20,"refreshTime":60,"retryTime":90,"serialNumber":123},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_172
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT/longtxt?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"TXTRecords":[{"value":["012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234","56789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"]}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '968'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:54 GMT
+          etag: d91c0b9c-d036-42f7-94b9-15962530b0b3
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/longtxt","name":"longtxt","type":"Microsoft.Network/dnszones/TXT","etag":"d91c0b9c-d036-42f7-94b9-15962530b0b3","properties":{"fqdn":"longtxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234","56789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_173
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '617'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:55 GMT
+          etag: 00000002-0000-0000-add0-45df9afed601
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com","name":"myzonex.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-add0-45df9afed601","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-07.azure-dns.com.","ns2-07.azure-dns.net.","ns3-07.azure-dns.org.","ns4-07.azure-dns.info."],"numberOfRecordSets":12,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_174
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '494'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:56 GMT
+          etag: 8eb98f56-f75b-4ef0-a06d-ecffe048a6c0
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"8eb98f56-f75b-4ef0-a06d-ecffe048a6c0","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"},{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_175
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/recordsets?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '6495'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:58 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-entities-read: '59988'
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"f38e9261-5d4f-44ad-9753-22f58d8c5cd1","properties":{"fqdn":"myzonex.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-07.azure-dns.com."},{"nsdname":"ns2-07.azure-dns.net."},{"nsdname":"ns3-07.azure-dns.org."},{"nsdname":"ns4-07.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"a29295fd-cbfc-43cf-9b76-c5693068d68a","properties":{"fqdn":"myzonex.com.","TTL":3600,"SOARecord":{"email":"foo.com","expireTime":30,"host":"ns1-07.azure-dns.com.","minimumTTL":20,"refreshTime":60,"retryTime":90,"serialNumber":123},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/longtxt","name":"longtxt","type":"Microsoft.Network/dnszones/TXT","etag":"d91c0b9c-d036-42f7-94b9-15962530b0b3","properties":{"fqdn":"longtxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234","56789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"8eb98f56-f75b-4ef0-a06d-ecffe048a6c0","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"},{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/AAAA/myrsaaaa","name":"myrsaaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"28b94864-92a3-474b-8028-5f8dc1dd3d00","properties":{"fqdn":"myrsaaaa.myzonex.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:db8:0:1:1:1:1:1"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/CAA/myrscaa","name":"myrscaa","type":"Microsoft.Network/dnszones/CAA","etag":"6f029dc6-1ce4-4215-806e-4a37aef943d2","properties":{"fqdn":"myrscaa.myzonex.com.","TTL":3600,"caaRecords":[{"flags":0,"tag":"foo","value":"my
+          value"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/CNAME/myrscname","name":"myrscname","type":"Microsoft.Network/dnszones/CNAME","etag":"d8b0e606-ea06-46f1-984d-3ef84d9dd1cf","properties":{"fqdn":"myrscname.myzonex.com.","TTL":3600,"CNAMERecord":{"cname":"mycname"},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/MX/myrsmx","name":"myrsmx","type":"Microsoft.Network/dnszones/MX","etag":"f124c36b-9c52-4959-982c-447ec71bbc82","properties":{"fqdn":"myrsmx.myzonex.com.","TTL":3600,"MXRecords":[{"exchange":"12","preference":13}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/NS/myrsns","name":"myrsns","type":"Microsoft.Network/dnszones/NS","etag":"07e567ef-d5fc-49b1-9a65-02f01774f86e","properties":{"fqdn":"myrsns.myzonex.com.","TTL":3600,"NSRecords":[{"nsdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/PTR/myrsptr","name":"myrsptr","type":"Microsoft.Network/dnszones/PTR","etag":"268f327a-8320-4c53-a5ae-abec0c6a8c83","properties":{"fqdn":"myrsptr.myzonex.com.","TTL":3600,"PTRRecords":[{"ptrdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/SRV/myrssrv","name":"myrssrv","type":"Microsoft.Network/dnszones/SRV","etag":"f98aa585-2645-4829-b6b9-b22715b88b4b","properties":{"fqdn":"myrssrv.myzonex.com.","TTL":3600,"SRVRecords":[{"port":1234,"priority":1,"target":"target.com","weight":50}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxt","name":"myrstxt","type":"Microsoft.Network/dnszones/TXT","etag":"02587058-bd7e-4704-a784-95b78440b987","properties":{"fqdn":"myrstxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["some_text"]}],"targetResource":{},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_176
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '1455'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:58 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-entities-read: '59998'
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/longtxt","name":"longtxt","type":"Microsoft.Network/dnszones/TXT","etag":"d91c0b9c-d036-42f7-94b9-15962530b0b3","properties":{"fqdn":"longtxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234","56789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxt","name":"myrstxt","type":"Microsoft.Network/dnszones/TXT","etag":"02587058-bd7e-4704-a784-95b78440b987","properties":{"fqdn":"myrstxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["some_text"]}],"targetResource":{},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_177
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '494'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:20:59 GMT
+          etag: 8eb98f56-f75b-4ef0-a06d-ecffe048a6c0
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '497'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"8eb98f56-f75b-4ef0-a06d-ecffe048a6c0","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"},{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_178
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"8eb98f56-f75b-4ef0-a06d-ecffe048a6c0","properties":{"TTL":3600,"targetResource":{},"ARecords":[{"ipv4Address":"10.0.0.11"}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:01 GMT
+          etag: f9b8be73-4f40-4232-b734-c50bf02e4245
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"f9b8be73-4f40-4232-b734-c50bf02e4245","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_179
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/AAAA/myrsaaaa?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '495'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:02 GMT
+          etag: 28b94864-92a3-474b-8028-5f8dc1dd3d00
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/AAAA/myrsaaaa","name":"myrsaaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"28b94864-92a3-474b-8028-5f8dc1dd3d00","properties":{"fqdn":"myrsaaaa.myzonex.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:db8:0:1:1:1:1:1"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_180
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/AAAA/myrsaaaa?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '0'
+          date: Tue, 09 Feb 2021 04:21:03 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+      - step: RawStep_181
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/CAA/myrscaa?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '493'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:05 GMT
+          etag: 6f029dc6-1ce4-4215-806e-4a37aef943d2
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/CAA/myrscaa","name":"myrscaa","type":"Microsoft.Network/dnszones/CAA","etag":"6f029dc6-1ce4-4215-806e-4a37aef943d2","properties":{"fqdn":"myrscaa.myzonex.com.","TTL":3600,"caaRecords":[{"flags":0,"tag":"foo","value":"my
+          value"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_182
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/CAA/myrscaa?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '0'
+          date: Tue, 09 Feb 2021 04:21:06 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+      - step: RawStep_183
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/CNAME/myrscname?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '479'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:08 GMT
+          etag: d8b0e606-ea06-46f1-984d-3ef84d9dd1cf
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/CNAME/myrscname","name":"myrscname","type":"Microsoft.Network/dnszones/CNAME","etag":"d8b0e606-ea06-46f1-984d-3ef84d9dd1cf","properties":{"fqdn":"myrscname.myzonex.com.","TTL":3600,"CNAMERecord":{"cname":"mycname"},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_184
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/CNAME/myrscname?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '0'
+          date: Tue, 09 Feb 2021 04:21:09 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+      - step: RawStep_185
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/MX/myrsmx?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '478'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:10 GMT
+          etag: f124c36b-9c52-4959-982c-447ec71bbc82
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/MX/myrsmx","name":"myrsmx","type":"Microsoft.Network/dnszones/MX","etag":"f124c36b-9c52-4959-982c-447ec71bbc82","properties":{"fqdn":"myrsmx.myzonex.com.","TTL":3600,"MXRecords":[{"exchange":"12","preference":13}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_186
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/MX/myrsmx?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '0'
+          date: Tue, 09 Feb 2021 04:21:12 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+      - step: RawStep_187
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/NS/myrsns?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '469'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:12 GMT
+          etag: 07e567ef-d5fc-49b1-9a65-02f01774f86e
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/NS/myrsns","name":"myrsns","type":"Microsoft.Network/dnszones/NS","etag":"07e567ef-d5fc-49b1-9a65-02f01774f86e","properties":{"fqdn":"myrsns.myzonex.com.","TTL":3600,"NSRecords":[{"nsdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_188
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/NS/myrsns?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '0'
+          date: Tue, 09 Feb 2021 04:21:14 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+      - step: RawStep_189
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/PTR/myrsptr?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '476'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:15 GMT
+          etag: 268f327a-8320-4c53-a5ae-abec0c6a8c83
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/PTR/myrsptr","name":"myrsptr","type":"Microsoft.Network/dnszones/PTR","etag":"268f327a-8320-4c53-a5ae-abec0c6a8c83","properties":{"fqdn":"myrsptr.myzonex.com.","TTL":3600,"PTRRecords":[{"ptrdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_190
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/PTR/myrsptr?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '0'
+          date: Tue, 09 Feb 2021 04:21:17 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+      - step: RawStep_191
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/SRV/myrssrv?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '511'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:17 GMT
+          etag: f98aa585-2645-4829-b6b9-b22715b88b4b
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/SRV/myrssrv","name":"myrssrv","type":"Microsoft.Network/dnszones/SRV","etag":"f98aa585-2645-4829-b6b9-b22715b88b4b","properties":{"fqdn":"myrssrv.myzonex.com.","TTL":3600,"SRVRecords":[{"port":1234,"priority":1,"target":"target.com","weight":50}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_192
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/SRV/myrssrv?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '0'
+          date: Tue, 09 Feb 2021 04:21:19 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+      - step: RawStep_193
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT/myrstxt?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '474'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:20 GMT
+          etag: 02587058-bd7e-4704-a784-95b78440b987
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxt","name":"myrstxt","type":"Microsoft.Network/dnszones/TXT","etag":"02587058-bd7e-4704-a784-95b78440b987","properties":{"fqdn":"myrstxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["some_text"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_194
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT/myrstxt?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '0'
+          date: Tue, 09 Feb 2021 04:21:22 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+      - step: RawStep_195
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:22 GMT
+          etag: f9b8be73-4f40-4232-b734-c50bf02e4245
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"f9b8be73-4f40-4232-b734-c50bf02e4245","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_196
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:24 GMT
+          etag: f9b8be73-4f40-4232-b734-c50bf02e4245
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"f9b8be73-4f40-4232-b734-c50bf02e4245","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_197
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '0'
+          date: Tue, 09 Feb 2021 04:21:25 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+      - step: RawStep_198
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          date: Tue, 09 Feb 2021 04:21:27 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 204
+      - step: RawStep_199
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com/CNAME/myrscname?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          date: Tue, 09 Feb 2021 04:21:29 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 204
+      - step: RawStep_200
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsZones/myzonex.com?api-version=2018-05-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com:443/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsOperationStatuses/delzone637484412920955835965bfd40?api-version=2018-05-01
+          cache-control: private
+          content-length: '0'
+          date: Tue, 09 Feb 2021 04:21:31 GMT
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsOperationResults/delzone637484412920955835965bfd40?api-version=2018-05-01
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 202
+      - step: RawStep_201
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_match000001/providers/Microsoft.Network/dnsOperationStatuses/delzone637484412920955835965bfd40?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '22'
+          content-type: application/json; charset=utf-8
+          date: Tue, 09 Feb 2021 04:21:35 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: '{"status":"Succeeded"}'

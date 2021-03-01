@@ -1,0 +1,56 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_extended_nsg
+    steps:
+      - step: RawStep_1720
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_extended_nsg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:36:39 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_extended_nsg000001","name":"cli_test_extended_nsg000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:36:37Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkSecurityGroups_nsg1
+        resourceName: networkSecurityGroups_nsg1
+        exampleFile: ../examples/Create_networkSecurityGroups_nsg1_Generated.json
+        operationId: NetworkSecurityGroups_CreateOrUpdate
+      - step: Create_securityRules_rule1
+        resourceName: securityRules_rule1
+        exampleFile: ../examples/Create_securityRules_rule1_Generated.json
+        operationId: SecurityRules_CreateOrUpdate
+      - step: Update_securityRules_rule1_1724
+        resourceName: securityRules_rule1
+        operationId: SecurityRules_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/destinationPortRange
+          - replace: /properties/sourceAddressPrefix
+            value: ''
+          - replace: /properties/destinationAddressPrefix
+            value: Internet
+          - remove: /properties/sourcePortRanges/1
+          - remove: /properties/sourcePortRanges/0
+          - add: /properties/destinationPortRanges/0
+            value: 500-1000
+          - add: /properties/destinationPortRanges/1
+            value: '2000'
+          - add: /properties/destinationPortRanges/2
+            value: '3000'
+          - add: /properties/sourceAddressPrefixes/0
+            value: 10.0.0.0/24
+          - add: /properties/sourceAddressPrefixes/1
+            value: 11.0.0.0/24
+          - remove: /properties/destinationAddressPrefixes/1
+          - remove: /properties/destinationAddressPrefixes/0
+          - add: /properties/sourcePortRange
+            value: '*'
+    variables:
+      networkSecurityGroupName: nsg1
+      securityRuleName: rule1

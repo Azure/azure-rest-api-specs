@@ -64,14 +64,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Request successful. Resource does not exist."
+          "200": {
+            "description": "Delete successful."
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
-          "200": {
-            "description": "Delete successful."
+          "204": {
+            "description": "Request successful. Resource does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -83,6 +83,9 @@
         "x-ms-examples": {
           "Delete public IP prefix": {
             "$ref": "./examples/PublicIpPrefixDelete.json"
+          },
+          "PublicIPPrefixes_Delete_2306_Generated": {
+            "$ref": "./examples/PublicIPPrefixes_Delete_2306_Generated.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -183,14 +186,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Create successful. The operation returns the resulting PublicIPPrefix resource.",
+          "200": {
+            "description": "Update successful. The operation returns the resulting PublicIPPrefix resource.",
             "schema": {
               "$ref": "#/definitions/PublicIPPrefix"
             }
           },
-          "200": {
-            "description": "Update successful. The operation returns the resulting PublicIPPrefix resource.",
+          "201": {
+            "description": "Create successful. The operation returns the resulting PublicIPPrefix resource.",
             "schema": {
               "$ref": "#/definitions/PublicIPPrefix"
             }
@@ -208,6 +211,21 @@
           },
           "Create public IP prefix allocation method": {
             "$ref": "./examples/PublicIpPrefixCreateCustomizedValues.json"
+          },
+          "Create_publicIPPrefixes_prefix1_Generated": {
+            "$ref": "./examples/Create_publicIPPrefixes_prefix1_Generated.json"
+          },
+          "Create_publicIPPrefixes_prefix1_Generated_2302": {
+            "$ref": "./examples/Create_publicIPPrefixes_prefix1_Generated_2302.json"
+          },
+          "Create_publicIPPrefixes_prefix1_2310_Generated": {
+            "$ref": "./examples/Create_publicIPPrefixes_prefix1_2310_Generated.json"
+          },
+          "Create_publicIPPrefixes_public_ip_prefix_0_Generated": {
+            "$ref": "./examples/Create_publicIPPrefixes_public_ip_prefix_0_Generated.json"
+          },
+          "Create_publicIPPrefixes_public_ip_prefix_2_Generated": {
+            "$ref": "./examples/Create_publicIPPrefixes_public_ip_prefix_2_Generated.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -351,6 +369,12 @@
         "x-ms-examples": {
           "List resource group public IP prefixes": {
             "$ref": "./examples/PublicIpPrefixList.json"
+          },
+          "PublicIPPrefixes_List_2305_Generated": {
+            "$ref": "./examples/PublicIPPrefixes_List_2305_Generated.json"
+          },
+          "PublicIPPrefixes_List_2307_Generated": {
+            "$ref": "./examples/PublicIPPrefixes_List_2307_Generated.json"
           }
         },
         "x-ms-pageable": {

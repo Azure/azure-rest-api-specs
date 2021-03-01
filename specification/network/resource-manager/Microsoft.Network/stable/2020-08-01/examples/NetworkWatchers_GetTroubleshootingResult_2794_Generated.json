@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "NetworkWatcherRG",
+    "networkWatcherName": "NetworkWatcher_westcentralus",
+    "parameters": {
+      "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_troubleshooting000001/providers/Microsoft.Network/virtualNetworkGateways/vgw1"
+    }
+  },
+  "responses": {
+    "200": {
+      "startTime": "2021-02-24T16:13:23.398325Z",
+      "endTime": "2021-02-24T16:13:28.15Z",
+      "code": "UnHealthy",
+      "results": [
+        {
+          "id": "UnKnown",
+          "summary": "The health status for this VPN gateway is unknown",
+          "detail": "We are currently unable to determine the health of this VPN gateway",
+          "recommendedActions": [
+            {
+              "actionText": "If you are having problems with the VPN gateway, try resetting the VPN gateway",
+              "actionUri": "https://azure.microsoft.com/en-us/documentation/articles/vpn-gateway-resetgw-classic/",
+              "actionUriText": "resetting the VPN gateway"
+            },
+            {
+              "actionText": "If you are experiencing problems you believe are caused by Azure, contact support",
+              "actionUri": "http://azure.microsoft.com/support",
+              "actionUriText": "contact support"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_app_gateway_waf_policy_managed_rules_000001",
+    "policyName": "agp1",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "managedRules": {
+          "managedRuleSets": [
+            {
+              "ruleSetType": "OWASP",
+              "ruleSetVersion": "3.1"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "name": "agp1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_policy_managed_rules_000001/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/agp1",
+      "etag": "W/\"352476a6-0b84-40ae-9eec-cfe873813cdd\"",
+      "type": "Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies",
+      "location": "westus",
+      "properties": {
+        "provisioningState": "Updating",
+        "customRules": [],
+        "policySettings": {
+          "requestBodyCheck": true,
+          "maxRequestBodySizeInKb": 128,
+          "fileUploadLimitInMb": 100,
+          "state": "Disabled",
+          "mode": "Detection"
+        },
+        "managedRules": {
+          "managedRuleSets": [
+            {
+              "ruleSetType": "OWASP",
+              "ruleSetVersion": "3.1",
+              "ruleGroupOverrides": []
+            }
+          ],
+          "exclusions": []
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,465 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_private_endpoint_connection_webapp
+    steps:
+      - step: RawStep_3251
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '429'
+          content-type: application/json; charset=utf-8
+          date: Thu, 25 Feb 2021 02:28:12 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus2","tags":{"product":"azurecli","cause":"automation","date":"2021-02-25T02:28:09Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_webapp-privatelink-vnet000004
+        resourceName: virtualNetworks_webapp-privatelink-vnet000004
+        exampleFile: >-
+          ../examples/Create_virtualNetworks_webapp-privatelink-vnet000004_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_3253
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_webapp-privatelink-subnet000005
+        resourceName: subnets_webapp-privatelink-subnet000005
+        exampleFile: >-
+          ../examples/Create_subnets_webapp-privatelink-subnet000005_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: Update_subnets_webapp-privatelink-subnet000005_3256
+        resourceName: subnets_webapp-privatelink-subnet000005
+        operationId: Subnets_CreateOrUpdate
+        resourceUpdate:
+          - remove: /error
+          - add: /id
+            value: >-
+              /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/webapp-privatelink-vnet000004/subnets/webapp-privatelink-subnet000005
+          - add: /name
+            value: webapp-privatelink-subnet000005
+          - add: /properties
+            value:
+              addressPrefix: 10.0.0.0/24
+              delegations: []
+              privateEndpointNetworkPolicies: Disabled
+              privateLinkServiceNetworkPolicies: Enabled
+              provisioningState: Succeeded
+          - add: /type
+            value: Microsoft.Network/virtualNetworks/subnets
+      - step: RawStep_3257
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '429'
+          content-type: application/json; charset=utf-8
+          date: Thu, 25 Feb 2021 02:29:35 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus2","tags":{"product":"azurecli","cause":"automation","date":"2021-02-25T02:28:09Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_3258
+        method: POST
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/validate?api-version=2019-08-01
+        requestBody: >-
+          {"name":"webapp-privatelink-asp000003","type":"Microsoft.Web/serverfarms","location":"westus2","properties":{"skuName":"P1V2","capacity":1}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '33'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:29:36 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+          x-powered-by: ASP.NET
+        responseExpected: '{"status":"Success","error":null}'
+      - step: RawStep_3259
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '429'
+          content-type: application/json; charset=utf-8
+          date: Thu, 25 Feb 2021 02:29:36 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus2","tags":{"product":"azurecli","cause":"automation","date":"2021-02-25T02:28:09Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_3260
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/serverfarms/webapp-privatelink-asp000003?api-version=2019-08-01
+        requestBody: >-
+          {"location":"westus2","properties":{"perSiteScaling":false,"isXenon":false},"sku":{"name":"P1V2","tier":"PREMIUMV2","capacity":1}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1676'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:29:46 GMT
+          etag: '"1D70B1E14F2CD60"'
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1196'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/serverfarms/webapp-privatelink-asp000003","name":"webapp-privatelink-asp000003","type":"Microsoft.Web/serverfarms","kind":"app","location":"westus2","properties":{"serverFarmId":9774,"name":"webapp-privatelink-asp000003","sku":{"name":"P1v2","tier":"PremiumV2","size":"P1v2","family":"Pv2","capacity":1},"workerSize":"D1","workerSizeId":3,"workerTierName":null,"numberOfWorkers":1,"currentWorkerSize":"D1","currentWorkerSizeId":3,"currentNumberOfWorkers":1,"status":"Ready","webSpace":"clitest.rg000001-WestUS2webspace","subscription":"0b1f6471-1bf0-4dda-aec3-cb9272f09590","adminSiteName":null,"hostingEnvironment":null,"hostingEnvironmentProfile":null,"maximumNumberOfWorkers":0,"planName":"VirtualDedicatedPlan","adminRuntimeSiteName":null,"computeMode":"Dedicated","siteMode":null,"geoRegion":"West
+          US
+          2","perSiteScaling":false,"maximumElasticWorkerCount":1,"numberOfSites":0,"hostingEnvironmentId":null,"isSpot":false,"spotExpirationTime":null,"freeOfferExpirationTime":null,"tags":null,"kind":"app","resourceGroup":"clitest.rg000001","reserved":false,"isXenon":false,"hyperV":false,"mdmId":"waws-prod-mwh-065_9774","targetWorkerCount":0,"targetWorkerSizeId":0,"provisioningState":"Succeeded","webSiteId":null,"existingServerFarmIds":null,"azBalancing":false},"sku":{"name":"P1v2","tier":"PremiumV2","size":"P1v2","family":"Pv2","capacity":1}}
+      - step: RawStep_3261
+        method: POST
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/validate?api-version=2019-08-01
+        requestBody: >-
+          {"name":"webapp-privatelink-webapp000002","type":"Microsoft.Web/sites","location":"West
+          US
+          2","properties":{"serverFarmId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/serverfarms/webapp-privatelink-asp000003"}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '33'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:29:49 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+          x-powered-by: ASP.NET
+        responseExpected: '{"status":"Success","error":null}'
+      - step: RawStep_3262
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/serverfarms/webapp-privatelink-asp000003?api-version=2019-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1596'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:29:50 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/serverfarms/webapp-privatelink-asp000003","name":"webapp-privatelink-asp000003","type":"Microsoft.Web/serverfarms","kind":"app","location":"West
+          US
+          2","properties":{"serverFarmId":9774,"name":"webapp-privatelink-asp000003","workerSize":"D1","workerSizeId":3,"workerTierName":null,"numberOfWorkers":1,"currentWorkerSize":"D1","currentWorkerSizeId":3,"currentNumberOfWorkers":1,"status":"Ready","webSpace":"clitest.rg000001-WestUS2webspace","subscription":"0b1f6471-1bf0-4dda-aec3-cb9272f09590","adminSiteName":null,"hostingEnvironment":null,"hostingEnvironmentProfile":null,"maximumNumberOfWorkers":30,"planName":"VirtualDedicatedPlan","adminRuntimeSiteName":null,"computeMode":"Dedicated","siteMode":null,"geoRegion":"West
+          US
+          2","perSiteScaling":false,"maximumElasticWorkerCount":1,"numberOfSites":0,"hostingEnvironmentId":null,"isSpot":false,"spotExpirationTime":null,"freeOfferExpirationTime":null,"tags":null,"kind":"app","resourceGroup":"clitest.rg000001","reserved":false,"isXenon":false,"hyperV":false,"mdmId":"waws-prod-mwh-065_9774","targetWorkerCount":0,"targetWorkerSizeId":0,"provisioningState":"Succeeded","webSiteId":null,"existingServerFarmIds":null,"azBalancing":false},"sku":{"name":"P1v2","tier":"PremiumV2","size":"P1v2","family":"Pv2","capacity":1}}
+      - step: RawStep_3263
+        method: POST
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/checknameavailability?api-version=2019-08-01
+        requestBody: '{"name":"webapp-privatelink-webapp000002","type":"Site"}'
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '47'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:29:51 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-powered-by: ASP.NET
+        responseExpected: '{"nameAvailable":true,"reason":"","message":""}'
+      - step: RawStep_3264
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002?api-version=2019-08-01
+        requestBody: >-
+          {"location":"West US
+          2","properties":{"serverFarmId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/serverfarms/webapp-privatelink-asp000003","reserved":false,"isXenon":false,"hyperV":false,"siteConfig":{"netFrameworkVersion":"v4.6","appSettings":[{"name":"WEBSITE_NODE_DEFAULT_VERSION","value":"10.14.1"}],"alwaysOn":true,"localMySqlEnabled":false,"http20Enabled":true},"scmSiteAlsoStopped":false,"httpsOnly":false}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '6733'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:30:14 GMT
+          etag: '"1D70B1E1C725BA0"'
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002","name":"webapp-privatelink-webapp000002","type":"Microsoft.Web/sites","kind":"app","location":"West
+          US
+          2","properties":{"name":"webapp-privatelink-webapp000002","state":"Running","hostNames":["webapp-privatelink-webapp000002.azurewebsites.net"],"webSpace":"clitest.rg000001-WestUS2webspace","selfLink":"https://waws-prod-mwh-065.api.azurewebsites.windows.net:454/subscriptions/00000000-0000-0000-0000-000000000000/webspaces/clitest.rg000001-WestUS2webspace/sites/webapp-privatelink-webapp000002","repositorySiteName":"webapp-privatelink-webapp000002","owner":null,"usageState":"Normal","enabled":true,"adminEnabled":true,"enabledHostNames":["webapp-privatelink-webapp000002.azurewebsites.net","webapp-privatelink-webapp000002.scm.azurewebsites.net"],"siteProperties":{"metadata":null,"properties":[{"name":"LinuxFxVersion","value":""},{"name":"WindowsFxVersion","value":null}],"appSettings":null},"availabilityState":"Normal","sslCertificates":null,"csrs":[],"cers":null,"siteMode":null,"hostNameSslStates":[{"name":"webapp-privatelink-webapp000002.azurewebsites.net","sslState":"Disabled","ipBasedSslResult":null,"virtualIP":null,"thumbprint":null,"toUpdate":null,"toUpdateIpBasedSsl":null,"ipBasedSslState":"NotConfigured","hostType":"Standard"},{"name":"webapp-privatelink-webapp000002.scm.azurewebsites.net","sslState":"Disabled","ipBasedSslResult":null,"virtualIP":null,"thumbprint":null,"toUpdate":null,"toUpdateIpBasedSsl":null,"ipBasedSslState":"NotConfigured","hostType":"Repository"}],"computeMode":null,"serverFarm":null,"serverFarmId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/serverfarms/webapp-privatelink-asp000003","reserved":false,"isXenon":false,"hyperV":false,"lastModifiedTimeUtc":"2021-02-25T02:29:57.9866667","storageRecoveryDefaultState":"Running","contentAvailabilityState":"Normal","runtimeAvailabilityState":"Normal","siteConfig":{"numberOfWorkers":null,"defaultDocuments":null,"netFrameworkVersion":null,"phpVersion":null,"pythonVersion":null,"nodeVersion":null,"powerShellVersion":null,"linuxFxVersion":null,"windowsFxVersion":null,"requestTracingEnabled":null,"remoteDebuggingEnabled":null,"remoteDebuggingVersion":null,"httpLoggingEnabled":null,"azureMonitorLogCategories":null,"acrUseManagedIdentityCreds":false,"acrUserManagedIdentityID":null,"logsDirectorySizeLimit":null,"detailedErrorLoggingEnabled":null,"publishingUsername":null,"publishingPassword":null,"appSettings":null,"azureStorageAccounts":null,"metadata":null,"connectionStrings":null,"machineKey":null,"handlerMappings":null,"documentRoot":null,"scmType":null,"use32BitWorkerProcess":null,"webSocketsEnabled":null,"alwaysOn":null,"javaVersion":null,"javaContainer":null,"javaContainerVersion":null,"appCommandLine":null,"managedPipelineMode":null,"virtualApplications":null,"winAuthAdminState":null,"winAuthTenantState":null,"customAppPoolIdentityAdminState":null,"customAppPoolIdentityTenantState":null,"runtimeADUser":null,"runtimeADUserPassword":null,"loadBalancing":null,"routingRules":null,"experiments":null,"limits":null,"autoHealEnabled":null,"autoHealRules":null,"tracingOptions":null,"vnetName":null,"vnetRouteAllEnabled":null,"vnetPrivatePortsCount":null,"cors":null,"push":null,"apiDefinition":null,"apiManagementConfig":null,"autoSwapSlotName":null,"localMySqlEnabled":null,"managedServiceIdentityId":null,"xManagedServiceIdentityId":null,"ipSecurityRestrictions":[{"ipAddress":"Any","action":"Allow","priority":1,"name":"Allow
+          all","description":"Allow all
+          access"}],"scmIpSecurityRestrictions":[{"ipAddress":"Any","action":"Allow","priority":1,"name":"Allow
+          all","description":"Allow all
+          access"}],"scmIpSecurityRestrictionsUseMain":null,"http20Enabled":null,"minTlsVersion":null,"scmMinTlsVersion":null,"ftpsState":null,"preWarmedInstanceCount":null,"functionAppScaleLimit":null,"healthCheckPath":null,"fileChangeAuditEnabled":null,"functionsRuntimeScaleMonitoringEnabled":null,"websiteTimeZone":null,"minimumElasticInstanceCount":0},"deploymentId":"webapp-privatelink-webapp000002","trafficManagerHostNames":null,"sku":"PremiumV2","scmSiteAlsoStopped":false,"targetSwapSlot":null,"hostingEnvironment":null,"hostingEnvironmentProfile":null,"clientAffinityEnabled":true,"clientCertEnabled":false,"clientCertMode":"Required","clientCertExclusionPaths":null,"hostNamesDisabled":false,"domainVerificationIdentifiers":null,"customDomainVerificationId":"253001F2FCF5A7B1CD759EB861E9BB1596370BE27E47A991F72184277B3D12F2","kind":"app","inboundIpAddress":"40.64.128.228","possibleInboundIpAddresses":"40.64.128.228","ftpUsername":"webapp-privatelink-webapp000002\\$webapp-privatelink-webapp000002","ftpsHostName":"ftps://waws-prod-mwh-065.ftp.azurewebsites.windows.net/site/wwwroot","outboundIpAddresses":"20.72.192.161,20.72.192.166,20.72.192.169,20.72.192.222,20.72.192.250,20.72.193.46,40.64.128.228","possibleOutboundIpAddresses":"20.72.192.39,20.72.192.87,20.72.192.99,20.72.192.146,20.72.192.156,20.72.192.159,20.72.192.161,20.72.192.166,20.72.192.169,20.72.192.222,20.72.192.250,20.72.193.46,20.72.193.92,20.72.193.103,20.72.193.104,20.72.193.106,20.72.193.117,20.72.193.118,20.72.193.121,20.72.193.133,20.72.193.162,20.72.193.174,20.72.193.181,20.72.193.194,20.72.193.229,20.72.193.242,20.72.194.0,51.143.126.35,51.143.58.61,51.143.59.101,40.64.128.228","containerSize":0,"dailyMemoryTimeQuota":0,"suspendedTill":null,"siteDisabledReason":0,"functionExecutionUnitsCache":null,"maxNumberOfWorkers":null,"homeStamp":"waws-prod-mwh-065","cloningInfo":null,"hostingEnvironmentId":null,"tags":null,"resourceGroup":"clitest.rg000001","defaultHostName":"webapp-privatelink-webapp000002.azurewebsites.net","slotSwapStatus":null,"httpsOnly":false,"redundancyMode":"None","inProgressOperationId":null,"geoDistributions":null,"privateEndpointConnections":null,"buildVersion":null,"targetBuildVersion":null,"migrationState":null,"eligibleLogCategories":"AppServiceAppLogs,AppServiceAuditLogs,AppServiceConsoleLogs,AppServiceHTTPLogs,AppServiceIPSecAuditLogs,AppServicePlatformLogs,ScanLogs,AppServiceFileAuditLogs,AppServiceAntivirusScanAuditLogs","storageAccountRequired":false}}
+      - step: RawStep_3265
+        method: POST
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/publishxml?api-version=2019-08-01
+        requestBody: '{}'
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1875'
+          content-type: application/xml
+          date: Thu, 25 Feb 2021 02:30:15 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          <publishData><publishProfile
+          profileName="webapp-privatelink-webapp000002 - Web Deploy"
+          publishMethod="MSDeploy"
+          publishUrl="webapp-privatelink-webapp000002.scm.azurewebsites.net:443"
+          msdeploySite="webapp-privatelink-webapp000002"
+          userName="$webapp-privatelink-webapp000002"
+          userPWD="yMqpKwLSF5wFCE65D370xstpy9nj4b3oo9A4nEbdTb6HG6hbpgXCGctzq7Md"
+          destinationAppUrl="http://webapp-privatelink-webapp000002.azurewebsites.net"
+          SQLServerDBConnectionString="" mySQLDBConnectionString=""
+          hostingProviderForumLink=""
+          controlPanelLink="http://windows.azure.com"
+          webSystem="WebSites"><databases /></publishProfile><publishProfile
+          profileName="webapp-privatelink-webapp000002 - FTP"
+          publishMethod="FTP"
+          publishUrl="ftp://waws-prod-mwh-065.ftp.azurewebsites.windows.net/site/wwwroot"
+          ftpPassiveMode="True"
+          userName="webapp-privatelink-webapp000002\$webapp-privatelink-webapp000002"
+          userPWD="yMqpKwLSF5wFCE65D370xstpy9nj4b3oo9A4nEbdTb6HG6hbpgXCGctzq7Md"
+          destinationAppUrl="http://webapp-privatelink-webapp000002.azurewebsites.net"
+          SQLServerDBConnectionString="" mySQLDBConnectionString=""
+          hostingProviderForumLink=""
+          controlPanelLink="http://windows.azure.com"
+          webSystem="WebSites"><databases /></publishProfile><publishProfile
+          profileName="webapp-privatelink-webapp000002 - Zip Deploy"
+          publishMethod="ZipDeploy"
+          publishUrl="webapp-privatelink-webapp000002.scm.azurewebsites.net:443"
+          userName="$webapp-privatelink-webapp000002"
+          userPWD="yMqpKwLSF5wFCE65D370xstpy9nj4b3oo9A4nEbdTb6HG6hbpgXCGctzq7Md"
+          destinationAppUrl="http://webapp-privatelink-webapp000002.azurewebsites.net"
+          SQLServerDBConnectionString="" mySQLDBConnectionString=""
+          hostingProviderForumLink=""
+          controlPanelLink="http://windows.azure.com"
+          webSystem="WebSites"><databases /></publishProfile></publishData>
+      - step: RawStep_3266
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '429'
+          content-type: application/json; charset=utf-8
+          date: Thu, 25 Feb 2021 02:30:15 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus2","tags":{"product":"azurecli","cause":"automation","date":"2021-02-25T02:28:09Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_privateEndpoints_webapp-privatelink-endpoint000006
+        resourceName: privateEndpoints_webapp-privatelink-endpoint000006
+        exampleFile: >-
+          ../examples/Create_privateEndpoints_webapp-privatelink-endpoint000006_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_3268
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002?api-version=2019-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '7415'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:31:34 GMT
+          etag: '"1D70B1E1C725BA0"'
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002","name":"webapp-privatelink-webapp000002","type":"Microsoft.Web/sites","kind":"app","location":"West
+          US
+          2","properties":{"name":"webapp-privatelink-webapp000002","state":"Running","hostNames":["webapp-privatelink-webapp000002.azurewebsites.net"],"webSpace":"clitest.rg000001-WestUS2webspace","selfLink":"https://waws-prod-mwh-065.api.azurewebsites.windows.net:454/subscriptions/00000000-0000-0000-0000-000000000000/webspaces/clitest.rg000001-WestUS2webspace/sites/webapp-privatelink-webapp000002","repositorySiteName":"webapp-privatelink-webapp000002","owner":null,"usageState":"Normal","enabled":true,"adminEnabled":true,"enabledHostNames":["webapp-privatelink-webapp000002.azurewebsites.net","webapp-privatelink-webapp000002.scm.azurewebsites.net"],"siteProperties":{"metadata":null,"properties":[{"name":"LinuxFxVersion","value":""},{"name":"WindowsFxVersion","value":null}],"appSettings":null},"availabilityState":"Normal","sslCertificates":null,"csrs":[],"cers":null,"siteMode":null,"hostNameSslStates":[{"name":"webapp-privatelink-webapp000002.azurewebsites.net","sslState":"Disabled","ipBasedSslResult":null,"virtualIP":null,"thumbprint":null,"toUpdate":null,"toUpdateIpBasedSsl":null,"ipBasedSslState":"NotConfigured","hostType":"Standard"},{"name":"webapp-privatelink-webapp000002.scm.azurewebsites.net","sslState":"Disabled","ipBasedSslResult":null,"virtualIP":null,"thumbprint":null,"toUpdate":null,"toUpdateIpBasedSsl":null,"ipBasedSslState":"NotConfigured","hostType":"Repository"}],"computeMode":null,"serverFarm":null,"serverFarmId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/serverfarms/webapp-privatelink-asp000003","reserved":false,"isXenon":false,"hyperV":false,"lastModifiedTimeUtc":"2021-02-25T02:29:58.49","storageRecoveryDefaultState":"Running","contentAvailabilityState":"Normal","runtimeAvailabilityState":"Normal","siteConfig":{"numberOfWorkers":null,"defaultDocuments":null,"netFrameworkVersion":null,"phpVersion":null,"pythonVersion":null,"nodeVersion":null,"powerShellVersion":null,"linuxFxVersion":null,"windowsFxVersion":null,"requestTracingEnabled":null,"remoteDebuggingEnabled":null,"remoteDebuggingVersion":null,"httpLoggingEnabled":null,"azureMonitorLogCategories":null,"acrUseManagedIdentityCreds":false,"acrUserManagedIdentityID":null,"logsDirectorySizeLimit":null,"detailedErrorLoggingEnabled":null,"publishingUsername":null,"publishingPassword":null,"appSettings":null,"azureStorageAccounts":null,"metadata":null,"connectionStrings":null,"machineKey":null,"handlerMappings":null,"documentRoot":null,"scmType":null,"use32BitWorkerProcess":null,"webSocketsEnabled":null,"alwaysOn":null,"javaVersion":null,"javaContainer":null,"javaContainerVersion":null,"appCommandLine":null,"managedPipelineMode":null,"virtualApplications":null,"winAuthAdminState":null,"winAuthTenantState":null,"customAppPoolIdentityAdminState":null,"customAppPoolIdentityTenantState":null,"runtimeADUser":null,"runtimeADUserPassword":null,"loadBalancing":null,"routingRules":null,"experiments":null,"limits":null,"autoHealEnabled":null,"autoHealRules":null,"tracingOptions":null,"vnetName":null,"vnetRouteAllEnabled":null,"vnetPrivatePortsCount":null,"cors":null,"push":null,"apiDefinition":null,"apiManagementConfig":null,"autoSwapSlotName":null,"localMySqlEnabled":null,"managedServiceIdentityId":null,"xManagedServiceIdentityId":null,"ipSecurityRestrictions":null,"scmIpSecurityRestrictions":null,"scmIpSecurityRestrictionsUseMain":null,"http20Enabled":null,"minTlsVersion":null,"scmMinTlsVersion":null,"ftpsState":null,"preWarmedInstanceCount":null,"functionAppScaleLimit":null,"healthCheckPath":null,"fileChangeAuditEnabled":null,"functionsRuntimeScaleMonitoringEnabled":null,"websiteTimeZone":null,"minimumElasticInstanceCount":0},"deploymentId":"webapp-privatelink-webapp000002","trafficManagerHostNames":null,"sku":"PremiumV2","scmSiteAlsoStopped":false,"targetSwapSlot":null,"hostingEnvironment":null,"hostingEnvironmentProfile":null,"clientAffinityEnabled":true,"clientCertEnabled":false,"clientCertMode":"Required","clientCertExclusionPaths":null,"hostNamesDisabled":false,"domainVerificationIdentifiers":null,"customDomainVerificationId":"253001F2FCF5A7B1CD759EB861E9BB1596370BE27E47A991F72184277B3D12F2","kind":"app","inboundIpAddress":"40.64.128.228","possibleInboundIpAddresses":"40.64.128.228","ftpUsername":"webapp-privatelink-webapp000002\\$webapp-privatelink-webapp000002","ftpsHostName":"ftps://waws-prod-mwh-065.ftp.azurewebsites.windows.net/site/wwwroot","outboundIpAddresses":"20.72.192.161,20.72.192.166,20.72.192.169,20.72.192.222,20.72.192.250,20.72.193.46,40.64.128.228","possibleOutboundIpAddresses":"20.72.192.39,20.72.192.87,20.72.192.99,20.72.192.146,20.72.192.156,20.72.192.159,20.72.192.161,20.72.192.166,20.72.192.169,20.72.192.222,20.72.192.250,20.72.193.46,20.72.193.92,20.72.193.103,20.72.193.104,20.72.193.106,20.72.193.117,20.72.193.118,20.72.193.121,20.72.193.133,20.72.193.162,20.72.193.174,20.72.193.181,20.72.193.194,20.72.193.229,20.72.193.242,20.72.194.0,51.143.126.35,51.143.58.61,51.143.59.101,40.64.128.228","containerSize":0,"dailyMemoryTimeQuota":0,"suspendedTill":null,"siteDisabledReason":0,"functionExecutionUnitsCache":null,"maxNumberOfWorkers":null,"homeStamp":"waws-prod-mwh-065","cloningInfo":null,"hostingEnvironmentId":null,"tags":null,"resourceGroup":"clitest.rg000001","defaultHostName":"webapp-privatelink-webapp000002.azurewebsites.net","slotSwapStatus":null,"httpsOnly":false,"redundancyMode":"None","inProgressOperationId":null,"geoDistributions":null,"privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314","name":"webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314","type":"Microsoft.Web/sites/privateEndpointConnections","properties":{"provisioningState":"Pending","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/webapp-privatelink-endpoint000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"ipAddresses":[]}}],"buildVersion":null,"targetBuildVersion":null,"migrationState":null,"eligibleLogCategories":"AppServiceAppLogs,AppServiceAuditLogs,AppServiceConsoleLogs,AppServiceHTTPLogs,AppServiceIPSecAuditLogs,AppServicePlatformLogs,ScanLogs,AppServiceFileAuditLogs,AppServiceAntivirusScanAuditLogs","storageAccountRequired":false}}
+      - step: RawStep_3269
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314?api-version=2019-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '887'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:31:35 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314","name":"webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314","type":"Microsoft.Web/sites/privateEndpointConnections","properties":{"provisioningState":"Pending","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/webapp-privatelink-endpoint000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"ipAddresses":[]}}
+      - step: RawStep_3270
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314?api-version=2019-08-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314","name":"webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314","type":"Microsoft.Web/sites/privateEndpointConnections","properties":{"provisioningState":"Pending","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/webapp-privatelink-endpoint000006"},"privateLinkServiceConnectionState":{"status":"Approved","description":null,"actionsRequired":"None"},"ipAddresses":[]}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '889'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:31:37 GMT
+          etag: '"1D70B1E1C725BA0"'
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1195'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314","name":"webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314","type":"Microsoft.Web/sites/privateEndpointConnections","properties":{"provisioningState":"Pending","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/webapp-privatelink-endpoint000006"},"privateLinkServiceConnectionState":{"status":"Approving","description":"","actionsRequired":"None"},"ipAddresses":[]}}
+      - step: RawStep_3271
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '429'
+          content-type: application/json; charset=utf-8
+          date: Thu, 25 Feb 2021 02:35:44 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus2","tags":{"product":"azurecli","cause":"automation","date":"2021-02-25T02:28:09Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_privateEndpoints_webapp-privatelink-endpoint2000008
+        resourceName: privateEndpoints_webapp-privatelink-endpoint2000008
+        exampleFile: >-
+          ../examples/Create_privateEndpoints_webapp-privatelink-endpoint2000008_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+        variables:
+          privateEndpointName: webapp-privatelink-endpoint2000008
+      - step: RawStep_3273
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002?api-version=2019-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '8310'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:36:04 GMT
+          etag: '"1D70B1E57A974CB"'
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002","name":"webapp-privatelink-webapp000002","type":"Microsoft.Web/sites","kind":"app","location":"West
+          US
+          2","properties":{"name":"webapp-privatelink-webapp000002","state":"Running","hostNames":["webapp-privatelink-webapp000002.azurewebsites.net"],"webSpace":"clitest.rg000001-WestUS2webspace","selfLink":"https://waws-prod-mwh-065.api.azurewebsites.windows.net:454/subscriptions/00000000-0000-0000-0000-000000000000/webspaces/clitest.rg000001-WestUS2webspace/sites/webapp-privatelink-webapp000002","repositorySiteName":"webapp-privatelink-webapp000002","owner":null,"usageState":"Normal","enabled":true,"adminEnabled":true,"enabledHostNames":["webapp-privatelink-webapp000002.azurewebsites.net","webapp-privatelink-webapp000002.scm.azurewebsites.net"],"siteProperties":{"metadata":null,"properties":[{"name":"LinuxFxVersion","value":""},{"name":"WindowsFxVersion","value":null}],"appSettings":null},"availabilityState":"Normal","sslCertificates":null,"csrs":[],"cers":null,"siteMode":null,"hostNameSslStates":[{"name":"webapp-privatelink-webapp000002.azurewebsites.net","sslState":"Disabled","ipBasedSslResult":null,"virtualIP":null,"thumbprint":null,"toUpdate":null,"toUpdateIpBasedSsl":null,"ipBasedSslState":"NotConfigured","hostType":"Standard"},{"name":"webapp-privatelink-webapp000002.scm.azurewebsites.net","sslState":"Disabled","ipBasedSslResult":null,"virtualIP":null,"thumbprint":null,"toUpdate":null,"toUpdateIpBasedSsl":null,"ipBasedSslState":"NotConfigured","hostType":"Repository"}],"computeMode":null,"serverFarm":null,"serverFarmId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/serverfarms/webapp-privatelink-asp000003","reserved":false,"isXenon":false,"hyperV":false,"lastModifiedTimeUtc":"2021-02-25T02:31:37.8366667","storageRecoveryDefaultState":"Running","contentAvailabilityState":"Normal","runtimeAvailabilityState":"Normal","siteConfig":{"numberOfWorkers":null,"defaultDocuments":null,"netFrameworkVersion":null,"phpVersion":null,"pythonVersion":null,"nodeVersion":null,"powerShellVersion":null,"linuxFxVersion":null,"windowsFxVersion":null,"requestTracingEnabled":null,"remoteDebuggingEnabled":null,"remoteDebuggingVersion":null,"httpLoggingEnabled":null,"azureMonitorLogCategories":null,"acrUseManagedIdentityCreds":false,"acrUserManagedIdentityID":null,"logsDirectorySizeLimit":null,"detailedErrorLoggingEnabled":null,"publishingUsername":null,"publishingPassword":null,"appSettings":null,"azureStorageAccounts":null,"metadata":null,"connectionStrings":null,"machineKey":null,"handlerMappings":null,"documentRoot":null,"scmType":null,"use32BitWorkerProcess":null,"webSocketsEnabled":null,"alwaysOn":null,"javaVersion":null,"javaContainer":null,"javaContainerVersion":null,"appCommandLine":null,"managedPipelineMode":null,"virtualApplications":null,"winAuthAdminState":null,"winAuthTenantState":null,"customAppPoolIdentityAdminState":null,"customAppPoolIdentityTenantState":null,"runtimeADUser":null,"runtimeADUserPassword":null,"loadBalancing":null,"routingRules":null,"experiments":null,"limits":null,"autoHealEnabled":null,"autoHealRules":null,"tracingOptions":null,"vnetName":null,"vnetRouteAllEnabled":null,"vnetPrivatePortsCount":null,"cors":null,"push":null,"apiDefinition":null,"apiManagementConfig":null,"autoSwapSlotName":null,"localMySqlEnabled":null,"managedServiceIdentityId":null,"xManagedServiceIdentityId":null,"ipSecurityRestrictions":null,"scmIpSecurityRestrictions":null,"scmIpSecurityRestrictionsUseMain":null,"http20Enabled":null,"minTlsVersion":null,"scmMinTlsVersion":null,"ftpsState":null,"preWarmedInstanceCount":null,"functionAppScaleLimit":null,"healthCheckPath":null,"fileChangeAuditEnabled":null,"functionsRuntimeScaleMonitoringEnabled":null,"websiteTimeZone":null,"minimumElasticInstanceCount":0},"deploymentId":"webapp-privatelink-webapp000002","trafficManagerHostNames":null,"sku":"PremiumV2","scmSiteAlsoStopped":false,"targetSwapSlot":null,"hostingEnvironment":null,"hostingEnvironmentProfile":null,"clientAffinityEnabled":true,"clientCertEnabled":false,"clientCertMode":"Required","clientCertExclusionPaths":null,"hostNamesDisabled":false,"domainVerificationIdentifiers":null,"customDomainVerificationId":"253001F2FCF5A7B1CD759EB861E9BB1596370BE27E47A991F72184277B3D12F2","kind":"app","inboundIpAddress":"40.64.128.228","possibleInboundIpAddresses":"40.64.128.228","ftpUsername":"webapp-privatelink-webapp000002\\$webapp-privatelink-webapp000002","ftpsHostName":"ftps://waws-prod-mwh-065.ftp.azurewebsites.windows.net/site/wwwroot","outboundIpAddresses":"20.72.192.161,20.72.192.166,20.72.192.169,20.72.192.222,20.72.192.250,20.72.193.46,40.64.128.228","possibleOutboundIpAddresses":"20.72.192.39,20.72.192.87,20.72.192.99,20.72.192.146,20.72.192.156,20.72.192.159,20.72.192.161,20.72.192.166,20.72.192.169,20.72.192.222,20.72.192.250,20.72.193.46,20.72.193.92,20.72.193.103,20.72.193.104,20.72.193.106,20.72.193.117,20.72.193.118,20.72.193.121,20.72.193.133,20.72.193.162,20.72.193.174,20.72.193.181,20.72.193.194,20.72.193.229,20.72.193.242,20.72.194.0,51.143.126.35,51.143.58.61,51.143.59.101,40.64.128.228","containerSize":0,"dailyMemoryTimeQuota":0,"suspendedTill":null,"siteDisabledReason":0,"functionExecutionUnitsCache":null,"maxNumberOfWorkers":null,"homeStamp":"waws-prod-mwh-065","cloningInfo":null,"hostingEnvironmentId":null,"tags":null,"resourceGroup":"clitest.rg000001","defaultHostName":"webapp-privatelink-webapp000002.azurewebsites.net","slotSwapStatus":null,"httpsOnly":false,"redundancyMode":"None","inProgressOperationId":null,"geoDistributions":null,"privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314","name":"webapp-privatelink-endpointconn000007-9d97a5d7-0d21-4e81-883f-65d70e2d4314","type":"Microsoft.Web/sites/privateEndpointConnections","properties":{"provisioningState":"Pending","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/webapp-privatelink-endpoint000006"},"privateLinkServiceConnectionState":{"status":"Approving","description":"","actionsRequired":"None"},"ipAddresses":[]}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn2000009-e23ef9bd-b412-4b60-a6fc-20d3822cdf7f","name":"webapp-privatelink-endpointconn2000009-e23ef9bd-b412-4b60-a6fc-20d3822cdf7f","type":"Microsoft.Web/sites/privateEndpointConnections","properties":{"provisioningState":"Pending","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/webapp-privatelink-endpoint2000008"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"ipAddresses":[]}}],"buildVersion":null,"targetBuildVersion":null,"migrationState":null,"eligibleLogCategories":"AppServiceAppLogs,AppServiceAuditLogs,AppServiceConsoleLogs,AppServiceHTTPLogs,AppServiceIPSecAuditLogs,AppServicePlatformLogs,ScanLogs,AppServiceFileAuditLogs,AppServiceAntivirusScanAuditLogs","storageAccountRequired":false}}
+      - step: RawStep_3274
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn2000009-e23ef9bd-b412-4b60-a6fc-20d3822cdf7f?api-version=2019-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '887'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:36:05 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn2000009-e23ef9bd-b412-4b60-a6fc-20d3822cdf7f","name":"webapp-privatelink-endpointconn2000009-e23ef9bd-b412-4b60-a6fc-20d3822cdf7f","type":"Microsoft.Web/sites/privateEndpointConnections","properties":{"provisioningState":"Pending","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/webapp-privatelink-endpoint2000008"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"ipAddresses":[]}}
+      - step: RawStep_3275
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn2000009-e23ef9bd-b412-4b60-a6fc-20d3822cdf7f?api-version=2019-08-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn2000009-e23ef9bd-b412-4b60-a6fc-20d3822cdf7f","name":"webapp-privatelink-endpointconn2000009-e23ef9bd-b412-4b60-a6fc-20d3822cdf7f","type":"Microsoft.Web/sites/privateEndpointConnections","properties":{"provisioningState":"Pending","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/webapp-privatelink-endpoint2000008"},"privateLinkServiceConnectionState":{"status":"Rejected","description":null,"actionsRequired":"None"},"ipAddresses":[]}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '889'
+          content-type: application/json
+          date: Thu, 25 Feb 2021 02:36:06 GMT
+          etag: '"1D70B1E57A974CB"'
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1196'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002/privateEndpointConnections/webapp-privatelink-endpointconn2000009-e23ef9bd-b412-4b60-a6fc-20d3822cdf7f","name":"webapp-privatelink-endpointconn2000009-e23ef9bd-b412-4b60-a6fc-20d3822cdf7f","type":"Microsoft.Web/sites/privateEndpointConnections","properties":{"provisioningState":"Pending","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/webapp-privatelink-endpoint2000008"},"privateLinkServiceConnectionState":{"status":"Rejecting","description":"","actionsRequired":"None"},"ipAddresses":[]}}
+    variables:
+      virtualNetworkName: webapp-privatelink-vnet000004
+      subnetName: webapp-privatelink-subnet000005
+      privateEndpointName: webapp-privatelink-endpoint000006

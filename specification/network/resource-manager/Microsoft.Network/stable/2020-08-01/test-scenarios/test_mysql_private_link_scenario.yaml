@@ -1,0 +1,561 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_mysql_private_link_scenario
+    steps:
+      - step: RawStep_657
+        method: HEAD
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '0'
+          date: Wed, 24 Feb 2021 12:05:16 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+        statusCode: 204
+      - step: RawStep_658
+        method: POST
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBForMySQL/checkNameAvailability?api-version=2017-12-01
+        requestBody: '{"name":"azuredbclitest000002","type":"Microsoft.DBforMySQL/servers"}'
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '35'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:05:18 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        responseExpected: '{"nameAvailable":true,"message":""}'
+      - step: RawStep_659
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBForMySQL/servers/azuredbclitest000002?api-version=2017-12-01
+        requestBody: >-
+          {"sku":{"name":"GP_Gen5_2"},"properties":{"storageProfile":{"storageMB":51200,"storageAutogrow":"Enabled"},"createMode":"Default","administratorLogin":"cloudsa","administratorLoginPassword":"SecretPassword123"},"location":"westus"}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMySQL/locations/westus/azureAsyncOperation/7a08f8cc-81f2-45c4-ac2c-a395470f1268?api-version=2017-12-01
+          cache-control: no-cache
+          content-length: '73'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:05:23 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMySQL/locations/westus/operationResults/7a08f8cc-81f2-45c4-ac2c-a395470f1268?api-version=2017-12-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1176'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"UpsertElasticServer","startTime":"2021-02-24T12:05:23.31Z"}
+      - step: RawStep_660
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBForMySQL/servers/azuredbclitest000002/databases/defaultdb?api-version=2017-12-01
+        requestBody: '{"properties":{"charset":"utf8"}}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMySQL/locations/westus/azureAsyncOperation/bb11442b-530d-4279-bac3-a16a6cfa6ed9?api-version=2017-12-01
+          cache-control: no-cache
+          content-length: '81'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:06:48 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMySQL/locations/westus/operationResults/bb11442b-530d-4279-bac3-a16a6cfa6ed9?api-version=2017-12-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1163'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"UpsertElasticServerDatabase","startTime":"2021-02-24T12:06:48.52Z"}
+      - step: RawStep_661
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateLinkResources?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '497'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:07:05 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"properties":{"groupId":"mysqlServer","requiredMembers":["mysqlServer"],"requiredZoneNames":["privatelink.mysql.database.azure.com"]},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateLinkResources/plr","name":"plr","type":"Microsoft.DBforMySQL/servers/privateLinkResources"}]}
+      - step: Create_virtualNetworks_cli-vnet-000003
+        resourceName: virtualNetworks_cli-vnet-000003
+        exampleFile: ../examples/Create_virtualNetworks_cli-vnet-000003_Generated_663.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_664
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_cli-subnet-000004
+        resourceName: subnets_cli-subnet-000004
+        exampleFile: >-
+          ../examples/Create_subnets_appgw_private_endpoint_subnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: RawStep_666
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBForMySQL/servers/azuredbclitest000002?api-version=2017-12-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1115'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:07:22 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"5.7","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.mysql.database.azure.com","earliestRestoreDate":"2021-02-24T12:15:23.653+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","privateEndpointConnections":[],"infrastructureEncryption":"Disabled","publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforMySQL/servers"}
+      - step: RawStep_667
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateLinkResources?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '497'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:07:22 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"properties":{"groupId":"mysqlServer","requiredMembers":["mysqlServer"],"requiredZoneNames":["privatelink.mysql.database.azure.com"]},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateLinkResources/plr","name":"plr","type":"Microsoft.DBforMySQL/servers/privateLinkResources"}]}
+      - step: Create_privateEndpoints_cli-pe-000005
+        resourceName: privateEndpoints_cli-pe-000005
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000005_Generated_669.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_670
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBForMySQL/servers/azuredbclitest000002?api-version=2017-12-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1854'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:07:41 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"5.7","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.mysql.database.azure.com","earliestRestoreDate":"2021-02-24T12:15:23.653+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Ready"}}],"infrastructureEncryption":"Disabled","publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforMySQL/servers"}
+      - step: RawStep_671
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '875'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:07:42 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791","name":"cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+      - step: RawStep_672
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '875'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:07:43 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791","name":"cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+      - step: RawStep_673
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791","name":"cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:07:43 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1161'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_674
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791","name":"cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:07:45 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1155'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_675
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-2a18072d-1c32-4e8c-a9fd-db9231bd5791?api-version=2018-06-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/locations/westus/privateEndpointConnectionAzureAsyncOperation/daa23944-8914-4adf-b786-b4746fd070f1?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '96'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:07:47 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/locations/westus/privateEndpointConnectionOperationResults/daa23944-8914-4adf-b786-b4746fd070f1?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14993'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"DropElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:07:46.84Z"}
+      - step: Create_privateEndpoints_cli-pe-000006
+        resourceName: privateEndpoints_cli-pe-000006
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000006_Generated_677.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+        variables:
+          privateEndpointName: cli-pe-000006
+      - step: RawStep_678
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBForMySQL/servers/azuredbclitest000002?api-version=2017-12-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1840'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:08:07 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"5.7","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.mysql.database.azure.com","earliestRestoreDate":"2021-02-24T12:15:23.653+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"}}],"infrastructureEncryption":"Disabled","publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforMySQL/servers"}
+      - step: RawStep_679
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '861'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:08:08 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef","name":"cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+      - step: RawStep_680
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '861'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:08:09 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef","name":"cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+      - step: RawStep_681
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef","name":"cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/locations/westus/privateEndpointConnectionAzureAsyncOperation/191afbfd-a2f9-4e45-8699-8338622c8268?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '99'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:08:11 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/locations/westus/privateEndpointConnectionOperationResults/191afbfd-a2f9-4e45-8699-8338622c8268?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1183'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"ApproveElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:08:10.85Z"}
+      - step: RawStep_682
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef","name":"cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:08:35 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1154'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_683
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-d9225872-da47-4a79-b724-bfc1f0777bef?api-version=2018-06-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/locations/westus/privateEndpointConnectionAzureAsyncOperation/3f4be8a3-c97d-47d1-b97b-8fc5e5e6e811?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '97'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:08:37 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/locations/westus/privateEndpointConnectionOperationResults/3f4be8a3-c97d-47d1-b97b-8fc5e5e6e811?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14989'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"DropElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:08:36.647Z"}
+      - step: Create_privateEndpoints_cli-pe-000007
+        resourceName: privateEndpoints_cli-pe-000007
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000007_Generated_685.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+        variables:
+          privateEndpointName: cli-pe-000007
+      - step: RawStep_686
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBForMySQL/servers/azuredbclitest000002?api-version=2017-12-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1840'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:08:56 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"5.7","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.mysql.database.azure.com","earliestRestoreDate":"2021-02-24T12:15:23.653+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"}}],"infrastructureEncryption":"Disabled","publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforMySQL/servers"}
+      - step: RawStep_687
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '861'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:08:57 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8","name":"cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+      - step: RawStep_688
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '861'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:08:58 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8","name":"cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+      - step: RawStep_689
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8","name":"cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/locations/westus/privateEndpointConnectionAzureAsyncOperation/f2c5d0e7-6ed3-4ba8-9a4f-a57190a341ad?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '99'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:09:00 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/locations/westus/privateEndpointConnectionOperationResults/f2c5d0e7-6ed3-4ba8-9a4f-a57190a341ad?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1175'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"RejectElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:08:59.753Z"}
+      - step: RawStep_690
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8","name":"cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8","type":"Microsoft.DBforMySQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:09:12 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1170'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_691
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002?api-version=2017-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1858'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:09:14 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"5.7","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.mysql.database.azure.com","earliestRestoreDate":"2021-02-24T12:15:23.653+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"}}],"infrastructureEncryption":"Disabled","publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforMySQL/servers"}
+      - step: RawStep_692
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-a26672a3-15f1-442f-b310-545a1e5c75f8?api-version=2018-06-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/locations/westus/privateEndpointConnectionAzureAsyncOperation/79992d7d-f60b-4d74-9a2e-26e003b8dddf?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '97'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:09:16 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/locations/westus/privateEndpointConnectionOperationResults/79992d7d-f60b-4d74-9a2e-26e003b8dddf?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14992'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"DropElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:09:15.427Z"}
+    variables:
+      virtualNetworkName: cli-vnet-000003
+      subnetName: cli-subnet-000004
+      privateEndpointName: cli-pe-000005

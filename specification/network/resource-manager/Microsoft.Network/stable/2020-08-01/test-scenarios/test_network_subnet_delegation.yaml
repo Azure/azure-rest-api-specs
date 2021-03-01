@@ -1,0 +1,68 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_subnet_delegation
+    steps:
+      - step: AvailableDelegations_List_2389
+        exampleFile: ../examples/AvailableDelegations_List_2389_Generated.json
+        operationId: AvailableDelegations_List
+      - step: RawStep_2390
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_subnet_delegation000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:01:20 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_subnet_delegation000001","name":"cli_subnet_delegation000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T14:01:17Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: AvailableResourceGroupDelegations_List_2391
+        exampleFile: ../examples/AvailableResourceGroupDelegations_List_2391_Generated.json
+        operationId: AvailableResourceGroupDelegations_List
+        variables:
+          location: westus
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2393.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Update_virtualNetworks_vnet1_2395
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/0
+            value:
+              name: subnet1
+              properties:
+                addressPrefix: 10.0.0.0/24
+                delegations:
+                  - name: '0'
+                    properties:
+                      serviceName: Microsoft.Web/serverFarms
+                      provisioningState: Succeeded
+                      actions:
+                        - Microsoft.Network/virtualNetworks/subnets/action
+                    id: >-
+                      /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_subnet_delegation000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1/delegations/0
+                    type: Microsoft.Network/virtualNetworks/subnets/delegations
+                provisioningState: Succeeded
+                privateEndpointNetworkPolicies: Enabled
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_subnet_delegation000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+              type: Microsoft.Network/virtualNetworks/subnets
+      - step: Subnets_Get_2396
+        exampleFile: ../examples/Subnets_Get_2396_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_subnet1
+        resourceName: subnets_subnet1
+        exampleFile: ../examples/Create_subnets_subnet1_Generated_2398.json
+        operationId: Subnets_CreateOrUpdate
+    variables:
+      location: westcentralus
+      virtualNetworkName: vnet1
+      subnetName: subnet1

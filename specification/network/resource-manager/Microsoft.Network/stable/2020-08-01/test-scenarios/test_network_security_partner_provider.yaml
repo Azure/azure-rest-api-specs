@@ -1,0 +1,147 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_security_partner_provider
+    steps:
+      - step: RawStep_2351
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:02:12 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:02:09Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2352
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan?api-version=2020-05-01
+        requestBody: '{"location":"westus"}'
+        requestHeaders:
+          azure-asyncnotification: Enabled
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/c2f47814-564e-4dfa-8773-290b8c990848?api-version=2020-05-01
+          cache-control: no-cache
+          content-length: '573'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:02:19 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-arm-service-request-id: fd5fb7ac-28c9-443e-bf40-90414b91ed19
+          x-ms-ratelimit-remaining-subscription-writes: '1172'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"clitestvwan","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan","etag":"W/\"8984fe1f-f0fd-4cf6-bfc7-ec86ef05e378\"","type":"Microsoft.Network/virtualWans","location":"westus","properties":{"provisioningState":"Updating","disableVpnEncryption":false,"allowBranchToBranchTraffic":true,"office365LocalBreakoutCategory":"None","type":"Standard"}}
+      - step: RawStep_2353
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualHubs/clitestvhub?api-version=2020-05-01
+        requestBody: >-
+          {"location":"westus","properties":{"virtualWan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan"},"addressPrefix":"10.5.0.0/16","sku":"Standard"}}
+        requestHeaders:
+          azure-asyncnotification: Enabled
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/7ea34102-db2e-439a-ab15-cc48fba9f051?api-version=2020-05-01
+          cache-control: no-cache
+          content-length: '895'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:02:36 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-arm-service-request-id: 366d6763-16cf-4d92-a4df-0f8db30c7bd4
+          x-ms-ratelimit-remaining-subscription-writes: '1176'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"clitestvhub","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualHubs/clitestvhub","etag":"W/\"854c98dc-24df-4afe-8e27-35c0b019103f\"","type":"Microsoft.Network/virtualHubs","location":"westus","properties":{"provisioningState":"Updating","virtualHubRouteTableV2s":[],"addressPrefix":"10.5.0.0/16","virtualRouterAsn":0,"virtualRouterIps":[],"routeTable":{"routes":[]},"virtualWan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan"},"sku":"Standard","routingState":"None"}}
+      - step: RawStep_2354
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:06:21 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:02:09Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2355
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/vpnGateways/cligateway?api-version=2020-05-01
+        requestBody: >-
+          {"location":"westus","properties":{"virtualHub":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualHubs/clitestvhub"},"bgpSettings":{}}}
+        requestHeaders:
+          azure-asyncnotification: Enabled
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/09fb0072-20f8-4a30-a424-4ba520d1c6b9?api-version=2020-05-01
+          cache-control: no-cache
+          content-length: '975'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:06:28 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-arm-service-request-id: e6e3986f-2f61-4518-8efa-4be54b09a6b8
+          x-ms-ratelimit-remaining-subscription-writes: '1153'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"cligateway","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/vpnGateways/cligateway","etag":"W/\"3a25ac58-1869-4256-ba2c-753cd38b561b\"","type":"Microsoft.Network/vpnGateways","location":"westus","properties":{"provisioningState":"Updating","connections":[],"virtualHub":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualHubs/clitestvhub"},"bgpSettings":{"asn":65515,"peerWeight":0},"vpnGatewayScaleUnit":1,"packetCaptureDiagnosticState":"None","ipConfigurations":[],"natRules":[],"enableBgpRouteTranslationForNat":false,"isRoutingPreferenceInternet":false}}
+      - step: RawStep_2356
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:31:21 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:02:09Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_securityPartnerProviders_clisecuritypartnerprovider
+        resourceName: securityPartnerProviders_clisecuritypartnerprovider
+        exampleFile: >-
+          ../examples/Create_securityPartnerProviders_clisecuritypartnerprovider_Generated.json
+        operationId: SecurityPartnerProviders_CreateOrUpdate
+      - step: Update_securityPartnerProviders_clisecuritypartnerprovider_2359
+        resourceName: securityPartnerProviders_clisecuritypartnerprovider
+        operationId: SecurityPartnerProviders_CreateOrUpdate
+        resourceUpdate:
+          - add: /tags
+            value:
+              a: b
+      - step: SecurityPartnerProviders_ListByResourceGroup_2360
+        exampleFile: >-
+          ../examples/SecurityPartnerProviders_ListByResourceGroup_2360_Generated.json
+        operationId: SecurityPartnerProviders_ListByResourceGroup
+      - step: SecurityPartnerProviders_List_2361
+        exampleFile: ../examples/SecurityPartnerProviders_List_2361_Generated.json
+        operationId: SecurityPartnerProviders_List
+      - step: SecurityPartnerProviders_Delete_2362
+        exampleFile: ../examples/SecurityPartnerProviders_Delete_2362_Generated.json
+        operationId: SecurityPartnerProviders_Delete
+    variables:
+      securityPartnerProviderName: clisecuritypartnerprovider

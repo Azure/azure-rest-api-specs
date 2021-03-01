@@ -1,0 +1,152 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_virtual_appliance
+    steps:
+      - step: RawStep_2433
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:42:52 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T15:42:50Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2434
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan?api-version=2020-05-01
+        requestBody: '{"location":"westcentralus"}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westcentralus/operations/276a5545-49f9-4652-b556-148bb206eb85?api-version=2020-05-01
+          cache-control: no-cache
+          content-length: '580'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:42:59 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-arm-service-request-id: cb71e1cd-e0f6-42d2-86c3-770d2d034ef4
+          x-ms-ratelimit-remaining-subscription-writes: '1195'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"clitestvwan","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan","etag":"W/\"77abc038-5d81-4120-bb76-9ecee4c51882\"","type":"Microsoft.Network/virtualWans","location":"westcentralus","properties":{"provisioningState":"Updating","disableVpnEncryption":false,"allowBranchToBranchTraffic":true,"office365LocalBreakoutCategory":"None","type":"Standard"}}
+      - step: RawStep_2435
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:43:10 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T15:42:50Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2436
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualHubs/clitestvhub?api-version=2020-05-01
+        requestBody: >-
+          {"location":"westcentralus","properties":{"virtualWan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan"},"addressPrefix":"10.5.0.0/16","sku":"Standard"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westcentralus/operations/bb4daf67-a7e3-44d4-b54d-bc4c5bc8da98?api-version=2020-05-01
+          cache-control: no-cache
+          content-length: '902'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:43:19 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-arm-service-request-id: 8ab6becc-4244-47df-80d8-d6bdf9cd3901
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"clitestvhub","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualHubs/clitestvhub","etag":"W/\"423f909b-df9b-47f8-9aed-35604a6a7654\"","type":"Microsoft.Network/virtualHubs","location":"westcentralus","properties":{"provisioningState":"Updating","virtualHubRouteTableV2s":[],"addressPrefix":"10.5.0.0/16","virtualRouterAsn":0,"virtualRouterIps":[],"routeTable":{"routes":[]},"virtualWan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan"},"sku":"Standard","routingState":"None"}}
+      - step: RawStep_2437
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:48:33 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T15:42:50Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkVirtualAppliances_cli-virtual-appliance
+        resourceName: networkVirtualAppliances_cli-virtual-appliance
+        exampleFile: >-
+          ../examples/Create_networkVirtualAppliances_cli-virtual-appliance_Generated.json
+        operationId: NetworkVirtualAppliances_CreateOrUpdate
+      - step: Update_networkVirtualAppliances_cli-virtual-appliance_2440
+        resourceName: networkVirtualAppliances_cli-virtual-appliance
+        operationId: NetworkVirtualAppliances_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/virtualApplianceAsn
+            value: 20000
+          - replace: /properties/cloudInitConfiguration
+            value: echo $abcd
+      - step: NetworkVirtualAppliances_ListByResourceGroup_2441
+        exampleFile: >-
+          ../examples/NetworkVirtualAppliances_ListByResourceGroup_2441_Generated.json
+        operationId: NetworkVirtualAppliances_ListByResourceGroup
+      - step: NetworkVirtualAppliances_List_2442
+        exampleFile: ../examples/NetworkVirtualAppliances_List_2442_Generated.json
+        operationId: NetworkVirtualAppliances_List
+      - step: VirtualApplianceSkus_List_2443
+        exampleFile: ../examples/VirtualApplianceSkus_List_2443_Generated.json
+        operationId: VirtualApplianceSkus_List
+      - step: VirtualApplianceSkus_Get_2444
+        exampleFile: ../examples/VirtualApplianceSkus_Get_2444_Generated.json
+        operationId: VirtualApplianceSkus_Get
+      - step: Create_virtualApplianceSites_cli-site
+        resourceName: virtualApplianceSites_cli-site
+        exampleFile: ../examples/Create_virtualApplianceSites_cli-site_Generated.json
+        operationId: VirtualApplianceSites_CreateOrUpdate
+      - step: Update_virtualApplianceSites_cli-site_2447
+        resourceName: virtualApplianceSites_cli-site
+        operationId: VirtualApplianceSites_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/addressPrefix
+            value: 10.0.0.1/24
+          - replace: /properties/o365Policy/breakOutCategories/optimize
+            value: false
+          - replace: /properties/o365Policy/breakOutCategories/allow
+            value: false
+          - replace: /properties/o365Policy/breakOutCategories/default
+            value: false
+      - step: VirtualApplianceSites_List_2448
+        exampleFile: ../examples/VirtualApplianceSites_List_2448_Generated.json
+        operationId: VirtualApplianceSites_List
+      - step: VirtualApplianceSites_Delete_2449
+        exampleFile: ../examples/VirtualApplianceSites_Delete_2449_Generated.json
+        operationId: VirtualApplianceSites_Delete
+      - step: NetworkVirtualAppliances_Delete_2450
+        exampleFile: ../examples/NetworkVirtualAppliances_Delete_2450_Generated.json
+        operationId: NetworkVirtualAppliances_Delete
+    variables:
+      networkVirtualApplianceName: cli-virtual-appliance
+      skuName: barracudasdwanrelease
+      siteName: cli-site

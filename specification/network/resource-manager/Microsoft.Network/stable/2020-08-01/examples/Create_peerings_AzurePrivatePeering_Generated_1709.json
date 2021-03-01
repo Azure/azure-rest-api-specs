@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_express_route_ipv6_peering2000001",
+    "circuitName": "test_circuit",
+    "peeringName": "AzurePrivatePeering",
+    "peeringParameters": {
+      "properties": {
+        "peeringType": "AzurePrivatePeering",
+        "peerASN": 10002,
+        "vlanId": 103,
+        "ipv6PeeringConfig": {
+          "primaryPeerAddressPrefix": "2002:db00::/126",
+          "secondaryPeerAddressPrefix": "2003:db00::/126"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "AzurePrivatePeering",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_ipv6_peering2000001/providers/Microsoft.Network/expressRouteCircuits/test_circuit/peerings/AzurePrivatePeering",
+      "etag": "W/\"7eca86c1-69f5-4749-a8f9-8c0ff0ef60bf\"",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "peeringType": "AzurePrivatePeering",
+        "azureASN": 12076,
+        "peerASN": 10002,
+        "primaryAzurePort": "A51-IBIZA-06GMR-CIS-1-PRI-A",
+        "secondaryAzurePort": "A51-IBIZA-06GMR-CIS-2-SEC-A",
+        "state": "Disabled",
+        "vlanId": 103,
+        "gatewayManagerEtag": "",
+        "lastModifiedBy": "Customer",
+        "ipv6PeeringConfig": {
+          "primaryPeerAddressPrefix": "2002:db00::/126",
+          "secondaryPeerAddressPrefix": "2003:db00::/126",
+          "state": "Enabled"
+        },
+        "connections": [],
+        "peeredConnections": []
+      },
+      "type": "Microsoft.Network/expressRouteCircuits/peerings"
+    }
+  }
+}

@@ -1,0 +1,69 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_interface_endpoints
+    steps:
+      - step: RawStep_1725
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_interface_endpoints000001?api-version=2019-07-01
+        requestBody: >-
+          {"location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-09-11T17:08:31Z"}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Tue, 11 Sep 2018 17:08:33 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_interface_endpoints000001","name":"cli_test_network_interface_endpoints000001","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-09-11T17:08:31Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1726
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/interfaceEndpoints?api-version=2018-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '12'
+          content-type: application/json; charset=utf-8
+          date: Tue, 11 Sep 2018 17:08:34 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"value":[]}'
+      - step: RawStep_1727
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_interface_endpoints000001/providers/Microsoft.Network/interfaceEndpoints?api-version=2018-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '12'
+          content-type: application/json; charset=utf-8
+          date: Tue, 11 Sep 2018 17:08:35 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"value":[]}'
+      - step: RawStep_1728
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_interface_endpoints000001?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '0'
+          date: Tue, 11 Sep 2018 17:08:36 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/operationresults/eyJqb2JJZCI6IlJFU09VUkNFR1JPVVBERUxFVElPTkpPQi1DTEk6NUZURVNUOjVGTkVUV09SSzo1RklOVEVSRkFDRTo1RkVORFBPSU5UUzRHUnxENkEwOTQ2OTg5OTlBRDcwLVdFU1RVUyIsImpvYkxvY2F0aW9uIjoid2VzdHVzIn0?api-version=2019-07-01
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14999'
+        statusCode: 202

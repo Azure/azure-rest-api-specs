@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "clitest.rg000001",
+    "privateEndpointName": "webapp-privatelink-endpoint000006",
+    "parameters": {
+      "location": "westus2",
+      "properties": {
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/webapp-privatelink-vnet000004/subnets/webapp-privatelink-subnet000005"
+        },
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "webapp-privatelink-endpointconn000007",
+            "properties": {
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002",
+              "groupIds": [
+                "sites"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "webapp-privatelink-endpoint000006",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/webapp-privatelink-endpoint000006",
+      "etag": "W/\"a94572f8-4519-428e-920f-b07f56bca3ad\"",
+      "type": "Microsoft.Network/privateEndpoints",
+      "location": "westus2",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "cc266937-3503-4501-8862-0d439f3c4ce3",
+        "privateLinkServiceConnections": [],
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "webapp-privatelink-endpointconn000007",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/webapp-privatelink-endpoint000006/manualPrivateLinkServiceConnections/webapp-privatelink-endpointconn000007",
+            "etag": "W/\"a94572f8-4519-428e-920f-b07f56bca3ad\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Web/sites/webapp-privatelink-webapp000002",
+              "groupIds": [
+                "sites"
+              ],
+              "privateLinkServiceConnectionState": {
+                "status": "Pending",
+                "description": "",
+                "actionsRequired": "None"
+              }
+            },
+            "type": "Microsoft.Network/privateEndpoints/manualPrivateLinkServiceConnections"
+          }
+        ],
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/webapp-privatelink-vnet000004/subnets/webapp-privatelink-subnet000005"
+        },
+        "networkInterfaces": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/networkInterfaces/webapp-privatelink-endpoint000006.nic.c49d9ddc-7bf1-4d97-b884-5273fc4579bd"
+          }
+        ],
+        "customDnsConfigs": []
+      }
+    }
+  }
+}

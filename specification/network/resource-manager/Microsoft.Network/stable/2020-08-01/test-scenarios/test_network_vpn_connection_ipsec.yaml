@@ -1,0 +1,236 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vpn_connection_ipsec
+    steps:
+      - step: RawStep_2582
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_connection_ipsec000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:25:31 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001","name":"cli_test_vpn_connection_ipsec000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:25:29Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2584.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Update_virtualNetworks_vnet1_2586
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/0
+            value:
+              name: FrontEnd
+              properties:
+                addressPrefix: 10.11.0.0/24
+                provisioningState: Succeeded
+                delegations: []
+                privateEndpointNetworkPolicies: Enabled
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/FrontEnd
+              type: Microsoft.Network/virtualNetworks/subnets
+      - step: Update_virtualNetworks_vnet1_2588
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/1
+            value:
+              name: BackEnd
+              properties:
+                addressPrefix: 10.12.0.0/24
+                provisioningState: Succeeded
+                delegations: []
+                privateEndpointNetworkPolicies: Enabled
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/BackEnd
+              type: Microsoft.Network/virtualNetworks/subnets
+      - step: Update_virtualNetworks_vnet1_2590
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/2
+            value:
+              name: GatewaySubnet
+              properties:
+                addressPrefix: 10.12.255.0/27
+                provisioningState: Succeeded
+                delegations: []
+                privateEndpointNetworkPolicies: Enabled
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet
+              type: Microsoft.Network/virtualNetworks/subnets
+      - step: RawStep_2591
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_connection_ipsec000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:26:00 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001","name":"cli_test_vpn_connection_ipsec000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:25:29Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pip1
+        resourceName: publicIPAddresses_pip1
+        exampleFile: ../examples/Create_publicIPAddresses_pip1_Generated_2593.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2594
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_connection_ipsec000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:26:07 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001","name":"cli_test_vpn_connection_ipsec000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:25:29Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gw1
+        resourceName: virtualNetworkGateways_gw1
+        exampleFile: ../examples/Create_virtualNetworkGateways_gw1_Generated_2596.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+      - step: RawStep_2597
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_connection_ipsec000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:03:52 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001","name":"cli_test_vpn_connection_ipsec000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:25:29Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_localNetworkGateways_lgw1
+        resourceName: localNetworkGateways_lgw1
+        exampleFile: ../examples/Create_localNetworkGateways_lgw1_Generated_2599.json
+        operationId: LocalNetworkGateways_CreateOrUpdate
+      - step: RawStep_2600
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_connection_ipsec000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:04:09 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001","name":"cli_test_vpn_connection_ipsec000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:25:29Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2601
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{"sharedKey":{"type":"securestring","metadata":{"description":"Secure
+          sharedKey"}}},"variables":{},"resources":[{"type":"Microsoft.Network/connections","name":"conn1","location":"westus","tags":{},"apiVersion":"2015-06-15","dependsOn":[],"properties":{"virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"},"enableBgp":false,"connectionType":"IPSec","routingWeight":10,"usePolicyBasedTrafficSelectors":false,"expressRouteGatewayBypass":null,"localNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/localNetworkGateways/lgw1"},"sharedKey":"[parameters('sharedKey')]"}}],"outputs":{"resource":{"type":"object","value":"[reference('conn1')]"}}},"parameters":{"sharedKey":{"value":"AzureA1b2C3"}},"mode":"Incremental"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_mdFvYeLRmEIGfX0c4PwuyCqAvtlnz5B1/operationStatuses/08585874350334797583?api-version=2020-10-01
+          cache-control: no-cache
+          content-length: '771'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:04:14 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1148'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_mdFvYeLRmEIGfX0c4PwuyCqAvtlnz5B1","name":"vpn_connection_deploy_mdFvYeLRmEIGfX0c4PwuyCqAvtlnz5B1","type":"Microsoft.Resources/deployments","properties":{"templateHash":"18100356542708711533","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-02-24T13:04:14.1826086Z","duration":"PT2.1847412S","correlationId":"e235faca-d5be-45f0-901c-33a4d1dffb84","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[]}}
+      - step: RawStep_2602
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874350334797583?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:04:47 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_2603
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874350334797583?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '22'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:05:17 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_2604
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1898'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:05:18 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_mdFvYeLRmEIGfX0c4PwuyCqAvtlnz5B1","name":"vpn_connection_deploy_mdFvYeLRmEIGfX0c4PwuyCqAvtlnz5B1","type":"Microsoft.Resources/deployments","properties":{"templateHash":"18100356542708711533","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-02-24T13:04:57.1982964Z","duration":"PT45.200429S","correlationId":"e235faca-d5be-45f0-901c-33a4d1dffb84","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[],"outputs":{"resource":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"04fc7eb5-64bc-4abb-a13a-4f1953055674","virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"},"localNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/localNetworkGateways/lgw1"},"connectionType":"IPsec","connectionProtocol":"IKEv2","routingWeight":10,"sharedKey":"AzureA1b2C3","enableBgp":false,"useLocalAzureIpAddress":false,"trafficSelectorPolicies":[],"connectionStatus":"Unknown","ingressBytesTransferred":0,"egressBytesTransferred":0,"dpdTimeoutSeconds":0,"connectionMode":"Default"}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/connections/conn1"}]}}
+      - step: VirtualNetworkGatewayConnections_Get_2605
+        exampleFile: ../examples/VirtualNetworkGatewayConnections_Get_2605_Generated.json
+        operationId: VirtualNetworkGatewayConnections_Get
+      - step: Create_connections_conn1
+        resourceName: connections_conn1
+        exampleFile: ../examples/Create_connections_conn1_Generated.json
+        operationId: VirtualNetworkGatewayConnections_CreateOrUpdate
+      - step: Update_connections_conn1_2608
+        resourceName: connections_conn1
+        operationId: VirtualNetworkGatewayConnections_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/ipsecPolicies/0
+          - replace: /properties/connectionStatus
+            value: NotConnected
+    variables:
+      virtualNetworkName: vnet1
+      publicIpAddressName: pip1
+      virtualNetworkGatewayName: gw1
+      localNetworkGatewayName: lgw1
+      virtualNetworkGatewayConnectionName: conn1

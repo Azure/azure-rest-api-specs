@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_network_lb_sku000001",
+    "publicIpAddressName": "pubip2",
+    "parameters": {
+      "location": "eastus2",
+      "tags": {
+        "foo": "doo"
+      },
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Static",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "pubip2",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_lb_sku000001/providers/Microsoft.Network/publicIPAddresses/pubip2",
+      "etag": "W/\"b657fc90-d0b2-42d4-8abb-6c80c6cffa56\"",
+      "location": "eastus2",
+      "tags": {
+        "foo": "doo"
+      },
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "80a32a3c-0dcf-4c1d-a6f4-9d21614c5077",
+        "ipAddress": "104.209.223.101",
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static",
+        "idleTimeoutInMinutes": 4,
+        "ipTags": []
+      },
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      }
+    }
+  }
+}

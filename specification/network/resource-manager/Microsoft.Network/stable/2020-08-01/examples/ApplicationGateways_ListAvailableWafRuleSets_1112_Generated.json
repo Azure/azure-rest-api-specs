@@ -1,0 +1,2590 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "value": [
+        {
+          "name": "OWASP_3.1",
+          "id": "/subscriptions//resourceGroups//providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets/",
+          "type": "Microsoft.Network/applicationGatewayAvailableWafRuleSets",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "ruleSetType": "OWASP",
+            "ruleSetVersion": "3.1",
+            "tiers": [
+              "WAF_v2"
+            ],
+            "ruleGroups": [
+              {
+                "ruleGroupName": "General",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 200004,
+                    "description": "Possible Multipart Unmatched Boundary."
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-911-METHOD-ENFORCEMENT",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 911100,
+                    "description": "Method is not allowed by policy"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-913-SCANNER-DETECTION",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 913100,
+                    "description": "Found User-Agent associated with security scanner"
+                  },
+                  {
+                    "ruleId": 913101,
+                    "description": "Found User-Agent associated with scripting/generic HTTP client"
+                  },
+                  {
+                    "ruleId": 913102,
+                    "description": "Found User-Agent associated with web crawler/bot"
+                  },
+                  {
+                    "ruleId": 913110,
+                    "description": "Found request header associated with security scanner"
+                  },
+                  {
+                    "ruleId": 913120,
+                    "description": "Found request filename/argument associated with security scanner"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-920-PROTOCOL-ENFORCEMENT",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 920100,
+                    "description": "Invalid HTTP Request Line"
+                  },
+                  {
+                    "ruleId": 920120,
+                    "description": "Attempted multipart/form-data bypass"
+                  },
+                  {
+                    "ruleId": 920121,
+                    "description": "Attempted multipart/form-data bypass"
+                  },
+                  {
+                    "ruleId": 920130,
+                    "description": "Failed to parse request body."
+                  },
+                  {
+                    "ruleId": 920140,
+                    "description": "Multipart request body failed strict validation:     PE %{REQBODY_PROCESSOR_ERROR},     BQ %{MULTIPART_BOUNDARY_QUOTED},     BW %{MULTIPART_BOUNDARY_WHITESPACE},     DB %{MULTIPART_DATA_BEFORE},     DA %{MULTIPART_DATA_AFTER},     HF %{MULTIPART_HEADER_FOLDING},     LF %{MULTIPART_LF_LINE},     SM %{MULTIPART_SEMICOLON_MISSING},     IQ %{MULTIPART_INVALID_QUOTING},     IH %{MULTIPART_INVALID_HEADER_FOLDING},     FLE %{MULTIPART_FILE_LIMIT_EXCEEDED}"
+                  },
+                  {
+                    "ruleId": 920160,
+                    "description": "Content-Length HTTP header is not numeric."
+                  },
+                  {
+                    "ruleId": 920170,
+                    "description": "GET or HEAD Request with Body Content."
+                  },
+                  {
+                    "ruleId": 920171,
+                    "description": "GET or HEAD Request with Transfer-Encoding."
+                  },
+                  {
+                    "ruleId": 920180,
+                    "description": "POST request missing Content-Length Header."
+                  },
+                  {
+                    "ruleId": 920190,
+                    "description": "Range: Invalid Last Byte Value."
+                  },
+                  {
+                    "ruleId": 920200,
+                    "description": "Range: Too many fields (6 or more)"
+                  },
+                  {
+                    "ruleId": 920201,
+                    "description": "Range: Too many fields for pdf request (35 or more)"
+                  },
+                  {
+                    "ruleId": 920202,
+                    "description": "Range: Too many fields for pdf request (6 or more)"
+                  },
+                  {
+                    "ruleId": 920210,
+                    "description": "Multiple/Conflicting Connection Header Data Found."
+                  },
+                  {
+                    "ruleId": 920220,
+                    "description": "URL Encoding Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 920230,
+                    "description": "Multiple URL Encoding Detected"
+                  },
+                  {
+                    "ruleId": 920240,
+                    "description": "URL Encoding Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 920250,
+                    "description": "UTF8 Encoding Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 920260,
+                    "description": "Unicode Full/Half Width Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 920270,
+                    "description": "Invalid character in request (null character)"
+                  },
+                  {
+                    "ruleId": 920271,
+                    "description": "Invalid character in request (non printable characters)"
+                  },
+                  {
+                    "ruleId": 920272,
+                    "description": "Invalid character in request (outside of printable chars below ascii 127)"
+                  },
+                  {
+                    "ruleId": 920273,
+                    "description": "Invalid character in request (outside of very strict set)"
+                  },
+                  {
+                    "ruleId": 920274,
+                    "description": "Invalid character in request headers (outside of very strict set)"
+                  },
+                  {
+                    "ruleId": 920280,
+                    "description": "Request Missing a Host Header"
+                  },
+                  {
+                    "ruleId": 920290,
+                    "description": "Empty Host Header"
+                  },
+                  {
+                    "ruleId": 920300,
+                    "description": "Request Missing an Accept Header"
+                  },
+                  {
+                    "ruleId": 920310,
+                    "description": "Request Has an Empty Accept Header"
+                  },
+                  {
+                    "ruleId": 920311,
+                    "description": "Request Has an Empty Accept Header"
+                  },
+                  {
+                    "ruleId": 920320,
+                    "description": "Missing User Agent Header"
+                  },
+                  {
+                    "ruleId": 920330,
+                    "description": "Empty User Agent Header"
+                  },
+                  {
+                    "ruleId": 920340,
+                    "description": "Request Containing Content, but Missing Content-Type header"
+                  },
+                  {
+                    "ruleId": 920341,
+                    "description": "Request containing content requires Content-Type header"
+                  },
+                  {
+                    "ruleId": 920350,
+                    "description": "Host header is a numeric IP address"
+                  },
+                  {
+                    "ruleId": 920420,
+                    "description": "Request content type is not allowed by policy"
+                  },
+                  {
+                    "ruleId": 920430,
+                    "description": "HTTP protocol version is not allowed by policy"
+                  },
+                  {
+                    "ruleId": 920440,
+                    "description": "URL file extension is restricted by policy"
+                  },
+                  {
+                    "ruleId": 920450,
+                    "description": "HTTP header is restricted by policy (%{MATCHED_VAR})"
+                  },
+                  {
+                    "ruleId": 920460,
+                    "description": "Abnormal Escape Characters"
+                  },
+                  {
+                    "ruleId": 920470,
+                    "description": "Illegal Content-Type header"
+                  },
+                  {
+                    "ruleId": 920480,
+                    "description": "Restrict charset parameter within the content-type header"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-921-PROTOCOL-ATTACK",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 921110,
+                    "description": "HTTP Request Smuggling Attack"
+                  },
+                  {
+                    "ruleId": 921120,
+                    "description": "HTTP Response Splitting Attack"
+                  },
+                  {
+                    "ruleId": 921130,
+                    "description": "HTTP Response Splitting Attack"
+                  },
+                  {
+                    "ruleId": 921140,
+                    "description": "HTTP Header Injection Attack via headers"
+                  },
+                  {
+                    "ruleId": 921150,
+                    "description": "HTTP Header Injection Attack via payload (CR/LF detected)"
+                  },
+                  {
+                    "ruleId": 921151,
+                    "description": "HTTP Header Injection Attack via payload (CR/LF detected)"
+                  },
+                  {
+                    "ruleId": 921160,
+                    "description": "HTTP Header Injection Attack via payload (CR/LF and header-name detected)"
+                  },
+                  {
+                    "ruleId": 921170,
+                    "description": "HTTP Parameter Pollution"
+                  },
+                  {
+                    "ruleId": 921180,
+                    "description": "HTTP Parameter Pollution (%{TX.1})"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-930-APPLICATION-ATTACK-LFI",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 930100,
+                    "description": "Path Traversal Attack (/../)"
+                  },
+                  {
+                    "ruleId": 930110,
+                    "description": "Path Traversal Attack (/../)"
+                  },
+                  {
+                    "ruleId": 930120,
+                    "description": "OS File Access Attempt"
+                  },
+                  {
+                    "ruleId": 930130,
+                    "description": "Restricted File Access Attempt"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-931-APPLICATION-ATTACK-RFI",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 931100,
+                    "description": "Possible Remote File Inclusion (RFI) Attack: URL Parameter using IP Address"
+                  },
+                  {
+                    "ruleId": 931110,
+                    "description": "Possible Remote File Inclusion (RFI) Attack: Common RFI Vulnerable Parameter Name used w/URL Payload"
+                  },
+                  {
+                    "ruleId": 931120,
+                    "description": "Possible Remote File Inclusion (RFI) Attack: URL Payload Used w/Trailing Question Mark Character (?)"
+                  },
+                  {
+                    "ruleId": 931130,
+                    "description": "Possible Remote File Inclusion (RFI) Attack: Off-Domain Reference/Link"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 932100,
+                    "description": "Remote Command Execution: Unix Command Injection"
+                  },
+                  {
+                    "ruleId": 932105,
+                    "description": "Remote Command Execution: Unix Command Injection"
+                  },
+                  {
+                    "ruleId": 932106,
+                    "description": "Remote Command Execution: Unix Command Injection"
+                  },
+                  {
+                    "ruleId": 932110,
+                    "description": "Remote Command Execution: Windows Command Injection"
+                  },
+                  {
+                    "ruleId": 932115,
+                    "description": "Remote Command Execution: Windows Command Injection"
+                  },
+                  {
+                    "ruleId": 932120,
+                    "description": "Remote Command Execution: Windows PowerShell Command Found"
+                  },
+                  {
+                    "ruleId": 932130,
+                    "description": "Remote Command Execution: Unix Shell Expression Found"
+                  },
+                  {
+                    "ruleId": 932140,
+                    "description": "Remote Command Execution: Windows FOR/IF Command Found"
+                  },
+                  {
+                    "ruleId": 932150,
+                    "description": "Remote Command Execution: Direct Unix Command Execution"
+                  },
+                  {
+                    "ruleId": 932160,
+                    "description": "Remote Command Execution: Unix Shell Code Found"
+                  },
+                  {
+                    "ruleId": 932170,
+                    "description": "Remote Command Execution: Shellshock (CVE-2014-6271)"
+                  },
+                  {
+                    "ruleId": 932171,
+                    "description": "Remote Command Execution: Shellshock (CVE-2014-6271)"
+                  },
+                  {
+                    "ruleId": 932180,
+                    "description": "Restricted File Upload Attempt"
+                  },
+                  {
+                    "ruleId": 932190,
+                    "description": "Remote Command Execution: Wildcard bypass technique attempt"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-933-APPLICATION-ATTACK-PHP",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 933100,
+                    "description": "PHP Injection Attack: Opening/Closing Tag Found"
+                  },
+                  {
+                    "ruleId": 933110,
+                    "description": "PHP Injection Attack: PHP Script File Upload Found"
+                  },
+                  {
+                    "ruleId": 933111,
+                    "description": "PHP Injection Attack: PHP Script File Upload Found"
+                  },
+                  {
+                    "ruleId": 933120,
+                    "description": "PHP Injection Attack: Configuration Directive Found"
+                  },
+                  {
+                    "ruleId": 933130,
+                    "description": "PHP Injection Attack: Variables Found"
+                  },
+                  {
+                    "ruleId": 933131,
+                    "description": "PHP Injection Attack: Variables Found"
+                  },
+                  {
+                    "ruleId": 933140,
+                    "description": "PHP Injection Attack: I/O Stream Found"
+                  },
+                  {
+                    "ruleId": 933150,
+                    "description": "PHP Injection Attack: High-Risk PHP Function Name Found"
+                  },
+                  {
+                    "ruleId": 933151,
+                    "description": "PHP Injection Attack: Medium-Risk PHP Function Name Found"
+                  },
+                  {
+                    "ruleId": 933160,
+                    "description": "PHP Injection Attack: High-Risk PHP Function Call Found"
+                  },
+                  {
+                    "ruleId": 933161,
+                    "description": "PHP Injection Attack: Low-Value PHP Function Call Found"
+                  },
+                  {
+                    "ruleId": 933170,
+                    "description": "PHP Injection Attack: Serialized Object Injection"
+                  },
+                  {
+                    "ruleId": 933180,
+                    "description": "PHP Injection Attack: Variable Function Call Found"
+                  },
+                  {
+                    "ruleId": 933190,
+                    "description": "PHP Injection Attack: PHP Closing Tag Found"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-941-APPLICATION-ATTACK-XSS",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 941100,
+                    "description": "XSS Attack Detected via libinjection"
+                  },
+                  {
+                    "ruleId": 941101,
+                    "description": "XSS Attack Detected via libinjection."
+                  },
+                  {
+                    "ruleId": 941110,
+                    "description": "XSS Filter - Category 1: Script Tag Vector"
+                  },
+                  {
+                    "ruleId": 941120,
+                    "description": "XSS Filter - Category 2: Event Handler Vector"
+                  },
+                  {
+                    "ruleId": 941130,
+                    "description": "XSS Filter - Category 3: Attribute Vector"
+                  },
+                  {
+                    "ruleId": 941140,
+                    "description": "XSS Filter - Category 4: Javascript URI Vector"
+                  },
+                  {
+                    "ruleId": 941150,
+                    "description": "XSS Filter - Category 5: Disallowed HTML Attributes"
+                  },
+                  {
+                    "ruleId": 941160,
+                    "description": "NoScript XSS InjectionChecker: HTML Injection"
+                  },
+                  {
+                    "ruleId": 941170,
+                    "description": "NoScript XSS InjectionChecker: Attribute Injection"
+                  },
+                  {
+                    "ruleId": 941180,
+                    "description": "Node-Validator Blacklist Keywords"
+                  },
+                  {
+                    "ruleId": 941190,
+                    "description": "XSS Using style sheets"
+                  },
+                  {
+                    "ruleId": 941200,
+                    "description": "XSS using VML frames"
+                  },
+                  {
+                    "ruleId": 941210,
+                    "description": "XSS using obfuscated JavaScript"
+                  },
+                  {
+                    "ruleId": 941220,
+                    "description": "XSS using obfuscated VB Script"
+                  },
+                  {
+                    "ruleId": 941230,
+                    "description": "XSS using 'embed' tag"
+                  },
+                  {
+                    "ruleId": 941240,
+                    "description": "XSS using 'import' or 'implementation' attribute"
+                  },
+                  {
+                    "ruleId": 941250,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 941260,
+                    "description": "XSS using 'meta' tag"
+                  },
+                  {
+                    "ruleId": 941270,
+                    "description": "XSS using 'link' href"
+                  },
+                  {
+                    "ruleId": 941280,
+                    "description": "XSS using 'base' tag"
+                  },
+                  {
+                    "ruleId": 941290,
+                    "description": "XSS using 'applet' tag"
+                  },
+                  {
+                    "ruleId": 941300,
+                    "description": "XSS using 'object' tag"
+                  },
+                  {
+                    "ruleId": 941310,
+                    "description": "US-ASCII Malformed Encoding XSS Filter - Attack Detected."
+                  },
+                  {
+                    "ruleId": 941320,
+                    "description": "Possible XSS Attack Detected - HTML Tag Handler"
+                  },
+                  {
+                    "ruleId": 941330,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 941340,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 941350,
+                    "description": "UTF-7 Encoding IE XSS - Attack Detected."
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-942-APPLICATION-ATTACK-SQLI",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 942100,
+                    "description": "SQL Injection Attack Detected via libinjection"
+                  },
+                  {
+                    "ruleId": 942110,
+                    "description": "SQL Injection Attack: Common Injection Testing Detected"
+                  },
+                  {
+                    "ruleId": 942120,
+                    "description": "SQL Injection Attack: SQL Operator Detected"
+                  },
+                  {
+                    "ruleId": 942130,
+                    "description": "SQL Injection Attack: SQL Tautology Detected."
+                  },
+                  {
+                    "ruleId": 942140,
+                    "description": "SQL Injection Attack: Common DB Names Detected"
+                  },
+                  {
+                    "ruleId": 942150,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942160,
+                    "description": "Detects blind sqli tests using sleep() or benchmark()."
+                  },
+                  {
+                    "ruleId": 942170,
+                    "description": "Detects SQL benchmark and sleep injection attempts including conditional queries"
+                  },
+                  {
+                    "ruleId": 942180,
+                    "description": "Detects basic SQL authentication bypass attempts 1/3"
+                  },
+                  {
+                    "ruleId": 942190,
+                    "description": "Detects MSSQL code execution and information gathering attempts"
+                  },
+                  {
+                    "ruleId": 942200,
+                    "description": "Detects MySQL comment-/space-obfuscated injections and backtick termination"
+                  },
+                  {
+                    "ruleId": 942210,
+                    "description": "Detects chained SQL injection attempts 1/2"
+                  },
+                  {
+                    "ruleId": 942220,
+                    "description": "Looking for intiger overflow attacks, these are taken from skipfish, except 3.0.00738585072007e-308 is the \\\"magic number\\\" crash"
+                  },
+                  {
+                    "ruleId": 942230,
+                    "description": "Detects conditional SQL injection attempts"
+                  },
+                  {
+                    "ruleId": 942240,
+                    "description": "Detects MySQL charset switch and MSSQL DoS attempts"
+                  },
+                  {
+                    "ruleId": 942250,
+                    "description": "Detects MATCH AGAINST, MERGE and EXECUTE IMMEDIATE injections"
+                  },
+                  {
+                    "ruleId": 942251,
+                    "description": "Detects HAVING injections"
+                  },
+                  {
+                    "ruleId": 942260,
+                    "description": "Detects basic SQL authentication bypass attempts 2/3"
+                  },
+                  {
+                    "ruleId": 942270,
+                    "description": "Looking for basic sql injection. Common attack string for mysql, oracle and others."
+                  },
+                  {
+                    "ruleId": 942280,
+                    "description": "Detects Postgres pg_sleep injection, waitfor delay attacks and database shutdown attempts"
+                  },
+                  {
+                    "ruleId": 942290,
+                    "description": "Finds basic MongoDB SQL injection attempts"
+                  },
+                  {
+                    "ruleId": 942300,
+                    "description": "Detects MySQL comments, conditions and ch(a)r injections"
+                  },
+                  {
+                    "ruleId": 942310,
+                    "description": "Detects chained SQL injection attempts 2/2"
+                  },
+                  {
+                    "ruleId": 942320,
+                    "description": "Detects MySQL and PostgreSQL stored procedure/function injections"
+                  },
+                  {
+                    "ruleId": 942330,
+                    "description": "Detects classic SQL injection probings 1/2"
+                  },
+                  {
+                    "ruleId": 942340,
+                    "description": "Detects basic SQL authentication bypass attempts 3/3"
+                  },
+                  {
+                    "ruleId": 942350,
+                    "description": "Detects MySQL UDF injection and other data/structure manipulation attempts"
+                  },
+                  {
+                    "ruleId": 942360,
+                    "description": "Detects concatenated basic SQL injection and SQLLFI attempts"
+                  },
+                  {
+                    "ruleId": 942361,
+                    "description": "Detects basic SQL injection based on keyword alter or union"
+                  },
+                  {
+                    "ruleId": 942370,
+                    "description": "Detects classic SQL injection probings 2/2"
+                  },
+                  {
+                    "ruleId": 942380,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942390,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942400,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942410,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942420,
+                    "description": "Restricted SQL Character Anomaly Detection (cookies): # of special characters exceeded (8)"
+                  },
+                  {
+                    "ruleId": 942421,
+                    "description": "Restricted SQL Character Anomaly Detection (cookies): # of special characters exceeded (3)"
+                  },
+                  {
+                    "ruleId": 942430,
+                    "description": "Restricted SQL Character Anomaly Detection (args): # of special characters exceeded (12)"
+                  },
+                  {
+                    "ruleId": 942431,
+                    "description": "Restricted SQL Character Anomaly Detection (args): # of special characters exceeded (6)"
+                  },
+                  {
+                    "ruleId": 942432,
+                    "description": "Restricted SQL Character Anomaly Detection (args): # of special characters exceeded (2)"
+                  },
+                  {
+                    "ruleId": 942440,
+                    "description": "SQL Comment Sequence Detected."
+                  },
+                  {
+                    "ruleId": 942450,
+                    "description": "SQL Hex Encoding Identified"
+                  },
+                  {
+                    "ruleId": 942460,
+                    "description": "Meta-Character Anomaly Detection Alert - Repetitive Non-Word Characters"
+                  },
+                  {
+                    "ruleId": 942470,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942480,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942490,
+                    "description": "Detects classic SQL injection probings 3/3"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 943100,
+                    "description": "Possible Session Fixation Attack: Setting Cookie Values in HTML"
+                  },
+                  {
+                    "ruleId": 943110,
+                    "description": "Possible Session Fixation Attack: SessionID Parameter Name with Off-Domain Referer"
+                  },
+                  {
+                    "ruleId": 943120,
+                    "description": "Possible Session Fixation Attack: SessionID Parameter Name with No Referer"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-944-APPLICATION-ATTACK-JAVA",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 944120,
+                    "description": "Possible payload execution and remote command execution"
+                  },
+                  {
+                    "ruleId": 944130,
+                    "description": "Suspicious Java classes"
+                  },
+                  {
+                    "ruleId": 944200,
+                    "description": "Exploitation of Java deserialization Apache Commons"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "OWASP_3.0",
+          "id": "/subscriptions//resourceGroups//providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets/",
+          "type": "Microsoft.Network/applicationGatewayAvailableWafRuleSets",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "ruleSetType": "OWASP",
+            "ruleSetVersion": "3.0",
+            "tiers": [
+              "WAF",
+              "WAF_v2"
+            ],
+            "ruleGroups": [
+              {
+                "ruleGroupName": "General",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 200004,
+                    "description": "Possible Multipart Unmatched Boundary."
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-911-METHOD-ENFORCEMENT",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 911100,
+                    "description": "Method is not allowed by policy"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-913-SCANNER-DETECTION",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 913100,
+                    "description": "Found User-Agent associated with security scanner"
+                  },
+                  {
+                    "ruleId": 913101,
+                    "description": "Found User-Agent associated with scripting/generic HTTP client"
+                  },
+                  {
+                    "ruleId": 913102,
+                    "description": "Found User-Agent associated with web crawler/bot"
+                  },
+                  {
+                    "ruleId": 913110,
+                    "description": "Found request header associated with security scanner"
+                  },
+                  {
+                    "ruleId": 913120,
+                    "description": "Found request filename/argument associated with security scanner"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-920-PROTOCOL-ENFORCEMENT",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 920100,
+                    "description": "Invalid HTTP Request Line"
+                  },
+                  {
+                    "ruleId": 920120,
+                    "description": "Attempted multipart/form-data bypass"
+                  },
+                  {
+                    "ruleId": 920130,
+                    "description": "Failed to parse request body."
+                  },
+                  {
+                    "ruleId": 920140,
+                    "description": "Multipart request body failed strict validation:     PE %{REQBODY_PROCESSOR_ERROR},     BQ %{MULTIPART_BOUNDARY_QUOTED},     BW %{MULTIPART_BOUNDARY_WHITESPACE},     DB %{MULTIPART_DATA_BEFORE},     DA %{MULTIPART_DATA_AFTER},     HF %{MULTIPART_HEADER_FOLDING},     LF %{MULTIPART_LF_LINE},     SM %{MULTIPART_SEMICOLON_MISSING},     IQ %{MULTIPART_INVALID_QUOTING},     IH %{MULTIPART_INVALID_HEADER_FOLDING},     FLE %{MULTIPART_FILE_LIMIT_EXCEEDED}"
+                  },
+                  {
+                    "ruleId": 920160,
+                    "description": "Content-Length HTTP header is not numeric."
+                  },
+                  {
+                    "ruleId": 920170,
+                    "description": "GET or HEAD Request with Body Content."
+                  },
+                  {
+                    "ruleId": 920180,
+                    "description": "POST request missing Content-Length Header."
+                  },
+                  {
+                    "ruleId": 920190,
+                    "description": "Range: Invalid Last Byte Value."
+                  },
+                  {
+                    "ruleId": 920200,
+                    "description": "Range: Too many fields (6 or more)"
+                  },
+                  {
+                    "ruleId": 920201,
+                    "description": "Range: Too many fields for pdf request (35 or more)"
+                  },
+                  {
+                    "ruleId": 920202,
+                    "description": "Range: Too many fields for pdf request (6 or more)"
+                  },
+                  {
+                    "ruleId": 920210,
+                    "description": "Multiple/Conflicting Connection Header Data Found."
+                  },
+                  {
+                    "ruleId": 920220,
+                    "description": "URL Encoding Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 920230,
+                    "description": "Multiple URL Encoding Detected"
+                  },
+                  {
+                    "ruleId": 920240,
+                    "description": "URL Encoding Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 920250,
+                    "description": "UTF8 Encoding Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 920260,
+                    "description": "Unicode Full/Half Width Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 920270,
+                    "description": "Invalid character in request (null character)"
+                  },
+                  {
+                    "ruleId": 920271,
+                    "description": "Invalid character in request (non printable characters)"
+                  },
+                  {
+                    "ruleId": 920272,
+                    "description": "Invalid character in request (outside of printable chars below ascii 127)"
+                  },
+                  {
+                    "ruleId": 920273,
+                    "description": "Invalid character in request (outside of very strict set)"
+                  },
+                  {
+                    "ruleId": 920274,
+                    "description": "Invalid character in request headers (outside of very strict set)"
+                  },
+                  {
+                    "ruleId": 920280,
+                    "description": "Request Missing a Host Header"
+                  },
+                  {
+                    "ruleId": 920290,
+                    "description": "Empty Host Header"
+                  },
+                  {
+                    "ruleId": 920300,
+                    "description": "Request Missing an Accept Header"
+                  },
+                  {
+                    "ruleId": 920310,
+                    "description": "Request Has an Empty Accept Header"
+                  },
+                  {
+                    "ruleId": 920311,
+                    "description": "Request Has an Empty Accept Header"
+                  },
+                  {
+                    "ruleId": 920320,
+                    "description": "Missing User Agent Header"
+                  },
+                  {
+                    "ruleId": 920330,
+                    "description": "Empty User Agent Header"
+                  },
+                  {
+                    "ruleId": 920340,
+                    "description": "Request Containing Content, but Missing Content-Type header"
+                  },
+                  {
+                    "ruleId": 920350,
+                    "description": "Host header is a numeric IP address"
+                  },
+                  {
+                    "ruleId": 920420,
+                    "description": "Request content type is not allowed by policy"
+                  },
+                  {
+                    "ruleId": 920430,
+                    "description": "HTTP protocol version is not allowed by policy"
+                  },
+                  {
+                    "ruleId": 920440,
+                    "description": "URL file extension is restricted by policy"
+                  },
+                  {
+                    "ruleId": 920450,
+                    "description": "HTTP header is restricted by policy (%{MATCHED_VAR})"
+                  },
+                  {
+                    "ruleId": 920460,
+                    "description": "Abnormal Escape Characters"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-921-PROTOCOL-ATTACK",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 921100,
+                    "description": "HTTP Request Smuggling Attack."
+                  },
+                  {
+                    "ruleId": 921110,
+                    "description": "HTTP Request Smuggling Attack"
+                  },
+                  {
+                    "ruleId": 921120,
+                    "description": "HTTP Response Splitting Attack"
+                  },
+                  {
+                    "ruleId": 921130,
+                    "description": "HTTP Response Splitting Attack"
+                  },
+                  {
+                    "ruleId": 921140,
+                    "description": "HTTP Header Injection Attack via headers"
+                  },
+                  {
+                    "ruleId": 921150,
+                    "description": "HTTP Header Injection Attack via payload (CR/LF detected)"
+                  },
+                  {
+                    "ruleId": 921151,
+                    "description": "HTTP Header Injection Attack via payload (CR/LF detected)"
+                  },
+                  {
+                    "ruleId": 921160,
+                    "description": "HTTP Header Injection Attack via payload (CR/LF and header-name detected)"
+                  },
+                  {
+                    "ruleId": 921170,
+                    "description": "HTTP Parameter Pollution"
+                  },
+                  {
+                    "ruleId": 921180,
+                    "description": "HTTP Parameter Pollution (%{TX.1})"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-930-APPLICATION-ATTACK-LFI",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 930100,
+                    "description": "Path Traversal Attack (/../)"
+                  },
+                  {
+                    "ruleId": 930110,
+                    "description": "Path Traversal Attack (/../)"
+                  },
+                  {
+                    "ruleId": 930120,
+                    "description": "OS File Access Attempt"
+                  },
+                  {
+                    "ruleId": 930130,
+                    "description": "Restricted File Access Attempt"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-931-APPLICATION-ATTACK-RFI",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 931100,
+                    "description": "Possible Remote File Inclusion (RFI) Attack: URL Parameter using IP Address"
+                  },
+                  {
+                    "ruleId": 931110,
+                    "description": "Possible Remote File Inclusion (RFI) Attack: Common RFI Vulnerable Parameter Name used w/URL Payload"
+                  },
+                  {
+                    "ruleId": 931120,
+                    "description": "Possible Remote File Inclusion (RFI) Attack: URL Payload Used w/Trailing Question Mark Character (?)"
+                  },
+                  {
+                    "ruleId": 931130,
+                    "description": "Possible Remote File Inclusion (RFI) Attack: Off-Domain Reference/Link"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 932100,
+                    "description": "Remote Command Execution: Unix Command Injection"
+                  },
+                  {
+                    "ruleId": 932105,
+                    "description": "Remote Command Execution: Unix Command Injection"
+                  },
+                  {
+                    "ruleId": 932110,
+                    "description": "Remote Command Execution: Windows Command Injection"
+                  },
+                  {
+                    "ruleId": 932115,
+                    "description": "Remote Command Execution: Windows Command Injection"
+                  },
+                  {
+                    "ruleId": 932120,
+                    "description": "Remote Command Execution: Windows PowerShell Command Found"
+                  },
+                  {
+                    "ruleId": 932130,
+                    "description": "Remote Command Execution: Unix Shell Expression Found"
+                  },
+                  {
+                    "ruleId": 932140,
+                    "description": "Remote Command Execution: Windows FOR/IF Command Found"
+                  },
+                  {
+                    "ruleId": 932150,
+                    "description": "Remote Command Execution: Direct Unix Command Execution"
+                  },
+                  {
+                    "ruleId": 932160,
+                    "description": "Remote Command Execution: Unix Shell Code Found"
+                  },
+                  {
+                    "ruleId": 932170,
+                    "description": "Remote Command Execution: Shellshock (CVE-2014-6271)"
+                  },
+                  {
+                    "ruleId": 932171,
+                    "description": "Remote Command Execution: Shellshock (CVE-2014-6271)"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-933-APPLICATION-ATTACK-PHP",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 933100,
+                    "description": "PHP Injection Attack: Opening/Closing Tag Found"
+                  },
+                  {
+                    "ruleId": 933110,
+                    "description": "PHP Injection Attack: PHP Script File Upload Found"
+                  },
+                  {
+                    "ruleId": 933111,
+                    "description": "PHP Injection Attack: PHP Script File Upload Found"
+                  },
+                  {
+                    "ruleId": 933120,
+                    "description": "PHP Injection Attack: Configuration Directive Found"
+                  },
+                  {
+                    "ruleId": 933130,
+                    "description": "PHP Injection Attack: Variables Found"
+                  },
+                  {
+                    "ruleId": 933131,
+                    "description": "PHP Injection Attack: Variables Found"
+                  },
+                  {
+                    "ruleId": 933140,
+                    "description": "PHP Injection Attack: I/O Stream Found"
+                  },
+                  {
+                    "ruleId": 933150,
+                    "description": "PHP Injection Attack: High-Risk PHP Function Name Found"
+                  },
+                  {
+                    "ruleId": 933151,
+                    "description": "PHP Injection Attack: Medium-Risk PHP Function Name Found"
+                  },
+                  {
+                    "ruleId": 933160,
+                    "description": "PHP Injection Attack: High-Risk PHP Function Call Found"
+                  },
+                  {
+                    "ruleId": 933161,
+                    "description": "PHP Injection Attack: Low-Value PHP Function Call Found"
+                  },
+                  {
+                    "ruleId": 933170,
+                    "description": "PHP Injection Attack: Serialized Object Injection"
+                  },
+                  {
+                    "ruleId": 933180,
+                    "description": "PHP Injection Attack: Variable Function Call Found"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-941-APPLICATION-ATTACK-XSS",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 941100,
+                    "description": "XSS Attack Detected via libinjection"
+                  },
+                  {
+                    "ruleId": 941110,
+                    "description": "XSS Filter - Category 1: Script Tag Vector"
+                  },
+                  {
+                    "ruleId": 941120,
+                    "description": "XSS Filter - Category 2: Event Handler Vector"
+                  },
+                  {
+                    "ruleId": 941130,
+                    "description": "XSS Filter - Category 3: Attribute Vector"
+                  },
+                  {
+                    "ruleId": 941140,
+                    "description": "XSS Filter - Category 4: Javascript URI Vector"
+                  },
+                  {
+                    "ruleId": 941150,
+                    "description": "XSS Filter - Category 5: Disallowed HTML Attributes"
+                  },
+                  {
+                    "ruleId": 941160,
+                    "description": "NoScript XSS InjectionChecker: HTML Injection"
+                  },
+                  {
+                    "ruleId": 941170,
+                    "description": "NoScript XSS InjectionChecker: Attribute Injection"
+                  },
+                  {
+                    "ruleId": 941180,
+                    "description": "Node-Validator Blacklist Keywords"
+                  },
+                  {
+                    "ruleId": 941190,
+                    "description": "XSS Using style sheets"
+                  },
+                  {
+                    "ruleId": 941200,
+                    "description": "XSS using VML frames"
+                  },
+                  {
+                    "ruleId": 941210,
+                    "description": "XSS using obfuscated JavaScript"
+                  },
+                  {
+                    "ruleId": 941220,
+                    "description": "XSS using obfuscated VB Script"
+                  },
+                  {
+                    "ruleId": 941230,
+                    "description": "XSS using 'embed' tag"
+                  },
+                  {
+                    "ruleId": 941240,
+                    "description": "XSS using 'import' or 'implementation' attribute"
+                  },
+                  {
+                    "ruleId": 941250,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 941260,
+                    "description": "XSS using 'meta' tag"
+                  },
+                  {
+                    "ruleId": 941270,
+                    "description": "XSS using 'link' href"
+                  },
+                  {
+                    "ruleId": 941280,
+                    "description": "XSS using 'base' tag"
+                  },
+                  {
+                    "ruleId": 941290,
+                    "description": "XSS using 'applet' tag"
+                  },
+                  {
+                    "ruleId": 941300,
+                    "description": "XSS using 'object' tag"
+                  },
+                  {
+                    "ruleId": 941310,
+                    "description": "US-ASCII Malformed Encoding XSS Filter - Attack Detected."
+                  },
+                  {
+                    "ruleId": 941320,
+                    "description": "Possible XSS Attack Detected - HTML Tag Handler"
+                  },
+                  {
+                    "ruleId": 941330,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 941340,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 941350,
+                    "description": "UTF-7 Encoding IE XSS - Attack Detected."
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-942-APPLICATION-ATTACK-SQLI",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 942100,
+                    "description": "SQL Injection Attack Detected via libinjection"
+                  },
+                  {
+                    "ruleId": 942110,
+                    "description": "SQL Injection Attack: Common Injection Testing Detected"
+                  },
+                  {
+                    "ruleId": 942120,
+                    "description": "SQL Injection Attack: SQL Operator Detected"
+                  },
+                  {
+                    "ruleId": 942130,
+                    "description": "SQL Injection Attack: SQL Tautology Detected."
+                  },
+                  {
+                    "ruleId": 942140,
+                    "description": "SQL Injection Attack: Common DB Names Detected"
+                  },
+                  {
+                    "ruleId": 942150,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942160,
+                    "description": "Detects blind sqli tests using sleep() or benchmark()."
+                  },
+                  {
+                    "ruleId": 942170,
+                    "description": "Detects SQL benchmark and sleep injection attempts including conditional queries"
+                  },
+                  {
+                    "ruleId": 942180,
+                    "description": "Detects basic SQL authentication bypass attempts 1/3"
+                  },
+                  {
+                    "ruleId": 942190,
+                    "description": "Detects MSSQL code execution and information gathering attempts"
+                  },
+                  {
+                    "ruleId": 942200,
+                    "description": "Detects MySQL comment-/space-obfuscated injections and backtick termination"
+                  },
+                  {
+                    "ruleId": 942210,
+                    "description": "Detects chained SQL injection attempts 1/2"
+                  },
+                  {
+                    "ruleId": 942220,
+                    "description": "Looking for intiger overflow attacks, these are taken from skipfish, except 3.0.00738585072007e-308 is the \\\"magic number\\\" crash"
+                  },
+                  {
+                    "ruleId": 942230,
+                    "description": "Detects conditional SQL injection attempts"
+                  },
+                  {
+                    "ruleId": 942240,
+                    "description": "Detects MySQL charset switch and MSSQL DoS attempts"
+                  },
+                  {
+                    "ruleId": 942250,
+                    "description": "Detects MATCH AGAINST, MERGE and EXECUTE IMMEDIATE injections"
+                  },
+                  {
+                    "ruleId": 942251,
+                    "description": "Detects HAVING injections"
+                  },
+                  {
+                    "ruleId": 942260,
+                    "description": "Detects basic SQL authentication bypass attempts 2/3"
+                  },
+                  {
+                    "ruleId": 942270,
+                    "description": "Looking for basic sql injection. Common attack string for mysql, oracle and others."
+                  },
+                  {
+                    "ruleId": 942280,
+                    "description": "Detects Postgres pg_sleep injection, waitfor delay attacks and database shutdown attempts"
+                  },
+                  {
+                    "ruleId": 942290,
+                    "description": "Finds basic MongoDB SQL injection attempts"
+                  },
+                  {
+                    "ruleId": 942300,
+                    "description": "Detects MySQL comments, conditions and ch(a)r injections"
+                  },
+                  {
+                    "ruleId": 942310,
+                    "description": "Detects chained SQL injection attempts 2/2"
+                  },
+                  {
+                    "ruleId": 942320,
+                    "description": "Detects MySQL and PostgreSQL stored procedure/function injections"
+                  },
+                  {
+                    "ruleId": 942330,
+                    "description": "Detects classic SQL injection probings 1/2"
+                  },
+                  {
+                    "ruleId": 942340,
+                    "description": "Detects basic SQL authentication bypass attempts 3/3"
+                  },
+                  {
+                    "ruleId": 942350,
+                    "description": "Detects MySQL UDF injection and other data/structure manipulation attempts"
+                  },
+                  {
+                    "ruleId": 942360,
+                    "description": "Detects concatenated basic SQL injection and SQLLFI attempts"
+                  },
+                  {
+                    "ruleId": 942370,
+                    "description": "Detects classic SQL injection probings 2/2"
+                  },
+                  {
+                    "ruleId": 942380,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942390,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942400,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942410,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 942420,
+                    "description": "Restricted SQL Character Anomaly Detection (cookies): # of special characters exceeded (8)"
+                  },
+                  {
+                    "ruleId": 942421,
+                    "description": "Restricted SQL Character Anomaly Detection (cookies): # of special characters exceeded (3)"
+                  },
+                  {
+                    "ruleId": 942430,
+                    "description": "Restricted SQL Character Anomaly Detection (args): # of special characters exceeded (12)"
+                  },
+                  {
+                    "ruleId": 942431,
+                    "description": "Restricted SQL Character Anomaly Detection (args): # of special characters exceeded (6)"
+                  },
+                  {
+                    "ruleId": 942432,
+                    "description": "Restricted SQL Character Anomaly Detection (args): # of special characters exceeded (2)"
+                  },
+                  {
+                    "ruleId": 942440,
+                    "description": "SQL Comment Sequence Detected."
+                  },
+                  {
+                    "ruleId": 942450,
+                    "description": "SQL Hex Encoding Identified"
+                  },
+                  {
+                    "ruleId": 942460,
+                    "description": "Meta-Character Anomaly Detection Alert - Repetitive Non-Word Characters"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 943100,
+                    "description": "Possible Session Fixation Attack: Setting Cookie Values in HTML"
+                  },
+                  {
+                    "ruleId": 943110,
+                    "description": "Possible Session Fixation Attack: SessionID Parameter Name with Off-Domain Referer"
+                  },
+                  {
+                    "ruleId": 943120,
+                    "description": "Possible Session Fixation Attack: SessionID Parameter Name with No Referer"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "OWASP_2.2.9",
+          "id": "/subscriptions//resourceGroups//providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets/",
+          "type": "Microsoft.Network/applicationGatewayAvailableWafRuleSets",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "ruleSetType": "OWASP",
+            "ruleSetVersion": "2.2.9",
+            "tiers": [
+              "WAF",
+              "WAF_v2"
+            ],
+            "ruleGroups": [
+              {
+                "ruleGroupName": "General",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 200004,
+                    "description": "Possible Multipart Unmatched Boundary."
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "crs_20_protocol_violations",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 950107,
+                    "description": "URL Encoding Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 950108,
+                    "description": "URL Encoding Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 950109,
+                    "description": "Multiple URL Encoding Detected"
+                  },
+                  {
+                    "ruleId": 950116,
+                    "description": "Unicode Full/Half Width Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 950801,
+                    "description": "UTF8 Encoding Abuse Attack Attempt"
+                  },
+                  {
+                    "ruleId": 958230,
+                    "description": "Range: Invalid Last Byte Value."
+                  },
+                  {
+                    "ruleId": 958231,
+                    "description": "Range: Too many fields"
+                  },
+                  {
+                    "ruleId": 958291,
+                    "description": "Range: field exists and begins with 0."
+                  },
+                  {
+                    "ruleId": 958295,
+                    "description": "Multiple/Conflicting Connection Header Data Found."
+                  },
+                  {
+                    "ruleId": 960000,
+                    "description": "Attempted multipart/form-data bypass"
+                  },
+                  {
+                    "ruleId": 960011,
+                    "description": "GET or HEAD Request with Body Content."
+                  },
+                  {
+                    "ruleId": 960012,
+                    "description": "POST request missing Content-Length Header."
+                  },
+                  {
+                    "ruleId": 960016,
+                    "description": "Content-Length HTTP header is not numeric."
+                  },
+                  {
+                    "ruleId": 960018,
+                    "description": "Invalid character in request"
+                  },
+                  {
+                    "ruleId": 960020,
+                    "description": "Pragma Header requires Cache-Control Header for HTTP/1.1 requests."
+                  },
+                  {
+                    "ruleId": 960022,
+                    "description": "Expect Header Not Allowed for HTTP 1.0."
+                  },
+                  {
+                    "ruleId": 960901,
+                    "description": "Invalid character in request"
+                  },
+                  {
+                    "ruleId": 960902,
+                    "description": "Invalid Use of Identity Encoding."
+                  },
+                  {
+                    "ruleId": 960911,
+                    "description": "Invalid HTTP Request Line"
+                  },
+                  {
+                    "ruleId": 960912,
+                    "description": "Failed to parse request body."
+                  },
+                  {
+                    "ruleId": 960914,
+                    "description": "Multipart request body failed strict validation:     PE %{REQBODY_PROCESSOR_ERROR},     BQ %{MULTIPART_BOUNDARY_QUOTED},     BW %{MULTIPART_BOUNDARY_WHITESPACE},     DB %{MULTIPART_DATA_BEFORE},     DA %{MULTIPART_DATA_AFTER},     HF %{MULTIPART_HEADER_FOLDING},     LF %{MULTIPART_LF_LINE},     SM %{MULTIPART_SEMICOLON_MISSING},     IQ %{MULTIPART_INVALID_QUOTING},     IH %{MULTIPART_INVALID_HEADER_FOLDING},     FLE %{MULTIPART_FILE_LIMIT_EXCEEDED}"
+                  },
+                  {
+                    "ruleId": 960915,
+                    "description": "Multipart parser detected a possible unmatched boundary."
+                  },
+                  {
+                    "ruleId": 981227,
+                    "description": "Apache Error: Invalid URI in Request."
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "crs_21_protocol_anomalies",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 960006,
+                    "description": "Empty User Agent Header"
+                  },
+                  {
+                    "ruleId": 960007,
+                    "description": "Empty Host Header"
+                  },
+                  {
+                    "ruleId": 960008,
+                    "description": "Request Missing a Host Header"
+                  },
+                  {
+                    "ruleId": 960009,
+                    "description": "Request Missing a User Agent Header"
+                  },
+                  {
+                    "ruleId": 960015,
+                    "description": "Request Missing an Accept Header"
+                  },
+                  {
+                    "ruleId": 960017,
+                    "description": "Host header is a numeric IP address"
+                  },
+                  {
+                    "ruleId": 960021,
+                    "description": "Request Has an Empty Accept Header"
+                  },
+                  {
+                    "ruleId": 960904,
+                    "description": "Request Containing Content, but Missing Content-Type header"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "crs_23_request_limits",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 960208,
+                    "description": "Argument value too long"
+                  },
+                  {
+                    "ruleId": 960209,
+                    "description": "Argument name too long"
+                  },
+                  {
+                    "ruleId": 960335,
+                    "description": "Too many arguments in request"
+                  },
+                  {
+                    "ruleId": 960341,
+                    "description": "Total arguments size exceeded"
+                  },
+                  {
+                    "ruleId": 960342,
+                    "description": "Uploaded file size too large"
+                  },
+                  {
+                    "ruleId": 960343,
+                    "description": "Total uploaded files size too large"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "crs_30_http_policy",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 960010,
+                    "description": "Request content type is not allowed by policy"
+                  },
+                  {
+                    "ruleId": 960032,
+                    "description": "Method is not allowed by policy"
+                  },
+                  {
+                    "ruleId": 960034,
+                    "description": "HTTP protocol version is not allowed by policy"
+                  },
+                  {
+                    "ruleId": 960035,
+                    "description": "URL file extension is restricted by policy"
+                  },
+                  {
+                    "ruleId": 960038,
+                    "description": "HTTP header is restricted by policy"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "crs_35_bad_robots",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 990002,
+                    "description": "Request Indicates a Security Scanner Scanned the Site"
+                  },
+                  {
+                    "ruleId": 990012,
+                    "description": "Rogue web site crawler"
+                  },
+                  {
+                    "ruleId": 990901,
+                    "description": "Request Indicates a Security Scanner Scanned the Site"
+                  },
+                  {
+                    "ruleId": 990902,
+                    "description": "Request Indicates a Security Scanner Scanned the Site"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "crs_40_generic_attacks",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 950000,
+                    "description": "Session Fixation"
+                  },
+                  {
+                    "ruleId": 950002,
+                    "description": "System Command Access"
+                  },
+                  {
+                    "ruleId": 950003,
+                    "description": "Session Fixation"
+                  },
+                  {
+                    "ruleId": 950005,
+                    "description": "Remote File Access Attempt"
+                  },
+                  {
+                    "ruleId": 950006,
+                    "description": "System Command Injection"
+                  },
+                  {
+                    "ruleId": 950008,
+                    "description": "Injection of Undocumented ColdFusion Tags"
+                  },
+                  {
+                    "ruleId": 950009,
+                    "description": "Session Fixation Attack"
+                  },
+                  {
+                    "ruleId": 950010,
+                    "description": "LDAP Injection Attack"
+                  },
+                  {
+                    "ruleId": 950011,
+                    "description": "SSI injection Attack"
+                  },
+                  {
+                    "ruleId": 950012,
+                    "description": "HTTP Request Smuggling Attack."
+                  },
+                  {
+                    "ruleId": 950018,
+                    "description": "Universal PDF XSS URL Detected."
+                  },
+                  {
+                    "ruleId": 950019,
+                    "description": "Email Injection Attack"
+                  },
+                  {
+                    "ruleId": 950117,
+                    "description": "Remote File Inclusion Attack"
+                  },
+                  {
+                    "ruleId": 950118,
+                    "description": "Remote File Inclusion Attack"
+                  },
+                  {
+                    "ruleId": 950119,
+                    "description": "Remote File Inclusion Attack"
+                  },
+                  {
+                    "ruleId": 950120,
+                    "description": "Possible Remote File Inclusion (RFI) Attack: Off-Domain Reference/Link"
+                  },
+                  {
+                    "ruleId": 950907,
+                    "description": "System Command Injection"
+                  },
+                  {
+                    "ruleId": 950910,
+                    "description": "HTTP Response Splitting Attack"
+                  },
+                  {
+                    "ruleId": 950911,
+                    "description": "HTTP Response Splitting Attack"
+                  },
+                  {
+                    "ruleId": 958976,
+                    "description": "PHP Injection Attack"
+                  },
+                  {
+                    "ruleId": 958977,
+                    "description": "PHP Injection Attack"
+                  },
+                  {
+                    "ruleId": 959151,
+                    "description": "PHP Injection Attack"
+                  },
+                  {
+                    "ruleId": 960024,
+                    "description": "Meta-Character Anomaly Detection Alert - Repetative Non-Word Characters"
+                  },
+                  {
+                    "ruleId": 981133,
+                    "description": "Rule 981133"
+                  },
+                  {
+                    "ruleId": 981134,
+                    "description": "Rule 981134"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "crs_41_sql_injection_attacks",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 950001,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 950007,
+                    "description": "Blind SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 950901,
+                    "description": "SQL Injection Attack: SQL Tautology Detected."
+                  },
+                  {
+                    "ruleId": 950908,
+                    "description": "SQL Injection Attack."
+                  },
+                  {
+                    "ruleId": 959070,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 959071,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 959072,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 959073,
+                    "description": "SQL Injection Attack"
+                  },
+                  {
+                    "ruleId": 981172,
+                    "description": "Restricted SQL Character Anomaly Detection Alert - Total # of special characters exceeded"
+                  },
+                  {
+                    "ruleId": 981173,
+                    "description": "Restricted SQL Character Anomaly Detection Alert - Total # of special characters exceeded"
+                  },
+                  {
+                    "ruleId": 981231,
+                    "description": "SQL Comment Sequence Detected."
+                  },
+                  {
+                    "ruleId": 981240,
+                    "description": "Detects MySQL comments, conditions and ch(a)r injections"
+                  },
+                  {
+                    "ruleId": 981241,
+                    "description": "Detects conditional SQL injection attempts"
+                  },
+                  {
+                    "ruleId": 981242,
+                    "description": "Detects classic SQL injection probings 1/2"
+                  },
+                  {
+                    "ruleId": 981243,
+                    "description": "Detects classic SQL injection probings 2/2"
+                  },
+                  {
+                    "ruleId": 981244,
+                    "description": "Detects basic SQL authentication bypass attempts 1/3"
+                  },
+                  {
+                    "ruleId": 981245,
+                    "description": "Detects basic SQL authentication bypass attempts 2/3"
+                  },
+                  {
+                    "ruleId": 981246,
+                    "description": "Detects basic SQL authentication bypass attempts 3/3"
+                  },
+                  {
+                    "ruleId": 981247,
+                    "description": "Detects concatenated basic SQL injection and SQLLFI attempts"
+                  },
+                  {
+                    "ruleId": 981248,
+                    "description": "Detects chained SQL injection attempts 1/2"
+                  },
+                  {
+                    "ruleId": 981249,
+                    "description": "Detects chained SQL injection attempts 2/2"
+                  },
+                  {
+                    "ruleId": 981250,
+                    "description": "Detects SQL benchmark and sleep injection attempts including conditional queries"
+                  },
+                  {
+                    "ruleId": 981251,
+                    "description": "Detects MySQL UDF injection and other data/structure manipulation attempts"
+                  },
+                  {
+                    "ruleId": 981252,
+                    "description": "Detects MySQL charset switch and MSSQL DoS attempts"
+                  },
+                  {
+                    "ruleId": 981253,
+                    "description": "Detects MySQL and PostgreSQL stored procedure/function injections"
+                  },
+                  {
+                    "ruleId": 981254,
+                    "description": "Detects Postgres pg_sleep injection, waitfor delay attacks and database shutdown attempts"
+                  },
+                  {
+                    "ruleId": 981255,
+                    "description": "Detects MSSQL code execution and information gathering attempts"
+                  },
+                  {
+                    "ruleId": 981256,
+                    "description": "Detects MATCH AGAINST, MERGE, EXECUTE IMMEDIATE and HAVING injections"
+                  },
+                  {
+                    "ruleId": 981257,
+                    "description": "Detects MySQL comment-/space-obfuscated injections and backtick termination"
+                  },
+                  {
+                    "ruleId": 981260,
+                    "description": "SQL Hex Encoding Identified"
+                  },
+                  {
+                    "ruleId": 981270,
+                    "description": "Finds basic MongoDB SQL injection attempts"
+                  },
+                  {
+                    "ruleId": 981272,
+                    "description": "Detects blind sqli tests using sleep() or benchmark()."
+                  },
+                  {
+                    "ruleId": 981276,
+                    "description": "Looking for basic sql injection. Common attack string for mysql, oracle and others."
+                  },
+                  {
+                    "ruleId": 981277,
+                    "description": "Looking for integer overflow attacks, these are taken from skipfish, except 2.2.90738585072007e-308 is the \\\"magic number\\\" crash"
+                  },
+                  {
+                    "ruleId": 981300,
+                    "description": "Rule 981300"
+                  },
+                  {
+                    "ruleId": 981301,
+                    "description": "Rule 981301"
+                  },
+                  {
+                    "ruleId": 981302,
+                    "description": "Rule 981302"
+                  },
+                  {
+                    "ruleId": 981303,
+                    "description": "Rule 981303"
+                  },
+                  {
+                    "ruleId": 981304,
+                    "description": "Rule 981304"
+                  },
+                  {
+                    "ruleId": 981305,
+                    "description": "Rule 981305"
+                  },
+                  {
+                    "ruleId": 981306,
+                    "description": "Rule 981306"
+                  },
+                  {
+                    "ruleId": 981307,
+                    "description": "Rule 981307"
+                  },
+                  {
+                    "ruleId": 981308,
+                    "description": "Rule 981308"
+                  },
+                  {
+                    "ruleId": 981309,
+                    "description": "Rule 981309"
+                  },
+                  {
+                    "ruleId": 981310,
+                    "description": "Rule 981310"
+                  },
+                  {
+                    "ruleId": 981311,
+                    "description": "Rule 981311"
+                  },
+                  {
+                    "ruleId": 981312,
+                    "description": "Rule 981312"
+                  },
+                  {
+                    "ruleId": 981313,
+                    "description": "Rule 981313"
+                  },
+                  {
+                    "ruleId": 981314,
+                    "description": "Rule 981314"
+                  },
+                  {
+                    "ruleId": 981315,
+                    "description": "Rule 981315"
+                  },
+                  {
+                    "ruleId": 981316,
+                    "description": "Rule 981316"
+                  },
+                  {
+                    "ruleId": 981317,
+                    "description": "SQL SELECT Statement Anomaly Detection Alert"
+                  },
+                  {
+                    "ruleId": 981318,
+                    "description": "SQL Injection Attack: Common Injection Testing Detected"
+                  },
+                  {
+                    "ruleId": 981319,
+                    "description": "SQL Injection Attack: SQL Operator Detected"
+                  },
+                  {
+                    "ruleId": 981320,
+                    "description": "SQL Injection Attack: Common DB Names Detected"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "crs_41_xss_attacks",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 958000,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958001,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958002,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958003,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958004,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958005,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958006,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958007,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958008,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958009,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958010,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958011,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958012,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958013,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958016,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958017,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958018,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958019,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958020,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958022,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958023,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958024,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958025,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958026,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958027,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958028,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958030,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958031,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958032,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958033,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958034,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958036,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958037,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958038,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958039,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958040,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958041,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958045,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958046,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958047,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958049,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958051,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958052,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958054,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958056,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958057,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958059,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958404,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958405,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958406,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958407,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958408,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958409,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958410,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958411,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958412,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958413,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958414,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958415,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958416,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958417,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958418,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958419,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958420,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958421,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958422,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 958423,
+                    "description": "Cross-site Scripting (XSS) Attack"
+                  },
+                  {
+                    "ruleId": 973300,
+                    "description": "Possible XSS Attack Detected - HTML Tag Handler"
+                  },
+                  {
+                    "ruleId": 973301,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973302,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973303,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973304,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973305,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973306,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973307,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973308,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973309,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973310,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973311,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973312,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973313,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973314,
+                    "description": "XSS Attack Detected"
+                  },
+                  {
+                    "ruleId": 973315,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973316,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973317,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973318,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973319,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973320,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973321,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973322,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973323,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973324,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973325,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973326,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973327,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973328,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973329,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973330,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973331,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973332,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973333,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973334,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973335,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973336,
+                    "description": "XSS Filter - Category 1: Script Tag Vector"
+                  },
+                  {
+                    "ruleId": 973337,
+                    "description": "XSS Filter - Category 2: Event Handler Vector"
+                  },
+                  {
+                    "ruleId": 973338,
+                    "description": "XSS Filter - Category 3: Javascript URI Vector"
+                  },
+                  {
+                    "ruleId": 973344,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973345,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973346,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973347,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 973348,
+                    "description": "IE XSS Filters - Attack Detected."
+                  },
+                  {
+                    "ruleId": 981018,
+                    "description": "Rule 981018"
+                  },
+                  {
+                    "ruleId": 981136,
+                    "description": "Rule 981136"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "crs_42_tight_security",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 950103,
+                    "description": "Path Traversal Attack"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "crs_45_trojans",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 950110,
+                    "description": "Backdoor access"
+                  },
+                  {
+                    "ruleId": 950921,
+                    "description": "Backdoor access"
+                  }
+                ]
+              },
+              {
+                "ruleGroupName": "crs_49_inbound_blocking",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 981175,
+                    "description": "Inbound Attack Targeting OSVDB Flagged Resource."
+                  },
+                  {
+                    "ruleId": 981176,
+                    "description": "Inbound Anomaly Score Exceeded (Total Score: %{TX.ANOMALY_SCORE}, SQLi=%{TX.SQL_INJECTION_SCORE}, XSS=%{TX.XSS_SCORE}): Last Matched Message: %{tx.msg}"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Microsoft_BotManagerRuleSet_0.1",
+          "id": "/subscriptions//resourceGroups//providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets/",
+          "type": "Microsoft.Network/applicationGatewayAvailableWafRuleSets",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "ruleSetType": "Microsoft_BotManagerRuleSet",
+            "ruleSetVersion": "0.1",
+            "tiers": [
+              "WAF_v2"
+            ],
+            "ruleGroups": [
+              {
+                "ruleGroupName": "KnownBadBots",
+                "description": "",
+                "rules": [
+                  {
+                    "ruleId": 1,
+                    "description": "Malicious Bots"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_network_private_endpoints000001",
+    "serviceName": "lks1",
+    "parameters": {
+      "location": "centralus",
+      "properties": {
+        "loadBalancerFrontendIpConfigurations": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIpConfigurations/LoadBalancerFrontEnd"
+          }
+        ],
+        "ipConfigurations": [
+          {
+            "name": "lks1_ipconfig_0",
+            "properties": {
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+              },
+              "privateIPAddressVersion": "IPv4"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "lks1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateLinkServices/lks1",
+      "etag": "W/\"29926c4b-028c-4a8d-882c-5fe31472b4ea\"",
+      "type": "Microsoft.Network/privateLinkServices",
+      "location": "centralus",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "385891e8-5e1d-4b62-9ed9-05616e608038",
+        "fqdns": [],
+        "alias": "lks1.e7b1ef98-65ec-4a2c-9cc2-0242c1c0e615.centralus.azure.privatelinkservice",
+        "enableProxyProtocol": false,
+        "loadBalancerFrontendIpConfigurations": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd"
+          }
+        ],
+        "ipConfigurations": [
+          {
+            "name": "lks1_ipconfig_0",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateLinkServices/lks1/ipConfigurations/lks1_ipconfig_0",
+            "etag": "W/\"29926c4b-028c-4a8d-882c-5fe31472b4ea\"",
+            "type": "Microsoft.Network/privateLinkServices/ipConfigurations",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+              },
+              "primary": true,
+              "privateIPAddressVersion": "IPv4"
+            }
+          }
+        ],
+        "privateEndpointConnections": [],
+        "networkInterfaces": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/networkInterfaces/lks1.nic.fdda578e-ef9d-4274-8bf5-3812a6aa6eb3"
+          }
+        ]
+      }
+    }
+  }
+}

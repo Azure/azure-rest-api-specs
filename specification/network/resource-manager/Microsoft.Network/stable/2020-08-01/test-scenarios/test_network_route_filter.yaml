@@ -1,0 +1,68 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_route_filter
+    steps:
+      - step: RawStep_2326
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_route_filter000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:48:27 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_route_filter000001","name":"cli_test_network_route_filter000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:48:26Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_routeFilters_filter1
+        resourceName: routeFilters_filter1
+        exampleFile: ../examples/Create_routeFilters_filter1_Generated.json
+        operationId: RouteFilters_CreateOrUpdate
+      - step: Update_routeFilters_filter1_2329
+        resourceName: routeFilters_filter1
+        operationId: RouteFilters_CreateOrUpdate
+      - step: RouteFilters_ListByResourceGroup_2330
+        exampleFile: ../examples/RouteFilters_ListByResourceGroup_2330_Generated.json
+        operationId: RouteFilters_ListByResourceGroup
+      - step: RawStep_2331
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_route_filter000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:49:17 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_route_filter000001","name":"cli_test_network_route_filter000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:48:26Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_routeFilterRules_rule1
+        resourceName: routeFilterRules_rule1
+        exampleFile: ../examples/Create_routeFilterRules_rule1_Generated.json
+        operationId: RouteFilterRules_CreateOrUpdate
+      - step: Update_routeFilterRules_rule1_2334
+        resourceName: routeFilterRules_rule1
+        operationId: RouteFilterRules_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/access
+            value: Deny
+      - step: RouteFilterRules_ListByRouteFilter_2335
+        exampleFile: ../examples/RouteFilterRules_ListByRouteFilter_2335_Generated.json
+        operationId: RouteFilterRules_ListByRouteFilter
+      - step: RouteFilterRules_Delete_2336
+        exampleFile: ../examples/RouteFilterRules_Delete_2336_Generated.json
+        operationId: RouteFilterRules_Delete
+      - step: RouteFilters_Delete_2337
+        exampleFile: ../examples/RouteFilters_Delete_2337_Generated.json
+        operationId: RouteFilters_Delete
+    variables:
+      routeFilterName: filter1
+      ruleName: rule1

@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_app_gateway_waf_policy_000001",
+    "policyName": "agp1"
+  },
+  "responses": {
+    "200": {
+      "name": "agp1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_policy_000001/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/agp1",
+      "etag": "W/\"b39953a0-6edc-497f-854e-fb3988f0f48c\"",
+      "type": "Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies",
+      "location": "westus",
+      "tags": {
+        "test": "best"
+      },
+      "properties": {
+        "provisioningState": "Succeeded",
+        "customRules": [
+          {
+            "name": "rule1",
+            "priority": 50,
+            "ruleType": "MatchRule",
+            "action": "Log",
+            "rateLimitThreshold": 0,
+            "matchConditions": [],
+            "skippedManagedRuleSets": []
+          },
+          {
+            "name": "rule2",
+            "priority": 100,
+            "ruleType": "MatchRule",
+            "action": "Log",
+            "rateLimitThreshold": 0,
+            "matchConditions": [],
+            "skippedManagedRuleSets": []
+          }
+        ],
+        "policySettings": {
+          "requestBodyCheck": false,
+          "maxRequestBodySizeInKb": 128,
+          "fileUploadLimitInMb": 64,
+          "state": "Enabled",
+          "mode": "Prevention"
+        },
+        "managedRules": {
+          "managedRuleSets": [
+            {
+              "ruleSetType": "OWASP",
+              "ruleSetVersion": "3.0",
+              "ruleGroupOverrides": [
+                {
+                  "ruleGroupName": "REQUEST-921-PROTOCOL-ATTACK",
+                  "rules": [
+                    {
+                      "ruleId": "921100",
+                      "state": "Disabled"
+                    },
+                    {
+                      "ruleId": "921110",
+                      "state": "Disabled"
+                    }
+                  ]
+                },
+                {
+                  "ruleGroupName": "REQUEST-913-SCANNER-DETECTION",
+                  "rules": [
+                    {
+                      "ruleId": "913100",
+                      "state": "Disabled"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "ruleSetType": "Microsoft_BotManagerRuleSet",
+              "ruleSetVersion": "0.1",
+              "ruleGroupOverrides": []
+            }
+          ],
+          "exclusions": [
+            {
+              "matchVariable": "RequestHeaderNames",
+              "selectorMatchOperator": "StartsWith",
+              "selector": "Bing"
+            }
+          ]
+        },
+        "applicationGateways": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_policy_000001/providers/Microsoft.Network/applicationGateways/ag1"
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_policy_000001/providers/Microsoft.Network/applicationGateways/ag2"
+          }
+        ]
+      }
+    }
+  }
+}

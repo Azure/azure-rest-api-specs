@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "NetworkWatcherRG",
+    "networkWatcherName": "NetworkWatcher_westus",
+    "parameters": {
+      "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_flow_log000001/providers/Microsoft.Network/networkSecurityGroups/nsg1"
+    }
+  },
+  "responses": {
+    "200": {
+      "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_flow_log000001/providers/Microsoft.Network/networkSecurityGroups/nsg1",
+      "properties": {
+        "storageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_flow_log000001/providers/Microsoft.Storage/storageAccounts/clitestnw000002",
+        "enabled": true,
+        "retentionPolicy": {
+          "days": 0,
+          "enabled": false
+        },
+        "format": {
+          "type": "JSON",
+          "version": 1
+        }
+      },
+      "flowAnalyticsConfiguration": {
+        "networkWatcherFlowAnalyticsConfiguration": {
+          "enabled": true,
+          "workspaceId": "d83cadae-8b8f-4cb4-a16d-bd8857482333",
+          "workspaceRegion": "westus",
+          "workspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_flow_log000001/providers/Microsoft.OperationalInsights/workspaces/testws000003",
+          "trafficAnalyticsInterval": 10
+        }
+      }
+    }
+  }
+}

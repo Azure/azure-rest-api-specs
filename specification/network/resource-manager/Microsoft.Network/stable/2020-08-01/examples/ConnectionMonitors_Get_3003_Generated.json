@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "NetworkWatcherRG",
+    "networkWatcherName": "NetworkWatcher_eastus",
+    "connectionMonitorName": "CMv2-01"
+  },
+  "responses": {
+    "200": {
+      "name": "cmv2-01",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkWatchers/NetworkWatcher_eastus/connectionMonitors/cmv2-01",
+      "etag": "W/\"7fba49b7-1bb3-4bad-b7bd-1c24e570e36c\"",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "48a52d9c-2a1a-4d68-9d9d-ebc9d0bf89d9",
+        "endpoints": [
+          {
+            "name": "vm2",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/connection_monitor_v2_test_6xjg6cv4jg6buvj3j5ru2g4btirttrtw7xv72eivnrdx743e/providers/Microsoft.Compute/virtualMachines/vm2"
+          },
+          {
+            "name": "bing",
+            "address": "bing.com"
+          }
+        ],
+        "testConfigurations": [
+          {
+            "name": "DefaultIcmp",
+            "testFrequencySec": 60,
+            "protocol": "Icmp",
+            "icmpConfiguration": {
+              "disableTraceRoute": false
+            }
+          }
+        ],
+        "testGroups": [
+          {
+            "name": "DefaultTestGroup",
+            "disable": false,
+            "testConfigurations": [
+              "DefaultIcmp"
+            ],
+            "sources": [
+              "vm2"
+            ],
+            "destinations": [
+              "bing"
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "type": "Workspace",
+            "workspaceSettings": {
+              "workspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/defaultresourcegroup-eus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-0b1f6471-1bf0-4dda-aec3-cb9272f09590-eus"
+            }
+          }
+        ],
+        "startTime": "2021-02-24T15:47:12.0379732Z",
+        "connectionMonitorType": "MultiEndpoint"
+      },
+      "type": "Microsoft.Network/networkWatchers/connectionMonitors",
+      "location": "eastus"
+    }
+  }
+}

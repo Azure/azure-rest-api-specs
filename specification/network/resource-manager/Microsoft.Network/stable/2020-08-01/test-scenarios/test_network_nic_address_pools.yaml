@@ -1,0 +1,512 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_nic_address_pools
+    steps:
+      - step: RawStep_2050
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_address_pools000001?api-version=2019-07-01
+        requestBody: >-
+          {"location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2019-01-30T21:00:42Z"}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:00:44 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001","name":"cli_test_nic_address_pools000001","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2019-01-30T21:00:42Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2051
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-10-01
+        requestBody: >-
+          {"location":"westus","tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{},"subnets":[{"properties":{"addressPrefix":"10.0.0.0/24"},"name":"subnet1"}]}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/47e216d5-b8ba-46e4-8248-8f2c36622f55?api-version=2018-10-01
+          cache-control: no-cache
+          content-length: '1322'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:00:53 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"643cdc41-efc3-4b6f-b0a3-8d5a54865273\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"387c15e8-a248-4566-a6e5-8ddd18d5acd4","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[{"name":"subnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1","etag":"W/\"643cdc41-efc3-4b6f-b0a3-8d5a54865273\"","properties":{"provisioningState":"Updating","addressPrefix":"10.0.0.0/24","delegations":[]},"type":"Microsoft.Network/virtualNetworks/subnets"}],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_2052
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_address_pools000001?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:00:58 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001","name":"cli_test_nic_address_pools000001","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2019-01-30T21:00:42Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2053
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1?api-version=2018-10-01
+        requestBody: >-
+          b'{"location": "westus", "properties": {"ipConfigurations":
+          [{"properties": {"privateIPAllocationMethod": "Dynamic",
+          "privateIPAddressVersion": "IPv4", "subnet": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"}},
+          "name": "ipconfig1"}], "dnsSettings": {"dnsServers": []},
+          "enableIPForwarding": false}}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/6dad8ada-c9fd-4d2e-b518-812ba16c4e3a?api-version=2018-10-01
+          cache-control: no-cache
+          content-length: '1768'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:00:59 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"nic1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1","etag":"W/\"79332d2e-6d12-4bcc-8ee1-2469d1aa6e5d\"","location":"westus","properties":{"provisioningState":"Succeeded","resourceGuid":"ce47bce5-32bd-448b-8ad5-0e3a484eb383","ipConfigurations":[{"name":"ipconfig1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1","etag":"W/\"79332d2e-6d12-4bcc-8ee1-2469d1aa6e5d\"","type":"Microsoft.Network/networkInterfaces/ipConfigurations","properties":{"provisioningState":"Succeeded","privateIPAddress":"10.0.0.4","privateIPAllocationMethod":"Dynamic","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},"primary":true,"privateIPAddressVersion":"IPv4"}}],"dnsSettings":{"dnsServers":[],"appliedDnsServers":[],"internalDomainNameSuffix":"3akxyociujteljxfrxorrvnm0e.dx.internal.cloudapp.net"},"enableAcceleratedNetworking":false,"enableIPForwarding":false,"hostedWorkloads":[],"tapConfigurations":[]},"type":"Microsoft.Network/networkInterfaces"}
+      - step: RawStep_2054
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_address_pools000001?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:01:31 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001","name":"cli_test_nic_address_pools000001","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2019-01-30T21:00:42Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2055
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_nic_address_pools000001%27%20and%20name%20eq%20%27None%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FpublicIPAddresses%27&api-version=2018-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '12'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:01:32 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"value":[]}'
+      - step: RawStep_2056
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_address_pools000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2019-07-01
+        requestBody: >-
+          b'{"properties": {"template": {"$schema":
+          "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0", "parameters": {}, "variables": {},
+          "resources": [{"apiVersion": "2018-10-01", "type":
+          "Microsoft.Network/publicIPAddresses", "name": "PublicIPlb1",
+          "location": "westus", "tags": {}, "dependsOn": [], "properties":
+          {"publicIPAllocationMethod": "Dynamic"}, "sku": {"name": "Basic"}},
+          {"type": "Microsoft.Network/loadBalancers", "name": "lb1", "location":
+          "westus", "tags": {}, "apiVersion": "2018-10-01", "dependsOn":
+          ["Microsoft.Network/publicIpAddresses/PublicIPlb1"], "properties":
+          {"backendAddressPools": [{"name": "lb1bepool"}],
+          "frontendIPConfigurations": [{"name": "LoadBalancerFrontEnd",
+          "properties": {"publicIPAddress": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"}}}]},
+          "sku": {"name": "Basic"}}], "outputs": {"loadBalancer": {"type":
+          "object", "value": "[reference(\'lb1\')]"}}}, "parameters": {},
+          "mode": "Incremental"}}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_address_pools000001/providers/Microsoft.Resources/deployments/lb_deploy_UeWlBTFt000UFAHK74JFkcc4ljN9rSji/operationStatuses/08586527247910535441?api-version=2019-07-01
+          cache-control: no-cache
+          content-length: '1304'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:01:34 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Resources/deployments/lb_deploy_UeWlBTFt000UFAHK74JFkcc4ljN9rSji","name":"lb_deploy_UeWlBTFt000UFAHK74JFkcc4ljN9rSji","properties":{"templateHash":"7382546252863517299","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2019-01-30T21:01:35.201172Z","duration":"PT0.7770895S","correlationId":"0fc7d077-7f93-41db-aa78-cb2ecfa5df38","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"publicIPAddresses","locations":["westus"]},{"resourceType":"loadBalancers","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"PublicIPlb1"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1","resourceType":"Microsoft.Network/loadBalancers","resourceName":"lb1"}]}}
+      - step: RawStep_2057
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_address_pools000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08586527247910535441?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '22'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:02:05 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_2058
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_address_pools000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '3119'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:02:05 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Resources/deployments/lb_deploy_UeWlBTFt000UFAHK74JFkcc4ljN9rSji","name":"lb_deploy_UeWlBTFt000UFAHK74JFkcc4ljN9rSji","properties":{"templateHash":"7382546252863517299","parameters":{},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2019-01-30T21:01:55.1457647Z","duration":"PT20.7216822S","correlationId":"0fc7d077-7f93-41db-aa78-cb2ecfa5df38","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"publicIPAddresses","locations":["westus"]},{"resourceType":"loadBalancers","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"PublicIPlb1"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1","resourceType":"Microsoft.Network/loadBalancers","resourceName":"lb1"}],"outputs":{"loadBalancer":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"5cf6de6c-c72c-4d18-b2bc-25f15a0f90e9","frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd","etag":"W/\"d492ffbd-3629-4a48-9ce8-1f3ade9bdf6c\"","type":"Microsoft.Network/loadBalancers/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAllocationMethod":"Dynamic","publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"}}}],"backendAddressPools":[{"name":"lb1bepool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool","etag":"W/\"d492ffbd-3629-4a48-9ce8-1f3ade9bdf6c\"","properties":{"provisioningState":"Succeeded"},"type":"Microsoft.Network/loadBalancers/backendAddressPools"}],"loadBalancingRules":[],"probes":[],"inboundNatRules":[],"inboundNatPools":[]}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"}]}}
+      - step: RawStep_2059
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1?api-version=2018-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '2091'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:02:06 GMT
+          etag: W/"d492ffbd-3629-4a48-9ce8-1f3ade9bdf6c"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"lb1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1","etag":"W/\"d492ffbd-3629-4a48-9ce8-1f3ade9bdf6c\"","type":"Microsoft.Network/loadBalancers","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"5cf6de6c-c72c-4d18-b2bc-25f15a0f90e9","frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd","etag":"W/\"d492ffbd-3629-4a48-9ce8-1f3ade9bdf6c\"","type":"Microsoft.Network/loadBalancers/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAllocationMethod":"Dynamic","publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"}}}],"backendAddressPools":[{"name":"lb1bepool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool","etag":"W/\"d492ffbd-3629-4a48-9ce8-1f3ade9bdf6c\"","properties":{"provisioningState":"Succeeded"},"type":"Microsoft.Network/loadBalancers/backendAddressPools"}],"loadBalancingRules":[],"probes":[],"inboundNatRules":[],"inboundNatPools":[]},"sku":{"name":"Basic","tier":"Regional"}}
+      - step: RawStep_2060
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1?api-version=2018-10-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1",
+          "location": "westus", "tags": {}, "sku": {"name": "Basic"},
+          "properties": {"frontendIPConfigurations": [{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd",
+          "properties": {"privateIPAllocationMethod": "Dynamic",
+          "publicIPAddress": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"},
+          "provisioningState": "Succeeded"}, "name": "LoadBalancerFrontEnd",
+          "etag": "W/\\"d492ffbd-3629-4a48-9ce8-1f3ade9bdf6c\\""}],
+          "backendAddressPools": [{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool",
+          "properties": {"provisioningState": "Succeeded"}, "name": "lb1bepool",
+          "etag": "W/\\"d492ffbd-3629-4a48-9ce8-1f3ade9bdf6c\\""}, {"name":
+          "pool1"}], "loadBalancingRules": [], "probes": [], "inboundNatRules":
+          [], "inboundNatPools": [], "resourceGuid":
+          "5cf6de6c-c72c-4d18-b2bc-25f15a0f90e9", "provisioningState":
+          "Succeeded"}, "etag": "W/\\"d492ffbd-3629-4a48-9ce8-1f3ade9bdf6c\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/9bc78523-1c59-402a-82be-a4db506d0f37?api-version=2018-10-01
+          cache-control: no-cache
+          content-length: '2584'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:02:07 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        responseExpected: >-
+          {"name":"lb1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1","etag":"W/\"fe16b153-9166-4476-a48f-916ff747940a\"","type":"Microsoft.Network/loadBalancers","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"5cf6de6c-c72c-4d18-b2bc-25f15a0f90e9","frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd","etag":"W/\"fe16b153-9166-4476-a48f-916ff747940a\"","type":"Microsoft.Network/loadBalancers/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAllocationMethod":"Dynamic","publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"}}}],"backendAddressPools":[{"name":"lb1bepool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool","etag":"W/\"fe16b153-9166-4476-a48f-916ff747940a\"","properties":{"provisioningState":"Succeeded"},"type":"Microsoft.Network/loadBalancers/backendAddressPools"},{"name":"pool1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/pool1","etag":"W/\"fe16b153-9166-4476-a48f-916ff747940a\"","properties":{"provisioningState":"Succeeded"},"type":"Microsoft.Network/loadBalancers/backendAddressPools"}],"loadBalancingRules":[],"probes":[],"inboundNatRules":[],"inboundNatPools":[]},"sku":{"name":"Basic","tier":"Regional"}}
+      - step: RawStep_2061
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1?api-version=2018-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1768'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:02:40 GMT
+          etag: W/"79332d2e-6d12-4bcc-8ee1-2469d1aa6e5d"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"nic1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1","etag":"W/\"79332d2e-6d12-4bcc-8ee1-2469d1aa6e5d\"","location":"westus","properties":{"provisioningState":"Succeeded","resourceGuid":"ce47bce5-32bd-448b-8ad5-0e3a484eb383","ipConfigurations":[{"name":"ipconfig1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1","etag":"W/\"79332d2e-6d12-4bcc-8ee1-2469d1aa6e5d\"","type":"Microsoft.Network/networkInterfaces/ipConfigurations","properties":{"provisioningState":"Succeeded","privateIPAddress":"10.0.0.4","privateIPAllocationMethod":"Dynamic","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},"primary":true,"privateIPAddressVersion":"IPv4"}}],"dnsSettings":{"dnsServers":[],"appliedDnsServers":[],"internalDomainNameSuffix":"3akxyociujteljxfrxorrvnm0e.dx.internal.cloudapp.net"},"enableAcceleratedNetworking":false,"enableIPForwarding":false,"hostedWorkloads":[],"tapConfigurations":[]},"type":"Microsoft.Network/networkInterfaces"}
+      - step: RawStep_2062
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1?api-version=2018-10-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1",
+          "location": "westus", "properties": {"ipConfigurations": [{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1",
+          "properties": {"loadBalancerBackendAddressPools": [{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/pool1"}],
+          "privateIPAddress": "10.0.0.4", "privateIPAllocationMethod":
+          "Dynamic", "privateIPAddressVersion": "IPv4", "subnet": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},
+          "primary": true, "provisioningState": "Succeeded"}, "name":
+          "ipconfig1", "etag": "W/\\"79332d2e-6d12-4bcc-8ee1-2469d1aa6e5d\\""}],
+          "tapConfigurations": [], "dnsSettings": {"dnsServers": [],
+          "appliedDnsServers": [], "internalDomainNameSuffix":
+          "3akxyociujteljxfrxorrvnm0e.dx.internal.cloudapp.net"},
+          "enableAcceleratedNetworking": false, "enableIPForwarding": false,
+          "resourceGuid": "ce47bce5-32bd-448b-8ad5-0e3a484eb383",
+          "provisioningState": "Succeeded"}, "etag":
+          "W/\\"79332d2e-6d12-4bcc-8ee1-2469d1aa6e5d\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/2bfdf98c-522a-43aa-821e-93736bca10ac?api-version=2018-10-01
+          cache-control: no-cache
+          content-length: '2098'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:02:40 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        responseExpected: >-
+          {"name":"nic1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1","etag":"W/\"d68ead92-0e2c-4fad-a93e-7f710488918c\"","location":"westus","properties":{"provisioningState":"Succeeded","resourceGuid":"ce47bce5-32bd-448b-8ad5-0e3a484eb383","ipConfigurations":[{"name":"ipconfig1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1","etag":"W/\"d68ead92-0e2c-4fad-a93e-7f710488918c\"","type":"Microsoft.Network/networkInterfaces/ipConfigurations","properties":{"provisioningState":"Succeeded","privateIPAddress":"10.0.0.4","privateIPAllocationMethod":"Dynamic","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},"primary":true,"privateIPAddressVersion":"IPv4","loadBalancerBackendAddressPools":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/pool1"}]}}],"dnsSettings":{"dnsServers":[],"appliedDnsServers":[],"internalDomainNameSuffix":"3akxyociujteljxfrxorrvnm0e.dx.internal.cloudapp.net"},"enableAcceleratedNetworking":false,"enableIPForwarding":false,"hostedWorkloads":[],"tapConfigurations":[]},"type":"Microsoft.Network/networkInterfaces"}
+      - step: RawStep_2063
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1?api-version=2018-10-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1",
+          "location": "westus", "properties": {"ipConfigurations": [{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1",
+          "properties": {"loadBalancerBackendAddressPools": [],
+          "privateIPAddress": "10.0.0.4", "privateIPAllocationMethod":
+          "Dynamic", "privateIPAddressVersion": "IPv4", "subnet": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},
+          "primary": true, "provisioningState": "Succeeded"}, "name":
+          "ipconfig1", "etag": "W/\\"d68ead92-0e2c-4fad-a93e-7f710488918c\\""}],
+          "tapConfigurations": [], "dnsSettings": {"dnsServers": [],
+          "appliedDnsServers": [], "internalDomainNameSuffix":
+          "3akxyociujteljxfrxorrvnm0e.dx.internal.cloudapp.net"},
+          "enableAcceleratedNetworking": false, "enableIPForwarding": false,
+          "resourceGuid": "ce47bce5-32bd-448b-8ad5-0e3a484eb383",
+          "provisioningState": "Succeeded"}, "etag":
+          "W/\\"d68ead92-0e2c-4fad-a93e-7f710488918c\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/5856969b-3454-41cb-b9f9-3ad796908a3e?api-version=2018-10-01
+          cache-control: no-cache
+          content-length: '1768'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:03:13 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        responseExpected: >-
+          {"name":"nic1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1","etag":"W/\"79f970ac-047f-4e70-8949-47b9006130f5\"","location":"westus","properties":{"provisioningState":"Succeeded","resourceGuid":"ce47bce5-32bd-448b-8ad5-0e3a484eb383","ipConfigurations":[{"name":"ipconfig1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1","etag":"W/\"79f970ac-047f-4e70-8949-47b9006130f5\"","type":"Microsoft.Network/networkInterfaces/ipConfigurations","properties":{"provisioningState":"Succeeded","privateIPAddress":"10.0.0.4","privateIPAllocationMethod":"Dynamic","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},"primary":true,"privateIPAddressVersion":"IPv4"}}],"dnsSettings":{"dnsServers":[],"appliedDnsServers":[],"internalDomainNameSuffix":"3akxyociujteljxfrxorrvnm0e.dx.internal.cloudapp.net"},"enableAcceleratedNetworking":false,"enableIPForwarding":false,"hostedWorkloads":[],"tapConfigurations":[]},"type":"Microsoft.Network/networkInterfaces"}
+      - step: RawStep_2064
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1?api-version=2018-10-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1",
+          "location": "westus", "properties": {"ipConfigurations": [{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1",
+          "properties": {"loadBalancerBackendAddressPools": [{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/pool1"}],
+          "privateIPAddress": "10.0.0.4", "privateIPAllocationMethod":
+          "Dynamic", "privateIPAddressVersion": "IPv4", "subnet": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},
+          "primary": true, "provisioningState": "Succeeded"}, "name":
+          "ipconfig1", "etag": "W/\\"79f970ac-047f-4e70-8949-47b9006130f5\\""}],
+          "tapConfigurations": [], "dnsSettings": {"dnsServers": [],
+          "appliedDnsServers": [], "internalDomainNameSuffix":
+          "3akxyociujteljxfrxorrvnm0e.dx.internal.cloudapp.net"},
+          "enableAcceleratedNetworking": false, "enableIPForwarding": false,
+          "resourceGuid": "ce47bce5-32bd-448b-8ad5-0e3a484eb383",
+          "provisioningState": "Succeeded"}, "etag":
+          "W/\\"79f970ac-047f-4e70-8949-47b9006130f5\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/7b36a48e-1868-4fa4-af64-b1ee62a1ce16?api-version=2018-10-01
+          cache-control: no-cache
+          content-length: '2098'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:03:48 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        responseExpected: >-
+          {"name":"nic1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1","etag":"W/\"776078cf-80c3-4056-a9aa-92c1c24d1d59\"","location":"westus","properties":{"provisioningState":"Succeeded","resourceGuid":"ce47bce5-32bd-448b-8ad5-0e3a484eb383","ipConfigurations":[{"name":"ipconfig1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1","etag":"W/\"776078cf-80c3-4056-a9aa-92c1c24d1d59\"","type":"Microsoft.Network/networkInterfaces/ipConfigurations","properties":{"provisioningState":"Succeeded","privateIPAddress":"10.0.0.4","privateIPAllocationMethod":"Dynamic","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},"primary":true,"privateIPAddressVersion":"IPv4","loadBalancerBackendAddressPools":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/pool1"}]}}],"dnsSettings":{"dnsServers":[],"appliedDnsServers":[],"internalDomainNameSuffix":"3akxyociujteljxfrxorrvnm0e.dx.internal.cloudapp.net"},"enableAcceleratedNetworking":false,"enableIPForwarding":false,"hostedWorkloads":[],"tapConfigurations":[]},"type":"Microsoft.Network/networkInterfaces"}
+      - step: RawStep_2065
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1?api-version=2018-10-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1",
+          "location": "westus", "properties": {"ipConfigurations": [{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1",
+          "properties": {"loadBalancerBackendAddressPools": [],
+          "privateIPAddress": "10.0.0.4", "privateIPAllocationMethod":
+          "Dynamic", "privateIPAddressVersion": "IPv4", "subnet": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},
+          "primary": true, "provisioningState": "Succeeded"}, "name":
+          "ipconfig1", "etag": "W/\\"776078cf-80c3-4056-a9aa-92c1c24d1d59\\""}],
+          "tapConfigurations": [], "dnsSettings": {"dnsServers": [],
+          "appliedDnsServers": [], "internalDomainNameSuffix":
+          "3akxyociujteljxfrxorrvnm0e.dx.internal.cloudapp.net"},
+          "enableAcceleratedNetworking": false, "enableIPForwarding": false,
+          "resourceGuid": "ce47bce5-32bd-448b-8ad5-0e3a484eb383",
+          "provisioningState": "Succeeded"}, "etag":
+          "W/\\"776078cf-80c3-4056-a9aa-92c1c24d1d59\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/21d7fc9e-44d2-498d-8652-2a2f14ced3f6?api-version=2018-10-01
+          cache-control: no-cache
+          content-length: '1768'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:04:21 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        responseExpected: >-
+          {"name":"nic1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1","etag":"W/\"f9db4e3f-d9b5-481d-a130-362a708484bd\"","location":"westus","properties":{"provisioningState":"Succeeded","resourceGuid":"ce47bce5-32bd-448b-8ad5-0e3a484eb383","ipConfigurations":[{"name":"ipconfig1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1","etag":"W/\"f9db4e3f-d9b5-481d-a130-362a708484bd\"","type":"Microsoft.Network/networkInterfaces/ipConfigurations","properties":{"provisioningState":"Succeeded","privateIPAddress":"10.0.0.4","privateIPAllocationMethod":"Dynamic","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},"primary":true,"privateIPAddressVersion":"IPv4"}}],"dnsSettings":{"dnsServers":[],"appliedDnsServers":[],"internalDomainNameSuffix":"3akxyociujteljxfrxorrvnm0e.dx.internal.cloudapp.net"},"enableAcceleratedNetworking":false,"enableIPForwarding":false,"hostedWorkloads":[],"tapConfigurations":[]},"type":"Microsoft.Network/networkInterfaces"}
+      - step: RawStep_2066
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_address_pools000001?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:04:52 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001","name":"cli_test_nic_address_pools000001","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2019-01-30T21:00:42Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2067
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_nic_address_pools000001%27%20and%20name%20eq%20%27vnet1%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FvirtualNetworks%27&api-version=2018-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '301'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:04:52 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1","name":"vnet1","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{}}]}
+      - step: RawStep_2068
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_address_pools000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2019-07-01
+        requestBody: >-
+          b'{"properties": {"template": {"$schema":
+          "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0", "parameters": {}, "variables":
+          {"appGwID": "[resourceId(\'Microsoft.Network/applicationGateways\',
+          \'ag1\')]"}, "resources": [{"type":
+          "Microsoft.Network/applicationGateways", "name": "ag1", "location":
+          "westus", "tags": {}, "apiVersion": "2018-10-01", "dependsOn": [],
+          "properties": {"backendAddressPools": [{"name":
+          "appGatewayBackendPool"}], "backendHttpSettingsCollection": [{"name":
+          "appGatewayBackendHttpSettings", "properties": {"Port": 80,
+          "Protocol": "Http", "CookieBasedAffinity": "disabled",
+          "connectionDraining": {"enabled": false, "drainTimeoutInSec": 1}}}],
+          "frontendIPConfigurations": [{"name": "appGatewayFrontendIP",
+          "properties": {"privateIPAllocationMethod": "Dynamic",
+          "privateIPAddress": "", "subnet": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"}}}],
+          "frontendPorts": [{"name": "appGatewayFrontendPort", "properties":
+          {"Port": 80}}], "gatewayIPConfigurations": [{"name":
+          "appGatewayFrontendIP", "properties": {"subnet": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"}}}],
+          "httpListeners": [{"name": "appGatewayHttpListener", "properties":
+          {"FrontendIpConfiguration": {"Id": "[concat(variables(\'appGwID\'),
+          \'/frontendIPConfigurations/appGatewayFrontendIP\')]"},
+          "FrontendPort": {"Id": "[concat(variables(\'appGwID\'),
+          \'/frontendPorts/appGatewayFrontendPort\')]"}, "Protocol": "http",
+          "SslCertificate": null}}], "sku": {"name": "Standard_Medium", "tier":
+          "Standard", "capacity": 2}, "requestRoutingRules": [{"Name": "rule1",
+          "properties": {"RuleType": "Basic", "httpListener": {"id":
+          "[concat(variables(\'appGwID\'),
+          \'/httpListeners/appGatewayHttpListener\')]"}, "backendAddressPool":
+          {"id": "[concat(variables(\'appGwID\'),
+          \'/backendAddressPools/appGatewayBackendPool\')]"},
+          "backendHttpSettings": {"id": "[concat(variables(\'appGwID\'),
+          \'/backendHttpSettingsCollection/appGatewayBackendHttpSettings\')]"}}}]},
+          "zones": null}], "outputs": {"applicationGateway": {"type": "object",
+          "value": "[reference(\'ag1\')]"}}}, "parameters": {}, "mode":
+          "Incremental"}}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_address_pools000001/providers/Microsoft.Resources/deployments/ag_deploy_mlxwR4e2woudN1P8SXwvYqT5nSGxVJg6/operationStatuses/08586527245900984195?api-version=2019-07-01
+          cache-control: no-cache
+          content-length: '679'
+          content-type: application/json; charset=utf-8
+          date: Wed, 30 Jan 2019 21:04:56 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_address_pools000001/providers/Microsoft.Resources/deployments/ag_deploy_mlxwR4e2woudN1P8SXwvYqT5nSGxVJg6","name":"ag_deploy_mlxwR4e2woudN1P8SXwvYqT5nSGxVJg6","properties":{"templateHash":"10613883561696206674","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2019-01-30T21:04:56.2655612Z","duration":"PT0.8863683S","correlationId":"c6a23e85-746a-4a10-a41a-7415ceac418d","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"applicationGateways","locations":["westus"]}]}],"dependencies":[]}}

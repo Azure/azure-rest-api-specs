@@ -1,0 +1,1093 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_ddos_protection_plan
+    steps:
+      - step: RawStep_1615
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ddos_protection000001?api-version=2019-07-01
+        requestBody: >-
+          {"location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-04-04T00:06:03Z"}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:06:04 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001","name":"cli_test_ddos_protection000001","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-04-04T00:06:03Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1616
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-02-01
+        requestBody: >-
+          {"location":"westus","tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{}}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/96f8bd20-f274-4a91-8a0a-d5ebacfbe752?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '766'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:06:06 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1196'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"066f81c5-9a1f-4698-8ce3-0d064618beb7\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"2cd3dfa5-d558-4305-afad-f8d3edcf4887","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1617
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ddos_protection000001?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:06:21 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001","name":"cli_test_ddos_protection000001","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-04-04T00:06:03Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1618
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestBody: >-
+          {"location":"westus","tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{}}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/2b83fbfb-51b6-4bf3-a29f-4e8b568ed75f?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '766'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:06:23 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"ba308873-f0de-4303-a314-b46d8b7a3369\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1619
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ddos_protection000001?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:06:37 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001","name":"cli_test_ddos_protection000001","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-04-04T00:06:03Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1620
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestBody: '{"location":"westus","tags":{"foo":"doo"}}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/7ba6aabd-d3b2-4e1c-8ca7-f26f64ac5f3a?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:06:38 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"caa5b8e0-d193-409e-8c0a-c80dfb95ed30\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1621
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:10 GMT
+          etag: W/"db40c043-e940-4486-80b5-1e48f3f298d3"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"db40c043-e940-4486-80b5-1e48f3f298d3\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"2cd3dfa5-d558-4305-afad-f8d3edcf4887","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1622
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1",
+          "location": "westus", "tags": {}, "properties": {"addressSpace":
+          {"addressPrefixes": ["10.0.0.0/16"]}, "dhcpOptions": {"dnsServers":
+          []}, "subnets": [], "virtualNetworkPeerings": [], "resourceGuid":
+          "2cd3dfa5-d558-4305-afad-f8d3edcf4887", "provisioningState":
+          "Succeeded", "enableDdosProtection": false, "enableVmProtection":
+          false, "ddosProtectionPlan": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}},
+          "etag": "W/\\"db40c043-e940-4486-80b5-1e48f3f298d3\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/829bdd9d-3bc4-4f7a-a8e0-f5fe91f6f26a?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '1015'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:11 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"9a29367f-76ff-409b-a312-39c6d126e10d\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"2cd3dfa5-d558-4305-afad-f8d3edcf4887","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1623
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:11 GMT
+          etag: W/"2a9ea9e2-01c0-4074-94d8-185a6db48899"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"2a9ea9e2-01c0-4074-94d8-185a6db48899\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1624
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2",
+          "location": "westus", "tags": {}, "properties": {"addressSpace":
+          {"addressPrefixes": ["10.0.0.0/16"]}, "dhcpOptions": {"dnsServers":
+          []}, "subnets": [], "virtualNetworkPeerings": [], "resourceGuid":
+          "626e5668-9f37-4b5d-9d06-af20361ff91a", "provisioningState":
+          "Succeeded", "enableDdosProtection": false, "enableVmProtection":
+          false, "ddosProtectionPlan": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}},
+          "etag": "W/\\"2a9ea9e2-01c0-4074-94d8-185a6db48899\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/df4ab6fe-465e-42f5-887a-96f08cbef195?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '1015'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:12 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"5f2dc381-f5c6-4e99-b1bb-4208ac20d705\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1625
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '957'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:11 GMT
+          etag: W/"5e60d53d-0266-4648-b8ad-92845d293023"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"5e60d53d-0266-4648-b8ad-92845d293023\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","virtualNetworks":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2"}]}}
+      - step: RawStep_1626
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '957'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:12 GMT
+          etag: W/"5e60d53d-0266-4648-b8ad-92845d293023"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"5e60d53d-0266-4648-b8ad-92845d293023\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","virtualNetworks":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2"}]}}
+      - step: RawStep_1627
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1016'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:13 GMT
+          etag: W/"9493396b-e8f5-49a0-85ba-e1f1826de97f"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"9493396b-e8f5-49a0-85ba-e1f1826de97f\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"2cd3dfa5-d558-4305-afad-f8d3edcf4887","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1628
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1",
+          "location": "westus", "tags": {}, "properties": {"addressSpace":
+          {"addressPrefixes": ["10.0.0.0/16"]}, "dhcpOptions": {"dnsServers":
+          []}, "subnets": [], "virtualNetworkPeerings": [], "resourceGuid":
+          "2cd3dfa5-d558-4305-afad-f8d3edcf4887", "provisioningState":
+          "Succeeded", "enableDdosProtection": false, "enableVmProtection":
+          false}, "etag": "W/\\"9493396b-e8f5-49a0-85ba-e1f1826de97f\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/892d1a12-db36-4c20-a44a-f42e886bd892?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '766'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:13 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"41c13c5b-e990-4936-951f-bec815adce7d\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"2cd3dfa5-d558-4305-afad-f8d3edcf4887","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1629
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1016'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:15 GMT
+          etag: W/"27d7c1b5-021f-4483-9e18-5a851f228d5f"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"27d7c1b5-021f-4483-9e18-5a851f228d5f\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1630
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:17 GMT
+          etag: W/"636cb505-3b0c-4eb9-9093-d504eb9a07c9"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"636cb505-3b0c-4eb9-9093-d504eb9a07c9\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"2cd3dfa5-d558-4305-afad-f8d3edcf4887","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1631
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1016'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:17 GMT
+          etag: W/"27d7c1b5-021f-4483-9e18-5a851f228d5f"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"27d7c1b5-021f-4483-9e18-5a851f228d5f\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1632
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2",
+          "location": "westus", "tags": {}, "properties": {"addressSpace":
+          {"addressPrefixes": ["10.0.0.0/16"]}, "dhcpOptions": {"dnsServers":
+          []}, "subnets": [], "virtualNetworkPeerings": [], "resourceGuid":
+          "626e5668-9f37-4b5d-9d06-af20361ff91a", "provisioningState":
+          "Succeeded", "enableDdosProtection": false, "enableVmProtection":
+          false}, "etag": "W/\\"27d7c1b5-021f-4483-9e18-5a851f228d5f\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/8489f123-a43d-48ee-874b-41b6fd4d7ea7?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '766'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:17 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"46445789-0989-42f0-869c-4a73bb3e70e7\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1633
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:23 GMT
+          etag: W/"4e3f1b94-0ab5-4838-9bbd-d31d96431395"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"4e3f1b94-0ab5-4838-9bbd-d31d96431395\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1634
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:23 GMT
+          etag: W/"636cb505-3b0c-4eb9-9093-d504eb9a07c9"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"636cb505-3b0c-4eb9-9093-d504eb9a07c9\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"2cd3dfa5-d558-4305-afad-f8d3edcf4887","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1635
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1",
+          "location": "westus", "tags": {}, "properties": {"addressSpace":
+          {"addressPrefixes": ["10.0.0.0/16"]}, "dhcpOptions": {"dnsServers":
+          []}, "subnets": [], "virtualNetworkPeerings": [], "resourceGuid":
+          "2cd3dfa5-d558-4305-afad-f8d3edcf4887", "provisioningState":
+          "Succeeded", "enableDdosProtection": false, "enableVmProtection":
+          false, "ddosProtectionPlan": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}},
+          "etag": "W/\\"636cb505-3b0c-4eb9-9093-d504eb9a07c9\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/4e0e8271-1fbc-4185-ae6f-370dfa65cf15?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '1015'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:23 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"628d73d3-b505-447a-a2fa-5a3ae0594864\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"2cd3dfa5-d558-4305-afad-f8d3edcf4887","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1636
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:28 GMT
+          etag: W/"23ea1453-1138-458b-898c-ec3b8562b533"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"23ea1453-1138-458b-898c-ec3b8562b533\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1637
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2",
+          "location": "westus", "tags": {}, "properties": {"addressSpace":
+          {"addressPrefixes": ["10.0.0.0/16"]}, "dhcpOptions": {"dnsServers":
+          []}, "subnets": [], "virtualNetworkPeerings": [], "resourceGuid":
+          "626e5668-9f37-4b5d-9d06-af20361ff91a", "provisioningState":
+          "Succeeded", "enableDdosProtection": false, "enableVmProtection":
+          false, "ddosProtectionPlan": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}},
+          "etag": "W/\\"23ea1453-1138-458b-898c-ec3b8562b533\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/a8c1f5a8-40ef-477c-aff1-8768e5f7cd90?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '1015'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:28 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"e88ec989-35e0-43d2-93f4-dd98253aa60f\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1638
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '957'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:34 GMT
+          etag: W/"e6b6cf79-cc8f-436d-a626-b68619e95da0"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"e6b6cf79-cc8f-436d-a626-b68619e95da0\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","virtualNetworks":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2"}]}}
+      - step: RawStep_1639
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '957'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:34 GMT
+          etag: W/"e6b6cf79-cc8f-436d-a626-b68619e95da0"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"e6b6cf79-cc8f-436d-a626-b68619e95da0\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","virtualNetworks":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2"}]}}
+      - step: RawStep_1640
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1016'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:35 GMT
+          etag: W/"8bbdc246-f031-4ee8-996f-d737e89e62dd"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"8bbdc246-f031-4ee8-996f-d737e89e62dd\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"2cd3dfa5-d558-4305-afad-f8d3edcf4887","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1641
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1",
+          "location": "westus", "tags": {}, "properties": {"addressSpace":
+          {"addressPrefixes": ["10.0.0.0/16"]}, "dhcpOptions": {"dnsServers":
+          []}, "subnets": [], "virtualNetworkPeerings": [], "resourceGuid":
+          "2cd3dfa5-d558-4305-afad-f8d3edcf4887", "provisioningState":
+          "Succeeded", "enableDdosProtection": false, "enableVmProtection":
+          false}, "etag": "W/\\"8bbdc246-f031-4ee8-996f-d737e89e62dd\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/cadf5a2c-fbca-4625-8143-255b795886f3?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '766'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:35 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"47c1541f-fe55-4b41-b7cf-631de91f89d3\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"2cd3dfa5-d558-4305-afad-f8d3edcf4887","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1642
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1016'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:35 GMT
+          etag: W/"93d37ca6-374e-4618-b2df-8292f9bbbe0e"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"93d37ca6-374e-4618-b2df-8292f9bbbe0e\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1643
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2",
+          "location": "westus", "tags": {}, "properties": {"addressSpace":
+          {"addressPrefixes": ["10.0.0.0/16"]}, "dhcpOptions": {"dnsServers":
+          []}, "subnets": [], "virtualNetworkPeerings": [], "resourceGuid":
+          "626e5668-9f37-4b5d-9d06-af20361ff91a", "provisioningState":
+          "Succeeded", "enableDdosProtection": false, "enableVmProtection":
+          false}, "etag": "W/\\"93d37ca6-374e-4618-b2df-8292f9bbbe0e\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/59ba4fcb-848c-4e6f-856e-2e02ffa899ee?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '766'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:35 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"d2370dbe-69bc-433a-be69-daa9ad6038f6\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1644
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1",
+          "location": "westus", "tags": {"doo": "foo"}}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/65232d24-2908-48dc-b4c4-7d2e110ee259?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:36 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"33456cf1-14f5-4c75-a4df-df0bbb984831\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"doo":"foo"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1645
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:38 GMT
+          etag: W/"fef063e8-6779-400e-92fe-02c8e5752b5e"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"fef063e8-6779-400e-92fe-02c8e5752b5e\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"2cd3dfa5-d558-4305-afad-f8d3edcf4887","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1646
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:07:39 GMT
+          etag: W/"ae8cdde0-21e5-4f83-aa08-621f604c8e97"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"ae8cdde0-21e5-4f83-aa08-621f604c8e97\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1647
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:07 GMT
+          etag: W/"33456cf1-14f5-4c75-a4df-df0bbb984831"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"33456cf1-14f5-4c75-a4df-df0bbb984831\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"doo":"foo"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1648
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:08 GMT
+          etag: W/"33456cf1-14f5-4c75-a4df-df0bbb984831"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"33456cf1-14f5-4c75-a4df-df0bbb984831\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"doo":"foo"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1649
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:08 GMT
+          etag: W/"33456cf1-14f5-4c75-a4df-df0bbb984831"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"33456cf1-14f5-4c75-a4df-df0bbb984831\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"doo":"foo"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1650
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:08 GMT
+          etag: W/"ae8cdde0-21e5-4f83-aa08-621f604c8e97"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"ae8cdde0-21e5-4f83-aa08-621f604c8e97\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1651
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2",
+          "location": "westus", "tags": {}, "properties": {"addressSpace":
+          {"addressPrefixes": ["10.0.0.0/16"]}, "dhcpOptions": {"dnsServers":
+          []}, "subnets": [], "virtualNetworkPeerings": [], "resourceGuid":
+          "626e5668-9f37-4b5d-9d06-af20361ff91a", "provisioningState":
+          "Succeeded", "enableDdosProtection": false, "enableVmProtection":
+          false, "ddosProtectionPlan": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}},
+          "etag": "W/\\"ae8cdde0-21e5-4f83-aa08-621f604c8e97\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/27344425-227a-4672-b18b-5051259448ee?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '1015'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:09 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"2c7565f2-db3d-4136-acd1-facfd5c309dd\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1652
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1",
+          "location": "westus", "tags": {"doo": "foo"}}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/54ba45d2-681f-49f4-b42c-c01349dd52d6?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '728'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:10 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"ac651140-8613-4ab2-9926-1c8e52931372\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"doo":"foo"},"properties":{"provisioningState":"Succeeded","virtualNetworks":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2"}]}}
+      - step: RawStep_1653
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1016'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:13 GMT
+          etag: W/"170a3084-d526-41e2-85af-60c15a1921a1"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"170a3084-d526-41e2-85af-60c15a1921a1\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1654
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '728'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:40 GMT
+          etag: W/"ac651140-8613-4ab2-9926-1c8e52931372"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"ac651140-8613-4ab2-9926-1c8e52931372\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"doo":"foo"},"properties":{"provisioningState":"Succeeded","virtualNetworks":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2"}]}}
+      - step: RawStep_1655
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '728'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:41 GMT
+          etag: W/"ac651140-8613-4ab2-9926-1c8e52931372"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"ac651140-8613-4ab2-9926-1c8e52931372\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"doo":"foo"},"properties":{"provisioningState":"Succeeded","virtualNetworks":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2"}]}}
+      - step: RawStep_1656
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '825'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:41 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"ac651140-8613-4ab2-9926-1c8e52931372\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"doo":"foo"},"properties":{"provisioningState":"Succeeded","virtualNetworks":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2"}]}}]}
+      - step: RawStep_1657
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '589'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:42 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"InUseDdosProtectionPlanCannotBeDeleted","message":"DDoS
+          Protection Plan
+          /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1
+          cannot be deleted because it is in use with virtual networks
+          /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2.","details":[]}}
+      - step: RawStep_1658
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1016'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:43 GMT
+          etag: W/"170a3084-d526-41e2-85af-60c15a1921a1"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"170a3084-d526-41e2-85af-60c15a1921a1\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false,"ddosProtectionPlan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1"}}}
+      - step: RawStep_1659
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2",
+          "location": "westus", "tags": {}, "properties": {"addressSpace":
+          {"addressPrefixes": ["10.0.0.0/16"]}, "dhcpOptions": {"dnsServers":
+          []}, "subnets": [], "virtualNetworkPeerings": [], "resourceGuid":
+          "626e5668-9f37-4b5d-9d06-af20361ff91a", "provisioningState":
+          "Succeeded", "enableDdosProtection": false, "enableVmProtection":
+          false}, "etag": "W/\\"170a3084-d526-41e2-85af-60c15a1921a1\\""}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/f1a4965a-6561-4160-8095-4764620adc73?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '766'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:43 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"f049f36f-3a85-497e-8903-4a14869cbac6\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1660
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestBody: >-
+          b'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1",
+          "location": "westus", "tags": {"doo": "foo"}}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/b1cd358a-88d2-4b92-b4fa-04ecc60da43e?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:44 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"79b39fbb-958f-472e-b0f6-24f8ab0751a4\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"doo":"foo"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1661
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:08:47 GMT
+          etag: W/"6f814d5f-220a-482a-8697-31ecb33d5d17"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"6f814d5f-220a-482a-8697-31ecb33d5d17\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"626e5668-9f37-4b5d-9d06-af20361ff91a","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_1662
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Wed, 04 Apr 2018 00:09:14 GMT
+          etag: W/"79b39fbb-958f-472e-b0f6-24f8ab0751a4"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"ddos1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1","etag":"W/\"79b39fbb-958f-472e-b0f6-24f8ab0751a4\"","type":"Microsoft.Network/ddosProtectionPlans","location":"westus","tags":{"doo":"foo"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1663
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ddos_protection000001/providers/Microsoft.Network/ddosProtectionPlans/ddos1?api-version=2018-02-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/ae0b8ffb-51a6-4447-ac8c-53cecc92fbdd?api-version=2018-02-01
+          cache-control: no-cache
+          content-length: '0'
+          date: Wed, 04 Apr 2018 00:09:15 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationResults/ae0b8ffb-51a6-4447-ac8c-53cecc92fbdd?api-version=2018-02-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 202
+      - step: RawStep_1664
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ddos_protection000001?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '0'
+          date: Wed, 04 Apr 2018 00:09:27 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/operationresults/eyJqb2JJZCI6IlJFU09VUkNFR1JPVVBERUxFVElPTkpPQi1DTEk6NUZURVNUOjVGRERPUzo1RlBST1RFQ1RJT05CT0VNNEo0SU5CRDVKUEtHVXxBMTZFMjQ0M0E0NjA0MTlBLVdFU1RVUyIsImpvYkxvY2F0aW9uIjoid2VzdHVzIn0?api-version=2019-07-01
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        statusCode: 202

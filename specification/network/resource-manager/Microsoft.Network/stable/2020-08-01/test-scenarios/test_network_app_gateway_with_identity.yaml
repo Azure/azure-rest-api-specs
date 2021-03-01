@@ -1,0 +1,583 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_app_gateway_with_identity
+    steps:
+      - step: RawStep_1295
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:16:37 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001","name":"cli_test_ag_identity000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:16:35Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1296
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1?api-version=2015-08-31-preview
+        requestBody: '{"location":"westus"}'
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '885'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:16:46 GMT
+          expires: '-1'
+          location: >-
+            /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1193'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1","name":"id1","type":"Microsoft.ManagedIdentity/userAssignedIdentities","location":"westus","tags":{},"properties":{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","principalId":"b62546e2-4d3a-4640-ad96-bd44f27a7f69","clientId":"328ba28c-b2cf-4eac-94c6-d9e65b0118e2","clientSecretUrl":"https://control-westus.identity.azure.net/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1/credentials?tid=54826b22-38d6-4fb2-bad9-b7b93a3e9c5a&oid=b62546e2-4d3a-4640-ad96-bd44f27a7f69&aid=328ba28c-b2cf-4eac-94c6-d9e65b0118e2"}}
+      - step: RawStep_1297
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:16:46 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001","name":"cli_test_ag_identity000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:16:35Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1298
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2?api-version=2015-08-31-preview
+        requestBody: '{"location":"westus"}'
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '885'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:16:53 GMT
+          expires: '-1'
+          location: >-
+            /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1193'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2","name":"id2","type":"Microsoft.ManagedIdentity/userAssignedIdentities","location":"westus","tags":{},"properties":{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","principalId":"404d62b2-2c29-42c8-aca5-d730abdd9a06","clientId":"7f0841b0-c225-415f-b3b3-d4c24109332e","clientSecretUrl":"https://control-westus.identity.azure.net/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2/credentials?tid=54826b22-38d6-4fb2-bad9-b7b93a3e9c5a&oid=404d62b2-2c29-42c8-aca5-d730abdd9a06&aid=7f0841b0-c225-415f-b3b3-d4c24109332e"}}
+      - step: RawStep_1299
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:16:54 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001","name":"cli_test_ag_identity000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:16:35Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1300
+        method: GET
+        rawUrl: >-
+          https://graph.windows.net/00000000-0000-0000-0000-000000000000/me?api-version=1.6
+        requestHeaders:
+          access-control-allow-origin: '*'
+          cache-control: no-cache
+          content-length: '1567'
+          content-type: >-
+            application/json; odata=minimalmetadata; streaming=true;
+            charset=utf-8
+          dataserviceversion: 3.0;
+          date: Wed, 24 Feb 2021 11:16:56 GMT
+          duration: '3582374'
+          expires: '-1'
+          ocp-aad-diagnostics-server-name: W5FAoXdw0+jtBbSyWPXMCW/gNJ9eFd4+HLEzcUQbgf8=
+          ocp-aad-session-key: >-
+            kairW9Mso2_A_p8lWYjA6D4xEg-SNtzLmCqkawCksQ9Blr8ve4y8a21f7L3JG4qSxEdGGiOLVszQYGPaLj9p6lIEC8iyr6oYi8w-gPFLSAP6oE64ckgFzAqp3CrTmNOO.MGkZXxzcWR8pln9e8FBOim9Q8RPILgO13sBHWwBisvw
+          pragma: no-cache
+          request-id: 56f1b5c5-be1f-409e-bef0-5430c854e56d
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-aspnet-version: 4.0.30319
+          x-ms-dirapi-data-contract-version: '1.6'
+          x-ms-resource-unit: '1'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"odata.metadata":"https://graph.windows.net/00000000-0000-0000-0000-000000000000/$metadata#directoryObjects/@Element","odata.type":"Microsoft.DirectoryServices.User","objectType":"User","objectId":"181c08fa-7ac8-48a6-a869-342ab74566a4","deletionTimestamp":null,"accountEnabled":true,"ageGroup":null,"assignedLicenses":[],"assignedPlans":[],"city":null,"companyName":null,"consentProvidedForMinor":null,"country":null,"createdDateTime":"2020-07-01T06:20:59Z","creationType":null,"department":null,"dirSyncEnabled":null,"displayName":"azureclitest","employeeId":null,"facsimileTelephoneNumber":null,"givenName":null,"immutableId":null,"isCompromised":null,"jobTitle":null,"lastDirSyncTime":null,"legalAgeGroupClassification":null,"mail":null,"mailNickname":"azureclitest","mobile":null,"onPremisesDistinguishedName":null,"onPremisesSecurityIdentifier":null,"otherMails":[],"passwordPolicies":null,"passwordProfile":null,"physicalDeliveryOfficeName":null,"postalCode":null,"preferredLanguage":"en-US","provisionedPlans":[],"provisioningErrors":[],"proxyAddresses":[],"refreshTokensValidFromDateTime":"2021-01-15T06:35:45Z","showInAddressList":null,"signInNames":[],"sipProxyAddress":null,"state":null,"streetAddress":null,"surname":null,"telephoneNumber":null,"thumbnailPhoto@odata.mediaEditLink":"directoryObjects/181c08fa-7ac8-48a6-a869-342ab74566a4/Microsoft.DirectoryServices.User/thumbnailPhoto","usageLocation":null,"userIdentities":[],"userPrincipalName":"azureclitest@azuresdkteam.onmicrosoft.com","userState":null,"userStateChangedOn":null,"userType":"Member"}
+      - step: RawStep_1301
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002?api-version=2019-09-01
+        requestBody: >-
+          {"location":"westus","properties":{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","sku":{"family":"A","name":"premium"},"accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"181c08fa-7ac8-48a6-a869-342ab74566a4","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}}],"softDeleteRetentionInDays":90,"networkAcls":{"bypass":"AzureServices","defaultAction":"Allow"}}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1160'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:17:02 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-keyvault-service-version: 1.1.231.0
+          x-ms-ratelimit-remaining-subscription-writes: '1191'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002","name":"cli-test-keyvault-000002","type":"Microsoft.KeyVault/vaults","location":"westus","tags":{},"properties":{"sku":{"family":"A","name":"premium"},"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"181c08fa-7ac8-48a6-a869-342ab74566a4","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}}],"enabledForDeployment":false,"enableSoftDelete":true,"softDeleteRetentionInDays":90,"vaultUri":"https://cli-test-keyvault-000002.vault.azure.net","provisioningState":"RegisteringDns"}}
+      - step: RawStep_1302
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002?api-version=2019-09-01
+        requestBody: >-
+          {"location":"westus","tags":{},"properties":{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","sku":{"family":"A","name":"premium"},"accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"181c08fa-7ac8-48a6-a869-342ab74566a4","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}},{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"404d62b2-2c29-42c8-aca5-d730abdd9a06","permissions":{"secrets":["get","set","list"]}}],"vaultUri":"https://cli-test-keyvault-000002.vault.azure.net/","enabledForDeployment":false,"enableSoftDelete":true,"softDeleteRetentionInDays":90}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1305'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:17:36 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-keyvault-service-version: 1.1.231.0
+          x-ms-ratelimit-remaining-subscription-writes: '1191'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002","name":"cli-test-keyvault-000002","type":"Microsoft.KeyVault/vaults","location":"westus","tags":{},"properties":{"sku":{"family":"A","name":"premium"},"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"181c08fa-7ac8-48a6-a869-342ab74566a4","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}},{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"404d62b2-2c29-42c8-aca5-d730abdd9a06","permissions":{"secrets":["get","set","list"]}}],"enabledForDeployment":false,"enableSoftDelete":true,"softDeleteRetentionInDays":90,"vaultUri":"https://cli-test-keyvault-000002.vault.azure.net/","provisioningState":"Succeeded"}}
+      - step: RawStep_1303
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002?api-version=2019-09-01
+        requestBody: >-
+          {"location":"westus","properties":{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","sku":{"family":"A","name":"premium"},"accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"181c08fa-7ac8-48a6-a869-342ab74566a4","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}},{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"404d62b2-2c29-42c8-aca5-d730abdd9a06","permissions":{"secrets":["get","set","list"]}}],"vaultUri":"https://cli-test-keyvault-000002.vault.azure.net/","enabledForDeployment":false,"enableSoftDelete":true,"softDeleteRetentionInDays":90}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1305'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:17:39 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-keyvault-service-version: 1.1.231.0
+          x-ms-ratelimit-remaining-subscription-writes: '1194'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002","name":"cli-test-keyvault-000002","type":"Microsoft.KeyVault/vaults","location":"westus","tags":{},"properties":{"sku":{"family":"A","name":"premium"},"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"181c08fa-7ac8-48a6-a869-342ab74566a4","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}},{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"404d62b2-2c29-42c8-aca5-d730abdd9a06","permissions":{"secrets":["get","set","list"]}}],"enabledForDeployment":false,"enableSoftDelete":true,"softDeleteRetentionInDays":90,"vaultUri":"https://cli-test-keyvault-000002.vault.azure.net/","provisioningState":"Succeeded"}}
+      - step: RawStep_1304
+        method: POST
+        rawUrl: >-
+          https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/create?api-version=7.0
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '87'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:17:40 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000;includeSubDomains
+          www-authenticate: >-
+            Bearer
+            authorization="https://login.windows.net/54826b22-38d6-4fb2-bad9-b7b93a3e9c5a",
+            resource="https://vault.azure.net"
+          x-content-type-options: nosniff
+          x-ms-keyvault-network-info: conn_type=Ipv4;addr=167.220.255.88;act_addr_fam=InterNetwork;
+          x-ms-keyvault-region: westus
+          x-ms-keyvault-service-version: 1.2.164.2
+          x-powered-by: ASP.NET
+        statusCode: 401
+        responseExpected: >-
+          {"error":{"code":"Unauthorized","message":"Request is missing a Bearer
+          or PoP token."}}
+      - step: RawStep_1305
+        method: POST
+        rawUrl: >-
+          https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/create?api-version=7.0
+        requestBody: >-
+          {"policy":{"key_props":{"exportable":true,"kty":"RSA","key_size":2048,"reuse_key":true},"secret_props":{"contentType":"application/x-pkcs12"},"x509_props":{"subject":"CN=CLIGetDefaultPolicy","key_usage":["cRLSign","dataEncipherment","digitalSignature","keyEncipherment","keyAgreement","keyCertSign"],"validity_months":12},"lifetime_actions":[{"trigger":{"days_before_expiry":90},"action":{"action_type":"AutoRenew"}}],"issuer":{"name":"Self"}},"attributes":{"enabled":true}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1311'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:17:42 GMT
+          expires: '-1'
+          location: >-
+            https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending?api-version=7.0&request_id=f573bb4425844be09da61198c67a12e9
+          pragma: no-cache
+          strict-transport-security: max-age=31536000;includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-keyvault-network-info: conn_type=Ipv4;addr=167.220.255.88;act_addr_fam=InterNetwork;
+          x-ms-keyvault-region: westus
+          x-ms-keyvault-service-version: 1.2.164.2
+          x-powered-by: ASP.NET
+        statusCode: 202
+        responseExpected: >-
+          {"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending","issuer":{"name":"Self"},"csr":"MIICrjCCAZYCAQAwHjEcMBoGA1UEAxMTQ0xJR2V0RGVmYXVsdFBvbGljeTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJZ/qn8Xhqx5tdft+vxjMb8j3WkedMAwjEPLWUQ4ohViClHN4IruVT1bE8rdEqB7o65duiiBlwQJ/77dSOoOBH7jesTi1W3eQDao35ODuZQNDqPL0KTRgmcdCxs0rPpW5XmYZzbF7x3cnJXcI55uuzWuMN5YzVZBOZciRLSLkJiwNpDgRRq3gPXqefbm3WkTM9vHarBlXjNR5iPBFCKt+MqWNy41qZHEYo0qi0ln5AmQHRLPJ9iNXyJU6hn42ZukkJlBxsMjl/FzkUGbb21lhPm62td3qyPwrvG4IEl/aLlw6HFCsllnbA2DV8F+9Uqv1CaRT06ngFsAHWmkMde/On0CAwEAAaBLMEkGCSqGSIb3DQEJDjE8MDowDgYDVR0PAQH/BAQDAgG+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAJBgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBuGDGSEzdbGrhewownHkF4H2Om0f3zxjk9e38TF+fnUu07MBNPSpy6qLFul5wOIvVqDFv+iFsqbqchJXbpF4U4hcpg+cXptFm2dhpqy/B0HCvsy9enQ4KtIaJGmL9Gr87LZItlZVszGH0PnWFk0/N3j4DS1QYeA1yJ5xuZjqCn8wPVC8l8ALm/aK/FCWvts7MS2scAXUVEIY1x9ccsa/Wkry8NawI9gp6rdZUCJGgtmoQ9QhNOmffNNhkwlIq3HeUPqTRyvcbQSHyc1F4JTMZN1S6nndT0JF6I7/+LOwRUPtXTQNH9541xlw8YR4WyXl151AzlunyfnR3J/ud9QyPt","cancellation_requested":false,"status":"inProgress","status_details":"Pending
+          certificate created. Certificate request is in progress. This may take
+          some time based on the issuer provider. Please check again
+          later.","request_id":"f573bb4425844be09da61198c67a12e9"}
+      - step: RawStep_1306
+        method: GET
+        rawUrl: >-
+          https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending?api-version=7.0
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1311'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:17:43 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000;includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-keyvault-network-info: conn_type=Ipv4;addr=167.220.255.88;act_addr_fam=InterNetwork;
+          x-ms-keyvault-region: westus
+          x-ms-keyvault-service-version: 1.2.164.2
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending","issuer":{"name":"Self"},"csr":"MIICrjCCAZYCAQAwHjEcMBoGA1UEAxMTQ0xJR2V0RGVmYXVsdFBvbGljeTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJZ/qn8Xhqx5tdft+vxjMb8j3WkedMAwjEPLWUQ4ohViClHN4IruVT1bE8rdEqB7o65duiiBlwQJ/77dSOoOBH7jesTi1W3eQDao35ODuZQNDqPL0KTRgmcdCxs0rPpW5XmYZzbF7x3cnJXcI55uuzWuMN5YzVZBOZciRLSLkJiwNpDgRRq3gPXqefbm3WkTM9vHarBlXjNR5iPBFCKt+MqWNy41qZHEYo0qi0ln5AmQHRLPJ9iNXyJU6hn42ZukkJlBxsMjl/FzkUGbb21lhPm62td3qyPwrvG4IEl/aLlw6HFCsllnbA2DV8F+9Uqv1CaRT06ngFsAHWmkMde/On0CAwEAAaBLMEkGCSqGSIb3DQEJDjE8MDowDgYDVR0PAQH/BAQDAgG+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAJBgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBuGDGSEzdbGrhewownHkF4H2Om0f3zxjk9e38TF+fnUu07MBNPSpy6qLFul5wOIvVqDFv+iFsqbqchJXbpF4U4hcpg+cXptFm2dhpqy/B0HCvsy9enQ4KtIaJGmL9Gr87LZItlZVszGH0PnWFk0/N3j4DS1QYeA1yJ5xuZjqCn8wPVC8l8ALm/aK/FCWvts7MS2scAXUVEIY1x9ccsa/Wkry8NawI9gp6rdZUCJGgtmoQ9QhNOmffNNhkwlIq3HeUPqTRyvcbQSHyc1F4JTMZN1S6nndT0JF6I7/+LOwRUPtXTQNH9541xlw8YR4WyXl151AzlunyfnR3J/ud9QyPt","cancellation_requested":false,"status":"inProgress","status_details":"Pending
+          certificate created. Certificate request is in progress. This may take
+          some time based on the issuer provider. Please check again
+          later.","request_id":"f573bb4425844be09da61198c67a12e9"}
+      - step: RawStep_1307
+        method: GET
+        rawUrl: >-
+          https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending?api-version=7.0
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1233'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:17:55 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000;includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-keyvault-network-info: conn_type=Ipv4;addr=167.220.255.88;act_addr_fam=InterNetwork;
+          x-ms-keyvault-region: westus
+          x-ms-keyvault-service-version: 1.2.164.2
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending","issuer":{"name":"Self"},"csr":"MIICrjCCAZYCAQAwHjEcMBoGA1UEAxMTQ0xJR2V0RGVmYXVsdFBvbGljeTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJZ/qn8Xhqx5tdft+vxjMb8j3WkedMAwjEPLWUQ4ohViClHN4IruVT1bE8rdEqB7o65duiiBlwQJ/77dSOoOBH7jesTi1W3eQDao35ODuZQNDqPL0KTRgmcdCxs0rPpW5XmYZzbF7x3cnJXcI55uuzWuMN5YzVZBOZciRLSLkJiwNpDgRRq3gPXqefbm3WkTM9vHarBlXjNR5iPBFCKt+MqWNy41qZHEYo0qi0ln5AmQHRLPJ9iNXyJU6hn42ZukkJlBxsMjl/FzkUGbb21lhPm62td3qyPwrvG4IEl/aLlw6HFCsllnbA2DV8F+9Uqv1CaRT06ngFsAHWmkMde/On0CAwEAAaBLMEkGCSqGSIb3DQEJDjE8MDowDgYDVR0PAQH/BAQDAgG+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAJBgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBuGDGSEzdbGrhewownHkF4H2Om0f3zxjk9e38TF+fnUu07MBNPSpy6qLFul5wOIvVqDFv+iFsqbqchJXbpF4U4hcpg+cXptFm2dhpqy/B0HCvsy9enQ4KtIaJGmL9Gr87LZItlZVszGH0PnWFk0/N3j4DS1QYeA1yJ5xuZjqCn8wPVC8l8ALm/aK/FCWvts7MS2scAXUVEIY1x9ccsa/Wkry8NawI9gp6rdZUCJGgtmoQ9QhNOmffNNhkwlIq3HeUPqTRyvcbQSHyc1F4JTMZN1S6nndT0JF6I7/+LOwRUPtXTQNH9541xlw8YR4WyXl151AzlunyfnR3J/ud9QyPt","cancellation_requested":false,"status":"completed","target":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate","request_id":"f573bb4425844be09da61198c67a12e9"}
+      - step: RawStep_1308
+        method: GET
+        rawUrl: >-
+          https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/?api-version=7.0
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '2439'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:17:57 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000;includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-keyvault-network-info: conn_type=Ipv4;addr=167.220.255.88;act_addr_fam=InterNetwork;
+          x-ms-keyvault-region: westus
+          x-ms-keyvault-service-version: 1.2.164.2
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/dcf040d149ee4b6e9d638b7091d0f558","kid":"https://cli-test-keyvault-000002.vault.azure.net/keys/MyCertificate/dcf040d149ee4b6e9d638b7091d0f558","sid":"https://cli-test-keyvault-000002.vault.azure.net/secrets/MyCertificate/dcf040d149ee4b6e9d638b7091d0f558","x5t":"2CljfW43zfIP8ZfG6VRVefaZ5jE","cer":"MIIDQjCCAiqgAwIBAgIQFnbrvZmqTgaDxVDPGhoX+jANBgkqhkiG9w0BAQsFADAeMRwwGgYDVQQDExNDTElHZXREZWZhdWx0UG9saWN5MB4XDTIxMDIyNDExMDc1M1oXDTIyMDIyNDExMTc1M1owHjEcMBoGA1UEAxMTQ0xJR2V0RGVmYXVsdFBvbGljeTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJZ/qn8Xhqx5tdft+vxjMb8j3WkedMAwjEPLWUQ4ohViClHN4IruVT1bE8rdEqB7o65duiiBlwQJ/77dSOoOBH7jesTi1W3eQDao35ODuZQNDqPL0KTRgmcdCxs0rPpW5XmYZzbF7x3cnJXcI55uuzWuMN5YzVZBOZciRLSLkJiwNpDgRRq3gPXqefbm3WkTM9vHarBlXjNR5iPBFCKt+MqWNy41qZHEYo0qi0ln5AmQHRLPJ9iNXyJU6hn42ZukkJlBxsMjl/FzkUGbb21lhPm62td3qyPwrvG4IEl/aLlw6HFCsllnbA2DV8F+9Uqv1CaRT06ngFsAHWmkMde/On0CAwEAAaN8MHowDgYDVR0PAQH/BAQDAgG+MAkGA1UdEwQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMB8GA1UdIwQYMBaAFEpcAqZO0lK+Q5pFMSUVpV2BLixPMB0GA1UdDgQWBBRKXAKmTtJSvkOaRTElFaVdgS4sTzANBgkqhkiG9w0BAQsFAAOCAQEANVcgYCc7LBty76bAPqY4+TB6ZztZdUYCrIV8wJZ7k4TcqqwQc8v2EpxSj/8UMzNqceNCLnMo81mFRgWisYUPm5ATSVig0SHNPIPY29WJ0F8Q3gfdWRwbKSeTfti3mWIMDFc5ULS786Vp87yqqssD6NY7F8z4dJ1rMYNgHAkCA3OC9Xls85qE/FI+5ENgkHu0MutIs+KNfNSPyD+UL57hZlK88aNPbpXUBrkx8OgOHheL/I8GkWyqO4q7iNHxx7CswdEB2LCkWrljxLrfwbrk4WOoS7c5h+nnEvlzvMybMA/U2wl9r8nZZDanDO6MuVbf67e3SwbIZI0lxLkLSUXqKQ==","attributes":{"enabled":true,"nbf":1614164873,"exp":1645701473,"created":1614165473,"updated":1614165473,"recoveryLevel":"Recoverable+Purgeable"},"policy":{"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/policy","key_props":{"exportable":true,"kty":"RSA","key_size":2048,"reuse_key":true},"secret_props":{"contentType":"application/x-pkcs12"},"x509_props":{"subject":"CN=CLIGetDefaultPolicy","ekus":["1.3.6.1.5.5.7.3.1","1.3.6.1.5.5.7.3.2"],"key_usage":["cRLSign","dataEncipherment","digitalSignature","keyAgreement","keyCertSign","keyEncipherment"],"validity_months":12,"basic_constraints":{"ca":false}},"lifetime_actions":[{"trigger":{"days_before_expiry":90},"action":{"action_type":"AutoRenew"}}],"issuer":{"name":"Self"},"attributes":{"enabled":true,"created":1614165463,"updated":1614165463}},"pending":{"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending"}}
+      - step: RawStep_1309
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:17:57 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001","name":"cli_test_ag_identity000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:16:35Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_ip1
+        resourceName: publicIPAddresses_ip1
+        exampleFile: ../examples/Create_publicIPAddresses_ip1_Generated_1311.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_1312
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:18:04 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001","name":"cli_test_ag_identity000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:16:35Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1313
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_ag_identity000001%27%20and%20name%20eq%20%27None%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FvirtualNetworks%27&api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '12'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:18:05 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"value":[]}'
+      - step: RawStep_1314
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_ag_identity000001%27%20and%20name%20eq%20%27ip1%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FpublicIPAddresses%27&api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '335'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:18:06 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/publicIPAddresses/ip1","name":"ip1","type":"Microsoft.Network/publicIPAddresses","sku":{"name":"Standard","tier":"Regional"},"location":"westus"}]}
+      - step: RawStep_1315
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{"appGwID":"[resourceId('Microsoft.Network/applicationGateways',
+          'gateway')]"},"resources":[{"name":"gatewayVnet","type":"Microsoft.Network/virtualNetworks","location":"westus","apiVersion":"2015-06-15","dependsOn":[],"tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"subnets":[{"name":"default","properties":{"addressPrefix":"10.0.0.0/24"}}]}},{"type":"Microsoft.Network/applicationGateways","name":"gateway","location":"westus","tags":{},"apiVersion":"2020-08-01","dependsOn":["Microsoft.Network/virtualNetworks/gatewayVnet"],"properties":{"backendAddressPools":[{"name":"appGatewayBackendPool"}],"backendHttpSettingsCollection":[{"name":"appGatewayBackendHttpSettings","properties":{"Port":80,"Protocol":"Http","CookieBasedAffinity":"disabled","connectionDraining":{"enabled":false,"drainTimeoutInSec":1}}}],"frontendIPConfigurations":[{"name":"appGatewayFrontendIP","properties":{"publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/publicIPAddresses/ip1"}}}],"frontendPorts":[{"name":"appGatewayFrontendPort","properties":{"Port":80}}],"gatewayIPConfigurations":[{"name":"appGatewayFrontendIP","properties":{"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/virtualNetworks/gatewayVnet/subnets/default"}}}],"httpListeners":[{"name":"appGatewayHttpListener","properties":{"FrontendIpConfiguration":{"Id":"[concat(variables('appGwID'),
+          '/frontendIPConfigurations/appGatewayFrontendIP')]"},"FrontendPort":{"Id":"[concat(variables('appGwID'),
+          '/frontendPorts/appGatewayFrontendPort')]"},"Protocol":"http","SslCertificate":null}}],"sku":{"name":"Standard_v2","tier":"Standard_v2","capacity":2},"requestRoutingRules":[{"Name":"rule1","properties":{"RuleType":"Basic","httpListener":{"id":"[concat(variables('appGwID'),
+          '/httpListeners/appGatewayHttpListener')]"},"backendAddressPool":{"id":"[concat(variables('appGwID'),
+          '/backendAddressPools/appGatewayBackendPool')]"},"backendHttpSettings":{"id":"[concat(variables('appGwID'),
+          '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"}}}],"privateLinkConfigurations":[]},"zones":null,"identity":{"type":"UserAssigned","userAssignedIdentities":{"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1":{}}}}],"outputs":{"applicationGateway":{"type":"object","value":"[reference('gateway')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/ag_deploy_lUeChdRBCO7gKlURHjsjOJJuAC5F0AOf/operationStatuses/08585874413974663374?api-version=2020-10-01
+          cache-control: no-cache
+          content-length: '1367'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:18:10 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1193'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/ag_deploy_lUeChdRBCO7gKlURHjsjOJJuAC5F0AOf","name":"ag_deploy_lUeChdRBCO7gKlURHjsjOJJuAC5F0AOf","type":"Microsoft.Resources/deployments","properties":{"templateHash":"10238741149669005744","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-02-24T11:18:10.0466844Z","duration":"PT2.0354037S","correlationId":"690150a0-8489-4179-bd5a-e196c6314664","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["westus"]},{"resourceType":"applicationGateways","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/virtualNetworks/gatewayVnet","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"gatewayVnet"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway","resourceType":"Microsoft.Network/applicationGateways","resourceName":"gateway"}]}}
+      - step: RawStep_1316
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874413974663374?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:18:41 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1317
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874413974663374?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:19:11 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1318
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874413974663374?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:19:43 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1319
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874413974663374?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:20:13 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1320
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874413974663374?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:20:43 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1321
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874413974663374?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:21:14 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1322
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874413974663374?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:21:44 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1323
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874413974663374?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '22'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:22:16 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_1324
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '9068'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:22:17 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/ag_deploy_lUeChdRBCO7gKlURHjsjOJJuAC5F0AOf","name":"ag_deploy_lUeChdRBCO7gKlURHjsjOJJuAC5F0AOf","type":"Microsoft.Resources/deployments","properties":{"templateHash":"10238741149669005744","parameters":{},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-02-24T11:22:15.4251647Z","duration":"PT4M7.413884S","correlationId":"690150a0-8489-4179-bd5a-e196c6314664","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["westus"]},{"resourceType":"applicationGateways","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/virtualNetworks/gatewayVnet","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"gatewayVnet"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway","resourceType":"Microsoft.Network/applicationGateways","resourceName":"gateway"}],"outputs":{"applicationGateway":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"adcfb388-9cc3-4659-8e70-1e560176a930","sku":{"name":"Standard_v2","tier":"Standard_v2","capacity":2},"operationalState":"Running","gatewayIPConfigurations":[{"name":"appGatewayFrontendIP","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/gatewayIPConfigurations/appGatewayFrontendIP","etag":"W/\"d923d904-98c7-44bd-a9a1-a9454ef63e23\"","properties":{"provisioningState":"Succeeded","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/virtualNetworks/gatewayVnet/subnets/default"}},"type":"Microsoft.Network/applicationGateways/gatewayIPConfigurations"}],"sslCertificates":[],"trustedRootCertificates":[],"trustedClientCertificates":[],"sslProfiles":[],"frontendIPConfigurations":[{"name":"appGatewayFrontendIP","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/frontendIPConfigurations/appGatewayFrontendIP","etag":"W/\"d923d904-98c7-44bd-a9a1-a9454ef63e23\"","type":"Microsoft.Network/applicationGateways/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAllocationMethod":"Dynamic","publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/publicIPAddresses/ip1"},"httpListeners":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/httpListeners/appGatewayHttpListener"}]}}],"frontendPorts":[{"name":"appGatewayFrontendPort","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/frontendPorts/appGatewayFrontendPort","etag":"W/\"d923d904-98c7-44bd-a9a1-a9454ef63e23\"","properties":{"provisioningState":"Succeeded","port":80,"httpListeners":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/httpListeners/appGatewayHttpListener"}]},"type":"Microsoft.Network/applicationGateways/frontendPorts"}],"backendAddressPools":[{"name":"appGatewayBackendPool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/backendAddressPools/appGatewayBackendPool","etag":"W/\"d923d904-98c7-44bd-a9a1-a9454ef63e23\"","properties":{"provisioningState":"Succeeded","backendAddresses":[],"requestRoutingRules":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/requestRoutingRules/rule1"}]},"type":"Microsoft.Network/applicationGateways/backendAddressPools"}],"loadDistributionPolicies":[],"backendHttpSettingsCollection":[{"name":"appGatewayBackendHttpSettings","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/backendHttpSettingsCollection/appGatewayBackendHttpSettings","etag":"W/\"d923d904-98c7-44bd-a9a1-a9454ef63e23\"","properties":{"provisioningState":"Succeeded","port":80,"protocol":"Http","cookieBasedAffinity":"Disabled","connectionDraining":{"enabled":false,"drainTimeoutInSec":1},"pickHostNameFromBackendAddress":false,"requestTimeout":30,"requestRoutingRules":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/requestRoutingRules/rule1"}]},"type":"Microsoft.Network/applicationGateways/backendHttpSettingsCollection"}],"httpListeners":[{"name":"appGatewayHttpListener","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/httpListeners/appGatewayHttpListener","etag":"W/\"d923d904-98c7-44bd-a9a1-a9454ef63e23\"","properties":{"provisioningState":"Succeeded","frontendIPConfiguration":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/frontendIPConfigurations/appGatewayFrontendIP"},"frontendPort":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/frontendPorts/appGatewayFrontendPort"},"protocol":"Http","hostNames":[],"requireServerNameIndication":false,"requestRoutingRules":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/requestRoutingRules/rule1"}]},"type":"Microsoft.Network/applicationGateways/httpListeners"}],"urlPathMaps":[],"requestRoutingRules":[{"name":"rule1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/requestRoutingRules/rule1","etag":"W/\"d923d904-98c7-44bd-a9a1-a9454ef63e23\"","properties":{"provisioningState":"Succeeded","ruleType":"Basic","httpListener":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/httpListeners/appGatewayHttpListener"},"backendAddressPool":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/backendAddressPools/appGatewayBackendPool"},"backendHttpSettings":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/backendHttpSettingsCollection/appGatewayBackendHttpSettings"}},"type":"Microsoft.Network/applicationGateways/requestRoutingRules"}],"probes":[],"rewriteRuleSets":[],"redirectConfigurations":[],"privateLinkConfigurations":[],"privateEndpointConnections":[]}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/virtualNetworks/gatewayVnet"}]}}
+      - step: ApplicationGateways_Get_1325
+        exampleFile: ../examples/ApplicationGateways_Get_1325_Generated.json
+        operationId: ApplicationGateways_Get
+      - step: Create_applicationGateways_gateway
+        resourceName: applicationGateways_gateway
+        exampleFile: ../examples/Create_applicationGateways_gateway_Generated.json
+        operationId: ApplicationGateways_CreateOrUpdate
+      - step: Update_applicationGateways_gateway_1328
+        resourceName: applicationGateways_gateway
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /identity
+            value:
+              type: userAssigned
+              userAssignedIdentities:
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2: {}
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2:
+                  principalId: 404d62b2-2c29-42c8-aca5-d730abdd9a06
+                  clientId: 7f0841b0-c225-415f-b3b3-d4c24109332e
+      - step: Update_applicationGateways_gateway_1330
+        resourceName: applicationGateways_gateway
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/sslCertificates/0
+            value:
+              name: MySSLCert
+              properties:
+                keyVaultSecretId: >-
+                  https://cli-test-keyvault-000002.vault.azure.net/secrets/MyCertificate/dcf040d149ee4b6e9d638b7091d0f558
+                provisioningState: Succeeded
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/sslCertificates/MySSLCert
+              type: Microsoft.Network/applicationGateways/sslCertificates
+      - step: Update_applicationGateways_gateway_1332
+        resourceName: applicationGateways_gateway
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/trustedRootCertificates/0
+            value:
+              name: cert1
+              properties:
+                keyVaultSecretId: >-
+                  https://cli-test-keyvault-000002.vault.azure.net/secrets/MyCertificate/dcf040d149ee4b6e9d638b7091d0f558
+                provisioningState: Succeeded
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/trustedRootCertificates/cert1
+              type: Microsoft.Network/applicationGateways/trustedRootCertificates
+    variables:
+      publicIpAddressName: ip1
+      applicationGatewayName: gateway

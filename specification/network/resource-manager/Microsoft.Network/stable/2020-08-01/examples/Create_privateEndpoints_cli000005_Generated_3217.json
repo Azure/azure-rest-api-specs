@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_event_grid_pec000002",
+    "privateEndpointName": "cli000005",
+    "parameters": {
+      "location": "centraluseuap",
+      "properties": {
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/virtualNetworks/cli000003/subnets/cli000004"
+        },
+        "privateLinkServiceConnections": [
+          {
+            "name": "cli000006",
+            "properties": {
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/topics/cli000007",
+              "groupIds": [
+                "topic"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "cli000005",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/privateEndpoints/cli000005",
+      "etag": "W/\"d99e611f-695d-4be8-8b17-f646edce8a09\"",
+      "type": "Microsoft.Network/privateEndpoints",
+      "location": "centraluseuap",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "6b4669ae-2693-4562-a3b5-641d279f651e",
+        "privateLinkServiceConnections": [
+          {
+            "name": "cli000006",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/privateEndpoints/cli000005/privateLinkServiceConnections/cli000006",
+            "etag": "W/\"d99e611f-695d-4be8-8b17-f646edce8a09\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/topics/cli000007",
+              "groupIds": [
+                "topic"
+              ],
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-approved",
+                "actionsRequired": "None"
+              }
+            },
+            "type": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections"
+          }
+        ],
+        "manualPrivateLinkServiceConnections": [],
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/virtualNetworks/cli000003/subnets/cli000004"
+        },
+        "networkInterfaces": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/networkInterfaces/cli000005.nic.337b50d0-3949-4a01-bcb0-a0621c7046a4"
+          }
+        ],
+        "customDnsConfigs": [
+          {
+            "fqdn": "cli000007.centraluseuap-1.eventgrid.azure.net",
+            "ipAddresses": [
+              "10.0.0.4"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,164 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_private_endpoint_connection_private_link_scope
+    steps:
+      - step: RawStep_3230
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privateLinkScopes/clitestscopename?api-version=2019-10-17-preview
+        requestBody: '{"location":"Global"}'
+        requestHeaders:
+          access-control-expose-headers: Request-Context
+          cache-control: no-cache
+          content-length: '851'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 06:04:02 GMT
+          expires: '-1'
+          pragma: no-cache
+          request-context: appId=cid-v1:f4a36589-b561-4b37-9a1f-be4af0b2786a
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1195'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privatelinkscopes/clitestscopename","name":"clitestscopename","type":"microsoft.insights/privatelinkscopes","location":"global","tags":{},"kind":null,"etag":"\"df00e0ff-0000-0700-0000-6035ec510000\"","systemData":{"createdBy":"fey@microsoft.com","createdByType":"User","createdAt":"2021-02-24T06:04:00.4960631Z","lastModifiedBy":"fey@microsoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T06:04:00.4960631Z"},"properties":{"scopeId":"73091681-4489-4822-853e-4401de03c72f","provisioningState":"Succeeded","privateEndpointConnections":[]}}
+      - step: RawStep_3231
+        method: PATCH
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privateLinkScopes/clitestscopename?api-version=2019-10-17-preview
+        requestBody: '{"tags":{"tag1":"d1"}}'
+        requestHeaders:
+          access-control-expose-headers: Request-Context
+          cache-control: no-cache
+          content-length: '834'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 06:04:10 GMT
+          expires: '-1'
+          pragma: no-cache
+          request-context: appId=cid-v1:f4a36589-b561-4b37-9a1f-be4af0b2786a
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privatelinkscopes/clitestscopename","name":"clitestscopename","type":"microsoft.insights/privatelinkscopes","location":"global","tags":{"tag1":"d1"},"kind":null,"etag":"\"e000d703-0000-0700-0000-6035ec560000\"","systemData":{"createdBy":"fey@microsoft.com","createdByType":"User","createdAt":"2021-02-24T06:04:00.4960631Z","lastModifiedBy":"fey@microsoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T06:04:04.9891352Z"},"properties":{"scopeId":"73091681-4489-4822-853e-4401de03c72f","provisioningState":"Succeeded"}}
+      - step: RawStep_3232
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privateLinkScopes/clitestscopename?api-version=2019-10-17-preview
+        requestHeaders:
+          access-control-expose-headers: Request-Context
+          cache-control: no-cache
+          content-length: '834'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 06:04:12 GMT
+          expires: '-1'
+          pragma: no-cache
+          request-context: appId=cid-v1:f4a36589-b561-4b37-9a1f-be4af0b2786a
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privatelinkscopes/clitestscopename","name":"clitestscopename","type":"microsoft.insights/privatelinkscopes","location":"global","tags":{"tag1":"d1"},"kind":null,"etag":"\"e000d703-0000-0700-0000-6035ec560000\"","systemData":{"createdBy":"fey@microsoft.com","createdByType":"User","createdAt":"2021-02-24T06:04:00.4960631Z","lastModifiedBy":"fey@microsoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T06:04:04.9891352Z"},"properties":{"scopeId":"73091681-4489-4822-853e-4401de03c72f","provisioningState":"Succeeded"}}
+      - step: RawStep_3233
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privateLinkScopes?api-version=2019-10-17-preview
+        requestHeaders:
+          access-control-expose-headers: Request-Context
+          cache-control: no-cache
+          content-length: '972'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 06:04:14 GMT
+          expires: '-1'
+          pragma: no-cache
+          request-context: appId=cid-v1:f4a36589-b561-4b37-9a1f-be4af0b2786a
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privatelinkscopes/clitestscopename","name":"clitestscopename","type":"microsoft.insights/privatelinkscopes","location":"global","tags":{"tag1":"d1"},"kind":null,"etag":"\"e000d703-0000-0700-0000-6035ec560000\"","systemData":{"createdBy":"fey@microsoft.com","createdByType":"User","createdAt":"2021-02-24T06:04:00.4960631Z","lastModifiedBy":"fey@microsoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T06:04:04.9891352Z"},"properties":{"scopeId":"73091681-4489-4822-853e-4401de03c72f","provisioningState":"Succeeded"}}],"nextLink":null}
+      - step: RawStep_3234
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.insights/privateLinkScopes?api-version=2019-10-17-preview
+        requestHeaders:
+          access-control-expose-headers: Request-Context
+          cache-control: no-cache
+          content-length: '972'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 06:04:15 GMT
+          expires: '-1'
+          pragma: no-cache
+          request-context: appId=cid-v1:f4a36589-b561-4b37-9a1f-be4af0b2786a
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privatelinkscopes/clitestscopename","name":"clitestscopename","type":"microsoft.insights/privatelinkscopes","location":"global","tags":{"tag1":"d1"},"kind":null,"etag":"\"e000d703-0000-0700-0000-6035ec560000\"","systemData":{"createdBy":"fey@microsoft.com","createdByType":"User","createdAt":"2021-02-24T06:04:00.4960631Z","lastModifiedBy":"fey@microsoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T06:04:04.9891352Z"},"properties":{"scopeId":"73091681-4489-4822-853e-4401de03c72f","provisioningState":"Succeeded"}}],"nextLink":null}
+      - step: RawStep_3235
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001/providers/Microsoft.OperationalInsights/workspaces/clitest000002?api-version=2020-08-01
+        requestBody: >-
+          {"location":"eastus","properties":{"sku":{"name":"PerGB2018"},"retentionInDays":30,"workspaceCapping":{}}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1177'
+          content-type: application/json
+          date: Wed, 24 Feb 2021 06:04:26 GMT
+          pragma: no-cache
+          server: Microsoft-IIS/10.0 Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+          x-powered-by: ASP.NET ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"properties":{"source":"Azure","customerId":"b3b30af9-1b97-450a-8078-7ce2f92edcf8","provisioningState":"Creating","sku":{"name":"pergb2018","maxCapacityReservationLevel":3000,"lastSkuUpdate":"Wed,
+          24 Feb 2021 06:04:25
+          GMT"},"retentionInDays":30,"features":{"legacy":0,"searchVersion":1,"enableLogAccessUsingOnlyResourcePermissions":true},"workspaceCapping":{"dailyQuotaGb":-1,"quotaNextResetTime":"Wed,
+          24 Feb 2021 19:00:00
+          GMT","dataIngestionStatus":"RespectQuota"},"publicNetworkAccessForIngestion":"Enabled","publicNetworkAccessForQuery":"Enabled","createdDate":"Wed,
+          24 Feb 2021 06:04:24 GMT","modifiedDate":"Wed, 24 Feb 2021 06:04:24
+          GMT"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001/providers/microsoft.operationalinsights/workspaces/clitest000002","name":"clitest000002","type":"Microsoft.OperationalInsights/workspaces","location":"eastus"}
+      - step: RawStep_3236
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Insights/privateLinkScopes/clitestscopename/scopedResources/assigned_ws?api-version=2019-10-17-preview
+        requestBody: >-
+          {"properties":{"linkedResourceId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001/providers/microsoft.operationalinsights/workspaces/clitest000002"}}
+        requestHeaders:
+          access-control-expose-headers: Request-Context
+          cache-control: no-cache
+          content-length: '467'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 06:05:00 GMT
+          expires: '-1'
+          pragma: no-cache
+          request-context: appId=cid-v1:f4a36589-b561-4b37-9a1f-be4af0b2786a
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+          x-powered-by: ASP.NET
+        statusCode: 412
+        responseExpected: >-
+          {"error":{"code":"PreconditionFailed","message":"Resource
+          '/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.operationalinsights/workspaces/clitest000002'
+          not found in 'AIMON'
+          environment","innererror":{"trace":["Microsoft.AppInsights.Nexus.ResourceStore.ResourceStoreException"]}}}

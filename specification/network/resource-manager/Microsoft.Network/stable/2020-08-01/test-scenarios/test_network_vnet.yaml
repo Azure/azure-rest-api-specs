@@ -1,0 +1,93 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vnet
+    steps:
+      - step: RawStep_2469
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_vnet_test000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:40:02 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_vnet_test000001","name":"cli_vnet_test000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:40:00Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2471.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: VirtualNetworks_CheckIPAddressAvailability_2472
+        exampleFile: >-
+          ../examples/VirtualNetworks_CheckIPAddressAvailability_2472_Generated.json
+        operationId: VirtualNetworks_CheckIPAddressAvailability
+      - step: VirtualNetworks_ListAll_2473
+        exampleFile: ../examples/VirtualNetworks_ListAll_2473_Generated.json
+        operationId: VirtualNetworks_ListAll
+      - step: VirtualNetworks_List_2474
+        exampleFile: ../examples/VirtualNetworks_List_2474_Generated.json
+        operationId: VirtualNetworks_List
+      - step: Update_virtualNetworks_vnet1_2476
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/addressSpace/addressPrefixes/0
+            value: 20.0.0.0/16
+          - add: /properties/dhcpOptions/dnsServers/0
+            value: 1.2.3.4
+      - step: Update_virtualNetworks_vnet1_2478
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/dhcpOptions/dnsServers/0
+      - step: Update_virtualNetworks_vnet1_2480
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/addressSpace/addressPrefixes/0
+            value: 20.0.0.0/24
+      - step: Update_virtualNetworks_vnet1_2482
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/1
+            value:
+              name: subnet1
+              properties:
+                addressPrefix: 20.0.0.0/24
+                provisioningState: Succeeded
+                delegations: []
+                privateEndpointNetworkPolicies: Enabled
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_vnet_test000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+              type: Microsoft.Network/virtualNetworks/subnets
+      - step: Subnets_List_2483
+        exampleFile: ../examples/Subnets_List_2483_Generated.json
+        operationId: Subnets_List
+      - step: Subnets_Get_2484
+        exampleFile: ../examples/Subnets_Get_2484_Generated.json
+        operationId: Subnets_Get
+      - step: Subnets_Delete_2485
+        exampleFile: ../examples/Subnets_Delete_2485_Generated.json
+        operationId: Subnets_Delete
+      - step: Subnets_List_2486
+        exampleFile: ../examples/Subnets_List_2486_Generated.json
+        operationId: Subnets_List
+      - step: VirtualNetworks_List_2487
+        exampleFile: ../examples/VirtualNetworks_List_2487_Generated.json
+        operationId: VirtualNetworks_List
+      - step: VirtualNetworks_Delete_2488
+        exampleFile: ../examples/VirtualNetworks_Delete_2419_Generated.json
+        operationId: VirtualNetworks_Delete
+      - step: VirtualNetworks_List_2489
+        exampleFile: ../examples/VirtualNetworks_List_2489_Generated.json
+        operationId: VirtualNetworks_List
+    variables:
+      virtualNetworkName: vnet1
+      subnetName: subnet1

@@ -1,0 +1,52 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_app_gateway_waf_policy_managed_rules_exclusions
+    steps:
+      - step: RawStep_1143
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_app_gateway_waf_policy_managed_rules_exclusion000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:25:40 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_policy_managed_rules_exclusion000001","name":"cli_test_app_gateway_waf_policy_managed_rules_exclusion000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:25:38Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        resourceName: ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        exampleFile: >-
+          ../examples/Create_ApplicationGatewayWebApplicationFirewallPolicies_waf_1_Generated.json
+        statusCode: 201
+        operationId: WebApplicationFirewallPolicies_CreateOrUpdate
+      - step: Update_ApplicationGatewayWebApplicationFirewallPolicies_agp1_1146
+        resourceName: ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        operationId: WebApplicationFirewallPolicies_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/managedRules/exclusions/0
+            value:
+              matchVariable: RequestHeaderNames
+              selectorMatchOperator: StartsWith
+              selector: Bing
+      - step: Update_ApplicationGatewayWebApplicationFirewallPolicies_agp1_1148
+        resourceName: ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        operationId: WebApplicationFirewallPolicies_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/managedRules/exclusions/1
+            value:
+              matchVariable: RequestHeaderNames
+              selectorMatchOperator: Contains
+              selector: Azure
+      - step: Update_ApplicationGatewayWebApplicationFirewallPolicies_agp1_1150
+        resourceName: ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        operationId: WebApplicationFirewallPolicies_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/managedRules/exclusions/1
+          - remove: /properties/managedRules/exclusions/0
+    variables:
+      policyName: agp1

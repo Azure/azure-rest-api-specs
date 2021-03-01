@@ -1,0 +1,57 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vnet_with_subnet_nsg
+    steps:
+      - step: RawStep_2574
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_vnet_with_subnet_nsg_test000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:35:48 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_vnet_with_subnet_nsg_test000001","name":"cli_vnet_with_subnet_nsg_test000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:35:47Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkSecurityGroups_nsg
+        resourceName: networkSecurityGroups_nsg
+        exampleFile: ../examples/Create_networkSecurityGroups_nsg_Generated.json
+        operationId: NetworkSecurityGroups_CreateOrUpdate
+      - step: RawStep_2576
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_vnet_with_subnet_nsg_test000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:35:59 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_vnet_with_subnet_nsg_test000001","name":"cli_vnet_with_subnet_nsg_test000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:35:47Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2578.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_List_2579
+        exampleFile: ../examples/Subnets_List_2579_Generated.json
+        operationId: Subnets_List
+      - step: Subnets_Get_2580
+        exampleFile: ../examples/Subnets_Get_2580_Generated.json
+        operationId: Subnets_Get
+      - step: Subnets_Delete_2581
+        exampleFile: ../examples/Subnets_Delete_2485_Generated.json
+        operationId: Subnets_Delete
+    variables:
+      networkSecurityGroupName: nsg
+      virtualNetworkName: vnet1
+      subnetName: subnet1

@@ -1,0 +1,77 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_private_link_resource_keyvault
+    steps:
+      - step: RawStep_3311
+        method: GET
+        rawUrl: >-
+          https://graph.windows.net/00000000-0000-0000-0000-000000000000/me?api-version=1.6
+        requestHeaders:
+          access-control-allow-origin: '*'
+          cache-control: no-cache
+          content-length: '1702'
+          content-type: >-
+            application/json; odata=minimalmetadata; streaming=true;
+            charset=utf-8
+          dataserviceversion: 3.0;
+          date: Mon, 08 Feb 2021 09:17:27 GMT
+          duration: '3388248'
+          expires: '-1'
+          ocp-aad-diagnostics-server-name: bxFYtED0ehqtGXVkohjvKglRqmwo5Yot4qaZS8C4m7o=
+          ocp-aad-session-key: >-
+            JHNtBWop-FlQqIJnanrXiVvq-ZXeeh_UzvuW1e-l6Kv4zkHpOZ9xwSQSg9qsAy4Y0VAo5xouzp1Wm9ywt1AkqBv6LJ6CWu7Q47WbrUCLjAXsu7YSH6vL6_hPYfKO93R1.V-wA0fzjZyVl5l0nT_tBJFWAfBvs0HCW5MS6M2m_L-A
+          pragma: no-cache
+          request-id: ca28248d-a97a-4802-9419-3a5b5bcead32
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-aspnet-version: 4.0.30319
+          x-ms-dirapi-data-contract-version: '1.6'
+          x-ms-resource-unit: '1'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"odata.metadata":"https://graph.windows.net/00000000-0000-0000-0000-000000000000/$metadata#directoryObjects/@Element","odata.type":"Microsoft.DirectoryServices.User","objectType":"User","objectId":"3bd37d68-b234-4fcd-bc83-0fedb27ccf5c","deletionTimestamp":null,"accountEnabled":true,"ageGroup":null,"assignedLicenses":[],"assignedPlans":[],"city":null,"companyName":null,"consentProvidedForMinor":null,"country":null,"createdDateTime":"2020-09-14T05:46:25Z","creationType":"Invitation","department":null,"dirSyncEnabled":null,"displayName":"Yuchao
+          Yan","employeeId":null,"facsimileTelephoneNumber":null,"givenName":null,"immutableId":null,"isCompromised":null,"jobTitle":null,"lastDirSyncTime":null,"legalAgeGroupClassification":null,"mail":"yuchaoyan@microsoft.com","mailNickname":"yuchaoyan_microsoft.com#EXT#","mobile":null,"onPremisesDistinguishedName":null,"onPremisesSecurityIdentifier":null,"otherMails":["yuchaoyan@microsoft.com"],"passwordPolicies":null,"passwordProfile":null,"physicalDeliveryOfficeName":null,"postalCode":null,"preferredLanguage":null,"provisionedPlans":[],"provisioningErrors":[],"proxyAddresses":["SMTP:yuchaoyan@microsoft.com"],"refreshTokensValidFromDateTime":"2020-09-14T05:46:24Z","showInAddressList":false,"signInNames":[],"sipProxyAddress":null,"state":null,"streetAddress":null,"surname":null,"telephoneNumber":null,"thumbnailPhoto@odata.mediaEditLink":"directoryObjects/3bd37d68-b234-4fcd-bc83-0fedb27ccf5c/Microsoft.DirectoryServices.User/thumbnailPhoto","usageLocation":null,"userIdentities":[],"userPrincipalName":"yuchaoyan_microsoft.com#EXT#@AzureSDKTeam.onmicrosoft.com","userState":"Accepted","userStateChangedOn":"2020-09-14T05:47:14Z","userType":"Guest"}
+      - step: RawStep_3312
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_keyvault_plr000001/providers/Microsoft.KeyVault/vaults/cli-test-kv-plr-000002?api-version=2019-09-01
+        requestBody: >-
+          {"location":"centraluseuap","properties":{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","sku":{"family":"A","name":"premium"},"accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"3bd37d68-b234-4fcd-bc83-0fedb27ccf5c","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}}],"enableSoftDelete":true,"softDeleteRetentionInDays":7,"networkAcls":{"bypass":"AzureServices","defaultAction":"Allow"}}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1166'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 09:17:35 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-keyvault-service-version: 1.1.218.0
+          x-ms-ratelimit-remaining-subscription-writes: '1173'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_keyvault_plr000001/providers/Microsoft.KeyVault/vaults/cli-test-kv-plr-000002","name":"cli-test-kv-plr-000002","type":"Microsoft.KeyVault/vaults","location":"centraluseuap","tags":{},"properties":{"sku":{"family":"A","name":"premium"},"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"3bd37d68-b234-4fcd-bc83-0fedb27ccf5c","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}}],"enabledForDeployment":false,"enableSoftDelete":true,"softDeleteRetentionInDays":7,"vaultUri":"https://cli-test-kv-plr-000002.vault.azure.net","provisioningState":"RegisteringDns"}}
+      - step: RawStep_3313
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_keyvault_plr000001/providers/Microsoft.Keyvault/vaults/cli-test-kv-plr-000002/privateLinkResources?api-version=2019-09-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '441'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 09:18:07 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-keyvault-service-version: 1.1.218.0
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_keyvault_plr000001/providers/Microsoft.KeyVault/vaults/cli-test-kv-plr-000002/privateLinkResources/vault","name":"vault","type":"Microsoft.KeyVault/vaults/privateLinkResources","properties":{"groupId":"vault","requiredMembers":["default"],"requiredZoneNames":["privatelink.vaultcore.azure.net"]}}]}

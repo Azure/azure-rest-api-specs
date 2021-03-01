@@ -1,0 +1,63 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_local_gateway
+    steps:
+      - step: RawStep_1990
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/local_gateway_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:27:59 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/local_gateway_scenario000001","name":"local_gateway_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:27:57Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_localNetworkGateways_lgw1
+        resourceName: localNetworkGateways_lgw1
+        exampleFile: ../examples/Create_localNetworkGateways_lgw1_Generated.json
+        operationId: LocalNetworkGateways_CreateOrUpdate
+      - step: Update_localNetworkGateways_lgw1_1993
+        resourceName: localNetworkGateways_lgw1
+        operationId: LocalNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /tags/foo
+            value: boo
+      - step: RawStep_1994
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/local_gateway_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:28:55 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/local_gateway_scenario000001","name":"local_gateway_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:27:57Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_localNetworkGateways_lgw2
+        resourceName: localNetworkGateways_lgw2
+        exampleFile: ../examples/Create_localNetworkGateways_lgw2_Generated_1996.json
+        operationId: LocalNetworkGateways_CreateOrUpdate
+        variables:
+          localNetworkGatewayName: lgw2
+      - step: LocalNetworkGateways_List_1997
+        exampleFile: ../examples/LocalNetworkGateways_List_1997_Generated.json
+        operationId: LocalNetworkGateways_List
+      - step: LocalNetworkGateways_Delete_1998
+        exampleFile: ../examples/LocalNetworkGateways_Delete_1998_Generated.json
+        operationId: LocalNetworkGateways_Delete
+      - step: LocalNetworkGateways_List_1999
+        exampleFile: ../examples/LocalNetworkGateways_List_1999_Generated.json
+        operationId: LocalNetworkGateways_List
+    variables:
+      localNetworkGatewayName: lgw1

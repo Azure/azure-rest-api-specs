@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_extended_nsg000001",
+    "networkSecurityGroupName": "nsg1",
+    "securityRuleName": "rule1",
+    "securityRuleParameters": {
+      "name": "rule1",
+      "properties": {
+        "protocol": "*",
+        "destinationPortRange": "4444",
+        "sourceAddressPrefix": "*",
+        "destinationAddressPrefix": "",
+        "destinationAddressPrefixes": [
+          "10.0.0.0/24",
+          "11.0.0.0/24"
+        ],
+        "sourcePortRanges": [
+          "700-900",
+          "1000-1100"
+        ],
+        "access": "Allow",
+        "priority": 1000,
+        "direction": "Inbound"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "rule1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_extended_nsg000001/providers/Microsoft.Network/networkSecurityGroups/nsg1/securityRules/rule1",
+      "etag": "W/\"b1bdcb8b-9915-466d-82fa-c31f1f5f334d\"",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "protocol": "*",
+        "destinationPortRange": "4444",
+        "sourceAddressPrefix": "*",
+        "destinationAddressPrefix": "",
+        "access": "Allow",
+        "priority": 1000,
+        "direction": "Inbound",
+        "sourcePortRanges": [
+          "700-900",
+          "1000-1100"
+        ],
+        "destinationPortRanges": [],
+        "sourceAddressPrefixes": [],
+        "destinationAddressPrefixes": [
+          "10.0.0.0/24",
+          "11.0.0.0/24"
+        ]
+      }
+    }
+  }
+}

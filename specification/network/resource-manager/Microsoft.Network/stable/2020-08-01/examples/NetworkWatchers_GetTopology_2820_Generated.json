@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "NetworkWatcherRG",
+    "networkWatcherName": "NetworkWatcher_westus",
+    "parameters": {
+      "targetResourceGroupName": "cli_test_nw_vm000001"
+    }
+  },
+  "responses": {
+    "200": {
+      "id": "8420c22c-d106-4b65-8341-d3c072a88a54",
+      "createdDateTime": "2021-02-24T11:42:36.4981407Z",
+      "lastModified": "2021-02-24T11:41:03.4512399Z",
+      "resources": [
+        {
+          "name": "vm1",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Compute/virtualMachines/vm1",
+          "location": "westus",
+          "associations": [
+            {
+              "name": "vm1VMNic",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Network/networkInterfaces/vm1VMNic",
+              "associationType": "Contains"
+            }
+          ],
+          "properties": {}
+        },
+        {
+          "name": "vm1VMNic",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Network/networkInterfaces/vm1VMNic",
+          "location": "westus",
+          "associations": [
+            {
+              "name": "vm1",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Compute/virtualMachines/vm1",
+              "associationType": "Associated"
+            },
+            {
+              "name": "nsg1",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Network/networkSecurityGroups/nsg1",
+              "associationType": "Associated"
+            },
+            {
+              "name": "vm1Subnet",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Network/virtualNetworks/vm1VNET/subnets/vm1Subnet",
+              "associationType": "Associated"
+            },
+            {
+              "name": "vm1PublicIP",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Network/publicIPAddresses/vm1PublicIP",
+              "associationType": "Associated"
+            }
+          ],
+          "properties": {}
+        },
+        {
+          "name": "nsg1",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Network/networkSecurityGroups/nsg1",
+          "location": "westus",
+          "associations": [],
+          "properties": {}
+        },
+        {
+          "name": "vm1PublicIP",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Network/publicIPAddresses/vm1PublicIP",
+          "location": "westus",
+          "associations": [
+            {
+              "name": "vm1VMNic",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Network/networkInterfaces/vm1VMNic",
+              "associationType": "Associated"
+            }
+          ],
+          "properties": {}
+        },
+        {
+          "name": "vm1VNET",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Network/virtualNetworks/vm1VNET",
+          "location": "westus",
+          "associations": [
+            {
+              "name": "vm1Subnet",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Network/virtualNetworks/vm1VNET/subnets/vm1Subnet",
+              "associationType": "Contains"
+            }
+          ],
+          "properties": {}
+        },
+        {
+          "name": "vm1Subnet",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Network/virtualNetworks/vm1VNET/subnets/vm1Subnet",
+          "location": "westus",
+          "associations": [],
+          "properties": {}
+        }
+      ]
+    }
+  }
+}

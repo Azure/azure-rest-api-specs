@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "NetworkWatcherRG",
+    "networkWatcherName": "NetworkWatcher_eastus",
+    "connectionMonitorName": "CMv2-01",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "endpoints": [
+          {
+            "name": "vm1",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/connection_monitor_v2_test_000001/providers/Microsoft.Compute/virtualMachines/vm1"
+          },
+          {
+            "name": "bing",
+            "address": "bing.com"
+          }
+        ],
+        "testConfigurations": [
+          {
+            "name": "DefaultTestConfig",
+            "testFrequencySec": 60,
+            "protocol": "Tcp",
+            "tcpConfiguration": {
+              "port": 2048
+            }
+          }
+        ],
+        "testGroups": [
+          {
+            "name": "DefaultTestGroup",
+            "testConfigurations": [
+              "DefaultTestConfig"
+            ],
+            "sources": [
+              "vm1"
+            ],
+            "destinations": [
+              "bing"
+            ]
+          }
+        ],
+        "outputs": []
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "CMv2-01",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkWatchers/NetworkWatcher_eastus/connectionMonitors/CMv2-01",
+      "etag": "W/\"f83f8cd0-a5f1-492b-8546-04110305ea5e\"",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "48a52d9c-2a1a-4d68-9d9d-ebc9d0bf89d9",
+        "endpoints": [
+          {
+            "name": "vm1",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/connection_monitor_v2_test_000001/providers/Microsoft.Compute/virtualMachines/vm1"
+          },
+          {
+            "name": "bing",
+            "address": "bing.com"
+          }
+        ],
+        "testConfigurations": [
+          {
+            "name": "DefaultTestConfig",
+            "testFrequencySec": 60,
+            "protocol": "Tcp",
+            "tcpConfiguration": {
+              "port": 2048,
+              "disableTraceRoute": false
+            }
+          }
+        ],
+        "testGroups": [
+          {
+            "name": "DefaultTestGroup",
+            "disable": false,
+            "testConfigurations": [
+              "DefaultTestConfig"
+            ],
+            "sources": [
+              "vm1"
+            ],
+            "destinations": [
+              "bing"
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "type": "Workspace",
+            "workspaceSettings": {
+              "workspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/defaultresourcegroup-eus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-0b1f6471-1bf0-4dda-aec3-cb9272f09590-eus"
+            }
+          }
+        ],
+        "startTime": "2021-02-25T02:10:46.2242281Z",
+        "connectionMonitorType": "MultiEndpoint"
+      },
+      "type": "Microsoft.Network/networkWatchers/connectionMonitors",
+      "location": "eastus"
+    }
+  }
+}
