@@ -26,16 +26,7 @@ These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-03-01
-```
-
-### Tag: package-2021-03-01
-
-These settings apply only when `--tag=package-2021-03-01` is specified on the command line.Creating it for az extension only.
-
-``` yaml $(tag) == 'package-2021-03-01'
-input-file:
-  - Microsoft.Capacity/stable/2020-10-25/quota.json
+tag: package-2020-10-25
 ```
 
 ### Tag: package-2020-10-25
