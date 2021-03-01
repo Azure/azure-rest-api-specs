@@ -626,14 +626,15 @@
           "type": "string",
           "readOnly": true,
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "sku": {
+          "description": "The sku of this Bastion Host.",
+          "$ref": "#/definitions/Sku"
         }
       },
       "allOf": [
         {
           "$ref": "./network.json#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/Sku"
         }
       ],
       "description": "Bastion Host resource."
