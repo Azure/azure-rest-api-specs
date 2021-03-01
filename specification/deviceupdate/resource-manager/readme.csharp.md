@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.DeviceUpdate
-  output-folder: $(csharp-sdks-folder)/deviceupdate/management/Microsoft.DeviceUpdate/GeneratedProtocol
+  namespace: Azure.ResourceManager.DeviceUpdate
+  output-folder: $(csharp-sdks-folder)/deviceupdate/Azure.ResourceManager.DeviceUpdate/src/Generated
 ```
