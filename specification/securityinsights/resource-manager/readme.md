@@ -45,6 +45,18 @@ directive:
 
 ---
 
+### Tag: package-2021-03-preview-only
+
+These settings apply only when `--tag=package-2021-03-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-preview-only'
+input-file:
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
+```
+
+---
+
 ### Tag: package-2019-01-preview-only
 
 These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
@@ -77,7 +89,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
