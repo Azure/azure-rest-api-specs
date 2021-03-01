@@ -28,6 +28,18 @@ directive:
     from: defenderSettings.json
     where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/defenderSettings"].get'
     reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: sensors.json
+    where: '$.paths["/{scope}/providers/Microsoft.IoTSecurity/sensors/{sensorName}"].get'
+    reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: onPremiseSensors.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/onPremiseSensors"].get'
+    reason: The list returns limited number of items
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: onPremiseSensors.json
+    where: $.definitions.OnPremiseSensor
+    reason: The resource is managed in a subscription level (instead of inside a resource group)
 ```
 
 ### Basic Information
@@ -49,6 +61,9 @@ These settings apply only when `--tag=2021-02-01-preview` is specified on the co
 input-file:
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/defenderSettings.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/operations.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/sites.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/sensors.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/onPremiseSensors.json
 ```
 
 ---
