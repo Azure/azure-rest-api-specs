@@ -185,7 +185,8 @@
           "Delete a managed private endpoint": {
             "$ref": "./examples/DeleteManagedPrivateEndpoint.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints": {
@@ -282,7 +283,8 @@
         },
         "properties": {
           "$ref": "#/definitions/ManagedPrivateEndpointProperties",
-          "description": "Managed private endpoint properties"
+          "description": "Managed private endpoint properties",
+          "x-ms-client-flatten": true
         }
       },
       "systemData": {
