@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "ServiceBusManagementClient",
-    "description": "Azure Service Bus client for managing Namespace, IPFilter Rules, VirtualNetworkRules and Zone Redundant",
-    "version": "2018-01-01-preview"
+    "description": "Azure Service Bus client for managing Namespace",
+    "version": "2021-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -638,6 +638,11 @@
           "$ref": "#/definitions/Identity",
           "description": "Properties of BYOK Identity description"
         },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SBNamespaceProperties",
@@ -759,32 +764,61 @@
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "ObjectId from the KeyVault"
+          "description": "ObjectId from the KeyVault",
+          "readOnly": true
         },
         "tenantId": {
           "type": "string",
-          "description": "TenantId from the KeyVault"
+          "description": "TenantId from the KeyVault",
+          "readOnly": true
         },
         "type": {
-          "type": "string",
-          "description": "Enumerates the possible value Identity type, which currently supports only 'SystemAssigned'",
-          "default": "SystemAssigned",
+          "description": "Type of managed service identity.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "IdentityType",
+            "name": "ManagedServiceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "description": "Principal Id of user assigned identity",
+                "type": "string",
+                "x-ms-client-name": "PrincipalId",
+                "readOnly": true
+              },
+              "clientId": {
+                "description": "Client Id of user assigned identity",
+                "type": "string",
+                "x-ms-client-name": "ClientId",
+                "readOnly": true
+              }
+            }
+          },
+          "description": "Properties for User Assigned Identities"
         }
       },
-      "description": "Properties to configure Identity for Bring your Own Keys"
+      "description": "Properties to configure User Assigned Identities for Bring your Own Keys"
     },
     "Encryption": {
       "x-ms-client-flatten": true,
       "properties": {
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyVaultProperties"
+          },
+          "x-ms-client-name": "KeyVaultProperties",
           "description": "Properties of KeyVault"
         },
         "keySource": {
@@ -798,6 +832,10 @@
             "name": "keySource",
             "modelAsString": false
           }
+        },
+        "requireInfrastructureEncryption": {
+          "type": "boolean",
+          "description": "Enable Infrastructure Encryption (Double Encryption)"
         }
       },
       "description": "Properties to configure Encryption"
@@ -811,6 +849,13 @@
         "keyVaultUri": {
           "type": "string",
           "description": "Uri of KeyVault"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Version of KeyVault"
+        },
+        "identity": {
+          "$ref": "#/definitions/userAssignedIdentityProperties"
         }
       },
       "description": "Properties to configure keyVault Properties"
@@ -827,6 +872,11 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Properties of the PrivateEndpointConnection.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
         }
       }
     },
@@ -964,6 +1014,15 @@
         "nextLink": {
           "description": "A link for the next page of private link resources.",
           "type": "string"
+        }
+      }
+    },
+    "userAssignedIdentityProperties": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "ARM ID of user Identity selected for encryption"
         }
       }
     }
