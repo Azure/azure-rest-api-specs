@@ -207,6 +207,12 @@ directive:
       - TrackedResourcePatchOperation
     reason:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
+  - where:
+      - $..paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile"]
+    suppress:
+      - INVALID_TYPE
+    reason:
+      - The response type schema of this API has binary format and file type, which is a valid swagger format. However, this can't be specified in the requried JSON example format.
 
 ```
 ### Tag: package-2021-03-01
