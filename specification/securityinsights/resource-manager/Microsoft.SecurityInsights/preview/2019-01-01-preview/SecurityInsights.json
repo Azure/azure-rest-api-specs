@@ -12137,6 +12137,10 @@
           "description": "Pattern type of a threat intelligence entity",
           "type": "string"
         },
+        "patternVersion": {
+          "description": "Pattern version of a threat intelligence entity",
+          "type": "string"
+        },
         "killChainPhases": {
           "description": "Kill chain phases",
           "items": {
@@ -12161,11 +12165,19 @@
           "description": "Created by reference of threat intelligence entity",
           "type": "string"
         },
+        "defanged": {
+          "description": "Is threat intelligence entity defanged",
+          "type": "boolean"
+        },
+        "externalLastUpdatedTimeUtc": {
+          "description": "External last updated time in UTC",
+          "type": "string"
+        },
         "externalReferences": {
           "description": "External References",
           "items": {
             "description": "external_reference",
-            "type": "string"
+            "$ref": "#/definitions/ThreatIntelligenceExternalReference"
           },
           "type": "array"
         },
@@ -12174,6 +12186,14 @@
           "items": {
             "description": "Granular marking",
             "$ref": "#/definitions/ThreatIntelligenceGranularMarkingModel"
+          },
+          "type": "array"
+        },
+        "labels": {
+          "description": "Labels  of threat intelligence entity",
+          "items": {
+            "description": "label",
+            "type": "string"
           },
           "type": "array"
         },
@@ -12186,10 +12206,10 @@
           "type": "integer",
           "format": "int32"
         },
-        "labels": {
-          "description": "Labels  of threat intelligence entity",
+        "objectMarkingRefs": {
+          "description": "Threat intelligence entity object marking references",
           "items": {
-            "description": "label",
+            "description": "Threat intelligence entity object marking reference",
             "type": "string"
           },
           "type": "array"
@@ -12295,6 +12315,35 @@
             "type": "string"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceExternalReference": {
+      "description": "Describes external reference",
+      "properties": {
+        "description": {
+          "description": "External reference description",
+          "type": "string"
+        },
+        "externalId": {
+          "description": "External reference ID",
+          "type": "string"
+        },
+        "sourceName": {
+          "description": "External reference source name",
+          "type": "string"
+        },
+        "url": {
+          "description": "External reference URL",
+          "type": "string"
+        },
+        "hashes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "External reference hashes"
         }
       },
       "type": "object"
