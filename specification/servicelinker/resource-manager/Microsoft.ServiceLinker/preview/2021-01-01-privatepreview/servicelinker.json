@@ -260,10 +260,6 @@
         ],
         "operationId": "Linker_ValidateLinker",
         "description": "Validate a link.",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-examples": {
           "ValidateLinkSuccess": {
             "$ref": "./examples/ValidateLinkSuccess.json"
@@ -290,9 +286,6 @@
               "$ref": "#/definitions/ValidateResult"
             }
           },
-          "202": {
-            "description": "Operation Accepted"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -302,7 +295,7 @@
         }
       }
     },
-    "/{resourceUri}//providers/Microsoft.ServiceLinker/linkers/{linkerName}/listConfigurations": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/listConfigurations": {
       "post": {
         "tags": [
           "Links"
