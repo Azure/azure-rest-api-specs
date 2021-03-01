@@ -152,6 +152,9 @@
               "$ref": "#/definitions/UsageDetailsListResult"
             }
           },
+          "503": {
+            "description": "Server temporary unavailable"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2153,9 +2156,8 @@
           "readOnly": true
         },
         "meterId": {
-          "description": "The meter id (GUID). Not available for marketplace. For reserved instance this represents the primary meter for which the reservation was purchased. For the actual VM Size for which the reservation is purchased see productOrderName.",
+          "description": "The meter id. Not available for marketplace. For reserved instance this represents the primary meter for which the reservation was purchased. For the actual VM Size for which the reservation is purchased see productOrderName.",
           "type": "string",
-          "format": "uuid",
           "readOnly": true
         },
         "meterName": {
@@ -2439,6 +2441,12 @@
         "partnerEarnedCreditApplied": {
           "description": "Flag to indicate if partner earned credit has been applied or not.",
           "type": "string",
+          "readOnly": true
+        },
+        "payGPrice": {
+          "description": "Retail price for the resource.",
+          "type": "number",
+          "format": "decimal",
           "readOnly": true
         }
       }
