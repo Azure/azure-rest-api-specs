@@ -361,6 +361,52 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Quantum/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "description": "Check the availability of the resource name.",
+        "operationId": "Workspace_CheckNameAvailability",
+        "x-ms-examples": {
+          "QuantumWorkspacesCheckNameAvailability": {
+            "$ref": "./examples/quantumWorkspacesCheckNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "name": "checkNameAvailabilityParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "The name and type of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
     }
   },
   "definitions": {
@@ -402,7 +448,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Gets or sets the properties. Define quantum space's specific properties.",
+          "description": "Gets or sets the properties. Define quantum workspace's specific properties.",
           "$ref": "#/definitions/WorkspaceResourceProperties"
         },
         "identity": {
@@ -432,6 +478,11 @@
               }
             }
           }
+        },
+        "systemData": {
+          "description": "System metadata",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -654,6 +705,10 @@
           "type": "string",
           "description": "Display name of this sku."
         },
+        "version": {
+          "type": "string",
+          "description": "Display name of this sku."
+        },
         "description": {
           "type": "string",
           "description": "Description about this sku."
@@ -769,7 +824,8 @@
         },
         "applicationName": {
           "type": "string",
-          "description": "The provider's marketplace application display name."
+          "description": "The provider's marketplace application display name.",
+          "readOnly": true
         },
         "provisioningState": {
           "type": "string",
@@ -789,7 +845,8 @@
         },
         "resourceUsageId": {
           "type": "string",
-          "description": "Id to track resource usage for the provider."
+          "description": "Id to track resource usage for the provider.",
+          "readOnly": true
         }
       }
     },
@@ -848,6 +905,35 @@
       "required": [
         "value"
       ]
+    },
+    "CheckNameAvailabilityParameters": {
+      "description": "Details of check name availability request body.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for checking availability."
+        },
+        "type": {
+          "type": "string",
+          "default": "Microsoft.Quantum/Workspaces",
+          "description": "The resource type of Quantum Workspace."
+        }
+      }
+    },
+    "CheckNameAvailabilityResult": {
+      "description": "Result of check name availability.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicator of availability of the Quantum Workspace resource name."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason of unavailability."
+        }
+      }
     }
   },
   "parameters": {
