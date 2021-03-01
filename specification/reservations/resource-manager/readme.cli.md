@@ -62,6 +62,6 @@ cli:
     -select: 'parameter'
      where:
        parameter: 'base_url'        
-    set:
-        value: 'https://management.azure.com' 
+     set:
+       value: 'https://management.azure.com' 
 ```
