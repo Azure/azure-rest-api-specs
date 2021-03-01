@@ -2799,6 +2799,11 @@
           "description": "Type of the object.",
           "type": "string",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
         }
       }
     },
@@ -4141,6 +4146,44 @@
         }
       },
       "x-ms-discriminator-value": "ValidateSubscriptionIsAllowedToCreateJob"
+    },
+    "systemData": {
+      "description": "Provides details about resource creation and update time",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "A string identifier for the identity that created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource: user, application, managedIdentity",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "A string identifier for the identity that last modified the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource: user, application, managedIdentity",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "TransferAllDetails": {
       "description": "Details to transfer all data.",
