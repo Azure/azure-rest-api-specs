@@ -208,11 +208,10 @@ directive:
     reason:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
   - where:
-      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile"]'
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile"].get
     suppress:
-      - INVALID_TYPE
-    reason:
-      - The response type schema of this API has binary format and file type, which is a valid swagger format. However, this can't be specified in the requried JSON example format.
+      - D5001
+    reason: The API response has binary format and file type which is valid Swagger format. However, the example must be a JSON file which does not support specifying this response format.
 
 ```
 ### Tag: package-2021-03-01
