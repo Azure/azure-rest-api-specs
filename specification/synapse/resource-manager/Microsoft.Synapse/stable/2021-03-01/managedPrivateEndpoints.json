@@ -162,6 +162,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "schema": {
+              "type": "object"
+            },
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -257,6 +263,7 @@
     "ManagedPrivateEndpoint": {
       "description": "Managed private endpoint",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "readOnly": true,
