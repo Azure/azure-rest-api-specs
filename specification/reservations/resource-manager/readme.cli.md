@@ -35,15 +35,27 @@ cli:
     - name: /quota/get/Catalog
     - split: reservations
     - name: /Reservation/get/GetReservation
+      disabled: true
     - name: /Reservation/get/ReservationList
+      disabled: true    
     - name: /Reservation/get/ReservationRevisions
+      disabled: true    
     - name: /Reservation/patch/PatchReservation
+      disabled: true    
     - name: /Reservation/post/AvailableScopes
+      disabled: true    
     - name: /Reservation/post/Merge
+      disabled: true    
     - name: /Reservation/post/Split
+      disabled: true    
     - name: /ReservationOrder/put/Purchase
+      disabled: true    
     - name: /ReservationOrder/get/GetReservation
+      disabled: true    
     - name: /ReservationOrder/get/GetReservationWithExpandPayments
+      disabled: true    
     - name: /ReservationOrder/get/ReservationOrderList
+      disabled: true    
     - name: /ReservationOrder/post/Purchase  
+      disabled: true    
 ```
