@@ -1389,7 +1389,7 @@
           "type": "array"
         },
         "dnsServers": {
-          "description": "DNS servers for the cache to use. The default is determined by the network configuration.",
+          "description": "DNS servers for the cache to use.  It will be set from the network configuration if no value is provided.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1663,7 +1663,7 @@
           "type": "boolean"
         },
         "anonymousUID": {
-          "description": "UID value that replaces 0 when rootSquash is true.  65534 will be used if its not provided.",
+          "description": "UID value that replaces 0 when rootSquash is true. 65534 will be used if not provided.",
           "type": "string"
         },
         "anonymousGID": {
@@ -1746,6 +1746,7 @@
         },
         "conditions": {
           "description": "Outstanding conditions that need to be investigated and resolved.",
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Condition"
@@ -1758,11 +1759,13 @@
       "description": "Outstanding conditions that will need to be resolved.",
       "properties": {
         "timestamp": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "The time when the condition was raised."
         },
         "message": {
+          "readOnly": true,
           "type": "string",
           "description": "The issue requiring attention."
         }
@@ -1936,7 +1939,7 @@
           "type": "string"
         },
         "usageModel": {
-          "description": "Identifies the usage model to be used for this Storage Target. Get choices from .../usageModels",
+          "description": "Identifies the StorageCache usage model to be used for this storage target.",
           "type": "string"
         }
       }
@@ -1970,7 +1973,7 @@
           "$ref": "#/definitions/URLString"
         },
         "usageModel": {
-          "description": "Identifies the usage model to be used for this Storage Target. Get choices from .../usageModels",
+          "description": "Identifies the StorageCache usage model to be used for this storage target.",
           "type": "string"
         }
       }
