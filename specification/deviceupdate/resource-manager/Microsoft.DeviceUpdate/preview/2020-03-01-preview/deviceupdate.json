@@ -312,12 +312,6 @@
               "$ref": "#/definitions/Account"
             }
           },
-          "201": {
-            "description": "Creates or Updates the VirtualMachines resource.",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
@@ -634,10 +628,6 @@
               "readOnly": true
             }
           }
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "The type of identity used for the resource."
         }
       }
     },
@@ -725,33 +715,6 @@
         }
       }
     },
-    "Identity": {
-      "description": "Identity for the resource.",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "enum": [
-            "SystemAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          },
-          "type": "string",
-          "description": "The identity type."
-        }
-      }
-    },
     "IotHubSettings": {
       "type": "object",
       "description": "Device Update account integration with IoT Hub settings.",
@@ -781,12 +744,14 @@
       "description": "Error response indicates that the service is not able to process the incoming request.",
       "properties": {
         "code": {
-          "description": "The error status code.",
-          "type": "string"
+          "description": "Error status code.",
+          "type": "string",
+          "readOnly": true
         },
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+          "description": "Error details.",
+          "readOnly": true
         }
       }
     },
@@ -794,17 +759,17 @@
       "description": "Error definition.",
       "properties": {
         "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "description": "Error status code.",
           "type": "string",
           "readOnly": true
         },
         "message": {
-          "description": "Description of the error.",
+          "description": "Error message.",
           "type": "string",
           "readOnly": true
         },
         "details": {
-          "description": "Internal error details.",
+          "description": "Error details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
@@ -815,10 +780,6 @@
     "AccountUpdate": {
       "description": "Request payload used to update and existing Accounts.",
       "properties": {
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "The type of identity used for the resource."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
