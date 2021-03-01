@@ -815,6 +815,45 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/migrate": {
+      "put": {
+        "tags": [
+          "BlobContainers"
+        ],
+        "operationId": "BlobContainers_VersionLevelWorm",
+        "x-ms-examples": {
+          "VersionLevelWormContainerMigration": {
+            "$ref": "./examples/VersionLevelWormContainerMigration.json"
+          }
+        },
+        "description": "This operation migrates a blob container from container level WORM to version level WORM enabled container. Pre-requisits require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal holds.",
+        "parameters": [
+          {
+            "$ref": "./storage.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/ContainerName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- returned when the blob container migration to support version level WORM completes."
+          },
+          "202": {
+            "description": "Accepted -- Blob Container migration to support version leve worm is accepted; operation will complete asynchronously."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -937,6 +976,11 @@
           "type": "boolean",
           "readOnly": true,
           "description": "The hasImmutabilityPolicy public property is set to true by SRP if ImmutabilityPolicy has been created for this container. The hasImmutabilityPolicy public property is set to false by SRP if ImmutabilityPolicy has not been created for this container."
+        },
+        "versionLevelWorm": {
+          "$ref": "#/definitions/VersionLevelWorm",
+          "x-ms-client-flatten": true,
+          "description": "The version level worm property of the container."
         }
       },
       "description": "The properties of a container."
@@ -1023,6 +1067,37 @@
         "properties"
       ],
       "description": "The ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag."
+    },
+    "VersionLevelWorm": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "This is an immutable property, when set to true enables version level worm at the container level."
+        },
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Returns the date and time the version level worm was enabled."
+        },
+        "migrationState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "InProgress",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "MigrationState",
+            "modelAsString": true
+          },
+          "description": "This property denotes the container level worm to version level worm migration state."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "Version level worm properties of the container."
     },
     "UpdateHistoryProperty": {
       "properties": {
