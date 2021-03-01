@@ -1788,6 +1788,12 @@
           "Creates or updates an Office365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
           },
+          "Creates or updates a Threat Intelligence Taxii data connector.": {
+            "$ref": "./examples/dataConnectors/CreateThreatIntelligenceTaxiiDataConnector.json"
+          },
+          "Creates or updates an Threat Intelligence Platform data connector.": {
+            "$ref": "./examples/dataConnectors/CreateThreatIntelligenceDataConnector.json"
+          },
           "Creates or updates a Dynamics365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateDynamics365DataConnetor.json"
           }
@@ -5132,6 +5138,9 @@
           "type": "string"
         }
       },
+      "required": [
+        "logicAppResourceId"
+      ],
       "type": "object"
     },
     "ActionRequestProperties": {
@@ -5147,6 +5156,9 @@
           "type": "string"
         }
       },
+      "required": [
+        "triggerUri"
+      ],
       "type": "object"
     },
     "ActionResponse": {
@@ -11167,13 +11179,18 @@
       "type": "object"
     },
     "TIDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
-      "description": "Threat Intelligence Platforms data connector properties.",
+      "description": "TI (Threat Intelligence) data connector properties.",
       "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "tipLookbackPeriod": {
+          "description": "The lookback period for the feed to be imported.",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
         "dataTypes": {
           "$ref": "#/definitions/TIDataConnectorDataTypes",
           "description": "The available data types for the connector."
@@ -11271,6 +11288,40 @@
         "password": {
           "description": "The password for the TAXII server.",
           "type": "string"
+        },
+        "taxiiLookbackPeriod": {
+          "description": "The lookback period for the TAXII server.",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "pollingFrequency": {
+          "description": "The polling frequency for the TAXII server.",
+          "type": "string",
+          "x-nullable": true,
+          "enum": [
+            "OnceAMinute",
+            "OnceAnHour",
+            "OnceADay"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PollingFrequency",
+            "values": [
+              {
+                "description": "Once a minute",
+                "value": "OnceAMinute"
+              },
+              {
+                "description": "Once an hour",
+                "value": "OnceAnHour"
+              },
+              {
+                "description": "Once a day",
+                "value": "OnceADay"
+              }
+            ]
+          }
         },
         "dataTypes": {
           "$ref": "#/definitions/TiTaxiiDataConnectorDataTypes",
@@ -12086,6 +12137,10 @@
           "description": "Pattern type of a threat intelligence entity",
           "type": "string"
         },
+        "patternVersion": {
+          "description": "Pattern version of a threat intelligence entity",
+          "type": "string"
+        },
         "killChainPhases": {
           "description": "Kill chain phases",
           "items": {
@@ -12110,11 +12165,19 @@
           "description": "Created by reference of threat intelligence entity",
           "type": "string"
         },
+        "defanged": {
+          "description": "Is threat intelligence entity defanged",
+          "type": "boolean"
+        },
+        "externalLastUpdatedTimeUtc": {
+          "description": "External last updated time in UTC",
+          "type": "string"
+        },
         "externalReferences": {
           "description": "External References",
           "items": {
             "description": "external_reference",
-            "type": "string"
+            "$ref": "#/definitions/ThreatIntelligenceExternalReference"
           },
           "type": "array"
         },
@@ -12123,6 +12186,14 @@
           "items": {
             "description": "Granular marking",
             "$ref": "#/definitions/ThreatIntelligenceGranularMarkingModel"
+          },
+          "type": "array"
+        },
+        "labels": {
+          "description": "Labels  of threat intelligence entity",
+          "items": {
+            "description": "label",
+            "type": "string"
           },
           "type": "array"
         },
@@ -12135,10 +12206,10 @@
           "type": "integer",
           "format": "int32"
         },
-        "labels": {
-          "description": "Labels  of threat intelligence entity",
+        "objectMarkingRefs": {
+          "description": "Threat intelligence entity object marking references",
           "items": {
-            "description": "label",
+            "description": "Threat intelligence entity object marking reference",
             "type": "string"
           },
           "type": "array"
@@ -12244,6 +12315,35 @@
             "type": "string"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceExternalReference": {
+      "description": "Describes external reference",
+      "properties": {
+        "description": {
+          "description": "External reference description",
+          "type": "string"
+        },
+        "externalId": {
+          "description": "External reference ID",
+          "type": "string"
+        },
+        "sourceName": {
+          "description": "External reference source name",
+          "type": "string"
+        },
+        "url": {
+          "description": "External reference URL",
+          "type": "string"
+        },
+        "hashes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "External reference hashes"
         }
       },
       "type": "object"
