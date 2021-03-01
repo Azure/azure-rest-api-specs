@@ -32,7 +32,9 @@ cli:
     - name: /Exchange/post/Exchange
       disabled: true
     - name: /quota/get/AppliedReservationList
+      disabled: true
     - name: /quota/get/Catalog
+       disabled: true
     - split: reservations
     - name: /Reservation/get/GetReservation
       disabled: true
