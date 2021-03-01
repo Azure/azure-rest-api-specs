@@ -246,6 +246,9 @@
           "ApiManagementCreateService": {
             "$ref": "./examples/ApiManagementCreateService.json"
           },
+          "ApiManagementCreateServiceInVnetWithPublicIP": {
+            "$ref": "./examples/ApiManagementCreateServiceInVnetWithPublicIP.json"
+          },
           "ApiManagementCreateMultiRegionServiceWithCustomHostname": {
             "$ref": "./examples/ApiManagementCreateMultiRegionServiceWithCustomHostname.json"
           },
@@ -1033,6 +1036,10 @@
           "readOnly": true,
           "description": "Private Static Load Balanced IP addresses of the API Management service which is deployed in an Internal Virtual Network in a particular additional location. Available only for Basic, Standard, Premium and Isolated SKU."
         },
+        "publicIpAddressId": {
+          "type": "string",
+          "description": "Public Standard SKU IP V4 based IP address to be associated with Virtual Network deployed service in the location. Supported only for Premium SKU being deployed in Virtual Network."
+        },
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
           "description": "Virtual network configuration for the location."
@@ -1200,6 +1207,10 @@
           },
           "readOnly": true,
           "description": "Private Static Load Balanced IP addresses of the API Management service in Primary region which is deployed in an Internal Virtual Network. Available only for Basic, Standard, Premium and Isolated SKU."
+        },
+        "publicIpAddressId": {
+          "type": "string",
+          "description": "Public Standard SKU IP V4 based IP address to be associated with Virtual Network deployed service in the region. Supported only for Developer and Premium SKU being deployed in Virtual Network."
         },
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",

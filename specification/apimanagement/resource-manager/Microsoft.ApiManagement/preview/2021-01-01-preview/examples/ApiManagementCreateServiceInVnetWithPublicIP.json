@@ -7,7 +7,12 @@
     "parameters": {
       "properties": {
         "publisherEmail": "apim@autorestsdk.com",
-        "publisherName": "autorestsdk"
+        "publisherName": "autorestsdk",
+        "virtualNetworkConfiguration": {
+          "subnetResourceId": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.Network/virtualNetworks/apimcus/subnets/tenant"
+        },
+        "publicIpAddressId": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.Network/publicIPAddresses/apimazvnet",
+        "virtualNetworkType": "External"
       },
       "sku": {
         "name": "Premium",
@@ -17,7 +22,7 @@
         "1",
         "2"
       ],
-      "location": "North europe",
+      "location": "East US 2 EUAP",
       "tags": {
         "tag1": "value1",
         "tag2": "value2",
@@ -39,7 +44,7 @@
           "tag2": "value2",
           "tag3": "value3"
         },
-        "location": "North Europe",
+        "location": "East US 2 EUAP",
         "etag": "AAAAAAAiXto=",
         "properties": {
           "publisherEmail": "apim@autorestsdk.com",
@@ -56,7 +61,11 @@
               "defaultSslBinding": true
             }
           ],
-          "virtualNetworkType": "None",
+          "publicIpAddressId": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.Network/publicIPAddresses/apimazvnet",
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.Network/virtualNetworks/apimcus/subnets/tenant"
+          },
+          "virtualNetworkType": "External",
           "disableGateway": false
         },
         "sku": {
@@ -71,7 +80,7 @@
     },
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "id": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.ApiManagement/service/apimService1",
         "name": "apimService1",
         "type": "Microsoft.ApiManagement/service",
         "tags": {
@@ -79,17 +88,17 @@
           "tag2": "value2",
           "tag3": "value3"
         },
-        "location": "North Europe",
-        "etag": "AAAAAAAiXvE=",
+        "location": "East US 2 EUAP",
+        "etag": "AAAAAAAGTAs=",
         "properties": {
           "publisherEmail": "apim@autorestsdk.com",
           "publisherName": "autorestsdk",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Succeeded",
           "targetProvisioningState": "",
-          "createdAtUtc": "2020-07-28T23:18:14.6562474Z",
+          "createdAtUtc": "2021-02-22T06:53:46.6409875Z",
           "gatewayUrl": "https://apimService1.azure-api.net",
-          "gatewayRegionalUrl": "https://apimService1-northeurope-01.regional.azure-api.net",
+          "gatewayRegionalUrl": "https://apimService1-eastus2euap-01.regional.azure-api.net",
           "portalUrl": "https://apimService1.portal.azure-api.net",
           "developerPortalUrl": "https://apimService1.developer.azure-api.net",
           "managementApiUrl": "https://apimService1.management.azure-api.net",
@@ -103,8 +112,12 @@
             }
           ],
           "publicIPAddresses": [
-            "20.54.34.66"
+            "20.47.137.XXX"
           ],
+          "publicIpAddressId": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.Network/publicIPAddresses/apimazvnet",
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.Network/virtualNetworks/apimcus/subnets/tenant"
+          },
           "customProperties": {
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False",
@@ -115,7 +128,7 @@
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
           },
-          "virtualNetworkType": "None",
+          "virtualNetworkType": "External",
           "disableGateway": false
         },
         "sku": {
