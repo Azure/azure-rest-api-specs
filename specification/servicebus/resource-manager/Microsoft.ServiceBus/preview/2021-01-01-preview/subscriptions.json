@@ -273,6 +273,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SBSubscriptionProperties",
           "description": "Properties of subscriptions resource."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -365,11 +370,6 @@
         "forwardDeadLetteredMessagesTo": {
           "type": "string",
           "description": "Queue/Topic name to forward the Dead Letter message"
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource.",
-          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
         }
       },
       "description": "Description of Subscription Resource."
