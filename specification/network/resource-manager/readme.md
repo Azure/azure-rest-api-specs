@@ -45,7 +45,7 @@ input-file:
   - Microsoft.Network/stable/2020-08-01/azureFirewall.json
   - Microsoft.Network/stable/2020-08-01/azureFirewallFqdnTag.json
   - Microsoft.Network/stable/2020-08-01/azureWebCategory.json
-  - Microsoft.Network/stable/2021-02-01-preview/bastionHost.json
+  - Microsoft.Network/preview/2021-02-01-preview/bastionHost.json
   - Microsoft.Network/stable/2020-08-01/checkDnsAvailability.json
   - Microsoft.Network/stable/2020-08-01/customIpPrefix.json
   - Microsoft.Network/stable/2020-08-01/ddosCustomPolicy.json
