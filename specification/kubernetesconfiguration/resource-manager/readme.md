@@ -2,11 +2,11 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for kubernetesconfiguration.
+This is the AutoRest configuration file for KubernetesConfiguration.
 
 ## Getting Started
 
-To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+To build the SDKs for KubernetesConfiguration, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
 
@@ -22,9 +22,11 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the kubernetesconfiguration.
+These are the global settings for the KubernetesConfiguration.
 
 ``` yaml
+title: SourceControlConfigurationClient
+description: KubernetesConfiguration Client
 openapi-type: arm
 tag: package-2021-03
 ```
@@ -47,6 +49,17 @@ input-file:
   - Microsoft.KubernetesConfiguration/preview/2020-10-01-preview/kubernetesconfiguration.json
 ```
 
+### Tag: package-2020-07-01-preview
+
+These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-01-preview'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/extensions.json
+```
+
+
 ### Tag: package-2019-11-01-preview
 
 These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line.
@@ -54,6 +67,15 @@ These settings apply only when `--tag=package-2019-11-01-preview` is specified o
 ``` yaml $(tag) == 'package-2019-11-01-preview'
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2019-11-01-preview/kubernetesconfiguration.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: TopLevelResourcesListBySubscription
+    from: extensions.json
+    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
 ```
 
 ---
@@ -79,6 +101,7 @@ swagger-to-sdk:
     after_scripts:
       - node sdkauto_afterscript.js kubernetesconfiguration/resource-manager
 ```
+
 
 ## Go
 
