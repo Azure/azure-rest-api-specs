@@ -4350,6 +4350,20 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "userData"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandTypes",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -6399,7 +6413,14 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView', 'userData'."
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "userData"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandTypes",
+              "modelAsString": false
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
