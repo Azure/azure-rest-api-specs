@@ -35,13 +35,4 @@ cli:
         group: 'MoveResources'
         op: 'Create'
       name: Add
-      
-    # - where:
-    #     group: 'MoveCollections'
-    #     op: 'ListRequiredFor'
-    #   name: List_Arm_Required
-    # - where:
-    #     group: 'MoveCollections'
-    #     op: 'InitiateMove'
-    #   name: Initiate
 ```
