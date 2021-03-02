@@ -13,10 +13,10 @@ no-namespace-folders: true
 
 ```yaml $(python) && $(track2) && $(python-mode) == 'update'
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/sdk/deviceupdate/azure-mgmt-deviceupdate/azure/mgmt/deviceupdate
+output-folder: $(python-sdks-folder)/deviceupdate/azure-mgmt-deviceupdate/azure/mgmt/deviceupdate
 ```
 
 ```yaml $(python) && $(track2) && $(python-mode) == 'create'
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/sdk/deviceupdate/azure-mgmt-deviceupdate
+output-folder: $(python-sdks-folder)/deviceupdate/azure-mgmt-deviceupdate
 ```
