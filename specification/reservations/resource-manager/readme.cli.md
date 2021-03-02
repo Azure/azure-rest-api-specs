@@ -19,12 +19,12 @@ cli:
      - name: /Quota/get/Quotas_List_MachineLearningServices
      - name: /Quota/patch/Quota_Request_Patch_Compute
      - split: quota_request_status
+     - name: /QuotaRequestStatus/get/QuotaRequest_History
+     - name: /QuotaRequestStatus/get/QuotaRequest_Status
      - name: /QuotaRequestStatus/get/QuotaRequest_Failed
        disabled: true     
      - name: /QuotaRequestStatus/get/QuotaRequest_InProgress
-       disabled: true          
-     - name: /QuotaRequestStatus/get/QuotaRequest_History
-     - name: /QuotaRequestStatus/get/QuotaRequest_Status
+       disabled: true 
      - split: reservation
      - name: /Reservation/get/GetReservation
      - name: /Reservation/get/ReservationList
