@@ -7,7 +7,6 @@ cli:
   cli-name: reservations
   package-name: azure-mgmt-reservations
   namespace: azure.mgmt.reservations
-  flatten-all: true
   test-scenario:
     - split: quota
     - name: /Quota/put/Quotas_Request_PutForCompute
