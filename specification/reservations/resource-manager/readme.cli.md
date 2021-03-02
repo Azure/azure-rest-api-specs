@@ -11,19 +11,19 @@ cli:
   test-scenario:
     - split: quota
     - name: /Quota/put/Quotas_Request_PutForCompute
-      disabled: true
+      disabled: false
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_DedicatedResource
-      disabled: true
+      disabled: false
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_LowPriorityResource
-      disabled: true
+      disabled: false
     - name: /Quota/get/Quotas_listUsagesForCompute
       disabled: false
     - name: /Quota/get/Quotas_listUsagesMachineLearningServices
-      disabled: true
+      disabled: false
     - name: /Quota/get/Quotas_Request_ForCompute
-      disabled: true
+      disabled: false
     - name: /Quota/patch/Quotas_Request_PatchForCompute
-      disabled: true
+      disabled: false
     - split: quotaRequests
     - name: /QuotaRequestStatus/get/QuotaRequestFailed
       disabled: true
