@@ -15,10 +15,10 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ```
 
 ```yaml $(python-mode) == 'create'
-output-folder: $(python-sdks-folder)/sdk/deviceupdate/azure-iot-deviceupdate
+output-folder: $(python-sdks-folder)/deviceupdate/azure-iot-deviceupdate
 ```
 
 ```yaml $(python-mode) == 'update'
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/sdk/deviceupdate/azure-iot-deviceupdate/azure/iot/deviceupdate
+output-folder: $(python-sdks-folder)/deviceupdate/azure-iot-deviceupdate/azure/iot/deviceupdate
 ```
