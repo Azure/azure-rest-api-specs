@@ -163,12 +163,12 @@ cli:
   clear-output-folder: false
 ```
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
+``` yaml $(terraform)
+terraform:
   cli_name: ResourceGraph
   azure_arm: true
   license_header: MICROSOFT_MIT_NO_VERSION
