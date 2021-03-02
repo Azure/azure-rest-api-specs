@@ -10,36 +10,23 @@ cli:
   test-scenario:
     - split: quota
     - name: /Quota/put/Quotas_Request_PutForCompute
-      disabled: false
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_DedicatedResource
-      disabled: false
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_LowPriorityResource
-      disabled: false
     - name: /Quota/get/Quotas_listUsagesForCompute
-      disabled: false
     - name: /Quota/get/Quotas_listUsagesMachineLearningServices
-      disabled: false
     - name: /Quota/get/Quotas_Request_ForCompute
-      disabled: false
     - name: /Quota/patch/Quotas_Request_PatchForCompute
-      disabled: false
     - split: quotaRequests
     - name: /QuotaRequestStatus/get/QuotaRequestFailed
       disabled: true
     - name: /QuotaRequestStatus/get/QuotaRequestInProgress
       disabled: true
     - name: /QuotaRequestStatus/get/QuotaRequestStatus  
-       disabled: false
     - name: /QuotaRequestStatus/get/QuotaRequestHistory
-       disabled: false   
     - split: exchange
     - name: /CalculateExchange/post/CalculateExchange
       disabled: false
     - name: /Exchange/post/Exchange
-      disabled: false
-    - name: /quota/get/AppliedReservationList
-      disabled: false
-    - name: /quota/get/Catalog
       disabled: false
     - split: reservations
     - name: /Reservation/get/GetReservation
@@ -55,6 +42,7 @@ cli:
     - name: /Reservation/post/Merge
       disabled: false    
     - name: /Reservation/post/Split
+    - split: ReservationOrder
       disabled: false    
     - name: /ReservationOrder/put/Purchase
       disabled: false    
@@ -65,5 +53,9 @@ cli:
     - name: /ReservationOrder/get/ReservationOrderList
       disabled: false    
     - name: /ReservationOrder/post/Purchase  
+      disabled: false
+       - name: /quota/get/AppliedReservationList
+      disabled: false
+    - name: /quota/get/Catalog
       disabled: false
 ```
