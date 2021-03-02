@@ -58,10 +58,4 @@ cli:
       disabled: true    
     - name: /ReservationOrder/post/Purchase  
       disabled: true
-  cli-directive:
-    - select: 'parameter'
-      where:
-        parameter: 'base_url'        
-      set:
-        value: 'https://management.azure.com' 
 ```
