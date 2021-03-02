@@ -54,7 +54,7 @@ cli:
       disabled: false    
     - name: /ReservationOrder/post/Purchase  
       disabled: false
-       - name: /quota/get/AppliedReservationList
+    - name: /quota/get/AppliedReservationList
       disabled: false
     - name: /quota/get/Catalog
       disabled: false
