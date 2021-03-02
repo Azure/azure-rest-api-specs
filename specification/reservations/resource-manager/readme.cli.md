@@ -11,12 +11,19 @@ cli:
   test-scenario:
     - split: quota
     - name: /Quota/put/Quotas_Request_PutForCompute
+      disabled: true
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_DedicatedResource
+      disabled: true
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_LowPriorityResource
+      disabled: true
     - name: /Quota/get/Quotas_listUsagesForCompute
+      disabled: true
     - name: /Quota/get/Quotas_listUsagesMachineLearningServices
+      disabled: true
     - name: /Quota/get/Quotas_Request_ForCompute
+      disabled: true
     - name: /Quota/patch/Quotas_Request_PatchForCompute
+      disabled: true
     - split: quotaRequests
     - name: /QuotaRequestStatus/get/QuotaRequestFailed
       disabled: true
@@ -37,7 +44,7 @@ cli:
     - name: /Reservation/get/GetReservation
       disabled: true
     - name: /Reservation/get/ReservationList
-      disabled: true    
+      disabled: false    
     - name: /Reservation/get/ReservationRevisions
       disabled: true    
     - name: /Reservation/patch/PatchReservation
@@ -57,5 +64,5 @@ cli:
     - name: /ReservationOrder/get/ReservationOrderList
       disabled: true    
     - name: /ReservationOrder/post/Purchase  
-      disabled: true
+      disabled: false
 ```
