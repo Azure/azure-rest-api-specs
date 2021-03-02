@@ -573,7 +573,7 @@
           "200": {
             "description": "Operation details.",
             "schema": {
-              "$ref": "#/definitions/OperationsList"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -803,56 +803,6 @@
           }
         }
       }
-    },
-    "Operation": {
-      "description": "Operation provided by provider.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation."
-        },
-        "display": {
-          "type": "object",
-          "description": "Properties of the operation.",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Provider name."
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource name."
-            },
-            "operation": {
-              "type": "string",
-              "description": "Operation name."
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the operation."
-            }
-          }
-        }
-      }
-    },
-    "OperationsList": {
-      "description": "Lists the operations available.",
-      "properties": {
-        "nextLink": {
-          "description": "Url to follow for getting next page of operations.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of operations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
     }
   },
   "parameters": {
