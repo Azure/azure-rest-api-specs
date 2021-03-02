@@ -247,6 +247,77 @@
           }
         }
       }
+    },
+    "/{resourceId}/providers/Microsoft.ChangeAnalysis/resourceChanges": {
+      "get": {
+        "tags": [
+          "ResourceChanges"
+        ],
+        "summary": "List the changes of a resource within the specified time range.",
+        "operationId": "ResourceChanges_List",
+        "produces": [
+          "application/json",
+          "default"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceId",
+            "description": "The identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "in": "query",
+            "name": "$startTime",
+            "description": "Specifies the start time of the changes request.",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "$endTime",
+            "description": "Specifies the end time of the changes request.",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ResourceChangesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ResourceChanges_List": {
+            "$ref": "./examples/ResourceChangesList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -446,6 +517,129 @@
         },
         "nextLink": {
           "description": "The URI that can be used to request the next page for list of Azure operations.",
+          "type": "string"
+        }
+      }
+    },
+    "ChangeType": {
+      "description": "The type of the change.",
+      "enum": [
+        "Add",
+        "Remove",
+        "Update"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ChangeType",
+        "modelAsString": true
+      }
+    },
+    "Level": {
+      "description": "The importance of the change.",
+      "enum": [
+        "Noisy",
+        "Normal",
+        "Important"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Level",
+        "modelAsString": true
+      }
+    },
+    "PropertyChange": {
+      "description": "Data of a property change.",
+      "type": "object",
+      "properties": {
+        "changeType": {
+          "$ref": "#/definitions/ChangeType"
+        },
+        "changeCategory": {
+          "description": "The change category.",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ChangeCategory",
+            "modelAsString": false
+          }
+        },
+        "jsonPath": {
+          "description": "The json path of the changed property.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The enhanced display name of the json path. E.g., the json path value[0].properties will be translated to something meaningful like slots[\"Staging\"].properties.",
+          "type": "string"
+        },
+        "level": {
+          "$ref": "#/definitions/Level"
+        },
+        "description": {
+          "description": "The description of the changed property.",
+          "type": "string"
+        },
+        "oldValue": {
+          "description": "The value of the property before the change.",
+          "type": "string"
+        },
+        "newValue": {
+          "description": "The value of the property after the change.",
+          "type": "string"
+        },
+        "isDataMasked": {
+          "description": "The boolean indicating whether the oldValue and newValue are masked. The values are masked if it contains sensitive information that the user doesn't have access to.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Change": {
+      "description": "Data of a specific change.",
+      "type": "object",
+      "properties": {
+        "changeId": {
+          "description": "The unique identifier of the changes.",
+          "type": "string"
+        },
+        "timeStamp": {
+          "format": "date-time",
+          "description": "The time when the change is detected.",
+          "type": "string"
+        },
+        "initiatedByList": {
+          "description": "The list of identities who might initiated the change.\r\nThe identity could be user name (email address) or the object ID of the Service Principal.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changeType": {
+          "$ref": "#/definitions/ChangeType"
+        },
+        "propertyChanges": {
+          "description": "The list of detailed changes at json property level.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyChange"
+          }
+        }
+      }
+    },
+    "ResourceChangesResponse": {
+      "description": "The list of resource changes.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of resource changes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Change"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next page of changes.",
           "type": "string"
         }
       }
