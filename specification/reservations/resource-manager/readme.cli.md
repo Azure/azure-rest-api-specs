@@ -7,7 +7,28 @@ cli:
   cli-name: reservations
   package-name: azure-mgmt-reservations
   namespace: azure.mgmt.reservations
-  flatten-all: true
+  cli-directive:
+    - select: 'operationGroup'
+      where:
+          operationGroup: 'operations'
+      hidden: true
+      - where:
+          operationGroup: 'quota_request_status'
+        alias:
+          - quotaStatus
+          - status
+          - s 
+      - where:
+          operationGroup: 'quota'
+        alias:
+          - quota
+          - q    
+      - where:
+          operationGroup: 'quota'
+          param: 'ResourceName'
+        alias:
+          - n
+          - name
   test-scenario:
      - name: /Operation/get/GetOperations
      - split: quota 
