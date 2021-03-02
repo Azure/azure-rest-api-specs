@@ -8,7 +8,7 @@ cli:
   package-name: azure-mgmt-reservations
   namespace: azure.mgmt.reservations
   test-scenario:
-    - split: quota
+    - split: quotas
     - name: /Quota/put/Quotas_Request_PutForCompute
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_DedicatedResource
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_LowPriorityResource
