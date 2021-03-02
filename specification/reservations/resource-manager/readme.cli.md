@@ -7,55 +7,34 @@ cli:
   cli-name: reservations
   package-name: azure-mgmt-reservations
   namespace: azure.mgmt.reservations
+  flatten-all: true
   test-scenario:
-    - split: quotas
-    - name: /Quota/put/Quotas_Request_PutForCompute
-    - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_DedicatedResource
-    - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_LowPriorityResource
-    - name: /Quota/get/Quotas_listUsagesForCompute
-    - name: /Quota/get/Quotas_listUsagesMachineLearningServices
-    - name: /Quota/get/Quotas_Request_ForCompute
-    - name: /Quota/patch/Quotas_Request_PatchForCompute
-    - split: quotaRequests
-    - name: /QuotaRequestStatus/get/QuotaRequestFailed
-      disabled: true
-    - name: /QuotaRequestStatus/get/QuotaRequestInProgress
-      disabled: true
-    - name: /QuotaRequestStatus/get/QuotaRequestStatus  
-    - name: /QuotaRequestStatus/get/QuotaRequestHistory
-    - split: exchange
-    - name: /CalculateExchange/post/CalculateExchange
-      disabled: false
-    - name: /Exchange/post/Exchange
-      disabled: false
-    - split: reservations
-    - name: /Reservation/get/GetReservation
-      disabled: false
-    - name: /Reservation/get/ReservationList
-      disabled: false    
-    - name: /Reservation/get/ReservationRevisions
-      disabled: false    
-    - name: /Reservation/patch/PatchReservation
-      disabled: false    
-    - name: /Reservation/post/AvailableScopes
-      disabled: false    
-    - name: /Reservation/post/Merge
-      disabled: false    
-    - name: /Reservation/post/Split
-    - split: ReservationOrder
-      disabled: false    
-    - name: /ReservationOrder/put/Purchase
-      disabled: false    
-    - name: /ReservationOrder/get/GetReservation
-      disabled: false    
-    - name: /ReservationOrder/get/GetReservationWithExpandPayments
-      disabled: false    
-    - name: /ReservationOrder/get/ReservationOrderList
-      disabled: false    
-    - name: /ReservationOrder/post/Purchase  
-      disabled: false
-    - name: /quota/get/AppliedReservationList
-      disabled: false
-    - name: /quota/get/Catalog
-      disabled: false
+     - name: /CalculateExchange/post/CalculateExchange
+     - name: /Exchange/post/Exchange
+     - name: /Operation/get/GetOperations
+     - name: /Quota/put/Quota_Request_Put_Compute
+     - name: /Quota/put/Quota_Request_Put_MachineLearningServices_DedicatedResource
+     - name: /Quota/put/Quota_Request_Put_MachineLearningServices_LowPriorityResource
+     - name: /Quota/get/Quota_Info_Compute
+     - name: /Quota/get/Quotas_List_Compute
+     - name: /Quota/get/Quotas_List_MachineLearningServices
+     - name: /Quota/patch/Quota_Request_Patch_Compute
+     - name: /QuotaRequestStatus/get/QuotaRequest_Failed
+     - name: /QuotaRequestStatus/get/QuotaRequest_History
+     - name: /QuotaRequestStatus/get/QuotaRequest_InProgress
+     - name: /QuotaRequestStatus/get/QuotaRequest_Status
+     - name: /Reservation/get/GetReservation
+     - name: /Reservation/get/ReservationList
+     - name: /Reservation/get/ReservationRevisions
+     - name: /Reservation/patch/PatchReservation
+     - name: /Reservation/post/AvailableScopes
+     - name: /Reservation/post/Merge
+     - name: /Reservation/post/Split
+     - name: /reservations/get/AppliedReservationList
+     - name: /reservations/get/Catalog
+     - name: /ReservationOrder/put/Purchase
+     - name: /ReservationOrder/get/GetReservation
+     - name: /ReservationOrder/get/GetReservationWithExpandPayments
+     - name: /ReservationOrder/get/ReservationOrderList
+     - name: /ReservationOrder/post/Purchase
 ```
