@@ -4,7 +4,7 @@ These settings apply only when `--terraform` is specified on the command line.
 
 ``` yaml $(terraform)
 terraform:
-  cli_name: customproviders
+  cli-name: customproviders
   azure_arm: true
   license_header: MICROSOFT_MIT_NO_VERSION
   payload_flattening_threshold: 2
