@@ -95,10 +95,10 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "Get locations with a subscription id": {
+          "GetLocationsWithASubscriptionId": {
             "$ref": "./examples/GetLocations.json"
           },
-          "Get locations with extended locations": {
+          "GetLocationsWithExtendedLocations": {
             "$ref": "./examples/GetLocationsWithExtendedLocations.json"
           }
         }
@@ -128,7 +128,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a single subscription.": {
+          "GetASingleSubscription": {
             "$ref": "./examples/GetSubscription.json"
           }
         }
@@ -155,7 +155,7 @@
           }
         },
         "x-ms-examples": {
-          "Get all subscriptions.": {
+          "GetAllSubscriptions": {
             "$ref": "./examples/GetSubscriptions.json"
           }
         },
@@ -185,7 +185,7 @@
           }
         },
         "x-ms-examples": {
-          "Get all tenants.": {
+          "GetAllTenants": {
             "$ref": "./examples/GetTenants.json"
           }
         },
@@ -228,7 +228,7 @@
           }
         },
         "x-ms-examples": {
-          "Check validity for a resource name.": {
+          "CheckValidityForAResourceName": {
             "$ref": "./examples/CheckResourceName.json"
           }
         }
@@ -641,14 +641,10 @@
     },
     "ErrorDefinition": {
       "description": "Error description and code explaining why resource name is invalid.",
+      "x-ms-external": true,
       "properties": {
-        "message": {
-          "type": "string",
-          "description": "Description of the error."
-        },
-        "code": {
-          "type": "string",
-          "description": "Code of the error."
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       }
     },
