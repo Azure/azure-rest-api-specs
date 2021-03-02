@@ -17,7 +17,7 @@ cli:
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_LowPriorityResource
       disabled: true
     - name: /Quota/get/Quotas_listUsagesForCompute
-      disabled: true
+      disabled: false
     - name: /Quota/get/Quotas_listUsagesMachineLearningServices
       disabled: true
     - name: /Quota/get/Quotas_Request_ForCompute
