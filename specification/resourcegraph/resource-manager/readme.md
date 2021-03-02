@@ -175,5 +175,5 @@ terraform:
   payload_flattening_threshold: 2
   namespace: azure.mgmt.ResourceGraph
   package_name: azure-mgmt-ResourceGraph
-  clear_output_folder: false
+  clear-output-folder: false
 ```

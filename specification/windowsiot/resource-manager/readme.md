@@ -125,5 +125,5 @@ terraform:
     payload_flattening_threshold: 2
     namespace: windowsiot
     package-name: windowsiot
-    clear_output_folder: false
+    clear-output-folder: false
 ```

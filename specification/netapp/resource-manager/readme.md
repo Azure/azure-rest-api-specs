@@ -226,6 +226,6 @@ terraform:
     payload_flattening_threshold: 2
     namespace: netapp
     package-name: netapp
-    clear_output_folder: false
+    clear-output-folder: false
 ```
 

@@ -264,5 +264,5 @@ terraform:
     payload_flattening_threshold: 2
     namespace: logic
     package-name: logic
-    clear_output_folder: false
+    clear-output-folder: false
 ```

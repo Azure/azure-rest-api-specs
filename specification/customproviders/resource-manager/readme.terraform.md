@@ -10,7 +10,7 @@ terraform:
   payload_flattening_threshold: 2
   namespace: azure.mgmt.customproviders
   package_name: azure-mgmt-customproviders
-  clear_output_folder: false
+  clear-output-folder: true
 overrides:
   - where:
       property: resourceProviderName
