@@ -12,18 +12,21 @@ cli:
       where:
           operationGroup: 'operations'
       hidden: true
-      - where:
+    - select: 'operationGroup' 
+      where:
           operationGroup: 'quota_request_status'
         alias:
           - quotaStatus
           - status
           - s 
-      - where:
+    - select: 'operationGroup'          
+      where:
           operationGroup: 'quota'
         alias:
           - quota
-          - q    
-      - where:
+          - q 
+      - select: 'operationGroup'   
+        where:
           operationGroup: 'quota'
           param: 'ResourceName'
         alias:
