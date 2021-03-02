@@ -2881,11 +2881,13 @@
       "properties": {
         "name": {
           "description": "Name of the Sku",
-          "type": "string"
+          "type": "string",
+          "default": "S0"
         },
         "tier": {
           "description": "Tier of the Sku",
-          "type": "string"
+          "type": "string",
+          "default": "Standard"
         },
         "capacity": {
           "format": "int32",
@@ -3408,10 +3410,6 @@
           "description": "Indicate if only https is allowed.",
           "type": "boolean"
         },
-        "enableEndToEndTLS": {
-          "description": "Indicate if end to end TLS is enabled.",
-          "type": "boolean"
-        },
         "createdTime": {
           "format": "date-time",
           "description": "Date time when the resource is created",
@@ -3425,6 +3423,10 @@
         "persistentDisk": {
           "$ref": "#/definitions/PersistentDisk",
           "description": "Persistent disk settings"
+        },
+        "enableEndToEndTLS": {
+          "description": "Indicate if end to end TLS is enabled.",
+          "type": "boolean"
         }
       }
     },
