@@ -32,7 +32,7 @@ cli:
     - name: /QuotaRequestStatus/get/QuotaRequestStatus  
        disabled: false
     - name: /QuotaRequestStatus/get/QuotaRequestHistory
-      disabled: false   
+       disabled: false   
     - split: exchange
     - name: /CalculateExchange/post/CalculateExchange
       disabled: false
