@@ -3517,6 +3517,460 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}": {
+      "put": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_CreateOrUpdate",
+        "description": "The operation to create or update the restore point collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            },
+            "description": "Parameters supplied to the Create or Update restore point collection operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_Update",
+        "description": "The operation to update the restore point collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollectionUpdate"
+            },
+            "description": "Parameters supplied to the Update restore point collection operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_Delete",
+        "description": "The operation to delete the restore point collection. This operation will also delete all the contained restore points.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Restore Point Collection."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_Get",
+        "description": "The operation to get the restore point collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation. If true, server would return all contained restore points in response.",
+            "enum": [
+              "restorePoints"
+            ],
+            "x-ms-enum": {
+              "name": "RestorePointCollectionExpandOptions",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections": {
+      "get": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_List",
+        "description": "Gets the list of restore point collections in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/restorePointCollections": {
+      "get": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_ListAll",
+        "description": "Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}": {
+      "put": {
+        "operationId": "RestorePoints_CreateOrUpdate",
+        "description": "The operation to create the restore point. Updating properties of an existing restore point is not allowed",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            },
+            "description": "Parameters supplied to the Create restore point operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RestorePoints_Delete",
+        "description": "The operation to delete the restore point.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Restore Point Collection."
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "operationId": "RestorePoints_Get",
+        "description": "The operation to get the restore point.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes": {
       "get": {
         "tags": [
@@ -6888,6 +7342,305 @@
     }
   },
   "definitions": {
+    "RestorePointCollectionProperties": {
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Reference Id of the VM for which the restore points have to be created."
+        },
+        "restorePoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorePoint"
+          },
+          "description": "Gets a list containing all restore points created under this restore point collection."
+        }
+      },
+      "description": "The restore point collection properties."
+    },
+    "RestorePointCollection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestorePointCollectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Create or update Restore Point collection parameters."
+    },
+    "RestorePointCollectionUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestorePointCollectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Update Restore Point collection parameters."
+    },
+    "RestorePointCollectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorePointCollection"
+          },
+          "description": "Gets the list of restore point collections."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
+        }
+      },
+      "description": "The List restore point collection operation response."
+    },
+    "RestorePointProperties": {
+      "properties": {
+        "optionalProperties": {
+          "type": "object",
+          "description": "Optional properties to be passed for restore point creation (raw JSON)"
+        },
+        "sourceMetadata": {
+          "readOnly": true,
+          "$ref": "#/definitions/RestorePointSourceMetadata",
+          "description": "Gets the details of the VM captured at the time of creation of restore point."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the provisioning state of restore point, which only appears in the response."
+        },
+        "consistencyMode": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "CrashConsistent",
+            "FileSystemConsistent",
+            "ApplicationConsistent"
+          ],
+          "x-ms-enum": {
+            "name": "ConsistencyModeTypes",
+            "modelAsString": false
+          },
+          "description": "Gets or sets the consistency mode for the restore point."
+        },
+        "provisioningDetails": {
+          "$ref": "#/definitions/RestorePointProvisioningDetails",
+          "readOnly": true,
+          "description": "Gets the provisioning details set by the server during Create restore point operation."
+        },
+        "excludeDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiEntityReference"
+          },
+          "readOnly": false,
+          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
+        }
+      },
+      "description": "The restore point properties."
+    },
+    "RestorePointSourceMetadata": {
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Gets the hardware profile."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/RestorePointSourceVMStorageProfile",
+          "description": "Gets the storage profile."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile",
+          "description": "Gets the OS profile."
+        },
+        "diagnosticsProfile": {
+          "$ref": "#/definitions/DiagnosticsProfile",
+          "description": "Gets the diagnostics profile."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Gets the license type, which is for bring your own license scenario."
+        },
+        "vmId": {
+          "type": "string",
+          "description": "Gets the virtual machine unique id."
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine from which the restore point was created."
+    },
+    "RestorePointSourceVMStorageProfile": {
+      "properties": {
+        "osDisk": {
+          "$ref": "#/definitions/RestorePointSourceVMOSDisk",
+          "description": "Gets the OS disk of the VM captured at the time of creation of restore point."
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorePointSourceVMDataDisk"
+          },
+          "description": "Gets the data disks of the VM captured at the time of creation of restore point."
+        }
+      },
+      "description": "Describes the storage profile."
+    },
+    "RestorePointSourceVMOSDisk": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "Gets or sets the Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "encryptionSettings": {
+          "$ref": "#/definitions/DiskEncryptionSettings",
+          "description": "Gets or sets the disk encryption settings."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the disk name."
+        },
+        "caching": {
+          "$ref": "#/definitions/Caching",
+          "description": "Gets or sets the caching type."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the disk size in GB."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDiskParameters",
+          "description": "Gets the managed disk details"
+        },
+        "diskRestorePoint": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Gets or sets the disk restore point Id."
+        }
+      },
+      "description": "Describes an Operating System disk."
+    },
+    "RestorePointSourceVMDataDisk": {
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the logical unit number."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the disk name."
+        },
+        "caching": {
+          "$ref": "#/definitions/Caching",
+          "description": "Gets or sets the caching type."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDiskParameters",
+          "description": "Gets the managed disk details"
+        },
+        "diskRestorePoint": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Gets or sets the disk restore point Id."
+        }
+      },
+      "description": "Describes a data disk."
+    },
+    "RestorePointProvisioningDetails": {
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the creation time of the restore point."
+        },
+        "totalUsedSizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the total size of the data in all the disks which are part of the restore point."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the status of the Create restore point operation."
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Gets the status message of the Create restore point operation."
+        }
+      },
+      "description": "Restore Point Provisioning details."
+    },
+    "RestorePoint": {
+      "properties": {
+        "optionalProperties": {
+          "type": "object",
+          "description": "Optional properties to be passed for restore point creation (raw JSON)"
+        },
+        "sourceMetadata": {
+          "readOnly": true,
+          "$ref": "#/definitions/RestorePointSourceMetadata",
+          "description": "Gets the details of the VM captured at the time of creation of restore point."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the provisioning state of restore point, which only appears in the response."
+        },
+        "consistencyMode": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "CrashConsistent",
+            "FileSystemConsistent",
+            "ApplicationConsistent"
+          ],
+          "x-ms-enum": {
+            "name": "ConsistencyModeTypes",
+            "modelAsString": false
+          },
+          "description": "Gets or sets the consistency mode for the restore point."
+        },
+        "provisioningDetails": {
+          "$ref": "#/definitions/RestorePointProvisioningDetails",
+          "readOnly": true,
+          "description": "Gets the provisioning details set by the server during Create restore point operation."
+        },
+        "excludeDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiEntityReference"
+          },
+          "readOnly": false,
+          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "description": "Restore Point details."
+    },
     "ComputeOperationListResult": {
       "properties": {
         "value": {
@@ -12286,6 +13039,27 @@
         }
       },
       "description": "Api error."
+    },
+    "ProxyOnlyResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "The ProxyOnly Resource model definition."
     },
     "Resource": {
       "description": "The Resource model definition.",
