@@ -28,16 +28,26 @@ These are the global settings for the StreamAnalytics API.
 title: Stream Analytics Management Client
 description: Stream Analytics Client
 openapi-type: arm
-tag: package-2020-03-preview
+tag: package-2020-03
 ```
 
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.StreamAnalytics/stable/2020-03-01/clusters.json
+  - Microsoft.StreamAnalytics/stable/2020-03-01/privateEndpoints.json
+```
 ### Tag: package-2020-03-preview
 
 These settings apply only when `--tag=package-2020-03-preview` is specified on the command line.
 
 This section contains the composite set of APIs. Stream Analytics Cluster and Private Endpoint related APIs are under 2020-03-01-preview version. Streamingjobs related APIs are under 2017-04-01-preview version.
 
-```yaml $(tag) == 'package-2020-03-preview'
+``` yaml $(tag) == 'package-2020-03-preview'
 input-file:
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/functions.json
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/inputs.json
@@ -54,9 +64,9 @@ input-file:
 
 These settings apply only when `--tag=package-pure-2020-03-preview` is specified on the command line.
 
-This section only contains input swagger files for version 2020-03-01-preview, including Stream Analytics Cluster and Private Endpoint related APIs.  
+This section only contains input swagger files for version 2020-03-01-preview, including Stream Analytics Cluster and Private Endpoint related APIs.
 
-```yaml $(tag) == 'package-pure-2020-03-preview'
+``` yaml $(tag) == 'package-pure-2020-03-preview'
 input-file:
   - Microsoft.StreamAnalytics/preview/2020-03-01-preview/clusters.json
   - Microsoft.StreamAnalytics/preview/2020-03-01-preview/privateEndpoints.json
@@ -66,9 +76,9 @@ input-file:
 
 These settings apply only when `--tag=package-pure-2017-04-preview` is specified on the command line.
 
-This section only contains input swagger files for version 2017-04-01-preview, including streamingjobs related APIs. 
+This section only contains input swagger files for version 2017-04-01-preview, including streamingjobs related APIs.
 
-```yaml $(tag) == 'package-pure-2017-04-preview'
+``` yaml $(tag) == 'package-pure-2017-04-preview'
 input-file:
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/functions.json
   - Microsoft.StreamAnalytics/preview/2017-04-01-preview/inputs.json
@@ -232,4 +242,3 @@ directive:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
