@@ -1,18 +1,32 @@
 {
   "parameters": {
-    "namespaceName": "sdk-Namespace-5849",
-    "resourceGroupName": "ArunMonocle",
-    "api-version": "2017-04-01",
-    "subscriptionId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4",
+    "namespaceName": "NamespaceSample",
+    "resourceGroupName": "ResurceGroupSample",
+    "api-version": "2021-01-01-preview",
+    "subscriptionId": "SampleSubscription",
     "parameters": {
-      "sku": {
-        "name": "Standard",
-        "tier": "Standard"
+      "location": "East US",
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1": {},
+          "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud2": {}
+        }
       },
-      "location": "South Central US",
-      "tags": {
-        "tag1": "value1",
-        "tag2": "value2"
+      "properties": {
+        "encryption": {
+          "keyVaultProperties": [
+            {
+              "keyName": "Samplekey",
+              "keyVaultUri": "https://aprao-keyvault-user.vault-int.azure-int.net/",
+              "identity": {
+                "userAssignedIdentity": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1"
+              }
+            }
+          ],
+          "keySource": "Microsoft.KeyVault"
+        },
+        "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/enc-test"
       }
     }
   },
@@ -24,22 +38,51 @@
           "tier": "Standard",
           "capacity": 1
         },
-        "id": "/subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ArunMonocle/providers/Microsoft.EventHub/namespaces/sdk-Namespace-5849",
-        "name": "sdk-Namespace-5849",
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceSample",
+        "name": "NamespaceSample",
         "type": "Microsoft.EventHub/Namespaces",
-        "location": "South Central US",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
+        "location": "East US",
+        "tags": {},
+        "identity": {
+          "principalId": "PrincipalIdGUID",
+          "tenantId": "TenantIdGUID",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1": {
+              "clientId": "ClientIdGUID",
+              "principalId": "PrincipalIdGUID"
+            },
+            "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud2": {
+              "clientId": "6a35400f-6ccb-4817-8f1a-ce19ea4523bc",
+              "principalId": "ce2d5953-5c15-40ca-9d51-cc3f4a63b0f5"
+            }
+          }
         },
         "properties": {
+          "zoneRedundant": false,
           "isAutoInflateEnabled": false,
           "maximumThroughputUnits": 0,
-          "provisioningState": "Created",
-          "metricId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4:sdk-namespace-5849",
-          "createdAt": "2017-05-24T23:23:27.877Z",
-          "updatedAt": "2017-05-24T23:23:27.877Z",
-          "serviceBusEndpoint": "https://sdk-Namespace-5849.servicebus.windows-int.net:443/"
+          "encryption": {
+            "keySource": "Microsoft.KeyVault",
+            "keyVaultProperties": [
+              {
+                "keyName": "Samplekey",
+                "keyVaultUri": "https://sample-keyvault-user.vault-int.azure-int.net",
+                "keyVersion": "",
+                "identity": {
+                  "userAssignedIdentity": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1"
+                }
+              }
+            ],
+            "requireInfrastructureEncryption": false
+          },
+          "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/enc-test",
+          "kafkaEnabled": false,
+          "provisioningState": "Succeeded",
+          "metricId": "MetricGUID:NamespaceSample",
+          "createdAt": "2021-02-16T22:36:06.107Z",
+          "updatedAt": "2021-02-16T22:37:42.29Z",
+          "serviceBusEndpoint": "https://NamespaceSample.servicebus.windows-int.net:443/"
         }
       }
     },
@@ -50,22 +93,51 @@
           "tier": "Standard",
           "capacity": 1
         },
-        "id": "/subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ArunMonocle/providers/Microsoft.EventHub/namespaces/sdk-Namespace-5849",
-        "name": "sdk-Namespace-5849",
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceSample",
+        "name": "NamespaceSample",
         "type": "Microsoft.EventHub/Namespaces",
-        "location": "South Central US",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
+        "location": "East US",
+        "tags": {},
+        "identity": {
+          "principalId": "PrincipalIdGUID",
+          "tenantId": "TenantIdGUID",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1": {
+              "clientId": "ClientIdGUID",
+              "principalId": "PrincipalIdGUID"
+            },
+            "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud2": {
+              "clientId": "6a35400f-6ccb-4817-8f1a-ce19ea4523bc",
+              "principalId": "ce2d5953-5c15-40ca-9d51-cc3f4a63b0f5"
+            }
+          }
         },
         "properties": {
+          "zoneRedundant": false,
           "isAutoInflateEnabled": false,
           "maximumThroughputUnits": 0,
-          "provisioningState": "Created",
-          "metricId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4:sdk-namespace-5849",
-          "createdAt": "2017-05-24T23:23:27.877Z",
-          "updatedAt": "2017-05-24T23:23:27.877Z",
-          "serviceBusEndpoint": "https://sdk-Namespace-5849.servicebus.windows-int.net:443/"
+          "encryption": {
+            "keySource": "Microsoft.KeyVault",
+            "keyVaultProperties": [
+              {
+                "keyName": "Samplekey",
+                "keyVaultUri": "https://sample-keyvault-user.vault-int.azure-int.net",
+                "keyVersion": "",
+                "identity": {
+                  "userAssignedIdentity": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1"
+                }
+              }
+            ],
+            "requireInfrastructureEncryption": false
+          },
+          "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/enc-test",
+          "kafkaEnabled": false,
+          "provisioningState": "Succeeded",
+          "metricId": "MetricGUID:NamespaceSample",
+          "createdAt": "2021-02-16T22:36:06.107Z",
+          "updatedAt": "2021-02-16T22:37:42.29Z",
+          "serviceBusEndpoint": "https://NamespaceSample.servicebus.windows-int.net:443/"
         }
       }
     },
