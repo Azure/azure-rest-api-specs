@@ -313,6 +313,14 @@
             "$ref": "#/definitions/RoutingRuleLink"
           }
         },
+        "securityPolicyLinks": {
+          "description": "Describes Security Policy associated with this Web Application Firewall policy.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SecurityPolicyLink"
+          }
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -821,7 +829,8 @@
             "RequestHeaderNames",
             "RequestCookieNames",
             "QueryStringArgNames",
-            "RequestBodyPostArgNames"
+            "RequestBodyPostArgNames",
+            "RequestBodyJsonArgNames"
           ],
           "description": "The variable type to be excluded.",
           "x-ms-enum": {
@@ -918,6 +927,17 @@
     },
     "RoutingRuleLink": {
       "description": "Defines the Resource ID for a Routing Rule.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      }
+    },
+    "SecurityPolicyLink": {
+      "description": "Defines the Resource ID for a Security Policy.",
       "type": "object",
       "readOnly": true,
       "properties": {

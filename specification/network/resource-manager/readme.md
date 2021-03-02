@@ -31,7 +31,6 @@ openapi-type: arm
 tag: package-2020-11
 ```
 
-
 ### Tag: package-2020-11
 
 These settings apply only when `--tag=package-2020-11` is specified on the command line.
@@ -1596,6 +1595,24 @@ input-file:
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManagerConnectivityConfiguration.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManagerSecurityConfiguration.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManager.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManagerGroup.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManagerEffectiveConfiguration.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManagerActiveConfiguration.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: applicationGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -1817,12 +1834,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    autorest_options:
-      use: "@microsoft.azure/autorest.python@4.0.70"
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-network
-      - python ./scripts/trim_aio.py ./sdk/network/azure-mgmt-network
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

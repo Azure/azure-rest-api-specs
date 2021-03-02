@@ -2496,7 +2496,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The resource types you want to force delete. Currently, only the following is supported: forceDeletionResourceTypes=Microsoft.Compute/virtualMachines"
+            "description": "The resource types you want to force delete. Currently, only the following is supported: forceDeletionResourceTypes=Microsoft.Compute/virtualMachines,Microsoft.Compute/virtualMachineScaleSets"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2508,6 +2508,9 @@
         "x-ms-examples": {
           "Force delete all the Virtual Machines in a resource group": {
             "$ref": "./examples/ForceDeleteVMsInResourceGroup.json"
+          },
+          "Force delete all the Virtual Machines and Virtual Machine Scale Sets in a resource group": {
+            "$ref": "./examples/ForceDeleteVMsAndVMSSInResourceGroup.json"
           }
         },
         "responses": {
