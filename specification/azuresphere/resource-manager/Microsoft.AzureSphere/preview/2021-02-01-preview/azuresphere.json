@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow.",
+      "description": "Azure Active Directory OAuth2 flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -53,7 +53,7 @@
           "200": {
             "description": "The list of supported operations has been retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/ListOperationsResponse"
+              "$ref": "#/definitions/GetOperationsResponse"
             }
           },
           "default": {
@@ -78,7 +78,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "Returns a list of Azure Sphere Catalogs for the given subscriptionId",
+        "description": "Returns a list of catalogs for the given subscriptionId.",
         "operationId": "CatalogsBySubscription_List",
         "parameters": [
           {
@@ -90,9 +90,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure Sphere Catalogs for the subscription details.",
+            "description": "Catalogs for the subscription details.",
             "schema": {
-              "$ref": "#/definitions/CatalogList"
+              "$ref": "#/definitions/GetCatalogsResponse"
             }
           },
           "default": {
@@ -107,7 +107,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Get a list of Azure Sphere Catalogs for a given subscription.": {
+          "Get a list of catalogs for a given subscription.": {
             "$ref": "./examples/GetCatalogsSub.json"
           }
         }
@@ -118,7 +118,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "Returns a list of Azure Sphere Catalogs in the given resource group.",
+        "description": "Get a list of catalogs in the given resource group.",
         "operationId": "Catalogs_List",
         "parameters": [
           {
@@ -133,9 +133,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of Azure Sphere Catalogs for the subscription.",
+            "description": "The list of catalogs for the given resource group.",
             "schema": {
-              "$ref": "#/definitions/CatalogList"
+              "$ref": "#/definitions/GetCatalogsResponse"
             }
           },
           "default": {
@@ -150,7 +150,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Get a list of Azure Sphere Catalogs for a given resource group.": {
+          "Get a list of catalogs for a given resource group.": {
             "$ref": "./examples/GetCatalogsRG.json"
           }
         }
@@ -161,7 +161,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "Returns an Azure Sphere Catalog by name.",
+        "description": "Returns a catalog by name.",
         "operationId": "Catalogs_Get",
         "parameters": [
           {
@@ -179,7 +179,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure Sphere Catalog details.",
+            "description": "Catalog details.",
             "schema": {
               "$ref": "#/definitions/Catalog"
             }
@@ -192,7 +192,7 @@
           }
         },
         "x-ms-examples": {
-          "Get the details of an Azure Sphere Catalog.": {
+          "Get the details of a catalog.": {
             "$ref": "./examples/GetCatalog.json"
           }
         }
@@ -201,7 +201,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "Create or update an Azure Sphere Catalog.",
+        "description": "Create or update a catalog.",
         "operationId": "Catalogs_CreateOrUpdate",
         "parameters": [
           {
@@ -218,7 +218,7 @@
           },
           {
             "name": "Catalog",
-            "description": "Azure Sphere Catalog details.",
+            "description": "Catalog details.",
             "in": "body",
             "required": true,
             "schema": {
@@ -241,7 +241,7 @@
           }
         },
         "x-ms-examples": {
-          "Put the details of the Azure Sphere Catalog.": {
+          "Put the details of the catalog.": {
             "$ref": "./examples/PutCatalog.json"
           }
         }
@@ -250,7 +250,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "Patch an Azure Sphere Catalog.",
+        "description": "Patch a catalog.",
         "operationId": "Catalogs_Update",
         "parameters": [
           {
@@ -267,7 +267,7 @@
           },
           {
             "name": "Catalog",
-            "description": "Azure Sphere Catalog details.",
+            "description": "Catalog details.",
             "in": "body",
             "required": true,
             "schema": {
@@ -290,7 +290,7 @@
           }
         },
         "x-ms-examples": {
-          "Patch an Azure Sphere Catalog.": {
+          "Patch a catalog.": {
             "$ref": "./examples/PatchCatalog.json"
           }
         }
@@ -299,7 +299,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "Delete an Azure Sphere Catalog.",
+        "description": "Delete an catalog.",
         "operationId": "Catalogs_Delete",
         "parameters": [
           {
@@ -323,7 +323,7 @@
             }
           },
           "204": {
-            "description": "Successful. Resource marked for deletion",
+            "description": "Successful. Resource marked for deletion.",
             "schema": {
               "$ref": "#/definitions/Catalog"
             }
@@ -336,7 +336,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an Azure Sphere Catalog.": {
+          "Delete a catalog.": {
             "$ref": "./examples/DeleteCatalog.json"
           }
         }
@@ -347,7 +347,7 @@
         "tags": [
           "Products"
         ],
-        "description": "Returns the associated products of a given Azure Sphere Catalog by Name",
+        "description": "Returns the associated products of a given catalog by name.",
         "operationId": "Products_List",
         "parameters": [
           {
@@ -365,9 +365,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure Sphere Products for the Azure Sphere Catalog in the subscription.",
+            "description": "Products for the catalog in the subscription.",
             "schema": {
-              "$ref": "#/definitions/ProductList"
+              "$ref": "#/definitions/GetProductsResponse"
             }
           },
           "default": {
@@ -382,7 +382,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Get products in an Azure Sphere product.": {
+          "Get products in a product.": {
             "$ref": "./examples/GetProducts.json"
           }
         }
@@ -393,7 +393,7 @@
         "tags": [
           "Products"
         ],
-        "description": "Returns the associated Product for a given Azure Sphere Catalog by Name",
+        "description": "Gets the associated product from a given catalog by name.",
         "operationId": "Products_Get",
         "parameters": [
           {
@@ -414,7 +414,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Product.",
+            "description": "Product details.",
             "schema": {
               "$ref": "#/definitions/Product"
             }
@@ -427,7 +427,7 @@
           }
         },
         "x-ms-examples": {
-          "Get the details of an Azure Sphere product.": {
+          "Get the details of a product.": {
             "$ref": "./examples/GetProduct.json"
           }
         }
@@ -436,7 +436,7 @@
         "tags": [
           "Products"
         ],
-        "description": "Create or update an Azure Sphere Product.",
+        "description": "Create or update a  product.",
         "operationId": "Products_CreateOrUpdate",
         "parameters": [
           {
@@ -456,7 +456,7 @@
           },
           {
             "name": "Product",
-            "description": "Azure Sphere Product details.",
+            "description": "Product details.",
             "in": "body",
             "required": true,
             "schema": {
@@ -479,7 +479,7 @@
           }
         },
         "x-ms-examples": {
-          "Put an Azure Sphere product.": {
+          "Put a product.": {
             "$ref": "./examples/PutProduct.json"
           }
         }
@@ -488,7 +488,7 @@
         "tags": [
           "Products"
         ],
-        "description": "Patch Azure Sphere Product.",
+        "description": "Patch a product.",
         "operationId": "Products_Update",
         "parameters": [
           {
@@ -508,7 +508,7 @@
           },
           {
             "name": "Product",
-            "description": "Azure Sphere Product patch details.",
+            "description": "Product details.",
             "in": "body",
             "required": true,
             "schema": {
@@ -531,7 +531,7 @@
           }
         },
         "x-ms-examples": {
-          "Patch an Azure Sphere product.": {
+          "Patch a product.": {
             "$ref": "./examples/PatchProduct.json"
           }
         }
@@ -540,7 +540,7 @@
         "tags": [
           "Products"
         ],
-        "description": "Delete Product in an Azure Sphere Catalog.",
+        "description": "Delete a product from a catalog.",
         "operationId": "Products_Delete",
         "parameters": [
           {
@@ -580,7 +580,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an Azure Sphere product.": {
+          "Delete a product.": {
             "$ref": "./examples/DeleteProduct.json"
           }
         }
@@ -590,26 +590,26 @@
   "definitions": {
     "Resource": {
       "type": "object",
-      "description": "An Azure Sphere Resource.",
+      "description": "An Azure Sphere resource.",
       "properties": {
         "id": {
-          "description": "Azure Sphere resource Id.",
+          "description": "Resource Id.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "Azure Sphere resource name.",
+          "description": "Resource name.",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "Azure Sphere resource type.",
+          "description": "Resource type.",
           "type": "string",
           "readOnly": true
         },
         "location": {
           "type": "string",
-          "description": "The Azure Sphere resource location.",
+          "description": "Resource location.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -632,7 +632,7 @@
     },
     "Catalog": {
       "type": "object",
-      "description": "Azure Sphere Catalog details",
+      "description": "Catalog details.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -640,9 +640,19 @@
       ],
       "properties": {
         "properties": {
+          "description": "Catalog properties.",
+          "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
+            "description": {
+              "type": "string",
+              "description": "Catalog description.",
+              "minLength": 1,
+              "maxLength": 150,
+              "pattern": "^[A-Za-z0-9-._ ]+$"
+            },
             "provisioningState": {
+              "description": "Current provisioning state.",
               "type": "string",
               "readOnly": true
             }
@@ -732,12 +742,12 @@
         }
       }
     },
-    "ListOperationsResponse": {
+    "GetOperationsResponse": {
       "type": "object",
       "description": "Result of a request to list all operations supported by Microsoft.AzureSphere resource provider.",
       "properties": {
         "value": {
-          "description": "The list of Azure Sphere Operations.",
+          "description": "The list of available operations.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -745,22 +755,22 @@
           }
         },
         "nextLink": {
-          "description": "The link used to get the next page of Azure Sphere Operations list, if any.",
+          "description": "The link used to get the next page of operations list, if any.",
           "type": "string",
           "readOnly": true
         }
       }
     },
-    "CatalogList": {
-      "description": "The list of Azure Sphere Catalogs.",
+    "GetCatalogsResponse": {
+      "description": "A collection of catalogs.",
       "type": "object",
       "properties": {
         "nextLink": {
-          "description": "The link used to get the next page of Azure Sphere Catalog list.",
+          "description": "The link used to get the next page of catalog list.",
           "type": "string"
         },
         "value": {
-          "description": "The list of Azure Sphere Catalogs.",
+          "description": "A collection of catalogs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Catalog"
@@ -770,7 +780,7 @@
     },
     "Product": {
       "type": "object",
-      "description": "Azure Sphere product details",
+      "description": "Product details",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -778,9 +788,19 @@
       ],
       "properties": {
         "properties": {
+          "description": "Product properties.",
+          "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
+            "description": {
+              "type": "string",
+              "description": "Product description.",
+              "minLength": 1,
+              "maxLength": 150,
+              "pattern": "^[A-Za-z0-9-._ ]+$"
+            },
             "provisioningState": {
+              "description": "Current provisioning state.",
               "type": "string",
               "readOnly": true
             }
@@ -788,16 +808,16 @@
         }
       }
     },
-    "ProductList": {
-      "description": "The list of Azure Sphere Products.",
+    "GetProductsResponse": {
+      "description": "The collection of products.",
       "type": "object",
       "properties": {
         "nextLink": {
-          "description": "The link used to get the next page of the Azure Sphere Product list.",
+          "description": "The link used to get the next page of the product collection.",
           "type": "string"
         },
         "value": {
-          "description": "The list of Azure Sphere products.",
+          "description": "The collection of products.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Product"
@@ -834,7 +854,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Azure Sphere Catalog.",
+      "description": "The name of the catalog.",
       "x-ms-parameter-location": "method"
     },
     "ProductNameParameter": {
@@ -842,7 +862,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of associated Azure Sphere Product.",
+      "description": "The name of associated product.",
       "x-ms-parameter-location": "method"
     }
   }
