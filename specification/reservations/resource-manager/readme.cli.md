@@ -27,10 +27,12 @@ cli:
     - split: quotaRequests
     - name: /QuotaRequestStatus/get/QuotaRequestFailed
       disabled: true
-    - name: /QuotaRequestStatus/get/QuotaRequestHistory
     - name: /QuotaRequestStatus/get/QuotaRequestInProgress
       disabled: true
     - name: /QuotaRequestStatus/get/QuotaRequestStatus  
+       disabled: false
+    - name: /QuotaRequestStatus/get/QuotaRequestHistory
+      disabled: false   
     - split: exchange
     - name: /CalculateExchange/post/CalculateExchange
       disabled: false
