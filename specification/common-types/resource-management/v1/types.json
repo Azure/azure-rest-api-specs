@@ -120,6 +120,13 @@
           ],
           "description": "The geo-location where the resource lives"
         },
+        "extendedLocation": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ExtendedLocation"
+            }
+          ]
+        },
         "managedBy": {
           "type": "string",
           "x-ms-mutability": [
@@ -178,6 +185,26 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ExtendedLocation": {
+      "description": "The resource model definition representing extended location",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "EdgeZone"
+          ],
+          "x-ms-enum": {
+            "name": "ExtendedLocationType",
+            "modelAsString": true
+          },
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
     },
     "Sku": {
       "description": "The resource model definition representing SKU",
