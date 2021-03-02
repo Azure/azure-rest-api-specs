@@ -42,7 +42,7 @@
         "description": "Get the current quota (service limit) and usage of a resource. You can use the response from the GET operation to submit quota update request.",
         "operationId": "Quota_Get",
         "x-ms-examples": {
-          "Quotas_Info_Compute": {
+          "Quota_Info_Compute": {
             "$ref": "./examples/getComputeOneSkuUsages.json"
           }
         },
@@ -91,13 +91,13 @@
         "description": "Create or update the quota (service limits) of a resource to the requested value.\n Steps:\n\r  1. Make the Get request to get the quota information for specific resource.\n\r  2. To increase the quota, update the limit field in the response from Get request to new value.\n\r  3. Submit the JSON to the quota request API to update the quota.\r\n  The Create quota request may be constructed as follows. The PUT operation can be used to update the quota.",
         "operationId": "Quota_CreateOrUpdate",
         "x-ms-examples": {
-          "Quotas_Request_Put_Compute": {
+          "Quota_Request_Put_Compute": {
             "$ref": "./examples/putComputeOneSkuQuotaRequest.json"
           },
-          "Quotas_Request_Put_MachineLearningServices_DedicatedResource": {
+          "Quota_Request_Put_MachineLearningServices_DedicatedResource": {
             "$ref": "./examples/putMachineLearningServicesQuotaRequestDedicated.json"
           },
-          "Quotas_Request_Put_MachineLearningServices_LowPriorityResource": {
+          "Quota_Request_Put_MachineLearningServices_LowPriorityResource": {
             "$ref": "./examples/putMachineLearningServicesQuotaRequestLowPriority.json"
           }
         },
@@ -159,7 +159,7 @@
         "description": "Update the quota (service limits) of this resource to the requested value.\n\r  • To get the quota information for specific resource, send a GET request.\n\r  • To increase the quota, update the limit field from the GET response to a new value.\n\r  • To update the quota value, submit the JSON response to the quota request API to update the quota.\r\n  • To update the quota. use the PATCH operation.",
         "operationId": "Quota_Update",
         "x-ms-examples": {
-          "Quotas_Request_Patch_Compute": {
+          "Quota_Request_Patch_Compute": {
             "$ref": "./examples/patchComputeQuotaRequest.json"
           }
         },
@@ -223,10 +223,10 @@
         "description": "Gets a list of current quotas (service limits) and usage for all resources. The response from the list quota operation can be leveraged to request quota updates.",
         "operationId": "Quota_List",
         "x-ms-examples": {
-          "Quotas_List_Usages_Compute": {
+          "Quotas_List_Compute": {
             "$ref": "./examples/getComputeUsages.json"
           },
-          "Quotas_List_Usages_MachineLearningServices": {
+          "Quotas_List_MachineLearningServices": {
             "$ref": "./examples/getMachineLearningServicesUsages.json"
           }
         },
@@ -275,13 +275,13 @@
           "QuotaRequests"
         ],
         "x-ms-examples": {
-          "QuotaRequestStatus": {
+          "QuotaRequest_Status": {
             "$ref": "./examples/getQuotaRequestStatusById.json"
           },
-          "QuotaRequestInProgress": {
+          "QuotaRequest_InProgress": {
             "$ref": "./examples/getQuotaRequestStatusInProgress.json"
           },
-          "QuotaRequestFailed": {
+          "QuotaRequest_Failed": {
             "$ref": "./examples/getQuotaRequestStatusFailed.json"
           }
         },
