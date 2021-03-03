@@ -2,7 +2,6 @@
   "parameters": {
     "Endpoint": "https://westus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
-    "Content-Type": "application/json",
     "testDefinition": {
       "models": [
         {
@@ -17,7 +16,30 @@
       },
       "name": "Accuracy test",
       "description": "This is an accuracy test"
-    }
+    },
+    "Content-Type": "application/json"
   },
-  "responses": {}
+  "responses": {
+    "401": {
+      "headers": {},
+      "body": {
+        "code": "Unauthorized",
+        "message": "Authentication is required to access the resource."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "code": "Forbidden",
+        "message": "No permission to access this resource."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "code": "TooManyRequests",
+        "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+      }
+    }
+  }
 }

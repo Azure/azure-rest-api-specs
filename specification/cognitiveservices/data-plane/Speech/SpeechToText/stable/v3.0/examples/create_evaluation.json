@@ -2,21 +2,21 @@
   "parameters": {
     "Endpoint": "https://westus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
-    "Content-Type": "application/json",
     "evaluation": {
       "model1": {
         "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/base/8a043172-65b7-4cf3-a8b5-4449efa5a0f1"
       },
       "model2": {
-        "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/021a72d0-54c4-43d3-8254-27336ead9037"
+        "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/827712a5-f942-4997-91c3-7c6cde35600b"
       },
       "dataset": {
-        "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/ca588c0f-7637-47db-a137-dd4223a42d93"
+        "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1"
       },
       "locale": "en-US",
       "displayName": "My new evaluation",
       "description": "The description of the evaluation"
-    }
+    },
+    "Content-Type": "application/json"
   },
   "responses": {
     "200": {
@@ -27,16 +27,16 @@
           "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/base/8a043172-65b7-4cf3-a8b5-4449efa5a0f1"
         },
         "model2": {
-          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/021a72d0-54c4-43d3-8254-27336ead9037"
+          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/827712a5-f942-4997-91c3-7c6cde35600b"
         },
         "dataset": {
-          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/ca588c0f-7637-47db-a137-dd4223a42d93"
+          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1"
         },
         "transcription2": {
           "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/transcriptions/ad86d0c9-af6d-4d14-a621-c60d7d65b74f"
         },
         "transcription1": {
-          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/transcriptions/9c142230-a9e4-4dbb-8cc7-70ca43d5cc91"
+          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/transcriptions/ba7ea6f5-3065-40b7-b49a-a90f48584683"
         },
         "links": {
           "files": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/evaluations/00000000-0000-0000-0000-000000000000/files"
@@ -64,6 +64,38 @@
         "createdDateTime": "2019-01-07T12:34:12Z",
         "locale": "en-US",
         "displayName": "Evalution of one model against another model"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "code": "InvalidRequest",
+        "message": "The base model isn't valid for this operation.",
+        "innerError": {
+          "code": "InvalidBaseModel",
+          "message": "The base model isn't valid for this operation."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "code": "Unauthorized",
+        "message": "Authentication is required to access the resource."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "code": "Forbidden",
+        "message": "No permission to access this resource."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "code": "TooManyRequests",
+        "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
       }
     }
   }

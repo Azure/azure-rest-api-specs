@@ -2,7 +2,6 @@
   "parameters": {
     "Endpoint": "https://westus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
-    "Content-Type": "application/json",
     "webHook": {
       "displayName": "TranscriptionCompletionWebHook",
       "properties": {
@@ -13,7 +12,8 @@
         "transcriptionCompletion": true
       },
       "description": "I registered this URL to get a POST request for each completed transcription."
-    }
+    },
+    "Content-Type": "application/json"
   },
   "responses": {
     "201": {
@@ -36,6 +36,38 @@
         "createdDateTime": "2018-11-11T00:00:00Z",
         "lastActionDateTime": "2018-11-28T00:00:00Z",
         "status": "NotStarted"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "code": "InvalidRequest",
+        "message": "The base model isn't valid for this operation.",
+        "innerError": {
+          "code": "InvalidBaseModel",
+          "message": "The base model isn't valid for this operation."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "code": "Unauthorized",
+        "message": "Authentication is required to access the resource."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "code": "Forbidden",
+        "message": "No permission to access this resource."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "code": "TooManyRequests",
+        "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
       }
     }
   }
