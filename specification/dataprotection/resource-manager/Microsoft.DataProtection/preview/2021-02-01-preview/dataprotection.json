@@ -1985,8 +1985,6 @@
         },
         "duration": {
           "description": "Total run time of the job. ISO 8601 format.",
-          "format": "date-time",
-          "readOnly": true,
           "type": "string"
         },
         "endTime": {
@@ -2018,17 +2016,7 @@
         },
         "operationCategory": {
           "description": "It indicates the type of Job i.e. Backup/Restore/Tiering/Management",
-          "type": "string",
-          "enum": [
-            "Backup",
-            "Restore",
-            "Management",
-            "Tiering"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "JobOperationCategory"
-          }
+          "type": "string"
         },
         "policyId": {
           "description": "ARM ID of the policy",
