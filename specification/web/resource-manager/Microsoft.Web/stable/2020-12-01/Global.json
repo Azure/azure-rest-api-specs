@@ -51,6 +51,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Deleted Web App": {
+            "$ref": "./examples/GetDeletedWebApp.json"
+          }
         }
       }
     },
@@ -92,6 +97,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Deleted Web App Snapshots": {
+            "$ref": "./examples/GetDeletedWebAppSnapshots.json"
           }
         }
       }
@@ -245,7 +255,7 @@
   },
   "definitions": {
     "ArmOperationResponse": {
-      "description": "ArmOperationResponse",
+      "description": "ARM Operation Response",
       "required": [
         "status"
       ],
@@ -265,7 +275,7 @@
       }
     },
     "ArmOperationResponseError": {
-      "description": "ArmOperationResponse",
+      "description": "ARM Operation Response Error",
       "required": [
         "code",
         "message"
@@ -273,7 +283,7 @@
       "type": "object",
       "properties": {
         "code": {
-          "description": "Code",
+          "description": "Code of error",
           "type": "string"
         },
         "message": {
