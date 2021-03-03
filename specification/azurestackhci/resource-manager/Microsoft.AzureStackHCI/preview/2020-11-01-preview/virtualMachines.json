@@ -518,23 +518,6 @@
           },
           "description": "SecurityProfile - Specifies the security settings for the virtual machine."
         },
-        "storageProfileUpdate": {
-          "type": "object",
-          "properties": {
-            "dataDisks": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  }
-                }
-              },
-              "description": "adds data disks to the virtual machine for the update call"
-            }
-          }
-        },
         "storageProfile": {
           "type": "object",
           "properties": {
@@ -628,6 +611,23 @@
       ],
       "description": "The virtualmachines resource definition."
     },
+    "storageProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "adds data disks to the virtual machine for the update call"
+        }
+      }
+    },
     "virtualMachineUpdateProperties": {
       "description": "Defines the resource properties for the update.",
       "type": "object",
@@ -636,7 +636,7 @@
           "$ref": "#/definitions/virtualmachinesProperties/hardwareProfile"
         },
         "storageProfile": {
-          "$ref": "#/definitions/virtualmachinesProperties/storageProfileUpdate"
+          "$ref": "#/definitions/storageProfileUpdate"
         },
         "networkProfile": {
           "$ref": "#/definitions/virtualmachinesProperties/networkProfile"
