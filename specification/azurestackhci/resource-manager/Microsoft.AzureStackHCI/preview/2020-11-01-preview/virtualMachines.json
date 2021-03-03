@@ -611,6 +611,44 @@
       ],
       "description": "The virtualmachines resource definition."
     },
+    "hardwareProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "vmSize": {
+          "type": "string"
+        },
+        "processors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "number of processors for the virtual machine"
+        },
+        "memoryMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "RAM in mb for the virtual machine"
+        }
+      },
+      "description": "HardwareProfile - Specifies the hardware settings for the virtual machine."
+    },
+    "networkProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "ID - Resource Id"
+              }
+            }
+          },
+          "description": "NetworkInterfaces - list of network interfaces to be attached to the virtual machine"
+        }
+      },
+      "description": "NetworkProfile - describes the network update configuration the virtual machine"
+    },
     "storageProfileUpdate": {
       "type": "object",
       "properties": {
@@ -633,13 +671,13 @@
       "type": "object",
       "properties": {
         "hardwareProfile": {
-          "$ref": "#/definitions/virtualmachinesProperties/hardwareProfile"
+          "$ref": "#/definitions/hardwareProfileUpdate"
         },
         "storageProfile": {
           "$ref": "#/definitions/storageProfileUpdate"
         },
         "networkProfile": {
-          "$ref": "#/definitions/virtualmachinesProperties/networkProfile"
+          "$ref": "#/definitions/networkProfileUpdate"
         }
       }
     },
