@@ -312,22 +312,12 @@
               "$ref": "#/definitions/Account"
             }
           },
-          "201": {
-            "description": "Account updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Updates Account": {
@@ -800,15 +790,8 @@
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request.",
       "properties": {
-        "code": {
-          "description": "Error status code.",
-          "type": "string",
-          "readOnly": true
-        },
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
-          "description": "Error details.",
-          "readOnly": true
         }
       }
     },
