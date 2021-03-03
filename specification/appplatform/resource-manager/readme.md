@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-11
+tag: package-preview-2021-03
 ```
 
 ### Suppression
@@ -50,14 +50,23 @@ directive:
 ```
 
 
+### Tag: package-preview-2021-03
+
+These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-03'
+input-file:
+  - Microsoft.AppPlatform/preview/2021-03-03-preview/appplatform.json
+```
 ### Tag: package-preview-2020-11
 
 These settings apply only when `--tag=package-preview-2020-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-11'
+``` yaml $(tag) == 'package-preview-2020-11'
 input-file:
   - Microsoft.AppPlatform/preview/2020-11-01-preview/appplatform.json
 ```
+
 ### Tag: package-2020-07
 
 These settings apply only when `--tag=package-2020-07` is specified on the command line.
