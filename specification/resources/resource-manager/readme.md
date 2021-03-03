@@ -45,7 +45,7 @@ tag: package-resources-2020-10
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2019-11
+tag: package-subscriptions-2020-10
 ```
 
 ``` yaml $(package-links)
@@ -108,13 +108,13 @@ input-file:
   - Microsoft.Resources/stable/2020-08-01/resources.json
 ```
 
-### Tag: package-subscriptions-2020-01
+### Tag: package-subscriptions-2020-10
 
-These settings apply only when `--tag=package-subscriptions-2020-01` is specified on the command line.
+These settings apply only when `--tag=package-subscriptions-2020-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-subscriptions-2020-01'
+``` yaml $(tag) == 'package-subscriptions-2020-10'
 input-file:
-  - Microsoft.Resources/stable/2020-01-01/subscriptions.json
+- Microsoft.Resources/stable/2020-10-01/subscriptions.json
 ```
 
 ### Tag: package-deploymentscripts-2020-10
@@ -447,6 +447,15 @@ These settings apply only when `--tag=package-resources-2015-11` is specified on
 ``` yaml $(tag) == 'package-resources-2015-11'
 input-file:
 - Microsoft.Resources/stable/2015-11-01/resources.json
+```
+
+### Tag: package-subscriptions-2020-01
+
+These settings apply only when `--tag=package-subscriptions-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2020-01'
+input-file:
+  - Microsoft.Resources/stable/2020-01-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2019-11
