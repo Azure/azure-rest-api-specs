@@ -15,21 +15,21 @@ cli:
     - select: 'operationGroup' 
       where:
           operationGroup: 'quota_request_status'
-        alias:
+      alias:
           - quotaStatus
           - status
           - s 
     - select: 'operationGroup'          
       where:
           operationGroup: 'quota'
-        alias:
+      alias:
           - quota
           - q 
-      - select: 'operationGroup'   
-        where:
+    - select: 'operationGroup'   
+      where:
           operationGroup: 'quota'
           param: 'ResourceName'
-        alias:
+      alias:
           - n
           - name
   test-scenario:
