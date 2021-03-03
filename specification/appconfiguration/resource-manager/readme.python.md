@@ -23,7 +23,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-appconfiguration
 no-namespace-folders: true
-package-version: 0.1.0
+package-version: 0.2.0
 ```
 
 ``` yaml $(python-mode) == 'update'
