@@ -628,18 +628,18 @@
       ],
       "description": "The virtualmachines resource definition."
     },
-    "VirtualMachineUpdateProperties": {
+    "virtualMachineUpdateProperties": {
       "description": "Defines the resource properties for the update.",
       "type": "object",
       "properties": {
         "hardwareProfile": {
-          "$ref": "#/definitions/hardwareProfile"
+          "$ref": "#/definitions/virtualmachinesProperties/hardwareProfile"
         },
         "storageProfile": {
-          "$ref": "#/definitions/storageProfileUpdate"
+          "$ref": "#/definitions/virtualmachinesProperties/storageProfileUpdate"
         },
         "networkProfile": {
-          "$ref": "#/definitions/networkProfile"
+          "$ref": "#/definitions/virtualmachinesProperties/networkProfile"
         }
       }
     },
@@ -647,7 +647,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualMachineUpdateProperties"
+          "$ref": "#/definitions/virtualMachineUpdateProperties"
         },
         "tags": {
           "type": "object",
