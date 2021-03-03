@@ -11,7 +11,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
   package-version: 1.0.0b1
   clear-output-folder: true
   add-credentials: true
-  credential-scopes: 6ee392c4-d339-4083-b04d-6b7947c6cf78/.default
+  credential-scopes: https://api.adu.microsoft.com/.default
 ```
 
 ```yaml $(python-mode) == 'create'
