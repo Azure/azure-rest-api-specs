@@ -1107,9 +1107,6 @@
               "$ref": "#/definitions/OperationJobExtendedInfo"
             }
           },
-          "204": {
-            "description": "NoContent"
-          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -1180,6 +1177,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -1198,9 +1201,6 @@
               }
             }
           },
-          "204": {
-            "description": "NoContent"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1213,7 +1213,10 @@
             "$ref": "./examples/BackupInstanceOperations/ValidateForBackup.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" :{
+          "final-state-via" : "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/recoveryPoints": {
@@ -1336,7 +1339,7 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/BMSRecoveryPointsFilters",
+        "x-ms-odata": "#/definitions/RecoveryPointsFilters",
         "x-ms-examples": {
           "Get Recovery Point": {
             "$ref": "./examples/BackupInstanceOperations/GetRecoveryPoint.json"
@@ -1485,9 +1488,6 @@
               }
             }
           },
-          "204": {
-            "description": "NoContent"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1553,6 +1553,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -1571,9 +1577,6 @@
               }
             }
           },
-          "204": {
-            "description": "NoContent"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1582,6 +1585,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" :{
+          "final-state-via" : "azure-async-operation"
+        },
         "x-ms-examples": {
           "Validate Restore": {
             "$ref": "./examples/BackupInstanceOperations/ValidateRestore.json"
@@ -1815,7 +1821,7 @@
       "type": "object",
       "x-ms-discriminator-value": "AbsoluteDeleteOption"
     },
-    "BMSRecoveryPointsFilters": {
+    "RecoveryPointsFilters": {
       "type": "object",
       "properties": {
         "restorePointDataStoreId": {
