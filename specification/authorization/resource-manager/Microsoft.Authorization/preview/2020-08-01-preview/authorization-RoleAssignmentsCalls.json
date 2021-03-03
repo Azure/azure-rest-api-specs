@@ -315,6 +315,54 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}/validate": {
+      "post": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_Validate",
+        "description": "Validate a role assignment create or update operation by scope and name.",
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleAssignmentCreateParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "500": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a role assignment create or update operation": {
+            "$ref": "./examples/RoleAssignments_Validate.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
       "get": {
         "tags": [
@@ -476,6 +524,51 @@
         "x-ms-examples": {
           "Delete role assignment by ID": {
             "$ref": "./examples/RoleAssignments_DeleteById.json"
+          }
+        }
+      }
+    },
+    "/{roleAssignmentId}/validate": {
+      "post": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_ValidateById",
+        "description": "Validate a role assignment create or update operation by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/RoleAssignmentIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleAssignmentCreateParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "500": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a role assignment create or update operation by ID": {
+            "$ref": "./examples/RoleAssignments_ValidateById.json"
           }
         }
       }
