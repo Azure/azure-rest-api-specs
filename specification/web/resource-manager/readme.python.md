@@ -20,6 +20,7 @@ python:
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-web
+package-version: 0.42.0
 no-namespace-folders: true
 ```
 
