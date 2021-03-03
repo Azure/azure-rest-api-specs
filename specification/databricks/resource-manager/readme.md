@@ -61,6 +61,18 @@ input-file:
 - Microsoft.Databricks/stable/2018-04-01/databricks.json
 ```
 
+---
+# Suppressions
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: databricks.json 
+    where: $.definitions.Encryption.properties.KeyName
+    reason: Response from service is not camel case
+```
+
+---
 # Code Generation
 
 ## Swagger to SDK
@@ -70,6 +82,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-powershell
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

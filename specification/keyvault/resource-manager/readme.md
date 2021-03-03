@@ -61,6 +61,7 @@ These settings apply only when `--tag=package-2019-09` is specified on the comma
 input-file:
 - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
 - Microsoft.KeyVault/stable/2019-09-01/providers.json
+- Microsoft.KeyVault/stable/2019-09-01/keys.json
 ```
 
 ### Tag: package-2018-02-14-preview
@@ -102,6 +103,18 @@ input-file:
 - Microsoft.KeyVault/stable/2015-06-01/keyvault.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+- Microsoft.KeyVault/stable/2019-09-01/providers.json
+- Microsoft.KeyVault/stable/2019-09-01/secrets.json
+```
+
 ### Supressions
 
 ``` yaml
@@ -123,9 +136,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-keyvault
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

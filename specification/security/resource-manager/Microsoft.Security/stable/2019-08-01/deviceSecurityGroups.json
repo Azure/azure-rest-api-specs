@@ -364,6 +364,16 @@
       ],
       "properties": {}
     },
+    "ConnectionFromIpNotAllowed": {
+      "type": "object",
+      "description": "Inbound connection from an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AllowlistCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
     "LocalUserNotAllowed": {
       "type": "object",
       "description": "Login by a local user that isn't allowed. Allow list consists of login names to allow.",
@@ -416,10 +426,12 @@
       "properties": {
         "minThreshold": {
           "type": "integer",
+          "format": "int32",
           "description": "The minimum threshold."
         },
         "maxThreshold": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum threshold."
         }
       },
