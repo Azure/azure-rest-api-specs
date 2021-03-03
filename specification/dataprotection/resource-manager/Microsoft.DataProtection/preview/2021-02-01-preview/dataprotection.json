@@ -91,6 +91,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
           "204": {
             "description": "NoContent"
           },
@@ -1095,6 +1101,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
           "204": {
             "description": "NoContent"
           },
@@ -1128,7 +1140,10 @@
             "$ref": "./examples/BackupInstanceOperations/TriggerBackup.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" :{
+          "final-state-via" : "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/validateForBackup": {
@@ -1446,6 +1461,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -1475,6 +1496,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" :{
+          "final-state-via" : "azure-async-operation"
+        },
         "x-ms-examples": {
           "Trigger Restore": {
             "$ref": "./examples/BackupInstanceOperations/TriggerRestore.json"
