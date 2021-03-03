@@ -9,18 +9,6 @@
     },
     "version": "v3.0"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/speechtotext/v3.0",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "$ref": "#/parameters/Endpoint"
-      }
-    ]
-  },
-  "schemes": [
-    "https"
-  ],
   "paths": {
     "/datasets/locales": {
       "get": {
@@ -44,6 +32,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -51,12 +45,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -70,9 +76,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get the supported locales": {
+            "$ref": "./examples/get_supported_dataset_locales.json"
+          }
+        }
       }
     },
     "/datasets": {
@@ -119,12 +130,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -133,12 +160,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -152,12 +191,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all datasets": {
+            "$ref": "./examples/get_datasets.json"
+          }
         }
       },
       "post": {
@@ -202,12 +246,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -216,12 +276,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -235,9 +307,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Create a dataset": {
+            "$ref": "./examples/create_dataset.json"
+          }
+        }
       }
     },
     "/datasets/{id}": {
@@ -278,12 +355,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -292,6 +385,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -299,12 +398,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -318,9 +429,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a dataset": {
+            "$ref": "./examples/get_dataset.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -372,12 +488,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -386,6 +518,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "409": {
@@ -393,12 +531,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -412,9 +562,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Update a dataset": {
+            "$ref": "./examples/update_dataset.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -444,6 +599,16 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
@@ -451,12 +616,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -472,6 +649,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before not getting this response anymore.",
@@ -484,7 +667,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       }
@@ -574,12 +757,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -588,6 +787,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "415": {
@@ -595,12 +800,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "UnsupportedMediaType",
+                "message": "The request entity's media type 'application/xml' is not supported for this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -615,9 +832,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Upload a dataset": {
+            "$ref": "./examples/upload_dataset.json"
+          }
+        }
       }
     },
     "/datasets/{id}/files": {
@@ -686,12 +908,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -700,12 +934,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -719,12 +965,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all files": {
+            "$ref": "./examples/get_dataset_files.json"
+          }
         }
       }
     },
@@ -782,12 +1033,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -796,12 +1059,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -815,9 +1090,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a file": {
+            "$ref": "./examples/get_dataset_file.json"
+          }
+        }
       }
     },
     "/endpoints/locales": {
@@ -845,6 +1125,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -852,12 +1138,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -871,9 +1169,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get the supported locales": {
+            "$ref": "./examples/get_supported_endpoint_locales.json"
+          }
+        }
       }
     },
     "/endpoints": {
@@ -927,6 +1230,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -934,12 +1243,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -953,12 +1274,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all endpoints": {
+            "$ref": "./examples/get_endpoints.json"
+          }
         }
       },
       "post": {
@@ -1003,12 +1329,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1017,12 +1359,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1036,9 +1390,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Create an endpoint": {
+            "$ref": "./examples/create_endpoint.json"
+          }
+        }
       }
     },
     "/endpoints/{id}": {
@@ -1086,12 +1445,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1100,12 +1471,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1119,9 +1502,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get an endpoint": {
+            "$ref": "./examples/get_endpoint.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1151,12 +1539,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1165,6 +1569,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -1172,12 +1582,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1191,7 +1613,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       },
@@ -1245,12 +1667,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1259,6 +1697,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "409": {
@@ -1266,12 +1710,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1285,9 +1741,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Update an endpoint": {
+            "$ref": "./examples/update_endpoint.json"
+          }
+        }
       }
     },
     "/endpoints/{id}/files/logs": {
@@ -1348,12 +1809,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1362,6 +1839,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -1369,12 +1852,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1388,12 +1883,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all endpoint logs": {
+            "$ref": "./examples/get_endpoint_logs.json"
+          }
         }
       },
       "delete": {
@@ -1431,12 +1931,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1445,6 +1961,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -1452,12 +1974,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1471,7 +2005,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       }
@@ -1522,12 +2056,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1536,6 +2086,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -1543,12 +2099,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1562,9 +2130,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get an endpoint log": {
+            "$ref": "./examples/get_endpoint_log.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1601,12 +2174,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1615,6 +2204,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -1622,12 +2217,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1641,7 +2248,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       }
@@ -1697,12 +2304,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1711,6 +2334,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -1718,12 +2347,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1737,12 +2378,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all base model logs": {
+            "$ref": "./examples/get_base_model_logs.json"
+          }
         }
       },
       "delete": {
@@ -1779,12 +2425,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1793,6 +2455,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -1800,12 +2468,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1819,7 +2499,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       }
@@ -1869,12 +2549,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1883,6 +2579,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -1890,12 +2592,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1909,9 +2623,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a base model log": {
+            "$ref": "./examples/get_base_model_log.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1947,12 +2666,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -1961,6 +2696,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -1968,12 +2709,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -1987,7 +2740,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       }
@@ -2017,6 +2770,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -2024,12 +2783,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -2043,9 +2814,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get the supported locales": {
+            "$ref": "./examples/get_supported_evaluations_locales.json"
+          }
+        }
       }
     },
     "/evaluations": {
@@ -2099,6 +2875,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -2106,12 +2888,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -2125,12 +2919,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all evaluations": {
+            "$ref": "./examples/get_evaluations.json"
+          }
         }
       },
       "post": {
@@ -2182,6 +2981,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -2189,12 +2994,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -2208,9 +3025,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Create a evaluation": {
+            "$ref": "./examples/create_evaluation.json"
+          }
+        }
       }
     },
     "/evaluations/{id}/files": {
@@ -2279,12 +3101,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -2293,12 +3127,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -2312,12 +3158,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all files": {
+            "$ref": "./examples/get_evaluation_files.json"
+          }
         }
       }
     },
@@ -2375,12 +3226,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -2389,12 +3252,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -2408,9 +3283,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a file": {
+            "$ref": "./examples/get_evaluation_file.json"
+          }
+        }
       }
     },
     "/evaluations/{id}": {
@@ -2458,12 +3338,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -2472,12 +3364,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -2491,9 +3395,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a evaluation": {
+            "$ref": "./examples/get_evaluation.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -2545,12 +3454,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -2559,6 +3484,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "409": {
@@ -2566,12 +3497,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -2585,9 +3528,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Update a evaluation": {
+            "$ref": "./examples/update_evaluation.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -2617,6 +3565,16 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
@@ -2624,12 +3582,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -2645,6 +3615,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before not getting this response anymore.",
@@ -2657,7 +3633,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       }
@@ -2687,6 +3663,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -2694,12 +3676,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -2713,9 +3707,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get the supported locales": {
+            "$ref": "./examples/get_supported_model_locales.json"
+          }
+        }
       }
     },
     "/models": {
@@ -2769,6 +3768,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -2776,12 +3781,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -2795,12 +3812,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all models": {
+            "$ref": "./examples/get_models.json"
+          }
         }
       },
       "post": {
@@ -2845,12 +3867,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -2859,12 +3897,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -2878,9 +3928,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Create a model": {
+            "$ref": "./examples/create_model.json"
+          }
+        }
       }
     },
     "/models/base": {
@@ -2928,6 +3983,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -2935,12 +3996,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -2954,12 +4027,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all base models": {
+            "$ref": "./examples/get_base_models.json"
+          }
         }
       }
     },
@@ -3008,12 +4086,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -3022,12 +4112,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -3041,9 +4143,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a model": {
+            "$ref": "./examples/get_model.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -3095,12 +4202,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -3109,6 +4232,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "409": {
@@ -3116,12 +4245,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -3135,9 +4276,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Update a model": {
+            "$ref": "./examples/update_model.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -3167,6 +4313,16 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
@@ -3174,12 +4330,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -3195,6 +4363,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before not getting this response anymore.",
@@ -3207,7 +4381,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       }
@@ -3251,12 +4425,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -3265,12 +4451,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -3284,9 +4482,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a base model": {
+            "$ref": "./examples/get_base_model.json"
+          }
+        }
       }
     },
     "/models/{id}/copyto": {
@@ -3341,12 +4544,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -3355,6 +4574,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -3362,12 +4587,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -3381,9 +4618,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Copy a model": {
+            "$ref": "./examples/copy_model.json"
+          }
+        }
       }
     },
     "/models/{id}/manifest": {
@@ -3425,12 +4667,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -3439,6 +4697,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -3446,12 +4710,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -3465,9 +4741,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a model manifest": {
+            "$ref": "./examples/get_model_manifest.json"
+          }
+        }
       }
     },
     "/models/base/{id}/manifest": {
@@ -3509,12 +4790,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -3523,6 +4820,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -3530,12 +4833,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -3549,9 +4864,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a base model manifest": {
+            "$ref": "./examples/get_base_model_manifest.json"
+          }
+        }
       }
     },
     "/projects/locales": {
@@ -3579,6 +4899,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -3586,12 +4912,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -3605,9 +4943,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get the supported locales": {
+            "$ref": "./examples/get_supported_project_locales.json"
+          }
+        }
       }
     },
     "/projects": {
@@ -3655,6 +4998,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -3662,12 +5011,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -3681,12 +5042,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all projects": {
+            "$ref": "./examples/get_projects.json"
+          }
         }
       },
       "post": {
@@ -3728,12 +5094,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -3742,12 +5124,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -3761,9 +5155,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Create a project": {
+            "$ref": "./examples/create_project.json"
+          }
+        }
       }
     },
     "/projects/{id}": {
@@ -3805,12 +5204,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -3819,12 +5230,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -3838,9 +5261,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get all projects": {
+            "$ref": "./examples/get_projects.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -3886,12 +5314,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -3900,6 +5344,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "409": {
@@ -3907,12 +5357,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -3926,9 +5388,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Update a project": {
+            "$ref": "./examples/update_project.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -3958,6 +5425,16 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
@@ -3965,12 +5442,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -3986,6 +5475,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before not getting this response anymore.",
@@ -3998,7 +5493,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       }
@@ -4055,12 +5550,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -4069,6 +5580,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -4076,12 +5593,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -4095,12 +5624,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all evaluations": {
+            "$ref": "./examples/get_project_evaluations.json"
+          }
         }
       }
     },
@@ -4156,12 +5690,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -4170,6 +5720,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -4177,12 +5733,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -4196,12 +5764,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all datasets": {
+            "$ref": "./examples/get_project_datasets.json"
+          }
         }
       }
     },
@@ -4257,12 +5830,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -4271,6 +5860,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -4278,12 +5873,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -4297,12 +5904,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all endpoints": {
+            "$ref": "./examples/get_project_endpoints.json"
+          }
         }
       }
     },
@@ -4358,12 +5970,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -4372,6 +6000,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -4379,12 +6013,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -4398,12 +6044,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all models": {
+            "$ref": "./examples/get_project_models.json"
+          }
         }
       }
     },
@@ -4459,12 +6110,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -4473,6 +6140,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "404": {
@@ -4480,12 +6153,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -4499,12 +6184,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all transcriptions": {
+            "$ref": "./examples/get_project_transcriptions.json"
+          }
         }
       }
     },
@@ -4533,6 +6223,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -4540,12 +6236,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -4559,9 +6267,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get the supported locales": {
+            "$ref": "./examples/get_supported_transcription_locales.json"
+          }
+        }
       }
     },
     "/transcriptions": {
@@ -4615,6 +6328,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -4622,12 +6341,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -4641,12 +6372,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all transcriptions": {
+            "$ref": "./examples/get_transcriptions.json"
+          }
         }
       },
       "post": {
@@ -4691,12 +6427,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -4705,12 +6457,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -4724,9 +6488,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Create a transcription": {
+            "$ref": "./examples/create _transcription.json"
+          }
+        }
       }
     },
     "/transcriptions/{id}": {
@@ -4774,12 +6543,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -4788,12 +6569,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -4807,9 +6600,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a transcription": {
+            "$ref": "./examples/get_transcription.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -4861,12 +6659,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -4875,6 +6689,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "409": {
@@ -4882,12 +6702,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -4901,9 +6733,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Update a transcription": {
+            "$ref": "./examples/update_transcription.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -4933,6 +6770,16 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
@@ -4940,12 +6787,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -4961,6 +6820,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before not getting this response anymore.",
@@ -4973,7 +6838,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       }
@@ -5044,12 +6909,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -5058,12 +6935,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -5077,12 +6966,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all files": {
+            "$ref": "./examples/get_transcription_files.json"
+          }
         }
       }
     },
@@ -5140,12 +7034,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -5154,12 +7060,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -5173,9 +7091,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a file": {
+            "$ref": "./examples/get_transcription_file.json"
+          }
+        }
       }
     },
     "/webhooks": {
@@ -5229,6 +7152,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -5236,12 +7165,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -5255,12 +7196,17 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-pageable": {
           "itemName": "values",
           "nextLinkName": "@nextLink"
+        },
+        "x-ms-example": {
+          "Get all web hooks": {
+            "$ref": "./examples/get_web_hooks.json"
+          }
         }
       },
       "post": {
@@ -5303,12 +7249,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -5317,12 +7279,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -5336,9 +7310,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Create a web hook": {
+            "$ref": "./examples/create_web_hook.json"
+          }
+        }
       }
     },
     "/webhooks/{id}": {
@@ -5386,12 +7365,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -5400,12 +7391,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -5419,9 +7422,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Get a web hook": {
+            "$ref": "./examples/get_web_hook.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -5474,12 +7482,28 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
             "description": "In case the user isn't authorized.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -5488,6 +7512,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "409": {
@@ -5495,12 +7525,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -5514,9 +7556,14 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
-        ]
+        ],
+        "x-ms-example": {
+          "Update a web hook": {
+            "$ref": "./examples/update_web hook.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -5546,6 +7593,16 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The base model isn't valid for this operation.",
+                "innerError": {
+                  "code": "InvalidBaseModel",
+                  "message": "The base model isn't valid for this operation."
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "401": {
@@ -5553,12 +7610,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -5574,6 +7643,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before not getting this response anymore.",
@@ -5586,7 +7661,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       }
@@ -5639,12 +7714,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -5653,12 +7740,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -5672,7 +7771,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-long-running-operation": true,
@@ -5732,12 +7831,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
             "description": "In case authorized user isn't known or doesn't have the required permissions.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
             },
             "x-ms-error-response": true
           },
@@ -5746,12 +7857,24 @@
             "schema": {
               "$ref": "#/definitions/Error"
             },
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
             "x-ms-error-response": true
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
             "schema": {
               "$ref": "#/definitions/Error"
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
             },
             "headers": {
               "Retry-After": {
@@ -5765,7 +7888,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ],
         "x-ms-long-running-operation": true,
@@ -5822,7 +7945,7 @@
         "security": [
           {
             "subscription_key": [],
-            "token": []
+            "token": [ ]
           }
         ]
       }
@@ -7696,17 +9819,6 @@
       }
     }
   },
-  "parameters": {
-    "Endpoint": {
-      "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true
-    }
-  },
   "securityDefinitions": {
     "subscription_key": {
       "type": "apiKey",
@@ -7719,6 +9831,29 @@
       "name": "Authorization",
       "in": "header",
       "description": "Provide an access token from the JWT returned by the STS of this region. Make sure to add the management scope to the token by adding the following query string to the STS URL: ?scope=speechservicesmanagement"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/speechtotext/v3.0",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
