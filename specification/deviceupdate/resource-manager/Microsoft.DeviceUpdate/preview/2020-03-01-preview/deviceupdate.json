@@ -313,7 +313,7 @@
             }
           },
           "201": {
-            "description": "Creates or Updates the VirtualMachines resource.",
+            "description": "Account updated successfully.",
             "schema": {
               "$ref": "#/definitions/Account"
             }
@@ -552,12 +552,22 @@
               "$ref": "#/definitions/Instance"
             }
           },
+          "201": {
+            "description": "Instance updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Updates Instance": {
@@ -606,6 +616,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
+        },
         "properties": {
           "description": "Device Update account properties.",
           "x-ms-client-flatten": true,
@@ -667,6 +681,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "readOnly": true
+        },
         "properties": {
           "description": "Device Update instance properties.",
           "x-ms-client-flatten": true,
@@ -783,12 +801,14 @@
       "description": "Error response indicates that the service is not able to process the incoming request.",
       "properties": {
         "code": {
-          "description": "The error status code.",
-          "type": "string"
+          "description": "Error status code.",
+          "type": "string",
+          "readOnly": true
         },
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+          "description": "Error details.",
+          "readOnly": true
         }
       }
     },
@@ -796,17 +816,17 @@
       "description": "Error definition.",
       "properties": {
         "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "description": "Error status code.",
           "type": "string",
           "readOnly": true
         },
         "message": {
-          "description": "Description of the error.",
+          "description": "Error message.",
           "type": "string",
           "readOnly": true
         },
         "details": {
-          "description": "Internal error details.",
+          "description": "Error details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
