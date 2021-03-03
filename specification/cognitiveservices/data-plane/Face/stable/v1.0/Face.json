@@ -1048,7 +1048,7 @@
     },
     "/detect": {
       "post": {
-        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](../face/identify), [Face - Verify](../face/verifyfacetoface), and [Face - Find Similar](../face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure and noise. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](../face/identify), [Face - Verify](../face/verifyfacetoface), and [Face - Find Similar](../face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
+        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](../face/identify), [Face - Verify](../face/verifyfacetoface), and [Face - Find Similar](../face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, and mask. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](../face/identify), [Face - Verify](../face/verifyfacetoface), and [Face - Find Similar](../face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model).\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
         "operationId": "Face_DetectWithUrl",
         "parameters": [
           {
@@ -2559,7 +2559,7 @@
     },
     "/detect?overload=stream": {
       "post": {
-        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](../face/identify), [Face - Verify](../face/verifyfacetoface), and [Face - Find Similar](../face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure and noise. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](../face/identify), [Face - Verify](../face/verifyfacetoface), and [Face - Find Similar](../face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
+        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](../face/identify), [Face - Verify](../face/verifyfacetoface), and [Face - Find Similar](../face/findsimilar). The stored face feature(s) will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, noise, and mask. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](../face/identify), [Face - Verify](../face/verifyfacetoface), and [Face - Find Similar](../face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [Specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model).",
         "operationId": "Face_DetectWithStream",
         "parameters": [
           {
@@ -3058,7 +3058,7 @@
           "$ref": "#/definitions/Hair"
         },
         "makeup": {
-          "description": "Properties describing present makeups on a given face.",
+          "description": "Properties describing the presence of makeup on a given face.",
           "$ref": "#/definitions/Makeup"
         },
         "occlusion": {
@@ -3080,6 +3080,10 @@
         "noise": {
           "description": "Properties describing noise level of the image.",
           "$ref": "#/definitions/Noise"
+        },
+        "mask": {
+          "description": "Properties describing the presence of a mask on a given face.",
+          "$ref": "#/definitions/Mask"
         }
       }
     },
@@ -3215,7 +3219,7 @@
     },
     "Makeup": {
       "type": "object",
-      "description": "Properties describing present makeups on a given face.",
+      "description": "Properties describing the presence of makeup on a given face.",
       "properties": {
         "eyeMakeup": {
           "type": "boolean",
@@ -3354,6 +3358,32 @@
           "description": "A number indicating level of noise level ranging from 0 to 1. [0, 0.25) is under exposure. [0.25, 0.75) is good exposure. [0.75, 1] is over exposure. [0, 0.3) is low noise level. [0.3, 0.7) is medium noise level. [0.7, 1] is high noise level.",
           "x-nullable": false,
           "$ref": "#/definitions/Level"
+        }
+      }
+    },
+    "Mask": {
+      "type": "object",
+      "description": "Properties describing the presence of a mask on a given face.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Mask type if any of the face",
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "MaskType",
+            "modelAsString": false
+          },
+          "enum": [
+            "noMask",
+            "faceMask",
+            "otherMaskOrOcclusion",
+            "uncertain"
+          ]
+        },
+        "noseAndMouthCovered": {
+          "type": "boolean",
+          "description": "A boolean value indicating whether nose and mouth are covered.",
+          "x-nullable": false
         }
       }
     },
@@ -3934,7 +3964,8 @@
       "enum": [
         "recognition_01",
         "recognition_02",
-        "recognition_03"
+        "recognition_03",
+        "recognition_04"
       ]
     },
     "ApplyScope": {
@@ -4139,7 +4170,7 @@
     "returnFaceAttributes": {
       "name": "returnFaceAttributes",
       "in": "query",
-      "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". Supported face attributes include age, gender, headPose, smile, facialHair, glasses and emotion. Note that each face attribute analysis has additional computational and time cost.",
+      "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \"returnFaceAttributes=age,gender\". The available attributes depends on the 'detectionModel' specified. 'detection_01' supports age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure, and noise. While 'detection_02' does not support any attributes and 'detection_03' only supports mask. Note that each face attribute analysis has additional computational and time cost.",
       "type": "array",
       "x-ms-parameter-location": "method",
       "required": false,
@@ -4165,7 +4196,8 @@
           "accessories",
           "blur",
           "exposure",
-          "noise"
+          "noise",
+          "mask"
         ]
       }
     },
@@ -4318,7 +4350,8 @@
       "enum": [
         "recognition_01",
         "recognition_02",
-        "recognition_03"
+        "recognition_03",
+        "recognition_04"
       ]
     },
     "returnRecognitionModel": {
