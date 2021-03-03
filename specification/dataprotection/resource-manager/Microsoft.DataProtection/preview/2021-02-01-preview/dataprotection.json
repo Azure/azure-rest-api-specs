@@ -1245,6 +1245,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skipToken Filter.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1264,6 +1278,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
+        "x-ms-odata": "#/definitions/RecoveryPointsFilters",
         "x-ms-examples": {
           "List Recovery Points in a Vault": {
             "$ref": "./examples/BackupInstanceOperations/ListRecoveryPoints.json"
@@ -1306,20 +1321,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "skipToken Filter.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1336,7 +1337,6 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/RecoveryPointsFilters",
         "x-ms-examples": {
           "Get Recovery Point": {
             "$ref": "./examples/BackupInstanceOperations/GetRecoveryPoint.json"
