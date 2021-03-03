@@ -3376,6 +3376,98 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
+      },
+      "patch": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "Update Online Deployment.",
+        "operationId": "OnlineDeployments_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "Inference Endpoint Deployment name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Online Endpoint entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartialOnlineDeploymentPartialTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentTrackedResource"
+            }
+          },
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "default": 60,
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Online Deployment.": {
+            "$ref": "./examples/OnlineDeployment/update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs": {
@@ -3795,7 +3887,7 @@
             "description": "Online Endpoint entity to apply during operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateOnlineEndpointUpdatableTrackedResource"
+              "$ref": "#/definitions/PartialOnlineEndpointPartialTrackedResource"
             }
           }
         ],
@@ -5799,6 +5891,13 @@
         "distributionConfiguration": {
           "$ref": "#/definitions/DistributionConfiguration"
         },
+        "environmentVariables": {
+          "description": "Environment variables included in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "identityConfiguration": {
           "$ref": "#/definitions/IdentityConfiguration"
         },
@@ -5987,6 +6086,17 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/DataBinding"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "environmentVariables": {
+          "description": "Environment variables included in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
           "x-ms-mutability": [
             "create",
@@ -7213,6 +7323,7 @@
     },
     "OnlineDeploymentTrackedResource": {
       "required": [
+        "location",
         "properties"
       ],
       "type": "object",
@@ -7224,6 +7335,7 @@
           }
         },
         "location": {
+          "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
         "kind": {
@@ -7274,6 +7386,64 @@
         },
         "nextLink": {
           "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialOnlineDeployment": {
+      "description": "Mutable online deployment configuration",
+      "type": "object",
+      "properties": {
+        "scaleSettings": {
+          "$ref": "#/definitions/OnlineDeploymentScaleSettings"
+        },
+        "deploymentConfiguration": {
+          "$ref": "#/definitions/DeploymentConfigurationBase"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialOnlineDeploymentPartialTrackedResource": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentityInArm"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/PartialOnlineDeployment"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "additionalProperties": false
@@ -7450,6 +7620,7 @@
     },
     "OnlineEndpointTrackedResource": {
       "required": [
+        "location",
         "properties"
       ],
       "type": "object",
@@ -7461,6 +7632,7 @@
           }
         },
         "location": {
+          "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
         "kind": {
@@ -7515,7 +7687,7 @@
       },
       "additionalProperties": false
     },
-    "UpdateOnlineEndpoint": {
+    "PartialOnlineEndpoint": {
       "description": "Mutable online endpoint configuration",
       "type": "object",
       "properties": {
@@ -7530,7 +7702,7 @@
       },
       "additionalProperties": false
     },
-    "UpdateOnlineEndpointUpdatableTrackedResource": {
+    "PartialOnlineEndpointPartialTrackedResource": {
       "type": "object",
       "properties": {
         "tags": {
@@ -7565,7 +7737,7 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/UpdateOnlineEndpoint"
+          "$ref": "#/definitions/PartialOnlineEndpoint"
         },
         "systemData": {
           "description": "System data associated with resource provider",
