@@ -1,5 +1,3 @@
-
-
 ## Azure CLI
 
 These settings apply only when `--az` is specified on the command line.
@@ -18,19 +16,19 @@ compatible-level: track2
 
 cli:
   cli-directive:
-		- where:
-		    group: "*"
+    - where:
+        group: "*"
         op: "*"
-		    param: networkSecurityGroupName
+        param: networkSecurityGroupName
       name: nsgName
-		- where:
-		    group: "*"
+    - where:
+        group: "*"
         op: "*"
-		    param: virtualNetworkName
+        param: virtualNetworkName
       name: vnetName
-		- where:
-		    group: PrivateLinkServices
+    - where:
+        group: PrivateLinkServices
         op: "*"
-		    param: serviceName
+        param: serviceName
       name: name
 ```
