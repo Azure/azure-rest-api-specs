@@ -22,6 +22,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcechanges.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
 
 ```
 

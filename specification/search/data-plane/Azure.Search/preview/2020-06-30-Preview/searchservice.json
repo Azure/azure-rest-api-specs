@@ -5637,7 +5637,8 @@
         "cosmosdb",
         "azureblob",
         "azuretable",
-        "mysql"
+        "mysql",
+        "adlsgen2"
       ],
       "x-ms-enum": {
         "name": "SearchIndexerDataSourceType",
@@ -5656,17 +5657,22 @@
           {
             "value": "azureblob",
             "name": "AzureBlob",
-            "description": "Indicates a Azure Blob datasource."
+            "description": "Indicates an Azure Blob datasource."
           },
           {
             "value": "azuretable",
             "name": "AzureTable",
-            "description": "Indicates a Azure Table datasource."
+            "description": "Indicates an Azure Table datasource."
           },
           {
             "value": "mysql",
             "name": "MySql",
             "description": "Indicates a MySql datasource."
+          },
+          {
+            "value": "adlsgen2",
+            "name": "AdlsGen2",
+            "description": "Indicates an ADLS Gen2 datasource."
           }
         ]
       },
@@ -7656,6 +7662,38 @@
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-text-translation"
       },
       "description": "A skill to translate text from one language to another."
+    },
+    "DocumentExtractionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentExtractionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "parsingMode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The parsingMode for the skill. Will be set to 'default' if not defined."
+        },
+        "dataToExtract": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The type of data to be extracted for the skill. Will be set to 'contentAndMetadata' if not defined."
+        },
+        "configuration": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "x-nullable": true,
+          "description": "A dictionary of configurations for the skill."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-document-extraction"
+      },
+      "description": "A skill that extracts content from a file within the enrichment pipeline."
     },
     "WebApiSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
