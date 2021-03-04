@@ -535,6 +535,18 @@
       ],
       "description": "Specifies the stamp location."
     },
+    "ClaimsProvider": {
+      "properties": {
+        "baseUrl": {
+          "type": "string",
+          "description": "Specifies Claims Provider URL."
+        }
+      },
+      "required": [
+        "baseUrl"
+      ],
+      "description": "Specifies the Claims Provider endpoint."
+    },
     "PlatformAccountPropertiesUpdateParameters": {
       "properties": {
         "extensions": {
@@ -554,12 +566,20 @@
             "$ref": "#/definitions/StampLocation"
           },
           "description": "Specifies the list of stamp locations."
+        },
+        "claimsProvider": {
+          "$ref": "#/definitions/ClaimsProvider",
+          "description": "Specifies claims provider endpoint."
         }
       },
       "description": "Specifies the properties of the platform account to update."
     },
     "PlatformAccountUpdateParameters": {
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity",
+          "description": "Specifies the identity of the platform account."
+        },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
           "description": "Specifies the SKU of the platform account."
@@ -620,15 +640,29 @@
             "$ref": "#/definitions/StampLocation"
           },
           "description": "Specifies the list of stamp locations."
+        },
+        "claimsProvider": {
+          "$ref": "#/definitions/ClaimsProvider",
+          "description": "Specifies Claims Provider endpoint."
+        },
+        "platformUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the endpoint that can be used to interact with the platform. This is a ready only field and is set by the resource provider when the resource is created."
         }
       },
       "required": [
-        "networking"
+        "networking",
+        "claimsProvider"
       ],
       "description": "Specifies the properties of the platform account."
     },
     "PlatformAccount": {
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity",
+          "description": "Specifies the identity of the platform account."
+        },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
           "description": "Specifies the SKU of the platform account."

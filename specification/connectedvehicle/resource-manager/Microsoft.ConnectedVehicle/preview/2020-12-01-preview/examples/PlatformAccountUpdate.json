@@ -5,6 +5,9 @@
     "accountName": "sample-account-name",
     "api-version": "2020-12-01-preview",
     "parameters": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
       "properties": {
         "extensions": [
           {
@@ -25,10 +28,13 @@
           {
             "locationName": "sample-location-name"
           }
-        ]
+        ],
+        "claimsProvider": {
+            "baseUrl": "sample-endpoint-1"
+        }
       },
       "sku": {
-        "name": "Dedicated"
+        "name": "D0"
       },
       "tags": {
         "sample-key1": "sample-value1",
@@ -40,6 +46,11 @@
     "200": {
       "body": {
         "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-resource-group-name/providers/Microsoft.ConnectedVehicle/platformAccounts/sample-account-name",
+        "identity": {
+          "principalId": "b5cf119e-a5c2-42c7-802f-592e0efb169f",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "type": "SystemAssigned"
+        },
         "location": "eastus2",
         "name": "sample-account-name",
         "properties": {
@@ -66,10 +77,14 @@
             {
               "locationName": "sample-location-name"
             }
-          ]
+          ],
+          "claimsProvider": {
+              "baseUrl": "sample-endpoint-1"
+          },
+          "platformUri":"sample-account-name.azure-connectedvehicle.net"
         },
         "sku": {
-          "name": "Dedicated"
+          "name": "D0"
         },
         "systemData": {
           "createdBy": "sample-user1",
@@ -89,6 +104,11 @@
     "202": {
       "body": {
         "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-resource-group-name/providers/Microsoft.ConnectedVehicle/platformAccounts/sample-account-name",
+        "identity": {
+          "principalId": "b5cf119e-a5c2-42c7-802f-592e0efb169f",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "type": "SystemAssigned"
+        },
         "location": "eastus2",
         "name": "sample-account-name",
         "properties": {
@@ -115,10 +135,14 @@
             {
               "locationName": "sample-location-name"
             }
-          ]
+          ],
+          "claimsProvider": {
+              "baseUrl": "sample-endpoint-1"
+          },
+          "platformUri":"sample-account-name.azure-connectedvehicle.net"
         },
         "sku": {
-          "name": "Dedicated"
+          "name": "D0"
         },
         "systemData": {
           "createdBy": "sample-user1",
