@@ -24,12 +24,12 @@ cli:
         group: "*"
         op: "*"
         param: networkSecurityGroupName
-      name: nsgName
+      name: nsg-name
     - where:
         group: "*"
         op: "*"
         param: virtualNetworkName
-      name: vnetName
+      name: vnet-name
     - where:
         group: PrivateLinkServices
         op: "*"
