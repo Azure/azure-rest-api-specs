@@ -23,5 +23,6 @@ input-file:
   - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/orchestrators.json
   - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/delegatedSubnets.json
   - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/operations.json
+  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/common-types.json
 
 ```
