@@ -2082,13 +2082,6 @@
             "modelAsString": true
           }
         },
-        "features": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GalleryImageFeature"
-          },
-          "description": "A list of gallery image features."
-        },
         "endOfLifeDate": {
           "type": "string",
           "format": "date-time",
@@ -2119,6 +2112,13 @@
             "Deleting",
             "Migrating"
           ]
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryImageFeature"
+          },
+          "description": "A list of gallery image features."
         }
       },
       "required": [
@@ -2460,23 +2460,13 @@
         "id": {
           "type": "string",
           "description": "The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, user image or storage account resource."
-        }
-      },
-      "description": "The gallery artifact version source."
-    },
-    "GalleryDiskImageSource": {
-      "properties": {
+        },
         "uri": {
           "type": "string",
           "description": "The uri of the gallery artifact version source. Currently used to specify vhd/blob source."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryArtifactVersionSource"
-        }
-      ],
-      "description": "The gallery disk image source."
+      "description": "The gallery artifact version source."
     },
     "GalleryOSDiskImage": {
       "allOf": [
@@ -2526,7 +2516,7 @@
           }
         },
         "source": {
-          "$ref": "#/definitions/GalleryDiskImageSource"
+          "$ref": "#/definitions/GalleryArtifactVersionSource"
         }
       },
       "description": "This is the disk image base class."
