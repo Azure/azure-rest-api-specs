@@ -129,6 +129,9 @@
           },
           "Create a new server group as a point in time restore": {
             "$ref": "./examples/ServerGroupCreatePITR.json"
+          },
+          "Create a new server group as a read replica": {
+            "$ref": "./examples/ServerGroupCreateReadReplica.json"
           }
         },
         "parameters": [
@@ -1544,7 +1547,8 @@
           "description": "The mode to create a new server group.",
           "enum": [
             "Default",
-            "PointInTimeRestore"
+            "PointInTimeRestore",
+            "ReadReplica"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -1653,30 +1657,44 @@
             }
           }
         },
+        "readReplicas": {
+          "type": "array",
+          "description": "The array of read replica server groups.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "sourceServerGroup": {
+          "type": "string",
+          "description": "The source server group id for read replica server groups.",
+          "readOnly": true
+        },
         "sourceSubscriptionId": {
           "type": "string",
-          "description": "The source subscription id to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "description": "The source subscription id to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
           "x-ms-mutability": [
             "create"
           ]
         },
         "sourceResourceGroupName": {
           "type": "string",
-          "description": "The source resource group name to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "description": "The source resource group name to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
           "x-ms-mutability": [
             "create"
           ]
         },
         "sourceServerGroupName": {
           "type": "string",
-          "description": "The source server group name to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "description": "The source server group name to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
           "x-ms-mutability": [
             "create"
           ]
         },
         "sourceLocation": {
           "type": "string",
-          "description": "The source server group location to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "description": "The source server group location to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
           "x-ms-mutability": [
             "create"
           ]
