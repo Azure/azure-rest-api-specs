@@ -978,9 +978,6 @@
                 "$ref": "#/definitions/TextAnalyticsError"
               },
               "type": "array"
-            },
-            "statistics": {
-              "$ref": "#/definitions/RequestStatistics"
             }
           },
           "type": "object"
@@ -1088,7 +1085,10 @@
                     "type": "object",
                     "properties": {
                       "results": {
-                        "$ref": "#/definitions/EntitiesResult"
+                        "$ref": "#/definitions/EntitiesResult",
+                        "statistics": {
+                          "$ref": "#/definitions/RequestStatistics"
+                        }
                       }
                     }
                   }
@@ -1107,7 +1107,10 @@
                     "type": "object",
                     "properties": {
                       "results": {
-                        "$ref": "#/definitions/PiiResult"
+                        "$ref": "#/definitions/PiiResult",
+                        "statistics": {
+                          "$ref": "#/definitions/RequestStatistics"
+                        }
                       }
                     }
                   }
@@ -1126,7 +1129,10 @@
                     "type": "object",
                     "properties": {
                       "results": {
-                        "$ref": "#/definitions/KeyPhraseResult"
+                        "$ref": "#/definitions/KeyPhraseResult",
+                        "statistics": {
+                          "$ref": "#/definitions/RequestStatistics"
+                        }
                       }
                     }
                   }
@@ -1145,7 +1151,10 @@
                     "type": "object",
                     "properties": {
                       "results": {
-                        "$ref": "#/definitions/EntityLinkingResult"
+                        "$ref": "#/definitions/EntityLinkingResult",
+                        "statistics": {
+                          "$ref": "#/definitions/RequestStatistics"
+                        }
                       }
                     }
                   }
