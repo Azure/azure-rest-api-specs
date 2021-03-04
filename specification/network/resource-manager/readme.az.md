@@ -19,6 +19,10 @@ cli:
     - where:
         group: "*"
         op: "*"
+      hidden: true
+    - where:
+        group: "*"
+        op: "*"
         param: networkSecurityGroupName
       name: nsgName
     - where:
