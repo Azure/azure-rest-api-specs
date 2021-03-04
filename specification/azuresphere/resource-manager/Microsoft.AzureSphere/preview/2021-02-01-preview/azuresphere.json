@@ -59,7 +59,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -98,7 +98,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -141,7 +141,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -187,7 +187,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -236,7 +236,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -285,7 +285,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -317,21 +317,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful.",
-            "schema": {
-              "$ref": "#/definitions/Catalog"
-            }
+            "description": "Successful."
           },
           "204": {
-            "description": "Successful. Resource marked for deletion.",
-            "schema": {
-              "$ref": "#/definitions/Catalog"
-            }
+            "description": "Successful. Catalog does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -373,7 +367,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -422,7 +416,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -474,7 +468,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -526,7 +520,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -561,21 +555,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful.",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
+            "description": "Successful."
           },
           "204": {
-            "description": "Successful. Resource marked for deletion",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
+            "description": "Successful. Product does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -588,57 +576,18 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "type": "object",
-      "description": "An Azure Sphere resource.",
-      "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "systemData": {
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
-        },
-        "tags": {
-          "description": "resource tags.",
-          "readOnly": false,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "Catalog": {
       "type": "object",
       "description": "Catalog details.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "description": "Catalog properties.",
           "x-ms-client-flatten": true,
@@ -695,46 +644,6 @@
       },
       "description": "Display information of an operation."
     },
-    "ErrorResponseBody": {
-      "description": "The error object.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "Error target.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Error details.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ErrorResponseBody"
-          }
-        }
-      }
-    },
-    "DefaultErrorResponse": {
-      "type": "object",
-      "description": "Default error response on failure.",
-      "properties": {
-        "error": {
-          "description": "The error object.",
-          "readOnly": true,
-          "$ref": "#/definitions/ErrorResponseBody"
-        }
-      }
-    },
     "GetOperationsResponse": {
       "type": "object",
       "description": "Result of a request to list all operations supported by Microsoft.AzureSphere resource provider.",
@@ -776,10 +685,13 @@
       "description": "Product details",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "description": "Product properties.",
           "x-ms-client-flatten": true,
