@@ -2256,6 +2256,10 @@
           "description": "(Optional) Indicates whether to start the cloud service immediately after it is created. The default value is `true`.\r\nIf false, the service model is still deployed, but the code is not run immediately. Instead, the service is PoweredOff until you call Start, at which time the service will be started. A deployed service still incurs charges, even if it is poweredoff.",
           "type": "boolean"
         },
+        "allowModelOverride": {
+          "description": "(Optional) Indicates whether the role sku properties (roleProfile.roles.sku) specified in the model/template should override the role instance count and vm size specified in the .cscfg and .csdef respectively.\r\nThe default value is `false`.",
+          "type": "boolean"
+        },
         "upgradeMode": {
           "$ref": "#/definitions/CloudServiceUpgradeMode"
         },
