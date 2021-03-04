@@ -975,9 +975,6 @@
           "format": "int32",
           "type": "integer",
           "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/systemData"
         }
       }
     },
@@ -1065,6 +1062,62 @@
         }
       }
     },
+    "ElasticMonitorResourceResponse": {
+      "description": "Monitor resource response.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "ARM id of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "description": "SKU of the monitor resource.",
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "properties": {
+          "description": "Properties of the monitor resource.",
+          "$ref": "#/definitions/MonitorProperties",
+          "x-ms-client-flatten": false
+        },
+        "identity": {
+          "description": "Identity properties of the monitor resource.",
+          "$ref": "#/definitions/IdentityProperties"
+        },
+        "tags": {
+          "description": "The tags of the monitor resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "The location of the monitor resource",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData"
+        }
+      }
+    },
     "ElasticMonitorResourceListResponse": {
       "description": "Response of a list operation.",
       "type": "object",
@@ -1073,7 +1126,7 @@
           "description": "Results of a list operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ElasticMonitorResource"
+            "$ref": "#/definitions/ElasticMonitorResourceResponse"
           }
         },
         "nextLink": {
@@ -1209,9 +1262,6 @@
         "logRules": {
           "description": "Rules for sending logs.",
           "$ref": "#/definitions/LogRules"
-        },
-        "systemData": {
-          "$ref": "#/definitions/systemData"
         }
       }
     },
