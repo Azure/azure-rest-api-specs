@@ -19,6 +19,11 @@ cli:
             group: "SshPublicKeys"
             op: "*"
           hidden: false
+        - where:
+            group: "*"
+            op: "*"
+            param: vmName
+          name: name
 directive: 
   - where: 
       command: vm ssh-public-key
