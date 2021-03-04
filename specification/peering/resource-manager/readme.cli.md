@@ -24,7 +24,7 @@ cli:
     "/properties/direct": "Direct*/"
     "/properties/peercontactinfo": "*/"
     
-  test:
+  test-scenario:
     - name: /PeerAsns/put/Create a peer ASN
       disabled: true
     - name: /Peerings/put/Create an exchange peering
