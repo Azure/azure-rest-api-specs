@@ -2373,6 +2373,22 @@
         "primaryUserAssignedIdentity": {
           "description": "The user assigned identity resource id that represents the workspace identity.",
           "type": "string"
+        },
+        "subscriptionState": {
+          "readOnly":true,
+          "$ref": "#/definitions/SubscriptionState"
+        },
+        "subscriptionStatusChangeTimeStampUtc": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Subscription state change time.",
+          "description": "The time at which the subscription state changed."
+        },
+        "tenantId": {
+          "description": "The tenant id associated with this workspace.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4102,6 +4118,22 @@
         "modelAsString": true
       }
     },
+    "SubscriptionState": {
+      "type": "string",
+      "description": "The state AzureML workspace's subscription",
+      "enum": [
+        "suspended",
+        "active",
+        "expired",
+        "submitted",
+        "rejected",
+        "cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriptionState",
+        "modelAsString": false
+      }
+    },
     "MachineLearningServiceError": {
       "type": "object",
       "description": "Wrapper for error response to follow ARM guidelines.",
@@ -4569,10 +4601,7 @@
           "description": "The ArmId of the user assigned identity that will be used to access the customer managed key vault",
           "type": "string"
         }
-      },
-      "required": [
-        "userAssignedIdentity"
-      ]
+      }
     },
     "ServiceResource": {
       "type": "object",
