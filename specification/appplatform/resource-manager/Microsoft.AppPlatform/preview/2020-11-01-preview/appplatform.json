@@ -3925,15 +3925,19 @@
       "properties": {
         "cpu": {
           "format": "int32",
-          "description": "Required CPU, basic tier should be 1, standard tier should be in range (1, 4)",
+          "description": "Required CPU, basic tier should be 1, standard tier should be in range (1, 4), it will be deprecated since api version 2021-03-03-preview, Please leverage the ResourceRequest field to set the cpu size.",
           "default": 1,
           "type": "integer"
         },
         "memoryInGB": {
           "format": "int32",
-          "description": "Required Memory size in GB, basic tier should be in range (1, 2), standard tier should be in range (1, 8)",
+          "description": "Required Memory size in GB, basic tier should be in range (1, 2), standard tier should be in range (1, 8), it will be deprecated since api version 2021-03-03-preview, Please leverage the ResourceRequest field to set the memory size.",
           "default": 1,
           "type": "integer"
+        },
+        "resourceRequest": {
+          "$ref": "#/definitions/ResourceRequest",
+          "description": "The request of quantity for cpu and memory size."
         },
         "jvmOptions": {
           "description": "JVM parameter",
@@ -4010,6 +4014,20 @@
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceRequest": {
+      "description": "Deployment resource request payload",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "description": "Required CPU, 1c can be represent by 1 or 1000m, basic tier should be 500m or 1, standard tier should be 500m or the value in range (1, 4).",
+          "type": "string"
+        },
+        "memory": {
+          "description": "Required Memory size, 1GB can be represent by 1Gi or 1024Mi, basic tier should be 500m or the value in range (1, 2), standard tier should be 500m or the value in range (1, 8).",
           "type": "string"
         }
       }
