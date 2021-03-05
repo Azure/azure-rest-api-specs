@@ -16,6 +16,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi)
 clear-output-folder: true
 batch:
+  - tag: package-2020-11
   - tag: package-2020-08
   - tag: package-2020-07
   - tag: package-2020-06
@@ -55,6 +56,16 @@ batch:
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2020-11 and python
+
+These settings apply only when `--tag=package-2020-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-11'
+namespace: azure.mgmt.network.v2020_11_01
+output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2020_11_01
 ```
 
 ### Tag: package-2020-08 and python
