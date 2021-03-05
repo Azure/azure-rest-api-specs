@@ -50,7 +50,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./artifacts.json#/definitions/CloudError"
             }
           }
         },
@@ -93,7 +93,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./artifacts.json#/definitions/CloudError"
             }
           }
         }
@@ -135,7 +135,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./artifacts.json#/definitions/CloudError"
             }
           }
         }
@@ -178,7 +178,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./artifacts.json#/definitions/CloudError"
             }
           }
         }
@@ -215,7 +215,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./artifacts.json#/definitions/CloudError"
             }
           }
         }
@@ -309,7 +309,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "./artifacts.json#/definitions/CloudError"
             }
           }
         }
@@ -329,7 +329,7 @@
         "error": {
           "x-ms-client-flatten": true,
           "description": "Error data",
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "./artifacts.json#/definitions/CloudErrorBody"
         }
       }
     },
@@ -469,51 +469,6 @@
           "description": "Creator Id of the library/package."
         }
       }
-    },
-    "CloudError": {
-      "x-ms-external": true,
-      "description": "The object that defines the structure of an Azure Synapse error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "x-ms-client-flatten": true,
-          "description": "Error data",
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "description": "The object that defines the structure of an Azure Synapse error.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "Property name/path in request associated with error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Array with additional error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudError"
-          }
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
     }
   },
   "parameters": {
