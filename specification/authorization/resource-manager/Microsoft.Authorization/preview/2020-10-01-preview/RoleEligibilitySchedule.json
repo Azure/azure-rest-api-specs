@@ -39,7 +39,7 @@
         "tags": [
           "roleEligibilitySchedules"
         ],
-        "operationId": "roleEligibilitySchedules_Get",
+        "operationId": "RoleEligibilitySchedules_Get",
         "description": "Get the specified role eligibility schedule for a resource scope",
         "parameters": [
           {
@@ -87,7 +87,7 @@
         "tags": [
           "roleEligibilitySchedules"
         ],
-        "operationId": "roleEligibilitySchedules_ListForScope",
+        "operationId": "RoleEligibilitySchedules_ListForScope",
         "description": "Gets role eligibility schedules for a resource scope.",
         "parameters": [
           {
@@ -103,7 +103,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedules at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedules at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role eligibility schedules requested by the current user. Use $filter=asTarget() to return all role eligibility schedules created for the current user."
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedules at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"

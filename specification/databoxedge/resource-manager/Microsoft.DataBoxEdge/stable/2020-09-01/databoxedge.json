@@ -4634,6 +4634,7 @@
             "AzureModularDataCentre"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "DataBoxEdgeDeviceKind",
             "modelAsString": true
@@ -4646,6 +4647,7 @@
         "properties": {
           "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
           "description": "The properties of the Data Box Edge/Gateway device.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       }
@@ -4793,11 +4795,13 @@
         },
         "description": {
           "description": "The Description of the Data Box Edge/Gateway device.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "modelDescription": {
           "description": "The description of the Data Box Edge/Gateway device model.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "deviceType": {
           "description": "The type of the Data Box Edge/Gateway device.",
@@ -4813,7 +4817,8 @@
         },
         "friendlyName": {
           "description": "The Data Box Edge/Gateway device name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "culture": {
           "description": "The Data Box Edge/Gateway device culture.",
@@ -4876,11 +4881,13 @@
         },
         "resourceMoveDetails": {
           "$ref": "#/definitions/ResourceMoveDetails",
-          "description": "The details of the move operation on this resource."
+          "description": "The details of the move operation on this resource.",
+          "readOnly": true
         },
         "edgeProfile": {
           "$ref": "#/definitions/EdgeProfile",
-          "description": "The details of Edge Profile for this resource"
+          "description": "The details of Edge Profile for this resource",
+          "readOnly": true
         }
       }
     },
@@ -6936,7 +6943,8 @@
         },
         "currentStatus": {
           "$ref": "#/definitions/OrderStatus",
-          "description": "Current status of the order."
+          "description": "Current status of the order.",
+          "readOnly": true
         },
         "orderHistory": {
           "description": "List of status changes in the order.",
