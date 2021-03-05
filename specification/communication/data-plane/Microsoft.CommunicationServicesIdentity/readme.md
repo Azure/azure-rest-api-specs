@@ -4,17 +4,14 @@
 
 This is the AutoRest configuration file for communicationservices.
 
-## Getting Started
+The current release is `release_1_0`.
 
-To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+``` yaml
 
-> `autorest readme.md`
-
-To see additional help and options, run:
-
-> `autorest --help`
-
-For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
+tag: release_1_0
+add-credentials: true
+openapi-type: data-plane
+```
 
 ---
 
@@ -130,15 +127,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_anomalydetector']
 ```
 
-## CSharp
+## CSharp 
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
