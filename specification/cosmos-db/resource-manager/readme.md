@@ -45,12 +45,11 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-01'
+``` yaml $(tag) == 'package-2021-01'
 input-file:
   - Microsoft.DocumentDB/stable/2021-01-15/cosmos-db.json
   - Microsoft.DocumentDB/stable/2021-01-15/notebook.json
@@ -59,6 +58,7 @@ input-file:
 modelerfour:
   lenient-model-deduplication: true
 ```
+
 ### Tag: package-2020-09
 
 These settings apply only when `--tag=package-2020-09` is specified on the command line.
@@ -289,6 +289,10 @@ directive:
   - suppress: DeleteOperationResponses
     from: managedCassandra.json
     reason: Linter is broken and throwing false positives.
+  - suppress: INVALID_TYPE
+    where: $.definitions.ContinuousBackupRestoreLocation
+    from: cosmos-db.json
+    reason: Type looks correct for ContinuousBackupRestoreLocation and validated with SDK. seems like false alert.
 ```
 
 ---
