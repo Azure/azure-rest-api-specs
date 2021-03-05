@@ -14,6 +14,7 @@ python:
 
 ``` yaml $(python-mode) == 'update' && !$(track2)
 python:
+    no-namespace-folders: true
     output-folder: $(python-sdks-folder)/elastic/azure-mgmt-elastic/azure/mgmt/elastic
 ```
 ``` yaml $(python-mode) == 'create' && !$(track2)
