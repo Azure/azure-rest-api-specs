@@ -424,8 +424,8 @@
               "$ref": "#/definitions/ManagedHsm"
             }
           },
-          "204": {
-            "description": "Request successful. Resource does not exist."
+          "404": {
+            "description": "The specified managed HSM resource could not be found."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -471,8 +471,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Request successful. Resource does not exist."
+          "404": {
+            "description": "The specified managed HSM resource could not be found."
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
@@ -911,7 +911,7 @@
             "modelAsString": true
           }
         },
-        "purgeDateTimeUtc": {
+        "scheduledPurgeDate": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
