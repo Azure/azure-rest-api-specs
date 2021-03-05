@@ -26,12 +26,20 @@ These are the global settings for the StorageCache API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-10-01
+tag: package-2021-03
 add-credentials: true
 title: StorageCacheManagementClient
 ```
 
 
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.StorageCache/stable/2021-03-01/storagecache.json
+```
 ### Tag: package-2020-10-01
 
 These settings apply only when `--tag=package-2020-10` is specified on the command line.
@@ -40,6 +48,7 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 input-file:
   - Microsoft.StorageCache/stable/2020-10-01/storagecache.json
 ```
+
 ### Tag: package-2020-03-01
 
 These settings apply only when `--tag=package-2020-03-01` is specified on the command line.
