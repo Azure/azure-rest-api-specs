@@ -45,6 +45,9 @@
           },
           {
             "$ref": "#/parameters/Pages"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "consumes": [
@@ -263,12 +266,18 @@
       "type": "object",
       "required": [
         "version",
+        "modelVersion",
         "readResults"
       ],
       "properties": {
         "version": {
           "description": "Version of schema used for this result.",
           "type": "string"
+        },
+        "modelVersion": {
+          "description": "Version of the OCR model used for text extraction.",
+          "type": "string",
+          "pattern": "^(latest|\\d{4}-\\d{2}-\\d{2})(-preview)?$"
         },
         "readResults": {
           "description": "Text extracted from the input.",
@@ -453,7 +462,6 @@
       "in": "query",
       "description": "The BCP-47 language code of the text in the document. The Read API is currently only available for Afrikaans, Albanian, Asturian, Basque, Bislama, Breton, Catalan, Cebuano, Cornish, Corsican, Czech, Danish, Dutch, English , Fijian, Filipino, French, Friulian, Galician, German, Gilbertese, Greenlandic, Haitian Creole, Hani, Hmong Daw, Hungarian, Indonesian, Interlingua, Inuktitut, Irish, Italian, Japanese, Javanese, Kabuverdianu, Kachin, Kara-Kalpak, Khasi, Korean, K’iche’, Luxembourgish, Malay, Manx, Neapolitan, Norwegian, Occitan, Polish, Portuguese, Romansh, Scots, Scottish Gaelic, simplified Chinese , Spanish, Swahili, Swedish, Tetum, traditional Chinese , Turkish, Uzbek, Volapük, Western Frisian, Yucatec Maya, Zhuang and Zulu. Read supports auto language identification and multi-language documents, so only provide a language code if you would like to force the documented to be processed as that specific language.",
       "required": false,
-      "default": "en",
       "x-ms-parameter-location": "method",
       "type": "string",
       "x-ms-enum": {
@@ -568,17 +576,27 @@
       "x-ms-skip-url-encoding": true
     },
     "Pages": {
-      "name": "Pages",
+      "name": "pages",
       "in": "query",
-      "description": "Custom page numbers for multi-page documents(PDF/TIFF), input the number of the pages you want to get OCR result. For a range of pages, use a hyphen. Separate each page or range with a comma or space.",
+      "description": "Custom page numbers for multi-page documents(PDF/TIFF), input the number of the pages you want to get OCR result. For a range of pages, use a hyphen. Separate each page or range with a comma.",
       "required": false,
       "x-ms-parameter-location": "method",
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "(^[0-9]+-[0-9]+$)|(^[0-9]+$)"
+        "pattern": "^(\\d+|\\d+-\\d+|\\d+-|-\\d+)$"
       },
       "collectionFormat": "csv"
+    },
+    "ModelVersion": {
+      "name": "modelVersion",
+      "in": "query",
+      "description": "Optional parameter to specify the version of the OCR model used for text extraction. Accepted values are: \"latest\", \"latest-preview\", \"2021-03-15\". Defaults to \"latest\".",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "pattern": "^(latest|\\d{4}-\\d{2}-\\d{2})(-preview)?$",
+      "default": "latest"
     }
   }
 }
