@@ -1872,6 +1872,9 @@
             "description": "The expand value for the operation result."
           },
           {
+            "$ref": "#/parameters/top"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -4396,6 +4399,17 @@
       "type": "string",
       "description": "The tenant ID.",
       "x-ms-parameter-location": "client"
+    },
+    "top": {
+      "required": false,
+      "default": 100,
+      "description": "(Optional) Set the maximum number of results per response.",
+      "in": "query",
+      "maximum": 999,
+      "minimum": 1,
+      "name": "$top",
+      "type": "integer",
+      "x-ms-parameter-location": "method"
     }
   }
 }
