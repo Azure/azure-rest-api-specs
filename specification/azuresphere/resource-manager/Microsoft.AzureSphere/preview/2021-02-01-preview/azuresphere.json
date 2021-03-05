@@ -40,7 +40,7 @@
           "Operations"
         ],
         "summary": "Lists all operations supported by the Microsoft.AzureSphere resource provider.",
-        "operationId": "Operations_List",
+        "operationId": "Operations_ListBySubscription",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -79,7 +79,7 @@
           "Catalogs"
         ],
         "description": "Returns a list of catalogs for the given subscriptionId.",
-        "operationId": "CatalogsBySubscription_List",
+        "operationId": "Catalogs_ListBySubscription",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -102,7 +102,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -119,7 +118,7 @@
           "Catalogs"
         ],
         "description": "Get a list of catalogs in the given resource group.",
-        "operationId": "Catalogs_List",
+        "operationId": "Catalogs_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -145,7 +144,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -271,7 +269,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Catalog"
+              "$ref": "#/definitions/CatalogPatch"
             }
           }
         ],
@@ -371,7 +369,6 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -506,7 +503,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Product"
+              "$ref": "#/definitions/ProductPatch"
             }
           }
         ],
@@ -591,14 +588,47 @@
         "properties": {
           "description": "Catalog properties.",
           "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CatalogProperty"
+        }
+      }
+    },
+    "CatalogProperty": {
+      "description": "Catalog properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Current provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CatalogPatch": {
+      "type": "object",
+      "description": "Catalog details",
+      "properties": {
+        "properties": {
+          "description": "Catalog properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CatalogPatchProperty"
+        }
+      }
+    },
+    "CatalogPatchProperty": {
+      "description": "Catalog patch properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the catalog."
+        },
+        "tags": {
           "type": "object",
-          "properties": {
-            "provisioningState": {
-              "description": "Current provisioning state.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
         }
       }
     },
@@ -695,21 +725,61 @@
         "properties": {
           "description": "Product properties.",
           "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProductProperty"
+        }
+      }
+    },
+    "ProductProperty": {
+      "description": "Product properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Product description.",
+          "minLength": 1,
+          "maxLength": 150,
+          "pattern": "^[A-Za-z0-9-._ ]+$"
+        },
+        "provisioningState": {
+          "description": "Current provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProductPatch": {
+      "type": "object",
+      "description": "Product details",
+      "properties": {
+        "properties": {
+          "description": "Product properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProductPatchProperty"
+        }
+      }
+    },
+    "ProductPatchProperty": {
+      "description": "Product patch properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the product."
+        },
+        "tags": {
           "type": "object",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "Product description.",
-              "minLength": 1,
-              "maxLength": 150,
-              "pattern": "^[A-Za-z0-9-._ ]+$"
-            },
-            "provisioningState": {
-              "description": "Current provisioning state.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "description": {
+          "type": "string",
+          "description": "Product description.",
+          "minLength": 1,
+          "maxLength": 150,
+          "pattern": "^[A-Za-z0-9-._ ]+$"
         }
       }
     },
