@@ -1762,6 +1762,10 @@
           "description": "Password of the OData service.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "authHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
+        },
         "tenant": {
           "type": "object",
           "description": "Specify the tenant information (domain name or tenant ID) under which your application resides. Type: string (or Expression with resultType string)."
@@ -2636,6 +2640,10 @@
           "description": "The password used in Basic authentication type.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "authHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
+        },
         "servicePrincipalId": {
           "description": "The application's client ID used in AadServicePrincipal authentication type.",
           "type": "object"
@@ -2878,6 +2886,10 @@
           "description": "Password for Basic, Digest, Windows, or ClientCertificate with EmbeddedCertData authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "authHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
+        },
         "embeddedCertData": {
           "type": "object",
           "description": "Base64 encoded certificate data for ClientCertificate authentication. For on-premises copy with ClientCertificate authentication, either CertThumbprint or EmbeddedCertData/Password should be specified. Type: string (or Expression with resultType string)."
@@ -3003,7 +3015,8 @@
           "type": "string",
           "enum": [
             "Basic",
-            "SshPublicKey"
+            "SshPublicKey",
+            "MultiFactor"
           ],
           "x-ms-enum": {
             "name": "SftpAuthenticationType",
