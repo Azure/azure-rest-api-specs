@@ -8,6 +8,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/providers/Microsoft.ChangeAnalysis/operations": {
       "get": {
@@ -16,10 +22,6 @@
         ],
         "summary": "Lists all the supported operations by the Microsoft.ChangeAnalysis resource provider along with their descriptions.",
         "operationId": "Operations_List",
-        "produces": [
-          "application/json",
-          "default"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -59,10 +61,6 @@
         ],
         "summary": "List the changes of a resource within the specified time range. Customer data will be masked if the user doesn't have access.",
         "operationId": "ResourceChanges_List",
-        "produces": [
-          "application/json",
-          "default"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -111,10 +109,6 @@
         ],
         "summary": "List the changes of a resource group within the specified time range. Customer data will always be masked.",
         "operationId": "Changes_ListChangesByResourceGroup",
-        "produces": [
-          "application/json",
-          "default"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -166,10 +160,6 @@
         ],
         "summary": "List the changes of a subscription within the specified time range. Customer data will always be masked.",
         "operationId": "Changes_ListChangesBySubscription",
-        "produces": [
-          "application/json",
-          "default"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
