@@ -425,7 +425,11 @@
             }
           },
           "404": {
-            "description": "The specified managed HSM resource could not be found."
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -472,7 +476,11 @@
         ],
         "responses": {
           "404": {
-            "description": "The specified managed HSM resource could not be found."
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
