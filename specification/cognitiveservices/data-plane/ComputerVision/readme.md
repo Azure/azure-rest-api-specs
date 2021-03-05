@@ -202,6 +202,8 @@ input-file:
   - $(this-folder)/stable/v3.0/Ocr.json
   - $(this-folder)/preview/v3.1-preview.2/Ocr.json
   - $(this-folder)/preview/v3.2-preview.2/Ocr.json
+  - $(this-folder)/stable/v3.2/ComputerVision.json
+  - $(this-folder)/stable/v3.2/Ocr.json
 
 ```
 
