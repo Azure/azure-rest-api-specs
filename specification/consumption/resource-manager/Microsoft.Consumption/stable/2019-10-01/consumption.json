@@ -2520,6 +2520,11 @@
           "type": "string",
           "readOnly": true
         },
+        "additionalInfo": {
+          "description": "Additional information.",
+          "type": "string",
+          "readOnly": true
+        },
         "orderNumber": {
           "description": "The order number.",
           "type": "string",
@@ -4143,6 +4148,26 @@
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "download": {
+          "description": "Pricesheet download details.",
+          "$ref": "#/definitions/MeterDetails",
+          "readOnly": true
+        }
+      }
+    },
+    "DownloadProperties": {
+      "description": "The properties of the price sheet download.",
+      "properties": {
+        "downloadUrl": {
+          "description": "The link (url) to download the pricesheet.",
+          "type": "string",
+          "readOnly": true
+        },
+        "validTill": {
+          "description": "Download link validity.",
           "type": "string",
           "readOnly": true
         }
