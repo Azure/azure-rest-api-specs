@@ -7663,6 +7663,38 @@
       },
       "description": "A skill to translate text from one language to another."
     },
+    "DocumentExtractionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentExtractionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "parsingMode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The parsingMode for the skill. Will be set to 'default' if not defined."
+        },
+        "dataToExtract": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The type of data to be extracted for the skill. Will be set to 'contentAndMetadata' if not defined."
+        },
+        "configuration": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "x-nullable": true,
+          "description": "A dictionary of configurations for the skill."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-document-extraction"
+      },
+      "description": "A skill that extracts content from a file within the enrichment pipeline."
+    },
     "WebApiSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
       "allOf": [
