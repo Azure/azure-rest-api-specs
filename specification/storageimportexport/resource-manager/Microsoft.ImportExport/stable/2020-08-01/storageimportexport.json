@@ -143,7 +143,8 @@
             "in": "query",
             "description": "An integer value that specifies how many jobs at most should be returned. The value cannot exceed 100.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -202,7 +203,8 @@
             "in": "query",
             "description": "An integer value that specifies how many jobs at most should be returned. The value cannot exceed 100.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -666,7 +668,7 @@
         },
         "deliveryPackage": {
           "description": "Contains information about the package being shipped by the customer to the Microsoft data center. ",
-          "$ref": "#/definitions/PackageInformation"
+          "$ref": "#/definitions/DeliveryPackageInformation"
         },
         "returnPackage": {
           "description": "Contains information about the package being shipped from the Microsoft data center to the customer to return the drives. The format is the same as the deliveryPackage property above. This property is not included if the drives have not yet been returned. ",
@@ -694,6 +696,7 @@
         },
         "percentComplete": {
           "type": "integer",
+          "format": "int32",
           "description": "Overall percentage completed for the job."
         },
         "incompleteBlobListUri": {
@@ -731,7 +734,11 @@
           "enum": [
             "MicrosoftManaged",
             "CustomerManaged"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKekType",
+            "modelAsString": true
+          }
         },
         "kekUrl": {
           "description": "Specifies the url for kek encryption key. ",
@@ -754,7 +761,11 @@
             "None",
             "SystemAssigned",
             "UserAssigned"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
         },
         "principalId": {
           "description": "Specifies the principal id for the identity for the job. ",
@@ -796,7 +807,7 @@
             },
             "deliveryPackage": {
               "description": "Contains information about the package being shipped by the customer to the Microsoft data center.",
-              "$ref": "#/definitions/PackageInformation"
+              "$ref": "#/definitions/DeliveryPackageInformation"
             },
             "logLevel": {
               "type": "string",
@@ -838,6 +849,11 @@
       "x-ms-azure-resource": true,
       "description": "Contains the job information.",
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "SystemData of ImportExport Jobs.",
+          "readOnly": true
+        },
         "id": {
           "type": "string",
           "description": "Specifies the resource identifier of the job.",
@@ -957,6 +973,10 @@
               "description": "The phone number for the Azure data center. ",
               "type": "string"
             },
+            "additionalShippingInformation": {
+              "description": "Additional shipping information for customer, specific to datacenter to which customer should send their disks.",
+              "type": "string"
+            },
             "supportedCarriers": {
               "type": "array",
               "description": "A list of carriers that are supported at this location. ",
@@ -1044,14 +1064,6 @@
     },
     "ShippingInformation": {
       "description": "Contains information about the Microsoft datacenter to which the drives should be shipped.",
-      "required": [
-        "recipientName",
-        "streetAddress1",
-        "city",
-        "stateOrProvince",
-        "postalCode",
-        "countryOrRegion"
-      ],
       "properties": {
         "recipientName": {
           "type": "string",
@@ -1120,6 +1132,32 @@
         }
       }
     },
+    "DeliveryPackageInformation": {
+      "description": "Contains information about the delivery package being shipped by the customer to the Microsoft data center.",
+      "required": [
+        "carrierName",
+        "trackingNumber"
+      ],
+      "properties": {
+        "carrierName": {
+          "type": "string",
+          "description": "The name of the carrier that is used to ship the import or export drives."
+        },
+        "trackingNumber": {
+          "type": "string",
+          "description": "The tracking number of the package."
+        },
+        "driveCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of drives included in the package."
+        },
+        "shipDate": {
+          "type": "string",
+          "description": "The date when the package is shipped."
+        }
+      }
+    },
     "DriveStatus": {
       "description": "Provides information about the drive's status",
       "properties": {
@@ -1166,6 +1204,7 @@
         },
         "percentComplete": {
           "type": "integer",
+          "format": "int32",
           "description": "Percentage completed for the drive. "
         },
         "verboseLogUri": {

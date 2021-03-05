@@ -1860,6 +1860,12 @@
           "default": 107374182400,
           "example": 107374182400
         },
+        "usedBytes": {
+          "type": "integer",
+          "description": "Resource size in bytes, current storage usage for the volume in bytes",
+          "readOnly": true,
+          "format": "int64"
+        },
         "exportPolicy": {
           "title": "exportPolicy",
           "description": "Set of export policy rules",
@@ -1998,7 +2004,7 @@
           "title": "replicationSchedule",
           "type": "string",
           "description": "Schedule",
-          "example": "10minutely, hourly, daily, weekly, monthly"
+          "example": "10minutely, hourly, daily"
         },
         "remoteVolumeResourceId": {
           "title": "remoteVolumeResourceId",

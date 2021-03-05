@@ -1047,7 +1047,7 @@
           "Volumes Replication"
         ],
         "summary": "Resync volume replication",
-        "description": "Resync the connection on the destination volume. If the operation is ran on the source volume it will reverse-resync the connection and sync from source to destination.",
+        "description": "Resync the connection on the destination volume. If the operation is ran on the source volume it will reverse-resync the connection and sync from destination to source.",
         "operationId": "Volumes_ResyncReplication",
         "parameters": [
           {
@@ -1765,6 +1765,7 @@
       "properties": {
         "activeDirectoryId": {
           "type": "string",
+          "default": "guid id",
           "description": "Id of the Active Directory"
         },
         "username": {
@@ -1793,6 +1794,7 @@
         },
         "organizationalUnit": {
           "type": "string",
+          "default": "CN=Computers",
           "description": "The Organizational Unit (OU) within the Windows Active Directory"
         },
         "site": {
@@ -2144,6 +2146,12 @@
           "default": 107374182400,
           "example": 107374182400
         },
+        "usedBytes": {
+          "type": "integer",
+          "description": "Resource size in bytes, current storage usage for the volume in bytes",
+          "readOnly": true,
+          "format": "int64"
+        },
         "exportPolicy": {
           "title": "exportPolicy",
           "description": "Set of export policy rules",
@@ -2160,7 +2168,7 @@
         },
         "protocolTypes": {
           "title": "protocolTypes",
-          "description": "Set of protocol types",
+          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
           "type": "array",
           "items": {
             "type": "string"
@@ -2177,6 +2185,7 @@
         "snapshotId": {
           "title": "Snapshot ID",
           "type": "string",
+          "x-nullable": true,
           "description": "UUID v4 or resource identifier used to identify the Snapshot.",
           "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
           "maxLength": 36,
@@ -2200,6 +2209,7 @@
         "mountTargets": {
           "title": "mountTargets",
           "type": "array",
+          "readOnly": true,
           "description": "List of mount targets",
           "items": {
             "$ref": "#/definitions/mountTargetProperties"
@@ -2233,6 +2243,7 @@
         },
         "snapshotDirectoryVisible": {
           "type": "boolean",
+          "default": true,
           "description": "If enabled (true) the volume will contain a read-only .snapshot directory which provides access to each of the volume's snapshots (default to true)."
         }
       }
@@ -2255,6 +2266,7 @@
         },
         "cifs": {
           "type": "boolean",
+          "default": false,
           "description": "Allows CIFS protocol"
         },
         "nfsv3": {
@@ -2301,9 +2313,7 @@
           "enum": [
             "_10minutely",
             "hourly",
-            "daily",
-            "weekly",
-            "monthly"
+            "daily"
           ],
           "x-ms-enum": {
             "name": "ReplicationSchedule",

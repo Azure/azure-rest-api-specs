@@ -62,6 +62,15 @@ input-file:
 - Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
 ```
 
+### Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+    where: $.definitions.CloudEventEvent.properties.data_base64
+    reason: This parameter name is defined by the Cloud Events 1.0 specification
+```
+
 ---
 # Code Generation
 
@@ -109,6 +118,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(java)
 azure-arm: true
+fluent: true
 namespace: com.microsoft.azure.eventgrid
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1

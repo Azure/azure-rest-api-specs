@@ -6,15 +6,19 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2018-09
+  - tag: schema-migrate-2018-09-01-preview
+
 ```
 
-### Tag: package-2018-09 and azureresourceschema
-
-These settings apply only when `--tag=package-2018-09 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2018-09' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
+### Tag: schema-migrate-2018-09-01-preview and azureresourceschema
 
+``` yaml $(tag) == 'schema-migrate-2018-09-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Migrate/preview/2018-09-01-preview/migrate.json
+
+```
