@@ -278,7 +278,9 @@
             "type": "string",
             "enum": [
               "http",
-              "https"
+              "https",
+              "ws",
+              "wss"
             ],
             "x-ms-enum": {
               "name": "Protocol",
@@ -396,10 +398,11 @@
         },
         "apiType": {
           "type": "string",
-          "description": "Type of Api to create. \n * `http` creates a SOAP to REST API \n * `soap` creates a SOAP pass-through API .",
+          "description": "Type of Api to create. \n * `http` creates a REST API \n * `soap` creates a SOAP pass-through API  \n * `websocket` creates websocket API.",
           "enum": [
             "http",
-            "soap"
+            "soap",
+            "websocket"
           ],
           "x-ms-client-name": "SoapApiType",
           "x-ms-enum": {
@@ -446,7 +449,8 @@
           "description": "Type of API.",
           "enum": [
             "http",
-            "soap"
+            "soap",
+            "websocket"
           ],
           "x-ms-client-name": "ApiType",
           "x-ms-enum": {
@@ -740,7 +744,9 @@
             "type": "string",
             "enum": [
               "http",
-              "https"
+              "https",
+              "ws",
+              "wss"
             ],
             "x-ms-enum": {
               "name": "Protocol",
@@ -793,7 +799,9 @@
             "type": "string",
             "enum": [
               "http",
-              "https"
+              "https",
+              "ws",
+              "wss"
             ],
             "x-ms-enum": {
               "name": "Protocol",
