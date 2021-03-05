@@ -181,7 +181,7 @@
           "type": "array",
           "description": "Array of private link resources",
           "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
           }
         }
       }
@@ -218,6 +218,13 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource Private link DNS zone name."
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
