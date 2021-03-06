@@ -55,7 +55,7 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -106,7 +106,7 @@
           "200": {
             "description": "Successfully retrieved a specified private link resource.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -169,56 +169,6 @@
         "consumes": [
           "application/json"
         ]
-      }
-    }
-  },
-  "definitions": {
-    "PrivateLinkResourceListResult": {
-      "description": "A list of private link resources",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private link resources",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
-          }
-        }
-      }
-    },
-    "PrivateLinkResource": {
-      "description": "A private link resource",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateLinkResourceProperties": {
-      "description": "Properties of a private link resource.",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "The private link resource group id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "description": "The private link resource required member names.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
       }
     }
   },
