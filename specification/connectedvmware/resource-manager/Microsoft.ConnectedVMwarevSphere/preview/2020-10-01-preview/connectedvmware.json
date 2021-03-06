@@ -2388,7 +2388,10 @@
             "$ref": "./examples/PUTExtension.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "patch": {
         "tags": [
@@ -4275,37 +4278,55 @@
       "description": "Managed service identity."
     },
     "MachineExtension": {
+      "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineExtensionProperties"
-            }
-          ],
+          "$ref": "#/definitions/MachineExtensionProperties",
           "description": "Describes Machine Extension Properties."
+        },
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "The system data."
+        },
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Gets or sets the Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
       "description": "Describes a Machine Extension."
     },
     "MachineExtensionUpdate": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineExtensionUpdateProperties"
-            }
-          ],
+          "$ref": "#/definitions/MachineExtensionUpdateProperties",
           "description": "Describes Machine Extension Update Properties."
         }
       },
