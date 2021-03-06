@@ -2,19 +2,27 @@
   "swagger": "2.0",
   "info": {
     "version": "2021-02-01-privatepreview",
-    "title": "dfp",
-    "description": "Description of the new service",
+    "title": "DFP",
+    "description": "DFP Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete DFP instances",
     "x-ms-code-generation-settings": {
-      "name": "dfpClient"
+      "name": "DFPManagementClient"
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -29,27 +37,333 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DFP/operations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DFP/instances/{instanceName}": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
+        "description": "Gets details about the specified instances.",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
+          "Get details of an instance": {
+            "$ref": "./examples/getInstance.json"
+          }
         },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "Instances_GetDetails",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the instance. It must be a minimum of 3 characters, and a maximum of 63."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "OK. The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/DFPInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Provisions the specified DFP instance based on the configuration specified in the request.",
+        "x-ms-examples": {
+          "Create instance": {
+            "$ref": "./examples/createInstance.json"
+          }
+        },
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "Instances_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the DFP instances. It must be a minimum of 3 characters, and a maximum of 63."
+          },
+          {
+            "name": "instanceParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DFPInstance"
+            },
+            "description": "Contains the information used to provision the DFP instance."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DFPInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes the specified DFP instance.",
+        "x-ms-examples": {
+          "Get details of an instance": {
+            "$ref": "./examples/deleteInstance.json"
+          }
+        },
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "Instances_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the DFP instance. It must be at least 3 characters in length, and no more than 63."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates the current state of the specified DFP instance.",
+        "x-ms-examples": {
+          "Update instance parameters": {
+            "$ref": "./examples/updateInstance.json"
+          }
+        },
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "Instances_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the DFP instance. It must be at least 3 characters in length, and no more than 63."
+          },
+          {
+            "name": "instanceUpdateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DFPInstanceUpdateParameters"
+            },
+            "description": "Request object that contains the updated information for the instance."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DFPInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DFP/instances": {
+      "get": {
+        "description": "Gets all the Dedicated instance for the given resource group.",
+        "x-ms-examples": {
+          "List DFP instances in resource group": {
+            "$ref": "./examples/listInstancesInResourceGroup.json"
+          }
+        },
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "Instances_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DFPInstances"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DFP/instances": {
+      "get": {
+        "description": "Lists all the Dedicated instances for the given subscription.",
+        "x-ms-examples": {
+          "Get details of a instance": {
+            "$ref": "./examples/listInstancesInSubscription.json"
+          }
+        },
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "Instances_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DFPInstances"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DFP/instances/{location}/checkNameAvailability": {
+      "post": {
+        "x-ms-examples": {
+          "Check name availability of an instnace": {
+            "$ref": "./examples/checkNameAvailability.json"
+          }
+        },
+        "tags": [
+          "Instances"
+        ],
+        "operationId": "Instances_CheckNameAvailability",
+        "description": "Check the name availability in the target location.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name which the operation will lookup into."
+          },
+          {
+            "name": "instanceParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckInstanceNameAvailabilityParameters"
+            },
+            "description": "The name of the instance."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckInstanceNameAvailabilityResult"
             }
           },
           "default": {
@@ -63,44 +377,225 @@
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "Resource": {
+      "description": "Represents an instance of an DFP resource.",
+      "type": "object",
       "properties": {
-        "sampleProperty": {
+        "id": {
           "type": "string",
-          "description": "Sample property of type string"
+          "readOnly": true,
+          "description": "An identifier that represents the DFP resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the DFP resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the DFP resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the DFP resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs of additional resource provisioning properties."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "DFPInstance": {
+      "description": "Represents an instance of a DFP instance resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DFPInstanceProperties",
+          "description": "Properties of the provision operation request."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "DFPInstances": {
+      "description": "An array of DFP instance resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DFPInstance"
+          },
+          "description": "An array of DFP instance resources."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DFPInstanceUpdateParameters": {
+      "description": "Provision request specification",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs of additional provisioning properties."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DFPInstanceMutableProperties",
+          "description": "Properties of the provision operation request"
+        }
+      }
+    },
+    "DFPInstanceProperties": {
+      "description": "Properties of DFP resource.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Paused",
+            "Suspended",
+            "Provisioning",
+            "Updating",
+            "Suspending",
+            "Pausing",
+            "Resuming",
+            "Preparing",
+            "Scaling"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current state of DFP resource. The state is to indicate more states outside of resource provisioning."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Paused",
+            "Suspended",
+            "Provisioning",
+            "Updating",
+            "Suspending",
+            "Pausing",
+            "Resuming",
+            "Preparing",
+            "Scaling"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current deployment state of DFP resource. The provisioningState is to indicate states for resource provisioning."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DFPInstanceMutableProperties"
+        }
+      ]
+    },
+    "DFPInstanceMutableProperties": {
+      "description": "An object that represents a set of mutable DFP resource properties.",
+      "type": "object",
+      "properties": {
+        "administration": {
+          "$ref": "#/definitions/DFPInstanceAdministrators",
+          "description": "A collection of DFP instance administrators"
+        }
+      }
+    },
+    "DFPInstanceAdministrators": {
+      "description": "An array of administrator user identities",
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The UPN of the user. For example: johnsmith@contoso.com."
+          },
+          "description": "An array of administrator user identities."
         }
       }
     },
     "ErrorResponse": {
-      "description": "Error response.",
+      "type": "object",
+      "description": "Describes the format of Error response.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+          "description": "The error object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Error message indicating why the operation failed."
+            }
+          }
         }
       }
     },
-    "ErrorDefinition": {
-      "description": "Error definition.",
+    "CheckInstanceNameAvailabilityParameters": {
+      "description": "Details of DFP instance name request body.",
+      "type": "object",
       "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+        "name": {
           "type": "string",
-          "readOnly": true
+          "pattern": "^[a-z][a-z0-9]*$",
+          "minLength": 3,
+          "maxLength": 63,
+          "description": "Name for checking availability."
+        },
+        "type": {
+          "type": "string",
+          "default": "Microsoft.DFP/instances",
+          "description": "The resource type of PowerBI dedicated."
+        }
+      }
+    },
+    "CheckInstanceNameAvailabilityResult": {
+      "description": "The checking result of DFP instance name availability.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicator of availability of the DFP instance name."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason of unavailability."
         },
         "message": {
-          "description": "Description of the error.",
           "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
+          "description": "The detailed message of the request unavailability."
         }
       }
     }
@@ -111,22 +606,25 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
+      "description": "A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "description": "The client API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Azure Resource group of which a given DFP instance is part. This name must be at least 1 character in length, and no more than 90."
     }
   }
 }
