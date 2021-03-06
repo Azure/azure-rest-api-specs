@@ -94,7 +94,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name for the new key. The system will generate the version for the new key."
+            "description": "The name of key to be rotated. The system will generate a new version in the specified key."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2098,7 +2098,7 @@
           "items": {
             "$ref": "#/definitions/LifetimeActions"
           },
-          "description": "Actions that will be performed by Key Vault over the lifetime of a key."
+          "description": "Actions that will be performed by Key Vault over the lifetime of a key. For preview, lifetimeActions could only have two items at maximum: one for rotate, one for notify. Notification time would be default to 30 days before expiry and it is not configurable."
         },
         "attributes": {
           "$ref": "#/definitions/KeyRotationPolicyAttributes",
@@ -2122,13 +2122,13 @@
     },
     "LifetimeActionsTrigger": {
       "properties": {
-        "timeAfterCreation": {
+        "timeAfterCreate": {
           "type": "string",
-          "description": "Time after creation to attempt rotate. It will be in ISO 8601 format."
+          "description": "Time after creation to attempt rotate. It will be in ISO 8601 format. Example: 90 days : \"P90D\" "
         },
         "timeBeforeExpiry": {
           "type": "string",
-          "description": "Time before expiry to attempt rotate. It will be in ISO 8601 format."
+          "description": "Time before expiry to attempt rotate. It will be in ISO 8601 format. Example: 90 days : \"P90D\""
         }
       },
       "description": "A condition to be satisfied for an action to be executed."
@@ -2152,7 +2152,7 @@
               },
               {
                 "value": "Notify",
-                "description": "Trigger event grid events."
+                "description": "Trigger event grid events. For preview, the notification time is not configurable and it is default to 30 days before expiry."
               }
             ]
           }
@@ -2162,7 +2162,7 @@
     },
     "KeyRotationPolicyAttributes": {
       "properties": {
-        "expirationTime": {
+        "expiryTime": {
           "type": "string",
           "description": "The expiration time duration to be applied on the new key version. It will be in ISO 8601 Format. Examples: 90 days: P90D, 3 months: P3M, 48 hours: PT48H, 1 year and 10 days: P1Y10D"
         },
