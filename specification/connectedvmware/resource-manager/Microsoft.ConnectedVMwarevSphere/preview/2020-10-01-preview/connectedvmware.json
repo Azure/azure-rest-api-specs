@@ -2373,8 +2373,14 @@
               "$ref": "#/definitions/MachineExtension"
             }
           },
-          "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+          "201": {
+            "description": "HTTP 201 (Created) if the operation was successfully started and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2431,8 +2437,14 @@
               "$ref": "#/definitions/MachineExtension"
             }
           },
-          "202": {
-            "description": "Accepted"
+          "201": {
+            "description": "Created"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2482,6 +2494,12 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -2527,6 +2545,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MachineExtension"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2574,6 +2598,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MachineExtensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -4254,6 +4284,10 @@
             }
           ],
           "description": "Describes Machine Extension Properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
         }
       },
       "allOf": [
@@ -4277,7 +4311,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/UpdateResource"
+          "$ref": "#/definitions/ResourcePatch"
         }
       ],
       "description": "Describes a Machine Extension Update."
