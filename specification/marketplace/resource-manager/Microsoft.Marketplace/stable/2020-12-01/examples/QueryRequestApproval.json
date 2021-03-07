@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "privateStoreId": "a0e28e55-90c4-41d8-8e34-bb7ef7775406",
+    "requestApprovalId": "marketplacetestthirdparty.md-test-third-party-2",
+    "api-version": "2020-12-01",
+    "QueryRequestApprovalProperties": {
+      "parameters": {
+        "properties": {
+          "publisherId": "marketplacetestthirdparty",
+          "planIds": [
+            "testPlanA",
+            "testPlanB",
+            "*"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "uniqueOfferId": "marketplacetestthirdparty.md-test-third-party-2",
+        "plansDetails": {
+          "*": {
+            "planId": "*",
+            "status": "None",
+            "requestDate": null,
+            "justification": null
+          },
+          "byol": {
+            "planId": "testPlanA",
+            "status": "None",
+            "requestDate": null,
+            "justification": ""
+          },
+          "hourly": {
+            "planId": "testPlanB",
+            "status": "ApprovedByAdmin",
+            "requestDate": null,
+            "justification": ""
+          }
+        },
+        "etag": null,
+        "messageCode": 0
+      }
+    }
+  }
+}

@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.Azure.Management.DigitalTwins
-  output-folder: $(csharp-sdks-folder)/digitaltwins/Microsoft.Azure.Management.DigitalTwins/
+  output-folder: $(csharp-sdks-folder)/digitaltwins/Microsoft.Azure.Management.DigitalTwins/src/Generated/
 ```

@@ -1762,6 +1762,10 @@
           "description": "Password of the OData service.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "authHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
+        },
         "tenant": {
           "type": "object",
           "description": "Specify the tenant information (domain name or tenant ID) under which your application resides. Type: string (or Expression with resultType string)."
@@ -2636,6 +2640,10 @@
           "description": "The password used in Basic authentication type.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "authHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
+        },
         "servicePrincipalId": {
           "description": "The application's client ID used in AadServicePrincipal authentication type.",
           "type": "object"
@@ -2878,6 +2886,10 @@
           "description": "Password for Basic, Digest, Windows, or ClientCertificate with EmbeddedCertData authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "authHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
+        },
         "embeddedCertData": {
           "type": "object",
           "description": "Base64 encoded certificate data for ClientCertificate authentication. For on-premises copy with ClientCertificate authentication, either CertThumbprint or EmbeddedCertData/Password should be specified. Type: string (or Expression with resultType string)."
@@ -3003,7 +3015,8 @@
           "type": "string",
           "enum": [
             "Basic",
-            "SshPublicKey"
+            "SshPublicKey",
+            "MultiFactor"
           ],
           "x-ms-enum": {
             "name": "SftpAuthenticationType",
@@ -5312,6 +5325,14 @@
           "description": "Access token for databricks REST API. Refer to https://docs.azuredatabricks.net/api/latest/authentication.html. Type: string (or Expression with resultType string).",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "authentication": {
+          "type": "object",
+          "description": "Required to specify MSI, if using Workspace resource id for databricks REST API. Type: string (or Expression with resultType string)."
+        },
+        "workspaceResourceId": {
+          "type": "object",
+          "description": "Workspace resource id for databricks REST API. Type: string (or Expression with resultType string)."
+        },
         "existingClusterId": {
           "type": "object",
           "description": "The id of an existing interactive cluster that will be used for all runs of this activity. Type: string (or Expression with resultType string)."
@@ -5375,11 +5396,14 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "policyId": {
+          "type": "object",
+          "description": "The policy id for limiting the ability to configure clusters based on a user defined set of rules. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
-        "domain",
-        "accessToken"
+        "domain"
       ]
     },
     "AzureDatabricksDeltaLakeLinkedService": {

@@ -25,10 +25,10 @@ These are the global settings for the TrafficManager API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-04
+tag: package-2018-08
 ```
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: OperationsAPIImplementation
@@ -55,6 +55,15 @@ directive:
     reason: This will cause breaking changes in .NET SDK
     from: trafficmanager.json
     where: $.definitions.UserMetricsModel
+```
+
+### Tag: package-2018-08
+
+These settings apply only when `--tag=package-2018-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08'
+input-file:
+- Microsoft.Network/stable/2018-08-01/trafficmanager.json
 ```
 
 ### Tag: package-2018-04
