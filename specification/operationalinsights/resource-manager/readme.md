@@ -150,13 +150,13 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
 - Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
-- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
 - Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
 - Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
 - Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/stable/2020-10-01/StorageInsightConfigs.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Tables.json
