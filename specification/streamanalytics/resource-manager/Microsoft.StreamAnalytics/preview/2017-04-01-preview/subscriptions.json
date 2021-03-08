@@ -47,11 +47,7 @@
         },
         "parameters": [
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The region in which to retrieve the subscription's quota information. You can find out which regions Azure Stream Analytics is supported in here: https://azure.microsoft.com/en-us/regions/"
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -65,6 +61,108 @@
             "description": "Successfully retrieved the subscription's quota information in the specified region.",
             "schema": {
               "$ref": "#/definitions/SubscriptionQuotasListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/testQuery": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_TestQuery",
+        "description": "Test the Stream Analytics query before submitting the job.",
+        "x-ms-examples": {
+          "List subscription quota information in West US": {
+            "$ref": "./examples/Subscription_TestQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request to test the Stream Analytics query was successfully initiated."
+          },
+          "400": {
+            "description": "The request to test the Stream Analytics query was not formed correctly.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          },
+          "429": {
+            "description": "The subscription has submitted too many query-testing requests in a short time frame.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/OperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_GetOperationResults",
+        "description": "Fetch the asynchronous operation result.",
+        "x-ms-examples": {
+          "List subscription quota information in West US": {
+            "$ref": "./examples/Subscription_GetOperationResults.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the operation result.",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          },
+          "202": {
+            "description": "The request to fetch the asynchronous operation result was successfully initiated.",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          },
+          "400": {
+            "description": "Request to get operation result failed due to incorrect format or syntax error.",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
             }
           }
         }
@@ -134,6 +232,67 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "OperationResult": {
+      "description": "",
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/Error"
+        }
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationResultStatus"
+        },
+        "outputUri": {
+          "description": "The SAS URL to the outputs payload.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationResultStatus": {
+      "description": "The status of the request to fetch the asynchronous operation results.",
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "Started",
+        "Success",
+        "CompilerError",
+        "RuntimeError",
+        "Timeout",
+        "UnknownError"
+      ],
+      "x-ms-enum": {
+        "name": "OperationResultStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Started",
+            "description": "The operation result request was initiatied."
+          },
+          {
+            "value": "Success",
+            "description": "The operation result request succeeded."
+          },
+          {
+            "value": "CompilerError",
+            "description": "The operation result request failed due to a compiler error."
+          },
+          {
+            "value": "RuntimeError",
+            "description": "The operation result request failed due to a runtime error."
+          },
+          {
+            "value": "Timeout",
+            "description": "The operation result request failed due to a timeout."
+          },
+          {
+            "value": "UnknownError",
+            "description": "The operation result request failed due to an unknown error ."
+          }
+        ]
+      }
     }
   }
 }
