@@ -27,7 +27,6 @@ These are the global settings for the SecurityAndCompliance API.
 ``` yaml
 openapi-type: arm
 tag: package-2021-01-11
-tag: package-2021-03-08
 ```
 
 ### Tag: package-2021-01-11
@@ -42,6 +41,11 @@ input-file:
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForM365SecurityCenter.json
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForO365ManagementActivityAPI.json
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForSCCPowershell.json
+```
+
+``` yaml
+openapi-type: arm
+tag: package-2021-03-08
 ```
 
 ### Tag: package-2021-03-08
@@ -117,7 +121,6 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-securityandcomplian
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2021-01-11
-  - tag: package-2021-03-08
 ```
 
 ### Tag: package-2021-01-11 and java
@@ -131,6 +134,11 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/sdk/securityandcompliance/mgmt-v2021_01_11
 regenerate-manager: true
 generate-interface: true
+```
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2021-03-08
 ```
 
 ### Tag: package-2021-03-08 and java
