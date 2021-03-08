@@ -45,6 +45,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -79,16 +82,23 @@
         ],
         "summary": "Create Confluent Marketplace agreement in the subscription.",
         "operationId": "MarketplaceAgreements_Create",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Confluent Marketplace Agreement resource",
             "schema": {
               "$ref": "#/definitions/ConfluentAgreementResource"
             }
@@ -516,13 +526,14 @@
           "readOnly": true
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConfluentAgreementProperties",
           "description": "Represents the properties of the resource."
         }
       }
     },
     "ConfluentAgreementResourceListResponse": {
-      "description": "Response of a agreements operation.",
+      "description": "Response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
@@ -571,6 +582,10 @@
         "display": {
           "description": "The object that represents the operation.",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         }
       }
     },
@@ -742,7 +757,8 @@
         },
         "provisioningState": {
           "description": "Provision states for confluent RP",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         },
         "organizationId": {
           "description": "Id of the Confluent organization.",

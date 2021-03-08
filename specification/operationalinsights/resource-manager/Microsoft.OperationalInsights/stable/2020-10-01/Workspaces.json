@@ -530,13 +530,22 @@
         "retentionInDays": {
           "type": "integer",
           "format": "int32",
-          "minimum": 30,
-          "maximum": 730,
-          "description": "The workspace data retention in days, between 30 and 730."
+          "x-nullable": true,
+          "description": "The workspace data retention in days. Allowed values are per pricing plan. See pricing tiers documentation for details."
         },
         "workspaceCapping": {
           "$ref": "#/definitions/WorkspaceCapping",
           "description": "The daily volume cap for ingestion."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "Workspace creation date.",
+          "readOnly": true
+        },
+        "modifiedDate": {
+          "type": "string",
+          "description": "Workspace modification date.",
+          "readOnly": true
         },
         "publicNetworkAccessForIngestion": {
           "description": "The network access type for accessing Log Analytics ingestion.",
@@ -557,9 +566,19 @@
             "$ref": "#/definitions/PrivateLinkScopedResource"
           },
           "description": "List of linked private link scope resources."
+        },
+        "features": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceFeatures",
+          "description": "Workspace features."
         }
       },
       "description": "Workspace properties."
+    },
+    "WorkspaceFeatures": {
+      "properties": {},
+      "additionalProperties": true,
+      "description": "Workspace features."
     },
     "PrivateLinkScopedResource": {
       "properties": {
