@@ -1430,8 +1430,16 @@
           "description": "Operation name, i.e., {provider}/{resource}/{operation}.",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
         }
       }
     },
@@ -1650,6 +1658,8 @@
           "readOnly": true
         },
         "systemData": {
+          "readOnly": true,
+          "description": "The system metadata relating to this resource",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "name": {
@@ -1808,6 +1818,8 @@
           "readOnly": true
         },
         "systemData": {
+          "readOnly": true,
+          "description": "The system metadata relating to this resource",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "properties": {
