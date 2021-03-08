@@ -351,29 +351,10 @@
           }
         }
       },
-      "discriminator": "kind",
-      "type": "object"
-    },
-    "SettingsKind": {
-      "description": "Describes an Azure resource with kind.",
-      "properties": {
-        "kind": {
-          "description": "The kind of the setting",
-          "enum": [
-            "EyesOn",
-            "EntityAnalytics",
-            "Ueba"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "SettingKind"
-          }
-        }
-      },
       "required": [
         "kind"
       ],
+      "discriminator": "kind",
       "type": "object"
     },
     "EyesOn": {
