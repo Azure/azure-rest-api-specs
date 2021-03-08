@@ -11977,6 +11977,34 @@
       },
       "description": "Specify a SQL where clause on blob tags to operate only on blobs with a matching value."
     },
+    "ImmutabilityPolicyExpiry": {
+      "name": "x-ms-immutability-policy-until-date",
+      "x-ms-client-name": "immutabilityPolicyExpiry",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "date-time-rfc1123",
+      "x-ms-parameter-location": "method",
+      "description": "Specifies the date time when the blobs immutability policy is set to expire."
+    },
+    "ImmutabilityPolicyMode": {
+      "name": "x-ms-immutability-policy-mode",
+      "x-ms-client-name": "immutabilityPolicyMode",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "Unlocked",
+        "Locked",
+        "Mutable"
+      ],
+      "x-ms-enum": {
+        "name": "BlobImmutabilityPolicyMode",
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method",
+      "description": "Specifies the immutability policy mode to set on the blob."
+    },
     "KeyInfo": {
       "name": "KeyInfo",
       "in": "body",
@@ -12069,6 +12097,15 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Specifies the current lease ID on the resource."
+    },
+    "LegalHold": {
+      "name": "x-ms-legal-hold",
+      "x-ms-client-name": "legalHold",
+      "in": "header",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "description": "Specified if a legal hold should be set on the blob."
     },
     "Owner": {
       "name": "x-ms-owner",
