@@ -52,18 +52,18 @@
       "description": "An error response from the PowerPlatform service."
     },
     "Resource": {
-      "description": "The core properties of ARM resources",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "ARM resource id of the EnterprisePolicy."
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "Name of the EnterprisePolicy."
+          "description": "The name of the resource"
         },
         "location": {
           "type": "string",
@@ -73,13 +73,13 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource."
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
         }
       },
       "x-ms-azure-resource": true
     },
     "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "type": "object",
       "properties": {
         "tags": {
@@ -100,7 +100,7 @@
             "read",
             "create"
           ],
-          "description": "The Azure Region where the resource lives"
+          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -110,7 +110,7 @@
       ]
     },
     "ProxyResource": {
-      "description": "ARM proxy resource.",
+      "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
       "type": "object",
       "allOf": [
         {
@@ -120,37 +120,38 @@
       "properties": {}
     },
     "Operation": {
-      "description": "PowerPlatform REST API operation",
+      "title": "REST API Operation",
+      "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Operation name: For ex. providers/Microsoft.PowerPlatform/enterprisePolicies/write or read",
+          "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\"",
           "type": "string"
         },
         "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
           "type": "string"
         },
         "display": {
           "properties": {
             "provider": {
-              "description": "Service provider: Microsoft.PowerPlatform",
+              "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
               "type": "string"
             },
             "resource": {
-              "description": "Resource on which the operation is performed.",
+              "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
               "type": "string"
             },
             "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
+              "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
               "type": "string"
             },
             "description": {
-              "description": "Description about operation.",
+              "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
               "type": "string"
             }
           },
-          "description": "Provider, Resource, Operation and description values."
+          "description": "Localized display information for this particular operation."
         },
         "properties": {
           "properties": {
