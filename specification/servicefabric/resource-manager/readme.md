@@ -72,6 +72,16 @@ input-file:
 - Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
 ```
 
+### Tag: package-2020-12-preview
+
+These settings apply only when `--tag=package-2020-12-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2020-12-01-preview/cluster.json
+- Microsoft.ServiceFabric/preview/2020-12-01-preview/application.json
+```
+
 ### Tag: package-2020-01-preview
 
 These settings apply only when `--tag=package-2020-01-preview` is specified on the command line.
@@ -179,8 +189,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_service_fabric']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js servicefabric/resource-manager
 ```
 
 
