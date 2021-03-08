@@ -188,6 +188,18 @@ input-file:
   - Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json
 ```
 
+### Tag: package-phonenumber-2021-03-07
+
+These settings apply only when `--tag=package-phonenumber-2021-03-07` is specified on the command line.
+
+```yaml $(tag) == 'package-phonenumber-2021-03-07'
+input-file:
+  - Microsoft.CommunicationServicesPhoneNumbers/stable/2021-03-07/phonenumbers.json
+title:
+  Azure Communication Services
+```
+
+
 ## Supression
 ``` yaml
 directive:
