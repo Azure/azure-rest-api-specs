@@ -5823,17 +5823,12 @@
             "actionConfiguration": {
               "description": "The configuration of the run playbook automation rule action",
               "properties": {
-                "workflowId": {
-                  "description": "The workflow id of the playbook",
-                  "type": "string",
-                  "readOnly": true
-                },
                 "logicAppResourceId": {
                   "description": "The resource id of the playbook resource",
                   "type": "string"
                 },
-                "triggerUri": {
-                  "description": "The url to trigger the playbook",
+                "tenantId": {
+                  "description": "The tenant id of the playbook resource",
                   "type": "string"
                 }
               },
@@ -5922,7 +5917,10 @@
                     "IncidentTitle",
                     "IncidentDescription",
                     "IncidentSeverity",
+                    "IncidentStatus",
+                    "IncidentTactics",
                     "IncidentRelatedAnalyticRuleIds",
+                    "IncidentProviderName",
                     "AccountAadTenantId",
                     "AccountAadUserId",
                     "AccountName",
@@ -5987,8 +5985,20 @@
                         "value": "IncidentSeverity"
                       },
                       {
+                        "description": "The status of the incident",
+                        "value": "IncidentStatus"
+                      },
+                      {
+                        "description": "The tactics of the incident",
+                        "value": "IncidentTactics"
+                      },
+                      {
                         "description": "The related Analytic rule ids of the incident",
                         "value": "IncidentRelatedAnalyticRuleIds"
+                      },
+                      {
+                        "description": "The provider name of the incident",
+                        "value": "IncidentProviderName"
                       },
                       {
                         "description": "The account Azure Active Directory tenant id",
@@ -6179,7 +6189,11 @@
                     "Equals",
                     "NotEquals",
                     "Contains",
-                    "NotContains"
+                    "NotContains",
+                    "StartsWith",
+                    "NotStartsWith",
+                    "EndsWith",
+                    "NotEndsWith"
                   ],
                   "type": "string",
                   "x-ms-enum": {
@@ -6201,6 +6215,22 @@
                       {
                         "description": "Evaluates if the property does not contain any of the condition values",
                         "value": "NotContains"
+                      },
+                      {
+                        "description": "Evaluates if the property starts with any of the condition values",
+                        "value": "StartsWith"
+                      },
+                      {
+                        "description": "Evaulates if the property does not start with any of the condition values",
+                        "value": "NotStartsWith"
+                      },
+                      {
+                        "description": "Evaluates if the property ends with any of the condition values",
+                        "value": "EndsWith"
+                      },
+                      {
+                        "description": "Evaluates if the property does not end with any of the condition values",
+                        "value": "NotEndsWith"
                       }
                     ]
                   }
