@@ -13,6 +13,18 @@ batch:
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
+### Tag: schema-securityinsights-2021-03-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-securityinsights-2021-03-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.SecurityInsights/preview/2021-03-01/Settings.json
+  - Microsoft.SecurityInsights/preview/2021-03-01/operations.json
+
+```
+
 ### Tag: schema-securityinsights-2020-01-01 and azureresourceschema
 
 ``` yaml $(tag) == 'schema-securityinsights-2020-01-01' && $(azureresourceschema)
