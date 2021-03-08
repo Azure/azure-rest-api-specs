@@ -35,6 +35,13 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 input-file:
 - Microsoft.Search/stable/2021-01-04/search.json
 ```
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+``` yaml $(tag) == 'package-2021-01'
+input-file:
+- Microsoft.Search/stable/2021-01-04/search.json
+```
 
 ### Tag: package-2020-08
 
