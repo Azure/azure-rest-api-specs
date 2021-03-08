@@ -412,53 +412,65 @@
   },
   "definitions": {
     "OperationListResult": {
-      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
-          "description": "List of capacities supported by the Microsoft.Dfp resource provider.",
           "type": "array",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "description": "List of operations supported by Microsoft.Dfp resource provider."
         },
         "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
           "type": "string",
-          "readOnly": true
+          "description": "The URL to get the next set of operations, if there are any."
         }
-      }
+      },
+      "description": "Result of a request to list all operations supported by Microsoft.DevOps resource provider."
     },
     "Operation": {
-      "description": "Capacities REST API operation.",
-      "type": "object",
       "properties": {
         "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
         },
         "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Dfp.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: capacity, etc.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type: create, update, delete, etc.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "description": "Display information of the operation.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationDisplayValue"
         }
-      }
+      },
+      "description": "Properties of an Operation."
+    },
+    "OperationDisplayValue": {
+      "properties": {
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource type the operation applies to."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly description of the operation."
+        },
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource provider."
+        }
+      },
+      "description": "Display information of an operation."
     },
     "Resource": {
       "description": "Represents an instance of an DFP resource.",
