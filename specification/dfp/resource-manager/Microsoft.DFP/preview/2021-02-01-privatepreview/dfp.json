@@ -242,6 +242,37 @@
         }
       }
     },
+    "/providers/Microsoft.Dfp/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available DFP REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dfp/instances": {
       "get": {
         "description": "Gets all the Dedicated instance for the given resource group.",
@@ -377,6 +408,55 @@
     }
   },
   "definitions": {
+    "OperationListResult": {
+      "description": "Result listing capacities. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of capacities supported by the Microsoft.Dfp resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "Capacities REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Dfp.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: capacity, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: create, update, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
     "Resource": {
       "description": "Represents an instance of an DFP resource.",
       "type": "object",
@@ -577,7 +657,7 @@
         "type": {
           "type": "string",
           "default": "Microsoft.Dfp/instances",
-          "description": "The resource type of PowerBI dedicated."
+          "description": "The resource type of DFP instance."
         }
       }
     },
