@@ -55,7 +55,7 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -106,7 +106,7 @@
           "200": {
             "description": "Successfully retrieved a specified private link resource.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -149,9 +149,13 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "Metadata for the private link resource."
         }
       },
       "allOf": [
@@ -159,29 +163,6 @@
           "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "PrivateLinkResourceProperties": {
-      "description": "Properties of a private link resource.",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "The private link resource group id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "description": "The private link resource required member names.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata for the private link resource."
-        }
-      }
     }
   },
   "parameters": {
