@@ -3925,18 +3925,18 @@
       "properties": {
         "cpu": {
           "format": "int32",
-          "description": "Required CPU. This should be 1 for Basic tier, and in range [1, 4] for Standard tier. This is deprecated starting from API version 2020-11-01-preview. Please use the ResourceRequest field to set the CPU size.",
+          "description": "Required CPU. This should be 1 for Basic tier, and in range [1, 4] for Standard tier. This is deprecated starting from API version 2020-11-01-preview. Please use the ResourceRequests field to set the CPU size.",
           "default": 1,
           "type": "integer"
         },
         "memoryInGB": {
           "format": "int32",
-          "description": "Required Memory size in GB. This should be in range [1, 2] for Basic tier, and in range [1, 8] for Standard tier. This is deprecated starting from API version 2020-11-01-preview. Please use the ResourceRequest field to set the the memory size.",
+          "description": "Required Memory size in GB. This should be in range [1, 2] for Basic tier, and in range [1, 8] for Standard tier. This is deprecated starting from API version 2020-11-01-preview. Please use the ResourceRequests field to set the the memory size.",
           "default": 1,
           "type": "integer"
         },
-        "resourceRequest": {
-          "$ref": "#/definitions/ResourceRequest",
+        "resourceRequests": {
+          "$ref": "#/definitions/ResourceRequests",
           "description": "The requested resource quantity."
         },
         "jvmOptions": {
@@ -4018,7 +4018,7 @@
         }
       }
     },
-    "ResourceRequest": {
+    "ResourceRequests": {
       "description": "Deployment resource request payload",
       "type": "object",
       "properties": {
