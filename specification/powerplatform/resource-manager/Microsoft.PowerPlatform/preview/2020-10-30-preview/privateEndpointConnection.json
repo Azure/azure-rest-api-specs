@@ -55,7 +55,7 @@
           "200": {
             "description": "Successfully retrieved private endpoint connections.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -106,7 +106,7 @@
           "200": {
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -155,7 +155,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             },
             "description": "Parameters supplied to create or update a private endpoint connection."
           }
@@ -164,7 +164,7 @@
           "200": {
             "description": "Successfully approved or rejected private endpoint connection.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "202": {
@@ -285,6 +285,41 @@
           "application/json"
         ]
       }
+    }
+  },
+  "definitions": {
+    "PrivateEndpointConnectionListResult": {
+      "description": "A list of private endpoint connections",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata for the private endpoint connection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ]
     }
   },
   "parameters": {
