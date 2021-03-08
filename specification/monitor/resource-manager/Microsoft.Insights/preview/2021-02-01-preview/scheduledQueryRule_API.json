@@ -103,7 +103,7 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "List scheduled query rules": {
+          "List scheduled query rules by subscription": {
             "$ref": "./examples/listScheduledQueryRulesBySubscription.json"
           }
         }
@@ -145,7 +145,7 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "List scheduled query rules": {
+          "List scheduled query rules by resource group": {
             "$ref": "./examples/listScheduledQueryRulesByResourceGroup.json"
           }
         }
@@ -499,7 +499,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Action"
-          }
+          },
+          "description": "Actions to invoke when the alert fires."
         },
         "isWorkspaceAlertsStorageConfigured": {
           "type": "boolean",
