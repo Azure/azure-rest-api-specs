@@ -75,6 +75,9 @@
           },
           {
             "$ref": "#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -127,6 +130,9 @@
           },
           {
             "$ref": "#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -163,6 +169,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -239,6 +248,9 @@
           },
           {
             "$ref": "#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -281,6 +293,9 @@
           },
           {
             "$ref": "#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -320,6 +335,9 @@
           },
           {
             "$ref": "#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -387,6 +405,9 @@
           },
           {
             "$ref": "#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -423,6 +444,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -515,6 +539,9 @@
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion"
         }
       },
       "x-nullable": true
@@ -789,6 +816,12 @@
       },
       "x-nullable": true
     },
+    "ModelVersion": {
+      "description": "Version of the AI model.",
+      "type": "string",
+      "pattern": "^(latest|\\d{4}-\\d{2}-\\d{2})(-preview)?$",
+      "x-nullable": false
+    },
     "CategoryDetail": {
       "description": "An object describing additional category details.",
       "type": "object",
@@ -970,6 +1003,9 @@
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion"
         }
       },
       "x-nullable": true
@@ -994,6 +1030,9 @@
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion"
         }
       },
       "x-nullable": true
@@ -1051,6 +1090,9 @@
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion"
         }
       },
       "x-nullable": true
@@ -1081,6 +1123,9 @@
             "$ref": "#/definitions/OcrRegion"
           },
           "x-nullable": true
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion"
         }
       },
       "x-nullable": true
@@ -1161,6 +1206,9 @@
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion"
         }
       },
       "x-nullable": true
@@ -1181,6 +1229,9 @@
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion"
         }
       },
       "x-nullable": true
@@ -1198,7 +1249,7 @@
       }
     },
     "ComputerVisionError": {
-      "description": "Details about the API request error.",
+      "description": "The API request error.",
       "required": [
         "code",
         "message"
@@ -1207,6 +1258,43 @@
       "properties": {
         "code": {
           "description": "The error code.",
+          "type": "string",
+          "enum": [
+            "invalidRequest",
+            "invalidArgument",
+            "internalServerError",
+            "serviceUnavailable"
+          ],
+          "x-ms-enum": {
+            "name": "ComputerVisionErrorCodes",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/ComputerVisionInnerError",
+          "description": "Inner error contains more specific information."
+        },
+        "requestId": {
+          "description": "A unique request identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "ComputerVisionInnerError": {
+      "description": "Details about the API request error.",
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
           "enum": [
             "InvalidImageFormat",
             "UnsupportedMediaType",
@@ -1226,77 +1314,19 @@
             "NotSupportedVisualFeature",
             "FailedToProcess",
             "Unspecified",
-            "StorageException",
-            "InvalidPageRange",
-            "FailedToDownloadImage",
-            "InvalidImage",
-            "UnsupportedImageFormat",
-            "InvalidImageDimension",
-            "InvalidReadingOrder",
-            "InvalidRequest"
+            "StorageException"
           ],
           "x-ms-enum": {
-            "name": "ComputerVisionErrorCodes",
+            "name": "ComputerVisionInnerErrorCodeValue",
             "modelAsString": true
           }
         },
         "message": {
-          "description": "A message explaining the error reported by the service.",
-          "type": "string"
-        },
-        "requestId": {
-          "description": "A unique request identifier.",
-          "type": "string"
+          "type": "string",
+          "description": "Error message."
         }
       }
     },
-    "LandmarkResults": {
-      "description": "Result of domain-specific classifications for the domain of landmarks.",
-      "type": "object",
-      "properties": {
-        "landmarks": {
-          "description": "List of landmarks recognized in the image.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LandmarksModel"
-          },
-          "x-nullable": true
-        },
-        "requestId": {
-          "description": "Id of the REST API request.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "metadata": {
-          "$ref": "#/definitions/ImageMetadata"
-        }
-      },
-      "x-nullable": true
-    },
-    "CelebrityResults": {
-      "description": "Result of domain-specific classifications for the domain of celebrities.",
-      "type": "object",
-      "properties": {
-        "celebrities": {
-          "description": "List of celebrities recognized in the image.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CelebritiesModel"
-          },
-          "x-nullable": true
-        },
-        "requestId": {
-          "description": "Id of the REST API request.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "metadata": {
-          "$ref": "#/definitions/ImageMetadata"
-        }
-      },
-      "x-nullable": true
-    }
-  },
   "parameters": {
     "Endpoint": {
       "name": "Endpoint",
@@ -1328,6 +1358,16 @@
       },
       "x-ms-parameter-location": "method",
       "x-ms-client-flatten": true
+    },
+    "ModelVersion": {
+      "name": "modelVersion",
+      "in": "query",
+      "description": "Optional parameter to specify the version of the AI model used. Accepted values are: \"latest\", \"2021-04-01\". Defaults to \"latest\".",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "pattern": "^(latest|\\d{4}-\\d{2}-\\d{2})(-preview)?$",
+      "default": "latest"
     },
     "ServiceLanguage": {
       "name": "language",
@@ -1494,6 +1534,9 @@
           },
           {
             "$ref": "#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -1531,6 +1574,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -1584,6 +1630,9 @@
           },
           {
             "$ref": "#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -1621,6 +1670,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -1689,6 +1741,9 @@
           },
           {
             "$ref": "#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -1737,6 +1792,9 @@
           },
           {
             "$ref": "#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -1780,6 +1838,9 @@
           },
           {
             "$ref": "#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
@@ -1820,6 +1881,9 @@
           },
           {
             "$ref": "#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/ModelVersion"
           }
         ],
         "responses": {
