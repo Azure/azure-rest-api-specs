@@ -1058,6 +1058,11 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The sku of the configuration store."
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "#/definitions/SystemMetadata"
         }
       }
     },
@@ -1925,6 +1930,44 @@
         }
       },
       "description": "Properties of a private link resource."
+    },
+    "SystemMetadata": {
+      "type": "object",
+      "description": "Resource metadata required by ARM RPC.",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "A string identifier for the identity that created the resource.",
+          "readOnly": true
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource: user, application, managedIdentity.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp of resource creation (UTC).",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "A string identifier for the identity that last modified the resource.",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource: user, application, managedIdentity.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp of resource last modification (UTC).",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
