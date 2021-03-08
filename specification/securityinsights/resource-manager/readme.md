@@ -53,6 +53,11 @@ These settings apply only when `--tag=package-2021-03-preview-only` is specified
 input-file:
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
+directive:
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
+    where: $.definitions.Settings
+    reason: The Setting does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace. 
 ```
 
 ---

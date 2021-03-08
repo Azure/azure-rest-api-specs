@@ -233,7 +233,7 @@
           "Settings"
         ],
         "description": "Onboards workspace to sentinel.",
-        "operationId": "Workspace_Onboard",
+        "operationId": "ProductSettings_OnboardWorkspace",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -281,7 +281,7 @@
           "Settings"
         ],
         "description": "Offboards workspace from sentinel.",
-        "operationId": "Workspace_Offboard",
+        "operationId": "ProductSettings_OffboardWorkspace",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -333,12 +333,24 @@
       "allOf": [
         {
           "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
-        },
-        {
-          "$ref": "#/definitions/SettingsKind"
         }
       ],
       "description": "The Setting.",
+      "properties": {
+        "kind": {
+          "description": "The kind of the setting",
+          "enum": [
+            "EyesOn",
+            "EntityAnalytics",
+            "Ueba"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SettingKind"
+          }
+        }
+      },
       "discriminator": "kind",
       "type": "object"
     },
