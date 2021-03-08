@@ -45,6 +45,7 @@ input-file:
 - Microsoft.ServiceBus/preview/2021-01-01-preview/topics.json
 - Microsoft.ServiceBus/preview/2021-01-01-preview/Rules.json
 - Microsoft.ServiceBus/preview/2021-01-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/CheckNameAvailability.json
 ```
 
 
