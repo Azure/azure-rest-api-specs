@@ -1782,8 +1782,14 @@
           }
         },
         "x-ms-examples": {
-          "getCommandResult": {
-            "$ref": "./examples/RunCommandResult.json"
+          "commandSucceedResult": {
+            "$ref": "./examples/RunCommandResultSucceed.json"
+          },
+          "commandFailedResult": {
+            "$ref": "./examples/RunCommandResultFailed.json"
+          },
+          "commandInProgressResult": {
+            "$ref": "./examples/RunCommandResultInProgress.json"
           }
         }
       }
@@ -2698,6 +2704,10 @@
         "logs": {
           "type": "string",
           "description": "command output."
+        },
+        "reason": {
+          "type": "string",
+          "description": "explain why provisioningState is set to failed (if so)."
         }
       }
     },
