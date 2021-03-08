@@ -1927,7 +1927,7 @@
           }
         },
         "purchasePlan": {
-          "$ref": "#/definitions/PurchasePlan",
+          "$ref": "#/definitions/DiskPurchasePlan",
           "description": "Purchase plan information for the the image from which the OS disk was created. E.g. - {name: 2019-Datacenter, publisher: MicrosoftWindowsServer, product: WindowsServer}"
         },
         "creationData": {
@@ -2067,7 +2067,7 @@
           }
         },
         "purchasePlan": {
-          "$ref": "#/definitions/PurchasePlan",
+          "$ref": "#/definitions/DiskPurchasePlan",
           "description": "Purchase plan information for the image from which the source disk for the snapshot was originally created."
         },
         "creationData": {
@@ -2422,7 +2422,7 @@
           "description": "Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks."
         },
         "purchasePlan": {
-          "$ref": "#/definitions/PurchasePlan",
+          "$ref": "#/definitions/DiskPurchasePlan",
           "description": "Purchase plan information to be added on the OS disk"
         },
         "propertyUpdatesInProgress": {
@@ -2643,7 +2643,7 @@
       ],
       "description": "The source image used for creating the disk."
     },
-    "PurchasePlan": {
+    "DiskPurchasePlan": {
       "properties": {
         "name": {
           "type": "string",
@@ -2667,7 +2667,8 @@
         "name",
         "product"
       ],
-      "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace."
+      "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace.",
+      "x-ms-client-name": "PurchasePlan"
     },
     "PropertyUpdatesInProgress": {
       "properties": {
@@ -3196,7 +3197,7 @@
           }
         },
         "purchasePlan": {
-          "$ref": "#/definitions/PurchasePlan",
+          "$ref": "#/definitions/DiskPurchasePlan",
           "description": "Purchase plan information for the the image from which the OS disk was created."
         },
         "familyId": {
