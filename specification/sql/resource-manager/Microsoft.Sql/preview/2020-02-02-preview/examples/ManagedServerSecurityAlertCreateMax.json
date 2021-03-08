@@ -4,7 +4,23 @@
     "resourceGroupName": "securityalert-4799",
     "managedInstanceName": "securityalert-6440",
     "securityAlertPolicyName": "Default",
-    "api-version": "2020-02-02-preview"
+    "api-version": "2020-02-02-preview",
+    "parameters": {
+      "properties": {
+        "state": "Enabled",
+        "emailAccountAdmins": true,
+        "emailAddresses": [
+          "testSecurityAlert@microsoft.com"
+        ],
+        "disabledAlerts": [
+          "Access_Anomaly",
+          "Usage_Anomaly"
+        ],
+        "retentionDays": 5,
+        "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
+        "storageEndpoint": "https://mystorage.blob.core.windows.net"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -21,20 +37,21 @@
           "lastModifiedAt": "2020-04-03T04:41:33.937Z"
         },
         "properties": {
-          "state": "Disabled",
+          "state": "Enabled",
           "emailAccountAdmins": true,
           "emailAddresses": [
-            "test@microsoft.com;user@microsoft.com"
+            "testSecurityAlert@microsoft.com"
           ],
           "disabledAlerts": [
-            "Access_Anomaly"
+            "Access_Anomaly",
+            "Usage_Anomaly"
           ],
-          "retentionDays": 0,
+          "retentionDays": 5,
           "storageAccountAccessKey": "",
-          "storageEndpoint": "",
-          "creationTime": "2020-04-03T04:41:33.937Z"
+          "storageEndpoint": "https://mystorage.blob.core.windows.net"
         }
       }
-    }
+    },
+    "202": {}
   }
 }
