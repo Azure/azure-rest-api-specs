@@ -87,6 +87,7 @@ input-file:
 - Microsoft.EventHub/preview/2021-01-01-preview/networkrulessets-preview.json
 - Microsoft.EventHub/preview/2021-01-01-preview/AuthorizationRules.json
 - Microsoft.EventHub/preview/2021-01-01-preview/consumergroups.json
+- Microsoft.EventHub/preview/2021-01-01-preview/CheckNameAvailability.json
 ```
 
 
