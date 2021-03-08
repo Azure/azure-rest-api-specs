@@ -103,7 +103,6 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
-- Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
 - Microsoft.Sql/preview/2020-08-01-preview/LocationCapabilities.json
@@ -127,6 +126,7 @@ input-file:
 - Microsoft.Sql/preview/2020-11-01-preview/Databases_legacy.json 
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionBackups.json
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionPolicies.json
+- Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
 
 
 # Needed when there is more than one input file
