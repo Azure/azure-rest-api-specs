@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "id": "abc46f33-90b8-443d-adad-4870517356e0",
+    "$skip": 0,
+    "$top": 10
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "values": [
+          {
+            "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1",
+            "kind": "Acoustic",
+            "contentUrl": "https://www.contoso.com/acousticdata/sourcelocation",
+            "links": {
+              "files": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1/files"
+            },
+            "properties": {
+              "acceptedLineCount": 11,
+              "rejectedLineCount": 2,
+              "duration": "PT4M12S"
+            },
+            "lastActionDateTime": "2019-01-07T12:36:07Z",
+            "status": "Succeeded",
+            "createdDateTime": "2019-01-07T12:34:12Z",
+            "locale": "en-US",
+            "displayName": "Acoustic dataset"
+          },
+          {
+            "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/cdc91c24-3972-496d-a12f-209c35f4cc6c",
+            "kind": "Language",
+            "contentUrl": "https://www.contoso.com/LanguageData/SourceLocation",
+            "links": {
+              "files": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/cdc91c24-3972-496d-a12f-209c35f4cc6c/files"
+            },
+            "properties": {
+              "acceptedLineCount": 11,
+              "rejectedLineCount": 2
+            },
+            "lastActionDateTime": "2019-01-07T12:36:07Z",
+            "status": "Succeeded",
+            "createdDateTime": "2019-01-07T12:34:12Z",
+            "locale": "en-US",
+            "displayName": "Language dataset"
+          },
+          {
+            "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/d3910eba-c576-4886-afaa-886bb363822b",
+            "kind": "Pronunciation",
+            "contentUrl": "https://www.contoso.com/PronunciationData/SourceLocation",
+            "links": {
+              "files": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/d3910eba-c576-4886-afaa-886bb363822b/files"
+            },
+            "properties": {
+              "acceptedLineCount": 11,
+              "rejectedLineCount": 2,
+              "duration": "PT10M"
+            },
+            "lastActionDateTime": "2019-01-07T12:36:07Z",
+            "status": "Succeeded",
+            "createdDateTime": "2019-01-07T12:34:12Z",
+            "locale": "en-US",
+            "displayName": "Pronunciation dataset",
+            "customProperties": {
+              "CustomProperty": "value"
+            }
+          }
+        ],
+        "@nextLink": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets?skip=3&top=3"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "code": "InvalidRequest",
+        "message": "The base model isn't valid for this operation.",
+        "innerError": {
+          "code": "InvalidBaseModel",
+          "message": "The base model isn't valid for this operation."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "code": "Unauthorized",
+        "message": "Authentication is required to access the resource."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "code": "Forbidden",
+        "message": "No permission to access this resource."
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "code": "NotFound",
+        "message": "The specified entity cannot be found."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "code": "TooManyRequests",
+        "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+      }
+    }
+  }
+}
