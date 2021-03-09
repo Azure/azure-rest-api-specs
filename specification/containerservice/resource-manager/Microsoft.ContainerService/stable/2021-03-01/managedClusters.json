@@ -489,7 +489,7 @@
           "Create Managed Cluster with Node Public IP Prefix": {
             "$ref": "./examples/ManagedClustersCreate_NodePublicIPPrefix.json"
           },
-          "Create Managed Cluster with FIPS enabled": {
+          "Create Managed Cluster with FIPS enabled OS": {
             "$ref": "./examples/ManagedClustersCreate_EnabledFIPS.json"
           }
         }
@@ -1826,7 +1826,7 @@
     "ContainerServiceOSDisk": {
       "type": "integer",
       "format": "int32",
-      "maximum": 2048,
+      "maximum": 1023,
       "minimum": 0,
       "description": "OS Disk Size in GB to be used to specify the disk size for every machine in this master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified."
     },
@@ -2364,10 +2364,6 @@
             "modelAsString": true
           },
           "description": "The licenseType to use for Windows VMs. Windows_Server is used to enable Azure Hybrid User Benefits for Windows VMs."
-        },
-        "enableCSIProxy": {
-          "type": "boolean",
-          "description": "Whether to enable CSI proxy."
         }
       },
       "required": [
@@ -3008,13 +3004,6 @@
             ]
           },
           "description": "Identities associated with the cluster."
-        },
-        "privateLinkResources": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          },
-          "description": "Private link resources associated with the cluster."
         }
       },
       "description": "Properties of the managed cluster."
