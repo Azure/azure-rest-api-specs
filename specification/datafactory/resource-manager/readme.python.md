@@ -23,6 +23,8 @@ namespace: azure.mgmt.datafactory
 package-name: azure-mgmt-datafactory
 package-version: 1.0.0
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
