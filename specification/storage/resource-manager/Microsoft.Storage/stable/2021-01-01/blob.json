@@ -827,7 +827,7 @@
             "$ref": "./examples/VersionLevelWormContainerMigration.json"
           }
         },
-        "description": "This operation migrates a blob container from container level WORM to version level WORM enabled container. Pre-requisits require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal holds.",
+        "description": "This operation migrates a blob container from container level WORM to version level WORM enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal holds.",
         "parameters": [
           {
             "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -852,7 +852,8 @@
           "202": {
             "description": "Accepted -- Blob Container migration to support version leve worm is accepted; operation will complete asynchronously."
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
