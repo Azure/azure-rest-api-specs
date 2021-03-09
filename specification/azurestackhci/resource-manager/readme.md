@@ -38,7 +38,7 @@ tag: package-preview-2021-01
 directive:
   - suppress: R3020
     from:
-      - arc.json 
+      - arcSettings.json 
       - azurestackhci.json
       - extension.json
       - galleryImages.json
@@ -66,7 +66,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/virtualNetworks.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/storageContainers.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/azurestackhci.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/arc.json
+  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/extension.json
 ```
 
