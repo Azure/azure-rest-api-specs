@@ -512,13 +512,47 @@
         "modelAsString": true
       }
     },
-    "ConfidentialLedgerCertUser": {
+    "LedgerPermission": {
+      "description": "Permission associated with the Security Principal of Ledger",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Administrator",
+        "Contributor",
+        "Readonly"
+      ],
+      "x-ms-enum": {
+        "name": "LedgerPermission",
+        "modelAsString": true
+      }
+    },
+    "CertBasedSecurityPrincipal": {
       "type": "object",
-      "description": "User cert and permissions associated with that user",
+      "description": "Cert based security principal with associated permission",
       "properties": {
         "cert": {
           "description": "Base64 encoded public key of the user cert (.pem or .cer)",
           "type": "string"
+        },
+        "permission":{
+          "$ref": "#/definitions/LedgerPermission"
+        }
+      }
+    },
+    "AADBasedSecurityPrincipal": {
+      "type": "object",
+      "description": "AAD based security principal with associated permission",
+      "properties": {
+        "principalId": {
+          "description": "UUID/GUID based Principal Id of the Security Principal",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "UUID/GUID based Tenant Id of the Security Principal",
+          "type": "string"
+        },
+        "permission":{
+          "$ref": "#/definitions/LedgerPermission"
         }
       }
     },
@@ -560,11 +594,18 @@
           "readOnly": true,
           "$ref": "#/definitions/ProvisioningState"
         },
-        "certUsers": {
-          "description": "Array of all the cert based users who can access Confidential Ledger",
+        "aadBasedSecurityPrincipals": {
+          "description": "Array of all AAD based Security Principals.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfidentialLedgerCertUser"
+            "$ref": "#/definitions/AADBasedSecurityPrincipal"
+          }
+        },
+        "certBasedSecurityPrincipals": {
+          "description": "Array of all cert based Security Principals.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertBasedSecurityPrincipal"
           }
         }
       }
