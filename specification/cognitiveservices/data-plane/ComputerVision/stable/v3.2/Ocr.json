@@ -69,7 +69,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ComputerVisionError"
+              "$ref": "#/definitions/ComputerVisionOcrError"
             }
           }
         },
@@ -107,7 +107,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ComputerVisionError"
+              "$ref": "#/definitions/ComputerVisionOcrError"
             }
           }
         },
@@ -154,7 +154,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/ComputerVisionError"
+              "$ref": "#/definitions/ComputerVisionOcrError"
             }
           }
         },
@@ -396,7 +396,7 @@
         }
       }
     },
-    "ComputerVisionError": {
+    "ComputerVisionOcrError": {
       "description": "Details about the API request error.",
       "required": [
         "code",
@@ -410,19 +410,10 @@
             "InvalidImageFormat",
             "UnsupportedMediaType",
             "InvalidImageUrl",
-            "NotSupportedFeature",
-            "NotSupportedImage",
-            "Timeout",
             "InternalServerError",
             "InvalidImageSize",
             "BadArgument",
-            "DetectFaceError",
             "NotSupportedLanguage",
-            "InvalidThumbnailSize",
-            "InvalidDetails",
-            "InvalidModel",
-            "CancelledRequest",
-            "NotSupportedVisualFeature",
             "FailedToProcess",
             "Unspecified",
             "StorageException",
@@ -435,7 +426,7 @@
             "InvalidRequest"
           ],
           "x-ms-enum": {
-            "name": "ComputerVisionErrorCodes",
+            "name": "ComputerVisionOcrErrorCodes",
             "modelAsString": true
           }
         },
