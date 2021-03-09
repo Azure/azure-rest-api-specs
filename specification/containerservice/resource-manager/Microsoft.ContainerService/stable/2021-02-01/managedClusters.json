@@ -2768,13 +2768,15 @@
           "description": "AuthToken issued for AKS AAD Server App."
         }
       },
-      "description": "run command request"
+      "description": "run command request",
+      "required": ["command"]
     },
     "RunCommandResult": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "command id."
+          "description": "command id.",
+          "readOnly": true
         },
         "properties": {
           "description": "Properties of command result.",
@@ -2788,29 +2790,35 @@
       "properties": {
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
           "description": "provisioning State"
         },
         "exitCode": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "exit code of the command"
         },
         "startedAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "time when the command started."
         },
         "finishedAt": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "time when the command finished."
         },
         "logs": {
           "type": "string",
+          "readOnly": true,
           "description": "command output."
         },
         "reason": {
           "type": "string",
+          "readOnly": true,
           "description": "explain why provisioningState is set to failed (if so)."
         }
       }
