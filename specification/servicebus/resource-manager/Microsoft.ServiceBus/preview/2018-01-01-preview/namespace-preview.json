@@ -710,6 +710,11 @@
         "encryption": {
           "$ref": "#/definitions/Encryption",
           "description": "Properties of BYOK Encryption description"
+        },
+        "defaultMaxMessageSizeInKilobytes" :{
+          "format": "int32",
+          "type": "integer",
+          "description": "An optional value (in KB) that indicates the maximum message payload that can be accepted by the namespace. This value can be overriden by each queue or topic. If the value is missing, the default is 256 KB for Standard tier and 1024 KB for Premium tier."
         }
       },
       "description": "Properties of the namespace."
