@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "endpointId": "afa0669c-a01e-4693-ae3a-93baf40f26d6"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "startDate": "2018-12-08T00:00:00Z",
+          "endDate": "2019-01-07T00:00:00Z",
+          "dataUrl": "https://contoso.com/",
+          "id": "9cf1e320-41b1-41e6-bdd3-8fb27cb2c90a",
+          "createdDateTime": "2019-01-07T12:34:12Z",
+          "lastActionDateTime": "2019-01-07T12:36:07Z",
+          "status": "Succeeded"
+        }
+      ]
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "code": "Unauthorized",
+        "message": "Authentication is required to access the resource."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "code": "Forbidden",
+        "message": "No permission to access this resource."
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "code": "NotFound",
+        "message": "The specified entity cannot be found."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "code": "TooManyRequests",
+        "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+      }
+    }
+  }
+}
