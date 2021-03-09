@@ -24,11 +24,6 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the SecurityAndCompliance API.
 
-``` yaml
-openapi-type: arm
-tag: package-2021-01-11
-```
-
 ### Tag: package-2021-01-11
 
 These settings apply only when `--tag=package-2021-01-11` is specified on the command line.
