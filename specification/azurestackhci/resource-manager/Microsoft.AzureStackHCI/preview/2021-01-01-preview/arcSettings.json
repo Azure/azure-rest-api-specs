@@ -34,10 +34,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arc/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/": {
       "get": {
-        "operationId": "ArcResource_ListByHCICluster",
-        "description": "Get Arc resource of HCI Cluster",
+        "operationId": "ArcSettingsResource_ListByHCICluster",
+        "description": "Get ArcSettings resource of HCI Cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -56,7 +56,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ArcList"
+              "$ref": "#/definitions/ArcSettingsList"
             }
           },
           "default": {
@@ -67,8 +67,8 @@
           }
         },
         "x-ms-examples": {
-          "List Arc details by HCI Cluster": {
-            "$ref": "./examples/ListArcByCluster.json"
+          "List ArcSettings details by HCI Cluster": {
+            "$ref": "./examples/ListArcSettingsByCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -76,10 +76,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arc/{arcName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcName}": {
       "get": {
-        "operationId": "ArcResource_Get",
-        "description": "Get Arc resource details of HCI Cluster",
+        "operationId": "ArcSettingsResource_Get",
+        "description": "Get ArcSettings resource details of HCI Cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -91,7 +91,7 @@
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "#/parameters/ArcNameParameter"
+            "$ref": "#/parameters/ArcSettingsNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -101,7 +101,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Arc"
+              "$ref": "#/definitions/ArcSettings"
             }
           },
           "default": {
@@ -112,14 +112,14 @@
           }
         },
         "x-ms-examples": {
-          "Get Arc details": {
-            "$ref": "./examples/GetArc.json"
+          "Get ArcSettings details": {
+            "$ref": "./examples/GetArcSettings.json"
           }
         }
       },
       "put": {
         "operationId": "ArcResource_Create",
-        "description": "Create Arc for HCI cluster.",
+        "description": "Create ArcSettings for HCI cluster.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -131,16 +131,16 @@
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "#/parameters/ArcNameParameter"
+            "$ref": "#/parameters/ArcSettingsNameParameter"
           },
           {
-            "name": "arc",
+            "name": "arcSettings",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Arc"
+              "$ref": "#/definitions/ArcSettings"
             },
-            "description": "Parameters supplied to the Create Arc resource for this HCI cluster."
+            "description": "Parameters supplied to the Create ArcSettings resource for this HCI cluster."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -150,7 +150,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Arc"
+              "$ref": "#/definitions/ArcSettings"
             }
           },
           "default": {
@@ -161,14 +161,14 @@
           }
         },
         "x-ms-examples": {
-          "Create Arc details": {
-            "$ref": "./examples/PutArc.json"
+          "Create ArcSettings details": {
+            "$ref": "./examples/PutArcSettings.json"
           }
         }
       },
       "delete": {
-        "operationId": "ArcResource_Delete",
-        "description": "Delete Arc resource details of HCI Cluster",
+        "operationId": "ArcSettingsResource_Delete",
+        "description": "Delete ArcSettings resource details of HCI Cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -180,7 +180,7 @@
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "#/parameters/ArcNameParameter"
+            "$ref": "#/parameters/ArcSettingsNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -205,23 +205,23 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Delete Arc details": {
-            "$ref": "./examples/DeleteArc.json"
+          "Delete ArcSettings details": {
+            "$ref": "./examples/DeleteArcSettings.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ArcList": {
-      "description": "List of Arc proxy resource for the HCI cluster",
+    "ArcSettingsList": {
+      "description": "List of ArcSettings proxy resource for the HCI cluster",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of Arc proxy resource.",
+          "description": "List of ArcSettings proxy resource.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Arc"
+            "$ref": "#/definitions/ArcSettings"
           }
         },
         "nextLink": {
@@ -231,8 +231,8 @@
         }
       }
     },
-    "Arc": {
-      "description": "Arc details.",
+    "ArcSettings": {
+      "description": "ArcSettings details.",
       "type": "object",
       "allOf": [
         {
@@ -241,23 +241,23 @@
       ],
       "properties": {
         "systemData": {
-          "description": "System data of Arc resource",
+          "description": "System data of ArcSettings resource",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "x-ms-client-flatten": true
         },
         "properties": {
-          "description": "Arc properties.",
-          "$ref": "#/definitions/ArcProperties",
+          "description": "ArcSettings properties.",
+          "$ref": "#/definitions/ArcSettingsProperties",
           "x-ms-client-flatten": true
         }
       }
     },
-    "ArcProperties": {
-      "description": "Arc properties.",
+    "ArcSettingsProperties": {
+      "description": "ArcSettings properties.",
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state of the Arc proxy resource",
+          "description": "Provisioning state of the ArcSettings proxy resource",
           "type": "string",
           "enum": [
             "Succeeded",
@@ -275,7 +275,7 @@
         "arcInstanceResourceGroup": {
           "type": "string",
           "readOnly": true,
-          "description": "The resource group that hosts the ArcInstances"
+          "description": "The resource group that hosts the Arc agents, ie Hybrid compute Machine resources"
         },
         "aggregateState": {
           "description": "Aggregate state of Arc agent across the nodes in this HCI cluster",
@@ -303,7 +303,7 @@
       }
     },
     "PerNodeState": {
-      "description": "Status of ArcInstance for a particular node in HCI Cluster",
+      "description": "Status of Arc agent for a particular node in HCI Cluster",
       "type": "object",
       "properties": {
         "name": {
@@ -314,7 +314,7 @@
         "arcInstance": {
           "type": "string",
           "readOnly": true,
-          "description": "Fully qualified resource ID for the Arc Instance of this node"
+          "description": "Fully qualified resource ID for the Arc agent of this node"
         },
         "state": {
           "description": "State of Arc agent in this node",
@@ -343,12 +343,12 @@
       "description": "The name of the cluster.",
       "x-ms-parameter-location": "method"
     },
-    "ArcNameParameter": {
-      "name": "arcName",
+    "ArcSettingsNameParameter": {
+      "name": "arcSettingsName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the proxy resource holding details of HCI Arc information.",
+      "description": "The name of the proxy resource holding details of HCI ArcSettings information.",
       "x-ms-parameter-location": "method"
     }
   }
