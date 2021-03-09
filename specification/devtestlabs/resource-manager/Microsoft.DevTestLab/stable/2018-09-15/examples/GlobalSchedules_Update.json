@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "name": "labvmautostart",
+    "schedule": {
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "status": "Enabled",
+          "taskType": "LabVmsStartupTask",
+          "weeklyRecurrence": {
+            "weekdays": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "time": "0700"
+          },
+          "timeZoneId": "Hawaiian Standard Time",
+          "notificationSettings": {
+            "status": "Disabled",
+            "timeInMinutes": 0
+          },
+          "createdDate": "2020-12-29T22:54:54.9335182+00:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/schedules/labvmautostart",
+        "name": "LabVmAutoStart",
+        "type": "microsoft.devtestlab/labs/schedules",
+        "location": "{location}",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  }
+}
