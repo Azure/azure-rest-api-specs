@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
-- Microsoft.Datadog/stable/2020-03-01/datadog.json
+- Microsoft.Datadog/stable/2021-03-01/datadog.json
 ```
 
 ### Tag: package-2020-02-preview
