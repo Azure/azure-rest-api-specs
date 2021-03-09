@@ -521,6 +521,46 @@
           "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The account key of the Azure CosmosDB account. Type: SecureString or AzureKeyVaultSecretReference."
         },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredentialType": {
+          "x-ms-enum": {
+            "name": "CosmosDbServicePrincipalCredentialType",
+            "modelAsString": true
+          },
+          "enum": [
+            "ServicePrincipalKey",
+            "ServicePrincipalCert"
+          ],
+          "type": "string",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference."
+        },
+        "tenant": {
+          "type": "object",
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "azureCloudType": {
+          "type": "object",
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
+        },
+        "connectionMode": {
+          "description": "The connection mode used to access CosmosDB account. Type: string (or Expression with resultType string).",
+          "type": "string",
+          "enum": [
+            "Gateway",
+            "Direct"
+          ],
+          "x-ms-enum": {
+            "name": "CosmosDbConnectionMode",
+            "modelAsString": true
+          }
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
