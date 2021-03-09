@@ -24,6 +24,13 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the SecurityAndCompliance API.
 
+``` yaml
+title: SecurityAndComplianceClient
+description: Security And Compliance Client
+openapi-type: arm
+tag: package-2021-03-08
+```
+
 ### Tag: package-2021-01-11
 
 These settings apply only when `--tag=package-2021-01-11` is specified on the command line.
@@ -36,11 +43,6 @@ input-file:
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForM365SecurityCenter.json
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForO365ManagementActivityAPI.json
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForSCCPowershell.json
-```
-
-``` yaml
-openapi-type: arm
-tag: package-2021-03-08
 ```
 
 ### Tag: package-2021-03-08
