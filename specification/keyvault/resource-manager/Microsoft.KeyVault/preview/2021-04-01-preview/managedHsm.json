@@ -349,6 +349,157 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/deletedManagedHSMs": {
+      "get": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_ListDeleted",
+        "description": "The List operation gets information about the deleted managed HSMs associated with the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved information about all managed HSMs in the specified subscription.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List deleted managed HSMs in the specified subscription": {
+            "$ref": "./examples/DeletedManagedHsm_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}": {
+      "get": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_GetDeleted",
+        "description": "Gets the specified deleted managed HSM.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the deleted managed HSM."
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the deleted managed HSM."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved information about the specified deleted managed HSM.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            }
+          },
+          "404": {
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a deleted managed HSM": {
+            "$ref": "./examples/DeletedManagedHsm_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}/purge": {
+      "post": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_PurgeDeleted",
+        "description": "Permanently deletes the specified managed HSM.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the soft-deleted managed HSM."
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the soft-deleted managed HSM."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Purge a managed HSM Pool": {
+            "$ref": "./examples/DeletedManagedHsm_Purge.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
@@ -764,6 +915,12 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
+        },
+        "scheduledPurgeDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The scheduled purge date in UTC."
         }
       },
       "description": "Properties of the managed HSM Pool"
