@@ -1897,6 +1897,7 @@
           }
         },
         "description": "Creates or updates a Sql Script.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/sqlScriptName"
@@ -1927,6 +1928,9 @@
             "schema": {
               "$ref": "#/definitions/SqlScriptResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -1991,6 +1995,7 @@
           }
         },
         "description": "Deletes a Sql Script.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/sqlScriptName"
@@ -2002,6 +2007,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -2112,6 +2120,7 @@
           }
         },
         "description": "Creates or updates a Spark Job Definition.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/sparkJobDefinitionName"
@@ -2142,6 +2151,9 @@
             "schema": {
               "$ref": "#/definitions/SparkJobDefinitionResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -2206,6 +2218,7 @@
           }
         },
         "description": "Deletes a Spark Job Definition.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/sparkJobDefinitionName"
@@ -2217,6 +2230,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."

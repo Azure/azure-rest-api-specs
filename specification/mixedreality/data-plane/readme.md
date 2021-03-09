@@ -20,7 +20,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
@@ -36,7 +36,25 @@ These are the global settings for Azure Mixed Reality Client.
 ```yaml
 title: MixedRealityRemoteRendering
 openapi-type: data-plane
-tag: package-2021-01-01-preview
+tag: package-2021-01-01
+```
+
+### Tag: package-2021-01-01
+
+These settings apply only when `--tag=package-2021-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01'
+input-file:
+- Microsoft.MixedReality/stable/2021-01-01/mr-arr.json
+```
+
+### Tag: package-0.2-preview.0
+
+These settings apply only when `--tag=package-0.2-preview.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-0.2-preview.0'
+input-file:
+- Microsoft.MixedReality/preview/0.2-preview.0/mr-aoa.json
 ```
 
 ### Tag: package-2021-01-01-preview
