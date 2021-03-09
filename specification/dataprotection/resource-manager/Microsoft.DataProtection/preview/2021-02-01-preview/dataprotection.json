@@ -1628,6 +1628,62 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/findRestorableTimeRanges": {
+      "post": {
+        "tags": [
+          "FindRestorableTimeRanges"
+        ],
+        "operationId": "FindRestorableTimeRanges_Post",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesResponseResource"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        },
+        "x-ms-examples": {
+          "Find Restorable Time Ranges": {
+            "$ref": "./examples/BackupInstanceOperations/FindRestorableTimeRanges.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupJobs/{jobId}": {
       "get": {
         "tags": [
@@ -1934,6 +1990,82 @@
       "title": "AzureBackupDiscreteRecoveryPoint",
       "type": "object",
       "x-ms-discriminator-value": "AzureBackupDiscreteRecoveryPoint"
+    },
+    "AzureBackupFindRestorableTimeRangesRequest": {
+      "description": "List Restore Ranges Request",
+      "required": [
+        "sourceDataStoreType",
+        "startTime",
+        "endTime"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceDataStoreType": {
+          "description": "Gets or sets the type of the source data store.",
+          "enum": [
+            "OperationalStore",
+            "VaultStore",
+            "ArchiveStore"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SourceDataStoreType",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "Start time for the List Restore Ranges request",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time for the List Restore Ranges request",
+          "type": "string"
+        }
+      }
+    },
+    "AzureBackupFindRestorableTimeRangesRequestResource": {
+      "description": "List Restore Ranges Request",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppWorkerRequest"
+        }
+      ],
+      "properties": {
+        "Content": {
+          "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesRequest",
+          "description": "AzureBackupFindRestorableTimeRangesRequestResource Content"
+        }
+      }
+    },
+    "AzureBackupFindRestorableTimeRangesResponse": {
+      "description": "List Restore Ranges Response",
+      "type": "object",
+      "properties": {
+        "restorableTimeRanges": {
+          "description": "Returns the Restore Ranges available on the Backup Instance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableTimeRange"
+          }
+        },
+        "objectType": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureBackupFindRestorableTimeRangesResponseResource": {
+      "description": "List Restore Ranges Response",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesResponse",
+          "description": "AzureBackupFindRestorableTimeRangesResponseResource properties"
+        }
+      }
     },
     "AzureBackupJob": {
       "description": "AzureBackup Job Class",
@@ -2297,6 +2429,26 @@
       "title": "AzureBackupRestoreWithRehydrationRequest",
       "type": "object",
       "x-ms-discriminator-value": "AzureBackupRestoreWithRehydrationRequest"
+    },
+    "AzureBackupRecoveryTimeBasedRestoreRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureBackupRestoreRequest"
+        }
+      ],
+      "description": "AzureBackup RecoveryPointTime Based Restore Request",
+      "properties": {
+        "recoveryPointTime": {
+          "description": "The recovery time in ISO 8601 format example - 2020-08-14T17:30:00.0000000Z.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "recoveryPointTime"
+      ],
+      "title": "AzureBackupRecoveryTimeBasedRestoreRequest",
+      "type": "object",
+      "x-ms-discriminator-value": "AzureBackupRecoveryTimeBasedRestoreRequest"
     },
     "AzureBackupRule": {
       "allOf": [
@@ -3805,6 +3957,26 @@
         "recoveryOption"
       ],
       "type": "object"
+    },
+    "RestorableTimeRange": {
+      "required": [
+        "startTime",
+        "endTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "description": "Start time for the available restore range",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time for the available restore range",
+          "type": "string"
+        },
+        "objectType": {
+          "type": "string"
+        }
+      }
     },
     "RetentionTag": {
       "description": "Retention tag",
