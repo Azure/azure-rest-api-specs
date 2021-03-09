@@ -100,6 +100,12 @@
           },
           {
             "$ref": "#/parameters/restorableSqlDatabaseRidParameter"
+          },
+          {
+            "$ref": "#/parameters/restoreStartTime"
+          },
+          {
+            "$ref": "#/parameters/restoreEndTime"
           }
         ],
         "responses": {
@@ -740,6 +746,22 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The timestamp when the restorable resources existed."
+    },
+    "restoreStartTime": {
+      "name": "startTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The snapshot create timestamp after which snapshots need to be listed."
+    },
+    "restoreEndTime": {
+      "name": "endTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The snapshot create timestamp before which snapshots need to be listed."
     }
   }
 }
