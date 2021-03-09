@@ -422,6 +422,45 @@
         }
       }
     },
+    "/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions": {
+      "get": {
+        "tags": [
+          "MarketplaceRegistrationDefinitions"
+        ],
+        "operationId": "MarketplaceRegistrationDefinitionsWithoutScope_List",
+        "description": "Gets a list of the marketplace registration definitions for the marketplace identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Filter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of the marketplace registration definitions.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceRegistrationDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Marketplace Registration Definitions At Tenant Scope": {
+            "$ref": "./examples/GetMarketplaceRegistrationDefinitionsAtTenantScope.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions/{marketplaceIdentifier}": {
       "get": {
         "tags": [
@@ -444,7 +483,7 @@
           "200": {
             "description": "OK - Returns the details of the marketplace registration definition.",
             "schema": {
-              "$ref": "#/definitions/RegistrationDefinition"
+              "$ref": "#/definitions/MarketplaceRegistrationDefinition"
             }
           },
           "default": {
@@ -457,6 +496,42 @@
         "x-ms-examples": {
           "Get Registration Definitions": {
             "$ref": "./examples/GetMarketplaceRegistrationDefinition.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions/{marketplaceIdentifier}": {
+      "get": {
+        "tags": [
+          "MarketplaceRegistrationDefinitions"
+        ],
+        "operationId": "MarketplaceRegistrationDefinitionsWithoutScope_Get",
+        "description": "Get the marketplace registration definition for the marketplace identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/MarketplaceIdentifier"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the details of the marketplace registration definition.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceRegistrationDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Marketplace Registration Definition At Tenant Scope": {
+            "$ref": "./examples/GetMarketplaceRegistrationDefinitionAtTenantScope.json"
           }
         }
       }
@@ -765,13 +840,75 @@
       },
       "description": "List of registration assignments."
     },
+    "MarketplaceRegistrationDefinition": {
+      "properties": {
+        "properties": {
+          "description": "Properties of a marketplace registration definition.",
+          "$ref": "#/definitions/MarketplaceRegistrationDefinitionProperties"
+        },
+        "plan": {
+          "description": "Plan details for the managed services.",
+          "$ref": "#/definitions/Plan"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified path of the marketplace registration definition."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the marketplace registration definition."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "type": "object"
+    },
+    "MarketplaceRegistrationDefinitionProperties": {
+      "properties": {
+        "managedByTenantId": {
+          "type": "string",
+          "description": "Id of the managedBy tenant."
+        },
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Authorization"
+          },
+          "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
+        },
+        "offerDisplayName": {
+          "type": "string",
+          "description": "The marketplace offer display name."
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "The marketplace publisher display name."
+        },
+        "planDisplayName": {
+          "type": "string",
+          "description": "The marketplace plan display name."
+        }
+      },
+      "required": [
+        "managedByTenantId",
+        "authorizations"
+      ],
+      "type": "object",
+      "description": "Properties of a marketplace registration definition."
+    },
     "MarketplaceRegistrationDefinitionList": {
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/RegistrationDefinition"
+            "$ref": "#/definitions/MarketplaceRegistrationDefinition"
           },
           "description": "List of marketplace registration definitions."
         },
@@ -864,9 +1001,21 @@
           "type": "string",
           "description": "Principal Id of the security group/service principal/user that would be assigned permissions to the projected subscription"
         },
+        "principalIdDisplayName": {
+          "type": "string",
+          "description": "Display name of the principal Id."
+        },
         "roleDefinitionId": {
           "type": "string",
           "description": "The role definition identifier. This role will define all the permissions that the security group/service principal/user must have on the projected subscription. This role cannot be an owner role."
+        },
+        "delegatedRoleDefinitionIds": {
+          "type": "array",
+          "description": "The delegatedRoleDefinitionIds field is required when the roleDefinitionId refers to the User Access Administrator Role. It is the list of role definition ids which define all the permissions that the user in the authorization can assign to other security groups/service principals/users.",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -876,29 +1025,40 @@
       "type": "object",
       "description": "Authorization tuple containing principal Id (of user/service principal/security group) and role definition id."
     },
-    "ErrorResponse": {
+    "ErrorDefinition": {
       "properties": {
-        "error": {
-          "readOnly": true,
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "Error code."
-            },
-            "message": {
-              "type": "string",
-              "description": "Error message indicating why the operation failed."
-            }
-          },
-          "required": [
-            "code",
-            "message"
-          ],
-          "type": "object",
-          "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message."
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          }
         }
       },
-      "description": "Error response."
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message."
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details.",
+          "type": "object"
+        }
+      }
     }
   },
   "parameters": {
@@ -917,7 +1077,7 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string",
-      "description": "Market place identifer. Expected Formats - {publisher}.{product[-preview]}.{planName}.{version} or {publisher}.{product[-preview]}.{planName} or {publisher}.{product[-preview]} or {publisher})."
+      "description": "Market place identifier. Expected Formats - {publisher}.{product[-preview]}.{planName}.{version} or {publisher}.{product[-preview]}.{planName} or {publisher}.{product[-preview]} or {publisher})."
     },
     "ApiVersionParameter": {
       "name": "api-version",

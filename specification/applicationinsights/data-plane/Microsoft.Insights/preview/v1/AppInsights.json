@@ -27,11 +27,11 @@
     "application/json"
   ],
   "securityDefinitions": {
-    "azure_auth": {
+    "oauth2": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize?resource=https%3A%2F%2Fapi.applicationinsights.io",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Connect to Azure Application Insights API",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -39,7 +39,7 @@
   },
   "security": [
     {
-      "azure_auth": [
+      "oauth2": [
         "user_impersonation"
       ]
     }
@@ -380,7 +380,7 @@
     },
     "/apps/{appId}/metadata": {
       "post": {
-        "operationId": "Post_Metadata",
+        "operationId": "Metadata_Post",
         "summary": "Gets metadata information",
         "description": "Retrieve the metadata information for the app, including its schema, etc.",
         "x-ms-examples": {
@@ -409,7 +409,7 @@
         }
       },
       "get": {
-        "operationId": "Get_Metadata",
+        "operationId": "Metadata_Get",
         "summary": "Gets metadata information",
         "description": "Retrieve the metadata information for the app, including its schema, etc.",
         "x-ms-examples": {
@@ -1139,6 +1139,9 @@
             "additionalProperties": {
               "type": "object"
             }
+          },
+          "additionalProperties": {
+            "type": "object"
           }
         },
         "customMeasurements": {
@@ -1148,6 +1151,9 @@
             "additionalProperties": {
               "type": "object"
             }
+          },
+          "additionalProperties": {
+            "type": "object"
           }
         },
         "operation": {
