@@ -91,8 +91,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent"
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1095,8 +1098,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent"
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
           },
           "202": {
             "description": "The operation will be completed asynchronously.",
@@ -1165,6 +1171,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -1182,9 +1194,6 @@
                 "format": "int32"
               }
             }
-          },
-          "204": {
-            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1230,6 +1239,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skipToken Filter.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1249,6 +1272,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
+        "x-ms-odata": "#/definitions/RecoveryPointsFilters",
         "x-ms-examples": {
           "List Recovery Points in a Vault": {
             "$ref": "./examples/BackupInstanceOperations/ListRecoveryPoints.json"
@@ -1431,6 +1455,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -1448,9 +1478,6 @@
                 "format": "int32"
               }
             }
-          },
-          "204": {
-            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1514,6 +1541,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -1531,9 +1564,6 @@
                 "format": "int32"
               }
             }
-          },
-          "204": {
-            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1776,6 +1806,29 @@
       "type": "object",
       "x-ms-discriminator-value": "AbsoluteDeleteOption"
     },
+    "RecoveryPointsFilters": {
+      "type": "object",
+      "properties": {
+        "restorePointDataStoreId": {
+          "type": "string"
+        },
+        "isVisible": {
+          "type": "boolean"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "extendedInfo": {
+          "type": "boolean"
+        },
+        "restorePointState": {
+          "type": "string"
+        }
+      }
+    },
     "AdHocBackupRuleOptions": {
       "description": "Adhoc backup rules",
       "properties": {
@@ -1856,6 +1909,15 @@
           "format": "date-time",
           "type": "string"
         },
+        "policyName": {
+          "type": "string"
+        },
+        "policyVersion": {
+          "type": "string"
+        },
+        "recoveryPointId": {
+          "type": "string"
+        },
         "recoveryPointType": {
           "type": "string"
         },
@@ -1911,8 +1973,6 @@
         },
         "duration": {
           "description": "Total run time of the job. ISO 8601 format.",
-          "format": "duration",
-          "readOnly": true,
           "type": "string"
         },
         "endTime": {
@@ -1944,17 +2004,7 @@
         },
         "operationCategory": {
           "description": "It indicates the type of Job i.e. Backup/Restore/Tiering/Management",
-          "type": "string",
-          "enum": [
-            "Backup",
-            "Restore",
-            "Management",
-            "Tiering"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "JobOperationCategory"
-          }
+          "type": "string"
         },
         "policyId": {
           "description": "ARM ID of the policy",
@@ -2010,6 +2060,15 @@
         },
         "vaultName": {
           "description": "Name of the vault",
+          "type": "string"
+        },
+        "etag": {
+          "type": "string"
+        },
+        "sourceDataStoreName": {
+          "type": "string"
+        },
+        "destinationDataStoreName": {
           "type": "string"
         }
       },
@@ -2330,8 +2389,19 @@
       "type": "object"
     },
     "BackupInstance": {
-      "description": "Backup instance",
+      "description": "Backup Instance",
+      "required": [
+        "friendlyName",
+        "dataSourceInfo",
+        "policyInfo",
+        "objectType"
+      ],
+      "type": "object",
       "properties": {
+        "friendlyName": {
+          "description": "Gets or sets the Backup Instance friendly name.",
+          "type": "string"
+        },
         "dataSourceInfo": {
           "$ref": "#/definitions/Datasource",
           "description": "Gets or sets the data source information."
@@ -2339,9 +2409,6 @@
         "dataSourceSetInfo": {
           "$ref": "#/definitions/DatasourceSet",
           "description": "Gets or sets the data source set information."
-        },
-        "objectType": {
-          "type": "string"
         },
         "policyInfo": {
           "$ref": "#/definitions/PolicyInfo",
@@ -2352,18 +2419,43 @@
           "description": "Specifies the protection status of the resource",
           "readOnly": true
         },
+        "currentProtectionState": {
+          "description": "Specifies the current protection state of the resource",
+          "enum": [
+            "Invalid",
+            "NotProtected",
+            "ConfiguringProtection",
+            "ProtectionConfigured",
+            "BackupSchedulesSuspended",
+            "RetentionSchedulesSuspended",
+            "ProtectionStopped",
+            "ProtectionError",
+            "ConfiguringProtectionFailed",
+            "SoftDeleting",
+            "SoftDeleted",
+            "UpdatingProtection"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CurrentProtectionState",
+            "modelAsString": true
+          }
+        },
+        "protectionErrorDetails": {
+          "$ref": "#/definitions/UserFacingError",
+          "description": "Specifies the protection error of the resource",
+          "readOnly": true
+        },
         "provisioningState": {
           "description": "Specifies the provisioning state of the resource i.e. provisioning/updating/Succeeded/Failed",
-          "readOnly": true,
+          "type": "string",
+          "readOnly": true
+        },
+        "objectType": {
           "type": "string"
         }
-      },
-      "required": [
-        "dataSourceInfo",
-        "policyInfo"
-      ],
-      "title": "BackupInstance",
-      "type": "object"
+      }
     },
     "BackupInstanceResource": {
       "allOf": [
@@ -3905,7 +3997,7 @@
     "StorageSetting": {
       "description": "Storage setting",
       "properties": {
-        "dataStoreType": {
+        "datastoreType": {
           "description": "Gets or sets the type of the datastore.",
           "enum": [
             "ArchiveStore",
@@ -4104,6 +4196,13 @@
         "isUserError": {
           "description": "Whether the operation is due to a user error or service error",
           "type": "boolean"
+        },
+        "properties": {
+          "description": "Any key value pairs that can be injected inside error object",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "message": {
           "type": "string"
