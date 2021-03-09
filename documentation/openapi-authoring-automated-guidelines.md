@@ -61,7 +61,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4017](#r4017) | [TopLevelResourcesListBySubscription](#r4017) | ARM OpenAPI(swagger) specs |
 | [R4018](#r4018) | [OperationsApiResponseSchema](#r4018) | ARM OpenAPI(swagger) specs |
 | [R4019](#r4019) | [GetCollectionResponseSchema](#r4019) | ARM OpenAPI(swagger) specs |
-| [R4009](#r4009) | [RequiredSystemDataInNewApiVersions](#r4009) | ARM OpenAPI(swagger) specs |
+| [R4009](#r4009) | [RequiredReadOnlySystemData](#r4009) | ARM OpenAPI(swagger) specs |
 
 #### ARM Warnings
 
@@ -111,6 +111,11 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4013](#r4013) | [IntegerTypeMustHaveFormat](#r4013) | ARM OpenAPI(swagger) specs |
 | [R4028](#r4028) | [ValidResponseCodeRequired](#r4028) | ARM OpenAPI(swagger) specs |
 | [R4029](#r4029) | [UniqueClientParameterName](#r4029) | ARM OpenAPI(swagger) specs |
+| [R4032](#r4032) | [MissingXmsErrorResponse](#r4032) | ARM OpenAPI(swagger) specs |
+| [R4033](#r4033) | [UniqueModelName](#r4033) | ARM OpenAPI(swagger) specs |
+| [R4034](#r4034) | [AzureResourceTagsSchemaValidation](#r4034) | ARM OpenAPI(swagger) specs |
+| [R4035](#r4035) | [PrivateEndpointResourceSchemaValidation](#r4035) | ARM OpenAPI(swagger) specs |
+| [R4036](#r4036) | [ImplementPrivateEndpointAPIs](#r4036) | ARM OpenAPI(swagger) specs |
 
 #### SDK Warnings
 
@@ -2443,21 +2448,26 @@ The following would be invalid:
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r4009" ></a>R4009 RequiredSystemDataInNewApiVersions
+### <a name="r4009" ></a>R4009 RequiredReadOnlySystemData
 
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message** : The response of operation '{operation name}' is defined without 'systemData'. Consider adding the systemData to the response.
+**Output Message** : 
+1. if missing the systemData , output:
+The response of operation '{operationId}' is defined without 'systemData'. Consider adding the systemData to the response.
 
-**Description** : Per [common-api-contracts](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources), all Azure resources should implement the `systemData` object property in new api-version. In this lint rule, the version after 2020-05-01 considers as a new API version.
+2. if the systemData is not read only, output:
+The property systemData in the response of operation:'${operationId}' is not read only. Please add the readonly for the systemData.
+
+**Description** : Per [common-api-contracts](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources), all Azure resources should implement the `systemData` object property in new api-version. The systemData should be readonly.
 
 **CreatedAt**: May 21, 2020
 
-**LastModifiedAt**: May 21, 2020
+**LastModifiedAt**: February 26, 2021
 
-**How to fix the violation**: For each response in the GET/PUT/PATCH operation add the systemData object. 
+**How to fix the violation**: For each response in the GET/PUT/PATCH operation add a readonly systemData property. 
 It's recommended to refer to the 'systemData' defined in [v2/types.json](https://github.com/Azure/azure-rest-api-specs/blob/7dddc4bf1e402b6e6737c132ecf05b74e2b53b08/specification/common-types/resource-management/v2/types.json#L445) which is provided for fixing the error.
 ``` json
 "MyResource": {
@@ -2465,7 +2475,8 @@ It's recommended to refer to the 'systemData' defined in [v2/types.json](https:/
     ...
     ...
     "systemData": {
-      "$ref": "v2/types.json#/definitions/systemData"
+      "$ref": "v2/types.json#/definitions/systemData",
+       "readOnly" : true
     }
   }
 }
@@ -2987,7 +2998,7 @@ The following would be valid:
   }
 ...
 ```
-Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or[Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
 ### <a name="r4024" ></a>R4024 PreviewVersionOverOneYear
 
@@ -3259,4 +3270,193 @@ resourceDefinition": {
 }
 ...
 ```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4032"></a>R4032 MissingXmsErrorResponse
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The response code {0} is defined without a x-ms-error-response.
+
+**Description** :  If defines response code 4xx or 5xx ,  x-ms-error-response:true is required. There is one exception: a HEAD operation with 404 SHOULD have x-ms-error-response:false, as it is often used to check for existence of resources, the HEAD with 404 means the resource doesn’t exist.
+
+**CreatedAt**: February 23, 2021
+
+**LastModifiedAt**: February 23, 2021
+
+**Why this rule is important**: As some SDK may treat the 4xx or 5xx as exceptional code, if don't specified x-ms-error-response:true, the SDK will not handle the error schema correctly instead it will throw an exception.
+
+**How to fix the violation**: Add the x-ms-error-response:true for the error response code or remove it.
+
+The following would be valid:
+
+```json
+ "responses": {
+    "400": {
+      "description": "Bad Request",
+      "x-ms-error-response": true
+    }
+ }
+```
+The following would be invalid:
+
+```json
+ "responses": {
+    "400": {
+      "description": "Bad Request",
+    }
+ }
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4033"></a>R4033 UniqueModelName
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  The model name {0} is duplicated with {1} .
+
+**Description** :  Do not rely on case sensitivity to differentiate models.
+
+**CreatedAt**: February 23, 2021
+
+**LastModifiedAt**: February 23, 2021
+
+**Why this rule is important**: In Python SDK, model names are converted to forms starting with capital. So all of "AAAA", "aaaa", "Aaaa" will be transformed to "Aaaa". So differentiating model names by their case sensitivities would break Python SDK generation.
+
+**How to fix the violation**: Rename the duplicate name .
+
+The following would be invalid:
+
+```json
+"definitions": {
+  "SKU": {
+    "type": "string",
+    "description": "SKU in request"
+  },
+  "sku": {
+    "type": "string",
+    "description": "SKU in response"
+  }
+}
+```
+
+The following would be valid:
+
+```json
+"definitions": {
+  "requestSKU": {
+    "type": "string",
+    "description": "SKU in request"
+  },
+  "responseSKU": {
+    "type": "string",
+    "description": "SKU in response"
+  }
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4034"></a>R4034 AzureResourceTagsSchemaValidation
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  The property tags in the resource "{0}" does not conform to the common type definition.
+
+**Description** :  This rule is to check if the tags definition of a resource conforms to the common tags definition.
+
+**CreatedAt**: February 23, 2021
+
+**LastModifiedAt**: February 23, 2021
+
+**Why this rule is important**: It will block the SDK generation for Terraform, as it's only accepted that the Golang type for tags is map[string]*string .
+
+**How to fix the violation**: Please reference to the common tags definition in [v2/types.json](https://github.com/Azure/azure-rest-api-specs/blob/0e18f46fd2c210f85b5ec0f9dd9be664242bee82/specification/common-types/resource-management/v2/types.json#L146).
+
+The following would be invalid:
+
+```json
+"tags": {
+  "type": "object",
+  "description": "Resource Tags"
+}
+```
+
+The following would be valid:
+
+```json
+"tags": {
+  "type": "object",
+  "additionalProperties": {
+    "type": "string"
+  },
+  "x-ms-mutability": [
+    "read",
+    "create",
+    "update"
+  ],
+  "description": "Resource Tags"
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4035"></a>R4035 PrivateEndpointResourceSchemaValidation
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  The private endpoint model "{0}" schema does not conform to the common type definition.
+
+**Description** :  This rule is to check if the schemas used by private endpoint conform to the common [privateLink](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v1/privatelinks.json). The rule will check the schemas of following models and their properties:
+1. PrivateEndpointConnection
+2. PrivateEndpointConnectionProperties
+3. PrivateEndpointConnectionListResult
+4. PrivateLinkResource
+5. PrivateLinkResourceProperties
+6. PrivateLinkResourceListResult
+
+**CreatedAt**: February 23, 2021
+
+**LastModifiedAt**: February 23, 2021
+
+**Why this rule is important**: The schemas used by private endpoint should have same definition. 
+
+**How to fix the violation**: Please reference to the common private endpoint definition in [privateLink](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v1/privatelinks.json).
+
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings) 
+
+### <a name="r4036"></a>R4036 ImplementPrivateEndpointAPIs
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The private endpoint API: {apiPath} is missing.
+
+**Description** :  This rule is to check if all the APIs for private endpoint are implemented. Per design spec, for supporting private endpoint, the service should implement the following APIs:
+
+PUT/DELETE/GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.[Service]/{resourceType}/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}?api-version=[version]
+ 
+GET https://management.azure.com/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.[Service]/[resources]/{resourceName}/privateEndpointConnections?api-version=[version]
+ 
+GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.[Service]/[resources]/[resourceName]/privateLinkResources?api-version=[version]
+
+**CreatedAt**: February 23, 2021
+
+**LastModifiedAt**: February 23, 2021
+
+**Why this rule is important**: To meet the private endpoint design.
+
+**How to fix the violation**: Please add the missing private endpoint API path and operation to the swagger.
+
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
