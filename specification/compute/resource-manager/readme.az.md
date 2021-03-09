@@ -9,6 +9,7 @@ az:
   package-name: azure-mgmt-compute
 az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/vm
 python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/vm"
+compatible-level: track2
 cli:
     cli-directive:
         - where:
@@ -19,6 +20,11 @@ cli:
             group: "SshPublicKeys"
             op: "*"
           hidden: false
+        - where:
+            group: "*"
+            op: "*"
+            param: vmName
+          alias: name
 directive: 
   - where: 
       command: vm ssh-public-key
