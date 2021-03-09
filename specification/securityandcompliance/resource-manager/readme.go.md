@@ -17,7 +17,7 @@ batch:
   - tag: package-2021-03-08
 ```
 
-### Tag: package-2021-03-08 and go
+### Tag: package-2021-01-11 and go
 
 These settings apply only when `--tag=package-2021-01-11 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
