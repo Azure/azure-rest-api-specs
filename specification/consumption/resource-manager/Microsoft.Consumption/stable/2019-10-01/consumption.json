@@ -258,6 +258,49 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/marketplaces/download": {
+      "get": {
+        "tags": [
+          "Marketplaces"
+        ],
+        "x-ms-odata": "#/definitions/Marketplace",
+        "operationId": "Marketplaces_Download",
+        "description": "Download marketplaces for a scope by billing period and billing account id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "MarketplacesDownloadForBillingAccountBillingPeriod": {
+            "$ref": "./examples/MarketplacesDownloadForBillingAccountBillingPeriod.json"
+          }
+        },
+        "parameters": [          
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/languageParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The request has been accepted for processing."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.Consumption/budgets": {
       "get": {
         "tags": [
@@ -1478,132 +1521,6 @@
         "parameters": [          
           {
             "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/billingPeriodNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/languageParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. The request has been accepted for processing."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/marketplaces/download": {
-      "get": {
-        "tags": [
-          "Marketplaces"
-        ],
-        "operationId": "Marketplaces_BillingAccount_Download",
-        "description": "Download marketplaces for a scope by billing period and billing account id.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "x-ms-examples": {
-          "MarketplacesDownloadForBillingAccountBillingPeriod": {
-            "$ref": "./examples/MarketplacesDownloadForBillingAccountBillingPeriod.json"
-          }
-        },
-        "parameters": [          
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/billingPeriodNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/languageParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. The request has been accepted for processing."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/enrollmentaccounts/{enrollmentAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/marketplaces/download": {
-      "get": {
-        "tags": [
-          "Marketplaces"
-        ],
-        "operationId": "Marketplaces_EnrollmentAccount_Download",
-        "description": "Download marketplaces for a scope by enrollment account and billing period.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "x-ms-examples": {
-          "MarketplacesDownloadForEnrollmentAccountBillingPeriod": {
-            "$ref": "./examples/MarketplacesDownloadForEnrollmentAccountBillingPeriod.json"
-          }
-        },
-        "parameters": [          
-          {
-            "$ref": "#/parameters/enrollmentAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/billingPeriodNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/languageParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. The request has been accepted for processing."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/departments/{departmentId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/marketplaces/download": {
-      "get": {
-        "tags": [
-          "Marketplaces"
-        ],
-        "operationId": "Marketplaces_Departments_Download",
-        "description": "Download marketplaces for a scope by department and billing period.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "x-ms-examples": {
-          "MarketplacesDownloadForDepartmentIdBillingPeriod": {
-            "$ref": "./examples/MarketplacesDownloadForDepartmentIdBillingPeriod.json"
-          }
-        },
-        "parameters": [          
-          {
-            "$ref": "#/parameters/departmentIdParameter"
           },
           {
             "$ref": "#/parameters/billingPeriodNameParameter"
