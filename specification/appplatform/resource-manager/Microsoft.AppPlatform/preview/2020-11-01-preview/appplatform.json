@@ -3925,15 +3925,19 @@
       "properties": {
         "cpu": {
           "format": "int32",
-          "description": "Required CPU, basic tier should be 1, standard tier should be in range (1, 4)",
+          "description": "Required CPU. This should be 1 for Basic tier, and in range [1, 4] for Standard tier. This is deprecated starting from API version 2020-11-01-preview. Please use the resourceRequests field to set the CPU size.",
           "default": 1,
           "type": "integer"
         },
         "memoryInGB": {
           "format": "int32",
-          "description": "Required Memory size in GB, basic tier should be in range (1, 2), standard tier should be in range (1, 8)",
+          "description": "Required Memory size in GB. This should be in range [1, 2] for Basic tier, and in range [1, 8] for Standard tier. This is deprecated starting from API version 2020-11-01-preview. Please use the resourceRequests field to set the the memory size.",
           "default": 1,
           "type": "integer"
+        },
+        "resourceRequests": {
+          "$ref": "#/definitions/ResourceRequests",
+          "description": "The requested resource quantity."
         },
         "jvmOptions": {
           "description": "JVM parameter",
@@ -4010,6 +4014,20 @@
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceRequests": {
+      "description": "Deployment resource request payload",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "description": "Required CPU. 1 core can be represented by 1 or 1000m. This should be 500m or 1 for Basic tier, and {500m, 1, 2, 3, 4} for Standard tier.",
+          "type": "string"
+        },
+        "memory": {
+          "description": "Required memory. 1 GB can be represented by 1Gi or 1024Mi. This should be {512Mi, 1Gi, 2Gi} for Basic tier, and {512Mi, 1Gi, 2Gi, ..., 8Gi} for Standard tier.",
           "type": "string"
         }
       }
