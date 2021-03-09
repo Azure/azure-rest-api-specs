@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Dataset Service",
-    "version": "1.0",
+    "version": "2.0",
     "description": "APIs for managing datasets from uploaded data in Azure Maps."
   },
   "host": "atlas.microsoft.com",
@@ -76,28 +76,37 @@
         "$ref": "#/definitions/ODataErrorResponse"
       }
     },
-    "200Async": {
-      "description": "The operation's status response.",
-      "schema": {
-        "$ref": "#/definitions/LongRunningOperationResult"
+    "200": {
+      "description": "The operation was successfully queued.",
+      "headers": {
+        "location": {
+          "type": "string",
+          "description": "A URI where details on the operation can be found."
+        }
       }
-    },
-    "201Async": {
-      "description": "The resource has been created successfully.",
+     },
+    "200Async": {
+      "description": "The operation is complete.  If the operation was successful, use the resource-location header to obtain the path to the result.",
       "schema": {
         "$ref": "#/definitions/LongRunningOperationResult"
       },
       "headers": {
-        "Location": {
+        "resource-location": {
           "type": "string",
           "description": "A URI where details on the newly created resource can be found."
         }
       }
     },
     "202Async": {
-      "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "description": "The operation is in progress.",
+      "schema": {
+        "$ref": "#/definitions/LongRunningOperationResult"
+      }
+    },
+    "202": {
+      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the location Header to obtain status.",
       "headers": {
-        "Location": {
+        "location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
         }
@@ -115,11 +124,11 @@
     },
     "ApiVersion": {
       "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "description": "Version number of Azure Maps API. Current version is 2.0",
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "1.0",
+      "default": "2.0",
       "x-ms-parameter-location": "client"
     },
     "ConversionIdQuery": {
@@ -154,54 +163,12 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "Type": {
-      "name": "type",
+    "OutputOntology": {
+      "name": "outputOntology",
       "type": "string",
       "in": "query",
-      "description": "The type of data to create the dataset with.",
-      "enum": [
-        "facility"
-      ],
-      "x-ms-enum": {
-        "name": "DatasetType",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "facility",
-            "description": "Facility Maps data type."
-          }
-        ]
-      },
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "ImportUdid": {
-      "name": "udid",
-      "description": "The unique data ID used to import data into the dataset. The `udid` must have been obtained from a successful call to the Data Service Upload API.",
-      "type": "string",
-      "in": "query",
+      "description": "The ontology to create the dataset with.",
       "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "ImportType": {
-      "name": "type",
-      "type": "string",
-      "in": "query",
-      "description": "The type of data to import into the dataset with.",
-      "enum": [
-        "fixture"
-      ],
-      "x-ms-enum": {
-        "name": "ImportDataType",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "fixture",
-            "description": "Area and point element data."
-          }
-        ]
-      },
-      "required": true,
       "x-ms-parameter-location": "method"
     },
     "AppendDatasetId": {
@@ -212,8 +179,8 @@
       "required": false,
       "x-ms-parameter-location": "method"
     },
-    "StatusId": {
-      "name": "statusId",
+    "OperationId": {
+      "name": "operationId",
       "type": "string",
       "in": "path",
       "description": "The ID to query the status for the dataset create/import request.",
@@ -222,7 +189,7 @@
     }
   },
   "paths": {
-    "/dataset/create": {
+    "/datasets/create": {
       "post": {
         "x-publish": true,
         "description": "**Dataset Create API**\n\n**Applies to:** S1 pricing tier.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API \nand SDK. The Dataset APIs are part of Creator. This API allows the caller to create a dataset from data that \nwas uploaded to the Azure Maps Data Service.\n\nYou can use this API in a scenario like uploading a DWG zip package for a building, converting the zip package using \nthe Azure Maps Conversion Service, creating a dataset from the converted zip package. The created dataset can be \nused to create tilesets using the Azure Maps Tileset Service and can be queried via the Azure Maps WFS Service.\n\n## Submit Create Request\n\nTo create your dataset, you will use a `POST` request where the `conversionId` query parameter is an id that represents \nthe converted DWG zip package, the `type` parameter will describe the data type to use for the dataset, the `datasetId`\nparameter will describe if the provided data should be appended to a current dataset and, optionally, the \n`description` query parameter will contain a description (if description is not provided a default description will be \ngiven).\n\nThe Create API is a \n[long-running request](https://aka.ms/am-creator-lrt).",
@@ -250,7 +217,7 @@
             "$ref": "#/parameters/UdidDataset"
           },
           {
-            "$ref": "#/parameters/Type"
+            "$ref": "#/parameters/OutputOntology"
           },
           {
             "$ref": "#/parameters/AppendDatasetId"
@@ -260,11 +227,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "$ref": "#/responses/201Async"
-          },
           "202": {
-            "$ref": "#/responses/202Async"
+            "$ref": "#/responses/202"
           },
           "400": {
             "$ref": "#/responses/400"
@@ -284,59 +248,7 @@
         }
       }
     },
-    "/dataset/import/{datasetId}": {
-      "patch": {
-        "x-publish": true,
-        "description": "**Dataset Import API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API \nand SDK. The Dataset APIs are part of Creator. This API allows the caller to bulk import data into a dataset \nfrom data that was uploaded to the Azure Maps Data service.<br>\n\n### Submit Import Request\n\nTo import data into your dataset, you will use a `PATCH` request where the `datasetId` query parameter is the \ndataset you want to import your data into, the `udid` query parameter is the data you want to import, and the `type` \nparameter will describe the data type to use for the import data.<br>       \n\nThe Import API is a \n[long-running request](https://aka.ms/am-creator-lrt).",
-        "operationId": "Dataset_ImportPreview",
-        "x-ms-examples": {
-          "Import data into previously created dataset": {
-            "$ref": "./examples/Dataset_Import.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/DatasetId"
-          },
-          {
-            "$ref": "#/parameters/ImportUdid"
-          },
-          {
-            "$ref": "#/parameters/ImportType"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/responses/200Async"
-          },
-          "202": {
-            "$ref": "#/responses/202Async"
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/dataset/{datasetId}": {
+    "/datasets/{datasetId}": {
       "delete": {
         "x-publish": true,
         "description": "**Dataset Delete API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Dataset APIs are part of Creator.\nThis API allows the caller to delete a previously created dataset.<br>    \nYou can also use this API to delete old/unused datasets to create space for new Creator content.\n\n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `datasetId` of the dataset to delete.<br> \n\n\n### Delete Data Response\n\nThe Delete API returns a HTTP `204 No Content` response if the dataset resource was deleted successfully.<br>",
@@ -358,7 +270,7 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": "The dataset delete request completed successfully. The resource referenced by the `datasetId` was deleted from the server.",
             "schema": {
               "$ref": "#/definitions/DatasetDeleteResponse"
@@ -380,9 +292,50 @@
             "$ref": "#/responses/500"
           }
         }
+      },
+      "get": {
+        "x-publish": true,
+        "description": "**Dataset Get API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Dataset APIs are part of Creator.\nThis API allows the caller to fetch a previously successfully created dataset.\n",
+        "operationId": "Dataset_GetPreview",
+
+        "parameters": [
+          {
+            "$ref": "#/parameters/DatasetId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The get dataset request completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatasetDetailInfo"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
       }
+
     },
-    "/dataset": {
+    "/datasets": {
       "get": {
         "x-publish": true,
         "description": "**Dataset List API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Dataset APIs are part of Creator.\nThis API allows the caller to fetch a list of all previously successfully created datasets.\n\n\n### Submit List Request\n\nTo list all your datasets, you will issue a `GET` request with no additional parameters.<br>\n\n\n### List Data Response\n\nThe List API returns the complete list of all datasets in `json` format. The response contains the following fields (if they are not null or empty):\n  > created - The timestamp the dataset was created.\n  > datasetId - The id for the dataset.\n  > description - The description for the dataset.\n  > datasetSources - The source data that was used when the create request was issued.\n\nThe `datasetSources` describes the source data that was used when the create request was issued and contains the following elements (if they are not null or empty):\n  > conversionIds - The list of `conversionId` (null if none were provided).\n  > udids - The list of `udid` (null if none were provided).\n  > appendDatasetId - The `datasetId` that was used for an append operation (null if none was used).\n  > type - The type of data stored in the dataset that was created.\n\nHere's a sample response returning the `timestamp`, `datasetId`, `description`, and `datasetSources` of 3 dataset resources:\n\n<br>\n\n```json\n{\n  \"datasets\": [\n    {\n      \"timestamp\": \"2020-01-01T22:50:48+00:00\",\n      \"datasetId\": \"f6495f62-94f8-0ec2-c252-45626f82fcb2\",\n      \"description\": \"Some description or comment for the dataset.\",\n      \"datasetSources\": {\n        \"conversionIds\": [\n          \"15d21452-c9bb-27b6-5e79-743ca5c3205d\"\n        ],\n        \"type\": \"facility\"\n      },\n      \"status\": \"Succeeded\"\n    },\n    {\n      \"timestamp\": \"2020-01-01T22:57:53+00:00\",\n      \"datasetId\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n      \"description\": \"Create from upload '0c1288fa-2058-4a1b-b68d-13a5f5af7d7c'.\",\n      \"datasetSources\": {\n        \"udids\": [\n          \"0c1288fa-2058-4a1b-b68d-13a5f5af7d7c\"\n        ],\n        \"type\": \"facility\"\n      },\n      \"status\": \"Succeeded\"\n    },\n    {\n      \"timestamp\": \"2020-01-01T20:39:36+00:00\",\n      \"datasetId\": \"7c1288fa-2058-4a1b-b68f-13a6h5af7d7c\",\n      \"description\": \"Some other description or comment for the dataset.\",\n      \"datasetSources\": {\n        \"conversionIds\": [\n          \"15d21452-c9bb-27b6-5e79-743ca5c3205d\"\n        ],\n        \"appendDatasetId\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n        \"type\": \"facility\"\n      },\n      \"status\": \"Succeeded\"\n    }\n  ]\n}\n```\n<br>",
@@ -402,7 +355,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The list dataset request completed successfully. The response body contains a list of all the previously created datasets.",
+            "description": "The dataset request completed successfully. The response body contains the previously created dataset.",
             "schema": {
               "$ref": "#/definitions/DatasetListResponse"
             }
@@ -421,6 +374,34 @@
           },
           "500": {
             "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/datasets/operations/{operationId}": {
+      "get": {
+        "description": "This path will be obtained from a call to /datasets/create.  While in progress, an http202 will be returned, followed by an http200 once completed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          }
+        ],
+
+        "responses":{
+          "200": {
+            "$ref": "#/responses/200Async"
+          },
+          "202": {
+              "$ref": "#/responses/202Async"
+            },
+          "400": {
+            "$ref": "#/responses/400"
           }
         }
       }
@@ -600,9 +581,6 @@
           "readOnly": true
         }
       }
-    },
-    "DatasetGetDetailsResponse": {
-      "$ref": "#/definitions/DatasetDetailInfo"
     }
   }
 }
