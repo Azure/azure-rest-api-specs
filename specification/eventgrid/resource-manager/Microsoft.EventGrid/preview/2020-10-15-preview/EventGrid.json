@@ -6048,6 +6048,7 @@
             "Failed"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "DomainTopicProvisioningState",
             "modelAsString": true
@@ -6067,6 +6068,7 @@
         "properties": {
           "$ref": "#/definitions/DomainTopicProperties",
           "description": "Properties of the Domain Topic.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         },
         "systemData": {
@@ -6078,18 +6080,18 @@
       }
     },
     "DomainTopicsListResult": {
-      "description": "Result of the List Domain Topics operation",
+      "description": "Result of the List Domain Topics operation.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "A collection of Domain Topics",
+          "description": "A collection of Domain Topics.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DomainTopic"
           }
         },
         "nextLink": {
-          "description": "A link for the next page of domain topics",
+          "description": "A link for the next page of domain topics.",
           "type": "string"
         }
       }
@@ -8073,7 +8075,8 @@
           "description": "Identity information for the resource."
         },
         "systemData": {
-          "description": "The system metadata relating to this resource.",
+          "description": "The system metadata relating to System Topic resource.",
+          "type": "object",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
