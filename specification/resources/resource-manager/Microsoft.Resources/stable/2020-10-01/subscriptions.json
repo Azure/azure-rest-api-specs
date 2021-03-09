@@ -52,6 +52,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -89,6 +95,12 @@
             "schema": {
               "$ref": "#/definitions/LocationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -125,6 +137,12 @@
             "schema": {
               "$ref": "#/definitions/Subscription"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -151,6 +169,12 @@
             "description": "OK - Returns an array of subscriptions.",
             "schema": {
               "$ref": "#/definitions/SubscriptionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -181,6 +205,12 @@
             "description": "OK - Returns an array of tenants.",
             "schema": {
               "$ref": "#/definitions/TenantListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -221,9 +251,9 @@
             }
           },
           "default": {
-            "description": "Error response saying resource name is invalid",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -630,23 +660,14 @@
       },
       "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
     },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error description and code explaining why resource name is invalid.",
+    "CloudError": {
       "x-ms-external": true,
       "properties": {
         "error": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
-      }
+      },
+      "description": "An error response for a resource management request."
     },
     "Operation": {
       "description": "Microsoft.Resources operation",
