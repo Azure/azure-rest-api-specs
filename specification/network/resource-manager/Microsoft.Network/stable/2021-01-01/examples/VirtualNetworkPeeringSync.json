@@ -4,7 +4,18 @@
     "virtualNetworkName": "vnet1",
     "resourceGroupName": "peerTest",
     "api-version": "2021-01-01",
-    "subscriptionId": "subid"
+    "subscriptionId": "subid",
+    "VirtualNetworkPeeringParameters": {
+      "properties": {
+        "allowVirtualNetworkAccess": true,
+        "allowForwardedTraffic": true,
+        "allowGatewayTransit": false,
+        "useRemoteGateways": false,
+        "remoteVirtualNetwork": {
+          "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet2"
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -34,7 +45,7 @@
             "regionalCommunity": "12076:50004"
           },
           "peeringState": "Initiated",
-          "peeringSyncLevel": "FullyInSync",         
+          "peeringSyncLevel": "FullyInSync",
           "provisioningState": "Succeeded"
         }
       }
