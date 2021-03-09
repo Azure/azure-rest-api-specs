@@ -16,7 +16,6 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi)
 clear-output-folder: true
 batch:
-  - tag: package-2020-11
   - tag: package-2020-08
   - tag: package-2020-07
   - tag: package-2020-06
