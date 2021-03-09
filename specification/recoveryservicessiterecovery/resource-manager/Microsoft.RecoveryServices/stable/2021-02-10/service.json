@@ -10524,7 +10524,7 @@
           "description": "The Azure VM input endpoints.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TenantDB.InputEndpoint"
+            "$ref": "#/definitions/InputEndpoint"
           }
         }
       }
@@ -22206,25 +22206,6 @@
         }
       },
       "discriminator": "instanceType"
-    },
-    "TenantDB.InputEndpoint": {
-      "type": "object",
-      "properties": {
-        "endpointName": {
-          "type": "string"
-        },
-        "privatePort": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "publicPort": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "protocol": {
-          "type": "string"
-        }
-      }
     },
     "TestFailoverCleanupInput": {
       "description": "Input definition for test failover cleanup.",
