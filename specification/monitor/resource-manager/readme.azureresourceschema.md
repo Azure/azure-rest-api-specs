@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-insights-2020-10-01
   - tag: schema-insights-2020-05-01-preview
   - tag: schema-insights-2020-01-01-preview
   - tag: schema-insights-2019-11-01-preview
@@ -27,10 +28,22 @@ batch:
   - tag: schema-insights-2016-03-01
   - tag: schema-insights-2015-07-01
   - tag: schema-insights-2015-04-01
+  - tag: schema-insights-2014-04-01
 
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-insights-2020-10-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-insights-2020-10-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
+
+```
 
 ### Tag: schema-insights-2020-05-01-preview and azureresourceschema
 
@@ -119,6 +132,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
+  - Microsoft.Insights/stable/2018-09-01/metricBaselines_API.json
   - Microsoft.Insights/stable/2018-09-01/baseline_API.json
   - Microsoft.Insights/stable/2018-09-01/calculateBaseline_API.json
 
@@ -281,5 +295,16 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
   - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
   - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+
+```
+
+### Tag: schema-insights-2014-04-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-insights-2014-04-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Insights/stable/2014-04-01/alertRules_API.json
 
 ```
