@@ -122,6 +122,7 @@
         ],
         "operationId": "Subscriptions_GetOperationResults",
         "description": "Fetch the asynchronous operation result.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "List subscription quota information in West US": {
             "$ref": "./examples/Subscription_GetOperationResults.json"
@@ -235,7 +236,7 @@
       "x-ms-azure-resource": true
     },
     "OperationResult": {
-      "description": "",
+      "description": "The result of the requests to fetch the operation results.",
       "allOf": [
         {
           "$ref": "../../common/v1/definitions.json#/definitions/Error"
@@ -243,6 +244,7 @@
       ],
       "properties": {
         "status": {
+          "description": "The status of the request to fetch the asynchronous operation results.",
           "$ref": "#/definitions/OperationResultStatus"
         },
         "outputUri": {
