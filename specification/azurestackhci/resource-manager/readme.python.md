@@ -29,7 +29,7 @@ batch:
 These settings apply only when `--tag=package-2020-11-01-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2020-01-01-preview' && $(python)
+``` yaml $(tag) == 'package-2020-11-01-preview' && $(python)
 python:
   namespace: azure.mgmt.azurestackhci.v2020_11_01_preview
   output-folder: $(python-sdks-folder)/azurestackhci/azure-mgmt-azurestackhci/azure/mgmt/azurestackhci/v2020_11_01_preview
