@@ -23,39 +23,11 @@
         "backendAddressPools": [
           {
             "name": "be-lb1",
-            "properties": {
-              "tunnelInterfaces": [
-                {
-                  "port": 15000,
-                  "identifier": 900,
-                  "protocol": "VXLAN",
-                  "type": "Internal"
-                }
-              ],
-              "loadBalancingRules": [
-                {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
-                }
-              ]
-            }
+            "properties": {}
           },
           {
             "name": "be-lb2",
-            "properties": {
-              "tunnelInterfaces": [
-                {
-                  "port": 15001,
-                  "identifier": 901,
-                  "protocol": "VXLAN",
-                  "type": "Internal"
-                }
-              ],
-              "loadBalancingRules": [
-                {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
-                }
-              ]
-            }
+            "properties": {}
           }
         ],
         "loadBalancingRules": [
@@ -71,6 +43,7 @@
               "idleTimeoutInMinutes": 15,
               "protocol": "All",
               "loadDistribution": "Default",
+              "backendAddressPool": {},
               "backendAddressPools": [
                 {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb1"
@@ -199,8 +172,8 @@
                 "frontendIPConfiguration": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
                 },
-                "frontendPort": 80,
-                "backendPort": 80,
+                "frontendPort": 0,
+                "backendPort": 0,
                 "enableFloatingIP": true,
                 "idleTimeoutInMinutes": 15,
                 "protocol": "Tcp",
