@@ -16,7 +16,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi)
 clear-output-folder: true
 batch:
-  - tag: package-2021-02-preview
+  - tag: package-2021-02-preview-only
   - multiapiscript: true
 ```
 
@@ -26,12 +26,12 @@ clear-output-folder: false
 perform-load: false
 ```
 
-### Tag: package-2021-02-preview and python
+### Tag: package-2021-02-preview-only and python
 
-These settings apply only when `--tag=package-2021-02-preview --python` is specified on the command line.
+These settings apply only when `--tag=package-2021-02-preview-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-02-preview'
+``` yaml $(tag) == 'package-2021-02-preview-only'
 namespace: azure.mgmt.network.v2021_02_preview
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2021_02_preview
 ```
