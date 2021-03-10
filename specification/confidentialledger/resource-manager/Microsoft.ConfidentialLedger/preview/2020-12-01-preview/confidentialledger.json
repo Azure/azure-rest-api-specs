@@ -512,8 +512,8 @@
         "modelAsString": true
       }
     },
-    "LedgerPermission": {
-      "description": "Permission associated with the Security Principal of Ledger",
+    "LedgerRoleName": {
+      "description": "roleName associated with the Security Principal of Ledger",
       "type": "string",
       "enum": [
         "Reader",
@@ -521,26 +521,26 @@
         "Administrator"
       ],
       "x-ms-enum": {
-        "name": "LedgerPermission",
+        "name": "LedgerRoleName",
         "modelAsString": true
       }
     },
     "CertBasedSecurityPrincipal": {
       "type": "object",
-      "description": "Cert based security principal with associated permission",
+      "description": "Cert based security principal with associated roleName",
       "properties": {
         "cert": {
           "description": "Base64 encoded public key of the user cert (.pem or .cer)",
           "type": "string"
         },
-        "permission":{
-          "$ref": "#/definitions/LedgerPermission"
+        "roleName": {
+          "$ref": "#/definitions/LedgerRoleName"
         }
       }
     },
     "AADBasedSecurityPrincipal": {
       "type": "object",
-      "description": "AAD based security principal with associated permission",
+      "description": "AAD based security principal with associated roleName",
       "properties": {
         "principalId": {
           "description": "UUID/GUID based Principal Id of the Security Principal",
@@ -550,8 +550,8 @@
           "description": "UUID/GUID based Tenant Id of the Security Principal",
           "type": "string"
         },
-        "permission":{
-          "$ref": "#/definitions/LedgerPermission"
+        "roleName": {
+          "$ref": "#/definitions/LedgerRoleName"
         }
       }
     },
