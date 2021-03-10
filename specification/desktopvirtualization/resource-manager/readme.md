@@ -24,7 +24,7 @@ These are the global settings for the DesktopVirtualizationClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-11-10-preview
+tag: package-2021-02-01-preview
 ```
 
 ### Tag: package-2019-01-23-preview
@@ -88,6 +88,20 @@ input-file:
 - Microsoft.DesktopVirtualization/preview/2020-11-10-preview/desktopvirtualization.json
 ```
 
+### Tag: package-2021-01-14-preview
+
+``` yaml $(tag) == 'package-2021-01-14-preview'
+input-file:
+- Microsoft.DesktopVirtualization/preview/2021-01-14-preview/desktopvirtualization.json
+```
+
+### Tag: package-2021-02-01-preview
+
+``` yaml $(tag) == 'package-2021-02-01-preview'
+input-file:
+- Microsoft.DesktopVirtualization/preview/2021-02-01-preview/desktopvirtualization.json
+```
+
 ---
 # Code Generation
 
@@ -99,6 +113,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-powershell
   - repo: azure-sdk-for-csharp
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
@@ -161,6 +176,8 @@ input-file:
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2020-10-19-preview/desktopvirtualization.json
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2020-11-02-preview/desktopvirtualization.json
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2020-11-10-preview/desktopvirtualization.json
+  - $(this-folder)/Microsoft.DesktopVirtualization/preview/2021-01-14-preview/desktopvirtualization.json
+  - $(this-folder)/Microsoft.DesktopVirtualization/preview/2021-02-01-preview/desktopvirtualization.json
 
 ```
 

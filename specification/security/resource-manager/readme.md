@@ -20,7 +20,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
@@ -73,7 +73,7 @@ openapi-type: arm
 tag: package-composite-v3
 ```
 
-## Composite packages
+### Composite packages
 
 The following packages may be composed from multiple api-versions.
 
@@ -198,7 +198,6 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
-- Microsoft.Security/stable/2020-01-01/alerts.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
@@ -213,10 +212,12 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 - Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
 - Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
 - Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
+- Microsoft.Security/stable/2021-01-01/alerts.json
 
 # Needed when there is more than one input file
 override-info:
@@ -386,9 +387,10 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
-- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
 - Microsoft.Security/stable/2020-01-01/secureScore.json
+- Microsoft.Security/stable/2020-01-01/alerts.json
 
 # Needed when there is more than one input file
 override-info:
@@ -420,6 +422,7 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 - Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
 - Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
 - Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
@@ -478,4 +481,3 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
