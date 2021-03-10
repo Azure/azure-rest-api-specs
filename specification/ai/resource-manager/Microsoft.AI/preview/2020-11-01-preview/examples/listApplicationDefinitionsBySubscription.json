@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "location": "westus",
+    "api-version": "2020-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "name": "myManagedApplicationDef",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Ai/locations/westus/applicationDefinitions/myManagedApplicationDef",
+            "type": "Microsoft.Ai/locations/westus/applicationDefinitions",
+            "managedBy": null,
+            "sku": null,
+            "properties": {
+              "artifacts": [
+                {
+                  "name": "CreateUiDefinition",
+                  "type": "Custom",
+                  "uri": "https://path/to/managedApplicationCreateUiDefinition.json"
+                },
+                {
+                  "name": "ApplicationResourceTemplate",
+                  "type": "Template",
+                  "uri": "https://path/to/mainTemplate.json"
+                }
+              ],
+              "authorizations": [
+                {
+                  "principalId": "validprincipalguid",
+                  "roleDefinitionId": "validroleguid"
+                }
+              ],
+              "description": "myManagedApplicationDef description",
+              "displayName": "myManagedApplicationDef",
+              "lockLevel": "None",
+              "packageFileUri": "https://path/to/packagezipfile"
+            }
+          },
+          {
+            "name": "myManagedApplicationDef2",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Ai/locations/westus/applicationDefinitions/myManagedApplicationDef2",
+            "type": "Microsoft.Ai/locations/westus/applicationDefinitions",
+            "managedBy": null,
+            "sku": null,
+            "properties": {
+              "artifacts": [
+                {
+                  "name": "CreateUiDefinition",
+                  "type": "Custom",
+                  "uri": "https://path/to/managedApplicationCreateUiDefinition.json"
+                },
+                {
+                  "name": "ApplicationResourceTemplate",
+                  "type": "Template",
+                  "uri": "https://path/to/mainTemplate.json"
+                }
+              ],
+              "authorizations": [
+                {
+                  "principalId": "validprincipalguid",
+                  "roleDefinitionId": "validroleguid"
+                }
+              ],
+              "description": "myManagedApplicationDef2 description",
+              "displayName": "myManagedApplicationDef2",
+              "lockLevel": "None",
+              "packageFileUri": "https://path/to/packagezipfile"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
