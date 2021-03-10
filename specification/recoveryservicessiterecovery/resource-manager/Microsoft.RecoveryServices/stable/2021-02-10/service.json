@@ -3080,7 +3080,7 @@
         "tags": [
           "ReplicationProtectedItems"
         ],
-        "summary": "Updates the replication protected Item settings.",
+        "summary": "Updates the replication protected item settings.",
         "description": "The operation to update the recovery settings of an ASR replication protected item.",
         "operationId": "ReplicationProtectedItems_Update",
         "consumes": [
@@ -11053,11 +11053,11 @@
       "type": "object",
       "properties": {
         "provider": {
-          "description": "The provider. The localized friendly form of the resource provider name � it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\".",
+          "description": "The provider. The localized friendly form of the resource provider name - it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\".",
           "type": "string"
         },
         "resource": {
-          "description": "The resource. The localized friendly form of the resource related to this action/operation � it should match the public documentation for the resource provider. It should use Title Casing. This value should be unique for a particular URL type (e.g. nested types should *not* reuse their parent�s display.resource field). e.g. \"Virtual Machines\" or \"Scheduler Job Collections\", or \"Virtual Machine VM Sizes\" or \"Scheduler Jobs\".",
+          "description": "The resource. The localized friendly form of the resource related to this action/operation - it should match the public documentation for the resource provider. It should use Title Casing. This value should be unique for a particular URL type (e.g. nested types should *not* reuse their parent�s display.resource field). e.g. \"Virtual Machines\" or \"Scheduler Job Collections\", or \"Virtual Machine VM Sizes\" or \"Scheduler Jobs\".",
           "type": "string"
         },
         "operation": {
@@ -11065,7 +11065,7 @@
           "type": "string"
         },
         "description": {
-          "description": "The description. The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise � it will be used in tool tips and detailed views. Prescriptive guidance for namespaces: Read any 'display.provider' resource Create or Update any 'display.provider' resource Delete any 'display.provider' resource Perform any other action on any 'display.provider' resource Prescriptive guidance for namespaces: Read any 'display.resource' Create or Update any 'display.resource' Delete any 'display.resource' 'ActionName' any 'display.resources'.",
+          "description": "The description. The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise - it will be used in tool tips and detailed views. Prescriptive guidance for namespaces: Read any 'display.provider' resource Create or Update any 'display.provider' resource Delete any 'display.provider' resource Perform any other action on any 'display.provider' resource Prescriptive guidance for namespaces: Read any 'display.resource' Create or Update any 'display.resource' Delete any 'display.resource' 'ActionName' any 'display.resources'.",
           "type": "string"
         }
       }
@@ -17663,11 +17663,11 @@
       "type": "object",
       "properties": {
         "keyIdentifier": {
-          "description": "The key url / identifier.",
+          "description": "The key URL / identifier.",
           "type": "string"
         },
         "keyVaultResourceArmId": {
-          "description": "The KeyVault resource ARM id for key.",
+          "description": "The KeyVault resource ARM Id for key.",
           "type": "string"
         }
       }
@@ -21535,47 +21535,7 @@
         }
       }
     },
-    "SrsDataContract.AzureManagedDiskRecoverySettings": {
-      "type": "object",
-      "properties": {
-        "diskName": {
-          "type": "string"
-        },
-        "managedDiskFailoverGivenName": {
-          "type": "string"
-        },
-        "managedDiskTestFailoverGivenName": {
-          "type": "string"
-        },
-        "targetManagedDiskId": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SrsDataContract.IPConfig": {
-      "type": "object",
-      "properties": {
-        "staticIPAddress": {
-          "type": "string"
-        },
-        "publicIpAddressId": {
-          "type": "string"
-        },
-        "lBBackendAddressPoolIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SrsDataContract.IPConfigDetails": {
+    "IPConfigDetails": {
       "type": "object",
       "properties": {
         "name": {
@@ -21631,7 +21591,7 @@
         }
       }
     },
-    "SrsDataContract.IPConfigInputDetails": {
+    "IPConfigInputDetails": {
       "type": "object",
       "properties": {
         "ipConfigName": {
@@ -21672,156 +21632,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "SrsDataContract.RecoveryAzureNicSettings": {
-      "type": "object",
-      "properties": {
-        "nicId": {
-          "type": "string"
-        },
-        "nicFabricObjectId": {
-          "type": "string"
-        },
-        "isPrimary": {
-          "type": "boolean"
-        },
-        "recoveryVMNetworkId": {
-          "type": "string"
-        },
-        "previousRecoveryVMNetworkId": {
-          "type": "string"
-        },
-        "recoveryVmSubnetId": {
-          "type": "string"
-        },
-        "previousRecoveryVmSubnetId": {
-          "type": "string"
-        },
-        "recoveryVmSubnetName": {
-          "type": "string"
-        },
-        "previousRecoveryVmSubnetName": {
-          "type": "string"
-        },
-        "recoveryNetworkSecurityGroupId": {
-          "type": "string"
-        },
-        "previousRecoveryNetworkSecurityGroupId": {
-          "type": "string"
-        },
-        "isAcceleratedNetworkingEnabledOnRecovery": {
-          "type": "boolean"
-        },
-        "isAcceleratedNetworkingEnabledOnPreviousRecovery": {
-          "type": "boolean"
-        },
-        "recoveryIPConfigs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SrsDataContract.RecoveryIPConfig"
-          }
-        },
-        "previousRecoveryIPConfigs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SrsDataContract.RecoveryIPConfig"
-          }
-        },
-        "selectionTypeForFailover": {
-          "type": "string"
-        },
-        "testFailoverSettings": {
-          "$ref": "#/definitions/SrsDataContract.TestFailoverSettings"
-        },
-        "previousTestFailoverSettings": {
-          "$ref": "#/definitions/SrsDataContract.TestFailoverSettings"
-        },
-        "reuseExistingNicIfAvailable": {
-          "type": "boolean"
-        },
-        "previousReuseExistingNicIfAvailable": {
-          "type": "boolean"
-        },
-        "recoveryNicName": {
-          "type": "string"
-        },
-        "previousRecoveryNicName": {
-          "type": "string"
-        },
-        "recoveryNicResourceGroupName": {
-          "type": "string"
-        },
-        "previousRecoveryNicResourceGroupName": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SrsDataContract.RecoveryIPConfig": {
-      "type": "object",
-      "properties": {
-        "replicaNicStaticIPAddress": {
-          "type": "string"
-        },
-        "recoveryPublicIpAddressId": {
-          "type": "string"
-        },
-        "recoveryLBBackendAddressPoolIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ipConfigName": {
-          "type": "string"
-        },
-        "isPrimary": {
-          "type": "boolean"
-        },
-        "recoverySubnetId": {
-          "type": "string"
-        },
-        "recoverySubnetName": {
-          "type": "string"
-        }
-      }
-    },
-    "SrsDataContract.TestFailoverSettings": {
-      "type": "object",
-      "properties": {
-        "vmNetworkId": {
-          "type": "string"
-        },
-        "vmSubnetName": {
-          "type": "string"
-        },
-        "networkSecurityGroupId": {
-          "type": "string"
-        },
-        "isAcceleratedNetworkingEnabled": {
-          "type": "boolean"
-        },
-        "ipConfigs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SrsDataContract.RecoveryIPConfig"
-          }
-        },
-        "nicName": {
-          "type": "string"
-        },
-        "nicResourceGroupName": {
-          "type": "string"
-        },
-        "reuseExistingNic": {
-          "type": "boolean"
         }
       }
     },
@@ -23063,7 +22873,7 @@
           "description": "The IP configurations of the NIC.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SrsDataContract.IPConfigDetails"
+            "$ref": "#/definitions/IPConfigDetails"
           }
         },
         "selectionType": {
@@ -23128,7 +22938,7 @@
           "description": "The IP configurations to be used by NIC during test failover and failover.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SrsDataContract.IPConfigInputDetails"
+            "$ref": "#/definitions/IPConfigInputDetails"
           }
         },
         "selectionType": {
