@@ -491,9 +491,53 @@
         "subscriptionRequired": {
           "type": "boolean",
           "description": "Specifies whether an API or Product subscription is required for accessing the API."
+        },
+        "termsOfServiceUrl": {
+          "type": "string",
+          "description": " A URL to the Terms of Service for the API. MUST be in the format of a URL."
+        },
+        "contact": {
+          "$ref": "#/definitions/ApiContactInformation",
+          "description": "Contact information for the API."
+        },
+        "license": {
+          "$ref": "#/definitions/ApiLicenseInformation",
+          "description": "License information for the API."
         }
       },
       "description": "API base contract details."
+    },
+    "ApiContactInformation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The identifying name of the contact person/organization"
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL pointing to the contact information. MUST be in the format of a URL"
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the contact person/organization. MUST be in the format of an email address"
+        }
+      },
+      "description": "API contact information"
+    },
+    "ApiLicenseInformation": {
+      "type": "object",
+      "description": "API license information",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The license name used for the API"
+        },
+        "url": {
+          "type": "string",
+          "description": "A URL to the license used for the API. MUST be in the format of a URL"
+        }
+      }
     },
     "ApiExportResult": {
       "properties": {
@@ -3635,6 +3679,14 @@
             "type": "string"
           },
           "description": "Parameter values."
+        },
+        "schemaId": {
+          "type": "string",
+          "description": "Schema identifier."
+        },
+        "typeName": {
+          "type": "string",
+          "description": "Type name defined by the schema."
         }
       },
       "required": [
