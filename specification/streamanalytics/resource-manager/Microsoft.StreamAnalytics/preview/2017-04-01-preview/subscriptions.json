@@ -72,14 +72,26 @@
           "Subscriptions"
         ],
         "operationId": "Subscriptions_TestQuery",
-        "description": "Test the Stream Analytics query before submitting the job.",
+        "description": "Test the Stream Analytics query on a sample input.",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "azure-async-operation"
+        },
         "x-ms-examples": {
-          "List subscription quota information in West US": {
+          "Test the Stream Analytics query": {
             "$ref": "./examples/Subscription_TestQuery.json"
           }
         },
         "parameters": [
+          {
+            "name": "streamingJob",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./streamingjobs.json#/definitions/StreamingJob"
+            },
+            "description": "A streaming job object. This object defines the input, output, and transformation for the query testing."
+          },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
           },
@@ -93,18 +105,6 @@
         "responses": {
           "202": {
             "description": "The request to test the Stream Analytics query was successfully initiated."
-          },
-          "400": {
-            "description": "The request to test the Stream Analytics query was not formed correctly.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
-            }
-          },
-          "429": {
-            "description": "The subscription has submitted too many query-testing requests in a short time frame.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
-            }
           },
           "default": {
             "description": "Error.",
@@ -120,12 +120,15 @@
         "tags": [
           "Subscriptions"
         ],
-        "operationId": "Subscriptions_GetOperationResults",
+        "operationId": "Subscriptions_GetOperationResult",
         "description": "Fetch the asynchronous operation result.",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
+        },
         "x-ms-examples": {
-          "List subscription quota information in West US": {
-            "$ref": "./examples/Subscription_GetOperationResults.json"
+          "Get the results for the asynchronous operation": {
+            "$ref": "./examples/Subscription_GetOperationResult.json"
           }
         },
         "parameters": [
@@ -150,16 +153,7 @@
             }
           },
           "202": {
-            "description": "The request to fetch the asynchronous operation result was successfully initiated.",
-            "schema": {
-              "$ref": "#/definitions/OperationResult"
-            }
-          },
-          "400": {
-            "description": "Request to get operation result failed due to incorrect format or syntax error.",
-            "schema": {
-              "$ref": "#/definitions/OperationResult"
-            }
+            "description": "The request to fetch the asynchronous operation result was successfully initiated."
           },
           "default": {
             "description": "Error.",
