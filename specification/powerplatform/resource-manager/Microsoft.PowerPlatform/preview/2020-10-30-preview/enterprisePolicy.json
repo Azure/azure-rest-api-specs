@@ -399,7 +399,7 @@
       "allOf": [
         {
           "description": "The resource model definition for a ARM tracked top level resource.",
-          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -411,6 +411,10 @@
           "$ref": "#/definitions/Properties",
           "description": "The properties that define configuration for the enterprise policy",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
         }
       }
     },
