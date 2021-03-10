@@ -74,8 +74,8 @@
         "operationId": "Subscriptions_TestQuery",
         "description": "Test the Stream Analytics query on a sample input.",
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-          "final-state-via" : "azure-async-operation"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Test the Stream Analytics query": {
@@ -105,55 +105,6 @@
         "responses": {
           "202": {
             "description": "The request to test the Stream Analytics query was successfully initiated."
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/operationResults/{operationId}": {
-      "get": {
-        "tags": [
-          "Subscriptions"
-        ],
-        "operationId": "Subscriptions_GetOperationResult",
-        "description": "Fetch the asynchronous operation result.",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-          "final-state-via" : "location"
-        },
-        "x-ms-examples": {
-          "Get the results for the asynchronous operation": {
-            "$ref": "./examples/Subscription_GetOperationResult.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/OperationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the operation result.",
-            "schema": {
-              "$ref": "#/definitions/OperationResult"
-            }
-          },
-          "202": {
-            "description": "The request to fetch the asynchronous operation result was successfully initiated."
           },
           "default": {
             "description": "Error.",
@@ -228,68 +179,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "OperationResult": {
-      "description": "The result of the requests to fetch the operation results.",
-      "allOf": [
-        {
-          "$ref": "../../common/v1/definitions.json#/definitions/Error"
-        }
-      ],
-      "properties": {
-        "status": {
-          "description": "The status of the request to fetch the asynchronous operation results.",
-          "$ref": "#/definitions/OperationResultStatus"
-        },
-        "outputUri": {
-          "description": "The SAS URL to the outputs payload.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationResultStatus": {
-      "description": "The status of the request to fetch the asynchronous operation results.",
-      "readOnly": true,
-      "type": "string",
-      "enum": [
-        "Started",
-        "Success",
-        "CompilerError",
-        "RuntimeError",
-        "Timeout",
-        "UnknownError"
-      ],
-      "x-ms-enum": {
-        "name": "OperationResultStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Started",
-            "description": "The operation result request was initiatied."
-          },
-          {
-            "value": "Success",
-            "description": "The operation result request succeeded."
-          },
-          {
-            "value": "CompilerError",
-            "description": "The operation result request failed due to a compiler error."
-          },
-          {
-            "value": "RuntimeError",
-            "description": "The operation result request failed due to a runtime error."
-          },
-          {
-            "value": "Timeout",
-            "description": "The operation result request failed due to a timeout."
-          },
-          {
-            "value": "UnknownError",
-            "description": "The operation result request failed due to an unknown error ."
-          }
-        ]
-      }
     }
   }
 }
