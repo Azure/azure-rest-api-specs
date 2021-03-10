@@ -3927,6 +3927,11 @@
           "$ref": "#/definitions/CurrentSpend",
           "readOnly": true
         },
+        "forecastSpend": {
+          "description": "The forecasted cost which is being tracked for a budget.",
+          "$ref": "#/definitions/ForecastSpend",
+          "readOnly": true
+        },
         "notifications": {
           "type": "object",
           "description": "Dictionary of notifications associated with the budget. Budget can have up to five notifications.",
@@ -4038,6 +4043,22 @@
       "properties": {
         "amount": {
           "description": "The total amount of cost which is being tracked by the budget.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of measure for the budget amount.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ForecastSpend": {
+      "description": "The forecasted cost which is being tracked for a budget.",
+      "properties": {
+        "amount": {
+          "description": "The forecasted cost for the total time period which is being tracked by the budget.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
