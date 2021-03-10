@@ -694,6 +694,9 @@
         "collections"
       ],
       "properties": {
+        "ontology": {
+          "$ref": "#/definitions/Ontology"
+        },
         "links": {
           "type": "array",
           "items": {
@@ -791,6 +794,9 @@
           "type": "string",
           "example": "Buildings"
         },
+        "ontology": {
+          "$ref": "#/definitions/Ontology"
+        },
         "description": {
           "description": "a description of the features in the collection",
           "type": "string",
@@ -846,6 +852,9 @@
           "description": "title of collection",
           "type": "string",
           "example": "Feature Class buildings"
+        },
+        "ontology": {
+          "$ref": "#/definitions/Ontology"
         },
         "geometryType": {
           "description": "type of geometry returned",
@@ -915,6 +924,9 @@
         "type": {
           "type": "string"
         },
+        "ontology": {
+          "$ref": "#/definitions/Ontology"
+        },
         "numberReturned": {
           "type": "integer"
         },
@@ -938,6 +950,9 @@
         "feature"
       ],
       "properties": {
+        "ontology": {
+          "$ref": "#/definitions/Ontology"
+        },
         "feature": {
           "$ref": "#/definitions/FeatureGeoJSON"
         },
@@ -979,6 +994,11 @@
           "type": "string"
         }
       }
+    },
+    "Ontology": {
+      "type": "string",
+      "description": "The ontology version of this dataset.",
+      "readOnly": true
     }
   }
 }
