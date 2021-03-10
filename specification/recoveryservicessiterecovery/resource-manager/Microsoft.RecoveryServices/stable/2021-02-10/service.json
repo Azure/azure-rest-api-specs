@@ -6517,58 +6517,6 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationOperationStatus/{operationStatusId}": {
-      "get": {
-        "tags": [
-          "ReplicationOperationStatus"
-        ],
-        "summary": "Tracks the operation status response of any non-GET operation. This controller is not specific to ASR resource and directly will work on vault level call.",
-        "description": "Generic operation status response of any non-GET operation.",
-        "operationId": "ReplicationOperationStatus_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "required": true,
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "required": true,
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "operationStatusId",
-            "in": "path",
-            "description": "Operation status Id, actually job name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/System.Net.Http.HttpResponseMessage"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Tracks the operation status response of any non-GET operation. This controller is not specific to ASR resource and directly will work on vault level call.": {
-            "$ref": "./examples/ReplicationOperationStatus_Get.json"
-          }
-        }
-      }
-    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationPolicies": {
       "get": {
         "tags": [
@@ -15070,29 +15018,6 @@
         }
       }
     },
-    "InMageRcmAddDisksInput": {
-      "description": "InMageRcm add disk(s) input.",
-      "required": [
-        "disks"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AddDisksProviderSpecificInput"
-        }
-      ],
-      "properties": {
-        "disks": {
-          "description": "The list of disk details.",
-          "minLength": 1,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InMageRcmDiskInput"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "InMageRcm"
-    },
     "InMageRcmAgentUpgradeBlockingErrorDetails": {
       "description": "InMageRcm source agent upgrade blocking error details.",
       "type": "object",
@@ -15649,7 +15574,7 @@
       ],
       "properties": {
         "recoveryPointType": {
-          "description": "The recovery point type. See SrsDataContract.RecoveryPoint enum for possible values.",
+          "description": "The recovery point type.",
           "enum": [
             "ApplicationConsistent",
             "CrashConsistent"
@@ -17374,6 +17299,25 @@
             "name": "HealthErrorCustomerResolvability",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "InputEndpoint": {
+      "type": "object",
+      "properties": {
+        "endpointName": {
+          "type": "string"
+        },
+        "privatePort": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "publicPort": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "protocol": {
+          "type": "string"
         }
       }
     },
@@ -20045,7 +19989,7 @@
       ],
       "properties": {
         "recoveryPointType": {
-          "description": "The recovery point type. See SrsDataContract.RecoveryPoint enum for possible values.",
+          "description": "The recovery point type.",
           "enum": [
             "ApplicationConsistent",
             "CrashConsistent"
