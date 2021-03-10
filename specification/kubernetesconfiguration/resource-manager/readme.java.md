@@ -32,8 +32,9 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.kubernetesconfiguration.source-control-configurations.v2021_03_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/source-control-configurations/mgmt-v2021_03_01
-  regenerate-manager: true
-  generate-interface: true
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "SourceControlConfigurations"}'
 ```
 
 ### Tag: package-source-control-configurations-preview-2020-10 and java
@@ -45,8 +46,9 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.kubernetesconfiguration.source-control-configurations.v2020_10_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/source-control-configurations/mgmt-v2020_10_01_preview
-  regenerate-manager: true
-  generate-interface: true
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "SourceControlConfigurations"}'
 ```
 
 ### Tag: package-source-control-configurations-preview-2020-07 and java
@@ -58,8 +60,9 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.kubernetesconfiguration.source-control-configurations.v2020_07_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/source-control-configurations/mgmt-v2020_07_01_preview
-  regenerate-manager: true
-  generate-interface: true
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "SourceControlConfigurations"}'
 ```
 
 ### Tag: package-source-control-configurations-preview-2019-11 and java
@@ -71,8 +74,9 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.kubernetesconfiguration.source-control-configurations.v2019_11_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/source-control-configurations/mgmt-v2019_11_01_preview
-  regenerate-manager: true
-  generate-interface: true
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "SourceControlConfigurations"}'
 ```
 
 ### Tag: package-extensions-preview-2020-07 and java
@@ -84,6 +88,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.kubernetesconfiguration.extensions.v2020_07_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/extensions/mgmt-v2020_07_01_preview
-  regenerate-manager: true
-  generate-interface: true
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "Extensions"}'
 ```
