@@ -959,7 +959,7 @@
         }
       }
     },
-	"/providers/Microsoft.SaaS/operationResults/{operationId}": {
+    "/providers/Microsoft.SaaS/operationResults/{operationId}": {
       "get": {
         "tags": [
           "SaaSOperations"
@@ -984,7 +984,7 @@
               "$ref": "#/definitions/SaasResource"
             }
           },
-		  "202": {
+          "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
               "Location": {
@@ -1010,11 +1010,11 @@
             "$ref": "./examples/OperationResults/Get.json"
           }
         },
-		"x-ms-long-running-operation": true,
+        "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-			"final-state-via": "location"
+        "final-state-via": "location"
         }
-	  }
+      }
     }
   },
   "definitions": {
@@ -1152,7 +1152,7 @@
           "type": "string",
           "description": "Resource location. Only value allowed for SaaS is 'global'"
         },
-		"properties": {
+        "properties": {
           "$ref": "#/definitions/SaasCreationProperties",
           "description": "Properties of the SaaS resource that are relevant for creation."
         }
