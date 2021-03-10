@@ -25,46 +25,59 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the KubernetesConfiguration.
 
 ``` yaml
-title: SourceControlConfigurationClient
+title: KubernetesConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-2021-03
 ```
 
+``` yaml $(package-source-control-configurations)
+tag: package-source-control-configurations-2021-03
+```
 
-### Tag: package-2021-03
+``` yaml $(package-extensions)
+tag: package-extensions-preview-2020-07
+```
 
-These settings apply only when `--tag=package-2021-03` is specified on the command line.
+### Tag: package-source-control-configurations-2021-03
 
-```yaml $(tag) == 'package-2021-03'
+These settings apply only when `--tag=package-source-control-configurations-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-source-control-configurations-2021-03'
 input-file:
   - Microsoft.KubernetesConfiguration/stable/2021-03-01/kubernetesconfiguration.json
 ```
-### Tag: package-preview-2020-10
+### Tag: package-source-control-configurations-preview-2020-10
 
-These settings apply only when `--tag=package-preview-2020-10` is specified on the command line.
+These settings apply only when `--tag=package-source-control-configurations-preview-2020-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2020-10'
+``` yaml $(tag) == 'package-source-control-configurations-preview-2020-10'
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2020-10-01-preview/kubernetesconfiguration.json
 ```
 
-### Tag: package-2020-07-01-preview
+### Tag: package-source-control-configurations-preview-2020-07
 
-These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-source-control-configurations-preview-2020-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-07-01-preview'
+```yaml $(tag) == 'package-source-control-configurations-preview-2020-07'
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/kubernetesconfiguration.json
+```
+
+### Tag: package-extensions-preview-2020-07
+
+These settings apply only when `--tag=package-extensions-preview-2020-07` is specified on the command line.
+
+```yaml $(tag) == 'package-extensions-preview-2020-07'
+input-file:
   - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/extensions.json
 ```
 
+### Tag: package-source-control-configurations-preview-2029-11
 
-### Tag: package-2019-11-01-preview
+These settings apply only when `--tag=package-source-control-configurations-preview-2019-11` is specified on the command line.
 
-These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-11-01-preview'
+``` yaml $(tag) == 'package-source-control-configurations-preview-2019-11'
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2019-11-01-preview/kubernetesconfiguration.json
 ```

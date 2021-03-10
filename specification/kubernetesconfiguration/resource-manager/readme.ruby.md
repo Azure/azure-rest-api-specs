@@ -1,37 +1,72 @@
-## Ruby
+### Ruby multi-api for source-control-configurations
 
-These settings apply only when `--ruby` is specified on the command line.
-
-```yaml
-package-name: azure_mgmt_kubernetesconfiguration
-package-version: "0.1.1"
+``` yaml $(multiapi) && $(source-control-configurations)
+package-name: azure_mgmt_kubernetesconfiguration_sourcecontrolconfigurations
+package-version: "0.1.0"
 azure-arm: true
-```
-
-### Ruby multi-api
-
-``` yaml $(ruby) && $(multiapi)
 batch:
-  - tag: package-2019-11-01-preview'
-  - tag: package-2020-07-01-preview'
+  - tag: package-source-control-configurations-2021-03
+  - tag: package-source-control-configurations-preview-2020-10
+  - tag: package-source-control-configurations-preview-2020-07
+  - tag: package-source-control-configurations-preview-2019-11
 ```
 
-### Tag: package-2019-11-01-preview and ruby
+### Tag: package-source-control-configurations-2021-03 and ruby
 
-These settings apply only when `--tag=package-2019-11-01-preview --ruby` is specified on the command line.
+These settings apply only when `--tag=package-source-control-configurations-2021-03 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2019-11-01-preview' && $(ruby)
-namespace: "Azure::KubernetesConfiguration::Mgmt::V2019_11_01_preview"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_kubernetesconfiguration/lib
+``` yaml $(tag) == 'package-source-control-configurations-2021-03' && $(ruby)
+namespace: "Azure::Mgmt::KubernetesConfiguration::SourceControlConfigurations::V2021_03_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_kubernetesconfiguration_sourcecontrolconfigurations/lib
 ```
 
-### Tag: package-2020-07-01-preview and ruby
+### Tag: package-source-control-configurations-preview-2020-10 and ruby
 
-These settings apply only when `--tag=package-2020-07-01-preview --ruby` is specified on the command line.
+These settings apply only when `--tag=package-source-control-configurations-preview-2020-10 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2020-07-01-preview' && $(ruby)
-namespace: "Azure::KubernetesConfiguration::Mgmt::V2020_07_01_preview"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_kubernetesconfiguration/lib
+``` yaml $(tag) == 'package-source-control-configurations-preview-2020-10' && $(ruby)
+namespace: "Azure::Mgmt::KubernetesConfiguration::SourceControlConfigurations::V2020_10_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_kubernetesconfiguration_sourcecontrolconfigurations/lib
+```
+
+### Tag: package-source-control-configurations-preview-2020-07 and ruby
+
+These settings apply only when `--tag=package-source-control-configurations-preview-2020-07 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-source-control-configurations-preview-2020-07' && $(ruby)
+namespace: "Azure::Mgmt::KubernetesConfiguration::SourceControlConfigurations::V2020_07_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_kubernetesconfiguration_sourcecontrolconfigurations/lib
+```
+
+### Tag: package-source-control-configurations-preview-2019-11 and ruby
+
+These settings apply only when `--tag=package-source-control-configurations-preview-2019-11 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-source-control-configurations-preview-2019-11' && $(ruby)
+namespace: "Azure::Mgmt::KubernetesConfiguration::SourceControlConfigurations::V2019_11_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_kubernetesconfiguration_sourcecontrolconfigurations/lib
+```
+
+### Ruby multi-api for extensions
+
+``` yaml $(multiapi) && $(extensions)
+package-name: azure_mgmt_kubernetesconfiguration_extensions
+package-version: "0.1.0"
+azure-arm: true
+batch:
+  - tag: package-extensions-preview-2020-07
+```
+
+### Tag: package-extensions-preview-2020-07 and ruby
+
+These settings apply only when `--tag=package-extensions-preview-2020-07 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-extensions-preview-2020-07' && $(ruby)
+namespace: "Azure::Mgmt::KubernetesConfiguration::Extensions::V2020_07_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_kubernetesconfiguration_extensions/lib
 ```

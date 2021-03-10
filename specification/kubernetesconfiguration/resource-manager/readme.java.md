@@ -16,32 +16,74 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-kubernetesconfigura
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2019-11-01-preview
-  - tag: package-2020-07-01-preview
+  - tag: package-source-control-configurations-2021-03
+  - tag: package-source-control-configurations-preview-2020-10
+  - tag: package-source-control-configurations-preview-2020-07
+  - tag: package-source-control-configurations-preview-2019-11
+  - tag: package-extensions-preview-2020-07
 ```
 
-### Tag: package-2019-11-01-preview and java
+### Tag: package-source-control-configurations-2021-03 and java
 
-These settings apply only when `--tag=package-2019-11-01-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-source-control-configurations-2021-03 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2019-11-01-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-source-control-configurations-2021-03' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.kubernetesconfiguration.v2019_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/mgmt-v2019_11_01_preview
+  namespace: com.microsoft.azure.management.kubernetesconfiguration.source-control-configurations.v2021_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/source-control-configurations/mgmt-v2021_03_01
   regenerate-manager: true
   generate-interface: true
 ```
 
-### Tag: package-2020-07-01-preview and java
+### Tag: package-source-control-configurations-preview-2020-10 and java
 
-These settings apply only when `--tag=package-2020-07-01-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-source-control-configurations-preview-2020-10 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-07-01-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-source-control-configurations-preview-2020-10' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.kubernetesconfiguration.v2020_07_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/mgmt-v2020_07_01_preview
+  namespace: com.microsoft.azure.management.kubernetesconfiguration.source-control-configurations.v2020_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/source-control-configurations/mgmt-v2020_10_01_preview
+  regenerate-manager: true
+  generate-interface: true
+```
+
+### Tag: package-source-control-configurations-preview-2020-07 and java
+
+These settings apply only when `--tag=package-source-control-configurations-preview-2020-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-source-control-configurations-preview-2020-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.kubernetesconfiguration.source-control-configurations.v2020_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/source-control-configurations/mgmt-v2020_07_01_preview
+  regenerate-manager: true
+  generate-interface: true
+```
+
+### Tag: package-source-control-configurations-preview-2019-11 and java
+
+These settings apply only when `--tag=package-source-control-configurations-preview-2019-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-source-control-configurations-preview-2019-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.kubernetesconfiguration.source-control-configurations.v2019_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/source-control-configurations/mgmt-v2019_11_01_preview
+  regenerate-manager: true
+  generate-interface: true
+```
+
+### Tag: package-extensions-preview-2020-07 and java
+
+These settings apply only when `--tag=package-extensions-preview-2020-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-extensions-preview-2020-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.kubernetesconfiguration.extensions.v2020_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/extensions/mgmt-v2020_07_01_preview
   regenerate-manager: true
   generate-interface: true
 ```

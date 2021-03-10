@@ -6,9 +6,23 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-kubernetesconfiguration"
-  output-folder: "$(typescript-sdks-folder)/sdk/kubernetesconfiguration/arm-kubernetesconfiguration"
-  clear-output-folder: true
-  override-client-name: SourceControlConfigurationClient
   generate-metadata: true
+  batch: true
+batch:
+  - package-source-control-configurations: true
+  - package-extensions: true
+```
+
+```yaml $(typescript) && $(package-source-control-configurations) && !$(profile)
+typescript:
+  package-name: "@azure/kubernetesconfiguration-source-control-configurations"
+  output-folder: "$(typescript-sdks-folder)/sdk/kubernetesconfiguration/kubernetesconfiguration-source-control-configurations"
+  clear-output-folder: true
+```
+
+```yaml $(typescript) && $(package-extensions) && !$(profile)
+typescript:
+  package-name: "@azure/kubernetesconfiguration-extensions"
+  output-folder: "$(typescript-sdks-folder)/sdk/kubernetesconfiguration/kubernetesconfiguration-extensions"
+  clear-output-folder: true
 ```

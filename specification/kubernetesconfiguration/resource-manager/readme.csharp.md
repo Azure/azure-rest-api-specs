@@ -10,6 +10,13 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Azure.Management.KubernetesConfiguration
-  output-folder: $(csharp-sdks-folder)/kubernetesconfiguration/Microsoft.Azure.Management.KubernetesConfiguration/src/Generated
+```
+
+``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
+namespace: Microsoft.Azure.Management.KubernetesConfiguration  
+output-folder: $(csharp-sdks-folder)/kubernetesconfiguration/Microsoft.Azure.Management.KubernetesConfiguration/src/Generated
+
+batch:
+  - package-source-control-configurations: true
+  - package-extensions: true
 ```
