@@ -11,12 +11,12 @@ no-namespace-folders: true
 package-version: 1.0.0b1
 ```
 
-``` yaml $(python-mode) == 'update'
+``` yaml $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/datadog/azure-mgmt-datadog/azure/mgmt/datadog
 ```
 
-``` yaml $(python-mode) == 'create'
+``` yaml $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/datadog/azure-mgmt-datadog
 ```
