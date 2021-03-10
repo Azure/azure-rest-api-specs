@@ -1,5 +1,13 @@
 ---
 - rule:
+    # translator data-plane PR
+    paths:
+      - "specification/cognitiveservices/data-plane/TranslatorText/**"
+    reviewers:
+      - kristapratico
+      - maririos
+
+- rule:
     # eventgrid data-plane PR
     paths:
       - "specification/eventgrid/data-plane/**"
@@ -20,7 +28,6 @@
     reviewers:
       - anuchandy
       - jhendrixMSFT
-      - lmazuel
       - tjprescott
       
 
@@ -38,10 +45,15 @@
       - kairu-ms
 
 - rule:
-    paths: "specification/@(resources|powerplatform|appplatform)/**"
+    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate)/**"
     reviewers:
       - raych1
-
+      
+- rule:
+    paths: "specification/@(security|edgeorder|synapse)/**"
+    reviewers:
+      - ruowan
+      
 - rule:
     paths: "specification/sql/**"
     reviewers:
@@ -60,7 +72,6 @@
     paths: "specification/compute/**"
     reviewers:
       - ArcturusZhang
-      - fengzhou-msft
       - yungezz
 
 - rule:
@@ -80,7 +91,6 @@
       - "specification/authorization/**"
     reviewers:
       - qianwens
-      - yungezz
 
 - rule:
     paths:
@@ -99,7 +109,6 @@
     paths:
       - "specification/storage/**"
     reviewers:
-      - qianwens
       - Juliehzl
 
 
@@ -109,8 +118,7 @@
       - allenjzhang
 - rule:
     paths:
-      - "specification/@(keyvault|notificationhubs)/**"
-      - "specification/@(databricks|containerregistry)/**"
+      - "specification/containerregistry/**"
     reviewers:
       - fengzhou-msft
 
@@ -119,8 +127,6 @@
       - "specification/@(containerservice|containerinstance)/**"
     reviewers:
       - PhoenixHe-msft
-      - fengzhou-msft
-      - yungezz
 
 - rule:
     paths:
@@ -140,6 +146,25 @@
       - "specification/web/**"
     reviewers:
       - weidongxu-microsoft
+      
+- rule:
+    paths:
+      - "specification/testbase/**"
+    reviewers:
+      - PhoenixHe-msft
+      
+- rule:
+    paths:
+      - "specification/servicelinker/**"
+    reviewers:
+      - raych1
+
+- rule:
+    paths: 
+      - "specification/azurestack/**"
+      - "specification/automation/**"
+    reviewers:
+      - xiaoxuqi-ms
 
 - rule:
     paths:
@@ -148,12 +173,6 @@
       - josefree
       - akning-ms
 
-- rule:
-    paths:
-      - "documentation/**"	
-    reviewers:
-      - josefree
-      - akning-ms
 
 - rule:
     paths:
@@ -173,16 +192,13 @@
     paths:
       - "**"
     reviewers:
-      - yungezz
       - erich-wang
       - PhoenixHe-msft
       - lirenhe
       - weidongxu-microsoft
       - ArcturusZhang
-      - xccc-msft
       - raych1
       - ChenTanyi
-      - fengzhou-msft
       - njuCZ
       - akning-ms
       - leni-msft
@@ -190,3 +206,4 @@
       - ruowan
       - jianyexi
       - zhenglaizhang
+      - chunyu3

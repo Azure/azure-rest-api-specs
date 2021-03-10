@@ -34,7 +34,6 @@ This document lists the set of automated rules that can be validated against swa
 | [MAXIMUM_EXCLUSIVE](#MAXIMUM_EXCLUSIVE) | |
 | [OBJECT_PROPERTIES_MINIMUM](#OBJECT_PROPERTIES_MINIMUM) | |
 | [OBJECT_PROPERTIES_MAXIMUM](#OBJECT_PROPERTIES_MAXIMUM) | |
-| [OBJECT_MISSING_REQUIRED_PROPERTY_DEFINITION](#OBJECT_MISSING_REQUIRED_PROPERTY_DEFINITION) | |
 | [OBJECT_MISSING_REQUIRED_PROPERTY](#OBJECT_MISSING_REQUIRED_PROPERTY) | |
 | [OBJECT_ADDITIONAL_PROPERTIES](#OBJECT_ADDITIONAL_PROPERTIES) | |
 | [OBJECT_DEPENDENCY_KEY](#OBJECT_DEPENDENCY_KEY) | |
@@ -61,9 +60,9 @@ This document lists the set of automated rules that can be validated against swa
 | [INVALID_RESPONSE_CODE](#INVALID_RESPONSE_CODE) | |
 | [INVALID_RESPONSE_BODY](#INVALID_RESPONSE_BODY) | |
 | [MISSING_REQUIRED_PARAMETER](#MISSING_REQUIRED_PARAMETER) | |
-| [KEYWORD_TYPE_EXPECTED](#KEYWORD_TYPE_EXPECTED) | |
 | [READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST](#READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST) | |
 | [SCHEMA_VALIDATION_FAILED](#SCHEMA_VALIDATION_FAILED) | |
+| [SECRET_PROPERTY](#SECRET_PROPERTY) |  |
 | [DISCRIMINATOR_VALUE_NOT_FOUND](#DISCRIMINATOR_VALUE_NOT_FOUND) |  |
 | [DISCRIMINATOR_NOT_REQUIRED](#DISCRIMINATOR_NOT_REQUIRED) | [OAV131](#DISCRIMINATOR_NOT_REQUIRED) |
 | [RESPONSE_BODY_NOT_IN_EXAMPLE](#RESPONSE_BODY_NOT_IN_EXAMPLE) | [OAV130](#RESPONSE_BODY_NOT_IN_EXAMPLE) |
@@ -219,9 +218,9 @@ This document lists the set of automated rules that can be validated against swa
 
 **Output Message**: Value is required but was not provided.
 
-**Description**: Missing required value in example.
+**Description**: Missing required value in example or in traffic payload.
 
-**How to fix the violation**: Add the required value in example.
+**How to fix the violation**: Add the required value in example or in traffic payload.
 
 ### <a name="REMOTE_NOT_VALID" />REMOTE_NOT_VALID
 
@@ -358,14 +357,6 @@ This document lists the set of automated rules that can be validated against swa
 **Description**: The value of the keyword in swagger should be the specific type.
 
 **How to fix the violation**: The error info has the position of swagger, look for the position in swagger and fix the value type of keyword.
-
-### <a name="KEYWORD_TYPE_EXPECTED" />KEYWORD_TYPE_EXPECTED
-
-**Output Message**: Keyword '{0}' is expected to be of type '{1}'.
-
-**Description**: The value of the keyword in swagger should be the specific type.
-
-**How to fix the violation**: Fix the value type of keyword.
 
 ### <a name="PATTERN" />PATTERN
 
@@ -521,11 +512,11 @@ This document lists the set of automated rules that can be validated against swa
 
 ### <a name="REQUEST_VALIDATION_ERROR" />REQUEST_VALIDATION_ERROR 
 
-**Output Message**: Found errors in validating the request for x-ms-example {0} in operation {1}.
+**Output Message**: Found errors in validating the request for x-ms-example {0} in operation {1} or in validating request payload.
 
-**Description**: Validate the request of each x-ms-example.  
+**Description**: Validate the request of each x-ms-example or traffic payload.  
 
-**How to fix the violation**: The request parameter defined in example should match with the swagger spec.
+**How to fix the violation**: The request parameter defined in example or in traffic payload should match with the swagger spec.
 
 ### <a name="RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE" />RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE 
 
@@ -547,9 +538,9 @@ This document lists the set of automated rules that can be validated against swa
 
 **Output Message**: This operation does not have a defined {0} response code.
 
-**Description**: There's extra response code defined in example file.
+**Description**: The specified response code is not defined in example file or in traffic payload.
 
-**How to fix the violation**: Remove extra response code definition in example or correct it.
+**How to fix the violation**: Add response code to default, or add response code definition in the swagger.
 
 ### <a name="INVALID_RESPONSE_BODY" />INVALID_RESPONSE_BODY
 
@@ -559,22 +550,13 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add response body.
 
-
-### <a name="KEYWORD_TYPE_EXPECTED" />KEYWORD_TYPE_EXPECTED 
-
-**Output Message**: Keyword 'type' is expected to be of type 'array,boolean,integer,number,null,object,string'.
-
-**Description**: According to Json schema spec, the allowed value for [type](http://json-schema.org/latest/json-schema-validation.html#rfc.section.6.1.1) is 'array,boolean,integer,number,null,object,string'.
-
-**How to fix the violation**: Set the value of type to one of the values above.
-
 ### <a name="OBJECT_ADDITIONAL_PROPERTIES" />OBJECT_ADDITIONAL_PROPERTIES 
 
 **Output Message**: Additional properties not allowed:{0}.
 
-**Description**: Additional property {0} defined in example but not defined in swagger spec. It could be the property name does not match exactly.
+**Description**: Additional property {0} defined in example or in traffic payload but not defined in swagger spec. It could be the property name does not match exactly.
 
-**How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, ensure the property name specified in example appears exact the same in the definition or remove this property from example if it's not defined in swagger spec. Remind all the characters are case sensitive.
+**How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, ensure the property name specified in example or in traffic payload appears exact the same in the definition or remove this property from example or from traffic payload if it's not defined in swagger spec. Remind all the characters are case sensitive.
 
 
 ### <a name="INVALID_FORMAT" />INVALID_FORMAT 
@@ -591,23 +573,23 @@ This document lists the set of automated rules that can be validated against swa
 
 **Description**: The type provided for the property doesn't match to the defined type.
 
-**How to fix the violation**: Correct the type defined in example file. Sometimes this could be false positive when it peers with other errors which belongs to same parent `ANY_OF_MISSING` error or `ONE_OF_MISSING` error, in this case this error can be ignored and just fix other peer errors eventually this error will be cleared out automatically.
+**How to fix the violation**: Correct the type defined in example file or in traffic payload. Sometimes this could be false positive when it peers with other errors which belongs to same parent `ANY_OF_MISSING` error or `ONE_OF_MISSING` error, in this case this error can be ignored and just fix other peer errors eventually this error will be cleared out automatically.
 
 ### <a name="ENUM_CASE_MISMATCH" />ENUM_CASE_MISMATCH 
 
 **Output Message**: Enum does not match case for:{0}.
 
-**Description**: The enum value provided in exmaple doesn't match the case of an allowed value.
+**Description**: The enum value provided in exmaple or in traffic payload doesn't match the case of an allowed value.
 
-**How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, correct the value case in example.
+**How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, correct the value case in example or in traffic payload.
 
 ### <a name="ENUM_MISMATCH" />ENUM_MISMATCH 
 
 **Output Message**: Enum does not match case for:{0}.
 
-**Description**: The enum value provided in exmaple doesn't match the case of an allowed value.
+**Description**: The enum value provided in exmaple or in traffic payload doesn't match the case of an allowed value.
 
-**How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, correct the value case in example.
+**How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, correct the value case in example or in traffic payload.
 
 ### <a name="READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST" />READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST 
 
@@ -615,19 +597,19 @@ This document lists the set of automated rules that can be validated against swa
 
 **Description**: The value of a readonly property is managed exclusively by the owning authority and cannot be supplied in request.
 
-**How to fix the violation**: Remove the readonly property from the request parameters in example.
+**How to fix the violation**: Remove the readonly property from the request parameters in example or in traffic payload.
 
 ### <a name="OBJECT_MISSING_REQUIRED_PROPERTY" />OBJECT_MISSING_REQUIRED_PROPERTY 
 
 **Output Message**: Missing required property: {0}.
 
-**Description**: The property {0} is required and has to provide in request or response of example.
+**Description**: The property {0} is required and has to provide in request or response of example (or of traffic payload).
 
-**How to fix the violation**: Provide the requried property in example or remove this property from the required list of the definition in swagger spec. Or add items property if the type is array.
+**How to fix the violation**: Provide the requried property in example(or in traffic payload) or remove this property from the required list of the definition in swagger spec. Or add items property if the type is array.
 
 ### <a name="DISCRIMINATOR_VALUE_NOT_FOUND" />DISCRIMINATOR_VALUE_NOT_FOUND
 
-**Output Message**: Discriminator value "{0}" not found
+**Output Message**: Discriminator value "{0}" not found.
 
 **Description**: The property used as discriminator has a value {0} but it's not found in swagger spec.
 
@@ -801,23 +783,39 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Remove this definition if it's not used.
 
+### <a name="SECRET_PROPERTY" />SECRET_PROPERTY 
+
+**Output Message**: Secret property {0} cannot be sent in the response.
+
+**Description**: The secret is not allowed to return in response when it's annotated with x-ms-secret:true.
+
+**How to fix the violation**: Remove this secret value from the response.
+
 
 ### <a name="ROUNDTRIP_INCONSISTENT_PROPERTY" />ROUNDTRIP_INCONSISTENT_PROPERTY
 
-**Output Message**: The property’s value in the GET response is different from what was set in the preceding PUT request. If it is a read-only property, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema. If the property has a default value, update the Swagger definition for this property to mark it with "default": <default value> annotation.
+**Output Message**: The property’s value in the GET response is different from what was set in the preceding PUT request. If it is a read-only property, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema. If it is immutable (its value cannot be changed after creation), update the swagger definition for this property to mark it with the "x-ms-mutability": ["create", "read"] annotation. If the property has a default value, update the Swagger definition for this property to mark it with "default": <default value> annotation.
 
-**Description**: The property’s value in the GET response is different from what was set in the preceding PUT request. This usually happens when the property is read-only so it's value cannot be changed. It is also possible that the property has a default value, and it is set to that value when a null value is included in the PUT request.
+**Description**: The property’s value in the GET response is different from what was set in the preceding PUT request. This usually happens when the property is read-only so its value cannot be set by users, or its value can be set in the initial PUT request but cannot be updated afterwards. It is also possible that the property has a default value, and it is set to that value when a null value is included in the PUT request. There are some other cases where ROUNDTRIP_INCONISTENT_PROPERTY is raised but cannot be fixed in swagger, for which you might need to send exception requests (please refer to the **How to fix the violation section** section below for more details).
 
-**How to fix the violation**: If the property is a read-only, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema. If the property has a default value, update the Swagger definition for this property to mark it with "default": <default value> annotation.
+**How to fix the violation**:
+- Check if the property is read-only. If yes, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema.
+- Check if the property's value cannot be updated after creation. If yes, update the swagger definition for this property to mark it with the "x-ms-mutability": ["create", "read"] annotation.
+- Check if the property has a static default value that doesn't depend on other properties. If yes, update the Swagger definition for this property to mark it with "default": <default value> annotation.
+- If none of the above applies, check if one of the following behaviors is true for the property, send an exception request, but consider updating your service implementation to fix the behavior:
+  - The property has a dynamic default value that depends on other properties / some other resources (violates [Property Design Best Practices](https://armwiki.azurewebsites.net/rp_onboarding/process/property_design_best_practices.html#readwrite-properties-with-static-default-values)).
+  - The property's value always gets normalized (violates [ARM PRC](https://github.com/Azure/azure-resource-manager-rpc/blob/eec9f32c0357d0421be13c82ced767943013901a/v1.0/resource-api-reference.md#put-resource)).
 
 
 ### <a name="ROUNDTRIP_MISSING_PROPERTY" />ROUNDTRIP_MISSING_PROPERTY
 
-**Output Message**: The property is present in the PUT request but is either never returned in the GET response or is returned with a null value. If this is a property that carries a secret such as a password, update the Swagger definition to mark it with the "x-ms-secret": true annotation.
+**Output Message**: The property is present in the PUT request but is either never returned in the GET response or is returned with a null value. If this is a property that carries a secret such as a password, update the Swagger definition to mark it with the "x-ms-secret": true annotation. If it is write-only but does not carries a secret, update the swagger definition for this property to mark it with the "x-ms-mutability": ["create", "update"] annotation.
 
 **Description**: The property is present in the PUT request, but in the subsequent GET response, it is either never returned or is returned with a null value, which means the property is write-only and is likely to carry a secret.
 
-**How to fix the violation**: Mark the property definition with the "x-ms-secret": true annotation if the property is a secret.
+**How to fix the violation**:
+- Check if the property carries a secret. If yes, mark the property definition with the "x-ms-secret": true annotation.
+- Check if the property does not carry a secret but is still write-only. If yes, mark the property definition with the "x-ms-mutability": ["create", "update"] annotation.
 
 
 ### <a name="ROUNDTRIP_ADDITIONAL_PROPERTY" />ROUNDTRIP_ADDITIONAL_PROPERTY
@@ -826,4 +824,6 @@ This document lists the set of automated rules that can be validated against swa
 
 **Description**: The property was not in the PUT request, but it is returned in the subsequent GET response. This implies that the property is read-only or has a default value.
 
-**How to fix the violation**: If the property is a read-only, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema. If the property has a default value, update the Swagger definition for this property to mark it with "default": <default value> annotation.
+**How to fix the violation**:
+- Check if the property is read-only. If yes, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema.
+- Check if the property has a default value. If yes, update the Swagger definition for this property to mark it with "default": <default value> annotation.
