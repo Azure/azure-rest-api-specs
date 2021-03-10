@@ -12,7 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.kubernetesconfiguration
   package-name: azure-mgmt-kubernetesconfiguration
-  package-version: 0.1.1
+  package-version: 1.0.0b2
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
