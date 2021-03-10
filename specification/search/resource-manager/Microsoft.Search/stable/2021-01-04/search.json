@@ -1389,16 +1389,16 @@
       },
       "description": "The IP restriction rule of the Azure Cognitive Search service."
     },
-    "EncryptionWithCmk":{
-      "type":"object",
-      "properties":{
-        "enforcement":{
+    "EncryptionWithCmk": {
+      "type": "object",
+      "properties": {
+        "enforcement": {
           "type": "string",
-          "description": "Enforcement state of encryption with customer managed keys. Can be Enabled, Disabled, or Unspecified.",
+          "description": "Enforcement state of encryption with customer managed keys. Can be enabled, disabled, or unspecified.",
           "enum": [
-            "Unspecified",
-            "Enabled",
-            "Disabled"
+            "unspecified",
+            "enabled",
+            "disabled"
           ],
           "x-ms-enum": {
             "name": "EncryptionEnforcementStatus",
@@ -1415,15 +1415,15 @@
         }
       }
     },
-    "NonCmkEncryptedResource":{
-      "type":"object",
+    "NonCmkEncryptedResource": {
+      "type": "object",
       "readOnly": true,
-      "properties":{
-        "type":{
+      "properties": {
+        "type": {
           "type": "string",
           "description": "Describes type of resource (.i.e. index, indexer, skillset, synonym map and debug session) not encrypted by customer managed keys."
         },
-        "name":{
+        "name": {
           "type": "string",
           "description": "Describes name of resource not encrypted by customer managed keys."
         }
@@ -2084,4 +2084,3 @@
     }
   }
 }
-
