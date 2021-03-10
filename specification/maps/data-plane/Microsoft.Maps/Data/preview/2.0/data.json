@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Data Service",
-    "version": "2.0",
+    "version": "1.0",
     "description": "APIs for uploading map data to Azure Maps."
   },
   "host": "atlas.microsoft.com",
@@ -116,11 +116,11 @@
     },
     "ApiVersion": {
       "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 2.0",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "2.0",
+      "default": "1.0",
       "x-ms-parameter-location": "client"
     },
     "JsonFormat": {
@@ -152,12 +152,11 @@
       "required": true,
       "enum": [
         "geojson",
-        "zip",
-        "dwgzippackage"
+        "zip"
       ],
       "x-ms-enum": {
         "name": "UploadDataFormat",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "value": "geojson",
@@ -166,10 +165,6 @@
           {
             "value": "zip",
             "description": "Compressed data format."
-          },
-          {
-            "value": "dwgzippackage",
-            "description": ""
           }
         ]
       },
@@ -182,15 +177,7 @@
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
-    },
-    "Description": {
-        "name": "description",
-        "description": "The description to be given to the upload.",
-        "type": "string",
-        "in": "query",
-        "required": false,
-        "x-ms-parameter-location": "method"
-      }  
+    }
   },
   "paths": {
     "/mapData/upload": {
@@ -216,9 +203,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/Description"
           },
           {
             "$ref": "#/parameters/UploadDataFormat"
@@ -290,9 +274,6 @@
           },
           {
             "$ref": "#/parameters/Udid"
-          },
-          {
-            "$ref": "#/parameters/Description"
           },
           {
             "name": "UpdateContent",
@@ -630,16 +611,6 @@
           "description": "The current upload status of the content.",
           "type": "string",
           "readOnly": true
-        },
-        "dataFormat": {
-            "description": "",
-            "type":"string",
-            "readOnly": true
-        },
-        "description": {
-            "description": "",
-            "type":"string",
-            "readOnly": true
         }
       }
     }
