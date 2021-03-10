@@ -488,6 +488,9 @@
           },
           "Create Managed Cluster with Node Public IP Prefix": {
             "$ref": "./examples/ManagedClustersCreate_NodePublicIPPrefix.json"
+          },
+          "Create Managed Cluster with FIPS enabled OS": {
+            "$ref": "./examples/ManagedClustersCreate_EnabledFIPS.json"
           }
         }
       },
@@ -2245,6 +2248,10 @@
         "enableEncryptionAtHost": {
           "type": "boolean",
           "description": "Whether to enable EncryptionAtHost"
+        },
+        "enableFIPS": {
+          "type": "boolean",
+          "description": "Whether to use FIPS enabled OS"
         }
       },
       "description": "Properties for the container service agent pool profile."
