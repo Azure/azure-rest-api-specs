@@ -3222,6 +3222,11 @@
           "description": "The link (url) to the next page of results.",
           "type": "string",
           "readOnly": true
+        },
+        "previousLink": {
+          "description": "The link (url) to the previous page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3402,6 +3407,11 @@
     "ModernReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource Location.",
+          "readOnly": true
+        },
         "lookBackPeriod": {
           "description": "The number of days of usage to look back for recommendation.",
           "type": "integer",
@@ -3477,6 +3487,11 @@
           "items": {
             "$ref": "#/definitions/SkuProperty"
           },
+          "readOnly": true
+        },
+        "skuName": {
+          "description": "This is the ARM Sku name.",
+          "type": "string",
           "readOnly": true
         }
       }
