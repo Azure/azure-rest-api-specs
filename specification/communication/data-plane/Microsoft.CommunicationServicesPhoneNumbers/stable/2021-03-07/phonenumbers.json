@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PhoneNumbersClient",
-    "description": "The phone numbers client uses Azure Communication Services to acquire and manage phone numbers.",
+    "description": "The phone numbers client uses Azure Communication Services to purchase and manage phone numbers.",
     "version": "2021-03-07"
   },
   "paths": {
@@ -273,12 +273,88 @@
         ]
       }
     },
+    "/phoneNumbers/{phoneNumber}/capabilities": {
+      "patch": {
+        "tags": [
+          "Manage purchased phone numbers"
+        ],
+        "summary": "Updates the capabilities of a phone number.",
+        "operationId": "PhoneNumbers_UpdateCapabilities",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "phoneNumber",
+            "description": "The phone number id in E.164 format. The leading plus can be either + or encoded as %2B, e.g. +11234567890.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Defines the update capabilities request.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumberCapabilitiesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
+            "schema": {
+              "$ref": "#/definitions/PurchasedPhoneNumber"
+            },
+            "headers": {
+              "Location": {
+                "description": "URL to retrieve the final result after operation completes.",
+                "type": "string"
+              },
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "operation-id": {
+                "description": "The operation id.",
+                "type": "string"
+              },
+              "capabilities-id": {
+                "description": "The capabilities operation id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update phoneNumber capabilities": {
+            "$ref": "./examples/UpdatePhoneNumberCapabilities.json"
+          }
+        }
+      }
+    },
     "/phoneNumbers/{phoneNumber}": {
       "get": {
         "tags": [
-          "Manage acquired phone numbers"
+          "Manage purchased phone numbers"
         ],
-        "summary": "Gets the details of the given acquired phone number.",
+        "summary": "Gets the details of the given purchased phone number.",
         "operationId": "PhoneNumbers_GetByNumber",
         "produces": [
           "application/json"
@@ -287,7 +363,7 @@
           {
             "in": "path",
             "name": "phoneNumber",
-            "description": "The acquired phone number whose details are to be fetched in E.164 format, e.g. +11234567890.",
+            "description": "The purchased phone number whose details are to be fetched in E.164 format, e.g. +11234567890.",
             "required": true,
             "type": "string"
           },
@@ -299,7 +375,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AcquiredPhoneNumber"
+              "$ref": "#/definitions/PurchasedPhoneNumber"
             }
           },
           "default": {
@@ -310,16 +386,16 @@
           }
         },
         "x-ms-examples": {
-          "Fetch acquired phone number": {
+          "Fetch purchased phone number": {
             "$ref": "./examples/GetPhoneNumber.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Manage acquired phone numbers"
+          "Manage purchased phone numbers"
         ],
-        "summary": "Releases an acquired phone number.",
+        "summary": "Releases a purchased phone number.",
         "operationId": "PhoneNumbers_ReleasePhoneNumber",
         "parameters": [
           {
@@ -372,9 +448,9 @@
     "/phoneNumbers": {
       "get": {
         "tags": [
-          "Manage acquired phone numbers"
+          "Manage purchased phone numbers"
         ],
-        "summary": "Gets the list of all acquired phone numbers.",
+        "summary": "Gets the list of all purchased phone numbers.",
         "operationId": "PhoneNumbers_ListPhoneNumbers",
         "produces": [
           "application/json"
@@ -404,7 +480,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AcquiredPhoneNumbers"
+              "$ref": "#/definitions/PurchasedPhoneNumbers"
             }
           },
           "default": {
@@ -419,84 +495,8 @@
           "itemName": "phoneNumbers"
         },
         "x-ms-examples": {
-          "List acquired phone numbers": {
+          "List purchased phone numbers": {
             "$ref": "./examples/GetPhoneNumbers.json"
-          }
-        }
-      }
-    },
-    "/phoneNumbers/{phoneNumber}/capabilities": {
-      "patch": {
-        "tags": [
-          "Manage acquired phone numbers"
-        ],
-        "summary": "Updates the capabilities of a phone number.",
-        "operationId": "PhoneNumbers_UpdateCapabilities",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "phoneNumber",
-            "description": "The phone number id in E.164 format. The leading plus can be either + or encoded as %2B, e.g. +11234567890.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Defines the update capabilities request.",
-            "schema": {
-              "$ref": "#/definitions/PhoneNumberCapabilitiesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
-            "schema": {
-              "$ref": "#/definitions/AcquiredPhoneNumber"
-            },
-            "headers": {
-              "Location": {
-                "description": "URL to retrieve the final result after operation completes.",
-                "type": "string"
-              },
-              "Operation-Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              },
-              "operation-id": {
-                "description": "The operation id.",
-                "type": "string"
-              },
-              "capabilities-id": {
-                "description": "The capabilities operation id.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Update phoneNumber capabilities": {
-            "$ref": "./examples/UpdatePhoneNumberCapabilities.json"
           }
         }
       }
@@ -755,8 +755,42 @@
         }
       }
     },
-    "AcquiredPhoneNumber": {
-      "description": "Represents an acquired phone number.",
+    "PhoneNumberCapabilitiesRequest": {
+      "description": "Capabilities of a phone number.",
+      "type": "object",
+      "properties": {
+        "calling": {
+          "description": "Capability value for calling.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
+        },
+        "sms": {
+          "description": "Capability value for SMS.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PurchasedPhoneNumber": {
+      "description": "Represents a purchased phone number.",
       "required": [
         "assignmentType",
         "capabilities",
@@ -818,8 +852,8 @@
         }
       }
     },
-    "AcquiredPhoneNumbers": {
-      "description": "The list of acquired phone numbers.",
+    "PurchasedPhoneNumbers": {
+      "description": "The list of purchased phone numbers.",
       "required": [
         "phoneNumbers"
       ],
@@ -829,46 +863,12 @@
           "description": "Represents a list of phone numbers.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AcquiredPhoneNumber"
+            "$ref": "#/definitions/PurchasedPhoneNumber"
           }
         },
         "nextLink": {
           "description": "Represents the URL link to the next page of phone number results.",
           "type": "string"
-        }
-      }
-    },
-    "PhoneNumberCapabilitiesRequest": {
-      "description": "Capabilities of a phone number.",
-      "type": "object",
-      "properties": {
-        "calling": {
-          "description": "Capability value for calling.",
-          "enum": [
-            "none",
-            "inbound",
-            "outbound",
-            "inbound+outbound"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PhoneNumberCapabilityType",
-            "modelAsString": true
-          }
-        },
-        "sms": {
-          "description": "Capability value for SMS.",
-          "enum": [
-            "none",
-            "inbound",
-            "outbound",
-            "inbound+outbound"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PhoneNumberCapabilityType",
-            "modelAsString": true
-          }
         }
       }
     }
