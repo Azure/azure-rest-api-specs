@@ -153,6 +153,22 @@ input-file:
   - Microsoft.Network/stable/2020-08-01/cloudServicePublicIpAddress.json
 
 ```
+
+### Tag: package-2021-02-preview-only
+
+These settings apply only when `--tag=2021-02-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-02-preview-only'
+input-file:
+  - Microsoft.Network/preview/2021-02-01-preview/network.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManager.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerActiveConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerGroup.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityConfiguration.json
+```
+
 ### Tag: package-2020-08
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
