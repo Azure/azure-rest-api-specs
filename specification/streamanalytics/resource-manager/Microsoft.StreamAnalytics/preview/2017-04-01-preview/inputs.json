@@ -463,6 +463,36 @@
         }
       }
     },
+    "RawInputPropertiesWithStreamType": {
+      "description": "The properties that are associated with an input containing stream data.",
+      "x-ms-discriminator-value": "Stream",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputProperties"
+        }
+      ],
+      "properties": {
+        "datasource": {
+          "$ref": "#/definitions/RawInputDatasource",
+          "description": "Describes an input data source that contains raw data. Type can be stream or reference to support the case when an input is used in a query before it's definted on the job, so the type of the input is unknown."
+        }
+      }
+    },
+    "RawInputPropertiesWithReferenceType": {
+      "description": "The properties that are associated with an input containing reference data.",
+      "x-ms-discriminator-value": "Reference",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputProperties"
+        }
+      ],
+      "properties": {
+        "datasource": {
+          "$ref": "#/definitions/RawInputDatasource",
+          "description": "Describes an input data source that contains raw data. Type can be stream or reference to support the case when an input is used in a query before it's definted on the job, so the type of the input is unknown."
+        }
+      }
+    },
     "StreamInputDataSource": {
       "description": "Describes an input data source that contains stream data.",
       "discriminator": "type",
@@ -1063,6 +1093,31 @@
       "x-ms-enum": {
         "name": "EventSerializationType",
         "modelAsString": true
+      }
+    },
+    "RawInputDatasource": {
+      "description": "Defines the input datasource for query testing.",
+      "properties": {
+        "type": {
+          "description": "Indicates whether the type of input used for query testing. Currently query testing only supports RAW input type.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/RawInputDatasourceProperties"
+        }
+      }
+    },
+    "RawInputDatasourceProperties": {
+      "description": "Defines the datasource properties for raw inputs.",
+      "properties": {
+        "payload": {
+          "description": "The JSON serialized content of the input data. ",
+          "type": "string"
+        },
+        "payloadUri": {
+          "description": "The SAS URL to a blob containing the JSON serialized content of the input data.",
+          "type": "string"
+        }
       }
     }
   },
