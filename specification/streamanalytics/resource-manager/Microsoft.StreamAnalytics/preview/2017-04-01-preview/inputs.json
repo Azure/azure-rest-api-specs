@@ -476,22 +476,6 @@
         "type"
       ]
     },
-    "RawStreamInputDataSource": {
-      "description": "Describes a raw input data source used for query testing. Type can be stream or reference to support the case when an input is used in a query before it's defined on the job, so the type of the input is unknown.",
-      "x-ms-discriminator-value": "Raw",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StreamInputDataSource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RawInputDatasourceProperties",
-          "description": "The properties that are associated with a raw input containing stream data. Required on PUT (CreateOrReplace) requests.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "BlobStreamInputDataSource": {
       "description": "Describes a blob input data source that contains stream data.",
       "x-ms-discriminator-value": "Microsoft.Storage/Blob",
@@ -610,6 +594,22 @@
         }
       }
     },
+    "RawStreamInputDataSource": {
+      "description": "Describes a raw input data source. This data source type is only applicable/usable when using the query testing API. You cannot create a job with this data source type or add an input/output of this data source type to an existing job.",
+      "x-ms-discriminator-value": "Raw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawInputDatasourceProperties",
+          "description": "The properties that are associated with a raw input.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ReferenceInputDataSource": {
       "description": "Describes an input data source that contains reference data.",
       "discriminator": "type",
@@ -622,22 +622,6 @@
       "required": [
         "type"
       ]
-    },
-    "RawReferenceInputDataSource": {
-      "description": "Describes a raw input data source used for query testing. Type can be stream or reference to support the case when an input is used in a query before it's defined on the job, so the type of the input is unknown.",
-      "x-ms-discriminator-value": "Raw",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ReferenceInputDataSource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RawInputDatasourceProperties",
-          "description": "The properties that are associated with a raw input containing stream data.",
-          "x-ms-client-flatten": true
-        }
-      }
     },
     "BlobReferenceInputDataSource": {
       "description": "Describes a blob input data source that contains reference data.",
@@ -689,6 +673,35 @@
         "timeFormat": {
           "type": "string",
           "description": "The time format. Wherever {time} appears in pathPattern, the value of this property is used as the time format instead."
+        }
+      }
+    },
+    "RawReferenceInputDataSource": {
+      "description": "Describes a raw input data source. This data source type is only applicable/usable when using the query testing API. You cannot create a job with this data source type or add an input/output of this data source type to an existing job.",
+      "x-ms-discriminator-value": "Raw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReferenceInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawInputDatasourceProperties",
+          "description": "The properties that are associated with a raw input containing stream data.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RawInputDatasourceProperties": {
+      "description": "The properties that are associated with a raw input.",
+      "properties": {
+        "payload": {
+          "description": "The JSON serialized content of the input data. ",
+          "type": "string"
+        },
+        "payloadUri": {
+          "description": "The SAS URL to a blob containing the JSON serialized content of the input data.",
+          "type": "string"
         }
       }
     },
@@ -1095,31 +1108,6 @@
       "x-ms-enum": {
         "name": "EventSerializationType",
         "modelAsString": true
-      }
-    },
-    "RawInputDatasource": {
-      "description": "Defines the input datasource for query testing.",
-      "properties": {
-        "type": {
-          "description": "Indicates whether the type of input used for query testing. Currently query testing only supports RAW input type.",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/RawInputDatasourceProperties"
-        }
-      }
-    },
-    "RawInputDatasourceProperties": {
-      "description": "Defines the datasource properties for raw inputs.",
-      "properties": {
-        "payload": {
-          "description": "The JSON serialized content of the input data. ",
-          "type": "string"
-        },
-        "payloadUri": {
-          "description": "The SAS URL to a blob containing the JSON serialized content of the input data.",
-          "type": "string"
-        }
       }
     }
   },
