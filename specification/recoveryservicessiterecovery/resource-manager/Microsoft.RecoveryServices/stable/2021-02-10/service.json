@@ -10134,19 +10134,12 @@
     "Alert": {
       "description": "Implements the Alert class.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "name": {
-          "description": "Unique Id of the Alert.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Object type.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique ARM identifier for this object.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/AlertProperties",
           "description": "Alert related data."
@@ -11179,19 +11172,12 @@
     "Event": {
       "description": "Implements the Event class.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "name": {
-          "description": "Unique Id of the Event.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Object type.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique ARM identifier for this object.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/EventProperties",
           "description": "Event related data."
@@ -19981,19 +19967,12 @@
     "RecoveryPoint": {
       "description": "Recovery point.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The recovery point Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the recovery point.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The resource type.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/RecoveryPointProperties",
           "description": "The recovery point properties."
@@ -20061,19 +20040,12 @@
     "RecoveryServicesProvider": {
       "description": "Provider details.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Unique ARM Id URL to access this object.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Class type of the object.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Id of the DRA.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/RecoveryServicesProviderProperties",
           "description": "Provider properties."
@@ -20435,19 +20407,12 @@
     "ReplicationProtectedItem": {
       "description": "Replication protected item.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The Type of the object.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ReplicationProtectedItemProperties",
           "description": "The custom data."
@@ -20600,19 +20565,12 @@
     "ReplicationProtectionIntent": {
       "description": "Replication protection intent.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The Type of the object.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ReplicationProtectionIntentProperties",
           "description": "The custom data."
@@ -21163,19 +21121,12 @@
     "StorageClassification": {
       "description": "Storage object definition.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Unique ARM Id URL to access this object.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Class type of the object.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Id of the Storage.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/StorageClassificationProperties",
           "description": "Properties of the storage object."
@@ -21202,19 +21153,12 @@
     "StorageClassificationMapping": {
       "description": "Storage mapping object.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Unique ARM Id URL to access this object.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Class type of the object.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Id of the Storage mapping.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/StorageClassificationMappingProperties",
           "description": "Properties of the storage mapping object."
@@ -21302,19 +21246,12 @@
     "SupportedOperatingSystems": {
       "description": "Supported operating systems.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The ARM Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/SupportedOSProperties",
           "description": "The supported operating systems properties."
@@ -21483,7 +21420,8 @@
         "vCPUsAvailable": {
           "format": "int32",
           "description": "The Available vCPUs supported by target compute size.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "memoryInGB": {
           "format": "double",
@@ -22009,19 +21947,12 @@
     "VaultHealthDetails": {
       "description": "Vault health details definition.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "name": {
-          "description": "Unique Id of the vault health detail.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique ARM identifier for this object.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/VaultHealthProperties",
           "description": "The vault health related data."
@@ -22056,19 +21987,12 @@
     "VaultSetting": {
       "description": "Vault setting.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of the object.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/VaultSettingProperties",
           "description": "The vault setting properties."
@@ -22131,19 +22055,12 @@
     "VCenter": {
       "description": "vCenter definition.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "name": {
-          "description": "Unique Id of the vCenter.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Object type.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique ARM identifier for this object.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/VCenterProperties",
           "description": "VCenter related data."
