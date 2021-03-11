@@ -278,7 +278,7 @@
           "BackupVaults"
         ],
         "description": "Creates or updates a BackupVault resource belonging to a resource group.",
-        "operationId": "BackupVaults_Put",
+        "operationId": "BackupVaults_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -738,7 +738,7 @@
         "tags": [
           "BackupPolicies"
         ],
-        "operationId": "BackupPolicies_Put",
+        "operationId": "BackupPolicies_CreateOrUpdate",
         "summary": "Creates or Updates a backup policy belonging to a backup vault",
         "produces": [
           "application/json"
@@ -848,7 +848,7 @@
           "BackupInstances"
         ],
         "description": "Gets a backup instances belonging to a backup vault",
-        "operationId": "BackupInstances_GetBackupInstancesInVault",
+        "operationId": "BackupInstances_List",
         "produces": [
           "application/json"
         ],
@@ -945,7 +945,7 @@
         "tags": [
           "BackupInstances"
         ],
-        "operationId": "BackupInstances_Put",
+        "operationId": "BackupInstances_CreateOrUpdate",
         "produces": [
           "application/json"
         ],
@@ -1693,6 +1693,12 @@
           },
           "404": {
             "description": "NotFound"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -2027,7 +2033,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "SourceDataStoreType",
+            "name": "RestoreSourceDataStoreType",
             "modelAsString": true
           }
         },
@@ -2049,9 +2055,9 @@
         }
       ],
       "properties": {
-        "Content": {
+        "content": {
           "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesRequest",
-          "description": "AzureBackupFindRestorableTimeRangesRequestResource Content"
+          "description": "AzureBackupFindRestorableTimeRangesRequestResource content"
         }
       }
     },
