@@ -2509,6 +2509,54 @@
               "type": "string"
             }
           }
+        },
+        "isDataAction": {
+          "description": "Is a data action.",
+          "type": "boolean"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Properties of the operation",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification payload",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Specifications of the Log for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Specifications of the Log for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blob duration of the log",
+          "type": "string"
         }
       }
     },
@@ -2517,7 +2565,7 @@
       "description": "Represents a Workspace definition.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "properties": {
@@ -2532,6 +2580,11 @@
       "description": "Schema for Workspace properties.",
       "type": "object",
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of Workspace. (internal use)",
+          "readOnly": true
+        },
         "description": {
           "type": "string",
           "description": "Description of Workspace."
@@ -2546,6 +2599,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "cloudPcResource": {
+          "type": "boolean",
+          "description": "Is cloud pc resource.",
+          "readOnly": true
         }
       }
     },
@@ -2612,7 +2670,7 @@
       "description": "Represents a ApplicationGroup definition.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "required": [
@@ -2635,6 +2693,11 @@
         "applicationGroupType"
       ],
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of ApplicationGroup. (internal use)",
+          "readOnly": true
+        },
         "description": {
           "type": "string",
           "description": "Description of ApplicationGroup."
@@ -2665,6 +2728,15 @@
           "type": "string",
           "description": "Resource Type of ApplicationGroup.",
           "x-nullable": false
+        },
+        "migrationRequest": {
+          "$ref": "#/definitions/MigrationRequestProperties",
+          "description": "The registration info of HostPool."
+        },
+        "cloudPcResource": {
+          "type": "boolean",
+          "description": "Is cloud pc resource.",
+          "readOnly": true
         }
       }
     },
@@ -2729,7 +2801,7 @@
       "description": "Represents a HostPool definition.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "required": [
@@ -2753,6 +2825,11 @@
         "preferredAppGroupType"
       ],
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of HostPool. (internal use)",
+          "readOnly": true
+        },
         "friendlyName": {
           "type": "string",
           "description": "Friendly name of HostPool."
@@ -2799,8 +2876,7 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "PersonalDesktopAssignment type for HostPool.",
-          "x-nullable": false
+          "description": "PersonalDesktopAssignment type for HostPool."
         },
         "customRdpProperty": {
           "type": "string",
@@ -2872,8 +2948,7 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "The type of single sign on Secret Type.",
-          "x-nullable": false
+          "description": "The type of single sign on Secret Type."
         },
         "preferredAppGroupType": {
           "enum": [
@@ -2892,6 +2967,15 @@
         "startVMOnConnect": {
           "type": "boolean",
           "description": "The flag to turn on/off StartVMOnConnect feature."
+        },
+        "migrationRequest": {
+          "$ref": "#/definitions/MigrationRequestProperties",
+          "description": "The registration info of HostPool."
+        },
+        "cloudPcResource": {
+          "type": "boolean",
+          "description": "Is cloud pc resource.",
+          "readOnly": true
         }
       }
     },
@@ -3003,8 +3087,7 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "The type of single sign on Secret Type.",
-          "x-nullable": false
+          "description": "The type of single sign on Secret Type."
         },
         "preferredAppGroupType": {
           "enum": [
@@ -3340,6 +3423,11 @@
         "commandLineSetting"
       ],
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of Application. (internal use)",
+          "readOnly": true
+        },
         "description": {
           "type": "string",
           "description": "Description of Application."
@@ -3555,6 +3643,11 @@
       "description": "Schema for Desktop properties.",
       "type": "object",
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of Desktop. (internal use)",
+          "readOnly": true
+        },
         "description": {
           "type": "string",
           "description": "Description of Desktop."
@@ -3830,6 +3923,11 @@
       "description": "Schema for SessionHost properties.",
       "type": "object",
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of SessionHost. (internal use)",
+          "readOnly": true
+        },
         "lastHeartBeat": {
           "format": "date-time",
           "type": "string",
@@ -4186,6 +4284,11 @@
       "description": "Schema for UserSession properties.",
       "type": "object",
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of user session. (internal use)",
+          "readOnly": true
+        },
         "userPrincipalName": {
           "type": "string",
           "description": "The user principal name."
@@ -4254,7 +4357,7 @@
       "description": "Represents a scaling plan definition.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "properties": {
@@ -4269,6 +4372,11 @@
       "type": "object",
       "description": "Scaling plan properties.",
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of scaling plan. (internal use)",
+          "readOnly": true
+        },
         "ring": {
           "type": "integer",
           "format": "int32",
@@ -4598,6 +4706,53 @@
           "items": {
             "$ref": "#/definitions/ScalingHostPoolReference"
           }
+        }
+      }
+    },
+    "MigrationRequestProperties": {
+      "type": "object",
+      "description": "Properties for arm migration.",
+      "properties": {
+        "operation": {
+          "enum": [
+            "Start",
+            "Revoke",
+            "Complete",
+            "Hide",
+            "Unhide"
+          ],
+          "x-ms-enum": {
+            "name": "Operation",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Start",
+                "description": "Start the migration."
+              },
+              {
+                "value": "Revoke",
+                "description": "Revoke the migration."
+              },
+              {
+                "value": "Complete",
+                "description": "Complete the migration."
+              },
+              {
+                "value": "Hide",
+                "description": "Hide the hostpool."
+              },
+              {
+                "value": "Unhide",
+                "description": "Unhide the hostpool."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The type of operation for migration."
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "The path to the legacy object to migrate."
         }
       }
     }
