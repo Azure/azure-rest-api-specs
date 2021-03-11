@@ -975,6 +975,33 @@
         "certificate": {
           "$ref": "#/definitions/CertificateInformation",
           "description": "Certificate information."
+        },
+        "certificateSource": {
+          "type": "string",
+          "description": "Certificate Source.",
+          "enum": [
+            "Managed",
+            "KeyVault",
+            "Custom",
+            "BuiltIn"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateSource",
+            "modelAsString": true
+          }
+        },
+        "certificateStatus": {
+          "type": "string",
+          "description": "Certificate Status.",
+          "enum": [
+            "Completed",
+            "Failed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateStatus",
+            "modelAsString": true
+          }
         }
       },
       "required": [
