@@ -40,14 +40,6 @@ directive:
     from: onPremiseSensors.json
     where: $.definitions.OnPremiseSensor
     reason: The resource is managed in a subscription level (instead of inside a resource group)
-  - suppress: PageableOperation
-    from: locations.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations"].get'
-    reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: deviceGroups.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups"].get'
-    reason: The list returns limited number of items
 ```
 
 ### Basic Information
