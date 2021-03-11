@@ -981,7 +981,7 @@
         "versionLevelWorm": {
           "$ref": "#/definitions/VersionLevelWorm",
           "x-ms-client-flatten": true,
-          "description": "The version level worm property of the container."
+          "description": "The version level worm property of the container. The property is immutable and can only be set to true at the container creation time. Existing containers must undergo a migration process."
         }
       },
       "description": "The properties of a container."
@@ -1096,9 +1096,6 @@
           "description": "This property denotes the container level worm to version level worm migration state."
         }
       },
-      "required": [
-        "enabled"
-      ],
       "description": "Version level worm properties of the container."
     },
     "UpdateHistoryProperty": {
