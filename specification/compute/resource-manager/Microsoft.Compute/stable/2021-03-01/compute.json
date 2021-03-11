@@ -3810,7 +3810,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}": {
       "put": {
-        "operationId": "RestorePoints_CreateOrUpdate",
+        "operationId": "RestorePoints_Create",
         "description": "The operation to create the restore point. Updating properties of an existing restore point is not allowed",
         "parameters": [
           {
@@ -3842,7 +3842,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RestorePoint"
+              "$ref": "#/definitions/RestorePointCreate"
             },
             "description": "Parameters supplied to the Create restore point operation."
           },
@@ -7543,6 +7543,24 @@
         }
       },
       "description": "Restore Point Provisioning details."
+    },
+    "RestorePointCreate": {
+      "properties": {
+        "excludeDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiEntityReference"
+          },
+          "readOnly": false,
+          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "description": "When creating a Restore Point, customer may only specify the disks that will be excluded."
     },
     "RestorePoint": {
       "properties": {
