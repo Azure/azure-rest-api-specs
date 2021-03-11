@@ -490,6 +490,29 @@
         "type"
       ]
     },
+    "RawOutputDatasource": {
+      "description": "Defines the output datasource for query testing.",
+      "x-ms-discriminator-value": "Raw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawOutputDatasourceProperties"
+        }
+      }
+    },
+    "RawOutputDatasourceProperties": {
+      "description": "Defines the datasource properties for raw outputs.",
+      "properties": {
+        "payloadUri": {
+          "description": "The SAS URL to a blob where the output should be written. If this property is not set, output data will be embedded in the result response. The SAS URL needs to have write permission.",
+          "type": "string"
+        }
+      }
+    },
     "BlobOutputDataSource": {
       "description": "Describes a blob output data source.",
       "x-ms-discriminator-value": "Microsoft.Storage/Blob",
