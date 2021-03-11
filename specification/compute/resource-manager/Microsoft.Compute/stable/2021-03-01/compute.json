@@ -7557,7 +7557,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "When creating a Restore Point, customer may only specify the disks that will be excluded."
@@ -7604,7 +7604,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Restore Point details."
@@ -13008,7 +13008,7 @@
       },
       "description": "Api error."
     },
-    "ProxyOnlyResource": {
+    "ProxyResource": {
       "properties": {
         "id": {
           "readOnly": true,
@@ -13026,7 +13026,8 @@
           "description": "Resource type"
         }
       },
-      "description": "The ProxyOnly Resource model definition."
+      "description": "The resource model definition for an Azure Resource Manager proxy resource. It will not have tags and a location",
+      "x-ms-azure-resource": true
     },
     "Resource": {
       "description": "The Resource model definition.",
