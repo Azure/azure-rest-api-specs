@@ -463,36 +463,6 @@
         }
       }
     },
-    "RawInputPropertiesWithStreamType": {
-      "description": "The properties that are associated with an input containing raw data.",
-      "x-ms-discriminator-value": "Stream",
-      "allOf": [
-        {
-          "$ref": "#/definitions/InputProperties"
-        }
-      ],
-      "properties": {
-        "datasource": {
-          "$ref": "#/definitions/RawInputDatasource",
-          "description": "Describes an input data source that contains raw data. Type can be stream or reference to support the case when an input is used in a query before it's definted on the job, so the type of the input is unknown."
-        }
-      }
-    },
-    "RawInputPropertiesWithReferenceType": {
-      "description": "The properties that are associated with an input containing raw data.",
-      "x-ms-discriminator-value": "Reference",
-      "allOf": [
-        {
-          "$ref": "#/definitions/InputProperties"
-        }
-      ],
-      "properties": {
-        "datasource": {
-          "$ref": "#/definitions/RawInputDatasource",
-          "description": "Describes an input data source that contains raw data. Type can be stream or reference to support the case when an input is used in a query before it's definted on the job, so the type of the input is unknown."
-        }
-      }
-    },
     "StreamInputDataSource": {
       "description": "Describes an input data source that contains stream data.",
       "discriminator": "type",
@@ -505,6 +475,22 @@
       "required": [
         "type"
       ]
+    },
+    "RawStreamInputDataSource": {
+      "description": "Describes a raw input data source used for query testing. Type can be stream or reference to support the case when an input is used in a query before it's defined on the job, so the type of the input is unknown.",
+      "x-ms-discriminator-value": "Raw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawInputDatasourceProperties",
+          "description": "The properties that are associated with a raw input containing stream data. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "BlobStreamInputDataSource": {
       "description": "Describes a blob input data source that contains stream data.",
@@ -636,6 +622,22 @@
       "required": [
         "type"
       ]
+    },
+    "RawReferenceInputDataSource": {
+      "description": "Describes a raw input data source used for query testing. Type can be stream or reference to support the case when an input is used in a query before it's defined on the job, so the type of the input is unknown.",
+      "x-ms-discriminator-value": "Raw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReferenceInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawInputDatasourceProperties",
+          "description": "The properties that are associated with a raw input containing stream data.",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "BlobReferenceInputDataSource": {
       "description": "Describes a blob input data source that contains reference data.",
