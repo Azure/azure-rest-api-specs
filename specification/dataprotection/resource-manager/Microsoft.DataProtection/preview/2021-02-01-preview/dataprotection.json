@@ -1646,7 +1646,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/findRestorableTimeRanges": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstances}/findRestorableTimeRanges": {
       "post": {
         "tags": [
           "FindRestorableTimeRanges"
@@ -1669,7 +1669,7 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "backupInstanceName",
+            "name": "backupInstances",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1690,10 +1690,6 @@
             "schema": {
               "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesResponseResource"
             }
-          },
-          "404": {
-            "description": "NotFound",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3407,13 +3403,13 @@
     "DppWorkerRequest": {
       "type": "object",
       "properties": {
-        "SubscriptionId": {
+        "subscriptionId": {
           "type": "string"
         },
-        "Uri": {
+        "uri": {
           "type": "string"
         },
-        "Headers": {
+        "headers": {
           "type": "object",
           "additionalProperties": {
             "type": "array",
@@ -3422,22 +3418,22 @@
             }
           }
         },
-        "SupportedGroupVersions": {
+        "supportedGroupVersions": {
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "CultureInfo": {
+        "cultureInfo": {
           "type": "string"
         },
-        "Parameters": {
+        "parameters": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
-        "HttpMethod": {
+        "httpMethod": {
           "type": "string"
         }
       }
