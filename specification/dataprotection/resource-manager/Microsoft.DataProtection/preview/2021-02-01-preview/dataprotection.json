@@ -3404,6 +3404,44 @@
       },
       "type": "object"
     },
+    "DppWorkerRequest": {
+      "type": "object",
+      "properties": {
+        "SubscriptionId": {
+          "type": "string"
+        },
+        "Uri": {
+          "type": "string"
+        },
+        "Headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "SupportedGroupVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CultureInfo": {
+          "type": "string"
+        },
+        "Parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "HttpMethod": {
+          "type": "string"
+        }
+      }
+    },
     "Error": {
       "description": "The resource management error response.",
       "properties": {
