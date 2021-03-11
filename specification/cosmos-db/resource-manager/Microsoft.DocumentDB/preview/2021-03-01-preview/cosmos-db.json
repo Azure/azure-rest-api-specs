@@ -8810,27 +8810,17 @@
       "description": "Cosmos DB location get result",
       "type": "object",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The unique resource identifier of the ARM resource."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the ARM resource."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of Azure resource."
-        },
         "properties": {
           "type": "object",
           "description": "Cosmos DB location metadata",
           "$ref": "#/definitions/LocationProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMProxyResource"
+        }
+      ]
     },
     "LocationProperties": {
       "description": "Cosmos DB location metadata",
