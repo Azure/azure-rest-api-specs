@@ -62,6 +62,14 @@ directive:
     suppress:
       - BodyTopLevelProperties
   - where:
+      - $.definitions.RestorePointCreate.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.RestorePoint.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
       - $.definitions.VirtualMachineScaleSetExtension
     suppress:
       - RequiredPropertiesMissingInResourceModel
