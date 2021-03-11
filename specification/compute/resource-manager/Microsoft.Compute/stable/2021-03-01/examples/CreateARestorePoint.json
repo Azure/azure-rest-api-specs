@@ -2,6 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
+    "restorePointCollectionName": "rpcName",
     "vmName": "myVM",
     "api-version": "2021-03-01",
     "parameters": {
@@ -47,8 +48,7 @@
                 },
                 "diskRestorePoint": {
                   "id": "/subscriptions/6344e824-652e-4846-8c17-543d80c08f3e/resourceGroups/userdata/providers/Microsoft.Compute/restorePointCollections/mynewrpc/restorePoints/restorepointtwo/diskRestorePoints/testingexcludedisk_DataDisk_1_68785190-1acb-4d5e-a8ae-705b45f3dca5"
-                },
-                "writeAcceleratorEnabled": false
+                }
               }
             ]
           },
@@ -67,8 +67,7 @@
             "bootDiagnostics": {
               "enabled": true
             }
-          },
-          "hyperVGeneration": "V1"
+          }
         },
         "provisioningState": "Succeeded",
         "consistencyMode": "ApplicationConsistent",
