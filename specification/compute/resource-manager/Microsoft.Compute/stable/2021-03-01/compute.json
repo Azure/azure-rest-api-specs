@@ -7475,7 +7475,7 @@
           "description": "Gets the virtual machine unique id."
         }
       },
-      "description": "Describes the properties of a Virtual Machine from which the restore point was created."
+      "description": "Describes the properties of the Virtual Machine for which the restore point was created. The properties provided are a subset and the snapshot of the overall Virtual Machine properties captured at the time of the restore point creation."
     },
     "RestorePointSourceVMStorageProfile": {
       "properties": {
@@ -7497,7 +7497,7 @@
       "properties": {
         "osType": {
           "type": "string",
-          "description": "Gets or sets the Operating System type.",
+          "description": "Gets the Operating System type.",
           "enum": [
             "Windows",
             "Linux"
@@ -7592,10 +7592,6 @@
     },
     "RestorePoint": {
       "properties": {
-        "optionalProperties": {
-          "type": "object",
-          "description": "Optional properties to be passed for restore point creation (raw JSON)"
-        },
         "sourceMetadata": {
           "readOnly": true,
           "$ref": "#/definitions/RestorePointSourceMetadata",
