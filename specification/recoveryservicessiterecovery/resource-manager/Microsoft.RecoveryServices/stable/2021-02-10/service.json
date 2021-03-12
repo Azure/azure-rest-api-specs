@@ -11853,67 +11853,6 @@
         }
       }
     },
-    "HyperVFabricCreationInput": {
-      "description": "HyperV fabric provider specific settings.",
-      "required": [
-        "hyperVSiteId",
-        "migrationSolutionId"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FabricSpecificCreationInput"
-        }
-      ],
-      "properties": {
-        "hyperVSiteId": {
-          "description": "The ARM Id of the HyperV site.",
-          "type": "string"
-        },
-        "migrationSolutionId": {
-          "description": "The ARM Id of the migration solution.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "HyperV"
-    },
-    "HyperVFabricSpecificDetails": {
-      "description": "HyperV fabric specific details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FabricSpecificDetails"
-        }
-      ],
-      "properties": {
-        "hyperVSiteId": {
-          "description": "The ARM Id of the HyperV site.",
-          "type": "string",
-          "readOnly": true
-        },
-        "migrationSolutionId": {
-          "description": "The Migration solution ARM Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "serviceEndpoint": {
-          "description": "The service endpoint.",
-          "type": "string",
-          "readOnly": true
-        },
-        "serviceResourceId": {
-          "description": "The service resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "serviceContainerId": {
-          "description": "The service container Id.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-discriminator-value": "HyperV"
-    },
     "HyperVHostDetails": {
       "description": "Hyper-V host details.",
       "type": "object",
