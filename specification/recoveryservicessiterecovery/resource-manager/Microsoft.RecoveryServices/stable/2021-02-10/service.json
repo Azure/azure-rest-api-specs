@@ -12028,10 +12028,27 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/HyperVReplicaBaseEventDetails"
+          "$ref": "#/definitions/EventProviderSpecificDetails"
         }
       ],
-      "properties": {},
+      "properties": {
+        "containerName": {
+          "description": "The container friendly name.",
+          "type": "string"
+        },
+        "fabricName": {
+          "description": "The fabric friendly name.",
+          "type": "string"
+        },
+        "remoteContainerName": {
+          "description": "The remote container name.",
+          "type": "string"
+        },
+        "remoteFabricName": {
+          "description": "The remote fabric name.",
+          "type": "string"
+        }
+      },
       "x-ms-discriminator-value": "HyperVReplica2012"
     },
     "HyperVReplica2012R2EventDetails": {
@@ -12039,10 +12056,27 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/HyperVReplicaBaseEventDetails"
+          "$ref": "#/definitions/EventProviderSpecificDetails"
         }
       ],
-      "properties": {},
+      "properties": {
+        "containerName": {
+          "description": "The container friendly name.",
+          "type": "string"
+        },
+        "fabricName": {
+          "description": "The fabric friendly name.",
+          "type": "string"
+        },
+        "remoteContainerName": {
+          "description": "The remote container name.",
+          "type": "string"
+        },
+        "remoteFabricName": {
+          "description": "The remote fabric name.",
+          "type": "string"
+        }
+      },
       "x-ms-discriminator-value": "HyperVReplica2012R2"
     },
     "HyperVReplicaAzureApplyRecoveryPointInput": {
@@ -12803,8 +12837,7 @@
           "type": "string"
         }
       },
-      "discriminator": "instanceType",
-      "x-ms-discriminator-value": "Microsoft.Azure.SiteRecovery.V2018_01_10.HyperVReplicaBaseEventDetails"
+      "x-ms-discriminator-value": "HyperVReplicaBaseEventDetails"
     },
     "HyperVReplicaBasePolicyDetails": {
       "description": "Base class for HyperVReplica policy details.",
@@ -12860,8 +12893,7 @@
           "type": "string"
         }
       },
-      "discriminator": "instanceType",
-      "x-ms-discriminator-value": "Microsoft.Azure.SiteRecovery.V2015_11_10.HyperVReplicaBasePolicyDetails"
+      "x-ms-discriminator-value": "HyperVReplicaBasePolicyDetails"
     },
     "HyperVReplicaBaseReplicationDetails": {
       "description": "Hyper V replica provider specific settings base class.",
@@ -12908,15 +12940,14 @@
           }
         }
       },
-      "discriminator": "instanceType",
-      "x-ms-discriminator-value": "Microsoft.Azure.SiteRecovery.V2021_02_10.HyperVReplicaBaseReplicationDetails"
+      "x-ms-discriminator-value": "HyperVReplicaBaseReplicationDetails"
     },
     "HyperVReplicaBluePolicyDetails": {
       "description": "Hyper-V Replica Blue specific protection profile details.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/HyperVReplicaBasePolicyDetails"
+          "$ref": "#/definitions/PolicyProviderSpecificDetails"
         }
       ],
       "properties": {
@@ -12924,6 +12955,50 @@
           "format": "int32",
           "description": "A value indicating the replication interval.",
           "type": "integer"
+        },
+        "recoveryPoints": {
+          "format": "int32",
+          "description": "A value indicating the number of recovery points.",
+          "type": "integer"
+        },
+        "applicationConsistentSnapshotFrequencyInHours": {
+          "format": "int32",
+          "description": "A value indicating the application consistent frequency.",
+          "type": "integer"
+        },
+        "compression": {
+          "description": "A value indicating whether compression has to be enabled.",
+          "type": "string"
+        },
+        "initialReplicationMethod": {
+          "description": "A value indicating whether IR is online.",
+          "type": "string"
+        },
+        "onlineReplicationStartTime": {
+          "description": "A value indicating the online IR start time.",
+          "type": "string"
+        },
+        "offlineReplicationImportPath": {
+          "description": "A value indicating the offline IR import path.",
+          "type": "string"
+        },
+        "offlineReplicationExportPath": {
+          "description": "A value indicating the offline IR export path.",
+          "type": "string"
+        },
+        "replicationPort": {
+          "format": "int32",
+          "description": "A value indicating the recovery HTTPS port.",
+          "type": "integer"
+        },
+        "allowedAuthenticationType": {
+          "format": "int32",
+          "description": "A value indicating the authentication type.",
+          "type": "integer"
+        },
+        "replicaDeletionOption": {
+          "description": "A value indicating whether the VM has to be auto deleted. Supported Values: String.Empty, None, OnRecoveryCloud",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "HyperVReplica2012R2"
@@ -12950,10 +13025,46 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/HyperVReplicaBaseReplicationDetails"
+          "$ref": "#/definitions/ReplicationProviderSpecificSettings"
         }
       ],
-      "properties": {},
+      "properties": {
+        "lastReplicatedTime": {
+          "format": "date-time",
+          "description": "The Last replication time.",
+          "type": "string"
+        },
+        "vmNics": {
+          "description": "The PE Network details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMNicDetails"
+          }
+        },
+        "vmId": {
+          "description": "The virtual machine Id.",
+          "type": "string"
+        },
+        "vmProtectionState": {
+          "description": "The protection state for the vm.",
+          "type": "string"
+        },
+        "vmProtectionStateDescription": {
+          "description": "The protection state description for the vm.",
+          "type": "string"
+        },
+        "initialReplicationDetails": {
+          "$ref": "#/definitions/InitialReplicationDetails",
+          "description": "Initial replication details."
+        },
+        "vMDiskDetails": {
+          "description": "VM disk details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskDetails"
+          }
+        }
+      },
       "x-ms-discriminator-value": "HyperVReplica2012R2"
     },
     "HyperVReplicaPolicyDetails": {
@@ -12961,10 +13072,55 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/HyperVReplicaBasePolicyDetails"
+          "$ref": "#/definitions/PolicyProviderSpecificDetails"
         }
       ],
-      "properties": {},
+      "properties": {
+        "recoveryPoints": {
+          "format": "int32",
+          "description": "A value indicating the number of recovery points.",
+          "type": "integer"
+        },
+        "applicationConsistentSnapshotFrequencyInHours": {
+          "format": "int32",
+          "description": "A value indicating the application consistent frequency.",
+          "type": "integer"
+        },
+        "compression": {
+          "description": "A value indicating whether compression has to be enabled.",
+          "type": "string"
+        },
+        "initialReplicationMethod": {
+          "description": "A value indicating whether IR is online.",
+          "type": "string"
+        },
+        "onlineReplicationStartTime": {
+          "description": "A value indicating the online IR start time.",
+          "type": "string"
+        },
+        "offlineReplicationImportPath": {
+          "description": "A value indicating the offline IR import path.",
+          "type": "string"
+        },
+        "offlineReplicationExportPath": {
+          "description": "A value indicating the offline IR export path.",
+          "type": "string"
+        },
+        "replicationPort": {
+          "format": "int32",
+          "description": "A value indicating the recovery HTTPS port.",
+          "type": "integer"
+        },
+        "allowedAuthenticationType": {
+          "format": "int32",
+          "description": "A value indicating the authentication type.",
+          "type": "integer"
+        },
+        "replicaDeletionOption": {
+          "description": "A value indicating whether the VM has to be auto deleted. Supported Values: String.Empty, None, OnRecoveryCloud",
+          "type": "string"
+        }
+      },
       "x-ms-discriminator-value": "HyperVReplica2012"
     },
     "HyperVReplicaPolicyInput": {
@@ -13029,10 +13185,46 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/HyperVReplicaBaseReplicationDetails"
+          "$ref": "#/definitions/ReplicationProviderSpecificSettings"
         }
       ],
-      "properties": {},
+      "properties": {
+        "lastReplicatedTime": {
+          "format": "date-time",
+          "description": "The Last replication time.",
+          "type": "string"
+        },
+        "vmNics": {
+          "description": "The PE Network details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMNicDetails"
+          }
+        },
+        "vmId": {
+          "description": "The virtual machine Id.",
+          "type": "string"
+        },
+        "vmProtectionState": {
+          "description": "The protection state for the vm.",
+          "type": "string"
+        },
+        "vmProtectionStateDescription": {
+          "description": "The protection state description for the vm.",
+          "type": "string"
+        },
+        "initialReplicationDetails": {
+          "$ref": "#/definitions/InitialReplicationDetails",
+          "description": "Initial replication details."
+        },
+        "vMDiskDetails": {
+          "description": "VM disk details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskDetails"
+          }
+        }
+      },
       "x-ms-discriminator-value": "HyperVReplica2012"
     },
     "HyperVSiteDetails": {
@@ -13543,7 +13735,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/InMageBasePolicyDetails"
+          "$ref": "#/definitions/PolicyProviderSpecificDetails"
         }
       ],
       "properties": {
@@ -13551,6 +13743,25 @@
           "format": "int32",
           "description": "The crash consistent snapshot frequency in minutes.",
           "type": "integer"
+        },
+        "recoveryPointThresholdInMinutes": {
+          "format": "int32",
+          "description": "The recovery point threshold in minutes.",
+          "type": "integer"
+        },
+        "recoveryPointHistory": {
+          "format": "int32",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
+          "type": "integer"
+        },
+        "appConsistentFrequencyInMinutes": {
+          "format": "int32",
+          "description": "The app consistent snapshot frequency in minutes.",
+          "type": "integer"
+        },
+        "multiVmSyncStatus": {
+          "description": "A value indicating whether multi-VM sync has to be enabled.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -14215,8 +14426,7 @@
           "type": "string"
         }
       },
-      "discriminator": "instanceType",
-      "x-ms-discriminator-value": "Microsoft.Azure.SiteRecovery.V2015_11_10.InMageBasePolicyDetails"
+      "x-ms-discriminator-value": "InMageBasePolicyDetails"
     },
     "InMageDisableProtectionProviderSpecificInput": {
       "description": "InMage disable protection provider specific input.",
@@ -14364,10 +14574,30 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/InMageBasePolicyDetails"
+          "$ref": "#/definitions/PolicyProviderSpecificDetails"
         }
       ],
-      "properties": {},
+      "properties": {
+        "recoveryPointThresholdInMinutes": {
+          "format": "int32",
+          "description": "The recovery point threshold in minutes.",
+          "type": "integer"
+        },
+        "recoveryPointHistory": {
+          "format": "int32",
+          "description": "The duration in minutes until which the recovery points need to be stored.",
+          "type": "integer"
+        },
+        "appConsistentFrequencyInMinutes": {
+          "format": "int32",
+          "description": "The app consistent snapshot frequency in minutes.",
+          "type": "integer"
+        },
+        "multiVmSyncStatus": {
+          "description": "A value indicating whether multi-VM sync has to be enabled.",
+          "type": "string"
+        }
+      },
       "x-ms-discriminator-value": "InMage"
     },
     "InMagePolicyInput": {
@@ -20348,7 +20578,7 @@
         }
       ],
       "properties": {},
-      "x-ms-discriminator-value": "Microsoft.Azure.SiteRecovery.V2015_11_10.ReplicationGroupDetails"
+      "x-ms-discriminator-value": "ReplicationGroupDetails"
     },
     "ReplicationProtectedItem": {
       "description": "Replication protected item.",
