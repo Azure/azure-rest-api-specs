@@ -2,13 +2,10 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "location": "norwayeast",
     "restorePointCollectionName": "restorePointCollection1",
-    "tags": {
-      "team": "devops"
-    },
     "api-version": "2021-03-01",
     "parameters": {
+      "location": "norwayeast",
       "properties": {
         "source": {
           "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
@@ -19,34 +16,28 @@
   "responses": {
     "200": {
       "body": {
+        "name": "restorePointCollection1",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/myVM",
         "type": "Microsoft.Compute/restorePointCollection",
         "location": "norwayeast",
-        "tags": {
-          "team": "devops"
-        },
         "properties": {
           "source": {
             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
           }
-        },
-        "restorePointCollectionName": "restorePointCollection1"
+        }
       }
     },
     "201": {
       "body": {
+        "name": "restorePointCollection1",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/myVM",
         "type": "Microsoft.Compute/restorePointCollection",
         "location": "norwayeast",
-        "tags": {
-          "team": "devops"
-        },
         "properties": {
           "source": {
             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
           }
-        },
-        "restorePointCollectionName": "restorePointCollection1"
+        }
       }
     }
   }
