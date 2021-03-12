@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2020-12-01
+tag: package-2021-03-01
 
 directive:
   - where:
@@ -207,8 +207,36 @@ directive:
       - TrackedResourcePatchOperation
     reason:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile"].get
+    suppress:
+      - D5001
+    reason: The API response has binary format and file type which is valid Swagger format. However, the example must be a JSON file which does not support specifying this response format.
 
 ```
+### Tag: package-2021-03-01
+
+These settings apply only when `--tag=package-2021-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01'
+input-file:
+- Microsoft.Compute/stable/2020-12-01/compute.json
+- Microsoft.Compute/stable/2020-12-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-09-30/disk.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
+### Tag: package-2021-03-01-only
+
+These settings apply only when `--tag=package-2021-03-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01-only'
+input-file:
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
+```
+
 ### Tag: package-2020-12-01
 
 These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
