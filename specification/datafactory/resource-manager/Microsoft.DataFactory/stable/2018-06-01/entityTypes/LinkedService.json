@@ -1046,6 +1046,92 @@
         }
       }
     },
+    "AmazonS3CompatibleLinkedService": {
+      "x-ms-discriminator-value": "AmazonS3Compatible",
+      "description": "Linked service for Amazon S3 Compatible.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Amazon S3 Compatible linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonS3CompatibleLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AmazonS3CompatibleLinkedServiceTypeProperties": {
+      "description": "Amazon S3 Compatible linked service properties.",
+      "properties": {
+        "accessKeyId": {
+          "type": "object",
+          "description": "The access key identifier of the Amazon S3 Compatible Identity and Access Management (IAM) user. Type: string (or Expression with resultType string)."
+        },
+        "secretAccessKey": {
+          "description": "The secret access key of the Amazon S3 Compatible Identity and Access Management (IAM) user.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "serviceUrl": {
+          "type": "object",
+          "description": "This value specifies the endpoint to access with the Amazon S3 Compatible Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string)."
+        },
+        "forcePathStyle": {
+          "type": "object",
+          "description": "If true, use S3 path-style access instead of virtual hosted-style access. Default value is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OracleCloudStorageLinkedService": {
+      "x-ms-discriminator-value": "OracleCloudStorage",
+      "description": "Linked service for Oracle Cloud Storage.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Oracle Cloud Storage linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OracleCloudStorageLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OracleCloudStorageLinkedServiceTypeProperties": {
+      "description": "Oracle Cloud Storage linked service properties.",
+      "properties": {
+        "accessKeyId": {
+          "type": "object",
+          "description": "The access key identifier of the Oracle Cloud Storage Identity and Access Management (IAM) user. Type: string (or Expression with resultType string)."
+        },
+        "secretAccessKey": {
+          "description": "The secret access key of the Oracle Cloud Storage Identity and Access Management (IAM) user.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "serviceUrl": {
+          "type": "object",
+          "description": "This value specifies the endpoint to access with the Oracle Cloud Storage Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "GoogleCloudStorageLinkedService": {
       "x-ms-discriminator-value": "GoogleCloudStorage",
       "description": "Linked service for Google Cloud Storage.",
