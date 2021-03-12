@@ -3608,7 +3608,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -3722,7 +3725,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -3788,7 +3794,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -4142,7 +4151,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -4205,7 +4217,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -4775,7 +4790,10 @@
         "hasBeenValidated": {
           "description": "Whether the service has validated access to the datastore with the provided credentials.",
           "type": "boolean",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "isDefault": {
           "description": "Whether this datastore is the default for the workspace.",
@@ -4825,7 +4843,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -4932,7 +4953,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -4995,7 +5019,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -5181,7 +5208,10 @@
           "x-ms-enum": {
             "name": "EnvironmentSpecificationType",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "docker": {
           "$ref": "#/definitions/DockerSpecification"
@@ -5263,7 +5293,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -5542,12 +5575,18 @@
         "datastoreId": {
           "description": "ARM ID of the datastore where the job logs and artifacts are stored, or null for the default container (\"azureml\") in the workspace's storage account.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "path": {
           "description": "Path within the datastore to the job logs and artifacts.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -5591,7 +5630,10 @@
           "x-ms-enum": {
             "name": "JobProvisioningState",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "interactionEndpoints": {
           "description": "Dictionary of endpoint URIs, keyed by enumerated job endpoints.\r\nFor local jobs, a job endpoint will have a value of FileStreamObject.",
@@ -5618,7 +5660,10 @@
               "type": "string"
             }
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "description": {
           "description": "The asset description text.",
@@ -5674,7 +5719,10 @@
         "output": {
           "description": "Location of the job output logs and artifacts.",
           "$ref": "#/definitions/JobOutput",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "priority": {
           "format": "int32",
@@ -5739,7 +5787,10 @@
           "x-ms-enum": {
             "name": "JobStatus",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "generalSettings": {
           "description": "General Settings",
@@ -6048,7 +6099,10 @@
           "x-ms-enum": {
             "name": "JobStatus",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "maxRunDurationSeconds": {
           "format": "int64",
@@ -6107,7 +6161,10 @@
           "description": "Input parameters.",
           "type": "object",
           "additionalProperties": {},
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "Command",
@@ -6706,7 +6763,10 @@
           "x-ms-enum": {
             "name": "JobStatus",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "parameterSamplingConfiguration": {
           "description": "class for all hyperparameter sampling algorithms",
@@ -7176,7 +7236,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -7218,7 +7281,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -7387,7 +7453,10 @@
           "additionalProperties": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "description": {
           "description": "The asset description text.",
@@ -7430,7 +7499,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -7539,7 +7611,10 @@
         "systemData": {
           "description": "System data associated with resource provider",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "additionalProperties": false
