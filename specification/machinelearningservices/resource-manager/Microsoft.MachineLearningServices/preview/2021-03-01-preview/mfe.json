@@ -5243,6 +5243,354 @@
       "x-ms-discriminator-value": "Command",
       "additionalProperties": false
     },
+    "InputData": {
+      "type": "object",
+      "properties": {
+        "datasetId": {
+          "description": "Dataset registration id.",
+          "type": "string",
+          "example": "\"/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.MachineLearningServices/workspaces/{{workspaceName}}/data/{{name}}/versions/{{version}}\"",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "mode": {
+          "description": "Mode type, can be set for DatasetId.",
+          "enum": [
+            "Mount",
+            "Download",
+            "Upload"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataBindingMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "value": {
+          "description": "Literal Value of a data binding.",
+          "type": "string",
+          "example": "\"42\"",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentJobInput": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "InputData Definition.",
+          "$ref": "#/definitions/InputData",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "inputBinding": {
+          "description": "Reference to an output of another job's ComponentJobInput or reference to a ComponentJobInput.",
+          "type": "string",
+          "example": "\"input2\"",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "OutputData": {
+      "type": "object",
+      "properties": {
+        "datasetName": {
+          "description": "Output dataset Name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "datastore": {
+          "description": "Datastore location for output data.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "datapath": {
+          "description": "Path location within the datastore for output data.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "mode": {
+          "description": "Mode type for data.",
+          "enum": [
+            "Mount",
+            "Download",
+            "Upload"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataBindingMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentJobOutput": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "OutputData Definition.",
+          "$ref": "#/definitions/OutputData",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "outputBinding": {
+          "description": "This is to pull the ComponentJobOutput from the overall PipelineOutputs.",
+          "type": "string",
+          "example": "\"outputPath\"",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentJob": {
+      "type": "object",
+      "properties": {
+        "computeBinding": {
+          "description": "Compute definition for Job.",
+          "$ref": "#/definitions/ComputeBinding",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "componentId": {
+          "description": "Reference to component artifact.",
+          "type": "string",
+          "example": "\"/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.MachineLearningServices/workspaces/{{workspaceName}}/components/{{name}}/versions/{{version}}\"",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "inputs": {
+          "description": "Data input definition for Job.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ComponentJobInput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "outputs": {
+          "description": "Data output definition for Job.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ComponentJobOutput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PipelineInput": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "InputData Definition.",
+          "$ref": "#/definitions/InputData",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PipelineOutput": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "OutputData Definition.",
+          "$ref": "#/definitions/OutputData",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Pipeline": {
+      "type": "object",
+      "properties": {
+        "continueRunOnStepFailure": {
+          "description": "Flag when set, continue pipeline execution if a step fails.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "defaultDatastoreName": {
+          "description": "Default datastore name shared by all pipeline jobs",
+          "type": "string"
+        },
+        "componentJobs": {
+          "description": "JobDefinition set for PipelineStepJobs.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ComponentJob"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "inputs": {
+          "description": "DataInput set for Jobs.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/PipelineInput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "outputs": {
+          "description": "DataOnput set for Jobs.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/PipelineOutput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PipelineJob": {
+      "description": "Pipeline Job definition",
+      "required": [
+        "computeBinding"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeJobBase"
+        }
+      ],
+      "properties": {
+        "jobType": {
+          "enum": [
+            "Command",
+            "Sweep",
+            "Labeling",
+            "Pipeline",
+            "Data",
+            "AutoML"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "status": {
+          "description": "Status of the job.",
+          "enum": [
+            "NotStarted",
+            "Starting",
+            "Provisioning",
+            "Preparing",
+            "Queued",
+            "Running",
+            "Finalizing",
+            "CancelRequested",
+            "Completed",
+            "Failed",
+            "Canceled",
+            "NotResponding",
+            "Paused"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "Type of PipelineJob",
+          "enum": [
+            "AzureML"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PipelineType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "pipeline": {
+          "description": "Pipeline details.",
+          "$ref": "#/definitions/Pipeline",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "definition": {
+          "description": "Todo remove (keeping temporarily for backwards compat)",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Pipeline",
+      "additionalProperties": false
+    },
     "ParameterSamplingConfiguration": {
       "description": "class for all hyperparameter sampling algorithms",
       "required": [
