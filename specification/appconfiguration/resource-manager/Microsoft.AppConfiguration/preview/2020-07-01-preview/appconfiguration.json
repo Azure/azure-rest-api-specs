@@ -1931,40 +1931,55 @@
       "description": "Properties of a private link resource."
     },
     "SystemMetadata": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
       "type": "object",
-      "description": "Resource metadata required by ARM RPC.",
+      "readOnly": true,
       "properties": {
         "createdBy": {
           "type": "string",
-          "description": "A string identifier for the identity that created the resource.",
-          "readOnly": true
+          "description": "The identity that created the resource."
         },
         "createdByType": {
           "type": "string",
-          "description": "The type of identity that created the resource: user, application, managedIdentity.",
-          "readOnly": true
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
         },
         "createdAt": {
-          "format": "date-time",
           "type": "string",
-          "description": "The timestamp of resource creation (UTC).",
-          "readOnly": true
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "A string identifier for the identity that last modified the resource.",
-          "readOnly": true
+          "description": "The identity that last modified the resource."
         },
         "lastModifiedByType": {
           "type": "string",
-          "description": "The type of identity that last modified the resource: user, application, managedIdentity.",
-          "readOnly": true
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
         },
         "lastModifiedAt": {
-          "format": "date-time",
           "type": "string",
-          "description": "The timestamp of resource last modification (UTC).",
-          "readOnly": true
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
         }
       }
     }
