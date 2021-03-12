@@ -1,0 +1,183 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "ConstosoRG",
+    "cloudServiceName": "{cs-name}",
+    "api-version": "2021-03-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "networkProfile": {
+          "loadBalancerConfigurations": [
+            {
+              "properties": {
+                "frontendIPConfigurations": [
+                  {
+                    "properties": {
+                      "publicIPAddress": {
+                        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/contosopublicip"
+                      }
+                    },
+                    "name": "contosofe"
+                  }
+                ]
+              },
+              "name": "contosolb"
+            }
+          ]
+        },
+        "osProfile": {
+          "secrets": [
+            {
+              "sourceVault": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.KeyVault/vaults/{keyvault-name}"
+              },
+              "vaultCertificates": [
+                {
+                  "certificateUrl": "https://{keyvault-name}.vault.azure.net:443/secrets/ContosoCertificate/{secret-id}"
+                }
+              ]
+            }
+          ]
+        },
+        "roleProfile": {
+          "roles": [
+            {
+              "sku": {
+                "name": "Standard_D1_v2",
+                "capacity": 1,
+                "tier": "Standard"
+              },
+              "name": "ContosoFrontend"
+            }
+          ]
+        },
+        "configuration": "{ServiceConfiguration}",
+        "packageUrl": "{PackageUrl}",
+        "upgradeMode": "Auto"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{cs-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}",
+        "type": "Microsoft.Compute/cloudServices",
+        "location": "westus",
+        "properties": {
+          "configuration": "{ServiceConfiguration}",
+          "packageUrl": "{PackageUrl}",
+          "upgradeMode": "Auto",
+          "roleProfile": {
+            "roles": [
+              {
+                "name": "ContosoFrontend",
+                "sku": {
+                  "name": "Standard_D1_v2",
+                  "tier": "Standard",
+                  "capacity": 1
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "secrets": [
+              {
+                "sourceVault": {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.KeyVault/vaults/{keyvault-name}"
+                },
+                "vaultCertificates": [
+                  {
+                    "certificateUrl": "https://{keyvault-name}.vault.azure.net:443/secrets/ContosoCertificate/{secret-id}"
+                  }
+                ]
+              }
+            ]
+          },
+          "networkProfile": {
+            "loadBalancerConfigurations": [
+              {
+                "name": "contosolb",
+                "properties": {
+                  "frontendIPConfigurations": [
+                    {
+                      "name": "contosofe",
+                      "properties": {
+                        "publicIPAddress": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/contosopublicip"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "provisioningState": "Updating",
+          "uniqueId": "60b6cd59-600b-4e02-b717-521b07aa94bf"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{cs-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}",
+        "type": "Microsoft.Compute/cloudServices",
+        "location": "westus",
+        "properties": {
+          "configuration": "{ServiceConfiguration}",
+          "packageUrl": "{PackageUrl}",
+          "upgradeMode": "Auto",
+          "roleProfile": {
+            "roles": [
+              {
+                "name": "ContosoFrontend",
+                "sku": {
+                  "name": "Standard_D1_v2",
+                  "tier": "Standard",
+                  "capacity": 1
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "secrets": [
+              {
+                "sourceVault": {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.KeyVault/vaults/{keyvault-name}"
+                },
+                "vaultCertificates": [
+                  {
+                    "certificateUrl": "https://{keyvault-name}.vault.azure.net:443/secrets/ContosoCertificate/{secret-id}"
+                  }
+                ]
+              }
+            ]
+          },
+          "networkProfile": {
+            "loadBalancerConfigurations": [
+              {
+                "name": "contosolb",
+                "properties": {
+                  "frontendIPConfigurations": [
+                    {
+                      "name": "contosofe",
+                      "properties": {
+                        "publicIPAddress": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Network/publicIPAddresses/contosopublicip"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "provisioningState": "Creating",
+          "uniqueId": "60b6cd59-600b-4e02-b717-521b07aa94bf"
+        }
+      }
+    }
+  }
+}
