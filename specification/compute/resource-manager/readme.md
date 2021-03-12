@@ -215,6 +215,10 @@ directive:
       - TrackedResourcePatchOperation
     reason:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
+  - where:
+      - $.definitions.RestorePointCreate
+    suppress:
+      - NestedResourcesMustHaveListOperation
 
 ```
 
