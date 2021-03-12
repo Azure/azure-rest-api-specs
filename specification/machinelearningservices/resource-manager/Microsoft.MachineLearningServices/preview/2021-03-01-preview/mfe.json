@@ -4112,6 +4112,24 @@
       },
       "additionalProperties": false
     },
+    "DockerImagePlatform": {
+      "type": "object",
+      "properties": {
+        "operatingSystemType": {
+          "description": "The OS type the Environment.",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperatingSystemType",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "DockerSpecification": {
       "description": "Class to represent configuration settings for Docker",
       "required": [
@@ -4130,6 +4148,14 @@
             "name": "DockerSpecificationType",
             "modelAsString": true
           },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "platform": {
+          "description": "The platform information of the docker image.",
+          "$ref": "#/definitions/DockerImagePlatform",
           "x-ms-mutability": [
             "create",
             "read"
