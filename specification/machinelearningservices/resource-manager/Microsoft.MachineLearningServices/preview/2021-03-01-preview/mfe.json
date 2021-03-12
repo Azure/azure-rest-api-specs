@@ -494,6 +494,228 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}": {
+      "put": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "Create or update container.",
+        "operationId": "ComponentContainers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Container entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Component Container.": {
+            "$ref": "./examples/ComponentContainer/createOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "Get container.",
+        "operationId": "ComponentContainers_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Component Container.": {
+            "$ref": "./examples/ComponentContainer/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "Delete container.",
+        "operationId": "ComponentContainers_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Component Container.": {
+            "$ref": "./examples/ComponentContainer/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components": {
+      "get": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "List containers.",
+        "operationId": "ComponentContainers_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Component Container.": {
+            "$ref": "./examples/ComponentContainer/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}": {
       "put": {
         "tags": [
@@ -3259,6 +3481,72 @@
       },
       "additionalProperties": false
     },
+    "ComponentContainer": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentContainerResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/ComponentContainer",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentContainerResourceArmPaginatedResult": {
+      "description": "A paginated list of ComponentContainer entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type ComponentContainer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentContainerResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "DataContainer": {
       "type": "object",
       "properties": {
@@ -5236,7 +5524,7 @@
         "parameters": {
           "description": "Input parameters.",
           "type": "object",
-          "additionalProperties": { },
+          "additionalProperties": {},
           "readOnly": true
         }
       },
