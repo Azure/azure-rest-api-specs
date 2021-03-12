@@ -216,7 +216,7 @@ directive:
     reason:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
   - where:
-      - $.definitions.RestorePointCreate
+      - $.definitions.RestorePoint
     suppress:
       - NestedResourcesMustHaveListOperation
 
