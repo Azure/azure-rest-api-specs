@@ -30,31 +30,25 @@
         ],
         "parameters": [
           {
-            "required": true,
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListOperationsPartner": {
-            "$ref": "./examples/ListOperationsPartner.json"
-          }
         }
       }
     },
@@ -73,8 +67,7 @@
         ],
         "parameters": [
           {
-            "required": true,
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "required": true,
@@ -87,8 +80,7 @@
             "type": "string"
           },
           {
-            "required": true,
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "manageInventoryMetadataRequest",
@@ -107,7 +99,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -133,8 +125,7 @@
         ],
         "parameters": [
           {
-            "required": true,
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "required": true,
@@ -147,8 +138,7 @@
             "type": "string"
           },
           {
-            "required": true,
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "manageLinkRequest",
@@ -167,7 +157,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -193,12 +183,10 @@
         ],
         "parameters": [
           {
-            "required": true,
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "searchInventoriesRequest",
@@ -220,7 +208,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -533,8 +521,7 @@
         },
         "configurationIdentifierOnDevice": {
           "description": "Configuration identifier on device - this is used in case of any mismatch\r\nbetween actual configuration on inventory and configuration stored in service",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -788,8 +775,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-secret": true
+          "readOnly": true
         }
       }
     },
