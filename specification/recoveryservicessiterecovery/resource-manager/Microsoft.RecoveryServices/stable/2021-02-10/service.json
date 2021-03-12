@@ -221,33 +221,33 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationEligibilityResults": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults": {
       "get": {
         "tags": [
           "ReplicationEligibilityResults"
         ],
         "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
-        "description": "Validates whether a given VM can be protected or not in which case returns list of errors. Currently this API supports only V2 Vms. Support for Classic Vms will be added soon.",
+        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
         "operationId": "ReplicationEligibilityResults_List",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "required": true,
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "Virtual Machine name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -265,33 +265,33 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationEligibilityResults/default": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default": {
       "get": {
         "tags": [
           "ReplicationEligibilityResults"
         ],
         "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
-        "description": "Validates whether a given VM can be protected or not in which case returns list of errors. Currently this API supports only V2 Vms. Support for Classic Vms will be added soon.",
+        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
         "operationId": "ReplicationEligibilityResults_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "required": true,
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "required": true,
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "required": true,
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "required": true,
             "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "Virtual Machine name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -10944,7 +10944,7 @@
           "type": "string"
         },
         "resource": {
-          "description": "The resource. The localized friendly form of the resource related to this action/operation - it should match the public documentation for the resource provider. It should use Title Casing. This value should be unique for a particular URL type (e.g. nested types should *not* reuse their parent�s display.resource field). e.g. \"Virtual Machines\" or \"Scheduler Job Collections\", or \"Virtual Machine VM Sizes\" or \"Scheduler Jobs\".",
+          "description": "The resource. The localized friendly form of the resource related to this action/operation - it should match the public documentation for the resource provider. It should use Title Casing. This value should be unique for a particular URL type (e.g. nested types should *not* reuse their parent's display.resource field). e.g. \"Virtual Machines\" or \"Scheduler Job Collections\", or \"Virtual Machine VM Sizes\" or \"Scheduler Jobs\".",
           "type": "string"
         },
         "operation": {
@@ -11932,96 +11932,6 @@
           "readOnly": true
         }
       }
-    },
-    "HyperVMigrationContainerMappingDetails": {
-      "description": "HyperVMigration provider specific container mapping details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProtectionContainerMappingProviderSpecificDetails"
-        }
-      ],
-      "properties": {
-        "targetLocation": {
-          "description": "The target location.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-discriminator-value": "HyperVMigration"
-    },
-    "HyperVMigrationContainerMappingInput": {
-      "description": "HyperVMigration container mapping input.",
-      "required": [
-        "targetLocation"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ReplicationProviderSpecificContainerMappingInput"
-        }
-      ],
-      "properties": {
-        "targetLocation": {
-          "description": "The target location.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "HyperVMigration"
-    },
-    "HyperVMigrationPolicyCreationInput": {
-      "description": "HyperV Migration policy creation input.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PolicyProviderSpecificInput"
-        }
-      ],
-      "properties": {
-        "recoveryPointHistoryInHours": {
-          "format": "int32",
-          "description": "The duration (in hours) to which point the recovery history needs to be maintained.",
-          "type": "integer"
-        },
-        "appConsistentFrequencyInHours": {
-          "format": "int32",
-          "description": "The interval (in hours) at which Hyper-V Replica should create an application consistent snapshot within the VM.",
-          "type": "integer"
-        },
-        "crashConsistentFrequencyInMinutes": {
-          "format": "int32",
-          "description": "The crash consistency frequency in minutes.",
-          "type": "integer"
-        }
-      },
-      "x-ms-discriminator-value": "HyperVMigration"
-    },
-    "HyperVMigrationPolicyDetails": {
-      "description": "HyperVMigration specific policy details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PolicyProviderSpecificDetails"
-        }
-      ],
-      "properties": {
-        "recoveryPointHistoryDuration": {
-          "format": "int32",
-          "description": "The duration in hours until which the recovery points need to be stored.",
-          "type": "integer"
-        },
-        "appConsistentFrequencyInHours": {
-          "format": "int32",
-          "description": "The app consistent frequency in hours.",
-          "type": "integer"
-        },
-        "crashConsistentFrequencyInMinutes": {
-          "format": "int32",
-          "description": "The crash consistent frequency in minutes.",
-          "type": "integer"
-        }
-      },
-      "x-ms-discriminator-value": "HyperVMigration"
     },
     "HyperVReplica2012EventDetails": {
       "description": "Model class for event details of a HyperVReplica E2E event.",
@@ -19337,7 +19247,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "RpRecoveryPointType",
+            "name": "A2ARpRecoveryPointType",
             "modelAsString": true
           }
         },
@@ -19640,7 +19550,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "RpRecoveryPointType",
+            "name": "HyperVReplicaAzureRpRecoveryPointType",
             "modelAsString": true
           }
         }
@@ -19669,7 +19579,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "RpRecoveryPointType",
+            "name": "InMageV2RpRecoveryPointType",
             "modelAsString": true
           }
         },
