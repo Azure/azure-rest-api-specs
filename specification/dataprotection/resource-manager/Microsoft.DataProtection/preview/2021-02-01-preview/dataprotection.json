@@ -91,6 +91,24 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
           "200": {
             "description": "Contains additional information like job Id",
             "schema": {
@@ -260,7 +278,7 @@
           "BackupVaults"
         ],
         "description": "Creates or updates a BackupVault resource belonging to a resource group.",
-        "operationId": "BackupVaults_Put",
+        "operationId": "BackupVaults_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -720,7 +738,7 @@
         "tags": [
           "BackupPolicies"
         ],
-        "operationId": "BackupPolicies_Put",
+        "operationId": "BackupPolicies_CreateOrUpdate",
         "summary": "Creates or Updates a backup policy belonging to a backup vault",
         "produces": [
           "application/json"
@@ -830,7 +848,7 @@
           "BackupInstances"
         ],
         "description": "Gets a backup instances belonging to a backup vault",
-        "operationId": "BackupInstances_GetBackupInstancesInVault",
+        "operationId": "BackupInstances_List",
         "produces": [
           "application/json"
         ],
@@ -927,7 +945,7 @@
         "tags": [
           "BackupInstances"
         ],
-        "operationId": "BackupInstances_Put",
+        "operationId": "BackupInstances_CreateOrUpdate",
         "produces": [
           "application/json"
         ],
@@ -1628,6 +1646,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstances}/findRestorableTimeRanges": {
+      "post": {
+        "tags": [
+          "FindRestorableTimeRanges"
+        ],
+        "operationId": "FindRestorableTimeRanges_Post",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "backupInstances",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesResponseResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find Restorable Time Ranges": {
+            "$ref": "./examples/BackupInstanceOperations/FindRestorableTimeRanges.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupJobs/{jobId}": {
       "get": {
         "tags": [
@@ -1934,6 +2011,82 @@
       "title": "AzureBackupDiscreteRecoveryPoint",
       "type": "object",
       "x-ms-discriminator-value": "AzureBackupDiscreteRecoveryPoint"
+    },
+    "AzureBackupFindRestorableTimeRangesRequest": {
+      "description": "List Restore Ranges Request",
+      "required": [
+        "sourceDataStoreType",
+        "startTime",
+        "endTime"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceDataStoreType": {
+          "description": "Gets or sets the type of the source data store.",
+          "enum": [
+            "OperationalStore",
+            "VaultStore",
+            "ArchiveStore"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RestoreSourceDataStoreType",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "Start time for the List Restore Ranges request",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time for the List Restore Ranges request",
+          "type": "string"
+        }
+      }
+    },
+    "AzureBackupFindRestorableTimeRangesRequestResource": {
+      "description": "List Restore Ranges Request",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppWorkerRequest"
+        }
+      ],
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesRequest",
+          "description": "AzureBackupFindRestorableTimeRangesRequestResource content"
+        }
+      }
+    },
+    "AzureBackupFindRestorableTimeRangesResponse": {
+      "description": "List Restore Ranges Response",
+      "type": "object",
+      "properties": {
+        "restorableTimeRanges": {
+          "description": "Returns the Restore Ranges available on the Backup Instance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableTimeRange"
+          }
+        },
+        "objectType": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureBackupFindRestorableTimeRangesResponseResource": {
+      "description": "List Restore Ranges Response",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureBackupFindRestorableTimeRangesResponse",
+          "description": "AzureBackupFindRestorableTimeRangesResponseResource properties"
+        }
+      }
     },
     "AzureBackupJob": {
       "description": "AzureBackup Job Class",
@@ -2297,6 +2450,26 @@
       "title": "AzureBackupRestoreWithRehydrationRequest",
       "type": "object",
       "x-ms-discriminator-value": "AzureBackupRestoreWithRehydrationRequest"
+    },
+    "AzureBackupRecoveryTimeBasedRestoreRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureBackupRestoreRequest"
+        }
+      ],
+      "description": "AzureBackup RecoveryPointTime Based Restore Request",
+      "properties": {
+        "recoveryPointTime": {
+          "description": "The recovery time in ISO 8601 format example - 2020-08-14T17:30:00.0000000Z.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "recoveryPointTime"
+      ],
+      "title": "AzureBackupRecoveryTimeBasedRestoreRequest",
+      "type": "object",
+      "x-ms-discriminator-value": "AzureBackupRecoveryTimeBasedRestoreRequest"
     },
     "AzureBackupRule": {
       "allOf": [
@@ -3227,6 +3400,44 @@
       },
       "type": "object"
     },
+    "DppWorkerRequest": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "supportedGroupVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cultureInfo": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "httpMethod": {
+          "type": "string"
+        }
+      }
+    },
     "Error": {
       "description": "The resource management error response.",
       "properties": {
@@ -3805,6 +4016,26 @@
         "recoveryOption"
       ],
       "type": "object"
+    },
+    "RestorableTimeRange": {
+      "required": [
+        "startTime",
+        "endTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "description": "Start time for the available restore range",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time for the available restore range",
+          "type": "string"
+        },
+        "objectType": {
+          "type": "string"
+        }
+      }
     },
     "RetentionTag": {
       "description": "Retention tag",
