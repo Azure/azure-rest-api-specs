@@ -3,19 +3,20 @@
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-```yaml $(python)
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: Microsoft.DeviceUpdate
-  package-name: deviceupdate
-  package-version: 2020-03-01-preview
-  clear-output-folder: true
+```yaml $(python) && $(track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+package-name: azure-mgmt-deviceupdate
+package-version: 1.0.0b1
+no-namespace-folders: true
 ```
 
-```yaml $(python)
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/deviceupdate
+```yaml $(python) && $(track2) && $(python-mode) == 'update'
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/deviceupdate/azure-mgmt-deviceupdate/azure/mgmt/deviceupdate
+```
+
+```yaml $(python) && $(track2) && $(python-mode) == 'create'
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/deviceupdate/azure-mgmt-deviceupdate
 ```
