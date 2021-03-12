@@ -339,9 +339,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the role assignment.",
+            "description": "Returns whether or not validation was successful.",
             "schema": {
-              "$ref": "#/definitions/RoleAssignment"
+              "$ref": "#/definitions/ValidationResponse"
             }
           },
           "500": {
@@ -359,8 +359,11 @@
           }
         },
         "x-ms-examples": {
-          "Validate a role assignment create or update operation": {
-            "$ref": "./examples/RoleAssignments_Validate.json"
+          "Validate a role assignment create or update operation with failed validation": {
+            "$ref": "./examples/RoleAssignments_ValidateInvalid.json"
+          },
+          "Validate a role assignment create or update operation with successful validation": {
+            "$ref": "./examples/RoleAssignments_ValidateValid.json"
           }
         }
       }
@@ -553,7 +556,7 @@
           "200": {
             "description": "Returns the role assignment.",
             "schema": {
-              "$ref": "#/definitions/RoleAssignment"
+              "$ref": "#/definitions/ValidationResponse"
             }
           },
           "500": {
@@ -571,8 +574,11 @@
           }
         },
         "x-ms-examples": {
-          "Validate a role assignment create or update operation by ID": {
-            "$ref": "./examples/RoleAssignments_ValidateById.json"
+          "Validate a role assignment create or update operation by ID with failed validation": {
+            "$ref": "./examples/RoleAssignments_ValidateByIdInvalid.json"
+          },
+          "Validate a role assignment create or update operation by ID with successful validation": {
+            "$ref": "./examples/RoleAssignments_ValidateByIdValid.json"
           }
         }
       }
@@ -587,6 +593,32 @@
         }
       },
       "description": "Descriptive error response."
+    },
+    "ValidationResponseErrorInfo": {
+      "description": "Failed validation result details",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code indicating why validation failed"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message indicating why validation failed"
+        }
+      }
+    },
+    "ValidationResponse": {
+      "description": "Validation response",
+      "properties": {
+        "isValid": {
+          "type": "boolean",
+          "description": "Whether or not validation succeeded"
+        },
+        "validationErrorInfo": {
+          "description": "Failed validation result details",
+          "$ref": "#/definitions/ValidationResponseErrorInfo"
+        }
+      }
     },
     "RoleAssignmentFilter": {
       "properties": {

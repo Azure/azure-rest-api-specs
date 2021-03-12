@@ -69,6 +69,10 @@ directive:
     where: $.definitions.DenyAssignmentProperties.properties.isSystemProtected
     from: authorization-DenyAssignmentGetCalls.json
     reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.ValidationResponse.properties.isValid
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
   - suppress: R4024
     reason: Preview versions still in use
   - suppress: RequiredSystemDataInNewApiVersions
