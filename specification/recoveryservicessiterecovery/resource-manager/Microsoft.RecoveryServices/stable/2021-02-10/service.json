@@ -9404,7 +9404,17 @@
         },
         "vmEncryptionType": {
           "description": "The encryption type of the VM.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "NotEncrypted",
+            "OnePassEncrypted",
+            "TwoPassEncrypted"
+          ],
+          "x-ms-enum": {
+            "name": "VmEncryptionType",
+            "modelAsString": true
+          }
         },
         "tfoAzureVMName": {
           "description": "The test failover vm name.",
@@ -11397,19 +11407,12 @@
     "Fabric": {
       "description": "Fabric definition.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "name": {
-          "description": "Unique Id of the Fabric.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Object type.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique ARM identifier for this object.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/FabricProperties",
           "description": "Fabric related data."
@@ -17261,19 +17264,12 @@
     "LogicalNetwork": {
       "description": "Logical network data model.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "type": {
-          "description": "The Resource Type.",
-          "type": "string"
-        },
-        "id": {
-          "description": "The Logical Network ID (ARM ID).",
-          "type": "string"
-        },
-        "name": {
-          "description": "The Logical Network Name.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/LogicalNetworkProperties",
           "description": "The Logical Network Properties."
@@ -17545,19 +17541,12 @@
     "MigrationItem": {
       "description": "Migration item.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of the object.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/MigrationItemProperties",
           "description": "The migration item properties."
@@ -17750,19 +17739,12 @@
     "MigrationRecoveryPoint": {
       "description": "Recovery point for a migration item.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The unique ARM identifier for this object.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the recovery point.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The resource type.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/MigrationRecoveryPointProperties",
           "description": "Recovery point properties."
@@ -17833,19 +17815,12 @@
     "Network": {
       "description": "Network model.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "type": {
-          "description": "The Resource Type.",
-          "type": "string"
-        },
-        "id": {
-          "description": "The Network ID (ARM ID).",
-          "type": "string"
-        },
-        "name": {
-          "description": "The Network Name.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/NetworkProperties",
           "description": "The Network Properties."
@@ -17872,19 +17847,12 @@
     "NetworkMapping": {
       "description": "Network Mapping model. Ideally it should have been possible to inherit this class from prev version in InheritedModels as long as there is no difference in structure or method signature. Since there were no base Models for certain fields and methods viz NetworkMappingProperties and Load with required return type, the class has been introduced in its entirety with references to base models to facilitate extensions in subsequent versions.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "type": {
-          "description": "The Resource Type.",
-          "type": "string"
-        },
-        "id": {
-          "description": "The Network Mapping ID (ARM ID).",
-          "type": "string"
-        },
-        "name": {
-          "description": "The Network Mapping Name.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/NetworkMappingProperties",
           "description": "The Network Mapping Properties."
@@ -18198,19 +18166,12 @@
     "Policy": {
       "description": "Protection profile details.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/PolicyProperties",
           "description": "The custom data."
@@ -18687,19 +18648,12 @@
     "ProtectableItem": {
       "description": "Replication protected item.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The Type of the object.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ProtectableItemProperties",
           "description": "The custom data."
@@ -18814,19 +18768,12 @@
     "ProtectionContainer": {
       "description": "Protection container details.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ProtectionContainerProperties",
           "description": "The custom data."
@@ -18864,19 +18811,12 @@
     "ProtectionContainerMapping": {
       "description": "Protection container mapping object.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The Resource Type.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ProtectionContainerMappingProperties",
           "description": "The custom data."
@@ -19194,19 +19134,12 @@
     "RecoveryPlan": {
       "description": "Recovery plan details.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/RecoveryPlanProperties",
           "description": "The custom details."
@@ -20886,6 +20819,31 @@
           }
         }
       }
+    },
+    "Resource": {
+      "description": "Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Resource Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource Type",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource Location",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "ResourceHealthSummary": {
       "description": "Base class to define the health summary of the resources contained under an Arm resource.",
