@@ -3128,62 +3128,6 @@
       },
       "additionalProperties": false
     },
-    "InnerErrorResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorResponse"
-        }
-      },
-      "additionalProperties": false
-    },
-    "RootError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "severity": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "message": {
-          "type": "string"
-        },
-        "messageFormat": {
-          "type": "string"
-        },
-        "messageParameters": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "referenceCode": {
-          "type": "string"
-        },
-        "detailsUri": {
-          "format": "uri",
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RootError"
-          }
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorResponse"
-        }
-      },
-      "additionalProperties": false
-    },
     "CodeContainerResourceArmPaginatedResult": {
       "description": "A paginated list of CodeContainer entities.",
       "type": "object",
