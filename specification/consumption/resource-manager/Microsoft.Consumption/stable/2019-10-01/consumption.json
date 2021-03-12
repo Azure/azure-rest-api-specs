@@ -3950,6 +3950,11 @@
             "$ref": "#/definitions/Notification"
           },
           "maxItems": 5
+        },
+        "forecastSpend": {
+          "description": "The forecasted cost which is being tracked for a budget.",
+          "$ref": "#/definitions/ForecastSpend",
+          "readOnly": true
         }
       },
       "required": [
@@ -4053,6 +4058,22 @@
       "properties": {
         "amount": {
           "description": "The total amount of cost which is being tracked by the budget.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of measure for the budget amount.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ForecastSpend": {
+      "description": "The forecasted cost which is being tracked for a budget.",
+      "properties": {
+        "amount": {
+          "description": "The forecasted cost for the total time period which is being tracked by the budget. This value is only provided if the budget contains a forecast alert type.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
