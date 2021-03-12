@@ -228,7 +228,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnterprisePolicy"
+              "$ref": "#/definitions/PatchEnterprisePolicy"
             },
             "description": "Parameters supplied to update EnterprisePolicy."
           }
@@ -400,6 +400,31 @@
         {
           "description": "The resource model definition for a ARM tracked top level resource.",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EnterprisePolicyIdentity",
+          "description": "The identity of the EnterprisePolicy."
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties",
+          "description": "The properties that define configuration for the enterprise policy",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        }
+      }
+    },
+    "PatchEnterprisePolicy": {
+      "type": "object",
+      "description": "Definition of the EnterprisePolicy.",
+      "allOf": [
+        {
+          "description": "The resource model definition for a ARM tracked top level resource.",
+          "$ref": "../../common/v1/definitions.json#/definitions/PatchTrackedResource"
         }
       ],
       "properties": {
