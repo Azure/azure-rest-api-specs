@@ -4844,6 +4844,17 @@
         "distributionConfiguration": {
           "$ref": "#/definitions/DistributionConfiguration"
         },
+        "environmentVariables": {
+          "description": "Environment variables included in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "identityConfiguration": {
           "$ref": "#/definitions/IdentityConfiguration"
         },
@@ -5032,6 +5043,17 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/DataBinding"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "environmentVariables": {
+          "description": "Environment variables included in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
           "x-ms-mutability": [
             "create",
