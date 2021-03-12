@@ -16969,19 +16969,12 @@
     "Job": {
       "description": "Job details.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The resource type.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/JobProperties",
           "description": "The custom data."
