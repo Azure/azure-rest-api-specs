@@ -5512,14 +5512,14 @@
           "type": "integer"
         },
         "blockListModels": {
-          "description": "List of Algos/Models to be blocked for training.",
+          "description": "List of Algorithms/Models to be blocked for training.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "allowListModels": {
-          "description": "List of Algos/Models to be Allowed for training.",
+          "description": "List of Algorithms/Models to be Allowed for training.",
           "type": "array",
           "items": {
             "type": "string"
@@ -5801,7 +5801,7 @@
           "$ref": "#/definitions/ExperimentLimits"
         },
         "dataSettings": {
-          "description": "Collection of registerd Tabular Dataset Ids required for training.",
+          "description": "Collection of registered Tabular Dataset Ids required for training.",
           "$ref": "#/definitions/DataSettings"
         },
         "featurizationSettings": {
@@ -6176,7 +6176,6 @@
         "datasetId": {
           "description": "Dataset registration id.",
           "type": "string",
-          "example": "\"/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.MachineLearningServices/workspaces/{{workspaceName}}/data/{{name}}/versions/{{version}}\"",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6200,9 +6199,8 @@
           ]
         },
         "value": {
-          "description": "Literal Value of a data binding.",
+          "description": "Literal Value of a data binding. Example \"42\".",
           "type": "string",
-          "example": "\"42\"",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6215,7 +6213,7 @@
       "type": "object",
       "properties": {
         "data": {
-          "description": "InputData Definition.",
+          "description": "Input data definition.",
           "$ref": "#/definitions/InputData",
           "x-ms-mutability": [
             "create",
@@ -6223,9 +6221,8 @@
           ]
         },
         "inputBinding": {
-          "description": "Reference to an output of another job's ComponentJobInput or reference to a ComponentJobInput.",
+          "description": "Reference to an output of another job's ComponentJobInput or reference to a ComponentJobInput. Example \"input2\".",
           "type": "string",
-          "example": "\"input2\"",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6238,7 +6235,7 @@
       "type": "object",
       "properties": {
         "datasetName": {
-          "description": "Output dataset Name.",
+          "description": "Output dataset name.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -6285,7 +6282,7 @@
       "type": "object",
       "properties": {
         "data": {
-          "description": "OutputData Definition.",
+          "description": "Output data definition.",
           "$ref": "#/definitions/OutputData",
           "x-ms-mutability": [
             "create",
@@ -6293,9 +6290,8 @@
           ]
         },
         "outputBinding": {
-          "description": "This is to pull the ComponentJobOutput from the overall PipelineOutputs.",
+          "description": "This is to pull the ComponentJobOutput from the overall PipelineOutputs. Example \"outputPath\".",
           "type": "string",
-          "example": "\"outputPath\"",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6308,7 +6304,7 @@
       "type": "object",
       "properties": {
         "computeBinding": {
-          "description": "Compute definition for Job.",
+          "description": "Compute definition for job.",
           "$ref": "#/definitions/ComputeBinding",
           "x-ms-mutability": [
             "create",
@@ -6318,14 +6314,13 @@
         "componentId": {
           "description": "Reference to component artifact.",
           "type": "string",
-          "example": "\"/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.MachineLearningServices/workspaces/{{workspaceName}}/components/{{name}}/versions/{{version}}\"",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
         "inputs": {
-          "description": "Data input definition for Job.",
+          "description": "Data input set for job.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ComponentJobInput"
@@ -6336,7 +6331,7 @@
           ]
         },
         "outputs": {
-          "description": "Data output definition for Job.",
+          "description": "Data output set for job.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ComponentJobOutput"
@@ -6353,7 +6348,7 @@
       "type": "object",
       "properties": {
         "data": {
-          "description": "InputData Definition.",
+          "description": "Input data definition.",
           "$ref": "#/definitions/InputData",
           "x-ms-mutability": [
             "create",
@@ -6367,7 +6362,7 @@
       "type": "object",
       "properties": {
         "data": {
-          "description": "OutputData Definition.",
+          "description": "Output data definition.",
           "$ref": "#/definitions/OutputData",
           "x-ms-mutability": [
             "create",
@@ -6389,7 +6384,7 @@
           ]
         },
         "defaultDatastoreName": {
-          "description": "Default datastore name shared by all pipeline jobs",
+          "description": "Default datastore name shared by all pipeline jobs.",
           "type": "string"
         },
         "componentJobs": {
@@ -6404,7 +6399,7 @@
           ]
         },
         "inputs": {
-          "description": "DataInput set for Jobs.",
+          "description": "Data input set for jobs.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/PipelineInput"
@@ -6415,7 +6410,7 @@
           ]
         },
         "outputs": {
-          "description": "DataOnput set for Jobs.",
+          "description": "Data output set for jobs.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/PipelineOutput"
