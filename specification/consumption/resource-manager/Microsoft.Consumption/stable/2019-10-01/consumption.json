@@ -2520,6 +2520,11 @@
           "type": "string",
           "readOnly": true
         },
+        "additionalInfo": {
+          "description": "Additional information.",
+          "type": "string",
+          "readOnly": true
+        },
         "orderNumber": {
           "description": "The order number.",
           "type": "string",
@@ -3217,6 +3222,11 @@
           "description": "The link (url) to the next page of results.",
           "type": "string",
           "readOnly": true
+        },
+        "previousLink": {
+          "description": "The link (url) to the previous page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3397,6 +3407,11 @@
     "ModernReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource Location.",
+          "readOnly": true
+        },
         "lookBackPeriod": {
           "description": "The number of days of usage to look back for recommendation.",
           "type": "integer",
@@ -3472,6 +3487,11 @@
           "items": {
             "$ref": "#/definitions/SkuProperty"
           },
+          "readOnly": true
+        },
+        "skuName": {
+          "description": "This is the ARM Sku name.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -4143,6 +4163,26 @@
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "download": {
+          "description": "Pricesheet download details.",
+          "$ref": "#/definitions/MeterDetails",
+          "readOnly": true
+        }
+      }
+    },
+    "DownloadProperties": {
+      "description": "The properties of the price sheet download.",
+      "properties": {
+        "downloadUrl": {
+          "description": "The link (url) to download the pricesheet.",
+          "type": "string",
+          "readOnly": true
+        },
+        "validTill": {
+          "description": "Download link validity.",
           "type": "string",
           "readOnly": true
         }
