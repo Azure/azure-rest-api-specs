@@ -4179,7 +4179,12 @@
       "properties": {
         "dockerImageUri": {
           "description": "Image name of a custom base image.\r\n<seealso href=\"https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-custom-docker-image#use-a-custom-base-image\" />",
-          "type": "string"
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "Image",
@@ -4199,11 +4204,20 @@
       "properties": {
         "dockerfile": {
           "description": "Docker command line instructions to assemble an image.\r\n<seealso href=\"https://repo2docker.readthedocs.io/en/latest/config_files.html#dockerfile-advanced-environments\" />",
-          "type": "string"
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "context": {
           "description": "Path to a snapshot of the Docker Context. This property is only valid if Dockerfile is specified.\r\nThe path is relative to the asset path which must contain a single Blob URI value.\r\nMicrosoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.Path<seealso href=\"https://docs.docker.com/engine/context/working-with-contexts/\" />",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "Build",
@@ -4519,11 +4533,19 @@
       "properties": {
         "experimentName": {
           "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "computeBinding": {
           "description": "Compute binding for the job.",
-          "$ref": "#/definitions/ComputeBinding"
+          "$ref": "#/definitions/ComputeBinding",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "output": {
           "description": "Location of the job output logs and artifacts.",
@@ -4533,7 +4555,11 @@
         "priority": {
           "format": "int32",
           "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview  is only for whitelisted customers",
-          "type": "integer"
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "discriminator": "jobType",
@@ -4644,11 +4670,19 @@
         "workerCount": {
           "format": "int32",
           "description": "Number of workers. Overwrites the node count in compute binding.",
-          "type": "integer"
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "parameterServerCount": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "TensorFlow",
@@ -4664,7 +4698,11 @@
       "properties": {
         "processCountPerInstance": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "Mpi",
@@ -4735,16 +4773,28 @@
         "clientId": {
           "format": "uuid",
           "description": "Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "objectId": {
           "format": "uuid",
           "description": "Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "msiResourceId": {
           "description": "Specifies a user-assigned identity by resource ID. For system-assigned, do not set this field.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "Managed",
@@ -4797,7 +4847,11 @@
           "x-ms-enum": {
             "name": "JobType",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "status": {
           "description": "Status of the job.",
@@ -4826,22 +4880,38 @@
         "maxRunDurationSeconds": {
           "format": "int64",
           "description": "The max run duration in seconds, after which the job will be cancelled.",
-          "type": "integer"
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "codeConfiguration": {
           "description": "Code configuration of the job.",
-          "$ref": "#/definitions/CodeConfiguration"
+          "$ref": "#/definitions/CodeConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "environmentId": {
           "description": "Environment specification of the job.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "dataBindings": {
           "description": "Mapping of data bindings used in the job.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/DataBinding"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "distributionConfiguration": {
           "$ref": "#/definitions/DistributionConfiguration"
@@ -5095,7 +5165,11 @@
           "x-ms-enum": {
             "name": "JobType",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "status": {
           "description": "The status of a job.",
@@ -5328,7 +5402,11 @@
           "x-ms-enum": {
             "name": "ImageAnnotationType",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "Image",
@@ -5352,7 +5430,11 @@
           "x-ms-enum": {
             "name": "TextAnnotationType",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "Text",
@@ -5464,15 +5546,29 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/LabelCategory"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "jobInstructions": {
           "description": "Labeling instructions of the job.",
-          "$ref": "#/definitions/LabelingJobInstructions"
+          "$ref": "#/definitions/LabelingJobInstructions",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "datasetConfiguration": {
           "description": "Configuration of dataset used in the job.",
-          "$ref": "#/definitions/LabelingDatasetConfiguration"
+          "$ref": "#/definitions/LabelingDatasetConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "mlAssistConfiguration": {
           "description": "Configuration of MLAssist feature in the job.",
@@ -5485,7 +5581,10 @@
           "format": "uuid",
           "description": "Internal id of the job(Previously called project).",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "status": {
           "description": "Status of the job.",
@@ -5509,12 +5608,18 @@
           "x-ms-enum": {
             "name": "JobStatus",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "progressMetrics": {
           "description": "Progress metrics of the job.",
           "$ref": "#/definitions/ProgressMetrics",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "statusMessages": {
           "description": "Status messages of the job.",
@@ -5522,13 +5627,19 @@
           "items": {
             "$ref": "#/definitions/StatusMessage"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "createdTimeUtc": {
           "format": "date-time",
           "description": "Created time of the job in UTC timezone.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "Labeling",
@@ -5689,12 +5800,18 @@
         "snapshotPath": {
           "description": "The output path where the labels will be exported.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "containerName": {
           "description": "The container name to which the labels will be exported.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "Coco",
@@ -5711,12 +5828,18 @@
         "snapshotPath": {
           "description": "The output path where the labels will be exported.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "containerName": {
           "description": "The container name to which the labels will be exported.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "CSV",
@@ -5733,7 +5856,10 @@
         "labeledAssetName": {
           "description": "The unique name of the labeled data asset.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "Dataset",
