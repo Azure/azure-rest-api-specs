@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "api-version": "2020-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "requestBody": {
+      "name": "myMonitor",
+      "sku": {
+        "name": "free_Monthly"
+      },
+      "properties": {
+        "monitoringStatus": "Enabled",
+        "datadogOrganizationProperties": {
+          "name": "myOrg",
+          "subscription": "pro",
+          "linkingAuthCode" : "someAuthCode",
+          "linkingClientId": "00000000-0000-0000-0000-000000000000",
+          "enterpriseAppId": "00000000-0000-0000-0000-000000000000"
+        },
+        "userInfo": {
+          "name": "Alice",
+          "emailAddress": "alice@microsoft.com",
+          "phoneNumber": "123-456-7890"
+        }
+      },
+      "tags": {
+        "Environment": "Dev"
+      },
+      "location": "West US"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Datadog/monitors",
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "monitoringStatus": "Enabled",
+          "datadogOrganizationProperties": {
+            "name": "myOrg",
+            "id": "myOrg123",
+            "linkingAuthCode": null,
+            "linkingClientId": null,
+            "enterpriseAppId": null
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 1
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Datadog/monitors",
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "monitoringStatus": "Enabled",
+          "datadogOrganizationProperties": {
+            "name": "myOrg",
+            "id": "myOrg123"
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 1
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US"
+      }
+    }
+  }
+}
