@@ -491,6 +491,9 @@
           },
           "Create Managed Cluster with FIPS enabled OS": {
             "$ref": "./examples/ManagedClustersCreate_EnabledFIPS.json"
+          },
+          "Create Managed Cluster with HTTP proxy configured": {
+            "$ref": "./examples/ManagedClustersCreate_HTTPProxy.json"
           }
         }
       },
@@ -3015,6 +3018,10 @@
             "$ref": "#/definitions/PrivateLinkResource"
           },
           "description": "Private link resources associated with the cluster."
+        },
+        "httpProxyConfig": {
+          "$ref": "#/definitions/ManagedClusterHTTPProxyConfig",
+          "description": "Configurations for provisioning the cluster with HTTP proxy servers."
         }
       },
       "description": "Properties of the managed cluster."
@@ -4094,6 +4101,31 @@
           "type": "integer",
           "format": "int32",
           "description": "Sysctl setting vm.vfs_cache_pressure."
+        }
+      }
+    },
+    "ManagedClusterHTTPProxyConfig": {
+      "description": "Configurations for provisioning the cluster with HTTP proxy servers.",
+      "type": "object",
+      "properties": {
+        "httpProxy": {
+          "type": "string",
+          "description": "HTTP proxy server endpoint to use."
+        },
+        "httpsProxy": {
+          "type": "string",
+          "description": "HTTPS proxy server endpoint to use."
+        },
+        "noProxy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Endpoints that should not go through proxy."
+        },
+        "trustedCa": {
+          "type": "string",
+          "description": "Alternative CA cert to use for connecting to proxy servers."
         }
       }
     }
