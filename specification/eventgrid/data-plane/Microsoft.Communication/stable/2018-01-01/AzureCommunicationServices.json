@@ -378,6 +378,10 @@
           "description": "The time at which the SMS delivery report was received",
           "format": "date-time",
           "type": "string"
+        },
+        "tag": {
+          "description": "Customer Content",
+          "type": "string"
         }
       }
     },
@@ -396,6 +400,30 @@
         "receivedTimestamp": {
           "description": "The time at which the SMS was received",
           "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRecordingFileStatusUpdatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.RecordingFileStatusUpdated event.",
+      "properties": {
+        "recordingStorageInfo": {
+          "description": "The details of recording storage information",
+          "$ref": "#/definitions/AcsRecordingStorageInfoProperties",
+          "type": "object"
+        },
+        "recordingStartTime": {
+          "description": "The time at which the recording started",
+          "format": "date-time",
+          "type": "string"
+        },
+        "recordingDurationMs": {
+          "description": "The recording duration in milliseconds",
+          "format": "int64",
+          "type": "integer"
+        },
+        "sessionEndReason": {
+          "description": "The reason for ending recording session",
           "type": "string"
         }
       }
@@ -588,6 +616,38 @@
         "segmentsFailed": {
           "description": "Number of segments whose delivery failed",
           "type": "integer"
+        }
+      }
+    },
+    "AcsRecordingStorageInfoProperties": {
+      "description": "Schema for all properties of Recording Storage Information.",
+      "type": "object",
+      "properties": {
+        "recordingChunks": {
+          "description": "List of details of recording chunks information",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRecordingChunkInfoProperties"
+          }
+        }
+      }
+    },
+    "AcsRecordingChunkInfoProperties": {
+      "description": "Schema for all properties of  Recording Chunk Information.",
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "description": "The documentId of the recording chunk",
+          "type": "string"
+        },
+        "index": {
+          "description": "The index of the recording chunk",
+          "type": "integer",
+          "format": "int64"
+        },
+        "endReason": {
+          "description": "The reason for ending the recording chunk",
+          "type": "string"
         }
       }
     }
