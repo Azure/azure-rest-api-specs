@@ -13,6 +13,9 @@
       "location": "westus",
       "properties": {
         "overprovision": true,
+        "upgradePolicy": {
+          "mode": "Manual"
+        },
         "virtualMachineProfile": {
           "userData": "U29tZSBDdXN0b20gRGF0YQ==",
           "storageProfile": {
@@ -30,19 +33,10 @@
               "createOption": "FromImage"
             }
           },
-          "description": "The expand expression to apply on the operation.",
-          "enum": [
-            "userData"
-          ],
-          "x-ms-enum": {
-            "name": "ExpandTypes",
-            "modelAsString": false
-          },
           "bootDiagnostics": {
             "storageUri": "http://{existing-storage-account-name}.blob.core.windows.net",
             "enabled": true
-          }
-        },
+          },
           "osProfile": {
             "computerNamePrefix": "{vmss-name}",
             "adminUsername": "{your-username}",
@@ -69,12 +63,10 @@
               }
             ]
           }
-        },
-        "upgradePolicy": {
-          "mode": "Manual"
         }
       }
-    },
+    }
+  },
   "responses": {
     "200": {
       "body": {
