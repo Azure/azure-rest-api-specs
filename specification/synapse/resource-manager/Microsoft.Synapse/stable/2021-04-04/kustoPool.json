@@ -1,494 +1,494 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"title": "KustoManagementClient",
-		"version": "2021-01-01"
-	},
-	"host": "management.azure.com",
-	"schemes": [
-		"https"
-	],
-	"consumes": [
-		"application/json"
-	],
-	"produces": [
-		"application/json"
-	],
-	"paths": {
-		"/subscriptions/{subscriptionId}/workspaces/{workspaceName}/providers/Microsoft.Synapse/kustoPools/{kustoPoolName}": {
-			"get": {
-				"tags": [
-					"kustoPools"
-				],
-				"operationId": "kustoPools_Get",
-				"x-ms-examples": {
-					"kustoPoolsGet": {
-						"$ref": "./examples/kustoPoolsGet.json"
-					}
-				},
-				"description": "Gets a Kusto pool.",
-				"parameters": [
-					{
-						"$ref": "./workspace.json#/parameters/workspaceNameParameter"
-					},
-					{
-						"$ref": "#/parameters/kustoPoolNameParameter"
-					},
-					{
-						"$ref": "#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "The Kusto pool.",
-						"schema": {
-							"$ref": "#/definitions/KustoPool"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/CloudError"
-						}
-					}
-				}
-			},
-			"put": {
-				"tags": [
-					"kustoPools"
-				],
-				"operationId": "kustoPools_CreateOrUpdate",
-				"x-ms-examples": {
-					"kustoPoolsCreateOrUpdate": {
-						"$ref": "./examples/kustoPoolsCreateOrUpdate.json"
-					}
-				},
-				"x-ms-long-running-operation": true,
-				"description": "Create or update a Kusto pool.",
-				"parameters": [
-					{
-						"$ref": "./workspace.json#/parameters/workspaceNameParameter"
-					},
-					{
-						"$ref": "#/parameters/kustoPoolNameParameter"
-					},
-					{
-						"name": "parameters",
-						"in": "body",
-						"required": true,
-						"schema": {
-							"$ref": "#/definitions/KustoPool"
-						},
-						"description": "The Kusto pool parameters supplied to the CreateOrUpdate operation."
-					},
-					{
-						"name": "If-Match",
-						"in": "header",
-						"required": false,
-						"type": "string",
-						"x-ms-client-name": "IfMatch",
-						"description": "The ETag of the Kusto Pool. Omit this value to always overwrite the current Kusto Pool. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
-					},
-					{
-						"name": "If-None-Match",
-						"in": "header",
-						"required": false,
-						"type": "string",
-						"x-ms-client-name": "IfNoneMatch",
-						"description": "Set to '*' to allow a new Kusto Pool to be created, but to prevent updating an existing Kusto Pool. Other values will result in a 412 Pre-condition Failed response."
-					},
-					{
-						"$ref": "#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Successfully updated the Kusto Pool.",
-						"schema": {
-							"$ref": "#/definitions/KustoPool"
-						}
-					},
-					"201": {
-						"description": "Successfully created the Kusto Pool.",
-						"schema": {
-							"$ref": "#/definitions/KustoPool"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/CloudError"
-						}
-					}
-				}
-			},
-			"patch": {
-				"tags": [
-					"kustoPools"
-				],
-				"operationId": "kustoPools_Update",
-				"x-ms-examples": {
-					"kustoPoolsUpdate": {
-						"$ref": "./examples/kustoPoolsUpdate.json"
-					}
-				},
-				"x-ms-long-running-operation": true,
-				"description": "Update a Kusto Kusto Pool.",
-				"parameters": [
-					{
-						"$ref": "./workspace.json#/parameters/workspaceNameParameter"
-					},
-					{
-						"$ref": "#/parameters/kustoPoolNameParameter"
-					},
-					{
-						"name": "parameters",
-						"in": "body",
-						"required": true,
-						"schema": {
-							"$ref": "#/definitions/KustoPoolUpdate"
-						},
-						"description": "The Kusto pool parameters supplied to the Update operation."
-					},
-					{
-						"name": "If-Match",
-						"in": "header",
-						"required": false,
-						"type": "string",
-						"x-ms-client-name": "IfMatch",
-						"description": "The ETag of the Kusto Pool. Omit this value to always overwrite the current Kusto Pool. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
-					},
-					{
-						"$ref": "#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Successfully updated the Kusto Pool.",
-						"schema": {
-							"$ref": "#/definitions/KustoPool"
-						}
-					},
-					"201": {
-						"description": "Successfully updated the Kusto Pool.",
-						"schema": {
-							"$ref": "#/definitions/KustoPool"
-						}
-					},
-					"202": {
-						"description": "Successfully updated the Kusto Pool.",
-						"schema": {
-							"$ref": "#/definitions/KustoPool"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/CloudError"
-						}
-					}
-				}
-			},
-			"delete": {
-				"tags": [
-					"kustoPools"
-				],
-				"operationId": "kustoPools_Delete",
-				"x-ms-examples": {
-					"kustoPoolsDelete": {
-						"$ref": "./examples/kustoPoolsDelete.json"
-					}
-				},
-				"x-ms-long-running-operation": true,
-				"description": "Deletes a Kusto pool.",
-				"parameters": [
-					{
-						"$ref": "./workspace.json#/parameters/workspaceNameParameter"
-					},
-					{
-						"$ref": "#/parameters/kustoPoolNameParameter"
-					},
-					{
-						"$ref": "#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK -- Kusto Pool deleted successfully."
-					},
-					"202": {
-						"description": "Accepted the delete Kusto Pool request."
-					},
-					"204": {
-						"description": "NoContent -- Kusto Pool does not exist in the subscription."
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/CloudError"
-						}
-					}
-				}
-			}
-		}
-	},
-	"definitions": {
-		"AzureSku": {
-			"type": "object",
-			"required": [
-				"name",
-				"tier"
-			],
-			"properties": {
-				"name": {
-					"description": "SKU name.",
-					"type": "string",
-					"enum": [
-						"Standard_DS13_v2+1TB_PS",
-						"Standard_DS13_v2+2TB_PS",
-						"Standard_DS14_v2+3TB_PS",
-						"Standard_DS14_v2+4TB_PS",
-						"Standard_D13_v2",
-						"Standard_D14_v2",
-						"Standard_L8s",
-						"Standard_L16s",
-						"Standard_L8s_v2",
-						"Standard_L16s_v2",
-						"Standard_D11_v2",
-						"Standard_D12_v2",
-						"Standard_L4s",
-						"Dev(No SLA)_Standard_D11_v2",
-						"Standard_E64i_v3",
-						"Standard_E80ids_v4",
-						"Standard_E2a_v4",
-						"Standard_E4a_v4",
-						"Standard_E8a_v4",
-						"Standard_E16a_v4",
-						"Standard_E8as_v4+1TB_PS",
-						"Standard_E8as_v4+2TB_PS",
-						"Standard_E16as_v4+3TB_PS",
-						"Standard_E16as_v4+4TB_PS",
-						"Dev(No SLA)_Standard_E2a_v4"
-					],
-					"x-ms-enum": {
-						"name": "AzureSkuName",
-						"modelAsString": true
-					}
-				},
-				"capacity": {
-					"description": "The number of instances of the cluster.",
-					"type": "integer",
-					"format": "int32"
-				},
-				"tier": {
-					"description": "SKU tier.",
-					"type": "string",
-					"enum": [
-						"Basic",
-						"Standard"
-					],
-					"x-ms-enum": {
-						"name": "AzureSkuTier",
-						"modelAsString": true
-					}
-				}
-			},
-			"description": "Azure SKU definition."
-		},
-		"CloudError": {
-			"x-ms-external": true,
-			"properties": {
-				"error": {
-					"$ref": "#/definitions/CloudErrorBody",
-					"description": "An error response from Kusto."
-				}
-			},
-			"description": "An error response from Kusto."
-		},
-		"KustoPoolProperties": {
-			"properties": {
-				"state": {
-					"type": "string",
-					"readOnly": true,
-					"description": "The state of the resource.",
-					"enum": [
-						"Creating",
-						"Unavailable",
-						"Running",
-						"Deleting",
-						"Deleted",
-						"Stopping",
-						"Stopped",
-						"Starting",
-						"Updating"
-					],
-					"x-ms-enum": {
-						"name": "State",
-						"modelAsString": true
-					}
-				},
-				"provisioningState": {
-					"$ref": "#/definitions/ProvisioningState",
-					"description": "The provisioned state of the resource."
-				},
-				"uri": {
-					"type": "string",
-					"readOnly": true,
-					"description": "The Kusto Pool URI."
-				},
-				"dataIngestionUri": {
-					"type": "string",
-					"readOnly": true,
-					"description": "The Kusto Pool data ingestion URI."
-				},
-				"stateReason": {
-					"type": "string",
-					"readOnly": true,
-					"description": "The reason for the Kusto Pool's current state."
-				},
-				"engineType": {
-					"type": "string",
-					"description": "The engine type",
-					"enum": [
-						"V2",
-						"V3"
-					],
-					"x-ms-enum": {
-						"name": "EngineType",
-						"modelAsString": true
-					}
-				}
-			},
-			"description": "Class representing the Kusto pool properties."
-		},
-		"KustoPool": {
-			"required": [
-				"sku"
-			],
-			"properties": {
-				"sku": {
-					"$ref": "#/definitions/AzureSku",
-					"description": "The SKU of the kusto pool."
-				},
-				"workspaceUid": {
-					"type": "string",
-					"description": "The SKU of the kusto pool."
-				},
-				"properties": {
-					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/KustoPoolProperties",
-					"description": "The kusto pool properties."
-				},
-				"etag": {
-					"type": "string",
-					"readOnly": true,
-					"description": "A unique read-only string that changes whenever the resource is updated."
-				}
-			},
-			"allOf": [
-				{
-					"$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-				}
-			],
-			"description": "Class representing a Kusto kusto pool."
-		},
-		"KustoPoolUpdate": {
-			"properties": {
-				"tags": {
-					"type": "object",
-					"additionalProperties": {
-						"type": "string"
-					},
-					"x-ms-mutability": [
-						"read",
-						"create",
-						"update"
-					],
-					"description": "Resource tags."
-				},
-				"location": {
-					"type": "string",
-					"description": "Resource location."
-				},
-				"sku": {
-					"$ref": "#/definitions/AzureSku",
-					"description": "The SKU of the kusto pool."
-				},
-				"properties": {
-					"x-ms-client-flatten": true,
-					"description": "The kusto pool properties.",
-					"$ref": "#/definitions/KustoPoolProperties"
-				}
-			},
-			"allOf": [
-				{
-					"$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-				}
-			],
-			"description": "Class representing an update to a Kusto kusto pool."
-		}
-	},
-	"parameters": {
-		"SubscriptionIdParameter": {
-			"name": "subscriptionId",
-			"in": "path",
-			"required": true,
-			"type": "string",
-			"description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-		},
-		"ApiVersionParameter": {
-			"name": "api-version",
-			"in": "query",
-			"required": true,
-			"type": "string",
-			"description": "Client API Version."
-		},
-		"kustoPoolNameParameter": {
-			"name": "kustoPoolName",
-			"in": "path",
-			"description": "The name of the Kusto pool.",
-			"required": true,
-			"type": "string",
-			"x-ms-parameter-location": "method"
-		},
-		"LocationNameParameter": {
-			"name": "location",
-			"in": "path",
-			"description": "Azure location (region) name.",
-			"required": true,
-			"type": "string",
-			"x-ms-parameter-location": "method"
-		},
-		"OperationIdParameter": {
-			"name": "operationId",
-			"in": "path",
-			"description": "The Guid of the operation ID",
-			"required": true,
-			"type": "string",
-			"x-ms-parameter-location": "method"
-		}
-	},
-	"securityDefinitions": {
-		"azure_auth": {
-			"type": "oauth2",
-			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-			"flow": "implicit",
-			"description": "Azure Active Directory OAuth2 Flow",
-			"scopes": {
-				"user_impersonation": "impersonate your user account"
-			}
-		}
-	}
+  "swagger": "2.0",
+  "info": {
+    "title": "KustoManagementClient",
+    "version": "2021-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/workspaces/{workspaceName}/providers/Microsoft.Synapse/kustoPools/{kustoPoolName}": {
+      "get": {
+        "tags": [
+          "kustoPools"
+        ],
+        "operationId": "kustoPools_Get",
+        "x-ms-examples": {
+          "kustoPoolsGet": {
+            "$ref": "./examples/kustoPoolsGet.json"
+          }
+        },
+        "description": "Gets a Kusto pool.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Kusto pool.",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "kustoPools"
+        ],
+        "operationId": "kustoPools_CreateOrUpdate",
+        "x-ms-examples": {
+          "kustoPoolsCreateOrUpdate": {
+            "$ref": "./examples/kustoPoolsCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Create or update a Kusto pool.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            },
+            "description": "The Kusto pool parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the Kusto Pool. Omit this value to always overwrite the current Kusto Pool. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new Kusto Pool to be created, but to prevent updating an existing Kusto Pool. Other values will result in a 412 Pre-condition Failed response."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the Kusto Pool.",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "201": {
+            "description": "Successfully created the Kusto Pool.",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "kustoPools"
+        ],
+        "operationId": "kustoPools_Update",
+        "x-ms-examples": {
+          "kustoPoolsUpdate": {
+            "$ref": "./examples/kustoPoolsUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Update a Kusto Kusto Pool.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KustoPoolUpdate"
+            },
+            "description": "The Kusto pool parameters supplied to the Update operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the Kusto Pool. Omit this value to always overwrite the current Kusto Pool. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the Kusto Pool.",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "201": {
+            "description": "Successfully updated the Kusto Pool.",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "202": {
+            "description": "Successfully updated the Kusto Pool.",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "kustoPools"
+        ],
+        "operationId": "kustoPools_Delete",
+        "x-ms-examples": {
+          "kustoPoolsDelete": {
+            "$ref": "./examples/kustoPoolsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes a Kusto pool.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Kusto Pool deleted successfully."
+          },
+          "202": {
+            "description": "Accepted the delete Kusto Pool request."
+          },
+          "204": {
+            "description": "NoContent -- Kusto Pool does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureSku": {
+      "type": "object",
+      "required": [
+        "name",
+        "tier"
+      ],
+      "properties": {
+        "name": {
+          "description": "SKU name.",
+          "type": "string",
+          "enum": [
+            "Standard_DS13_v2+1TB_PS",
+            "Standard_DS13_v2+2TB_PS",
+            "Standard_DS14_v2+3TB_PS",
+            "Standard_DS14_v2+4TB_PS",
+            "Standard_D13_v2",
+            "Standard_D14_v2",
+            "Standard_L8s",
+            "Standard_L16s",
+            "Standard_L8s_v2",
+            "Standard_L16s_v2",
+            "Standard_D11_v2",
+            "Standard_D12_v2",
+            "Standard_L4s",
+            "Dev(No SLA)_Standard_D11_v2",
+            "Standard_E64i_v3",
+            "Standard_E80ids_v4",
+            "Standard_E2a_v4",
+            "Standard_E4a_v4",
+            "Standard_E8a_v4",
+            "Standard_E16a_v4",
+            "Standard_E8as_v4+1TB_PS",
+            "Standard_E8as_v4+2TB_PS",
+            "Standard_E16as_v4+3TB_PS",
+            "Standard_E16as_v4+4TB_PS",
+            "Dev(No SLA)_Standard_E2a_v4"
+          ],
+          "x-ms-enum": {
+            "name": "AzureSkuName",
+            "modelAsString": true
+          }
+        },
+        "capacity": {
+          "description": "The number of instances of the cluster.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "tier": {
+          "description": "SKU tier.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "AzureSkuTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Azure SKU definition."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from Kusto."
+        }
+      },
+      "description": "An error response from Kusto."
+    },
+    "KustoPoolProperties": {
+      "properties": {
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The state of the resource.",
+          "enum": [
+            "Creating",
+            "Unavailable",
+            "Running",
+            "Deleting",
+            "Deleted",
+            "Stopping",
+            "Stopped",
+            "Starting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
+        },
+        "uri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Kusto Pool URI."
+        },
+        "dataIngestionUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Kusto Pool data ingestion URI."
+        },
+        "stateReason": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The reason for the Kusto Pool's current state."
+        },
+        "engineType": {
+          "type": "string",
+          "description": "The engine type",
+          "enum": [
+            "V2",
+            "V3"
+          ],
+          "x-ms-enum": {
+            "name": "EngineType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Class representing the Kusto pool properties."
+    },
+    "KustoPool": {
+      "required": [
+        "sku"
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/AzureSku",
+          "description": "The SKU of the kusto pool."
+        },
+        "workspaceUid": {
+          "type": "string",
+          "description": "The SKU of the kusto pool."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/KustoPoolProperties",
+          "description": "The kusto pool properties."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Class representing a Kusto kusto pool."
+    },
+    "KustoPoolUpdate": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "sku": {
+          "$ref": "#/definitions/AzureSku",
+          "description": "The SKU of the kusto pool."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The kusto pool properties.",
+          "$ref": "#/definitions/KustoPoolProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Class representing an update to a Kusto kusto pool."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API Version."
+    },
+    "kustoPoolNameParameter": {
+      "name": "kustoPoolName",
+      "in": "path",
+      "description": "The name of the Kusto pool.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationNameParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "Azure location (region) name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "The Guid of the operation ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
 }
