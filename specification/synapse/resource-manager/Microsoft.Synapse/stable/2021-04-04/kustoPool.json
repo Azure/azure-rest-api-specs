@@ -429,6 +429,23 @@
       ],
       "description": "Class representing a Kusto kusto pool."
     },
+	"ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The provisioned state of the resource.",
+      "enum": [
+        "Running",
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Moving"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
     "KustoPoolUpdate": {
       "properties": {
         "tags": {
