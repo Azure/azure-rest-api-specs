@@ -928,6 +928,298 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/dataWarehouseInstances": {
+      "get": {
+        "tags": [
+          "DataWarehouseInstances"
+        ],
+        "operationId": "DataWarehouseInstances_List",
+        "summary": "List dataWarehouse Instance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all DataWarehouse Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionDataWarehouseInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataWarehouseInstances": {
+      "get": {
+        "tags": [
+          "DataWarehouseInstances"
+        ],
+        "operationId": "DataWarehouseInstances_ListByResourceGroup",
+        "description": "Get a dataWarehouse Instances list by Resource group name.",
+        "summary": "List dataWarehouse Instance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all dataWarehouse Instances in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupDataWarehouseInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataWarehouseInstances/{dataWarehouseInstanceName}": {
+      "get": {
+        "tags": [
+          "DataWarehouseInstances"
+        ],
+        "operationId": "DataWarehouseInstances_Get",
+        "description": "Retrieves a dataWarehouse Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataWarehouseInstanceName",
+            "description": "Name of DataWarehouse Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a dataWarehouse Instances.": {
+            "$ref": "./examples/GetDataWarehouseInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataWarehouseInstances"
+        ],
+        "operationId": "DataWarehouseInstances_Create",
+        "description": "Creates or replaces a dataWarehouse Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataWarehouseInstanceName",
+            "description": "Name of DataWarehouseInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "resource",
+            "description": "The dataWarehouse instance",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a DataWarehouse Instance.": {
+            "$ref": "./examples/CreateOrUpdateDataWarehouseInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataWarehouseInstances"
+        ],
+        "operationId": "DataWarehouseInstances_Delete",
+        "description": "Deletes a dataWarehouse Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataWarehouseInstanceName",
+            "description": "Name of DataWarehouse Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the DataWarehouse Instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified DataWarehouse Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a DataWarehouseInstances.": {
+            "$ref": "./examples/DeleteDataWarehouseInstance.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DataWarehouseInstances"
+        ],
+        "operationId": "DataWarehouseInstances_Update",
+        "description": "Updates a dataWarehouse Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataWarehouseInstanceName",
+            "description": "Name of DataWarehouse Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The DataWarehouse Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataWarehouseInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a dataWarehouse Instances tags.": {
+            "$ref": "./examples/UpdateDataWarehouseInstance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/dataControllers": {
       "get": {
         "tags": [
@@ -1700,6 +1992,85 @@
         }
       }
     },
+    "DataWarehouseInstanceProperties": {
+      "description": "DataWarehouse Instance properties.",
+      "type": "object",
+      "properties": {
+        "dataControllerId": {
+          "type": "string",
+          "description": "The data controller id"
+        },
+        "admin": {
+          "type": "string",
+          "description": "The instance admin"
+        },
+        "k8sRaw": {
+          "type": "object",
+          "description": "The raw kubernetes information"
+        },
+        "lastUploadedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last uploaded date from on premise cluster. Defaults to current date time"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataWarehouseInstance": {
+      "description": "A DataWarehouse Instance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource",
+          "description": "null"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataWarehouseInstanceProperties",
+          "x-ms-client-flatten": false,
+          "description": "null"
+        }
+      }
+    },
+    "DataWarehouseInstanceUpdate": {
+      "description": "An update to a DataWarehouse Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/DataWarehouseInstanceProperties"
+        }
+      }
+    },
+    "DataWarehouseInstanceListResult": {
+      "description": "A list of DataWarehouseInstance.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataWarehouseInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "SqlManagedInstanceProperties": {
       "description": "Properties of sqlManagedInstance.",
       "type": "object",
@@ -2017,6 +2388,14 @@
     "PostgresInstanceNameParameter": {
       "in": "path",
       "name": "postgresInstanceName",
+      "description": "The name of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DataWarehouseInstanceNameParameter": {
+      "in": "path",
+      "name": "dataWarehouseInstanceName",
       "description": "The name of the resource.",
       "required": true,
       "type": "string",
