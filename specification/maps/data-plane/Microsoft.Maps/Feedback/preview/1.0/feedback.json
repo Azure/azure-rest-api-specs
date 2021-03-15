@@ -38,197 +38,8 @@
       "apiKeyQuery": []
     }
   ],
-  "responses": {
-    "400": {
-      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "401": {
-      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "headers": {
-        "WWW-Authenticate": {
-          "type": "string",
-          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
-        }
-      }
-    },
-    "403": {
-      "description": "Permission, capacity, or authentication issues.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "404": {
-      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "500": {
-      "description": "An error occurred while processing the request. Please try again later.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    }
-  },
-  "parameters": {
-    "ClientId": {
-      "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
-      "type": "string",
-      "in": "header",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "SubscriptionKey": {
-      "name": "subscription-key",
-      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 1.0",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "default": "1.0",
-      "x-ms-parameter-location": "client"
-    }
-  },
   "paths": {},
   "definitions": {
-    "ODataErrorResponse": {
-      "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
-    "ODataError": {
-      "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The ODataError code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, a human readable description of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ODataError"
-          }
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, the target causing the error."
-        }
-      }
-    },
-    "GeoJSONPosition": {
-      "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
-      "type": "array",
-      "items": {
-        "type": "number",
-        "format": "double"
-      }
-    },
-    "GeoJSONGeometry": {
-      "description": "A valid `GeoJSON` geometry object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
-      "type": "object",
-      "discriminator": "type",
-      "required": [
-        "type"
-      ],
-      "properties": {
-        "type": {
-          "description": "Specifies the `GeoJSON` geometry type. Must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection.",
-          "type": "string",
-          "enum": [
-            "Point",
-            "MultiPoint",
-            "LineString",
-            "MultiLineString",
-            "Polygon",
-            "MultiPolygon",
-            "GeometryCollection"
-          ],
-          "x-ms-enum": {
-            "name": "GeoJSONGeometryType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Point",
-                "description": "`GeoJSON Point` geometry."
-              },
-              {
-                "value": "MultiPoint",
-                "description": "`GeoJSON MultiPoint` geometry."
-              },
-              {
-                "value": "LineString",
-                "description": "`GeoJSON LineString` geometry."
-              },
-              {
-                "value": "MultiLineString",
-                "description": "`GeoJSON MultiLineString` geometry."
-              },
-              {
-                "value": "Polygon",
-                "description": "`GeoJSON Polygon` geometry."
-              },
-              {
-                "value": "MultiPolygon",
-                "description": "`GeoJSON MultiPolygon` geometry."
-              },
-              {
-                "value": "GeometryCollection",
-                "description": "`GeoJSON GeometryCollection` geometry."
-              }
-            ]
-          }
-        }
-      }
-    },
-    "Point": {
-      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJSONGeometry"
-        },
-        {
-          "properties": {
-            "type": {
-              "description": "Specifies the `type` for the geometry. Value should always be equal to \"Point\".",
-              "type": "string"
-            },
-            "coordinates": {
-              "$ref": "#/definitions/GeoJSONPosition"
-            }
-          },
-          "required": [
-            "coordinates"
-          ]
-        }
-      ]
-    },
     "GeoJsonBoundingBox": {
       "description": "Bounding Box. The bounding box is an array of length 2*n where n is\nthe number of dimensions represented in the contained geometries,\nwith all axes of the most southwesterly point followed by all axes\nof the more northeasterly point.  The axes order of a bbox follows\nthe axes order of geometries.\n\nThe edges of the bounding box follow lines of constant longitude,\nlatitude, and elevation.",
       "type": "array",
@@ -236,10 +47,6 @@
         "type": "number",
         "format": "double"
       }
-    },
-    "Geometry": {
-      "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) and should be a `GeoJSON` compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
-      "type": "object"
     },
     "FeedbackStatusResponse": {
       "type": "object",
@@ -289,7 +96,7 @@
           "type": "boolean"
         },
         "location": {
-          "$ref": "#/definitions/GeoJSONPosition"
+          "$ref": "../../../Common/common.json#/definitions/GeoJSONPosition"
         },
         "bbox": {
           "$ref": "#/definitions/GeoJsonBoundingBox"
@@ -317,7 +124,7 @@
           "type": "boolean"
         },
         "location": {
-          "$ref": "#/definitions/GeoJSONPosition"
+          "$ref": "../../../Common/common.json#/definitions/GeoJSONPosition"
         },
         "bbox": {
           "$ref": "#/definitions/GeoJsonBoundingBox"
@@ -345,7 +152,7 @@
           "type": "boolean"
         },
         "location": {
-          "$ref": "#/definitions/GeoJSONPosition"
+          "$ref": "../../../Common/common.json#/definitions/GeoJSONPosition"
         },
         "bbox": {
           "$ref": "#/definitions/GeoJsonBoundingBox"
@@ -412,7 +219,7 @@
           "type": "string"
         },
         "geometry": {
-          "$ref": "#/definitions/Point"
+          "$ref": "../../../Common/common.json#/definitions/Point"
         }
       }
     },
@@ -483,7 +290,7 @@
           "type": "boolean"
         },
         "location": {
-          "$ref": "#/definitions/GeoJSONPosition"
+          "$ref": "../../../Common/common.json#/definitions/GeoJSONPosition"
         },
         "bbox": {
           "$ref": "#/definitions/GeoJsonBoundingBox"
@@ -511,7 +318,7 @@
           "type": "boolean"
         },
         "location": {
-          "$ref": "#/definitions/GeoJSONPosition"
+          "$ref": "../../../Common/common.json#/definitions/GeoJSONPosition"
         },
         "bbox": {
           "$ref": "#/definitions/GeoJsonBoundingBox"
@@ -539,7 +346,7 @@
           "type": "boolean"
         },
         "location": {
-          "$ref": "#/definitions/GeoJSONPosition"
+          "$ref": "../../../Common/common.json#/definitions/GeoJSONPosition"
         },
         "bbox": {
           "$ref": "#/definitions/GeoJsonBoundingBox"
@@ -587,7 +394,7 @@
           "type": "string"
         },
         "geometry": {
-          "$ref": "#/definitions/Point"
+          "$ref": "../../../Common/common.json#/definitions/Point"
         }
       }
     },
@@ -638,7 +445,7 @@
           "type": "boolean"
         },
         "location": {
-          "$ref": "#/definitions/GeoJSONPosition"
+          "$ref": "../../../Common/common.json#/definitions/GeoJSONPosition"
         },
         "bbox": {
           "$ref": "#/definitions/GeoJsonBoundingBox"
@@ -674,10 +481,10 @@
       "type": "object",
       "properties": {
         "current": {
-          "$ref": "#/definitions/Geometry"
+          "$ref": "../../../Common/common.json#/definitions/Geometry"
         },
         "proposed": {
-          "$ref": "#/definitions/Geometry"
+          "$ref": "../../../Common/common.json#/definitions/Geometry"
         }
       }
     }

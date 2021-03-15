@@ -59,13 +59,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -77,19 +77,19 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     }
   },
@@ -604,62 +604,15 @@
           },
           "500": {
             "$ref": "#/responses/500"
+          },
+          "default": {
+            "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
           }
         }
       }
     }
   },
   "definitions": {
-    "ODataErrorResponse": {
-      "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
-    "ODataError": {
-      "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The ODataError code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, a human readable description of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ODataError"
-          }
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, the target causing the error."
-        }
-      }
-    },
-    "Exception": {
-      "type": "object",
-      "required": [
-        "code"
-      ],
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
     "Root": {
       "type": "object",
       "required": [

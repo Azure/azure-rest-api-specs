@@ -39,97 +39,6 @@
       "apiKeyQuery": []
     }
   ],
-  "responses": {
-    "400": {
-      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "401": {
-      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory (Azure AD) bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided Azure AD bearer token.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "headers": {
-        "WWW-Authenticate": {
-          "type": "string",
-          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
-        }
-      },
-      "x-ms-error-response": true
-    },
-    "403": {
-      "description": "Permission, capacity, or authentication issues.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "404": {
-      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "500": {
-      "description": "An error occurred while processing the request. Please try again later.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "x-ms-error-response": true
-    }
-  },
-  "parameters": {
-    "ClientId": {
-      "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
-      "type": "string",
-      "in": "header",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "SubscriptionKey": {
-      "name": "subscription-key",
-      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "JsonFormat": {
-      "name": "format",
-      "description": "Desired format of the response. Only `json` format is supported.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "enum": [
-        "json"
-      ],
-      "x-ms-enum": {
-        "name": "JsonFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "json",
-            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 1.0",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "default": "1.0",
-      "x-ms-parameter-location": "client"
-    }
-  },
   "paths": {
     "/elevation/point/{format}": {
       "get": {
@@ -143,16 +52,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/common.json#/parameters/JsonFormat"
           },
           {
             "name": "points",
@@ -181,19 +90,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/common.json#/responses/500"
           }
         }
       },
@@ -208,16 +117,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/common.json#/parameters/JsonFormat"
           },
           {
             "name": "pointsRequestBody",
@@ -240,19 +149,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/common.json#/responses/500"
           }
         }
       }
@@ -269,16 +178,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/common.json#/parameters/JsonFormat"
           },
           {
             "name": "lines",
@@ -317,19 +226,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/common.json#/responses/500"
           }
         }
       },
@@ -344,16 +253,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/common.json#/parameters/JsonFormat"
           },
           {
             "name": "linesRequestBody",
@@ -386,19 +295,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/common.json#/responses/500"
           }
         }
       }
@@ -415,16 +324,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/common.json#/parameters/JsonFormat"
           },
           {
             "name": "bounds",
@@ -467,95 +376,25 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/common.json#/responses/500"
           }
         }
       }
     }
   },
   "definitions": {
-    "ODataErrorResponse": {
-      "type": "object",
-      "description": "This response object is returned when an error occurs in the Azure Maps API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
-    "ODataError": {
-      "type": "object",
-      "description": "This object is returned when an error occurs in the Azure Maps API.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The ODataError code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, a human-readable description of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ODataError"
-          }
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, the target causing the error."
-        }
-      }
-    },
-    "Coordinate": {
-      "description": "A location represented as a latitude and longitude.",
-      "type": "object",
-      "properties": {
-        "latitude": {
-          "description": "Latitude property",
-          "type": "number",
-          "format": "double",
-          "readOnly": true
-        },
-        "longitude": {
-          "description": "Longitude property",
-          "type": "number",
-          "format": "double",
-          "readOnly": true
-        }
-      }
-    },
-    "CoordinateAbbreviated": {
-      "description": "A location represented as a latitude and longitude.",
-      "type": "object",
-      "properties": {
-        "lat": {
-          "description": "Latitude property",
-          "type": "number",
-          "format": "double"
-        },
-        "lon": {
-          "description": "Longitude property",
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
     "ElevationPointResponse": {
       "description": "The response for point/points elevation API. The result will be in same sequence of points listed in request.",
       "type": "array",
@@ -569,7 +408,7 @@
       "description": "The elevation data.",
       "properties": {
         "coordinate": {
-          "$ref": "#/definitions/Coordinate"
+          "$ref": "../../../Common/common.json#/definitions/Coordinate"
         },
         "elevationInMeter": {
           "description": "The elevation value in meters.",
@@ -625,14 +464,14 @@
       "type": "array",
       "description": "The post elevation points array request body. The length of the array ranges from 2 to 2000.",
       "items": {
-        "$ref": "#/definitions/CoordinateAbbreviated"
+        "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
       }
     },
     "LinesInRequestBody": {
       "type": "array",
       "description": "The post elevation lines request body.",
       "items": {
-        "$ref": "#/definitions/CoordinateAbbreviated"
+        "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
       }
     }
   }

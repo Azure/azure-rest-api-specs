@@ -52,13 +52,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -70,19 +70,19 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     },
     "202Async": {
@@ -1638,7 +1638,7 @@
             "description": "The list of route directions queries/requests to process. The list can contain  a max of 700 queries for async and 100 queries for sync version and must contain at least 1 query.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchRequestBody"
+              "$ref": "../../../Common/common.json#/definitions/BatchRequestBody"
             }
           }
         ],
@@ -1646,7 +1646,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BatchResponse"
+              "$ref": "../../../Common/common.json#/definitions/BatchResponse"
             }
           },
           "202": {
@@ -1675,287 +1675,6 @@
     }
   },
   "definitions": {
-    "ODataErrorResponse": {
-      "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
-    "ODataError": {
-      "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The ODataError code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, a human readable description of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ODataError"
-          }
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, the target causing the error."
-        }
-      }
-    },
-    "Redirect": {
-      "type": "object",
-      "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry."
-    },
-    "BatchResponse": {
-      "description": "This object is returned from a successful Batch service call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "description": "Summary for the batch request",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "successfulRequests": {
-              "description": "Number of successful requests in the batch",
-              "type": "integer",
-              "readOnly": true
-            },
-            "totalRequests": {
-              "description": "Total number of requests in the batch",
-              "type": "integer",
-              "readOnly": true
-            }
-          }
-        },
-        "batchItems": {
-          "description": "Array containing the batch results",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "object"
-          }
-        }
-      }
-    },
-    "GeoJSONGeometry": {
-      "description": "A valid `GeoJSON` geometry object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
-      "type": "object",
-      "discriminator": "type",
-      "required": [
-        "type"
-      ],
-      "properties": {
-        "type": {
-          "description": "Specifies the `GeoJSON` geometry type. Must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection.",
-          "type": "string",
-          "enum": [
-            "Point",
-            "MultiPoint",
-            "LineString",
-            "MultiLineString",
-            "Polygon",
-            "MultiPolygon",
-            "GeometryCollection"
-          ],
-          "x-ms-enum": {
-            "name": "GeoJSONGeometryType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Point",
-                "description": "`GeoJSON Point` geometry."
-              },
-              {
-                "value": "MultiPoint",
-                "description": "`GeoJSON MultiPoint` geometry."
-              },
-              {
-                "value": "LineString",
-                "description": "`GeoJSON LineString` geometry."
-              },
-              {
-                "value": "MultiLineString",
-                "description": "`GeoJSON MultiLineString` geometry."
-              },
-              {
-                "value": "Polygon",
-                "description": "`GeoJSON Polygon` geometry."
-              },
-              {
-                "value": "MultiPolygon",
-                "description": "`GeoJSON MultiPolygon` geometry."
-              },
-              {
-                "value": "GeometryCollection",
-                "description": "`GeoJSON GeometryCollection` geometry."
-              }
-            ]
-          }
-        }
-      }
-    },
-    "MultiPoint": {
-      "description": "A valid `GeoJSON MultiPoint` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.3) for details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJSONGeometry"
-        },
-        {
-          "properties": {
-            "type": {
-              "description": "Specifies the `type` for the geometry. Value should always be equal to \"MultiPoint\".",
-              "type": "string"
-            },
-            "coordinates": {
-              "description": "Coordinates for the `MultiPoint` geometry.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/GeoJSONPosition"
-              }
-            }
-          },
-          "required": [
-            "coordinates"
-          ]
-        }
-      ]
-    },
-    "GeoJSONLinearRing": {
-      "description": "Though a linear ring is not explicitly represented as a GeoJSON geometry type, it helps in defining the polygon as an array of linear rings. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/GeoJSONPosition"
-      }
-    },
-    "GeoJSONPosition": {
-      "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
-      "type": "array",
-      "items": {
-        "type": "number",
-        "format": "double"
-      }
-    },
-    "Point": {
-      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJSONGeometry"
-        },
-        {
-          "properties": {
-            "type": {
-              "description": "Specifies the `type` for the geometry. Value should always be equal to \"Point\".",
-              "type": "string"
-            },
-            "coordinates": {
-              "$ref": "#/definitions/GeoJSONPosition"
-            }
-          },
-          "required": [
-            "coordinates"
-          ]
-        }
-      ]
-    },
-    "MultiPolygon": {
-      "description": "A valid `GeoJSON MultiPolygon` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.7) for details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJSONGeometry"
-        },
-        {
-          "properties": {
-            "type": {
-              "description": "Specifies the `type` for the object. Value should always be equal to \"MultiPolygon\".",
-              "type": "string"
-            },
-            "coordinates": {
-              "description": "Contains a list of valid `GeoJSON` Polygon objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
-              "type": "array",
-              "items": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/GeoJSONLinearRing"
-                }
-              }
-            }
-          },
-          "required": [
-            "coordinates"
-          ]
-        }
-      ]
-    },
-    "GeoJSONGeometryCollection": {
-      "description": "A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Specifies the `type` for the object. Value should always be equal to \"GeometryCollection\".",
-          "type": "string"
-        },
-        "geometries": {
-          "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GeoJSONGeometry"
-          }
-        }
-      },
-      "required": [
-        "geometries"
-      ]
-    },
-    "BatchRequestBody": {
-      "description": "This type represents the request body for the Batch service.",
-      "type": "object",
-      "properties": {
-        "batchItems": {
-          "description": "The list of queries/requests to process",
-          "type": "array",
-          "items": {
-            "description": "Batch Query object",
-            "type": "object",
-            "properties": {
-              "query": {
-                "description": "Partial query string",
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
-    "Coordinate": {
-      "description": "A location represented as a latitude and longitude.",
-      "type": "object",
-      "properties": {
-        "latitude": {
-          "description": "Latitude property",
-          "type": "number",
-          "format": "double",
-          "readOnly": true
-        },
-        "longitude": {
-          "description": "Longitude property",
-          "type": "number",
-          "format": "double",
-          "readOnly": true
-        }
-      }
-    },
     "RouteDirectionsRequestBody": {
       "type": "object",
       "description": "Post body parameters for Route directions.",
@@ -1964,14 +1683,14 @@
           "description": "A GeoJSON Geometry collection representing sequence of coordinates used as input for route reconstruction and for calculating zero or more alternative routes to this reference route.\n  - The provided sequence of supporting points is used as input for route reconstruction.\n  - The alternative routes are calculated between the origin and destination points specified in the base path parameter locations.\n  - If both _minDeviationDistance_ and _minDeviationTime_ are set to zero, then these origin and destination points are\n  expected to be at (or very near) the beginning and end of the reference route, respectively.\n  - Intermediate locations (_waypoints_) are not supported when using <_supportingPoints_>.\n  - The reference route may contain traffic incidents of type _ROAD_CLOSURE_, which are\n  ignored for the calculation of the reference route's travel time and traffic delay.",
           "allOf": [
             {
-              "$ref": "#/definitions/GeoJSONGeometryCollection"
+              "$ref": "../../../Common/common.json#/definitions/GeoJSONGeometryCollection"
             },
             {
               "properties": {
                 "geometries": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/Point"
+                    "$ref": "../../../Common/common.json#/definitions/Point"
                   }
                 }
               }
@@ -1994,7 +1713,7 @@
         },
         "avoidAreas": {
           "description": "A GeoJSON MultiPolygon representing list of areas to avoid. Only rectangle polygons are supported. The maximum size of a rectangle is about 160x160 km. Maximum number of avoided areas is **10**. It cannot cross the 180th meridian. It must be between -80 and +80 degrees of latitude.",
-          "$ref": "#/definitions/MultiPolygon"
+          "$ref": "../../../Common/common.json#/definitions/MultiPolygon"
         }
       }
     },
@@ -2114,7 +1833,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Coordinate"
+            "$ref": "../../../Common/common.json#/definitions/Coordinate"
           }
         }
       }
@@ -2308,7 +2027,7 @@
           "readOnly": true
         },
         "point": {
-          "$ref": "#/definitions/Coordinate"
+          "$ref": "../../../Common/common.json#/definitions/Coordinate"
         },
         "pointIndex": {
           "description": "The index of the point in the list of polyline \"points\" corresponding to the point of the instruction.",
@@ -2719,14 +2438,14 @@
       "properties": {
         "center": {
           "description": "Center point of the reachable range",
-          "$ref": "#/definitions/Coordinate"
+          "$ref": "../../../Common/common.json#/definitions/Coordinate"
         },
         "boundary": {
           "description": "Polygon boundary of the reachable range represented as a list of points.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Coordinate"
+            "$ref": "../../../Common/common.json#/definitions/Coordinate"
           }
         }
       }
@@ -2834,10 +2553,10 @@
       "type": "object",
       "properties": {
         "origins": {
-          "$ref": "#/definitions/MultiPoint"
+          "$ref": "../../../Common/common.json#/definitions/MultiPoint"
         },
         "destinations": {
-          "$ref": "#/definitions/MultiPoint"
+          "$ref": "../../../Common/common.json#/definitions/MultiPoint"
         }
       }
     }

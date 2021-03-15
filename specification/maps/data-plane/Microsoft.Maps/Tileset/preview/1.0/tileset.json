@@ -49,13 +49,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -67,25 +67,25 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
       }
     },
     "201Async": {
       "description": "The resource has been created successfully.",
       "schema": {
-        "$ref": "#/definitions/LongRunningOperationResult"
+        "$ref": "../../../Common/common.json#/definitions/LongRunningOperationResult"
       },
       "headers": {
         "Location": {
@@ -236,6 +236,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Status 200 not expected",
+            "schema": {
+              "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
+            }
+          },
           "201": {
             "$ref": "#/responses/201Async"
           },
@@ -357,101 +363,6 @@
     }
   },
   "definitions": {
-    "ODataErrorResponse": {
-      "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
-    "ODataError": {
-      "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The ODataError code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, a human readable description of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ODataError"
-          }
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, the target causing the error."
-        }
-      }
-    },
-    "LongRunningOperationResult": {
-      "description": "The response model for a Long-Running Operations API.",
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "The Id for this long-running operation.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The status state of the request.",
-          "type": "string",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Failed",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "type",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "NotStarted",
-                "description": "The request has not started processing yet."
-              },
-              {
-                "value": "Running",
-                "description": "The request has started processing."
-              },
-              {
-                "value": "Failed",
-                "description": "The request has one or more failures."
-              },
-              {
-                "value": "Succeeded",
-                "description": "The request has successfully completed."
-              }
-            ]
-          },
-          "readOnly": true
-        },
-        "created": {
-          "description": "The created timestamp.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceLocation": {
-          "description": "The location URI for details about the created resource. This is only provided when the request was successfully completed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "#/definitions/ODataError"
-        },
-        "warning": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
     "TilesetListResponse": {
       "description": "The response model for the Tileset List API. Returns a list of all tilesets.",
       "type": "object",
