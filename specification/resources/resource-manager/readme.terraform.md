@@ -1,43 +1,43 @@
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-<!-- ``` yaml $(trenton)
-trenton:
+<!-- ``` yaml $(terraform)
+terraform:
     cli-name: features
     package-name: features
 clear-output-folder: true
-output-folder: $(trenton-output-folder)/features
+output-folder: $(terraform-output-folder)/features
 ``` -->
-``` yaml $(trenton)
+``` yaml $(terraform)
 batch:
   - package-features: true
   - package-policy: true
   - package-managedapplications: true
 ```
 
-```yaml $(trenton) && $(package-policy)
-trenton:
+```yaml $(terraform) && $(package-policy)
+terraform:
   cli-name: policy
   package-name: policy
-output-folder: $(trenton-output-folder)/policy
+output-folder: $(terraform-output-folder)/policy
 clear-output-folder: true
 ```
 
-```yaml $(trenton) && $(package-features)
-trenton:
+```yaml $(terraform) && $(package-features)
+terraform:
   cli-name: features
   package-name: features
-output-folder: $(trenton-output-folder)/features
+output-folder: $(terraform-output-folder)/features
 clear-output-folder: true
 ```
 
-```yaml $(trenton) && $(package-managedapplications)
-trenton:
+```yaml $(terraform) && $(package-managedapplications)
+terraform:
   cli-name: managedApplications
   package-name: managedapplications
-output-folder: $(trenton-output-folder)/managedapplications
+output-folder: $(terraform-output-folder)/managedapplications
 clear-output-folder: true
 
 overrides:

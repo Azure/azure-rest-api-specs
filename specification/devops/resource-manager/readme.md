@@ -97,12 +97,12 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
+``` yaml $(terraform)
+terraform:
     cli-name: devops
     azure_arm: true
     license_header: MICROSOFT_MIT_NO_VERSION

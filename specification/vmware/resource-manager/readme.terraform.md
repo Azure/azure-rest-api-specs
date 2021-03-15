@@ -1,14 +1,14 @@
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
+``` yaml $(terraform)
+terraform:
     cli-name: avs
     package-name: avs
 clear-output-folder: true
-output-folder: $(trenton-output-folder)/avs
+output-folder: $(terraform-output-folder)/avs
 overrides:
     - where:
         property: baseGroupDn
