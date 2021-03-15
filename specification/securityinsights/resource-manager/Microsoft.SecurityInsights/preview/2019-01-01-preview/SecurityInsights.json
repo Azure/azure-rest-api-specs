@@ -5815,30 +5815,34 @@
           "$ref": "#/definitions/AutomationRuleAction"
         },
         {
-          "type": "object",
-          "properties": {
-            "actionConfiguration": {
-              "description": "The configuration of the run playbook automation rule action",
-              "properties": {
-                "logicAppResourceId": {
-                  "description": "The resource id of the playbook resource",
-                  "type": "string"
-                },
-                "tenantId": {
-                  "description": "The tenant id of the playbook resource",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
-          }
+          "$ref": "#/definitions/AutomationRuleRunPlaybookActionProperties"
         }
-      ],
-      "required": [
-        "actionConfiguration"
       ],
       "type": "object",
       "x-ms-discriminator-value": "RunPlaybook"
+    },
+    "AutomationRuleRunPlaybookActionProperties": {
+      "description": "Describes the properties of an automation rule action to run a playbook",
+      "properties": {
+        "actionConfiguration": {
+          "description": "The configuration of the run playbook automation rule action",
+          "properties": {
+            "logicAppResourceId": {
+              "description": "The resource id of the playbook resource",
+              "type": "string"
+            },
+            "tenantId": {
+              "description": "The tenant id of the playbook resource",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "actionConfiguration"
+      ],
+      "type": "object"
     },
     "AutomationRuleModifyPropertiesAction": {
       "description": "Describes an automation rule action to modify an object's properties",
