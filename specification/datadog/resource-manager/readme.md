@@ -26,7 +26,16 @@ These are the global settings for the Datadog API.
 title: Microsoft Datadog Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-02-preview
+tag: package-2021-03
+```
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03'
+input-file:
+- Microsoft.Datadog/stable/2021-03-01/datadog.json
 ```
 
 ### Tag: package-2020-02-preview
@@ -108,6 +117,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Datadog/stable/2021-03-01/datadog.json
   - $(this-folder)/Microsoft.Datadog/preview/2020-02-01-preview/datadog.json
   
 ```
