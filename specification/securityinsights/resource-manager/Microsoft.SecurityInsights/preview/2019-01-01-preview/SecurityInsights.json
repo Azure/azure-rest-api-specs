@@ -6387,7 +6387,7 @@
         "triggersWhen"
       ],
       "type": "object"
-    },    
+    },
     "AwsCloudTrailDataConnector": {
       "allOf": [
         {
@@ -9515,6 +9515,29 @@
         "value"
       ]
     },
+    "IncidentOwnerInfo": {
+      "description": "Information on the user an incident is assigned to",
+      "properties": {
+        "email": {
+          "description": "The email of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "assignedTo": {
+          "description": "The name of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the user the incident is assigned to.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the user the incident is assigned to.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "IncidentClassification": {
       "description": "The reason the incident was closed",
       "enum": [
@@ -9637,29 +9660,6 @@
           }
         ]
       }
-    },
-    "IncidentOwnerInfo": {
-      "description": "Information on the user an incident is assigned to",
-      "properties": {
-        "email": {
-          "description": "The email of the user the incident is assigned to.",
-          "type": "string"
-        },
-        "assignedTo": {
-          "description": "The name of the user the incident is assigned to.",
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object id of the user the incident is assigned to.",
-          "format": "uuid",
-          "type": "string"
-        },
-        "userPrincipalName": {
-          "description": "The user principal name of the user the incident is assigned to.",
-          "type": "string"
-        }
-      },
-      "type": "object"
     },
     "IncidentProperties": {
       "description": "Describes incident properties",
