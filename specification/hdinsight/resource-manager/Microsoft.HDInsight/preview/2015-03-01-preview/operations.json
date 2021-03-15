@@ -89,8 +89,145 @@
             "operation": {
               "description": "The operation type: read, write, delete, etc.",
               "type": "string"
+            },
+            "description": {
+              "description": "Localized friendly description for the operation",
+              "type": "string"
             }
           }
+        },
+        "properties": {
+          "description": "The operation properties.",
+          "$ref": "#/definitions/OperationProperties"
+        }
+      },
+      "readOnly": true
+    },
+    "OperationProperties": {
+      "description": "The details of operation.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "description": "The specification of the service.",
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "The specification of the service.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "The metric specifications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecifications"
+          }
+        }
+      }
+    },
+    "MetricSpecifications": {
+      "description": "The details of metric specifications.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the metric specification.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the metric specification.",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "The display description of the metric specification.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "The unit of the metric specification.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "The aggregation type of the metric specification.",
+          "type": "string"
+        },
+        "supportedAggregationTypes": {
+          "description": "The supported aggregation types of the metric specification.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "description": "The supported time grain types of the metric specification.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enableRegionalMdmAccount": {
+          "description": "The flag indicates whether enable regional mdm account or not.",
+          "type": "boolean"
+        },
+        "sourceMdmAccount": {
+          "description": "The source mdm account.",
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "description": "The source mdm namespace.",
+          "type": "string"
+        },
+        "metricFilterPattern": {
+          "description": "The metric filter pattern.",
+          "type": "string"
+        },
+        "fillGapWithZero": {
+          "description": "The flag indicates whether filling gap with zero.",
+          "type": "boolean"
+        },
+        "category": {
+          "description": "The category of the metric.",
+          "type": "string"
+        },
+        "resourceIdDimensionNameOverride": {
+          "description": "The override name of resource id dimension name.",
+          "type": "string"
+        },
+        "isInternal": {
+          "description": "The flag indicates whether the metric is internal or not.",
+          "type": "boolean"
+        },
+        "delegateMetricNameOverride": {
+          "description": "The override name of delegate metric.",
+          "type": "string"
+        },
+        "dimensions": {
+          "description": "The dimensions of the metric specification.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        }
+      }
+    },
+    "Dimension": {
+      "description": "The definition of Dimension.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the dimension.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the dimension.",
+          "type": "string"
+        },
+        "internalName": {
+          "description": "The display name of the dimension.",
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "The flag indicates whether the metric will be exported for shoebox or not.",
+          "type": "boolean"
         }
       }
     },
@@ -108,7 +245,8 @@
           "type": "string",
           "description": "The URL to get the next set of operation list results if there are any."
         }
-      }
+      },
+      "readOnly": true
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
