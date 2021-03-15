@@ -107,7 +107,7 @@ AutoRest V3 generators require the use of `--tag=all-api-versions` to select api
 
 This block is updated by an automatic script. Edits may be lost!
 
-``` yaml
+``` yaml $(tag) == 'all-api-versions'
 # include the azure profile definitions from the standard location
 require: $(this-folder)/../../../../profiles/readme.md
 
