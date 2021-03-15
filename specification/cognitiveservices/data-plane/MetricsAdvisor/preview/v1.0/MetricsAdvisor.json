@@ -2845,32 +2845,30 @@
       }
     },
     "AlertResult": {
-      "required": [
-        "alertId",
-        "createdTime",
-        "modifiedTime",
-        "timestamp"
-      ],
       "type": "object",
       "properties": {
         "alertId": {
           "description": "alert id",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "timestamp": {
           "format": "date-time",
           "description": "anomaly time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdTime": {
           "format": "date-time",
           "description": "created time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "modifiedTime": {
           "format": "date-time",
           "description": "modified time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3051,6 +3049,18 @@
             "name": "IncidentStatus",
             "modelAsString": true
           }
+        },
+        "valueOfRootNode": {
+          "format": "double",
+          "description": "value of the root node",
+          "type": "number",
+          "readOnly": true
+        },
+        "expectedValueOfRootNode": {
+          "format": "double",
+          "description": "expected value of the root node given by smart detector",
+          "type": "number",
+          "readOnly": true
         }
       }
     },
@@ -5188,9 +5198,6 @@
       "x-ms-discriminator-value": "MongoDB"
     },
     "DataFeedList": {
-      "required": [
-        "value"
-      ],
       "type": "object",
       "properties": {
         "@nextLink": {
@@ -5201,7 +5208,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataFeedDetail"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -5609,8 +5617,7 @@
         "dataFeedName": "Sample - cost/revenue - city/category (modified)",
         "viewers": [
           "viewer@company.example"
-        ],
-        "authenticationType": "Basic"
+        ]
       },
       "x-ms-discriminator-value": "SqlServer"
     },
@@ -6110,9 +6117,6 @@
       "x-ms-discriminator-value": "Webhook"
     },
     "HookList": {
-      "required": [
-        "value"
-      ],
       "type": "object",
       "properties": {
         "@nextLink": {
@@ -6124,7 +6128,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/HookInfo"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -6265,9 +6270,6 @@
       }
     },
     "IngestionStatusList": {
-      "required": [
-        "value"
-      ],
       "type": "object",
       "properties": {
         "@nextLink": {
@@ -6278,7 +6280,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IngestionStatus"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -6408,16 +6411,14 @@
       }
     },
     "MetricDataList": {
-      "required": [
-        "value"
-      ],
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDataItem"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -6453,9 +6454,6 @@
       }
     },
     "MetricSeriesList": {
-      "required": [
-        "value"
-      ],
       "type": "object",
       "properties": {
         "@nextLink": {
@@ -6466,7 +6464,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSeriesItem"
-          }
+          },
+          "readOnly": true
         }
       }
     },
