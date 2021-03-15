@@ -26,38 +26,7 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-```
-
-``` yaml $(package-communication)
 tag: package-2020-07-20-preview1
-```
-
-``` yaml $(package-chat)
-tag: package-2020-09-21-preview2
-```
-
-``` yaml $(package-access-chat)
-tag: package-2020-11-01-preview3
-```
-
-``` yaml $(package-identity)
-tag: package-2020-07-20-preview2
-```
-
-``` yaml $(package-identity)
-tag: package-2021-03-07
-```
-
-``` yaml $(package-sms)
-tag: package-sms-2021-03-07
-```
-
-``` yaml $(package-communication)
-tag: package-2021-02-22-preview1
-```
-
-``` yaml $(package-common)
-tag: package-2020-11-19-preview1
 ```
 
 ### Tag: package-2020-07-20-preview1
