@@ -91,9 +91,9 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Trenton
+## Terraform
 
-See configuration in [readme.trenton.md](./readme.trenton.md)
+See configuration in [readme.terraform.md](./readme.terraform.md)
 
 ## AzureResourceSchema
 

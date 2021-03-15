@@ -163,17 +163,17 @@ cli:
   clear-output-folder: false
 ```
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
-  cli_name: ResourceGraph
+``` yaml $(terraform)
+terraform:
+  cli-name: ResourceGraph
   azure_arm: true
   license_header: MICROSOFT_MIT_NO_VERSION
   payload_flattening_threshold: 2
   namespace: azure.mgmt.ResourceGraph
   package_name: azure-mgmt-ResourceGraph
-  clear_output_folder: false
+  clear-output-folder: false
 ```
