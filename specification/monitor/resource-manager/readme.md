@@ -24,8 +24,14 @@ To see additional help and options, run:
 
 These are the global settings for the MonitorClient API.
 
-``` yaml
+``` yaml !$(python) || !$(track2)
 title: MonitorClient
+```
+``` yaml $(python) && $(track2)
+title: MonitorManagementClient
+```
+
+``` yaml
 description: Monitor Management Client
 openapi-type: arm
 tag: package-2020-10
