@@ -285,6 +285,14 @@
             "create"
           ]
         },
+        "storageRedundancy": {
+          "description": "Storage redundancy of the database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "maxSizeBytes": {
           "format": "int64",
           "description": "The max size of the database expressed in bytes.",
@@ -331,11 +339,6 @@
       "description": "A sql database resource.",
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SqlDatabaseProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
