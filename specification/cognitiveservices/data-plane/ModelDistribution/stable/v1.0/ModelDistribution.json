@@ -1,0 +1,511 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Model Distribution Service v1.0 API",
+    "description": "Model Distribution Service v1.0 API",
+    "version": "v1.0"
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/api/onprem/v1.0/{serviceName}/models": {
+      "get": {
+        "tags": [
+          "OnPrem v1.0:"
+        ],
+        "summary": "Get the list of available models for the authenticated subscription.",
+        "parameters": [
+		      {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The service name of model, eg. 'speechtotext', 'textospeech', 'displaypostprocess' and etc.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "modelType",
+            "in": "query",
+            "description": "The type of the model, eg. 'base', 'custom'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "The locale of the model. eg. 'en-us'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "voiceName",
+            "description": "The voice name of the model. eg. 'ZiraRUS'",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "compatWith",
+            "in": "query",
+            "description": "The filters for compatibilty validation.",
+            "required": false,
+            "type": "array",
+            "items":{
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ocp-Apim-Subscription-Key",
+            "description": "The authenticated subscription.",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/Models"
+						},
+						"examples": {
+							"application/json": {
+								"values": [
+									{
+										"self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/base/9a063172-65a9-4cf3-a8b5-4449efa5a1j9",
+										"links": {
+											"manifest": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/endpoints/manifest/9a063172-65a9-4cf3-a8b5-4449efa5a1j9"
+										},
+										"properties": {
+										},
+										"customProperties": {
+										},
+										"id": "9a063172-65a9-4cf3-a8b5-4449efa5a1j9",
+										"lastActionDateTime": "2019-01-07T11:36:07Z",
+										"status": "Succeeded",
+										"createdDateTime": "2019-01-07T11:34:12Z",
+										"locale": "en-US",
+										"displayName": "en-US Base model"
+									},
+									{
+										"self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/base/9076b659-83b2-12bc-afd8-184d1e2a1a2e",
+										"links": {
+											"manifest": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/endpoints/manifest/9076b659-83b2-12bc-afd8-184d1e2a1a2e"
+										},
+										"properties": {
+										},
+										"id": "9076b659-83b2-12bc-afd8-184d1e2a1a2e",
+										"lastActionDateTime": "2019-01-07T11:36:07Z",
+										"status": "Succeeded",
+										"createdDateTime": "2019-01-07T11:34:12Z",
+										"locale": "en-US",
+										"displayName": "en-US Base model"
+									}
+								]
+							}
+						}
+					},
+					"204": {
+						"description": "No content."
+					},
+					"400": {
+						"description": "Bad request."
+					},
+					"401": {
+						"description": "Unauthorized."
+					},
+					"403": {
+						"description": "Forbidden."
+					},
+					"404": {
+						"description": "Not found."
+					},
+					"429": {
+						"description": "Too many requets."
+					}
+        }
+      }
+    },
+    "/api/onprem/v1.0/{serviceName}/models/latest": {
+      "get": {
+        "tags": [
+          "OnPrem v1.0:"
+        ],
+        "summary": "Get the latest available model for the authenticated subscription.",
+        "parameters": [
+		      {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The service name of model, eg. 'speechtotext', 'textospeech', 'displaypostprocess' and etc.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "modelType",
+            "in": "query",
+            "description": "The type of the model, eg. 'base', 'custom'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "The locale of the model. eg. 'en-us'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "voiceName",
+            "description": "The voice name of the model. eg. 'ZiraRUS'",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "compatWith",
+            "in": "query",
+            "description": "The filters for compatibilty validation.",
+            "required": false,
+            "type": "array",
+            "items":{
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ocp-Apim-Subscription-Key",
+            "description": "The authenticated subscription.",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/Models"
+						},
+						"examples": {
+							"application/json": {
+								"values": [
+									{
+										"self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/base/9a063172-65a9-4cf3-a8b5-4449efa5a1j9",
+										"links": {
+											"manifest": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/endpoints/manifest/9a063172-65a9-4cf3-a8b5-4449efa5a1j9"
+										},
+										"properties": {
+										},
+										"customProperties": {
+										},
+										"id": "9a063172-65a9-4cf3-a8b5-4449efa5a1j9",
+										"lastActionDateTime": "2019-01-07T11:36:07Z",
+										"status": "Succeeded",
+										"createdDateTime": "2019-01-07T11:34:12Z",
+										"locale": "en-US",
+										"displayName": "en-US Base model"
+									}
+								]
+							}
+						}
+					},
+					"204": {
+						"description": "No content."
+					},
+					"400": {
+						"description": "Bad request."
+					},
+					"401": {
+						"description": "Unauthorized."
+					},
+					"403": {
+						"description": "Forbidden."
+					},
+					"404": {
+						"description": "Not found."
+					},
+					"429": {
+						"description": "Too many requets."
+					}
+        }
+      }
+    },
+    "/api/onprem/v1.0/{serviceName}/models/{id}": {
+      "get": {
+        "tags": [
+          "OnPrem v1.0:"
+        ],
+        "summary": "Get the model manifest of the id for the authenticated subscription.",
+        "parameters": [
+		      {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The service name of model, eg. 'speechtotext', 'textospeech', 'displaypostprocess' and etc.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The model id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "modelType",
+            "in": "query",
+            "description": "The type of the model, eg. 'base', 'custom'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "The locale of the model. eg. 'en-us'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "voiceName",
+            "description": "The voice name of the model. eg. 'ZiraRUS'",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "compatWith",
+            "in": "query",
+            "description": "The filters for compatibilty validation.",
+            "required": false,
+            "type": "array",
+            "items":{
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ocp-Apim-Subscription-Key",
+            "description": "The authenticated subscription.",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/ModelManifest"
+						},
+						"examples": {
+							"application/json": {
+								"model": {
+									"self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/02231df2-012f-45d4-9af0-8a3e4ccc877c"
+								},
+								"modelFiles": [
+									{
+										"name": "0_EN_US_V4.14_UNI/adaptedPrepAM/model.fe",
+										"contentUrl": "https://https://customspeech-usw.blob.core.windows.net/models/0_EN_US_V4.14_UNI/adaptedPrepAM/model.fe?sv=2017-04-17&sr=b&sig=wgSFvL8ParcZsckXWbr%2BSYYdPXHr2srdevD%2FoX4Ay7g%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+									},
+									{
+										"name": "0_EN_US_V4.14_UNI/graphV2/base.lms",
+										"contentUrl": "https://customspeech-usw.blob.core.windows.net/models/0_EN_US_V4.14_UNI/graphV2/base.lms?sv=2017-04-17&sr=b&sig=D7Ql1riMUbmaFSX7DpuOitS4mZTOIbJPoB1qfVEP8DY%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+									},
+									{
+										"name": "02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.lms",
+										"contentUrl": "https://customspeech-usw.blob.core.windows.net/models/02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.lms?sv=2017-04-17&sr=b&sig=Hf%2B50Pxox02NMdxmlcDZEDMWhUEz8nHE0L0aAkiDnWY%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+									},
+									{
+										"name": "02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.i1.hclg",
+										"contentUrl": "https://customspeech-usw.blob.core.windows.net/models/02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.i1.hclg?sv=2017-04-17&sr=b&sig=pTv1hsjG111Nwl%2FGdwZbNfXDIfx5EBIzkTO6OksSC9g%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+									},
+									{
+										"name": "02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.i1.lms",
+										"contentUrl": "https://customspeech-usw.blob.core.windows.net/models/02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.i1.lms?sv=2017-04-17&sr=b&sig=RS5wj8nw7cCMp3IrBVPdH6fLBznfuk%2FH%2BcuUQ8DfSh0%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+									},
+									{
+										"name": "0_EN_US_V4.14_UNI/adaptedPrepAM/model.dbn.am",
+										"contentUrl": "https://customspeech-usw.blob.core.windows.net/models/0_EN_US_V4.14_UNI/adaptedPrepAM/model.dbn.am?sv=2017-04-17&sr=b&sig=yqsHvDR9nLn3lyFFbi9U%2BxbRwWsfWD0qoSiri3buLkA%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+									}
+								],
+								"properties": {
+									"IN_FESpec": "audio(%MODELSPATH%0_EN_US_V4.14_UNI/adaptedPrepAM/model.fe,8kHz16kHzLFB80EnergyMLPVADRuntime)",
+									"IN_DNNSpec": "dnn_spec(%MODELSPATH%0_EN_US_V4.14_UNI/adaptedPrepAM/model.dbn.am,40,20),allValidInUtt(1),frameCopyCount(1),resetOnSegmentation(1)",
+									"IN_HCLGSpecBase": "interpolated_lm_base(%MODELSPATH%0_EN_US_V4.14_UNI/graphV2/base.lms)",
+									"IN_HCLGSpec": "interpolated_lm_custom(0.9,%MODELSPATH%fc4fecb3-791a-4c47-88c0-043be3d4967e/graphV2/custom.i1.hclg,%MODELSPATH%fc4fecb3-791a-4c47-88c0-043be3d4967e/graphV2/custom.i1.lms,%MODELSPATH%fc4fecb3-791a-4c47-88c0-043be3d4967e/graphV2/custom.lms)",
+									"IN_BeamSize": 5000,
+									"IN_BeamThreshold": 190,
+									"IN_NBestBeamSize": 1
+								}
+							}
+						}
+					},
+					"204": {
+						"description": "No content."
+					},
+					"400": {
+						"description": "Bad request."
+					},
+					"401": {
+						"description": "Unauthorized."
+					},
+					"403": {
+						"description": "Forbidden."
+					},
+					"404": {
+						"description": "Not found."
+					},
+					"429": {
+						"description": "Too many requets."
+					}
+        }
+      }
+    }
+  },
+  "definitions": {
+		"Models": {
+			"title": "Models",
+			"type": "object",
+			"properties": {
+				"values": {
+					"description": "A list of models.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Model"
+					},
+					"readOnly": true
+				},
+				"@nextLink": {
+					"description": "A link of next page of models.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"Model": {
+			"title": "Model",
+			"required": [
+				"self",
+				"links",
+				"id",
+				"locale",
+				"createdDateTime"
+			],
+			"type": "object",
+			"properties":{
+				"self": {
+					"description": "The location of this model.",
+					"type": "string",
+					"readOnly": false
+				},
+				"links": {
+					"type": "object",
+					"properties": {
+						"manifest": {
+							"description": "The location to get model manifest.",
+							"type": "string",
+							"readOnly": false
+						}
+					}
+				},
+				"displayName": {
+					"description": "The display name of the model.",
+					"type": "string",
+					"readOnly": false
+				},
+				"id": {
+					"description": "The id of the model.",
+					"type": "string",
+					"readOnly": false
+				},
+				"description": {
+					"description": "The description of the model",
+					"type": "string",
+					"readOnly": false
+				},
+				"locale": {
+					"description": "The locale of the model.",
+					"type": "string",
+					"readOnly": false
+				},
+				"status": {
+					"description": "The status of the model.",
+					"enum": [
+						"NotStarted",
+						"Running",
+						"Succeeded",
+						"Failed"
+					],
+					"type": "string",
+					"readOnly": true
+				},
+				"lastActionDateTime": {
+					"format": "date-time",
+					"description": "The time-stamp when the current status was entered.",
+					"type": "string",
+					"readOnly": true
+				},
+				"createdDateTime": {
+					"format": "date-time",
+					"description": "The time-stamp when the current status was created.",
+					"type": "string",
+					"readOnly": false
+				},
+				"properties": {
+					"description": "The model properties.",
+					"type": "object",
+					"readOnly": false
+				},
+				"customProperties": {
+					"description": "The custom properties.",
+					"type": "object",
+					"readOnly": false
+				}
+			}
+		},
+		"ModelManifest": {
+			"title": "ModelManifest",
+			"type": "object",
+			"properties": {
+				"model": {
+					"required": [
+						"self"
+					],
+					"type": "object",
+					"properties": {
+						"self": {
+							"description": "The location of the referenced entity.",
+							"type": "string",
+							"readOnly": false
+						}
+					},
+					"description": "The model, the endpoint is associated with.",
+					"readOnly": false
+				},
+				"modelFiles": {
+					"description": "The model files, the endpoint requires.",
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"description": "The name of this file.",
+								"type": "string",
+								"readOnly": false
+							},
+							"contentUrl": {
+								"description": "The url to retrieve the content of this file.",
+								"type": "string",
+								"readOnly": false
+							}
+						}
+					},
+					"readOnly": false
+				},
+				"properties": {
+					"description": "The configuration of the endpoint.",
+					"type": "object",
+					"readOnly": false
+				}
+			}
+		}
+	}
+}
