@@ -1,7 +1,7 @@
 ## overrides
 
-These settings apply only when `--trenton` is specified on the command line.
-``` yaml $(trenton)
+These settings apply only when `--terraform` is specified on the command line.
+``` yaml $(terraform)
 overrides:
   - where:
       resource: "*"
@@ -40,14 +40,14 @@ overrides:
       - EnumValues/1/GoEnumMemberName: "ScopeTypeResource"
       - EnumValues/2/GoEnumMemberName: "ScopeTypeSubscription"
 ```
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
+``` yaml $(terraform)
+terraform:
     cli-name: alertsManagement
     package-name: alertsmanagement
 clear-output-folder: true
-output-folder: $(trenton-output-folder)/alertsmanagement
+output-folder: $(terraform-output-folder)/alertsmanagement
 ```
