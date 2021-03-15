@@ -4,7 +4,7 @@
 
 This is the AutoRest configuration file for Addons RP.
 
-
+for testing purpose only
 
 ---
 ## Getting Started 
