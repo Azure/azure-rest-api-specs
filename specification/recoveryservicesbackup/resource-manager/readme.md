@@ -45,6 +45,16 @@ model-validator: true
 semantic-validator: true
 message-format: json
 ```
+### Tag: package-2021-02-preview
+
+These settings apply only when `--tag=package-2021-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02-preview'
+input-file:
+- Microsoft.RecoveryServices/preview/2021-02-01-preview/bms.json
+- Microsoft.RecoveryServices/stable/2018-12-20/bms.json
+```
+
 ### Tag: package-2021-02
 
 These settings apply only when `--tag=package-2021-02` is specified on the command line.
