@@ -12,7 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.datadog
   package-name: azure-mgmt-datadog
-  package-version: 1.0.0
+  package-version: 1.1.0
   clear-output-folder: true
 ```
 
@@ -23,7 +23,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-datadog
 no-namespace-folders: true
-package-version: 1.0.0
+package-version: 1.1.0
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
