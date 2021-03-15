@@ -20,7 +20,7 @@ no-async: true
 ``` yaml $(python) && $(python-mode) == 'update'
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face
-keepVersionFile: true
+keep-version-file: true
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
