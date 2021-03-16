@@ -249,13 +249,6 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
-          "500": {
-            "x-ms-error-response": true,
-            "description": "Error.",
-            "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -424,13 +417,6 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
-          "500": {
-            "x-ms-error-response": true,
-            "description": "Error.",
-            "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -484,15 +470,6 @@
     }
   },
   "definitions": {
-    "CustomErrorResponse": {
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Description of the error."
-        }
-      },
-      "description": "Descriptive error response."
-    },
     "RoleAssignmentFilter": {
       "properties": {
         "principalId": {
@@ -526,6 +503,7 @@
     "RoleAssignmentProperties": {
       "properties": {
         "scope": {
+          "readOnly": true,
           "type": "string",
           "description": "The role assignment scope."
         },
