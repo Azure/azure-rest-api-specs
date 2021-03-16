@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-01-21",
+    "version": "2021-03-15-preview",
     "title": "Azure Quota Extension API",
     "description": "Microsoft Azure Quota Resource Provider."
   },
@@ -332,7 +332,7 @@
         }
       }
     },
-     "/providers/Microsoft.Quota/quotaLimitTypes": {
+    "/providers/Microsoft.Quota/quotaLimitTypes": {
       "get": {
         "tags": [
           "QuotaLimitTypes"
@@ -833,17 +833,17 @@
       }
     },
     "QuotaTypeDetails": {
-     "type": "object",
+      "type": "object",
       "description": "Quota type details.",
       "properties": {
         "name": {
           "type": "string",
           "description": "The quota type property name. Example: Quota properties for a resource provider as: /providers/Microsoft.Compute, Quota properties for"
-          },
-          "id": {
-            "type": "string",
-            "description": "The resource id/path. Example: /providers/Microsoft.Compute, /providers/Microsoft.Network/locations"
-          },
+        },
+        "id": {
+          "type": "string",
+          "description": "The resource id/path. Example: /providers/Microsoft.Compute, /providers/Microsoft.Network/locations"
+        },
         "properties": {
           "description": "The quota type properties for the resource id.",
           "x-ms-client-flatten": true,
