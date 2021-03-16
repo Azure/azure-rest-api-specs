@@ -5816,18 +5816,6 @@
         }
       ],
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/AutomationRuleRunPlaybookActionProperties",
-          "description": "Properties of an automation rule action to run a playbook",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "RunPlaybook"
-    },
-    "AutomationRuleRunPlaybookActionProperties": {
-      "description": "Describes the properties of an automation rule action to run a playbook",
-      "properties": {
         "actionConfiguration": {
           "description": "The configuration of the run playbook automation rule action",
           "properties": {
@@ -5846,7 +5834,9 @@
       "required": [
         "actionConfiguration"
       ],
-      "type": "object"
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "x-ms-discriminator-value": "RunPlaybook"
     },
     "AutomationRuleModifyPropertiesAction": {
       "description": "Describes an automation rule action to modify an object's properties",
@@ -5855,21 +5845,6 @@
           "$ref": "#/definitions/AutomationRuleAction"
         }
       ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AutomationRuleModifyPropertiesActionProperties",
-          "description": "Properties of an automation rule action to modify an object's properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "actionConfiguration"
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "ModifyProperties"
-    },
-    "AutomationRuleModifyPropertiesActionProperties": {
-      "description": "Describes the properties of an automation rule action to modify an object's properties",
       "properties": {
         "actionConfiguration": {
           "description": "The configuration of the modify properties automation rule action",
@@ -5909,7 +5884,13 @@
           },
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "actionConfiguration"
+      ],
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "x-ms-discriminator-value": "ModifyProperties"
     },
     "AutomationRulePropertyConditionSupportedProperty": {
       "description": "The property to evaluate in an automation rule property condition",
@@ -6191,19 +6172,6 @@
         }
       ],
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/AutomationRulePropertyValuesConditionProperties",
-          "description": "Properties of an automation rule condition that evaluates a property's value",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "Property"
-    },
-    "AutomationRulePropertyValuesConditionProperties": {
-      "description": "Describes properties of an automation rule condition that evaluates a property's value",
-      "type": "object",
-      "properties": {
         "conditionProperties": {
           "description": "The configuration of the automation rule condition",
           "properties": {
@@ -6277,7 +6245,10 @@
       },
       "required": [
         "conditionProperties"
-      ]
+      ],
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "x-ms-discriminator-value": "Property"
     },
     "AutomationRulesList": {
       "description": "List all the automation rules.",
