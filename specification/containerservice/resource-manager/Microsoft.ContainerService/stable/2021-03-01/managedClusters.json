@@ -1693,6 +1693,118 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/runCommand": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_RunCommand",
+        "summary": "Run Command against Managed Kubernetes Service",
+        "description": "Submit a command to run against managed kubernetes service, it will create a pod to run the command.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "requestPayload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunCommandRequest"
+            },
+            "description": "Parameters supplied to the RunCommand operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "200": {
+            "description": "command finished with async pattern, tracking by location header. !!! this is for autorest only, you never get 200 from this api !!!",
+            "schema": {
+              "$ref": "#/definitions/RunCommandResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "submitNewCommand": {
+            "$ref": "./examples/RunCommandRequest.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/commandResults/{commandId}": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_GetCommandResult",
+        "summary": "Get command result.",
+        "description": "Get command result from previous runCommand invoke.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "commandId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the command request."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "command running in progress"
+          },
+          "200": {
+            "description": "command finished",
+            "schema": {
+              "$ref": "#/definitions/RunCommandResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "commandSucceedResult": {
+            "$ref": "./examples/RunCommandResultSucceed.json"
+          },
+          "commandFailedResult": {
+            "$ref": "./examples/RunCommandResultFailed.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2654,6 +2766,78 @@
         }
       },
       "description": "The time span with start and end properties."
+    },
+    "RunCommandRequest": {
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "command to run."
+        },
+        "context": {
+          "type": "string",
+          "description": "base64 encoded zip file, contains files required by the command"
+        },
+        "clusterToken": {
+          "type": "string",
+          "description": "AuthToken issued for AKS AAD Server App."
+        }
+      },
+      "description": "run command request",
+      "required": [
+        "command"
+      ]
+    },
+    "RunCommandResult": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "command id.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of command result.",
+          "$ref": "#/definitions/CommandResultProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "run command result."
+    },
+    "CommandResultProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "provisioning State"
+        },
+        "exitCode": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "exit code of the command"
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "time when the command started."
+        },
+        "finishedAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "time when the command finished."
+        },
+        "logs": {
+          "type": "string",
+          "readOnly": true,
+          "description": "command output."
+        },
+        "reason": {
+          "type": "string",
+          "readOnly": true,
+          "description": "explain why provisioningState is set to failed (if so)."
+        }
+      }
     },
     "ManagedClusterLoadBalancerProfile": {
       "properties": {
