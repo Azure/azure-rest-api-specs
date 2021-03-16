@@ -51,6 +51,7 @@ These settings apply only when `--tag=package-2021-03-preview-only` is specified
 
 ```yaml $(tag) == 'package-2021-03-preview-only'
 input-file:
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/Incidents.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
 directive:
