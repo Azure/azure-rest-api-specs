@@ -63,6 +63,10 @@ directive:
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Incidents.json
     where: $.definitions.Incidents
     reason: The Incidents does not support list by subscription. It's not a top-level resource. To get the Incidents, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Incidents.json
+    where: $.definitions.Incident
+    reason: The Incident does not support list by subscription. It's not a top-level resource. To get the Incident, we should have a subscription as well as a resource group, Log Analytics workspace and incident ID.
 ```
 
 ---
