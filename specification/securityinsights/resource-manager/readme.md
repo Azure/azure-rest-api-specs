@@ -51,6 +51,7 @@ These settings apply only when `--tag=package-2021-03-preview-only` is specified
 
 ```yaml $(tag) == 'package-2021-03-preview-only'
 input-file:
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/Incidents.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/OnboardingStates.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
@@ -73,6 +74,15 @@ directive:
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/OnboardingStates.json
     where: $.definitions.SentinelOnboardingState
     reason: The SentinelOnboardingState does not support list by subscription. It's not a top-level resource. To get the SentinelOnboardingState, we should have a subscription as well as a resource group and Log Analytics workspace.
+    reason: The Setting does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace. 
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Incidents.json
+    where: $.definitions.Incidents
+    reason: The Incidents does not support list by subscription. It's not a top-level resource. To get the Incidents, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Incidents.json
+    where: $.definitions.Incident
+    reason: The Incident does not support list by subscription. It's not a top-level resource. To get the Incident, we should have a subscription as well as a resource group, Log Analytics workspace and incident ID.
 ```
 
 ---
