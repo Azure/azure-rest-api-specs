@@ -69,6 +69,10 @@ directive:
     where: $.definitions.DenyAssignmentProperties.properties.isSystemProtected
     from: authorization-DenyAssignmentGetCalls.json
     reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.ValidationResponse.properties.isValid
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
   - suppress: R4024
     reason: Preview versions still in use
   - suppress: RequiredSystemDataInNewApiVersions
@@ -98,6 +102,22 @@ input-file:
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+```
+
+### Tag: package-2020-08-01-preview
+
+These settings apply only when `--tag=package-2020-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-DenyAssignmentGetCalls.json
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-PermissionsCalls.json
+- Microsoft.Authorization/preview/2020-08-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
 ```
 
 ### Tag: package-2020-04-01-preview
