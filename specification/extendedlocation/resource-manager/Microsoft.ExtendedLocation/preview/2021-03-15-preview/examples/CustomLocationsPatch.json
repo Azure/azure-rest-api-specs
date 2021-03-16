@@ -1,9 +1,21 @@
 {
   "parameters": {
-    "api-version": "2020-07-15-privatepreview",
+    "api-version": "2021-03-15-preview",
     "subscriptionId": "11111111-2222-3333-4444-555555555555",
     "resourceGroupName": "testresourcegroup",
-    "resourceName": "customLocation01"
+    "resourceName": "customLocation01",
+    "parameters": {
+      "properties": {
+        "clusterExtensionIds": [
+          "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01/Microsoft.KubernetesConfiguration/clusterExtensions/fooExtension",
+          "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01/Microsoft.KubernetesConfiguration/clusterExtensions/barExtension"
+        ]
+      },
+      "tags": {
+        "tier": "testing",
+        "archv3": ""
+      }
+    }
   },
   "responses": {
     "200": {
@@ -12,13 +24,18 @@
         "name": "customLocation01",
         "type": "Microsoft.ExtendedLocation/customLocations",
         "location": "West US",
+        "tags": {
+          "tier": "testing",
+          "archv3": ""
+        },
         "properties": {
           "hostResourceId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01",
           "namespace": "namespace01",
           "displayName": "customLocationLocation01",
           "provisioningState": "Succeeded",
           "clusterExtensionIds": [
-            "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01/Microsoft.KubernetesConfiguration/clusterExtensions/fooExtension"
+            "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01/Microsoft.KubernetesConfiguration/clusterExtensions/fooExtension",
+            "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01/Microsoft.KubernetesConfiguration/clusterExtensions/barExtension"
           ],
           "authentication": {
             "type": "KubeConfig"
@@ -34,7 +51,7 @@
         }
       }
     },
-    "404": {},
+    "400": {},
     "500": {}
   }
 }

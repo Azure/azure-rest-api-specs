@@ -12,3 +12,4 @@ typescript:
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
+
