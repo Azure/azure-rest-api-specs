@@ -26,7 +26,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-09
+tag: package-2020-03
 ```
 
 ### Tag: package-preview-2020-09
