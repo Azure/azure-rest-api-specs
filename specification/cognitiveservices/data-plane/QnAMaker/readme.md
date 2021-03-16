@@ -33,6 +33,17 @@ add-credentials: true
 openapi-type: data-plane
 ```
 
+``` yaml
+tag: release_5_0_preview.2
+add-credentials: true
+openapi-type: data-plane
+```
+
+``` yaml
+tag: runtime_release_preview.2
+add-credentials: true
+openapi-type: data-plane
+
 # Releases
 
 ### Release 4.0
@@ -56,11 +67,19 @@ These settings apply only when `--tag=release_5_0_preview.1` is specified on the
 input-file: preview/v5.0-preview.1/QnAMaker.json
 ```
 
+### Release 5.0-preview.2
+These settings apply only when `--tag=release_5_0_preview.2` is specified on the command line.
+
+``` yaml $(tag) == 'release_5_0_preview.2'
+input-file: preview/v5.0-preview.2/QnAMaker.json
+```
+
 ``` yaml
 batch:
   - tag: release_4_0
   - tag: runtime_release_4_0
   - tag: release_5_0_preview.1
+  - tag: release_5_0_preview.2
 ```
 
 ## Swagger to SDK
@@ -108,6 +127,20 @@ csharp:
 These settings apply only when `--csharp --tag=release_5_0_preview.1` is specified on the command line.
 
 ``` yaml $(csharp) && $(tag) == 'release_5_0_preview.1'
+csharp:
+  sync-methods: None
+  license-header: MICROSOFT_MIT_NO_VERSION
+  azure-arm: false
+  namespace: Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Knowledge.QnAMaker/preview/src/Generated
+  clear-output-folder: true
+```
+
+## CSharp Settings Release 5.0-preview.2
+
+These settings apply only when `--csharp --tag=release_5_0_preview.2` is specified on the command line.
+
+``` yaml $(csharp) && $(tag) == 'release_5_0_preview.2'
 csharp:
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -171,6 +204,7 @@ input-file:
   - $(this-folder)/stable/v4.0/QnAMaker.json
   - $(this-folder)/stable/v4.0/QnAMakerRuntime.json
   - $(this-folder)/preview/v5.0-preview.1/QnAMaker.json
+  - $(this-folder)/preview/v5.0-preview.2/QnAMaker.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
