@@ -46,6 +46,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/extensions.json
 
 ```
 
