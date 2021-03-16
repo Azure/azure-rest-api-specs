@@ -448,7 +448,8 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "type": "string",
+          "readOnly": true,
           "description": "The provisioned state of the resource."
         },
         "uri": {
@@ -507,11 +508,6 @@
         }
       ],
       "description": "Class representing a Kusto kusto pool."
-    },
-    "ProvisioningState": {
-      "type": "string",
-      "readOnly": true,
-      "description": "The provisioned state of the resource."
     },
     "KustoPoolUpdate": {
       "properties": {
