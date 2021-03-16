@@ -28,9 +28,17 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-2021-03
+tag: package-preview-2020-07-extensions
 ```
 
+### Tag: package-preview-2020-07-extensions
+
+These settings apply only when `--tag=package-preview-2020-07-extensions` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-07-extensions'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/extensions.json
+```
 
 ### Tag: package-2021-03
 
@@ -39,8 +47,8 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 ```yaml $(tag) == 'package-2021-03'
 input-file:
   - Microsoft.KubernetesConfiguration/stable/2021-03-01/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/extensions.json
 ```
+
 ### Tag: package-preview-2020-10
 
 These settings apply only when `--tag=package-preview-2020-10` is specified on the command line.

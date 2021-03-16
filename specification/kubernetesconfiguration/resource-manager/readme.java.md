@@ -16,10 +16,24 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-kubernetesconfigura
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-preview-2020-07-extensions
   - tag: package-2021-03
   - tag: package-preview-2020-10
   - tag: package-2020-07-01-preview
   - tag: package-2019-11-01-preview
+```
+
+### Tag: package-preview-2020-07-extensions and java
+
+These settings apply only when `--tag=package-preview-2020-07-extensions --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2020-07-extensions' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.kubernetesconfiguration.v2020_07_01_preview_extensions
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kubernetesconfiguration/mgmt-v2020_07_01_preview_extensions
+  regenerate-manager: true
+  generate-interface: true
 ```
 
 ### Tag: package-2021-03 and java
