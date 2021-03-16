@@ -37,15 +37,6 @@ input-file:
   - Microsoft.ExtendedLocation/preview/2020-07-15-privatepreview/customlocations.json
 ```
 
-### Tag: package-2020-10-01-privatepreview
-
-These settings apply only when `--tag=package-2020-10-01-privatepreview` is specified on the command line.
-
-```yaml $(tag) == 'package-2020-10-01-privatepreview'
-input-file:
-  - Microsoft.ExtendedLocation/preview/2020-10-01-privatepreview/iotlocations.json
-```
-
 ### Tag: package-2021-03-15-preview
 
 These settings apply only when `--tag=package-2021-03-15-preview` is specified on the command line.

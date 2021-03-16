@@ -29,15 +29,12 @@ Generate all API versions currently shipped for this package
 ``` yaml $(python) && $(multiapi) && !$(track2)
 batch:
   - tag: package-2020-07-15-privatepreview
-  - tag: package-2020-10-01-privatepreview
 ```
 
 ``` yaml $(python) && $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
   - tag: package-2020-07-15-privatepreview
-  - multiapiscript: true
-  - tag: package-2020-10-01-privatepreview
   - multiapiscript: true
 ```
 
@@ -58,19 +55,6 @@ output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocatio
 python:
   namespace: azure.mgmt.extendedlocation.v2020_07_15_privatepreview
   output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocation/azure/mgmt/extendedlocation/v2020_07_15_privatepreview
-```
-
-### Tag: package-2020-10-01-privatepreview and python
-
-These settings apply only when `--tag=package-2020-10-01-privatepreview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2020-10-01-privatepreview' && $(python)
-namespace: azure.mgmt.extendedlocation.v2020_10_01_privatepreview
-output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocation/azure/mgmt/extendedlocation/v2020_10_01_privatepreview
-python:
-  namespace: azure.mgmt.extendedlocation.v2020_10_01_privatepreview
-  output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocation/azure/mgmt/extendedlocation/v2020_10_01_privatepreview
 ```
 
 ### Tag: package-2021-03-15-preview and python
