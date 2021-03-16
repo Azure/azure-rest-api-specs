@@ -255,7 +255,8 @@
           "Create or update a static site": {
             "$ref": "./examples/CreateOrUpdateStaticSite.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -300,7 +301,8 @@
           "Delete a static site": {
             "$ref": "./examples/DeleteStaticSite.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -702,7 +704,8 @@
           "Delete a static site build": {
             "$ref": "./examples/DeleteStaticSiteBuild.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/config/appsettings": {
@@ -750,12 +753,6 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
@@ -819,12 +816,6 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
@@ -940,12 +931,6 @@
               "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
-          "202": {
-            "description": "Asynchronous operation in progress.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
-            }
-          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -996,12 +981,6 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
@@ -1215,7 +1194,8 @@
           "Register a user provided function app with a static site build": {
             "$ref": "./examples/RegisterUserProvidedFunctionAppWithStaticSiteBuild.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1323,6 +1303,9 @@
           "200": {
             "description": "OK."
           },
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -1334,7 +1317,8 @@
           "Deploy a site from a zipped package to a particular static site build": {
             "$ref": "./examples/StaticSiteBuildZipDeploy.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/config/appsettings": {
@@ -1375,12 +1359,6 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
@@ -1437,12 +1415,6 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
@@ -1684,7 +1656,8 @@
           "Create or update a custom domain for a static site": {
             "$ref": "./examples/CreateOrUpdateStaticSiteCustomDomain.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1736,7 +1709,8 @@
           "Delete a custom domain for a static site": {
             "$ref": "./examples/DeleteStaticSiteCustomDomain.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/customDomains/{domainName}/validate": {
@@ -1799,7 +1773,8 @@
           "Validate a custom domain for a static site": {
             "$ref": "./examples/ValidateStaticSiteCustomDomain.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/detach": {
@@ -1846,7 +1821,8 @@
           "Detach a static site": {
             "$ref": "./examples/DetachStaticSite.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/functions": {
@@ -1928,12 +1904,6 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
@@ -2028,12 +1998,6 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
@@ -2609,7 +2573,8 @@
           "Register a user provided function app with a static site": {
             "$ref": "./examples/RegisterUserProvidedFunctionAppWithStaticSite.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -2703,6 +2668,9 @@
           "200": {
             "description": "OK."
           },
+          "202": {
+            "description": "Asynchronous operation in progress."
+          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -2714,7 +2682,8 @@
           "Deploy a site from a zipped package": {
             "$ref": "./examples/StaticSiteZipDeploy.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
