@@ -30,6 +30,8 @@ openapi-type: arm
 azure-arm: true
 tag: package-2021-04
 generate-empty-classes: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Tag: package-2021-04
