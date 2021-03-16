@@ -23,6 +23,8 @@ namespace: azure.mgmt.attestation
 package-name: azure-mgmt-attestation
 package-version: 0.1.0
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
