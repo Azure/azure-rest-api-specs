@@ -1694,7 +1694,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/extensionaddons": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/extensionAddons": {
       "get": {
         "tags": [
           "ExtensionAddons"
@@ -1740,7 +1740,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/extensionaddons/{extensionAddonName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/extensionAddons/{extensionAddonName}": {
       "get": {
         "tags": [
           "ExtensionAddons"
@@ -1882,6 +1882,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -4508,6 +4511,11 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true,
+          "description": "The system meta data relating to this resource."
+        },
         "properties": {
           "description": "Properties of a extension add-on.",
           "$ref": "#/definitions/ExtensionAddonProperties",
