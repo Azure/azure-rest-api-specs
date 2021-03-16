@@ -5813,11 +5813,15 @@
       "allOf": [
         {
           "$ref": "#/definitions/AutomationRuleAction"
-        },
-        {
-          "$ref": "#/definitions/AutomationRuleRunPlaybookActionProperties"
         }
       ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationRuleRunPlaybookActionProperties",
+          "description": "Properties of an automation rule action to run a playbook",
+          "x-ms-client-flatten": true
+        }
+      },
       "type": "object",
       "x-ms-discriminator-value": "RunPlaybook"
     },
@@ -5849,11 +5853,15 @@
       "allOf": [
         {
           "$ref": "#/definitions/AutomationRuleAction"
-        },
-        {
-          "$ref": "#/definitions/AutomationRuleModifyPropertiesActionProperties"
         }
       ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationRuleModifyPropertiesActionProperties",
+          "description": "Properties of an automation rule action to modify an object's properties",
+          "x-ms-client-flatten": true
+        }
+      },
       "required": [
         "actionConfiguration"
       ],
@@ -6180,11 +6188,15 @@
       "allOf": [
         {
           "$ref": "#/definitions/AutomationRuleCondition"
-        },
-        {
-          "$ref": "#/definitions/AutomationRulePropertyValuesConditionProperties"
         }
       ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationRulePropertyValuesConditionProperties",
+          "description": "Properties of an automation rule condition that evaluates a property's value",
+          "x-ms-client-flatten": true
+        }
+      },
       "type": "object",
       "x-ms-discriminator-value": "Property"
     },
