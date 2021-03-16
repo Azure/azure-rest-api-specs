@@ -56,6 +56,7 @@ az:
 az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/vm
 python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/vm"
 extension-mode: stable
+compatible-level: track2
 cli:
     cli-directive:
         - where:
@@ -70,6 +71,11 @@ cli:
             group: "SshPublicKeys"
             op: "GenerateKeyPair"
           hidden: true
+        - where:
+            group: "*"
+            op: "*"
+            param: vmName
+          alias: name
 directive: 
   - where: 
       group: vm ssh-public-key
