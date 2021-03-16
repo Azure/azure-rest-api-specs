@@ -15,48 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}": {
-      "get": {
-        "tags": [
-          "kustoPools"
-        ],
-        "operationId": "kustoPools_Get",
-        "x-ms-examples": {
-          "kustoPoolsGet": {
-            "$ref": "./examples/KustoPoolsGet.json"
-          }
-        },
-        "description": "Gets a Kusto pool.",
-        "parameters": [
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/kustoPoolNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Kusto pool.",
-            "schema": {
-              "$ref": "#/definitions/KustoPool"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-          "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools": {
+   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools": {
       "get": {
         "operationId": "KustoPools_ListByWorkspace",
         "summary": "List Kusto pools",
@@ -70,10 +29,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+		  {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./workspace.json#/parameters/workspaceNameParameter"
@@ -101,12 +60,53 @@
           "List Kusto pools in a workspace": {
             "$ref": "./examples/KustoPoolsListByWorkspace.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
-    }
+	},
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}": {
+      "get": {
+        "tags": [
+          "kustoPools"
+        ],
+        "operationId": "kustoPools_Get",
+        "x-ms-examples": {
+          "kustoPoolsGet": {
+            "$ref": "./examples/KustoPoolsGet.json"
+          }
+        },
+        "description": "Gets a Kusto pool.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+		  {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Kusto pool.",
+            "schema": {
+              "$ref": "#/definitions/KustoPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
 	  "put": {
         "tags": [
           "kustoPools"
@@ -124,6 +124,9 @@
             "$ref": "./workspace.json#/parameters/workspaceNameParameter"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+		  {
             "$ref": "#/parameters/kustoPoolNameParameter"
           },
           {
@@ -202,6 +205,9 @@
             "$ref": "./workspace.json#/parameters/workspaceNameParameter"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+		  {
             "$ref": "#/parameters/kustoPoolNameParameter"
           },
           {
@@ -272,6 +278,9 @@
             "$ref": "./workspace.json#/parameters/workspaceNameParameter"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+		  {
             "$ref": "#/parameters/kustoPoolNameParameter"
           },
           {
