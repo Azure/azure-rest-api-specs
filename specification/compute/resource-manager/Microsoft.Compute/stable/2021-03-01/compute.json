@@ -9444,6 +9444,18 @@
         "primary": {
           "type": "boolean",
           "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the network interface when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": false
+          }
         }
       },
       "description": "Describes a network interface reference properties."
@@ -9462,17 +9474,424 @@
       ],
       "description": "Describes a network interface reference."
     },
+    "VirtualMachineIpTag": {
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "IP tag type. Example: FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
+        }
+      },
+      "description": "Contains the IP tag associated with the public IP address."
+    },
+    "VirtualMachinePublicIPAddressDnsSettingsConfiguration": {
+      "properties": {
+        "domainNameLabel": {
+          "type": "string",
+          "description": "The Domain name label. The concatenation of the domain name label and vm [what] will be the domain name labels of the PublicIPAddress resources that will be created"
+        }
+      },
+      "required": [
+        "domainNameLabel"
+      ],
+      "description": "Describes a virtual machines network configuration's DNS settings."
+    },
+    "VirtualMachinePublicIPAddressConfigurationProperties": {
+      "properties": {
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The idle timeout of the public IP address."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the public IP address when the VM is deleted",
+          "default": "Delete",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": false
+          }
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/VirtualMachinePublicIPAddressDnsSettingsConfiguration",
+          "description": "The dns settings to be applied on the publicIP addresses ."
+        },
+        "ipTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineIpTag"
+          },
+          "description": "The list of IP tags associated with the public IP address."
+        },
+        "publicIPPrefix": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The PublicIPPrefix from which to allocate publicIP addresses."
+        },
+        "publicIPAddressVersion": {
+          "type": "string",
+          "description": "Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersions",
+            "modelAsString": true
+          }
+        },
+        "publicIPAllocationMethod": {
+          "type": "string",
+          "description": "Specify the public IP allocation type",
+          "enum": [
+            "Dynamic",
+            "Static"
+          ],
+          "x-ms-enum": {
+            "name": "PublicIPAllocationMethod",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Describes a virtual machines IP Configuration's PublicIPAddress configuration"
+    },
+    "LoadBalancerAndPublicIPSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Specify public IP sku name",
+          "enum": [
+            "Basic",
+            "Standard",
+            "Classic",
+            "Gateway"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "Specify public IP sku tier",
+          "enum": [
+            "Regional",
+            "Global"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Describes the public IP Sku"
+    },
+    "VirtualMachinePublicIPAddressConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The publicIP address configuration name."
+        },
+        "sku": {
+          "$ref": "#/definitions/LoadBalancerAndPublicIPSku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachinePublicIPAddressConfigurationProperties"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Describes a virtual machines IP Configuration's PublicIPAddress configuration"
+    },
+    "VirtualMachineNetworkInterfaceIPConfigurationProperties": {
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Specifies the identifier of the subnet."
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
+        },
+        "publicIPAddressConfiguration": {
+          "$ref": "#/definitions/VirtualMachinePublicIPAddressConfiguration",
+          "description": "The publicIPAddressConfiguration."
+        },
+        "privateIPAddressVersion": {
+          "type": "string",
+          "description": "Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersions",
+            "modelAsString": true
+          }
+        },
+        "applicationSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to application security group."
+        },
+        "applicationGatewayBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of application gateways. A virtual machine can reference backend address pools of multiple application gateways. Multiple virtual machines cannot use the same application gateway."
+        },
+        "loadBalancerBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of load balancers. A virtual machine can reference backend address pools of one public and one internal load balancer. [Multiple virtual machines cannot use the same basic sku load balancer]."
+        }
+      },
+      "description": "Describes a virtual machine network interface IP configuration properties."
+    },
+    "VirtualMachineNetworkInterfaceIPConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The IP configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineNetworkInterfaceIPConfigurationProperties"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Describes a virtual machine network profile's IP configuration."
+    },
+    "VirtualMachineNetworkInterfaceDnsSettingsConfiguration": {
+      "properties": {
+        "dnsServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of DNS servers IP addresses"
+        }
+      },
+      "description": "Describes a virtual machines network configuration's DNS settings."
+    },
+    "QoSIPRange": {
+      "properties": {
+        "startIP": {
+          "type": "string"
+        },
+        "endIP": {
+          "type": "string"
+        }
+      }
+    },
+    "QoSPortRange": {
+      "properties": {
+        "start": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        }
+      }
+    },
+    "DscpConfigurationProperties": {
+      "properties": {
+        "markings": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "Set the priority for the traffic tied to this configuration."
+        },
+        "destinationIPRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QoSIPRange"
+          }
+        },
+        "sourceIPRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QoSIPRange"
+          }
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QoSPortRange"
+          }
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QoSPortRange"
+          }
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Icmp",
+            "Tcp",
+            "Udp",
+            "Gre",
+            "Esp",
+            "Ah",
+            "Vxlan",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "DscpProtocolOptions",
+            "modelAsString": false
+          }
+        },
+        "associatedNetworkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceReference"
+          }
+        }
+      }
+    },
+    "DscpConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DscpConfigurationProperties"
+        }
+      }
+    },
+    "VirtualMachineNetworkInterfaceConfigurationProperties": {
+      "properties": {
+        "primary": {
+          "type": "boolean",
+          "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
+        },
+        "deleteOption": {
+          "type": "string",
+          "default": "Delete",
+          "description": "Specify what happens to the network interface when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": false
+          }
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "enableFpga": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is FPGA networking-enabled."
+        },
+        "enableIPForwarding": {
+          "type": "boolean",
+          "description": "Whether IP forwarding enabled on this NIC."
+        },
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The network security group."
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/VirtualMachineNetworkInterfaceDnsSettingsConfiguration",
+          "description": "The dns settings to be applied on the network interfaces."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineNetworkInterfaceIPConfiguration"
+          },
+          "description": "Specifies the IP configurations of the network interface."
+        },
+        "dscpConfiguration": {
+          "$ref": "#/definitions/DscpConfiguration"
+        }
+      },
+      "required": [
+        "ipConfigurations"
+      ],
+      "description": "Describes a virtual machine network profile's IP configuration."
+    },
+    "VirtualMachineNetworkInterfaceConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The network interface configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineNetworkInterfaceConfigurationProperties"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Describes a virtual machine network interface configurations."
+    },
     "NetworkProfile": {
       "properties": {
+        "networkApiVersion": {
+          "type": "string",
+          "description": "",
+          "enum": [
+            "2021-03-01"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkApiVersion",
+            "modelAsString": true
+          }
+        },
         "networkInterfaces": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterfaceReference"
           },
           "description": "Specifies the list of resource Ids for the network interfaces associated with the virtual machine."
+        },
+        "NetworkInterfaceConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineNetworkInterfaceConfiguration"
+          },
+          "description": "Specifies the networking configurations that will be used to create the virtual machine networking resources."
         }
       },
-      "description": "Specifies the network interfaces of the virtual machine."
+      "description": "Specifies the network interfaces or the networking configuration of the virtual machine."
     },
     "BootDiagnostics": {
       "properties": {
@@ -10810,6 +11229,19 @@
         "enableIPForwarding": {
           "type": "boolean",
           "description": "Whether IP forwarding enabled on this NIC."
+        },
+        "deleteOption": {
+          "type": "string",
+          "default": null,
+          "description": "Specify what happens to the network interface when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": false
+          }
         }
       },
       "required": [
@@ -10849,6 +11281,19 @@
         "enableIPForwarding": {
           "type": "boolean",
           "description": "Whether IP forwarding enabled on this NIC."
+        },
+        "deleteOption": {
+          "type": "string",
+          "default": null,
+          "description": "Specify what happens to the network interface when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": false
+          }
         }
       },
       "description": "Describes a virtual machine scale set updatable network profile's IP configuration.Use this object for updating network profile's IP Configuration."
@@ -11011,6 +11456,18 @@
     },
     "VirtualMachineScaleSetNetworkProfile": {
       "properties": {
+        "networkApiVersion": {
+          "type": "string",
+          "default": null,
+          "description": "",
+          "enum": [
+            "2021-03-01"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkApiVersion",
+            "modelAsString": true
+          }
+        },
         "healthProbe": {
           "$ref": "#/definitions/ApiEntityReference",
           "description": "A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'."
@@ -11027,6 +11484,18 @@
     },
     "VirtualMachineScaleSetUpdateNetworkProfile": {
       "properties": {
+        "networkApiVersion": {
+          "type": "string",
+          "default": null,
+          "description": "",
+          "enum": [
+            "2021-03-01"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkApiVersion",
+            "modelAsString": true
+          }
+        },
         "healthProbe": {
           "$ref": "#/definitions/ApiEntityReference",
           "description": "A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'."
