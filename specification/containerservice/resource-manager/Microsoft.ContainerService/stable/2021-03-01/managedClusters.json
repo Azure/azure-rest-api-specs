@@ -1690,6 +1690,215 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/extensionaddons": {
+      "get": {
+        "tags": [
+          "ExtensionAddons"
+        ],
+        "operationId": "ExtensionAddons_ListByManagedCluster",
+        "summary": "Gets a list of extension add-ons in the specified managed cluster.",
+        "description": "Gets a list of extension add-ons in the specified managed cluster. The operation returns properties of each extension add-on.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionAddonListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Extension Addons by Managed Cluster": {
+            "$ref": "./examples/ExtensionAddonsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/extensionaddons/{extensionAddonName}": {
+      "get": {
+        "tags": [
+          "ExtensionAddons"
+        ],
+        "operationId": "ExtensionAddons_Get",
+        "summary": "Gets the extension add-on.",
+        "description": "Gets the details of the extension add-on in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "extensionAddonName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the extension add-on."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionAddon"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Extension Addon": {
+            "$ref": "./examples/ExtensionAddonsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExtensionAddons"
+        ],
+        "operationId": "ExtensionAddons_CreateOrUpdate",
+        "summary": "Creates or updates an extension add-on.",
+        "description": "Creates or updates an extension add-on in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "extensionAddonName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the extension add-on."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionAddon"
+            },
+            "description": "Parameters supplied to the Create or Update an extension add-on."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionAddon"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ExtensionAddon"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Create/Update Extension Addon": {
+            "$ref": "./examples/ExtensionAddonsCreate_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ExtensionAddons"
+        ],
+        "operationId": "ExtensionAddons_Delete",
+        "summary": "Deletes the extension add-on.",
+        "description": "Deletes the extension add-on in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "extensionAddonName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the extension add-on."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Delete Extension Addon": {
+            "$ref": "./examples/ExtensionAddonsDelete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4096,6 +4305,76 @@
           "description": "Sysctl setting vm.vfs_cache_pressure."
         }
       }
+    },
+    "ExtensionAddon": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of a extension add-on.",
+          "$ref": "#/definitions/ExtensionAddonProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Extension add-on."
+    },
+    "ExtensionAddonProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current provisioning state of extension add-on.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ExtensionAddonProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "addonName": {
+          "type": "string",
+          "description": "Corresponding name if the add-on is also embedded in AKS."
+        },
+        "enableManagedIdentity": {
+          "type": "boolean",
+          "description": "Whether managed identity is required for the extension add-on or not."
+        },
+        "identity": {
+          "readOnly": true,
+          "description": "Information of user assigned identity used by this add-on.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UserAssignedIdentity"
+            }
+          ]
+        }
+      },
+      "description": "Extension add-on properties."
+    },
+    "ExtensionAddonListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionAddon"
+          },
+          "description": "The list of extension add-ons."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of extension add-on results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Extension Addon operation."
     }
   },
   "parameters": {
