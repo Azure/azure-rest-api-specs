@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2020-09-21-preview2` is specified 
 
 ```yaml $(tag) == 'package-2020-09-21-preview2'
 input-file:
-  - Microsoft.CommunicationServicesChat/preview/2020-09-21-preview2/communicationserviceschat.json
+  - preview/2020-09-21-preview2/communicationserviceschat.json
 title:
   Azure Communication Services
 ```
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2020-11-01-preview3` is specified 
 
 ```yaml $(tag) == 'package-2020-11-01-preview3'
 input-file:
-  - Microsoft.CommunicationServicesChat/preview/2020-11-01-preview3/communicationserviceschat.json
+  - preview/2020-11-01-preview3/communicationserviceschat.json
 title:
   Azure Communication Services
 ```
@@ -57,7 +57,7 @@ These settings apply only when `--tag=package-2021-01-27-preview4` is specified 
 
 ```yaml $(tag) == 'package-2021-01-27-preview4'
 input-file:
-  - Microsoft.CommunicationServicesChat/preview/2021-01-27-preview4/communicationserviceschat.json
+  - preview/2021-01-27-preview4/communicationserviceschat.json
 title:
   Azure Communication Services
 ```
