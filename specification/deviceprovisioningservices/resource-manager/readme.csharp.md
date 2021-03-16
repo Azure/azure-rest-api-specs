@@ -17,5 +17,5 @@ csharp:
   client-side-validation: false
   clear-output-folder: true
   namespace: Microsoft.Azure.Management.DeviceProvisioningServices
-  output-folder: $(csharp-sdks-folder)/deviceprovisioningservcies/Management.Azure.Management.DeviceProvisioningServcies/src/Generated
+  output-folder: $(csharp-sdks-folder)/deviceprovisioningservcies/Microsoft.Azure.Management.DeviceProvisioningServcies/src/Generated
 ```
