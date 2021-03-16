@@ -1,20 +1,16 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
-    "name": "{devtestlab-name}",
     "api-version": "2018-09-15",
-    "lab": {
-      "properties": {
-        "labStorageType": "Premium"
-      }
-    }
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "name": "{labName}",
+    "lab": {}
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "vaultName": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/{keyvault-name}",
+          "vaultName": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/{keyVaultName}",
           "labStorageType": "Standard",
           "mandatoryArtifactsResourceIdsLinux": [],
           "mandatoryArtifactsResourceIdsWindows": [],
@@ -32,14 +28,14 @@
             "markdown": ""
           },
           "provisioningState": "Succeeded",
-          "uniqueIdentifier": "{unique-identifier}"
+          "uniqueIdentifier": "{uniqueIdentifier}"
         },
-        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}",
-        "name": "{devtestlab-name}",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}",
+        "name": "{labName}",
         "type": "Microsoft.DevTestLab/labs",
-        "location": "{azure-location}",
+        "location": "{location}",
         "tags": {
-          "MyTag": "MyValue"
+          "tagName1": "tagValue1"
         }
       }
     }
