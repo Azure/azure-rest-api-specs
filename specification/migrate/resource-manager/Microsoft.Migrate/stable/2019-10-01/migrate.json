@@ -83,6 +83,14 @@
       "x-ms-parameter-location": "method",
       "required": true
     },
+    "serverCollectorName": {
+      "name": "serverCollectorName",
+      "description": "Unique name of a Server collector within a project.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
     "vmWareCollectorName": {
       "name": "vmWareCollectorName",
       "description": "Unique name of a VMware collector within a project.",
@@ -99,6 +107,30 @@
       "x-ms-parameter-location": "method",
       "required": true
     },
+    "importCollectorName": {
+      "name": "importCollectorName",
+      "description": "Unique name of a Import collector within a project.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "privateLinkResourceName": {
+      "name": "privateLinkResourceName",
+      "description": "Unique name of a private link resource within a project.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "privateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "description": "Unique name of a private endpoint connection within a project.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
     "api-version": {
       "name": "api-version",
       "description": "Standard request header. Used by service to identify API version used by client.",
@@ -108,6 +140,12 @@
       "enum": [
         "2019-10-01"
       ]
+    },
+    "acceptLanguage": {
+      "description": "Standard request header. Used by service to respond to client in appropriate language.",
+      "name": "Accept-Language",
+      "type": "string",
+      "in": "header"
     }
   },
   "securityDefinitions": {
@@ -206,7 +244,7 @@
         },
         "customerWorkspaceId": {
           "type": "string",
-          "description": "The ARM id of service map workspace created by customer."
+          "description": "URL of service map workspace created by customer."
         },
         "customerWorkspaceLocation": {
           "type": "string",
@@ -237,6 +275,22 @@
           "x-nullable": true,
           "readOnly": true
         },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The list of private endpoint connections to the project.",
+          "readOnly": true
+        },
+        "customerStorageAccountArmId": {
+          "type": "string",
+          "description": "The ARM id of the storage account used for interactions when public access is disabled."
+        },
         "provisioningState": {
           "type": "string",
           "enum": [
@@ -248,7 +302,6 @@
             "Succeeded"
           ],
           "description": "Provisioning state of the project.",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
@@ -302,7 +355,7 @@
             "Completed",
             "Invalid"
           ],
-          "description": "Whether the group has been created and is valid.",
+          "description": "Wheter the group has been created and is valid.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "GroupStatus",
@@ -333,14 +386,18 @@
         "createdTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Time when this group was created. Date-Time represented in ISO-8601 format.",
+          "description": "Time when this project was created. Date-Time represented in ISO-8601 format.",
           "readOnly": true
         },
         "updatedTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Time when this group was last updated. Date-Time represented in ISO-8601 format.",
+          "description": "Time when this project was last updated. Date-Time represented in ISO-8601 format.",
           "readOnly": true
+        },
+        "groupType": {
+          "type": "string",
+          "description": "The type of group."
         }
       }
     },
@@ -365,6 +422,7 @@
         "operationType": {
           "type": "string",
           "enum": [
+            "Unknown",
             "Add",
             "Remove"
           ],
@@ -826,7 +884,7 @@
             "OutOfSync",
             "OutDated"
           ],
-          "description": "Whether the assessment has been created and is valid.",
+          "description": "Wheter the assessment has been created and is valid.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "AssessmentStatus",
@@ -1183,7 +1241,7 @@
             "InternalErrorOccurredForDiskEvaluation",
             "NoEaPriceFoundForDiskSize"
           ],
-          "description": "If disk is not suitable to be migrated, this explains the reasons and mitigation steps.",
+          "description": "If disk is suitable, this explains the reasons and mitigation steps.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "AzureDiskSuitabilityExplanation",
@@ -1207,7 +1265,7 @@
             "DiskGigabytesConsumedOutOfRange",
             "DiskGigabytesProvisionedOutOfRange"
           ],
-          "description": "If disk is suitable to be migrate but some conditions/checks were not considered while calculating suitability, this explains the details.",
+          "description": "If disk is not suitable, this explains the details.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "AzureDiskSuitabilityDetail",
@@ -1433,7 +1491,7 @@
           "description": "Monthly standard SSD storage cost estimate for the disks that are attached to this machine as a group, for a 31-day month.",
           "readOnly": true
         },
-        "confidenceRatingInPercentage": {
+        "ConfidenceRatingInPercentage": {
           "type": "number",
           "format": "double",
           "description": "Confidence rating of assessed machine.",
@@ -1794,9 +1852,6 @@
           "items": {
             "$ref": "#/definitions/Project"
           }
-        },
-        "nextLink": {
-          "type": "string"
         }
       }
     },
@@ -1858,68 +1913,28 @@
         }
       }
     },
-    "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "description": "An error response from the Azure Migrate service."
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the Azure Migrate service."
-    },
     "CollectorBodyAgentSpnProperties": {
       "type": "object",
       "properties": {
         "authority": {
-          "description": "AAD Authority URL which was used to request the token for the service principal.",
           "type": "string"
         },
         "applicationId": {
-          "description": "Application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
           "type": "string"
         },
         "audience": {
-          "description": "Intended audience for the service principal.",
           "type": "string"
         },
         "objectId": {
-          "description": "Object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
           "type": "string"
         },
         "tenantId": {
-          "description": "Tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
           "type": "string"
         }
       }
     },
     "HyperVCollector": {
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
         "eTag": {
           "type": "string"
@@ -1945,17 +1960,14 @@
       "type": "object",
       "properties": {
         "discoverySiteId": {
-          "type": "string",
-          "description": "The ARM id of the discovery service site."
+          "type": "string"
         },
         "createdTimestamp": {
           "type": "string",
-          "description": "Time when this collector was created. Date-Time represented in ISO-8601 format.",
           "readOnly": true
         },
         "updatedTimestamp": {
           "type": "string",
-          "description": "Time when this collector was updated. Date-Time represented in ISO-8601 format.",
           "readOnly": true
         },
         "agentProperties": {
@@ -1974,7 +1986,7 @@
           "type": "string",
           "readOnly": true
         },
-        "lastHeartbeatUtc": {
+        "lastHeartbeat": {
           "type": "string",
           "format": "date-time",
           "x-nullable": true,
@@ -1985,9 +1997,24 @@
         }
       }
     },
+    "ImportCollectorProperties": {
+      "type": "object",
+      "properties": {
+        "discoverySiteId": {
+          "type": "string"
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "VMwareCollector": {
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
         "eTag": {
           "type": "string"
@@ -2009,6 +2036,52 @@
         }
       }
     },
+    "ServerCollector": {
+      "type": "object",
+      "properties": {
+        "eTag": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/CollectorProperties"
+        }
+      }
+    },
+    "ImportCollector": {
+      "type": "object",
+      "properties": {
+        "eTag": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ImportCollectorProperties"
+        }
+      }
+    },
     "HyperVCollectorList": {
       "type": "object",
       "description": "List of Hyper-V collectors.",
@@ -2022,6 +2095,19 @@
         }
       }
     },
+    "ServerCollectorList": {
+      "type": "object",
+      "description": "List of Server collectors.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Server collectors.",
+          "items": {
+            "$ref": "#/definitions/ServerCollector"
+          }
+        }
+      }
+    },
     "VMwareCollectorList": {
       "type": "object",
       "description": "List of VMware collectors.",
@@ -2031,6 +2117,19 @@
           "description": "List of VMware collectors.",
           "items": {
             "$ref": "#/definitions/VMwareCollector"
+          }
+        }
+      }
+    },
+    "ImportCollectorList": {
+      "type": "object",
+      "description": "List of Import collectors.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Import collectors.",
+          "items": {
+            "$ref": "#/definitions/ImportCollector"
           }
         }
       }
@@ -2133,11 +2232,6 @@
           "description": "Unique name of an assessment options.",
           "readOnly": true
         },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of an assessment options.",
-          "readOnly": true
-        },
         "properties": {
           "description": "Properties of the assessment options.",
           "$ref": "#/definitions/AssessmentOptionsProperties"
@@ -2169,52 +2263,193 @@
           }
         }
       }
-    }
-  },
-  "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/assessmentProjects": {
-      "get": {
-        "summary": "Get all projects.",
-        "description": "Get all the projects in the subscription.",
-        "operationId": "Projects_ListBySubscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
+    },
+    "PrivateEndpointConnectionCollection": {
+      "type": "object",
+      "description": "A collection of private endpoint connections for a project.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of private endpoint connections for a project.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
           },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "headers": {
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "Service generated Request ID."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/ProjectResultList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
+          "readOnly": true
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Projects_List": {
-            "$ref": "./examples/ProjectsInSubscription_List.json"
-          }
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ],
+      "description": "A private endpoint connection for a project.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the private endpoint endpoint connection.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the object = [Microsoft.Migrate/assessmentProjects/privateEndpointConnections].",
+          "readOnly": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "For optimistic concurrency control."
+        },
+        "id": {
+          "type": "string",
+          "description": "Path reference to this private endpoint endpoint connection. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the private endpoint endpoint connection.",
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Private endpoint connection properties.",
+      "properties": {
+        "provisioningState": {
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "description": "Indicates whether there is an ongoing operation on the private endpoint.",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "description": "ARM id for the private endpoint resource corresponding to the connection.",
+          "$ref": "#/definitions/ResourceId",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "description": "State of the private endpoint connection.",
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "ResourceId": {
+      "type": "object",
+      "description": "ARM id for a resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "State of a private endpoint connection.",
+      "properties": {
+        "status": {
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "description": "Connection status of the private endpoint connection."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the private endpoint connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "Actions required on the private endpoint connection."
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "A private link resource for a project for which a private endpoint can be created.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the private link resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the object = [Microsoft.Migrate/assessmentProjects/privateLinkResources].",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Path reference to this private link resource. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/privateLinkResources/{privateLinkResourceName}",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the private link resource.",
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource.",
+      "type": "object",
+      "properties": {
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Required DNS zone names of the the private link resource."
+        },
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceCollection": {
+      "type": "object",
+      "description": "A list of private link resources",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects": {
       "get": {
         "summary": "Get all projects.",
@@ -2229,6 +2464,9 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2244,20 +2482,21 @@
               "$ref": "#/definitions/ProjectResultList"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "401": {
+            "description": "Not authorized (No access to subscription or resource group)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Projects_List": {
-            "$ref": "./examples/Projects_List.json"
-          }
+          "nextLinkName": null
         }
       }
     },
@@ -2278,6 +2517,9 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2293,16 +2535,17 @@
               "$ref": "#/definitions/Project"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Projects_Get": {
-            "$ref": "./examples/Projects_Get.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       },
@@ -2322,6 +2565,9 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "name": "project",
@@ -2357,16 +2603,17 @@
               "$ref": "#/definitions/Project"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Projects_Create": {
-            "$ref": "./examples/Projects_Create.json"
+          "400": {
+            "description": "Bad Request (Read only settings of an existing project cannot be changed)."
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       },
@@ -2386,6 +2633,9 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "name": "project",
@@ -2409,16 +2659,20 @@
               "$ref": "#/definitions/Project"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Projects_Update": {
-            "$ref": "./examples/Projects_Update.json"
+          "400": {
+            "description": "Bad Request (Read only settings of an existing project cannot be changed)."
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, or nestName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       },
@@ -2438,6 +2692,9 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2453,16 +2710,17 @@
           "204": {
             "description": "No content. No project with specified name was found."
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Projects_Delete": {
-            "$ref": "./examples/Projects_Delete.json"
+          "400": {
+            "description": "Bad request. (Invalid subscriptionId or resourceGroupName)."
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)"
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       }
@@ -2471,7 +2729,7 @@
       "get": {
         "summary": "Get all available options for the properties of an assessment on a project.",
         "description": "Get all available options for the properties of an assessment on a project.",
-        "operationId": "Projects_AssessmentOptions",
+        "operationId": "Project_AssessmentOptions",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2487,6 +2745,9 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2502,25 +2763,29 @@
               "$ref": "#/definitions/AssessmentOptions"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "401": {
+            "description": "Not authorized (No access to subscription or resource group)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName or projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
-        "x-ms-examples": {
-          "AssessmentOptions_Get": {
-            "$ref": "./examples/AssessmentOptions_Get.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/assessmentOptions": {
       "get": {
-        "summary": "Gets list of all available options for the properties of an assessment on a project.",
-        "description": "Gets list of all available options for the properties of an assessment on a project.",
-        "operationId": "Projects_AssessmentOptionsList",
+        "summary": "Get all available options for the properties of an assessment on a project.",
+        "description": "Get all available options for the properties of an assessment on a project.",
+        "operationId": "Project_AssessmentOptionsList",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2533,6 +2798,9 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -2548,20 +2816,21 @@
               "$ref": "#/definitions/AssessmentOptionsResultList"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "401": {
+            "description": "Not authorized (No access to subscription or resource group)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName or projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "AssessmentOptions_Get": {
-            "$ref": "./examples/AssessmentOptions_List.json"
-          }
         }
       }
     },
@@ -2581,6 +2850,9 @@
             "$ref": "#/parameters/projectName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2597,20 +2869,21 @@
               "$ref": "#/definitions/MachineResultList"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Machines_ListByProject": {
-            "$ref": "./examples/Machines_ListByProject.json"
-          }
         }
       }
     },
@@ -2633,6 +2906,9 @@
             "$ref": "#/parameters/machineName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2649,16 +2925,17 @@
               "$ref": "#/definitions/Machine"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Machines_Get": {
-            "$ref": "./examples/Machines_Get.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or machineName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       }
@@ -2679,6 +2956,9 @@
             "$ref": "#/parameters/projectName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2695,20 +2975,21 @@
               "$ref": "#/definitions/GroupResultList"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "Groups_ListByProject": {
-            "$ref": "./examples/Groups_ListByProject.json"
-          }
         }
       }
     },
@@ -2731,6 +3012,9 @@
             "$ref": "#/parameters/groupName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2747,16 +3031,17 @@
               "$ref": "#/definitions/Group"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Groups_Get": {
-            "$ref": "./examples/Groups_Get.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or groupName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       },
@@ -2776,6 +3061,9 @@
           },
           {
             "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2814,16 +3102,17 @@
               "$ref": "#/definitions/Group"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Groups_Create": {
-            "$ref": "./examples/Groups_Create.json"
+          "400": {
+            "description": "Bad Request (Read only settings of an existing group cannot be changed)."
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       },
@@ -2845,6 +3134,9 @@
             "$ref": "#/parameters/groupName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2861,16 +3153,17 @@
           "204": {
             "description": "No content. No group with specified name was found."
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Groups_Delete": {
-            "$ref": "./examples/Groups_Delete.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)"
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName)"
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       }
@@ -2897,6 +3190,9 @@
             "$ref": "#/parameters/api-version"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "name": "groupUpdateProperties",
             "description": "Machines list to be added or removed from group.",
             "in": "body",
@@ -2918,16 +3214,17 @@
               "$ref": "#/definitions/Group"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Groups_UpdateMachines": {
-            "$ref": "./examples/Groups_UpdateMachines.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       }
@@ -2951,6 +3248,9 @@
             "$ref": "#/parameters/groupName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -2967,20 +3267,21 @@
               "$ref": "#/definitions/AssessmentResultList"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, assessmentName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "Assessments_ListByGroup": {
-            "$ref": "./examples/Assessments_ListByGroup.json"
-          }
         }
       }
     },
@@ -3000,6 +3301,9 @@
             "$ref": "#/parameters/projectName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3016,20 +3320,21 @@
               "$ref": "#/definitions/AssessmentResultList"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, assessmentName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "Assessments_ListByProject": {
-            "$ref": "./examples/Assessments_ListByProject.json"
-          }
         }
       }
     },
@@ -3055,6 +3360,9 @@
             "$ref": "#/parameters/assessmentName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3071,22 +3379,23 @@
               "$ref": "#/definitions/Assessment"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Assessments_Get": {
-            "$ref": "./examples/Assessments_Get.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or assesmentName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       },
       "put": {
         "summary": "Create or Update assessment.",
-        "description": "Create a new assessment with the given name and the specified settings. Since name of an assessment in a project is a unique identifier, if an assessment with the name provided already exists, then the existing assessment is updated.\n\nAny PUT operation, resulting in either create or update on an assessment, will cause the assessment to go in a \"InProgress\" state. This will be indicated by the field 'computationState' on the Assessment object. During this time no other PUT operation will be allowed on that assessment object, nor will a Delete operation. Once the computation for the assessment is complete, the field 'computationState' will be updated to 'Ready', and then other PUT or DELETE operations can happen on the assessment.\n\nWhen assessment is under computation, any PUT will lead to a 400 - Bad Request error.\n",
+        "description": "Create a new assessment with the given name and the specified settings. Since name of an assessment in a project is a unique identiefier, if an assessment with the name provided already exists, then the existing assessment is updated.\n\nAny PUT operation, resulting in either create or update on an assessment, will cause the assessment to go in a \"InProgress\" state. This will be indicated by the field 'computationState' on the Assessment object. During this time no other PUT operation will be allowed on that assessment object, nor will a Delete operation. Once the computation for the assessment is complete, the field 'computationState' will be updated to 'Ready', and then other PUT or DELETE operations can happen on the assessment.\n\nWhen assessment is under computation, any PUT will lead to a 400 - Bad Request error.\n",
         "operationId": "Assessments_Create",
         "parameters": [
           {
@@ -3103,6 +3412,9 @@
           },
           {
             "$ref": "#/parameters/assessmentName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3141,16 +3453,17 @@
               "$ref": "#/definitions/Assessment"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Assessments_Create": {
-            "$ref": "./examples/Assessments_Create.json"
+          "400": {
+            "description": "Bad Request. Assessment is under computation and cannot be updated yet."
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       },
@@ -3175,6 +3488,9 @@
             "$ref": "#/parameters/assessmentName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3191,16 +3507,17 @@
           "204": {
             "description": "No content. No assessment with specified name was found."
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Assessments_Delete": {
-            "$ref": "./examples/Assessments_Delete.json"
+          "400": {
+            "description": "Bad Request. Assessment is under computation and cannot be deleted yet."
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)"
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       }
@@ -3228,6 +3545,9 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           }
         ],
         "responses": {
@@ -3243,16 +3563,17 @@
               "$ref": "#/definitions/DownloadUrl"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Assessments_GetReportDownloadUrl": {
-            "$ref": "./examples/Assessments_GetReportDownloadUrl.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       }
@@ -3279,6 +3600,9 @@
             "$ref": "#/parameters/assessmentName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3295,27 +3619,28 @@
               "$ref": "#/definitions/AssessedMachineResultList"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or assessmentName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AssessedMachines_ListByAssessment": {
-            "$ref": "./examples/AssessedMachines_ListByAssessment.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines/{assessedMachineName}": {
       "get": {
         "summary": "Get an assessed machine.",
-        "description": "Get an assessed machine with its size & cost estimate that was evaluated in the specified assessment.",
+        "description": "Get an assessed machine with its size & cost estimnate that was evaluated in the specified assessment.",
         "operationId": "AssessedMachines_Get",
         "parameters": [
           {
@@ -3337,6 +3662,9 @@
             "$ref": "#/parameters/assessedMachineName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3353,16 +3681,17 @@
               "$ref": "#/definitions/AssessedMachine"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AssessedMachines_Get": {
-            "$ref": "./examples/AssessedMachines_Get.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, groupName, assessmentName, or machineId)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       }
@@ -3383,6 +3712,9 @@
             "$ref": "#/parameters/projectName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3399,20 +3731,21 @@
               "$ref": "#/definitions/HyperVCollectorList"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "HyperVCollectors_ListByProject": {
-            "$ref": "./examples/HyperVCollectors_ListByProject.json"
-          }
         }
       }
     },
@@ -3435,6 +3768,9 @@
             "$ref": "#/parameters/hyperVCollectorName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3451,16 +3787,17 @@
               "$ref": "#/definitions/HyperVCollector"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HyperVCollectors_Get": {
-            "$ref": "./examples/HyperVCollectors_Get.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or hyperVCollectorName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       },
@@ -3480,6 +3817,9 @@
           },
           {
             "$ref": "#/parameters/hyperVCollectorName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3518,16 +3858,14 @@
               "$ref": "#/definitions/HyperVCollector"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HyperVCollectors_Create": {
-            "$ref": "./examples/HyperVCollectors_Create.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       },
@@ -3549,6 +3887,9 @@
             "$ref": "#/parameters/hyperVCollectorName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3565,16 +3906,242 @@
           "204": {
             "description": "No content. No Hyper-V collector with specified name was found."
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)"
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName or hyperVCollectorName)"
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/servercollectors": {
+      "get": {
+        "summary": "Get a list of Server collector.",
+        "description": "Get a list of Server collector.",
+        "operationId": "ServerCollectors_ListByProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns list of Server collectors.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ServerCollectorList"
             }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
-        "x-ms-examples": {
-          "HyperVCollectors_Delete": {
-            "$ref": "./examples/HyperVCollectors_Delete.json"
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/servercollectors/{serverCollectorName}": {
+      "get": {
+        "summary": "Get a Server collector.",
+        "description": "Get a Server collector.",
+        "operationId": "ServerCollectors_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/serverCollectorName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the specific Server collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServerCollector"
+            }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or serverCollectorName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        }
+      },
+      "put": {
+        "summary": "Create or Update Server collector.",
+        "description": "Create or Update Server collector",
+        "operationId": "ServerCollectors_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/serverCollectorName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "collectorBody",
+            "description": "New or Updated Server collector.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ServerCollector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Existing Server collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServerCollector"
+            }
+          },
+          "201": {
+            "description": "Created. New Server collector was created.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServerCollector"
+            }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes Server collector from the project.",
+        "description": "Delete a Server collector from the project.",
+        "operationId": "ServerCollectors_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/serverCollectorName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Deleted the Server collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            }
+          },
+          "204": {
+            "description": "No content. No Server collector with specified name was found."
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)"
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName or serverCollectorName)"
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       }
@@ -3595,6 +4162,9 @@
             "$ref": "#/parameters/projectName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3611,20 +4181,21 @@
               "$ref": "#/definitions/VMwareCollectorList"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "VMwareCollectors_ListByProject": {
-            "$ref": "./examples/VMwareCollectors_ListByProject.json"
-          }
         }
       }
     },
@@ -3647,6 +4218,9 @@
             "$ref": "#/parameters/vmWareCollectorName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3663,16 +4237,17 @@
               "$ref": "#/definitions/VMwareCollector"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VMwareCollectors_Get": {
-            "$ref": "./examples/VMwareCollectors_Get.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or vmwareCollectorName, )."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       },
@@ -3692,6 +4267,9 @@
           },
           {
             "$ref": "#/parameters/vmWareCollectorName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -3730,16 +4308,14 @@
               "$ref": "#/definitions/VMwareCollector"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VMwareCollectors_Create": {
-            "$ref": "./examples/VMwareCollectors_Create.json"
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       },
@@ -3761,6 +4337,9 @@
             "$ref": "#/parameters/vmWareCollectorName"
           },
           {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -3777,16 +4356,568 @@
           "204": {
             "description": "No content. No VMware collector with specified name was found."
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)"
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName or vmWareCollectorName)"
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/importcollectors": {
+      "get": {
+        "summary": "Get a list of Import collector.",
+        "description": "Get a list of Import collector.",
+        "operationId": "ImportCollectors_ListByProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns list of Import collectors.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ImportCollectorList"
             }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         },
-        "x-ms-examples": {
-          "VMwareCollectors_Delete": {
-            "$ref": "./examples/VMwareCollectors_Delete.json"
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/importcollectors/{importCollectorName}": {
+      "get": {
+        "summary": "Get a Import collector.",
+        "description": "Get a Import collector.",
+        "operationId": "ImportCollectors_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/importCollectorName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the specific Import collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ImportCollector"
+            }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or importCollectorName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        }
+      },
+      "put": {
+        "summary": "Create or Update Import collector.",
+        "description": "Create or Update Import collector",
+        "operationId": "ImportCollectors_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/importCollectorName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "collectorBody",
+            "description": "New or Updated Import collector.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ImportCollector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Existing Import collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ImportCollector"
+            }
+          },
+          "201": {
+            "description": "Created. New Import collector was created.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ImportCollector"
+            }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes Import collector from the project.",
+        "description": "Delete a Import collector from the project.",
+        "operationId": "ImportCollectors_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/importCollectorName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Deleted the Import collector.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            }
+          },
+          "204": {
+            "description": "No content. No Import collector with specified name was found."
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)"
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName or importCollectorName)"
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentprojects/{projectName}/privateEndpointConnections": {
+      "get": {
+        "summary": "Get all private endpoint connections",
+        "description": "Get all private endpoint connections in the project. Returns a json array of objects of type 'privateEndpointConnections' as specified in the Models section.",
+        "operationId": "PrivateEndpointConnection_ListByProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionCollection"
+            }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentprojects/{projectName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "summary": "Get a private endpoint connection in the project.",
+        "description": "Get information related to a specific private ndpoint connection in the project. Returns a json object of type 'privateEndpointConnections' as specified in the models section.",
+        "operationId": "PrivateEndpointConnection_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName or private endpoint connection)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a private endpoint connection in the project.",
+        "description": "Update a specific private ndpoint connection in the project.",
+        "operationId": "PrivateEndpointConnection_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "privateEndpointConnectionBody",
+            "in": "body",
+            "description": "New or Updated Private Endpoint Connection object.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted. Update request is queued for processing.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete the private endpoint connection",
+        "description": "Delete the private endpoint connection from the project. T.\n",
+        "operationId": "PrivateEndpointConnection_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            }
+          },
+          "204": {
+            "description": "No content. No project with specified name was found."
+          },
+          "400": {
+            "description": "Bad request. (Invalid subscriptionId or resourceGroupName)."
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, project or private endpoint connection)"
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentprojects/{projectName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "summary": "Get a specific private Link Resource.",
+        "description": "Get information related to a specific private Link Resource in the project. Returns a json object of type 'privateLinkResources' as specified in the models section.",
+        "operationId": "PrivateLinkResource_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/privateLinkResourceName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName or private link resource)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentprojects/{projectName}/privateLinkResources": {
+      "get": {
+        "summary": "Get all private link resources",
+        "description": "Get all private link resources created in the project. Returns a json array of objects of type 'privateLinkResources' as specified in the Models section.",
+        "operationId": "PrivateLinkResource_ListByProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceCollection"
+            }
+          },
+          "401": {
+            "description": "Not authorized (No access to subscription, resource group, or project)."
+          },
+          "404": {
+            "description": "Not found (Invalid subscriptionId, resourceGroupName or projectName)."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          },
+          "503": {
+            "description": "Service Unavailable."
           }
         }
       }
@@ -3806,11 +4937,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
         }
       }
     }
