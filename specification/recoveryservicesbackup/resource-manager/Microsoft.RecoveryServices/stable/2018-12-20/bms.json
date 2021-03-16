@@ -37,8 +37,16 @@
           },
           {
             "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
           }
         ],
+
         "responses": {
           "200": {
             "description": "OK",
@@ -3063,6 +3071,31 @@
         }
       },
       "discriminator": "jobType"
+    },
+    "BMSAADPropertiesQueryObject": {
+      "description": "Filters to list backup items.",
+      "type": "object",
+      "properties": {
+        "backupManagementType": {
+          "description": "Backup management type for the backed up item.",
+          "enum": [
+            "Invalid",
+            "AzureIaasVM",
+            "MAB",
+            "DPM",
+            "AzureBackupServer",
+            "AzureSql",
+            "AzureStorage",
+            "AzureWorkload",
+            "DefaultBackup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupManagementType",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "JobQueryObject": {
       "description": "Filters to list the jobs.",
