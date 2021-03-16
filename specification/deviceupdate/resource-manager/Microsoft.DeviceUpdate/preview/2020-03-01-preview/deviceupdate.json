@@ -71,45 +71,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/instances": {
-      "get": {
-        "description": "Returns instances for the given account name.",
-        "operationId": "Instances_ListBySubscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of Instances.",
-            "schema": {
-              "$ref": "#/definitions/InstanceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDefinition"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get list of Instances by Account": {
-            "$ref": "./examples/Instances/Instances_ListByAccount.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts": {
       "get": {
         "description": "Returns list of Accounts.",
