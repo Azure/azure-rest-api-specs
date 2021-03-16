@@ -56,7 +56,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -96,7 +96,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -135,7 +135,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -178,7 +178,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -228,7 +228,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -269,7 +269,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -321,7 +321,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -364,7 +364,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -409,7 +409,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -462,7 +462,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -506,7 +506,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -555,7 +555,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -585,7 +585,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -787,40 +787,13 @@
         "eventHubConnectionString"
       ]
     },
-    "ErrorResponse": {
+    "ErrorDefinition": {
       "description": "Error response indicates that the service is not able to process the incoming request.",
       "properties": {
-        "code": {
-          "description": "Error status code.",
-          "type": "string",
-          "readOnly": true
-        },
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
           "description": "Error details.",
           "readOnly": true
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Error status code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          }
         }
       }
     },
