@@ -442,11 +442,6 @@
             "modelAsString": true
           }
         },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-        },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
@@ -500,6 +495,12 @@
           "type": "string",
           "readOnly": true,
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+		"systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "allOf": [
