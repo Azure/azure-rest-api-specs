@@ -1179,7 +1179,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/HighCasedErrorResponse"
             }
           }
         }
@@ -2350,7 +2350,7 @@
           "readOnly": true
         },
         "productIdentifier": {
-          "description": "Identifier for the product that has accrued charges by consumption or purchase . This is the concatenated key of productId and SKuId in partner center.",
+          "description": "Identifier for the product that has accrued charges by consumption or purchase . This is the concatenated key of productId and SkuId in partner center.",
           "type": "string",
           "readOnly": true
         },
@@ -2440,6 +2440,12 @@
           "description": "Flag to indicate if partner earned credit has been applied or not.",
           "type": "string",
           "readOnly": true
+        },
+        "payGPrice": {
+          "description": "Retail price for the resource.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
         }
       }
     },
@@ -2512,6 +2518,11 @@
         },
         "resourceGroup": {
           "description": "The name of resource group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "description": "Additional information.",
           "type": "string",
           "readOnly": true
         },
@@ -3003,6 +3014,10 @@
           "type": "string",
           "description": "Resource sku"
         },
+        "etag": {
+          "type": "string",
+          "description": "Resource etag."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3208,6 +3223,11 @@
           "description": "The link (url) to the next page of results.",
           "type": "string",
           "readOnly": true
+        },
+        "previousLink": {
+          "description": "The link (url) to the previous page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3293,6 +3313,11 @@
           "description": "The meter id (GUID)",
           "type": "string",
           "format": "uuid",
+          "readOnly": true
+        },
+        "resourceType": {
+          "description": "The azure resource type.",
+          "type": "string",
           "readOnly": true
         },
         "term": {
@@ -3383,9 +3408,15 @@
     "ModernReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource Location.",
+          "readOnly": true
+        },
         "lookBackPeriod": {
           "description": "The number of days of usage to look back for recommendation.",
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "instanceFlexibilityRatio": {
@@ -3457,6 +3488,11 @@
           "items": {
             "$ref": "#/definitions/SkuProperty"
           },
+          "readOnly": true
+        },
+        "skuName": {
+          "description": "This is the ARM Sku name.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -3814,6 +3850,13 @@
         "key": {
           "description": "Tag key.",
           "type": "string"
+        },
+        "value": {
+          "description": "Tag values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3908,6 +3951,11 @@
             "$ref": "#/definitions/Notification"
           },
           "maxItems": 5
+        },
+        "forecastSpend": {
+          "description": "The forecasted cost which is being tracked for a budget.",
+          "$ref": "#/definitions/ForecastSpend",
+          "readOnly": true
         }
       },
       "required": [
@@ -4022,6 +4070,22 @@
         }
       }
     },
+    "ForecastSpend": {
+      "description": "The forecasted cost which is being tracked for a budget.",
+      "properties": {
+        "amount": {
+          "description": "The forecasted cost for the total time period which is being tracked by the budget. This value is only provided if the budget contains a forecast alert type.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of measure for the budget amount.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Notification": {
       "description": "The notification associated with a budget.",
       "properties": {
@@ -4121,6 +4185,26 @@
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "download": {
+          "description": "Pricesheet download details.",
+          "$ref": "#/definitions/MeterDetails",
+          "readOnly": true
+        }
+      }
+    },
+    "DownloadProperties": {
+      "description": "The properties of the price sheet download.",
+      "properties": {
+        "downloadUrl": {
+          "description": "The link (url) to download the pricesheet.",
+          "type": "string",
+          "readOnly": true
+        },
+        "validTill": {
+          "description": "Download link validity.",
           "type": "string",
           "readOnly": true
         }
@@ -4603,6 +4687,31 @@
         }
       }
     },
+    "HighCasedErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HighCasedErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/HighCasedErrorDetails"
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
       "type": "object",
@@ -4642,6 +4751,11 @@
             },
             "operation": {
               "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Description of the operation.",
               "type": "string",
               "readOnly": true
             }
