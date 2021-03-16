@@ -49,6 +49,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperationsPartner": {
+            "$ref": "./examples/ListOperationsPartner.json"
+          }
         }
       }
     },
@@ -94,7 +99,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "\"No content\""
+          },
+          "202": {
+            "description": "\"No content\""
+          },
+          "204": {
+            "description": "\"No content\""
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
@@ -103,6 +114,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "ManageInventoryMetadata": {
             "$ref": "./examples/ManageInventoryMetadata.json"
@@ -152,7 +164,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "\"No content\""
+          },
+          "204": {
+            "description": "\"No content\""
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
@@ -251,27 +266,9 @@
       "type": "object",
       "properties": {
         "status": {
+          "$ref": "#/definitions/OrderStatusDetails",
           "description": "Order status",
-          "enum": [
-            "InProgress",
-            "Completed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "OrderStatus",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "InProgress",
-                "description": "Order is in progress"
-              },
-              {
-                "value": "Completed",
-                "description": "Order has been completed"
-              }
-            ]
-          }
+          "readOnly": true
         },
         "subscription": {
           "$ref": "#/definitions/SubscriptionDetails",
@@ -521,7 +518,8 @@
         },
         "configurationIdentifierOnDevice": {
           "description": "Configuration identifier on device - this is used in case of any mismatch\r\nbetween actual configuration on inventory and configuration stored in service",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -537,6 +535,19 @@
             "$ref": "#/definitions/SpecificationDetails"
           },
           "readOnly": true
+        }
+      }
+    },
+    "ConfigurationOnDevice": {
+      "description": "Configuration parameters for ManageInventoryMetadata call",
+      "required": [
+        "configurationIdentifier"
+      ],
+      "type": "object",
+      "properties": {
+        "configurationIdentifier": {
+          "description": "Configuration identifier on device",
+          "type": "string"
         }
       }
     },
@@ -911,8 +922,8 @@
           "description": "Inventory metadata to be updated",
           "type": "string"
         },
-        "configuration": {
-          "$ref": "#/definitions/ConfigurationData",
+        "configurationOnDevice": {
+          "$ref": "#/definitions/ConfigurationOnDevice",
           "description": "Inventory configuration to be updated"
         }
       }
@@ -1067,6 +1078,177 @@
         }
       }
     },
+    "OrderStatusDetails": {
+      "description": "Order status CurrentStatus",
+      "type": "object",
+      "properties": {
+        "stageStatus": {
+          "description": "Order status",
+          "enum": [
+            "None",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Cancelling"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StageStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No status available yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Stage is in progress."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Stage has succeeded."
+              },
+              {
+                "value": "Failed",
+                "description": "Stage has failed."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Stage has been cancelled."
+              },
+              {
+                "value": "Cancelling",
+                "description": "Stage is cancelling."
+              }
+            ]
+          }
+        },
+        "stageName": {
+          "description": "Order stage name",
+          "enum": [
+            "DeviceOrdered",
+            "DevicePrepared",
+            "PickedUp",
+            "AtAzureDC",
+            "DataCopy",
+            "Completed",
+            "CompletedWithErrors",
+            "Cancelled",
+            "Aborted",
+            "CompletedWithWarnings",
+            "ReadyToDispatchFromAzureDC",
+            "ReadyToReceiveAtAzureDC",
+            "Placed",
+            "InReview",
+            "Confirmed",
+            "ReadyForDispatch",
+            "Dispatched",
+            "Delivered",
+            "InUse"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StageName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DeviceOrdered",
+                "description": "An order has been created."
+              },
+              {
+                "value": "DevicePrepared",
+                "description": "A device has been prepared for the order."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Device has been picked up from user and in transit to Azure datacenter."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Device has been received at Azure datacenter from the user."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Data copy from the device at Azure datacenter."
+              },
+              {
+                "value": "Completed",
+                "description": "Order has completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Order has completed with errors."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Order has been cancelled."
+              },
+              {
+                "value": "Aborted",
+                "description": "Order has been aborted."
+              },
+              {
+                "value": "Current"
+              },
+              {
+                "value": "CompletedWithWarnings",
+                "description": "Order has completed with warnings."
+              },
+              {
+                "value": "ReadyToDispatchFromAzureDC",
+                "description": "Device is ready to be handed to customer from Azure DC."
+              },
+              {
+                "value": "ReadyToReceiveAtAzureDC",
+                "description": "Device can be dropped off at Azure DC."
+              },
+              {
+                "value": "Placed",
+                "description": "Currently in draft mode and can still be cancelled"
+              },
+              {
+                "value": "InReview",
+                "description": "Order is currently in draft mode and can still be cancelled"
+              },
+              {
+                "value": "Confirmed",
+                "description": "Order is confirmed"
+              },
+              {
+                "value": "ReadyForDispatch",
+                "description": "Order is ready for dispatch"
+              },
+              {
+                "value": "Dispatched",
+                "description": "Order is in transit to customer"
+              },
+              {
+                "value": "Delivered",
+                "description": "Order is delivered to customer"
+              },
+              {
+                "value": "InUse",
+                "description": "Order is in use at customer site"
+              }
+            ]
+          }
+        },
+        "displayName": {
+          "description": "Display name of the order stage.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Stage start time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "PartnerInventory": {
       "description": "Represents partner inventory contract",
       "type": "object",
@@ -1145,30 +1327,7 @@
       "properties": {
         "name": {
           "description": "The sku name.",
-          "enum": [
-            "DataBox",
-            "DataBoxDisk",
-            "DataBoxHeavy"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "DataBox",
-                "description": "Data Box."
-              },
-              {
-                "value": "DataBoxDisk",
-                "description": "Data Box Disk."
-              },
-              {
-                "value": "DataBoxHeavy",
-                "description": "Data Box Heavy."
-              }
-            ]
-          }
+          "type": "string"
         },
         "displayName": {
           "description": "The display name of the sku.",
