@@ -427,6 +427,12 @@
           "type": "string",
           "readOnly": true,
           "description": "Id of the user who created this request"
+        },
+        "expandedProperties": {
+          "type": "object",
+          "readOnly": true,
+          "description": "Additional properties of principal, scope and role definition",
+          "$ref": "#/definitions/ExpandedProperties"
         }
       },
       "required": [
@@ -499,7 +505,67 @@
         }
       },
       "description": "An error response from the service."
-    }
+    },
+    "ExpandedProperties": {
+      "properties": {
+        "scope": {
+          "type": "object",
+          "description": "Details of the resource scope",
+          "properties": {
+            "id": {
+              "type": "string",
+              "desccription" : "Scope id of the resource"
+            },
+            "displayName": {
+              "type": "string",
+              "desccription" : "Display name of the resource"
+            },
+            "type": {
+              "type": "string",
+              "desccription" : "Type of the resource"
+            }
+          }
+        },
+        "roleDefinition": {
+          "type": "object",
+          "description": "Details of role definition",
+          "properties": {
+            "id": {
+              "type": "string",
+              "desccription" : "Id of the role definition"
+            },
+            "displayName": {
+              "type": "string",
+              "desccription" : "Display name of the role definition"
+            },
+            "type": {
+              "type": "string",
+              "desccription" : "Type of the role definition"
+            }
+        },
+        "principal": {
+          "type": "object",
+          "description": "Details of the principal",
+          "properties": {
+            "id": {
+              "type": "string",
+              "desccription" : "Id of the principal"
+            },
+            "displayName": {
+              "type": "string",
+              "desccription" : "Display name of the principal"
+            },
+            "email": {
+              "type": "string",
+              "desccription" : "Email id of the principal"
+            },
+            "type": {
+              "type": "string",
+              "desccription" : "Type of the principal"
+            }
+        }
+      }
+    }  
   },
   "parameters": {
     "ApiVersionParameter": {
