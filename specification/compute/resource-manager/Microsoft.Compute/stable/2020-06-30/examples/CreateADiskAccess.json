@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2020-06-30",
+    "diskAccessName": "myDiskAccess",
+    "diskAccess": {
+      "location": "West US"
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myDiskAccess",
+        "location": "West US",
+        "type": "Microsoft.Compute/diskAccesses"
+      }
+    },
+    "200": {
+      "body": {
+        "name": "myDiskAccess",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourcegroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess",
+        "type": "Microsoft.Compute/diskAccesses",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "timeCreated": "2020-05-01T04:41:35.079872+00:00"
+        }
+      }
+    }
+  }
+}

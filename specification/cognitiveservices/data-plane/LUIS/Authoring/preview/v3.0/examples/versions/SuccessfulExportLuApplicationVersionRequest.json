@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "00000000000000000000000000000000",
+    "appId": "bd72e8d7-62b8-48f5-9dcb-e3b0588b803a",
+    "versionId": "0.2",
+    "format": "lu"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/octet-stream"
+      },
+      "body": "> LUIS application information\\n> !# @app.name = App\\n> !# @app.versionId = 0.2\\n> !# @app.culture = en-us\\n> !# @app.luis_schema_version = 6.0.0\\n\\n\\n> # Intent definitions\\n\\n## intent1\\n\\n\\n@ intent intent1 usesFeature phraselist1\\n\\n## None\\n- a\\n- hi {@simpleentity1=guys}\\n\\n\\n@ intent None usesFeature phraselist1\\n\\n> # Entity definitions\\n\\n@ ml simpleentity1 usesFeature phraselist1\\n\\n\\n> # PREBUILT Entity definitions\\n\\n@ prebuilt datetimeV2\\n\\n\\n> # Phrase list definitions\\n\\n@ phraselist phraselist1(interchangeable) = \\n\t- why,where,when,what,how,who\\n\\n\\n> # List entities\\n\\n@ list closedlist = \\n\t- a :\\n\t\t- b\\n\t\t- c\\n\t\t- d\\n\\n\\n> # RegEx entities\""
+    }
+  }
+}

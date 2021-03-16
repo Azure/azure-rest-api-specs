@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "api-version": "2020-03-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sampleacct",
+            "location": "japaneast",
+            "properties": {
+              "accountEndpoint": "sampleacct.japaneast.batch.azure.com",
+              "provisioningState": "Succeeded",
+              "poolAllocationMode": "BatchService",
+              "dedicatedCoreQuota": 20,
+              "lowPriorityCoreQuota": 20,
+              "poolQuota": 20,
+              "activeJobAndJobScheduleQuota": 20,
+              "autoStorage": {
+                "storageAccountId": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage",
+                "lastKeySync": "2016-03-10T23:48:38.9878479Z"
+              },
+              "publicNetworkAccess": "Enabled"
+            },
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct",
+            "type": "Microsoft.Batch/batchAccounts"
+          }
+        ]
+      }
+    }
+  }
+}

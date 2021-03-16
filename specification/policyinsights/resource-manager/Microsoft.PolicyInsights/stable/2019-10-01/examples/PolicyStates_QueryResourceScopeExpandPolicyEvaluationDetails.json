@@ -3,11 +3,12 @@
     "policyStatesResource": "latest",
     "resourceId": "subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourceGroups/myResourceGroup/providers/Microsoft.ClassicCompute/domainNames/myDomainName",
     "api-version": "2019-10-01",
-    "$expand": "policyEvaluationDetails"
+    "$expand": "PolicyEvaluationDetails"
   },
   "responses": {
     "200": {
       "body": {
+        "@odata.nextLink": null,
         "@odata.context": "https://management.azure.com/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourcegroups/myResourceGroup/providers/Microsoft.ClassicCompute/domainNames/myDomainName/providers/Microsoft.PolicyInsights/policyStates/$metadata#default",
         "@odata.count": 2,
         "value": [
@@ -43,6 +44,9 @@
             "policyDefinitionGroupNames": [
               "myGroup"
             ],
+            "policyDefinitionVersion": "1.0.0-preview",
+            "policySetDefinitionVersion": null,
+            "policyAssignmentVersion": "1.0.0",
             "policyEvaluationDetails": {
               "evaluatedExpressions": [
                 {
@@ -96,6 +100,9 @@
             "policyDefinitionGroupNames": [
               "myGroup"
             ],
+            "policyDefinitionVersion": "1.0.0-preview",
+            "policySetDefinitionVersion": null,
+            "policyAssignmentVersion": "1.0.0",
             "policyEvaluationDetails": {
               "evaluatedExpressions": [
                 {
