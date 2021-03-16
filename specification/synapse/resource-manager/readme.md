@@ -40,20 +40,7 @@ These settings apply only when `--tag=package-2021-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-04'
 input-file:
-  - Microsoft.Synapse/stable/2021-04-04/bigDataPool.json
-  - Microsoft.Synapse/stable/2021-04-04/checkNameAvailability.json
-  - Microsoft.Synapse/stable/2021-04-04/firewallRule.json
-  - Microsoft.Synapse/stable/2021-04-04/integrationRuntime.json
-  - Microsoft.Synapse/stable/2021-04-04/keys.json
-  - Microsoft.Synapse/stable/2021-04-04/library.json
-  - Microsoft.Synapse/stable/2021-04-04/operations.json
-  - Microsoft.Synapse/stable/2021-04-04/privateEndpointConnections.json
-  - Microsoft.Synapse/stable/2021-04-04/privateLinkResources.json
-  - Microsoft.Synapse/stable/2021-04-04/privatelinkhub.json
-  - Microsoft.Synapse/stable/2021-04-04/sqlPool.json
   - Microsoft.Synapse/stable/2021-04-04/kustoPool.json
-  - Microsoft.Synapse/stable/2021-04-04/sqlServer.json
-  - Microsoft.Synapse/stable/2021-04-04/workspace.json
 ```
 
 ### Tag: package-2021-03
