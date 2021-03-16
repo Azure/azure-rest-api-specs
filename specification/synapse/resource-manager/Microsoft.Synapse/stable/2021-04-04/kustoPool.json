@@ -56,7 +56,58 @@
           }
         }
       },
-      "put": {
+          "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools": {
+      "get": {
+        "operationId": "KustoPools_ListByWorkspace",
+        "summary": "List Kusto pools",
+        "description": "List all Kusto pools",
+        "tags": [
+          "KustoPools"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/KustoPoolListResult"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "List Kusto pools in a workspace": {
+            "$ref": "./examples/KustoClustersListByWorkspace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+	  "put": {
         "tags": [
           "kustoPools"
         ],
@@ -251,6 +302,18 @@
     }
   },
   "definitions": {
+    "KustoPoolListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KustoPool"
+          },
+          "description": "The list of Kusto pools."
+        }
+      },
+      "description": "The list Kusto pools operation response."
+    }
     "AzureSku": {
       "type": "object",
       "required": [
