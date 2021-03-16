@@ -65,6 +65,8 @@ directive:
       - $.definitions.RestorePointCreate.properties
     suppress:
       - BodyTopLevelProperties
+    reason:
+      - CRP has already been using existing ‘RestorePoint’ model definition with these properties as top level properties for many years now.
   - where:
       - $.definitions.RestorePoint.properties
     suppress:
@@ -219,6 +221,8 @@ directive:
       - $.definitions.RestorePoint
     suppress:
       - NestedResourcesMustHaveListOperation
+    reason:
+      - CRP is not going to support list operation for this new RestorePoint resource.
 
 ```
 
