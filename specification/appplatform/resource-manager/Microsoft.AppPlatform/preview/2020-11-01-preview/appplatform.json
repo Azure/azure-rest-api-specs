@@ -2739,6 +2739,51 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/checkVnetRoleAssignment": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Checks if the required owner role of the vnet is assigned to Azure Spring Cloud.",
+        "operationId": "Services_CheckVnetRoleAssignment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "roleAssignmentParameters",
+            "in": "body",
+            "description": "Parameters supplied to the operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnetRoleAssignmentParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the name availability.",
+            "schema": {
+              "$ref": "#/definitions/VnetRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Services_CheckVnetRoleAssignment": {
+            "$ref": "./examples/Services_CheckVnetRoleAssignment.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4540,6 +4585,34 @@
         },
         "version": {
           "description": "The detailed version (major.minor) of the platform.",
+          "type": "string"
+        }
+      },
+      "readOnly": true
+    },
+    "VnetRoleAssignmentParameter": {
+      "description": "Vnet Role Assignment parameters payload",
+      "required": [
+        "scope"
+      ],
+      "type": "object",
+      "properties": {
+        "scope": {
+          "description": "The resource Id of the Vnet to be checked",
+          "type": "string"
+        }
+      }
+    },
+    "VnetRoleAssignment": {
+      "description": "Check Vnet role assignment response payload",
+      "type": "object",
+      "properties": {
+        "hasPermission": {
+          "description": "Indicates whether the owner role is assigned",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "Reason why the assignment is not found",
           "type": "string"
         }
       },
