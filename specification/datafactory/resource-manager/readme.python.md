@@ -24,6 +24,24 @@ package-name: azure-mgmt-datafactory
 package-version: 1.0.0
 modelerfour:
   lenient-model-deduplication: true
+directive:
+  - from: swagger-document
+    where: $.definitions.JsonFormatFilePattern
+    transform: >
+        $['type'] = 'string';
+  - from: swagger-document
+    where: $.definitions.CompressionLevel
+    transform: >
+        $['type'] = 'string'; 
+  - from: swagger-document
+    where: $.definitions.DynamicsLinkedServiceTypeProperties.properties.servicePrincipalCredentialType
+    transform: >
+        $['type'] = 'string'; 
+  - from: swagger-document
+    where: $.definitions.ScriptAction.properties.roles
+    transform: >
+        $['type'] = 'string'; 
+
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
