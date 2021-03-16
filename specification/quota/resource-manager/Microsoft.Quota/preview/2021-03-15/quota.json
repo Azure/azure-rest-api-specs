@@ -353,7 +353,7 @@
           "200": {
             "description": "OK. Quota limits type information",
             "schema": {
-              "$ref": "#/definitions/QuotaTypeDetails"
+              "$ref": "#/definitions/resourceProvidersList"
             }
           },
           "default": {
@@ -804,6 +804,73 @@
         }
       },
       "description": "The api error."
+    },
+    "ResourceDimesionsTypesName": {
+      "description": "The resource dimension types. For extendibility, we can keep it as string.",
+      "enum": [
+        "predefined",
+        "resourceName",
+        "serviceSpecific"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": true
+      }
+    },
+    "ResourceProviderDimesions": {
+      "type": "object",
+      "description": "List of resource provider dimesions",
+      "properties":{
+      "value": {
+        "description": "The resource provider dimesions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderDimesion"
+          }
+        }
+      }
+    },
+    "ResourceProviderDimesion":{
+      "type":"object",
+      "description": "The resource provider resource dimension",
+      "properties":{
+        "name":{
+          "type": "string",
+          "description": "The resource dimesion name"
+        },
+        "resourceDimesnsionType" :{
+          "description": "The dimesion type",
+           "$ref": "#/definitions/ResourceDimesionsTypesName"
+        }
+      }
+    },
+    "ResourceProviderInformation": {
+    "type": "object",
+    "description": "The resource provider information",
+    "properties": {
+      "resourceProviderName": {
+        "type": "string",
+        "description": "The name of the resource provider"
+        },
+        "properties": {
+          "description": "The quota dimesions for the resource provider.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResourceProviderDimesions"
+        }
+      }
+    },
+    "resourceProvidersList":{
+      "type": "object",
+      "description": "List of resource providers",
+      "properties":{
+      "value": {
+        "description": "The resource provider information",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderInformation"
+          }
+        }
+      }
     },
     "QuotaTypeInformation": {
       "type": "object",
