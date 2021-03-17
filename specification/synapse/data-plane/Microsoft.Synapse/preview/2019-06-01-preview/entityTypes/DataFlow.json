@@ -60,6 +60,7 @@
     },
     "MappingDataFlowTypeProperties": {
       "description": "Mapping data flow type properties.",
+      "type": "object",
       "properties": {
         "sources": {
           "type": "array",
@@ -107,6 +108,7 @@
     },
     "DataFlowSource": {
       "description": "Transformation for data flow source.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Transformation"
@@ -116,11 +118,20 @@
         "dataset": {
           "description": "Dataset reference.",
           "$ref": "../artifacts.json#/definitions/DatasetReference"
+        },
+        "linkedService": {
+          "description": "Linked service reference.",
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
+        },
+        "schemaLinkedService": {
+          "description": "Schema linked service reference.",
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         }
       }
     },
     "DataFlowSink": {
       "description": "Transformation for data flow sink.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Transformation"
@@ -130,6 +141,14 @@
         "dataset": {
           "description": "Dataset reference.",
           "$ref": "../artifacts.json#/definitions/DatasetReference"
+        },
+        "linkedService": {
+          "description": "Linked service reference.",
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
+        },
+        "schemaLinkedService": {
+          "description": "Schema linked service reference.",
+          "$ref": "../artifacts.json#/definitions/LinkedServiceReference"
         }
       }
     }
