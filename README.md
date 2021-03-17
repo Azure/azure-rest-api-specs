@@ -5,7 +5,7 @@
 This repository is the canonical source for REST API specifications for Microsoft Azure.
 
 ## Getting started
-If you're a Microsoft employee looking for information about all of the repositories and steps in the pipeline, go to the [Azure SDK - Internal Wiki](https://https://aka.ms/jointhesdk). Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that wiki repo.  If any trouble with access, please submit a support request using this [form](https://aka.ms/swaggerfeedback).
+If you're a Microsoft employee looking for information about all of the repositories and steps in the pipeline, go to the [Azure SDK - Internal Wiki](https://aka.ms/jointhesdk). Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that wiki repo.  If any trouble with access, please submit a support request using this [form](https://aka.ms/swaggerfeedback).
 
 <b>Latest improvement:</b><i> Microsoft employees can try out our new experience at [OpenAPI Hub](https://aka.ms/openapihub) - online experience for using our validation tools and finding your workflow.</i>
 
