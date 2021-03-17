@@ -376,12 +376,6 @@
             }
           }
         },
-        "properties": {
-          "systemData": {
-            "$ref": "v2/types.json#/definitions/systemData",
-             "readOnly" : true
-          }
-        },
         "x-ms-examples": {
           "GetEmergingIssues": {
             "$ref": "./examples/EmergingIssues_Get.json"
@@ -1226,6 +1220,8 @@
       "type": "object",
       "properties": {
         "error": {
+          "description": "Error details.",
+          "type": "object",
           "properties": {
             "code": {
               "description": "The error code.",
