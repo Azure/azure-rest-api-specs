@@ -34,6 +34,57 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/workbooks": {
+      "get": {
+        "description": "Get all private workbooks defined within a specified subscription and category.",
+        "operationId": "Workbooks_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsParameter"
+          },
+          {
+            "$ref": "#/parameters/CanFetchWorkbookContentParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more workbook definitions.",
+            "schema": {
+              "$ref": "#/definitions/WorkbooksListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WorkbooksList": {
+            "$ref": "./examples/WorkbooksList.json"
+          },
+          "WorkbooksList2": {
+            "$ref": "./examples/WorkbooksList2.json"
+          },
+          "WorkbooksManagedList": {
+            "$ref": "./examples/WorkbooksManagedList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/workbooks": {
       "get": {
         "description": "Get all Workbooks defined within a specified resource group and category.",
