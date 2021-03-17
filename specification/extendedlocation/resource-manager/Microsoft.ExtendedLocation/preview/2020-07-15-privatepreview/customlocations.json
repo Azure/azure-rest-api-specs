@@ -53,10 +53,6 @@
               "$ref": "#/definitions/customLocationOperationsList"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -97,10 +93,6 @@
             "schema": {
               "$ref": "#/definitions/customLocationListResult"
             }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -144,10 +136,6 @@
             "schema": {
               "$ref": "#/definitions/customLocationListResult"
             }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -194,14 +182,6 @@
             "schema": {
               "$ref": "#/definitions/customLocation"
             }
-          },
-          "404": {
-            "description": "Not Found",
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -259,14 +239,6 @@
               "$ref": "#/definitions/customLocation"
             }
           },
-          "400": {
-            "description": "Bad Request",
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -311,10 +283,6 @@
           },
           "204": {
             "description": "NoContent. The response indicates the customLocation resource is already deleted."
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -371,14 +339,6 @@
               "$ref": "#/definitions/customLocation"
             }
           },
-          "400": {
-            "description": "Bad Request",
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -422,14 +382,6 @@
               "$ref": "#/definitions/EnabledResourceTypesListResult"
             }
           },
-          "400": {
-            "description": "Bad Request",
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -443,6 +395,52 @@
         "x-ms-examples": {
           "Get Custom Location": {
             "$ref": "./examples/CustomLocationsListEnabledResourceTypes.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations/{resourceName}/enabledResourceTypes/{enabledResourceTypeName}": {
+      "get": {
+        "tags": [
+          "customLocations"
+        ],
+        "operationId": "customLocations_GetEnabledResourceType",
+        "summary": "Gets details of a Enabled Resource Type.",
+        "description": "Gets the details of the Enabled Resource Type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnabledResourceTypeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EnabledResourceType"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Custom Location": {
+            "$ref": "./examples/CustomLocationsGetEnabledResourceType.json"
           }
         }
       }
