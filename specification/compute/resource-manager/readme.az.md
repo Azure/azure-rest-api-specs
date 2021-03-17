@@ -47,7 +47,7 @@ directive:
       group: cloud-service update-domain
 ```
 
-``` yaml $(az) && $(target-mode) == "core" && $(sshkey)
+``` yaml $(az) && $(target-mode) == "core"
 tag: package-2020-12-01-only
 az:
   extensions: vm
