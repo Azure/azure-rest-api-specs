@@ -332,7 +332,7 @@
         }
       }
     },
-    "/providers/Microsoft.Quota/quotaLimitTypes": {
+    "/providers/Microsoft.Quota/quotaLimitProviders": {
       "get": {
         "tags": [
           "QuotaLimitTypes"
@@ -838,9 +838,37 @@
           "type": "string",
           "description": "The resource dimesion name"
         },
-        "resourceDimesnsionType" :{
+        "resourceDimesnsionType": {
           "description": "The dimesion type",
            "$ref": "#/definitions/ResourceDimesionsTypesName"
+        }
+      }
+    },
+    "ResourceProviderTemplate": {
+      "type": "object",
+      "description": "The resource provider resource template details",
+      "properties":{
+        "resourceTemplate" :{
+          "type" : "string",
+          "description": "The resource template"
+        },
+        "properties": {
+          "description": "The quota dimesions for the resource provider.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResourceProviderDimesions"
+        }
+      }
+    },
+    "ResourceProviderTemplates": {
+      "type": "object",
+      "description": "List of resource provider templates",
+      "properties":{
+      "value": {
+        "description": "The resource provider templates",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderTemplate"
+          }
         }
       }
     },
@@ -855,7 +883,7 @@
         "properties": {
           "description": "The quota dimesions for the resource provider.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ResourceProviderDimesions"
+          "$ref": "#/definitions/ResourceProviderTemplates"
         }
       }
     },
