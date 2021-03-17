@@ -3,8 +3,8 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
     "location": "westus",
-    "applicationDefinitionName": "myManagedApplication",
-    "api-version": "2020-11-01-preview",
+    "applicationName": "myManagedApplication",
+    "api-version": "2020-10-01-preview",
     "application": {
       "tags": {
         "tagKey1": "TagValue1"
@@ -19,16 +19,29 @@
         "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Ai/locations/westus/applications/myManagedApplication",
         "type": "Microsoft.Ai/locations/westus/applications",
         "managedBy": null,
+        "plan": null,
+        "identity": null,
+        "kind": "ServiceCatalog",
         "sku": null,
         "properties": {
+          "applicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Ai/locations/westus/managedApplicationDefinitions/myAppDef",
+          "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "outputs": null,
+          "parameters": null,
           "provisioningState": "Created",
+          "billingDetails": null,
+          "jitAccessPolicy": null,
+          "publisherTenantId": null,
           "authorizations": [
             {
               "principalId": "validprincipalguid",
               "roleDefinitionId": "validroleguid"
             }
           ],
-          "lockLevel": "ReadOnly"
+          "managementMode": "Managed",
+          "customerSupport": null,
+          "supportUrls": null,
+          "artifacts": []
         }
       }
     }
