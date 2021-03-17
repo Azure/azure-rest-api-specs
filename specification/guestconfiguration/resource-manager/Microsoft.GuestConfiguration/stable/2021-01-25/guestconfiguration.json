@@ -713,12 +713,12 @@
         ]
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}": {
-	  "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}": {
+      "get": {
         "tags": [
           "GuestConfigurationAssignments"
         ],
-        "operationId": "GuestConfigurationAssignments_VMSS_Get",
+        "operationId": "GuestConfigurationAssignmentsVMSS_Get",
         "description": "Get information about a guest configuration assignment for VMSS",
         "x-ms-examples": {
           "Get a VMSS guest configuration assignment": {
@@ -767,13 +767,13 @@
           "application/json"
         ]
       }
-	},
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports/{id}": {
-	  "get": {
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports/{id}": {
+      "get": {
         "tags": [
           "GuestConfigurationAssignmentReports"
         ],
-        "operationId": "GuestConfigurationAssignmentReports_VMSS_Get",
+        "operationId": "GuestConfigurationAssignmentReportsVMSS_Get",
         "description": "Get a report for the VMSS guest configuration assignment, by reportId.",
         "x-ms-examples": {
           "Get a guest configuration assignment report by Id for a virtual machine scale set": {
@@ -829,7 +829,7 @@
           "application/json"
         ]
       }
-	},
+    },
     "/providers/Microsoft.GuestConfiguration/operations": {
       "get": {
         "tags": [
@@ -892,6 +892,12 @@
           "x-ms-client-flatten": false,
           "$ref": "#/definitions/GuestConfigurationAssignmentProperties",
           "description": "Properties of the Guest configuration assignment."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -1002,7 +1008,7 @@
         },
         "rebootIfNeeded": {
           "type": "boolean",
-          "readOnly": false,          
+          "readOnly": false,
           "description": "Set this to true to automatically reboot the node after a configuration that requires reboot is applied. Otherwise, you will have to manually reboot the node for any configuration that requires it. The default value is false. To use this setting when a reboot condition is enacted by something other than DSC (such as Windows Installer), combine this setting with the xPendingReboot module."
         },
         "configurationModeFrequencyMins": {
@@ -1151,13 +1157,13 @@
             "Created"
           ]
         },
-		"resourceType": {
+        "resourceType": {
           "type": "string",
           "readOnly": true,
           "description": "Type of the resource - VMSS / VM",
           "x-nullable": true
         },
-		"vmssVMList": {
+        "vmssVMList": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMSSVMInfo"
@@ -1244,7 +1250,7 @@
           "description": "Details of the assignment report.",
           "x-nullable": true
         },
-		    "VMSSResourceId": {
+        "vmssResourceId": {
           "type": "string",
           "readOnly": true,
           "description": "Azure resource Id of the VMSS."
@@ -1403,14 +1409,14 @@
       },
       "description": "Reason and code for the compliance of the guest configuration assignment resource."
     },
-	"VMSSVMInfo": {
+    "VMSSVMInfo": {
       "properties": {
-        "VMId": {
+        "vmId": {
           "type": "string",
           "readOnly": true,
           "description": "UUID of the VM."
         },
-        "VMResourceId": {
+        "vmResourceId": {
           "type": "string",
           "readOnly": true,
           "description": "Azure resource Id of the VM."
@@ -1443,8 +1449,8 @@
           "x-nullable": true
         }
       },
-      "description": "Information about VMSS VM"	 
-	}
+      "description": "Information about VMSS VM"
+    }
   },
   "parameters": {}
 }
