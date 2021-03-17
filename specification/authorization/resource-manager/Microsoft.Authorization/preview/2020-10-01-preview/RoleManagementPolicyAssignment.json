@@ -268,11 +268,11 @@
           "type": "string",
           "description": "The policy id role management policy assignment."
         },
-        "expandedProperties": {
+        "policyAssignmentProperties": {
           "readOnly": true,
           "type": "object",
-          "description": "Additional properties of scope, roledefinition and policy",
-          "$ref": "#/definitions/ExpandedProperties"
+          "description": "Additional properties of scope, role definition and policy",
+          "$ref": "#/definitions/PolicyAssignmentProperties"
         }
       },
       "description": "Role management policy assignment properties with scope."
@@ -293,12 +293,11 @@
       },
       "description": "Role management policy assignment list operation result."
     },
-    "ExpandedProperties": {
+    "PolicyAssignmentProperties": {
       "properties": {
         "scope": {
           "type": "object",
           "description": "Details of the resource scope",
-          "readOnly": true,
           "properties": {
             "id": {
               "type": "string",
@@ -317,7 +316,6 @@
         "roleDefinition": {
           "type": "object",
           "description": "Details of role definition",
-          "readOnly": true,
           "properties": {
             "id": {
               "type": "string",
@@ -336,15 +334,13 @@
         "policy": {
           "type": "object",
           "description": "Details of the policy",
-          "readOnly": true,
           "properties": {
             "id": {
               "type": "string",
               "description": "Id of the policy"
             },
             "lastModifiedBy": {
-              "type": "string",
-              "description": "The name of the entity last modified it"
+              "$ref": "#/definitions/Principal"
             },
             "lastModifiedDateTime": {
               "type": "string",
@@ -352,6 +348,29 @@
               "description": "The last modified date time."
             }
           }
+        }
+      }
+    },
+    "Principal": {
+      "readOnly": true,
+      "type": "object",
+      "description": "The name of the entity last modified it",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the principal made changes"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the principal made changes"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of principal such as user , group etc"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of principal"
         }
       }
     },

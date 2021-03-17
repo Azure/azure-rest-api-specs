@@ -251,9 +251,7 @@
           "description": "The role management policy is default policy."
         },
         "lastModifiedBy": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the entity last modified it"
+          "$ref": "#/definitions/Principal"          
         },
         "lastModifiedDateTime": {
           "type": "string",
@@ -276,11 +274,11 @@
           "readOnly": true,
           "description": "The readonly computed rule applied to the policy."
         },
-        "expandedProperties": {
+        "policyProperties": {
           "readOnly": true,
           "type": "object",
           "description": "Additional properties of scope",
-          "$ref": "#/definitions/ExpandedProperties"
+          "$ref": "#/definitions/PolicyProperties"
         }
       },
       "description": "Role management policy properties with scope."
@@ -450,13 +448,13 @@
       "properties": {
         "userType": {
           "type": "string",
-          "description": "The type of userset.",
+          "description": "The type of user.",
           "enum": [
             "User",
             "Group"
           ],
           "x-ms-enum": {
-            "name": "SubjectType",
+            "name": "UserType",
             "modelAsString": true
           }
         },
@@ -487,6 +485,11 @@
     },
     "GroupMembers": {
       "description": "The detail of a group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserSet"
+        }
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -533,7 +536,7 @@
               "type": "string",
               "description": "The type of enable rules",
               "enum": [
-                "MultifactorAuthentication",
+                "MultiFactorAuthentication",
                 "Justification",
                 "Ticketing"
               ],
@@ -620,7 +623,7 @@
         },
         "isDefaultRecipientsEnabled": {
           "type": "boolean",
-          "description": "Its value determine if the notification need to be sent to the receipientType specified in policy rule."
+          "description": "Its value determine if the notification need to be sent to the recipient type specified in policy rule."
         }
       }
     },
@@ -681,7 +684,7 @@
         "modelAsString": true
       }
     },
-    "ExpandedProperties": {
+    "PolicyProperties": {
       "properties": {
         "scope": {
           "type": "object",
@@ -701,6 +704,29 @@
               "description": "Type of the resource"
             }
           }
+        }
+      }
+    },
+    "Principal": {
+      "readOnly": true,
+      "type": "object",
+      "description": "The name of the entity last modified it",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the principal made changes"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the principal made changes"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of principal such as user , group etc"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of principal"
         }
       }
     },
