@@ -1,6 +1,6 @@
 # OpenAPI Specifications Authoring - Automated Guidelines #
 
-This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools](https://github.com/Azure/adx-documentation-pr/blob/master/tools/tools.md). Please visit [here for Manual guidelines](openapi-authoring-manual-guidelines.md).
+This document lists the set of automated rules that can be validated against OpenAPI(swagger) spec by running [validation tools](https://github.com/Azure/azure-openapi-validator#how-to-run-locally). Please visit [here for Manual guidelines](openapi-authoring-manual-guidelines.md).
 
 It is a requirement to conform to all manual and automated rules with severity "Error" before sending a pull request for review.
 
