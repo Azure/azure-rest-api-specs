@@ -8,14 +8,14 @@
       "location": "westus",
       "properties": {
         "hardwareProfile": {
-          "vmSize": "Standard_D2s_v3"
+          "vmSize": "Standard_D1_v2"
         },
         "storageProfile": {
           "imageReference": {
-            "sku": "16.04-LTS",
-            "publisher": "Canonical",
+            "sku": "2016-Datacenter",
+            "publisher": "MicrosoftWindowsServer",
             "version": "latest",
-            "offer": "UbuntuServer"
+            "offer": "WindowsServer"
           },
           "osDisk": {
             "caching": "ReadWrite",
@@ -30,10 +30,11 @@
           "adminUsername": "{your-username}",
           "computerName": "myVM",
           "adminPassword": "{your-password}",
-          "linuxConfiguration": {
+          "windowsConfiguration": {
             "provisionVMAgent": true,
+            "enableAutomaticUpdates": true,
             "patchSettings": {
-              "patchMode": "AutomaticByPlatform"
+              "assessmentMode": "Manual"
             }
           }
         },
@@ -60,10 +61,11 @@
             "adminUsername": "{your-username}",
             "secrets": [],
             "computerName": "myVM",
-            "linuxConfiguration": {
+            "windowsConfiguration": {
               "provisionVMAgent": true,
+              "enableAutomaticUpdates": true,
               "patchSettings": {
-                "patchMode": "AutomaticByPlatform"
+                "assessmentMode": "Manual"
               }
             }
           },
@@ -79,13 +81,13 @@
           },
           "storageProfile": {
             "imageReference": {
-              "sku": "16.04-LTS",
-              "publisher": "Canonical",
+              "sku": "2016-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
               "version": "latest",
-              "offer": "UbuntuServer"
+              "offer": "WindowsServer"
             },
             "osDisk": {
-              "osType": "Linux",
+              "osType": "Windows",
               "caching": "ReadWrite",
               "createOption": "FromImage",
               "name": "myVMosdisk",
@@ -97,7 +99,7 @@
           },
           "vmId": "a149cd25-409f-41af-8088-275f5486bc93",
           "hardwareProfile": {
-            "vmSize": "Standard_D2s_v3"
+            "vmSize": "Standard_DS1_v2"
           },
           "provisioningState": "Creating"
         },
@@ -114,10 +116,11 @@
             "adminUsername": "{your-username}",
             "secrets": [],
             "computerName": "myVM",
-            "linuxConfiguration": {
+            "windowsConfiguration": {
               "provisionVMAgent": true,
+              "enableAutomaticUpdates": false,
               "patchSettings": {
-                "patchMode": "AutomaticByPlatform"
+                "assessmentMode": "Manual"
               }
             }
           },
@@ -133,13 +136,13 @@
           },
           "storageProfile": {
             "imageReference": {
-              "sku": "16.04-LTS",
-              "publisher": "Canonical",
+              "sku": "2016-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
               "version": "latest",
-              "offer": "UbuntuServer"
+              "offer": "WindowsServer"
             },
             "osDisk": {
-              "osType": "Linux",
+              "osType": "Windows",
               "caching": "ReadWrite",
               "createOption": "FromImage",
               "name": "myVMosdisk",
@@ -151,7 +154,7 @@
           },
           "vmId": "a149cd25-409f-41af-8088-275f5486bc93",
           "hardwareProfile": {
-            "vmSize": "Standard_D2s_v3"
+            "vmSize": "Standard_DS1_v2"
           },
           "provisioningState": "Creating"
         },
