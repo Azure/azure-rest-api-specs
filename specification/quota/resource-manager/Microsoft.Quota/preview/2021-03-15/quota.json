@@ -33,7 +33,7 @@
   "securityDefinitions": {
     "azure_auth": {
       "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "authorizationUrl": https://login.microsoftonline.com/common/oauth2/authorize,
       "scopes": {
         "user_impersonation": "impersonate your user account"
       },
@@ -337,7 +337,7 @@
         "tags": [
           "QuotaLimitTypes"
         ],
-        "description": "Gets the list of current resource providers supported by Quota resource provider.\r\n For each resource provider, resource templates will be provided. \r\n For each resource template, the resource dimesions will be listed. \r\n The response from this API can be leveraged to discover resource providers, resource templates and resource dimensions for the specific template supported for quota. The specific details for each resource dimesion can be reterived using the quotaLimitTypes API call.",
+        "description": "Gets the list of current resource providers supported by Quota resource provider.\r\n For each resource provider, resource templates will be provided. \r\n For each resource template, the resource dimensions will be listed. \r\n The response from this API can be leveraged to discover resource providers, resource templates and resource dimensions for the specific template supported for quota. The specific details for each resource dimension can be retrieved using the quotaLimitTypes API call.",
         "operationId": "QuotaResourceProviders_List",
         "x-ms-examples": {
           "Quotas_listMetadataForCompute": {
@@ -365,12 +365,12 @@
         }
       }
     },
-      "/providers/Microsoft.Quota/quotaLimitTypes/{resourceDimesion}": {
+      "/providers/Microsoft.Quota/quotaLimitTypes/{resourceDimension}": {
       "get": {
         "tags": [
           "QuotaLimitTypes"
         ],
-        "description": "Get a details of each dimesion for the resource provider and resourceDimesion. \r\n Examples: \r\n For Microsoft.Compite resource provider: \r\n  1.  /subscriptions/{subscriptionId}/providers/Microsoft.Compute/providers/providers/Microsoft.Quota/quotaLimitTypes/{locations}.\r\n This call will return all the locations, where Compute RP is supported. \r\n 2. Then the second call will be: \r\n /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/providers/Microsoft.Quota/quotaLimitTypes/{skus}.\r\n The skus is the last resource dimension for the uri template. This call will return all the SKUs available at the {locationId} provided. \r\n \r\n Similarly example for Microsoft.Batch resource provider: \r\n There are multiple resource templates for Microsoft.Batch resource provider. For each resource template, the resource dimension details can be reterived. \r\n  Example for one resource template : /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{batchAccountName}/providers/Microsoft.Quota/quotaLimitTypes/{skus} \r\n  1. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/providers/Microsoft.Quota/quotaLimitTypes/{locations} \r\n 2. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/providers/Microsoft.Quota/quotaLimitTypes/{batchAccounts} \r\n 3. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{batchAccountName}/providers/Microsoft.Quota/quotaLimitTypes/{skus}",
+        "description": "Get a details of each dimension for the resource provider and resourceDimension. \r\n Examples: \r\n For Microsoft.Compute resource provider: \r\n  1.  /subscriptions/{subscriptionId}/providers/Microsoft.Compute/providers/providers/Microsoft.Quota/quotaLimitTypes/{locations}.\r\n This call will return all the locations, where Compute RP is supported. \r\n 2. Then the second call will be: \r\n /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/providers/Microsoft.Quota/quotaLimitTypes/{skus}.\r\n The skus is the last resource dimension for the uri template. This call will return all the SKUs available at the {locationId} provided. \r\n \r\n Similarly example for Microsoft.Batch resource provider: \r\n There are multiple resource templates for Microsoft.Batch resource provider. For each resource template, the resource dimension details can be retrieved. \r\n  Example for one resource template : /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{batchAccountName}/providers/Microsoft.Quota/quotaLimitTypes/{skus} \r\n  1. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/providers/Microsoft.Quota/quotaLimitTypes/{locations} \r\n 2. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/providers/Microsoft.Quota/quotaLimitTypes/{batchAccounts} \r\n 3. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{batchAccountName}/providers/Microsoft.Quota/quotaLimitTypes/{skus}",
         "operationId": "QuotaTemplateDimensionTypes_List",
         "x-ms-examples": {
           "Quotas_listMetadataForCompute": {
@@ -379,7 +379,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceDimesionTypeInParameter"
+            "$ref": "#/parameters/ResourceDimensionTypeInParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -924,7 +924,7 @@
       },
       "description": "The api error."
     },
-    "ResourceDimesionsTypesName": {
+    "ResourceDimensionsTypesName": {
       "description": "The resource dimension types. For extendibility, we can keep it as string.",
       "enum": [
         "predefined",
@@ -936,30 +936,30 @@
         "modelAsString": true
       }
     },
-    "ResourceProviderDimesions": {
+    "ResourceProviderDimensions": {
       "type": "object",
-      "description": "List of resource provider dimesions",
+      "description": "List of resource provider dimensions",
       "properties":{
       "value": {
-        "description": "The resource provider dimesions",
+        "description": "The resource provider dimensions",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceProviderDimesion"
+            "$ref": "#/definitions/ResourceProviderDimension"
           }
         }
       }
     },
-    "ResourceProviderDimesion":{
+    "ResourceProviderDimension":{
       "type":"object",
       "description": "The resource provider resource dimension",
       "properties":{
         "name":{
           "type": "string",
-          "description": "The resource dimesion name"
+          "description": "The resource dimension name"
         },
         "resourceDimesnsionType": {
-          "description": "The dimesion type",
-           "$ref": "#/definitions/ResourceDimesionsTypesName"
+          "description": "The dimension type",
+           "$ref": "#/definitions/ResourceDimensionsTypesName"
         }
       }
     },
@@ -972,9 +972,9 @@
           "description": "The resource template"
         },
         "properties": {
-          "description": "The quota dimesions for the resource provider.",
+          "description": "The quota dimensions for the resource provider.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ResourceProviderDimesions"
+          "$ref": "#/definitions/ResourceProviderDimensions"
         }
       }
     },
@@ -1000,7 +1000,7 @@
         "description": "The name of the resource provider"
         },
         "properties": {
-          "description": "The quota dimesions for the resource provider.",
+          "description": "The quota dimensions for the resource provider.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ResourceProviderTemplates"
         }
@@ -1052,11 +1052,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The quota type property name. Example: Quota properties for a resource provider as: /providers/Microsoft.Compute, Quota properties for"
+          "description": "The quota type property name. Example: Quota properties for a resource provider as: /providers/Microsoft.Compute"
         },
         "id": {
           "type": "string",
-          "description": "The resource id/path. Example: /providers/Microsoft.Compute, /providers/Microsoft.Network/locations"
+          "description": "he resource id/path. Example: /providers/Microsoft.Compute, /providers/Microsoft.Network/locations"
         },
         "properties": {
           "description": "The quota type properties for the resource id.",
@@ -1144,8 +1144,8 @@
       "description": "The resource name for a resource provider, such as SKU name for Microsoft.Compute, Sku or TotalLowPriorityCores for Microsoft.MachineLearningServices",
       "x-ms-parameter-location": "method"
     },
-    "ResourceDimesionTypeInParameter":{
-      "name": "resourceDimesion",
+    "ResourceDimensionTypeInParameter":{
+      "name": "resourceDimension",
       "in": "path",
       "required": true,
       "type": "string",
@@ -1180,7 +1180,7 @@
     },
     "resourceUrl": {
       "name": "resourceUrl",
-      "description": "The traget Azure resource Uri. Example - /subscriptions/9f6cce51-6baf-4de5-a3c4-6f58b85315b9/resourceGroups/qms-test/providers/Microsoft.Batch/batchAccounts/testbatchab/. This will be the List API. If a {resourceName} is added after /quotaLimits, then it's a get Call for the specific resource.",
+      "description": "The target Azure resource Uri. Example - /subscriptions/9f6cce51-6baf-4de5-a3c4-6f58b85315b9/resourceGroups/qms-test/providers/Microsoft.Batch/batchAccounts/testbatchab/. This will be the List API. If a {resourceName} is added after /quotaLimits, then it's a get Call for the specific resource.",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
