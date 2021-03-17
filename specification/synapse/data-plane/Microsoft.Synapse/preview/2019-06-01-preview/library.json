@@ -333,14 +333,6 @@
         }
       }
     },
-    "SubResource": {
-      "description": "Azure Synapse nested resource, which belongs to a workspace.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
-        }
-      ]
-    },
     "LibraryListResponse": {
       "description": "A list of Library resources.",
       "type": "object",
@@ -414,9 +406,10 @@
     },
     "LibraryResource": {
       "description": "Library response details",
+      "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./artifacts.json#/definitions/SubResource"
         }
       ],
       "properties": {
