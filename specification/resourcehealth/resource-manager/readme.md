@@ -191,4 +191,8 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events"].get.operationId'
     from: ResourceHealth.json
     reason: Changing this will break
+  - suppress: OperationIdNounConflictingModelNames
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events"].get.operationId'
+    from: ResourceHealth.json
+    reason: Changing this will break
 ```
