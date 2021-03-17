@@ -441,10 +441,6 @@
     "UserSet": {
       "description": "The detail of a user.",
       "type": "object",
-      "required": [
-        "userType"
-      ],
-      "discriminator": "userType",
       "properties": {
         "userType": {
           "type": "string",
@@ -469,44 +465,6 @@
         "description": {
           "type": "string",
           "description": "The description of the user."
-        }
-      }
-    },
-    "SingleUser": {
-      "description": "The detail of a user.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserSet"
-        }
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The object id of the user."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the user."
-        }
-      }
-    },
-    "GroupMembers": {
-      "description": "The detail of a group.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserSet"
-        }
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The object id of the group."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the group."
         }
       }
     },
