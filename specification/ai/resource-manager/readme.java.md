@@ -26,8 +26,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2020-10-01-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.ai.v2020_11_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/ai/mgmt-v2020_11_01
+  namespace: com.microsoft.azure.management.ai.v2020_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/ai/mgmt-v2020_10_01
 regenerate-manager: true
 generate-interface: true
 ```

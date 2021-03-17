@@ -21,6 +21,6 @@ These settings apply only when `--tag=package-2020-10-01-preview --ruby` is spec
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ```yaml $(tag) == 'package-2020-10-01-preview' && $(ruby)
-namespace: "Azure::AI::Mgmt::V2020_11_01_preview"
+namespace: "Azure::AI::Mgmt::V2020_10_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_ai/lib
 ```
