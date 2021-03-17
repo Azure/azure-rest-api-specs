@@ -2,7 +2,7 @@
 
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(python) && $(track2)
+```yaml $(python) && $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-extendedlocation
@@ -19,7 +19,7 @@ batch:
   - multiapiscript: true
 ```
 
-``` yaml $(multiapiscript)
+```yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocation/azure/mgmt/extendedlocation/
 clear-output-folder: false
 perform-load: false
@@ -30,7 +30,7 @@ perform-load: false
 These settings apply only when `--tag=package-2020-07-15-privatepreview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2020-07-15-privatepreview' && $(python)
+```yaml $(tag) == 'package-2020-07-15-privatepreview' && $(python)
 namespace: azure.mgmt.extendedlocation.v2020_07_15_privatepreview
 output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocation/azure/mgmt/extendedlocation/v2020_07_15_privatepreview
 ```
@@ -40,7 +40,7 @@ output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocatio
 These settings apply only when `--tag=package-2021-03-15-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-03-15-preview' && $(python)
+```yaml $(tag) == 'package-2021-03-15-preview' && $(python)
 namespace: azure.mgmt.extendedlocation.v2021_03_15_preview
 output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocation/azure/mgmt/extendedlocation/v2021_03_15_preview
 ```
