@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-2021-03
 ```
 
-
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03'
+``` yaml $(tag) == 'package-2021-03'
 input-file:
   - Microsoft.ResourceHealth/stable/2021-03-01/ResourceHealth.json
 ```
+
 ### Tag: package-2017-07
 
 These settings apply only when `--tag=package-2017-07` is specified on the command line.
@@ -182,3 +182,21 @@ generate-interface: true
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OperationIdNounConflictingModelNames
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events"].get.operationId'
+    from: ResourceHealth.json
+    reason: Changing this will break
+  - suppress: OperationIdNounConflictingModelNames
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events"].get.operationId'
+    from: ResourceHealth.json
+    reason: Changing this will break
+  - suppress: OperationIdNounConflictingModelNames
+    where: '$.paths["/{resourceUri}/providers/Microsoft.ResourceHealth/events"].get.operationId'
+    from: ResourceHealth.json
+    reason: Changing this will break
+```
