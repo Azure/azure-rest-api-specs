@@ -4193,7 +4193,7 @@
             "$ref": "./examples/CosmosDBRestorableDatabaseAccountList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription and in a region.",
+        "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription and in a region.  This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read' permission.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -4215,7 +4215,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -4232,7 +4232,7 @@
             "$ref": "./examples/CosmosDBRestorableDatabaseAccountNoLocationList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription.",
+        "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription. This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read' permission.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -4251,7 +4251,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -4268,7 +4268,7 @@
             "$ref": "./examples/CosmosDBRestorableDatabaseAccountGet.json"
           }
         },
-        "description": "Retrieves the properties of an existing Azure Cosmos DB restorable database account.",
+        "description": "Retrieves the properties of an existing Azure Cosmos DB restorable database account.  This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read/*' permission.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -4293,7 +4293,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -4483,11 +4483,12 @@
       },
       "description": "Error Response."
     },
-    "ErrorResponseUpdatedFormat": {
+    "CloudError": {
+      "x-ms-external": true,
       "description": "An error response from the service.",
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "#/definitions/ErrorResponse"
         }
       }
     },
@@ -5207,6 +5208,38 @@
         "defaultConsistencyLevel"
       ]
     },
+    "CorsPolicy": {
+      "type": "object",
+      "description": "The CORS policy for the Cosmos DB database account.",
+      "properties": {
+        "allowedOrigins": {
+          "description": "The origin domains that are permitted to make a request against the service via CORS.",
+          "type": "string"
+        },
+        "allowedMethods": {
+          "description": "The methods (HTTP request verbs) that the origin domain may use for a CORS request.",
+          "type": "string"
+        },
+        "allowedHeaders": {
+          "description": "The request headers that the origin domain may specify on the CORS request.",
+          "type": "string"
+        },
+        "exposedHeaders": {
+          "description": "The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer.",
+          "type": "string"
+        },
+        "maxAgeInSeconds": {
+          "description": "The maximum amount time that a browser should cache the preflight OPTIONS request.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647,
+          "format": "int64"
+        }
+      },
+      "required": [
+        "allowedOrigins"
+      ]
+    },
     "DatabaseAccountGetProperties": {
       "description": "Properties for the database account.",
       "type": "object",
@@ -5351,6 +5384,13 @@
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
           "$ref": "#/definitions/BackupPolicy"
+        },
+        "cors": {
+          "type": "array",
+          "description": "The CORS policy for the Cosmos DB database account.",
+          "items": {
+            "$ref": "#/definitions/CorsPolicy"
+          }
         }
       }
     },
@@ -5447,6 +5487,13 @@
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
           "$ref": "#/definitions/BackupPolicy"
+        },
+        "cors": {
+          "type": "array",
+          "description": "The CORS policy for the Cosmos DB database account.",
+          "items": {
+            "$ref": "#/definitions/CorsPolicy"
+          }
         }
       },
       "required": [
@@ -5593,6 +5640,13 @@
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
           "$ref": "#/definitions/BackupPolicy"
+        },
+        "cors": {
+          "type": "array",
+          "description": "The CORS policy for the Cosmos DB database account.",
+          "items": {
+            "$ref": "#/definitions/CorsPolicy"
+          }
         }
       }
     },
@@ -5610,6 +5664,9 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountUpdateProperties"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -6971,17 +7028,36 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
+          "description": "The type of identity used for the resource. The type 'SystemAssigned,UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
           "enum": [
             "SystemAssigned",
             "UserAssigned",
-            "SystemAssigned, UserAssigned",
+            "SystemAssigned,UserAssigned",
             "None"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the resource."
@@ -7611,7 +7687,7 @@
         },
         "restoreSource": {
           "type": "string",
-          "description": "Path of the source account from which the restore has to be initiated"
+          "description": "The id of the restorable database account from which the restore has to be initiated. For example: /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}"
         },
         "restoreTimestampInUtc": {
           "type": "string",
@@ -7620,7 +7696,7 @@
         },
         "databasesToRestore": {
           "type": "array",
-          "description": "List of specific databases to restore.",
+          "description": "List of specific databases available for restore.",
           "items": {
             "$ref": "#/definitions/DatabaseRestoreResource"
           }
@@ -7633,11 +7709,11 @@
       "properties": {
         "databaseName": {
           "type": "string",
-          "description": "The name of the database to restore."
+          "description": "The name of the database available for restore."
         },
         "collectionNames": {
           "type": "array",
-          "description": "The names of the collections to restore.",
+          "description": "The names of the collections available for restore.",
           "items": {
             "$ref": "#/definitions/CollectionName"
           }
@@ -7712,6 +7788,11 @@
           "format": "int32",
           "minimum": 0,
           "description": "An integer representing the time (in hours) that each backup is retained"
+        },
+        "backupStorageRedundancy": {
+          "description": "Enum to indicate type of backup residency",
+          "type": "string",
+          "$ref": "#/definitions/BackupStorageRedundancy"
         }
       }
     },
@@ -7737,13 +7818,27 @@
           "x-ms-client-flatten": true,
           "description": "The properties of a restorable database account.",
           "$ref": "#/definitions/RestorableDatabaseAccountProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ARMResourceProperties"
-        }
-      ]
+      }
     },
     "RestorableDatabaseAccountProperties": {
       "type": "object",
@@ -7762,7 +7857,79 @@
           "type": "string",
           "format": "date-time",
           "description": "The time at which the restorable database account has been deleted (ISO-8601 format)."
+        },
+        "apiType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The API type of the restorable database account.",
+          "$ref": "#/definitions/ApiType"
+        },
+        "restorableLocations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of regions where the of the database account can be restored from.",
+          "items": {
+            "$ref": "#/definitions/RestorableLocationResource"
+          }
         }
+      }
+    },
+    "ApiType": {
+      "description": "Enum to indicate the API type of the restorable database account.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "MongoDB",
+        "Gremlin",
+        "Cassandra",
+        "Table",
+        "Sql",
+        "GremlinV2"
+      ],
+      "x-ms-enum": {
+        "name": "ApiType",
+        "modelAsString": true
+      }
+    },
+    "RestorableLocationResource": {
+      "type": "object",
+      "description": "Properties of the regional restorable account.",
+      "properties": {
+        "locationName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the regional restorable account."
+        },
+        "regionalDatabaseAccountInstanceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The instance id of the regional restorable account."
+        },
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The creation time of the regional restorable database account (ISO-8601 format)."
+        },
+        "deletionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The time at which the regional restorable database account has been deleted (ISO-8601 format)."
+        }
+      }
+    },
+    "BackupStorageRedundancy": {
+      "description": "Enum to indicate type of backup storage redundancy.",
+      "type": "string",
+      "enum": [
+        "Geo",
+        "Local",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "BackupStorageRedundancy",
+        "modelAsString": true
       }
     }
   },

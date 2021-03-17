@@ -1,0 +1,41 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataFactoryManagementClient",
+    "version": "2018-06-01"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ManagedVirtualNetwork": {
+      "description": "A managed Virtual Network associated with the Azure Data Factory",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "vNetId": {
+          "description": "Managed Virtual Network ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "alias": {
+          "description": "Managed Virtual Network alias.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    }
+  }
+}
