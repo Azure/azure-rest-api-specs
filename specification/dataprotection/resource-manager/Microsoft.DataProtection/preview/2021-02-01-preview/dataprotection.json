@@ -1769,6 +1769,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
             "$ref": "#/parameters/SubscriptionId"
           },
           {
@@ -1825,6 +1828,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
           {
             "$ref": "#/parameters/SubscriptionId"
           },
@@ -2748,6 +2754,9 @@
           "type": "array"
         }
       },
+      "required": [
+        "storageSettings"
+      ],
       "title": "BackupVault",
       "type": "object"
     },
@@ -2765,6 +2774,10 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "location",
+        "properties"
+      ],
       "title": "BackupVault Resource"
     },
     "BackupVaultResourceList": {
