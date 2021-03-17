@@ -502,6 +502,9 @@
     "CompressionLevel": {
       "title": "Microsoft.Azure.Management.DataFactories.Models.CompressionLevel",
       "description": "All available compression levels.",
+      "type": "object"
+    },
+    "DatasetCompressionLevelEnum": {
       "type": "string",
       "enum": [
         "Optimal",
@@ -599,18 +602,8 @@
           "description": "The location of the avro storage."
         },
         "avroCompressionCodec": {
-          "type": "string",
-          "enum": [
-            "none",
-            "deflate",
-            "snappy",
-            "xz",
-            "bzip2"
-          ],
-          "x-ms-enum": {
-            "name": "avroCompressionCodec",
-            "modelAsString": true
-          }
+          "type": "object",
+          "description": "A string from AvroCompressionCodec or an expression"
         },
         "avroCompressionLevel": {
           "type": "integer",
@@ -621,6 +614,20 @@
       "required": [
         "location"
       ]
+    },
+    "CompressionCodecEnum": {
+      "type": "string",
+      "enum": [
+        "none",
+        "deflate",
+        "snappy",
+        "xz",
+        "bzip2"
+      ],
+      "x-ms-enum": {
+        "name": "AvroCompressionCodec",
+        "modelAsString": true
+      }
     },
     "ExcelDataset": {
       "x-ms-discriminator-value": "Excel",
@@ -699,22 +706,26 @@
           "description": "The location of the parquet storage."
         },
         "compressionCodec": {
-          "type": "string",
-          "enum": [
-            "none",
-            "gzip",
-            "snappy",
-            "lzo"
-          ],
-          "x-ms-enum": {
-            "name": "compressionCodec",
-            "modelAsString": true
-          }
+          "type": "object",
+          "description": "A string from ParquetCompressionCodecEnum or an expression"
         }
       },
       "required": [
         "location"
       ]
+    },
+    "ParquetCompressionCodecEnum": {
+      "type": "string",
+        "enum": [
+          "none",
+          "gzip",
+          "snappy",
+          "lzo"
+        ],
+        "x-ms-enum": {
+          "name": "ParquetCompressionCodecEnum",
+          "modelAsString": true
+        }
     },
     "DelimitedTextDataset": {
       "x-ms-discriminator-value": "DelimitedText",
