@@ -30,6 +30,8 @@ openapi-type: arm
 azure-arm: true
 tag: package-preview-2021-04
 generate-empty-classes: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 
@@ -44,6 +46,7 @@ input-file:
   - Microsoft.Synapse/preview/2021-04-01-preview/firewallRule.json
   - Microsoft.Synapse/preview/2021-04-01-preview/integrationRuntime.json
   - Microsoft.Synapse/preview/2021-04-01-preview/keys.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/kustoPool.json
   - Microsoft.Synapse/preview/2021-04-01-preview/operations.json
   - Microsoft.Synapse/preview/2021-04-01-preview/privateEndpointConnections.json
   - Microsoft.Synapse/preview/2021-04-01-preview/privateLinkResources.json
