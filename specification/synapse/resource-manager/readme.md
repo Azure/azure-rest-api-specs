@@ -28,16 +28,36 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2021-03
+tag: package-2021-04
 generate-empty-classes: true
 ```
 
 
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.Synapse/stable/2021-04-04/bigDataPool.json
+  - Microsoft.Synapse/stable/2021-04-04/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-04-04/firewallRule.json
+  - Microsoft.Synapse/stable/2021-04-04/integrationRuntime.json
+  - Microsoft.Synapse/stable/2021-04-04/keys.json
+  - Microsoft.Synapse/stable/2021-04-04/library.json
+  - Microsoft.Synapse/stable/2021-04-04/operations.json
+  - Microsoft.Synapse/stable/2021-04-04/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-04-04/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-04-04/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-04-04/sqlPool.json
+  - Microsoft.Synapse/stable/2021-04-04/sqlServer.json
+  - Microsoft.Synapse/stable/2021-04-04/workspace.json
+```
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03'
+``` yaml $(tag) == 'package-2021-03'
 input-file:
   - Microsoft.Synapse/stable/2021-03-01/bigDataPool.json
   - Microsoft.Synapse/stable/2021-03-01/checkNameAvailability.json
@@ -53,6 +73,7 @@ input-file:
   - Microsoft.Synapse/stable/2021-03-01/sqlServer.json
   - Microsoft.Synapse/stable/2021-03-01/workspace.json
 ```
+
 ### Tag: package-2019-06-01-preview
 
 These settings apply only when `--tag=package-2019-06-01-preview` is specified on the command line.
