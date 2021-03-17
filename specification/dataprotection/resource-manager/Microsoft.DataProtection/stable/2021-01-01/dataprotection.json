@@ -2754,9 +2754,6 @@
           "type": "array"
         }
       },
-      "required": [
-        "storageSettings"
-      ],
       "title": "BackupVault",
       "type": "object"
     },
@@ -2776,7 +2773,7 @@
       },
       "required": [
         "location",
-        "properties"
+        "storageSettings"
       ],
       "title": "BackupVault Resource"
     },
@@ -3815,6 +3812,13 @@
           },
           "description": "Resource tags.",
           "type": "object"
+        },
+        "storageSettings": {
+          "description": "Storage Settings",
+          "items": {
+            "$ref": "#/definitions/StorageSetting"
+          },
+          "type": "array"
         }
       },
       "title": "PatchResourceRequestInput",
