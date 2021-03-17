@@ -29,6 +29,26 @@ openapi-type: arm
 tag: package-2018-01-preview
 ```
 
+### Tag: package-2021-01-preview
+
+These settings apply only when `--tag=package-2021-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-preview'
+input-file:
+- Microsoft.ServiceBus/preview/2021-01-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/operations.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/CheckNameAvailability.json
+```
+
+
 ### Tag: package-2018-01-preview
 
 These settings apply only when `--tag=package-2018-01-preview` is specified on the command line.
@@ -105,6 +125,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
