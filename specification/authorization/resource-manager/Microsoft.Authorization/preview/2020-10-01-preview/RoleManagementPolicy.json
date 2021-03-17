@@ -81,12 +81,12 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "roleManagementPolicies"
         ],
         "operationId": "RoleManagementPolicies_Update",
-        "description": "Update or create a role management policy",
+        "description": "Update a role management policy",
         "parameters": [
           {
             "name": "scope",
@@ -117,8 +117,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created - Returns the created or updated policy.",
+          "200": {
+            "description": "Ok - Returns the updated policy.",
             "schema": {
               "$ref": "#/definitions/RoleManagementPolicy"
             }
@@ -131,8 +131,11 @@
           }
         },
         "x-ms-examples": {
-          "PutRoleManagementPolicy": {
-            "$ref": "./examples/PutRoleManagementPolicy.json"
+          "PatchRoleManagementPolicy": {
+            "$ref": "./examples/PatchRoleManagementPolicy.json"
+          },
+          "PatchPartialRoleManagementPolicy": {
+            "$ref": "./examples/PatchPartialRoleManagementPolicy.json"
           }
         }
       },
@@ -247,11 +250,16 @@
           "type": "boolean",
           "description": "The role management policy is default policy."
         },
-        "lastUpdatedDateTime": {
+        "lastModifiedBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the entity last modified it"
+        },
+        "lastModifiedDateTime": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The last updated date time."
+          "description": "The last modified date time."
         },
         "rules": {
           "type": "array",
@@ -267,6 +275,12 @@
           },
           "readOnly": true,
           "description": "The readonly computed rule applied to the policy."
+        },
+        "expandedProperties": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Additional properties of scope",
+          "$ref": "#/definitions/ExpandedProperties"
         }
       },
       "description": "Role management policy properties with scope."
@@ -343,18 +357,6 @@
       ],
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the rule."
-        },
-        "ruleType": {
-          "description": "The type of rule",
-          "$ref": "#/definitions/RoleManagementPolicyRuleType"
-        },
-        "target": {
-          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
-          "description": "The target of the current rule."
-        },
         "setting": {
           "$ref": "#/definitions/ApprovalSettings",
           "description": "The approval setting"
@@ -448,7 +450,15 @@
       "properties": {
         "userType": {
           "type": "string",
-          "description": "The object id of the user."
+          "description": "The type of userset.",
+          "enum": [
+            "User",
+            "Group"
+          ],
+          "x-ms-enum": {
+            "name": "SubjectType",
+            "modelAsString": true
+          }
         },
         "isBackup": {
           "type": "boolean",
@@ -481,15 +491,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The object id of the user."
+          "description": "The object id of the group."
         },
         "description": {
           "type": "string",
-          "description": "The description of the user."
-        },
-        "isBackup": {
-          "type": "boolean",
-          "description": "The value indicating whether the user is a backup fallback approver"
+          "description": "The description of the group."
         }
       }
     },
@@ -502,18 +508,6 @@
       ],
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the rule."
-        },
-        "ruleType": {
-          "description": "The type of rule",
-          "$ref": "#/definitions/RoleManagementPolicyRuleType"
-        },
-        "target": {
-          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
-          "description": "The target of the current rule."
-        },
         "isEnabled": {
           "type": "boolean",
           "description": "The value indicating if rule is enabled."
@@ -533,22 +527,20 @@
       ],
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the rule."
-        },
-        "ruleType": {
-          "description": "The type of rule",
-          "$ref": "#/definitions/RoleManagementPolicyRuleType"
-        },
-        "target": {
-          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
-          "description": "The target of the current rule."
-        },
         "enabledRules": {
           "type": "array",
           "items": {
-            "type": "string"
+              "type": "string",
+              "description": "The type of enable rules",
+              "enum": [
+                "MultifactorAuthentication",
+                "Justification",
+                "Ticketing"
+              ],
+              "x-ms-enum": {
+                "name": "EnablementRules",
+                "modelAsString": true
+              }
           },
           "description": "The list of enabled rules."
         }
@@ -563,18 +555,6 @@
       ],
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the rule."
-        },
-        "ruleType": {
-          "description": "The type of rule",
-          "$ref": "#/definitions/RoleManagementPolicyRuleType"
-        },
-        "target": {
-          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
-          "description": "The target of the current rule."
-        },
         "isExpirationRequired": {
           "type": "boolean",
           "description": "The value indicating whether expiration is required."
@@ -594,18 +574,6 @@
       ],
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the rule."
-        },
-        "ruleType": {
-          "description": "The type of rule",
-          "$ref": "#/definitions/RoleManagementPolicyRuleType"
-        },
-        "target": {
-          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
-          "description": "The target of the current rule."
-        },
         "notificationType": {
           "type": "string",
           "description": "The type of notification.",
@@ -649,6 +617,10 @@
             "type": "string"
           },
           "description": "The list notification recipients."
+        },
+        "isDefaultRecipientsEnabled": {
+          "type": "boolean",
+          "description": "Its value determine if the notification need to be sent to the receipientType specified in policy rule."
         }
       }
     },
@@ -707,6 +679,29 @@
       "x-ms-enum": {
         "name": "RoleManagementPolicyRuleType",
         "modelAsString": true
+      }
+    },
+    "ExpandedProperties": {
+      "properties": {
+        "scope": {
+          "type": "object",
+          "description": "Details of the resource scope",
+          "readOnly": true,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Scope id of the resource"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the resource"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the resource"
+            }
+          }
+        }
       }
     },
     "CloudError": {

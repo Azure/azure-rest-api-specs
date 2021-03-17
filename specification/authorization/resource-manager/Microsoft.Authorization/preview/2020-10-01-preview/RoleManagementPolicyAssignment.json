@@ -267,6 +267,12 @@
         "policyId": {
           "type": "string",
           "description": "The policy id role management policy assignment."
+        },
+        "expandedProperties": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Additional properties of scope, roledefinition and policy",
+          "$ref": "#/definitions/ExpandedProperties"
         }
       },
       "description": "Role management policy assignment properties with scope."
@@ -286,6 +292,68 @@
         }
       },
       "description": "Role management policy assignment list operation result."
+    },
+    "ExpandedProperties": {
+      "properties": {
+        "scope": {
+          "type": "object",
+          "description": "Details of the resource scope",
+          "readOnly": true,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Scope id of the resource"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the resource"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the resource"
+            }
+          }
+        },
+        "roleDefinition": {
+          "type": "object",
+          "description": "Details of role definition",
+          "readOnly": true,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the role definition"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the role definition"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the role definition"
+            }
+          }
+        },
+        "policy": {
+          "type": "object",
+          "description": "Details of the policy",
+          "readOnly": true,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the policy"
+            },
+            "lastModifiedBy": {
+              "type": "string",
+              "description": "The name of the entity last modified it"
+            },
+            "lastModifiedDateTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The last modified date time."
+            }
+          }
+        }
+      }
     },
     "CloudError": {
       "x-ms-external": true,
