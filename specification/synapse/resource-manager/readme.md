@@ -30,8 +30,18 @@ openapi-type: arm
 azure-arm: true
 tag: package-2021-04
 generate-empty-classes: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.Synapse/stable/2021-04-04/kustoPool.json
+```
 
 ### Tag: package-2021-04
 
