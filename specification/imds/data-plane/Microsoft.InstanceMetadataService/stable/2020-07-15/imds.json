@@ -261,6 +261,11 @@
           "type": "string",
           "description": "This is the offer information for the VM image. This value is only present for images deployed from the Azure Image Gallery."
         },
+        "osProfile": {
+          "type": "object",
+          "description": "This contains the data about the OS.",
+          "$ref": "#/definitions/OsProfile"
+        },
         "osType": {
           "type": "string",
           "description": "This value indicates the type of OS the VM is running, either Linux or Windows."
@@ -416,6 +421,20 @@
         "macAddress": {
           "type": "string",
           "description": "This is the MAC address of the interface."
+        }
+      }
+    },
+    "OsProfile": {
+      "type": "object",
+      "description": "This contains the data about the OS.",
+      "properties": {
+        "adminUsername": {
+          "type": "string",
+          "description": "This is admin account."
+        },
+        "computerName": {
+          "type": "string",
+          "description": "This is the name of the VM."
         }
       }
     },
