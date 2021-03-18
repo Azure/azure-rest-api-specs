@@ -190,7 +190,7 @@
   },
   "definitions": {
     "CommunicationIdentityTokenScope": {
-      "description": "List of scopes for an access token.",
+      "description": "List of scopes for an access token to use. Valid values are: chat and voip.",
       "enum": [
         "chat",
         "voip"
@@ -246,7 +246,7 @@
       }
     },
     "CommunicationIdentityAccessTokenResult": {
-      "description": "A communication identity with access token.",
+      "description": "A communication identity with access token. The access token, is only included if `createTokenWithScopes` is specified in the request.",
       "required": [
         "identity"
       ],
