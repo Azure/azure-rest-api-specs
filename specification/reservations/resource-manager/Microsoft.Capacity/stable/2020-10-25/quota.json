@@ -39,10 +39,10 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Get the current quota (service limit) and usage of a resource. You can use the response from the GET operation to submit quota update request.",
+        "description": "Get the current `quota` (service limit) and usage of a resource. You can use the response from the GET operation to submit quota update request.",
         "operationId": "Quota_Get",
         "x-ms-examples": {
-          "Quotas_Request_ForCompute": {
+          "Quota_Info_Compute": {
             "$ref": "./examples/getComputeOneSkuUsages.json"
           }
         },
@@ -88,16 +88,16 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Create or update the quota (service limits) of a resource to the requested value.\n Steps:\n\r  1. Make the Get request to get the quota information for specific resource.\n\r  2. To increase the quota, update the limit field in the response from Get request to new value.\n\r  3. Submit the JSON to the quota request API to update the quota.\r\n  The Create quota request may be constructed as follows. The PUT operation can be used to update the quota.",
+        "description": "Create or update the `quota` (service limits) of a resource to the requested value.\n Steps:\n\r  1. Make the Get request to get the quota information for specific resource.\n\r  2. To increase the quota, update the limit field in the response from Get request to new value.\n\r  3. Submit the JSON to the quota request API to update the quota.\r\n  The Create quota request may be constructed as follows. The PUT operation can be used to update the quota.",
         "operationId": "Quota_CreateOrUpdate",
         "x-ms-examples": {
-          "Quotas_Request_ForCompute": {
+          "Quota_Request_Put_Compute": {
             "$ref": "./examples/putComputeOneSkuQuotaRequest.json"
           },
-          "Quotas_Request_ForMachineLearningServices_DedicatedResource": {
+          "Quota_Request_Put_MachineLearningServices_DedicatedResource": {
             "$ref": "./examples/putMachineLearningServicesQuotaRequestDedicated.json"
           },
-          "Quotas_Request_ForMachineLearningServices_LowPriorityResource": {
+          "Quota_Request_Put_MachineLearningServices_LowPriorityResource": {
             "$ref": "./examples/putMachineLearningServicesQuotaRequestLowPriority.json"
           }
         },
@@ -156,10 +156,10 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Update the quota (service limits) of this resource to the requested value.\n\r  • To get the quota information for specific resource, send a GET request.\n\r  • To increase the quota, update the limit field from the GET response to a new value.\n\r  • To update the quota value, submit the JSON response to the quota request API to update the quota.\r\n  • To update the quota. use the PATCH operation.",
+        "description": "Update the `quota` (service limits) of this resource to the requested value.\n\r  • To get the quota information for specific resource, send a GET request.\n\r  • To increase the quota, update the limit field from the GET response to a new value.\n\r  • To update the quota value, submit the JSON response to the quota request API to update the quota.\r\n  • To update the quota. use the PATCH operation.",
         "operationId": "Quota_Update",
         "x-ms-examples": {
-          "Quotas_Request_PatchForCompute": {
+          "Quota_Request_Patch_Compute": {
             "$ref": "./examples/patchComputeQuotaRequest.json"
           }
         },
@@ -220,13 +220,13 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Gets a list of current quotas (service limits) and usage for all resources. The response from the list quota operation can be leveraged to request quota updates.",
+        "description": "Gets a list of current `quotas` (service limits) and usage for all resources. The response from the list quota operation can be leveraged to request quota updates.",
         "operationId": "Quota_List",
         "x-ms-examples": {
-          "Quotas_listUsagesForCompute": {
+          "Quotas_List_Compute": {
             "$ref": "./examples/getComputeUsages.json"
           },
-          "Quotas_listUsagesMachineLearningServices": {
+          "Quotas_List_MachineLearningServices": {
             "$ref": "./examples/getMachineLearningServicesUsages.json"
           }
         },
@@ -275,17 +275,17 @@
           "QuotaRequests"
         ],
         "x-ms-examples": {
-          "QuotaRequestStatus": {
+          "QuotaRequest_Status": {
             "$ref": "./examples/getQuotaRequestStatusById.json"
           },
-          "QuotaRequestInProgress": {
+          "QuotaRequest_InProgress": {
             "$ref": "./examples/getQuotaRequestStatusInProgress.json"
           },
-          "QuotaRequestFailed": {
+          "QuotaRequest_Failed": {
             "$ref": "./examples/getQuotaRequestStatusFailed.json"
           }
         },
-        "description": "For the specified Azure region (location), get the details and status of the quota request by the quota request ID for the resources of the resource provider. The PUT request for the quota (service limit) returns a response with the requestId parameter.",
+        "description": "For the specified Azure region (location), get the details and status of the `quota request` by the quota request ID for the resources of the resource provider. The PUT request for the quota (service limit) returns a response with the requestId parameter.",
         "operationId": "QuotaRequestStatus_Get",
         "parameters": [
           {
@@ -326,11 +326,11 @@
           "QuotaRequests"
         ],
         "x-ms-examples": {
-          "QuotaRequestHistory": {
+          "QuotaRequest_History": {
             "$ref": "./examples/getQuotaRequestsHistory.json"
           }
         },
-        "description": "For the specified Azure region (location), subscription, and resource provider, get the history of the quota requests for the past year. To select specific quota requests, use the oData filter.",
+        "description": "For the specified Azure region (location), subscription, and resource provider, get the history of the `quota request`s for the past year. To select specific quota requests, use the oData filter.",
         "operationId": "QuotaRequestStatus_List",
         "parameters": [
           {
