@@ -91,6 +91,8 @@ This document lists the set of automated rules that can be validated against swa
 | [ROUNDTRIP_INCONSISTENT_PROPERTY](#ROUNDTRIP_INCONSISTENT_PROPERTY) | |
 | [ROUNDTRIP_MISSING_PROPERTY](#ROUNDTRIP_MISSING_PROPERTY) | |
 | [ROUNDTRIP_ADDITIONAL_PROPERTY](#ROUNDTRIP_ADDITIONAL_PROPERTY) | |
+| [LRO_RESPONSE_CODE](#LRO_RESPONSE_CODE) | |
+| [LRO_RESPONSE_HEADER](#LRO_RESPONSE_HEADER) | |
 
 
 ### Validation Warnings
@@ -827,3 +829,19 @@ This document lists the set of automated rules that can be validated against swa
 **How to fix the violation**:
 - Check if the property is read-only. If yes, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema.
 - Check if the property has a default value. If yes, update the Swagger definition for this property to mark it with "default": <default value> annotation.
+
+### <a name="LRO_RESPONSE_CODE" />LRO_RESPONSE_CODE
+
+**Output Message**: Patch/Post long running operation must return 201 or 202, Delete long running operation must return 202 or 204, Put long running operation must return 202 or 201 or 200, but {statusCode} returned.
+
+**Description**: Long running operation must return specific response code as per http method type when this operation is annotated with x-ms-long-running-operation:true.
+
+**How to fix the violation**: Correct the response code per the guidance or remove annotation of x-ms-long-running-operation.
+
+### <a name="LRO_RESPONSE_HEADER" />LRO_RESPONSE_HEADER
+
+**Output Message**: Long running operation should return {header} in header but not provided.
+
+**Description**: Long running operation must return location header or azure-AsyncOperation header in response when this operation is annotated with x-ms-long-running-operation:true.
+
+**How to fix the violation**: Adding one of these headers to the response.
