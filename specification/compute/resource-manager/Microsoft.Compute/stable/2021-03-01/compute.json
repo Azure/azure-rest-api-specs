@@ -9454,7 +9454,7 @@
           ],
           "x-ms-enum": {
             "name": "DeleteOptions",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -9491,7 +9491,7 @@
       "properties": {
         "domainNameLabel": {
           "type": "string",
-          "description": "The Domain name label. The concatenation of the domain name label and vm [what] will be the domain name labels of the PublicIPAddress resources that will be created"
+          "description": "The Domain name label prefix. The concatenation of the domain name label and vm [what] will be the domain name labels of the PublicIPAddress resources that will be created"
         }
       },
       "required": [
@@ -9516,7 +9516,7 @@
           ],
           "x-ms-enum": {
             "name": "DeleteOptions",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "dnsSettings": {
@@ -9555,29 +9555,27 @@
           ],
           "x-ms-enum": {
             "name": "PublicIPAllocationMethod",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
       "description": "Describes a virtual machines IP Configuration's PublicIPAddress configuration"
     },
-    "LoadBalancerAndPublicIPSku": {
+    "PublicIPAddressSku": {
       "properties": {
-        "name": {
+        "publicIPAddressSkuName": {
           "type": "string",
           "description": "Specify public IP sku name",
           "enum": [
             "Basic",
-            "Standard",
-            "Classic",
-            "Gateway"
+            "Standard"
           ],
           "x-ms-enum": {
-            "name": "SkuName",
+            "name": "PublicIPAddressSkuName",
             "modelAsString": true
           }
         },
-        "tier": {
+        "publicIPAddressSkuTier": {
           "type": "string",
           "description": "Specify public IP sku tier",
           "enum": [
@@ -9585,13 +9583,13 @@
             "Global"
           ],
           "x-ms-enum": {
-            "name": "SkuTier",
+            "name": "PublicIPAddressSkuTier",
             "modelAsString": true
           }
         }
       },
       "required": [
-        "name"
+        "publicIPAddressSkuName"
       ],
       "description": "Describes the public IP Sku"
     },
@@ -9602,7 +9600,7 @@
           "description": "The publicIP address configuration name."
         },
         "sku": {
-          "$ref": "#/definitions/LoadBalancerAndPublicIPSku"
+          "$ref": "#/definitions/PublicIPAddressSku"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -9617,7 +9615,7 @@
     "VirtualMachineNetworkInterfaceIPConfigurationProperties": {
       "properties": {
         "subnet": {
-          "$ref": "#/definitions/ApiEntityReference",
+          "$ref": "#/definitions/SubResource",
           "description": "Specifies the identifier of the subnet."
         },
         "primary": {
@@ -9678,11 +9676,6 @@
       "required": [
         "name"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
       "description": "Describes a virtual machine network profile's IP configuration."
     },
     "VirtualMachineNetworkInterfaceDnsSettingsConfiguration": {
@@ -9721,72 +9714,6 @@
         }
       }
     },
-    "DscpConfigurationProperties": {
-      "properties": {
-        "markings": {
-          "type": "array",
-          "items": {
-            "type": "integer"
-          },
-          "description": "Set the priority for the traffic tied to this configuration."
-        },
-        "destinationIPRanges": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QoSIPRange"
-          }
-        },
-        "sourceIPRanges": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QoSIPRange"
-          }
-        },
-        "destinationPortRanges": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QoSPortRange"
-          }
-        },
-        "sourcePortRanges": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QoSPortRange"
-          }
-        },
-        "protocol": {
-          "type": "string",
-          "enum": [
-            "Icmp",
-            "Tcp",
-            "Udp",
-            "Gre",
-            "Esp",
-            "Ah",
-            "Vxlan",
-            "All"
-          ],
-          "x-ms-enum": {
-            "name": "DscpProtocolOptions",
-            "modelAsString": false
-          }
-        },
-        "associatedNetworkInterfaces": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkInterfaceReference"
-          }
-        }
-      }
-    },
-    "DscpConfiguration": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DscpConfigurationProperties"
-        }
-      }
-    },
     "VirtualMachineNetworkInterfaceConfigurationProperties": {
       "properties": {
         "primary": {
@@ -9803,7 +9730,7 @@
           ],
           "x-ms-enum": {
             "name": "DeleteOptions",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "enableAcceleratedNetworking": {
@@ -9834,7 +9761,7 @@
           "description": "Specifies the IP configurations of the network interface."
         },
         "dscpConfiguration": {
-          "$ref": "#/definitions/DscpConfiguration"
+          "$ref": "#/definitions/SubResource"
         }
       },
       "required": [
@@ -11232,7 +11159,6 @@
         },
         "deleteOption": {
           "type": "string",
-          "default": null,
           "description": "Specify what happens to the network interface when the VM is deleted",
           "enum": [
             "Delete",
@@ -11240,7 +11166,7 @@
           ],
           "x-ms-enum": {
             "name": "DeleteOptions",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -11284,7 +11210,6 @@
         },
         "deleteOption": {
           "type": "string",
-          "default": null,
           "description": "Specify what happens to the network interface when the VM is deleted",
           "enum": [
             "Delete",
@@ -11292,7 +11217,7 @@
           ],
           "x-ms-enum": {
             "name": "DeleteOptions",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -11458,7 +11383,6 @@
       "properties": {
         "networkApiVersion": {
           "type": "string",
-          "default": null,
           "description": "",
           "enum": [
             "2021-03-01"
@@ -11486,7 +11410,6 @@
       "properties": {
         "networkApiVersion": {
           "type": "string",
-          "default": null,
           "description": "",
           "enum": [
             "2021-03-01"
