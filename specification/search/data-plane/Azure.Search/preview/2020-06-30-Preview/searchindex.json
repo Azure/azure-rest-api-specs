@@ -1414,6 +1414,78 @@
       },
       "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax and 'semantic' if query syntax is not needed."
     },
+    "Speller": {
+      "type": "string",
+      "enum": [
+        "none",
+        "lexicon"
+      ],
+      "x-ms-enum": {
+        "name": "Speller",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Speller not enabled."
+          },
+          {
+            "value": "lexicon",
+            "name": "Lexicon",
+            "description": "Speller corrects individual query terms using a static lexicon for the language specified by the queryLanguage parameter."
+          }
+        ]
+      },
+      "description": "Improve search recall by spell-correcting individual search query terms."
+    },   
+    "Answers": {
+      "type": "string",
+      "enum": [
+        "none",
+        "extractive"
+      ],
+      "x-ms-enum": {
+        "name": "Answers",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not return answers for the query."
+          },
+          {
+            "value": "extractive",
+            "name": "Extractive",
+            "description": "Extracts answer candidates from the contents of the documents returned in response to a query expressed as a question in natural language."
+          }
+        ]
+      },
+      "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the |count-<number of answers> option after the answers parameter value. Default is 1."
+    },   
+    "QueryLanguage": {
+      "type": "string",
+      "enum": [
+        "none",
+        "en-us"        
+      ],
+      "x-ms-enum": {
+        "name": "QueryLanguage",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Query language not specified."
+          },
+          {
+            "value": "en-us",
+            "name": "EnUs",
+            "description": "English"
+          }
+        ]
+      },
+      "description": "The language of the query."
+    },
     "ScoringStatistics": {
       "type": "string",
       "enum": [
