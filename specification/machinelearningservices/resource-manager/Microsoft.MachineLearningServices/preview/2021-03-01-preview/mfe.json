@@ -3080,6 +3080,462 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments": {
+      "get": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "List Inference Endpoint Deployments.",
+        "operationId": "OnlineDeployments_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$orderBy",
+            "description": "Ordering of list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Top of list.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentTrackedResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Online Deployment.": {
+            "$ref": "./examples/OnlineDeployment/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}": {
+      "delete": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "Delete Inference Endpoint Deployment.",
+        "operationId": "OnlineDeployments_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "Inference Endpoint Deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Online Deployment.": {
+            "$ref": "./examples/OnlineDeployment/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "Get Inference Deployment Deployment.",
+        "operationId": "OnlineDeployments_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "Inference Endpoint Deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Online Deployment.": {
+            "$ref": "./examples/OnlineDeployment/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "Create or update Inference Endpoint Deployment.",
+        "operationId": "OnlineDeployments_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "Inference Endpoint Deployment name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Inference Endpoint entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentTrackedResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentTrackedResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Online Deployment.": {
+            "$ref": "./examples/OnlineDeployment/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "Update Online Deployment.",
+        "operationId": "OnlineDeployments_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "Inference Endpoint Deployment name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Online Endpoint entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartialOnlineDeploymentPartialTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentTrackedResource"
+            }
+          },
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Online Deployment.": {
+            "$ref": "./examples/OnlineDeployment/update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs": {
+      "post": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "Polls an Endpoint operation.",
+        "operationId": "OnlineDeployments_GetLogs",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name and identifier for the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request containing parameters for retrieving logs.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentLogsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeploymentLogs"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetLogs Online Deployment.": {
+            "$ref": "./examples/OnlineDeployment/getLogs.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints": {
       "get": {
         "tags": [
@@ -6707,6 +7163,468 @@
           "additionalProperties": {
             "$ref": "#/definitions/UserAssignedIdentityMeta"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "OnlineDeploymentScaleSettings": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maximum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "instanceCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "scaleType": {
+          "enum": [
+            "Automatic",
+            "Manual",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScaleTypeMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ModelDataCollection": {
+      "description": "The Model data collection properties.",
+      "type": "object",
+      "properties": {
+        "eventHubEnabled": {
+          "description": "Option for enabling/disabling Event Hub.",
+          "type": "boolean"
+        },
+        "storageEnabled": {
+          "description": "Option for enabling/disabling storage.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DeploymentConfigurationBase": {
+      "required": [
+        "computeType"
+      ],
+      "type": "object",
+      "properties": {
+        "computeType": {
+          "enum": [
+            "Managed",
+            "AKS",
+            "AzureMLCompute"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EndpointComputeType",
+            "modelAsString": true
+          }
+        },
+        "appInsightsEnabled": {
+          "type": "boolean"
+        },
+        "maxConcurrentRequestsPerInstance": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxQueueWaitMs": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "scoringTimeoutMs": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "livenessProbeRequirements": {
+          "$ref": "machineLearningServices.json#/definitions/LivenessProbeRequirements"
+        }
+      },
+      "discriminator": "computeType",
+      "additionalProperties": false
+    },
+    "AksDeploymentConfiguration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentConfigurationBase"
+        }
+      ],
+      "properties": {
+        "containerResourceRequirements": {
+          "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
+        },
+        "modelDataCollection": {
+          "description": "The Model data collection properties.",
+          "$ref": "#/definitions/ModelDataCollection"
+        }
+      },
+      "x-ms-discriminator-value": "AKS",
+      "additionalProperties": false
+    },
+    "ManagedDeploymentConfiguration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentConfigurationBase"
+        }
+      ],
+      "properties": {
+        "instanceType": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "osType": {
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OSTypes",
+            "modelAsString": true
+          }
+        },
+        "readinessProbeRequirements": {
+          "$ref": "machineLearningServices.json#/definitions/LivenessProbeRequirements"
+        }
+      },
+      "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
+    },
+    "AssetReferenceBase": {
+      "required": [
+        "referenceType"
+      ],
+      "type": "object",
+      "properties": {
+        "referenceType": {
+          "description": "Specifies the type of asset reference.",
+          "enum": [
+            "Id",
+            "DataPath",
+            "OutputPath"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReferenceType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "referenceType",
+      "additionalProperties": false
+    },
+    "IdAssetReference": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetReferenceBase"
+        }
+      ],
+      "properties": {
+        "id": {
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Id",
+      "additionalProperties": false
+    },
+    "DataPathAssetReference": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetReferenceBase"
+        }
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "datastoreId": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DataPath",
+      "additionalProperties": false
+    },
+    "OutputPathAssetReference": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetReferenceBase"
+        }
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "OutputPath",
+      "additionalProperties": false
+    },
+    "OnlineDeployment": {
+      "required": [
+        "deploymentConfiguration",
+        "modelReference"
+      ],
+      "type": "object",
+      "properties": {
+        "scaleSettings": {
+          "$ref": "#/definitions/OnlineDeploymentScaleSettings"
+        },
+        "deploymentConfiguration": {
+          "$ref": "#/definitions/DeploymentConfigurationBase"
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the endpoint deployment.",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Scaling",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DeploymentProvisioningState",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "description": {
+          "description": "Description of the endpoint deployment.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "modelReference": {
+          "$ref": "#/definitions/AssetReferenceBase"
+        },
+        "codeConfiguration": {
+          "description": "Code configuration for the endpoint deployment.",
+          "$ref": "#/definitions/CodeConfiguration"
+        },
+        "environmentId": {
+          "description": "Environment specification for the endpoint deployment.",
+          "type": "string"
+        },
+        "environmentVariables": {
+          "description": "Environment variables configuration for the deployment.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "OnlineDeploymentTrackedResource": {
+      "required": [
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentityInArm"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/OnlineDeployment"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "OnlineDeploymentTrackedResourceArmPaginatedResult": {
+      "description": "A paginated list of OnlineDeployment entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type OnlineDeployment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OnlineDeploymentTrackedResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialOnlineDeployment": {
+      "description": "Mutable online deployment configuration",
+      "type": "object",
+      "properties": {
+        "scaleSettings": {
+          "$ref": "#/definitions/OnlineDeploymentScaleSettings"
+        },
+        "deploymentConfiguration": {
+          "$ref": "#/definitions/DeploymentConfigurationBase"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialOnlineDeploymentPartialTrackedResource": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentityInArm"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/PartialOnlineDeployment"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "DeploymentLogsRequest": {
+      "type": "object",
+      "properties": {
+        "containerType": {
+          "description": "The type of container to retrieve logs from.",
+          "enum": [
+            "StorageInitializer",
+            "InferenceServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ContainerType",
+            "modelAsString": true
+          }
+        },
+        "tail": {
+          "format": "int32",
+          "description": "The maximum number of lines to tail.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DeploymentLogs": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
         }
       },
       "additionalProperties": false
