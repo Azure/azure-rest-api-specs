@@ -3079,6 +3079,581 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints": {
+      "get": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "List Online Endpoints.",
+        "operationId": "OnlineEndpoints_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "description": "Name of the endpoint.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Number of endpoints to be retrieved in a page of results.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "computeType",
+            "description": "EndpointComputeType to be filtered by.",
+            "type": "string",
+            "enum": [
+              "Managed",
+              "AKS",
+              "AzureMLCompute"
+            ],
+            "x-ms-enum": {
+              "name": "EndpointComputeType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "A set of tags with which to filter the returned models. It is a comma separated string of tags key or tags key=value. Example: tagKey1,tagKey2,tagKey3=value3 .",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "properties",
+            "description": "A set of properties with which to filter the returned models. It is a comma separated string of properties key and/or properties key=value Example: propKey1,propKey2,propKey3=value3 .",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "description": "The option to order the response.",
+            "type": "string",
+            "enum": [
+              "CreatedAtDesc",
+              "CreatedAtAsc",
+              "UpdatedAtDesc",
+              "UpdatedAtAsc"
+            ],
+            "x-ms-enum": {
+              "name": "OrderString",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointTrackedResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Online Endpoint.": {
+            "$ref": "./examples/OnlineEndpoint/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}": {
+      "delete": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Delete Online Endpoint.",
+        "operationId": "OnlineEndpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Online Endpoint.": {
+            "$ref": "./examples/OnlineEndpoint/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Get Online Endpoint.",
+        "operationId": "OnlineEndpoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Online Endpoint.": {
+            "$ref": "./examples/OnlineEndpoint/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Create or update Online Endpoint.",
+        "operationId": "OnlineEndpoints_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Online Endpoint entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointTrackedResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointTrackedResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Online Endpoint.": {
+            "$ref": "./examples/OnlineEndpoint/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Update Online Endpoint.",
+        "operationId": "OnlineEndpoints_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Online Endpoint entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartialOnlineEndpointPartialTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointTrackedResource"
+            }
+          },
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Online Endpoint.": {
+            "$ref": "./examples/OnlineEndpoint/update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication.",
+        "operationId": "OnlineEndpoints_RegenerateKeys",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "RegenerateKeys request .",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateEndpointKeysRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegenerateKeys Online Endpoint.": {
+            "$ref": "./examples/OnlineEndpoint/regenerateKeys.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/listKeys": {
+      "post": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "List EndpointAuthKeys for an Endpoint using Key-based authentication.",
+        "operationId": "OnlineEndpoints_ListKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EndpointAuthKeys"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListKeys Online Endpoint.": {
+            "$ref": "./examples/OnlineEndpoint/listKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/token": {
+      "post": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Retrieve a valid AAD token for an Endpoint using AMLToken-based authentication.",
+        "operationId": "OnlineEndpoints_GetToken",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EndpointAuthToken"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetToken Online Endpoint.": {
+            "$ref": "./examples/OnlineEndpoint/getToken.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6090,6 +6665,424 @@
         },
         "nextLink": {
           "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "UserAssignedIdentityMeta": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecretUrl": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ResourceIdentityInArm": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityMeta"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComputeConfiguration": {
+      "required": [
+        "computeType"
+      ],
+      "type": "object",
+      "properties": {
+        "computeType": {
+          "enum": [
+            "Managed",
+            "AKS",
+            "AzureMLCompute"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EndpointComputeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "computeType",
+      "additionalProperties": false
+    },
+    "AksComputeConfiguration": {
+      "required": [
+        "computeName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeConfiguration"
+        }
+      ],
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "computeName": {
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AKS",
+      "additionalProperties": false
+    },
+    "ManagedComputeConfiguration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
+    },
+    "AzureMLComputeConfiguration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureMLCompute",
+      "additionalProperties": false
+    },
+    "OnlineEndpoint": {
+      "description": "Online endpoint configuration",
+      "required": [
+        "authMode",
+        "computeConfiguration"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "State of endpoint provisioning.",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EndpointProvisioningState",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "description": {
+          "description": "Description of the inference endpoint.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "trafficRules": {
+          "description": "Traffic rules on how the traffic will be routed across deployments.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "computeConfiguration": {
+          "$ref": "#/definitions/ComputeConfiguration"
+        },
+        "endpoint": {
+          "format": "uri",
+          "description": "Endpoint URI",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "swaggerEndpoint": {
+          "format": "uri",
+          "description": "Endpoint Swagger URI",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "authMode": {
+          "description": "Inference endpoint authentication mode type",
+          "enum": [
+            "AMLToken",
+            "Key",
+            "AADToken"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EndpointAuthModeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "OnlineEndpointTrackedResource": {
+      "required": [
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentityInArm"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/OnlineEndpoint"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "OnlineEndpointTrackedResourceArmPaginatedResult": {
+      "description": "A paginated list of OnlineEndpoint entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type OnlineEndpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OnlineEndpointTrackedResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialOnlineEndpoint": {
+      "description": "Mutable online endpoint configuration",
+      "type": "object",
+      "properties": {
+        "trafficRules": {
+          "description": "Traffic rules on how the traffic will be routed across deployments.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialOnlineEndpointPartialTrackedResource": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentityInArm"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/PartialOnlineEndpoint"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "RegenerateEndpointKeysRequest": {
+      "required": [
+        "keyType"
+      ],
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "description": "Specification for which type of key to generate. Primary or Secondary.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "type": "string",
+          "example": "Primary",
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": true
+          }
+        },
+        "keyValue": {
+          "description": "The value the key is set to.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EndpointAuthKeys": {
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "description": "The primary key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "secondaryKey": {
+          "description": "The secondary key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "EndpointAuthToken": {
+      "description": "Service Token",
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "description": "Access token.",
+          "type": "string"
+        },
+        "tokenType": {
+          "description": "Access token type.",
+          "type": "string"
+        },
+        "expiryTimeUtc": {
+          "format": "int64",
+          "description": "Access token expiry time (UTC).",
+          "type": "integer"
+        },
+        "refreshAfterTimeUtc": {
+          "format": "int64",
+          "description": "Refresh access token after time (UTC).",
+          "type": "integer"
         }
       },
       "additionalProperties": false
