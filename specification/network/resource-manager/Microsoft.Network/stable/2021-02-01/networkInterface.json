@@ -205,6 +205,9 @@
         "x-ms-examples": {
           "Create network interface": {
             "$ref": "./examples/NetworkInterfaceCreate.json"
+          },
+          "Create network interface with Gateway Load Balancer Consumer configured": {
+            "$ref": "./examples/NetworkInterfaceCreateGatewayLoadBalancerConsumer.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -925,6 +928,10 @@
     },
     "NetworkInterfaceIPConfigurationPropertiesFormat": {
       "properties": {
+        "gatewayLoadBalancer": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to gateway load balancer frontend IP."
+        },
         "virtualNetworkTaps": {
           "type": "array",
           "items": {
