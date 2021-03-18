@@ -25,7 +25,7 @@ batch:
 ```
 
 ``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/
 clear-output-folder: false
 perform-load: false
 ```
