@@ -42,6 +42,7 @@ openapi-type: data-plane
 tag: runtime_release_preview.2
 add-credentials: true
 openapi-type: data-plane
+```
 
 # Releases
 
