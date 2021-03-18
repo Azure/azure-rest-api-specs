@@ -9,6 +9,280 @@
     "https"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}": {
+      "put": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Creates a batch inference endpoint.",
+        "operationId": "BatchEndpoints_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Name for the Batch inference endpoint.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Batch inference endpoint definition object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointTrackedResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/createOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Gets a batch inference endpoint by name.",
+        "operationId": "BatchEndpoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Name for the Batch Endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Delete Batch Inference Endpoint.",
+        "operationId": "BatchEndpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints": {
+      "get": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Lists Batch inference endpoint in the workspace.",
+        "operationId": "BatchEndpoints_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointTrackedResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/listkeys": {
+      "post": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Lists batch Inference Endpoint keys.",
+        "operationId": "BatchEndpoints_ListKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EndpointAuthKeysTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListKeys Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/listKeys.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}": {
       "put": {
         "tags": [
@@ -4113,6 +4387,312 @@
     }
   },
   "definitions": {
+    "UserAssignedIdentityMeta": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecretUrl": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ResourceIdentityInArm": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityMeta"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComputeConfiguration": {
+      "required": [
+        "computeType"
+      ],
+      "type": "object",
+      "properties": {
+        "computeType": {
+          "enum": [
+            "Managed",
+            "AKS",
+            "AzureMLCompute"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EndpointComputeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "computeType",
+      "additionalProperties": false
+    },
+    "AksComputeConfiguration": {
+      "required": [
+        "computeName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeConfiguration"
+        }
+      ],
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "computeName": {
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AKS",
+      "additionalProperties": false
+    },
+    "ManagedComputeConfiguration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
+    },
+    "AzureMLComputeConfiguration": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureMLCompute",
+      "additionalProperties": false
+    },
+    "BatchEndpoint": {
+      "description": "Batch endpoint configuration",
+      "required": [
+        "computeConfiguration"
+      ],
+      "type": "object",
+      "properties": {
+        "authMode": {
+          "enum": [
+            "AMLToken",
+            "Key",
+            "AADToken"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EndpointAuthModeType",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Description of the inference endpoint.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "trafficRules": {
+          "description": "Traffic rules on how the traffic will be routed across deployments.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "computeConfiguration": {
+          "$ref": "#/definitions/ComputeConfiguration"
+        },
+        "endpoint": {
+          "format": "uri",
+          "description": "Endpoint URI",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "swaggerEndpoint": {
+          "format": "uri",
+          "description": "Endpoint Swagger URI",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchEndpointTrackedResource": {
+      "required": [
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentityInArm"
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/BatchEndpoint"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchEndpointTrackedResourceArmPaginatedResult": {
+      "description": "A paginated list of BatchEndpoint entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type BatchEndpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchEndpointTrackedResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EndpointAuthKeys": {
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "description": "The primary key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "secondaryKey": {
+          "description": "The secondary key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "EndpointAuthKeysTrackedResource": {
+      "required": [
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentityInArm"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/EndpointAuthKeys"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
     "CodeContainer": {
       "type": "object",
       "properties": {
@@ -7125,48 +7705,6 @@
       },
       "additionalProperties": false
     },
-    "UserAssignedIdentityMeta": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "type": "string"
-        },
-        "clientId": {
-          "type": "string"
-        },
-        "clientSecretUrl": {
-          "type": "string"
-        },
-        "resourceId": {
-          "type": "string"
-        },
-        "tenantId": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "ResourceIdentityInArm": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "principalId": {
-          "type": "string"
-        },
-        "tenantId": {
-          "type": "string"
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentityMeta"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
     "OnlineDeploymentScaleSettings": {
       "type": "object",
       "properties": {
@@ -7629,74 +8167,6 @@
       },
       "additionalProperties": false
     },
-    "ComputeConfiguration": {
-      "required": [
-        "computeType"
-      ],
-      "type": "object",
-      "properties": {
-        "computeType": {
-          "enum": [
-            "Managed",
-            "AKS",
-            "AzureMLCompute"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EndpointComputeType",
-            "modelAsString": true
-          }
-        }
-      },
-      "discriminator": "computeType",
-      "additionalProperties": false
-    },
-    "AksComputeConfiguration": {
-      "required": [
-        "computeName"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputeConfiguration"
-        }
-      ],
-      "properties": {
-        "namespace": {
-          "type": "string"
-        },
-        "computeName": {
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "x-ms-discriminator-value": "AKS",
-      "additionalProperties": false
-    },
-    "ManagedComputeConfiguration": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputeConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "Managed",
-      "additionalProperties": false
-    },
-    "AzureMLComputeConfiguration": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputeConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureMLCompute",
-      "additionalProperties": false
-    },
     "OnlineEndpoint": {
       "description": "Online endpoint configuration",
       "required": [
@@ -7954,28 +8424,6 @@
         "keyValue": {
           "description": "The value the key is set to.",
           "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "EndpointAuthKeys": {
-      "type": "object",
-      "properties": {
-        "primaryKey": {
-          "description": "The primary key.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "secondaryKey": {
-          "description": "The secondary key.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         }
       },
       "additionalProperties": false
