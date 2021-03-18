@@ -635,6 +635,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/getDomainOwnershipIdentifier": {
+      "post": {
+        "tags": [
+          "ApiManagementService"
+        ],
+        "operationId": "ApiManagementService_GetDomainOwnershipIdentifier",
+        "description": "Get the custom domain ownership identifier for an API Management service.",
+        "x-ms-examples": {
+          "ApiManagementServiceGetDomainOwnershipIdentifier": {
+            "$ref": "./examples/ApiManagementServiceGetDomainOwnershipIdentifier.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The result of getting domain ownership identifier.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementServiceGetDomainOwnershipIdentifierResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/applynetworkconfigurationupdates": {
       "post": {
         "tags": [
@@ -1480,6 +1516,16 @@
         }
       },
       "description": "Response of the CheckNameAvailability operation."
+    },
+    "ApiManagementServiceGetDomainOwnershipIdentifierResult": {
+      "properties": {
+        "domainOwnershipIdentifier": {
+          "type": "string",
+          "description": "The domain ownership identifer value.",
+          "readOnly": true
+        }
+      },
+      "description": "Response of the GetDomainOwnershipIdentifier operation."
     },
     "ApiManagementServiceApplyNetworkConfigurationParameters": {
       "properties": {
