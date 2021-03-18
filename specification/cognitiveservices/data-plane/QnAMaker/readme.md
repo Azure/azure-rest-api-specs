@@ -9,7 +9,6 @@ A preview release `release_5_0_preview.1` is also available.
 
 
 ``` yaml
-
 tag: release_4_0
 add-credentials: true
 openapi-type: data-plane
