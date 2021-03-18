@@ -52,13 +52,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
+        "$ref": "../../..Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
+        "$ref": "../../..Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -70,19 +70,19 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
+        "$ref": "../../..Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
+        "$ref": "../../..Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "../../../Common/common.json#/definitions/ODataErrorResponse"
+        "$ref": "../../..Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
       }
     },
     "202Async": {
@@ -1726,7 +1726,7 @@
             "description": "The list of search fuzzy queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
             "required": true,
             "schema": {
-              "$ref": "../../../Common/common.json#/definitions/BatchRequestBody"
+              "$ref": "../../..Common/preview/1.0/common.js#/definitions/BatchRequestBody"
             }
           }
         ],
@@ -1734,7 +1734,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../Common/common.json#/definitions/BatchResponse"
+              "$ref": "../../..Common/preview/1.0/common.js#/definitions/BatchResponse"
             }
           },
           "202": {
@@ -1794,7 +1794,7 @@
             "description": "The list of address geocoding queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
             "required": true,
             "schema": {
-              "$ref": "../../../Common/common.json#/definitions/BatchRequestBody"
+              "$ref": "../../..Common/preview/1.0/common.js#/definitions/BatchRequestBody"
             }
           }
         ],
@@ -1802,7 +1802,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../Common/common.json#/definitions/BatchResponse"
+              "$ref": "../../..Common/preview/1.0/common.js#/definitions/BatchResponse"
             }
           },
           "202": {
@@ -1862,7 +1862,7 @@
             "description": "The list of reverse geocoding queries/requests to process. The list can contain  a max of 10,000 queries and must contain at least 1 query.",
             "required": true,
             "schema": {
-              "$ref": "../../../Common/common.json#/definitions/BatchRequestBody"
+              "$ref": "../../..Common/preview/1.0/common.js#/definitions/BatchRequestBody"
             }
           }
         ],
@@ -1870,7 +1870,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../Common/common.json#/definitions/BatchResponse"
+              "$ref": "../../..Common/preview/1.0/common.js#/definitions/BatchResponse"
             }
           },
           "202": {
@@ -1976,7 +1976,7 @@
         },
         "geometryData": {
           "description": "Geometry data in GeoJSON format. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details. Present only if \"error\" is not present.",
-          "$ref": "../../../Common/common.json#/definitions/Geometry"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/Geometry"
         }
       }
     },
@@ -2070,7 +2070,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2186,7 +2186,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2288,7 +2288,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2398,7 +2398,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2491,7 +2491,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2697,7 +2697,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2805,7 +2805,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2910,7 +2910,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2937,7 +2937,7 @@
       "type": "object",
       "properties": {
         "geometry": {
-          "$ref": "../../../Common/common.json#/definitions/Geometry"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/Geometry"
         }
       }
     },
@@ -2946,7 +2946,7 @@
       "type": "object",
       "properties": {
         "route": {
-          "$ref": "../../../Common/common.json#/definitions/LineString"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/LineString"
         }
       }
     },
@@ -3233,10 +3233,10 @@
       "type": "object",
       "properties": {
         "topLeftPoint": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         },
         "btmRightPoint": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         }
       }
     },
@@ -3254,7 +3254,7 @@
           ]
         },
         "position": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         }
       }
     },
@@ -3269,10 +3269,10 @@
           "type": "string"
         },
         "from": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         },
         "to": {
-          "$ref": "../../../Common/common.json#/definitions/CoordinateAbbreviated"
+          "$ref": "../../..Common/preview/1.0/common.js#/definitions/CoordinateAbbreviated"
         }
       }
     },
