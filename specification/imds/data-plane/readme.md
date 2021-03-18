@@ -27,7 +27,7 @@ These are the global settings for the Instance Metadata Service API.
 ``` yaml
 openapi-type: data-plane
 azure-arm: false
-tag: package-2020-07-15
+tag: package-2019-02-01
 ```
 
 ### Tag: package-2018-10-01
