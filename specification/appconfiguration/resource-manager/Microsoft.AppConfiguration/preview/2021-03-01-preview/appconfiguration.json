@@ -1042,7 +1042,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1058,6 +1058,10 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The sku of the configuration store."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Resource system metadata."
         }
       }
     },
@@ -1691,45 +1695,6 @@
         }
       },
       "description": "The resource management error additional info."
-    },
-    "Resource": {
-      "description": "An Azure resource.",
-      "required": [
-        "location"
-      ],
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "The location of the resource. This cannot be changed after the resource is created.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "The tags of the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
