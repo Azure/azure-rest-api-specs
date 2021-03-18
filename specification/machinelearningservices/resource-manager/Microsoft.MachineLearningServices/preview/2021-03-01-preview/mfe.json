@@ -9,6 +9,270 @@
     "https"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}": {
+      "put": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Creates a batch inference deployment.",
+        "operationId": "BatchDeployments_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The identifier for the Batch inference deployment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Batch inference deployment definition object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentTrackedResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Batch Deployment.": {
+            "$ref": "./examples/BatchDeployment/createOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Gets a batch inference deployment by id.",
+        "operationId": "BatchDeployments_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Endpoint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The identifier for the Batch deployments.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Batch Deployment.": {
+            "$ref": "./examples/BatchDeployment/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Delete Batch Inference deployment.",
+        "operationId": "BatchDeployments_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Endpoint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "Inference deployment identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Batch Deployment.": {
+            "$ref": "./examples/BatchDeployment/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments": {
+      "get": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Lists Batch inference deployments in the workspace.",
+        "operationId": "BatchDeployments_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Endpoint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$orderBy",
+            "description": "Ordering of list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Top of list.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentTrackedResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Batch Deployment.": {
+            "$ref": "./examples/BatchDeployment/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}": {
       "put": {
         "tags": [
@@ -4429,6 +4693,331 @@
       },
       "additionalProperties": false
     },
+    "BatchDeploymentScaleSettings": {
+      "type": "object",
+      "properties": {
+        "nodeCount": {
+          "format": "int32",
+          "description": "Number of Compute nodes to be used for running the deployment",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchRetrySettings": {
+      "description": "Retry settings for a batch inference operation.",
+      "type": "object",
+      "properties": {
+        "maximumRetries": {
+          "format": "int32",
+          "description": "Maximum retry count for a mini-batch",
+          "type": "integer"
+        },
+        "timeoutInSeconds": {
+          "format": "int32",
+          "description": "Invocation timeout for a mini-batch, in seconds.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchPartitioningScheme": {
+      "description": "Partitioning scheme for batch inference operation.",
+      "type": "object",
+      "properties": {
+        "partitioningKeys": {
+          "description": "Partition keys list used for Named partitioning.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "miniBatchSize": {
+          "format": "int64",
+          "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchOutputConfiguration": {
+      "description": "Batch inference output configuration.",
+      "type": "object",
+      "properties": {
+        "outputAction": {
+          "description": "Indicates how the output will be organized.",
+          "enum": [
+            "SummaryOnly",
+            "AppendRow"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BatchOutputAction",
+            "modelAsString": true
+          }
+        },
+        "appendRowFileName": {
+          "description": "Customized output file name for append_row output action.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchDeploymentSettings": {
+      "description": "Batch inference specific settings per deployment.",
+      "type": "object",
+      "properties": {
+        "computeId": {
+          "description": "Resource ID of the compute resource",
+          "type": "string"
+        },
+        "errorThreshold": {
+          "format": "int32",
+          "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue]\r\n-1 value indicates, ignore all failures during batch inference\r\nFor FileDataset count of file failures\r\nFor TabularDataset, this is the count of record failures",
+          "type": "integer"
+        },
+        "retrySettings": {
+          "description": "Retry Settings for the batch inference operation.",
+          "$ref": "#/definitions/BatchRetrySettings"
+        },
+        "partitioningScheme": {
+          "description": "Partitioning scheme on how data is partitioned across mini-batches for the batch inference operation.",
+          "$ref": "#/definitions/BatchPartitioningScheme"
+        },
+        "loggingLevel": {
+          "description": "Logging level for batch inference operation.",
+          "enum": [
+            "Info",
+            "Warning",
+            "Debug"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BatchLoggingLevel",
+            "modelAsString": true
+          }
+        },
+        "outputConfiguration": {
+          "description": "Output configuration for the batch inference operation.",
+          "$ref": "#/definitions/BatchOutputConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AssetReferenceBase": {
+      "required": [
+        "referenceType"
+      ],
+      "type": "object",
+      "properties": {
+        "referenceType": {
+          "description": "Specifies the type of asset reference.",
+          "enum": [
+            "Id",
+            "DataPath",
+            "OutputPath"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReferenceType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "referenceType",
+      "additionalProperties": false
+    },
+    "IdAssetReference": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetReferenceBase"
+        }
+      ],
+      "properties": {
+        "id": {
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Id",
+      "additionalProperties": false
+    },
+    "DataPathAssetReference": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetReferenceBase"
+        }
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "datastoreId": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DataPath",
+      "additionalProperties": false
+    },
+    "OutputPathAssetReference": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetReferenceBase"
+        }
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "OutputPath",
+      "additionalProperties": false
+    },
+    "CodeConfiguration": {
+      "required": [
+        "command"
+      ],
+      "type": "object",
+      "properties": {
+        "codeArtifactId": {
+          "description": "The ID of the code asset.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "command": {
+          "description": "The command to execute on startup of the job. eg. [\"python\", \"train.py\"]",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchDeployment": {
+      "description": "Batch inference settings per deployment.",
+      "required": [
+        "modelReference"
+      ],
+      "type": "object",
+      "properties": {
+        "scaleSettings": {
+          "description": "Scale settings for deployment",
+          "$ref": "#/definitions/BatchDeploymentScaleSettings"
+        },
+        "batchSettings": {
+          "description": "Batch deployment settings",
+          "$ref": "#/definitions/BatchDeploymentSettings"
+        },
+        "description": {
+          "description": "Description of the endpoint deployment.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "modelReference": {
+          "$ref": "#/definitions/AssetReferenceBase"
+        },
+        "codeConfiguration": {
+          "description": "Code configuration for the endpoint deployment.",
+          "$ref": "#/definitions/CodeConfiguration"
+        },
+        "environmentId": {
+          "description": "Environment specification for the endpoint deployment.",
+          "type": "string"
+        },
+        "environmentVariables": {
+          "description": "Environment variables configuration for the deployment.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchDeploymentTrackedResource": {
+      "required": [
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentityInArm"
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/BatchDeployment"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchDeploymentTrackedResourceArmPaginatedResult": {
+      "description": "A paginated list of BatchDeployment entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type BatchDeployment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchDeploymentTrackedResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "ComputeConfiguration": {
       "required": [
         "computeType"
@@ -6177,33 +6766,6 @@
       "discriminator": "jobType",
       "additionalProperties": false
     },
-    "CodeConfiguration": {
-      "required": [
-        "command"
-      ],
-      "type": "object",
-      "properties": {
-        "codeArtifactId": {
-          "description": "The ID of the code asset.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "command": {
-          "description": "The command to execute on startup of the job. eg. [\"python\", \"train.py\"]",
-          "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
     "DataBinding": {
       "description": "Data binding definition.",
       "type": "object",
@@ -7811,84 +8373,6 @@
         }
       },
       "x-ms-discriminator-value": "Managed",
-      "additionalProperties": false
-    },
-    "AssetReferenceBase": {
-      "required": [
-        "referenceType"
-      ],
-      "type": "object",
-      "properties": {
-        "referenceType": {
-          "description": "Specifies the type of asset reference.",
-          "enum": [
-            "Id",
-            "DataPath",
-            "OutputPath"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ReferenceType",
-            "modelAsString": true
-          }
-        }
-      },
-      "discriminator": "referenceType",
-      "additionalProperties": false
-    },
-    "IdAssetReference": {
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AssetReferenceBase"
-        }
-      ],
-      "properties": {
-        "id": {
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "Id",
-      "additionalProperties": false
-    },
-    "DataPathAssetReference": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AssetReferenceBase"
-        }
-      ],
-      "properties": {
-        "path": {
-          "type": "string"
-        },
-        "datastoreId": {
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "DataPath",
-      "additionalProperties": false
-    },
-    "OutputPathAssetReference": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AssetReferenceBase"
-        }
-      ],
-      "properties": {
-        "path": {
-          "type": "string"
-        },
-        "jobId": {
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "OutputPath",
       "additionalProperties": false
     },
     "OnlineDeployment": {
