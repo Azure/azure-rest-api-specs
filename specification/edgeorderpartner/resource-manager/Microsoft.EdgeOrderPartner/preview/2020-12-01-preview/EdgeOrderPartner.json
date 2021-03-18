@@ -57,7 +57,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrderPartner/locations/{location}/inventories/{SerialNumber}/manageInventoryMetadata": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrderPartner/locations/{location}/inventories/{serialNumber}/manageInventoryMetadata": {
       "post": {
         "tags": [
           "PartnerInventory"
@@ -75,14 +75,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/locationParameter"
           },
-          {
-            "name": "SerialNumber",
-            "in": "path",
-            "required": true,
-            "type": "string"
+		  {
+            "$ref": "#/parameters/serialNumberParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -122,7 +118,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrderPartner/locations/{location}/inventories/{SerialNumber}/manageLink": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrderPartner/locations/{location}/inventories/{serialNumber}/manageLink": {
       "post": {
         "tags": [
           "PartnerInventory"
@@ -140,14 +136,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "required": true,
             "$ref": "#/parameters/locationParameter"
           },
           {
-            "name": "SerialNumber",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/serialNumberParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1318,38 +1310,17 @@
         }
       }
     },
-    "Sku": {
-      "description": "The Sku.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The sku name.",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "The display name of the sku.",
-          "type": "string"
-        },
-        "family": {
-          "description": "The sku family.",
-          "type": "string"
-        }
-      }
-    },
     "SpecificationDetails": {
       "description": "Specification details for the inventory",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name",
+          "description": "Name of the specification property",
           "type": "string",
           "readOnly": true
         },
         "value": {
-          "description": "Value",
+          "description": "Value of the specification property",
           "type": "string",
           "readOnly": true
         }
@@ -1412,7 +1383,15 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    }
+    },
+	"serialNumberParameter": {
+      "name": "serialNumber",
+      "in": "path",
+      "description": "The serial number of the device",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }	
   },
   "securityDefinitions": {
     "azure_auth": {
