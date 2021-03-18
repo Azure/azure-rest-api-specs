@@ -1846,22 +1846,7 @@
           "type": "array",
           "description": "Documents to be searched for given question.",
           "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "id",
-              "text"
-            ],
-            "properties": {
-              "id": {
-                "type": "string",
-                "description": "Unique identifier for the document."
-              },
-              "text": {
-                "type": "string",
-                "description": "Text contents of the document"
-              }
-            }
+            "$ref": "#/definitions/TextInput"
           }
         },
         "language": {
@@ -1915,6 +1900,25 @@
           "type": "integer",
           "description": "End index of answer in document text.",
           "format": "int32"
+        }
+      }
+    },
+    "TextInput": {
+      "type": "object",
+      "description": "List of documents to be queried over.",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "text"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the document."
+        },
+        "text": {
+          "type": "string",
+          "description": "Text contents of the document"
         }
       }
     }
