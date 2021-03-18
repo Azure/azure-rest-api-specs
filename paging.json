@@ -15,12 +15,13 @@
   "consumes": [
     "application/json"
   ],
-  "paths": {
+  "x-ms-paths": {
     "/paging/noitemname": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
-          "itemName": "values"
+          "itemName": "values",
+          "operationName": "examplePaging"
         },
         "operationId": "examplePaging",
         "description": "Paging whose operation we want to override to have subsequent calls be post.",
