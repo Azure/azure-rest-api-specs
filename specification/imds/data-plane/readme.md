@@ -24,17 +24,26 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the Instance Metadata Service API.
 
-```yaml
+``` yaml
 openapi-type: data-plane
 azure-arm: false
-tag: package-2020-07-15
+tag: package-2020-09
 ```
 
+
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-09'
+input-file:
+  - Microsoft.InstanceMetadataService/stable/2020-09-01/imds.json
+```
 ### Tag: package-2018-10-01
 
 These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-10-01'
+``` yaml $(tag) == 'package-2018-10-01'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
 ```
@@ -43,7 +52,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-02-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-02-01'
+``` yaml $(tag) == 'package-2019-02-01'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2019-02-01/imds.json
 ```
@@ -52,7 +61,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-03-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-03-11'
+``` yaml $(tag) == 'package-2019-03-11'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2019-03-11/imds.json
 ```
@@ -61,7 +70,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-04-30` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04-30'
+``` yaml $(tag) == 'package-2019-04-30'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2019-04-30/imds.json
 ```
@@ -70,7 +79,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-06-01'
+``` yaml $(tag) == 'package-2019-06-01'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2019-06-01/imds.json
 ```
@@ -79,7 +88,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-06-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-06-04'
+``` yaml $(tag) == 'package-2019-06-04'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2019-06-04/imds.json
 ```
@@ -88,7 +97,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-08-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-08-01'
+``` yaml $(tag) == 'package-2019-08-01'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
 ```
@@ -97,7 +106,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-08-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-08-15'
+``` yaml $(tag) == 'package-2019-08-15'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
 ```
@@ -106,7 +115,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-11-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-11-01'
+``` yaml $(tag) == 'package-2019-11-01'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2019-11-01/imds.json
 ```
@@ -115,7 +124,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06-01'
+``` yaml $(tag) == 'package-2020-06-01'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2020-06-01/imds.json
 ```
@@ -124,7 +133,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-07-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-07-15'
+``` yaml $(tag) == 'package-2020-07-15'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2020-07-15/imds.json
 ```
@@ -322,7 +331,7 @@ input-file:
 
 ## Java
 
-These settings apply only when --java is specified on the command line. Please also specify --azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>.
+These settings apply only when --java is specified on the command line. Please also specify --azure-libraries-for-java-folder=`.
 
 ``` yaml $(java)
 java:
