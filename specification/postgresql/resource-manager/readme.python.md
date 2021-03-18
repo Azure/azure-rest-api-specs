@@ -24,11 +24,6 @@ batch:
   - multiapiscript: true
 ```
 
-``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/
-clear-output-folder: false
-perform-load: false
-```
 
 ### Tag: package-2020-01-01 and python
 
