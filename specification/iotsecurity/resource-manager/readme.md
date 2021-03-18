@@ -40,6 +40,10 @@ directive:
     from: onPremiseSensors.json
     where: $.definitions.OnPremiseSensor
     reason: The resource is managed in a subscription level (instead of inside a resource group)
+  - suppress: PageableOperation
+    from: devices.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups/{deviceGroupName}/devices"].get'
+    reason: The list returns limited number of items
 ```
 
 ### Basic Information
@@ -64,6 +68,7 @@ input-file:
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/sites.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/sensors.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/onPremiseSensors.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/devices.json
 ```
 
 ---
