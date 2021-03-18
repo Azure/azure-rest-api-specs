@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SubscriptionClient",
-    "version": "2020-01-01",
+    "version": "2020-10-01",
     "description": "All resource groups and resources exist within subscriptions. These operation enable you get information about your subscriptions and tenants. A tenant is a dedicated instance of Azure Active Directory (Azure AD) for your organization."
   },
   "host": "management.azure.com",
@@ -52,6 +52,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -73,6 +79,14 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "includeExtendedLocations",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Whether to include extended locations.",
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -81,14 +95,23 @@
             "schema": {
               "$ref": "#/definitions/LocationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "Get locations with a subscription id": {
+          "GetLocationsWithASubscriptionId": {
             "$ref": "./examples/GetLocations.json"
+          },
+          "GetLocationsWithExtendedLocations": {
+            "$ref": "./examples/GetLocationsWithExtendedLocations.json"
           }
         }
       }
@@ -114,10 +137,16 @@
             "schema": {
               "$ref": "#/definitions/Subscription"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
-          "Get a single subscription.": {
+          "GetASingleSubscription": {
             "$ref": "./examples/GetSubscription.json"
           }
         }
@@ -141,10 +170,16 @@
             "schema": {
               "$ref": "#/definitions/SubscriptionListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
-          "Get all subscriptions.": {
+          "GetAllSubscriptions": {
             "$ref": "./examples/GetSubscriptions.json"
           }
         },
@@ -171,10 +206,16 @@
             "schema": {
               "$ref": "#/definitions/TenantListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
-          "Get all tenants.": {
+          "GetAllTenants": {
             "$ref": "./examples/GetTenants.json"
           }
         },
@@ -210,14 +251,14 @@
             }
           },
           "default": {
-            "description": "Error response saying resource name is invalid",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
-          "Check validity for a resource name.": {
+          "CheckValidityForAResourceName": {
             "$ref": "./examples/CheckResourceName.json"
           }
         }
@@ -267,6 +308,7 @@
           "description": "The category of the region.",
           "enum": [
             "Recommended",
+            "Extended",
             "Other"
           ],
           "x-ms-enum": {
@@ -300,6 +342,11 @@
           "items": {
             "$ref": "#/definitions/PairedRegion"
           }
+        },
+        "homeLocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The home location of an edge zone."
         }
       }
     },
@@ -319,6 +366,19 @@
           "readOnly": true,
           "type": "string",
           "description": "The location name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location type.",
+          "enum": [
+            "Region",
+            "EdgeZone"
+          ],
+          "x-ms-enum": {
+            "name": "LocationType",
+            "modelAsString": false
+          }
         },
         "displayName": {
           "readOnly": true,
@@ -600,27 +660,14 @@
       },
       "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "CloudError": {
+      "x-ms-external": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error description and code explaining why resource name is invalid.",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Description of the error."
-        },
-        "code": {
-          "type": "string",
-          "description": "Code of the error."
-        }
-      }
+      },
+      "description": "An error response for a resource management request."
     },
     "Operation": {
       "description": "Microsoft.Resources operation",

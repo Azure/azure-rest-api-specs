@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2020-10-01",
+    "version": "2021-01-01",
     "description": "Provides operations for working with resources and resource groups."
   },
   "host": "management.azure.com",
@@ -5381,6 +5381,26 @@
       ],
       "description": "Resource information."
     },
+    "ExtendedLocation": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "EdgeZone"
+          ],
+          "x-ms-enum": {
+            "name": "ExtendedLocationType",
+            "modelAsString": true
+          },
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      },
+      "description": "Resource extended location."
+    },
     "GenericResourceExpanded": {
       "properties": {
         "createdTime": {
@@ -5953,6 +5973,10 @@
         "location": {
           "type": "string",
           "description": "Resource location"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Resource extended location."
         },
         "tags": {
           "type": "object",
