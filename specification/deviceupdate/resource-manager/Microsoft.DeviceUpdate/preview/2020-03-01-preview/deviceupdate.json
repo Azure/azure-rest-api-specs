@@ -56,7 +56,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -67,45 +67,6 @@
         "x-ms-examples": {
           "Get list of Accounts": {
             "$ref": "./examples/Accounts/Accounts_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/instances": {
-      "get": {
-        "description": "Returns instances for the given account name.",
-        "operationId": "Instances_ListBySubscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of Instances.",
-            "schema": {
-              "$ref": "#/definitions/InstanceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get list of Instances by Account": {
-            "$ref": "./examples/Instances/Instances_ListByAccount.json"
           }
         }
       }
@@ -135,7 +96,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -178,7 +139,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -228,7 +189,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -272,7 +233,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -318,7 +279,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -361,7 +322,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -406,7 +367,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -459,7 +420,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -506,7 +467,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -555,7 +516,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -585,7 +546,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDefinition"
             }
           }
         },
@@ -746,40 +707,13 @@
         "resourceId"
       ]
     },
-    "ErrorResponse": {
+    "ErrorDefinition": {
       "description": "Error response indicates that the service is not able to process the incoming request.",
       "properties": {
-        "code": {
-          "description": "Error status code.",
-          "type": "string",
-          "readOnly": true
-        },
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
           "description": "Error details.",
           "readOnly": true
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Error status code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          }
         }
       }
     },
