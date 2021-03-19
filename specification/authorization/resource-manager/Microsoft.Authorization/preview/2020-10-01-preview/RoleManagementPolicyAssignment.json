@@ -267,6 +267,12 @@
         "policyId": {
           "type": "string",
           "description": "The policy id role management policy assignment."
+        },
+        "policyAssignmentProperties": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Additional properties of scope, role definition and policy",
+          "$ref": "#/definitions/PolicyAssignmentProperties"
         }
       },
       "description": "Role management policy assignment properties with scope."
@@ -286,6 +292,87 @@
         }
       },
       "description": "Role management policy assignment list operation result."
+    },
+    "PolicyAssignmentProperties": {
+      "properties": {
+        "scope": {
+          "type": "object",
+          "description": "Details of the resource scope",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Scope id of the resource"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the resource"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the resource"
+            }
+          }
+        },
+        "roleDefinition": {
+          "type": "object",
+          "description": "Details of role definition",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the role definition"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the role definition"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the role definition"
+            }
+          }
+        },
+        "policy": {
+          "type": "object",
+          "description": "Details of the policy",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the policy"
+            },
+            "lastModifiedBy": {
+              "$ref": "#/definitions/Principal"
+            },
+            "lastModifiedDateTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The last modified date time."
+            }
+          }
+        }
+      }
+    },
+    "Principal": {
+      "readOnly": true,
+      "type": "object",
+      "description": "The name of the entity last modified it",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the principal made changes"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the principal made changes"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of principal such as user , group etc"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of principal"
+        }
+      }
     },
     "CloudError": {
       "x-ms-external": true,
