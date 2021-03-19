@@ -77,7 +77,7 @@
           {
             "$ref": "#/parameters/locationParameter"
           },
-		  {
+          {
             "$ref": "#/parameters/serialNumberParameter"
           },
           {
@@ -253,155 +253,18 @@
         }
       }
     },
-    "AdditionalOrderDetails": {
+    "AdditionalOrderItemDetails": {
       "description": "Contains additional order details",
       "type": "object",
       "properties": {
         "status": {
-          "$ref": "#/definitions/OrderStatusDetails",
+          "$ref": "#/definitions/StageDetails",
           "description": "Order status",
           "readOnly": true
         },
         "subscription": {
           "$ref": "#/definitions/SubscriptionDetails",
           "description": "Subscription details",
-          "readOnly": true
-        }
-      }
-    },
-    "AvailabilityInformation": {
-      "description": "Availability information of a product system.",
-      "type": "object",
-      "properties": {
-        "availabilityStage": {
-          "description": "Current availability stage of the product. Availability stage",
-          "enum": [
-            "Available",
-            "ComingSoon",
-            "Preview",
-            "Deprecated"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "AvailabilityStage",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "Available",
-                "description": "Product is available."
-              },
-              {
-                "value": "ComingSoon",
-                "description": "Product is coming soon."
-              },
-              {
-                "value": "Preview",
-                "description": "Product is in preview."
-              },
-              {
-                "value": "Deprecated",
-                "description": "Product is deprecated."
-              }
-            ]
-          }
-        },
-        "disabledReason": {
-          "description": "Reason why the product is disabled.",
-          "enum": [
-            "None",
-            "Country",
-            "Region",
-            "Feature",
-            "OfferType",
-            "NoSubscriptionInfo",
-            "NotAvailable",
-            "OutOfStock"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "DisabledReason",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "None",
-                "description": "Not disabled."
-              },
-              {
-                "value": "Country",
-                "description": "Not available in the requested country."
-              },
-              {
-                "value": "Region",
-                "description": "Not available to push data to the requested Azure region."
-              },
-              {
-                "value": "Feature",
-                "description": "Required features are not enabled."
-              },
-              {
-                "value": "OfferType",
-                "description": "Subscription does not have required offer types."
-              },
-              {
-                "value": "NoSubscriptionInfo",
-                "description": "Subscription has not registered to Microsoft.DataBox and Service does not have the subscription notification."
-              },
-              {
-                "value": "NotAvailable",
-                "description": "The product is not yet available."
-              },
-              {
-                "value": "OutOfStock",
-                "description": "The product is out of stock."
-              }
-            ]
-          }
-        },
-        "disabledReasonMessage": {
-          "description": "Message for why the product is disabled.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "BasicInformation": {
-      "description": "Basic information for any product system",
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "description": "Display Name for the product system.",
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "$ref": "#/definitions/Description",
-          "description": "Description related to the product system.",
-          "readOnly": true
-        },
-        "imageInformation": {
-          "description": "Image information for the product system.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImageInformation"
-          },
-          "readOnly": true
-        },
-        "costInformation": {
-          "$ref": "#/definitions/CostInformation",
-          "description": "Cost information for the product system.",
-          "readOnly": true
-        },
-        "availabilityInformation": {
-          "$ref": "#/definitions/AvailabilityInformation",
-          "description": "Availability information of the product system.",
-          "readOnly": true
-        },
-        "hierarchyInformation": {
-          "$ref": "#/definitions/HierarchyInformation",
-          "description": "Hierarchy information of a product",
           "readOnly": true
         }
       }
@@ -417,17 +280,6 @@
         },
         "status": {
           "description": "Billing status for the inventory",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "BillingModel": {
-      "description": "Model to represent the billing cycle",
-      "type": "object",
-      "properties": {
-        "model": {
-          "description": "String to represent the billing model",
           "type": "string",
           "readOnly": true
         }
@@ -463,26 +315,6 @@
         }
       },
       "x-ms-external": true
-    },
-    "CommonProperties": {
-      "description": "Represents common properties accross product hierarchy",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BasicInformation"
-        }
-      ],
-      "properties": {
-        "filterableProperties": {
-          "description": "list of filters supported for a product",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FilterableProperty"
-          },
-          "readOnly": true
-        }
-      }
     },
     "ConfigurationData": {
       "description": "Contains information about inventory configuration",
@@ -543,213 +375,12 @@
         }
       }
     },
-    "CostInformation": {
-      "description": "Cost information for the product system",
-      "type": "object",
-      "properties": {
-        "primaryMeterType": {
-          "description": "Primary meter i.e. basic billing type for the product system.",
-          "enum": [
-            "ServiceFee",
-            "ShippingFee",
-            "LostOrDamagedFee",
-            "LateDayFee"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "MeterType",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "ServiceFee",
-                "description": "Service usage fee."
-              },
-              {
-                "value": "ShippingFee",
-                "description": "Shipping fee."
-              },
-              {
-                "value": "LostOrDamagedFee",
-                "description": "Fee charged if the device is lost or damaged."
-              },
-              {
-                "value": "LateDayFee",
-                "description": "Fee charged if the device is kept longer that the allotted days."
-              }
-            ]
-          }
-        },
-        "meterDetails": {
-          "description": "Details on the various billing aspects for the product system.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MeterDetails"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "Description": {
-      "description": "Description related properties of a product system.",
-      "type": "object",
-      "properties": {
-        "descriptionType": {
-          "description": "Type of description.",
-          "enum": [
-            "Base"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "DescriptionType",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "Base",
-                "description": "Base description."
-              }
-            ]
-          }
-        },
-        "shortDescription": {
-          "description": "Short description of the product system.",
-          "type": "string",
-          "readOnly": true
-        },
-        "longDescription": {
-          "description": "Long description of the product system.",
-          "type": "string",
-          "readOnly": true
-        },
-        "keywords": {
-          "description": "Keywords for the product system.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "attributes": {
-          "description": "Attributes for the product system.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "links": {
-          "description": "Links for the product system.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Link"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "FilterableProperty": {
-      "description": "Different types of filters supported and its values.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of product filter.",
-          "enum": [
-            "ShipToCountries"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SupportedFilterTypes",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "ShipToCountries",
-                "description": "Ship to country"
-              }
-            ]
-          }
-        },
-        "supportedValues": {
-          "description": "Values to be filtered.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "HierarchyInformation": {
-      "description": "Holds details about product hierarchy information",
-      "type": "object",
-      "properties": {
-        "productFamilyName": {
-          "description": "Represents product family name that uniquely identifies product family",
-          "type": "string"
-        },
-        "productLineName": {
-          "description": "Represents product line name that uniquely identifies product line",
-          "type": "string"
-        },
-        "productName": {
-          "description": "Represents product name that uniquely identifies product",
-          "type": "string"
-        },
-        "configurationName": {
-          "description": "Represents configuration name that uniquely identifies configuration",
-          "type": "string"
-        }
-      }
-    },
-    "ImageInformation": {
-      "description": "Image for the product",
-      "type": "object",
-      "properties": {
-        "imageType": {
-          "description": "Type of the image",
-          "enum": [
-            "MainImage",
-            "BulletImage",
-            "GenericImage"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ImageType",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "MainImage",
-                "description": "Main image."
-              },
-              {
-                "value": "BulletImage",
-                "description": "Bullet image."
-              },
-              {
-                "value": "GenericImage",
-                "description": "Generic image."
-              }
-            ]
-          }
-        },
-        "imageUrl": {
-          "description": "Url of the image",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "InventoryAdditionalDetails": {
-      "description": "Represents additional details abpout the partner inventory",
+      "description": "Represents additional details about the partner inventory",
       "type": "object",
       "properties": {
-        "order": {
-          "$ref": "#/definitions/AdditionalOrderDetails",
+        "orderItem": {
+          "$ref": "#/definitions/AdditionalOrderItemDetails",
           "description": "Represents additional details about the order"
         },
         "inventoryMetadata": {
@@ -812,8 +443,8 @@
           "type": "string",
           "readOnly": true
         },
-        "order": {
-          "$ref": "#/definitions/OrderData",
+        "orderItem": {
+          "$ref": "#/definitions/OrderItemData",
           "description": "Represents basic order data.",
           "readOnly": true
         },
@@ -840,60 +471,6 @@
         "details": {
           "$ref": "#/definitions/InventoryAdditionalDetails",
           "description": "Represents additional details of inventory",
-          "readOnly": true
-        }
-      }
-    },
-    "Link": {
-      "description": "Returns link related to the product",
-      "type": "object",
-      "properties": {
-        "linkType": {
-          "description": "Type of link",
-          "enum": [
-            "Generic",
-            "TermsAndConditions",
-            "Specification",
-            "Documentation",
-            "KnowMore",
-            "SignUp"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "LinkType",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "Generic",
-                "description": "Generic link."
-              },
-              {
-                "value": "TermsAndConditions",
-                "description": "Terms and conditions link."
-              },
-              {
-                "value": "Specification",
-                "description": "Link to product specification."
-              },
-              {
-                "value": "Documentation",
-                "description": "Link to product documentation"
-              },
-              {
-                "value": "KnowMore",
-                "description": "Link to know more"
-              },
-              {
-                "value": "SignUp",
-                "description": "Link to sign up for products"
-              }
-            ]
-          }
-        },
-        "linkUrl": {
-          "description": "Url of the link",
-          "type": "string",
           "readOnly": true
         }
       }
@@ -987,56 +564,7 @@
         }
       }
     },
-    "MeterDetails": {
-      "description": "Billing details for each meter.",
-      "type": "object",
-      "properties": {
-        "meterId": {
-          "description": "MeterId/ Billing Guid against which the product system will be charged",
-          "type": "string",
-          "readOnly": true
-        },
-        "meterType": {
-          "description": "Category of the billing meter.",
-          "enum": [
-            "ServiceFee",
-            "ShippingFee",
-            "LostOrDamagedFee",
-            "LateDayFee"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "MeterType",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "ServiceFee",
-                "description": "Service usage fee."
-              },
-              {
-                "value": "ShippingFee",
-                "description": "Shipping fee."
-              },
-              {
-                "value": "LostOrDamagedFee",
-                "description": "Fee charged if the device is lost or damaged."
-              },
-              {
-                "value": "LateDayFee",
-                "description": "Fee charged if the device is kept longer that the allotted days."
-              }
-            ]
-          }
-        },
-        "billingModel": {
-          "$ref": "#/definitions/BillingModel",
-          "description": "Billing model to represent billing cycle, i.e. Monthly, biweekly, daily, hourly etc.",
-          "readOnly": true
-        }
-      }
-    },
-    "OrderData": {
+    "OrderItemData": {
       "description": "Contains information about the order to which inventory belongs",
       "type": "object",
       "properties": {
@@ -1045,7 +573,7 @@
           "type": "string",
           "readOnly": true
         },
-        "orderType": {
+        "orderItemType": {
           "description": "Order type - purchase or rental",
           "enum": [
             "Purchase",
@@ -1054,28 +582,28 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "OrderType",
+            "name": "OrderItemType",
             "modelAsExtensible": true,
             "values": [
               {
                 "value": "Purchase",
-                "description": "Purchase Order."
+                "description": "Purchase OrderItem."
               },
               {
                 "value": "Rental",
-                "description": "Rental Order."
+                "description": "Rental OrderItem."
               }
             ]
           }
         }
       }
     },
-    "OrderStatusDetails": {
-      "description": "Order status CurrentStatus",
+    "StageDetails": {
+      "description": "Resource stage details.",
       "type": "object",
       "properties": {
         "stageStatus": {
-          "description": "Order status",
+          "description": "Stage status.",
           "enum": [
             "None",
             "InProgress",
@@ -1118,7 +646,7 @@
           }
         },
         "stageName": {
-          "description": "Order stage name",
+          "description": "Stage name",
           "enum": [
             "DeviceOrdered",
             "DevicePrepared",
@@ -1229,7 +757,7 @@
           }
         },
         "displayName": {
-          "description": "Display name of the order stage.",
+          "description": "Display name of the resource stage.",
           "type": "string",
           "readOnly": true
         },
@@ -1269,26 +797,6 @@
         "nextLink": {
           "description": "Link for the next set of order collection resources.",
           "type": "string"
-        }
-      }
-    },
-    "ResourceIdentity": {
-      "description": "Msi identity details of the resource",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Identity type",
-          "type": "string"
-        },
-        "principalId": {
-          "description": "Service Principal Id backing the Msi",
-          "type": "string",
-          "readOnly": true
-        },
-        "tenantId": {
-          "description": "Home Tenant Id",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -1349,17 +857,6 @@
     }
   },
   "parameters": {
-    "addressNameParameter": {
-      "name": "addressName",
-      "in": "path",
-      "description": "The name of the address Resource within the specified resource group. address names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
-      "required": true,
-      "type": "string",
-      "maxLength": 24,
-      "minLength": 3,
-      "pattern": "^[-\\w\\.]+$",
-      "x-ms-parameter-location": "method"
-    },
     "locationParameter": {
       "name": "location",
       "in": "path",
@@ -1368,30 +865,14 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "orderCollectionNameParameter": {
-      "name": "orderCollectionName",
-      "in": "path",
-      "description": "The name of the order collection",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "orderNameParameter": {
-      "name": "orderName",
-      "in": "path",
-      "description": "The name of the order",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-	"serialNumberParameter": {
+    "serialNumberParameter": {
       "name": "serialNumber",
       "in": "path",
       "description": "The serial number of the device",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    }	
+    }
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -1412,3 +893,4 @@
     }
   ]
 }
+																					
