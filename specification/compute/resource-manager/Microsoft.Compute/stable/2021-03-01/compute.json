@@ -9690,30 +9690,6 @@
       },
       "description": "Describes a virtual machines network configuration's DNS settings."
     },
-    "QoSIPRange": {
-      "properties": {
-        "startIP": {
-          "type": "string"
-        },
-        "endIP": {
-          "type": "string"
-        }
-      }
-    },
-    "QoSPortRange": {
-      "properties": {
-        "start": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "end": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 65535
-        }
-      }
-    },
     "VirtualMachineNetworkInterfaceConfigurationProperties": {
       "properties": {
         "primary": {
@@ -9810,7 +9786,7 @@
           },
           "description": "Specifies the list of resource Ids for the network interfaces associated with the virtual machine."
         },
-        "NetworkInterfaceConfigurations": {
+        "networkInterfaceConfigurations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineNetworkInterfaceConfiguration"
@@ -11304,6 +11280,9 @@
         "name": {
           "type": "string",
           "description": "The publicIP address configuration name."
+        },
+        "sku": {
+          "$ref": "#/definitions/PublicIPAddressSku"
         },
         "properties": {
           "x-ms-client-flatten": true,
