@@ -11,6 +11,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Azure.Iot.DeviceUpdate
-  output-folder: $(csharp-sdks-folder)/deviceupdate/Azure.Iot.DeviceUpdate/src/Generated
+  namespace: Azure.IoT.DeviceUpdate
+  output-folder: $(csharp-sdks-folder)/deviceupdate/Azure.IoT.DeviceUpdate/src/Generated
 ```
