@@ -26,7 +26,7 @@ These are the global settings for the changeanalysis.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-04-01-preview
+tag: package-2021-04-01
 ```
 
 ### Tag: package-2020-04-01-preview
