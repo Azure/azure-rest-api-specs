@@ -1061,7 +1061,7 @@
         "operationId": "ConfigurationProfileAssignmentIntents_Get",
         "description": "Get information about a configuration profile assignment intent",
         "x-ms-examples": {
-          "Get a configuration profile assignment": {
+          "Get a configuration profile assignment intent": {
             "$ref": "./examples/getConfigurationProfileAssignmentIntent.json"
           }
         },
@@ -1099,6 +1099,99 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfileAssignmentIntents": {
+      "get": {
+        "tags": [
+          "ConfigurationProfileAssignmentIntents"
+        ],
+        "operationId": "ConfigurationProfileAssignmentIntents_ListByResourceGroup",
+        "description": "Get list of configuration profile assignment intents within a given resource group",
+        "x-ms-examples": {
+          "Get a configuration profile assignment intents by resource group": {
+            "$ref": "./examples/listConfigurationProfileAssignmentIntentsByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The list of configuration profile assignment intents were returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentIntentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/configurationProfileAssignmentIntents": {
+      "get": {
+        "tags": [
+          "ConfigurationProfileAssignmentIntents"
+        ],
+        "operationId": "ConfigurationProfileAssignmentIntents_ListBySubscription",
+        "description": "Get list of configuration profile assignment intents under a given subscription",
+        "x-ms-examples": {
+          "List configuration profile assignment intents by subscription": {
+            "$ref": "./examples/listConfigurationProfileAssignmentIntentsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The list of configuration profile assignment intents were returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentIntentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         },
         "produces": [
           "application/json"
@@ -1481,6 +1574,18 @@
         }
       }
     },
+    "ConfigurationProfileAssignmentIntentList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationProfileAssignmentIntent"
+          },
+          "description": "Result of the list configuration profile assignment intent operation."
+        }
+      },
+      "description": "The response of the list configuration profile assignment intent operation."
+    },    
     "ConfigurationProfileAssignmentIntent": {
       "properties": {
         "properties": {
@@ -1502,7 +1607,7 @@
           "type": "string",
           "description": "A value indicating configuration profile.",
           "x-ms-enum": {
-            "name": "configurationProfile",
+            "name": "intentConfigurationProfile",
             "modelAsString": true
           },
           "enum": [
