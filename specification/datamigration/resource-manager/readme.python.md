@@ -16,7 +16,6 @@ python:
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(track2)
-python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.datamigration
