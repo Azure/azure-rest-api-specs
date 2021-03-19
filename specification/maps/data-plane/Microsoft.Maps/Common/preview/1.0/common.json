@@ -2,9 +2,9 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Common Types",
-    "version": "1.0",
-    "description": "Common types in Azure Maps."
+    "version": "1.0"
   },
+  "consumes": [],
   "produces": [
     "application/json",
     "application/xml"
@@ -446,82 +446,6 @@
         ]
       },
       "x-ms-parameter-location": "method"
-    }
-  },
-  "responses": {
-    "400": {
-      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "401": {
-      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "headers": {
-        "WWW-Authenticate": {
-          "type": "string",
-          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
-        }
-      },
-      "x-ms-error-response": true
-    },
-    "403": {
-      "description": "Permission, capacity, or authentication issues.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "404": {
-      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "409": {
-      "description": "The request could not be completed due to a conflict with the current state of the resource. Likely caused by a parallel update to the same resource.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "500": {
-      "description": "An error occurred while processing the request. Please try again later.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "200Async": {
-      "description": "The operation's status response.",
-      "schema": {
-        "$ref": "#/definitions/LongRunningOperationResult"
-      }
-    },
-    "201Async": {
-      "description": "The resource has been created successfully.",
-      "schema": {
-        "$ref": "#/definitions/LongRunningOperationResult"
-      },
-      "headers": {
-        "Location": {
-          "type": "string",
-          "description": "A URI where details on the newly created resource can be found."
-        }
-      }
-    },
-    "202Async": {
-      "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
-      "headers": {
-        "Location": {
-          "type": "string",
-          "description": "New URL to check for the results of the long running process."
-        }
-      }
     }
   }
 }

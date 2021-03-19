@@ -46,34 +46,73 @@
       "apiKeyQuery": []
     }
   ],
-  "parameters": {
-    "GeographicResourceLocation": {
-      "name": "geography",
-      "description": "This parameter specifies where the Azure Maps Creator resource is located.  Valid values are us and eu.",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "default": "us",
-      "enum": [
-        "us",
-        "eu"
-      ],
-      "x-ms-enum": {
-        "name": "GeographicResourceLocation",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "us",
-            "description": "Used to access an Azure Maps Creator resource in the United States"
-          },
-          {
-            "value": "eu",
-            "description": "Used to access an Azure Maps Creator resource in Europe"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "client"
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/ODataErrorResponse"
+      }
     },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/ODataErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/ODataErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/ODataErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/ODataErrorResponse"
+      }
+    },
+    "200Async": {
+      "description": "The operation's status response.",
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult"
+      }
+    },
+    "201Async": {
+      "description": "The resource has been created successfully.",
+      "schema": {
+        "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult"
+      },
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "A URI where details on the newly created resource can be found."
+        }
+      }
+    },
+    "202Async": {
+      "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
+        }
+      }
+    }
+  },
+  "parameters": {
+
     "ConversionIdQuery": {
       "name": "conversionId",
       "description": "The unique ID used to create the dataset. The `conversionId` must have been obtained from a successful call to the Conversion Service Convert API and must be provided with multiple query parameters with same name (if more than one is provided). May not be provided in conjunction with the `udid` query parameter.",
@@ -190,10 +229,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/ConversionIdQuery"
@@ -213,25 +252,25 @@
         ],
         "responses": {
           "201": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/201Async"
+            "$ref": "#/responses/201Async"
           },
           "202": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/202Async"
+            "$ref": "#/responses/202Async"
           },
           "400": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
+            "$ref": "#/responses/400"
           },
           "401": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
+            "$ref": "#/responses/401"
           },
           "403": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
+            "$ref": "#/responses/403"
           },
           "404": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
+            "$ref": "#/responses/404"
           },
           "500": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
+            "$ref": "#/responses/500"
           }
         }
       }
@@ -248,10 +287,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/DatasetId"
@@ -265,25 +304,25 @@
         ],
         "responses": {
           "200": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/200Async"
+            "$ref": "#/responses/200Async"
           },
           "202": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/202Async"
+            "$ref": "#/responses/202Async"
           },
           "400": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
+            "$ref": "#/responses/400"
           },
           "401": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
+            "$ref": "#/responses/401"
           },
           "403": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
+            "$ref": "#/responses/403"
           },
           "404": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
+            "$ref": "#/responses/404"
           },
           "500": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
+            "$ref": "#/responses/500"
           }
         }
       }
@@ -300,10 +339,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/DatasetId"
@@ -317,19 +356,19 @@
             }
           },
           "400": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
+            "$ref": "#/responses/400"
           },
           "401": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
+            "$ref": "#/responses/401"
           },
           "403": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
+            "$ref": "#/responses/403"
           },
           "404": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
+            "$ref": "#/responses/404"
           },
           "500": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
+            "$ref": "#/responses/500"
           }
         }
       }
@@ -346,10 +385,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
+            "$ref": "#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -360,19 +399,19 @@
             }
           },
           "400": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
+            "$ref": "#/responses/400"
           },
           "401": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
+            "$ref": "#/responses/401"
           },
           "403": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
+            "$ref": "#/responses/403"
           },
           "404": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
+            "$ref": "#/responses/404"
           },
           "500": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
+            "$ref": "#/responses/500"
           }
         }
       }
