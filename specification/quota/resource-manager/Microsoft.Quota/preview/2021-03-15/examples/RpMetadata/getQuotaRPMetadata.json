@@ -89,10 +89,37 @@
                     ]
                   }
                 }
-
               ]
             }
-          }
+          },
+           {
+            "resourceProviderName": "Microsoft.Network",
+            "properties": {
+              "value": [
+                {
+                  // For each resource template
+                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{locationId}/resourceNames/{resourceName}",
+                  "properties": {
+                    // Dimesions
+                    "value": [
+                      {
+                        "name": "subscriptions",
+                        "resourceDimesnsionType": "predefined"
+                      },
+                      {
+                        "name": "locations",
+                        "resourceDimesnsionType": "predefined"
+                      },
+                      {
+                        "name": "resourceNames",
+                        "resourceDimesnsionType": "resourceName"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
         ]
       }
     }
