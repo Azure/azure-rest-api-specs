@@ -4801,6 +4801,15 @@
           },
           {
             "$ref": "#/parameters/BlobTagsHeader"
+          },
+          {
+            "$ref": "#/parameters/ImmutabilityPolicyExpiry"
+          },
+          {
+            "$ref": "#/parameters/ImmutabilityPolicyMode"
+          },
+          {
+            "$ref": "#/parameters/LegalHoldOptional"
           }
         ],
         "responses": {
@@ -12442,6 +12451,15 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Specifies the current lease ID on the resource."
+    },
+    "LegalHoldOptional": {
+      "name": "x-ms-legal-hold",
+      "x-ms-client-name": "legalHold",
+      "in": "header",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "description": "Specified if a legal hold should be set on the blob."
     },
     "LegalHoldRequired": {
       "name": "x-ms-legal-hold",
