@@ -363,6 +363,26 @@
           "type": "string",
           "description": "The prefix range in CIDR notation. Should include the start address and the prefix length."
         },
+        "signedMessage": {
+          "type": "string",
+          "description": "Signed message for WAN validation."
+        },
+        "authorizationMessage": {
+          "type": "string",
+          "description": "Authorization message for WAN validation."
+        },
+        "customIpPrefixParent": {
+          "$ref": "#/definitions/CustomIpPrefix",
+          "description": "The Parent CustomIpPrefix for IPv6 /64 CustomIpPrefix."
+        },
+        "childCustomIpPrefixes": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomIpPrefix"
+          },
+          "description": "The list of all Children for IPv6 /48 CustomIpPrefix."
+        },
         "commissionedState": {
           "type": "string",
           "description": "The commissioned state of the Custom IP Prefix.",
