@@ -26,18 +26,27 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-11
+tag: package-2021-03
 ```
 
 
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.ContainerInstance/stable/2021-03-01/containerInstance.json
+```
 ### Tag: package-2020-11
 
 These settings apply only when `--tag=package-2020-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-11'
+``` yaml $(tag) == 'package-2020-11'
 input-file:
   - Microsoft.ContainerInstance/stable/2020-11-01/containerInstance.json
 ```
+
 ### Tag: package-2019-12
 
 These settings apply only when `--tag=package-2019-12` is specified on the command line.
@@ -141,6 +150,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

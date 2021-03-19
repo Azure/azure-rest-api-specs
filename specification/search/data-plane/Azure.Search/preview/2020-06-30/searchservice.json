@@ -5637,7 +5637,8 @@
         "cosmosdb",
         "azureblob",
         "azuretable",
-        "mysql"
+        "mysql",
+        "adlsgen2"
       ],
       "x-ms-enum": {
         "name": "SearchIndexerDataSourceType",
@@ -5656,17 +5657,22 @@
           {
             "value": "azureblob",
             "name": "AzureBlob",
-            "description": "Indicates a Azure Blob datasource."
+            "description": "Indicates an Azure Blob datasource."
           },
           {
             "value": "azuretable",
             "name": "AzureTable",
-            "description": "Indicates a Azure Table datasource."
+            "description": "Indicates an Azure Table datasource."
           },
           {
             "value": "mysql",
             "name": "MySql",
             "description": "Indicates a MySql datasource."
+          },
+          {
+            "value": "adlsgen2",
+            "name": "AdlsGen2",
+            "description": "Indicates an ADLS Gen2 datasource."
           }
         ]
       },
@@ -7382,6 +7388,11 @@
           "format": "int32",
           "x-nullable": true,
           "description": "A number indicating how many key phrases to return. If absent, all identified key phrases will be returned."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
         }
       },
       "externalDocs": {
@@ -7454,6 +7465,18 @@
           "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
+      "properties": {
+        "defaultCountryHint": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A country code to use as a hint to the language detection model if it cannot disambiguate the language."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        }
+      },
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-language-detection"
       },
@@ -7656,6 +7679,38 @@
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-text-translation"
       },
       "description": "A skill to translate text from one language to another."
+    },
+    "DocumentExtractionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentExtractionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "parsingMode": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The parsingMode for the skill. Will be set to 'default' if not defined."
+        },
+        "dataToExtract": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The type of data to be extracted for the skill. Will be set to 'contentAndMetadata' if not defined."
+        },
+        "configuration": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "x-nullable": true,
+          "description": "A dictionary of configurations for the skill."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-document-extraction"
+      },
+      "description": "A skill that extracts content from a file within the enrichment pipeline."
     },
     "WebApiSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
