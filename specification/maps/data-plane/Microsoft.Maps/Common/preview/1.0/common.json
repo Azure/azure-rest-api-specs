@@ -144,14 +144,12 @@
         "lat": {
           "description": "Latitude property",
           "type": "number",
-          "format": "double",
-          "readOnly": true
+          "format": "double"
         },
         "lon": {
           "description": "Longitude property",
           "type": "number",
-          "format": "double",
-          "readOnly": true
+          "format": "double"
         }
       }
     },
@@ -312,6 +310,36 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/definitions/GeoJSONLinearRing"
+                }
+              }
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "MultiLineString": {
+      "description": "A valid `GeoJSON MultiLineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.5) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the geometry. Value should always be equal to \"MultiLineString\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "description": "Coordinates for the `MultiLineString` geometry.",
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/GeoJSONPosition"
                 }
               }
             }
