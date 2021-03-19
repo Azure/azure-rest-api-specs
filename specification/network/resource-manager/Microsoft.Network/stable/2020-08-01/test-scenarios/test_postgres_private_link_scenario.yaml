@@ -1,0 +1,539 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_postgres_private_link_scenario
+    steps:
+      - step: RawStep_3067
+        method: HEAD
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '0'
+          date: Wed, 24 Feb 2021 12:09:23 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+        statusCode: 204
+      - step: RawStep_3068
+        method: POST
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBForPostgreSQL/checkNameAvailability?api-version=2017-12-01
+        requestBody: >-
+          {"name":"azuredbclitest000002","type":"Microsoft.DBforPostgreSQL/servers"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '35'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:09:25 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        responseExpected: '{"nameAvailable":true,"message":""}'
+      - step: RawStep_3069
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBForPostgreSQL/servers/azuredbclitest000002?api-version=2017-12-01
+        requestBody: >-
+          {"sku":{"name":"GP_Gen5_2"},"properties":{"storageProfile":{"storageMB":51200,"storageAutogrow":"Enabled"},"createMode":"Default","administratorLogin":"cloudsa","administratorLoginPassword":"SecretPassword123"},"location":"westus"}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforPostgreSQL/locations/westus/azureAsyncOperation/2eab2786-3986-47e3-a4d9-dd1aa027e32d?api-version=2017-12-01
+          cache-control: no-cache
+          content-length: '73'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:09:30 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforPostgreSQL/locations/westus/operationResults/2eab2786-3986-47e3-a4d9-dd1aa027e32d?api-version=2017-12-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1163'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"UpsertElasticServer","startTime":"2021-02-24T12:09:29.96Z"}
+      - step: RawStep_3070
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateLinkResources?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '520'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:10:34 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"properties":{"groupId":"postgresqlServer","requiredMembers":["postgresqlServer"],"requiredZoneNames":["privatelink.postgres.database.azure.com"]},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateLinkResources/plr","name":"plr","type":"Microsoft.DBforPostgreSQL/servers/privateLinkResources"}]}
+      - step: Create_virtualNetworks_cli-vnet-000003
+        resourceName: virtualNetworks_cli-vnet-000003
+        exampleFile: ../examples/Create_virtualNetworks_cli-vnet-000003_Generated_3072.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_3073
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_cli-subnet-000004
+        resourceName: subnets_cli-subnet-000004
+        exampleFile: >-
+          ../examples/Create_subnets_appgw_private_endpoint_subnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: RawStep_3075
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBForPostgreSQL/servers/azuredbclitest000002?api-version=2017-12-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1128'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:10:51 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"9.6","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.postgres.database.azure.com","earliestRestoreDate":"2021-02-24T12:19:30.443+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","privateEndpointConnections":[],"infrastructureEncryption":"Disabled","publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforPostgreSQL/servers"}
+      - step: RawStep_3076
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateLinkResources?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '520'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:10:51 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"properties":{"groupId":"postgresqlServer","requiredMembers":["postgresqlServer"],"requiredZoneNames":["privatelink.postgres.database.azure.com"]},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateLinkResources/plr","name":"plr","type":"Microsoft.DBforPostgreSQL/servers/privateLinkResources"}]}
+      - step: Create_privateEndpoints_cli-pe-000005
+        resourceName: privateEndpoints_cli-pe-000005
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000005_Generated_3078.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_3079
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBForPostgreSQL/servers/azuredbclitest000002?api-version=2017-12-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1872'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:10 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"9.6","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.postgres.database.azure.com","earliestRestoreDate":"2021-02-24T12:19:30.443+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Ready"}}],"infrastructureEncryption":"Disabled","publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforPostgreSQL/servers"}
+      - step: RawStep_3080
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '885'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:10 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858","name":"cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+      - step: RawStep_3081
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '885'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:12 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858","name":"cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+      - step: RawStep_3082
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858","name":"cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:13 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1158'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_3083
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858","name":"cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:16 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1161'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_3084
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-0a9880c1-a8f1-4843-9143-6d7ef6ce3858?api-version=2018-06-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/locations/westus/privateEndpointConnectionAzureAsyncOperation/b6908f43-eb69-4ef5-ade7-8e496d263fbc?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '97'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:18 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/locations/westus/privateEndpointConnectionOperationResults/b6908f43-eb69-4ef5-ade7-8e496d263fbc?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14991'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"DropElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:11:17.197Z"}
+      - step: Create_privateEndpoints_cli-pe-000006
+        resourceName: privateEndpoints_cli-pe-000006
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000006_Generated_3086.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+        variables:
+          privateEndpointName: cli-pe-000006
+      - step: RawStep_3087
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBForPostgreSQL/servers/azuredbclitest000002?api-version=2017-12-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1858'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:37 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"9.6","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.postgres.database.azure.com","earliestRestoreDate":"2021-02-24T12:19:30.443+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"}}],"infrastructureEncryption":"Disabled","publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforPostgreSQL/servers"}
+      - step: RawStep_3088
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '871'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:39 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265","name":"cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+      - step: RawStep_3089
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '871'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:39 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265","name":"cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+      - step: RawStep_3090
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265","name":"cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/locations/westus/privateEndpointConnectionAzureAsyncOperation/85e29fc8-d927-4623-8047-65b26310b4ff?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '100'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:41 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/locations/westus/privateEndpointConnectionOperationResults/85e29fc8-d927-4623-8047-65b26310b4ff?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1157'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"ApproveElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:11:40.697Z"}
+      - step: RawStep_3091
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265","name":"cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:12:04 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1174'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_3092
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-77da2b5c-b661-4cdc-87ae-5412dcbfd265?api-version=2018-06-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/locations/westus/privateEndpointConnectionAzureAsyncOperation/6024b000-5fcf-4de0-bbbd-4c656527ea8f?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '97'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:12:06 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/locations/westus/privateEndpointConnectionOperationResults/6024b000-5fcf-4de0-bbbd-4c656527ea8f?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14985'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"DropElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:12:05.807Z"}
+      - step: Create_privateEndpoints_cli-pe-000007
+        resourceName: privateEndpoints_cli-pe-000007
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000007_Generated_3094.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+        variables:
+          privateEndpointName: cli-pe-000007
+      - step: RawStep_3095
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBForPostgreSQL/servers/azuredbclitest000002?api-version=2017-12-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1858'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:12:25 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"9.6","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.postgres.database.azure.com","earliestRestoreDate":"2021-02-24T12:19:30.443+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"}}],"infrastructureEncryption":"Disabled","publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforPostgreSQL/servers"}
+      - step: RawStep_3096
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '871'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:12:25 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f","name":"cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+      - step: RawStep_3097
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '871'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:12:26 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f","name":"cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+      - step: RawStep_3098
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f","name":"cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/locations/westus/privateEndpointConnectionAzureAsyncOperation/e99eaebd-b725-47df-b581-70536b8f4b11?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '98'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:12:28 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/locations/westus/privateEndpointConnectionOperationResults/e99eaebd-b725-47df-b581-70536b8f4b11?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1154'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"RejectElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:12:27.83Z"}
+      - step: RawStep_3099
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f","name":"cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f","type":"Microsoft.DBforPostgreSQL/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:12:40 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1168'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_3100
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002?api-version=2017-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1876'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:12:42 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"9.6","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.postgres.database.azure.com","earliestRestoreDate":"2021-02-24T12:19:30.443+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"}}],"infrastructureEncryption":"Disabled","publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforPostgreSQL/servers"}
+      - step: RawStep_3101
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-c764c7db-1253-4ca0-818c-28510762482f?api-version=2018-06-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/locations/westus/privateEndpointConnectionAzureAsyncOperation/5e614042-b686-421e-ba21-ed6497cd446b?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '96'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:12:45 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/locations/westus/privateEndpointConnectionOperationResults/5e614042-b686-421e-ba21-ed6497cd446b?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14990'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"DropElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:12:44.68Z"}
+    variables:
+      virtualNetworkName: cli-vnet-000003
+      subnetName: cli-subnet-000004
+      privateEndpointName: cli-pe-000005

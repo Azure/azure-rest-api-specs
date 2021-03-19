@@ -1,0 +1,561 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_mariadb_private_link_scenario
+    steps:
+      - step: RawStep_625
+        method: HEAD
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '0'
+          date: Wed, 24 Feb 2021 12:01:08 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+        statusCode: 204
+      - step: RawStep_626
+        method: POST
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMariaDB/checkNameAvailability?api-version=2018-06-01
+        requestBody: '{"name":"azuredbclitest000002","type":"Microsoft.DBforMariaDB"}'
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '35'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:01:10 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        responseExpected: '{"nameAvailable":true,"message":""}'
+      - step: RawStep_627
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002?api-version=2018-06-01
+        requestBody: >-
+          {"sku":{"name":"GP_Gen5_2"},"properties":{"storageProfile":{"storageMB":51200,"storageAutogrow":"Enabled"},"createMode":"Default","administratorLogin":"cloudsa","administratorLoginPassword":"SecretPassword123"},"location":"westus"}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMariaDB/locations/westus/azureAsyncOperation/dda3c6ba-1b43-48ef-bc30-aa65062bbd11?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '74'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:01:16 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMariaDB/locations/westus/operationResults/dda3c6ba-1b43-48ef-bc30-aa65062bbd11?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1170'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"UpsertElasticServer","startTime":"2021-02-24T12:01:15.563Z"}
+      - step: RawStep_628
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/databases/defaultdb?api-version=2018-06-01
+        requestBody: '{"properties":{"charset":"utf8"}}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMariaDB/locations/westus/azureAsyncOperation/bac28e84-3e0f-4c6d-8830-4a915de2fa3b?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '82'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:02:46 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMariaDB/locations/westus/operationResults/bac28e84-3e0f-4c6d-8830-4a915de2fa3b?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1168'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"UpsertElasticServerDatabase","startTime":"2021-02-24T12:02:46.217Z"}
+      - step: RawStep_629
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateLinkResources?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '507'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:03:02 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"properties":{"groupId":"mariadbServer","requiredMembers":["mariadbServer"],"requiredZoneNames":["privatelink.mariadb.database.azure.com"]},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateLinkResources/plr","name":"plr","type":"Microsoft.DBforMariaDB/servers/privateLinkResources"}]}
+      - step: Create_virtualNetworks_cli-vnet-000003
+        resourceName: virtualNetworks_cli-vnet-000003
+        exampleFile: ../examples/Create_virtualNetworks_cli-vnet-000003_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_631
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_cli-subnet-000004
+        resourceName: subnets_cli-subnet-000004
+        exampleFile: >-
+          ../examples/Create_subnets_appgw_private_endpoint_subnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: RawStep_633
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1122'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:03:18 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"10.2","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.mariadb.database.azure.com","earliestRestoreDate":"2021-02-24T12:11:15.877+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","infrastructureEncryption":"Disabled","privateEndpointConnections":[],"publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforMariaDB/servers"}
+      - step: RawStep_634
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateLinkResources?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '507'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:03:19 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"properties":{"groupId":"mariadbServer","requiredMembers":["mariadbServer"],"requiredZoneNames":["privatelink.mariadb.database.azure.com"]},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateLinkResources/plr","name":"plr","type":"Microsoft.DBforMariaDB/servers/privateLinkResources"}]}
+      - step: Create_privateEndpoints_cli-pe-000005
+        resourceName: privateEndpoints_cli-pe-000005
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000005_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_636
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1863'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:03:39 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"10.2","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.mariadb.database.azure.com","earliestRestoreDate":"2021-02-24T12:11:15.877+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","infrastructureEncryption":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Ready"}}],"publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforMariaDB/servers"}
+      - step: RawStep_637
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '879'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:03:39 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a","name":"cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+      - step: RawStep_638
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '879'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:03:40 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a","name":"cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+      - step: RawStep_639
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a","name":"cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:03:41 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1175'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_640
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a","name":"cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:03:42 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1172'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_641
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000005-125a6a08-8c52-4c03-9dd9-63a68ff5702a?api-version=2018-06-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/locations/westus/privateEndpointConnectionAzureAsyncOperation/1d1f424f-b849-4688-9491-d73b55c625ef?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '97'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:03:45 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/locations/westus/privateEndpointConnectionOperationResults/1d1f424f-b849-4688-9491-d73b55c625ef?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14994'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"DropElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:03:43.987Z"}
+      - step: Create_privateEndpoints_cli-pe-000006
+        resourceName: privateEndpoints_cli-pe-000006
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000006_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+        variables:
+          privateEndpointName: cli-pe-000006
+      - step: RawStep_643
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1849'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:02 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"10.2","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.mariadb.database.azure.com","earliestRestoreDate":"2021-02-24T12:11:15.877+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","infrastructureEncryption":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"}}],"publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforMariaDB/servers"}
+      - step: RawStep_644
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '865'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:03 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7","name":"cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+      - step: RawStep_645
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '865'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:04 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7","name":"cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+      - step: RawStep_646
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7","name":"cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/locations/westus/privateEndpointConnectionAzureAsyncOperation/affb4b75-66d2-46fa-9001-8e0ab693b66b?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '100'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:06 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/locations/westus/privateEndpointConnectionOperationResults/affb4b75-66d2-46fa-9001-8e0ab693b66b?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1167'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"ApproveElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:04:05.207Z"}
+      - step: RawStep_647
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7","name":"cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:28 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1165'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_648
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000006-3cdd44e1-2af4-4a9a-bde4-2f72ee1103a7?api-version=2018-06-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/locations/westus/privateEndpointConnectionAzureAsyncOperation/69d9b32e-6a20-4867-bd9f-c15e2b49cfa3?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '97'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:30 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/locations/westus/privateEndpointConnectionOperationResults/69d9b32e-6a20-4867-bd9f-c15e2b49cfa3?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14993'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"DropElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:04:29.963Z"}
+      - step: Create_privateEndpoints_cli-pe-000007
+        resourceName: privateEndpoints_cli-pe-000007
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000007_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+        variables:
+          privateEndpointName: cli-pe-000007
+      - step: RawStep_650
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1849'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:49 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"10.2","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.mariadb.database.azure.com","earliestRestoreDate":"2021-02-24T12:11:15.877+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","infrastructureEncryption":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"}}],"publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforMariaDB/servers"}
+      - step: RawStep_651
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '865'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:49 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743","name":"cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+      - step: RawStep_652
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '865'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:51 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Pending","description":"","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743","name":"cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+      - step: RawStep_653
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743","name":"cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/locations/westus/privateEndpointConnectionAzureAsyncOperation/768d3843-d7b2-4de3-9f2b-7b7d9a09e1ad?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '99'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:52 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/locations/westus/privateEndpointConnectionOperationResults/768d3843-d7b2-4de3-9f2b-7b7d9a09e1ad?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1170'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"RejectElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:04:52.263Z"}
+      - step: RawStep_654
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743?api-version=2018-06-01
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!","actionsRequired":"None"},"provisioningState":"Ready"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743","name":"cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743","type":"Microsoft.DBforMariaDB/servers/privateEndpointConnections"}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '124'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:05:05 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1184'
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"PrivateEndpointConnectionStatusNotPending","message":"Private
+          Endpoint Connection Status is not Pending"}}
+      - step: RawStep_655
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002?api-version=2018-06-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1867'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:05:06 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"sku":{"name":"GP_Gen5_2","tier":"GeneralPurpose","family":"Gen5","capacity":2},"properties":{"administratorLogin":"cloudsa","storageProfile":{"storageMB":51200,"backupRetentionDays":7,"geoRedundantBackup":"Disabled","storageAutogrow":"Enabled"},"version":"10.2","sslEnforcement":"Enabled","minimalTlsVersion":"TLSEnforcementDisabled","userVisibleState":"Ready","fullyQualifiedDomainName":"azuredbclitest000002.mariadb.database.azure.com","earliestRestoreDate":"2021-02-24T12:11:15.877+00:00","replicationRole":"None","masterServerId":"","replicaCapacity":5,"byokEnforcement":"Disabled","infrastructureEncryption":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000007"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Ready"}}],"publicNetworkAccess":"Enabled"},"location":"westus","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002","name":"azuredbclitest000002","type":"Microsoft.DBforMariaDB/servers"}
+      - step: RawStep_656
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/servers/azuredbclitest000002/privateEndpointConnections/cli-pe-000007-135cd9ca-f850-46b2-aec2-4157b91f6743?api-version=2018-06-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/locations/westus/privateEndpointConnectionAzureAsyncOperation/2079ddcd-6779-4ad0-b76d-a66625ab4f9d?api-version=2018-06-01
+          cache-control: no-cache
+          content-length: '97'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:05:09 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMariaDB/locations/westus/privateEndpointConnectionOperationResults/2079ddcd-6779-4ad0-b76d-a66625ab4f9d?api-version=2018-06-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14989'
+        statusCode: 202
+        responseExpected: >-
+          {"operation":"DropElasticServerPrivateEndpointConnection","startTime":"2021-02-24T12:05:08.387Z"}
+    variables:
+      virtualNetworkName: cli-vnet-000003
+      subnetName: cli-subnet-000004
+      privateEndpointName: cli-pe-000005

@@ -1,0 +1,63 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_express_route_peer_connection
+    steps:
+      - step: RawStep_1710
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_express_route_peer_connection000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:23:16 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_peer_connection000001","name":"cli_test_express_route_peer_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T15:23:14Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_expressRouteCircuits_er1
+        resourceName: expressRouteCircuits_er1
+        exampleFile: ../examples/Create_expressRouteCircuits_er1_Generated_1712.json
+        operationId: ExpressRouteCircuits_CreateOrUpdate
+      - step: Create_peerings_AzurePrivatePeering
+        resourceName: peerings_AzurePrivatePeering
+        exampleFile: ../examples/Create_peerings_AzurePrivatePeering_Generated_1693.json
+        operationId: ExpressRouteCircuitPeerings_CreateOrUpdate
+      - step: RawStep_1714
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_express_route_peer_connection000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 15:23:57 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_peer_connection000001","name":"cli_test_express_route_peer_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T15:23:14Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_expressRouteCircuits_er2
+        resourceName: expressRouteCircuits_er2
+        exampleFile: ../examples/Create_expressRouteCircuits_er2_Generated_1716.json
+        operationId: ExpressRouteCircuits_CreateOrUpdate
+        variables:
+          circuitName: er2
+      - step: Create_peerings_AzurePrivatePeering_1718
+        resourceName: peerings_AzurePrivatePeering_1718
+        exampleFile: ../examples/Create_peerings_AzurePrivatePeering_1697_Generated.json
+        operationId: ExpressRouteCircuitPeerings_CreateOrUpdate
+        variables:
+          circuitName: er2
+      - step: PeerExpressRouteCircuitConnections_List_1719
+        exampleFile: >-
+          ../examples/PeerExpressRouteCircuitConnections_List_1719_Generated.json
+        operationId: PeerExpressRouteCircuitConnections_List
+    variables:
+      circuitName: er1
+      peeringName: AzurePrivatePeering

@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_cross_region_lb_probes000001",
+    "loadBalancerName": "lb1"
+  },
+  "responses": {
+    "200": {
+      "name": "lb1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_probes000001/providers/Microsoft.Network/loadBalancers/lb1",
+      "etag": "W/\"265c55c8-6e67-4ee1-9152-2d67ba1e38c6\"",
+      "type": "Microsoft.Network/loadBalancers",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "020ab070-d423-48a3-bfa9-cbacc7c13c69",
+        "frontendIPConfigurations": [
+          {
+            "name": "LoadBalancerFrontEnd",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_probes000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "etag": "W/\"265c55c8-6e67-4ee1-9152-2d67ba1e38c6\"",
+            "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_probes000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"
+              },
+              "privateIPAddressVersion": "IPv4"
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "lb1bepool",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_probes000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool",
+            "etag": "W/\"265c55c8-6e67-4ee1-9152-2d67ba1e38c6\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "loadBalancerBackendAddresses": []
+            },
+            "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+          }
+        ],
+        "loadBalancingRules": [],
+        "probes": [],
+        "inboundNatRules": [],
+        "outboundRules": [],
+        "inboundNatPools": []
+      },
+      "sku": {
+        "name": "Standard",
+        "tier": "Global"
+      }
+    }
+  }
+}

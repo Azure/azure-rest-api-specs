@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_vpn_gateway_aad_000001",
+    "virtualNetworkName": "vnet",
+    "parameters": {
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "dhcpOptions": {},
+        "subnets": [
+          {
+            "name": "GatewaySubnet",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "vnet",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway_aad_000001/providers/Microsoft.Network/virtualNetworks/vnet",
+      "etag": "W/\"cdedc8e4-9e18-42b5-9034-8e0ec3268398\"",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "1bd9f842-ac3c-47dc-8b9e-681263866b66",
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "dhcpOptions": {
+          "dnsServers": []
+        },
+        "subnets": [
+          {
+            "name": "GatewaySubnet",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway_aad_000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/GatewaySubnet",
+            "etag": "W/\"cdedc8e4-9e18-42b5-9034-8e0ec3268398\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "addressPrefix": "10.0.0.0/24",
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ],
+        "virtualNetworkPeerings": [],
+        "enableDdosProtection": false
+      }
+    }
+  }
+}

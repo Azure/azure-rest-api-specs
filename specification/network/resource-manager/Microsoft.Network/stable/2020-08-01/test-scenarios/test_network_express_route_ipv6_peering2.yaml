@@ -1,0 +1,31 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_express_route_ipv6_peering2
+    steps:
+      - step: RawStep_1706
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_express_route_ipv6_peering2000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 01:50:22 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_ipv6_peering2000001","name":"cli_test_express_route_ipv6_peering2000001","type":"Microsoft.Resources/resourceGroups","location":"eastus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T01:50:18Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_expressRouteCircuits_test_circuit
+        resourceName: expressRouteCircuits_test_circuit
+        exampleFile: ../examples/Create_expressRouteCircuits_test_circuit_Generated.json
+        operationId: ExpressRouteCircuits_CreateOrUpdate
+      - step: Create_peerings_AzurePrivatePeering
+        resourceName: peerings_AzurePrivatePeering
+        exampleFile: ../examples/Create_peerings_AzurePrivatePeering_Generated_1709.json
+        operationId: ExpressRouteCircuitPeerings_CreateOrUpdate
+    variables:
+      circuitName: test_circuit
+      peeringName: AzurePrivatePeering

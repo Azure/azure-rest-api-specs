@@ -1,0 +1,113 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_express_route
+    steps:
+      - step: ExpressRouteServiceProviders_List_1665
+        exampleFile: ../examples/ExpressRouteServiceProviders_List_1665_Generated.json
+        operationId: ExpressRouteServiceProviders_List
+      - step: RawStep_1666
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_express_route000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:27:21 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route000001","name":"cli_test_express_route000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:27:19Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_expressRouteCircuits_circuit1
+        resourceName: expressRouteCircuits_circuit1
+        exampleFile: ../examples/Create_expressRouteCircuits_circuit1_Generated.json
+        operationId: ExpressRouteCircuits_CreateOrUpdate
+      - step: ExpressRouteCircuits_ListAll_1668
+        exampleFile: ../examples/ExpressRouteCircuits_ListAll_1668_Generated.json
+        operationId: ExpressRouteCircuits_ListAll
+      - step: ExpressRouteCircuits_List_1669
+        exampleFile: ../examples/ExpressRouteCircuits_List_1669_Generated.json
+        operationId: ExpressRouteCircuits_List
+      - step: ExpressRouteCircuits_GetStats_1670
+        exampleFile: ../examples/ExpressRouteCircuits_GetStats_1670_Generated.json
+        operationId: ExpressRouteCircuits_GetStats
+      - step: Update_expressRouteCircuits_circuit1_1672
+        resourceName: expressRouteCircuits_circuit1
+        operationId: ExpressRouteCircuits_CreateOrUpdate
+        resourceUpdate:
+          - add: /tags/test
+            value: Test
+      - step: Update_expressRouteCircuits_circuit1_1674
+        resourceName: expressRouteCircuits_circuit1
+        operationId: ExpressRouteCircuits_CreateOrUpdate
+        resourceUpdate:
+          - replace: /tags/foo
+            value: boo
+          - remove: /tags/test
+      - step: Create_authorizations_auth1
+        resourceName: authorizations_auth1
+        exampleFile: ../examples/Create_authorizations_auth1_Generated.json
+        operationId: ExpressRouteCircuitAuthorizations_CreateOrUpdate
+      - step: ExpressRouteCircuitAuthorizations_List_1676
+        exampleFile: ../examples/ExpressRouteCircuitAuthorizations_List_1676_Generated.json
+        operationId: ExpressRouteCircuitAuthorizations_List
+      - step: ExpressRouteCircuitAuthorizations_Delete_1677
+        exampleFile: >-
+          ../examples/ExpressRouteCircuitAuthorizations_Delete_1677_Generated.json
+        operationId: ExpressRouteCircuitAuthorizations_Delete
+      - step: ExpressRouteCircuitAuthorizations_List_1678
+        exampleFile: ../examples/ExpressRouteCircuitAuthorizations_List_1678_Generated.json
+        operationId: ExpressRouteCircuitAuthorizations_List
+      - step: Create_peerings_AzurePrivatePeering
+        resourceName: peerings_AzurePrivatePeering
+        exampleFile: ../examples/Create_peerings_AzurePrivatePeering_Generated.json
+        operationId: ExpressRouteCircuitPeerings_CreateOrUpdate
+      - step: Create_peerings_MicrosoftPeering
+        resourceName: peerings_MicrosoftPeering
+        exampleFile: ../examples/Create_peerings_MicrosoftPeering_Generated.json
+        operationId: ExpressRouteCircuitPeerings_CreateOrUpdate
+        variables:
+          peeringName: MicrosoftPeering
+      - step: ExpressRouteCircuitPeerings_Delete_1681
+        exampleFile: ../examples/ExpressRouteCircuitPeerings_Delete_1681_Generated.json
+        operationId: ExpressRouteCircuitPeerings_Delete
+        variables:
+          peeringName: MicrosoftPeering
+      - step: ExpressRouteCircuitPeerings_List_1682
+        exampleFile: ../examples/ExpressRouteCircuitPeerings_List_1682_Generated.json
+        operationId: ExpressRouteCircuitPeerings_List
+      - step: ExpressRouteCircuitPeerings_Get_1683
+        exampleFile: ../examples/ExpressRouteCircuitPeerings_Get_1683_Generated.json
+        operationId: ExpressRouteCircuitPeerings_Get
+      - step: Update_peerings_AzurePrivatePeering_1685
+        resourceName: peerings_AzurePrivatePeering
+        operationId: ExpressRouteCircuitPeerings_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/vlanId
+            value: 200
+          - replace: /properties/gatewayManagerEtag
+            value: '12'
+      - step: ExpressRouteCircuits_ListArpTable_1686
+        exampleFile: ../examples/ExpressRouteCircuits_ListArpTable_1686_Generated.json
+        operationId: ExpressRouteCircuits_ListArpTable
+        variables:
+          peeringName: azureprivatepeering
+      - step: ExpressRouteCircuits_ListRoutesTable_1687
+        exampleFile: ../examples/ExpressRouteCircuits_ListRoutesTable_1687_Generated.json
+        operationId: ExpressRouteCircuits_ListRoutesTable
+        variables:
+          peeringName: azureprivatepeering
+      - step: ExpressRouteCircuits_Delete_1688
+        exampleFile: ../examples/ExpressRouteCircuits_Delete_1688_Generated.json
+        operationId: ExpressRouteCircuits_Delete
+      - step: ExpressRouteCircuits_List_1689
+        exampleFile: ../examples/ExpressRouteCircuits_List_1689_Generated.json
+        operationId: ExpressRouteCircuits_List
+    variables:
+      circuitName: circuit1
+      authorizationName: auth1
+      peeringName: AzurePrivatePeering
+      devicePath: primary

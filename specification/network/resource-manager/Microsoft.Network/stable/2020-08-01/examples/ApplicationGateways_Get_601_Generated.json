@@ -1,0 +1,229 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test_manage_appgw_private_endpoint000001",
+    "applicationGatewayName": "appgw"
+  },
+  "responses": {
+    "200": {
+      "name": "appgw",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw",
+      "etag": "W/\"ffd38539-f85a-4ec4-8466-7d036b3a603a\"",
+      "type": "Microsoft.Network/applicationGateways",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "9a867984-e2ce-4f61-8155-6227980f97c0",
+        "sku": {
+          "name": "Standard_v2",
+          "tier": "Standard_v2",
+          "capacity": 2
+        },
+        "operationalState": "Running",
+        "gatewayIPConfigurations": [
+          {
+            "name": "appGatewayFrontendIP",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/gatewayIPConfigurations/appGatewayFrontendIP",
+            "etag": "W/\"ffd38539-f85a-4ec4-8466-7d036b3a603a\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/virtualNetworks/appgwVnet/subnets/default"
+              }
+            },
+            "type": "Microsoft.Network/applicationGateways/gatewayIPConfigurations"
+          }
+        ],
+        "sslCertificates": [],
+        "trustedRootCertificates": [],
+        "trustedClientCertificates": [],
+        "sslProfiles": [],
+        "frontendIPConfigurations": [
+          {
+            "name": "appGatewayFrontendIP",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appGatewayFrontendIP",
+            "etag": "W/\"ffd38539-f85a-4ec4-8466-7d036b3a603a\"",
+            "type": "Microsoft.Network/applicationGateways/frontendIPConfigurations",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/publicIPAddresses/public_ip"
+              },
+              "httpListeners": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appGatewayHttpListener"
+                }
+              ],
+              "privateLinkConfiguration": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/appgw_private_link_for_public"
+              }
+            }
+          }
+        ],
+        "frontendPorts": [
+          {
+            "name": "appGatewayFrontendPort",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appGatewayFrontendPort",
+            "etag": "W/\"ffd38539-f85a-4ec4-8466-7d036b3a603a\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "port": 80,
+              "httpListeners": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appGatewayHttpListener"
+                }
+              ]
+            },
+            "type": "Microsoft.Network/applicationGateways/frontendPorts"
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "appGatewayBackendPool",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appGatewayBackendPool",
+            "etag": "W/\"ffd38539-f85a-4ec4-8466-7d036b3a603a\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "backendAddresses": [],
+              "requestRoutingRules": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/rule1"
+                }
+              ]
+            },
+            "type": "Microsoft.Network/applicationGateways/backendAddressPools"
+          }
+        ],
+        "loadDistributionPolicies": [],
+        "backendHttpSettingsCollection": [
+          {
+            "name": "appGatewayBackendHttpSettings",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appGatewayBackendHttpSettings",
+            "etag": "W/\"ffd38539-f85a-4ec4-8466-7d036b3a603a\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "port": 80,
+              "protocol": "Http",
+              "cookieBasedAffinity": "Disabled",
+              "connectionDraining": {
+                "enabled": false,
+                "drainTimeoutInSec": 1
+              },
+              "pickHostNameFromBackendAddress": false,
+              "requestTimeout": 30,
+              "requestRoutingRules": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/rule1"
+                }
+              ]
+            },
+            "type": "Microsoft.Network/applicationGateways/backendHttpSettingsCollection"
+          }
+        ],
+        "httpListeners": [
+          {
+            "name": "appGatewayHttpListener",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appGatewayHttpListener",
+            "etag": "W/\"ffd38539-f85a-4ec4-8466-7d036b3a603a\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "frontendIPConfiguration": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appGatewayFrontendIP"
+              },
+              "frontendPort": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appGatewayFrontendPort"
+              },
+              "protocol": "Http",
+              "hostNames": [],
+              "requireServerNameIndication": false,
+              "requestRoutingRules": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/rule1"
+                }
+              ]
+            },
+            "type": "Microsoft.Network/applicationGateways/httpListeners"
+          }
+        ],
+        "urlPathMaps": [],
+        "requestRoutingRules": [
+          {
+            "name": "rule1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/requestRoutingRules/rule1",
+            "etag": "W/\"ffd38539-f85a-4ec4-8466-7d036b3a603a\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "ruleType": "Basic",
+              "httpListener": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appGatewayHttpListener"
+              },
+              "backendAddressPool": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appGatewayBackendPool"
+              },
+              "backendHttpSettings": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appGatewayBackendHttpSettings"
+              }
+            },
+            "type": "Microsoft.Network/applicationGateways/requestRoutingRules"
+          }
+        ],
+        "probes": [],
+        "rewriteRuleSets": [],
+        "redirectConfigurations": [],
+        "privateLinkConfigurations": [
+          {
+            "name": "appgw_private_link_for_public",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/appgw_private_link_for_public",
+            "etag": "W/\"ffd38539-f85a-4ec4-8466-7d036b3a603a\"",
+            "type": "Microsoft.Network/applicationGateways/privateLinkConfigurations",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "ipConfigurations": [
+                {
+                  "name": "PrivateLinkDefaultIPConfiguration",
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/privateLinkConfigurations/appgw_private_link_for_public/ipConfigurations/PrivateLinkDefaultIPConfiguration",
+                  "etag": "W/\"ffd38539-f85a-4ec4-8466-7d036b3a603a\"",
+                  "type": "Microsoft.Network/applicationGateways/privateLinkConfigurations/ipConfigurations",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateIPAllocationMethod": "Dynamic",
+                    "subnet": {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/virtualNetworks/appgwVnet/subnets/appgw_private_link_subnet_for_public"
+                    }
+                  }
+                }
+              ],
+              "frontendIpConfigurations": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appGatewayFrontendIP"
+                }
+              ]
+            }
+          }
+        ],
+        "privateEndpointConnections": [
+          {
+            "name": "appgw_private_endpoint_for_public.0688f62f-7c9c-49c5-896d-3fda5609f4ac",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/privateEndpointConnections/appgw_private_endpoint_for_public.0688f62f-7c9c-49c5-896d-3fda5609f4ac",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/privateEndpoints/appgw_private_endpoint_for_public"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "",
+                "actionsRequired": "None"
+              },
+              "linkIdentifier": "620819030"
+            },
+            "type": "Microsoft.Network/applicationGateways/privateEndpointConnections"
+          }
+        ]
+      }
+    }
+  }
+}

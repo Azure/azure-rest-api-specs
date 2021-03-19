@@ -1,0 +1,74 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_subnet_with_private_endpoint_and_private_Link_options
+    steps:
+      - step: RawStep_3325
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_subnet_with_private_endpoint_option000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:33:30 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001","name":"test_subnet_with_private_endpoint_option000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:33:27Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_MyVnet
+        resourceName: virtualNetworks_MyVnet
+        exampleFile: ../examples/Create_virtualNetworks_MyVnet_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Update_virtualNetworks_MyVnet_3328
+        resourceName: virtualNetworks_MyVnet
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/0
+            value:
+              name: MySubnet1
+              properties:
+                addressPrefix: 10.0.1.0/24
+                privateEndpointNetworkPolicies: Disabled
+                provisioningState: Succeeded
+                delegations: []
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet/subnets/MySubnet1
+              type: Microsoft.Network/virtualNetworks/subnets
+      - step: Update_virtualNetworks_MyVnet_3330
+        resourceName: virtualNetworks_MyVnet
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/1
+            value:
+              name: MySubnet2
+              properties:
+                addressPrefix: 10.0.2.0/24
+                privateLinkServiceNetworkPolicies: Disabled
+                provisioningState: Succeeded
+                delegations: []
+                privateEndpointNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet/subnets/MySubnet2
+              type: Microsoft.Network/virtualNetworks/subnets
+      - step: Update_virtualNetworks_MyVnet_3332
+        resourceName: virtualNetworks_MyVnet
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/2
+            value:
+              name: MySubnet3
+              properties:
+                addressPrefix: 10.0.3.0/24
+                privateEndpointNetworkPolicies: Disabled
+                privateLinkServiceNetworkPolicies: Disabled
+                provisioningState: Succeeded
+                delegations: []
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet/subnets/MySubnet3
+              type: Microsoft.Network/virtualNetworks/subnets
+    variables:
+      virtualNetworkName: MyVnet

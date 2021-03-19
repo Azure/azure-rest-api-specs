@@ -1,0 +1,84 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_app_gateway_waf_custom_rule
+    steps:
+      - step: RawStep_1115
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_app_gateway_waf_custom_rule_000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:48:05 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_custom_rule_000001","name":"cli_test_app_gateway_waf_custom_rule_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:48:04Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        resourceName: ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        exampleFile: >-
+          ../examples/Create_ApplicationGatewayWebApplicationFirewallPolicies_waf_1_Generated.json
+        statusCode: 201
+        operationId: WebApplicationFirewallPolicies_CreateOrUpdate
+      - step: Update_ApplicationGatewayWebApplicationFirewallPolicies_agp1_1118
+        resourceName: ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        operationId: WebApplicationFirewallPolicies_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/customRules/0
+            value:
+              name: rule1
+              priority: 50
+              ruleType: MatchRule
+              matchConditions: []
+              action: Log
+              rateLimitThreshold: 0
+              skippedManagedRuleSets: []
+      - step: Update_ApplicationGatewayWebApplicationFirewallPolicies_agp1_1120
+        resourceName: ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        operationId: WebApplicationFirewallPolicies_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/customRules/0/matchConditions/0
+            value:
+              matchVariables:
+                - variableName: RequestHeaders
+                  selector: value
+              operator: Contains
+              matchValues:
+                - foo
+                - boo
+              transforms:
+                - Lowercase
+              negationConditon: false
+      - step: Update_ApplicationGatewayWebApplicationFirewallPolicies_agp1_1122
+        resourceName: ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        operationId: WebApplicationFirewallPolicies_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/customRules/0/priority
+            value: 75
+      - step: Update_ApplicationGatewayWebApplicationFirewallPolicies_agp1_1124
+        resourceName: ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        operationId: WebApplicationFirewallPolicies_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/customRules/0/matchConditions/1
+            value:
+              matchVariables:
+                - variableName: RequestHeaders
+                  selector: value
+              operator: Contains
+              matchValues:
+                - remove
+                - this
+              transforms:
+                - Lowercase
+              negationConditon: false
+      - step: Update_ApplicationGatewayWebApplicationFirewallPolicies_agp1_1126
+        resourceName: ApplicationGatewayWebApplicationFirewallPolicies_agp1
+        operationId: WebApplicationFirewallPolicies_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/customRules/0/matchConditions/1
+    variables:
+      policyName: agp1

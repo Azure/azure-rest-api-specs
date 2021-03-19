@@ -1,0 +1,323 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_private_endpoint_connection_acr
+    steps:
+      - step: RawStep_3102
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:58:10 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"centraluseuap","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:58:08Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_testvnet000003
+        resourceName: virtualNetworks_testvnet000003
+        exampleFile: ../examples/Create_virtualNetworks_testvnet000003_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_3104
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_testsubnet000004
+        resourceName: subnets_testsubnet000004
+        exampleFile: >-
+          ../examples/Create_subnets_appgw_private_endpoint_subnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: RawStep_3106
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:58:31 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"centraluseuap","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:58:08Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_3107
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002?api-version=2020-11-01-preview
+        requestBody: >-
+          {"location":"centraluseuap","sku":{"name":"Premium"},"properties":{"adminUserEnabled":false,"publicNetworkAccess":"Enabled","networkRuleBypassOptions":"AzureServices"}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1372'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:58:42 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1161'
+        responseExpected: >-
+          {"sku":{"name":"Premium","tier":"Premium"},"type":"Microsoft.ContainerRegistry/registries","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002","name":"testreg000002","location":"centraluseuap","tags":{},"systemData":{"createdBy":"azureclitest@azuresdkteam.onmicrosoft.com","createdByType":"User","createdAt":"2021-02-24T11:58:39.8546185+00:00","lastModifiedBy":"azureclitest@azuresdkteam.onmicrosoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T11:58:39.8546185+00:00"},"properties":{"loginServer":"testreg000002.azurecr.io","creationDate":"2021-02-24T11:58:39.8546185Z","provisioningState":"Succeeded","adminUserEnabled":false,"networkRuleSet":{"defaultAction":"Allow","virtualNetworkRules":[],"ipRules":[]},"policies":{"quarantinePolicy":{"status":"disabled"},"trustPolicy":{"type":"Notary","status":"disabled"},"retentionPolicy":{"days":7,"lastUpdatedTime":"2021-02-24T11:58:41.9933749+00:00","status":"disabled"}},"encryption":{"status":"disabled"},"dataEndpointEnabled":false,"dataEndpointHostNames":[],"privateEndpointConnections":[],"publicNetworkAccess":"Enabled","networkRuleBypassOptions":"AzureServices","zoneRedundancy":"Disabled","anonymousPullEnabled":false}}
+      - step: RawStep_3108
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:58:43 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"centraluseuap","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:58:08Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_privateEndpoints_priv_endpoint000005
+        resourceName: privateEndpoints_priv_endpoint000005
+        exampleFile: ../examples/Create_privateEndpoints_priv_endpoint000005_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_3110
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections?api-version=2019-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '797'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:59:05 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456","name":"testreg000002.a10d4bf041f2424ca80c87c884512456","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000005"},"privateLinkServiceConnectionState":{"status":"Pending"},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_3111
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456?api-version=2019-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '785'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:59:08 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456","name":"testreg000002.a10d4bf041f2424ca80c87c884512456","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000005"},"privateLinkServiceConnectionState":{"status":"Pending"},"provisioningState":"Succeeded"}}
+      - step: RawStep_3112
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456?api-version=2019-12-01-preview
+        requestBody: >-
+          {"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456","name":"testreg000002.a10d4bf041f2424ca80c87c884512456","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"somedescription"},"provisioningState":"Succeeded"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456/operationStatuses/privateendpointconnections-128fedfe-b9ad-4814-ad6d-a1aeaca119c0?api-version=2019-12-01-preview
+          cache-control: no-cache
+          content-length: '1068'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:59:09 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1174'
+        statusCode: 201
+        responseExpected: >-
+          {"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456","name":"testreg000002.a10d4bf041f2424ca80c87c884512456","systemData":{"createdBy":"azureclitest@azuresdkteam.onmicrosoft.com","createdByType":"User","createdAt":"2021-02-24T11:59:08.8824034+00:00","lastModifiedBy":"azureclitest@azuresdkteam.onmicrosoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T11:59:08.8824034+00:00"},"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000005"},"privateLinkServiceConnectionState":{"status":"Pending"},"provisioningState":"Updating"}}
+      - step: RawStep_3113
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:59:34 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"centraluseuap","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:58:08Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_privateEndpoints_priv_endpoint000007
+        resourceName: privateEndpoints_priv_endpoint000007
+        exampleFile: ../examples/Create_privateEndpoints_priv_endpoint000007_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+        variables:
+          privateEndpointName: priv_endpoint000007
+      - step: RawStep_3115
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections?api-version=2019-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1616'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:59:53 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456","name":"testreg000002.a10d4bf041f2424ca80c87c884512456","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"somedescription"},"provisioningState":"Succeeded"}},{"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.893e9bc80be746b99014524c0fb409aa","name":"testreg000002.893e9bc80be746b99014524c0fb409aa","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000007"},"privateLinkServiceConnectionState":{"status":"Pending"},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_3116
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.893e9bc80be746b99014524c0fb409aa?api-version=2019-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '785'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:59:55 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.893e9bc80be746b99014524c0fb409aa","name":"testreg000002.893e9bc80be746b99014524c0fb409aa","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000007"},"privateLinkServiceConnectionState":{"status":"Pending"},"provisioningState":"Succeeded"}}
+      - step: RawStep_3117
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.893e9bc80be746b99014524c0fb409aa?api-version=2019-12-01-preview
+        requestBody: >-
+          {"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.893e9bc80be746b99014524c0fb409aa","name":"testreg000002.893e9bc80be746b99014524c0fb409aa","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000007"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"somedescription"},"provisioningState":"Succeeded"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.893e9bc80be746b99014524c0fb409aa/operationStatuses/privateendpointconnections-ca1abc6b-0627-490f-ad15-c90426cca8ae?api-version=2019-12-01-preview
+          cache-control: no-cache
+          content-length: '1068'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:59:57 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1169'
+        statusCode: 201
+        responseExpected: >-
+          {"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.893e9bc80be746b99014524c0fb409aa","name":"testreg000002.893e9bc80be746b99014524c0fb409aa","systemData":{"createdBy":"azureclitest@azuresdkteam.onmicrosoft.com","createdByType":"User","createdAt":"2021-02-24T11:59:56.1706688+00:00","lastModifiedBy":"azureclitest@azuresdkteam.onmicrosoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T11:59:56.1706688+00:00"},"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000007"},"privateLinkServiceConnectionState":{"status":"Pending"},"provisioningState":"Updating"}}
+      - step: RawStep_3118
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections?api-version=2019-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1649'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:00:23 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456","name":"testreg000002.a10d4bf041f2424ca80c87c884512456","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"somedescription"},"provisioningState":"Succeeded"}},{"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.893e9bc80be746b99014524c0fb409aa","name":"testreg000002.893e9bc80be746b99014524c0fb409aa","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000007"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"somedescription"},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_3119
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.893e9bc80be746b99014524c0fb409aa?api-version=2019-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '4'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:00:25 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerRegistry/locations/centraluseuap/operationResults/privateendpointconnections-2ce5f6be-df05-4ee9-8a2b-cf9e4273c1a9?api-version=2019-12-01-preview
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14993'
+        statusCode: 202
+        responseExpected: 'null'
+      - step: RawStep_3120
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections?api-version=2019-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '830'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:00:56 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456","name":"testreg000002.a10d4bf041f2424ca80c87c884512456","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"somedescription"},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_3121
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456?api-version=2019-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '818'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:00:58 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"type":"Microsoft.ContainerRegistry/registries/privateEndpointConnections","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456","name":"testreg000002.a10d4bf041f2424ca80c87c884512456","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"somedescription"},"provisioningState":"Succeeded"}}
+      - step: RawStep_3122
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002/privateEndpointConnections/testreg000002.a10d4bf041f2424ca80c87c884512456?api-version=2019-12-01-preview
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '4'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:01:00 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerRegistry/locations/centraluseuap/operationResults/privateendpointconnections-01ddf2be-b049-44c5-9cb8-385a142fb830?api-version=2019-12-01-preview
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14990'
+        statusCode: 202
+        responseExpected: 'null'
+    variables:
+      virtualNetworkName: testvnet000003
+      subnetName: testsubnet000004
+      privateEndpointName: priv_endpoint000005

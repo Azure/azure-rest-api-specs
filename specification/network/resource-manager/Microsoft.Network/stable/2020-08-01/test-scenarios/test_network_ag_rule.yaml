@@ -1,0 +1,427 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_ag_rule
+    steps:
+      - step: RawStep_977
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_rule000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:17:54 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001","name":"cli_test_ag_rule000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:17:52Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pip1
+        resourceName: publicIPAddresses_pip1
+        exampleFile: ../examples/Create_publicIPAddresses_pip1_Generated.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_979
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_rule000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:18:03 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001","name":"cli_test_ag_rule000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:17:52Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_980
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_ag_rule000001%27%20and%20name%20eq%20%27None%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FvirtualNetworks%27&api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '12'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:18:03 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"value":[]}'
+      - step: RawStep_981
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_ag_rule000001%27%20and%20name%20eq%20%27pip1%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FpublicIPAddresses%27&api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '337'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:18:04 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/publicIPAddresses/pip1","name":"pip1","type":"Microsoft.Network/publicIPAddresses","sku":{"name":"Standard","tier":"Regional"},"location":"westus"}]}
+      - step: RawStep_982
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_rule000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{"appGwID":"[resourceId('Microsoft.Network/applicationGateways',
+          'ag1')]"},"resources":[{"name":"ag1Vnet","type":"Microsoft.Network/virtualNetworks","location":"westus","apiVersion":"2015-06-15","dependsOn":[],"tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"subnets":[{"name":"default","properties":{"addressPrefix":"10.0.0.0/24"}}]}},{"type":"Microsoft.Network/applicationGateways","name":"ag1","location":"westus","tags":{},"apiVersion":"2020-08-01","dependsOn":["Microsoft.Network/virtualNetworks/ag1Vnet"],"properties":{"backendAddressPools":[{"name":"appGatewayBackendPool"}],"backendHttpSettingsCollection":[{"name":"appGatewayBackendHttpSettings","properties":{"Port":80,"Protocol":"Http","CookieBasedAffinity":"disabled","connectionDraining":{"enabled":false,"drainTimeoutInSec":1}}}],"frontendIPConfigurations":[{"name":"appGatewayFrontendIP","properties":{"publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/publicIPAddresses/pip1"}}}],"frontendPorts":[{"name":"appGatewayFrontendPort","properties":{"Port":80}}],"gatewayIPConfigurations":[{"name":"appGatewayFrontendIP","properties":{"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/virtualNetworks/ag1Vnet/subnets/default"}}}],"httpListeners":[{"name":"appGatewayHttpListener","properties":{"FrontendIpConfiguration":{"Id":"[concat(variables('appGwID'),
+          '/frontendIPConfigurations/appGatewayFrontendIP')]"},"FrontendPort":{"Id":"[concat(variables('appGwID'),
+          '/frontendPorts/appGatewayFrontendPort')]"},"Protocol":"http","SslCertificate":null}}],"sku":{"name":"Standard_v2","tier":"Standard_v2","capacity":2},"requestRoutingRules":[{"Name":"rule1","properties":{"RuleType":"Basic","httpListener":{"id":"[concat(variables('appGwID'),
+          '/httpListeners/appGatewayHttpListener')]"},"backendAddressPool":{"id":"[concat(variables('appGwID'),
+          '/backendAddressPools/appGatewayBackendPool')]"},"backendHttpSettings":{"id":"[concat(variables('appGwID'),
+          '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"}}}],"privateLinkConfigurations":[]},"zones":null}],"outputs":{"applicationGateway":{"type":"object","value":"[reference('ag1')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_rule000001/providers/Microsoft.Resources/deployments/ag_deploy_O2LVi1Yx7wMoy5QwEPQsTWEnAGJmczuL/operationStatuses/08585874413995044038?api-version=2020-10-01
+          cache-control: no-cache
+          content-length: '1351'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:18:07 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1184'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Resources/deployments/ag_deploy_O2LVi1Yx7wMoy5QwEPQsTWEnAGJmczuL","name":"ag_deploy_O2LVi1Yx7wMoy5QwEPQsTWEnAGJmczuL","type":"Microsoft.Resources/deployments","properties":{"templateHash":"14681963152806857223","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-02-24T11:18:06.9879551Z","duration":"PT1.0147417S","correlationId":"84d696e6-0472-41c0-949e-248c524dcfcf","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["westus"]},{"resourceType":"applicationGateways","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/virtualNetworks/ag1Vnet","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"ag1Vnet"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1","resourceType":"Microsoft.Network/applicationGateways","resourceName":"ag1"}]}}
+      - step: ApplicationGateways_Get_983
+        exampleFile: ../examples/ApplicationGateways_Get_983_Generated.json
+        operationId: ApplicationGateways_Get
+      - step: Create_applicationGateways_ag1
+        resourceName: applicationGateways_ag1
+        exampleFile: ../examples/Create_applicationGateways_ag1_Generated_985.json
+        operationId: ApplicationGateways_CreateOrUpdate
+      - step: Update_applicationGateways_ag1_987
+        resourceName: applicationGateways_ag1
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/provisioningState
+            value: Updating
+          - replace: /properties/gatewayIPConfigurations/0/properties/provisioningState
+            value: Updating
+          - replace: >-
+              /properties/frontendIPConfigurations/0/properties/provisioningState
+            value: Updating
+          - add: /properties/frontendIPConfigurations/0/properties/httpListeners/1
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/mylistener
+          - replace: /properties/frontendPorts/0/properties/provisioningState
+            value: Updating
+          - add: /properties/frontendPorts/0/properties/httpListeners/1
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/mylistener
+          - replace: /properties/backendAddressPools/0/properties/provisioningState
+            value: Updating
+          - replace: >-
+              /properties/backendHttpSettingsCollection/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/httpListeners/0/properties/provisioningState
+            value: Updating
+          - add: /properties/httpListeners/1
+            value:
+              name: mylistener
+              properties:
+                frontendIPConfiguration:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/frontendIPConfigurations/appGatewayFrontendIP
+                frontendPort:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/frontendPorts/appGatewayFrontendPort
+                protocol: Http
+                hostName: www.test.com
+                provisioningState: Updating
+                hostNames: []
+                requireServerNameIndication: false
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/mylistener
+              type: Microsoft.Network/applicationGateways/httpListeners
+          - replace: /properties/requestRoutingRules/0/properties/provisioningState
+            value: Updating
+      - step: Update_applicationGateways_ag1_989
+        resourceName: applicationGateways_ag1
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/frontendIPConfigurations/0/properties/httpListeners/2
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/mylistener2
+          - add: /properties/frontendPorts/0/properties/httpListeners/2
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/mylistener2
+          - add: /properties/httpListeners/2
+            value:
+              name: mylistener2
+              properties:
+                frontendIPConfiguration:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/frontendIPConfigurations/appGatewayFrontendIP
+                frontendPort:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/frontendPorts/appGatewayFrontendPort
+                protocol: Http
+                hostName: www.test2.com
+                provisioningState: Updating
+                hostNames: []
+                requireServerNameIndication: false
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/mylistener2
+              type: Microsoft.Network/applicationGateways/httpListeners
+      - step: Update_applicationGateways_ag1_991
+        resourceName: applicationGateways_ag1
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/backendAddressPools/0/properties/requestRoutingRules/1
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule
+          - add: >-
+              /properties/backendHttpSettingsCollection/0/properties/requestRoutingRules/1
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule
+          - add: /properties/httpListeners/1/properties/requestRoutingRules
+            value:
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule
+          - add: /properties/requestRoutingRules/1
+            value:
+              name: myrule
+              properties:
+                ruleType: Basic
+                priority: 12
+                backendAddressPool:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/backendAddressPools/appGatewayBackendPool
+                backendHttpSettings:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/backendHttpSettingsCollection/appGatewayBackendHttpSettings
+                httpListener:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/mylistener
+                provisioningState: Updating
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule
+              type: Microsoft.Network/applicationGateways/requestRoutingRules
+      - step: Update_applicationGateways_ag1_993
+        resourceName: applicationGateways_ag1
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/httpListeners/1/properties/requestRoutingRules
+          - add: /properties/httpListeners/2/properties/requestRoutingRules
+            value:
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule
+          - replace: /properties/requestRoutingRules/1/properties/priority
+            value: 32
+          - replace: /properties/requestRoutingRules/1/properties/httpListener/id
+            value: >-
+              /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/mylistener2
+      - step: Update_applicationGateways_ag1_995
+        resourceName: applicationGateways_ag1
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/provisioningState
+            value: Succeeded
+          - replace: /properties/gatewayIPConfigurations/0/properties/provisioningState
+            value: Succeeded
+          - replace: >-
+              /properties/frontendIPConfigurations/0/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/frontendPorts/0/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/backendAddressPools/0/properties/provisioningState
+            value: Succeeded
+          - replace: >-
+              /properties/backendHttpSettingsCollection/0/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/httpListeners/0/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/httpListeners/1/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/httpListeners/2/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/requestRoutingRules/0/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/requestRoutingRules/1/properties/provisioningState
+            value: Succeeded
+          - add: /properties/rewriteRuleSets/0
+            value:
+              name: myruleset
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/rewriteRuleSets/myruleset
+              properties:
+                provisioningState: Succeeded
+                rewriteRules: []
+              type: Microsoft.Network/applicationGateways/rewriteRuleSets
+      - step: Update_applicationGateways_ag1_997
+        resourceName: applicationGateways_ag1
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/provisioningState
+            value: Updating
+          - replace: /properties/gatewayIPConfigurations/0/properties/provisioningState
+            value: Updating
+          - replace: >-
+              /properties/frontendIPConfigurations/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/frontendPorts/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/backendAddressPools/0/properties/provisioningState
+            value: Updating
+          - add: /properties/backendAddressPools/0/properties/requestRoutingRules/2
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule2
+          - replace: >-
+              /properties/backendHttpSettingsCollection/0/properties/provisioningState
+            value: Updating
+          - add: >-
+              /properties/backendHttpSettingsCollection/0/properties/requestRoutingRules/2
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule2
+          - replace: /properties/httpListeners/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/httpListeners/1/properties/provisioningState
+            value: Updating
+          - add: /properties/httpListeners/1/properties/requestRoutingRules
+            value:
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule2
+          - replace: /properties/httpListeners/2/properties/provisioningState
+            value: Updating
+          - replace: /properties/requestRoutingRules/0/properties/provisioningState
+            value: Updating
+          - add: /properties/requestRoutingRules/1
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule2
+              name: myrule2
+              properties:
+                ruleType: Basic
+                priority: 10
+                backendAddressPool:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/backendAddressPools/appGatewayBackendPool
+                backendHttpSettings:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/backendHttpSettingsCollection/appGatewayBackendHttpSettings
+                httpListener:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/mylistener
+                provisioningState: Updating
+                rewriteRuleSet:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/rewriteRuleSets/myruleset
+              type: Microsoft.Network/applicationGateways/requestRoutingRules
+          - replace: /properties/requestRoutingRules/2/properties/provisioningState
+            value: Updating
+          - add: /properties/requestRoutingRules/2/properties/rewriteRuleSet
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/rewriteRuleSets/myruleset
+          - replace: /properties/rewriteRuleSets/0/properties/provisioningState
+            value: Updating
+          - add: /properties/rewriteRuleSets/0/properties/requestRoutingRules
+            value:
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule2
+      - step: Update_applicationGateways_ag1_999
+        resourceName: applicationGateways_ag1
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/provisioningState
+            value: Succeeded
+          - replace: /properties/gatewayIPConfigurations/0/properties/provisioningState
+            value: Succeeded
+          - replace: >-
+              /properties/frontendIPConfigurations/0/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/frontendPorts/0/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/backendAddressPools/0/properties/provisioningState
+            value: Succeeded
+          - remove: /properties/backendAddressPools/0/properties/requestRoutingRules/2
+          - add: /properties/backendAddressPools/0/properties/requestRoutingRules/1
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule2
+          - replace: >-
+              /properties/backendHttpSettingsCollection/0/properties/provisioningState
+            value: Succeeded
+          - remove: >-
+              /properties/backendHttpSettingsCollection/0/properties/requestRoutingRules/2
+          - add: >-
+              /properties/backendHttpSettingsCollection/0/properties/requestRoutingRules/1
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_rule000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/myrule2
+          - replace: /properties/httpListeners/0/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/httpListeners/1/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/httpListeners/2/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/requestRoutingRules/0/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/requestRoutingRules/1/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/requestRoutingRules/1/properties/priority
+            value: 21
+          - replace: /properties/requestRoutingRules/2/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/rewriteRuleSets/0/properties/provisioningState
+            value: Succeeded
+      - step: Update_applicationGateways_ag1_1001
+        resourceName: applicationGateways_ag1
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/provisioningState
+            value: Updating
+          - replace: /properties/gatewayIPConfigurations/0/properties/provisioningState
+            value: Updating
+          - replace: >-
+              /properties/frontendIPConfigurations/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/frontendPorts/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/backendAddressPools/0/properties/provisioningState
+            value: Updating
+          - remove: /properties/backendAddressPools/0/properties/requestRoutingRules/2
+          - replace: >-
+              /properties/backendHttpSettingsCollection/0/properties/provisioningState
+            value: Updating
+          - remove: >-
+              /properties/backendHttpSettingsCollection/0/properties/requestRoutingRules/2
+          - replace: /properties/httpListeners/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/httpListeners/1/properties/provisioningState
+            value: Updating
+          - replace: /properties/httpListeners/2/properties/provisioningState
+            value: Updating
+          - remove: /properties/httpListeners/2/properties/requestRoutingRules
+          - remove: /properties/requestRoutingRules/2
+          - replace: /properties/requestRoutingRules/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/requestRoutingRules/1/properties/provisioningState
+            value: Updating
+          - replace: /properties/rewriteRuleSets/0/properties/provisioningState
+            value: Updating
+    variables:
+      publicIpAddressName: pip1
+      applicationGatewayName: ag1

@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_active_active_cross_premise_connection000001",
+    "virtualNetworkName": "vnet1",
+    "parameters": {
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.11.0.0/16",
+            "10.12.0.0/16"
+          ]
+        },
+        "dhcpOptions": {},
+        "subnets": [
+          {
+            "name": "GatewaySubnet",
+            "properties": {
+              "addressPrefix": "10.12.255.0/27"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "vnet1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworks/vnet1",
+      "etag": "W/\"46e9bcd8-2a03-4d1c-90ca-bb8ce8a58899\"",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "f42c6ecb-5a18-40ae-b859-d6b11b6b88ba",
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.11.0.0/16",
+            "10.12.0.0/16"
+          ]
+        },
+        "dhcpOptions": {
+          "dnsServers": []
+        },
+        "subnets": [
+          {
+            "name": "GatewaySubnet",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet",
+            "etag": "W/\"46e9bcd8-2a03-4d1c-90ca-bb8ce8a58899\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "addressPrefix": "10.12.255.0/27",
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ],
+        "virtualNetworkPeerings": [],
+        "enableDdosProtection": false
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_vnet_peering000001",
+    "virtualNetworkName": "vnet2",
+    "virtualNetworkPeeringName": "peering2",
+    "VirtualNetworkPeeringParameters": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet2",
+      "name": "peering2",
+      "properties": {
+        "allowVirtualNetworkAccess": false,
+        "allowForwardedTraffic": false,
+        "allowGatewayTransit": true,
+        "useRemoteGateways": false,
+        "remoteVirtualNetwork": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "peering2",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet2/virtualNetworkPeerings/peering2",
+      "etag": "W/\"bf7c804b-19e8-4985-95b9-47b0543353eb\"",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "8e3723e5-f920-0973-2f37-5c8524ac26be",
+        "peeringState": "Initiated",
+        "remoteVirtualNetwork": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet1"
+        },
+        "allowVirtualNetworkAccess": false,
+        "allowForwardedTraffic": false,
+        "allowGatewayTransit": true,
+        "useRemoteGateways": false,
+        "doNotVerifyRemoteGateways": false,
+        "remoteAddressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "routeServiceVips": {}
+      },
+      "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings"
+    }
+  }
+}

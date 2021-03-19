@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_vnet_with_subnet_nsg_test000001",
+    "virtualNetworkName": "vnet1"
+  },
+  "responses": {
+    "200": {
+      "value": [
+        {
+          "name": "subnet1",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_vnet_with_subnet_nsg_test000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "etag": "W/\"9d1e59c4-450c-4f0e-be22-846de29adc9c\"",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "addressPrefix": "20.0.0.0/24",
+            "networkSecurityGroup": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_vnet_with_subnet_nsg_test000001/providers/Microsoft.Network/networkSecurityGroups/nsg"
+            },
+            "delegations": [],
+            "privateEndpointNetworkPolicies": "Enabled",
+            "privateLinkServiceNetworkPolicies": "Enabled"
+          },
+          "type": "Microsoft.Network/virtualNetworks/subnets"
+        }
+      ]
+    }
+  }
+}

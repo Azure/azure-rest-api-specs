@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_network_lb_sku000001",
+    "publicIpAddressName": "pubip4",
+    "parameters": {
+      "location": "eastus2",
+      "sku": {
+        "name": "Basic",
+        "tier": "Global"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "error": {
+        "code": "GlobalPublicIPAddressNotSupportedForBasicPublicIpAddress",
+        "message": "Global publicIP addresses are only supported for standard SKU public IP addresses. Public IP address /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_lb_sku000001/providers/Microsoft.Network/publicIPAddresses/pubip4 is not standard SKU.",
+        "details": []
+      }
+    }
+  }
+}

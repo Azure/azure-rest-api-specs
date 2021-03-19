@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_nw_troubleshooting000001",
+    "virtualNetworkName": "vnet1",
+    "parameters": {
+      "location": "westcentralus",
+      "tags": {},
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "dhcpOptions": {},
+        "subnets": [
+          {
+            "name": "GatewaySubnet",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "vnet1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_troubleshooting000001/providers/Microsoft.Network/virtualNetworks/vnet1",
+      "etag": "W/\"ba96d81b-a1be-4c81-879d-75e6f1382e73\"",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "westcentralus",
+      "tags": {},
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "7d94bec0-2e53-4e50-b373-e2b127163daf",
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "dhcpOptions": {
+          "dnsServers": []
+        },
+        "subnets": [
+          {
+            "name": "GatewaySubnet",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_troubleshooting000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet",
+            "etag": "W/\"ba96d81b-a1be-4c81-879d-75e6f1382e73\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "addressPrefix": "10.0.0.0/24",
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ],
+        "virtualNetworkPeerings": [],
+        "enableDdosProtection": false
+      }
+    }
+  }
+}

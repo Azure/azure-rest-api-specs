@@ -1,0 +1,87 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vnet_gateway_ipsec
+    steps:
+      - step: RawStep_2495
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_gateway_ipsec000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:08:43 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_gateway_ipsec000001","name":"cli_test_vnet_gateway_ipsec000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T13:08:41Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2497.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2498
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_gateway_ipsec000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:08:52 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_gateway_ipsec000001","name":"cli_test_vnet_gateway_ipsec000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T13:08:41Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pip1
+        resourceName: publicIPAddresses_pip1
+        exampleFile: ../examples/Create_publicIPAddresses_pip1_Generated_2500.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2501
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_gateway_ipsec000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:09:00 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_gateway_ipsec000001","name":"cli_test_vnet_gateway_ipsec000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T13:08:41Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gw1
+        resourceName: virtualNetworkGateways_gw1
+        exampleFile: ../examples/Create_virtualNetworkGateways_gw1_Generated_2503.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+      - step: Update_virtualNetworkGateways_gw1_2505
+        resourceName: virtualNetworkGateways_gw1
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/vpnClientConfiguration/vpnClientIpsecPolicies/0
+            value:
+              saLifeTimeSeconds: 7200
+              saDataSizeKilobytes: 2048
+              ipsecEncryption: GCMAES256
+              ipsecIntegrity: GCMAES256
+              ikeEncryption: AES256
+              ikeIntegrity: SHA384
+              dhGroup: DHGroup24
+              pfsGroup: PFS24
+      - step: Update_virtualNetworkGateways_gw1_2507
+        resourceName: virtualNetworkGateways_gw1
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/vpnClientConfiguration/vpnClientIpsecPolicies/0
+    variables:
+      virtualNetworkName: vnet1
+      publicIpAddressName: pip1
+      virtualNetworkGatewayName: gw1

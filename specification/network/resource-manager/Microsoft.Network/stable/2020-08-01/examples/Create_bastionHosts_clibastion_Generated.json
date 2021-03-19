@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test_network_bastion_host000001",
+    "bastionHostName": "clibastion",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "bastion_ip_config",
+            "properties": {
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/AzureBastionSubnet"
+              },
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/publicIPAddresses/ip1"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "clibastion",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/bastionHosts/clibastion",
+      "etag": "W/\"745515c3-88f6-4479-9092-b5f74a0c4d14\"",
+      "type": "Microsoft.Network/bastionHosts",
+      "location": "westus",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "dnsName": "bst-46dbec0b-5a01-478d-8547-51cce519497c.bastion.azure.com",
+        "scaleUnits": 2,
+        "ipConfigurations": [
+          {
+            "name": "bastion_ip_config",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/bastionHosts/clibastion/bastionHostIpConfigurations/bastion_ip_config",
+            "etag": "W/\"745515c3-88f6-4479-9092-b5f74a0c4d14\"",
+            "type": "Microsoft.Network/bastionHosts/bastionHostIpConfigurations",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/publicIPAddresses/ip1"
+              },
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/AzureBastionSubnet"
+              }
+            }
+          }
+        ],
+        "bastionShareableLinks": {}
+      }
+    }
+  }
+}

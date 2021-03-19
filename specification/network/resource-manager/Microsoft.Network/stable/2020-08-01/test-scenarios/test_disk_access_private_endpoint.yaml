@@ -1,0 +1,117 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_disk_access_private_endpoint
+    steps:
+      - step: RawStep_63
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name?api-version=2020-05-01
+        requestBody: '{"location":"centraluseuap"}'
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/centraluseuap/DiskOperations/bf218fe3-9fcb-4075-9da0-2df154f542b4?api-version=2020-05-01
+          cache-control: no-cache
+          content-length: '111'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:21:18 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/centraluseuap/DiskOperations/bf218fe3-9fcb-4075-9da0-2df154f542b4?monitor=true&api-version=2020-05-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1170'
+        statusCode: 202
+        responseExpected: >-
+          {"name":"disk_access_name","type":"Microsoft.Compute/diskAccesses","location":"centraluseuap"}
+      - step: RawStep_64
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name/privateLinkResources?api-version=2020-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '594'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:21:50 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"name":"disks","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name/privateLinkResources/disks","type":"Microsoft.Compute/diskAccesses/privateLinkResources","properties":{"groupId":"disks","requiredMembers":["diskAccess_1"],"requiredZoneNames":["privatelink.blob.core.windows.net"]}}]}
+      - step: RawStep_65
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_disk_access_private_endpoint_000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:21:51 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001","name":"test_disk_access_private_endpoint_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:21:09Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_private_endpoint_vnet
+        resourceName: virtualNetworks_private_endpoint_vnet
+        exampleFile: >-
+          ../examples/Create_virtualNetworks_private_endpoint_vnet_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_67
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_private_endpoint_subnet
+        resourceName: subnets_private_endpoint_subnet
+        exampleFile: >-
+          ../examples/Create_subnets_appgw_private_endpoint_subnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: RawStep_69
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_disk_access_private_endpoint_000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:22:07 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001","name":"test_disk_access_private_endpoint_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:21:09Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_privateEndpoints_private_endpoint_name
+        resourceName: privateEndpoints_private_endpoint_name
+        exampleFile: >-
+          ../examples/Create_privateEndpoints_private_endpoint_name_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_71
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name?api-version=2020-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1498'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:22:27 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"disk_access_name","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name","type":"Microsoft.Compute/diskAccesses","location":"centraluseuap","properties":{"privateEndpointConnections":[{"name":"disk_access_name.10362d7b-810d-4167-8168-30c2790d5863","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name/privateEndpointConnections/disk_access_name.10362d7b-810d-4167-8168-30c2790d5863","type":"Microsoft.Compute/diskAccesses/PrivateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/private_endpoint_name"},"privateLinkServiceConnectionState":{"actionsRequired":"None","description":"Auto-Approved","status":"Approved"}}}],"provisioningState":"Succeeded","timeCreated":"2021-02-24T12:21:18.627501+00:00"}}
+    variables:
+      virtualNetworkName: private_endpoint_vnet
+      subnetName: private_endpoint_subnet
+      privateEndpointName: private_endpoint_name

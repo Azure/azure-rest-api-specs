@@ -1,0 +1,151 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_traffic_manager_subnet_routing
+    steps:
+      - step: RawStep_2423
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficmanagerprofiles/tm1?api-version=2018-04-01
+        requestBody: >-
+          {"location":"global","properties":{"profileStatus":"Enabled","trafficRoutingMethod":"Subnet","dnsConfig":{"relativeName":"testtm000002","ttl":30},"monitorConfig":{"protocol":"HTTP","port":80,"path":"/","customHeaders":[{"name":"foo","value":"bar"}],"expectedStatusCodeRanges":[{"min":200,"max":202}]}}}
+        requestHeaders:
+          cache-control: private
+          content-length: '802'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:45:41 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '10799'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficManagerProfiles/tm1","name":"tm1","type":"Microsoft.Network/trafficManagerProfiles","location":"global","properties":{"profileStatus":"Enabled","trafficRoutingMethod":"Subnet","dnsConfig":{"relativeName":"testtm000002","fqdn":"testtm000002.trafficmanager.net","ttl":30},"monitorConfig":{"profileMonitorStatus":"Inactive","protocol":"HTTP","port":80,"path":"/","intervalInSeconds":30,"toleratedNumberOfFailures":3,"timeoutInSeconds":10,"customHeaders":[{"name":"foo","value":"bar"}],"expectedStatusCodeRanges":[{"min":200,"max":202}]},"endpoints":[],"trafficViewEnrollmentStatus":"Disabled"}}
+      - step: RawStep_2424
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_traffic_manager_subnet000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:45:42 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001","name":"cli_test_traffic_manager_subnet000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T14:45:33Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_ip1
+        resourceName: publicIPAddresses_ip1
+        exampleFile: ../examples/Create_publicIPAddresses_ip1_Generated_2426.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2427
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficmanagerprofiles/tm1?api-version=2018-04-01
+        requestHeaders:
+          cache-control: private
+          content-length: '812'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:45:53 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '10799'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficManagerProfiles/tm1","name":"tm1","type":"Microsoft.Network/trafficManagerProfiles","location":"global","tags":{},"properties":{"profileStatus":"Enabled","trafficRoutingMethod":"Subnet","dnsConfig":{"relativeName":"testtm000002","fqdn":"testtm000002.trafficmanager.net","ttl":30},"monitorConfig":{"profileMonitorStatus":"Inactive","protocol":"HTTP","port":80,"path":"/","intervalInSeconds":30,"toleratedNumberOfFailures":3,"timeoutInSeconds":10,"customHeaders":[{"name":"foo","value":"bar"}],"expectedStatusCodeRanges":[{"min":200,"max":202}]},"endpoints":[],"trafficViewEnrollmentStatus":"Disabled"}}
+      - step: RawStep_2428
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficmanagerprofiles/tm1?api-version=2018-04-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficManagerProfiles/tm1","name":"tm1","type":"Microsoft.Network/trafficManagerProfiles","tags":{},"location":"global","properties":{"profileStatus":"Enabled","trafficRoutingMethod":"Subnet","dnsConfig":{"relativeName":"testtm000002","ttl":30},"monitorConfig":{"profileMonitorStatus":"Inactive","protocol":"HTTP","port":80,"path":"/","intervalInSeconds":30,"timeoutInSeconds":10,"toleratedNumberOfFailures":3,"customHeaders":[{"name":"foo","value":"doo"},{"name":"test","value":"best"}],"expectedStatusCodeRanges":[{"min":200,"max":204}]},"endpoints":[],"trafficViewEnrollmentStatus":"Disabled"}}
+        requestHeaders:
+          cache-control: private
+          content-length: '843'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:45:57 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '10799'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficManagerProfiles/tm1","name":"tm1","type":"Microsoft.Network/trafficManagerProfiles","location":"global","tags":{},"properties":{"profileStatus":"Enabled","trafficRoutingMethod":"Subnet","dnsConfig":{"relativeName":"testtm000002","fqdn":"testtm000002.trafficmanager.net","ttl":30},"monitorConfig":{"profileMonitorStatus":"Inactive","protocol":"HTTP","port":80,"path":"/","intervalInSeconds":30,"toleratedNumberOfFailures":3,"timeoutInSeconds":10,"customHeaders":[{"name":"foo","value":"doo"},{"name":"test","value":"best"}],"expectedStatusCodeRanges":[{"min":200,"max":204}]},"endpoints":[],"trafficViewEnrollmentStatus":"Disabled"}}
+      - step: RawStep_2429
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficmanagerprofiles/tm1/azureEndpoints/ep1?api-version=2018-04-01
+        requestBody: >-
+          {"properties":{"targetResourceId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/publicIPAddresses/ip1","subnets":[{"first":"10.0.0.0"}],"customHeaders":[{"name":"test","value":"best"}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '836'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:46:00 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1197'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficManagerProfiles/tm1/azureEndpoints/ep1","name":"ep1","type":"Microsoft.Network/trafficManagerProfiles/azureEndpoints","properties":{"endpointStatus":"Enabled","endpointMonitorStatus":"CheckingEndpoint","targetResourceId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/publicIPAddresses/ip1","target":"testpip000003.westus.cloudapp.azure.com","weight":1,"priority":1,"endpointLocation":"West
+          US","customHeaders":[{"name":"test","value":"best"}],"subnets":[{"first":"10.0.0.0"}],"NestedProfile":null}}
+      - step: RawStep_2430
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficmanagerprofiles/tm1/azureEndpoints/ep1?api-version=2018-04-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficManagerProfiles/tm1/azureEndpoints/ep1","name":"ep1","type":"Microsoft.Network/trafficManagerProfiles/azureEndpoints","properties":{"targetResourceId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/publicIPAddresses/ip1","target":"testpip000003.westus.cloudapp.azure.com","endpointStatus":"Enabled","weight":1,"priority":1,"endpointLocation":"West
+          US","endpointMonitorStatus":"CheckingEndpoint","subnets":[{"first":"10.0.0.0","scope":24}],"customHeaders":[{"name":"test","value":"best"}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '847'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:46:04 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1196'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficManagerProfiles/tm1/azureEndpoints/ep1","name":"ep1","type":"Microsoft.Network/trafficManagerProfiles/azureEndpoints","properties":{"endpointStatus":"Enabled","endpointMonitorStatus":"CheckingEndpoint","targetResourceId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/publicIPAddresses/ip1","target":"testpip000003.westus.cloudapp.azure.com","weight":1,"priority":1,"endpointLocation":"West
+          US","customHeaders":[{"name":"test","value":"best"}],"subnets":[{"first":"10.0.0.0","scope":24}],"NestedProfile":null}}
+      - step: RawStep_2431
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficmanagerprofiles/tm1/azureEndpoints/ep1?api-version=2018-04-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficManagerProfiles/tm1/azureEndpoints/ep1","name":"ep1","type":"Microsoft.Network/trafficManagerProfiles/azureEndpoints","properties":{"targetResourceId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/publicIPAddresses/ip1","target":"testpip000003.westus.cloudapp.azure.com","endpointStatus":"Enabled","weight":1,"priority":1,"endpointLocation":"West
+          US","endpointMonitorStatus":"CheckingEndpoint","subnets":[{"first":"10.0.0.0","last":"11.0.0.0"}],"customHeaders":[{"name":"test","value":"best"}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '854'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:46:06 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1195'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/trafficManagerProfiles/tm1/azureEndpoints/ep1","name":"ep1","type":"Microsoft.Network/trafficManagerProfiles/azureEndpoints","properties":{"endpointStatus":"Enabled","endpointMonitorStatus":"CheckingEndpoint","targetResourceId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager_subnet000001/providers/Microsoft.Network/publicIPAddresses/ip1","target":"testpip000003.westus.cloudapp.azure.com","weight":1,"priority":1,"endpointLocation":"West
+          US","customHeaders":[{"name":"test","value":"best"}],"subnets":[{"first":"10.0.0.0","last":"11.0.0.0"}],"NestedProfile":null}}
+    variables:
+      publicIpAddressName: ip1

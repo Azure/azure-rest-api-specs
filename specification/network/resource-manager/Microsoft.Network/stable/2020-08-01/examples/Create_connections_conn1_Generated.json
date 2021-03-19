@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_vpn_connection_ipsec000001",
+    "virtualNetworkGatewayConnectionName": "conn1",
+    "parameters": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/connections/conn1",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "virtualNetworkGateway1": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"
+        },
+        "localNetworkGateway2": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/localNetworkGateways/lgw1"
+        },
+        "connectionType": "IPsec",
+        "connectionProtocol": "IKEv2",
+        "routingWeight": 10,
+        "dpdTimeoutSeconds": 0,
+        "connectionMode": "Default",
+        "sharedKey": "AzureA1b2C3",
+        "enableBgp": false,
+        "useLocalAzureIpAddress": false,
+        "usePolicyBasedTrafficSelectors": false,
+        "ipsecPolicies": [
+          {
+            "saLifeTimeSeconds": 7200,
+            "saDataSizeKilobytes": 2048,
+            "ipsecEncryption": "GCMAES256",
+            "ipsecIntegrity": "GCMAES256",
+            "ikeEncryption": "AES256",
+            "ikeIntegrity": "SHA384",
+            "dhGroup": "DHGroup24",
+            "pfsGroup": "PFS24"
+          }
+        ],
+        "trafficSelectorPolicies": [],
+        "expressRouteGatewayBypass": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "conn1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/connections/conn1",
+      "etag": "W/\"acb51da5-4311-454a-9e5a-73206a319732\"",
+      "type": "Microsoft.Network/connections",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "04fc7eb5-64bc-4abb-a13a-4f1953055674",
+        "packetCaptureDiagnosticState": "None",
+        "virtualNetworkGateway1": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"
+        },
+        "localNetworkGateway2": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/localNetworkGateways/lgw1"
+        },
+        "connectionType": "IPsec",
+        "connectionProtocol": "IKEv2",
+        "routingWeight": 10,
+        "sharedKey": "AzureA1b2C3",
+        "enableBgp": false,
+        "useLocalAzureIpAddress": false,
+        "usePolicyBasedTrafficSelectors": false,
+        "ipsecPolicies": [
+          {
+            "saLifeTimeSeconds": 7200,
+            "saDataSizeKilobytes": 2048,
+            "ipsecEncryption": "GCMAES256",
+            "ipsecIntegrity": "GCMAES256",
+            "ikeEncryption": "AES256",
+            "ikeIntegrity": "SHA384",
+            "dhGroup": "DHGroup24",
+            "pfsGroup": "PFS24"
+          }
+        ],
+        "trafficSelectorPolicies": [],
+        "connectionStatus": "Unknown",
+        "ingressBytesTransferred": 0,
+        "egressBytesTransferred": 0,
+        "expressRouteGatewayBypass": false,
+        "dpdTimeoutSeconds": 0,
+        "connectionMode": "Default"
+      }
+    }
+  }
+}

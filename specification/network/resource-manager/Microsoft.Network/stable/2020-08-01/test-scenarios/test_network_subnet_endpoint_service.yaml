@@ -1,0 +1,60 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_subnet_endpoint_service
+    steps:
+      - step: AvailableEndpointServices_List_2399
+        exampleFile: ../examples/AvailableEndpointServices_List_2399_Generated.json
+        operationId: AvailableEndpointServices_List
+      - step: RawStep_2400
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_subnet_endpoint_service_test000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:04:19 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_subnet_endpoint_service_test000001","name":"cli_subnet_endpoint_service_test000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T14:04:15Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2402.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Update_virtualNetworks_vnet1_2404
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/0
+            value:
+              name: subnet1
+              properties:
+                addressPrefix: 10.0.1.0/24
+                serviceEndpoints:
+                  - service: Microsoft.Storage
+                    provisioningState: Succeeded
+                    locations:
+                      - westus
+                      - eastus
+                provisioningState: Succeeded
+                delegations: []
+                privateEndpointNetworkPolicies: Enabled
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_subnet_endpoint_service_test000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+              type: Microsoft.Network/virtualNetworks/subnets
+      - step: Subnets_Get_2405
+        exampleFile: ../examples/Subnets_Get_2405_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_subnet1
+        resourceName: subnets_subnet1
+        exampleFile: ../examples/Create_subnets_subnet1_Generated_2407.json
+        operationId: Subnets_CreateOrUpdate
+    variables:
+      location: westus
+      virtualNetworkName: vnet1
+      subnetName: subnet1

@@ -1,0 +1,79 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_public_ip
+    steps:
+      - step: RawStep_2290
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_public_ip000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:52:23 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_public_ip000001","name":"cli_test_public_ip000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:52:21Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pubipdns
+        resourceName: publicIPAddresses_pubipdns
+        exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2292
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_public_ip000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:52:32 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_public_ip000001","name":"cli_test_public_ip000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:52:21Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pubipnodns
+        resourceName: publicIPAddresses_pubipnodns
+        exampleFile: ../examples/Create_publicIPAddresses_pubipnodns_Generated.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+        variables:
+          publicIpAddressName: pubipnodns
+      - step: Update_publicIPAddresses_pubipnodns_2295
+        resourceName: publicIPAddresses_pubipnodns
+        operationId: PublicIPAddresses_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/publicIPAllocationMethod
+            value: Static
+          - replace: /properties/idleTimeoutInMinutes
+            value: 10
+          - add: /properties/dnsSettings
+            value:
+              domainNameLabel: wowza2
+              fqdn: wowza2.westus.cloudapp.azure.com
+          - add: /properties/ipAddress
+            value: 13.88.11.155
+          - add: /tags
+            value:
+              foo: doo
+        variables:
+          publicIpAddressName: pubipnodns
+      - step: PublicIPAddresses_List_2296
+        exampleFile: ../examples/PublicIPAddresses_List_2296_Generated.json
+        operationId: PublicIPAddresses_List
+      - step: PublicIPAddresses_Get_2297
+        exampleFile: ../examples/PublicIPAddresses_Get_2297_Generated.json
+        operationId: PublicIPAddresses_Get
+      - step: PublicIPAddresses_Delete_2298
+        exampleFile: ../examples/PublicIPAddresses_Delete_2298_Generated.json
+        operationId: PublicIPAddresses_Delete
+      - step: PublicIPAddresses_List_2299
+        exampleFile: ../examples/PublicIPAddresses_List_2299_Generated.json
+        operationId: PublicIPAddresses_List
+    variables:
+      publicIpAddressName: pubipdns

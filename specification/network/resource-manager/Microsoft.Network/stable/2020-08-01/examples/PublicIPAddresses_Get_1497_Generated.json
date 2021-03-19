@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_cr_load_balancer000001",
+    "publicIpAddressName": "PublicIPcross-region-lb2"
+  },
+  "responses": {
+    "200": {
+      "name": "PublicIPcross-region-lb2",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cr_load_balancer000001/providers/Microsoft.Network/publicIPAddresses/PublicIPcross-region-lb2",
+      "etag": "W/\"37f3e546-071b-4bb6-99c9-cc5d810953f5\"",
+      "location": "westus",
+      "tags": {
+        "foo": "doo"
+      },
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "92c6d8f0-7c41-4877-ac63-1212d9a44d18",
+        "ipAddress": "52.250.216.30",
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static",
+        "idleTimeoutInMinutes": 4,
+        "ipTags": [],
+        "ipConfiguration": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cr_load_balancer000001/providers/Microsoft.Network/loadBalancers/cross-region-lb2/frontendIPConfigurations/LoadBalancerFrontEnd"
+        }
+      },
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Standard",
+        "tier": "Global"
+      }
+    }
+  }
+}

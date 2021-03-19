@@ -1,0 +1,296 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_private_link_resource_batch_account
+    steps:
+      - step: RawStep_3279
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch?api-version=2020-05-01
+        requestBody: >-
+          {"location":"westcentralus","properties":{"publicNetworkAccess":"Disabled"}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '0'
+          date: Wed, 24 Feb 2021 12:12:58 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/operationResults/9a145902-210a-4bd0-b8b1-f715f4b85451?api-version=2020-05-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1166'
+        statusCode: 202
+      - step: RawStep_3280
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:13:16 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:12:49Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_testvnet000002
+        resourceName: virtualNetworks_testvnet000002
+        exampleFile: ../examples/Create_virtualNetworks_testvnet000002_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_3282
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_testsubnet000003
+        resourceName: subnets_testsubnet000003
+        exampleFile: >-
+          ../examples/Create_subnets_appgw_private_endpoint_subnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: RawStep_3284
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '435'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:13:31 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:12:49Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_privateEndpoints_priv_endpoint000004
+        resourceName: privateEndpoints_priv_endpoint000004
+        exampleFile: ../examples/Create_privateEndpoints_priv_endpoint000004_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_3286
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections?api-version=2020-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '916'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:13:51 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","name":"priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","type":"Microsoft.Batch/batchAccounts/privateEndpointConnections","etag":"W/\"0x8D8D8BD9FE74AD0\"","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000004"},"privateLinkServiceConnectionState":{"status":"Pending","description":"Manual
+          approval still required","actionsRequired":"Manual approval
+          request"}}}]}
+      - step: RawStep_3287
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch?api-version=2020-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '3667'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:13:52 GMT
+          etag: '"0x8D8D8BD8AD263AE"'
+          expires: '-1'
+          last-modified: Wed, 24 Feb 2021 12:13:06 GMT
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch","name":"testplinksbatch","type":"Microsoft.Batch/batchAccounts","location":"westcentralus","properties":{"accountEndpoint":"testplinksbatch.westcentralus.batch.azure.com","provisioningState":"Succeeded","dedicatedCoreQuota":700,"dedicatedCoreQuotaPerVMFamily":[{"name":"standardAv2Family","coreQuota":100},{"name":"standardDv2Family","coreQuota":100},{"name":"standardDv3Family","coreQuota":100},{"name":"standardEv3Family","coreQuota":50},{"name":"standardDSv2Family","coreQuota":100},{"name":"standardDSv3Family","coreQuota":100},{"name":"standardESv3Family","coreQuota":50},{"name":"standardFFamily","coreQuota":50},{"name":"standardFSFamily","coreQuota":50},{"name":"standardA0_A7Family","coreQuota":0},{"name":"standardA8_A11Family","coreQuota":0},{"name":"standardDFamily","coreQuota":0},{"name":"standardGFamily","coreQuota":0},{"name":"basicAFamily","coreQuota":0},{"name":"standardNVFamily","coreQuota":0},{"name":"standardNVPromoFamily","coreQuota":0},{"name":"standardNCFamily","coreQuota":0},{"name":"standardNCPromoFamily","coreQuota":0},{"name":"standardHFamily","coreQuota":0},{"name":"standardHPromoFamily","coreQuota":0},{"name":"standardMSFamily","coreQuota":0},{"name":"standardDSFamily","coreQuota":0},{"name":"standardGSFamily","coreQuota":0},{"name":"standardLSFamily","coreQuota":0},{"name":"standardLSv2Family","coreQuota":0},{"name":"standardNCSv2Family","coreQuota":0},{"name":"standardNDSFamily","coreQuota":0},{"name":"standardNCSv3Family","coreQuota":0},{"name":"standardFSv2Family","coreQuota":0},{"name":"standardHBSFamily","coreQuota":0},{"name":"standardHCSFamily","coreQuota":0},{"name":"standardNVSv3Family","coreQuota":0},{"name":"standardHBrsv2Family","coreQuota":0},{"name":"standardDAv4Family","coreQuota":0},{"name":"standardDASv4Family","coreQuota":0},{"name":"standardEAv4Family","coreQuota":0},{"name":"standardEASv4Family","coreQuota":0},{"name":"standardDDv4Family","coreQuota":0},{"name":"standardDDSv4Family","coreQuota":0},{"name":"standardEDv4Family","coreQuota":0},{"name":"standardEDSv4Family","coreQuota":0},{"name":"standardMSv2Family","coreQuota":0},{"name":"standardEIv3Family","coreQuota":0},{"name":"standardNVSv4Family","coreQuota":0},{"name":"Standard
+          NCASv3_T4
+          Family","coreQuota":0},{"name":"standardXEIDSv4Family","coreQuota":0}],"dedicatedCoreQuotaPerVMFamilyEnforced":true,"lowPriorityCoreQuota":500,"poolQuota":100,"activeJobAndJobScheduleQuota":300,"poolAllocationMode":"BatchService","publicNetworkAccess":"Disabled","privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","name":"priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","type":"Microsoft.Batch/batchAccounts/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000004"},"provisioningState":"Succeeded","privateLinkServiceConnectionState":{"status":"Pending","description":"Manual
+          approval still required","actionsRequired":"Manual approval
+          request"}}}],"encryption":{"keySource":"Microsoft.Batch"}},"identity":{"type":"None"}}
+      - step: RawStep_3288
+        method: PATCH
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2?api-version=2020-05-01
+        requestBody: >-
+          {"properties":{"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are approved!"}}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnectionResults/Updating$priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2$1eb9d537-f9a6-4320-9e69-6fb635afd83e?api-version=2020-05-01
+          cache-control: no-cache
+          content-length: '891'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:13:54 GMT
+          etag: W/"0x8D8D8BD9FE74AD0"
+          expires: '-1'
+          last-modified: Wed, 24 Feb 2021 12:13:41 GMT
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnectionResults/Updating$priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2$1eb9d537-f9a6-4320-9e69-6fb635afd83e?api-version=2020-05-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1168'
+        statusCode: 202
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","name":"priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","type":"Microsoft.Batch/batchAccounts/privateEndpointConnections","etag":"W/\"0x8D8D8BD9FE74AD0\"","properties":{"provisioningState":"Updating","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000004"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are approved!","actionsRequired":"Manual approval request"}}}
+      - step: RawStep_3289
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnectionResults/Updating$priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2$1eb9d537-f9a6-4320-9e69-6fb635afd83e?api-version=2020-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '37'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:14:10 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Succeeded","retryAfter":0}'
+      - step: RawStep_3290
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2?api-version=2020-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '892'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:14:10 GMT
+          etag: W/"0x8D8D8BD9FE74AD0"
+          expires: '-1'
+          last-modified: Wed, 24 Feb 2021 12:13:41 GMT
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","name":"priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","type":"Microsoft.Batch/batchAccounts/privateEndpointConnections","etag":"W/\"0x8D8D8BD9FE74AD0\"","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000004"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are approved!","actionsRequired":"Manual approval request"}}}
+      - step: RawStep_3291
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2?api-version=2020-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '892'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:14:11 GMT
+          etag: W/"0x8D8D8BD9FE74AD0"
+          expires: '-1'
+          last-modified: Wed, 24 Feb 2021 12:13:41 GMT
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","name":"priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","type":"Microsoft.Batch/batchAccounts/privateEndpointConnections","etag":"W/\"0x8D8D8BD9FE74AD0\"","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000004"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are approved!","actionsRequired":"Manual approval request"}}}
+      - step: RawStep_3292
+        method: PATCH
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2?api-version=2020-05-01
+        requestBody: >-
+          {"properties":{"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are rejected!"}}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnectionResults/Updating$priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2$4f4c4a5d-05d7-410b-8447-a29b2aeb8e7e?api-version=2020-05-01
+          cache-control: no-cache
+          content-length: '891'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:14:13 GMT
+          etag: W/"0x8D8D8BD9FE74AD0"
+          expires: '-1'
+          last-modified: Wed, 24 Feb 2021 12:13:41 GMT
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnectionResults/Updating$priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2$4f4c4a5d-05d7-410b-8447-a29b2aeb8e7e?api-version=2020-05-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1164'
+        statusCode: 202
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","name":"priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","type":"Microsoft.Batch/batchAccounts/privateEndpointConnections","etag":"W/\"0x8D8D8BD9FE74AD0\"","properties":{"provisioningState":"Updating","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000004"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are rejected!","actionsRequired":"Manual approval request"}}}
+      - step: RawStep_3293
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnectionResults/Updating$priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2$4f4c4a5d-05d7-410b-8447-a29b2aeb8e7e?api-version=2020-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '37'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:14:29 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Succeeded","retryAfter":0}'
+      - step: RawStep_3294
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2?api-version=2020-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '892'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:14:30 GMT
+          etag: W/"0x8D8D8BD9FE74AD0"
+          expires: '-1'
+          last-modified: Wed, 24 Feb 2021 12:13:41 GMT
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","name":"priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","type":"Microsoft.Batch/batchAccounts/privateEndpointConnections","etag":"W/\"0x8D8D8BD9FE74AD0\"","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000004"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are rejected!","actionsRequired":"Manual approval request"}}}
+      - step: RawStep_3295
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2?api-version=2020-05-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '892'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:14:32 GMT
+          etag: W/"0x8D8D8BD9FE74AD0"
+          expires: '-1'
+          last-modified: Wed, 24 Feb 2021 12:13:41 GMT
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch/privateEndpointConnections/priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","name":"priv_endpoint000004.ba8a42d5-ad31-4293-8aa1-bfb623f4d6f2","type":"Microsoft.Batch/batchAccounts/privateEndpointConnections","etag":"W/\"0x8D8D8BD9FE74AD0\"","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000004"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are rejected!","actionsRequired":"Manual approval request"}}}
+      - step: PrivateEndpoints_Delete_3296
+        exampleFile: ../examples/PrivateEndpoints_Delete_29_Generated.json
+        operationId: PrivateEndpoints_Delete
+    variables:
+      virtualNetworkName: testvnet000002
+      subnetName: testsubnet000003
+      privateEndpointName: priv_endpoint000004

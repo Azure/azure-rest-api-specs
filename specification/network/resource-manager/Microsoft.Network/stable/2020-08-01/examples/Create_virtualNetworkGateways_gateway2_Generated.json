@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_vpn_gateway000001",
+    "virtualNetworkGatewayName": "gateway2",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "vnetGatewayConfig0",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworks/myvnet2/subnets/GatewaySubnet"
+              },
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/publicIPAddresses/pubip2"
+              }
+            }
+          }
+        ],
+        "gatewayType": "Vpn",
+        "vpnType": "RouteBased",
+        "activeActive": false,
+        "sku": {
+          "name": "Basic",
+          "tier": "Basic"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "gateway2",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworkGateways/gateway2",
+      "etag": "W/\"80c45a21-8a83-4798-b0de-dbeef2730fa4\"",
+      "type": "Microsoft.Network/virtualNetworkGateways",
+      "location": "westus",
+      "properties": {
+        "provisioningState": "Updating",
+        "resourceGuid": "dea1905c-d27d-4104-bf5f-897ab0a6d060",
+        "packetCaptureDiagnosticState": "None",
+        "enablePrivateIpAddress": false,
+        "ipConfigurations": [
+          {
+            "name": "vnetGatewayConfig0",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworkGateways/gateway2/ipConfigurations/vnetGatewayConfig0",
+            "etag": "W/\"80c45a21-8a83-4798-b0de-dbeef2730fa4\"",
+            "type": "Microsoft.Network/virtualNetworkGateways/ipConfigurations",
+            "properties": {
+              "provisioningState": "Updating",
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/publicIPAddresses/pubip2"
+              },
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworks/myvnet2/subnets/GatewaySubnet"
+              }
+            }
+          }
+        ],
+        "sku": {
+          "name": "Basic",
+          "tier": "Basic",
+          "capacity": 2
+        },
+        "gatewayType": "Vpn",
+        "vpnType": "RouteBased",
+        "enableBgp": false,
+        "activeActive": false,
+        "vpnClientConfiguration": {
+          "vpnClientProtocols": [
+            "SSTP"
+          ],
+          "vpnAuthenticationTypes": [],
+          "vpnClientRootCertificates": [],
+          "vpnClientRevokedCertificates": [],
+          "radiusServers": [],
+          "vpnClientIpsecPolicies": []
+        },
+        "bgpSettings": {
+          "asn": 0,
+          "peerWeight": 0,
+          "bgpPeeringAddresses": [
+            {
+              "ipconfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworkGateways/gateway2/ipConfigurations/vnetGatewayConfig0",
+              "defaultBgpIpAddresses": [],
+              "customBgpIpAddresses": []
+            }
+          ]
+        },
+        "vpnGatewayGeneration": "Generation1"
+      }
+    }
+  }
+}

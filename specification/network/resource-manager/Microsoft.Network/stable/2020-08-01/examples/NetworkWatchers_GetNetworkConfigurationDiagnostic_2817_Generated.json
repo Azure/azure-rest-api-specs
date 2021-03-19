@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "NetworkWatcherRG",
+    "networkWatcherName": "NetworkWatcher_westus",
+    "parameters": {
+      "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_vm000001/providers/Microsoft.Compute/virtualMachines/vm1",
+      "profiles": [
+        {
+          "direction": "Inbound",
+          "protocol": "Tcp",
+          "source": "12.11.12.14",
+          "destination": "10.1.1.4",
+          "destinationPort": "12100"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {}
+  }
+}

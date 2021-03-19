@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "clitest.rg000001",
+    "privateEndpointName": "cli-pe-000005",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000003/subnets/cli-subnet-000004"
+        },
+        "privateLinkServiceConnections": [
+          {
+            "name": "cli-pec-000008",
+            "properties": {
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002",
+              "groupIds": [
+                "mysqlServer"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "cli-pe-000005",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005",
+      "etag": "W/\"37c095d8-fc18-451a-8db1-3da8bf95d8af\"",
+      "type": "Microsoft.Network/privateEndpoints",
+      "location": "westus",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "e1050528-5bf5-4812-9923-281c4fa8931c",
+        "privateLinkServiceConnections": [
+          {
+            "name": "cli-pec-000008",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005/privateLinkServiceConnections/cli-pec-000008",
+            "etag": "W/\"37c095d8-fc18-451a-8db1-3da8bf95d8af\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforMySQL/servers/azuredbclitest000002",
+              "groupIds": [
+                "mysqlServer"
+              ],
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-approved",
+                "actionsRequired": "None"
+              }
+            },
+            "type": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections"
+          }
+        ],
+        "manualPrivateLinkServiceConnections": [],
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000003/subnets/cli-subnet-000004"
+        },
+        "networkInterfaces": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/networkInterfaces/cli-pe-000005.nic.f93ebb39-6084-411f-a911-5537c64f6e74"
+          }
+        ],
+        "customDnsConfigs": [
+          {
+            "fqdn": "azuredbclitest000002.mysql.database.azure.com",
+            "ipAddresses": [
+              "10.0.0.4"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test_manage_appgw_private_endpoint000001",
+    "virtualNetworkName": "appgwVnet",
+    "parameters": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/virtualNetworks/appgwVnet",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "subnets": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/virtualNetworks/appgwVnet/subnets/default",
+            "name": "default",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24",
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+          },
+          {
+            "name": "appgw_private_link_subnet_for_public",
+            "properties": {
+              "addressPrefix": "10.0.4.0/24",
+              "privateLinkServiceNetworkPolicies": "Disabled"
+            }
+          }
+        ],
+        "virtualNetworkPeerings": [],
+        "enableDdosProtection": false,
+        "enableVmProtection": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "appgwVnet",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/virtualNetworks/appgwVnet",
+      "etag": "W/\"898406fb-0f5f-4d41-9356-dd97cc4e3e2b\"",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "provisioningState": "Updating",
+        "resourceGuid": "51117d07-bdf2-4871-81f9-421b6eca3a8e",
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "default",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/virtualNetworks/appgwVnet/subnets/default",
+            "etag": "W/\"898406fb-0f5f-4d41-9356-dd97cc4e3e2b\"",
+            "properties": {
+              "provisioningState": "Updating",
+              "addressPrefix": "10.0.0.0/24",
+              "ipConfigurations": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/armrg-fb6a15c2-d5c2-44e9-b0cc-79a3d7272602/providers/Microsoft.Compute/virtualMachineScaleSets/appgw/virtualMachines/0/networkInterfaces/custnic/ipConfigurations/ipconfig"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/armrg-fb6a15c2-d5c2-44e9-b0cc-79a3d7272602/providers/Microsoft.Compute/virtualMachineScaleSets/appgw/virtualMachines/1/networkInterfaces/custnic/ipConfigurations/ipconfig"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/armrg-fb6a15c2-d5c2-44e9-b0cc-79a3d7272602/providers/Microsoft.Compute/virtualMachineScaleSets/appgw/virtualMachines/2/networkInterfaces/custnic/ipConfigurations/ipconfig"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/armrg-fb6a15c2-d5c2-44e9-b0cc-79a3d7272602/providers/Microsoft.Compute/virtualMachineScaleSets/appgw/virtualMachines/3/networkInterfaces/custnic/ipConfigurations/ipconfig"
+                }
+              ],
+              "applicationGatewayIPConfigurations": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/applicationGateways/appgw/gatewayIPConfigurations/appGatewayFrontendIP"
+                }
+              ],
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          },
+          {
+            "name": "appgw_private_link_subnet_for_public",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_manage_appgw_private_endpoint000001/providers/Microsoft.Network/virtualNetworks/appgwVnet/subnets/appgw_private_link_subnet_for_public",
+            "etag": "W/\"898406fb-0f5f-4d41-9356-dd97cc4e3e2b\"",
+            "properties": {
+              "provisioningState": "Updating",
+              "addressPrefix": "10.0.4.0/24",
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Disabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ],
+        "virtualNetworkPeerings": [],
+        "enableDdosProtection": false,
+        "enableVmProtection": false
+      }
+    }
+  }
+}

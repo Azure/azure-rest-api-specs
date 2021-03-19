@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_public_ip_zone000001",
+    "publicIpAddressName": "ip",
+    "parameters": {
+      "location": "eastus2",
+      "sku": {
+        "name": "Standard"
+      },
+      "zones": [
+        "1",
+        "2",
+        "3"
+      ],
+      "properties": {
+        "publicIPAllocationMethod": "Static",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "ip",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_public_ip_zone000001/providers/Microsoft.Network/publicIPAddresses/ip",
+      "etag": "W/\"c32d2dc8-946f-496f-9038-7e90acc371d2\"",
+      "location": "eastus2",
+      "zones": [
+        "1",
+        "2",
+        "3"
+      ],
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "7e457801-466b-4e8a-9e3f-779f32911084",
+        "ipAddress": "20.72.65.240",
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static",
+        "idleTimeoutInMinutes": 4,
+        "ipTags": []
+      },
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      }
+    }
+  }
+}

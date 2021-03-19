@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_zoned_public_ip000001",
+    "publicIpAddressName": "pubip",
+    "parameters": {
+      "location": "centralus",
+      "zones": [
+        "2"
+      ],
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "pubip",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_zoned_public_ip000001/providers/Microsoft.Network/publicIPAddresses/pubip",
+      "etag": "W/\"69f119a9-598e-4e52-b8a6-b85e106bf3dc\"",
+      "location": "centralus",
+      "zones": [
+        "2"
+      ],
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "5b63e1d1-6754-42df-97b8-15c9b1aa979f",
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Dynamic",
+        "idleTimeoutInMinutes": 4,
+        "ipTags": []
+      },
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Basic",
+        "tier": "Regional"
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "connection_monitor_v2_test_000001",
+    "virtualNetworkName": "cmv2-vnet",
+    "parameters": {
+      "location": "eastus",
+      "tags": {},
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/24"
+          ]
+        },
+        "dhcpOptions": {},
+        "subnets": [
+          {
+            "name": "subnet1",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "cmv2-vnet",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/connection_monitor_v2_test_000001/providers/Microsoft.Network/virtualNetworks/cmv2-vnet",
+      "etag": "W/\"b9e1430e-5e51-40de-bccc-8b049b788a1b\"",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "eastus",
+      "tags": {},
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "57e09770-fbd3-46b7-b11e-c26f8246da00",
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/24"
+          ]
+        },
+        "dhcpOptions": {
+          "dnsServers": []
+        },
+        "subnets": [
+          {
+            "name": "subnet1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/connection_monitor_v2_test_000001/providers/Microsoft.Network/virtualNetworks/cmv2-vnet/subnets/subnet1",
+            "etag": "W/\"b9e1430e-5e51-40de-bccc-8b049b788a1b\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "addressPrefix": "10.0.0.0/24",
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ],
+        "virtualNetworkPeerings": [],
+        "enableDdosProtection": false
+      }
+    }
+  }
+}

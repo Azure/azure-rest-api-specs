@@ -1,0 +1,141 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vnet_peering
+    steps:
+      - step: RawStep_2533
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_peering000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:37:24 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001","name":"cli_test_vnet_peering000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:37:22Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2535.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2536
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_peering000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:37:34 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001","name":"cli_test_vnet_peering000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:37:22Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet2
+        resourceName: virtualNetworks_vnet2
+        exampleFile: ../examples/Create_virtualNetworks_vnet2_Generated_2538.json
+        operationId: VirtualNetworks_CreateOrUpdate
+        variables:
+          virtualNetworkName: vnet2
+      - step: RawStep_2539
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_peering000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:37:45 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001","name":"cli_test_vnet_peering000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:37:22Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_ip1
+        resourceName: publicIPAddresses_ip1
+        exampleFile: ../examples/Create_publicIPAddresses_ip1_Generated_2541.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: VirtualNetworks_Get_2542
+        exampleFile: ../examples/VirtualNetworks_Get_2542_Generated.json
+        operationId: VirtualNetworks_Get
+        variables:
+          virtualNetworkName: vnet2
+      - step: RawStep_2543
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_peering000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:37:54 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001","name":"cli_test_vnet_peering000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:37:22Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gateway1
+        resourceName: virtualNetworkGateways_gateway1
+        exampleFile: ../examples/Create_virtualNetworkGateways_gateway1_Generated.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+      - step: VirtualNetworks_Get_2545
+        exampleFile: ../examples/VirtualNetworks_Get_2545_Generated.json
+        operationId: VirtualNetworks_Get
+      - step: Create_virtualNetworkPeerings_peering2
+        resourceName: virtualNetworkPeerings_peering2
+        exampleFile: ../examples/Create_virtualNetworkPeerings_peering2_Generated.json
+        operationId: VirtualNetworkPeerings_CreateOrUpdate
+        variables:
+          virtualNetworkName: vnet2
+      - step: Create_virtualNetworkPeerings_peering1
+        resourceName: virtualNetworkPeerings_peering1
+        exampleFile: ../examples/Create_virtualNetworkPeerings_peering1_Generated.json
+        operationId: VirtualNetworkPeerings_CreateOrUpdate
+        variables:
+          virtualNetworkPeeringName: peering1
+      - step: VirtualNetworkPeerings_List_2549
+        exampleFile: ../examples/VirtualNetworkPeerings_List_2549_Generated.json
+        operationId: VirtualNetworkPeerings_List
+        variables:
+          virtualNetworkName: vnet2
+      - step: Update_virtualNetworkPeerings_peering1_2551
+        resourceName: virtualNetworkPeerings_peering1
+        operationId: VirtualNetworkPeerings_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/useRemoteGateways
+            value: false
+          - remove: /properties/remoteGateways
+        variables:
+          virtualNetworkPeeringName: peering1
+      - step: VirtualNetworkPeerings_Delete_2552
+        exampleFile: ../examples/VirtualNetworkPeerings_Delete_2552_Generated.json
+        operationId: VirtualNetworkPeerings_Delete
+        variables:
+          virtualNetworkPeeringName: peering1
+      - step: VirtualNetworkPeerings_List_2553
+        exampleFile: ../examples/VirtualNetworkPeerings_List_2553_Generated.json
+        operationId: VirtualNetworkPeerings_List
+      - step: VirtualNetworkPeerings_Delete_2554
+        exampleFile: ../examples/VirtualNetworkPeerings_Delete_2552_Generated.json
+        operationId: VirtualNetworkPeerings_Delete
+        variables:
+          virtualNetworkName: vnet2
+      - step: VirtualNetworkGateways_Delete_2555
+        exampleFile: ../examples/VirtualNetworkGateways_Delete_2555_Generated.json
+        operationId: VirtualNetworkGateways_Delete
+    variables:
+      virtualNetworkName: vnet1
+      publicIpAddressName: ip1
+      virtualNetworkGatewayName: gateway1
+      virtualNetworkPeeringName: peering2

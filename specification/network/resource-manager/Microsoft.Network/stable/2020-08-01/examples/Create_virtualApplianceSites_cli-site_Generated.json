@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "clitest.rg000001",
+    "networkVirtualApplianceName": "cli-virtual-appliance",
+    "siteName": "cli-site",
+    "parameters": {
+      "properties": {
+        "addressPrefix": "10.0.0.0/24",
+        "o365Policy": {
+          "breakOutCategories": {
+            "allow": true,
+            "optimize": true,
+            "default": true
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "properties": {
+        "addressPrefix": "10.0.0.0/24",
+        "o365Policy": {
+          "breakOutCategories": {
+            "optimize": true,
+            "allow": true,
+            "default": true
+          }
+        },
+        "provisioningState": "Succeeded"
+      },
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/networkVirtualAppliances/cli-virtual-appliance/virtualApplianceSites/cli-site",
+      "name": "cli-site",
+      "type": "Microsoft.Network/VirtualApplianceSites",
+      "etag": "6daa357b-ef90-48f4-8d9e-ca4aebad8dd6",
+      "location": "westcentralus"
+    }
+  }
+}

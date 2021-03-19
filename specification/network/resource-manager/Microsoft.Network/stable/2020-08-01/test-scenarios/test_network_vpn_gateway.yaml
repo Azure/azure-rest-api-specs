@@ -1,0 +1,437 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vpn_gateway
+    steps:
+      - step: RawStep_2609
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:54:14 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pubip1
+        resourceName: publicIPAddresses_pubip1
+        exampleFile: ../examples/Create_publicIPAddresses_pubip1_Generated_2611.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2612
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:54:21 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pubip2
+        resourceName: publicIPAddresses_pubip2
+        exampleFile: ../examples/Create_publicIPAddresses_pubip2_Generated_2614.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+        variables:
+          publicIpAddressName: pubip2
+      - step: RawStep_2615
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:54:29 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pubip3
+        resourceName: publicIPAddresses_pubip3
+        exampleFile: ../examples/Create_publicIPAddresses_pubip3_Generated_2617.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+        variables:
+          publicIpAddressName: pubip3
+      - step: RawStep_2618
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:01:13 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_myvnet1
+        resourceName: virtualNetworks_myvnet1
+        exampleFile: ../examples/Create_virtualNetworks_myvnet1_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2620
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:01:24 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_myvnet2
+        resourceName: virtualNetworks_myvnet2
+        exampleFile: ../examples/Create_virtualNetworks_myvnet2_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+        variables:
+          virtualNetworkName: myvnet2
+      - step: RawStep_2622
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:01:33 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_myvnet3
+        resourceName: virtualNetworks_myvnet3
+        exampleFile: ../examples/Create_virtualNetworks_myvnet3_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+        variables:
+          virtualNetworkName: myvnet3
+      - step: RawStep_2624
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:01:41 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2625
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:01:42 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gateway1
+        resourceName: virtualNetworkGateways_gateway1
+        exampleFile: ../examples/Create_virtualNetworkGateways_gateway1_Generated_2627.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+      - step: RawStep_2628
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:01:51 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gateway2
+        resourceName: virtualNetworkGateways_gateway2
+        exampleFile: ../examples/Create_virtualNetworkGateways_gateway2_Generated.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        variables:
+          virtualNetworkGatewayName: gateway2
+      - step: RawStep_2630
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 13:01:56 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gateway3
+        resourceName: virtualNetworkGateways_gateway3
+        exampleFile: ../examples/Create_virtualNetworkGateways_gateway3_Generated.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        variables:
+          virtualNetworkGatewayName: gateway3
+      - step: VirtualNetworkGateways_Get_2632
+        exampleFile: ../examples/VirtualNetworkGateways_Get_2632_Generated.json
+        operationId: VirtualNetworkGateways_Get
+      - step: Update_virtualNetworkGateways_gateway1_2636
+        resourceName: virtualNetworkGateways_gateway1
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/provisioningState
+            value: Succeeded
+          - replace: /properties/ipConfigurations/0/properties/provisioningState
+            value: Succeeded
+          - replace: /properties/sku/name
+            value: Standard
+          - replace: /properties/sku/tier
+            value: Standard
+          - remove: /properties/vpnClientConfiguration
+          - replace: /properties/bgpSettings/asn
+            value: 65515
+          - add: >-
+              /properties/bgpSettings/bgpPeeringAddresses/0/defaultBgpIpAddresses/0
+            value: 10.0.0.254
+          - add: /properties/bgpSettings/bgpPeeringAddresses/0/tunnelIpAddresses
+            value:
+              - 23.101.196.134
+          - add: /properties/bgpSettings/bgpPeeringAddress
+            value: 10.0.0.254
+          - add: /properties/customRoutes/addressPrefixes/1
+            value: 102.168.0.6/32
+      - step: RawStep_2639
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:15:42 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2640
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{"sharedKey":{"type":"securestring","metadata":{"description":"Secure
+          sharedKey"}}},"variables":{},"resources":[{"type":"Microsoft.Network/connections","name":"conn1to2","location":"westus","tags":{"foo":"doo"},"apiVersion":"2015-06-15","dependsOn":[],"properties":{"virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworkGateways/gateway1"},"enableBgp":false,"connectionType":"Vnet2Vnet","routingWeight":10,"usePolicyBasedTrafficSelectors":false,"expressRouteGatewayBypass":null,"virtualNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworkGateways/gateway2"},"sharedKey":"[parameters('sharedKey')]"}}],"outputs":{"resource":{"type":"object","value":"[reference('conn1to2')]"}}},"parameters":{"sharedKey":{"value":"123"}},"mode":"Incremental"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_2LfRAFAsv1MhP0TtWh5elUFs5C2SZuqM/operationStatuses/08585874307410649059?api-version=2020-10-01
+          cache-control: no-cache
+          content-length: '770'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:15:47 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1194'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_2LfRAFAsv1MhP0TtWh5elUFs5C2SZuqM","name":"vpn_connection_deploy_2LfRAFAsv1MhP0TtWh5elUFs5C2SZuqM","type":"Microsoft.Resources/deployments","properties":{"templateHash":"3841526419499541641","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-02-24T14:15:46.3949242Z","duration":"PT1.9822043S","correlationId":"17c8a3b4-1322-4613-a3b3-f883d67ab5b2","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[]}}
+      - step: RawStep_2641
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874307410649059?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:16:17 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_2642
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874307410649059?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '22'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:16:48 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_2643
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1914'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:16:48 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_2LfRAFAsv1MhP0TtWh5elUFs5C2SZuqM","name":"vpn_connection_deploy_2LfRAFAsv1MhP0TtWh5elUFs5C2SZuqM","type":"Microsoft.Resources/deployments","properties":{"templateHash":"3841526419499541641","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-02-24T14:16:28.338163Z","duration":"PT43.9254431S","correlationId":"17c8a3b4-1322-4613-a3b3-f883d67ab5b2","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[],"outputs":{"resource":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"944c55f1-1929-4a17-a6bc-679d31539d9a","virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworkGateways/gateway1"},"virtualNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworkGateways/gateway2"},"connectionType":"Vnet2Vnet","connectionProtocol":"IKEv2","routingWeight":10,"sharedKey":"123","enableBgp":false,"useLocalAzureIpAddress":false,"trafficSelectorPolicies":[],"connectionStatus":"NotConnected","ingressBytesTransferred":0,"egressBytesTransferred":0,"dpdTimeoutSeconds":0,"connectionMode":"Default"}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/connections/conn1to2"}]}}
+      - step: VirtualNetworkGatewayConnections_Get_2644
+        exampleFile: ../examples/VirtualNetworkGatewayConnections_Get_2644_Generated.json
+        operationId: VirtualNetworkGatewayConnections_Get
+      - step: VirtualNetworkGateways_Get_2645
+        exampleFile: ../examples/VirtualNetworkGateways_Get_2645_Generated.json
+        operationId: VirtualNetworkGateways_Get
+        variables:
+          virtualNetworkGatewayName: gateway2
+      - step: Create_connections_conn1to2
+        resourceName: connections_conn1to2
+        exampleFile: ../examples/Create_connections_conn1to2_Generated.json
+        operationId: VirtualNetworkGatewayConnections_CreateOrUpdate
+      - step: RawStep_2647
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:17:59 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001","name":"cli_test_vpn_gateway000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:54:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2648
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{"sharedKey":{"type":"securestring","metadata":{"description":"Secure
+          sharedKey"}}},"variables":{},"resources":[{"type":"Microsoft.Network/connections","name":"conn2to1","location":"westus","tags":{},"apiVersion":"2015-06-15","dependsOn":[],"properties":{"virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworkGateways/gateway2"},"enableBgp":false,"connectionType":"Vnet2Vnet","routingWeight":10,"usePolicyBasedTrafficSelectors":false,"expressRouteGatewayBypass":null,"virtualNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworkGateways/gateway1"},"sharedKey":"[parameters('sharedKey')]"}}],"outputs":{"resource":{"type":"object","value":"[reference('conn2to1')]"}}},"parameters":{"sharedKey":{"value":"123"}},"mode":"Incremental"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_x1MLoi8Q8XLcVWnhpB4810ZOqpsfQUjw/operationStatuses/08585874306037174651?api-version=2020-10-01
+          cache-control: no-cache
+          content-length: '770'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:18:04 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1194'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_x1MLoi8Q8XLcVWnhpB4810ZOqpsfQUjw","name":"vpn_connection_deploy_x1MLoi8Q8XLcVWnhpB4810ZOqpsfQUjw","type":"Microsoft.Resources/deployments","properties":{"templateHash":"9958889539938637974","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-02-24T14:18:03.7544436Z","duration":"PT1.9942918S","correlationId":"6393d719-9485-4822-8913-97cb4d62e49b","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[]}}
+      - step: RawStep_2649
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874306037174651?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:18:35 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_2650
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874306037174651?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '22'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:19:06 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_2651
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1909'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 14:19:07 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_x1MLoi8Q8XLcVWnhpB4810ZOqpsfQUjw","name":"vpn_connection_deploy_x1MLoi8Q8XLcVWnhpB4810ZOqpsfQUjw","type":"Microsoft.Resources/deployments","properties":{"templateHash":"9958889539938637974","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-02-24T14:18:43.6942138Z","duration":"PT41.934062S","correlationId":"6393d719-9485-4822-8913-97cb4d62e49b","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[],"outputs":{"resource":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"f5fd6159-7aef-4230-8c5f-460c5dc9faa1","virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworkGateways/gateway2"},"virtualNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/virtualNetworkGateways/gateway1"},"connectionType":"Vnet2Vnet","connectionProtocol":"IKEv2","routingWeight":10,"sharedKey":"123","enableBgp":false,"useLocalAzureIpAddress":false,"trafficSelectorPolicies":[],"connectionStatus":"Unknown","ingressBytesTransferred":0,"egressBytesTransferred":0,"dpdTimeoutSeconds":0,"connectionMode":"Default"}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway000001/providers/Microsoft.Network/connections/conn2to1"}]}}
+      - step: VirtualNetworkGateways_GetLearnedRoutes_2652
+        exampleFile: >-
+          ../examples/VirtualNetworkGateways_GetLearnedRoutes_2652_Generated.json
+        operationId: VirtualNetworkGateways_GetLearnedRoutes
+      - step: VirtualNetworkGateways_GetAdvertisedRoutes_2653
+        exampleFile: >-
+          ../examples/VirtualNetworkGateways_GetAdvertisedRoutes_2653_Generated.json
+        operationId: VirtualNetworkGateways_GetAdvertisedRoutes
+      - step: VirtualNetworkGateways_GetBgpPeerStatus_2654
+        exampleFile: >-
+          ../examples/VirtualNetworkGateways_GetBgpPeerStatus_2654_Generated.json
+        operationId: VirtualNetworkGateways_GetBgpPeerStatus
+    variables:
+      publicIpAddressName: pubip1
+      virtualNetworkName: myvnet1
+      virtualNetworkGatewayName: gateway1
+      virtualNetworkGatewayConnectionName: conn1to2

@@ -1,0 +1,153 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_private_link_service
+    steps:
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2266.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2267
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_network_private_link_service000001%27%20and%20name%20eq%20%27pubip1%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FpublicIPAddresses%27&api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '12'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:14:02 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"value":[]}'
+      - step: RawStep_2268
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_private_link_service000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{},"resources":[{"apiVersion":"2020-08-01","type":"Microsoft.Network/publicIPAddresses","name":"pubip1","location":"centralus","tags":{},"dependsOn":[],"properties":{"publicIPAllocationMethod":"Static"},"sku":{"name":"Standard"}},{"type":"Microsoft.Network/loadBalancers","name":"lb1","location":"centralus","tags":{},"apiVersion":"2020-08-01","dependsOn":["Microsoft.Network/publicIpAddresses/pubip1"],"properties":{"backendAddressPools":[{"name":"lb1bepool"}],"frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","properties":{"publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Network/publicIPAddresses/pubip1"},"privateIPAddressVersion":"IPv4"}}]},"sku":{"name":"Standard"}}],"outputs":{"loadBalancer":{"type":"object","value":"[reference('lb1')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_private_link_service000001/providers/Microsoft.Resources/deployments/lb_deploy_sAjvL7t03bCRWVeg3lRCESmqQkkrR8cC/operationStatuses/08585874416409841604?api-version=2020-10-01
+          cache-control: no-cache
+          content-length: '1342'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:14:08 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Resources/deployments/lb_deploy_sAjvL7t03bCRWVeg3lRCESmqQkkrR8cC","name":"lb_deploy_sAjvL7t03bCRWVeg3lRCESmqQkkrR8cC","type":"Microsoft.Resources/deployments","properties":{"templateHash":"9383445265200131914","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-02-24T11:14:06.6637367Z","duration":"PT2.1702793S","correlationId":"37ed4b0d-fbf3-4ab3-8517-43a434b067ce","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"publicIPAddresses","locations":["centralus"]},{"resourceType":"loadBalancers","locations":["centralus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Network/publicIPAddresses/pubip1","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"pubip1"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Network/loadBalancers/lb1","resourceType":"Microsoft.Network/loadBalancers","resourceName":"lb1"}]}}
+      - step: RawStep_2269
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_private_link_service000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874416409841604?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '22'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:14:39 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_2270
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_private_link_service000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '3232'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:14:39 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Resources/deployments/lb_deploy_sAjvL7t03bCRWVeg3lRCESmqQkkrR8cC","name":"lb_deploy_sAjvL7t03bCRWVeg3lRCESmqQkkrR8cC","type":"Microsoft.Resources/deployments","properties":{"templateHash":"9383445265200131914","parameters":{},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-02-24T11:14:22.7837121Z","duration":"PT18.2902547S","correlationId":"37ed4b0d-fbf3-4ab3-8517-43a434b067ce","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"publicIPAddresses","locations":["centralus"]},{"resourceType":"loadBalancers","locations":["centralus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Network/publicIPAddresses/pubip1","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"pubip1"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Network/loadBalancers/lb1","resourceType":"Microsoft.Network/loadBalancers","resourceName":"lb1"}],"outputs":{"loadBalancer":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"5db01e75-b449-4aba-9eb1-4aa4c6a20e2c","frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd","etag":"W/\"4c6cef16-5613-46ba-b7eb-5e50d2f6d4e7\"","type":"Microsoft.Network/loadBalancers/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAllocationMethod":"Dynamic","publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Network/publicIPAddresses/pubip1"},"privateIPAddressVersion":"IPv4"}}],"backendAddressPools":[{"name":"lb1bepool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool","etag":"W/\"4c6cef16-5613-46ba-b7eb-5e50d2f6d4e7\"","properties":{"provisioningState":"Succeeded","loadBalancerBackendAddresses":[]},"type":"Microsoft.Network/loadBalancers/backendAddressPools"}],"loadBalancingRules":[],"probes":[],"inboundNatRules":[],"outboundRules":[],"inboundNatPools":[]}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Network/loadBalancers/lb1"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Network/publicIPAddresses/pubip1"}]}}
+      - step: Subnets_Get_2271
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_subnet1
+        resourceName: subnets_subnet1
+        exampleFile: ../examples/Create_subnets_subnet1_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: VirtualNetworks_Get_2273
+        exampleFile: ../examples/VirtualNetworks_Get_2273_Generated.json
+        operationId: VirtualNetworks_Get
+      - step: Update_virtualNetworks_vnet1_2275
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/subnets/0/properties/privateLinkServiceNetworkPolicies
+            value: Disabled
+          - add: /properties/subnets/1
+            value:
+              name: subnet2
+              properties:
+                addressPrefix: 10.0.2.0/24
+                provisioningState: Succeeded
+                delegations: []
+                privateEndpointNetworkPolicies: Enabled
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_link_service000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2
+              type: Microsoft.Network/virtualNetworks/subnets
+      - step: Subnets_Get_2276
+        exampleFile: ../examples/Subnets_Get_2252_Generated.json
+        operationId: Subnets_Get
+        variables:
+          subnetName: subnet2
+      - step: Create_subnets_subnet2
+        resourceName: subnets_subnet2
+        exampleFile: ../examples/Create_subnets_subnet2_Generated.json
+        operationId: Subnets_CreateOrUpdate
+        variables:
+          subnetName: subnet2
+      - step: Create_privateLinkServices_lks1
+        resourceName: privateLinkServices_lks1
+        exampleFile: ../examples/Create_privateLinkServices_lks1_Generated_2279.json
+        operationId: PrivateLinkServices_CreateOrUpdate
+      - step: Update_privateLinkServices_lks1_2281
+        resourceName: privateLinkServices_lks1
+        operationId: PrivateLinkServices_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/enableProxyProtocol
+            value: false
+          - add: /properties/visibility
+            value:
+              subscriptions:
+                - 00000000-0000-0000-0000-000000000000
+                - 00000000-0000-0000-0000-000000000000
+          - add: /properties/autoApproval
+            value:
+              subscriptions:
+                - 00000000-0000-0000-0000-000000000000
+                - 00000000-0000-0000-0000-000000000000
+      - step: PrivateLinkServices_List_2282
+        exampleFile: ../examples/PrivateLinkServices_List_2282_Generated.json
+        operationId: PrivateLinkServices_List
+      - step: PrivateLinkServices_Delete_2283
+        exampleFile: ../examples/PrivateLinkServices_Delete_2283_Generated.json
+        operationId: PrivateLinkServices_Delete
+      - step: Subnets_Get_2284
+        exampleFile: ../examples/Subnets_Get_2284_Generated.json
+        operationId: Subnets_Get
+      - step: Update_subnets_subnet1_2286
+        resourceName: subnets_subnet1
+        operationId: Subnets_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/privateLinkServiceNetworkPolicies
+            value: Enabled
+    variables:
+      virtualNetworkName: vnet1
+      subnetName: subnet1
+      serviceName: lks1

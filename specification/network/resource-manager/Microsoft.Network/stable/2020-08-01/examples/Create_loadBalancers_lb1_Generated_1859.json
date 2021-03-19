@@ -1,0 +1,115 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_lb_probes000001",
+    "loadBalancerName": "lb1",
+    "parameters": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_probes000001/providers/Microsoft.Network/loadBalancers/lb1",
+      "location": "westus",
+      "tags": {},
+      "sku": {
+        "name": "Basic",
+        "tier": "Regional"
+      },
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_probes000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "name": "LoadBalancerFrontEnd",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAddressVersion": "IPv4",
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_probes000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_probes000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool",
+            "name": "lb1bepool"
+          }
+        ],
+        "loadBalancingRules": [],
+        "probes": [
+          {
+            "name": "probe1",
+            "properties": {
+              "protocol": "Http",
+              "port": 1,
+              "requestPath": "/test1"
+            }
+          }
+        ],
+        "inboundNatRules": [],
+        "inboundNatPools": []
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "lb1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_probes000001/providers/Microsoft.Network/loadBalancers/lb1",
+      "etag": "W/\"15df7c62-4e0b-4609-8361-bb525dea9061\"",
+      "type": "Microsoft.Network/loadBalancers",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "b4b4d401-31bf-4d0c-9384-d0e73ba98f9b",
+        "frontendIPConfigurations": [
+          {
+            "name": "LoadBalancerFrontEnd",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_probes000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "etag": "W/\"15df7c62-4e0b-4609-8361-bb525dea9061\"",
+            "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_probes000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"
+              },
+              "privateIPAddressVersion": "IPv4"
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "lb1bepool",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_probes000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool",
+            "etag": "W/\"15df7c62-4e0b-4609-8361-bb525dea9061\"",
+            "properties": {
+              "provisioningState": "Succeeded"
+            },
+            "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+          }
+        ],
+        "loadBalancingRules": [],
+        "probes": [
+          {
+            "name": "probe1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_probes000001/providers/Microsoft.Network/loadBalancers/lb1/probes/probe1",
+            "etag": "W/\"15df7c62-4e0b-4609-8361-bb525dea9061\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "protocol": "Http",
+              "port": 1,
+              "requestPath": "/test1",
+              "intervalInSeconds": 15,
+              "numberOfProbes": 2
+            },
+            "type": "Microsoft.Network/loadBalancers/probes"
+          }
+        ],
+        "inboundNatRules": [],
+        "inboundNatPools": []
+      },
+      "sku": {
+        "name": "Basic",
+        "tier": "Regional"
+      }
+    }
+  }
+}

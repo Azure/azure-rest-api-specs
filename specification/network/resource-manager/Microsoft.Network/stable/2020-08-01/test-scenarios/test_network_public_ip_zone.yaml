@@ -1,0 +1,26 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_public_ip_zone
+    steps:
+      - step: RawStep_2324
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_public_ip_zone000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '429'
+          content-type: application/json; charset=utf-8
+          date: Tue, 23 Feb 2021 01:38:09 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_public_ip_zone000001","name":"cli_test_public_ip_zone000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-02-23T01:38:04Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_ip
+        resourceName: publicIPAddresses_ip
+        exampleFile: ../examples/Create_publicIPAddresses_ip_Generated.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+    variables:
+      publicIpAddressName: ip

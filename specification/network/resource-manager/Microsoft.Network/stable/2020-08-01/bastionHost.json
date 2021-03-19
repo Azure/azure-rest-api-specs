@@ -56,14 +56,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
           "204": {
             "description": "Request successful. Resource with the specified name does not exist."
-          },
-          "200": {
-            "description": "Delete successful."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -75,6 +75,9 @@
         "x-ms-examples": {
           "Delete Bastion Host": {
             "$ref": "./examples/BastionHostDelete.json"
+          },
+          "BastionHosts_Delete_1486_Generated": {
+            "$ref": "./examples/BastionHosts_Delete_1486_Generated.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -152,14 +155,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Create successful. The operation returns the resulting Bastion Host resource.",
+          "200": {
+            "description": "Update successful. The operation returns the resulting Bastion Host resource.",
             "schema": {
               "$ref": "#/definitions/BastionHost"
             }
           },
-          "200": {
-            "description": "Update successful. The operation returns the resulting Bastion Host resource.",
+          "201": {
+            "description": "Create successful. The operation returns the resulting Bastion Host resource.",
             "schema": {
               "$ref": "#/definitions/BastionHost"
             }
@@ -174,6 +177,9 @@
         "x-ms-examples": {
           "Create Bastion Host": {
             "$ref": "./examples/BastionHostPut.json"
+          },
+          "Create_bastionHosts_clibastion_Generated": {
+            "$ref": "./examples/Create_bastionHosts_clibastion_Generated.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -214,6 +220,9 @@
         "x-ms-examples": {
           "List all Bastion Hosts for a given subscription": {
             "$ref": "./examples/BastionHostListBySubscription.json"
+          },
+          "BastionHosts_List_1484_Generated": {
+            "$ref": "./examples/BastionHosts_List_1484_Generated.json"
           }
         },
         "x-ms-pageable": {
@@ -256,6 +265,9 @@
         "x-ms-examples": {
           "List all Bastion Hosts for a given resource group": {
             "$ref": "./examples/BastionHostListByResourceGroup.json"
+          },
+          "BastionHosts_ListByResourceGroup_1485_Generated": {
+            "$ref": "./examples/BastionHosts_ListByResourceGroup_1485_Generated.json"
           }
         },
         "x-ms-pageable": {

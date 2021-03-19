@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_sa_pe000001",
+    "privateEndpointName": "cli-pe-000005",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_pe000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000003/subnets/cli-subnet-000004"
+        },
+        "privateLinkServiceConnections": [
+          {
+            "name": "cli-pec-000006",
+            "properties": {
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_pe000001/providers/Microsoft.Storage/storageAccounts/saplr000002",
+              "groupIds": [
+                "blob"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "cli-pe-000005",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_pe000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005",
+      "etag": "W/\"4196435a-c8d1-4d39-a11f-20bdf2c11bf0\"",
+      "type": "Microsoft.Network/privateEndpoints",
+      "location": "eastus",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "53e0e010-1860-4692-9f49-e0228c494816",
+        "privateLinkServiceConnections": [
+          {
+            "name": "cli-pec-000006",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_pe000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005/privateLinkServiceConnections/cli-pec-000006",
+            "etag": "W/\"4196435a-c8d1-4d39-a11f-20bdf2c11bf0\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_pe000001/providers/Microsoft.Storage/storageAccounts/saplr000002",
+              "groupIds": [
+                "blob"
+              ],
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-Approved",
+                "actionsRequired": "None"
+              }
+            },
+            "type": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections"
+          }
+        ],
+        "manualPrivateLinkServiceConnections": [],
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_pe000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000003/subnets/cli-subnet-000004"
+        },
+        "networkInterfaces": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_sa_pe000001/providers/Microsoft.Network/networkInterfaces/cli-pe-000005.nic.f17ae65a-6345-45e2-9391-7cbb48a42326"
+          }
+        ],
+        "customDnsConfigs": [
+          {
+            "fqdn": "saplr000002.blob.core.windows.net",
+            "ipAddresses": [
+              "10.0.0.4"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

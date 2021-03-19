@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "NetworkWatcherRG",
+    "networkWatcherName": "NetworkWatcher_westcentralus",
+    "connectionMonitorName": "cm1"
+  },
+  "responses": {
+    "200": {
+      "name": "cm1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkWatchers/NetworkWatcher_westcentralus/connectionMonitors/cm1",
+      "etag": "W/\"33470315-b84f-4f07-9c42-35cbf49565e7\"",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "19ccc9ba-01dc-486a-bbae-aac9ce9ef360",
+        "endpoints": [
+          {
+            "name": "defaultSourceEndpoint",
+            "type": "AzureVM",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_connection_monitor000001/providers/Microsoft.Compute/virtualMachines/vm2"
+          },
+          {
+            "name": "defaultDestinationEndpoint",
+            "type": "AzureVM",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_connection_monitor000001/providers/Microsoft.Compute/virtualMachines/vm3"
+          }
+        ],
+        "testConfigurations": [
+          {
+            "name": "defaultTestConfiguration",
+            "testFrequencySec": 60,
+            "protocol": "Tcp",
+            "tcpConfiguration": {
+              "port": 80,
+              "disableTraceRoute": false
+            }
+          }
+        ],
+        "testGroups": [
+          {
+            "name": "defaultTestGroup",
+            "disable": false,
+            "testConfigurations": [
+              "defaultTestConfiguration"
+            ],
+            "sources": [
+              "defaultSourceEndpoint"
+            ],
+            "destinations": [
+              "defaultDestinationEndpoint"
+            ]
+          }
+        ],
+        "outputs": [],
+        "startTime": "2021-02-24T12:05:26.5664048Z",
+        "monitoringStatus": "Running",
+        "connectionMonitorType": "SingleSourceDestination"
+      },
+      "type": "Microsoft.Network/networkWatchers/connectionMonitors",
+      "location": "westcentralus",
+      "tags": {
+        "foo": "doo"
+      }
+    }
+  }
+}

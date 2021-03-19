@@ -1,0 +1,358 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vnet_peering_different_resource_groups
+    steps:
+      - step: RawStep_2556
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli-test_vnet_peering_group_2000001?api-version=2019-07-01
+        requestBody: >-
+          {"location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-09-21T21:58:56Z"}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:58:57 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001","name":"cli-test_vnet_peering_group_2000001","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-09-21T21:58:56Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2557
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli-test_vnet_peering_group_1000002?api-version=2019-07-01
+        requestBody: >-
+          {"location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-09-21T21:58:58Z"}}
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:58:59 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002","name":"cli-test_vnet_peering_group_1000002","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-09-21T21:58:58Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2558
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-08-01
+        requestBody: >-
+          {"location":"westus","tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{}}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/1b0e9de8-66a7-4c57-8282-fef2ca95472a?api-version=2018-08-01
+          cache-control: no-cache
+          content-length: '766'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:59:01 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"db820f30-9bc8-4b1c-aefd-f8555df42af7\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"e6b3e8a8-3dd9-4d5b-a645-19bea1c626dc","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_2559
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli-test_vnet_peering_group_2000001?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:59:16 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001","name":"cli-test_vnet_peering_group_2000001","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-09-21T21:58:56Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2560
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-08-01
+        requestBody: >-
+          {"location":"westus","tags":{},"properties":{"addressSpace":{"addressPrefixes":["11.0.0.0/16"]},"dhcpOptions":{}}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/64dd0144-c63f-41d6-a595-48ea25273bbb?api-version=2018-08-01
+          cache-control: no-cache
+          content-length: '766'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:59:17 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"8399fc08-9c84-451b-ac97-0d1f123560d3\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"3f9da9be-7864-4d5b-bd05-011c1e244e33","addressSpace":{"addressPrefixes":["11.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_2561
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli-test_vnet_peering_group_2000001?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '384'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:59:33 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001","name":"cli-test_vnet_peering_group_2000001","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2018-09-21T21:58:56Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2562
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/publicIPAddresses/ip1?api-version=2018-08-01
+        requestBody: >-
+          {"location":"westus","sku":{"name":"Basic"},"properties":{"publicIPAllocationMethod":"Dynamic","publicIPAddressVersion":"IPv4","idleTimeoutInMinutes":4}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/5019967c-ce03-49c2-a87f-a53947e99cd3?api-version=2018-08-01
+          cache-control: no-cache
+          content-length: '679'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:59:34 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"ip1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/publicIPAddresses/ip1","etag":"W/\"329123c1-e83c-4eff-b9d5-d368909c8f40\"","location":"westus","properties":{"provisioningState":"Updating","resourceGuid":"2324ab70-b6cf-4740-bf73-5baabfc9aa6e","publicIPAddressVersion":"IPv4","publicIPAllocationMethod":"Dynamic","idleTimeoutInMinutes":4,"ipTags":[]},"type":"Microsoft.Network/publicIPAddresses","sku":{"name":"Basic","tier":"Regional"}}
+      - step: RawStep_2563
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:59:40 GMT
+          etag: W/"32106eb7-866f-4bf6-b9ff-38b31821a1ca"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"32106eb7-866f-4bf6-b9ff-38b31821a1ca\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"3f9da9be-7864-4d5b-bd05-011c1e244e33","addressSpace":{"addressPrefixes":["11.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_2564
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1?api-version=2018-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:59:41 GMT
+          etag: W/"67b67d8a-8301-43bf-a2bb-3193017d99c5"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1","etag":"W/\"67b67d8a-8301-43bf-a2bb-3193017d99c5\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"e6b3e8a8-3dd9-4d5b-a645-19bea1c626dc","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_2565
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2?api-version=2018-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '767'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:59:43 GMT
+          etag: W/"32106eb7-866f-4bf6-b9ff-38b31821a1ca"
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"name":"vnet2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2","etag":"W/\"32106eb7-866f-4bf6-b9ff-38b31821a1ca\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"3f9da9be-7864-4d5b-bd05-011c1e244e33","addressSpace":{"addressPrefixes":["11.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_2566
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2/virtualNetworkPeerings/peering2?api-version=2018-08-01
+        requestBody: >-
+          b'b\'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2",
+          "properties": {"allowVirtualNetworkAccess": false,
+          "allowForwardedTraffic": false, "allowGatewayTransit": true,
+          "useRemoteGateways": false, "remoteVirtualNetwork": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1"}},
+          "name": "peering2"}\''
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/c1199ff3-ced2-4e25-abea-c31b91f92bc8?api-version=2018-08-01
+          cache-control: no-cache
+          content-length: '1005'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:59:45 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1198'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"peering2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2/virtualNetworkPeerings/peering2","etag":"W/\"142d3481-1ad7-4a35-ab09-1f848b8d0c8f\"","properties":{"provisioningState":"Updating","peeringState":"Initiated","remoteVirtualNetwork":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1"},"allowVirtualNetworkAccess":false,"allowForwardedTraffic":false,"allowGatewayTransit":true,"useRemoteGateways":false,"remoteAddressSpace":{"addressPrefixes":["10.0.0.0/16"]},"routeServiceVips":{}},"type":"Microsoft.Network/virtualNetworks/virtualNetworkPeerings"}
+      - step: RawStep_2567
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peering1?api-version=2018-08-01
+        requestBody: >-
+          b'b\'{"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1",
+          "properties": {"allowVirtualNetworkAccess": false,
+          "allowForwardedTraffic": true, "allowGatewayTransit": false,
+          "useRemoteGateways": false, "remoteVirtualNetwork": {"id":
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2"}},
+          "name": "peering1"}\''
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/c49f978a-63f2-4c66-ab87-81be467380eb?api-version=2018-08-01
+          cache-control: no-cache
+          content-length: '1005'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 21:59:58 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1199'
+        statusCode: 201
+        responseExpected: >-
+          {"name":"peering1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peering1","etag":"W/\"cfe34148-3486-4954-a3d0-364b29231832\"","properties":{"provisioningState":"Updating","peeringState":"Connected","remoteVirtualNetwork":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2"},"allowVirtualNetworkAccess":false,"allowForwardedTraffic":true,"allowGatewayTransit":false,"useRemoteGateways":false,"remoteAddressSpace":{"addressPrefixes":["11.0.0.0/16"]},"routeServiceVips":{}},"type":"Microsoft.Network/virtualNetworks/virtualNetworkPeerings"}
+      - step: RawStep_2568
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2/virtualNetworkPeerings?api-version=2018-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1123'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 22:00:13 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"value":[{"name":"peering2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2/virtualNetworkPeerings/peering2","etag":"W/\"0bfc093c-f9c3-47bf-b34d-b42dbb7a51e5\"","properties":{"provisioningState":"Succeeded","peeringState":"Connected","remoteVirtualNetwork":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1"},"allowVirtualNetworkAccess":false,"allowForwardedTraffic":false,"allowGatewayTransit":true,"useRemoteGateways":false,"remoteAddressSpace":{"addressPrefixes":["10.0.0.0/16"]},"routeServiceVips":{}},"type":"Microsoft.Network/virtualNetworks/virtualNetworkPeerings"}]}
+      - step: RawStep_2569
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peering1?api-version=2018-08-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/5a02ae2b-63b6-4392-91d6-d9f9b0228f1a?api-version=2018-08-01
+          cache-control: no-cache
+          content-length: '0'
+          date: Fri, 21 Sep 2018 22:00:14 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationResults/5a02ae2b-63b6-4392-91d6-d9f9b0228f1a?api-version=2018-08-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14999'
+        statusCode: 202
+      - step: RawStep_2570
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_1000002/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings?api-version=2018-08-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '19'
+          content-type: application/json; charset=utf-8
+          date: Fri, 21 Sep 2018 22:00:26 GMT
+          expires: '-1'
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"value":[]}'
+      - step: RawStep_2571
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli-test_vnet_peering_group_2000001/providers/Microsoft.Network/virtualNetworks/vnet2/virtualNetworkPeerings/peering2?api-version=2018-08-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operations/ce82408c-b2ce-42c3-9efb-7883fa1501c3?api-version=2018-08-01
+          cache-control: no-cache
+          content-length: '0'
+          date: Fri, 21 Sep 2018 22:00:28 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationResults/ce82408c-b2ce-42c3-9efb-7883fa1501c3?api-version=2018-08-01
+          pragma: no-cache
+          server: Microsoft-HTTPAPI/2.0 Microsoft-HTTPAPI/2.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14999'
+        statusCode: 202
+      - step: RawStep_2572
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli-test_vnet_peering_group_1000002?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '0'
+          date: Fri, 21 Sep 2018 22:00:41 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/operationresults/eyJqb2JJZCI6IlJFU09VUkNFR1JPVVBERUxFVElPTkpPQi1DTEk6MkRURVNUOjVGVk5FVDo1RlBFRVJJTkc6NUZHUk9VUDo1RjFLRFJCS1ZLM3w3MjYzQUYxMUM1MzhCRDA3LVdFU1RVUyIsImpvYkxvY2F0aW9uIjoid2VzdHVzIn0?api-version=2019-07-01
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14999'
+        statusCode: 202
+      - step: RawStep_2573
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli-test_vnet_peering_group_2000001?api-version=2019-07-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '0'
+          date: Fri, 21 Sep 2018 22:00:43 GMT
+          expires: '-1'
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/operationresults/eyJqb2JJZCI6IlJFU09VUkNFR1JPVVBERUxFVElPTkpPQi1DTEk6MkRURVNUOjVGVk5FVDo1RlBFRVJJTkc6NUZHUk9VUDo1RjJGVTZNNElNNHwzNkEzMzJBNkRBRjVDRUE5LVdFU1RVUyIsImpvYkxvY2F0aW9uIjoid2VzdHVzIn0?api-version=2019-07-01
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-deletes: '14999'
+        statusCode: 202

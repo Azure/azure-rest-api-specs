@@ -1,0 +1,66 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vnet_ids_query
+    steps:
+      - step: RawStep_2508
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_ids_query000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 08:18:20 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_ids_query000001","name":"cli_test_vnet_ids_query000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-08T08:18:19Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2510.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2511
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_ids_query000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 08:18:31 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_ids_query000001","name":"cli_test_vnet_ids_query000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-08T08:18:19Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet2
+        resourceName: virtualNetworks_vnet2
+        exampleFile: ../examples/Create_virtualNetworks_vnet2_Generated_2513.json
+        operationId: VirtualNetworks_CreateOrUpdate
+        variables:
+          virtualNetworkName: vnet2
+      - step: VirtualNetworks_Get_2514
+        exampleFile: ../examples/VirtualNetworks_Get_2514_Generated.json
+        operationId: VirtualNetworks_Get
+      - step: VirtualNetworks_List_2515
+        exampleFile: ../examples/VirtualNetworks_List_2515_Generated.json
+        operationId: VirtualNetworks_List
+      - step: VirtualNetworks_Get_2516
+        exampleFile: ../examples/VirtualNetworks_Get_2514_Generated.json
+        operationId: VirtualNetworks_Get
+      - step: VirtualNetworks_List_2517
+        exampleFile: ../examples/VirtualNetworks_List_2515_Generated.json
+        operationId: VirtualNetworks_List
+      - step: VirtualNetworks_Get_2518
+        exampleFile: ../examples/VirtualNetworks_Get_2514_Generated.json
+        operationId: VirtualNetworks_Get
+      - step: VirtualNetworks_List_2519
+        exampleFile: ../examples/VirtualNetworks_List_2515_Generated.json
+        operationId: VirtualNetworks_List
+    variables:
+      virtualNetworkName: vnet1

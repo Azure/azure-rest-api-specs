@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_nsg000001",
+    "networkSecurityGroupName": "test-nsg1",
+    "securityRuleName": "web",
+    "securityRuleParameters": {
+      "name": "web",
+      "properties": {
+        "protocol": "*",
+        "sourcePortRange": "*",
+        "destinationPortRange": "4444",
+        "sourceAddressPrefix": "789",
+        "destinationAddressPrefix": "1234",
+        "access": "Allow",
+        "priority": 1000,
+        "direction": "Inbound"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "web",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nsg000001/providers/Microsoft.Network/networkSecurityGroups/test-nsg1/securityRules/web",
+      "etag": "W/\"8b770d2c-b859-4b50-9155-6ad1f538c398\"",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "protocol": "*",
+        "sourcePortRange": "*",
+        "destinationPortRange": "4444",
+        "sourceAddressPrefix": "789",
+        "destinationAddressPrefix": "1234",
+        "access": "Allow",
+        "priority": 1000,
+        "direction": "Inbound",
+        "sourcePortRanges": [],
+        "destinationPortRanges": [],
+        "sourceAddressPrefixes": [],
+        "destinationAddressPrefixes": []
+      }
+    }
+  }
+}

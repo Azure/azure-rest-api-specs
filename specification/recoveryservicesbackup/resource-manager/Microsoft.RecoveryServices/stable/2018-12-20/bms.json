@@ -18,7 +18,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties/default": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties": {
       "get": {
         "tags": [
           "AadProperties"
@@ -274,10 +274,6 @@
               "$ref": "#/definitions/NewErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Get Operation Results for Cross Region Restore": {
@@ -1840,6 +1836,20 @@
             "modelAsString": true
           },
           "readOnly": true
+        },
+        "recoveryPointTierDetails": {
+          "description": "Recovery point tier information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformation"
+          }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "description": "Eligibility of RP to be moved to another tier",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRecoveryPoint"
@@ -2096,6 +2106,10 @@
         },
         "extendedInfo": {
           "description": "In Get Recovery Point, it tells whether extended information about recovery point is asked.",
+          "type": "boolean"
+        },
+        "moveReadyRPOnly": {
+          "description": "Whether the RP can be moved to another tier",
           "type": "boolean"
         }
       }
@@ -2864,6 +2878,13 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "description": "Eligibility of RP to be moved to another tier",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
           }
         }
       },
@@ -3908,7 +3929,8 @@
           "enum": [
             "Invalid",
             "InstantRP",
-            "HardenedRP"
+            "HardenedRP",
+            "ArchivedRP"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3922,12 +3944,20 @@
             "Invalid",
             "Valid",
             "Disabled",
-            "Deleted"
+            "Deleted",
+            "Rehydrated"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPointTierStatus",
             "modelAsString": false
+          }
+        },
+        "extendedInfo": {
+          "description": "Recovery point tier status.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -4154,6 +4184,17 @@
         }
       },
       "x-ms-discriminator-value": "WorkloadCrrAccessToken"
+    },
+    "RecoveryPointMoveReadinessInfo": {
+      "type": "object",
+      "properties": {
+        "isReadyForMove": {
+          "type": "boolean"
+        },
+        "additionalInfo": {
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {

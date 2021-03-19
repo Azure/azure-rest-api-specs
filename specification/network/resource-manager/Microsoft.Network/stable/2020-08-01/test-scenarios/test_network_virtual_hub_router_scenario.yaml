@@ -1,0 +1,77 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_virtual_hub_router_scenario
+    steps:
+      - step: Create_virtualNetworks_vnet2
+        resourceName: virtualNetworks_vnet2
+        exampleFile: ../examples/Create_virtualNetworks_vnet2_Generated_2452.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_2453
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_RouteServerSubnet
+        resourceName: subnets_RouteServerSubnet
+        exampleFile: ../examples/Create_subnets_RouteServerSubnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: VirtualNetworks_Get_2455
+        exampleFile: ../examples/VirtualNetworks_Get_2455_Generated.json
+        operationId: VirtualNetworks_Get
+      - step: Create_virtualHubs_vrouter2
+        resourceName: virtualHubs_vrouter2
+        exampleFile: ../examples/Create_virtualHubs_vrouter2_Generated.json
+        operationId: VirtualHubs_CreateOrUpdate
+      - step: Create_ipConfigurations_Default
+        resourceName: ipConfigurations_Default
+        exampleFile: ../examples/Create_ipConfigurations_Default_Generated.json
+        operationId: VirtualHubIpConfiguration_CreateOrUpdate
+      - step: VirtualHubs_Get_2458
+        exampleFile: ../examples/VirtualHubs_Get_2458_Generated.json
+        operationId: VirtualHubs_Get
+      - step: Update_virtualHubs_vrouter2_2460
+        resourceName: virtualHubs_vrouter2
+        operationId: VirtualHubs_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/virtualRouterAsn
+            value: 65515
+          - add: /properties/virtualRouterIps/0
+            value: 10.0.0.4
+          - add: /properties/virtualRouterIps/1
+            value: 10.0.0.5
+          - replace: /properties/routingState
+            value: Provisioned
+          - replace: /properties/allowBranchToBranchTraffic
+            value: true
+      - step: VirtualHubs_ListByResourceGroup_2461
+        exampleFile: ../examples/VirtualHubs_ListByResourceGroup_2461_Generated.json
+        operationId: VirtualHubs_ListByResourceGroup
+      - step: Create_bgpConnections_peer1
+        resourceName: bgpConnections_peer1
+        exampleFile: ../examples/Create_bgpConnections_peer1_Generated.json
+        operationId: VirtualHubBgpConnection_CreateOrUpdate
+      - step: VirtualHubBgpConnections_List_2463
+        exampleFile: ../examples/VirtualHubBgpConnections_List_2463_Generated.json
+        operationId: VirtualHubBgpConnections_List
+      - step: VirtualHubBgpConnections_ListAdvertisedRoutes_2464
+        exampleFile: >-
+          ../examples/VirtualHubBgpConnections_ListAdvertisedRoutes_2464_Generated.json
+        operationId: VirtualHubBgpConnections_ListAdvertisedRoutes
+      - step: VirtualHubBgpConnections_ListLearnedRoutes_2465
+        exampleFile: >-
+          ../examples/VirtualHubBgpConnections_ListLearnedRoutes_2465_Generated.json
+        operationId: VirtualHubBgpConnections_ListLearnedRoutes
+      - step: VirtualHubBgpConnection_Delete_2466
+        exampleFile: ../examples/VirtualHubBgpConnection_Delete_2466_Generated.json
+        operationId: VirtualHubBgpConnection_Delete
+      - step: VirtualHubIpConfiguration_Delete_2467
+        exampleFile: ../examples/VirtualHubIpConfiguration_Delete_2467_Generated.json
+        operationId: VirtualHubIpConfiguration_Delete
+      - step: VirtualHubs_Delete_2468
+        exampleFile: ../examples/VirtualHubs_Delete_2468_Generated.json
+        operationId: VirtualHubs_Delete
+    variables:
+      virtualNetworkName: vnet2
+      subnetName: RouteServerSubnet
+      virtualHubName: vrouter2
+      ipConfigName: Default
+      connectionName: peer1
+      hubName: vrouter2

@@ -1,0 +1,910 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_dns_zone5_import
+    steps:
+      - step: RawStep_440
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com?api-version=2018-05-01
+        requestBody: '{"location":"global","properties":{"zoneType":"Public"}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '612'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:40:56 GMT
+          etag: 00000002-0000-0000-363f-98bbedfdd601
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com","name":"zone5.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-363f-98bbedfdd601","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-06.azure-dns.com.","ns2-06.azure-dns.net.","ns3-06.azure-dns.org.","ns4-06.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_441
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/SOA/@?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '590'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:40:57 GMT
+          etag: b5292e14-5304-4bb6-95fb-815acab3e08e
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '498'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"b5292e14-5304-4bb6-95fb-815acab3e08e","properties":{"fqdn":"zone5.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.microsoft.com","expireTime":2419200,"host":"ns1-06.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_442
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/SOA/@?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SOARecord":{"host":"ns1-06.azure-dns.com.","email":"hostmaster.zone5.com.","serialNumber":2003080800,"refreshTime":43200,"retryTime":900,"expireTime":1814400,"minimumTTL":10800}}}
+        requestHeaders:
+          cache-control: private
+          content-length: '590'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:40:58 GMT
+          etag: 341e6f09-38d1-4231-8f3d-2507886a25c1
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"341e6f09-38d1-4231-8f3d-2507886a25c1","properties":{"fqdn":"zone5.com.","TTL":3600,"SOARecord":{"email":"hostmaster.zone5.com.","expireTime":1814400,"host":"ns1-06.azure-dns.com.","minimumTTL":10800,"refreshTime":43200,"retryTime":900,"serialNumber":2003080800},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_443
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/@?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '446'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:00 GMT
+          etag: 0b876f56-1eb4-42a4-89dc-47efa00bcb1f
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/@","name":"@","type":"Microsoft.Network/dnszones/A","etag":"0b876f56-1eb4-42a4-89dc-47efa00bcb1f","properties":{"fqdn":"zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_444
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/default?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"0.1.2.3"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:01 GMT
+          etag: 1bba4f06-684d-4499-9a62-06e94b6777f3
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11993'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/default","name":"default","type":"Microsoft.Network/dnszones/A","etag":"1bba4f06-684d-4499-9a62-06e94b6777f3","properties":{"fqdn":"default.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"0.1.2.3"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_445
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/CNAME/tc?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"test.zone5.com."}}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '462'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:02 GMT
+          etag: 04d296da-6502-4529-9d78-753f49ed4064
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11998'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/tc","name":"tc","type":"Microsoft.Network/dnszones/CNAME","etag":"04d296da-6502-4529-9d78-753f49ed4064","properties":{"fqdn":"tc.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"test.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_446
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/www?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '454'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:04 GMT
+          etag: fb131096-318f-4b25-8ea1-ecc754b99a2f
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11991'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/www","name":"www","type":"Microsoft.Network/dnszones/A","etag":"fb131096-318f-4b25-8ea1-ecc754b99a2f","properties":{"fqdn":"www.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_447
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/CNAME/test-cname?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"r1.zone5.com."}}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '484'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:06 GMT
+          etag: ff64216d-626f-4555-ba57-bdb057c3b196
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname","name":"test-cname","type":"Microsoft.Network/dnszones/CNAME","etag":"ff64216d-626f-4555-ba57-bdb057c3b196","properties":{"fqdn":"test-cname.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_448
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/MX/test-mx?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"MXRecords":[{"preference":10,"exchange":"m1.zone5.com."}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '488'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:07 GMT
+          etag: d7b11468-b6a4-4f74-9056-2f0973027c96
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"d7b11468-b6a4-4f74-9056-2f0973027c96","properties":{"fqdn":"test-mx.zone5.com.","TTL":3600,"MXRecords":[{"exchange":"m1.zone5.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_449
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/NS/test-ns?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"NSRecords":[{"nsdname":"ns1.zone5.com."}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '472'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:08 GMT
+          etag: 6b74fd49-a901-49ce-8629-3a9fdc60f5df
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"6b74fd49-a901-49ce-8629-3a9fdc60f5df","properties":{"fqdn":"test-ns.zone5.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1.zone5.com."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_450
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/SRV/test-srv?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SRVRecords":[{"priority":1,"weight":2,"port":3,"target":"srv1.zone5.com."}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '511'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:10 GMT
+          etag: 56c501cf-2bba-45ac-805a-26ea2b9d3b7b
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11998'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SRV/test-srv","name":"test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"56c501cf-2bba-45ac-805a-26ea2b9d3b7b","properties":{"fqdn":"test-srv.zone5.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"srv1.zone5.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_451
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/CNAME/test-cname2?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"r1."}}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '477'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:11 GMT
+          etag: 7a0077a9-5e3d-40de-b87d-41ce1c56400f
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname2","name":"test-cname2","type":"Microsoft.Network/dnszones/CNAME","etag":"7a0077a9-5e3d-40de-b87d-41ce1c56400f","properties":{"fqdn":"test-cname2.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_452
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/MX/test-mx2?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"MXRecords":[{"preference":10,"exchange":"m1."}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '481'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:13 GMT
+          etag: 0cd1c419-c168-42bd-a611-97085a9443ba
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/MX/test-mx2","name":"test-mx2","type":"Microsoft.Network/dnszones/MX","etag":"0cd1c419-c168-42bd-a611-97085a9443ba","properties":{"fqdn":"test-mx2.zone5.com.","TTL":3600,"MXRecords":[{"exchange":"m1.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_453
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/NS/test-ns2?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"NSRecords":[{"nsdname":"ns1."}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '465'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:14 GMT
+          etag: 7bf42581-e89d-46c7-b900-5c7ac9bb2035
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/test-ns2","name":"test-ns2","type":"Microsoft.Network/dnszones/NS","etag":"7bf42581-e89d-46c7-b900-5c7ac9bb2035","properties":{"fqdn":"test-ns2.zone5.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_454
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/SRV/test-srv2?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SRVRecords":[{"priority":1,"weight":2,"port":3,"target":"srv1."}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '504'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:15 GMT
+          etag: 9039f6b3-e22b-4a95-8701-978128be442c
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SRV/test-srv2","name":"test-srv2","type":"Microsoft.Network/dnszones/SRV","etag":"9039f6b3-e22b-4a95-8701-978128be442c","properties":{"fqdn":"test-srv2.zone5.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"srv1.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_455
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/subzone?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"3.4.5.6"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:17 GMT
+          etag: 541754f6-8c63-4b52-afd2-a49cdd1b0944
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11992'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/subzone","name":"subzone","type":"Microsoft.Network/dnszones/A","etag":"541754f6-8c63-4b52-afd2-a49cdd1b0944","properties":{"fqdn":"subzone.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"3.4.5.6"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_456
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/www.subzone?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"4.5.6.7"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '478'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:19 GMT
+          etag: 6992fd33-a820-406b-99f9-1e924997f642
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11994'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/www.subzone","name":"www.subzone","type":"Microsoft.Network/dnszones/A","etag":"6992fd33-a820-406b-99f9-1e924997f642","properties":{"fqdn":"www.subzone.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"4.5.6.7"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_457
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/CNAME/test-cname.subzone?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"CNAMERecord":{"cname":"r1.subzone.zone5.com."}}}
+        requestHeaders:
+          cache-control: private
+          content-length: '516'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:20 GMT
+          etag: 0b90c01a-f9ca-4b4e-a060-50132406f5e9
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11996'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname.subzone","name":"test-cname.subzone","type":"Microsoft.Network/dnszones/CNAME","etag":"0b90c01a-f9ca-4b4e-a060-50132406f5e9","properties":{"fqdn":"test-cname.subzone.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1.subzone.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_458
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/CNAME/record?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"bar.foo.com."}}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '471'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:21 GMT
+          etag: 0aeb33cb-cf97-479b-bf71-b364316b4a77
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11998'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/record","name":"record","type":"Microsoft.Network/dnszones/CNAME","etag":"0aeb33cb-cf97-479b-bf71-b364316b4a77","properties":{"fqdn":"record.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"bar.foo.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_459
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/test?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"7.8.9.0"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '457'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:22 GMT
+          etag: 2dfc8060-67a6-4078-a833-3094483abcc8
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11992'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/test","name":"test","type":"Microsoft.Network/dnszones/A","etag":"2dfc8060-67a6-4078-a833-3094483abcc8","properties":{"fqdn":"test.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"7.8.9.0"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_460
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/recordsets?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '9288'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:24 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-entities-read: '59981'
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/@","name":"@","type":"Microsoft.Network/dnszones/A","etag":"0b876f56-1eb4-42a4-89dc-47efa00bcb1f","properties":{"fqdn":"zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"dfc08dfe-e588-49de-b268-531fc068f8e8","properties":{"fqdn":"zone5.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"341e6f09-38d1-4231-8f3d-2507886a25c1","properties":{"fqdn":"zone5.com.","TTL":3600,"SOARecord":{"email":"hostmaster.zone5.com.","expireTime":1814400,"host":"ns1-06.azure-dns.com.","minimumTTL":10800,"refreshTime":43200,"retryTime":900,"serialNumber":2003080800},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/default","name":"default","type":"Microsoft.Network/dnszones/A","etag":"1bba4f06-684d-4499-9a62-06e94b6777f3","properties":{"fqdn":"default.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"0.1.2.3"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/record","name":"record","type":"Microsoft.Network/dnszones/CNAME","etag":"0aeb33cb-cf97-479b-bf71-b364316b4a77","properties":{"fqdn":"record.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"bar.foo.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/subzone","name":"subzone","type":"Microsoft.Network/dnszones/A","etag":"541754f6-8c63-4b52-afd2-a49cdd1b0944","properties":{"fqdn":"subzone.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"3.4.5.6"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname.subzone","name":"test-cname.subzone","type":"Microsoft.Network/dnszones/CNAME","etag":"0b90c01a-f9ca-4b4e-a060-50132406f5e9","properties":{"fqdn":"test-cname.subzone.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1.subzone.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/www.subzone","name":"www.subzone","type":"Microsoft.Network/dnszones/A","etag":"6992fd33-a820-406b-99f9-1e924997f642","properties":{"fqdn":"www.subzone.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"4.5.6.7"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/tc","name":"tc","type":"Microsoft.Network/dnszones/CNAME","etag":"04d296da-6502-4529-9d78-753f49ed4064","properties":{"fqdn":"tc.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"test.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/test","name":"test","type":"Microsoft.Network/dnszones/A","etag":"2dfc8060-67a6-4078-a833-3094483abcc8","properties":{"fqdn":"test.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"7.8.9.0"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname","name":"test-cname","type":"Microsoft.Network/dnszones/CNAME","etag":"ff64216d-626f-4555-ba57-bdb057c3b196","properties":{"fqdn":"test-cname.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname2","name":"test-cname2","type":"Microsoft.Network/dnszones/CNAME","etag":"7a0077a9-5e3d-40de-b87d-41ce1c56400f","properties":{"fqdn":"test-cname2.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"d7b11468-b6a4-4f74-9056-2f0973027c96","properties":{"fqdn":"test-mx.zone5.com.","TTL":3600,"MXRecords":[{"exchange":"m1.zone5.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/MX/test-mx2","name":"test-mx2","type":"Microsoft.Network/dnszones/MX","etag":"0cd1c419-c168-42bd-a611-97085a9443ba","properties":{"fqdn":"test-mx2.zone5.com.","TTL":3600,"MXRecords":[{"exchange":"m1.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"6b74fd49-a901-49ce-8629-3a9fdc60f5df","properties":{"fqdn":"test-ns.zone5.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1.zone5.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/test-ns2","name":"test-ns2","type":"Microsoft.Network/dnszones/NS","etag":"7bf42581-e89d-46c7-b900-5c7ac9bb2035","properties":{"fqdn":"test-ns2.zone5.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SRV/test-srv","name":"test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"56c501cf-2bba-45ac-805a-26ea2b9d3b7b","properties":{"fqdn":"test-srv.zone5.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"srv1.zone5.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SRV/test-srv2","name":"test-srv2","type":"Microsoft.Network/dnszones/SRV","etag":"9039f6b3-e22b-4a95-8701-978128be442c","properties":{"fqdn":"test-srv2.zone5.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"srv1.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/www","name":"www","type":"Microsoft.Network/dnszones/A","etag":"fb131096-318f-4b25-8ea1-ecc754b99a2f","properties":{"fqdn":"www.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_461
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/recordsets?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '9288'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:25 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-entities-read: '59981'
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/@","name":"@","type":"Microsoft.Network/dnszones/A","etag":"0b876f56-1eb4-42a4-89dc-47efa00bcb1f","properties":{"fqdn":"zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"dfc08dfe-e588-49de-b268-531fc068f8e8","properties":{"fqdn":"zone5.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"341e6f09-38d1-4231-8f3d-2507886a25c1","properties":{"fqdn":"zone5.com.","TTL":3600,"SOARecord":{"email":"hostmaster.zone5.com.","expireTime":1814400,"host":"ns1-06.azure-dns.com.","minimumTTL":10800,"refreshTime":43200,"retryTime":900,"serialNumber":2003080800},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/default","name":"default","type":"Microsoft.Network/dnszones/A","etag":"1bba4f06-684d-4499-9a62-06e94b6777f3","properties":{"fqdn":"default.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"0.1.2.3"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/record","name":"record","type":"Microsoft.Network/dnszones/CNAME","etag":"0aeb33cb-cf97-479b-bf71-b364316b4a77","properties":{"fqdn":"record.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"bar.foo.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/subzone","name":"subzone","type":"Microsoft.Network/dnszones/A","etag":"541754f6-8c63-4b52-afd2-a49cdd1b0944","properties":{"fqdn":"subzone.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"3.4.5.6"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname.subzone","name":"test-cname.subzone","type":"Microsoft.Network/dnszones/CNAME","etag":"0b90c01a-f9ca-4b4e-a060-50132406f5e9","properties":{"fqdn":"test-cname.subzone.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1.subzone.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/www.subzone","name":"www.subzone","type":"Microsoft.Network/dnszones/A","etag":"6992fd33-a820-406b-99f9-1e924997f642","properties":{"fqdn":"www.subzone.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"4.5.6.7"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/tc","name":"tc","type":"Microsoft.Network/dnszones/CNAME","etag":"04d296da-6502-4529-9d78-753f49ed4064","properties":{"fqdn":"tc.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"test.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/test","name":"test","type":"Microsoft.Network/dnszones/A","etag":"2dfc8060-67a6-4078-a833-3094483abcc8","properties":{"fqdn":"test.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"7.8.9.0"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname","name":"test-cname","type":"Microsoft.Network/dnszones/CNAME","etag":"ff64216d-626f-4555-ba57-bdb057c3b196","properties":{"fqdn":"test-cname.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname2","name":"test-cname2","type":"Microsoft.Network/dnszones/CNAME","etag":"7a0077a9-5e3d-40de-b87d-41ce1c56400f","properties":{"fqdn":"test-cname2.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"d7b11468-b6a4-4f74-9056-2f0973027c96","properties":{"fqdn":"test-mx.zone5.com.","TTL":3600,"MXRecords":[{"exchange":"m1.zone5.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/MX/test-mx2","name":"test-mx2","type":"Microsoft.Network/dnszones/MX","etag":"0cd1c419-c168-42bd-a611-97085a9443ba","properties":{"fqdn":"test-mx2.zone5.com.","TTL":3600,"MXRecords":[{"exchange":"m1.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"6b74fd49-a901-49ce-8629-3a9fdc60f5df","properties":{"fqdn":"test-ns.zone5.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1.zone5.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/test-ns2","name":"test-ns2","type":"Microsoft.Network/dnszones/NS","etag":"7bf42581-e89d-46c7-b900-5c7ac9bb2035","properties":{"fqdn":"test-ns2.zone5.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SRV/test-srv","name":"test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"56c501cf-2bba-45ac-805a-26ea2b9d3b7b","properties":{"fqdn":"test-srv.zone5.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"srv1.zone5.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SRV/test-srv2","name":"test-srv2","type":"Microsoft.Network/dnszones/SRV","etag":"9039f6b3-e22b-4a95-8701-978128be442c","properties":{"fqdn":"test-srv2.zone5.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"srv1.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/www","name":"www","type":"Microsoft.Network/dnszones/A","etag":"fb131096-318f-4b25-8ea1-ecc754b99a2f","properties":{"fqdn":"www.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_462
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com?api-version=2018-05-01
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com:443/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsOperationStatuses/delzone6374836688877767867da4deb5?api-version=2018-05-01
+          cache-control: private
+          content-length: '0'
+          date: Mon, 08 Feb 2021 07:41:29 GMT
+          location: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsOperationResults/delzone6374836688877767867da4deb5?api-version=2018-05-01
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 202
+      - step: RawStep_463
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsOperationStatuses/delzone6374836688877767867da4deb5?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '22'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:32 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_464
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com?api-version=2018-05-01
+        requestBody: '{"location":"global","properties":{"zoneType":"Public"}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '612'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:36 GMT
+          etag: 00000002-0000-0000-2d5d-cad3edfdd601
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com","name":"zone5.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-2d5d-cad3edfdd601","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-06.azure-dns.com.","ns2-06.azure-dns.net.","ns3-06.azure-dns.org.","ns4-06.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_465
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/SOA/@?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '590'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:37 GMT
+          etag: 00ac2834-258c-4724-bf9c-eff9bfa750f0
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '498'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"00ac2834-258c-4724-bf9c-eff9bfa750f0","properties":{"fqdn":"zone5.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.microsoft.com","expireTime":2419200,"host":"ns1-06.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_466
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/SOA/@?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SOARecord":{"host":"ns1-06.azure-dns.com.","email":"hostmaster.zone5.com.","serialNumber":2003080800,"refreshTime":43200,"retryTime":900,"expireTime":1814400,"minimumTTL":10800}}}
+        requestHeaders:
+          cache-control: private
+          content-length: '590'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:39 GMT
+          etag: 7dcd193a-5373-4676-8acf-c0e4217032c4
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11998'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"7dcd193a-5373-4676-8acf-c0e4217032c4","properties":{"fqdn":"zone5.com.","TTL":3600,"SOARecord":{"email":"hostmaster.zone5.com.","expireTime":1814400,"host":"ns1-06.azure-dns.com.","minimumTTL":10800,"refreshTime":43200,"retryTime":900,"serialNumber":2003080800},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_467
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/@?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '446'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:40 GMT
+          etag: e687e0aa-bf04-4cb1-b7dd-145e67b9aea8
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11993'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/@","name":"@","type":"Microsoft.Network/dnszones/A","etag":"e687e0aa-bf04-4cb1-b7dd-145e67b9aea8","properties":{"fqdn":"zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_468
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/NS/@?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '570'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:42 GMT
+          etag: 9f9b75b7-d0e5-4950-a122-42f4d113040e
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '499'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"9f9b75b7-d0e5-4950-a122-42f4d113040e","properties":{"fqdn":"zone5.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_469
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/NS/@?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"9f9b75b7-d0e5-4950-a122-42f4d113040e","properties":{"TTL":172800,"targetResource":{},"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '570'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:43 GMT
+          etag: cf409af7-37ae-4625-b8db-91f07d6c3066
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11996'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"cf409af7-37ae-4625-b8db-91f07d6c3066","properties":{"fqdn":"zone5.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_470
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/default?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"0.1.2.3"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:45 GMT
+          etag: 134a765c-a23c-4b58-9f2b-889655bf3f97
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11988'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/default","name":"default","type":"Microsoft.Network/dnszones/A","etag":"134a765c-a23c-4b58-9f2b-889655bf3f97","properties":{"fqdn":"default.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"0.1.2.3"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_471
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/CNAME/record?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"bar.foo.com."}}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '471'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:47 GMT
+          etag: ce5c9952-cde2-4529-ae42-584951683a42
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/record","name":"record","type":"Microsoft.Network/dnszones/CNAME","etag":"ce5c9952-cde2-4529-ae42-584951683a42","properties":{"fqdn":"record.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"bar.foo.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_472
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/subzone?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"3.4.5.6"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '466'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:48 GMT
+          etag: c82298c5-fbc0-4ac8-b353-7fe594732913
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11993'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/subzone","name":"subzone","type":"Microsoft.Network/dnszones/A","etag":"c82298c5-fbc0-4ac8-b353-7fe594732913","properties":{"fqdn":"subzone.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"3.4.5.6"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_473
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/CNAME/test-cname.subzone?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"CNAMERecord":{"cname":"r1.subzone.zone5.com."}}}
+        requestHeaders:
+          cache-control: private
+          content-length: '516'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:49 GMT
+          etag: e91c17d4-37e1-4306-8532-f7f707aaad47
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11996'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname.subzone","name":"test-cname.subzone","type":"Microsoft.Network/dnszones/CNAME","etag":"e91c17d4-37e1-4306-8532-f7f707aaad47","properties":{"fqdn":"test-cname.subzone.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1.subzone.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_474
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/www.subzone?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"4.5.6.7"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '478'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:51 GMT
+          etag: eb3adb99-e341-44c7-a0f9-4d95eff1decd
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11993'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/www.subzone","name":"www.subzone","type":"Microsoft.Network/dnszones/A","etag":"eb3adb99-e341-44c7-a0f9-4d95eff1decd","properties":{"fqdn":"www.subzone.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"4.5.6.7"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_475
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/CNAME/tc?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"test.zone5.com."}}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '462'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:53 GMT
+          etag: fcffa97c-a217-4421-8e9a-505b7eab931a
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11998'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/tc","name":"tc","type":"Microsoft.Network/dnszones/CNAME","etag":"fcffa97c-a217-4421-8e9a-505b7eab931a","properties":{"fqdn":"tc.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"test.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_476
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/test?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"7.8.9.0"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '457'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:55 GMT
+          etag: a035fd2e-0a65-47a0-8d32-cda2ad824190
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11992'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/test","name":"test","type":"Microsoft.Network/dnszones/A","etag":"a035fd2e-0a65-47a0-8d32-cda2ad824190","properties":{"fqdn":"test.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"7.8.9.0"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_477
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/CNAME/test-cname?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"r1.zone5.com."}}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '484'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:56 GMT
+          etag: b2b766a5-84cb-47db-8bb4-d2acff4827d5
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname","name":"test-cname","type":"Microsoft.Network/dnszones/CNAME","etag":"b2b766a5-84cb-47db-8bb4-d2acff4827d5","properties":{"fqdn":"test-cname.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_478
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/CNAME/test-cname2?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"r1."}}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '477'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:57 GMT
+          etag: 11a737a8-8a9b-4389-9e7b-e529b4e99a02
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname2","name":"test-cname2","type":"Microsoft.Network/dnszones/CNAME","etag":"11a737a8-8a9b-4389-9e7b-e529b4e99a02","properties":{"fqdn":"test-cname2.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_479
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/MX/test-mx?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"MXRecords":[{"preference":10,"exchange":"m1.zone5.com."}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '488'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:41:59 GMT
+          etag: 5abcdf04-c6df-4b9a-a3d3-aefddc4179cb
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"5abcdf04-c6df-4b9a-a3d3-aefddc4179cb","properties":{"fqdn":"test-mx.zone5.com.","TTL":3600,"MXRecords":[{"exchange":"m1.zone5.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_480
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/MX/test-mx2?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"MXRecords":[{"preference":10,"exchange":"m1."}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '481'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:42:01 GMT
+          etag: 3d649082-cade-442c-bf8e-376c1f792571
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/MX/test-mx2","name":"test-mx2","type":"Microsoft.Network/dnszones/MX","etag":"3d649082-cade-442c-bf8e-376c1f792571","properties":{"fqdn":"test-mx2.zone5.com.","TTL":3600,"MXRecords":[{"exchange":"m1.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_481
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/NS/test-ns?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"NSRecords":[{"nsdname":"ns1.zone5.com."}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '472'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:42:02 GMT
+          etag: b787b7a7-873d-4126-8cba-b283ef4dfa7c
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11995'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"b787b7a7-873d-4126-8cba-b283ef4dfa7c","properties":{"fqdn":"test-ns.zone5.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1.zone5.com."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_482
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/NS/test-ns2?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"NSRecords":[{"nsdname":"ns1."}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '465'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:42:04 GMT
+          etag: 0e0cc457-c666-4724-aa81-2f66f34cc378
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11994'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/test-ns2","name":"test-ns2","type":"Microsoft.Network/dnszones/NS","etag":"0e0cc457-c666-4724-aa81-2f66f34cc378","properties":{"fqdn":"test-ns2.zone5.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_483
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/SRV/test-srv?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SRVRecords":[{"priority":1,"weight":2,"port":3,"target":"srv1.zone5.com."}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '511'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:42:05 GMT
+          etag: 04054fdd-b305-4293-8198-4f8f8b53df31
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11997'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SRV/test-srv","name":"test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"04054fdd-b305-4293-8198-4f8f8b53df31","properties":{"fqdn":"test-srv.zone5.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"srv1.zone5.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_484
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/SRV/test-srv2?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SRVRecords":[{"priority":1,"weight":2,"port":3,"target":"srv1."}]}}
+        requestHeaders:
+          cache-control: private
+          content-length: '504'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:42:08 GMT
+          etag: 78680759-61a2-4008-b1b3-2c9bc1f7edf3
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11999'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SRV/test-srv2","name":"test-srv2","type":"Microsoft.Network/dnszones/SRV","etag":"78680759-61a2-4008-b1b3-2c9bc1f7edf3","properties":{"fqdn":"test-srv2.zone5.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"srv1.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_485
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/A/www?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}]}}'
+        requestHeaders:
+          cache-control: private
+          content-length: '454'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:42:10 GMT
+          etag: b28b261f-a17b-4b77-8361-dc361e38e133
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '11991'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/www","name":"www","type":"Microsoft.Network/dnszones/A","etag":"b28b261f-a17b-4b77-8361-dc361e38e133","properties":{"fqdn":"www.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_486
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnsZones/zone5.com/recordsets?api-version=2018-05-01
+        requestHeaders:
+          cache-control: private
+          content-length: '9288'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 07:42:10 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-entities-read: '59962'
+          x-ms-ratelimit-remaining-subscription-resource-requests: '498'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/@","name":"@","type":"Microsoft.Network/dnszones/A","etag":"e687e0aa-bf04-4cb1-b7dd-145e67b9aea8","properties":{"fqdn":"zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"cf409af7-37ae-4625-b8db-91f07d6c3066","properties":{"fqdn":"zone5.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"7dcd193a-5373-4676-8acf-c0e4217032c4","properties":{"fqdn":"zone5.com.","TTL":3600,"SOARecord":{"email":"hostmaster.zone5.com.","expireTime":1814400,"host":"ns1-06.azure-dns.com.","minimumTTL":10800,"refreshTime":43200,"retryTime":900,"serialNumber":2003080800},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/default","name":"default","type":"Microsoft.Network/dnszones/A","etag":"134a765c-a23c-4b58-9f2b-889655bf3f97","properties":{"fqdn":"default.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"0.1.2.3"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/record","name":"record","type":"Microsoft.Network/dnszones/CNAME","etag":"ce5c9952-cde2-4529-ae42-584951683a42","properties":{"fqdn":"record.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"bar.foo.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/subzone","name":"subzone","type":"Microsoft.Network/dnszones/A","etag":"c82298c5-fbc0-4ac8-b353-7fe594732913","properties":{"fqdn":"subzone.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"3.4.5.6"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname.subzone","name":"test-cname.subzone","type":"Microsoft.Network/dnszones/CNAME","etag":"e91c17d4-37e1-4306-8532-f7f707aaad47","properties":{"fqdn":"test-cname.subzone.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1.subzone.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/www.subzone","name":"www.subzone","type":"Microsoft.Network/dnszones/A","etag":"eb3adb99-e341-44c7-a0f9-4d95eff1decd","properties":{"fqdn":"www.subzone.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"4.5.6.7"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/tc","name":"tc","type":"Microsoft.Network/dnszones/CNAME","etag":"fcffa97c-a217-4421-8e9a-505b7eab931a","properties":{"fqdn":"tc.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"test.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/test","name":"test","type":"Microsoft.Network/dnszones/A","etag":"a035fd2e-0a65-47a0-8d32-cda2ad824190","properties":{"fqdn":"test.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"7.8.9.0"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname","name":"test-cname","type":"Microsoft.Network/dnszones/CNAME","etag":"b2b766a5-84cb-47db-8bb4-d2acff4827d5","properties":{"fqdn":"test-cname.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1.zone5.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/CNAME/test-cname2","name":"test-cname2","type":"Microsoft.Network/dnszones/CNAME","etag":"11a737a8-8a9b-4389-9e7b-e529b4e99a02","properties":{"fqdn":"test-cname2.zone5.com.","TTL":3600,"CNAMERecord":{"cname":"r1."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"5abcdf04-c6df-4b9a-a3d3-aefddc4179cb","properties":{"fqdn":"test-mx.zone5.com.","TTL":3600,"MXRecords":[{"exchange":"m1.zone5.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/MX/test-mx2","name":"test-mx2","type":"Microsoft.Network/dnszones/MX","etag":"3d649082-cade-442c-bf8e-376c1f792571","properties":{"fqdn":"test-mx2.zone5.com.","TTL":3600,"MXRecords":[{"exchange":"m1.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"b787b7a7-873d-4126-8cba-b283ef4dfa7c","properties":{"fqdn":"test-ns.zone5.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1.zone5.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/NS/test-ns2","name":"test-ns2","type":"Microsoft.Network/dnszones/NS","etag":"0e0cc457-c666-4724-aa81-2f66f34cc378","properties":{"fqdn":"test-ns2.zone5.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SRV/test-srv","name":"test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"04054fdd-b305-4293-8198-4f8f8b53df31","properties":{"fqdn":"test-srv.zone5.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"srv1.zone5.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/SRV/test-srv2","name":"test-srv2","type":"Microsoft.Network/dnszones/SRV","etag":"78680759-61a2-4008-b1b3-2c9bc1f7edf3","properties":{"fqdn":"test-srv2.zone5.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"srv1.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone5_import000001/providers/Microsoft.Network/dnszones/zone5.com/A/www","name":"www","type":"Microsoft.Network/dnszones/A","etag":"b28b261f-a17b-4b77-8361-dc361e38e133","properties":{"fqdn":"www.zone5.com.","TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}}]}

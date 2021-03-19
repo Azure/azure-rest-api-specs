@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "NetworkWatcherRG",
+    "networkWatcherName": "NetworkWatcher_eastus",
+    "flowLogName": "flow_log_test2",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_nw_flow_log_000001/providers/Microsoft.Network/networkSecurityGroups/nsg1",
+        "storageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_nw_flow_log_000001/providers/Microsoft.Storage/storageAccounts/testflowlog000002",
+        "enabled": true,
+        "flowAnalyticsConfiguration": {
+          "networkWatcherFlowAnalyticsConfiguration": {
+            "workspaceId": "906914ad-6921-4114-9b71-e549fe0bb9b5",
+            "workspaceRegion": "eastus",
+            "workspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_nw_flow_log_000001/providers/microsoft.operationalinsights/workspaces/clitest000003",
+            "trafficAnalyticsInterval": 60
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "flow_log_test2",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkWatchers/NetworkWatcher_eastus/flowLogs/flow_log_test2",
+      "etag": "W/\"073b4541-4e42-4ebd-9b9f-c7654d4cf0a8\"",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_nw_flow_log_000001/providers/Microsoft.Network/networkSecurityGroups/nsg1",
+        "targetResourceGuid": "18e6ba07-e645-4137-b5a9-2182e7bf2556",
+        "storageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_nw_flow_log_000001/providers/Microsoft.Storage/storageAccounts/testflowlog000002",
+        "enabled": true,
+        "flowAnalyticsConfiguration": {
+          "networkWatcherFlowAnalyticsConfiguration": {
+            "enabled": false,
+            "workspaceId": "906914ad-6921-4114-9b71-e549fe0bb9b5",
+            "workspaceRegion": "eastus",
+            "workspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_nw_flow_log_000001/providers/microsoft.operationalinsights/workspaces/clitest000003",
+            "trafficAnalyticsInterval": 60
+          }
+        },
+        "retentionPolicy": {
+          "days": 0,
+          "enabled": false
+        },
+        "format": {
+          "type": "JSON",
+          "version": 1
+        }
+      },
+      "type": "Microsoft.Network/networkWatchers/flowLogs",
+      "location": "eastus"
+    }
+  }
+}

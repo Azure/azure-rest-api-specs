@@ -1,0 +1,124 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_app_gateway_with_private_ip
+    steps:
+      - step: RawStep_1333
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_private_ip000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:24:25 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_private_ip000001","name":"cli_test_ag_private_ip000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:24:23Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1334
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_ag_private_ip000001%27%20and%20name%20eq%20%27None%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FvirtualNetworks%27&api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '12'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:24:25 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"value":[]}'
+      - step: RawStep_1335
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_private_ip000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{"certPassword":{"type":"securestring","metadata":{"description":"Secure
+          certPassword"}}},"variables":{"appGwID":"[resourceId('Microsoft.Network/applicationGateways',
+          'ag3')]"},"resources":[{"name":"ag3Vnet","type":"Microsoft.Network/virtualNetworks","location":"westus","apiVersion":"2015-06-15","dependsOn":[],"tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"subnets":[{"name":"subnet1","properties":{"addressPrefix":"10.0.0.0/24"}}]}},{"type":"Microsoft.Network/applicationGateways","name":"ag3","location":"westus","tags":{},"apiVersion":"2020-08-01","dependsOn":["Microsoft.Network/virtualNetworks/ag3Vnet"],"properties":{"backendAddressPools":[{"name":"appGatewayBackendPool"}],"backendHttpSettingsCollection":[{"name":"appGatewayBackendHttpSettings","properties":{"Port":80,"Protocol":"Http","CookieBasedAffinity":"disabled","connectionDraining":{"enabled":false,"drainTimeoutInSec":1}}}],"frontendIPConfigurations":[{"name":"appGatewayPrivateFrontendIP","properties":{"privateIPAllocationMethod":"Static","privateIPAddress":"10.0.0.15","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_private_ip000001/providers/Microsoft.Network/virtualNetworks/ag3Vnet/subnets/subnet1"}}}],"frontendPorts":[{"name":"appGatewayFrontendPort","properties":{"Port":443}}],"gatewayIPConfigurations":[{"name":"appGatewayPrivateFrontendIP","properties":{"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_private_ip000001/providers/Microsoft.Network/virtualNetworks/ag3Vnet/subnets/subnet1"}}}],"httpListeners":[{"name":"appGatewayHttpListener","properties":{"FrontendIpConfiguration":{"Id":"[concat(variables('appGwID'),
+          '/frontendIPConfigurations/appGatewayPrivateFrontendIP')]"},"FrontendPort":{"Id":"[concat(variables('appGwID'),
+          '/frontendPorts/appGatewayFrontendPort')]"},"Protocol":"https","SslCertificate":{"id":"[concat(variables('appGwID'),
+          '/sslCertificates/ag3SslCert')]"}}}],"sku":{"name":"Standard_Medium","tier":"Standard","capacity":2},"requestRoutingRules":[{"Name":"rule1","properties":{"RuleType":"Basic","httpListener":{"id":"[concat(variables('appGwID'),
+          '/httpListeners/appGatewayHttpListener')]"},"backendAddressPool":{"id":"[concat(variables('appGwID'),
+          '/backendAddressPools/appGatewayBackendPool')]"},"backendHttpSettings":{"id":"[concat(variables('appGwID'),
+          '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"}}}],"privateLinkConfigurations":[],"sslCertificates":[{"name":"ag3SslCert","properties":{"data":"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","password":"[parameters('certPassword')]"}}]},"zones":null}],"outputs":{"applicationGateway":{"type":"object","value":"[reference('ag3')]"}}},"parameters":{"certPassword":{"value":"password"}},"mode":"Incremental"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_private_ip000001/providers/Microsoft.Resources/deployments/ag_deploy_w1KSGTP2WKCfEDXz1JcuyVn7PoqkpRBl/operationStatuses/08585874410177627798?api-version=2020-10-01
+          cache-control: no-cache
+          content-length: '1388'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:24:31 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1181'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_private_ip000001/providers/Microsoft.Resources/deployments/ag_deploy_w1KSGTP2WKCfEDXz1JcuyVn7PoqkpRBl","name":"ag_deploy_w1KSGTP2WKCfEDXz1JcuyVn7PoqkpRBl","type":"Microsoft.Resources/deployments","properties":{"templateHash":"1774322664235376569","parameters":{"certPassword":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-02-24T11:24:29.9387149Z","duration":"PT2.2238736S","correlationId":"13b3a43c-85b4-41f8-9000-fe583ab72381","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["westus"]},{"resourceType":"applicationGateways","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_private_ip000001/providers/Microsoft.Network/virtualNetworks/ag3Vnet","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"ag3Vnet"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_private_ip000001/providers/Microsoft.Network/applicationGateways/ag3","resourceType":"Microsoft.Network/applicationGateways","resourceName":"ag3"}]}}
+      - step: ApplicationGateways_Get_1336
+        exampleFile: ../examples/ApplicationGateways_Get_1336_Generated.json
+        operationId: ApplicationGateways_Get
+      - step: Create_applicationGateways_ag3
+        resourceName: applicationGateways_ag3
+        exampleFile: ../examples/Create_applicationGateways_ag3_Generated.json
+        operationId: ApplicationGateways_CreateOrUpdate
+      - step: Update_applicationGateways_ag3_1339
+        resourceName: applicationGateways_ag3
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/provisioningState
+            value: Updating
+          - replace: /properties/gatewayIPConfigurations/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/sslCertificates/0/properties/provisioningState
+            value: Updating
+          - replace: >-
+              /properties/frontendIPConfigurations/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/frontendPorts/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/backendAddressPools/0/properties/provisioningState
+            value: Updating
+          - replace: >-
+              /properties/backendHttpSettingsCollection/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/httpListeners/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/requestRoutingRules/0/properties/provisioningState
+            value: Updating
+          - add: /properties/sslPolicy
+            value:
+              disabledSslProtocols:
+                - TLSv1_0
+                - TLSv1_1
+      - step: Update_applicationGateways_ag3_1341
+        resourceName: applicationGateways_ag3
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/sslPolicy/disabledSslProtocols
+          - add: /properties/sslPolicy/policyType
+            value: Custom
+          - add: /properties/sslPolicy/cipherSuites
+            value:
+              - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+          - add: /properties/sslPolicy/minProtocolVersion
+            value: TLSv1_0
+      - step: Update_applicationGateways_ag3_1343
+        resourceName: applicationGateways_ag3
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/sslPolicy/policyType
+            value: Predefined
+          - remove: /properties/sslPolicy/minProtocolVersion
+          - remove: /properties/sslPolicy/cipherSuites
+          - add: /properties/sslPolicy/policyName
+            value: AppGwSslPolicy20150501
+    variables:
+      applicationGatewayName: ag3

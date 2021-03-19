@@ -1,0 +1,47 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_express_route_ipv6_peering
+    steps:
+      - step: RawStep_1700
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_express_route_ipv6_peering000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:25:56 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_ipv6_peering000001","name":"cli_test_express_route_ipv6_peering000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:25:54Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_expressRouteCircuits_circuit1
+        resourceName: expressRouteCircuits_circuit1
+        exampleFile: ../examples/Create_expressRouteCircuits_circuit1_Generated_1702.json
+        operationId: ExpressRouteCircuits_CreateOrUpdate
+      - step: Create_peerings_MicrosoftPeering
+        resourceName: peerings_MicrosoftPeering
+        exampleFile: ../examples/Create_peerings_MicrosoftPeering_Generated.json
+        operationId: ExpressRouteCircuitPeerings_CreateOrUpdate
+      - step: Update_peerings_MicrosoftPeering_1705
+        resourceName: peerings_MicrosoftPeering
+        operationId: ExpressRouteCircuitPeerings_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/ipv6PeeringConfig
+            value:
+              primaryPeerAddressPrefix: 2001:db00::/126
+              secondaryPeerAddressPrefix: 2002:db00::/126
+              microsoftPeeringConfig:
+                advertisedPublicPrefixes:
+                  - 2001:db00::/126
+                customerASN: 100001
+                routingRegistryName: LEVEL3
+                advertisedPublicPrefixesState: ValidationNeeded
+                legacyMode: 0
+              state: Enabled
+    variables:
+      circuitName: circuit1
+      peeringName: MicrosoftPeering

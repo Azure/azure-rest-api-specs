@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_cross_region_lb_address_pool000001",
+    "loadBalancerName": "cross_region_lb000002"
+  },
+  "responses": {
+    "200": {
+      "name": "cross_region_lb000002",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000002",
+      "etag": "W/\"aa617ac9-7b08-4967-8247-eaa75817c3d4\"",
+      "type": "Microsoft.Network/loadBalancers",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "791c7054-6203-4e4f-9534-22c995282087",
+        "frontendIPConfigurations": [
+          {
+            "name": "LoadBalancerFrontEnd",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000002/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "etag": "W/\"aa617ac9-7b08-4967-8247-eaa75817c3d4\"",
+            "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/publicIPAddresses/PublicIPcross_region_lb000002"
+              },
+              "privateIPAddressVersion": "IPv4"
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "cross_region_lb000002bepool",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000002/backendAddressPools/cross_region_lb000002bepool",
+            "etag": "W/\"aa617ac9-7b08-4967-8247-eaa75817c3d4\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "loadBalancerBackendAddresses": []
+            },
+            "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+          },
+          {
+            "name": "bap1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000002/backendAddressPools/bap1",
+            "etag": "W/\"aa617ac9-7b08-4967-8247-eaa75817c3d4\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "loadBalancerBackendAddresses": []
+            },
+            "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+          },
+          {
+            "name": "bap2",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000002/backendAddressPools/bap2",
+            "etag": "W/\"aa617ac9-7b08-4967-8247-eaa75817c3d4\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "loadBalancerBackendAddresses": []
+            },
+            "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+          },
+          {
+            "name": "bap3",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000002/backendAddressPools/bap3",
+            "etag": "W/\"aa617ac9-7b08-4967-8247-eaa75817c3d4\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "loadBalancerBackendAddresses": []
+            },
+            "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+          }
+        ],
+        "loadBalancingRules": [],
+        "probes": [],
+        "inboundNatRules": [],
+        "outboundRules": [],
+        "inboundNatPools": []
+      },
+      "sku": {
+        "name": "Standard",
+        "tier": "Global"
+      }
+    }
+  }
+}

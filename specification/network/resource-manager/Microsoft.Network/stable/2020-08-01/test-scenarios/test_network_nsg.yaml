@@ -1,0 +1,77 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_nsg
+    steps:
+      - step: RawStep_2205
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nsg000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:37:19 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nsg000001","name":"cli_test_nsg000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T12:37:17Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkSecurityGroups_test-nsg1
+        resourceName: networkSecurityGroups_test-nsg1
+        exampleFile: ../examples/Create_networkSecurityGroups_test-nsg1_Generated.json
+        operationId: NetworkSecurityGroups_CreateOrUpdate
+      - step: Create_securityRules_web
+        resourceName: securityRules_web
+        exampleFile: ../examples/Create_securityRules_web_Generated.json
+        operationId: SecurityRules_CreateOrUpdate
+      - step: NetworkSecurityGroups_ListAll_2208
+        exampleFile: ../examples/NetworkSecurityGroups_ListAll_2208_Generated.json
+        operationId: NetworkSecurityGroups_ListAll
+      - step: NetworkSecurityGroups_List_2209
+        exampleFile: ../examples/NetworkSecurityGroups_List_2209_Generated.json
+        operationId: NetworkSecurityGroups_List
+      - step: NetworkSecurityGroups_Get_2210
+        exampleFile: ../examples/NetworkSecurityGroups_Get_2210_Generated.json
+        operationId: NetworkSecurityGroups_Get
+      - step: Update_securityRules_web_2212
+        resourceName: securityRules_web
+        operationId: SecurityRules_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/protocol
+            value: Tcp
+          - replace: /properties/sourcePortRange
+            value: 1234-1235
+          - replace: /properties/destinationPortRange
+            value: 1234-1235
+          - replace: /properties/sourceAddressPrefix
+            value: '111'
+          - replace: /properties/destinationAddressPrefix
+            value: '111'
+          - replace: /properties/access
+            value: Deny
+          - replace: /properties/priority
+            value: 888
+          - replace: /properties/direction
+            value: Outbound
+          - add: /properties/description
+            value: greatrule
+      - step: Update_securityRules_web_2214
+        resourceName: securityRules_web
+        operationId: SecurityRules_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/description
+            value: cool
+      - step: SecurityRules_Delete_2215
+        exampleFile: ../examples/SecurityRules_Delete_2215_Generated.json
+        operationId: SecurityRules_Delete
+      - step: NetworkSecurityGroups_Delete_2216
+        exampleFile: ../examples/NetworkSecurityGroups_Delete_2216_Generated.json
+        operationId: NetworkSecurityGroups_Delete
+      - step: NetworkSecurityGroups_List_2217
+        exampleFile: ../examples/NetworkSecurityGroups_List_2217_Generated.json
+        operationId: NetworkSecurityGroups_List
+    variables:
+      networkSecurityGroupName: test-nsg1
+      securityRuleName: web

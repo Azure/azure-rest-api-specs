@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test_network_bastion_host000001",
+    "virtualNetworkName": "vnet",
+    "parameters": {
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "dhcpOptions": {},
+        "subnets": [
+          {
+            "name": "AzureBastionSubnet",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "vnet",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/virtualNetworks/vnet",
+      "etag": "W/\"f59ba3c8-21b6-419c-98a6-13fd695522fb\"",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "6a9a4de2-dc8f-41a4-8ee1-17f435a46997",
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "dhcpOptions": {
+          "dnsServers": []
+        },
+        "subnets": [
+          {
+            "name": "AzureBastionSubnet",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/AzureBastionSubnet",
+            "etag": "W/\"f59ba3c8-21b6-419c-98a6-13fd695522fb\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "addressPrefix": "10.0.0.0/24",
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ],
+        "virtualNetworkPeerings": [],
+        "enableDdosProtection": false
+      }
+    }
+  }
+}

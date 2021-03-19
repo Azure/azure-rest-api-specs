@@ -1,0 +1,179 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_ag_basic000001"
+  },
+  "responses": {
+    "200": {
+      "value": [
+        {
+          "name": "ag1",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1",
+          "etag": "W/\"40360e23-5d2f-4d65-b527-933a3af77504\"",
+          "type": "Microsoft.Network/applicationGateways",
+          "location": "westus",
+          "tags": {
+            "foo": "doo"
+          },
+          "properties": {
+            "provisioningState": "Succeeded",
+            "resourceGuid": "e5a54660-bee0-4077-ba38-615593ab8e5e",
+            "sku": {
+              "name": "Standard_Small",
+              "tier": "Standard",
+              "capacity": 3
+            },
+            "operationalState": "Running",
+            "gatewayIPConfigurations": [
+              {
+                "name": "appGatewayPrivateFrontendIP",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/gatewayIPConfigurations/appGatewayPrivateFrontendIP",
+                "etag": "W/\"40360e23-5d2f-4d65-b527-933a3af77504\"",
+                "properties": {
+                  "provisioningState": "Succeeded",
+                  "subnet": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/virtualNetworks/ag1Vnet/subnets/default"
+                  }
+                },
+                "type": "Microsoft.Network/applicationGateways/gatewayIPConfigurations"
+              }
+            ],
+            "sslCertificates": [],
+            "authenticationCertificates": [],
+            "frontendIPConfigurations": [
+              {
+                "name": "appGatewayPrivateFrontendIP",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/frontendIPConfigurations/appGatewayPrivateFrontendIP",
+                "etag": "W/\"40360e23-5d2f-4d65-b527-933a3af77504\"",
+                "type": "Microsoft.Network/applicationGateways/frontendIPConfigurations",
+                "properties": {
+                  "provisioningState": "Succeeded",
+                  "privateIPAddress": "10.0.0.7",
+                  "privateIPAllocationMethod": "Dynamic",
+                  "subnet": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/virtualNetworks/ag1Vnet/subnets/default"
+                  },
+                  "httpListeners": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/appGatewayHttpListener"
+                    }
+                  ]
+                }
+              }
+            ],
+            "frontendPorts": [
+              {
+                "name": "appGatewayFrontendPort",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/frontendPorts/appGatewayFrontendPort",
+                "etag": "W/\"40360e23-5d2f-4d65-b527-933a3af77504\"",
+                "properties": {
+                  "provisioningState": "Succeeded",
+                  "port": 80,
+                  "httpListeners": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/appGatewayHttpListener"
+                    }
+                  ]
+                },
+                "type": "Microsoft.Network/applicationGateways/frontendPorts"
+              }
+            ],
+            "backendAddressPools": [
+              {
+                "name": "appGatewayBackendPool",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/backendAddressPools/appGatewayBackendPool",
+                "etag": "W/\"40360e23-5d2f-4d65-b527-933a3af77504\"",
+                "properties": {
+                  "provisioningState": "Succeeded",
+                  "backendAddresses": [],
+                  "requestRoutingRules": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/rule1"
+                    }
+                  ]
+                },
+                "type": "Microsoft.Network/applicationGateways/backendAddressPools"
+              }
+            ],
+            "backendHttpSettingsCollection": [
+              {
+                "name": "appGatewayBackendHttpSettings",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/backendHttpSettingsCollection/appGatewayBackendHttpSettings",
+                "etag": "W/\"40360e23-5d2f-4d65-b527-933a3af77504\"",
+                "properties": {
+                  "provisioningState": "Succeeded",
+                  "port": 80,
+                  "protocol": "Http",
+                  "cookieBasedAffinity": "Disabled",
+                  "connectionDraining": {
+                    "enabled": false,
+                    "drainTimeoutInSec": 1
+                  },
+                  "pickHostNameFromBackendAddress": false,
+                  "requestTimeout": 30,
+                  "requestRoutingRules": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/rule1"
+                    }
+                  ]
+                },
+                "type": "Microsoft.Network/applicationGateways/backendHttpSettingsCollection"
+              }
+            ],
+            "httpListeners": [
+              {
+                "name": "appGatewayHttpListener",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/appGatewayHttpListener",
+                "etag": "W/\"40360e23-5d2f-4d65-b527-933a3af77504\"",
+                "properties": {
+                  "provisioningState": "Succeeded",
+                  "frontendIPConfiguration": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/frontendIPConfigurations/appGatewayPrivateFrontendIP"
+                  },
+                  "frontendPort": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/frontendPorts/appGatewayFrontendPort"
+                  },
+                  "protocol": "Http",
+                  "hostNames": [],
+                  "requireServerNameIndication": false,
+                  "requestRoutingRules": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/rule1"
+                    }
+                  ]
+                },
+                "type": "Microsoft.Network/applicationGateways/httpListeners"
+              }
+            ],
+            "urlPathMaps": [],
+            "requestRoutingRules": [
+              {
+                "name": "rule1",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/requestRoutingRules/rule1",
+                "etag": "W/\"40360e23-5d2f-4d65-b527-933a3af77504\"",
+                "properties": {
+                  "provisioningState": "Succeeded",
+                  "ruleType": "Basic",
+                  "httpListener": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/httpListeners/appGatewayHttpListener"
+                  },
+                  "backendAddressPool": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/backendAddressPools/appGatewayBackendPool"
+                  },
+                  "backendHttpSettings": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_basic000001/providers/Microsoft.Network/applicationGateways/ag1/backendHttpSettingsCollection/appGatewayBackendHttpSettings"
+                  }
+                },
+                "type": "Microsoft.Network/applicationGateways/requestRoutingRules"
+              }
+            ],
+            "probes": [],
+            "rewriteRuleSets": [],
+            "redirectConfigurations": []
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,84 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_ag_http_listener
+    steps:
+      - step: RawStep_847
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_http_listener000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:19:00 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_http_listener000001","name":"cli_test_ag_http_listener000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:18:58Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_848
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_ag_http_listener000001%27%20and%20name%20eq%20%27None%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FvirtualNetworks%27&api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '12'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:19:00 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"value":[]}'
+      - step: RawStep_849
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_http_listener000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{"appGwID":"[resourceId('Microsoft.Network/applicationGateways',
+          'ag1')]"},"resources":[{"name":"ag1Vnet","type":"Microsoft.Network/virtualNetworks","location":"westus","apiVersion":"2015-06-15","dependsOn":[],"tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"subnets":[{"name":"default","properties":{"addressPrefix":"10.0.0.0/24"}}]}},{"type":"Microsoft.Network/applicationGateways","name":"ag1","location":"westus","tags":{},"apiVersion":"2020-08-01","dependsOn":["Microsoft.Network/virtualNetworks/ag1Vnet"],"properties":{"backendAddressPools":[{"name":"appGatewayBackendPool"}],"backendHttpSettingsCollection":[{"name":"appGatewayBackendHttpSettings","properties":{"Port":80,"Protocol":"Http","CookieBasedAffinity":"disabled","connectionDraining":{"enabled":false,"drainTimeoutInSec":1}}}],"frontendIPConfigurations":[{"name":"appGatewayPrivateFrontendIP","properties":{"privateIPAllocationMethod":"Dynamic","privateIPAddress":null,"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_http_listener000001/providers/Microsoft.Network/virtualNetworks/ag1Vnet/subnets/default"}}}],"frontendPorts":[{"name":"appGatewayFrontendPort","properties":{"Port":80}}],"gatewayIPConfigurations":[{"name":"appGatewayPrivateFrontendIP","properties":{"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_http_listener000001/providers/Microsoft.Network/virtualNetworks/ag1Vnet/subnets/default"}}}],"httpListeners":[{"name":"appGatewayHttpListener","properties":{"FrontendIpConfiguration":{"Id":"[concat(variables('appGwID'),
+          '/frontendIPConfigurations/appGatewayPrivateFrontendIP')]"},"FrontendPort":{"Id":"[concat(variables('appGwID'),
+          '/frontendPorts/appGatewayFrontendPort')]"},"Protocol":"http","SslCertificate":null}}],"sku":{"name":"Standard_Medium","tier":"Standard","capacity":2},"requestRoutingRules":[{"Name":"rule1","properties":{"RuleType":"Basic","httpListener":{"id":"[concat(variables('appGwID'),
+          '/httpListeners/appGatewayHttpListener')]"},"backendAddressPool":{"id":"[concat(variables('appGwID'),
+          '/backendAddressPools/appGatewayBackendPool')]"},"backendHttpSettings":{"id":"[concat(variables('appGwID'),
+          '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"}}}],"privateLinkConfigurations":[]},"zones":null}],"outputs":{"applicationGateway":{"type":"object","value":"[reference('ag1')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_http_listener000001/providers/Microsoft.Resources/deployments/ag_deploy_T54Aq1mEw7TW0GpCNaChd7D3NpxXgjFy/operationStatuses/08585874413424924180?api-version=2020-10-01
+          cache-control: no-cache
+          content-length: '1351'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:19:05 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1190'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_http_listener000001/providers/Microsoft.Resources/deployments/ag_deploy_T54Aq1mEw7TW0GpCNaChd7D3NpxXgjFy","name":"ag_deploy_T54Aq1mEw7TW0GpCNaChd7D3NpxXgjFy","type":"Microsoft.Resources/deployments","properties":{"templateHash":"10356712565598296632","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-02-24T11:19:04.8790081Z","duration":"PT1.8938054S","correlationId":"99a5cfc2-f330-4bdf-a2ce-f5ce7c686b31","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["westus"]},{"resourceType":"applicationGateways","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_http_listener000001/providers/Microsoft.Network/virtualNetworks/ag1Vnet","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"ag1Vnet"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_http_listener000001/providers/Microsoft.Network/applicationGateways/ag1","resourceType":"Microsoft.Network/applicationGateways","resourceName":"ag1"}]}}
+      - step: ApplicationGateways_Get_850
+        exampleFile: ../examples/ApplicationGateways_Get_850_Generated.json
+        operationId: ApplicationGateways_Get
+      - step: Create_applicationGateways_ag1
+        resourceName: applicationGateways_ag1
+        exampleFile: ../examples/Create_applicationGateways_ag1_Generated_852.json
+        operationId: ApplicationGateways_CreateOrUpdate
+      - step: Update_applicationGateways_ag1_854
+        resourceName: applicationGateways_ag1
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/httpListeners/1/properties/hostName
+            value: www.test2.com
+      - step: Update_applicationGateways_ag1_856
+        resourceName: applicationGateways_ag1
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/frontendIPConfigurations/0/properties/httpListeners/1
+          - remove: /properties/frontendPorts/0/properties/httpListeners/1
+          - remove: /properties/httpListeners/1
+    variables:
+      applicationGatewayName: ag1

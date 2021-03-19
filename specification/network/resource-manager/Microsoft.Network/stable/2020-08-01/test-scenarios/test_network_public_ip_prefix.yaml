@@ -1,0 +1,127 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_public_ip_prefix
+    steps:
+      - step: RawStep_2300
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_public_ip_prefix000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '429'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:13:53 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_public_ip_prefix000001","name":"cli_test_network_public_ip_prefix000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:13:48Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPPrefixes_prefix1
+        resourceName: publicIPPrefixes_prefix1
+        exampleFile: ../examples/Create_publicIPPrefixes_prefix1_Generated_2302.json
+        operationId: PublicIPPrefixes_CreateOrUpdate
+      - step: Update_publicIPPrefixes_prefix1_2304
+        resourceName: publicIPPrefixes_prefix1
+        operationId: PublicIPPrefixes_CreateOrUpdate
+        resourceUpdate:
+          - add: /tags
+            value:
+              foo: doo
+      - step: PublicIPPrefixes_List_2305
+        exampleFile: ../examples/PublicIPPrefixes_List_2305_Generated.json
+        operationId: PublicIPPrefixes_List
+      - step: PublicIPPrefixes_Delete_2306
+        exampleFile: ../examples/PublicIPPrefixes_Delete_2306_Generated.json
+        operationId: PublicIPPrefixes_Delete
+      - step: PublicIPPrefixes_List_2307
+        exampleFile: ../examples/PublicIPPrefixes_List_2307_Generated.json
+        operationId: PublicIPPrefixes_List
+      - step: RawStep_2308
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_public_ip_prefix000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '429'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:15:09 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_public_ip_prefix000001","name":"cli_test_network_public_ip_prefix000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:13:48Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPPrefixes_prefix1_2310
+        resourceName: publicIPPrefixes_prefix1_2310
+        exampleFile: ../examples/Create_publicIPPrefixes_prefix1_2310_Generated.json
+        operationId: PublicIPPrefixes_CreateOrUpdate
+      - step: RawStep_2311
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_public_ip_prefix000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '429'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:15:22 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_public_ip_prefix000001","name":"cli_test_network_public_ip_prefix000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:13:48Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pip1
+        resourceName: publicIPAddresses_pip1
+        exampleFile: ../examples/Create_publicIPAddresses_pip1_Generated_2313.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2314
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_public_ip_prefix000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '429'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:15:28 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_public_ip_prefix000001","name":"cli_test_network_public_ip_prefix000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:13:48Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPPrefixes_public_ip_prefix_0
+        resourceName: publicIPPrefixes_public_ip_prefix_0
+        exampleFile: ../examples/Create_publicIPPrefixes_public_ip_prefix_0_Generated.json
+        operationId: PublicIPPrefixes_CreateOrUpdate
+        variables:
+          publicIpPrefixName: public_ip_prefix_0
+      - step: RawStep_2316
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_public_ip_prefix000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '429'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:15:39 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_public_ip_prefix000001","name":"cli_test_network_public_ip_prefix000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:13:48Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPPrefixes_public_ip_prefix_2
+        resourceName: publicIPPrefixes_public_ip_prefix_2
+        exampleFile: ../examples/Create_publicIPPrefixes_public_ip_prefix_2_Generated.json
+        operationId: PublicIPPrefixes_CreateOrUpdate
+        variables:
+          publicIpPrefixName: public_ip_prefix_2
+    variables:
+      publicIpPrefixName: prefix1
+      publicIpAddressName: pip1

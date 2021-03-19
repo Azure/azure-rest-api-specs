@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "fanqiu_cli_test_network_private_endpoints000001",
+    "privateEndpointName": "cli-pe-000005",
+    "privateDnsZoneGroupName": "clidnsgroup",
+    "parameters": {
+      "name": "clidnsgroup",
+      "properties": {
+        "privateDnsZoneConfigs": [
+          {
+            "name": "clizone1",
+            "properties": {
+              "privateDnsZoneId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsZones/www.clizone1.com"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "clidnsgroup",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005/privateDnsZoneGroups/clidnsgroup",
+      "etag": "W/\"ecac6451-fbc6-40d6-9094-5b43ec1f0a84\"",
+      "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "privateDnsZoneConfigs": [
+          {
+            "name": "clizone1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005/privateDnsZoneGroups/clidnsgroup/privateDnsZoneConfigs/clizone1",
+            "etag": "W/\"ecac6451-fbc6-40d6-9094-5b43ec1f0a84\"",
+            "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups/privateDnsZoneConfigs",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateDnsZoneId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsZones/www.clizone1.com",
+              "recordSets": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

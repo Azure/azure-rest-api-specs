@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_vnet_test000001"
+  },
+  "responses": {
+    "200": {
+      "value": [
+        {
+          "name": "vnet1",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_vnet_test000001/providers/Microsoft.Network/virtualNetworks/vnet1",
+          "etag": "W/\"a7d9811e-7329-476b-b9b4-a70ce4f2ee31\"",
+          "type": "Microsoft.Network/virtualNetworks",
+          "location": "westus",
+          "tags": {},
+          "properties": {
+            "provisioningState": "Succeeded",
+            "resourceGuid": "e6ed07ed-4abb-4ebb-b6fa-449d986034f2",
+            "addressSpace": {
+              "addressPrefixes": [
+                "20.0.0.0/24",
+                "10.0.0.0/16"
+              ]
+            },
+            "dhcpOptions": {
+              "dnsServers": []
+            },
+            "subnets": [
+              {
+                "name": "default",
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_vnet_test000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/default",
+                "etag": "W/\"a7d9811e-7329-476b-b9b4-a70ce4f2ee31\"",
+                "properties": {
+                  "provisioningState": "Succeeded",
+                  "addressPrefix": "10.0.0.0/24",
+                  "delegations": [],
+                  "privateEndpointNetworkPolicies": "Enabled",
+                  "privateLinkServiceNetworkPolicies": "Enabled"
+                },
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ],
+            "virtualNetworkPeerings": [],
+            "enableDdosProtection": false
+          }
+        }
+      ]
+    }
+  }
+}

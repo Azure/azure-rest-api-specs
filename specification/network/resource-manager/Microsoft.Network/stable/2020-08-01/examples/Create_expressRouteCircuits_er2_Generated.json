@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_express_route_global_reach000001",
+    "circuitName": "er2",
+    "parameters": {
+      "location": "westus",
+      "sku": {
+        "name": "Premium_MeteredData",
+        "tier": "Premium",
+        "family": "MeteredData"
+      },
+      "properties": {
+        "serviceProviderProperties": {
+          "serviceProviderName": "Test Provider NW",
+          "peeringLocation": "Denver Test",
+          "bandwidthInMbps": 50
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "er2",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_global_reach000001/providers/Microsoft.Network/expressRouteCircuits/er2",
+      "etag": "W/\"250765b3-ca06-4439-a0bc-c6ac1e02fcbf\"",
+      "type": "Microsoft.Network/expressRouteCircuits",
+      "location": "westus",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "82a598a6-71c4-4d4d-933c-1891f17c5d0d",
+        "peerings": [],
+        "authorizations": [],
+        "serviceProviderProperties": {
+          "serviceProviderName": "Test Provider NW",
+          "peeringLocation": "Denver Test",
+          "bandwidthInMbps": 50
+        },
+        "circuitProvisioningState": "Enabled",
+        "allowClassicOperations": false,
+        "gatewayManagerEtag": "",
+        "serviceKey": "9396ea4e-17b4-4da6-9547-15fe9e916ccc",
+        "serviceProviderProvisioningState": "NotProvisioned",
+        "allowGlobalReach": false,
+        "globalReachEnabled": false,
+        "stag": 2
+      },
+      "sku": {
+        "name": "Premium_MeteredData",
+        "tier": "Premium",
+        "family": "MeteredData"
+      }
+    }
+  }
+}

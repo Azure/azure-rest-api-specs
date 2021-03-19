@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "NetworkWatcherRG",
+    "networkWatcherName": "NetworkWatcher_westus"
+  },
+  "responses": {
+    "200": {
+      "value": [
+        {
+          "name": "capture1",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkWatchers/NetworkWatcher_westus/packetCaptures/capture1",
+          "etag": "W/\"f4e35fe5-5866-4a23-afaf-e5e6435e2b97\"",
+          "properties": {
+            "provisioningState": "Succeeded",
+            "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nw_packet_capture000001/providers/Microsoft.Compute/virtualMachines/vm1",
+            "bytesToCapturePerPacket": 0,
+            "totalBytesPerSession": 1073741824,
+            "timeLimitInSeconds": 18000,
+            "storageLocation": {
+              "storagePath": "",
+              "filePath": "capture\\capture.cap"
+            },
+            "filters": []
+          },
+          "type": "Microsoft.Network/networkWatchers/packetCaptures"
+        }
+      ]
+    }
+  }
+}

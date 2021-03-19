@@ -1,0 +1,947 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_active_active_cross_premise_connection
+    steps:
+      - step: RawStep_693
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:34:02 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:34:00Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_695
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:34:12 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:34:00Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_gwip1
+        resourceName: publicIPAddresses_gwip1
+        exampleFile: ../examples/Create_publicIPAddresses_gwip1_Generated.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_697
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:34:20 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:34:00Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_gwip2
+        resourceName: publicIPAddresses_gwip2
+        exampleFile: ../examples/Create_publicIPAddresses_gwip2_Generated.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+        variables:
+          publicIpAddressName: gwip2
+      - step: RawStep_699
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:34:28 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:34:00Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gw1
+        resourceName: virtualNetworkGateways_gw1
+        exampleFile: ../examples/Create_virtualNetworkGateways_gw1_Generated.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+      - step: Update_virtualNetworkGateways_gw1_702
+        resourceName: virtualNetworkGateways_gw1
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /tags/foo
+            value: boo
+          - replace: /properties/provisioningState
+            value: Updating
+          - remove: /properties/ipConfigurations/1
+          - replace: /properties/ipConfigurations/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/activeActive
+            value: false
+          - remove: /properties/bgpSettings/bgpPeeringAddresses/1
+          - add: /properties/vpnClientConfiguration
+            value:
+              vpnClientProtocols:
+                - OpenVPN
+                - IkeV2
+              vpnAuthenticationTypes: []
+              vpnClientRootCertificates: []
+              vpnClientRevokedCertificates: []
+              radiusServers: []
+              vpnClientIpsecPolicies: []
+      - step: Create_localNetworkGateways_lgw2
+        resourceName: localNetworkGateways_lgw2
+        exampleFile: ../examples/Create_localNetworkGateways_lgw2_Generated.json
+        operationId: LocalNetworkGateways_CreateOrUpdate
+      - step: RawStep_704
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:56:21 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:34:00Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_705
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{"sharedKey":{"type":"securestring","metadata":{"description":"Secure
+          sharedKey"}}},"variables":{},"resources":[{"type":"Microsoft.Network/connections","name":"Vnet1toSite5_1","location":"westus","tags":{},"apiVersion":"2015-06-15","dependsOn":[],"properties":{"virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"},"enableBgp":true,"connectionType":"IPSec","routingWeight":10,"usePolicyBasedTrafficSelectors":false,"expressRouteGatewayBypass":null,"localNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/localNetworkGateways/lgw2"},"sharedKey":"[parameters('sharedKey')]"}}],"outputs":{"resource":{"type":"object","value":"[reference('Vnet1toSite5_1')]"}}},"parameters":{"sharedKey":{"value":"abc123"}},"mode":"Incremental"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_y9TRKf4d2c8O2wnnwqjyR3QpCOHxsBGq/operationStatuses/08585874391015360138?api-version=2020-10-01
+          cache-control: no-cache
+          content-length: '768'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:56:26 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1173'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_y9TRKf4d2c8O2wnnwqjyR3QpCOHxsBGq","name":"vpn_connection_deploy_y9TRKf4d2c8O2wnnwqjyR3QpCOHxsBGq","type":"Microsoft.Resources/deployments","properties":{"templateHash":"574851089609343561","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-02-24T11:56:25.969131Z","duration":"PT2.0275252S","correlationId":"193d2620-78a9-4a1f-a494-336bc6645eab","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[]}}
+      - step: RawStep_706
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:56:57 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_707
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:57:27 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_708
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:57:57 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_709
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:58:28 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_710
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:58:59 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_711
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 11:59:29 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_712
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:00:00 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_713
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:00:30 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_714
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:01:01 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_715
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:01:31 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_716
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:02:02 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_717
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:02:32 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_718
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:03:03 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_719
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:03:33 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_720
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:04 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_721
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:04:35 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_722
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:05:05 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_723
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:05:35 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_724
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:06:06 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_725
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:06:37 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_726
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:07:07 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_727
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:07:38 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_728
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:08:08 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_729
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:08:39 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_730
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:09:10 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_731
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:09:41 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_732
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:10:12 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_733
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:10:42 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_734
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:12 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_735
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:11:44 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_736
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:12:14 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_737
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:12:44 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_738
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:13:14 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_739
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:13:46 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_740
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:14:16 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_741
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:14:46 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_742
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:15:17 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_743
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:15:47 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_744
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:16:18 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_745
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:16:48 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_746
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:17:19 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_747
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:17:49 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_748
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:18:21 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_749
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:18:51 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_750
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874391015360138?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '22'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:19:21 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_751
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1903'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:19:22 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_y9TRKf4d2c8O2wnnwqjyR3QpCOHxsBGq","name":"vpn_connection_deploy_y9TRKf4d2c8O2wnnwqjyR3QpCOHxsBGq","type":"Microsoft.Resources/deployments","properties":{"templateHash":"574851089609343561","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-02-24T12:19:15.9184536Z","duration":"PT22M51.9768478S","correlationId":"193d2620-78a9-4a1f-a494-336bc6645eab","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[],"outputs":{"resource":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"b8c5d151-4eca-4202-9211-24952bcb2ff7","virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"},"localNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/localNetworkGateways/lgw2"},"connectionType":"IPsec","connectionProtocol":"IKEv2","routingWeight":10,"sharedKey":"abc123","enableBgp":true,"useLocalAzureIpAddress":false,"trafficSelectorPolicies":[],"connectionStatus":"Unknown","ingressBytesTransferred":0,"egressBytesTransferred":0,"dpdTimeoutSeconds":0,"connectionMode":"Default"}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/connections/Vnet1toSite5_1"}]}}
+      - step: VirtualNetworkGatewayConnections_ResetSharedKey_752
+        exampleFile: >-
+          ../examples/VirtualNetworkGatewayConnections_ResetSharedKey_752_Generated.json
+        operationId: VirtualNetworkGatewayConnections_ResetSharedKey
+      - step: Create_sharedkey_Vnet1toSite5_1
+        resourceName: sharedkey_Vnet1toSite5_1
+        exampleFile: ../examples/Create_sharedkey_Vnet1toSite5_1_Generated.json
+        operationId: VirtualNetworkGatewayConnections_SetSharedKey
+      - step: Create_localNetworkGateways_lgw3
+        resourceName: localNetworkGateways_lgw3
+        exampleFile: ../examples/Create_localNetworkGateways_lgw3_Generated.json
+        operationId: LocalNetworkGateways_CreateOrUpdate
+        variables:
+          localNetworkGatewayName: lgw3
+      - step: RawStep_755
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '428'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:21:09 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-02-24T11:34:00Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_756
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{"sharedKey":{"type":"securestring","metadata":{"description":"Secure
+          sharedKey"}}},"variables":{},"resources":[{"type":"Microsoft.Network/connections","name":"Vnet1toSite5_2","location":"westus","tags":{},"apiVersion":"2015-06-15","dependsOn":[],"properties":{"virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"},"enableBgp":true,"connectionType":"IPSec","routingWeight":10,"usePolicyBasedTrafficSelectors":false,"expressRouteGatewayBypass":null,"localNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/localNetworkGateways/lgw3"},"sharedKey":"[parameters('sharedKey')]"}}],"outputs":{"resource":{"type":"object","value":"[reference('Vnet1toSite5_2')]"}}},"parameters":{"sharedKey":{"value":"abc123"}},"mode":"Incremental"}}
+        requestHeaders:
+          azure-asyncoperation: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_zM08afMPYjJoKT7OxXiJ8B952QoaoXvZ/operationStatuses/08585874376136426423?api-version=2020-10-01
+          cache-control: no-cache
+          content-length: '770'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:21:13 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-writes: '1167'
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_zM08afMPYjJoKT7OxXiJ8B952QoaoXvZ","name":"vpn_connection_deploy_zM08afMPYjJoKT7OxXiJ8B952QoaoXvZ","type":"Microsoft.Resources/deployments","properties":{"templateHash":"17510568600182131821","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-02-24T12:21:13.733357Z","duration":"PT1.8983804S","correlationId":"dce7c62a-e1bb-41a9-99dc-acc8f2956a1d","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[]}}
+      - step: RawStep_757
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874376136426423?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '20'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:21:45 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_758
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585874376136426423?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '22'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:22:15 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_759
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          cache-control: no-cache
+          content-length: '1907'
+          content-type: application/json; charset=utf-8
+          date: Wed, 24 Feb 2021 12:22:15 GMT
+          expires: '-1'
+          pragma: no-cache
+          strict-transport-security: max-age=31536000; includeSubDomains
+          vary: Accept-Encoding
+          x-content-type-options: nosniff
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_zM08afMPYjJoKT7OxXiJ8B952QoaoXvZ","name":"vpn_connection_deploy_zM08afMPYjJoKT7OxXiJ8B952QoaoXvZ","type":"Microsoft.Resources/deployments","properties":{"templateHash":"17510568600182131821","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-02-24T12:21:59.6431271Z","duration":"PT47.8081505S","correlationId":"dce7c62a-e1bb-41a9-99dc-acc8f2956a1d","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[],"outputs":{"resource":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"708eb8bb-793b-4215-b555-832914c32038","virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"},"localNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/localNetworkGateways/lgw3"},"connectionType":"IPsec","connectionProtocol":"IKEv2","routingWeight":10,"sharedKey":"abc123","enableBgp":true,"useLocalAzureIpAddress":false,"trafficSelectorPolicies":[],"connectionStatus":"NotConnected","ingressBytesTransferred":0,"egressBytesTransferred":0,"dpdTimeoutSeconds":0,"connectionMode":"Default"}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/connections/Vnet1toSite5_2"}]}}
+    variables:
+      virtualNetworkName: vnet1
+      publicIpAddressName: gwip1
+      virtualNetworkGatewayName: gw1
+      localNetworkGatewayName: lgw2
+      virtualNetworkGatewayConnectionName: Vnet1toSite5_1

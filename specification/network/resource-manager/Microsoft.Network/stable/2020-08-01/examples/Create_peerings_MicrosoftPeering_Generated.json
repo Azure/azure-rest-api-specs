@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_express_route000001",
+    "circuitName": "circuit1",
+    "peeringName": "MicrosoftPeering",
+    "peeringParameters": {
+      "properties": {
+        "peeringType": "MicrosoftPeering",
+        "peerASN": 10002,
+        "primaryPeerAddressPrefix": "104.0.0.0/30",
+        "secondaryPeerAddressPrefix": "105.0.0.0/30",
+        "vlanId": 103,
+        "microsoftPeeringConfig": {
+          "advertisedPublicPrefixes": [
+            "104.0.0.0/30"
+          ],
+          "customerASN": 10000,
+          "routingRegistryName": "LEVEL3"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "MicrosoftPeering",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route000001/providers/Microsoft.Network/expressRouteCircuits/circuit1/peerings/MicrosoftPeering",
+      "etag": "W/\"60eaf329-e3f4-4bab-9736-6e352606b56e\"",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "peeringType": "MicrosoftPeering",
+        "azureASN": 12076,
+        "peerASN": 10002,
+        "primaryPeerAddressPrefix": "104.0.0.0/30",
+        "secondaryPeerAddressPrefix": "105.0.0.0/30",
+        "primaryAzurePort": "A51-IBIZA-06GMR-CIS-1-PRI-A",
+        "secondaryAzurePort": "A51-IBIZA-06GMR-CIS-2-SEC-A",
+        "state": "Enabled",
+        "vlanId": 103,
+        "gatewayManagerEtag": "",
+        "lastModifiedBy": "Customer",
+        "microsoftPeeringConfig": {
+          "advertisedPublicPrefixes": [
+            "104.0.0.0/30"
+          ],
+          "advertisedPublicPrefixesState": "ValidationNeeded",
+          "customerASN": 10000,
+          "legacyMode": 0,
+          "routingRegistryName": "LEVEL3"
+        },
+        "connections": [],
+        "peeredConnections": []
+      },
+      "type": "Microsoft.Network/expressRouteCircuits/peerings"
+    }
+  }
+}

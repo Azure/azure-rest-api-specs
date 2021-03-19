@@ -1,0 +1,45 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_traffic_manager2
+    steps:
+      - step: RawStep_2421
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager2000001/providers/Microsoft.Network/trafficmanagerprofiles/mytmprofile2?api-version=2018-04-01
+        requestBody: >-
+          {"tags":{"foo":"doo"},"location":"global","properties":{"profileStatus":"Enabled","trafficRoutingMethod":"Multivalue","dnsConfig":{"relativeName":"mytrafficmanager001100a2","ttl":30},"monitorConfig":{"protocol":"HTTP","port":80,"path":"/"},"maxReturn":3}}
+        requestHeaders:
+          cache-control: private
+          content-length: '769'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 08:37:41 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '10799'
+          x-powered-by: ASP.NET
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager2000001/providers/Microsoft.Network/trafficManagerProfiles/mytmprofile2","name":"mytmprofile2","type":"Microsoft.Network/trafficManagerProfiles","location":"global","tags":{"foo":"doo"},"properties":{"profileStatus":"Enabled","trafficRoutingMethod":"MultiValue","dnsConfig":{"relativeName":"mytrafficmanager001100a2","fqdn":"mytrafficmanager001100a2.trafficmanager.net","ttl":30},"monitorConfig":{"profileMonitorStatus":"Inactive","protocol":"HTTP","port":80,"path":"/","intervalInSeconds":30,"toleratedNumberOfFailures":3,"timeoutInSeconds":10},"endpoints":[],"trafficViewEnrollmentStatus":"Disabled","maxReturn":3}}
+      - step: RawStep_2422
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager2000001/providers/Microsoft.Network/trafficmanagerprofiles/mytmprofile2?api-version=2018-04-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager2000001/providers/Microsoft.Network/trafficManagerProfiles/mytmprofile2","name":"mytmprofile2","type":"Microsoft.Network/trafficManagerProfiles","tags":{"foo":"boo"},"location":"global","properties":{"profileStatus":"Enabled","trafficRoutingMethod":"Multivalue","dnsConfig":{"relativeName":"mytrafficmanager001100a2","ttl":30},"monitorConfig":{"profileMonitorStatus":"Inactive","protocol":"HTTP","port":80,"path":"/","intervalInSeconds":30,"timeoutInSeconds":10,"toleratedNumberOfFailures":3},"endpoints":[],"trafficViewEnrollmentStatus":"Disabled","maxReturn":4}}
+        requestHeaders:
+          cache-control: private
+          content-length: '769'
+          content-type: application/json; charset=utf-8
+          date: Mon, 08 Feb 2021 08:37:45 GMT
+          server: Microsoft-IIS/10.0
+          strict-transport-security: max-age=31536000; includeSubDomains
+          transfer-encoding: chunked
+          vary: Accept-Encoding
+          x-aspnet-version: 4.0.30319
+          x-content-type-options: nosniff
+          x-ms-ratelimit-remaining-subscription-resource-requests: '10799'
+          x-powered-by: ASP.NET
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager2000001/providers/Microsoft.Network/trafficManagerProfiles/mytmprofile2","name":"mytmprofile2","type":"Microsoft.Network/trafficManagerProfiles","location":"global","tags":{"foo":"boo"},"properties":{"profileStatus":"Enabled","trafficRoutingMethod":"MultiValue","dnsConfig":{"relativeName":"mytrafficmanager001100a2","fqdn":"mytrafficmanager001100a2.trafficmanager.net","ttl":30},"monitorConfig":{"profileMonitorStatus":"Inactive","protocol":"HTTP","port":80,"path":"/","intervalInSeconds":30,"toleratedNumberOfFailures":3,"timeoutInSeconds":10},"endpoints":[],"trafficViewEnrollmentStatus":"Disabled","maxReturn":4}}

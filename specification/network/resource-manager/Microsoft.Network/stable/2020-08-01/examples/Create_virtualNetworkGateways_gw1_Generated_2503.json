@@ -1,0 +1,132 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_vnet_gateway_ipsec000001",
+    "virtualNetworkGatewayName": "gw1",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "vnetGatewayConfig0",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_gateway_ipsec000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet"
+              },
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_gateway_ipsec000001/providers/Microsoft.Network/publicIPAddresses/pip1"
+              }
+            }
+          }
+        ],
+        "gatewayType": "Vpn",
+        "vpnType": "RouteBased",
+        "activeActive": false,
+        "sku": {
+          "name": "VpnGw2",
+          "tier": "VpnGw2"
+        },
+        "vpnClientConfiguration": {
+          "vpnClientAddressPool": {
+            "addressPrefixes": [
+              "40.1.0.0/24"
+            ]
+          },
+          "vpnClientProtocols": [
+            "IkeV2",
+            "SSTP"
+          ],
+          "radiusServerAddress": "30.1.1.15",
+          "radiusServerSecret": "111_aaa"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "gw1",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_gateway_ipsec000001/providers/Microsoft.Network/virtualNetworkGateways/gw1",
+      "etag": "W/\"8a74f7ae-62a0-4788-aab3-4dc2064762be\"",
+      "type": "Microsoft.Network/virtualNetworkGateways",
+      "location": "westus",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "396bb032-931e-4dd4-ae44-be0f4d20b240",
+        "packetCaptureDiagnosticState": "None",
+        "enablePrivateIpAddress": false,
+        "ipConfigurations": [
+          {
+            "name": "vnetGatewayConfig0",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_gateway_ipsec000001/providers/Microsoft.Network/virtualNetworkGateways/gw1/ipConfigurations/vnetGatewayConfig0",
+            "etag": "W/\"8a74f7ae-62a0-4788-aab3-4dc2064762be\"",
+            "type": "Microsoft.Network/virtualNetworkGateways/ipConfigurations",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_gateway_ipsec000001/providers/Microsoft.Network/publicIPAddresses/pip1"
+              },
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_gateway_ipsec000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet"
+              }
+            }
+          }
+        ],
+        "sku": {
+          "name": "VpnGw2",
+          "tier": "VpnGw2",
+          "capacity": 2
+        },
+        "gatewayType": "Vpn",
+        "vpnType": "RouteBased",
+        "enableBgp": false,
+        "activeActive": false,
+        "vpnClientConfiguration": {
+          "vpnClientAddressPool": {
+            "addressPrefixes": [
+              "40.1.0.0/24"
+            ]
+          },
+          "vpnClientProtocols": [
+            "SSTP",
+            "IkeV2"
+          ],
+          "vpnAuthenticationTypes": [
+            "Radius"
+          ],
+          "vpnClientRootCertificates": [],
+          "vpnClientRevokedCertificates": [],
+          "vpnClientConnectionHealth": {
+            "vpnClientConnectionsCount": 0,
+            "totalIngressBytesTransferred": 0,
+            "totalEgressBytesTransferred": 0
+          },
+          "radiusServerAddress": "30.1.1.15",
+          "radiusServerSecret": "111_aaa",
+          "radiusServers": [],
+          "vpnClientIpsecPolicies": []
+        },
+        "bgpSettings": {
+          "asn": 65515,
+          "bgpPeeringAddress": "10.0.0.254",
+          "peerWeight": 0,
+          "bgpPeeringAddresses": [
+            {
+              "ipconfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_gateway_ipsec000001/providers/Microsoft.Network/virtualNetworkGateways/gw1/ipConfigurations/vnetGatewayConfig0",
+              "defaultBgpIpAddresses": [
+                "10.0.0.254"
+              ],
+              "customBgpIpAddresses": [],
+              "tunnelIpAddresses": [
+                "104.40.54.168"
+              ]
+            }
+          ]
+        },
+        "vpnGatewayGeneration": "Generation1"
+      }
+    }
+  }
+}

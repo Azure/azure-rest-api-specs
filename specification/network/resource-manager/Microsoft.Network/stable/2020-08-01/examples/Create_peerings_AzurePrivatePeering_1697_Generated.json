@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_express_route_global_reach000001",
+    "circuitName": "er2",
+    "peeringName": "AzurePrivatePeering",
+    "peeringParameters": {
+      "properties": {
+        "peeringType": "AzurePrivatePeering",
+        "peerASN": 10002,
+        "primaryPeerAddressPrefix": "104.0.0.0/30",
+        "secondaryPeerAddressPrefix": "105.0.0.0/30",
+        "vlanId": 102
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "name": "AzurePrivatePeering",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_express_route_global_reach000001/providers/Microsoft.Network/expressRouteCircuits/er2/peerings/AzurePrivatePeering",
+      "etag": "W/\"b4c234b2-41df-4970-8f68-b2a4551bc732\"",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "peeringType": "AzurePrivatePeering",
+        "azureASN": 12076,
+        "peerASN": 10002,
+        "primaryPeerAddressPrefix": "104.0.0.0/30",
+        "secondaryPeerAddressPrefix": "105.0.0.0/30",
+        "primaryAzurePort": "OC-TEST-06GMR-CIS-1-PRI-A",
+        "secondaryAzurePort": "OC-TEST-06GMR-CIS-2-SEC-A",
+        "state": "Enabled",
+        "vlanId": 102,
+        "gatewayManagerEtag": "",
+        "lastModifiedBy": "Customer",
+        "connections": [],
+        "peeredConnections": []
+      },
+      "type": "Microsoft.Network/expressRouteCircuits/peerings"
+    }
+  }
+}
