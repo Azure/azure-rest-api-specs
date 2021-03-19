@@ -15,13 +15,12 @@
   "consumes": [
     "application/json"
   ],
-  "x-ms-paths": {
+  "paths": {
     "/paging/noitemname": {
-      "get": {
+      "post": {
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
+          "nextLinkName": "@odata.nextLink",
           "itemName": "values",
-          "operationName": "examplePaging"
         },
         "operationId": "examplePaging",
         "description": "Paging whose operation we want to override to have subsequent calls be post.",
@@ -49,7 +48,7 @@
             "$ref": "#/definitions/Product"
           }
         },
-        "nextLink": {
+        "@odata.nextLink": {
           "type": "string"
         }
       }
