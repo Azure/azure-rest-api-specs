@@ -78,6 +78,7 @@ These settings apply only when `--tag=package-preview-2019-04` is specified on t
 input-file:
   - Microsoft.Capacity/preview/2019-04-01/reservations.json
 ```
+
 ### Tag: package-2018-06
 
 These settings apply only when `--tag=package-2018-06` is specified on the command line.
@@ -112,6 +113,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js reservations/resource-manager
@@ -133,50 +135,15 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+See configuration in [readme.python.md](./readme.python.md)
 
-``` yaml $(python) && !$(track2)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.reservations
-  package-name: azure-mgmt-reservations
-  package-version: 0.3.2
-  clear-output-folder: true
-```
-``` yaml $(python) && $(track2)
-python-mode: create
-azure-arm: true
-license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.reservations
-package-name: azure-mgmt-reservations
-package-version: 0.3.2
-clear-output-folder: true
-```
+## CLI
 
-``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations/azure/mgmt/reservations
-```
-``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations
-```
+See configuration in [readme.cli.md](./readme.cli.md)
 
-``` yaml $(python) && $(python-mode) == 'update' && $(track2)
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations/azure/mgmt/reservations
-```
-``` yaml $(python) && $(python-mode) == 'create' && $(track2)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations
-```
+## AZ
+
+ See configuration in [readme.az.md](./readme.az.md)
 
 ## Go
 
