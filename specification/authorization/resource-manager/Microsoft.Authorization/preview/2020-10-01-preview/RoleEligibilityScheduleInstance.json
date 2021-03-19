@@ -255,6 +255,11 @@
           "type": "string",
           "format": "date-time",
           "description": "DateTime when role eligibility schedule was created"
+        },
+        "expandedProperties": {
+          "type": "object",
+          "description": "Additional properties of principal, scope and role definition",
+          "$ref": "#/definitions/ExpandedProperties"
         }
       },
       "description": "Role eligibility schedule properties with scope."
@@ -322,6 +327,68 @@
         }
       },
       "description": "An error response from the service."
+    },
+    "ExpandedProperties": {
+      "properties": {
+        "scope": {
+          "type": "object",
+          "description": "Details of the resource scope",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Scope id of the resource"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the resource"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the resource"
+            }
+          }
+        },
+        "roleDefinition": {
+          "type": "object",
+          "description": "Details of role definition",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the role definition"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the role definition"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the role definition"
+            }
+          }
+        },
+        "principal": {
+          "type": "object",
+          "description": "Details of the principal",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the principal"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the principal"
+            },
+            "email": {
+              "type": "string",
+              "description": "Email id of the principal"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the principal"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {

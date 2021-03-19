@@ -2,7 +2,50 @@
   "parameters": {
     "scope": "providers/Microsoft.Subscription/subscriptions/129ff972-28f8-46b8-a726-e497be039368",
     "roleManagementPolicyName": "570c3619-7688-4b34-b290-2b8bb3ccab2a",
-    "api-version": "2020-10-01-preview"
+    "api-version": "2020-10-01-preview",
+    "parameters": {
+      "properties": {
+        "rules": [
+          {
+            "isExpirationRequired": false,
+            "maximumDuration": "P180D",
+            "id": "Expiration_Admin_Eligible",
+            "ruleType": "RoleManagementPolicyExpirationRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Admin",
+            "isDefaultRecipientsEnabled": false,
+            "notificationLevel": "CRITICAL",
+            "notificationRecipients": [
+              "admin_admin_eligible@test.com"
+            ],
+            "id": "Notification_Admin_Admin_Eligible",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          }
+        ]
+      }
+    }
   },
   "responses": {
     "200": {
@@ -12,7 +55,7 @@
           "displayName": null,
           "description": null,
           "isOrganizationDefault": false,
-          "lastModifiedDateTime": "2021-03-17T02:54:27.167+00:00",
+          "lastModifiedDateTime": "2021-03-17T16:35:27.91+00:00",
           "lastModifiedBy": {
             "id": null,
             "displayName": "Admin",
@@ -21,23 +64,8 @@
           },
           "rules": [
             {
-              "enabledRules": [],
-              "id": "Enablement_Admin_Eligible",
-              "ruleType": "RoleManagementPolicyEnablementRule",
-              "target": {
-                "caller": "Admin",
-                "operations": [
-                  "ALL"
-                ],
-                "level": "Eligibility",
-                "targetObjects": null,
-                "inheritableSettings": null,
-                "enforcedSettings": null
-              }
-            },
-            {
-              "isExpirationRequired": true,
-              "maximumDuration": "P90D",
+              "isExpirationRequired": false,
+              "maximumDuration": "P180D",
               "id": "Expiration_Admin_Eligible",
               "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
@@ -115,12 +143,25 @@
               }
             },
             {
-              "enabledRules": [
-                "MultiFactorAuthentication",
-                "Justification"
-              ],
-              "id": "Enablement_Admin_Member",
+              "enabledRules": [],
+              "id": "Enablement_Admin_Eligible",
               "ruleType": "RoleManagementPolicyEnablementRule",
+              "target": {
+                "caller": "Admin",
+                "operations": [
+                  "ALL"
+                ],
+                "level": "Eligibility",
+                "targetObjects": null,
+                "inheritableSettings": null,
+                "enforcedSettings": null
+              }
+            },
+            {
+              "isExpirationRequired": false,
+              "maximumDuration": "P90D",
+              "id": "Expiration_Admin_Member",
+              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -133,10 +174,12 @@
               }
             },
             {
-              "isExpirationRequired": false,
-              "maximumDuration": "P90D",
-              "id": "Expiration_Admin_Member",
-              "ruleType": "RoleManagementPolicyExpirationRule",
+              "enabledRules": [
+                "Justification",
+                "MultiFactorAuthentication"
+              ],
+              "id": "Enablement_Admin_Member",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -212,6 +255,41 @@
               }
             },
             {
+              "isExpirationRequired": true,
+              "maximumDuration": "PT7H",
+              "id": "Expiration_EndUser_Member",
+              "ruleType": "RoleManagementPolicyExpirationRule",
+              "target": {
+                "caller": "EndUser",
+                "operations": [
+                  "ALL"
+                ],
+                "level": "Assignment",
+                "targetObjects": null,
+                "inheritableSettings": null,
+                "enforcedSettings": null
+              }
+            },
+            {
+              "enabledRules": [
+                "Justification",
+                "MultiFactorAuthentication",
+                "Ticketing"
+              ],
+              "id": "Enablement_EndUser_Member",
+              "ruleType": "RoleManagementPolicyEnablementRule",
+              "target": {
+                "caller": "EndUser",
+                "operations": [
+                  "ALL"
+                ],
+                "level": "Assignment",
+                "targetObjects": null,
+                "inheritableSettings": null,
+                "enforcedSettings": null
+              }
+            },
+            {
               "setting": {
                 "isApprovalRequired": true,
                 "isApprovalRequiredForExtension": false,
@@ -259,41 +337,6 @@
               "claimValue": "",
               "id": "AuthenticationContext_EndUser_Member",
               "ruleType": "RoleManagementPolicyAuthenticationContextRule",
-              "target": {
-                "caller": "EndUser",
-                "operations": [
-                  "ALL"
-                ],
-                "level": "Assignment",
-                "targetObjects": null,
-                "inheritableSettings": null,
-                "enforcedSettings": null
-              }
-            },
-            {
-              "enabledRules": [
-                "MultiFactorAuthentication",
-                "Justification",
-                "Ticketing"
-              ],
-              "id": "Enablement_EndUser_Member",
-              "ruleType": "RoleManagementPolicyEnablementRule",
-              "target": {
-                "caller": "EndUser",
-                "operations": [
-                  "ALL"
-                ],
-                "level": "Assignment",
-                "targetObjects": null,
-                "inheritableSettings": null,
-                "enforcedSettings": null
-              }
-            },
-            {
-              "isExpirationRequired": true,
-              "maximumDuration": "PT7H",
-              "id": "Expiration_EndUser_Member",
-              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -369,23 +412,8 @@
           ],
           "effectiveRules": [
             {
-              "enabledRules": [],
-              "id": "Enablement_Admin_Eligible",
-              "ruleType": "RoleManagementPolicyEnablementRule",
-              "target": {
-                "caller": "Admin",
-                "operations": [
-                  "ALL"
-                ],
-                "level": "Eligibility",
-                "targetObjects": null,
-                "inheritableSettings": null,
-                "enforcedSettings": null
-              }
-            },
-            {
-              "isExpirationRequired": true,
-              "maximumDuration": "P90D",
+              "isExpirationRequired": false,
+              "maximumDuration": "P180D",
               "id": "Expiration_Admin_Eligible",
               "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
@@ -463,12 +491,25 @@
               }
             },
             {
-              "enabledRules": [
-                "MultiFactorAuthentication",
-                "Justification"
-              ],
-              "id": "Enablement_Admin_Member",
+              "enabledRules": [],
+              "id": "Enablement_Admin_Eligible",
               "ruleType": "RoleManagementPolicyEnablementRule",
+              "target": {
+                "caller": "Admin",
+                "operations": [
+                  "ALL"
+                ],
+                "level": "Eligibility",
+                "targetObjects": null,
+                "inheritableSettings": null,
+                "enforcedSettings": null
+              }
+            },
+            {
+              "isExpirationRequired": false,
+              "maximumDuration": "P90D",
+              "id": "Expiration_Admin_Member",
+              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -481,10 +522,12 @@
               }
             },
             {
-              "isExpirationRequired": false,
-              "maximumDuration": "P90D",
-              "id": "Expiration_Admin_Member",
-              "ruleType": "RoleManagementPolicyExpirationRule",
+              "enabledRules": [
+                "Justification",
+                "MultiFactorAuthentication"
+              ],
+              "id": "Enablement_Admin_Member",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -560,6 +603,41 @@
               }
             },
             {
+              "isExpirationRequired": true,
+              "maximumDuration": "PT7H",
+              "id": "Expiration_EndUser_Member",
+              "ruleType": "RoleManagementPolicyExpirationRule",
+              "target": {
+                "caller": "EndUser",
+                "operations": [
+                  "ALL"
+                ],
+                "level": "Assignment",
+                "targetObjects": null,
+                "inheritableSettings": null,
+                "enforcedSettings": null
+              }
+            },
+            {
+              "enabledRules": [
+                "Justification",
+                "MultiFactorAuthentication",
+                "Ticketing"
+              ],
+              "id": "Enablement_EndUser_Member",
+              "ruleType": "RoleManagementPolicyEnablementRule",
+              "target": {
+                "caller": "EndUser",
+                "operations": [
+                  "ALL"
+                ],
+                "level": "Assignment",
+                "targetObjects": null,
+                "inheritableSettings": null,
+                "enforcedSettings": null
+              }
+            },
+            {
               "setting": {
                 "isApprovalRequired": true,
                 "isApprovalRequiredForExtension": false,
@@ -607,41 +685,6 @@
               "claimValue": "",
               "id": "AuthenticationContext_EndUser_Member",
               "ruleType": "RoleManagementPolicyAuthenticationContextRule",
-              "target": {
-                "caller": "EndUser",
-                "operations": [
-                  "ALL"
-                ],
-                "level": "Assignment",
-                "targetObjects": null,
-                "inheritableSettings": null,
-                "enforcedSettings": null
-              }
-            },
-            {
-              "enabledRules": [
-                "MultiFactorAuthentication",
-                "Justification",
-                "Ticketing"
-              ],
-              "id": "Enablement_EndUser_Member",
-              "ruleType": "RoleManagementPolicyEnablementRule",
-              "target": {
-                "caller": "EndUser",
-                "operations": [
-                  "ALL"
-                ],
-                "level": "Assignment",
-                "targetObjects": null,
-                "inheritableSettings": null,
-                "enforcedSettings": null
-              }
-            },
-            {
-              "isExpirationRequired": true,
-              "maximumDuration": "PT7H",
-              "id": "Expiration_EndUser_Member",
-              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
