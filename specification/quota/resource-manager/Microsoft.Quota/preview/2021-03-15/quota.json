@@ -341,7 +341,7 @@
         "operationId": "QuotaResourceProviders_List",
         "x-ms-examples": {
           "Quotas_listMetadataForCompute": {
-            "$ref": "./examples/getQuotaRPMetadata.json"
+            "$ref": ".examples/RPMetadata/getQuotaRPMetadata.json"
           }
         },
         "parameters": [
@@ -373,8 +373,11 @@
         "description": "Gets details of each dimension for the resource provider and resourceDimension. \r\n Examples: \r\n For Microsoft.Compute resource provider: \r\n  1.  /subscriptions/{subscriptionId}/providers/Microsoft.Compute/providers/providers/Microsoft.Quota/quotaLimitTypes/{locations}.\r\n This call will return all the locations, where Compute RP is supported. \r\n 2. Then the second call will be: \r\n /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/providers/Microsoft.Quota/quotaLimitTypes/{skus}.\r\n The skus is the last resource dimension for the uri template. This call will return all the SKUs available at the {locationId} provided. \r\n \r\n Similarly example for Microsoft.Batch resource provider: \r\n There are multiple resource templates for Microsoft.Batch resource provider. For each resource template, the resource dimension details can be retrieved. \r\n  Example for one resource template : : /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{batchAccountName}/skus/{skuId} \r\n  1. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/providers/Microsoft.Quota/quotaLimitTypes/{locations} \r\n 2. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/providers/Microsoft.Quota/quotaLimitTypes/{batchAccounts} \r\n 3. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{batchAccountName}/providers/Microsoft.Quota/quotaLimitTypes/{skus}",
         "operationId": "QuotaTemplateDimensionTypes_List",
         "x-ms-examples": {
-          "Quotas_listMetadataForCompute": {
-            "$ref": "./examples/getComputeMetadata.json"
+          "Quotas_listMetadataForComputeSkus": {
+            "$ref": "./examples/RPMetadata/getComputeSkusMetadata.json"
+          },
+          "Quotas_listMetadataForComputeLocations": {
+            "$ref": "./examples/RPMetadata/getComputeLocationsMetadata.json"
           }
         },
         "parameters": [
@@ -929,7 +932,8 @@
       "enum": [
         "predefined",
         "resourceName",
-        "serviceSpecific"
+        "serviceSpecific",
+        "userDefined"
       ],
       "x-ms-enum": {
         "name": "ResourceType",
