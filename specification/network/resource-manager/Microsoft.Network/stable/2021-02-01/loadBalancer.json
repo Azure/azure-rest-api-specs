@@ -220,6 +220,15 @@
           },
           "Create load balancer with outbound rules": {
             "$ref": "./examples/LoadBalancerCreateWithOutboundRules.json"
+          },
+          "Create load balancer with Gateway Load Balancer Consumer configured": {
+            "$ref": "./examples/LoadBalancerCreateGatewayLoadBalancerConsumer.json"
+          },
+          "Create load balancer with Gateway Load Balancer Provider configured with one Backend Pool": {
+            "$ref": "./examples/LoadBalancerCreateGatewayLoadBalancerProviderWithOneBackendPool.json"
+          },
+          "Create load balancer with Gateway Load Balancer Provider configured with two Backend Pool": {
+            "$ref": "./examples/LoadBalancerCreateGatewayLoadBalancerProviderWithTwoBackendPool.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1373,6 +1382,47 @@
     }
   },
   "definitions": {
+    "GatewayLoadBalancerTunnelInterface": {
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port of gateway load balancer tunnel interface."
+        },
+        "identifier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Identifier of gateway load balancer tunnel interface."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Protocol of gateway load balancer tunnel interface.",
+          "enum": [
+            "None",
+            "Native",
+            "VXLAN"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayLoadBalancerTunnelProtocol",
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Traffic type of gateway load balancer tunnel interface.",
+          "enum": [
+            "None",
+            "Internal",
+            "External"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayLoadBalancerTunnelInterfaceType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Gateway load balancer tunnel interface of a load balancer backend address pool."
+    },
     "LoadBalancerSku": {
       "properties": {
         "name": {
@@ -1380,7 +1430,8 @@
           "description": "Name of a load balancer SKU.",
           "enum": [
             "Basic",
-            "Standard"
+            "Standard",
+            "Gateway"
           ],
           "x-ms-enum": {
             "name": "LoadBalancerSkuName",
@@ -1459,6 +1510,10 @@
         "publicIPPrefix": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference to the Public IP Prefix resource."
+        },
+        "gatewayLoadBalancer": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to gateway load balancer frontend IP."
         },
         "provisioningState": {
           "readOnly": true,
@@ -1552,6 +1607,13 @@
           "type": "string",
           "description": "The location of the backend address pool."
         },
+        "tunnelInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayLoadBalancerTunnelInterface"
+          },
+          "description": "An array of gateway load balancer tunnel interfaces."
+        },
         "loadBalancerBackendAddresses": {
           "type": "array",
           "items": {
@@ -1634,6 +1696,13 @@
         "backendAddressPool": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "A reference to a pool of DIPs. Inbound traffic is randomly load balanced across IPs in the backend IPs."
+        },
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "An array of references to pool of DIPs."
         },
         "probe": {
           "$ref": "./network.json#/definitions/SubResource",
