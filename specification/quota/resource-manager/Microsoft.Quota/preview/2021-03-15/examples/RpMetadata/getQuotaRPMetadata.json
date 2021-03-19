@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "resourceUrl": "management.azure.com/",
+    "api-version": "2021-03-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceProviderName": "Microsoft.Compute",
+            "properties": {
+              "value": [
+                {
+                  // For each resource template
+                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/skus/{skuId}",
+                  "properties": {
+                    // Dimesions
+                    "value": [
+                      {
+                        "name": "subscriptions",
+                        "resourceDimesnsionType": "predefined"
+                      },
+                      {
+                        "name": "locations",
+                        "resourceDimesnsionType": "predefined"
+                      },
+                      {
+                        "name": "skus",
+                        "resourceDimesnsionType": "resourceName"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "resourceProviderName": "Microsoft.Batch",
+            "properties": {
+              "value": [
+                {
+                  // For each resource template
+                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{accountName}/skus/{skuId}",
+                  "properties": {
+                    // Dimesions
+                    "value": [
+                      {
+                        "name": "subscriptions",
+                        "resourceDimesnsionType": "predefined"
+                      },
+                      {
+                        "name": "locations",
+                        "resourceDimesnsionType": "predefined"
+                      },
+                      {
+                        "name": "batchAccounts",
+                        "resourceDimesnsionType": "userDefined"
+                      },
+                      {
+                        "name": "skus",
+                        "resourceDimesnsionType": "resourceName"
+                      }
+                    ]
+                  }
+                },
+                {
+                  // For each resource template
+                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{accountName}/pools/{poolName}",
+                  "properties": {
+                    // Dimesions
+                    "value": [
+                      {
+                        "name": "subscriptions",
+                        "resourceDimesnsionType": "predefined"
+                      },
+                      {
+                        "name": "locations",
+                        "resourceDimesnsionType": "predefined"
+                      },
+                      {
+                        "name": "batchAccounts",
+                        "resourceDimesnsionType": "userDefined"
+                      },
+                      {
+                        "name": "pools",
+                        "resourceDimesnsionType": "userDefined"
+                      }
+                    ]
+                  }
+                }
+
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
