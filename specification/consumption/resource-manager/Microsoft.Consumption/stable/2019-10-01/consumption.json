@@ -4000,95 +4000,6 @@
         }
       }
     },
-    "CultureCode": {
-      "description": "Language in which the recipient will receive the notification",
-      "properties": {
-        "en-us": {
-          "description": "English (United States)",
-          "type": "string"
-        },
-        "ja-jp": {
-          "description": "Japanese (Japan)",
-          "type": "string"
-        },
-        "zh-cn": {
-          "description": "Chinese (Simplified, China)",
-          "type": "string"
-        },
-        "de-de": {
-          "description": "German (Germany)",
-          "type": "string"
-        },
-        "es-es": {
-          "description": "Spanish (Spain, International)",
-          "type": "string"
-        },
-        "fr-fr": {
-          "description": "French (France)",
-          "type": "string"
-        },
-        "it-it": {
-          "description": "Italian (Italy)",
-          "type": "string"
-        },
-        "ko-kr": {
-          "description": "Korean (Korea)",
-          "type": "string"
-        },
-        "pt-br": {
-          "description": "Portuguese (Brazil)",
-          "type": "string"
-        },
-        "ru-ru": {
-          "description": "Russian (Russia)",
-          "type": "string"
-        },
-        "zh-tw": {
-          "description": "Chinese (Traditional, Taiwan)",
-          "type": "string"
-        },
-        "cs-cz": {
-          "description": "Czech (Czech Republic)",
-          "type": "string"
-        },
-        "pl-pl": {
-          "description": "Polish (Poland)",
-          "type": "string"
-        },
-        "tr-tr": {
-          "description": "Turkish (Turkey)",
-          "type": "string"
-        },
-        "da-dk": {
-          "description": "Danish (Denmark)",
-          "type": "string"
-        },
-        "en-gb": {
-          "description": "English (United Kingdom)",
-          "type": "string"
-        },
-        "hu-hu": {
-          "description": "Hungarian (Hungary)",
-          "type": "string"
-        },
-        "nb-no": {
-          "description": "Norwegian Bokmal (Norway)",
-          "type": "string"
-        },
-        "nl-nl": {
-          "description": "Dutch (Netherlands)",
-          "type": "string"
-        },
-        "pt-pt": {
-          "description": "Portuguese (Portugal)",
-          "type": "string"
-        },
-        "sv-se": {
-          "description": "Swedish (Sweden)",
-          "type": "string"
-        }
-      }
-    },
     "BudgetComparisonExpression": {
       "description": "The comparison expression to be used in the budgets.",
       "properties": {
@@ -4202,7 +4113,34 @@
         },
         "locale": {
           "description": "Language in which the recipient will receive the notification",
-          "$ref": "#/definitions/CultureCode"
+          "type": "string",
+          "enum": [
+            "en-us",
+            "ja-jp",
+            "zh-cn",
+            "de-de",
+            "es-es",
+            "fr-fr",
+            "it-it",
+            "ko-kr",
+            "pt-br",
+            "ru-ru",
+            "zh-tw",
+            "cs-cz",
+            "pl-pl",
+            "tr-tr",
+            "da-dk",
+            "en-gb",
+            "hu-hu",
+            "nb-no",
+            "nl-nl",
+            "pt-pt",
+            "sv-se"
+          ],
+          "x-ms-enum": {
+            "name": "CultureCode",
+            "modelAsString": true
+          }
         }
       },
       "required": [
