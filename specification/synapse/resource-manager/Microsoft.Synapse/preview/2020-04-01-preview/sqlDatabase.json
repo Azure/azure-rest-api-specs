@@ -287,7 +287,17 @@
         },
         "storageRedundancy": {
           "description": "Storage redundancy of the database.",
+          "enum": [
+            "Geo",
+            "GeoZone",
+            "Local",
+            "Zone"
+          ],
           "type": "string",
+          "x-ms-enum": {
+            "name": "SqlDatabaseStorageRedundancyType",
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "read",
             "create"
