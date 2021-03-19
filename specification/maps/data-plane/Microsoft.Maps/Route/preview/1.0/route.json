@@ -52,13 +52,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "../../..Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "../../..Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -70,19 +70,19 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "../../..Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "../../..Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "../../..Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
+        "$ref": "../../../Common/preview/1.0/common.js#/definitions/ODataErrorResponse"
       }
     },
     "202Async": {
@@ -1638,7 +1638,7 @@
             "description": "The list of route directions queries/requests to process. The list can contain  a max of 700 queries for async and 100 queries for sync version and must contain at least 1 query.",
             "required": true,
             "schema": {
-              "$ref": "../../..Common/preview/1.0/common.js#/definitions/BatchRequestBody"
+              "$ref": "../../../Common/preview/1.0/common.js#/definitions/BatchRequestBody"
             }
           }
         ],
@@ -1646,7 +1646,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../..Common/preview/1.0/common.js#/definitions/BatchResponse"
+              "$ref": "../../../Common/preview/1.0/common.js#/definitions/BatchResponse"
             }
           },
           "202": {
@@ -1683,14 +1683,14 @@
           "description": "A GeoJSON Geometry collection representing sequence of coordinates used as input for route reconstruction and for calculating zero or more alternative routes to this reference route.\n  - The provided sequence of supporting points is used as input for route reconstruction.\n  - The alternative routes are calculated between the origin and destination points specified in the base path parameter locations.\n  - If both _minDeviationDistance_ and _minDeviationTime_ are set to zero, then these origin and destination points are\n  expected to be at (or very near) the beginning and end of the reference route, respectively.\n  - Intermediate locations (_waypoints_) are not supported when using <_supportingPoints_>.\n  - The reference route may contain traffic incidents of type _ROAD_CLOSURE_, which are\n  ignored for the calculation of the reference route's travel time and traffic delay.",
           "allOf": [
             {
-              "$ref": "../../..Common/preview/1.0/common.js#/definitions/GeoJSONGeometryCollection"
+              "$ref": "../../../Common/preview/1.0/common.js#/definitions/GeoJSONGeometryCollection"
             },
             {
               "properties": {
                 "geometries": {
                   "type": "array",
                   "items": {
-                    "$ref": "../../..Common/preview/1.0/common.js#/definitions/Point"
+                    "$ref": "../../../Common/preview/1.0/common.js#/definitions/Point"
                   }
                 }
               }
@@ -1713,7 +1713,7 @@
         },
         "avoidAreas": {
           "description": "A GeoJSON MultiPolygon representing list of areas to avoid. Only rectangle polygons are supported. The maximum size of a rectangle is about 160x160 km. Maximum number of avoided areas is **10**. It cannot cross the 180th meridian. It must be between -80 and +80 degrees of latitude.",
-          "$ref": "../../..Common/preview/1.0/common.js#/definitions/MultiPolygon"
+          "$ref": "../../../Common/preview/1.0/common.js#/definitions/MultiPolygon"
         }
       }
     },
@@ -1833,7 +1833,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "../../..Common/preview/1.0/common.js#/definitions/Coordinate"
+            "$ref": "../../../Common/preview/1.0/common.js#/definitions/Coordinate"
           }
         }
       }
@@ -2027,7 +2027,7 @@
           "readOnly": true
         },
         "point": {
-          "$ref": "../../..Common/preview/1.0/common.js#/definitions/Coordinate"
+          "$ref": "../../../Common/preview/1.0/common.js#/definitions/Coordinate"
         },
         "pointIndex": {
           "description": "The index of the point in the list of polyline \"points\" corresponding to the point of the instruction.",
@@ -2438,14 +2438,14 @@
       "properties": {
         "center": {
           "description": "Center point of the reachable range",
-          "$ref": "../../..Common/preview/1.0/common.js#/definitions/Coordinate"
+          "$ref": "../../../Common/preview/1.0/common.js#/definitions/Coordinate"
         },
         "boundary": {
           "description": "Polygon boundary of the reachable range represented as a list of points.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "../../..Common/preview/1.0/common.js#/definitions/Coordinate"
+            "$ref": "../../../Common/preview/1.0/common.js#/definitions/Coordinate"
           }
         }
       }
@@ -2553,10 +2553,10 @@
       "type": "object",
       "properties": {
         "origins": {
-          "$ref": "../../..Common/preview/1.0/common.js#/definitions/MultiPoint"
+          "$ref": "../../../Common/preview/1.0/common.js#/definitions/MultiPoint"
         },
         "destinations": {
-          "$ref": "../../..Common/preview/1.0/common.js#/definitions/MultiPoint"
+          "$ref": "../../../Common/preview/1.0/common.js#/definitions/MultiPoint"
         }
       }
     }
