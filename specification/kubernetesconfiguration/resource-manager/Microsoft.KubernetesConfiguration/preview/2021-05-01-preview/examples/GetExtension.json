@@ -4,7 +4,7 @@
     "resourceGroupName": "rg1",
     "clusterRp": "Microsoft.Kubernetes",
     "clusterResourceName": "connectedClusters",
-    "extensionInstanceName": "ClusterMonitor",
+    "extensionName": "ClusterMonitor",
     "api-version": "2021-05-01-preview",
     "clusterName": "clusterName1"
   },
@@ -16,6 +16,14 @@
         "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor",
         "type": "Microsoft.KubernetesConfiguration/extensions",
         "name": "ClusterMonitor",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2021-05-08T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-05-08T05:10:57.027Z"
+        },
         "properties": {
           "extensionType": "azuremonitor-containers",
           "autoUpgradeMinorVersion": true,
@@ -30,11 +38,8 @@
             "omsagent.secret.wsid": "a38cef99-5a89-52ed-b6db-22095c23664b",
             "omsagent.env.clusterName": "clusterName1"
           },
-          "installState": "Pending",
-          "statuses": [],
-          "creationTime": "2020-06-08T05:10:57.027Z",
-          "lastModifiedTime": "2020-06-08T05:10:57.027Z",
-          "lastStatusTime": "2020-06-08T05:10:57.027Z"
+          "provisioningState": "Creating",
+          "statuses": []
         }
       }
     }
