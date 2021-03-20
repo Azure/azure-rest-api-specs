@@ -385,7 +385,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceDimensionTypeInParameter"
+          
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "{dimension1Name}eq{dimensionsName1}&{dimension2Name}eq{dimensionsName2} and so on. The DimensionNames should include the parent dimensions,as applicable.\r\n Example for Microsoft.Compute RP to list all the locations - $filter=locations eq *\r\n List all the resources at eastus location - $filter=location eq eastus & resources eq *\r\n Alternatively skip the last * paramater and the code picks up the next dimension from the template -Please suggest?."
+          
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
