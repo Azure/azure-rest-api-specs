@@ -12,10 +12,8 @@
             "properties": {
               "value": [
                 {
-                  // For each resource template
                   "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/resources/",
                   "properties": {
-                    // Dimesions
                     "value": [
                       {
                         "name": "subscriptions",
@@ -26,7 +24,7 @@
                         "resourceDimesnsionType": "predefined"
                       },
                       {
-                        "name": "resources",
+                        "name": "resources", // We can call it quotaBuckets and remove the resourceDimesnsionType.
                         "resourceDimesnsionType": "resourceName"
                       }
                     ]
@@ -40,10 +38,8 @@
             "properties": {
               "value": [
                 {
-                  // For each resource template
                   "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{accountName}/resources/",
                   "properties": {
-                    // Dimesions
                     "value": [
                       {
                         "name": "subscriptions",
@@ -65,10 +61,8 @@
                   }
                 },
                 {
-                  // For each resource template
                   "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{accountName}/pools/{poolName}/resources",
                   "properties": {
-                    // Dimesions
                     "value": [
                       {
                         "name": "subscriptions",
@@ -87,7 +81,7 @@
                         "resourceDimesnsionType": "userDefined"
                       },
                       {
-                        "name": "resources",
+                        "name": "resources", // We can call it quotaBuckets
                         "resourceDimesnsionType": "resourceName"
                       }
                     ]
@@ -101,10 +95,8 @@
             "properties": {
               "value": [
                 {
-                  // For each resource template
                   "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{locationId}/resources",
                   "properties": {
-                    // Dimesions
                     "value": [
                       {
                         "name": "subscriptions",
