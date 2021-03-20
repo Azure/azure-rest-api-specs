@@ -474,6 +474,12 @@
           "Create Managed Cluster with PPG": {
             "$ref": "./examples/ManagedClustersCreate_PPG.json"
           },
+          "Create Managed Cluster with OSSKU": {
+            "$ref": "./examples/ManagedClustersCreate_OSSKU.json"
+          },
+          "Create Managed Cluster with GPUMIG": {
+            "$ref": "./examples/ManagedClustersCreate_GPUMIG.json"
+          },
           "Create/Update Managed Cluster with EnableAHUB": {
             "$ref": "./examples/ManagedClustersCreate_UpdateWithAHUB.json"
           },
@@ -959,6 +965,12 @@
           },
           "Create Agent Pool with PPG": {
             "$ref": "./examples/AgentPoolsCreate_PPG.json"
+          },
+          "Create Agent Pool with OSSKU": {
+            "$ref": "./examples/AgentPoolsCreate_OSSKU.json"
+          },
+          "Create Agent Pool with GPUMIG": {
+            "$ref": "./examples/AgentPoolsCreate_GPUMIG.json"
           },
           "Create Agent Pool with Ephemeral OS Disk": {
             "$ref": "./examples/AgentPoolsCreate_Ephemeral.json"
@@ -2255,6 +2267,10 @@
           "$ref": "#/definitions/OSType",
           "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
         },
+        "osSKU": {
+          "$ref": "#/definitions/OSSKU",
+          "description": "OsSKU to be used to specify os sku. Choose from Ubuntu(default) and CBLMariner for Linux OSType. Not applicable to Windows OSType."
+        },
         "maxCount": {
           "type": "integer",
           "format": "int32",
@@ -2367,6 +2383,10 @@
         "enableFIPS": {
           "type": "boolean",
           "description": "Whether to use FIPS enabled OS"
+        },
+        "gpuInstanceProfile": {
+          "$ref": "#/definitions/GPUInstanceProfile",
+          "description": "GPUInstanceProfile to be used to specify GPU MIG instance profile for supported GPU VM SKU. Supported values are MIG1g, MIG2g, MIG3g, MIG4g and MIG7g."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -3760,6 +3780,18 @@
       },
       "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
     },
+    "OSSKU": {
+      "type": "string",
+      "enum": [
+        "Ubuntu",
+        "CBLMariner"
+      ],
+      "x-ms-enum": {
+        "name": "OSSKU",
+        "modelAsString": true
+      },
+      "description": "OsSKU to be used to specify os sku. Choose from Ubuntu(default) and CBLMariner for Linux OSType. Not applicable to Windows OSType."
+    },
     "ScaleSetPriority": {
       "type": "string",
       "default": "Regular",
@@ -4320,6 +4352,21 @@
           "description": "Alternative CA cert to use for connecting to proxy servers."
         }
       }
+    },
+    "GPUInstanceProfile": {
+      "type": "string",
+      "enum": [
+        "MIG1g",
+        "MIG2g",
+        "MIG3g",
+        "MIG4g",
+        "MIG7g"
+      ],
+      "x-ms-enum": {
+        "name": "GPUInstanceProfile ",
+        "modelAsString": true
+      },
+      "description": "GPUInstanceProfile to be used to specify GPU MIG instance profile for supported GPU VM SKU. Supported values are MIG1g, MIG2g, MIG3g, MIG4g and MIG7g."
     }
   },
   "parameters": {
