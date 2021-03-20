@@ -983,6 +983,223 @@
           "application/json"
         ]
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignmentIntents/{configurationProfileAssignmentIntentName}": {
+      "put": {
+        "tags": [
+          "ConfigurationProfileAssignmentIntents"
+        ],
+        "operationId": "ConfigurationProfileAssignmentIntents_CreateOrUpdate",
+        "description": "Creates an association between a VM and Automanage configuration profile assignment intent",
+        "x-ms-examples": {
+          "Create or update configuration profile assignment intent": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileAssignmentIntent.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "configurationProfileAssignmentIntentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the configuration profile assignment intent. Only default is supported."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentIntent"
+            },
+            "description": "Parameters supplied to the create or update configuration profile assignment intent."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The Automanage configuration profile assignment intent for the VM was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentIntent"
+            }
+          },
+          "200": {
+            "description": "OK. The configuration profile assignment intent for the VM was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentIntent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "ConfigurationProfileAssignmentIntents"
+        ],
+        "operationId": "ConfigurationProfileAssignmentIntents_Get",
+        "description": "Get information about a configuration profile assignment intent",
+        "x-ms-examples": {
+          "Get a configuration profile assignment intent": {
+            "$ref": "./examples/getConfigurationProfileAssignmentIntent.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationProfileAssignmentIntentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The configuration profile assignment intent name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The configuration profile assignment intent was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentIntent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfileAssignmentIntents": {
+      "get": {
+        "tags": [
+          "ConfigurationProfileAssignmentIntents"
+        ],
+        "operationId": "ConfigurationProfileAssignmentIntents_ListByResourceGroup",
+        "description": "Get list of configuration profile assignment intents within a given resource group",
+        "x-ms-examples": {
+          "Get a configuration profile assignment intents by resource group": {
+            "$ref": "./examples/listConfigurationProfileAssignmentIntentsByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The list of configuration profile assignment intents were returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentIntentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/configurationProfileAssignmentIntents": {
+      "get": {
+        "tags": [
+          "ConfigurationProfileAssignmentIntents"
+        ],
+        "operationId": "ConfigurationProfileAssignmentIntents_ListBySubscription",
+        "description": "Get list of configuration profile assignment intents under a given subscription",
+        "x-ms-examples": {
+          "List configuration profile assignment intents by subscription": {
+            "$ref": "./examples/listConfigurationProfileAssignmentIntentsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The list of configuration profile assignment intents were returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentIntentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1356,6 +1573,63 @@
           }
         }
       }
+    },
+    "ConfigurationProfileAssignmentIntentList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationProfileAssignmentIntent"
+          },
+          "description": "Result of the list configuration profile assignment intent operation."
+        }
+      },
+      "description": "The response of the list configuration profile assignment intent operation."
+    },
+    "ConfigurationProfileAssignmentIntent": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/ConfigurationProfileAssignmentIntentProperties",
+          "description": "Properties of the configuration profile assignment intent."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Configuration profile assignment intent is an association between a VM and automanage profile configuration."
+    },
+    "ConfigurationProfileAssignmentIntentProperties": {
+      "properties": {
+        "configurationProfile": {
+          "type": "string",
+          "description": "A value indicating configuration profile.",
+          "x-ms-enum": {
+            "name": "intentConfigurationProfile",
+            "modelAsString": true
+          },
+          "enum": [
+            "DevTest",
+            "Production"
+          ]
+        },
+        "targetId": {
+          "type": "string",
+          "description": "The target VM resource URI"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The Automanage account ARM Resource URI"
+        },
+        "configurationProfilePreferenceId": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The configuration profile custom preferences ARM resource URI"
+        }
+      },
+      "description": "Automanage configuration profile assignment intent properties."
     }
   },
   "parameters": {
