@@ -370,7 +370,7 @@
         "tags": [
           "QuotaLimitTypes"
         ],
-        "description": "Gets details of each dimension for the resource provider and resourceDimension. \r\n Examples: \r\n For Microsoft.Compute resource provider: \r\n  1.  /subscriptions/{subscriptionId}/providers/Microsoft.Compute/providers/providers/Microsoft.Quota/quotaLimitTypes/{locations}.\r\n This call will return all the locations, where Compute RP is supported. \r\n 2. Then the second call will be: \r\n /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/providers/Microsoft.Quota/quotaLimitTypes/{skus}.\r\n The skus is the last resource dimension for the uri template. This call will return all the SKUs available at the {locationId} provided. \r\n \r\n Similarly example for Microsoft.Batch resource provider: \r\n There are multiple resource templates for Microsoft.Batch resource provider. For each resource template, the resource dimension details can be retrieved. \r\n  Example for one resource template : : /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{batchAccountName}/skus/{skuId} \r\n  1. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/providers/Microsoft.Quota/quotaLimitTypes/{locations} \r\n 2. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/providers/Microsoft.Quota/quotaLimitTypes/{batchAccounts} \r\n 3. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{batchAccountName}/providers/Microsoft.Quota/quotaLimitTypes/{skus}",
+        "description": "Gets details of each dimension for the resource provider and resourceDimension. \r\n Examples: \r\n For Microsoft.Compute resource provider: \r\n  1.  /subscriptions/{subscriptionId}/providers/Microsoft.Compute/providers/providers/Microsoft.Quota/quotaLimitTypes/{locations}.\r\n This call will return all the locations, where Compute RP is supported. \r\n 2. Then the second call will be: \r\n /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/providers/Microsoft.Quota/quotaLimitTypes/{skus}.\r\n The skus is the last resource dimension for the uri template. This call will return all the SKUs available at the {locationId} provided. \r\n \r\n Similarly example for Microsoft.Batch resource provider: \r\n There are multiple resource templates for Microsoft.Batch resource provider. For each resource template, the resource dimension details can be retrieved. \r\n  Example for one resource template : : /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{batchAccountName}/skus/{skuId} \r\n  1. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/providers/Microsoft.Quota/quotaLimitTypes/{locations} \r\n 2. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/providers/Microsoft.Quota/quotaLimitTypes/{batchAccounts} \r\n 3. /subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{batchAccountName}/providers/Microsoft.Quota/quotaLimitTypes/{skus}\r\n\r\n Error cases: \r\n  1. The resourceUrl parameter is not well-formed. The resourceUrl should follow the resourceTemplate provided for the resource provider.\r\n Example: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/providers/Microsoft.Quota/{skus}. The skus dimension depends on locations, so the locations/{locationId} should be part of the resourceUrl.\r\n  2. Wrong dimension name.\r\n  3. ResourceProvider not supported.",
         "operationId": "QuotaTemplateDimensionTypes_List",
         "x-ms-examples": {
           "Quotas_listMetadataForComputeSkus": {
@@ -395,7 +395,7 @@
           "200": {
             "description": "OK. Quota limits type information",
             "schema": {
-              "$ref": "#/definitions/QuotaTypeDetails"
+              "$ref": "#/definitions/QuotaTypeInformationList"
             }
           },
           "default": {
@@ -1034,7 +1034,7 @@
           "type": "string",
           "description": "The property name"
         },
-        "value": {
+        "displayName": {
           "type": "string",
           "description": "The property value"
         }
@@ -1081,7 +1081,7 @@
         "properties": {
           "description": "The quota type properties for the resource id.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/QuotaTypesList"
+          "$ref": "#/definitions/QuotaTypeInformationList"
         }
       }
     },
