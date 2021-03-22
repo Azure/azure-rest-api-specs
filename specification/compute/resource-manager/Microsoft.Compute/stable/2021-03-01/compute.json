@@ -3094,8 +3094,8 @@
           "Create a Windows vm with a patch setting patchMode of Manual.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfManual.json"
           },
-          "Create a Windows vm with a patch setting assessmentMode of Manual.": {
-            "$ref": "./examples/CreateAWindowsVmWithPatchSettingOfManualAssessment.json"
+          "Create a Windows vm with a patch setting assessmentMode of ImageDefault.": {
+            "$ref": "./examples/CreateAWindowsVmWithPatchSettingAssessmentModeOfImageDefault.json"
           },
           "Create a Windows vm with a patch setting patchMode of AutomaticByPlatform and enableHotpatching set to true.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByPlatformAndEnableHotPatchingTrue.json"
@@ -3106,8 +3106,8 @@
           "Create a Linux vm with a patch setting patchMode of ImageDefault.": {
             "$ref": "./examples/CreateALinuxVmWithPatchSettingModeOfImageDefault.json"
           },
-          "Create a Linux vm with a patch setting assessmentMode of Manual.": {
-            "$ref": "./examples/CreateALinuxVmWithPatchSettingManualAssessmentMode.json"
+          "Create a Linux vm with a patch setting assessmentMode of ImageDefault.": {
+            "$ref": "./examples/CreateALinuxVmWithPatchSettingAssessmentModeOfImageDefault.json"
           },
           "Create a vm with an extensions time budget.": {
             "$ref": "./examples/CreateAVmWithExtensionsTimeBudget.json"
@@ -12554,13 +12554,13 @@
         },
         "assessmentMode": {
           "type": "string",
-          "description": "Specifies the mode of VM Guest Auto-Assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **Manual** - You control the timing of patch assessments on a virtual machine.<br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true. ",
+          "description": "Specifies the mode of VM Guest patch assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine.<br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true. ",
           "enum": [
-            "Manual",
+            "ImageDefault",
             "AutomaticByPlatform"
           ],
           "x-ms-enum": {
-            "name": "WindowsVMGuestAssessmentMode",
+            "name": "WindowsPatchAssessmentMode",
             "modelAsString": true
           }
         },
@@ -12587,13 +12587,13 @@
         },
         "assessmentMode": {
           "type": "string",
-          "description": "Specifies the mode of VM Guest Auto-Assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **Manual** - You control the timing of patch assessments on a virtual machine. <br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.",
+          "description": "Specifies the mode of VM Guest Patch Assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine. <br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.",
           "enum": [
-            "Manual",
+            "ImageDefault",
             "AutomaticByPlatform"
           ],
           "x-ms-enum": {
-            "name": "LinuxVMGuestAssessmentMode",
+            "name": "LinuxPatchAssessmentMode",
             "modelAsString": true
           }
         }
