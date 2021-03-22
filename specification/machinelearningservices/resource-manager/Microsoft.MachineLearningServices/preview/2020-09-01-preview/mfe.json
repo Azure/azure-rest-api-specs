@@ -494,6 +494,491 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}": {
+      "put": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "Create or update container.",
+        "operationId": "ComponentContainers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Container entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Component Container.": {
+            "$ref": "./examples/ComponentContainer/createOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "Get container.",
+        "operationId": "ComponentContainers_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Component Container.": {
+            "$ref": "./examples/ComponentContainer/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "Delete container.",
+        "operationId": "ComponentContainers_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Component Container.": {
+            "$ref": "./examples/ComponentContainer/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components": {
+      "get": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "List containers.",
+        "operationId": "ComponentContainers_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Component Container.": {
+            "$ref": "./examples/ComponentContainer/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}": {
+      "put": {
+        "tags": [
+          "ComponentVersion"
+        ],
+        "summary": "Create or update version.",
+        "operationId": "ComponentVersions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Version entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComponentVersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentVersionResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentVersionResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Component Version.": {
+            "$ref": "./examples/ComponentVersion/createOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ComponentVersion"
+        ],
+        "summary": "Get version.",
+        "operationId": "ComponentVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentVersionResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Component Version.": {
+            "$ref": "./examples/ComponentVersion/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ComponentVersion"
+        ],
+        "summary": "Delete version.",
+        "operationId": "ComponentVersions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Component Version.": {
+            "$ref": "./examples/ComponentVersion/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions": {
+      "get": {
+        "tags": [
+          "ComponentVersion"
+        ],
+        "summary": "List versions.",
+        "operationId": "ComponentVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$orderBy",
+            "description": "Ordering of list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Maximum number of records to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentVersionResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Component Version.": {
+            "$ref": "./examples/ComponentVersion/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}": {
       "put": {
         "tags": [
@@ -4336,6 +4821,471 @@
       },
       "additionalProperties": false
     },
+    "ComponentContainer": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentContainerResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/ComponentContainer",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true,
+      "additionalProperties": false
+    },
+    "ComponentContainerResourceArmPaginatedResult": {
+      "description": "A paginated list of ComponentContainer entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type ComponentContainer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentContainerResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeConfiguration": {
+      "required": [
+        "command"
+      ],
+      "type": "object",
+      "properties": {
+        "codeArtifactId": {
+          "description": "The ID of the code asset.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "command": {
+          "description": "The command to execute on startup of the job. eg. [\"python\", \"train.py\"]",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentInput": {
+      "required": [
+        "dataType",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of ComponentInput.",
+          "enum": [
+            "Generic",
+            "RangedNumber",
+            "Enum"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComponentInputType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "optional": {
+          "description": "If the input is optional. Defaults to false/required.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "description": {
+          "description": "Description for input.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "default": {
+          "description": "Default value for an input. Must match the given type.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "dataType": {
+          "description": "Component input type. String is used for type extensibility.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "type",
+      "additionalProperties": false
+    },
+    "ComponentInputRangedNumber": {
+      "required": [
+        "dataType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComponentInput"
+        }
+      ],
+      "properties": {
+        "min": {
+          "description": "The minimum value that can be accepted, used to validate the inputs for type float/int.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "max": {
+          "description": "The maximum value that can be accepted, used to validate the inputs for type float/int.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "RangedNumber",
+      "additionalProperties": false
+    },
+    "ComponentInputEnum": {
+      "required": [
+        "dataType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComponentInput"
+        }
+      ],
+      "properties": {
+        "enum": {
+          "description": "The enum definition list for enum types, used to validate the inputs for type enum.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Enum",
+      "additionalProperties": false
+    },
+    "ComponentInputGeneric": {
+      "required": [
+        "dataType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComponentInput"
+        }
+      ],
+      "x-ms-discriminator-value": "Generic",
+      "additionalProperties": false
+    },
+    "ComponentOutput": {
+      "required": [
+        "dataType"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description for output.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "dataType": {
+          "description": "Component output type. String is used for type extensibility.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Component": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Component Type, should match the schema.",
+          "enum": [
+            "CommandComponent"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComponentType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "displayName": {
+          "description": "DisplayName of the component on the UI. Defaults to same as name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "isDeterministic": {
+          "description": "Whether or not its deterministic. Defaults to true.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "inputs": {
+          "description": "Defines input ports of the component. The string key is the name of input, which should be a valid Python variable name.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ComponentInput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "outputs": {
+          "description": "Defines output ports of the component. The string key is the name of Output, which should be a valid Python variable name.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ComponentOutput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentVersion": {
+      "required": [
+        "codeConfiguration"
+      ],
+      "type": "object",
+      "properties": {
+        "environmentId": {
+          "description": "Environment configuration of the component.",
+          "type": "string",
+          "example": "\"/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.MachineLearningServices/workspaces/{{workspaceName}}/Environments/AzureML-Minimal\"",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "codeConfiguration": {
+          "description": "Code configuration of the job. Includes CodeArtifactId and Command.",
+          "$ref": "#/definitions/CodeConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "component": {
+          "description": "Component definition details.",
+          "$ref": "#/definitions/Component",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "generatedBy": {
+          "description": "If the name version are system generated (anonymous registration) or user generated.",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AssetGenerator",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentVersionResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/ComponentVersion",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true,
+      "additionalProperties": false
+    },
+    "ComponentVersionResourceArmPaginatedResult": {
+      "description": "A paginated list of ComponentVersion entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type ComponentVersion.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentVersionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "DataContainer": {
       "type": "object",
       "properties": {
@@ -6066,33 +7016,6 @@
         }
       },
       "x-ms-discriminator-value": "AutoML",
-      "additionalProperties": false
-    },
-    "CodeConfiguration": {
-      "required": [
-        "command"
-      ],
-      "type": "object",
-      "properties": {
-        "codeArtifactId": {
-          "description": "The ID of the code asset.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "command": {
-          "description": "The command to execute on startup of the job. eg. [\"python\", \"train.py\"]",
-          "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
       "additionalProperties": false
     },
     "DataBinding": {
