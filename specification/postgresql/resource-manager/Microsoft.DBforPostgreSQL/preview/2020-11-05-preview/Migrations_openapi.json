@@ -1,0 +1,1265 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Migration ARM PG APIs",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:44373"
+    }
+  ],
+  "paths": {
+    "/modules/ArmPostgreSQL/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations": {
+      "post": {
+        "tags": [
+          "MigrationsPGARMApi"
+        ],
+        "parameters": [
+          {
+            "name": "targetDBServerSubscriptionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "targetDBServerResourceGroupName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "targetDBServerName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MigrationCreateRequest"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MigrationCreateRequest"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MigrationCreateRequest"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MigrationCreateRequest"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MigrationsPGARMApi"
+        ],
+        "parameters": [
+          {
+            "name": "targetDBServerSubscriptionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "targetDBServerResourceGroupName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "targetDBServerName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "migrationListFilter",
+            "in": "query",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/MigrationListFilter"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MigrationSummary"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MigrationSummary"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MigrationSummary"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modules/ArmPostgreSQL/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationId}": {
+      "get": {
+        "tags": [
+          "MigrationsPGARMApi"
+        ],
+        "parameters": [
+          {
+            "name": "targetDBServerSubscriptionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "targetDBServerResourceGroupName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "targetDBServerName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "migrationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "migrationDetailsLevel",
+            "in": "query",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/MigrationDetailsLevel"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/MigrationDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MigrationDBDetails"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/MigrationDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MigrationDBDetails"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/MigrationDetails"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MigrationDBDetails"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modules/ArmPostgreSQL/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationId}/targetState": {
+      "put": {
+        "tags": [
+          "MigrationsPGARMApi"
+        ],
+        "parameters": [
+          {
+            "name": "targetDBServerSubscriptionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "targetDBServerResourceGroupName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "targetDBServerName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "migrationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/MigrationStateTransitionRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DBsToMigrateSpecificationRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/MigrationSchedulingRequest"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/MigrationStateTransitionRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DBsToMigrateSpecificationRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/MigrationSchedulingRequest"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/MigrationStateTransitionRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DBsToMigrateSpecificationRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/MigrationSchedulingRequest"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/MigrationStateTransitionRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DBsToMigrateSpecificationRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/MigrationSchedulingRequest"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MigrationDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MigrationDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MigrationDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidInput"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AADApp": {
+        "required": [
+          "aadSecret",
+          "clientId",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "aadSecret": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminCredentials": {
+        "required": [
+          "sourceServerPassword",
+          "targetServerPassword"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceServerPassword": {
+            "type": "string"
+          },
+          "targetServerPassword": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataMigrationSubStateDetails": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MigrationSubStateDetails"
+          }
+        ],
+        "properties": {
+          "dbDetails": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/DMSDBDataMigrationDetails"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DBServerMetadata": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "storageMB": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sku": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Sku"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DBsToMigrateSpecificationRequest": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MigrationStateTransitionRequest"
+          }
+        ],
+        "properties": {
+          "dBsToMigrate": {
+            "maxItems": 8,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DMSDBDataMigrationDetails": {
+        "type": "object",
+        "properties": {
+          "fullLoadErroredTables": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "fullLoadQueuedTables": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "fullLoadLoadingTables": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "fullLoadCompletedTables": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "cdcUpdateCounter": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "cdcDeleteCounter": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "cdcInsertCounter": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "appliedChanges": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "incomingChanges": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "migrationState": {
+            "type": "string",
+            "nullable": true
+          },
+          "endedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "startedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "databaseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "initializationCompleted": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "latency": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InternalServerError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UnknownError"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InvalidInput": {
+        "type": "object",
+        "properties": {
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvalidInputDetails"
+            },
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InvalidInputDetails": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "target": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationCreateRequest": {
+        "required": [
+          "sourceDBServerResourceId"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceDBServerResourceId": {
+            "pattern": "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{Microsoft.DBforPostgreSQL|Microsoft.DBforMySQL}/{serverType}/{serverName}",
+            "type": "string"
+          },
+          "secretParameters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationSecretParameters"
+              }
+            ],
+            "nullable": true
+          },
+          "targetDBServerSubnetResourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "migrationResourceGroup": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationResourceGroup"
+              }
+            ],
+            "nullable": true
+          },
+          "setupLogicalReplicationOnSourceDBIfNeeded": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "overwriteDBsinTarget": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "migrationWindowStartTimeInUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationCreateRequestBase": {
+        "required": [
+          "sourceDBServerResourceId"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceDBServerResourceId": {
+            "type": "string"
+          },
+          "targetDBServerSubnetResourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "migrationResourceGroup": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationResourceGroup"
+              }
+            ],
+            "nullable": true
+          },
+          "setupLogicalReplicationOnSourceDBIfNeeded": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "overwriteDBsinTarget": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "migrationWindowStartTimeInUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationDBDetails": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MigrationDetailsBase"
+          }
+        ],
+        "properties": {
+          "dBsToMigrate": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "namesOfDBsInSourceServer": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "namesOfDBsInTargetServer": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationDetails": {
+        "type": "object",
+        "properties": {
+          "migrationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "migrationDetailsLevel": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationDetailsLevel"
+              }
+            ]
+          },
+          "currentStatus": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationStatus"
+              }
+            ],
+            "nullable": true
+          },
+          "sourceDBServerMetadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DBServerMetadata"
+              }
+            ],
+            "nullable": true
+          },
+          "targetDBServerMetadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DBServerMetadata"
+              }
+            ],
+            "nullable": true
+          },
+          "migrationCreateRequest": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationCreateRequestBase"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationDetailsBase": {
+        "type": "object",
+        "properties": {
+          "migrationDetailsLevel": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationDetailsLevel"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationDetailsLevel": {
+        "enum": [
+          "Default",
+          "Summary",
+          "Full",
+          "DBNames"
+        ],
+        "type": "string"
+      },
+      "MigrationListFilter": {
+        "enum": [
+          "Active",
+          "All"
+        ],
+        "type": "string"
+      },
+      "MigrationResourceGroup": {
+        "required": [
+          "resourceId"
+        ],
+        "type": "object",
+        "properties": {
+          "resourceId": {
+            "pattern": "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}",
+            "type": "string"
+          },
+          "location": {
+            "maxLength": 128,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationSchedulingRequest": {
+        "required": [
+          "migrationWindowStartTimeInUtc"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MigrationStateTransitionRequest"
+          }
+        ],
+        "properties": {
+          "migrationWindowStartTimeInUtc": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationSecretParameters": {
+        "required": [
+          "aadApp",
+          "adminCredentials"
+        ],
+        "type": "object",
+        "properties": {
+          "adminCredentials": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AdminCredentials"
+              }
+            ]
+          },
+          "aadApp": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AADApp"
+              }
+            ]
+          },
+          "dBsToMigrate": {
+            "maxItems": 8,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationState": {
+        "enum": [
+          "InProgress",
+          "WaitingForUserAction",
+          "Canceled",
+          "Failed",
+          "Succeeded"
+        ],
+        "type": "string"
+      },
+      "MigrationStateTransitionRequest": {
+        "required": [
+          "targetState"
+        ],
+        "type": "object",
+        "properties": {
+          "targetState": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationTargetState"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationStatus": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationState"
+              }
+            ]
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentSubStateDetails": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MigrationSubStateDetails"
+              },
+              {
+                "$ref": "#/components/schemas/TargetDBOverwriteConfirmationSubStateDetails"
+              },
+              {
+                "$ref": "#/components/schemas/DataMigrationSubStateDetails"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationSubState": {
+        "enum": [
+          "PerformingPreRequisiteSteps",
+          "WaitingForLogicalReplicationSetupRequestOnSourceDB",
+          "WaitingForDBsToMigrateSpecification",
+          "WaitingForTargetDBOverwriteConfirmation",
+          "WaitingForDataMigrationScheduling",
+          "WaitingForDataMigrationWindow",
+          "MigratingData",
+          "WaitingForCutoverTrigger",
+          "CompletingMigration",
+          "Completed"
+        ],
+        "type": "string"
+      },
+      "MigrationSubStateDetails": {
+        "type": "object",
+        "properties": {
+          "currentSubState": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationSubState"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationSummary": {
+        "type": "object",
+        "properties": {
+          "migrationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "migrationDetailsLevel": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationDetailsLevel"
+              }
+            ]
+          },
+          "currentStatus": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MigrationStatus"
+              }
+            ],
+            "nullable": true
+          },
+          "sourceDBServerMetadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DBServerMetadata"
+              }
+            ],
+            "nullable": true
+          },
+          "targetDBServerMetadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DBServerMetadata"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationTargetState": {
+        "enum": [
+          "LogicalReplicationSetupOnSourceDBTriggered",
+          "DBsToMigrateSpecified",
+          "TargetDBOverwriteConfirmed",
+          "DataMigrationScheduled",
+          "DataMigrationInitiated",
+          "CutoverTriggered",
+          "Canceled"
+        ],
+        "type": "string"
+      },
+      "Sku": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "tier": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TargetDBOverwriteConfirmationSubStateDetails": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MigrationSubStateDetails"
+          }
+        ],
+        "properties": {
+          "dBsThatAlreadyExistOnTarget": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnknownError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "MigrationsPGARMApi",
+      "description": "Controller for MigrationsPGARMApi (action count: 4)"
+    }
+  ]
+}
