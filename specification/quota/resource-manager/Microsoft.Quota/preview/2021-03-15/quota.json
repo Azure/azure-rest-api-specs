@@ -370,7 +370,7 @@
         "tags": [
           "QuotaLimitTypes"
         ],
-        "description": "Gets details of each dimension for the resource provider and resourceDimension using the $filter parameter. \r\n Examples: \r\n For Microsoft.Compute resource provider: \r\n  1. To get all the location: '$filter=locations eq *'.\r\n This call will return all the locations, where Compute RP is supported. \r\n 2. Then the second call will be: \r\n '$filter=locations eq eastus & quotaBucket eq *'.\r\n The quotaBucket is the last resource dimension for the uri template. This call will return all the SKUs(for compute)/quotaBucket available at the {locationId} provided. \r\n \r\n Similarly example for Microsoft.Batch resource provider: \r\n There are multiple resource templates for Microsoft.Batch resource provider. For each resource template, the resource dimension details can be retrieved. \r\n\r\n Error cases: \r\n  1. The resourceUrl parameter is not well-formed. The resourceUrl should follow the resourceTemplate provided for the resource provider.\r\n Example: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/providers/Microsoft.Quota/{skus}. The skus dimension depends on locations, so the locations/{locationId} should be part of the resourceUrl.\r\n  2. Wrong dimension name.\r\n  3. ResourceProvider not supported.",
+        "description": "Gets details of each dimension for the resource provider and resourceDimension using the $filter parameter. \r\n Examples: \r\n For Microsoft.Compute resource provider: \r\n  1. To get all the location: '$filter=locations eq *'.\r\n This call will return all the locations, where Compute RP is supported. \r\n 2. Then the second call will be: \r\n '$filter=locations eq eastus & quotaBucket eq *'.\r\n The quotaBucket is the last resource dimension for the uri template. This call will return all the SKUs(for compute)/quotaBucket available at the {locationId} provided. \r\n \r\n Similarly example for Microsoft.Batch resource provider: \r\n There are multiple resource templates for Microsoft.Batch resource provider. For each resource template, the resource dimension details can be retrieved. \r\n\r\n Error cases: \r\n  1. The filter parameter is not well-formed. The filetr should follow the resourceTemplate provided for the resource provider and should include the parent resources with prentresourceID, such as location eq eatus.\r\n Example: '$filter=locations eq eastus & quotaBucket eq *’.\r\n The quotaBucket dimension depends on locations, so the locationseq {locationId} should be included in the query.\r\n  2. Wrong dimension name.\r\n  3. ResourceProvider not supported.",
         "operationId": "QuotaTemplateDimensionTypes_List",
         "x-ms-examples": {
           "Quotas_listMetadataForComputeSkus": {
@@ -380,7 +380,7 @@
             "$ref": "./examples/RPMetadata/getComputeLocationsMetadata.json"
           },
           "Quotas_listMetadataForBatchAccounts": {
-            "$ref": "./examples/RPMetadata/getBatchAccountsMetadata.json"
+            "$ref": "./examples/RPMetadata/getBatchAccountsNamesMetadata.json"
           },
           "Quotas_listMetadataForBatchAccountsSkus": {
             "$ref": "./examples/RPMetadata/getBatchAccountsSkusMetadata.json"
