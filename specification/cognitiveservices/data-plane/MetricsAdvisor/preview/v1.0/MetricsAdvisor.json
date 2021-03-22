@@ -4083,19 +4083,17 @@
       }
     },
     "AzureSQLConnectionStringCredential": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceCredential"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "parameters": {
-              "$ref": "#/definitions/AzureSQLConnectionStringParam"
-            }
-          }
         }
       ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureSQLConnectionStringParam"
+        }
+      },
       "x-ms-discriminator-value": "AzureSQLConnectionString"
     },
     "DataLakeGen2SharedKeyParam": {
@@ -4111,19 +4109,17 @@
       }
     },
     "DataLakeGen2SharedKeyCredential": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceCredential"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "parameters": {
-              "$ref": "#/definitions/DataLakeGen2SharedKeyParam"
-            }
-          }
         }
       ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/DataLakeGen2SharedKeyParam"
+        }
+      },
       "x-ms-discriminator-value": "DataLakeGen2SharedKey"
     },
     "ServicePrincipalParam": {
@@ -4149,19 +4145,17 @@
       }
     },
     "ServicePrincipalCredential": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceCredential"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "parameters": {
-              "$ref": "#/definitions/ServicePrincipalParam"
-            }
-          }
         }
       ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ServicePrincipalParam"
+        }
+      },
       "x-ms-discriminator-value": "ServicePrincipal"
     },
     "ServicePrincipalInKVParam": {
@@ -4202,19 +4196,17 @@
       }
     },
     "ServicePrincipalInKVCredential": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceCredential"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "parameters": {
-              "$ref": "#/definitions/ServicePrincipalInKVParam"
-            }
-          }
         }
       ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ServicePrincipalInKVParam"
+        }
+      },
       "x-ms-discriminator-value": "ServicePrincipalInKV"
     },
     "DataSourceCredentialList": {
@@ -4281,67 +4273,59 @@
       }
     },
     "AzureSQLConnectionStringCredentialPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceCredentialPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "parameters": {
-              "$ref": "#/definitions/AzureSQLConnectionStringParam"
-            }
-          }
         }
       ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureSQLConnectionStringParam"
+        }
+      },
       "x-ms-discriminator-value": "AzureSQLConnectionString"
     },
     "DataLakeGen2SharedKeyCredentialPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceCredentialPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "parameters": {
-              "$ref": "#/definitions/DataLakeGen2SharedKeyParam"
-            }
-          }
         }
       ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/DataLakeGen2SharedKeyParam"
+        }
+      },
       "x-ms-discriminator-value": "DataLakeGen2SharedKey"
     },
     "ServicePrincipalCredentialPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceCredentialPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "parameters": {
-              "$ref": "#/definitions/ServicePrincipalParam"
-            }
-          }
         }
       ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ServicePrincipalParam"
+        }
+      },
       "x-ms-discriminator-value": "ServicePrincipal"
     },
     "ServicePrincipalInKVCredentialPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceCredentialPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "parameters": {
-              "$ref": "#/definitions/ServicePrincipalInKVParam"
-            }
-          }
         }
       ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ServicePrincipalInKVParam"
+        }
+      },
       "x-ms-discriminator-value": "ServicePrincipalInKV"
     },
     "AzureApplicationInsightsParameter": {
@@ -4731,19 +4715,17 @@
       }
     },
     "AzureApplicationInsightsDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureApplicationInsightsParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureApplicationInsightsParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureApplicationInsights"
     },
     "AzureBlobParameter": {
@@ -4769,19 +4751,17 @@
       }
     },
     "AzureBlobDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureBlobParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureBlobParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureBlob"
     },
     "AzureCosmosDBParameter": {
@@ -4812,19 +4792,17 @@
       }
     },
     "AzureCosmosDBDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureCosmosDBParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureCosmosDBParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureCosmosDB"
     },
     "SqlSourceParameter": {
@@ -4844,19 +4822,17 @@
       }
     },
     "AzureDataExplorerDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/SqlSourceParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureDataExplorer"
     },
     "AzureDataLakeStorageGen2Parameter": {
@@ -4891,19 +4867,17 @@
       }
     },
     "AzureDataLakeStorageGen2DataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureDataLakeStorageGen2Parameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureDataLakeStorageGen2Parameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureDataLakeStorageGen2"
     },
     "AzureEventHubsParameter": {
@@ -4924,19 +4898,17 @@
       }
     },
     "AzureEventHubsDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureEventHubsParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureEventHubsParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureEventHubs"
     },
     "AzureTableParameter": {
@@ -4962,19 +4934,17 @@
       }
     },
     "AzureTableDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureTableParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureTableParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureTable"
     },
     "ElasticsearchParameter": {
@@ -5005,19 +4975,17 @@
       }
     },
     "ElasticsearchDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/ElasticsearchParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/ElasticsearchParameter"
+        }
+      },
       "x-ms-discriminator-value": "Elasticsearch"
     },
     "HttpRequestParameter": {
@@ -5048,19 +5016,17 @@
       }
     },
     "HttpRequestDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/HttpRequestParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/HttpRequestParameter"
+        }
+      },
       "x-ms-discriminator-value": "HttpRequest"
     },
     "InfluxDBParameter": {
@@ -5096,67 +5062,59 @@
       }
     },
     "InfluxDBDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/InfluxDBParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/InfluxDBParameter"
+        }
+      },
       "x-ms-discriminator-value": "InfluxDB"
     },
     "MySqlDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/SqlSourceParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
       "x-ms-discriminator-value": "MySql"
     },
     "PostgreSqlDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/SqlSourceParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
       "x-ms-discriminator-value": "PostgreSql"
     },
     "SQLServerDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/SqlSourceParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
       "x-ms-discriminator-value": "SqlServer"
     },
     "MongoDBParameter": {
@@ -5182,19 +5140,17 @@
       }
     },
     "MongoDBDataFeed": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetail"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/MongoDBParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/MongoDBParameter"
+        }
+      },
       "x-ms-discriminator-value": "MongoDB"
     },
     "DataFeedList": {
@@ -5408,211 +5364,185 @@
       "discriminator": "dataSourceType"
     },
     "AzureApplicationInsightsDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureApplicationInsightsParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureApplicationInsightsParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureApplicationInsights"
     },
     "AzureBlobDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureBlobParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureBlobParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureBlob"
     },
     "AzureCosmosDBDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureCosmosDBParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureCosmosDBParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureCosmosDB"
     },
     "AzureDataExplorerDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/SqlSourceParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureDataExplorer"
     },
     "AzureDataLakeStorageGen2DataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureDataLakeStorageGen2Parameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureDataLakeStorageGen2Parameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureDataLakeStorageGen2"
     },
     "AzureEventHubsDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureEventHubsParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureEventHubsParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureEventHubs"
     },
     "AzureTableDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/AzureTableParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureTableParameter"
+        }
+      },
       "x-ms-discriminator-value": "AzureTable"
     },
     "ElasticsearchDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/ElasticsearchParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/ElasticsearchParameter"
+        }
+      },
       "x-ms-discriminator-value": "Elasticsearch"
     },
     "HttpRequestDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/HttpRequestParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/HttpRequestParameter"
+        }
+      },
       "x-ms-discriminator-value": "HttpRequest"
     },
     "InfluxDBDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/InfluxDBParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/InfluxDBParameter"
+        }
+      },
       "x-ms-discriminator-value": "InfluxDB"
     },
     "MySqlDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/SqlSourceParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
       "x-ms-discriminator-value": "MySql"
     },
     "PostgreSqlDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/SqlSourceParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
       "x-ms-discriminator-value": "PostgreSql"
     },
     "SQLServerDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/SqlSourceParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
       "example": {
         "dataFeedName": "Sample - cost/revenue - city/category (modified)",
         "viewers": [
@@ -5622,19 +5552,17 @@
       "x-ms-discriminator-value": "SqlServer"
     },
     "MongoDBDataFeedPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataFeedDetailPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dataSourceParameter": {
-              "$ref": "#/definitions/MongoDBParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/MongoDBParameter"
+        }
+      },
       "x-ms-discriminator-value": "MongoDB"
     },
     "AnomalyFeedbackValue": {
@@ -5723,37 +5651,35 @@
       "discriminator": "feedbackType"
     },
     "AnomalyFeedback": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MetricFeedback"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "startTime": {
-              "format": "date-time",
-              "description": "the start timestamp of feedback time range",
-              "type": "string"
-            },
-            "endTime": {
-              "format": "date-time",
-              "description": "the end timestamp of feedback time range, when equals to startTime means only one timestamp",
-              "type": "string"
-            },
-            "value": {
-              "$ref": "#/definitions/AnomalyFeedbackValue"
-            },
-            "anomalyDetectionConfigurationId": {
-              "format": "uuid",
-              "description": "the corresponding anomaly detection configuration of this feedback",
-              "type": "string"
-            },
-            "anomalyDetectionConfigurationSnapshot": {
-              "$ref": "#/definitions/AnomalyDetectionConfiguration"
-            }
-          }
         }
       ],
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start timestamp of feedback time range",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end timestamp of feedback time range, when equals to startTime means only one timestamp",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/AnomalyFeedbackValue"
+        },
+        "anomalyDetectionConfigurationId": {
+          "format": "uuid",
+          "description": "the corresponding anomaly detection configuration of this feedback",
+          "type": "string"
+        },
+        "anomalyDetectionConfigurationSnapshot": {
+          "$ref": "#/definitions/AnomalyDetectionConfiguration"
+        }
+      },
       "example": {
         "startTime": "2020-01-01T00:00:00Z",
         "endTime": "2020-01-01T00:00:00Z",
@@ -5792,29 +5718,27 @@
       }
     },
     "ChangePointFeedback": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MetricFeedback"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "startTime": {
-              "format": "date-time",
-              "description": "the start timestamp of feedback time range",
-              "type": "string"
-            },
-            "endTime": {
-              "format": "date-time",
-              "description": "the end timestamp of feedback time range, when equals to startTime means only one timestamp",
-              "type": "string"
-            },
-            "value": {
-              "$ref": "#/definitions/ChangePointFeedbackValue"
-            }
-          }
         }
       ],
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start timestamp of feedback time range",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end timestamp of feedback time range, when equals to startTime means only one timestamp",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/ChangePointFeedbackValue"
+        }
+      },
       "x-ms-discriminator-value": "ChangePoint"
     },
     "CommentFeedbackValue": {
@@ -5830,29 +5754,27 @@
       }
     },
     "CommentFeedback": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MetricFeedback"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "startTime": {
-              "format": "date-time",
-              "description": "the start timestamp of feedback time range",
-              "type": "string"
-            },
-            "endTime": {
-              "format": "date-time",
-              "description": "the end timestamp of feedback time range, when equals to startTime means only one timestamp",
-              "type": "string"
-            },
-            "value": {
-              "$ref": "#/definitions/CommentFeedbackValue"
-            }
-          }
         }
       ],
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start timestamp of feedback time range",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end timestamp of feedback time range, when equals to startTime means only one timestamp",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/CommentFeedbackValue"
+        }
+      },
       "x-ms-discriminator-value": "Comment"
     },
     "PeriodFeedbackValue": {
@@ -5883,19 +5805,17 @@
       }
     },
     "PeriodFeedback": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MetricFeedback"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "value": {
-              "$ref": "#/definitions/PeriodFeedbackValue"
-            }
-          }
         }
       ],
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PeriodFeedbackValue"
+        }
+      },
       "x-ms-discriminator-value": "Period"
     },
     "MetricFeedbackFilter": {
@@ -6041,19 +5961,17 @@
       "discriminator": "hookType"
     },
     "EmailHookInfo": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/HookInfo"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "hookParameter": {
-              "$ref": "#/definitions/EmailHookParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "hookParameter": {
+          "$ref": "#/definitions/EmailHookParameter"
+        }
+      },
       "x-ms-discriminator-value": "Email"
     },
     "WebhookHookParameter": {
@@ -6092,19 +6010,17 @@
       }
     },
     "WebhookHookInfo": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/HookInfo"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "hookParameter": {
-              "$ref": "#/definitions/WebhookHookParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "hookParameter": {
+          "$ref": "#/definitions/WebhookHookParameter"
+        }
+      },
       "example": {
         "hookParameter": {
           "endpoint": "https://localhost/demo/post"
@@ -6176,35 +6092,31 @@
       "discriminator": "hookType"
     },
     "EmailHookInfoPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/HookInfoPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "hookParameter": {
-              "$ref": "#/definitions/EmailHookParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "hookParameter": {
+          "$ref": "#/definitions/EmailHookParameter"
+        }
+      },
       "x-ms-discriminator-value": "Email"
     },
     "WebhookHookInfoPatch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/HookInfoPatch"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "hookParameter": {
-              "$ref": "#/definitions/WebhookHookParameter"
-            }
-          }
         }
       ],
+      "properties": {
+        "hookParameter": {
+          "$ref": "#/definitions/WebhookHookParameter"
+        }
+      },
       "example": {
         "hookName": "A webhook (modified)",
         "description": "This is a webhook. (modified)"
