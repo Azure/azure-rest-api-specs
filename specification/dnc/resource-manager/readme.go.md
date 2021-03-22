@@ -23,7 +23,7 @@ These settings apply only when `--tag=package-2021-03-15 --go` is specified on t
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2021-03-15' && $(go)
-output-folder: $(go-sdk-folder)/services/stable/$(namespace)/mgmt/stable/2021-03-15/$(namespace)
+output-folder: $(go-sdk-folder)/services/stable/$(namespace)/mgmt/2021-03-15/$(namespace)
 ```
 
 ### Tag: package-2020-08-08-preview and go
@@ -32,5 +32,5 @@ These settings apply only when `--tag=package-2020-08-08-preview --go` is specif
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2020-08-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/stable/$(namespace)/mgmt/preview/2020-08-08-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-08-08-preview/$(namespace)
 ```
