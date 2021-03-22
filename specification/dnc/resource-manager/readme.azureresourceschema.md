@@ -19,10 +19,9 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.DelegatedNetwork/preview/2021-03-15/controller.json
-  - Microsoft.DelegatedNetwork/preview/2021-03-15/orchestrators.json
-  - Microsoft.DelegatedNetwork/preview/2021-03-15/delegatedSubnets.json
-  - Microsoft.DelegatedNetwork/preview/2021-03-15/operations.json
-  - Microsoft.DelegatedNetwork/preview/2021-03-15/common-types.json
-
+  - Microsoft.DelegatedNetwork/stable/2021-03-15/controller.json
+  - Microsoft.DelegatedNetwork/stable/2021-03-15/orchestrators.json
+  - Microsoft.DelegatedNetwork/stable/2021-03-15/delegatedSubnets.json
+  - Microsoft.DelegatedNetwork/stable/2021-03-15/operations.json
+  - Microsoft.DelegatedNetwork/stable/2021-03-15/common-types.json
 ```
