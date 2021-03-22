@@ -56,6 +56,7 @@ input-file:
   - Microsoft.Synapse/preview/2021-04-01-preview/sqlServer.json
   - Microsoft.Synapse/preview/2021-04-01-preview/workspace.json
 ```
+
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
