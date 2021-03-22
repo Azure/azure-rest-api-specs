@@ -36,11 +36,11 @@ These settings apply only when `--tag=package-2021-03-15` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-03-15'
 input-file:
-- Microsoft.DelegatedNetwork/preview/2021-03-15/controller.json
-- Microsoft.DelegatedNetwork/preview/2021-03-15/orchestrators.json
-- Microsoft.DelegatedNetwork/preview/2021-03-15/delegatedSubnets.json
-- Microsoft.DelegatedNetwork/preview/2021-03-15/operations.json
-- Microsoft.DelegatedNetwork/preview/2021-03-15/common-types.json
+- Microsoft.DelegatedNetwork/stable/2021-03-15/controller.json
+- Microsoft.DelegatedNetwork/stable/2021-03-15/orchestrators.json
+- Microsoft.DelegatedNetwork/stable/2021-03-15/delegatedSubnets.json
+- Microsoft.DelegatedNetwork/stable/2021-03-15/operations.json
+- Microsoft.DelegatedNetwork/stable/2021-03-15/common-types.json
 ```
 
 ---
