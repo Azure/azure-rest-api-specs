@@ -1,5 +1,5 @@
 # Semantic and Model Violations Reference
-This document lists the set of automated rules that can be validated against swagger spec by running [OAV](https://github.com/Azure/oav) tool. This document also have some *tips for the fix*. Most of the time, the error information has the position of violations in swagger. If the error is internal error and doesn't have much meaningful infomation toward the fix, please create an issue [here](https://github.com/azure/oav/issues).
+This document lists the set of automated rules that can be validated against swagger spec by running [OAV](https://github.com/Azure/oav) tool. This document also have some *tips for the fix*. Most of the time, the error information has the position of violations in swagger. If the error is internal error and doesn't have much meaningful information toward the fix, please create an issue [here](https://github.com/azure/oav/issues).
 
 ### Validation Errors
 
@@ -104,7 +104,7 @@ This document lists the set of automated rules that can be validated against swa
 
 ## Rule Descriptions
 
-### <a name="INTERNAL_ERROR" />INTERNAL_ERROR 
+### <a name="INTERNAL_ERROR" />INTERNAL_ERROR
 
 **Output Message**: none.
 
@@ -112,7 +112,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: See the inner error details for the fix.
 
-### <a name="INVALID_CONTENT_TYPE" />INVALID_CONTENT_TYPE 
+### <a name="INVALID_CONTENT_TYPE" />INVALID_CONTENT_TYPE
 
 **Output Message**: Invalid Content-Type {0}. These are supported: {1}.
 
@@ -120,7 +120,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Fix the content-type as one of the supported values.
 
-### <a name="MISSING_PATH_PARAMETER_DECLARATION" />MISSING_PATH_PARAMETER_DECLARATION 
+### <a name="MISSING_PATH_PARAMETER_DECLARATION" />MISSING_PATH_PARAMETER_DECLARATION
 
 **Output Message**: Path parameter is defined but is not declared: {0}.
 
@@ -128,7 +128,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add the declaration or remove the definition of this parameter.
 
-### <a name="MISSING_PATH_PARAMETER_DEFINITION" />MISSING_PATH_PARAMETER_DEFINITION 
+### <a name="MISSING_PATH_PARAMETER_DEFINITION" />MISSING_PATH_PARAMETER_DEFINITION
 
 **Output Message**: Path parameter is declared but is not defined: {0}.
 
@@ -136,7 +136,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add the detail definition for this path parameter.
 
-### <a name="INVALID_PARAMETER_COMBINATION" />INVALID_PARAMETER_COMBINATION 
+### <a name="INVALID_PARAMETER_COMBINATION" />INVALID_PARAMETER_COMBINATION
 
 **Output Message**: Operation cannot have a body parameter and a formData parameter.
 
@@ -144,7 +144,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Remove one of these two parameters.
 
-### <a name="MULTIPLE_BODY_PARAMETERS" />MULTIPLE_BODY_PARAMETERS 
+### <a name="MULTIPLE_BODY_PARAMETERS" />MULTIPLE_BODY_PARAMETERS
 
 **Output Message**: Operation cannot have multiple body parameters.
 
@@ -152,7 +152,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Remove one of body parameter from this operation.
 
-### <a name="DUPLICATE_OPERATIONID" />DUPLICATE_OPERATIONID 
+### <a name="DUPLICATE_OPERATIONID" />DUPLICATE_OPERATIONID
 
 **Output Message**: Cannot have multiple operations with the same operationId: {0}.
 
@@ -160,7 +160,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Rename one of the operation id.
 
-### <a name="EQUIVALENT_PATH" />EQUIVALENT_PATH 
+### <a name="EQUIVALENT_PATH" />EQUIVALENT_PATH
 
 **Output Message**: Equivalent path already exists: {0}.
 
@@ -168,7 +168,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Remove one of the equivalent paths or rename it.
 
-### <a name="EMPTY_PATH_PARAMETER_DECLARATION" />EMPTY_PATH_PARAMETER_DECLARATION 
+### <a name="EMPTY_PATH_PARAMETER_DECLARATION" />EMPTY_PATH_PARAMETER_DECLARATION
 
 **Output Message**: Path parameter declaration cannot be empty: {0}.
 
@@ -176,7 +176,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add the detail definition or remove this parameter from path.
 
-### <a name="DUPLICATE_PARAMETER" />DUPLICATE_PARAMETER 
+### <a name="DUPLICATE_PARAMETER" />DUPLICATE_PARAMETER
 
 **Output Message**: Operation cannot have duplicate parameters: {0}.
 
@@ -184,7 +184,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Remove the duplicated parameter.
 
-### <a name="CIRCULAR_INHERITANCE" />CIRCULAR_INHERITANCE 
+### <a name="CIRCULAR_INHERITANCE" />CIRCULAR_INHERITANCE
 
 **Output Message**: Schema object inherits from itself: {0}.
 
@@ -192,7 +192,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Break the circular definition reference.
 
-### <a name="INVALID_REFERENCE" />INVALID_REFERENCE 
+### <a name="INVALID_REFERENCE" />INVALID_REFERENCE
 
 **Output Message**: Missing required property definition: {0}.
 
@@ -200,7 +200,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add the definition for the required property.
 
-### <a name="INVALID_REFERENCE" />INVALID_REFERENCE 
+### <a name="INVALID_REFERENCE" />INVALID_REFERENCE
 
 **Output Message**: xxx | Invalid JSON Reference.
 
@@ -208,7 +208,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Fix the $ref as per the error details.
 
-### <a name="SCHEMA_VALIDATION_FAILED" />SCHEMA_VALIDATION_FAILED 
+### <a name="SCHEMA_VALIDATION_FAILED" />SCHEMA_VALIDATION_FAILED
 
 **Output Message**: Value failed JSON Schema validation.
 
@@ -216,7 +216,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Look into the inner errors to fix the value.
 
-### <a name="MISSING_REQUIRED_PARAMETER" />MISSING_REQUIRED_PARAMETER 
+### <a name="MISSING_REQUIRED_PARAMETER" />MISSING_REQUIRED_PARAMETER
 
 **Output Message**: Value is required but was not provided.
 
@@ -300,7 +300,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **Output Message**: There is no validation function for format '{0}'.
 
-**Description**: It doesnot support this format validation.
+**Description**: It doesn't support this format validation.
 
 **How to fix the violation**: Use another format or raise an design issue.
 
@@ -368,7 +368,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: The error info has the position of swagger, look for the position in swagger and fix the string value.
 
-### <a name="MAX_LENGTH" />MAX_LENGTH 
+### <a name="MAX_LENGTH" />MAX_LENGTH
 
 **Output Message**: String is too long ({0} chars), maximum {1}.
 
@@ -376,7 +376,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: The error info has the position of swagger, look for the position in swagger and fix the string value.
 
-### <a name="MIN_LENGTH" />MIN_LENGTH 
+### <a name="MIN_LENGTH" />MIN_LENGTH
 
 **Output Message**: String is too short ({0} chars), minimum {1}.
 
@@ -384,151 +384,151 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: The error info has the position of swagger, look for the position in swagger and fix the string value.
 
-### <a name="OBJECT_DEPENDENCY_KEY" />OBJECT_DEPENDENCY_KEY 
+### <a name="OBJECT_DEPENDENCY_KEY" />OBJECT_DEPENDENCY_KEY
 
 **Output Message**: Dependency failed - key must exist: {0} (due to key: {1}).
 
-**Description**: The dependency value is an array, the object should have all the values in the array defined as property.  
+**Description**: The dependency value is an array, the object should have all the values in the array defined as property.
 
 **How to fix the violation**: Add the key {1} as property to the object.
 
-### <a name="OBJECT_PROPERTIES_MAXIMUM" />OBJECT_PROPERTIES_MAXIMUM 
+### <a name="OBJECT_PROPERTIES_MAXIMUM" />OBJECT_PROPERTIES_MAXIMUM
 
 **Output Message**: Too many properties defined ({0}), maximum {1}.
 
-**Description**: The provided properties amount of a type is greater than the defined maximum properties amount.  
+**Description**: The provided properties amount of a type is greater than the defined maximum properties amount.
 
 **How to fix the violation**: Delete some properties to meet the maximum requirement.
 
-### <a name="OBJECT_PROPERTIES_MINIMUM" />OBJECT_PROPERTIES_MINIMUM 
+### <a name="OBJECT_PROPERTIES_MINIMUM" />OBJECT_PROPERTIES_MINIMUM
 
 **Output Message**: Too few properties defined ({0}), minimum {1}.
 
-**Description**: The provided properties amount of a type is less than the defined minimum properties amount.  
+**Description**: The provided properties amount of a type is less than the defined minimum properties amount.
 
 **How to fix the violation**: Add more properties to meet the minimum requirement.
 
-### <a name="MAXIMUM_EXCLUSIVE" />MAXIMUM_EXCLUSIVE 
+### <a name="MAXIMUM_EXCLUSIVE" />MAXIMUM_EXCLUSIVE
 
 **Output Message**: Value {0} is equal or greater than exclusive maximum {1}.
 
-**Description**: The value provided is greater than or equal to the defined maximum value.  
+**Description**: The value provided is greater than or equal to the defined maximum value.
 
 **How to fix the violation**: The error info has the position of swagger, look for the position in swagger and fix the value.
 
-### <a name="MAXIMUM" />MAXIMUM 
+### <a name="MAXIMUM" />MAXIMUM
 
 **Output Message**: Value {0} is greater than maximum {1}.
 
-**Description**: The value provided is greater than the defined maximum value.  
+**Description**: The value provided is greater than the defined maximum value.
 
 **How to fix the violation**: The error info has the position of swagger, look for the position in swagger and fix the value.
 
-### <a name="MINIMUM_EXCLUSIVE" />MINIMUM_EXCLUSIVE 
+### <a name="MINIMUM_EXCLUSIVE" />MINIMUM_EXCLUSIVE
 
 **Output Message**: Value {0} is equal or less than exclusive minimum {1}.
 
-**Description**: The value provided is less than or equal to defined minimum value.  
+**Description**: The value provided is less than or equal to defined minimum value.
 
 **How to fix the violation**: The error info has the position of swagger, look for the position in swagger and fix the value.
 
-### <a name="MULTIPLE_OF" />MULTIPLE_OF 
+### <a name="MULTIPLE_OF" />MULTIPLE_OF
 
 **Output Message**: Value {0} is not a multiple of {1}.
 
-**Description**: The value provided isn't a multiple of defined value.  
+**Description**: The value provided isn't a multiple of defined value.
 
 **How to fix the violation**: The error info has the position of swagger, look for the position in swagger and fix the value.
 
-### <a name="MINIMUM" />MINIMUM 
+### <a name="MINIMUM" />MINIMUM
 
 **Output Message**: Value {0} is less than minimum {1}.
 
-**Description**: The value provided is less than the defined minimum value.  
+**Description**: The value provided is less than the defined minimum value.
 
 **How to fix the violation**: The error info has the position of swagger, look for the position in swagger and fix the value.
 
-### <a name="ARRAY_ADDITIONAL_ITEMS" />ARRAY_ADDITIONAL_ITEMS 
+### <a name="ARRAY_ADDITIONAL_ITEMS" />ARRAY_ADDITIONAL_ITEMS
 
 **Output Message**: Additional items not allowed.
 
-**Description**: The size of array is more than the array items length in schema.  
+**Description**: The size of array is more than the array items length in schema.
 
 **How to fix the violation**: Make the size of array less than or equal to the array items length in schema.
 
-### <a name="ARRAY_UNIQUE" />ARRAY_UNIQUE 
+### <a name="ARRAY_UNIQUE" />ARRAY_UNIQUE
 
 **Output Message**: Array items are not unique (indexes {0} and {1}).
 
-**Description**: Array items doesn't match the schema of `uniqueItems = true`.  
+**Description**: Array items doesn't match the schema of `uniqueItems = true`.
 
 **How to fix the violation**: Make array items unique.
 
-### <a name="ARRAY_LENGTH_LONG" />ARRAY_LENGTH_LONG 
+### <a name="ARRAY_LENGTH_LONG" />ARRAY_LENGTH_LONG
 
 **Output Message**: Array is too long ({0}), maximum {1}.
 
-**Description**: Array items is too much.  
+**Description**: Array items is too much.
 
 **How to fix the violation**: Make array items less than maximum number.
 
-### <a name="ARRAY_LENGTH_SHORT" />ARRAY_LENGTH_SHORT 
+### <a name="ARRAY_LENGTH_SHORT" />ARRAY_LENGTH_SHORT
 
 **Output Message**: Array is too short ({0}), minimum {1}.
 
-**Description**: Array items is too little.  
+**Description**: Array items is too little.
 
 **How to fix the violation**: Make array have at least minimum item.
 
-### <a name="NOT_PASSED" />NOT_PASSED 
+### <a name="NOT_PASSED" />NOT_PASSED
 
 **Output Message**: Data matches schema from 'not'.
 
-**Description**: Data is valid for the schema but it should not be valid because the `not` keyword.  
+**Description**: Data is valid for the schema but it should not be valid because the `not` keyword.
 
 **How to fix the violation**: See inner errors for the detail issue and fix the data to not match the schema.
 
-### <a name="ONE_OF_MULTIPLE" />ONE_OF_MULTIPLE 
+### <a name="ONE_OF_MULTIPLE" />ONE_OF_MULTIPLE
 
 **Output Message**: Data is valid against more than one schema from 'oneOf'.
 
-**Description**: Data is valid for more than one sub-schemas.  
+**Description**: Data is valid for more than one sub-schemas.
 
 **How to fix the violation**: See inner errors for the detail issue and fix the data to match only one sub-schema.
 
-### <a name="ONE_OF_MISSING" />ONE_OF_MISSING 
+### <a name="ONE_OF_MISSING" />ONE_OF_MISSING
 
 **Output Message**: Data does not match any schemas from 'oneOf'.
 
-**Description**: None of the sub-schemas passes the validation.  
+**Description**: None of the sub-schemas passes the validation.
 
 **How to fix the violation**: See inner errors for the detail issue.
 
-### <a name="ANY_OF_MISSING" />ANY_OF_MISSING 
+### <a name="ANY_OF_MISSING" />ANY_OF_MISSING
 
 **Output Message**: Data does not match any schemas from 'anyOf'.
 
-**Description**: None of the sub-schemas passes the validation.  
+**Description**: None of the sub-schemas passes the validation.
 
 **How to fix the violation**: See inner errors for the detail issue.
 
-### <a name="REQUEST_VALIDATION_ERROR" />REQUEST_VALIDATION_ERROR 
+### <a name="REQUEST_VALIDATION_ERROR" />REQUEST_VALIDATION_ERROR
 
 **Output Message**: Found errors in validating the request for x-ms-example {0} in operation {1} or in validating request payload.
 
-**Description**: Validate the request of each x-ms-example or traffic payload.  
+**Description**: Validate the request of each x-ms-example or traffic payload.
 
 **How to fix the violation**: The request parameter defined in example or in traffic payload should match with the swagger spec.
 
-### <a name="RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE" />RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE 
+### <a name="RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE" />RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
 
 **Output Message**: Following response status codes {0} for operation {1} were present in the swagger spec, however they were not present in x-ms-examples. Please provide them.
 
-**Description**: All the response cases with different response code should have correspondent response defined in example.   
+**Description**: All the response cases with different response code should have correspondent response defined in example.
 
 **How to fix the violation**: Add them to example if they are not present.
 
-### <a name="INVALID_REQUEST_PARAMETER" />INVALID_REQUEST_PARAMETER 
+### <a name="INVALID_REQUEST_PARAMETER" />INVALID_REQUEST_PARAMETER
 
 **Output Message**: Invalid parameter ({0}): Value failed JSON Schema validation.
 
@@ -536,7 +536,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Check the inner errors for the fix solution.
 
-### <a name="INVALID_RESPONSE_CODE" />INVALID_RESPONSE_CODE 
+### <a name="INVALID_RESPONSE_CODE" />INVALID_RESPONSE_CODE
 
 **Output Message**: This operation does not have a defined {0} response code.
 
@@ -552,7 +552,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add response body.
 
-### <a name="OBJECT_ADDITIONAL_PROPERTIES" />OBJECT_ADDITIONAL_PROPERTIES 
+### <a name="OBJECT_ADDITIONAL_PROPERTIES" />OBJECT_ADDITIONAL_PROPERTIES
 
 **Output Message**: Additional properties not allowed:{0}.
 
@@ -561,7 +561,7 @@ This document lists the set of automated rules that can be validated against swa
 **How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, ensure the property name specified in example or in traffic payload appears exact the same in the definition or remove this property from example or from traffic payload if it's not defined in swagger spec. Remind all the characters are case sensitive.
 
 
-### <a name="INVALID_FORMAT" />INVALID_FORMAT 
+### <a name="INVALID_FORMAT" />INVALID_FORMAT
 
 **Output Message**: Object didn't pass validation for format {0}:{1}.
 
@@ -569,7 +569,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, correct the format of the param. e.g. error info containing params: [ 'int32', '2'] means the param type is `int32`, so the format should be number `2` instead of string '2'.
 
-### <a name="INVALID_TYPE" />INVALID_TYPE 
+### <a name="INVALID_TYPE" />INVALID_TYPE
 
 **Output Message**: Expected type {0} but found type {1}.
 
@@ -577,23 +577,23 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Correct the type defined in example file or in traffic payload. Sometimes this could be false positive when it peers with other errors which belongs to same parent `ANY_OF_MISSING` error or `ONE_OF_MISSING` error, in this case this error can be ignored and just fix other peer errors eventually this error will be cleared out automatically.
 
-### <a name="ENUM_CASE_MISMATCH" />ENUM_CASE_MISMATCH 
+### <a name="ENUM_CASE_MISMATCH" />ENUM_CASE_MISMATCH
 
 **Output Message**: Enum does not match case for:{0}.
 
-**Description**: The enum value provided in exmaple or in traffic payload doesn't match the case of an allowed value.
+**Description**: The enum value provided in example or in traffic payload doesn't match the case of an allowed value.
 
 **How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, correct the value case in example or in traffic payload.
 
-### <a name="ENUM_MISMATCH" />ENUM_MISMATCH 
+### <a name="ENUM_MISMATCH" />ENUM_MISMATCH
 
 **Output Message**: Enum does not match case for:{0}.
 
-**Description**: The enum value provided in exmaple or in traffic payload doesn't match the case of an allowed value.
+**Description**: The enum value provided in example or in traffic payload doesn't match the case of an allowed value.
 
 **How to fix the violation**: The error info has the position of swagger. Look for the violation location of the swagger, correct the value case in example or in traffic payload.
 
-### <a name="READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST" />READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST 
+### <a name="READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST" />READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
 
 **Output Message**: ReadOnly property `{0}: {1}`, cannot be sent in the request.
 
@@ -601,13 +601,13 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Remove the readonly property from the request parameters in example or in traffic payload.
 
-### <a name="OBJECT_MISSING_REQUIRED_PROPERTY" />OBJECT_MISSING_REQUIRED_PROPERTY 
+### <a name="OBJECT_MISSING_REQUIRED_PROPERTY" />OBJECT_MISSING_REQUIRED_PROPERTY
 
 **Output Message**: Missing required property: {0}.
 
 **Description**: The property {0} is required and has to provide in request or response of example (or of traffic payload).
 
-**How to fix the violation**: Provide the requried property in example(or in traffic payload) or remove this property from the required list of the definition in swagger spec. Or add items property if the type is array.
+**How to fix the violation**: Provide the required property in example(or in traffic payload) or remove this property from the required list of the definition in swagger spec. Or add items property if the type is array.
 
 ### <a name="DISCRIMINATOR_VALUE_NOT_FOUND" />DISCRIMINATOR_VALUE_NOT_FOUND
 
@@ -618,7 +618,7 @@ This document lists the set of automated rules that can be validated against swa
 **How to fix the violation**: Add the model that has the discriminator value or fix the discriminator value. The discriminator value could be specified by model name in definitions or by "x-ms-discriminator-value".
 
 
-### <a name="DISCRIMINATOR_NOT_REQUIRED" />DISCRIMINATOR_NOT_REQUIRED 
+### <a name="DISCRIMINATOR_NOT_REQUIRED" />DISCRIMINATOR_NOT_REQUIRED
 
 **Output Message**: discriminator must be a required property.
 
@@ -626,15 +626,15 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Set the property as required property in swagger.
 
-### <a name="RESPONSE_BODY_NOT_IN_EXAMPLE" />RESPONSE_BODY_NOT_IN_EXAMPLE 
+### <a name="RESPONSE_BODY_NOT_IN_EXAMPLE" />RESPONSE_BODY_NOT_IN_EXAMPLE
 
 **Output Message**: Response statusCode {0} for operation {1} has no response body provided in the example, however the response does have a "schema" defined in the swagger spec.
 
-**Description**: It should have response body provided in exmaple even empty when it has schema defined for this response in swagger.
+**Description**: It should have response body provided in example even empty when it has schema defined for this response in swagger.
 
 **How to fix the violation**: Add the response body in example which could be empty value {}.
 
-### <a name="DOUBLE_FORWARD_SLASHES_IN_URL" />DOUBLE_FORWARD_SLASHES_IN_URL 
+### <a name="DOUBLE_FORWARD_SLASHES_IN_URL" />DOUBLE_FORWARD_SLASHES_IN_URL
 
 **Output Message**: In operation {0}, example for parameter {1}: {2} starts with a forward slash and the path template: {3} contains a forward slash before the parameter starts. This will cause double forward slashes in the request url. Thus making it incorrect. Please rectify the example.
 
@@ -642,43 +642,43 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Remove one of it from path or parameter.
 
-### <a name="OPERATION_NOT_FOUND_IN_CACHE_WITH_PROVIDER" />OPERATION_NOT_FOUND_IN_CACHE_WITH_PROVIDER 
+### <a name="OPERATION_NOT_FOUND_IN_CACHE_WITH_PROVIDER" />OPERATION_NOT_FOUND_IN_CACHE_WITH_PROVIDER
 
 **Output Message**: Could not find provider {0} in the cache.
 
-**Description**: There's none matched resouce provider in the cache.
+**Description**: There's none matched resource provider in the cache.
 
-**How to fix the violation**: Fix resouce provider.
+**How to fix the violation**: Fix resource provider.
 
-### <a name="OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB" />OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB 
+### <a name="OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB" />OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB
 
 **Output Message**: Could not find any methods with verb {0} for api-version {1 }and provider {2} in the cache.
 
-### <a name="OPERATION_NOT_FOUND_IN_CACHE_WITH_API" />OPERATION_NOT_FOUND_IN_CACHE_WITH_API 
+### <a name="OPERATION_NOT_FOUND_IN_CACHE_WITH_API" />OPERATION_NOT_FOUND_IN_CACHE_WITH_API
 
 **Output Message**: Could not find exact api-version {0} for provider {1} in the cache.
 
-**Description**: There's none api methods based on api-version and resouce provider.
+**Description**: There's none api methods based on api-version and resource provider.
 
-**How to fix the violation**: Fix api-version or resouce provider.
+**How to fix the violation**: Fix api-version or resource provider.
 
-### <a name="OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB" />OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB 
+### <a name="OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB" />OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB
 
 **Output Message**: Could not find any methods with verb {0} for api-version {1 }and provider {2} in the cache.
 
-**Description**: It fails to search for any matched api method based on verb, api-version and resouce provider.
+**Description**: It fails to search for any matched api method based on verb, api-version and resource provider.
 
-**How to fix the violation**: Fix the verb, api-version or resouce provider.
+**How to fix the violation**: Fix the verb, api-version or resource provider.
 
-### <a name="OPERATION_NOT_FOUND_IN_CACHE" />OPERATION_NOT_FOUND_IN_CACHE 
+### <a name="OPERATION_NOT_FOUND_IN_CACHE" />OPERATION_NOT_FOUND_IN_CACHE
 
 **Output Message**: Could not find best match operation for verb {0} for api-version {1} and provider {2} in the cache.
 
-**Description**: It fails to search for any matched operation based on verb, api-version, path and resouce provider.
+**Description**: It fails to search for any matched operation based on verb, api-version, path and resource provider.
 
-**How to fix the violation**: Fix the verb, api-version, path or resouce provider.
+**How to fix the violation**: Fix the verb, api-version, path or resource provider.
 
-### <a name="PATH_NOT_FOUND_IN_REQUEST_URL" />PATH_NOT_FOUND_IN_REQUEST_URL 
+### <a name="PATH_NOT_FOUND_IN_REQUEST_URL" />PATH_NOT_FOUND_IN_REQUEST_URL
 
 **Output Message**: Could not find path from requestUrl: {0}.
 
@@ -686,7 +686,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Fix the path.
 
-### <a name="POTENTIAL_OPERATION_SEARCH_ERROR" />POTENTIAL_OPERATION_SEARCH_ERROR 
+### <a name="POTENTIAL_OPERATION_SEARCH_ERROR" />POTENTIAL_OPERATION_SEARCH_ERROR
 
 **Output Message**: An error occurred while trying to search for potential operations: {0}.
 
@@ -694,7 +694,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Fix the url or http method.
 
-### <a name="INCORRECT_INPUT" />INCORRECT_INPUT 
+### <a name="INCORRECT_INPUT" />INCORRECT_INPUT
 
 **Output Message**: requestResponseObj cannot be null or undefined and must be of type "object" | Found errors {0} in the provided input {1}.
 
@@ -702,7 +702,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: See inner detail errors toward the fix.
 
-### <a name="MULTIPLE_OPERATIONS_FOUND" />MULTIPLE_OPERATIONS_FOUND 
+### <a name="MULTIPLE_OPERATIONS_FOUND" />MULTIPLE_OPERATIONS_FOUND
 
 **Output Message**: Found multiple matching operations with operationIds {0} for request url {1} with HTTP Method {2}.
 
@@ -710,7 +710,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Make the operationId as unique across the swagger.
 
-### <a name="SEMANTIC_VALIDATION_ERROR" />SEMANTIC_VALIDATION_ERROR 
+### <a name="SEMANTIC_VALIDATION_ERROR" />SEMANTIC_VALIDATION_ERROR
 
 **Output Message**: The spec {0} has semantic validation errors.
 
@@ -718,7 +718,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: See inner detail errors toward the fix.
 
-### <a name="RESPONSE_SCHEMA_NOT_IN_SPEC" />RESPONSE_SCHEMA_NOT_IN_SPEC 
+### <a name="RESPONSE_SCHEMA_NOT_IN_SPEC" />RESPONSE_SCHEMA_NOT_IN_SPEC
 
 **Output Message**: Response statusCode {0} for operation {1} has response body provided in the example, however the response does not have a "schema" defined in the swagger spec.
 
@@ -726,7 +726,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add the missing schema definition in swagger spec.
 
-### <a name="RESPONSE_STATUS_CODE_NOT_IN_SPEC" />RESPONSE_STATUS_CODE_NOT_IN_SPEC 
+### <a name="RESPONSE_STATUS_CODE_NOT_IN_SPEC" />RESPONSE_STATUS_CODE_NOT_IN_SPEC
 
 **Output Message**: Response statusCode {0} for operation {1} is provided in exampleResponseValue, however it is not present in the swagger spec.
 
@@ -734,7 +734,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add the missing status code definition in swagger spec or remove the unmatched status code part from example.
 
-### <a name="RESPONSE_VALIDATION_ERROR" />RESPONSE_VALIDATION_ERROR 
+### <a name="RESPONSE_VALIDATION_ERROR" />RESPONSE_VALIDATION_ERROR
 
 **Output Message**: Found errors in validating the response with statusCode {} ...
 
@@ -742,7 +742,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: See inner details for the violations and fix.
 
-### <a name="X-MS-EXAMPLE_NOTFOUND_ERROR" />X-MS-EXAMPLE_NOTFOUND_ERROR 
+### <a name="X-MS-EXAMPLE_NOTFOUND_ERROR" />X-MS-EXAMPLE_NOTFOUND_ERROR
 
 **Output Message**: x-ms-example not found in {0}.
 
@@ -750,34 +750,34 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Add `x-ms-example` declaration for this operation.
 
-### <a name="ERROR_IN_PREPARING_REQUEST" />ERROR_IN_PREPARING_REQUEST 
+### <a name="ERROR_IN_PREPARING_REQUEST" />ERROR_IN_PREPARING_REQUEST
 
 **Description**: Error when preparing the request for validation.
 
 **How to fix the violation**: Fix by the inner error details or raise an issue at [oav](https://github.com/azure/oav/issues).
 
-### <a name="REQUIRED_PARAMETER_EXAMPLE_NOT_FOUND" />REQUIRED_PARAMETER_EXAMPLE_NOT_FOUND 
+### <a name="REQUIRED_PARAMETER_EXAMPLE_NOT_FOUND" />REQUIRED_PARAMETER_EXAMPLE_NOT_FOUND
 
 **Output Message**: In operation {0}, parameter {1} is required in the swagger spec but is not present in the provided example parameter values.
 
 **Description**: Required parameter is not provided in example.
 
-**How to fix the violation**: Add the requried parameter in example.
+**How to fix the violation**: Add the required parameter in example.
 
-### <a name="RESOLVE_SPEC_ERROR" />RESOLVE_SPEC_ERROR 
+### <a name="RESOLVE_SPEC_ERROR" />RESOLVE_SPEC_ERROR
 
 **Description**: Error happens when try to resolve the swagger.
 
 **How to fix the violation**: See the inner error details for the fix.
 
-### <a name="JSON_PARSING_ERROR" />JSON_PARSING_ERROR 
+### <a name="JSON_PARSING_ERROR" />JSON_PARSING_ERROR
 
 **Description**: Error happens when try to parse the JSON.
 
 **How to fix the violation**: See the inner error details for the fix.
 
 
-### <a name="UNUSED_DEFINITION" />UNUSED_DEFINITION 
+### <a name="UNUSED_DEFINITION" />UNUSED_DEFINITION
 
 **Output Message**: Definition is not used: {0}.
 
@@ -785,7 +785,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: Remove this definition if it's not used.
 
-### <a name="SECRET_PROPERTY" />SECRET_PROPERTY 
+### <a name="SECRET_PROPERTY" />SECRET_PROPERTY
 
 **Output Message**: Secret property {0} cannot be sent in the response.
 
@@ -798,7 +798,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **Output Message**: The property’s value in the GET response is different from what was set in the preceding PUT request. If it is a read-only property, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema. If it is immutable (its value cannot be changed after creation), update the swagger definition for this property to mark it with the "x-ms-mutability": ["create", "read"] annotation. If the property has a default value, update the Swagger definition for this property to mark it with "default": <default value> annotation.
 
-**Description**: The property’s value in the GET response is different from what was set in the preceding PUT request. This usually happens when the property is read-only so its value cannot be set by users, or its value can be set in the initial PUT request but cannot be updated afterwards. It is also possible that the property has a default value, and it is set to that value when a null value is included in the PUT request. There are some other cases where ROUNDTRIP_INCONISTENT_PROPERTY is raised but cannot be fixed in swagger, for which you might need to send exception requests (please refer to the **How to fix the violation section** section below for more details).
+**Description**: The property’s value in the GET response is different from what was set in the preceding PUT request. This usually happens when the property is read-only so its value cannot be set by users, or its value can be set in the initial PUT request but cannot be updated afterwards. It is also possible that the property has a default value, and it is set to that value when a null value is included in the PUT request. There are some other cases where ROUNDTRIP_INCONSISTENT_PROPERTY is raised but cannot be fixed in swagger, for which you might need to send exception requests (please refer to the **How to fix the violation section** section below for more details).
 
 **How to fix the violation**:
 - Check if the property is read-only. If yes, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema.
