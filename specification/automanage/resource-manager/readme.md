@@ -37,7 +37,6 @@ These settings apply only when `--tag=package-2021-03-30-preview` is specified o
 ``` yaml $(tag) == 'package-2021-03-30-preview'
 input-file:
 - Microsoft.Automanage/preview/2021-03-30-preview/automanage.json
-- Microsoft.Automanage/preview/2020-06-30-preview/automanage.json
 ```
 
 ### Tag: package-2020-06-30-preview
