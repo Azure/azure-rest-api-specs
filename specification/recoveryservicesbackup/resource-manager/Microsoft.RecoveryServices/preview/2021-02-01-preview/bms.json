@@ -3916,6 +3916,263 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupResourceGuardProxies": {
+      "get": {
+        "tags": [
+          "ResourceGuardProxies"
+        ],
+        "description": "List the ResourceGuardProxies under vault",
+        "operationId": "ResourceGuardProxies_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get VaultGuardProxies": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/ListResourceGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}": {
+      "get": {
+        "tags": [
+          "ResourceGuardProxy"
+        ],
+        "description": "Returns ResourceGuardProxy under vault and with the name referenced in request",
+        "operationId": "ResourceGuardProxy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/GetResourceGuardProxy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ResourceGuardProxy"
+        ],
+        "description": "Add or Update ResourceGuardProxy under vault\r\nSecures vault critical operations",
+        "operationId": "ResourceGuardProxy_Put",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/PutResourceGuardProxy.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceGuardProxy"
+        ],
+        "description": "Delete ResourceGuardProxy under vault",
+        "operationId": "ResourceGuardProxy_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/DeleteResourceGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}/unlockDelete": {
+      "post": {
+        "tags": [
+          "ResourceGuardProxy"
+        ],
+        "description": "Secures delete ResourceGuardProxy operations.",
+        "operationId": "ResourceGuardProxy_UnlockDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnlockDelete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/UnlockDeleteResourceGuardProxy.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -8315,6 +8572,13 @@
             "name": "SoftDeleteFeatureState",
             "modelAsString": true
           }
+        },
+        "resourceGuardOperationRequests": {
+          "description": "ResourceGuard Operation Requests",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -11232,6 +11496,87 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "UnlockDeleteRequest": {
+      "description": "Request body of unlock delete API.",
+      "type": "object",
+      "properties": {
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UnlockDeleteResponse": {
+      "description": "Response of Unlock Delete API.",
+      "type": "object",
+      "properties": {
+        "unlockDeleteExpiryTime": {
+          "description": "This is the time when unlock delete privileges will get expired.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceGuardOperationDetail": {
+      "type": "object",
+      "properties": {
+        "vaultCriticalOperation": {
+          "type": "string"
+        },
+        "defaultResourceRequest": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceGuardProxyBase": {
+      "type": "object",
+      "properties": {
+        "resourceGuardResourceId": {
+          "type": "string"
+        },
+        "resourceGuardOperationDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceGuardOperationDetail"
+          }
+        },
+        "lastUpdatedTime": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceGuardProxyBaseResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceGuardProxyBase",
+          "description": "ResourceGuardProxyBaseResource properties"
+        }
+      }
+    },
+    "ResourceGuardProxyBaseResourceList": {
+      "description": "List of ResourceGuardProxyBase resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceGuardProxyBaseResource"
           }
         }
       }
