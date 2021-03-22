@@ -27,48 +27,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Automanage/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available Automanage REST API operations.",
-        "x-ms-examples": {
-          "Lists all of the available Automanage REST API operations": {
-            "$ref": "./examples/listOperations.json"
-          }
-        },
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignmentIntents/{configurationProfileAssignmentIntentName}": {
       "put": {
         "tags": [
@@ -288,63 +246,6 @@
     }
   },
   "definitions": {
-    "Operation": {
-      "description": "Automanage REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: For ex. providers/Microsoft.Automanage/configurationProfileAssignments/write or read",
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "string"
-        },
-        "display": {
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Automanage",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed:  For ex. ",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Description about operation.",
-              "type": "string"
-            }
-          },
-          "description": "Provider, Resource, Operation and description values."
-        },
-        "properties": {
-          "properties": {
-            "statusCode": {
-              "description": "Service provider: Microsoft.Automanage",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true,
-          "description": "Provider, Resource, Operation and description values."
-        }
-      }
-    },
-    "OperationList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of Automanage operations supported by the Automanage resource provider."
-        }
-      },
-      "description": "The response model for the list of Automanage operations"
-    },
     "ConfigurationProfileAssignmentIntentList": {
       "properties": {
         "value": {
