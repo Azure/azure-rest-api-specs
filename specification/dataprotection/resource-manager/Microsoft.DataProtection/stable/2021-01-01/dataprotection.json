@@ -1973,6 +1973,21 @@
       "type": "object",
       "x-ms-discriminator-value": "AdhocBasedTriggerContext"
     },
+    "AuthCredentials": {
+      "description": "Base class for different types of authentication credentials.",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false
+        }
+      },
+      "discriminator": "objectType"
+    },
     "AzureBackupDiscreteRecoveryPoint": {
       "allOf": [
         {
@@ -3656,6 +3671,53 @@
       "title": "InnerError",
       "type": "object"
     },
+    "ItemLevelRestoreCriteria": {
+      "description": "Class to contain criteria for item level restore",
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string"
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "ItemLevelRestoreTargetInfo": {
+      "description": "Restore target info for Item level restore operation",
+      "required": [
+        "restoreCriteria",
+        "datasourceInfo",
+        "recoveryOption"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestoreTargetInfoBase"
+        }
+      ],
+      "properties": {
+        "restoreCriteria": {
+          "description": "Restore Criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemLevelRestoreCriteria"
+          }
+        },
+        "datasourceInfo": {
+          "$ref": "#/definitions/Datasource",
+          "description": "Information of target DS"
+        },
+        "datasourceSetInfo": {
+          "$ref": "#/definitions/DatasourceSet",
+          "description": "Information of target DS Set"
+        },
+        "datasourceAuthCredentials": {
+          "$ref": "#/definitions/AuthCredentials",
+          "description": "Credentails to use to authenticate with data source provider."
+        }
+      },
+      "x-ms-discriminator-value": "ItemLevelRestoreTargetInfo"
+    },
     "JobExtendedInfo": {
       "description": "Extended Information about the job",
       "properties": {
@@ -3882,6 +3944,26 @@
       },
       "title": "ProtectionStatusDetails",
       "type": "object"
+    },
+    "RangeBasedItemLevelRestoreCriteria": {
+      "description": "Item Level target info for restore operation",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "properties": {
+        "minMatchingValue": {
+          "description": "minimum value for range prefix match",
+          "type": "string"
+        },
+        "maxMatchingValue": {
+          "description": "maximum value for range prefix match",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "RangeBasedItemLevelRestoreCriteria"
     },
     "RecoveryPointDataStoreDetails": {
       "description": "RecoveryPoint datastore details",
