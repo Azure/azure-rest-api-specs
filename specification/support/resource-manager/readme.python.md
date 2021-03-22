@@ -12,7 +12,6 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.support
   package-name: azure-mgmt-support
-  package-version: 2.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(track2)
@@ -21,7 +20,6 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.support
 package-name: azure-mgmt-support
-package-version: 2.0.0
 clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
