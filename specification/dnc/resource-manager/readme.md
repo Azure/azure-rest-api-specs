@@ -123,7 +123,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2021-03-15' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.DelegatedNetwork.2021-03-15
-  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/mgmt-2021-03-15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/stable/mgmt-2021-03-15
 regenerate-manager: true
 generate-interface: true
 ```
@@ -136,7 +136,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ```yaml $(tag) == 'package-2020-08-08-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.DelegatedNetwork.v2020_08_08_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/mgmt-v2020_08_08_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/preview/mgmt-v2020_08_08_preview
   regenerate-manager: true
   generate-interface: true
 ```
