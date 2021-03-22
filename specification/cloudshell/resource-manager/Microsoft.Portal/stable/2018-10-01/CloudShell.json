@@ -664,20 +664,18 @@
   "definitions": {
     "CloudShellConsole": {
       "description": "Cloud shell console",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConsoleProperties"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "type": "object",
-          "required": [
-            "properties"
-          ],
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/ConsoleProperties"
-            }
-          }
         }
       ]
     },
