@@ -451,25 +451,21 @@
           "properties": {
             "extensionType": {
               "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher.",
-              "type": "string",
-              "required": true
+              "type": "string"
             },
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
               "type": "boolean",
-              "default": true,
-              "required": false
+              "default": true
             },
             "releaseTrain": {
               "description": "ReleaseTrain this extension participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
               "type": "string",
-              "required": false,
               "default": "Stable"
             },
             "version": {
               "description": "Version of the extension for this extension, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'.",
-              "type": "string",
-              "required": false
+              "type": "string"
             },
             "scope": {
               "description": "Scope at which the extension is installed.",
@@ -478,7 +474,7 @@
             "configurationSettings": {
               "description": "Configuration settings, as name-value pairs for configuring this extension.",
               "type": "object",
-              "required": false,
+              "x-nullable": true,
               "additionalProperties": {
                 "type": "string"
               }
@@ -486,7 +482,6 @@
             "configurationProtectedSettings": {
               "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
               "type": "object",
-              "required": false,
               "x-nullable": true,
               "x-ms-secret": true,
               "additionalProperties": {
@@ -515,9 +510,8 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
             },
             "identity": {
-              "type": "object",
               "description": "Identity of the Extension resource",
-              "ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
             },
             "location": {
               "type": "string",
@@ -591,7 +585,6 @@
         "properties": {
           "description": "Additional information, if available.",
           "type": "object",
-          "required": false,
           "x-nullable": true,
           "additionalProperties": {
             "type": "string"
