@@ -12,20 +12,18 @@
             "properties": {
               "value": [
                 {
-                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/resources/",
+                  // the name and uri is for example. Actual dimension names will come from Policy document.
+                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/quotaeBucket/",
                   "properties": {
                     "value": [
                       {
-                        "name": "subscriptions",
-                        "resourceDimesnsionType": "predefined"
+                        "name": "subscriptions"
                       },
                       {
-                        "name": "locations",
-                        "resourceDimesnsionType": "predefined"
+                        "name": "locations"
                       },
                       {
-                        "name": "resources", // We can call it quotaBuckets and remove the resourceDimesnsionType.
-                        "resourceDimesnsionType": "resourceName"
+                        "name": "quotaeBucket"
                       }
                     ]
                   }
@@ -38,51 +36,42 @@
             "properties": {
               "value": [
                 {
-                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{accountName}/resources/",
+                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{accountName}/quotaeBucket/",
                   "properties": {
                     "value": [
                       {
-                        "name": "subscriptions",
-                        "resourceDimesnsionType": "predefined"
+                        "name": "subscriptions"
                       },
                       {
-                        "name": "locations",
-                        "resourceDimesnsionType": "predefined"
+                        "name": "locations"
                       },
                       {
-                        "name": "batchAccounts",
-                        "resourceDimesnsionType": "userDefined"
+                        "name": "batchAccounts"
                       },
                       {
-                        "name": "resources",
-                        "resourceDimesnsionType": "resourceName"
+                        "name": "quotaeBucket"
                       }
                     ]
                   }
                 },
                 {
-                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{accountName}/pools/{poolName}/resources",
+                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{accountName}/pools/{poolName}/quotaeBucket",
                   "properties": {
                     "value": [
                       {
-                        "name": "subscriptions",
-                        "resourceDimesnsionType": "predefined"
+                        "name": "subscriptions"
                       },
                       {
-                        "name": "locations",
-                        "resourceDimesnsionType": "predefined"
+                        "name": "locations"
                       },
                       {
-                        "name": "batchAccounts",
-                        "resourceDimesnsionType": "userDefined"
+                        "name": "batchAccounts"
                       },
                       {
-                        "name": "pools",
-                        "resourceDimesnsionType": "userDefined"
+                        "name": "pools"quotaeBucket
                       },
                       {
-                        "name": "resources", // We can call it quotaBuckets
-                        "resourceDimesnsionType": "resourceName"
+                        "name": "quotaeBucket" // We can call it quotaBuckets or whatever is defined in the manifest
                       }
                     ]
                   }
@@ -95,27 +84,24 @@
             "properties": {
               "value": [
                 {
-                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{locationId}/resources",
+                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{locationId}/quotaeBucket",
                   "properties": {
                     "value": [
                       {
-                        "name": "subscriptions",
-                        "resourceDimesnsionType": "predefined"
+                        "name": "subscriptions"
                       },
                       {
-                        "name": "locations",
-                        "resourceDimesnsionType": "predefined"
+                        "name": "locations"
                       },
                       {
-                        "name": "resourceNames",
-                        "resourceDimesnsionType": "resourceName"
+                        "name": "quotaBucket"
                       }
                     ]
                   }
                 }
               ]
             }
-          },
+          }
         ]
       }
     }
