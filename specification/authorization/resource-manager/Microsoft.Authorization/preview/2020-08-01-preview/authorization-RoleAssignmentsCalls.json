@@ -617,7 +617,7 @@
           "type": "boolean",
           "description": "Whether or not validation succeeded"
         },
-        "validationErrorInfo": {
+        "errorInfo": {
           "description": "Failed validation result details",
           "$ref": "#/definitions/ValidationResponseErrorInfo"
         }
@@ -652,6 +652,7 @@
     "RoleAssignmentProperties": {
       "properties": {
         "scope": {
+          "readOnly": true,
           "type": "string",
           "description": "The role assignment scope."
         },
