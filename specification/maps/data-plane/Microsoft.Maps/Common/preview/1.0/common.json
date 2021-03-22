@@ -291,19 +291,22 @@
           "$ref": "#/definitions/GeoJSONGeometry"
         },
         {
-          "properties": {
-            "coordinates": {
-              "description": "Coordinates for the `LineString` geometry.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/GeoJSONPosition"
-              }
-            }
-          },
-          "required": [
-            "coordinates"
-          ]
+          "$ref": "#/definitions/LineStringData"
         }
+      ]
+    },
+    "LineStringData": {
+      "properties": {
+        "coordinates": {
+          "description": "Coordinates for the `LineString` geometry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJSONPosition"
+          }
+        }
+      },
+      "required": [
+        "coordinates"
       ]
     },
     "GeoJSONLinearRing": {
@@ -329,22 +332,25 @@
           "$ref": "#/definitions/GeoJSONGeometry"
         },
         {
-          "properties": {
-            "coordinates": {
-              "description": "Contains a list of valid `GeoJSON` Polygon objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
-              "type": "array",
-              "items": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/GeoJSONLinearRing"
-                }
-              }
-            }
-          },
-          "required": [
-            "coordinates"
-          ]
+          "$ref": "#/definitions/MultiPolygonData"
         }
+      ]
+    },
+    "MultiPolygonData": {
+      "properties": {
+        "coordinates": {
+          "description": "Contains a list of valid `GeoJSON` Polygon objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/GeoJSONLinearRing"
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
       ]
     },
     "MultiLineString": {
@@ -355,26 +361,29 @@
           "$ref": "#/definitions/GeoJSONGeometry"
         },
         {
-          "properties": {
-            "type": {
-              "description": "Specifies the `type` for the geometry. Value should always be equal to \"MultiLineString\".",
-              "type": "string"
-            },
-            "coordinates": {
-              "description": "Coordinates for the `MultiLineString` geometry.",
-              "type": "array",
-              "items": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/GeoJSONPosition"
-                }
-              }
-            }
-          },
-          "required": [
-            "coordinates"
-          ]
+          "$ref": "#/definitions/MultiPointStringData"
         }
+      ]
+    },
+    "MultiPointStringData": {
+      "properties": {
+        "type": {
+          "description": "Specifies the `type` for the geometry. Value should always be equal to \"MultiLineString\".",
+          "type": "string"
+        },
+        "coordinates": {
+          "description": "Coordinates for the `MultiLineString` geometry.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/GeoJSONPosition"
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
       ]
     },
     "Polygon": {
@@ -385,19 +394,22 @@
           "$ref": "#/definitions/GeoJSONGeometry"
         },
         {
-          "properties": {
-            "coordinates": {
-              "description": "Coordinates for the `Polygon` geometry type.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/GeoJSONLinearRing"
-              }
-            }
-          },
-          "required": [
-            "coordinates"
-          ]
+          "$ref": "#/definitions/PolygonData"
         }
+      ]
+    },
+    "PolygonData": {
+      "properties": {
+        "coordinates": {
+          "description": "Coordinates for the `Polygon` geometry type.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJSONLinearRing"
+          }
+        }
+      },
+      "required": [
+        "coordinates"
       ]
     },
     "GeometryCollection": {
@@ -408,23 +420,26 @@
           "$ref": "#/definitions/Geometry"
         },
         {
-          "properties": {
-            "type": {
-              "description": "Specifies the `type` for the object. Value should always be equal to \"GeometryCollection\".",
-              "type": "string"
-            },
-            "geometries": {
-              "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/GeoJSONGeometry"
-              }
-            }
-          },
-          "required": [
-            "geometries"
-          ]
+          "$ref": "#/definitions/GeometryCollectionData"
         }
+      ]
+    },
+    "GeometryCollectionData": {
+      "properties": {
+        "type": {
+          "description": "Specifies the `type` for the object. Value should always be equal to \"GeometryCollection\".",
+          "type": "string"
+        },
+        "geometries": {
+          "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJSONGeometry"
+          }
+        }
+      },
+      "required": [
+        "geometries"
       ]
     },
     "BatchRequestBody": {
