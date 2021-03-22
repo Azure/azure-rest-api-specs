@@ -5566,6 +5566,225 @@
       },
       "additionalProperties": false
     },
+    "GeneralSettings": {
+      "description": "General Settings to submit an AutoML Job.",
+      "type": "object",
+      "properties": {
+        "primaryMetric": {
+          "description": "Primary optimization metric",
+          "enum": [
+            "AUC_weighted",
+            "Accuracy",
+            "Norm_macro_recall",
+            "Average_precision_score_weighted",
+            "Precision_score_weighted",
+            "Spearman_correlation",
+            "Normalized_root_mean_squared_error",
+            "R2_score",
+            "Normalized_mean_absolute_error",
+            "Normalized_root_mean_squared_log_error"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OptimizationMetric",
+            "modelAsString": true
+          }
+        },
+        "enableModelExplainability": {
+          "description": "Flag to turn on explainability on best model.",
+          "type": "boolean"
+        },
+        "taskType": {
+          "description": "Type of AutoML Experiment [Classification, Regression, Forecasting]",
+          "enum": [
+            "Classification",
+            "Regression",
+            "Forecasting"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TaskType",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ExperimentLimits": {
+      "description": "Limit settings on AutoML Experiment.",
+      "type": "object",
+      "properties": {
+        "maxTrials": {
+          "format": "int32",
+          "description": "Number of iterations.",
+          "type": "integer"
+        },
+        "experimentTimeoutInMinutes": {
+          "format": "int32",
+          "description": "Experiment Timeout",
+          "type": "integer"
+        },
+        "maxConcurrentTrials": {
+          "format": "int32",
+          "description": "Maximum Concurrent iterations",
+          "type": "integer"
+        },
+        "maxCoresPerTrial": {
+          "format": "int32",
+          "description": "Max cores per iteration.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TrainingDataSettings": {
+      "description": "Dataset datamodel.\r\nThis is the class represents the Dataset Json string structure that passed into Jasmine.",
+      "type": "object",
+      "properties": {
+        "datasetArmId": {
+          "description": "The Dataset Arm Id.",
+          "type": "string"
+        },
+        "targetColumnName": {
+          "description": "Label column name.",
+          "type": "string"
+        },
+        "weightColumnName": {
+          "description": "Weight column name.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ValidationDataSettings": {
+      "type": "object",
+      "properties": {
+        "datasetArmId": {
+          "description": "Dataset Arm id..",
+          "type": "string"
+        },
+        "nCrossValidations": {
+          "format": "int32",
+          "description": "Number of cross validation folds to be applied on training dataset\r\nwhen validation dataset is not provided.",
+          "type": "integer"
+        },
+        "validationSize": {
+          "format": "double",
+          "description": "The fraction of training dataset that needs to be set aside for validation purpose.\r\nValues between (0.0 , 1.0)\r\nApplied when validation dataset is not provided.",
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DataSettings": {
+      "description": "This class represents the Dataset Json that is passed into Jasmine for training.",
+      "type": "object",
+      "properties": {
+        "trainingData": {
+          "description": "The training_data",
+          "$ref": "#/definitions/TrainingDataSettings"
+        },
+        "validationData": {
+          "description": "The validation_data",
+          "$ref": "#/definitions/ValidationDataSettings"
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeaturizationSettings": {
+      "description": "Featurization Configuration",
+      "type": "object",
+      "properties": {
+        "featurizationConfig": {
+          "description": "Featurization config json string.",
+          "type": "string"
+        },
+        "enableDnnFeaturization": {
+          "description": "Enable Dnn featurization.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ForecastingSettings": {
+      "description": "Forecasting specific parameters.",
+      "type": "object",
+      "properties": {
+        "forecastingCountryOrRegion": {
+          "description": "Country or region for holidays for forecasting tasks.\r\nThese should be ISO 3166 two-letter country/region codes, for example 'US' or 'GB'.",
+          "type": "string"
+        },
+        "timeColumnName": {
+          "description": "Time column name",
+          "type": "string"
+        },
+        "targetLags": {
+          "description": "Target Lags.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "targetRollingWindowSize": {
+          "format": "int32",
+          "description": "Forecasting Window Size",
+          "type": "integer"
+        },
+        "forecastHorizon": {
+          "format": "int32",
+          "description": "Forecasting Horizon.",
+          "type": "integer"
+        },
+        "timeSeriesIdColumnNames": {
+          "description": "Time series column names",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enableDnnTraining": {
+          "description": "Enable recommendation of DNN models.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TrainingSettings": {
+      "description": "Training related configuration.",
+      "type": "object",
+      "properties": {
+        "trialTimeoutInMinutes": {
+          "format": "int32",
+          "description": "Iteration Timeout",
+          "type": "integer"
+        },
+        "blockListModels": {
+          "description": "List of Algorithms/Models to be blocked for training.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowListModels": {
+          "description": "List of Algorithms/Models to be Allowed for training.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "experimentExitScore": {
+          "format": "double",
+          "description": "Exit score for the AutoML experiment.",
+          "type": "number"
+        },
+        "enableEarlyTermination": {
+          "description": "Enable early termination.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
     "ComputeBinding": {
       "description": "Compute binding definition.",
       "type": "object",
@@ -5764,6 +5983,89 @@
         }
       },
       "discriminator": "jobType",
+      "additionalProperties": false
+    },
+    "AutoMLJob": {
+      "description": "AutoML Job definition",
+      "required": [
+        "computeBinding"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeJobBase"
+        }
+      ],
+      "properties": {
+        "jobType": {
+          "enum": [
+            "Command",
+            "Sweep",
+            "Labeling",
+            "Pipeline",
+            "Data",
+            "AutoML"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Status of the job.",
+          "enum": [
+            "NotStarted",
+            "Starting",
+            "Provisioning",
+            "Preparing",
+            "Queued",
+            "Running",
+            "Finalizing",
+            "CancelRequested",
+            "Completed",
+            "Failed",
+            "Canceled",
+            "NotResponding",
+            "Paused"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "generalSettings": {
+          "description": "General Settings",
+          "$ref": "#/definitions/GeneralSettings"
+        },
+        "limitSettings": {
+          "description": "Limit Settings",
+          "$ref": "#/definitions/ExperimentLimits"
+        },
+        "dataSettings": {
+          "description": "Collection of registered Tabular Dataset Ids required for training.",
+          "$ref": "#/definitions/DataSettings"
+        },
+        "featurizationSettings": {
+          "description": "Featurization related configuration.",
+          "$ref": "#/definitions/FeaturizationSettings"
+        },
+        "forecastingSettings": {
+          "description": "Forecasting experiment specific configuration.",
+          "$ref": "#/definitions/ForecastingSettings"
+        },
+        "trainingSettings": {
+          "description": "Advanced configuration settings for an AutoML Job.",
+          "$ref": "#/definitions/TrainingSettings"
+        }
+      },
+      "x-ms-discriminator-value": "AutoML",
       "additionalProperties": false
     },
     "CodeConfiguration": {
@@ -6141,6 +6443,341 @@
         }
       },
       "x-ms-discriminator-value": "Command",
+      "additionalProperties": false
+    },
+    "InputData": {
+      "type": "object",
+      "properties": {
+        "datasetId": {
+          "description": "Dataset registration id.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "mode": {
+          "description": "Mode type, can be set for DatasetId.",
+          "enum": [
+            "Mount",
+            "Download",
+            "Upload"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataBindingMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "value": {
+          "description": "Literal Value of a data binding. Example \"42\".",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentJobInput": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Input data definition.",
+          "$ref": "#/definitions/InputData",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "inputBinding": {
+          "description": "Reference to an output of another job's ComponentJobInput or reference to a ComponentJobInput. Example \"input2\".",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "OutputData": {
+      "type": "object",
+      "properties": {
+        "datasetName": {
+          "description": "Output dataset name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "datastore": {
+          "description": "Datastore location for output data.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "datapath": {
+          "description": "Path location within the datastore for output data.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "mode": {
+          "description": "Mode type for data.",
+          "enum": [
+            "Mount",
+            "Download",
+            "Upload"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataBindingMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentJobOutput": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Output data definition.",
+          "$ref": "#/definitions/OutputData",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "outputBinding": {
+          "description": "This is to pull the ComponentJobOutput from the overall PipelineOutputs. Example \"outputPath\".",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComponentJob": {
+      "type": "object",
+      "properties": {
+        "computeBinding": {
+          "description": "Compute definition for job.",
+          "$ref": "#/definitions/ComputeBinding",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "componentId": {
+          "description": "Reference to component artifact.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "inputs": {
+          "description": "Data input set for job.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ComponentJobInput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "outputs": {
+          "description": "Data output set for job.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ComponentJobOutput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PipelineInput": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Input data definition.",
+          "$ref": "#/definitions/InputData",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PipelineOutput": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Output data definition.",
+          "$ref": "#/definitions/OutputData",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Pipeline": {
+      "type": "object",
+      "properties": {
+        "continueRunOnStepFailure": {
+          "description": "Flag when set, continue pipeline execution if a step fails.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "defaultDatastoreName": {
+          "description": "Default datastore name shared by all pipeline jobs.",
+          "type": "string"
+        },
+        "componentJobs": {
+          "description": "JobDefinition set for PipelineStepJobs.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ComponentJob"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "inputs": {
+          "description": "Data input set for jobs.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/PipelineInput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "outputs": {
+          "description": "Data output set for jobs.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/PipelineOutput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PipelineJob": {
+      "description": "Pipeline Job definition",
+      "required": [
+        "computeBinding"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeJobBase"
+        }
+      ],
+      "properties": {
+        "jobType": {
+          "enum": [
+            "Command",
+            "Sweep",
+            "Labeling",
+            "Pipeline",
+            "Data",
+            "AutoML"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Status of the job.",
+          "enum": [
+            "NotStarted",
+            "Starting",
+            "Provisioning",
+            "Preparing",
+            "Queued",
+            "Running",
+            "Finalizing",
+            "CancelRequested",
+            "Completed",
+            "Failed",
+            "Canceled",
+            "NotResponding",
+            "Paused"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "Type of PipelineJob",
+          "enum": [
+            "AzureML"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PipelineType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "pipeline": {
+          "description": "Pipeline details.",
+          "$ref": "#/definitions/Pipeline",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Pipeline",
       "additionalProperties": false
     },
     "ParameterSamplingConfiguration": {
