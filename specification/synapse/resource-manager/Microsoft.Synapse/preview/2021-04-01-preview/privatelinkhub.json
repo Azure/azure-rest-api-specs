@@ -344,6 +344,62 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/PrivateLinkHubNameParameter"
+        },
+        {
+          "name": "privateEndpointConnectionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "Name of the privateEndpointConnection",
+          "x-ms-parameter-location": "method"
+        }
+      ],
+      "get": {
+        "operationId": "PrivateEndpointConnectionsPrivateLinkHub_Get",
+        "description": "Get all PrivateEndpointConnection in the PrivateLinkHub by name",
+        "tags": [
+          "PrivateLinkHubs",
+          "PrivateEndpointConnections"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionForPrivateLinkHub"
+            },
+            "description": "PrivateEndpointConnection in PrivateLinkHub"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a privateLinkHub": {
+            "$ref": "./examples/PrivateEndpointConnectionsPrivateLinkHub_Get.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
