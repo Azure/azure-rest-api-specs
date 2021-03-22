@@ -8939,7 +8939,7 @@
     },
     "DeleteOption": {
       "type": "string",
-      "description": "Specifies the behavior for the managed disk when the VM gets deleted i.e whether the managed disk is deleted or detached. Supported values:<br><br> **Delete** If this value is used, the managed disk is deleted when VM gets deleted.<br><br> **Detach** If this value is used, the managed disk is retained after VM gets deleted.<br><br> Minimum api-version: 2021-03-01",
+      "description": "Specifies the behavior of the managed disk when the VM gets deleted i.e whether the managed disk is deleted or detached. Supported values:<br><br> **Delete** If this value is used, the managed disk is deleted when VM gets deleted.<br><br> **Detach** If this value is used, the managed disk is retained after VM gets deleted.<br><br> Minimum api-version: 2021-03-01",
       "enum": [
         "Delete",
         "Detach"
@@ -9074,7 +9074,7 @@
         },
         "deleteOption": {
           "$ref": "#/definitions/DeleteOption",
-          "description": "Specifices whether OS Disk should be deleted or detached upon VM deletion. An ephemeral OS Disk can not DeleteOption as Delete.<br><br> Possible values: <br><br> **Delete** If this value is used, the OS disk is deleted when VM is deleted.<br><br> **Detach** If this value is used, the os disk is retained even after VM is deleted."
+          "description": "Specifies whether OS Disk should be deleted or detached upon VM deletion. An ephemeral OS Disk can not have DeleteOption as Delete.<br><br> Possible values: <br><br> **Delete** If this value is used, the OS disk is deleted when VM is deleted.<br><br> **Detach** If this value is used, the os disk is retained even after VM is deleted. <br><br> The default value is set to **detach**"
         }
       },
       "required": [
@@ -9144,7 +9144,7 @@
         },
         "deleteOption": {
           "$ref": "#/definitions/DeleteOption",
-          "description": "Specifices whether data disk should be deleted or detached upon VM deletion.<br><br> Possible values: <br><br> **Delete** If this value is used, the data disk is deleted when VM is deleted.<br><br> **Detach** If this value is used, the data disk is retained even after VM is deleted."
+          "description": "Specifies whether data disk should be deleted or detached upon VM deletion.<br><br> Possible values: <br><br> **Delete** If this value is used, the data disk is deleted when VM is deleted.<br><br> **Detach** If this value is used, the data disk is retained after VM is deleted.<br><br> The default value is set to **detach**"
         }
       },
       "required": [
@@ -10507,6 +10507,10 @@
         "managedDisk": {
           "description": "The managed disk parameters.",
           "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
+        },
+        "deleteOption": {
+          "$ref": "#/definitions/DeleteOption",
+          "description": "Specifies the behavior of the managed OS Disk when the virtual machines in the scale set are deleted. <br><br>Possible values are <br><br>**Delete** If this value is used, the OS disk is deleted when VM is deleted.<br><br> **Detach** If this value is used, the OS disk is retained after VM is deleted. <br><br>The default value is **delete**. <br><br>NOTE: 1. This is not applicable for VMSS uniform. The disks of virtual machines in VMSS uniform are deleted when VMs are deleted. <br><br> 2.An ephemeral OS Disk can not have DeleteOption as Delete."
         }
       },
       "required": [
@@ -10543,6 +10547,10 @@
         "managedDisk": {
           "description": "The managed disk parameters.",
           "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
+        },
+        "deleteOption": {
+          "$ref": "#/definitions/DeleteOption",
+          "description": "Specifies the behavior of the managed OS Disk when the virtual machines in the scale set are deleted.<br><br>Possible values are <br><br>**Delete** If this value is used, the OS disk is deleted when VM is deleted.<br><br> **Detach** If this value is used, the OS disk is retained after VM is deleted. <br><br>NOTE: This is not applicable for VMSS uniform. The disks of virtual machines in VMSS uniform are deleted when VMs are deleted."
         }
       },
       "description": "Describes virtual machine scale set operating system disk Update Object. This should be used for Updating VMSS OS Disk."
@@ -10588,6 +10596,10 @@
           "type": "integer",
           "format": "int64",
           "description": "Specifies the bandwidth in MB per second for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB."
+        },
+        "deleteOption": {
+          "$ref": "#/definitions/DeleteOption",
+          "description": "Specifies the behavior of the managed data disk when the virtual machines in the scale set are deleted.<br><br>Possible values are <br><br>**Delete** If this value is used, the data disk is deleted when VM is deleted.<br><br> **Detach** If this value is used, the data disk is retained after VM is deleted. <br><br>The default value is **delete**. <br><br>NOTE: This is not applicable for VMSS uniform. The disks of virtual machines in VMSS uniform are deleted when VMs are deleted."
         }
       },
       "required": [
