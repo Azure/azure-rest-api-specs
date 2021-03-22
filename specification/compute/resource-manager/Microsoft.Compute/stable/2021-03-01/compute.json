@@ -9491,7 +9491,7 @@
       "properties": {
         "domainNameLabel": {
           "type": "string",
-          "description": "The Domain name label prefix. The concatenation of the domain name label and vm [what] will be the domain name labels of the PublicIPAddress resources that will be created"
+          "description": "The Domain name label prefix of the PublicIPAddress resources that will be created. The generated name label is the concatenation of the domain name label and vm network profile unique ID."
         }
       },
       "required": [
@@ -11000,6 +11000,18 @@
             "$ref": "#/definitions/SubResource"
           },
           "description": "Specifies an array of references to inbound Nat pools of the load balancers. A scale set can reference inbound nat pools of one public and one internal load balancer. Multiple scale sets cannot use the same basic sku load balancer."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the public IP when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machine scale set network profile's IP configuration properties."
@@ -11057,6 +11069,18 @@
             "$ref": "#/definitions/SubResource"
           },
           "description": "The load balancer inbound nat pools."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the public IP when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machine scale set network profile's IP configuration properties."
