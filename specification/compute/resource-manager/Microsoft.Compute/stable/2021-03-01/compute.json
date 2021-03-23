@@ -11001,19 +11001,6 @@
             "$ref": "#/definitions/SubResource"
           },
           "description": "Specifies an array of references to inbound Nat pools of the load balancers. A scale set can reference inbound nat pools of one public and one internal load balancer. Multiple scale sets cannot use the same basic sku load balancer."
-        },
-        "deleteOption": {
-          "type": "string",
-          "default": null,
-          "description": "Specify what happens to the public IP when the VM is deleted",
-          "enum": [
-            "Delete",
-            "Detach"
-          ],
-          "x-ms-enum": {
-            "name": "DeleteOptions",
-            "modelAsString": true
-          }
         }
       },
       "description": "Describes a virtual machine scale set network profile's IP configuration properties."
@@ -11071,19 +11058,6 @@
             "$ref": "#/definitions/SubResource"
           },
           "description": "The load balancer inbound nat pools."
-        },
-        "deleteOption": {
-          "type": "string",
-          "default": null,
-          "description": "Specify what happens to the public IP when the VM is deleted",
-          "enum": [
-            "Delete",
-            "Detach"
-          ],
-          "x-ms-enum": {
-            "name": "DeleteOptions",
-            "modelAsString": true
-          }
         }
       },
       "description": "Describes a virtual machine scale set network profile's IP configuration properties."
@@ -11369,6 +11343,19 @@
             "name": "IPVersion",
             "modelAsString": true
           }
+        },
+        "deleteOption": {
+          "type": "string",
+          "default": null,
+          "description": "Specify what happens to the public IP when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
@@ -11383,6 +11370,19 @@
         "dnsSettings": {
           "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings",
           "description": "The dns settings to be applied on the publicIP addresses ."
+        },
+        "deleteOption": {
+          "type": "string",
+          "default": null,
+          "description": "Specify what happens to the public IP when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
