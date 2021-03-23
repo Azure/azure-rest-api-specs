@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "location": "eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subId1/providers/rg1/locations/eastus/extensionTypes",
+            "extensionType": "Microsoft.OpenServiceMesh",
+            "version": "1.0.0",
+            "releaseTrains": "stable",
+            "supportedScopes": {
+              "defaultScope": "cluster",
+              "clusterScopeSettings": {
+                "AllowMultipleInstances": false,
+                "defaultReleaseNamespace": "kube-system"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/subId1/providers/rg1/locations/eastus/extensionTypes",
+            "extensionType": "Microsoft.scvmm",
+            "version": "0.5.0",
+            "releaseTrains": "preview",
+            "supportedScopes": {
+              "defaultScope": "cluster",
+              "clusterScopeSettings": {
+                "AllowMultipleInstances": false,
+                "defaultReleaseNamespace": "kube-system"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/subId1/providers/rg1/locations/eastus/extensionTypes",
+            "extensionType": "Microsoft.ContainerInsights",
+            "version": "0.0.6",
+            "releaseTrains": "preview",
+            "supportedScopes": {
+              "defaultScope": "namespace",
+              "clusterScopeSettings": {
+                "AllowMultipleInstances": false,
+                "defaultReleaseNamespace": "MyNamespace"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

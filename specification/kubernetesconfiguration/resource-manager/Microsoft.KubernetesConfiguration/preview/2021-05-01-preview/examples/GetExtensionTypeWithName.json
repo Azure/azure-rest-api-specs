@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "extensionTypeName": "Microsoft.AzureServiceMesh",
+    "api-version": "2021-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "description": "Kubernetes Extension Type details",
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensionTypes/Microsoft.AzureServiceMesh",
+        "version": "1.0.0",
+        "releaseTrains": "preview",
+        "supportedScopes": {
+          "defaultScope":"cluster",
+          "clusterScopeSettings": {
+            "AllowMultipleInstances": false,
+            "defaultReleaseNamespace": "kube-system"
+          }
+        }
+      }
+    }
+  }
+}
