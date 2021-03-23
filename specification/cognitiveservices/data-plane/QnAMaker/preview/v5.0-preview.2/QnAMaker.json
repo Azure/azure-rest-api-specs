@@ -1152,6 +1152,10 @@
         "fileUri": {
           "type": "string",
           "description": "Public URI of the file."
+        },
+        "isUnstructured": {
+          "type": "boolean",
+          "description": "Optional Flag to specify if the given file is Unstructured."
         }
       }
     },
@@ -1656,6 +1660,10 @@
               "$ref": "#/definitions/AnswerSpanRequestDTO"
             }
           ]
+        },
+        "includeUnstructuredSources": {
+          "type": "boolean",
+          "description": "Optional Flag to enable Query over Unstructured Sources."
         }
       }
     },
@@ -1851,7 +1859,7 @@
         },
         "language": {
           "type": "string",
-          "description": "(Optional) Language of the documents. This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default.",
+          "description": "(Optional) Language of the documents. This is ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default.",
           "maxLength": 100,
           "minLength": 2
         }
