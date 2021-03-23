@@ -88,7 +88,7 @@
             "description": "The database import request parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseExtensionsDefinition"
+              "$ref": "#/definitions/DatabaseExtensions"
             }
           },
           {
@@ -167,7 +167,8 @@
     }
   },
   "definitions": {
-    "DatabaseExtensionsDefinition": {
+    "DatabaseExtensionsProperties": {
+      "description": "Contains the database information after successful export.",
       "required": [
         "operationMode",
         "storageKeyType",
@@ -218,27 +219,22 @@
           "x-ms-mutability": [
             "create"
           ]
-        },
-        "administratorLogin": {
-          "description": "Administrator login name.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "administratorLoginPassword": {
-          "description": "Administrator login password.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "authenticationType": {
-          "description": "Authentication type.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
+        }
+      }
+    },
+    "DatabaseExtensions": {
+      "description": "An export managed database operation result resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseExtensionsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       }
     },
