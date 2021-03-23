@@ -1,14 +1,14 @@
 {
   "parameters": {
     "resourceUrl": "management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/",
-    "$filter": "provider eq Microsoft.Batch & loactions eq eastus & batchAccounts eq eastusbatchaccounttest",
+    "$filter": "provider eq Microsoft.Batch & loactions eq eastus & batchAccounts eq *",
     "api-version": "2021-03-15-preview"
   },
   "responses": {
     "200": {
       "body": {
         "name": "quotaBucket",
-        "id": "/providers/Microsoft.Batch/locations/eastus/batchAccounts/eastusbatchaccounttest",
+        "id": "/providers/Microsoft.Batch/locations/eastus/batchAccounts",
         "properties": {
           "value": [
             {
