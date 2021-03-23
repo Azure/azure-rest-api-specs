@@ -39,7 +39,6 @@ These settings apply only when `--tag=package-2020-11-05-preview` is specified o
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
 - Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Migrations.json
 ```
 
 
