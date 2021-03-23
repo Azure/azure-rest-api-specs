@@ -4595,6 +4595,228 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}": {
+      "put": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Create or update schedule.",
+        "operationId": "Schedules_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Schedule name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Schedule definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleBaseResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleBaseResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleBaseResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Schedule.": {
+            "$ref": "./examples/Schedule/createOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Delete schedule.",
+        "operationId": "Schedules_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Schedule name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Schedule.": {
+            "$ref": "./examples/Schedule/delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Get schedule.",
+        "operationId": "Schedules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Schedule name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleBaseResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Schedule.": {
+            "$ref": "./examples/Schedule/get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "List schedules in specified workspace.",
+        "operationId": "Schedules_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScheduleBaseResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Schedules.": {
+            "$ref": "./examples/Schedule/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -9785,6 +10007,301 @@
           "format": "int64",
           "description": "Refresh access token after time (UTC).",
           "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RecurrenceSchedule": {
+      "type": "object",
+      "properties": {
+        "hours": {
+          "description": "List of hours for the schedule.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "minutes": {
+          "description": "List of minutes for the schedule.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "weekDays": {
+          "description": "List of days for the schedule.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "WeekDays",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Recurrence": {
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "description": "The frequency to trigger schedule.",
+          "enum": [
+            "Month",
+            "Week",
+            "Day",
+            "Hour",
+            "Minute"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Frequency",
+            "modelAsString": true
+          }
+        },
+        "interval": {
+          "format": "int32",
+          "description": "Schedule interval.",
+          "type": "integer"
+        },
+        "startTime": {
+          "description": "Time to start the schedule.",
+          "type": "string"
+        },
+        "timeZone": {
+          "description": "Timezone of StartTime.",
+          "type": "string"
+        },
+        "schedule": {
+          "description": "The recurrence schedule.",
+          "$ref": "#/definitions/RecurrenceSchedule"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Cron": {
+      "type": "object",
+      "properties": {
+        "expression": {
+          "description": "Cron expression.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Time to start the schedule.",
+          "type": "string"
+        },
+        "timeZone": {
+          "description": "Timezone of StartTime.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ScheduleBase": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of Schedule.",
+          "enum": [
+            "ComputeStartStop"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScheduleType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "targetResourceId": {
+          "description": "Arm Id of the schedule target resource.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of schedule.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScheduleStatus",
+            "modelAsString": true
+          }
+        },
+        "provisioningStatus": {
+          "description": "Provisioning status of schedule resource.",
+          "enum": [
+            "Completed",
+            "Provisioning",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ScheduleProvisioningStatus",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "discriminator": "type",
+      "additionalProperties": false
+    },
+    "ComputeStartStopSchedule": {
+      "required": [
+        "action",
+        "triggerType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduleBase"
+        }
+      ],
+      "properties": {
+        "computeType": {
+          "description": "Type of Compute.",
+          "enum": [
+            "ComputeInstance"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeType",
+            "modelAsString": true
+          }
+        },
+        "triggerType": {
+          "description": "Schedule's trigger type.",
+          "enum": [
+            "Recurrence",
+            "Cron"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeStartStopTriggerType",
+            "modelAsString": true
+          }
+        },
+        "action": {
+          "enum": [
+            "Start",
+            "Stop"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputePowerAction",
+            "modelAsString": true
+          }
+        },
+        "recurrence": {
+          "description": "Recurrence schedule details.",
+          "$ref": "#/definitions/Recurrence"
+        },
+        "cron": {
+          "description": "Cron schedule details.",
+          "$ref": "#/definitions/Cron"
+        }
+      },
+      "x-ms-discriminator-value": "ComputeStartStop",
+      "additionalProperties": false
+    },
+    "ScheduleBaseResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/ScheduleBase"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true,
+      "additionalProperties": false
+    },
+    "ScheduleBaseResourceArmPaginatedResult": {
+      "description": "A paginated list of ScheduleBase entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type ScheduleBase.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduleBaseResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
         }
       },
       "additionalProperties": false
