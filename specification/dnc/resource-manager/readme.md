@@ -26,9 +26,22 @@ These are the global settings for the DelegatedNetwork API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-08-08-preview
+tag: package-2021-03-15
 ```
 
+
+### Tag: package-2021-03-15
+
+These settings apply only when `--tag=package-2021-03-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-15'
+input-file:
+- Microsoft.DelegatedNetwork/stable/2021-03-15/controller.json
+- Microsoft.DelegatedNetwork/stable/2021-03-15/orchestrators.json
+- Microsoft.DelegatedNetwork/stable/2021-03-15/delegatedSubnets.json
+- Microsoft.DelegatedNetwork/stable/2021-03-15/operations.json
+- Microsoft.DelegatedNetwork/stable/2021-03-15/common-types.json
+```
 
 ### Tag: package-2020-08-08-preview
 
@@ -36,12 +49,13 @@ These settings apply only when `--tag=package-2020-08-08-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-08-08-preview'
 input-file:
-- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/controller.json
-- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/orchestrators.json
-- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/delegatedSubnets.json
-- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/operations.json
-- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/common-types.json
+  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/controller.json
+  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/orchestrators.json
+  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/delegatedSubnets.json
+  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/operations.json
+  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/common-types.json
 ```
+
 
 ---
 # Code Generation
@@ -97,7 +111,21 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-DelegatedNetwork
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-03-15
   - tag: package-2020-08-08-preview
+```
+
+### Tag: package-2021-03-15 and java
+
+These settings apply only when `--tag=package-2021-03-15 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-03-15' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.DelegatedNetwork.2021-03-15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/stable/mgmt-2021-03-15
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2020-08-08-preview and java
@@ -105,12 +133,12 @@ batch:
 These settings apply only when `--tag=package-2020-08-08-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-08-08-preview' && $(java) && $(multiapi)
+```yaml $(tag) == 'package-2020-08-08-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.DelegatedNetwork.2020-08-08-preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/mgmt-2020-08-08-preview
-regenerate-manager: true
-generate-interface: true
+  namespace: com.microsoft.azure.management.DelegatedNetwork.v2020_08_08_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/DelegatedNetwork/preview/mgmt-v2020_08_08_preview
+  regenerate-manager: true
+  generate-interface: true
 ```
 
 ## Python
