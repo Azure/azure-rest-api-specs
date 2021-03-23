@@ -6,7 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: schema-edgeorder-2020-12-01-preview
+  - tag: schema-edgeorderpartner-2020-12-01-preview
 
 ```
 
@@ -14,7 +14,7 @@ Please also specify `--azureresourceschema-folder=<path to the root directory of
 
 ### Tag: schema-edgeorderpartner-2020-12-01-preview and azureresourceschema
 
-``` yaml $(tag) == 'schema-edgeorder-2020-12-01-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-edgeorderpartner-2020-12-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
