@@ -52,7 +52,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/FeaturesDefaultErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -98,7 +98,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/FeaturesDefaultErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -150,7 +150,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/FeaturesDefaultErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -199,7 +199,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/FeaturesDefaultErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -248,7 +248,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/FeaturesDefaultErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -342,17 +342,34 @@
         }
       }
     },
-    "FeaturesDefaultErrorResponse": {
+    "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Object containing error details.",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetailsInternal": {
+      "description": "Error details.",
+      "type": "object",
       "properties": {
         "code": {
-          "readOnly": true,
+          "description": "The error code.",
           "type": "string",
-          "description": "The error code."
+          "readOnly": true
         },
         "message": {
-          "readOnly": true,
+          "description": "The error message.",
           "type": "string",
-          "description": "The error message."
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
