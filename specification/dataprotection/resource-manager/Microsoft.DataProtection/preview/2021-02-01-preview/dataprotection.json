@@ -1972,22 +1972,7 @@
       "title": "AdhocBasedTriggerContext",
       "type": "object",
       "x-ms-discriminator-value": "AdhocBasedTriggerContext"
-    },
-    "AuthCredentials": {
-      "description": "Base class for different types of authentication credentials.",
-      "required": [
-        "objectType"
-      ],
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "Type of the specific object - used for deserializing",
-          "type": "string",
-          "readOnly": false
-        }
-      },
-      "discriminator": "objectType"
-    },
+    },    
     "AzureBackupDiscreteRecoveryPoint": {
       "allOf": [
         {
@@ -3713,10 +3698,6 @@
         "datasourceSetInfo": {
           "$ref": "#/definitions/DatasourceSet",
           "description": "Information of target DS Set"
-        },
-        "datasourceAuthCredentials": {
-          "$ref": "#/definitions/AuthCredentials",
-          "description": "Credentials to use to authenticate with data source provider."
         }
       },
       "x-ms-discriminator-value": "ItemLevelRestoreTargetInfo"
