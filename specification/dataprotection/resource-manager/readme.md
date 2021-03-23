@@ -46,7 +46,7 @@ semantic-validator: true
 message-format: json
 ```
 
-### Tag: package-2021-01-01
+### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01-01` is specified on the command line.
 
