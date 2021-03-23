@@ -18,9 +18,8 @@ python:
 python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.apimanagement
 package-name: azure-mgmt-apimanagement
-clear-output-folder: true
+no-namespace-folders: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
