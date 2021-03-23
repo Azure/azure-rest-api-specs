@@ -198,7 +198,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Configures email notifications for this vault.": {
             "$ref": "./examples/ReplicationAlertSettings_Create.json"
@@ -6640,7 +6639,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create protection intent Resource.": {
             "$ref": "./examples/ReplicationProtectionIntents_Create.json"
@@ -7934,10 +7932,6 @@
             "$ref": "#/definitions/A2AProtectionIntentManagedDiskInputDetails"
           }
         },
-        "vmOSManagedDisk": {
-          "$ref": "#/definitions/A2AProtectionIntentOSManagedDiskInputDetails",
-          "description": "The vm os managed disk input."
-        },
         "multiVmGroupName": {
           "description": "The multi vm group name.",
           "type": "string"
@@ -8101,18 +8095,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/A2AVmManagedDiskInputDetails"
-          }
-        },
-        "autoProtectionOfDataDisk": {
-          "description": "A value indicating whether the auto protection is enabled.",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AutoProtectionOfDataDisk",
-            "modelAsString": true
           }
         },
         "multiVmGroupName": {
@@ -8562,36 +8544,6 @@
           "description": "The disk Id.",
           "type": "string"
         },
-        "primaryStagingStorageAccountCustomInput": {
-          "$ref": "#/definitions/StorageAccountCustomDetails",
-          "description": "The primary staging storage account input."
-        },
-        "recoveryResourceGroupCustomInput": {
-          "$ref": "#/definitions/RecoveryResourceGroupCustomDetails",
-          "description": "The recovery resource group input."
-        },
-        "recoveryReplicaDiskAccountType": {
-          "description": "The replica disk type. Its an optional value and will be same as source disk type if not user provided.",
-          "type": "string"
-        },
-        "recoveryTargetDiskAccountType": {
-          "description": "The target disk type after failover. Its an optional value and will be same as source disk type if not user provided.",
-          "type": "string"
-        },
-        "recoveryDiskEncryptionSetId": {
-          "description": "The recovery disk encryption set Id.",
-          "type": "string"
-        },
-        "diskEncryptionInfo": {
-          "$ref": "#/definitions/DiskEncryptionInfo",
-          "description": "The recovery disk encryption information (for one / single pass flows)."
-        }
-      }
-    },
-    "A2AProtectionIntentOSManagedDiskInputDetails": {
-      "description": "Azure VM OS managed disk input details.",
-      "type": "object",
-      "properties": {
         "primaryStagingStorageAccountCustomInput": {
           "$ref": "#/definitions/StorageAccountCustomDetails",
           "description": "The primary staging storage account input."
@@ -19782,6 +19734,7 @@
       "properties": {
         "value": {
           "description": "The replication eligibility results details.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReplicationEligibilityResults"
@@ -19811,6 +19764,7 @@
         },
         "status": {
           "description": "The error status.",
+          "readOnly": true,
           "type": "string"
         }
       }
@@ -21804,7 +21758,8 @@
         },
         "reuseExistingNic": {
           "description": "A value indicating whether an existing NIC is allowed to be reused during failover subject to availability.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "tfoRecoveryNicName": {
           "description": "The name of the NIC to be used when creating target NICs in TFO.",
