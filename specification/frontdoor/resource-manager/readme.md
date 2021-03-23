@@ -236,11 +236,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.cli.md](./readme.cli.md)
 
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
