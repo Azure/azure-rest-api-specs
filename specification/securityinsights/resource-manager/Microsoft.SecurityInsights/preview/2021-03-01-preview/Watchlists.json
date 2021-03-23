@@ -177,15 +177,18 @@
       },
       "put": {
         "x-ms-examples": {
-          "Creates a watchlist.": {
+          "Creates or updates a watchlist.": {
             "$ref": "./examples/watchlists/CreateWatchlist.json"
+          },
+          "Creates or updates a watchlist and bulk creates watchlist items.": {
+            "$ref": "./examples/watchlists/CreateWatchlistAndWatchlistItems.json"
           }
         },
         "tags": [
           "Watchlists"
         ],
-        "description": "Creates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint twice : the first call will create an empty Watchlist, and the second one will create its Items.",
-        "operationId": "Watchlists_Create",
+        "description": "Creates or updates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its items, we should call this endpoint with rawContent and contentType properties.",
+        "operationId": "Watchlists_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
