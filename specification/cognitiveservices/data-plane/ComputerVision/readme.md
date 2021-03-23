@@ -128,13 +128,16 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 ``` yaml $(python)
 python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  add-credentials: true
-  payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.vision.computervision
-  package-name: azure-cognitiveservices-vision-computervision
-  clear-output-folder: true
+license-header: MICROSOFT_MIT_NO_VERSION
+add-credentials: true
+payload-flattening-threshold: 2
+namespace: azure.cognitiveservices.vision.computervision
+package-name: azure-cognitiveservices-vision-computervision
+clear-output-folder: true
+use: "@microsoft.azure/autorest.python@~4.0.71" 
+version: V2
+multiapi: true
+no-async: true
 
 directive:
   from: source-file-python
@@ -143,14 +146,12 @@ directive:
     $ = $.replace( /self, mode, url,/g, "self, url, mode," );
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision/azure/cognitiveservices/vision/computervision
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision/azure/cognitiveservices/vision/computervision
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision
 ```
 
 ## Go
