@@ -63,7 +63,7 @@
             "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ExtensionTypeName"
+            "$ref": "#/parameters/ExtensionTypeNameParameter"
           }
         ],
         "responses": {
@@ -135,7 +135,7 @@
         "tags": [
           "ExtensionType"
         ],
-        "description": "List all Exntesion Types",
+        "description": "List all Extension Types",
         "operationId": "ExtensionTypes_List",
         "x-ms-examples": {
           "List Extension Types": {
@@ -264,21 +264,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "ClusterRpParameter": {
       "name": "clusterRp",
       "in": "path",
@@ -311,13 +296,6 @@
       "description": "The name of the kubernetes cluster.",
       "x-ms-parameter-location": "method"
     },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request."
-    },
     "ExtensionLocationParameter": {
       "name": "location",
       "in": "path",
@@ -325,7 +303,7 @@
       "required": true,
       "type": "string"
     },
-    "ExtensionTypeName": {
+    "ExtensionTypeNameParameter": {
       "name": "extensionTypeName",
       "in": "path",
       "required": true,
