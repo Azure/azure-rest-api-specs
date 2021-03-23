@@ -12212,7 +12212,8 @@
       "properties": {
         "properties": {
           "description": "SourceControl properties",
-          "$ref": "#/definitions/SourceControlModel"
+          "$ref": "#/definitions/SourceControlModel",
+          "x-ms-client-flatten": true
         },
         "systemData": {
           "readOnly": true,
@@ -12224,12 +12225,6 @@
       "type": "object"
     },
     "SourceControlModel": {
-      "type": "object",
-      "required": [
-        "displayName",
-        "source",
-        "provider"
-      ],
       "description": "Describes sourcecontrol properties",
       "properties": {
         "sourceControlId": {
@@ -12265,12 +12260,19 @@
         },
         "repository": {
           "description": "Repository metadata.",
-          "$ref": "#/definitions/Repository",
-          "type": "object"
+          "$ref": "#/definitions/Repository"
         }
-      }
+      },
+      "required": [
+        "displayName",
+        "repoType",
+        "contentTypes",
+        "repository"
+      ],
+      "type": "object"
     },
     "Repository": {
+      "type": "object",
       "description": "metadata of a respository.",
       "properties": {
         "url": {
@@ -12302,7 +12304,8 @@
           "description": "The path to the content.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "ContentType": {
       "description": "The content type of a sourcecontrol path.",
@@ -13545,6 +13548,16 @@
       "name": "sourceControlId",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceControl": {
+      "description": "The SourceControl",
+      "in": "body",
+      "name": "sourceControl",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SourceControl"
+      },
       "x-ms-parameter-location": "method"
     },
     "ThreatIntelligenceName": {
