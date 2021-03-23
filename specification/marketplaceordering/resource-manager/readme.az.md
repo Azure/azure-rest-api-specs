@@ -31,11 +31,16 @@ directive:
   - where:
       group: marketplaceordering marketplace-agreement
     set:
-      group: marketplaceordering agreement
+      group: term
   - where:
-      command: marketplaceordering agreement show-agreement
+      command: term show-agreement
     set:
-      command: marketplaceordering agreement show
+      command: term show
+  - where: 
+      command: term sign
+      parameter-name: publisher-id 
+    set:
+      name: publisher
 
 cli:
   cli-directive:
@@ -46,6 +51,10 @@ cli:
     - where:
         group: MarketplaceAgreements
         op: Create
+      hidden: true
+    - where:
+        group: MarketplaceAgreements
+        op: List
       hidden: true
     # - where:
     #     group: Operations
