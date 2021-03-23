@@ -3189,21 +3189,24 @@
           "description": "The subnet resource id.",
           "type": "string",
           "x-ms-mutability": [
-            "create"
+            "create",
+            "read"
           ]
         },
         "enginePublicIpId": {
           "description": "Engine service's public IP address resource id.",
           "type": "string",
           "x-ms-mutability": [
-            "create"
+            "create",
+            "read"
           ]
         },
         "dataManagementPublicIpId": {
           "description": "Data management's service public IP address resource id.",
           "type": "string",
           "x-ms-mutability": [
-            "create"
+            "create",
+            "read"
           ]
         }
       },
@@ -3947,6 +3950,9 @@
         "scriptUrlSasToken": {
           "description": "The SaS token.",
           "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
           "x-ms-secret": true
         },
         "forceUpdateTag": {
