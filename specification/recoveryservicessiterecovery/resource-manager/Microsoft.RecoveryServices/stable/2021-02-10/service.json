@@ -19775,11 +19775,13 @@
       "properties": {
         "clientRequestId": {
           "description": "The client request Id.",
+          "readOnly": true,
           "type": "string"
         },
         "errors": {
           "description": "The error details.",
           "type": "array",
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/ReplicationEligibilityResultsErrorInfo"
           }
@@ -21771,7 +21773,8 @@
         },
         "tfoReuseExistingNic": {
           "description": "A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       }
     },
