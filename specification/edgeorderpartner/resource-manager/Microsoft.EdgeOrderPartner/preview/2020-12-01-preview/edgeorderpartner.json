@@ -257,12 +257,12 @@
       }
     },
     "AdditionalOrderItemDetails": {
-      "description": "Contains additional order details",
+      "description": "Contains additional order item details",
       "type": "object",
       "properties": {
         "status": {
           "$ref": "#/definitions/StageDetails",
-          "description": "Order status",
+          "description": "Order item status",
           "readOnly": true
         },
         "subscription": {
@@ -384,7 +384,7 @@
       "properties": {
         "orderItem": {
           "$ref": "#/definitions/AdditionalOrderItemDetails",
-          "description": "Represents additional details about the order"
+          "description": "Represents additional details about the order item"
         },
         "inventoryMetadata": {
           "description": "Contains inventory metadata",
@@ -448,7 +448,7 @@
         },
         "orderItem": {
           "$ref": "#/definitions/OrderItemData",
-          "description": "Represents basic order data.",
+          "description": "Represents basic order item data.",
           "readOnly": true
         },
         "configuration": {
@@ -568,16 +568,16 @@
       }
     },
     "OrderItemData": {
-      "description": "Contains information about the order to which inventory belongs",
+      "description": "Contains information about the order item to which inventory belongs",
       "type": "object",
       "properties": {
         "armId": {
-          "description": "Arm ID of order",
+          "description": "Arm ID of order item ",
           "type": "string",
           "readOnly": true
         },
         "orderItemType": {
-          "description": "Order type - purchase or rental",
+          "description": "Order item type - purchase or rental",
           "enum": [
             "Purchase",
             "Rental"
@@ -798,7 +798,7 @@
           "readOnly": true
         },
         "nextLink": {
-          "description": "Link for the next set of order collection resources.",
+          "description": "Link for the next set of partner inventories.",
           "type": "string"
         }
       }
@@ -896,3 +896,4 @@
     }
   ]
 }
+																					
