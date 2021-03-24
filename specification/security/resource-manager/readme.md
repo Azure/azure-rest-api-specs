@@ -213,6 +213,7 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 - Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
 - Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
 - Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
@@ -386,7 +387,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
-- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
 - Microsoft.Security/stable/2020-01-01/secureScore.json
 
@@ -420,6 +421,7 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 - Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
 - Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
 - Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
