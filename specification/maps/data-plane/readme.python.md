@@ -21,21 +21,21 @@ package-name: azure-maps
 package-version: 1.0-preview
 clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
+``` yaml $(python) && $(python-mode) == 'asdf' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/maps/azure-maps/azure/maps/_generated
 ```
-``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
+``` yaml $(python) && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/maps/azure-maps
 ```
-``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+``` yaml $(python) && $(python-mode) == 'asdf' && $(track2)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/maps/azure-maps/azure/maps/_generated
 ```
-``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+``` yaml $(python) && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/maps/azure-maps
 ```
