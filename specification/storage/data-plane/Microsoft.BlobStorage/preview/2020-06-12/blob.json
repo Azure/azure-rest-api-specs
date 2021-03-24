@@ -3386,15 +3386,6 @@
               "x-ms-immutability-policy-mode": {
                 "x-ms-client-name": "ImmutabilityPolicyMode",
                 "type": "string",
-                "enum": [
-                  "Unlocked",
-                  "Locked",
-                  "Mutable"
-                ],
-                "x-ms-enum": {
-                  "name": "BlobImmutabilityPolicyMode",
-                  "modelAsString": false
-                },
                 "description": "Indicates immutability poliy mode."
               },
               "x-ms-legal-hold": {
@@ -3666,15 +3657,6 @@
               "x-ms-immutability-policy-mode": {
                 "x-ms-client-name": "ImmutabilityPolicyMode",
                 "type": "string",
-                "enum": [
-                  "Unlocked",
-                  "Locked",
-                  "Mutable"
-                ],
-                "x-ms-enum": {
-                  "name": "BlobImmutabilityPolicyMode",
-                  "modelAsString": false
-                },
                 "description": "Indicates immutability poliy mode."
               },
               "x-ms-legal-hold": {
@@ -4043,15 +4025,6 @@
               "x-ms-immutability-policy-mode": {
                 "x-ms-client-name": "ImmutabilityPolicyMode",
                 "type": "string",
-                "enum": [
-                  "Unlocked",
-                  "Locked",
-                  "Mutable"
-                ],
-                "x-ms-enum": {
-                  "name": "BlobImmutabilityPolicyMode",
-                  "modelAsString": false
-                },
                 "description": "Indicates immutability poliy mode."
               },
               "x-ms-legal-hold": {
@@ -5647,8 +5620,7 @@
                 "type": "string",
                 "enum": [
                   "Unlocked",
-                  "Locked",
-                  "Mutable"
+                  "Locked"
                 ],
                 "x-ms-enum": {
                   "name": "BlobImmutabilityPolicyMode",
@@ -10472,7 +10444,7 @@
           "format": "date-time-rfc1123"
         },
         "ImmutabilityPolicyMode": {
-          "$ref": "#/definitions/BlobImmutabilityPolicyMode"
+          "type": "string"
         },
         "LegalHold": {
           "x-ms-client-name": "LegalHold",
@@ -11604,18 +11576,6 @@
           "$ref": "#/definitions/GeoReplication"
         }
       }
-    },
-    "BlobImmutabilityPolicyMode": {
-      "type": "string",
-      "enum": [
-        "Unlocked",
-        "Locked",
-        "Mutable"
-      ],
-      "x-ms-enum": {
-        "name": "BlobImmutabilityPolicyMode",
-        "modelAsString": false
-      }
     }
   },
   "parameters": {
@@ -12393,8 +12353,7 @@
       "type": "string",
       "enum": [
         "Unlocked",
-        "Locked",
-        "Mutable"
+        "Locked"
       ],
       "x-ms-enum": {
         "name": "BlobImmutabilityPolicyMode",
