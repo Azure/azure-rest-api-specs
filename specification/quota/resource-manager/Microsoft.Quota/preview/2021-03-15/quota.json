@@ -924,29 +924,17 @@
       },
       "description": "The api error."
     },
-    "ResourceDimensionsTypesName": {
-      "description": "The resource dimension types. For extendibility, we can keep it as string.",
-      "enum": [
-        "predefined",
-        "resourceName",
-        "serviceSpecific",
-        "userDefined"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceType",
-        "modelAsString": true
-      }
-    },
-    "ResourceProviderDimensions": {
+    "quotaBucketProperties": {
       "type": "object",
-      "description": "List of resource provider dimensions",
+      "description": "The resource provider quotaBucket properties",
       "properties": {
-        "value": {
-          "description": "The resource provider dimensions",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderDimension"
-          }
+        "name": {
+          "type": "string",
+          "description": "The name"
+        },
+        "displayName": {
+          "description": "The display name",
+          "type": "string"
         }
       }
     },
@@ -964,14 +952,30 @@
         }
       }
     },
+    "ResourceProviderTemplateProperties": {
+      "type": "object",
+      "description": "The resource provider template properties",
+      "properties": {
+        "dimensions": {
+          "description": "The resource provider dimensions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderDimension"
+          }
+        },
+        "quotaBuckets": {
+          "description": "The resource provider quotaBuckets",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/quotaBucketProperties"
+          }
+        }
+      }
+    },
     "ResourceProviderTemplate": {
       "type": "object",
       "description": "The resource provider resource template details",
       "properties": {
-        "resourceTemplate": {
-          "type": "string",
-          "description": "The resource template"
-        },
         "resourceType": {
           "type": "string",
           "description": "Resource type"
@@ -979,7 +983,7 @@
         "properties": {
           "description": "The quota dimensions for the resource provider.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ResourceProviderDimensions"
+          "$ref": "#/definitions/ResourceProviderTemplateProperties"
         }
       }
     },
@@ -1229,9 +1233,9 @@
       "type": "object",
       "description": "Quota template details.",
       "properties": {
-        "resourceTemplate": {
+        "resourceType": {
           "type": "string",
-          "description": "The resource template."
+          "description": "The resource type."
         },
         "properties": {
           "description": "The quota type properties for the resource id.",
