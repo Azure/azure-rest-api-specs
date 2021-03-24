@@ -12,6 +12,14 @@ namespace: azure.mgmt.cdn
 package-name: azure-mgmt-cdn
 modelerfour: 
   lenient-model-deduplication: true
+directive:
+  - from: swagger-document
+    where: $.definitions.DeliveryRuleAction.properties.name
+    transform: >
+      $['x-ms-enum'] = {
+        "name": "DeliveryRuleActionEnum",
+        "modelAsString": true
+      };
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
