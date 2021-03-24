@@ -61,8 +61,11 @@
       "type": "object",
       "properties": {
         "urls": {
-          "description": "URL of the server.",
-          "type": "string"
+          "description": "List of TURN server URLs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "username": {
           "description": "User account name which uniquely identifies the credentials.",
