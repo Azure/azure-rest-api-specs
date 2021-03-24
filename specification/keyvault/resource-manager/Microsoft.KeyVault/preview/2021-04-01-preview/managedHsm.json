@@ -329,7 +329,7 @@
           "200": {
             "description": "Get information about all managed HSM Pools in the specified subscription.",
             "schema": {
-              "$ref": "#/definitions/ManagedHsmListResult"
+              "$ref": "#/definitions/DeletedManagedHsmListResult"
             }
           },
           "default": {
@@ -421,7 +421,7 @@
           "200": {
             "description": "Retrieved information about the specified deleted managed HSM.",
             "schema": {
-              "$ref": "#/definitions/ManagedHsm"
+              "$ref": "#/definitions/DeletedManagedHsm"
             }
           },
           "default": {
@@ -1014,6 +1014,85 @@
         }
       },
       "description": "The server error."
+    },
+    "DeletedManagedHsm": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Azure Resource Manager resource ID for the deleted managed HSM Pool."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the managed HSM Pool."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type of the managed HSM Pool."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeletedManagedHsmProperties",
+          "description": "Properties of the deleted managed HSM"
+        }
+      }
+    },
+    "DeletedManagedHsmProperties": {
+      "properties": {
+        "mhsmId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource id of the original managed HSM."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location of the original managed HSM."
+        },
+        "deletionDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The deleted date."
+        },
+        "scheduledPurgeDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The scheduled purged date."
+        },
+        "purgeProtectionEnabled": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Purge protection status of the original managed HSM."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags of the original managed HSM."
+        }
+      },
+      "description": "Properties of the deleted managed HSM."
+    },
+    "DeletedManagedHsmListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedManagedHsm"
+          },
+          "description": "The list of deleted managed HSM Pools."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of deleted managed HSM Pools."
+        }
+      },
+      "description": "List of deleted managed HSM Pools"
     },
     "MHSMNetworkRuleSet": {
       "properties": {
