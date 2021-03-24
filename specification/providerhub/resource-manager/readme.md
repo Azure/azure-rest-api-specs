@@ -41,6 +41,8 @@ directive:
   - suppress: R4009
     from: providerhub.json
     reason: This version doesn't support systemData.
+  - no-inline:
+    - Error
 ```
 
 ---
