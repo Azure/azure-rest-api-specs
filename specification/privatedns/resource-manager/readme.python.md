@@ -20,7 +20,6 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.privatedns
 package-name: azure-mgmt-privatedns
-clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
