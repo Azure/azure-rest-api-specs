@@ -539,21 +539,6 @@
       "description": "Quota properties for the resource.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Type of resource. \"Microsoft.Quota/quotaLimits\""
-        },
         "limit": {
           "description": "The quota limit.",
           "type": "integer",
@@ -567,9 +552,9 @@
         "unit": {
           "description": " The units of the limit, such as - Count, Bytes, etc. Use the unit field provided in the Get quota response.",
           "type": "string",
-          "readOnly": true
+          "readOnly": false
         },
-        "resourceName": {
+        "name": {
           "description": "Name of the resource provide by the resource Provider. Please use this name property for quotaRequests.",
           "$ref": "#/definitions/ResourceName"
         },
