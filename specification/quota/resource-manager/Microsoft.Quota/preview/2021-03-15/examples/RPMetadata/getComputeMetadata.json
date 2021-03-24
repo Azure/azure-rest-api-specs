@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "resourceUrl": "management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute",
+    "api-version": "2021-03-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/quotaBuckets",
+            "properties": {
+              "dimension": "locations",
+              "dimensionDisplayName": "Locations",
+              "value": [
+                {
+                  "name": "eastus",
+                  "displayName": "East US",
+                  "dimension": "quotaBuckets",
+                  "dimensionDisplayName": "vCpus",
+                  "value": [
+                    //List of skus per location
+                    {
+                      "name": "standardNDSFamily",
+                      "displayName": "Standard NDS Family vCPUs"
+                    },
+                    {
+                      "name": "standardDV2Family",
+                      "displayName": "Standard DV2 Family vCPUs"
+                    }
+                  ]
+                },
+                {
+                  "name": "westus",
+                  "displayName": "West US",
+                  "dimension": "quotaBuckets",
+                  "dimensionDisplayName": "vCpus",
+                  "value": [
+                    //List of skus per location
+                    {
+                      "name": "standardNDSFamily",
+                      "displayName": "Standard NDS Family vCPUs"
+                    },
+                    {
+                      "name": "standardDV2Family",
+                      "displayName": "Standard DV2 Family vCPUs"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -13,17 +13,21 @@
               "value": [
                 {
                   // the dimension names and uri is for example. Actual dimension names will come from Policy document.
-                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/quotaBucket/",
+                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/quotaBuckets/",
+                   "resourceType" : "Skus",
                   "properties": {
                     "value": [
                       {
-                        "name": "subscriptions"
+                        "name": "subscription",
+                        "displayname": "Subscription"
                       },
                       {
-                        "name": "locations"
+                        "name": "location",
+                        "displayname": "Location"
                       },
                       {
-                        "name": "quotaBucket"
+                        "name": "quotaBuckets",
+                        "displayname": "vCPUs Skus" // Should try to get localized name.
                       }
                     ]
                   }
@@ -37,41 +41,52 @@
               "value": [
                 {
                   "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{accountName}/quotaBucket/",
+                   "resourceType" : "Skus",
                   "properties": {
                     "value": [
                       {
-                        "name": "subscriptions"
+                        "name": "subscriptions",
+                         "displayname": "Subscription"
                       },
                       {
-                        "name": "locations"
+                        "name": "locations", 
+                        "displayname": "Location"
                       },
                       {
-                        "name": "batchAccounts"
+                        "name": "batchAccounts",
+                        "displayname": "BatchAccount Name"
                       },
                       {
-                        "name": "quotaBucket"
+                        "name": "quotaBucket",
+                        "displayname": "vCPUs Skus"
                       }
                     ]
                   }
                 },
                 {
-                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{accountName}/pools/{poolName}/quotaBucket",
+                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/resourceGroups/{RG}/batchAccounts/{accountName}/pools/{poolName}/quotaBucket",
+                  "resourceType" : "Skus",
                   "properties": {
                     "value": [
                       {
-                        "name": "subscriptions"
+                        "name": "subscriptions",
+                         "displayname": "Subscription"
                       },
                       {
-                        "name": "locations"
+                        "name": "locations", 
+                        "displayname": "Location"
                       },
                       {
-                        "name": "batchAccounts"
+                        "name": "batchAccounts",
+                        "displayname": "BatchAccount Name"
                       },
                       {
-                        "name": "pools"
+                        "name": "pools",
+                        "displayname": "Pool Name"
                       },
                       {
-                        "name": "quotaBucket" 
+                        "name": "quotaBucket",
+                        "displayname": "vCPUs Skus"
                       }
                     ]
                   }
@@ -85,16 +100,21 @@
               "value": [
                 {
                   "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{locationId}/quotaBucket",
+                  "resourceType" : "PublicIpAddresses",
                   "properties": {
                     "value": [
                       {
-                        "name": "subscriptions"
+                        "name": "subscriptions",
+                         "displayname": "Subscription"
                       },
                       {
-                        "name": "locations"
+                        "name": "locations", 
+                        "displayname": "Location"
                       },
                       {
-                        "name": "quotaBucket"
+                        "name": "quotaBucket" 
+                        ,
+                        "displayname": "Public IP Address Types"
                       }
                     ]
                   }
