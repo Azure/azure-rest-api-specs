@@ -231,6 +231,43 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
+### Tag: package-2021-04-01
+
+These settings apply only when `--tag=package-2021-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01'
+input-file:
+- Microsoft.Automation/stable/2021-04-01/privateEndpointConnection.json
+- Microsoft.Automation/stable/2021-04-01/privateLinkResources.json
+- Microsoft.Automation/stable/2021-04-01/python2package.json
+- Microsoft.Automation/stable/2021-04-01/dscNode.json
+- Microsoft.Automation/stable/2021-04-01/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2021-04-01/dscCompilationJob.json
+- Microsoft.Automation/stable/2021-04-01/dscNodeCounts.json
+- Microsoft.Automation/stable/2021-04-01/sourceControl.json
+- Microsoft.Automation/stable/2021-04-01/sourceControlSyncJob.json
+- Microsoft.Automation/stable/2021-04-01/sourceControlSyncJobStreams.json
+- Microsoft.Automation/stable/2021-04-01/account.json
+- Microsoft.Automation/stable/2021-04-01/certificate.json
+- Microsoft.Automation/stable/2021-04-01/connection.json
+- Microsoft.Automation/stable/2021-04-01/connectionType.json
+- Microsoft.Automation/stable/2021-04-01/credential.json
+- Microsoft.Automation/stable/2021-04-01/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/stable/2021-04-01/jobSchedule.json
+- Microsoft.Automation/stable/2021-04-01/linkedWorkspace.json
+- Microsoft.Automation/stable/2021-04-01/module.json
+- Microsoft.Automation/stable/2021-04-01/schedule.json
+- Microsoft.Automation/stable/2021-04-01/variable.json
+- Microsoft.Automation/stable/2021-04-01/watcher.json
+- Microsoft.Automation/stable/2021-04-01/dscConfiguration.json
+- Microsoft.Automation/stable/2021-04-01/job.json
+- Microsoft.Automation/stable/2021-04-01/operations.json
+- Microsoft.Automation/stable/2021-04-01/runbook.json
+- Microsoft.Automation/stable/2021-04-01/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2021-04-01/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2021-04-01/webhook.json
+```
+
 ---
 ## Suppression
 ``` yaml
