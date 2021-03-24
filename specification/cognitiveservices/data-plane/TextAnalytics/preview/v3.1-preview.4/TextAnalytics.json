@@ -149,6 +149,9 @@
             "$ref": ".//examples//SuccessfulAnalyzeStatusRequest.json"
           }
         },
+        "x-ms-pageable": {
+          "operationName": "AnalyzeStatusNextPage"
+        },
         "deprecated": false
       }
     },
@@ -212,6 +215,9 @@
           "Successful Health request": {
             "$ref": ".//examples//SuccessfulHealthStatusRequest.json"
           }
+        },
+        "x-ms-pageable": {
+          "operationName": "HealthStatusNextPage"
         },
         "deprecated": false
       },
@@ -664,6 +670,110 @@
         "x-ms-examples": {
           "Successful Sentiment request": {
             "$ref": ".//examples//SuccessfulSentimentRequest.json"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/entities/health/jobs/{nextLink}": {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Get details of the healthcare prediction job specified by the jobId.",
+        "operationId": "HealthStatusNextPage",
+        "summary": "Get healthcare analysis job status and results",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ShowStats"
+          },
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HealthcareJobState"
+            }
+          },
+          "404": {
+            "description": "Job ID not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/analyze/jobs/{nextLink}" : {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "values"
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are completed, the job will transition to the completed state and results will be available for each task.",
+        "operationId": "AnalyzeStatusNextPage",
+        "summary": "Get analysis status and results",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ShowStats"
+          },
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis job status and metadata.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeJobState"
+            }
+          },
+          "404": {
+            "description": "Job ID not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         },
         "deprecated": false
