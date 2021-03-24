@@ -4925,6 +4925,19 @@
       },
       "additionalProperties": false
     },
+    "AssetGenerator": {
+      "description": "The target that initiated generation of this asset",
+      "enum": [
+        "User",
+        "System"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AssetGenerator",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "CodeVersion": {
       "description": "Details of an RegisteredCode",
       "type": "object",
@@ -4943,15 +4956,7 @@
         },
         "generatedBy": {
           "description": "If the name version are system generated (anonymous registration) or user generated.",
-          "enum": [
-            "User",
-            "System"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AssetGenerator",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/AssetGenerator",
           "x-ms-mutability": [
             "create",
             "read"
@@ -5159,6 +5164,30 @@
       },
       "additionalProperties": false
     },
+    "ComponentType": {
+      "enum": [
+        "CommandComponent"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ComponentType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "ComponentInputType": {
+      "enum": [
+        "Generic",
+        "RangedNumber",
+        "Enum"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ComponentInputType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "ComponentInput": {
       "required": [
         "dataType",
@@ -5168,16 +5197,7 @@
       "properties": {
         "type": {
           "description": "Type of ComponentInput.",
-          "enum": [
-            "Generic",
-            "RangedNumber",
-            "Enum"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ComponentInputType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/ComponentInputType",
           "x-ms-mutability": [
             "create",
             "read"
@@ -5321,14 +5341,7 @@
       "properties": {
         "type": {
           "description": "Component Type, should match the schema.",
-          "enum": [
-            "CommandComponent"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ComponentType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/ComponentType",
           "x-ms-mutability": [
             "create",
             "read"
@@ -5408,15 +5421,7 @@
         },
         "generatedBy": {
           "description": "If the name version are system generated (anonymous registration) or user generated.",
-          "enum": [
-            "User",
-            "System"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AssetGenerator",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/AssetGenerator",
           "x-ms-mutability": [
             "create",
             "read"
@@ -5594,6 +5599,40 @@
       },
       "additionalProperties": false
     },
+    "ContentsType": {
+      "enum": [
+        "AzureBlob",
+        "AzureDataLake",
+        "AzureDataLakeGen2",
+        "AzureFile",
+        "AzureMySql",
+        "AzurePostgreSql",
+        "AzureSqlDatabase",
+        "GlusterFs"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ContentsType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "CredentialsType": {
+      "enum": [
+        "AccountKey",
+        "Certificate",
+        "None",
+        "Sas",
+        "ServicePrincipal",
+        "SqlAdmin"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CredentialsType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "AccountKeySection": {
       "type": "object",
       "properties": {
@@ -5735,19 +5774,7 @@
       "properties": {
         "type": {
           "description": "Credential type used to authentication with storage.",
-          "enum": [
-            "AccountKey",
-            "Certificate",
-            "None",
-            "Sas",
-            "ServicePrincipal",
-            "SqlAdmin"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CredentialsType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/CredentialsType"
         },
         "accountKey": {
           "description": "Storage account key authentication.",
@@ -6061,21 +6088,7 @@
       "properties": {
         "type": {
           "description": "Storage type backing the datastore.",
-          "enum": [
-            "AzureBlob",
-            "AzureDataLake",
-            "AzureDataLakeGen2",
-            "AzureFile",
-            "AzureMySql",
-            "AzurePostgreSql",
-            "AzureSqlDatabase",
-            "GlusterFs"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ContentsType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ContentsType"
         },
         "azureDataLake": {
           "description": "Azure Data Lake (Gen1/2) storage information.",
@@ -6104,6 +6117,17 @@
       },
       "additionalProperties": false
     },
+    "OriginType": {
+      "enum": [
+        "Synapse"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OriginType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "LinkedInfo": {
       "type": "object",
       "properties": {
@@ -6117,14 +6141,7 @@
         },
         "origin": {
           "description": "Type of the linked service.",
-          "enum": [
-            "Synapse"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OriginType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/OriginType"
         }
       },
       "additionalProperties": false
@@ -6240,21 +6257,25 @@
       },
       "additionalProperties": false
     },
+    "DatasetType": {
+      "enum": [
+        "Simple",
+        "Dataflow"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DatasetType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "DataVersion": {
       "description": "Details of an DatasetDto",
       "type": "object",
       "properties": {
         "datasetType": {
           "description": "The Format of dataset.",
-          "enum": [
-            "Simple",
-            "Dataflow"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DatasetType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DatasetType"
         },
         "datastoreId": {
           "description": "The asset datastoreId",
@@ -6270,15 +6291,7 @@
         },
         "generatedBy": {
           "description": "If the name version are system generated (anonymous registration) or user generated.",
-          "enum": [
-            "User",
-            "System"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AssetGenerator",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/AssetGenerator",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6456,20 +6469,51 @@
       },
       "additionalProperties": false
     },
+    "EnvironmentSpecificationType": {
+      "description": "Environment specification is either user created or curated by Azure ML service",
+      "enum": [
+        "Curated",
+        "UserCreated"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EnvironmentSpecificationType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "DockerSpecificationType": {
+      "description": "Docker specification must be either Build or Image",
+      "enum": [
+        "Build",
+        "Image"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DockerSpecificationType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "OperatingSystemType": {
+      "description": "The type of operating system.",
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OperatingSystemType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "DockerImagePlatform": {
       "type": "object",
       "properties": {
         "operatingSystemType": {
           "description": "The OS type the Environment.",
-          "enum": [
-            "Linux",
-            "Windows"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OperatingSystemType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/OperatingSystemType"
         }
       },
       "additionalProperties": false
@@ -6483,15 +6527,7 @@
       "properties": {
         "type": {
           "description": "Docker specification must be either Build or Image",
-          "enum": [
-            "Build",
-            "Image"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DockerSpecificationType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/DockerSpecificationType",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6611,16 +6647,8 @@
       "properties": {
         "type": {
           "description": "Environment specification is either user managed or curated by the Azure ML service\r\n<see href=\"https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments\" />",
-          "enum": [
-            "Curated",
-            "UserCreated"
-          ],
-          "type": "string",
+          "$ref": "#/definitions/EnvironmentSpecificationType",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "EnvironmentSpecificationType",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read"
           ]
@@ -6638,15 +6666,7 @@
         },
         "generatedBy": {
           "description": "If the name version are system generated (anonymous registration) or user generated.",
-          "enum": [
-            "User",
-            "System"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AssetGenerator",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/AssetGenerator",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6738,29 +6758,87 @@
       },
       "additionalProperties": false
     },
+    "JobType": {
+      "enum": [
+        "Command",
+        "Sweep",
+        "Labeling",
+        "Pipeline",
+        "Data",
+        "AutoML"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "JobStatus": {
+      "description": "The status of a job.",
+      "enum": [
+        "NotStarted",
+        "Starting",
+        "Provisioning",
+        "Preparing",
+        "Queued",
+        "Running",
+        "Finalizing",
+        "CancelRequested",
+        "Completed",
+        "Failed",
+        "Canceled",
+        "NotResponding",
+        "Paused"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "OptimizationMetric": {
+      "enum": [
+        "AUC_weighted",
+        "Accuracy",
+        "Norm_macro_recall",
+        "Average_precision_score_weighted",
+        "Precision_score_weighted",
+        "Spearman_correlation",
+        "Normalized_root_mean_squared_error",
+        "R2_score",
+        "Normalized_mean_absolute_error",
+        "Normalized_root_mean_squared_log_error"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OptimizationMetric",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "TaskType": {
+      "description": "Experiment Task type.",
+      "enum": [
+        "Classification",
+        "Regression",
+        "Forecasting"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TaskType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "GeneralSettings": {
       "description": "General Settings to submit an AutoML Job.",
       "type": "object",
       "properties": {
         "primaryMetric": {
           "description": "Primary optimization metric",
-          "enum": [
-            "AUC_weighted",
-            "Accuracy",
-            "Norm_macro_recall",
-            "Average_precision_score_weighted",
-            "Precision_score_weighted",
-            "Spearman_correlation",
-            "Normalized_root_mean_squared_error",
-            "R2_score",
-            "Normalized_mean_absolute_error",
-            "Normalized_root_mean_squared_log_error"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OptimizationMetric",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/OptimizationMetric"
         },
         "enableModelExplainability": {
           "description": "Flag to turn on explainability on best model.",
@@ -6768,16 +6846,7 @@
         },
         "taskType": {
           "description": "Type of AutoML Experiment [Classification, Regression, Forecasting]",
-          "enum": [
-            "Classification",
-            "Regression",
-            "Forecasting"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TaskType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/TaskType"
         }
       },
       "additionalProperties": false
@@ -7011,6 +7080,20 @@
       },
       "additionalProperties": false
     },
+    "JobProvisioningState": {
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobProvisioningState",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "JobBase": {
       "description": "Job base definition",
       "required": [
@@ -7020,37 +7103,15 @@
       "properties": {
         "jobType": {
           "description": "Specifies the type of job.",
-          "enum": [
-            "Command",
-            "Sweep",
-            "Labeling",
-            "Pipeline",
-            "Data",
-            "AutoML"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/JobType",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
         "provisioningState": {
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "InProgress"
-          ],
-          "type": "string",
+          "$ref": "#/definitions/JobProvisioningState",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobProvisioningState",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read"
           ]
@@ -7170,44 +7231,13 @@
       ],
       "properties": {
         "jobType": {
-          "enum": [
-            "Command",
-            "Sweep",
-            "Labeling",
-            "Pipeline",
-            "Data",
-            "AutoML"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/JobType",
+          "readOnly": true
         },
         "status": {
           "description": "Status of the job.",
-          "enum": [
-            "NotStarted",
-            "Starting",
-            "Provisioning",
-            "Preparing",
-            "Queued",
-            "Running",
-            "Finalizing",
-            "CancelRequested",
-            "Completed",
-            "Failed",
-            "Canceled",
-            "NotResponding",
-            "Paused"
-          ],
-          "type": "string",
+          "$ref": "#/definitions/JobStatus",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read"
           ]
@@ -7240,6 +7270,20 @@
       "x-ms-discriminator-value": "AutoML",
       "additionalProperties": false
     },
+    "DataBindingMode": {
+      "description": "Describes how the data should be attached to the container.",
+      "enum": [
+        "Mount",
+        "Download",
+        "Upload"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataBindingMode",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "DataBinding": {
       "description": "Data binding definition.",
       "type": "object",
@@ -7262,21 +7306,25 @@
         },
         "mode": {
           "description": "Mechanism for accessing the data artifact.",
-          "enum": [
-            "Mount",
-            "Download",
-            "Upload"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataBindingMode",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/DataBindingMode",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         }
+      },
+      "additionalProperties": false
+    },
+    "DistributionType": {
+      "enum": [
+        "PyTorch",
+        "TensorFlow",
+        "Mpi"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DistributionType",
+        "modelAsString": true
       },
       "additionalProperties": false
     },
@@ -7288,16 +7336,7 @@
       "properties": {
         "distributionType": {
           "description": "Specifies the type of distribution framework.",
-          "enum": [
-            "PyTorch",
-            "TensorFlow",
-            "Mpi"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DistributionType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/DistributionType",
           "x-ms-mutability": [
             "create",
             "read"
@@ -7373,6 +7412,19 @@
       "x-ms-discriminator-value": "PyTorch",
       "additionalProperties": false
     },
+    "IdentityType": {
+      "enum": [
+        "Managed",
+        "ServicePrincipal",
+        "AMLToken"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "IdentityConfiguration": {
       "required": [
         "identityType"
@@ -7381,16 +7433,7 @@
       "properties": {
         "identityType": {
           "description": "Specifies the type of identity framework.",
-          "enum": [
-            "Managed",
-            "ServicePrincipal",
-            "AMLToken"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IdentityType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/IdentityType",
           "x-ms-mutability": [
             "create",
             "read"
@@ -7482,44 +7525,13 @@
       ],
       "properties": {
         "jobType": {
-          "enum": [
-            "Command",
-            "Sweep",
-            "Labeling",
-            "Pipeline",
-            "Data",
-            "AutoML"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/JobType",
+          "readOnly": true
         },
         "status": {
           "description": "Status of the job.",
-          "enum": [
-            "NotStarted",
-            "Starting",
-            "Provisioning",
-            "Preparing",
-            "Queued",
-            "Running",
-            "Finalizing",
-            "CancelRequested",
-            "Completed",
-            "Failed",
-            "Canceled",
-            "NotResponding",
-            "Paused"
-          ],
-          "type": "string",
+          "$ref": "#/definitions/JobStatus",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read"
           ]
@@ -7590,6 +7602,17 @@
       "x-ms-discriminator-value": "Command",
       "additionalProperties": false
     },
+    "PipelineType": {
+      "enum": [
+        "AzureML"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PipelineType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "InputData": {
       "type": "object",
       "properties": {
@@ -7603,16 +7626,7 @@
         },
         "mode": {
           "description": "Mode type, can be set for DatasetId.",
-          "enum": [
-            "Mount",
-            "Download",
-            "Upload"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataBindingMode",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/DataBindingMode",
           "x-ms-mutability": [
             "create",
             "read"
@@ -7680,16 +7694,7 @@
         },
         "mode": {
           "description": "Mode type for data.",
-          "enum": [
-            "Mount",
-            "Download",
-            "Upload"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataBindingMode",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/DataBindingMode",
           "x-ms-mutability": [
             "create",
             "read"
@@ -7856,58 +7861,20 @@
       ],
       "properties": {
         "jobType": {
-          "enum": [
-            "Command",
-            "Sweep",
-            "Labeling",
-            "Pipeline",
-            "Data",
-            "AutoML"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/JobType",
+          "readOnly": true
         },
         "status": {
           "description": "Status of the job.",
-          "enum": [
-            "NotStarted",
-            "Starting",
-            "Provisioning",
-            "Preparing",
-            "Queued",
-            "Running",
-            "Finalizing",
-            "CancelRequested",
-            "Completed",
-            "Failed",
-            "Canceled",
-            "NotResponding",
-            "Paused"
-          ],
-          "type": "string",
+          "$ref": "#/definitions/JobStatus",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read"
           ]
         },
         "type": {
           "description": "Type of PipelineJob",
-          "enum": [
-            "AzureML"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PipelineType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/PipelineType",
           "x-ms-mutability": [
             "create",
             "read"
@@ -7925,6 +7892,19 @@
       "x-ms-discriminator-value": "Pipeline",
       "additionalProperties": false
     },
+    "ParameterSamplingType": {
+      "enum": [
+        "Grid",
+        "Random",
+        "Bayesian"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ParameterSamplingType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "ParameterSamplingConfiguration": {
       "description": "class for all hyperparameter sampling algorithms",
       "required": [
@@ -7939,17 +7919,21 @@
         },
         "samplingType": {
           "description": "Type of the hyperparameter sampling algorithms",
-          "enum": [
-            "Grid",
-            "Random",
-            "Bayesian"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ParameterSamplingType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ParameterSamplingType"
         }
+      },
+      "additionalProperties": false
+    },
+    "EarlyTerminationPolicyType": {
+      "enum": [
+        "Bandit",
+        "MedianStopping",
+        "TruncationSelection"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EarlyTerminationPolicyType",
+        "modelAsString": true
       },
       "additionalProperties": false
     },
@@ -7962,16 +7946,7 @@
       "properties": {
         "policyType": {
           "description": "Name of policy configuration",
-          "enum": [
-            "Bandit",
-            "MedianStopping",
-            "TruncationSelection"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EarlyTerminationPolicyType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/EarlyTerminationPolicyType"
         },
         "evaluationInterval": {
           "format": "int32",
@@ -8058,6 +8033,19 @@
       },
       "additionalProperties": false
     },
+    "PrimaryMetricGoal": {
+      "description": "Defines supported metric goals for hyperparameter tuning",
+      "enum": [
+        "Minimize",
+        "Maximize"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PrimaryMetricGoal",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "EvaluationConfiguration": {
       "required": [
         "primaryMetricGoal",
@@ -8071,15 +8059,7 @@
         },
         "primaryMetricGoal": {
           "description": "Defines supported metric goals for hyperparameter tuning",
-          "enum": [
-            "Minimize",
-            "Maximize"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PrimaryMetricGoal",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PrimaryMetricGoal"
         }
       },
       "additionalProperties": false
@@ -8137,44 +8117,13 @@
       ],
       "properties": {
         "jobType": {
-          "enum": [
-            "Command",
-            "Sweep",
-            "Labeling",
-            "Pipeline",
-            "Data",
-            "AutoML"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/JobType",
+          "readOnly": true
         },
         "status": {
           "description": "The status of a job.",
-          "enum": [
-            "NotStarted",
-            "Starting",
-            "Provisioning",
-            "Preparing",
-            "Queued",
-            "Running",
-            "Finalizing",
-            "CancelRequested",
-            "Completed",
-            "Failed",
-            "Canceled",
-            "NotResponding",
-            "Paused"
-          ],
-          "type": "string",
+          "$ref": "#/definitions/JobStatus",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read"
           ]
@@ -8339,6 +8288,33 @@
       },
       "additionalProperties": false
     },
+    "MediaType": {
+      "description": "Media type of data asset.",
+      "enum": [
+        "Image",
+        "Text"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "ImageAnnotationType": {
+      "description": "Annotation type of image data.",
+      "enum": [
+        "Classification",
+        "BoundingBox",
+        "InstanceSegmentation"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ImageAnnotationType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "LabelingJobMediaProperties": {
       "description": "Properties of a labeling job",
       "required": [
@@ -8348,15 +8324,7 @@
       "properties": {
         "mediaType": {
           "description": "Media type of the job.",
-          "enum": [
-            "Image",
-            "Text"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MediaType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/MediaType",
           "x-ms-mutability": [
             "create",
             "read"
@@ -8377,16 +8345,7 @@
       "properties": {
         "annotationType": {
           "description": "Annotation type of image labeling job.",
-          "enum": [
-            "Classification",
-            "BoundingBox",
-            "InstanceSegmentation"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ImageAnnotationType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/ImageAnnotationType",
           "x-ms-mutability": [
             "create",
             "read"
@@ -8394,6 +8353,18 @@
         }
       },
       "x-ms-discriminator-value": "Image",
+      "additionalProperties": false
+    },
+    "TextAnnotationType": {
+      "description": "Annotation type of text data.",
+      "enum": [
+        "Classification"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TextAnnotationType",
+        "modelAsString": true
+      },
       "additionalProperties": false
     },
     "LabelingJobTextProperties": {
@@ -8407,14 +8378,7 @@
       "properties": {
         "annotationType": {
           "description": "Annotation type of text labeling job.",
-          "enum": [
-            "Classification"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TextAnnotationType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/TextAnnotationType",
           "x-ms-mutability": [
             "create",
             "read"
@@ -8467,23 +8431,27 @@
       },
       "additionalProperties": false
     },
+    "StatusMessageLevel": {
+      "enum": [
+        "Error",
+        "Information",
+        "Warning"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StatusMessageLevel",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "StatusMessage": {
       "description": "Active message associated with project",
       "type": "object",
       "properties": {
         "level": {
           "description": "Severity level of message.",
-          "enum": [
-            "Error",
-            "Information",
-            "Warning"
-          ],
-          "type": "string",
+          "$ref": "#/definitions/StatusMessageLevel",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "StatusMessageLevel",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read"
           ]
@@ -8572,27 +8540,8 @@
         },
         "status": {
           "description": "Status of the job.",
-          "enum": [
-            "NotStarted",
-            "Starting",
-            "Provisioning",
-            "Preparing",
-            "Queued",
-            "Running",
-            "Finalizing",
-            "CancelRequested",
-            "Completed",
-            "Failed",
-            "Canceled",
-            "NotResponding",
-            "Paused"
-          ],
-          "type": "string",
+          "$ref": "#/definitions/JobStatus",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read"
           ]
@@ -8757,6 +8706,20 @@
       },
       "additionalProperties": false
     },
+    "ExportFormatType": {
+      "description": "The format of exported labels.",
+      "enum": [
+        "Dataset",
+        "Coco",
+        "CSV"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ExportFormatType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "ExportSummary": {
       "required": [
         "format"
@@ -8765,16 +8728,7 @@
       "properties": {
         "format": {
           "description": "The format of exported labels, also as the discriminator.",
-          "enum": [
-            "Dataset",
-            "Coco",
-            "CSV"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ExportFormatType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/ExportFormatType",
           "x-ms-mutability": [
             "create",
             "read"
@@ -9027,15 +8981,7 @@
         },
         "generatedBy": {
           "description": "If the name version are system generated (anonymous registration) or user generated.",
-          "enum": [
-            "User",
-            "System"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AssetGenerator",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/AssetGenerator",
           "x-ms-mutability": [
             "create",
             "read"
@@ -9169,6 +9115,19 @@
       },
       "additionalProperties": false
     },
+    "ScaleTypeMode": {
+      "enum": [
+        "Automatic",
+        "Manual",
+        "None"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScaleTypeMode",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "OnlineDeploymentScaleSettings": {
       "type": "object",
       "properties": {
@@ -9185,17 +9144,21 @@
           "type": "integer"
         },
         "scaleType": {
-          "enum": [
-            "Automatic",
-            "Manual",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ScaleTypeMode",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ScaleTypeMode"
         }
+      },
+      "additionalProperties": false
+    },
+    "EndpointComputeType": {
+      "enum": [
+        "Managed",
+        "AKS",
+        "AzureMLCompute"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EndpointComputeType",
+        "modelAsString": true
       },
       "additionalProperties": false
     },
@@ -9221,16 +9184,7 @@
       "type": "object",
       "properties": {
         "computeType": {
-          "enum": [
-            "Managed",
-            "AKS",
-            "AzureMLCompute"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EndpointComputeType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/EndpointComputeType"
         },
         "appInsightsEnabled": {
           "type": "boolean"
@@ -9273,6 +9227,18 @@
       "x-ms-discriminator-value": "AKS",
       "additionalProperties": false
     },
+    "OSTypes": {
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OSTypes",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "ManagedDeploymentConfiguration": {
       "type": "object",
       "allOf": [
@@ -9289,21 +9255,43 @@
           ]
         },
         "osType": {
-          "enum": [
-            "Linux",
-            "Windows"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OSTypes",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/OSTypes"
         },
         "readinessProbeRequirements": {
           "$ref": "machineLearningServices.json#/definitions/LivenessProbeRequirements"
         }
       },
       "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
+    },
+    "DeploymentProvisioningState": {
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Scaling",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DeploymentProvisioningState",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "ReferenceType": {
+      "enum": [
+        "Id",
+        "DataPath",
+        "OutputPath"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ReferenceType",
+        "modelAsString": true
+      },
       "additionalProperties": false
     },
     "AssetReferenceBase": {
@@ -9314,16 +9302,7 @@
       "properties": {
         "referenceType": {
           "description": "Specifies the type of asset reference.",
-          "enum": [
-            "Id",
-            "DataPath",
-            "OutputPath"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ReferenceType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ReferenceType"
         }
       },
       "discriminator": "referenceType",
@@ -9399,21 +9378,8 @@
         },
         "provisioningState": {
           "description": "Provisioning state for the endpoint deployment.",
-          "enum": [
-            "Creating",
-            "Deleting",
-            "Scaling",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
+          "$ref": "#/definitions/DeploymentProvisioningState",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "DeploymentProvisioningState",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read"
           ]
@@ -9601,20 +9567,24 @@
       },
       "additionalProperties": false
     },
+    "ContainerType": {
+      "enum": [
+        "StorageInitializer",
+        "InferenceServer"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ContainerType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "DeploymentLogsRequest": {
       "type": "object",
       "properties": {
         "containerType": {
           "description": "The type of container to retrieve logs from.",
-          "enum": [
-            "StorageInitializer",
-            "InferenceServer"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ContainerType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ContainerType"
         },
         "tail": {
           "format": "int32",
@@ -9633,6 +9603,37 @@
       },
       "additionalProperties": false
     },
+    "OrderString": {
+      "enum": [
+        "CreatedAtDesc",
+        "CreatedAtAsc",
+        "UpdatedAtDesc",
+        "UpdatedAtAsc"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OrderString",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "EndpointProvisioningState": {
+      "description": "State of endpoint provisioning.",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Updating",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EndpointProvisioningState",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "ComputeConfiguration": {
       "required": [
         "computeType"
@@ -9640,16 +9641,7 @@
       "type": "object",
       "properties": {
         "computeType": {
-          "enum": [
-            "Managed",
-            "AKS",
-            "AzureMLCompute"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EndpointComputeType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/EndpointComputeType"
         }
       },
       "discriminator": "computeType",
@@ -9701,6 +9693,19 @@
       "x-ms-discriminator-value": "AzureMLCompute",
       "additionalProperties": false
     },
+    "EndpointAuthModeType": {
+      "enum": [
+        "AMLToken",
+        "Key",
+        "AADToken"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EndpointAuthModeType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "OnlineEndpoint": {
       "description": "Online endpoint configuration",
       "required": [
@@ -9711,20 +9716,8 @@
       "properties": {
         "provisioningState": {
           "description": "State of endpoint provisioning.",
-          "enum": [
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Updating",
-            "Canceled"
-          ],
-          "type": "string",
+          "$ref": "#/definitions/EndpointProvisioningState",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "EndpointProvisioningState",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read"
           ]
@@ -9771,16 +9764,7 @@
         },
         "authMode": {
           "description": "Inference endpoint authentication mode type",
-          "enum": [
-            "AMLToken",
-            "Key",
-            "AADToken"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EndpointAuthModeType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/EndpointAuthModeType"
         }
       },
       "additionalProperties": false
@@ -9938,6 +9922,18 @@
       },
       "additionalProperties": false
     },
+    "KeyType": {
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "KeyType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "RegenerateEndpointKeysRequest": {
       "required": [
         "keyType"
@@ -9946,16 +9942,7 @@
       "properties": {
         "keyType": {
           "description": "Specification for which type of key to generate. Primary or Secondary.",
-          "enum": [
-            "Primary",
-            "Secondary"
-          ],
-          "type": "string",
-          "example": "Primary",
-          "x-ms-enum": {
-            "name": "KeyType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/KeyType"
         },
         "keyValue": {
           "description": "The value the key is set to.",
@@ -10011,6 +9998,84 @@
       },
       "additionalProperties": false
     },
+    "ScheduleType": {
+      "enum": [
+        "ComputeStartStop"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduleType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "ComputeType": {
+      "enum": [
+        "ComputeInstance"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ComputeType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "ComputeStartStopTriggerType": {
+      "enum": [
+        "Recurrence",
+        "Cron"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ComputeStartStopTriggerType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "ComputePowerAction": {
+      "enum": [
+        "Start",
+        "Stop"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ComputePowerAction",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "Frequency": {
+      "enum": [
+        "Month",
+        "Week",
+        "Day",
+        "Hour",
+        "Minute"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Frequency",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "WeekDays": {
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "WeekDays",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "RecurrenceSchedule": {
       "type": "object",
       "properties": {
@@ -10034,20 +10099,7 @@
           "description": "List of days for the schedule.",
           "type": "array",
           "items": {
-            "enum": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "WeekDays",
-              "modelAsString": true
-            }
+            "$ref": "#/definitions/WeekDays"
           }
         }
       },
@@ -10058,18 +10110,7 @@
       "properties": {
         "frequency": {
           "description": "The frequency to trigger schedule.",
-          "enum": [
-            "Month",
-            "Week",
-            "Day",
-            "Hour",
-            "Minute"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Frequency",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/Frequency"
         },
         "interval": {
           "format": "int32",
@@ -10109,6 +10150,31 @@
       },
       "additionalProperties": false
     },
+    "ScheduleStatus": {
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduleStatus",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "ScheduleProvisioningStatus": {
+      "enum": [
+        "Completed",
+        "Provisioning",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduleProvisioningStatus",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
     "ScheduleBase": {
       "required": [
         "type"
@@ -10117,14 +10183,7 @@
       "properties": {
         "type": {
           "description": "Type of Schedule.",
-          "enum": [
-            "ComputeStartStop"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ScheduleType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/ScheduleType",
           "x-ms-mutability": [
             "create",
             "read"
@@ -10136,29 +10195,12 @@
         },
         "status": {
           "description": "Status of schedule.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ScheduleStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ScheduleStatus"
         },
         "provisioningStatus": {
           "description": "Provisioning status of schedule resource.",
-          "enum": [
-            "Completed",
-            "Provisioning",
-            "Failed"
-          ],
-          "type": "string",
+          "$ref": "#/definitions/ScheduleProvisioningStatus",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "ScheduleProvisioningStatus",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read"
           ]
@@ -10199,37 +10241,14 @@
       "properties": {
         "computeType": {
           "description": "Type of Compute.",
-          "enum": [
-            "ComputeInstance"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ComputeType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ComputeType"
         },
         "triggerType": {
           "description": "Schedule's trigger type.",
-          "enum": [
-            "Recurrence",
-            "Cron"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ComputeStartStopTriggerType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ComputeStartStopTriggerType"
         },
         "action": {
-          "enum": [
-            "Start",
-            "Stop"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ComputePowerAction",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ComputePowerAction"
         },
         "recurrence": {
           "description": "Recurrence schedule details.",
