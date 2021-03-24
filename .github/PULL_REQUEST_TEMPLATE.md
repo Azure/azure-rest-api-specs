@@ -1,6 +1,7 @@
 <i>MSFT employees can try out our new experience at <b>[OpenAPI Hub](https://aka.ms/openapiportal) </b> - one location for using our validation tools and finding your workflow. 
 </i>
 
+
 ### Changelog
 Please ensure to add changelog with this PR by answering the following questions.
   1. What's the purpose of the update?    
