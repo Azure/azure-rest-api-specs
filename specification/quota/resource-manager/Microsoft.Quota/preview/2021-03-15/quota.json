@@ -1024,7 +1024,7 @@
         }
       }
     },
-    "QuotaTypeInformation": {
+    "QuotaTypeInformationDimension1": {
       "type": "object",
       "description": "Quota type information.",
       "properties": {
@@ -1037,11 +1037,11 @@
           "description": "The display name"
         },
         "value": {
-          "$ref": "#/definitions/QuotaTypeInformationList"
+          "$ref": "#/definitions/QuotaTypeInformationDimension2"
         }
       }
     },
-    "QuotaTypeInformationList":{
+    "QuotaTypeInformationDimension1List":{
       "description": "Quota types information list.",
       "type": "object",
       "properties": {
@@ -1057,8 +1057,157 @@
           "description": "The quota type information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/QuotaTypeInformation"
+            "$ref": "#/definitions/QuotaTypeInformationDimension1"
           }
+        }
+      }
+    },
+    "QuotaTypeInformationDimension2": {
+      "type": "object",
+      "description": "Quota type information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The property name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name"
+        },
+        "value": {
+          "$ref": "#/definitions/QuotaTypeInformationDimension2List"
+        }
+      }
+    },
+    "QuotaTypeInformationDimension2List":{
+      "description": "Quota types information list.",
+      "type": "object",
+      "properties": {
+        "dimension" : {
+          "type": "string",
+          "description": "The display name"
+        },
+        "dimensionDisplayName": {
+          "type": "string",
+          "description": "The property value"
+        },
+        "value": {
+          "description": "The quota type information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaTypeInformationDimension3"
+          }
+        }
+      }
+    },
+    "QuotaTypeInformationDimension3": {
+      "type": "object",
+      "description": "Quota type information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The property name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name"
+        },
+        "value": {
+          "$ref": "#/definitions/QuotaTypeInformationDimension3List"
+        }
+      }
+    },
+    "QuotaTypeInformationDimension3List":{
+      "description": "Quota types information list.",
+      "type": "object",
+      "properties": {
+        "dimension" : {
+          "type": "string",
+          "description": "The display name"
+        },
+        "dimensionDisplayName": {
+          "type": "string",
+          "description": "The property value"
+        },
+        "value": {
+          "description": "The quota type information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaTypeInformationDimension4"
+          }
+        }
+      }
+    },
+     "QuotaTypeInformationDimension4": {
+      "type": "object",
+      "description": "Quota type information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The property name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name"
+        },
+        "value": {
+          "$ref": "#/definitions/QuotaTypeInformationDimension4List"
+        }
+      }
+    },
+    "QuotaTypeInformationDimension4List":{
+      "description": "Quota types information list.",
+      "type": "object",
+      "properties": {
+        "dimension" : {
+          "type": "string",
+          "description": "The display name"
+        },
+        "dimensionDisplayName": {
+          "type": "string",
+          "description": "The property value"
+        },
+        "value": {
+          "description": "The quota type information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaTypeInformationDimensionEndList"
+          }
+        }
+      }
+    },
+    "QuotaTypeInformationDimensionEndList":{
+      "description": "Quota types information list.",
+      "type": "object",
+      "properties": {
+        "dimension" : {
+          "type": "string",
+          "description": "The display name"
+        },
+        "dimensionDisplayName": {
+          "type": "string",
+          "description": "The property value"
+        },
+        "value": {
+          "description": "The quota type information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaTypeInformationDimensionEnd"
+          }
+        }
+      }
+    },
+    "QuotaTypeInformationDimensionEnd": {
+      "type": "object",
+      "description": "Quota type information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The property name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name"
         }
       }
     },
@@ -1071,19 +1220,8 @@
           "type": "array",
           "items": {
              "x-ms-client-flatten": true,
-            "$ref": "#/definitions/QuotaTypeInformationList" 
+            "$ref": "#/definitions/QuotaTypeInformationDimension1List" 
           }
-        }
-      }
-    },
-    "QuotaTypeDetails": {
-      "type": "object",
-      "description": "Quota type details.",
-      "properties": {
-        "properties": {
-          "description": "The quota type properties for the resource id.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/QuotaTypeInformationList"
         }
       }
     },
@@ -1098,7 +1236,7 @@
         "properties": {
           "description": "The quota type properties for the resource id.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/QuotaTypeInformationList"
+          "$ref": "#/definitions/QuotaTypeInformationDimension1List"
         }
       }
     },
