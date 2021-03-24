@@ -276,7 +276,7 @@
           },
           "StorageAccountUpdateUserAssignedEncryptionIdentityWithCMK": {
             "$ref": "./examples/StorageAccountUpdateUserAssignedEncryptionIdentityWithCMK.json"
-          }          
+          }
         },
         "parameters": [
           {
@@ -2069,21 +2069,21 @@
       "properties": {
         "sasExpirationPeriod": {
           "type": "string",
-       	  "example": "1.15:59:59",
+          "example": "1.15:59:59",
           "description": "The SAS expiration period, DD.HH:MM:SS."
         },
         "expirationAction": {
-		  "type": "string",
-		  "enum": [
-		    "Log"
-		  ],
-		  "x-ms-enum": {
-		    "name": "ExpirationAction",
-		    "modelAsString": true
-		  },
-		  "default": "Log",
-		  "description": "The SAS expiration action. Can only be Log."
-		}
+          "type": "string",
+          "enum": [
+            "Log"
+          ],
+          "x-ms-enum": {
+            "name": "ExpirationAction",
+            "modelAsString": true
+          },
+          "default": "Log",
+          "description": "The SAS expiration action. Can only be Log."
+        }  
       },
       "required": [
         "sasExpirationPeriod"
@@ -2094,7 +2094,8 @@
       "properties": {
         "keyExpirationPeriodInDays": {
           "type": "integer",
-          "description": "The key expiration period in days."
+          "description": "The key expiration period in days.",
+          "format": "int32",
         }
       },
       "required": [
@@ -2455,14 +2456,14 @@
     },
     "StorageAccountPropertiesCreateParameters": {
       "properties": {
-      	"sasPolicy":{
-      		"$ref": "#/definitions/SasPolicy",
-      		"description": "SasPolicy assigned to the storage account."
-      	},
-      	"keyPolicy":{
-      		"$ref": "#/definitions/KeyPolicy",
-      		"description": "KeyPolicy assigned to the storage account."
-      	},
+        "sasPolicy":{
+          "$ref": "#/definitions/SasPolicy",
+          "description": "SasPolicy assigned to the storage account."
+        },
+        "keyPolicy":{
+          "$ref": "#/definitions/KeyPolicy",
+          "description": "KeyPolicy assigned to the storage account."
+        },
         "customDomain": {
           "$ref": "#/definitions/CustomDomain",
           "description": "User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property."
@@ -2964,16 +2965,16 @@
           "description": "Gets the custom domain the user assigned to this storage account."
         },
         "sasPolicy":{
-      		"$ref": "#/definitions/SasPolicy",
-      		"readOnly": true,
-      		"description": "SasPolicy assigned to the storage account."
-      	},
-      	"keyPolicy":{
-      		"$ref": "#/definitions/KeyPolicy",
-      		"readOnly": true,
-      		"description": "KeyPolicy assigned to the storage account."
-      	},
-      	"keyCreationTime":{
+          "$ref": "#/definitions/SasPolicy",
+          "readOnly": true,
+          "description": "SasPolicy assigned to the storage account."
+        },
+        "keyPolicy":{
+          "$ref": "#/definitions/KeyPolicy",
+          "readOnly": true,
+          "description": "KeyPolicy assigned to the storage account."
+        },
+        "keyCreationTime":{
           "readOnly": true,
           "type": "object",
           "additionalProperties": {
@@ -2981,11 +2982,11 @@
             "format": "date-time"
           },
           "example": {
-          	"key1": "2021-02-03T05:57:30.917Z",
-          	"key2": "2021-02-03T05:55:30.917Z"
+            "key1": "2021-02-03T05:57:30.917Z",
+            "key2": "2021-02-03T05:55:30.917Z"
           },
           "description": "Gets the list of storage account keys creation time."
-      	},
+        },
         "secondaryEndpoints": {
           "$ref": "#/definitions/Endpoints",
           "readOnly": true,
@@ -3267,13 +3268,13 @@
           "description": "Provides the encryption settings on the account. The default setting is unencrypted."
         },
         "sasPolicy":{
-      		"$ref": "#/definitions/SasPolicy",
-      		"description": "SasPolicy assigned to the storage account."
-      	},
-      	"keyPolicy":{
-      		"$ref": "#/definitions/KeyPolicy",
-      		"description": "KeyPolicy assigned to the storage account."
-      	},
+          "$ref": "#/definitions/SasPolicy",
+          "description": "SasPolicy assigned to the storage account."
+        },
+        "keyPolicy":{
+          "$ref": "#/definitions/KeyPolicy",
+          "description": "KeyPolicy assigned to the storage account."
+        },
         "accessTier": {
           "type": "string",
           "description": "Required for storage accounts where kind = BlobStorage. The access tier used for billing.",
