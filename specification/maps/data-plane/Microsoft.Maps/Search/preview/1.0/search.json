@@ -52,13 +52,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "../../../Common/preview/1.0/common.json#/definitions/ODataErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "../../../Common/preview/1.0/common.json#/definitions/ODataErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -70,19 +70,19 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "../../../Common/preview/1.0/common.json#/definitions/ODataErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "../../../Common/preview/1.0/common.json#/definitions/ODataErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "../../../Common/preview/1.0/common.json#/definitions/ODataErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       }
     },
     "202Async": {
@@ -2070,7 +2070,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2186,7 +2186,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2288,7 +2288,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2398,7 +2398,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2491,7 +2491,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2697,7 +2697,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2805,7 +2805,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -2910,7 +2910,7 @@
           "$ref": "#/definitions/SearchResultAddress"
         },
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         },
         "viewport": {
           "$ref": "#/definitions/SearchResultViewport"
@@ -3233,10 +3233,10 @@
       "type": "object",
       "properties": {
         "topLeftPoint": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         },
         "btmRightPoint": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         }
       }
     },
@@ -3254,7 +3254,7 @@
           ]
         },
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         }
       }
     },
@@ -3269,10 +3269,10 @@
           "type": "string"
         },
         "from": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         },
         "to": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviatedReadOnly"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinateAbbreviated"
         }
       }
     },

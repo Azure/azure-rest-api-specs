@@ -63,46 +63,10 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/ODataError"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
         },
         "warning": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
-    "ODataErrorResponse": {
-      "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
-    "ODataError": {
-      "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The ODataError code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, a human readable description of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ODataError"
-          }
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, the target causing the error."
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
         }
       }
     },
@@ -150,24 +114,6 @@
           "description": "Longitude property",
           "type": "number",
           "format": "double"
-        }
-      }
-    },
-    "CoordinateAbbreviatedReadOnly": {
-      "description": "A location represented as a latitude and longitude.",
-      "type": "object",
-      "properties": {
-        "lat": {
-          "description": "Latitude property",
-          "type": "number",
-          "format": "double",
-          "readOnly": true
-        },
-        "lon": {
-          "description": "Longitude property",
-          "type": "number",
-          "format": "double",
-          "readOnly": true
         }
       }
     },
