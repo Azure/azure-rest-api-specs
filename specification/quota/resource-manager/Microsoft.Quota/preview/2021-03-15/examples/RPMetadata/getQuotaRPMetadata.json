@@ -14,7 +14,7 @@
                 {
                   // the dimension names and uri is for example. Actual dimension names will come from Policy document.
                   "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationId}/quotaBuckets/",
-                   "resourceType" : "Skus",
+                  "resourceType": "Skus",
                   "properties": {
                     "value": [
                       {
@@ -41,15 +41,15 @@
               "value": [
                 {
                   "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{accountName}/quotaBucket/",
-                   "resourceType" : "Skus",
+                  "resourceType": "Skus",
                   "properties": {
                     "value": [
                       {
                         "name": "subscriptions",
-                         "displayname": "Subscription"
+                        "displayname": "Subscription"
                       },
                       {
-                        "name": "locations", 
+                        "name": "locations",
                         "displayname": "Location"
                       },
                       {
@@ -64,16 +64,32 @@
                   }
                 },
                 {
-                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/resourceGroups/{RG}/batchAccounts/{accountName}/pools/{poolName}/quotaBucket",
-                  "resourceType" : "Skus",
+                  "resourceTemplate": "/providers/Microsoft.Batch/locations/{locationId}/quotaBuckets",
+                  "resourceType": "Number Of Batch Accounts",
                   "properties": {
                     "value": [
                       {
                         "name": "subscriptions",
-                         "displayname": "Subscription"
+                        "displayname": "Subscription"
                       },
                       {
-                        "name": "locations", 
+                        "name": "locations",
+                        "displayname": "Location"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/resourceGroups/{RG}/batchAccounts/{accountName}/pools/{poolName}/quotaBucket",
+                  "resourceType": "Skus",
+                  "properties": {
+                    "value": [
+                      {
+                        "name": "subscriptions",
+                        "displayname": "Subscription"
+                      },
+                      {
+                        "name": "locations",
                         "displayname": "Location"
                       },
                       {
@@ -94,26 +110,25 @@
               ]
             }
           },
-           {
+          {
             "resourceProviderName": "Microsoft.Network",
             "properties": {
               "value": [
                 {
                   "resourceTemplate": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{locationId}/quotaBucket",
-                  "resourceType" : "PublicIpAddresses",
+                  "resourceType": "PublicIpAddresses",
                   "properties": {
                     "value": [
                       {
                         "name": "subscriptions",
-                         "displayname": "Subscription"
+                        "displayname": "Subscription"
                       },
                       {
-                        "name": "locations", 
+                        "name": "locations",
                         "displayname": "Location"
                       },
                       {
-                        "name": "quotaBucket" 
-                        ,
+                        "name": "quotaBucket",
                         "displayname": "Public IP Address Types"
                       }
                     ]
