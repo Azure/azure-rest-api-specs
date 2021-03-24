@@ -8,7 +8,7 @@
       "body": {
         "value": [
           {
-            "resourceTemplate": "/providers/Microsoft.Batch/locations/eastus/batchAccounts/quotaBuckets",
+            "resourceTemplate": "/providers/Microsoft.Batch/locations/{locationId}/batchAccounts/{batchAccountname}/quotaBuckets",
             "properties": {
               "dimension": "locations",
               "dimensionDisplayName": "Locations",
@@ -17,13 +17,12 @@
                   "name": "eastus",
                   "displayName": "East US",
                   "dimension": "batchAccounts",
-                  "dimensionDisplayName": "batchAccounts",
+                  "dimensionDisplayName": "batchAccount",
                   "value": [
                     //List of Batch Accounts
                     {
                       "name": "eastusbatccountTest1",
                       "displayName": "eastusbatccountTest1",
-
                       "value": [
                         //List of skus per batchAccount
                         {
@@ -35,43 +34,88 @@
                           "displayName": "Standard DV2 Family vCPUs"
                         }
                       ]
-
                     },
                     {
-                      "name": "westus",
-                      "displayName": "West US",
-                      "dimension": "quotaBuckets",
-                      "dimensionDisplayName": "vCpus",
+                      "name": "eastusbatccountTest2",
+                      "displayName": "eastusbatccountTest2",
                       "value": [
-                        //List of Batch Accounts
+                        //List of skus per batchAccount
                         {
-
-                          "name": "westusbatccountTest1",
-                          "displayName": "westusbatccountTest1"
-
-                          "value": [
-                            //List of skus per location
-                            {
-                              "name": "standardNDSFamily",
-                              "displayName": "Standard NDS Family vCPUs"
-                            },
-                            {
-                              "name": "standardDV2Family",
-                              "displayName": "Standard DV2 Family vCPUs"
-                            }
-                          ]
-
+                          "name": "standardNDSFamily",
+                          "displayName": "Standard NDS Family vCPUs"
+                        },
+                        {
+                          "name": "standardDV2Family",
+                          "displayName": "Standard DV2 Family vCPUs"
                         }
                       ]
-
                     }
-                  ]
-
+                  ],
+                  {
+                    "name": "westus",
+                    "displayName": "West US",
+                    "dimension": "batchAccounts",
+                    "dimensionDisplayName": "batchAccount",
+                    "value": [
+                      //List of Batch Accounts
+                      {
+                        "name": "westusbatccountTest1",
+                        "displayName": "westusbatccountTest1",
+                        "value": [
+                          //List of skus per location
+                          {
+                            "name": "standardNDSFamily",
+                            "displayName": "Standard NDS Family vCPUs"
+                          },
+                          {
+                            "name": "standardDV2Family",
+                            "displayName": "Standard DV2 Family vCPUs"
+                          }
+                        ]
+                      },
+                      {
+                        "name": "westusbatccountTest2",
+                        "displayName": "westusbatccountTest2",
+                        "value": [
+                          //List of skus per location
+                          {
+                            "name": "standardNDSFamily",
+                            "displayName": "Standard NDS Family vCPUs"
+                          },
+                          {
+                            "name": "standardDV2Family",
+                            "displayName": "Standard DV2 Family vCPUs"
+                          }
+                        ]
+                      }
+                    ]
+                  }
                 }
               ]
+            },
+            {
+              // this template is for quota for number of batch accounts in the region.
+              "resourceTemplate": "/providers/Microsoft.Batch/locations/{locationId}/quotaBuckets",
+              "properties": {
+                "dimension": "locations",
+                "dimensionDisplayName": "Locations",
+                "value": [
+                  {
+                    "name": "eastus",
+                    "displayName": "East US",
+                    "dimension": "quotaBuckets",
+                    "dimensionDisplayName": "Number of batch Accounts"
+                  },
+                  {
+                    "name": "westus",
+                    "displayName": "West US",
+                    "dimension": "quotaBuckets",
+                    "dimensionDisplayName": "Number of batch Accounts"
+                  }
+                ]
+              }
             }
-
-          }
+              //Similarly pool quota, etc templates can be added.           
         ]
       }
     }
