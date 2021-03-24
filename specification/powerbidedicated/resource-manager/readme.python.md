@@ -20,7 +20,6 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.powerbidedicated
 package-name: azure-mgmt-powerbidedicated
-clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
