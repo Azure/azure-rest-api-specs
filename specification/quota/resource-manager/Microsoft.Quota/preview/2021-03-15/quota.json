@@ -373,14 +373,11 @@
         "description": "Gets details of each dimension for the resource provider and resourceDimension.",
         "operationId": "QuotaTemplateDimensionTypes_List",
         "x-ms-examples": {
-          "Quotas_listMetadataForComputeSkus": {
+          "Quotas_listMetadataForCompute": {
             "$ref": "./examples/RPMetadata/getComputeMetadata.json"
           },
-          "Quotas_listMetadataForBatchAccounts": {
+          "Quotas_listMetadataForBatch": {
             "$ref": "./examples/RPMetadata/getBatchAccountsNamesMetadata.json"
-          },
-          "Quotas_listMetadataForBatchAccountsSkus": {
-            "$ref": "./examples/RPMetadata/getBatchAccountsSkusMetadata.json"
           }
         },
         "parameters": [
@@ -1070,10 +1067,11 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "The quota type information.",
+          "description": "The quota type information. \r\n It creates a circular reference. We can limit the depth to 4 and define 4 lists with different names for reference at each level.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/QuotaTypeInformationList"
+             "x-ms-client-flatten": true,
+            "$ref": "#/definitions/QuotaTypeInformationList" 
           }
         }
       }
