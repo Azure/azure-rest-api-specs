@@ -5809,9 +5809,26 @@
           "type": "boolean",
           "readOnly": false,
           "description": "Flag to control transit for VirtualRouter hub."
+        },
+        "preferredRoutingGateway": {
+          "$ref": "#/definitions/PreferredRoutingGateway",
+          "description": "The preferred gateway to route on-prem traffic"
         }
       },
       "description": "Parameters for VirtualHub."
+    },
+    "PreferredRoutingGateway": {
+      "type": "string",
+      "description": "The preferred routing gateway types",
+      "enum": [
+        "ExpressRoute",
+        "VpnGateway",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "PreferredRoutingGateway",
+        "modelAsString": true
+      }
     },
     "RoutingState": {
       "type": "string",
