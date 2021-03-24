@@ -96,7 +96,7 @@ These settings apply only when `--tag=package-2021-03-01-preview5` is specified 
 
 ```yaml $(tag) == 'package-chat-2021-03-07'
 input-file:
-  - Microsoft.CommunicationServicesIdentity/stable/2021-03-07/communicationserviceschat.json
+  - Microsoft.CommunicationServicesChat/stable/2021-03-07/communicationserviceschat.json
 title:
   Azure Communication Services
 ```
