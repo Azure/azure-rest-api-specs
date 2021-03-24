@@ -655,10 +655,6 @@
     "MerkleProofElement": {
       "description": "An item in the Merkle proof.",
       "type": "object",
-      "required": [
-        "left",
-        "right"
-      ],
       "properties": {
         "left": {
           "type": "string"
@@ -709,7 +705,7 @@
         },
         "proof": {
           "description": "Merkle proof.",
-          "$ref": "#/definitions/ReceiptContents"
+          "$ref": "#/definitions/MerkleProof"
         },
         "root": {
           "description": "Root of the Merkle tree at the time the transaction was recorded.",
