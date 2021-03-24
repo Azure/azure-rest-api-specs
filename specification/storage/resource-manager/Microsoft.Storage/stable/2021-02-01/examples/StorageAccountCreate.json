@@ -3,7 +3,7 @@
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res9101",
     "accountName": "sto4445",
-    "api-version": "2020-08-01-preview",
+    "api-version": "2021-02-01",
     "parameters": {
       "sku": {
         "name": "Standard_GRS"
@@ -15,6 +15,13 @@
         "name": "losangeles001"
       },
       "properties": {
+        "keyPolicy": {
+          "keyExpirationPeriodInDays": 20
+        },
+        "sasPolicy": {
+          "sasExpirationPeriod": "1.15:59:59",
+          "expirationAction": "Log"
+        },
         "isHnsEnabled": true,
         "allowBlobPublicAccess": false,
         "minimumTlsVersion": "TLS1_2",
@@ -57,6 +64,17 @@
           "name": "losangeles001"
         },
         "properties": {
+          "keyPolicy": {
+            "keyExpirationPeriodInDays": 20
+          },
+          "sasPolicy": {
+            "sasExpirationPeriod": "1.15:59:59",
+            "expirationAction": "Log"
+          },
+          "keyCreationTime": {
+            "key1": "2021-03-18T04:42:22.4322836Z",
+            "key2": "2021-03-18T04:42:22.4322836Z"
+          },
           "isHnsEnabled": true,
           "allowBlobPublicAccess": false,
           "minimumTlsVersion": "TLS1_2",

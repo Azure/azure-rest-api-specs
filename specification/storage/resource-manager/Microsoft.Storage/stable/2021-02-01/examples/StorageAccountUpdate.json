@@ -3,10 +3,17 @@
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res9407",
     "accountName": "sto8596",
-    "api-version": "2020-08-01-preview",
+    "api-version": "2021-02-01",
     "monitor": "true",
     "parameters": {
       "properties": {
+        "keyPolicy": {
+          "keyExpirationPeriodInDays": 20
+        },
+        "sasPolicy": {
+          "sasExpirationPeriod": "1.15:59:59",
+          "expirationAction": "Log"
+        },
         "allowBlobPublicAccess": false,
         "minimumTlsVersion": "TLS1_2",
         "allowSharedKeyAccess": true,
@@ -48,6 +55,17 @@
         "location": "eastus2(stage)",
         "name": "sto8596",
         "properties": {
+          "keyPolicy": {
+            "keyExpirationPeriodInDays": 20
+          },
+          "sasPolicy": {
+            "sasExpirationPeriod": "1.15:59:59",
+            "expirationAction": "Log"
+          },
+          "keyCreationTime": {
+            "key1": "2021-03-18T04:42:22.4322836Z",
+            "key2": "2021-03-18T04:42:22.4322836Z"
+          },
           "isHnsEnabled": true,
           "allowBlobPublicAccess": false,
           "minimumTlsVersion": "TLS1_2",
