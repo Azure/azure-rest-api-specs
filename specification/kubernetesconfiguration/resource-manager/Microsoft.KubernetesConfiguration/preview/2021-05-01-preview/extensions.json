@@ -86,6 +86,12 @@
               "$ref": "#/definitions/Extension"
             }
           },
+          "200": {
+            "description": "Request received successfully for an existing resource.",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -563,10 +569,6 @@
               "x-nullable": true,
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
             },
-            "identity": {
-              "description": "Identity of the Extension resource",
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
-            },
             "identityLocation": {
               "type": "string",
               "description": "Location of the identity - same as that of the parent resource."
@@ -587,6 +589,10 @@
               "x-nullable": true
             }
           }
+        },
+        "identity": {
+          "description": "Identity of the Extension resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
         },
         "systemData": {
           "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
