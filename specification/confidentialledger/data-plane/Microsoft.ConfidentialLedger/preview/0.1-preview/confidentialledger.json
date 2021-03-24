@@ -748,12 +748,15 @@
     "TransactionReceipt": {
       "description": "A receipt certifying the transaction at the specified id.",
       "required": [
-        "receipt",
+        "state",
         "transactionId"
       ],
       "properties": {
         "receipt": {
           "$ref": "#/definitions/ReceiptContents"
+        },
+        "state": {
+          "$ref": "#/definitions/LedgerQueryState"
         },
         "transactionId": {
           "$ref": "#/definitions/TransactionId"
