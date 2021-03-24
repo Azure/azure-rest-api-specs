@@ -16,6 +16,7 @@ no-namespace-folders: true
 clear-output-folder: true
 batch:
   - tag: package-2020-07-15-privatepreview
+  - tag: package-2021-03-15-preview
   - multiapiscript: true
 ```
 
