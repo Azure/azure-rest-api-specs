@@ -30,10 +30,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../2020-11-01/Compute.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Quotas.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../2020-11-01/Compute.json#/parameters/LocationParameter"
+            "$ref": "Quotas.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Quotas.json#/parameters/QuotaParameter"
@@ -71,10 +71,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../2020-11-01/Compute.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Quotas.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../2020-11-01/Compute.json#/parameters/LocationParameter"
+            "$ref": "Quotas.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Quotas.json#/parameters/QuotaParameter"
@@ -115,10 +115,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../2020-11-01/Compute.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Quotas.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../2020-11-01/Compute.json#/parameters/LocationParameter"
+            "$ref": "Quotas.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Quotas.json#/parameters/QuotaParameter"
@@ -155,10 +155,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../2020-11-01/Compute.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Quotas.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../2020-11-01/Compute.json#/parameters/LocationParameter"
+            "$ref": "Quotas.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Quotas.json#/parameters/ApiVersionParameter"
@@ -191,7 +191,7 @@
       },
       "allOf": [
         {
-          "$ref": "../2020-11-01/Compute.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -265,15 +265,56 @@
           }
         }
       }
+    },
+    "Resource": {
+      "description": "Base resource object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "ID of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "readOnly": true,
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "description": "Type of Resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "description": "Client API Version.",
       "required": true,
       "type": "string"
+    },
+    "LocationParameter": {
+      "description": "Location of the resource.",
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "QuotaParameter": {
       "description": "Name of the quota.",

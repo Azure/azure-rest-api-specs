@@ -39,7 +39,6 @@ input-file:
     - Microsoft.Compute.Admin/preview/2018-07-30-preview/Disks.json
     - Microsoft.Compute.Admin/preview/2018-07-30-preview/DiskMigrationJobs.json
     - Microsoft.Compute.Admin/stable/2020-11-01/Features.json
-    - Microsoft.Compute.Admin/stable/2020-11-01/Compute.json
     - Microsoft.Compute.Admin/stable/2021-01-01/Quotas.json
 ```
 
@@ -70,7 +69,6 @@ input-file:
     - Microsoft.Compute.Admin/preview/2018-07-30-preview/Disks.json
     - Microsoft.Compute.Admin/preview/2018-07-30-preview/DiskMigrationJobs.json
     - Microsoft.Compute.Admin/stable/2020-11-01/Features.json
-    - Microsoft.Compute.Admin/stable/2020-11-01/Compute.json
     - Microsoft.Compute.Admin/stable/2021-01-01/Quotas.json
 ```
 
