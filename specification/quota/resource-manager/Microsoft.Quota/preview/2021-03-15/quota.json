@@ -1037,17 +1037,24 @@
         },
         "properties": {
           "type": "object",
-          "dimension": {
-            "type": "string",
-            "description": "The dimension name."
-          },
-          "dimensionDisplayName": {
-            "type": "string",
-            "description": "The dimension display name."
-          },
-          "value": {
-            "$ref": "#/definitions/QuotaTypeInformationDimension2List"
-          }
+          "$ref": "#/definitions/QuotaDimensionInformation"
+        }
+      }
+    },
+    "QuotaDimensionInformation": {
+      "type": "object",
+      "description": "Quota dimension properties",
+      "properties": {
+        "dimension": {
+          "type": "string",
+          "description": "The dimension name."
+        },
+        "dimensionDisplayName": {
+          "type": "string",
+          "description": "The dimension display name."
+        },
+        "value": {
+          "$ref": "#/definitions/QuotaTypeInformationDimension2List"
         }
       }
     },
