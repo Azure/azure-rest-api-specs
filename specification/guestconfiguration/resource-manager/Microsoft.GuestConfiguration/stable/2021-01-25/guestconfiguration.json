@@ -766,6 +766,163 @@
         "consumes": [
           "application/json"
         ]
+      },
+	  "delete": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignmentsVMSS_Delete",
+        "description": "Delete a guest configuration assignment for VMSS",
+        "x-ms-examples": {
+          "Delete an guest configuration assignment for VMSS": {
+            "$ref": "./examples/deleteGuestConfigurationVMSSAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The guest configuration assignment name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VMSSNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+      "get": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignmentsVMSS_List",
+        "description": "List all guest configuration assignments for VMSS.",
+        "x-ms-examples": {
+          "List all guest configuration assignments for VMSS": {
+            "$ref": "./examples/listVMSSGuestConfigurationAssignments.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VMSSNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports": {
+      "get": {
+        "tags": [
+          "GuestConfigurationAssignmentReports"
+        ],
+        "operationId": "GuestConfigurationAssignmentReportsVMSS_List",
+        "description": "List all reports for the VMSS guest configuration assignment, latest report first.",
+        "x-ms-examples": {
+          "List all guest configuration assignments for VMSS": {
+            "$ref": "./examples/listAllVMSSGuestConfigurationAssignmentReports.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The guest configuration assignment name."
+          },          
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VMSSNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. This response is due one of these two reasons: 1. Reports were returned successfully 2. Guest configuration assignment was found, but VM is not registered yet, hence no reports returned.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentReportList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports/{id}": {
