@@ -1496,11 +1496,29 @@
         },
         "privateEndpointNetworkPolicies": {
           "type": "string",
-          "description": "Enable or Disable apply network policies on private end point in the subnet."
+          "default": "Enabled",
+          "description": "Enable or Disable apply network policies on private end point in the subnet.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkPrivateEndpointNetworkPolicies",
+            "modelAsString": true
+          }
         },
         "privateLinkServiceNetworkPolicies": {
           "type": "string",
-          "description": "Enable or Disable apply network policies on private link service in the subnet."
+          "default": "Enabled",
+          "description": "Enable or Disable apply network policies on private link service in the subnet.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkPrivateLinkServiceNetworkPolicies",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the subnet."
@@ -1701,6 +1719,11 @@
         "dhcpOptions": {
           "$ref": "#/definitions/DhcpOptions",
           "description": "The dhcpOptions that contains an array of DNS servers available to VMs deployed in the virtual network."
+        },
+        "flowTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The FlowTimeout value (in minutes) for the Virtual Network"
         },
         "subnets": {
           "type": "array",
