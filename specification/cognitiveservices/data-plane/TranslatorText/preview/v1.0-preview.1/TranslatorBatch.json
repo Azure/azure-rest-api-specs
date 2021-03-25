@@ -160,8 +160,9 @@
             "description": "Statuses to use in filtering",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Status"
-            }
+              "type": "string"
+            },
+            "maxLength": 5
           },
           {
             "in": "query",
@@ -622,8 +623,9 @@
             "description": "Statuses to use in filtering",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Status"
-            }
+              "type": "string"
+            },
+            "maxLength": 5
           },
           {
             "in": "query",
@@ -1088,46 +1090,6 @@
         }
       }
     },
-    "Status": {
-      "description": "List of possible statuses for job or document",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "Failed",
-        "Cancelled",
-        "Cancelling",
-        "ValidationFailed"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "Status",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "NotStarted"
-          },
-          {
-            "value": "Running"
-          },
-          {
-            "value": "Succeeded"
-          },
-          {
-            "value": "Failed"
-          },
-          {
-            "value": "Cancelled"
-          },
-          {
-            "value": "Cancelling"
-          },
-          {
-            "value": "ValidationFailed"
-          }
-        ]
-      }
-    },
     "ErrorCodeV2": {
       "description": "Enums containing high level error codes.",
       "enum": [
@@ -1304,7 +1266,9 @@
           "example": "2020-01-20T11:41:07.7010000-08:00"
         },
         "status": {
-          "$ref": "#/definitions/Status"
+          "description": "Overall Operation status",
+          "type": "string",
+          "example": "Succeeded"
         },
         "error": {
           "$ref": "#/definitions/ErrorV2"
@@ -1370,7 +1334,8 @@
           "example": "2020-01-20T11:41:07.7010000-08:00"
         },
         "status": {
-          "$ref": "#/definitions/Status"
+          "description": "Status / progress of the translation of the Document.",
+          "type": "string"
         },
         "to": {
           "description": "To language",
