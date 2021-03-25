@@ -105,6 +105,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-trenton
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js resourcegraph/resource-manager
 ```
 
 ## C#
@@ -158,27 +161,8 @@ See configuration in [readme.azureresourceschema.md](./readme.azureresourceschem
 
 These settings apply only when `--cli` is specified on the command line.
 
-``` yaml $(cli)
-cli:
-  cli-name: ResourceGraph
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.ResourceGraph
-  package-name: azure-mgmt-ResourceGraph
-  clear-output-folder: false
-```
-
-## Terraform
-
-These settings apply only when `--terraform` is specified on the command line.
-
-## cli
-
-These settings apply only when `--cli` is specified on the command line.
-
-``` yaml $(cli)
-cli:
+``` yaml $(terraform)
+terraform:
   cli-name: ResourceGraph
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
