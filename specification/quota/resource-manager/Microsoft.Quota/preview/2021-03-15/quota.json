@@ -965,10 +965,12 @@
           "type": "string",
           "description": "Resource type"
         },
-        "properties": {
-          "description": "The quota dimensions for the resource provider.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ResourceProviderTemplateProperties"
+        "dimensions": {
+          "description": "The resource provider templates",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderTemplate"
+          }
         }
       }
     },
