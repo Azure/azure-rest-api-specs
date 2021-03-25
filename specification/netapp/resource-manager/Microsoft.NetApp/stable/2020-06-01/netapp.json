@@ -4416,9 +4416,29 @@
           "description": "Label for backup"
         },
         "backupType": {
+          "title": "backupType",
           "type": "string",
           "readOnly": true,
-          "description": "Type of backup adhoc or scheduled"
+          "description": "Type of backup Manual or Scheduled",
+          "enum": [
+            "Manual",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "backupType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Manual",
+                "description": "Manual backup"
+              },
+              {
+                "value": "Scheduled",
+                "description": "Scheduled backup"
+              }
+            ]
+          },
+          "example": "Manual"
         }
       }
     },
