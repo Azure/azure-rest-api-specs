@@ -435,6 +435,18 @@
           "format": "int32",
           "description": "The idle timeout of the public IP address."
         },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the network interface when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
+        },
         "resourceGuid": {
           "readOnly": true,
           "type": "string",
