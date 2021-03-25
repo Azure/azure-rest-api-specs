@@ -44,7 +44,7 @@ directive:
   - suppress: EnumInsteadOfBoolean
     from: signalr.json
     where: $.definitions.Operation.properties.isDataAction
-    reason:  The boolean properties 'isDataAction' is a standard property for Azuer Operatoins.
+    reason:  The boolean properties 'isDataAction' is a standard property for Azure Operations.
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
   - suppress: AvoidNestedProperties
