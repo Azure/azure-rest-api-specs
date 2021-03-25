@@ -67,13 +67,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/generateSASuploadUri": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/getSASUriForUpload": {
       "post": {
         "tags": [
           "Operations"
         ],
-        "description": "Returns a azure storage URI to upload certificate/module",
-        "operationId": "GenerateSASUploadUri",
+        "description": "Returns a azure storage URI to upload certificate or module temporarily",
+        "operationId": "getSASUriForUpload",
         "parameters": [
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
@@ -199,7 +199,7 @@
           "items": {
             "$ref": "#/definitions/RunbookGalleryItem"
           },
-          "description": "List of Gallery items suported by the Automation resource provider."
+          "description": "List of Gallery items supported by the Automation resource provider."
         }
       },
       "description": "The response model for the list of Gallery items operations"
