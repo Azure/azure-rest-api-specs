@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "exclusionTestRG",
+    "migratorName": "exclusionTestMigrator",
+    "api-version": "2021-01-01-preview",
+    "exclusionTemplateName": "exclusionName",
+    "exclusion": {
+      "location": "East US",
+      "properties": {
+        "exclusionKind": "DateExclusion",
+        "description": "Explains what this exclusion does",
+        "dateForExclusion": "2018-12-10T13:45:00.000Z"
+      },
+      "tags": {
+        "tagKey1": "TagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/exclusionTestRG/providers/Wandisco.Fusion/migrators/migratorName/exclusions/exclusionName",
+        "name": "exclusionName",
+        "properties": {
+          "exclusionKind": "DateExclusion",
+          "description": "Explains what this exclusion does",
+          "dateForExclusion": "2018-12-10T13:45:00.000Z",
+          "provisioningState": "Accepted"
+        },
+        "location": "East US",
+        "type": "Wandisco.Fusion/exclusion",
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/exclusionTestRG/providers/Wandisco.Fusion/migrators/migratorName/exclusions/exclusionName",
+        "name": "exclusionName",
+        "properties": {
+          "exclusionKind": "DateExclusion",
+          "description": "Explains what this exclusion does",
+          "dateForExclusion": "2018-12-10T13:45:00.000Z",
+          "provisioningState": "Accepted"
+        },
+        "location": "East US",
+        "type": "Wandisco.Fusion/exclusion",
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    }
+  }
+}
