@@ -227,7 +227,6 @@ input-file:
 - Microsoft.Compute/stable/2019-09-30/gallery.json
 - Microsoft.Compute/stable/2019-09-30/sharedGallery.json
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
-- 
 ```
 
 ### Tag: package-2021-03-01-only
