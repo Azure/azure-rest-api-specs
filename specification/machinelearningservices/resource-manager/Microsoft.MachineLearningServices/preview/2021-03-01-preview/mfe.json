@@ -5348,57 +5348,25 @@
       },
       "additionalProperties": false
     },
-    "AssetPath": {
-      "description": "Details of an AssetUri.",
+    "CodeVersion": {
+      "description": "Details of an RegisteredCode",
       "required": [
         "path"
       ],
-      "type": "object",
-      "properties": {
-        "path": {
-          "description": "The path of file/directory.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
-        },
-        "isDirectory": {
-          "description": "Whether the path defines a directory or a single file.",
-          "type": "boolean"
-        }
-      },
-      "additionalProperties": false
-    },
-    "AssetGenerator": {
-      "description": "The target that initiated generation of this asset",
-      "enum": [
-        "User",
-        "System"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "AssetGenerator",
-        "modelAsString": true
-      },
-      "additionalProperties": false
-    },
-    "CodeVersion": {
-      "description": "Details of an RegisteredCode",
       "type": "object",
       "properties": {
         "datastoreId": {
           "description": "The asset datastoreId",
           "type": "string"
         },
-        "assetPath": {
-          "description": "DEPRECATED - use Microsoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.Path instead",
-          "$ref": "#/definitions/AssetPath"
-        },
         "path": {
           "description": "The path of the file/directory.",
+          "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
-        "generatedBy": {
-          "description": "If the name version are system generated (anonymous registration) or user generated.",
-          "$ref": "#/definitions/AssetGenerator",
+        "isAnonymous": {
+          "description": "If the name version are system generated (anonymous registration).",
+          "type": "boolean",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6188,6 +6156,9 @@
     },
     "DataVersion": {
       "description": "Details of an DatasetDto",
+      "required": [
+        "path"
+      ],
       "type": "object",
       "properties": {
         "datasetType": {
@@ -6198,17 +6169,14 @@
           "description": "The asset datastoreId",
           "type": "string"
         },
-        "assetPath": {
-          "description": "DEPRECATED - use Microsoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.Path instead",
-          "$ref": "#/definitions/AssetPath"
-        },
         "path": {
           "description": "The path of the file/directory.",
+          "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
-        "generatedBy": {
-          "description": "If the name version are system generated (anonymous registration) or user generated.",
-          "$ref": "#/definitions/AssetGenerator",
+        "isAnonymous": {
+          "description": "If the name version are system generated (anonymous registration).",
+          "type": "boolean",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6541,9 +6509,9 @@
           "description": "Defines configuration specific to inference.",
           "$ref": "#/definitions/InferenceContainerProperties"
         },
-        "generatedBy": {
-          "description": "If the name version are system generated (anonymous registration) or user generated.",
-          "$ref": "#/definitions/AssetGenerator",
+        "isAnonymous": {
+          "description": "If the name version are system generated (anonymous registration).",
+          "type": "boolean",
           "x-ms-mutability": [
             "create",
             "read"
@@ -8178,6 +8146,9 @@
     },
     "ModelVersion": {
       "description": "Details of an ModelDto",
+      "required": [
+        "path"
+      ],
       "type": "object",
       "properties": {
         "stage": {
@@ -8198,17 +8169,14 @@
           "description": "The asset datastoreId",
           "type": "string"
         },
-        "assetPath": {
-          "description": "DEPRECATED - use Microsoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.Path instead",
-          "$ref": "#/definitions/AssetPath"
-        },
         "path": {
           "description": "The path of the file/directory.",
+          "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
-        "generatedBy": {
-          "description": "If the name version are system generated (anonymous registration) or user generated.",
-          "$ref": "#/definitions/AssetGenerator",
+        "isAnonymous": {
+          "description": "If the name version are system generated (anonymous registration).",
+          "type": "boolean",
           "x-ms-mutability": [
             "create",
             "read"
