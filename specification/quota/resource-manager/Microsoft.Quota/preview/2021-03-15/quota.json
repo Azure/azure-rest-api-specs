@@ -1002,6 +1002,27 @@
         }
       }
     },
+    "QuotaTypeInformationDimension1List": {
+      "description": "Quota types information list.",
+      "type": "object",
+      "properties": {
+        "dimension": {
+          "type": "string",
+          "description": "The display name"
+        },
+        "dimensionDisplayName": {
+          "type": "string",
+          "description": "The property value"
+        },
+        "value": {
+          "description": "The quota type information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaTypeInformationDimension1"
+          }
+        }
+      }
+    },
     "QuotaTypeInformationDimension1": {
       "type": "object",
       "description": "Quota type information.",
@@ -1024,27 +1045,6 @@
         },
         "value": {
           "$ref": "#/definitions/QuotaTypeInformationDimension2List"
-        }
-      }
-    },
-    "QuotaTypeInformationDimension1List": {
-      "description": "Quota types information list.",
-      "type": "object",
-      "properties": {
-        "dimension": {
-          "type": "string",
-          "description": "The display name"
-        },
-        "dimensionDisplayName": {
-          "type": "string",
-          "description": "The property value"
-        },
-        "value": {
-          "description": "The quota type information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QuotaTypeInformationDimension1"
-          }
         }
       }
     },
@@ -1089,7 +1089,7 @@
           "description": "The quota type information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/QuotaTypeInformationDimension3"
+            "$ref": "#/definitions/QuotaTypeInformationDimension2"
           }
         }
       }
@@ -1115,7 +1115,7 @@
           "description": "The dimension display name."
         },
         "value": {
-          "$ref": "#/definitions/QuotaTypeInformationDimension3List"
+          "$ref": "#/definitions/QuotaTypeInformationDimension4List"
         }
       }
     },
@@ -1135,7 +1135,7 @@
           "description": "The quota type information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/QuotaTypeInformationDimension4"
+            "$ref": "#/definitions/QuotaTypeInformationDimension3"
           }
         }
       }
