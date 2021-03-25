@@ -12,6 +12,7 @@ go:
 
 ```yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2021-03-15-preview
   - tag: package-2020-07-15-privatepreview
 ```
 
