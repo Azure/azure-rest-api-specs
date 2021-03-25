@@ -42,6 +42,9 @@
         "x-ms-examples": {
           "CreateClusterExample": {
             "$ref": "./examples/CreateClusterExample.json"
+          },
+          "CreateClusterPrivateLinkExample": {
+            "$ref": "./examples/CreateClusterPrivateLinkExample.json"
           }
         },
         "parameters": [
@@ -105,6 +108,9 @@
         "x-ms-examples": {
           "UpdateClusterExample": {
             "$ref": "./examples/UpdateClusterExample.json"
+          },
+          "UpdateClusterPrivateLinkExample": {
+            "$ref": "./examples/UpdateClusterPrivateLinkExample.json"
           }
         },
         "parameters": [
@@ -614,7 +620,7 @@
             "modelAsString": true
           }
         },
-        "enabledForPrivateLink": {
+        "privateLinkEnabled": {
           "type": "boolean",
           "default": false,
           "description": "Boolean property which represents if a connected cluster resource has been enabled for private link."
@@ -699,7 +705,7 @@
     "ConnectedClusterPatchProperties": {
       "type": "object",
       "properties": {
-        "enabledForPrivateLink": {
+        "privateLinkEnabled": {
           "type": "boolean",
           "default": false,
           "description": "Boolean property which represents if a connected cluster resource has been enabled for private link."
