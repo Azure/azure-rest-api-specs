@@ -184,7 +184,7 @@
           "Webhook"
         ],
         "operationId": "Webhook_CreateOrUpdate",
-        "description": "Create the webhook identified by webhook name.",
+        "description": "Create the webhook identified by webhook name. In case of webhook creation, uri is randomly generated and returned in response if uri property is not supplied in request properties.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/webhookoperations"
         },
@@ -517,7 +517,7 @@
         "name",
         "properties"
       ],
-      "description": "The parameters supplied to the create or update webhook operation."
+      "description": "The parameters supplied to the create or update webhook operation. Note: if uri is not supplied, a random uri is generated and returned in response"
     },
     "WebhookCreateOrUpdateProperties": {
       "properties": {
@@ -527,7 +527,8 @@
         },
         "uri": {
           "type": "string",
-          "description": "Gets or sets the uri."
+          "description": "Sets the uri for webhook as the supplied value if it is not null or empty.",
+          "x-nullable": true
         },
         "expiryTime": {
           "type": "string",

@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2020-01-13-preview
+tag: package-2021-04-01
 ```
 
 ### Tag: package-2015-10
@@ -263,6 +263,7 @@ input-file:
 - Microsoft.Automation/stable/2021-04-01/job.json
 - Microsoft.Automation/stable/2021-04-01/operations.json
 - Microsoft.Automation/stable/2021-04-01/runbook.json
+- Microsoft.Automation/stable/2021-04-01/softwareUpdateConfiguration.json
 - Microsoft.Automation/stable/2021-04-01/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/stable/2021-04-01/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/stable/2021-04-01/webhook.json
