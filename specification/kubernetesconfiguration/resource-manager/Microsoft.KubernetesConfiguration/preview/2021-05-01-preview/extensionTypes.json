@@ -37,18 +37,18 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}": {
       "get": {
         "description": "Get Extension Type details",
-        "operationId": "ExtensionType_Get",
+        "operationId": "ClusterExtensionType_Get",
         "x-ms-examples": {
           "Get Extension Type": {
-            "$ref": "./examples/GetExtensionTypeWithName.json"
+            "$ref": "./examples/ClusterExtensionType.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterRpParameter"
@@ -60,7 +60,7 @@
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ExtensionTypeNameParameter"
@@ -76,7 +76,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -84,19 +84,19 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
       "get": {
-        "description": "Get Extension Type details",
-        "operationId": "ExtensionTypes_Get",
+        "description": "Get Extension Types",
+        "operationId": "ClusterExtensionTypes_List",
         "x-ms-examples": {
           "Get Extension Type": {
-            "$ref": "./examples/GetExtensionTypes.json"
+            "$ref": "./examples/ClusterExtensionTypes.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterRpParameter"
@@ -108,7 +108,7 @@
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -121,7 +121,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -136,34 +136,37 @@
           "ExtensionType"
         ],
         "description": "List all Extension Types",
-        "operationId": "ExtensionTypes_List",
+        "operationId": "LocationExtensionTypes_List",
         "x-ms-examples": {
           "List Extension Types": {
-            "$ref": "./examples/ListExtensionTypes.json"
+            "$ref": "./examples/LocationExtensionTypes.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterRpParameter"
           },
           {
             "$ref": "#/parameters/ExtensionLocationParameter"
           },
           {
-            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ExtensionType"
+              "$ref": "#/definitions/ExtensionTypeList"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -176,7 +179,6 @@
   "definitions": {
     "ExtensionTypeList": {
       "description": "List Extension Types",
-      "type": "array",
       "properties": {
         "value": {
           "description": "The list of Extension Types",
@@ -203,16 +205,9 @@
           "description": "Describes the Resource Type properties."
         },
         "systemData": {
-          "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SystemData",
-          "readOnly": true,
-          "description": "Metadata pertaining to creation and last modification of the resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ],
       "description": "Represents an Extension Type."
     },
     "ExtensionTypeProperties": {
@@ -301,7 +296,8 @@
       "in": "path",
       "description": "extension location",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "ExtensionTypeNameParameter": {
       "name": "extensionTypeName",
