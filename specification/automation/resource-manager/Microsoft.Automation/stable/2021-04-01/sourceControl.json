@@ -493,12 +493,23 @@
         },
         "securityToken": {
           "description": "The authorization token for the repo of the source control.",
+          "x-nullable": true,
           "$ref": "#/definitions/SourceControlSecurityTokenProperties"
         },
         "description": {
           "type": "string",
           "maxLength": 512,
           "description": "The user description of the source control."
+        },
+        "OAuthCallbackComplete": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag indicating whether the OAuth callback is complete. If this is false/null, securityToken should be present"
+        },
+        "OAuthCallbackInfo": {
+          "description": "The authorization token for the repo of the source control.",
+          "x-nullable": true,
+          "$ref": "#/definitions/OAuthCallbackInfo"
         }
       },
       "description": "The properties of the create source control operation."
@@ -526,6 +537,20 @@
             "name": "tokenType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "OAuthCallbackInfo": {
+      "properties": {
+        "callbackUri": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "The callback uri for source control connection."
+        },
+        "authUri": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "The auth uri for source control connection."
         }
       }
     }
