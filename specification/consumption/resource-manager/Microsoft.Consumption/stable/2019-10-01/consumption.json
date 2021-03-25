@@ -1596,7 +1596,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/events": {
+    "/{scope}/providers/Microsoft.Consumption/events": {
       "get": {
         "tags": [
           "Events"
@@ -1609,15 +1609,12 @@
         "x-ms-examples": {
           "EventsListByBillingProfile": {
             "$ref": "./examples/EventsListByBillingProfile.json"
+          },
+          "EventsList-Modern": {
+            "$ref": "./examples/EventsListByCustomer.json"
           }
         },
         "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileIdParameter"
-          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -1626,6 +1623,9 @@
           },
           {
             "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeEventsParameter"
           }
         ],
         "responses": {
@@ -1647,7 +1647,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/lots": {
+    "/{scope}/providers/Microsoft.Consumption/lots": {
       "get": {
         "tags": [
           "Lots"
@@ -1658,16 +1658,16 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "EventsListByBillingProfile": {
+          "LotsListByBillingProfile": {
             "$ref": "./examples/LotsListByBillingProfile.json"
+          },
+          "LotsList-Modern": {
+            "$ref": "./examples/LotsListByCustomer.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileIdParameter"
+            "$ref": "#/parameters/scopeLotsParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1692,7 +1692,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/credits/balanceSummary": {
+    "/{scope}/providers/Microsoft.Consumption/credits/balanceSummary": {
       "get": {
         "tags": [
           "Credits"
@@ -1703,19 +1703,19 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "CreditSummaryByBillingProfile": {
+          "CreditsBalanceSummaryByBillingProfile": {
             "$ref": "./examples/CreditSummaryByBillingProfile.json"
+          },
+          "CreditsBalanceSummary-Modern": {
+            "$ref": "./examples/CreditSummaryByCustomer.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileIdParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeCreditsParameter"
           }
         ],
         "responses": {
@@ -4848,6 +4848,16 @@
     "EventProperties": {
       "description": "The event properties.",
       "properties": {
+        "creditCurrency": {
+          "description": "Credit Currency",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "Billing Currency.",
+          "type": "string",
+          "readOnly": true
+        },
         "transactionDate": {
           "description": "Transaction date.",
           "type": "string",
@@ -4864,25 +4874,50 @@
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
+        "newCreditInBillingCurrency": {
+          "description": "Current balance.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
         "adjustments": {
           "description": "Adjustments amount.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "adjustmentsInBillingCurrency": {
+          "description": "Current balance.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
         },
         "creditExpired": {
           "description": "Credit expired.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
+        "creditExpiredInBillingCurrency": {
+          "description": "Current balance.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
         "charges": {
           "description": "Charges amount.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
+        "chargesInBillingCurrency": {
+          "description": "Current balance.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
         "closedBalance": {
           "description": "Closed balance.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "closedBalanceInBillingCurrency": {
+          "description": "Current balance.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
         },
         "eventType": {
           "description": "The type of event.",
@@ -4905,6 +4940,11 @@
           "description": "Invoice number.",
           "type": "string",
           "readOnly": true
+        },
+        "reseller": {
+          "description": "Reseller details.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
         }
       }
     },
@@ -4945,15 +4985,35 @@
     "LotProperties": {
       "description": "The lot properties.",
       "properties": {
+        "creditCurrency": {
+          "description": "Credit Currency",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "Billing Currency.",
+          "type": "string",
+          "readOnly": true
+        },
         "originalAmount": {
           "description": "Original amount.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
+        "originalAmountInBillingCurrency": {
+          "description": "Current balance.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
         "closedBalance": {
           "description": "Closed balance.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "closedBalanceInBillingCurrency": {
+          "description": "Current balance.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
         },
         "source": {
           "description": "Lot source.",
@@ -4984,6 +5044,11 @@
           "description": "PO number.",
           "type": "string",
           "readOnly": true
+        },
+        "reseller": {
+          "description": "Reseller details.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
         }
       }
     },
@@ -5007,6 +5072,16 @@
       "description": "The properties of the credit summary.",
       "type": "object",
       "properties": {
+        "creditCurrency": {
+          "description": "Credit Currency",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "Billing Currency.",
+          "type": "string",
+          "readOnly": true
+        },
         "balanceSummary": {
           "description": "Summary of balances associated with this credit summary.",
           "readOnly": true,
@@ -5026,6 +5101,11 @@
           "description": "Pending eligible charges.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "reseller": {
+          "description": "Reseller details.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
         }
       }
     },
@@ -5041,6 +5121,16 @@
           "description": "Current balance.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "estimatedBalanceInBillingCurrency": {
+          "description": "Current balance.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
+        "currentBalanceInBillingCurrency": {
+          "description": "Current balance.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
         }
       }
     },
@@ -5057,6 +5147,42 @@
           "type": "number",
           "format": "decimal",
           "description": "Amount."
+        }
+      }
+    },
+    "AmountWithExchangeRate": {
+      "description": "Reseller details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/amount"
+        }
+      ],
+      "properties": {
+        "exchangeRate": {
+          "description": "Exchange Rate.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "exchangeRateMonth": {
+          "description": "Exchange rate month.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "Reseller": {
+      "description": "Reseller details",
+      "properties": {
+        "resellerId": {
+          "description": "Reseller id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resellerDescription": {
+          "description": "Reseller Description.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5171,6 +5297,33 @@
       "required": true,
       "type": "string",
       "description": "The scope associated with charges operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope. For department and enrollment accounts, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. Also, Modern Commerce Account scopes are '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeCreditsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with credits operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for Billing Profile scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeEventsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with events operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for Billing Profile scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeLotsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with Lots operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfile/{billingProfileId}' for Billing Profile scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
