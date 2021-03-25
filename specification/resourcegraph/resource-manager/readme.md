@@ -161,8 +161,8 @@ See configuration in [readme.azureresourceschema.md](./readme.azureresourceschem
 
 These settings apply only when `--cli` is specified on the command line.
 
-``` yaml $(terraform)
-terraform:
+``` yaml $(cli)
+cli:
   cli-name: ResourceGraph
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -172,17 +172,17 @@ terraform:
   clear-output-folder: false
 ```
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
+``` yaml $(terraform)
+terraform:
   cli_name: ResourceGraph
   azure_arm: true
   license_header: MICROSOFT_MIT_NO_VERSION
   payload_flattening_threshold: 2
   namespace: azure.mgmt.ResourceGraph
   package_name: azure-mgmt-ResourceGraph
-  clear_output_folder: false
+  clear-output-folder: false
 ```
