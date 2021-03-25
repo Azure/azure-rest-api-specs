@@ -151,16 +151,13 @@
             "items": {
               "format": "uuid",
               "type": "string"
-            },
-            "collectionFormat": "csv"
+            }
           },
           {
             "in": "query",
             "name": "status",
             "description": "Status to use in filtering",
-            "schema": {
-              "$ref": "#/definitions/Status"
-            }
+            "type": "string"
           },
           {
             "in": "query",
@@ -180,7 +177,10 @@
             "in": "query",
             "name": "$orderBy",
             "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc', 'CreatedDateTimeUtc desc')",
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -608,16 +608,13 @@
             "items": {
               "format": "uuid",
               "type": "string"
-            },
-            "collectionFormat": "csv"
+            }
           },
           {
             "in": "query",
             "name": "status",
             "description": "Status to use in filtering",
-            "schema": {
-              "$ref": "#/definitions/Status"
-            }
+            "type": "string"
           },
           {
             "in": "query",
@@ -637,7 +634,10 @@
             "in": "query",
             "name": "$orderBy",
             "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc', 'CreatedDateTimeUtc desc')",
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
