@@ -4115,7 +4115,7 @@
             "type": "string",
             "enum": [
               "Managed",
-              "AKS",
+              "K8S",
               "AzureMLCompute"
             ],
             "x-ms-enum": {
@@ -8280,15 +8280,27 @@
       },
       "additionalProperties": false
     },
-    "ScaleTypeMode": {
+    "EndpointComputeType": {
       "enum": [
-        "Automatic",
-        "Manual",
-        "None"
+        "Managed",
+        "K8S",
+        "AzureMLCompute"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ScaleTypeMode",
+        "name": "EndpointComputeType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "ScaleType": {
+      "enum": [
+        "Auto",
+        "Manual"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScaleType",
         "modelAsString": true
       },
       "additionalProperties": false
@@ -8484,6 +8496,24 @@
           }
         }
       },
+    "K8sOnlineDeployment": {
+      "required": [
+        "model"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnlineDeployment"
+        }
+      ],
+      "properties": {
+        "containerResourceRequirements": {
+          "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
+        }
+      },
+      "x-ms-discriminator-value": "K8S",
+      "additionalProperties": false
+    },
       "additionalProperties": false
     },
     "OnlineDeploymentTrackedResource": {
@@ -8543,8 +8573,21 @@
         "scaleSettings": {
           "$ref": "#/definitions/OnlineDeploymentScaleSettings"
         },
-        "deploymentConfiguration": {
-          "$ref": "#/definitions/DeploymentConfigurationBase"
+    "K8sPartialOnlineDeployment": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartialOnlineDeployment"
+        }
+      ],
+      "properties": {
+        "containerResourceRequirements": {
+          "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
+        }
+      },
+      "x-ms-discriminator-value": "K8S",
+      "additionalProperties": false
+    },
         }
       },
       "additionalProperties": false
