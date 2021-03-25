@@ -10523,6 +10523,13 @@
         }
       }
     },
+    "ParquetConfiguration": {
+      "xml": {
+        "name": "ParquetTextConfiguration"
+      },
+      "description": "parquet configuration",
+      "type": "object"
+    },
     "ArrowField": {
       "xml": {
         "name": "Field"
@@ -11050,6 +11057,9 @@
         },
         "ArrowConfiguration": {
           "$ref": "#/definitions/ArrowConfiguration"
+        },
+        "ParquetTextConfiguration": {
+          "$ref": "#/definitions/ParquetConfiguration"
         }
       }
     },
@@ -11073,7 +11083,8 @@
       "enum": [
         "delimited",
         "json",
-        "arrow"
+        "arrow",
+        "parquet"
       ],
       "x-ms-enum": {
         "name": "QueryFormatType",
