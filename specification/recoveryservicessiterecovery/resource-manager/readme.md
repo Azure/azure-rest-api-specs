@@ -28,7 +28,22 @@ directive:
 
   - from: service.json 
     suppress: R4010
-	reason: Testing purpose
+    reason: Testing purpose
+
+  - from: service.json
+    suppress:
+    - R4009
+    reason: suppressing system data for 2021-02-10
+
+  - from: service.json
+    suppress:
+      - R4010
+    reason: suppressing default error response as ASR is an old service and implements error response in a different format.
+
+  - from: service.json
+    suppress:
+      - R4011
+    reason: service implements 204 for delete and DeleteOperationResponses error was falsely raised.
 ```
 
 ## Configuration
