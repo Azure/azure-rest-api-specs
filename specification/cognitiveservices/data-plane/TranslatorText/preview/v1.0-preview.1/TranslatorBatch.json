@@ -136,7 +136,7 @@
           {
             "in": "query",
             "name": "$maxpagesize",
-            "description": "$maxpagesize is the maximum items returned in the items in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.\r\n            \r\nClients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server's default page size.",
+            "description": "$maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.\r\n            \r\nClients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server's default page size.",
             "type": "integer",
             "format": "int32",
             "default": 50,
@@ -151,13 +151,17 @@
             "items": {
               "format": "uuid",
               "type": "string"
-            }
+            },
+            "maxLength": 25
           },
           {
             "in": "query",
-            "name": "status",
-            "description": "Status to use in filtering",
-            "type": "string"
+            "name": "statuses",
+            "description": "Statuses to use in filtering",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Status"
+            }
           },
           {
             "in": "query",
@@ -180,7 +184,8 @@
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "maxLength": 1
           }
         ],
         "responses": {
@@ -593,7 +598,7 @@
           {
             "in": "query",
             "name": "$maxpagesize",
-            "description": "$maxpagesize is the maximum items returned in the items in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.\r\n            \r\nClients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server's default page size.",
+            "description": "$maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.\r\n            \r\nClients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server's default page size.",
             "type": "integer",
             "format": "int32",
             "default": 50,
@@ -608,13 +613,17 @@
             "items": {
               "format": "uuid",
               "type": "string"
-            }
+            },
+            "maxLength": 25
           },
           {
             "in": "query",
-            "name": "status",
-            "description": "Status to use in filtering",
-            "type": "string"
+            "name": "statuses",
+            "description": "Statuses to use in filtering",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Status"
+            }
           },
           {
             "in": "query",
@@ -637,7 +646,8 @@
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "maxLength": 1
           }
         ],
         "responses": {
