@@ -937,10 +937,14 @@
         }
       }
     },
-    "ResourceProviderTemplateProperties": {
+    "ResourceProviderTemplate": {
       "type": "object",
-      "description": "The resource provider template properties",
+      "description": "The resource provider resource template details",
       "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type"
+        },
         "dimensions": {
           "description": "The resource provider dimensions",
           "type": "array",
@@ -953,23 +957,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/quotaBucketProperties"
-          }
-        }
-      }
-    },
-    "ResourceProviderTemplate": {
-      "type": "object",
-      "description": "The resource provider resource template details",
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "Resource type"
-        },
-        "dimensions": {
-          "description": "The resource provider templates",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderTemplate"
           }
         }
       }
