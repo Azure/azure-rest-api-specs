@@ -4387,6 +4387,27 @@
           "$ref": "#/definitions/InventoryItemProperties"
         }
       ],
+      "properties": {
+        "osType": {
+          "description": "Gets or sets the type of the os.",
+          "$ref": "#/definitions/OsType"
+        },
+        "osName": {
+          "description": "Gets or sets os name.",
+          "type": "string"
+        },
+        "ipAddresses": {
+          "description": "Gets or sets the nic ip addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "folderPath": {
+          "description": "Gets or sets the folder path of the vm.",
+          "type": "string"
+        }
+      },
       "x-ms-discriminator-value": "VirtualMachine"
     },
     "VirtualMachineTemplateInventoryItem": {
@@ -4397,6 +4418,35 @@
           "$ref": "#/definitions/InventoryItemProperties"
         }
       ],
+      "properties": {
+        "memorySizeMB": {
+          "format": "int32",
+          "description": "Gets or sets memory size in MBs for the template.",
+          "type": "integer"
+        },
+        "numCPUs": {
+          "format": "int32",
+          "description": "Gets or sets the number of vCPUs for the template.",
+          "type": "integer"
+        },
+        "numCoresPerSocket": {
+          "format": "int32",
+          "description": "Gets or sets the number of cores per socket for the template.\r\nDefaults to 1 if unspecified.",
+          "type": "integer"
+        },
+        "osType": {
+          "description": "Gets or sets the type of the os.",
+          "$ref": "#/definitions/OsType"
+        },
+        "osName": {
+          "description": "Gets or sets os name.",
+          "type": "string"
+        },
+        "folderPath": {
+          "description": "Gets or sets the folder path of the template.",
+          "type": "string"
+        }
+      },
       "x-ms-discriminator-value": "VirtualMachineTemplate"
     },
     "VirtualNetworkInventoryItem": {
