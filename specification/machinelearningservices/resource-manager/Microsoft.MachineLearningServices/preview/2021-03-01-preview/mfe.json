@@ -4700,17 +4700,57 @@
       },
       "additionalProperties": false
     },
-    "BatchDeploymentScaleSettings": {
+    "ComputeConfiguration": {
+      "description": "Compute binding definition.",
       "type": "object",
       "properties": {
-        "nodeCount": {
+        "target": {
+          "description": "Resource ID of the compute resource. Not used for Batch jobs.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "instanceCount": {
           "format": "int32",
-          "description": "Number of Compute nodes to be used for running the deployment",
+          "description": "Number of instances or nodes.",
           "type": "integer",
           "x-ms-mutability": [
             "create",
             "read"
           ]
+        },
+        "isLocal": {
+          "description": "Set to true for jobs running on local compute.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "location": {
+          "description": "Location for virtual cluster run.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "instanceType": {
+          "description": "SKU type to run on.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "Additional properties.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": false
@@ -4719,42 +4759,15 @@
       "description": "Retry settings for a batch inference operation.",
       "type": "object",
       "properties": {
-        "maximumRetries": {
+        "maxRetries": {
           "format": "int32",
           "description": "Maximum retry count for a mini-batch",
           "type": "integer"
         },
-        "timeoutInSeconds": {
-          "format": "int32",
-          "description": "Invocation timeout for a mini-batch, in seconds.",
-          "type": "integer"
-        }
-      },
-      "additionalProperties": false
-    },
-    "BatchPartitioningScheme": {
-      "description": "Partitioning scheme for batch inference operation.",
-      "type": "object",
-      "properties": {
-        "partitioningKeys": {
-          "description": "Partition keys list used for Named partitioning.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "miniBatchSize": {
-          "format": "int64",
-          "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+        "timeout": {
+          "format": "duration",
+          "description": "Invocation timeout for a mini-batch, in ISO 8601 format.",
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -4797,38 +4810,6 @@
         "appendRowFileName": {
           "description": "Customized output file name for append_row output action.",
           "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "BatchDeploymentSettings": {
-      "description": "Batch inference specific settings per deployment.",
-      "type": "object",
-      "properties": {
-        "computeId": {
-          "description": "Resource ID of the compute resource",
-          "type": "string"
-        },
-        "errorThreshold": {
-          "format": "int32",
-          "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue]\r\n-1 value indicates, ignore all failures during batch inference\r\nFor FileDataset count of file failures\r\nFor TabularDataset, this is the count of record failures",
-          "type": "integer"
-        },
-        "retrySettings": {
-          "description": "Retry Settings for the batch inference operation.",
-          "$ref": "#/definitions/BatchRetrySettings"
-        },
-        "partitioningScheme": {
-          "description": "Partitioning scheme on how data is partitioned across mini-batches for the batch inference operation.",
-          "$ref": "#/definitions/BatchPartitioningScheme"
-        },
-        "loggingLevel": {
-          "description": "Logging level for batch inference operation.",
-          "$ref": "#/definitions/BatchLoggingLevel"
-        },
-        "outputConfiguration": {
-          "description": "Output configuration for the batch inference operation.",
-          "$ref": "#/definitions/BatchOutputConfiguration"
         }
       },
       "additionalProperties": false
@@ -4917,11 +4898,11 @@
     },
     "CodeConfiguration": {
       "required": [
-        "command"
+        "scoringScript"
       ],
       "type": "object",
       "properties": {
-        "codeArtifactId": {
+        "codeId": {
           "description": "The ID of the code asset.",
           "type": "string",
           "x-ms-mutability": [
@@ -4929,8 +4910,8 @@
             "read"
           ]
         },
-        "command": {
-          "description": "The command to execute on startup of the job. eg. [\"python\", \"train.py\"]",
+        "scoringScript": {
+          "description": "The script to execute on startup. eg. \"score.py\"",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
@@ -4945,17 +4926,42 @@
     "BatchDeployment": {
       "description": "Batch inference settings per deployment.",
       "required": [
-        "modelReference"
+        "model"
       ],
       "type": "object",
       "properties": {
-        "scaleSettings": {
-          "description": "Scale settings for deployment",
-          "$ref": "#/definitions/BatchDeploymentScaleSettings"
+        "compute": {
+          "description": "Compute binding definition.",
+          "$ref": "#/definitions/ComputeConfiguration"
         },
-        "batchSettings": {
-          "description": "Batch deployment settings",
-          "$ref": "#/definitions/BatchDeploymentSettings"
+        "errorThreshold": {
+          "format": "int32",
+          "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue]\r\n-1 value indicates, ignore all failures during batch inference\r\nFor FileDataset count of file failures\r\nFor TabularDataset, this is the count of record failures",
+          "type": "integer"
+        },
+        "retrySettings": {
+          "description": "Retry Settings for the batch inference operation.",
+          "$ref": "#/definitions/BatchRetrySettings"
+        },
+        "partitionKeys": {
+          "description": "Partition keys list used for Named partitioning.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "miniBatchSize": {
+          "format": "int64",
+          "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
+          "type": "integer"
+        },
+        "loggingLevel": {
+          "description": "Logging level for batch inference operation.",
+          "$ref": "#/definitions/BatchLoggingLevel"
+        },
+        "outputConfiguration": {
+          "description": "Output configuration for the batch inference operation.",
+          "$ref": "#/definitions/BatchOutputConfiguration"
         },
         "description": {
           "description": "Description of the endpoint deployment.",
@@ -4968,7 +4974,7 @@
             "type": "string"
           }
         },
-        "modelReference": {
+        "model": {
           "$ref": "#/definitions/AssetReferenceBase"
         },
         "codeConfiguration": {
@@ -5039,7 +5045,7 @@
       },
       "additionalProperties": false
     },
-    "EndpointAuthModeType": {
+    "EndpointAuthMode": {
       "enum": [
         "AMLToken",
         "Key",
@@ -5047,92 +5053,17 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "EndpointAuthModeType",
+        "name": "EndpointAuthMode",
         "modelAsString": true
       },
-      "additionalProperties": false
-    },
-    "EndpointComputeType": {
-      "enum": [
-        "Managed",
-        "AKS",
-        "AzureMLCompute"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "EndpointComputeType",
-        "modelAsString": true
-      },
-      "additionalProperties": false
-    },
-    "ComputeConfiguration": {
-      "required": [
-        "computeType"
-      ],
-      "type": "object",
-      "properties": {
-        "computeType": {
-          "$ref": "#/definitions/EndpointComputeType"
-        }
-      },
-      "discriminator": "computeType",
-      "additionalProperties": false
-    },
-    "AksComputeConfiguration": {
-      "required": [
-        "computeName"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputeConfiguration"
-        }
-      ],
-      "properties": {
-        "namespace": {
-          "type": "string"
-        },
-        "computeName": {
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "x-ms-discriminator-value": "AKS",
-      "additionalProperties": false
-    },
-    "ManagedComputeConfiguration": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputeConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "Managed",
-      "additionalProperties": false
-    },
-    "AzureMLComputeConfiguration": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputeConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureMLCompute",
       "additionalProperties": false
     },
     "BatchEndpoint": {
       "description": "Batch endpoint configuration",
-      "required": [
-        "computeConfiguration"
-      ],
       "type": "object",
       "properties": {
         "authMode": {
-          "$ref": "#/definitions/EndpointAuthModeType"
+          "$ref": "#/definitions/EndpointAuthMode"
         },
         "description": {
           "description": "Description of the inference endpoint.",
@@ -5145,7 +5076,7 @@
             "type": "string"
           }
         },
-        "trafficRules": {
+        "traffic": {
           "description": "Traffic rules on how the traffic will be routed across deployments.",
           "type": "object",
           "additionalProperties": {
@@ -5153,10 +5084,7 @@
             "type": "integer"
           }
         },
-        "computeConfiguration": {
-          "$ref": "#/definitions/ComputeConfiguration"
-        },
-        "endpoint": {
+        "scoringUri": {
           "format": "uri",
           "description": "Endpoint URI",
           "type": "string",
@@ -5165,7 +5093,7 @@
             "read"
           ]
         },
-        "swaggerEndpoint": {
+        "swaggerUri": {
           "format": "uri",
           "description": "Endpoint Swagger URI",
           "type": "string",
@@ -5507,7 +5435,7 @@
     "ContentsType": {
       "enum": [
         "AzureBlob",
-        "AzureDataLake",
+        "AzureDataLakeGen1",
         "AzureDataLakeGen2",
         "AzureFile",
         "AzureMySql",
@@ -5538,8 +5466,27 @@
       },
       "additionalProperties": false
     },
-    "AccountKeySection": {
+    "DatastoreCredentials": {
+      "required": [
+        "type"
+      ],
       "type": "object",
+      "properties": {
+        "type": {
+          "description": "Credential type used to authentication with storage.",
+          "$ref": "#/definitions/CredentialsType"
+        }
+      },
+      "discriminator": "type",
+      "additionalProperties": false
+    },
+    "AccountKeyCredentials": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreCredentials"
+        }
+      ],
       "properties": {
         "key": {
           "description": "Storage account key.",
@@ -5551,15 +5498,21 @@
           "x-ms-secret": true
         }
       },
+      "x-ms-discriminator-value": "AccountKey",
       "additionalProperties": false
     },
-    "CertificateSection": {
+    "CertificateCredentials": {
       "required": [
         "clientId",
         "tenantId",
         "thumbprint"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreCredentials"
+        }
+      ],
       "properties": {
         "authorityUrl": {
           "description": "Authority URL used for authentication.",
@@ -5594,10 +5547,26 @@
           "type": "string"
         }
       },
+      "x-ms-discriminator-value": "Certificate",
       "additionalProperties": false
     },
-    "SasSection": {
+    "NoneCredentials": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreCredentials"
+        }
+      ],
+      "x-ms-discriminator-value": "None",
+      "additionalProperties": false
+    },
+    "SasCredentials": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreCredentials"
+        }
+      ],
       "properties": {
         "sasToken": {
           "description": "Storage container SAS token.",
@@ -5609,14 +5578,20 @@
           "x-ms-secret": true
         }
       },
+      "x-ms-discriminator-value": "Sas",
       "additionalProperties": false
     },
-    "ServicePrincipalSection": {
+    "ServicePrincipalCredentials": {
       "required": [
         "clientId",
         "tenantId"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreCredentials"
+        }
+      ],
       "properties": {
         "authorityUrl": {
           "description": "Authority URL used for authentication.",
@@ -5646,13 +5621,19 @@
           "x-ms-secret": true
         }
       },
+      "x-ms-discriminator-value": "ServicePrincipal",
       "additionalProperties": false
     },
-    "SqlAdminSection": {
+    "SqlAdminCredentials": {
       "required": [
         "userId"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreCredentials"
+        }
+      ],
       "properties": {
         "userId": {
           "description": "SQL database user name.",
@@ -5669,253 +5650,62 @@
           "x-ms-secret": true
         }
       },
+      "x-ms-discriminator-value": "SqlAdmin",
       "additionalProperties": false
     },
-    "DatastoreCredentials": {
+    "DatastoreContents": {
       "required": [
         "type"
       ],
       "type": "object",
       "properties": {
         "type": {
-          "description": "Credential type used to authentication with storage.",
-          "$ref": "#/definitions/CredentialsType"
-        },
-        "accountKey": {
-          "description": "Storage account key authentication.",
-          "$ref": "#/definitions/AccountKeySection"
-        },
-        "certificate": {
-          "description": "Service principal certificate authentication.",
-          "$ref": "#/definitions/CertificateSection"
-        },
-        "sas": {
-          "description": "Storage container SAS token authentication.",
-          "$ref": "#/definitions/SasSection"
-        },
-        "servicePrincipal": {
-          "description": "Service principal password authentication.",
-          "$ref": "#/definitions/ServicePrincipalSection"
-        },
-        "sqlAdmin": {
-          "description": "SQL user/password authentication.",
-          "$ref": "#/definitions/SqlAdminSection"
+          "description": "Storage type backing the datastore.",
+          "$ref": "#/definitions/ContentsType"
         }
       },
+      "discriminator": "type",
       "additionalProperties": false
     },
-    "AzureDataLakeSection": {
+    "DatastoresContentsWithCredentials": {
       "required": [
         "credentials",
-        "storeName"
+        "type"
       ],
       "type": "object",
-      "properties": {
-        "credentials": {
-          "description": "Azure Data Lake credentials.",
-          "$ref": "#/definitions/DatastoreCredentials"
-        },
-        "storeName": {
-          "description": "Azure Data Lake store name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreContents"
         }
-      },
-      "additionalProperties": false
-    },
-    "AzureMySqlSection": {
-      "required": [
-        "credentials",
-        "databaseName",
-        "endpoint",
-        "portNumber",
-        "serverName"
       ],
-      "type": "object",
       "properties": {
         "credentials": {
-          "description": "Azure SQL database credentials.",
           "$ref": "#/definitions/DatastoreCredentials"
-        },
-        "databaseName": {
-          "description": "Azure SQL database name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "endpoint": {
-          "description": "Azure cloud endpoint for the database.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "example": "database.windows.net",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "portNumber": {
-          "format": "int32",
-          "description": "Azure SQL server port.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "serverName": {
-          "description": "Azure SQL server name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         }
       },
+      "discriminator": "type",
       "additionalProperties": false
     },
-    "AzurePostgreSqlSection": {
-      "required": [
-        "credentials",
-        "databaseName",
-        "endpoint",
-        "portNumber",
-        "serverName"
-      ],
-      "type": "object",
-      "properties": {
-        "enableSSL": {
-          "description": "Whether the Azure PostgreSQL server requires SSL.",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "credentials": {
-          "description": "Azure SQL database credentials.",
-          "$ref": "#/definitions/DatastoreCredentials"
-        },
-        "databaseName": {
-          "description": "Azure SQL database name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "endpoint": {
-          "description": "Azure cloud endpoint for the database.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "example": "database.windows.net",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "portNumber": {
-          "format": "int32",
-          "description": "Azure SQL server port.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "serverName": {
-          "description": "Azure SQL server name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "AzureSqlDatabaseSection": {
-      "required": [
-        "credentials",
-        "databaseName",
-        "endpoint",
-        "portNumber",
-        "serverName"
-      ],
-      "type": "object",
-      "properties": {
-        "credentials": {
-          "description": "Azure SQL database credentials.",
-          "$ref": "#/definitions/DatastoreCredentials"
-        },
-        "databaseName": {
-          "description": "Azure SQL database name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "endpoint": {
-          "description": "Azure cloud endpoint for the database.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "example": "database.windows.net",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "portNumber": {
-          "format": "int32",
-          "description": "Azure SQL server port.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "serverName": {
-          "description": "Azure SQL server name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "AzureStorageSection": {
+    "AzureStorageContents": {
       "required": [
         "accountName",
         "containerName",
         "credentials",
         "endpoint",
-        "protocol"
+        "protocol",
+        "type"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoresContentsWithCredentials"
+        }
+      ],
       "properties": {
         "accountName": {
           "description": "Storage account name.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "blobCacheTimeout": {
-          "format": "int32",
-          "description": "Blob storage cache timeout.",
-          "type": "integer",
           "x-ms-mutability": [
             "create",
             "read"
@@ -5929,10 +5719,6 @@
             "create",
             "read"
           ]
-        },
-        "credentials": {
-          "description": "Storage account credentials.",
-          "$ref": "#/definitions/DatastoreCredentials"
         },
         "endpoint": {
           "description": "Azure cloud endpoint for the storage account.",
@@ -5955,14 +5741,206 @@
           ]
         }
       },
+      "discriminator": "type",
       "additionalProperties": false
     },
-    "GlusterFsSection": {
+    "AzureBlobContents": {
+      "required": [
+        "accountName",
+        "containerName",
+        "credentials",
+        "endpoint",
+        "protocol"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureStorageContents"
+        }
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentsType",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "AzureBlob",
+      "additionalProperties": false
+    },
+    "AzureDataLakeGen1Contents": {
+      "required": [
+        "credentials",
+        "storeName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoresContentsWithCredentials"
+        }
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentsType",
+          "readOnly": true
+        },
+        "storeName": {
+          "description": "Azure Data Lake store name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureDataLakeGen1",
+      "additionalProperties": false
+    },
+    "AzureDataLakeGen2Contents": {
+      "required": [
+        "accountName",
+        "containerName",
+        "credentials",
+        "endpoint",
+        "protocol"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureStorageContents"
+        }
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentsType",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "AzureDataLakeGen2",
+      "additionalProperties": false
+    },
+    "AzureFileContents": {
+      "required": [
+        "accountName",
+        "containerName",
+        "credentials",
+        "endpoint",
+        "protocol"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureStorageContents"
+        }
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentsType",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "AzureFile",
+      "additionalProperties": false
+    },
+    "AzureSqlDatabaseContents": {
+      "required": [
+        "credentials",
+        "databaseName",
+        "endpoint",
+        "portNumber",
+        "serverName",
+        "type"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoresContentsWithCredentials"
+        }
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentsType"
+        },
+        "databaseName": {
+          "description": "Azure SQL database name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "description": "Azure cloud endpoint for the database.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "database.windows.net",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "portNumber": {
+          "format": "int32",
+          "description": "Azure SQL server port.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "serverName": {
+          "description": "Azure SQL server name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "type",
+      "x-ms-discriminator-value": "AzureSqlDatabase",
+      "additionalProperties": false
+    },
+    "AzurePostgreSqlContents": {
+      "required": [
+        "credentials",
+        "databaseName",
+        "endpoint",
+        "portNumber",
+        "serverName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlDatabaseContents"
+        }
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentsType",
+          "readOnly": true
+        },
+        "enableSSL": {
+          "description": "Whether the Azure PostgreSQL server requires SSL.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "AzurePostgreSql",
+      "additionalProperties": false
+    },
+    "GlusterFsContents": {
       "required": [
         "serverAddress",
         "volumeName"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreContents"
+        }
+      ],
       "properties": {
         "serverAddress": {
           "description": "GlusterFS server address (can be the IP address or server name).",
@@ -5983,43 +5961,7 @@
           ]
         }
       },
-      "additionalProperties": false
-    },
-    "DatastoreContents": {
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Storage type backing the datastore.",
-          "$ref": "#/definitions/ContentsType"
-        },
-        "azureDataLake": {
-          "description": "Azure Data Lake (Gen1/2) storage information.",
-          "$ref": "#/definitions/AzureDataLakeSection"
-        },
-        "azureMySql": {
-          "description": "Azure Database for MySQL information.",
-          "$ref": "#/definitions/AzureMySqlSection"
-        },
-        "azurePostgreSql": {
-          "description": "Azure Database for PostgreSQL information.",
-          "$ref": "#/definitions/AzurePostgreSqlSection"
-        },
-        "azureSqlDatabase": {
-          "description": "Azure SQL Database information.",
-          "$ref": "#/definitions/AzureSqlDatabaseSection"
-        },
-        "azureStorage": {
-          "description": "Azure storage account (blobs, files) information.",
-          "$ref": "#/definitions/AzureStorageSection"
-        },
-        "glusterFs": {
-          "description": "GlusterFS volume information.",
-          "$ref": "#/definitions/GlusterFsSection"
-        }
-      },
+      "x-ms-discriminator-value": "GlusterFs",
       "additionalProperties": false
     },
     "OriginType": {
@@ -6058,7 +6000,6 @@
       "type": "object",
       "properties": {
         "contents": {
-          "description": "Reference to the datastore storage contents.",
           "$ref": "#/definitions/DatastoreContents"
         },
         "hasBeenValidated": {
@@ -6623,38 +6564,6 @@
       },
       "additionalProperties": false
     },
-    "ComputeBinding": {
-      "description": "Compute binding definition.",
-      "type": "object",
-      "properties": {
-        "computeId": {
-          "description": "Resource ID of the compute resource.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "nodeCount": {
-          "format": "int32",
-          "description": "Number of nodes.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "isLocal": {
-          "description": "Set to true for jobs running on local compute.",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
     "JobOutput": {
       "type": "object",
       "properties": {
@@ -6691,6 +6600,44 @@
       },
       "additionalProperties": false
     },
+    "JobEndpoint": {
+      "description": "Job endpoint definition",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Endpoint type.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "port": {
+          "format": "int32",
+          "description": "Port for endpoint.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "description": "Url for endpoint.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "JobBase": {
       "description": "Job base definition",
       "required": [
@@ -6714,29 +6661,10 @@
           ]
         },
         "interactionEndpoints": {
-          "description": "Dictionary of endpoint URIs, keyed by enumerated job endpoints.\r\nFor local jobs, a job endpoint will have a value of FileStreamObject.",
+          "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
           "type": "object",
-          "properties": {
-            "Tracking": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Studio": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Grafana": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Tensorboard": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Local": {
-              "format": "uri",
-              "type": "string"
-            }
+          "additionalProperties": {
+            "$ref": "#/definitions/JobEndpoint"
           },
           "readOnly": true,
           "x-ms-mutability": [
@@ -6768,7 +6696,7 @@
     "ComputeJobBase": {
       "description": "Compute job base definition",
       "required": [
-        "computeBinding",
+        "compute",
         "jobType"
       ],
       "type": "object",
@@ -6786,9 +6714,9 @@
             "read"
           ]
         },
-        "computeBinding": {
+        "compute": {
           "description": "Compute binding for the job.",
-          "$ref": "#/definitions/ComputeBinding",
+          "$ref": "#/definitions/ComputeConfiguration",
           "x-ms-mutability": [
             "create",
             "read"
@@ -6829,19 +6757,18 @@
       },
       "additionalProperties": false
     },
-    "DataBinding": {
-      "description": "Data binding definition.",
+    "InputDataBinding": {
       "type": "object",
       "properties": {
-        "sourceDataReference": {
-          "description": "Reference to source data artifact.",
+        "dataId": {
+          "description": "ArmId of the registered dataVersion.",
           "type": "string",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
-        "localReference": {
+        "pathOnCompute": {
           "description": "Location of data inside the container process.",
           "type": "string",
           "x-ms-mutability": [
@@ -6851,6 +6778,44 @@
         },
         "mode": {
           "description": "Mechanism for accessing the data artifact.",
+          "$ref": "#/definitions/DataBindingMode",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "OutputDataBinding": {
+      "type": "object",
+      "properties": {
+        "datastoreId": {
+          "description": "ArmId of the datastore where the data output will be stored.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "pathOnDatastore": {
+          "description": "Path within the datastore to the data.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "pathOnCompute": {
+          "description": "Location of data inside the container process.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "mode": {
+          "description": "Mechanism for data movement to datastore.",
           "$ref": "#/definitions/DataBindingMode",
           "x-ms-mutability": [
             "create",
@@ -6960,7 +6925,6 @@
     "IdentityType": {
       "enum": [
         "Managed",
-        "ServicePrincipal",
         "AMLToken"
       ],
       "type": "string",
@@ -6988,7 +6952,7 @@
       "discriminator": "identityType",
       "additionalProperties": false
     },
-    "AmlTokenConfiguration": {
+    "AmlToken": {
       "type": "object",
       "allOf": [
         {
@@ -6998,7 +6962,7 @@
       "x-ms-discriminator-value": "AMLToken",
       "additionalProperties": false
     },
-    "ManagedIdentityConfiguration": {
+    "ManagedIdentity": {
       "type": "object",
       "allOf": [
         {
@@ -7024,7 +6988,7 @@
             "read"
           ]
         },
-        "msiResourceId": {
+        "resourceId": {
           "description": "Specifies a user-assigned identity by resource ID. For system-assigned, do not set this field.",
           "type": "string",
           "x-ms-mutability": [
@@ -7036,31 +7000,11 @@
       "x-ms-discriminator-value": "Managed",
       "additionalProperties": false
     },
-    "ServicePrincipalConfiguration": {
-      "required": [
-        "secret"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IdentityConfiguration"
-        }
-      ],
-      "properties": {
-        "secret": {
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-secret": true
-        }
-      },
-      "x-ms-discriminator-value": "ServicePrincipal",
-      "additionalProperties": false
-    },
     "CommandJob": {
       "description": "Code Job definition",
       "required": [
-        "codeConfiguration",
-        "computeBinding"
+        "command",
+        "compute"
       ],
       "type": "object",
       "allOf": [
@@ -7081,18 +7025,24 @@
             "read"
           ]
         },
-        "maxRunDurationSeconds": {
-          "format": "int64",
-          "description": "The max run duration in seconds, after which the job will be cancelled.",
-          "type": "integer",
+        "timeout": {
+          "format": "duration",
+          "description": "The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.",
+          "type": "string"
+        },
+        "codeId": {
+          "description": "The ID of the code asset.",
+          "type": "string",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
-        "codeConfiguration": {
-          "description": "Code configuration of the job.",
-          "$ref": "#/definitions/CodeConfiguration",
+        "command": {
+          "description": "The command to execute on startup of the job. eg. \"python train.py\"",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
           "x-ms-mutability": [
             "create",
             "read"
@@ -7106,18 +7056,29 @@
             "read"
           ]
         },
-        "dataBindings": {
-          "description": "Mapping of data bindings used in the job.",
+        "inputDataBindings": {
+          "description": "Mapping of input data bindings used in the job.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/DataBinding"
+            "$ref": "#/definitions/InputDataBinding"
           },
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
-        "distributionConfiguration": {
+        "outputDataBindings": {
+          "description": "Mapping of output data bindings used in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/OutputDataBinding"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "distribution": {
           "$ref": "#/definitions/DistributionConfiguration"
         },
         "environmentVariables": {
@@ -7131,7 +7092,7 @@
             "read"
           ]
         },
-        "identityConfiguration": {
+        "identity": {
           "$ref": "#/definitions/IdentityConfiguration"
         },
         "parameters": {
@@ -7147,7 +7108,7 @@
       "x-ms-discriminator-value": "Command",
       "additionalProperties": false
     },
-    "ParameterSamplingType": {
+    "SamplingAlgorithm": {
       "enum": [
         "Grid",
         "Random",
@@ -7155,27 +7116,8 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ParameterSamplingType",
+        "name": "SamplingAlgorithm",
         "modelAsString": true
-      },
-      "additionalProperties": false
-    },
-    "ParameterSamplingConfiguration": {
-      "description": "class for all hyperparameter sampling algorithms",
-      "required": [
-        "parameterSpace",
-        "samplingType"
-      ],
-      "type": "object",
-      "properties": {
-        "parameterSpace": {
-          "description": "A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter",
-          "type": "object"
-        },
-        "samplingType": {
-          "description": "Type of the hyperparameter sampling algorithms",
-          "$ref": "#/definitions/ParameterSamplingType"
-        }
       },
       "additionalProperties": false
     },
@@ -7192,7 +7134,7 @@
       },
       "additionalProperties": false
     },
-    "EarlyTerminationPolicyConfiguration": {
+    "EarlyTerminationPolicy": {
       "description": "Early termination policies enable canceling poor-performing runs before they complete",
       "required": [
         "policyType"
@@ -7215,12 +7157,12 @@
       "discriminator": "policyType",
       "additionalProperties": false
     },
-    "BanditPolicyConfiguration": {
+    "BanditPolicy": {
       "description": "Defines an early termination policy based on slack criteria, and a frequency and delay interval for evaluation",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
+          "$ref": "#/definitions/EarlyTerminationPolicy"
         }
       ],
       "properties": {
@@ -7236,59 +7178,35 @@
       "x-ms-discriminator-value": "Bandit",
       "additionalProperties": false
     },
-    "MedianStoppingPolicyConfiguration": {
+    "MedianStoppingPolicy": {
       "description": "Defines an early termination policy based on running averages of the primary metric of all runs",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
+          "$ref": "#/definitions/EarlyTerminationPolicy"
         }
       ],
       "x-ms-discriminator-value": "MedianStopping",
       "additionalProperties": false
     },
-    "TruncationSelectionPolicyConfiguration": {
+    "TruncationSelectionPolicy": {
       "description": "Defines an early termination policy that cancels a given percentage of runs at each evaluation interval.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
+          "$ref": "#/definitions/EarlyTerminationPolicy"
         }
       ],
       "properties": {
         "truncationPercentage": {
           "format": "int32",
           "type": "integer"
-        },
-        "excludeFinishedJobs": {
-          "type": "boolean"
         }
       },
       "x-ms-discriminator-value": "TruncationSelection",
       "additionalProperties": false
     },
-    "TerminationConfiguration": {
-      "type": "object",
-      "properties": {
-        "maxTotalRuns": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxConcurrentRuns": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxDurationMinutes": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "earlyTerminationPolicyConfiguration": {
-          "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
-        }
-      },
-      "additionalProperties": false
-    },
-    "PrimaryMetricGoal": {
+    "Goal": {
       "description": "Defines supported metric goals for hyperparameter tuning",
       "enum": [
         "Minimize",
@@ -7296,45 +7214,82 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "PrimaryMetricGoal",
+        "name": "Goal",
         "modelAsString": true
       },
       "additionalProperties": false
     },
-    "EvaluationConfiguration": {
+    "Objective": {
       "required": [
-        "primaryMetricGoal",
-        "primaryMetricName"
+        "goal",
+        "primaryMetric"
       ],
       "type": "object",
       "properties": {
-        "primaryMetricName": {
+        "primaryMetric": {
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
-        "primaryMetricGoal": {
+        "goal": {
           "description": "Defines supported metric goals for hyperparameter tuning",
-          "$ref": "#/definitions/PrimaryMetricGoal"
+          "$ref": "#/definitions/Goal"
         }
       },
       "additionalProperties": false
     },
     "TrialComponent": {
+      "required": [
+        "command"
+      ],
       "type": "object",
       "properties": {
-        "codeConfiguration": {
-          "description": "Code configuration of the job.",
-          "$ref": "#/definitions/CodeConfiguration"
+        "timeout": {
+          "format": "duration",
+          "description": "The max run duration in ISO 8601 format, after which the trial component will be cancelled.\r\nOnly supports duration with precision as low as Seconds.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "codeId": {
+          "description": "The ID of the code asset.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "command": {
+          "description": "The command to execute on startup of the job. eg. \"python train.py\"",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "environmentId": {
           "description": "Environment id of the job.",
           "type": "string"
         },
-        "dataBindings": {
-          "description": "Mapping of data bindings used in the job.",
+        "inputDataBindings": {
+          "description": "Mapping of input data bindings used in the job.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/DataBinding"
+            "$ref": "#/definitions/InputDataBinding"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "outputDataBindings": {
+          "description": "Mapping of output data bindings used in the job.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/OutputDataBinding"
           },
           "x-ms-mutability": [
             "create",
@@ -7352,7 +7307,7 @@
             "read"
           ]
         },
-        "distributionConfiguration": {
+        "distribution": {
           "$ref": "#/definitions/DistributionConfiguration"
         }
       },
@@ -7360,9 +7315,10 @@
     },
     "SweepJob": {
       "required": [
-        "computeBinding",
-        "evaluationConfiguration",
-        "parameterSamplingConfiguration"
+        "algorithm",
+        "compute",
+        "objective",
+        "searchSpace"
       ],
       "type": "object",
       "allOf": [
@@ -7383,20 +7339,40 @@
             "read"
           ]
         },
-        "parameterSamplingConfiguration": {
-          "description": "class for all hyperparameter sampling algorithms",
-          "$ref": "#/definitions/ParameterSamplingConfiguration"
+        "searchSpace": {
+          "description": "A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         },
-        "terminationConfiguration": {
-          "$ref": "#/definitions/TerminationConfiguration"
+        "algorithm": {
+          "description": "Type of the hyperparameter sampling algorithms",
+          "$ref": "#/definitions/SamplingAlgorithm"
         },
-        "evaluationConfiguration": {
-          "$ref": "#/definitions/EvaluationConfiguration"
+        "maxTotalTrials": {
+          "format": "int32",
+          "type": "integer"
         },
-        "trialComponent": {
+        "maxConcurrentTrials": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "timeout": {
+          "format": "duration",
+          "description": "The total timeout in ISO 8601 format. Only supports duration with precision as low as Minutes.",
+          "type": "string"
+        },
+        "earlyTermination": {
+          "$ref": "#/definitions/EarlyTerminationPolicy"
+        },
+        "objective": {
+          "$ref": "#/definitions/Objective"
+        },
+        "trial": {
           "$ref": "#/definitions/TrialComponent"
         },
-        "identityConfiguration": {
+        "identity": {
           "$ref": "#/definitions/IdentityConfiguration"
         }
       },
@@ -7520,7 +7496,7 @@
       "properties": {
         "inferencingComputeBinding": {
           "description": "AML compute binding used in inferencing.",
-          "$ref": "#/definitions/ComputeBinding",
+          "$ref": "#/definitions/ComputeConfiguration",
           "x-ms-mutability": [
             "create",
             "read",
@@ -7529,7 +7505,7 @@
         },
         "trainingComputeBinding": {
           "description": "AML compute binding used in training.",
-          "$ref": "#/definitions/ComputeBinding",
+          "$ref": "#/definitions/ComputeConfiguration",
           "x-ms-mutability": [
             "create",
             "read",
@@ -8067,17 +8043,6 @@
     "ModelContainer": {
       "type": "object",
       "properties": {
-        "latestVersions": {
-          "description": "Latest model versions for each stage. Key is the model stage, value is the model version ARM ID.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
         "description": {
           "description": "The asset description text.",
           "type": "string"
@@ -8151,10 +8116,6 @@
       ],
       "type": "object",
       "properties": {
-        "stage": {
-          "description": "Model asset stage.",
-          "type": "string"
-        },
         "flavors": {
           "description": "Dictionary mapping model flavors to their properties.",
           "type": "object",
@@ -8273,127 +8234,113 @@
       },
       "additionalProperties": false
     },
-    "OnlineDeploymentScaleSettings": {
-      "type": "object",
-      "properties": {
-        "minimum": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maximum": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "instanceCount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "scaleType": {
-          "$ref": "#/definitions/ScaleTypeMode"
-        }
-      },
-      "additionalProperties": false
-    },
-    "ModelDataCollection": {
-      "description": "The Model data collection properties.",
-      "type": "object",
-      "properties": {
-        "eventHubEnabled": {
-          "description": "Option for enabling/disabling Event Hub.",
-          "type": "boolean"
-        },
-        "storageEnabled": {
-          "description": "Option for enabling/disabling storage.",
-          "type": "boolean"
-        }
-      },
-      "additionalProperties": false
-    },
-    "DeploymentConfigurationBase": {
+    "OnlineScaleSettings": {
       "required": [
-        "computeType"
+        "scaleType"
       ],
       "type": "object",
       "properties": {
-        "computeType": {
-          "$ref": "#/definitions/EndpointComputeType"
+        "scaleType": {
+          "$ref": "#/definitions/ScaleType"
         },
-        "appInsightsEnabled": {
-          "type": "boolean"
+        "minInstances": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxInstances": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "discriminator": "scaleType",
+      "additionalProperties": false
+    },
+    "ManualScaleSettings": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnlineScaleSettings"
+        }
+      ],
+      "properties": {
+        "instanceCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Manual",
+      "additionalProperties": false
+    },
+    "AutoScaleSettings": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnlineScaleSettings"
+        }
+      ],
+      "properties": {
+        "pollingInterval": {
+          "format": "duration",
+          "description": "The polling interval in ISO 8691 format. Only supports duration with precision as low as Seconds.",
+          "type": "string"
+        },
+        "targetUtilizationPercentage": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Auto",
+      "additionalProperties": false
+    },
+    "OnlineRequestSettings": {
+      "type": "object",
+      "properties": {
+        "maxQueueWait": {
+          "format": "duration",
+          "description": "The maximum queue wait time in ISO 8601 format. Supports millisecond precision.",
+          "type": "string"
+        },
+        "requestTimeout": {
+          "format": "duration",
+          "description": "The request timeout in ISO 8601 format. Supports millisecond precision.",
+          "type": "string"
         },
         "maxConcurrentRequestsPerInstance": {
           "format": "int32",
           "type": "integer"
-        },
-        "maxQueueWaitMs": {
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProbeSettings": {
+      "type": "object",
+      "properties": {
+        "failureThreshold": {
           "format": "int32",
+          "description": "The number of failures to allow before returning an unhealthy status.",
           "type": "integer"
         },
-        "scoringTimeoutMs": {
+        "successThreshold": {
           "format": "int32",
+          "description": "The number of successful probes before returning a healthy status.",
           "type": "integer"
         },
-        "livenessProbeRequirements": {
-          "$ref": "machineLearningServices.json#/definitions/LivenessProbeRequirements"
-        }
-      },
-      "discriminator": "computeType",
-      "additionalProperties": false
-    },
-    "AksDeploymentConfiguration": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentConfigurationBase"
-        }
-      ],
-      "properties": {
-        "containerResourceRequirements": {
-          "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
+        "timeout": {
+          "format": "duration",
+          "description": "The probe timeout in ISO 8601 format.",
+          "type": "string"
         },
-        "modelDataCollection": {
-          "description": "The Model data collection properties.",
-          "$ref": "#/definitions/ModelDataCollection"
-        }
-      },
-      "x-ms-discriminator-value": "AKS",
-      "additionalProperties": false
-    },
-    "OSTypes": {
-      "enum": [
-        "Linux",
-        "Windows"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "OSTypes",
-        "modelAsString": true
-      },
-      "additionalProperties": false
-    },
-    "ManagedDeploymentConfiguration": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentConfigurationBase"
-        }
-      ],
-      "properties": {
-        "instanceType": {
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+        "period": {
+          "format": "duration",
+          "description": "The length of time between probes in ISO 8601 format.",
+          "type": "string"
         },
-        "osType": {
-          "$ref": "#/definitions/OSTypes"
-        },
-        "readinessProbeRequirements": {
-          "$ref": "machineLearningServices.json#/definitions/LivenessProbeRequirements"
+        "initialDelay": {
+          "format": "duration",
+          "description": "The delay before the first probe in ISO 8601 format.",
+          "type": "string"
         }
       },
-      "x-ms-discriminator-value": "Managed",
       "additionalProperties": false
     },
     "DeploymentProvisioningState": {
@@ -8415,16 +8362,25 @@
     },
     "OnlineDeployment": {
       "required": [
-        "deploymentConfiguration",
-        "modelReference"
+        "model",
+        "type"
       ],
       "type": "object",
       "properties": {
-        "scaleSettings": {
-          "$ref": "#/definitions/OnlineDeploymentScaleSettings"
+        "type": {
+          "$ref": "#/definitions/EndpointComputeType"
         },
-        "deploymentConfiguration": {
-          "$ref": "#/definitions/DeploymentConfigurationBase"
+        "scaleSettings": {
+          "$ref": "#/definitions/OnlineScaleSettings"
+        },
+        "requestSettings": {
+          "$ref": "#/definitions/OnlineRequestSettings"
+        },
+        "appInsightsEnabled": {
+          "type": "boolean"
+        },
+        "livenessProbe": {
+          "$ref": "#/definitions/ProbeSettings"
         },
         "provisioningState": {
           "description": "Provisioning state for the endpoint deployment.",
@@ -8445,7 +8401,7 @@
             "type": "string"
           }
         },
-        "modelReference": {
+        "model": {
           "$ref": "#/definitions/AssetReferenceBase"
         },
         "codeConfiguration": {
@@ -8464,6 +8420,9 @@
           }
         }
       },
+      "discriminator": "type",
+      "additionalProperties": false
+    },
     "K8sOnlineDeployment": {
       "required": [
         "model"
@@ -8482,6 +8441,29 @@
       "x-ms-discriminator-value": "K8S",
       "additionalProperties": false
     },
+    "ManagedOnlineDeployment": {
+      "required": [
+        "model"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnlineDeployment"
+        }
+      ],
+      "properties": {
+        "instanceType": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "readinessProbe": {
+          "$ref": "#/definitions/ProbeSettings"
+        }
+      },
+      "x-ms-discriminator-value": "Managed",
       "additionalProperties": false
     },
     "OnlineDeploymentTrackedResource": {
@@ -8503,7 +8485,6 @@
           "$ref": "#/definitions/ResourceIdentityInArm"
         },
         "properties": {
-          "description": "Additional attributes of the entity.",
           "$ref": "#/definitions/OnlineDeployment"
         },
         "systemData": {
@@ -8536,11 +8517,30 @@
     },
     "PartialOnlineDeployment": {
       "description": "Mutable online deployment configuration",
+      "required": [
+        "type"
+      ],
       "type": "object",
       "properties": {
-        "scaleSettings": {
-          "$ref": "#/definitions/OnlineDeploymentScaleSettings"
+        "type": {
+          "$ref": "#/definitions/EndpointComputeType"
         },
+        "scaleSettings": {
+          "$ref": "#/definitions/OnlineScaleSettings"
+        },
+        "requestSettings": {
+          "$ref": "#/definitions/OnlineRequestSettings"
+        },
+        "appInsightsEnabled": {
+          "type": "boolean"
+        },
+        "livenessProbe": {
+          "$ref": "#/definitions/ProbeSettings"
+        }
+      },
+      "discriminator": "type",
+      "additionalProperties": false
+    },
     "K8sPartialOnlineDeployment": {
       "type": "object",
       "allOf": [
@@ -8556,8 +8556,19 @@
       "x-ms-discriminator-value": "K8S",
       "additionalProperties": false
     },
+    "ManagedPartialOnlineDeployment": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartialOnlineDeployment"
+        }
+      ],
+      "properties": {
+        "readinessProbe": {
+          "$ref": "#/definitions/ProbeSettings"
         }
       },
+      "x-ms-discriminator-value": "Managed",
       "additionalProperties": false
     },
     "PartialOnlineDeploymentPartialTrackedResource": {
@@ -8603,7 +8614,6 @@
           ]
         },
         "properties": {
-          "description": "Additional attributes of the entity.",
           "$ref": "#/definitions/PartialOnlineDeployment"
         },
         "systemData": {
@@ -8687,8 +8697,7 @@
     "OnlineEndpoint": {
       "description": "Online endpoint configuration",
       "required": [
-        "authMode",
-        "computeConfiguration"
+        "authMode"
       ],
       "type": "object",
       "properties": {
@@ -8699,6 +8708,10 @@
           "x-ms-mutability": [
             "read"
           ]
+        },
+        "target": {
+          "description": "Reference to compute Id if exist.\r\noptional",
+          "type": "string"
         },
         "description": {
           "description": "Description of the inference endpoint.",
@@ -8711,7 +8724,7 @@
             "type": "string"
           }
         },
-        "trafficRules": {
+        "traffic": {
           "description": "Traffic rules on how the traffic will be routed across deployments.",
           "type": "object",
           "additionalProperties": {
@@ -8719,10 +8732,7 @@
             "type": "integer"
           }
         },
-        "computeConfiguration": {
-          "$ref": "#/definitions/ComputeConfiguration"
-        },
-        "endpoint": {
+        "scoringUri": {
           "format": "uri",
           "description": "Endpoint URI",
           "type": "string",
@@ -8731,7 +8741,7 @@
             "read"
           ]
         },
-        "swaggerEndpoint": {
+        "swaggerUri": {
           "format": "uri",
           "description": "Endpoint Swagger URI",
           "type": "string",
@@ -8742,7 +8752,7 @@
         },
         "authMode": {
           "description": "Inference endpoint authentication mode type",
-          "$ref": "#/definitions/EndpointAuthModeType"
+          "$ref": "#/definitions/EndpointAuthMode"
         }
       },
       "additionalProperties": false
@@ -8801,7 +8811,7 @@
       "description": "Mutable online endpoint configuration",
       "type": "object",
       "properties": {
-        "trafficRules": {
+        "traffic": {
           "description": "Traffic rules on how the traffic will be routed across deployments.",
           "type": "object",
           "additionalProperties": {
