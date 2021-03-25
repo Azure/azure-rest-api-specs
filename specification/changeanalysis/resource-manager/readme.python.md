@@ -8,7 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: Microsoft.ChangeAnalysis
 package-name: changeanalysis
-package-version: 2020-04-01-preview
+package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
