@@ -187,6 +187,12 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "forceDelete",
+            "in": "query",
+            "description": "Delete the extension resource in Azure - not the normal asynchronous delete.",
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -568,10 +574,6 @@
               "readOnly": true,
               "x-nullable": true,
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
-            },
-            "identityLocation": {
-              "type": "string",
-              "description": "Location of the identity - same as that of the parent resource."
             },
             "customLocationSettings": {
               "description": "Custom Location settings properties.",
