@@ -43,6 +43,7 @@ message-format: json
 ```
 
 
+<<<<<<< HEAD
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
@@ -52,7 +53,17 @@ input-file:
   - Microsoft.RecoveryServices/stable/2021-03-01/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2021-03-01/replicationusages.json
   - Microsoft.RecoveryServices/stable/2021-03-01/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-03-01/vaultusages.json
+```
+### Tag: package-2021-02
+
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-02-10/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2021-02-10/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2021-02-10/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-02-10/vaultusages.json
 ```
 ### Tag: package-2016-06
 
