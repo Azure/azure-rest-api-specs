@@ -26,16 +26,31 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05
+tag: package-2021-05
 opt-in-extensible-enums: true
 ```
 
 
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.Media/stable/2021-05-01/AccountFilters.json
+  - Microsoft.Media/stable/2021-05-01/Accounts.json
+  - Microsoft.Media/stable/2021-05-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2021-05-01/Common.json
+  - Microsoft.Media/stable/2021-05-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2021-05-01/Encoding.json
+  - Microsoft.Media/stable/2021-05-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2021-05-01/streamingservice.json
+```
 ### Tag: package-2020-05
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-05'
+``` yaml $(tag) == 'package-2020-05'
 input-file:
   - Microsoft.Media/stable/2020-05-01/AccountFilters.json
   - Microsoft.Media/stable/2020-05-01/Accounts.json
@@ -50,6 +65,7 @@ directive:
     where: $.definitions.TrackedResource.required
     reason: location is a required property for our patch calls
 ```
+
 ### Tag: package-2020-02-preview
 
 These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
@@ -221,4 +237,3 @@ directive:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
