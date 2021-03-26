@@ -20,16 +20,16 @@ namespace: azure.ai.formrecognizer.v2_0
 output-folder: $(python-sdks-folder)/formrecognizer/azure-ai-formrecognizer/azure/ai/formrecognizer/_generated/v2_0
 ```
 
-``` yaml $(tag) == 'release_2_1_preview.2'
-namespace: azure.ai.formrecognizer.v2_1_preview_2
-output-folder: $(python-sdks-folder)/formrecognizer/azure-ai-formrecognizer/azure/ai/formrecognizer/_generated/v2_1_preview_2
+``` yaml $(tag) == 'release_2_1_preview.3'
+namespace: azure.ai.formrecognizer.v2_1_preview_3
+output-folder: $(python-sdks-folder)/formrecognizer/azure-ai-formrecognizer/azure/ai/formrecognizer/_generated/v2_1_preview_3
 ```
 
 
 ```yaml $(multiapi)
 batch:
   - tag: release_2_0
-  - tag: release_2_1_preview.2
+  - tag: release_2_1_preview.3
   - multiapiscript: true
 ```
 
@@ -37,5 +37,5 @@ batch:
 output-folder: $(python-sdks-folder)/formrecognizer/azure-ai-formrecognizer/azure/ai/formrecognizer/_generated
 clear-output-folder: false
 perform-load: false
-default-api: 2.1-preview.2
+default-api: 2.1-preview.3
 ```
