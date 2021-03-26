@@ -8,7 +8,6 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   package-name: azure-mgmt-azureadb2c
-  package-version: 1.0.0b2
   clear-output-folder: true
   no-namespace-folders: true
   python-base-folder: azureadb2c/azure-mgmt-azureadb2c/azure/mgmt/azureadb2c
@@ -21,6 +20,7 @@ These settings apply only when `--track2` is specified on the command line.
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-azureadb2c
+package-version: 1.0.0b2
 no-namespace-folders: true
 python-base-folder: azureadb2c/azure-mgmt-azureadb2c/azure/mgmt/azureadb2c
 ```
