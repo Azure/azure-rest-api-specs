@@ -226,6 +226,7 @@ input-file:
 - Microsoft.Automation/stable/2019-06-01/job.json
 - Microsoft.Automation/stable/2019-06-01/operations.json
 - Microsoft.Automation/stable/2019-06-01/runbook.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
