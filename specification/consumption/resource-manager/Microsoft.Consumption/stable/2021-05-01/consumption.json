@@ -1601,8 +1601,8 @@
         "tags": [
           "Events"
         ],
-        "operationId": "Events_List",
-        "description": "Lists the events by billingAccountId and billingProfileId for given start and end date.",
+        "operationId": "Events_ListByBillingProfile",
+        "description": "Lists the events that decrements Azure credits or Microsoft Azure consumption commitment for a billing account or a billing profile for a given start and end date.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1647,13 +1647,65 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "operationId": "Events_ListByBillingAccount",
+        "description": "Lists the events that decrements Azure credits or Microsoft Azure consumption commitment for a billing account or a billing profile for a given start and end date.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "EventsGetByBillingAccount": {
+            "$ref": "./examples/EventsGetByBillingAccount.json"
+          },
+          "EventsGetByBillingAccountWithFilters": {
+            "$ref": "./examples/EventsGetByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter the events by lotId, lotSource etc. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Events"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/lots": {
       "get": {
         "tags": [
           "Lots"
         ],
-        "operationId": "Lots_List",
-        "description": "Lists the lots by billingAccountId and billingProfileId.",
+        "operationId": "Lots_ListByBillingProfile",
+        "description": "Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a billing profile. Microsoft Azure consumption commitments are only supported for the billing account scope.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1671,6 +1723,58 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Lots"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/lots": {
+      "get": {
+        "tags": [
+          "Lots"
+        ],
+        "operationId": "Lots_ListByBillingAccount",
+        "description": "Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a billing profile. Microsoft Azure consumption commitments are only supported for the billing account scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "LotsListByBillingAccount": {
+            "$ref": "./examples/LotsListByBillingAccount.json"
+          },
+          "LotsListByBillingAccountWithStatusFilter": {
+            "$ref": "./examples/LotsListByBillingAccountWithFilters.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter the lots by Status, Source etc. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -4819,43 +4923,43 @@
       "description": "The event properties.",
       "properties": {
         "transactionDate": {
-          "description": "Transaction date.",
+          "description": "The date of the event.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "description": {
-          "description": "Transaction description.",
+          "description": "The description of the event.",
           "type": "string",
           "readOnly": true
         },
         "newCredit": {
-          "description": "New Credit.",
+          "description": "The amount of new credit or commitment for NewCredit or SettleCharges event.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
         "adjustments": {
-          "description": "Adjustments amount.",
+          "description": "The amount of balance adjustment. The property is not available for ConsumptionCommitment lots.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
         "creditExpired": {
-          "description": "Credit expired.",
+          "description": "The amount of expired credit or commitment for NewCredit or SettleCharges event.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
         "charges": {
-          "description": "Charges amount.",
+          "description": "The amount of charges for events of type SettleCharges and PendingEligibleCharges. ",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
         "closedBalance": {
-          "description": "Closed balance.",
+          "description": "The balance after the event. ",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
         "eventType": {
-          "description": "The type of event.",
+          "description": "Identifies the type of the event.",
           "type": "string",
           "enum": [
             "SettledCharges",
@@ -4872,7 +4976,27 @@
           }
         },
         "invoiceNumber": {
-          "description": "Invoice number.",
+          "description": "The number which uniquely identifies the invoice on which the event was billed. This will be empty for unbilled events.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "The ID that uniquely identifies the billing profile for which the event happened. The property is only available for billing account of type MicrosoftCustomerAgreement. ",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileDisplayName": {
+          "description": "The display name of the billing profile for which the event happened. The property is only available for billing account of type MicrosoftCustomerAgreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lotId": {
+          "description": "The ID that uniquely identifies the lot for which the event happened.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lotSource": {
+          "description": "Identifies the source of the lot for which the event happened. ",
           "type": "string",
           "readOnly": true
         }
@@ -4916,21 +5040,22 @@
       "description": "The lot properties.",
       "properties": {
         "originalAmount": {
-          "description": "Original amount.",
+          "description": "The original amount of a lot.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
         "closedBalance": {
-          "description": "Closed balance.",
+          "description": "The balance as of the last invoice.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
         "source": {
-          "description": "Lot source.",
+          "description": "The source of the lot.",
           "type": "string",
           "enum": [
             "PurchasedCredit",
-            "PromotionalCredit"
+            "PromotionalCredit",
+            "CommitmentConsumption"
           ],
           "x-ms-enum": {
             "name": "LotSource",
@@ -4939,20 +5064,31 @@
           "readOnly": true
         },
         "startDate": {
-          "description": "Start date.",
+          "description": "The date when the lot became effective.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "expirationDate": {
-          "description": "Expiration date.",
+          "description": "The expiration date of a lot.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "poNumber": {
-          "description": "PO number.",
+          "description": "The po number of the invoice on which the lot was added. This property is not available for ConsumptionCommitment lots.",
           "type": "string",
+          "readOnly": true
+        },
+        "purchaseDate": {
+          "description": "The date when the lot was added.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "Status": {
+          "description": "The status of the lot.",
+          "type": "boolean",
           "readOnly": true
         }
       }
@@ -5036,12 +5172,12 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id."
+          "description": "The full qualified ARM ID of an event."
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name."
+          "description": "The ID that uniquely identifies an event. "
         },
         "type": {
           "readOnly": true,
@@ -5051,7 +5187,7 @@
         "etag": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource etag."
+          "description": "The etag for the resource."
         },
         "tags": {
           "readOnly": true,
