@@ -15,10 +15,10 @@
         "properties": {
           "jobType": "Command",
           "interactionEndpoints": {
-            "Tracking": "string",
-            "Studio": "string",
-            "Grafana": "string",
-            "Tensorboard": "string"
+            "type": {
+              "endpoint": "string",
+              "port": 1234
+            }
           },
           "description": "string",
           "tags": {
@@ -31,13 +31,10 @@
             "additionalProp2": "string",
             "additionalProp3": "string"
           },
-          "computeBinding": {
-            "computeId": "string"
+          "compute": {
+            "target": "string"
           },
-          "codeConfiguration": {
-            "codeArtifactId": "string",
-            "command": "string"
-          }
+          "command": "string"
         },
         "systemData": {
           "createdAt": "2020-12-08T01:18:36.134Z",

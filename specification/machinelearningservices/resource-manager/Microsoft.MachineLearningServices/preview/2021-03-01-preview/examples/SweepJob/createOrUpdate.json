@@ -7,6 +7,15 @@
     "id": "testContainer",
     "body": {
       "properties": {
+        "jobType": "Sweep",
+        "searchSpace": {
+          "name": {}
+        },
+        "objective":{
+          "primaryMetric": "string",
+          "goal": "Minimize"
+        },
+        "algorithm": "Grid",
         "description": "string",
         "tags": {
           "additionalProp1": "string",
@@ -17,6 +26,9 @@
           "additionalProp1": "string",
           "additionalProp2": "string",
           "additionalProp3": "string"
+        },
+        "compute": {
+          "target": "string"
         }
       }
     }
@@ -29,11 +41,19 @@
         "type": "string",
         "properties": {
           "jobType": "Sweep",
+          "searchSpace": {
+            "name": {}
+          },
+          "objective":{
+            "primaryMetric": "string",
+            "goal": "Minimize"
+          },
+          "algorithm": "Grid",
           "interactionEndpoints": {
-            "Tracking": "string",
-            "Studio": "string",
-            "Grafana": "string",
-            "Tensorboard": "string"
+            "type": {
+              "endpoint": "string",
+              "port": 1234
+            }
           },
           "description": "string",
           "tags": {
@@ -46,18 +66,8 @@
             "additionalProp2": "string",
             "additionalProp3": "string"
           },
-          "computeBinding": {
-            "computeId": "string"
-          },
-          "parameterSamplingConfiguration": {
-            "parameterSpace": {
-              "additionalProp1": "string"
-            },
-            "samplingType": "Grid"
-          },
-          "evaluationConfiguration": {
-            "primaryMetricName": "string",
-            "primaryMetricGoal": "Minimize"
+          "compute": {
+            "target": "string"
           }
         },
         "systemData": {
@@ -77,11 +87,19 @@
         "type": "string",
         "properties": {
           "jobType": "Sweep",
+          "searchSpace": {
+            "name": {}
+          },
+          "objective":{
+            "primaryMetric": "string",
+            "goal": "Minimize"
+          },
+          "algorithm": "Grid",
           "interactionEndpoints": {
-            "Tracking": "string",
-            "Studio": "string",
-            "Grafana": "string",
-            "Tensorboard": "string"
+            "type": {
+              "endpoint": "string",
+              "port": 1234
+            }
           },
           "description": "string",
           "tags": {
@@ -94,18 +112,8 @@
             "additionalProp2": "string",
             "additionalProp3": "string"
           },
-          "computeBinding": {
-            "computeId": "string"
-          },
-          "parameterSamplingConfiguration": {
-            "parameterSpace": {
-              "additionalProp1": "string"
-            },
-            "samplingType": "Grid"
-          },
-          "evaluationConfiguration": {
-            "primaryMetricName": "string",
-            "primaryMetricGoal": "Minimize"
+          "compute": {
+            "target": "string"
           }
         },
         "systemData": {
