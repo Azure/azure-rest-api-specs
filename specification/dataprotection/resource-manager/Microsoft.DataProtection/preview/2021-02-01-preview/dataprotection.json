@@ -945,6 +945,7 @@
         "tags": [
           "BackupInstances"
         ],
+        "description": "Create or update a backup instance in a backup vault",
         "operationId": "BackupInstances_CreateOrUpdate",
         "produces": [
           "application/json"
@@ -1010,6 +1011,7 @@
         "tags": [
           "BackupInstances"
         ],
+        "description": "Delete a backup instance in a backup vault",
         "operationId": "BackupInstances_Delete",
         "produces": [
           "application/json"
@@ -1769,6 +1771,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
             "$ref": "#/parameters/SubscriptionId"
           },
           {
@@ -1825,6 +1830,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
           {
             "$ref": "#/parameters/SubscriptionId"
           },
@@ -2513,7 +2521,7 @@
       ],
       "properties": {
         "resourceGroupId": {
-          "description": "Gets or sets the Resource Group Uri.",
+          "description": "Gets or sets the Snapshot Resource Group Uri.",
           "type": "string"
         }
       },
@@ -2748,6 +2756,9 @@
           "type": "array"
         }
       },
+      "required": [
+        "storageSettings"
+      ],
       "title": "BackupVault",
       "type": "object"
     },
@@ -2765,6 +2776,10 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "location",
+        "properties"
+      ],
       "title": "BackupVault Resource"
     },
     "BackupVaultResourceList": {
@@ -3641,6 +3656,52 @@
       "title": "InnerError",
       "type": "object"
     },
+    "ItemLevelRestoreCriteria": {
+      "description": "Class to contain criteria for item level restore",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string"
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "ItemLevelRestoreTargetInfo": {
+      "description": "Restore target info for Item level restore operation",
+      "required": [
+        "restoreCriteria",
+        "datasourceInfo",
+        "recoveryOption"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestoreTargetInfoBase"
+        }
+      ],
+      "properties": {
+        "restoreCriteria": {
+          "description": "Restore Criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemLevelRestoreCriteria"
+          }
+        },
+        "datasourceInfo": {
+          "$ref": "#/definitions/Datasource",
+          "description": "Information of target DS"
+        },
+        "datasourceSetInfo": {
+          "$ref": "#/definitions/DatasourceSet",
+          "description": "Information of target DS Set"
+        }
+      },
+      "x-ms-discriminator-value": "ItemLevelRestoreTargetInfo"
+    },
     "JobExtendedInfo": {
       "description": "Extended Information about the job",
       "properties": {
@@ -3867,6 +3928,26 @@
       },
       "title": "ProtectionStatusDetails",
       "type": "object"
+    },
+    "RangeBasedItemLevelRestoreCriteria": {
+      "description": "Item Level target info for restore operation",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "properties": {
+        "minMatchingValue": {
+          "description": "minimum value for range prefix match",
+          "type": "string"
+        },
+        "maxMatchingValue": {
+          "description": "maximum value for range prefix match",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "RangeBasedItemLevelRestoreCriteria"
     },
     "RecoveryPointDataStoreDetails": {
       "description": "RecoveryPoint datastore details",
