@@ -129,12 +129,15 @@ directive:
   - from:
     - phonenumbers.json
     suppress:
-    - UNREFERENCED_JSON_FILE # We believe this is an error
-    - "AutoRest exception" # We believe this is an error
     - R2005 #Long running operation status code
     reason:
-    - The unreferenced file and API version error could not be resolved after close observation.
     - Approval from Azure review board that Long Running Operations can return 202s.
+  - from:
+    - DeleteOperation.json
+    suppress:
+    - UNREFERENCED_JSON_FILE #Long running operation status code
+    reason:
+    - The unreferenced file and API version error could not be resolved after close observation.
 ```
 
 ---
