@@ -6,28 +6,36 @@
       "vscode-restclient"
     ],
     "Referer": [
-      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/providers/Microsoft.EdgeOrder/listConfigurations?api-version=2020-12-01-preview"
+      "https://localhost/subscriptions/{{subscriptionId}}/providers/Microsoft.EdgeOrder/listConfigurations?api-version=2020-12-01-preview"
     ],
     "Content-Type": [
       "application/json; charset=utf-8"
     ],
     "Content-Length": [
-      "323"
+      "498"
     ],
     "configurationsRequest": {
       "configurationFilters": [
         {
           "hierarchyInformation": {
-            "productFamilyName": "AzureStackEdge",
-            "productLineName": "AzureStackEdge",
-            "productName": "AzureStackEdgeProFPGA"
+            "productFamilyName": "azurestackedge",
+            "productLineName": "azure stack edge_pl",
+            "productName": "azure stack edge pro - gpu"
           },
-          "filterableProperty": {
-            "type": "ShipToCountries",
-            "supportedValues": [
-              "US"
-            ]
-          }
+          "filterableProperty": [
+            {
+              "type": "ShipToCountries",
+              "supportedValues": [
+                "US"
+              ]
+            },
+            {
+              "type": "DoubleEncryptionStatus",
+              "supportedValues": [
+                "Enabled"
+              ]
+            }
+          ]
         }
       ]
     }
@@ -59,9 +67,15 @@
                     "US",
                     "UK"
                   ]
+                },
+                {
+                  "type": "DoubleEncryptionStatus",
+                  "supportedValues": [
+                    "Enabled"
+                  ]
                 }
               ],
-              "displayName": "1 GPU",
+              "displayName": "azurestackedgepro-gpu 1 GPU",
               "description": {
                 "descriptionType": "Base",
                 "keywords": [],
@@ -74,10 +88,10 @@
                 "disabledReason": "None"
               },
               "hierarchyInformation": {
-                "productFamilyName": "AzureStackEdge",
-                "productLineName": "AzureStackEdge",
-                "productName": "AzureStackEdgeProFPGA",
-                "configurationName": "1GPU"
+                "productFamilyName": "azurestackedge",
+                "productLineName": "azure stack edge_pl",
+                "productName": "azure stack edge pro - gpu",
+                "configurationName": "azurestackedgepro-gpu1 gpu"
               }
             }
           }
