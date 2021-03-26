@@ -8,6 +8,7 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   package-name: azure-mgmt-azureadb2c
+  package-version: 1.0.0b2
   clear-output-folder: true
   no-namespace-folders: true
   python-base-folder: azureadb2c/azure-mgmt-azureadb2c/azure/mgmt/azureadb2c
