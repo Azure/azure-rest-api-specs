@@ -127,10 +127,10 @@ input-file:
 ``` yaml
 - directive
   - where:
-    - $..paths["Microsoft.CommunicationServicesPhoneNumbers/stable/2021-03-07/**/*"]
+    - $..paths["Microsoft.CommunicationServicesPhoneNumbers/stable/2021-03-07/*"]
     suppress:
     - UNREFERENCED_JSON_FILE
-    - AutoRest exception
+    - "AutoRest exception"
     - R2005
     reason:
     - The unreferenced file and API version error could not be resolved after close observation.
