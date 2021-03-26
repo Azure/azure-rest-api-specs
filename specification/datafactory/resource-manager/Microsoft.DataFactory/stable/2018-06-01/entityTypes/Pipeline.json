@@ -258,6 +258,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -933,6 +937,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
@@ -1656,6 +1664,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -3864,6 +3876,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the sink data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -4838,6 +4854,36 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "MongoDbAtlasSink": {
+      "description": "A copy activity MongoDB Atlas sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "type": "object",
+          "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MongoDbV2Sink": {
+      "description": "A copy activity MongoDB sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "type": "object",
+          "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
         }
       }
     },
