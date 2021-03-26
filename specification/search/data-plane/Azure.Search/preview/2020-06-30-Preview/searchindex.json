@@ -271,7 +271,7 @@
                 {
                   "value": "en-us",
                   "name": "EnUs",
-                  "description": "English"
+                  "description": "English (US)"
                 }
               ]
             },
@@ -1088,28 +1088,25 @@
     "AnswerResult": {
       "properties": {
         "score": {
-          "type": "integer",
-          "format": "int64",
+          "type": "number",
+          "format": "double",
           "readOnly": true,
           "description": "The score value represents how relevant the answer is to the the query relative to other answers returned for the query."
         },
         "key": {
           "type": "string",
           "readOnly": true,
-          "description": "The key of the document the answer was extracted from.",
-          "x-ms-client-name": "Key"
+          "description": "The key of the document the answer was extracted from."
         },
         "text": {
           "type": "string",
           "readOnly": true,
-          "description": "The text passage extracted from the document contents as the answer.",
-          "x-ms-client-name": "Text"
+          "description": "The text passage extracted from the document contents as the answer."
         },
         "highlights": {
           "type": "string",
           "readOnly": true,
-          "description": "Same text passage as in the Text property with highlighted text phrases most relevant to the query.",
-          "x-ms-client-name": "Highlights"
+          "description": "Same text passage as in the Text property with highlighted text phrases most relevant to the query."
         }
       },
       "additionalProperties": true,
@@ -1120,14 +1117,12 @@
         "text": {
           "type": "string",
           "readOnly": true,
-          "description": "A representative text passage extracted from the document most relevant to the search query.",
-          "x-ms-client-name": "Text"
+          "description": "A representative text passage extracted from the document most relevant to the search query."
         },
         "highlights": {
           "type": "string",
           "readOnly": true,
-          "description": "Same text passage as in the Text property with highlighted phrases most relevant to the query.",
-          "x-ms-client-name": "Highlights"
+          "description": "Same text passage as in the Text property with highlighted phrases most relevant to the query."
         }
       },
       "additionalProperties": true,
@@ -1171,6 +1166,7 @@
           },
           "readOnly": true,
           "x-ms-client-name": "Answers",
+          "x-nullable": true,
           "description": "The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'."
         },
         "@search.nextPageParameters": {
@@ -1215,7 +1211,7 @@
           "format": "double",
           "readOnly": true,
           "x-ms-client-name": "RerankerScore",
-          "x-nullable": false,
+          "x-nullable": true,
           "description": "The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'."
         },
         "@search.highlights": {
@@ -1240,6 +1236,7 @@
           },
           "readOnly": true,
           "x-ms-client-name": "Captions",
+          "x-nullable": true,
           "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'."
         }
       },
