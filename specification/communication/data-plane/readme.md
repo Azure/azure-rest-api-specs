@@ -24,6 +24,10 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the communicationservices.
 
+```yaml
+openapi-type: data-plane
+tag: package-2020-07-20-preview1
+```
 
 ### Tag: package-2020-07-20-preview1
 
@@ -189,5 +193,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-
