@@ -224,11 +224,11 @@ input-file:
 - Microsoft.Automation/preview/2020-01-13-preview/watcher.json
 - Microsoft.Automation/preview/2020-01-13-preview/job.json
 - Microsoft.Automation/preview/2020-01-13-preview/operations.json
-- Microsoft.Automation/preview/2020-01-13-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2020-01-13-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2020-01-13-preview/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/preview/2020-01-13-preview/dscConfiguration.json
 - Microsoft.Automation/preview/2020-01-13-preview/runbook.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
