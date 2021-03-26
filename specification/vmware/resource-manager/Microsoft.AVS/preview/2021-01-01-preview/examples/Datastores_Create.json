@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2021-01-01-preview",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "clusterName": "cluster1",
+    "datastoreName": "datastore1",
+    "datastore": {
+      "properties": {
+        "netAppVolume": {
+          "nfsProviderIp": "12.0.0.4",
+          "nfsFilePath": "ANFVol2"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/datastores/datastore1",
+        "name": "datastore1",
+        "properties": {
+          "netAppVolume": {
+            "nfsProviderIp": "12.0.0.4",
+            "nfsFilePath": "ANFVol2"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "type": "Microsoft.AVS/privateClouds/clusters/datastores"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/datastores/datastore1",
+        "name": "datastore1",
+        "properties": {
+          "netAppVolume": {
+            "nfsProviderIp": "12.0.0.4",
+            "nfsFilePath": "ANFVol2"
+          },
+          "provisioningState": "Updating"
+        },
+        "type": "Microsoft.AVS/privateClouds/clusters/datastores"
+      }
+    }
+  }
+}
