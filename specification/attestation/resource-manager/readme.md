@@ -60,6 +60,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
@@ -91,9 +92,9 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Trenton
+## Terraform
 
-See configuration in [readme.trenton.md](./readme.trenton.md)
+See configuration in [readme.terraform.md](./readme.terraform.md)
 
 ## AzureResourceSchema
 

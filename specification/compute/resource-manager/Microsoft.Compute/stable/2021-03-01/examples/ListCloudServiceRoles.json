@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "ConstosoRG",
+    "cloudServiceName": "{cs-name}",
+    "api-version": "2021-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ContosoFrontend",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roles/ContosoFrontend",
+            "type": "Microsoft.Compute/cloudServices/roles",
+            "location": "eastus2euap",
+            "sku": {
+              "name": "Standard_D1_v2",
+              "tier": "Standard",
+              "capacity": 2
+            },
+            "properties": {
+              "uniqueId": "b03bc269-766b-4921-b91a-7dffaae4d03b:ContosoFrontend"
+            }
+          },
+          {
+            "name": "ContosoBackend",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roles/ContosoBackend",
+            "type": "Microsoft.Compute/cloudServices/roles",
+            "location": "eastus2euap",
+            "sku": {
+              "name": "Standard_D1_v2",
+              "tier": "Standard",
+              "capacity": 2
+            },
+            "properties": {
+              "uniqueId": "b03bc269-766b-4921-b91a-7dffaae4d03b:ContosoBackend"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

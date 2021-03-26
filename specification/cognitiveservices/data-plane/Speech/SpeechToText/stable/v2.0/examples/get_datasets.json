@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "dataImportKind": "Acoustic",
+          "lastActionDateTime": "2019-01-07T12:36:07Z",
+          "status": "Succeeded",
+          "id": "9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1",
+          "createdDateTime": "2019-01-07T12:34:12Z",
+          "locale": "en-US",
+          "name": "Acoustic dataset",
+          "properties": {
+            "AcceptedLines": "11",
+            "RejectedLines": "2",
+            "ReportUri": "https://www.contoso.com/AcousticData/6d52cb46-a6d8-4954-ba7e-1407a1bc2a4a?st=2018-02-09T18%3A07%3A00Z&se=2018-02-10T18%3A07%3A00Z&sp=rl&sv=2017-04-17&sr=b&sig=a324840f-37fa-4bbf-91a7-1ced1052bc3e"
+          }
+        },
+        {
+          "dataImportKind": "Pronunciation",
+          "lastActionDateTime": "2019-01-07T12:36:07Z",
+          "status": "Succeeded",
+          "id": "c0a2c730-19f7-4a78-9e0f-f8b6efa5f0a5",
+          "createdDateTime": "2019-01-07T12:34:12Z",
+          "locale": "en-US",
+          "name": "Pronunciation dataset",
+          "properties": {
+            "AcceptedLines": "11",
+            "RejectedLines": "2",
+            "ReportUri": "https://www.contoso.com/PronunciationData/71e831ef-ba18-4fbb-8559-cea56f98284f?st=2018-02-09T18%3A07%3A00Z&se=2018-02-10T18%3A07%3A00Z&sp=rl&sv=2017-04-17&sr=b&sig=5b69ed9e-e848-461b-8f4e-78851bc82f07"
+          }
+        },
+        {
+          "dataImportKind": "Language",
+          "lastActionDateTime": "2019-01-07T12:36:07Z",
+          "status": "Succeeded",
+          "id": "702d913a-8ba6-4f66-ad5c-897400b081fb",
+          "createdDateTime": "2019-01-07T12:34:12Z",
+          "locale": "en-US",
+          "name": "Language dataset",
+          "properties": {
+            "AcceptedLines": "11",
+            "RejectedLines": "2",
+            "ReportUri": "https://www.contoso.com/LanguageData/74be207a-22a3-4c24-b6c9-e51297d3d537?st=2018-02-09T18%3A07%3A00Z&se=2018-02-10T18%3A07%3A00Z&sp=rl&sv=2017-04-17&sr=b&sig=86eacb5b-f18e-4df4-a250-fcdcbc059c1b"
+          }
+        }
+      ]
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "code": "Unauthorized",
+        "message": "Authentication is required to access the resource."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "code": "Forbidden",
+        "message": "No permission to access this resource."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "code": "TooManyRequests",
+        "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+      }
+    }
+  }
+}

@@ -19,6 +19,7 @@ batch:
   - tag: package-2017-09-preview-only
   - tag: package-2018-03
   - tag: package-2018-04
+  - tag: package-2018-08
 ```
 
 ### Tag: package-2015-11 and ruby
@@ -78,5 +79,15 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2018-04' && $(ruby)
 namespace: "Azure::TrafficManager::Mgmt::V2018_04_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_traffic_manager/lib
+```
+
+### Tag: package-2018-08 and ruby
+
+These settings apply only when `--tag=package-2018-08 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2018-08' && $(ruby)
+namespace: "Azure::TrafficManager::Mgmt::V2018_08_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_traffic_manager/lib
 ```

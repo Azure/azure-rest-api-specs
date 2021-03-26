@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "id": "827712a5-f942-4997-91c3-7c6cde35600b"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/827712a5-f942-4997-91c3-7c6cde35600b",
+        "baseModel": {
+          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/base/8a043172-65b7-4cf3-a8b5-4449efa5a0f1"
+        },
+        "datasets": [
+          {
+            "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/datasets/cdc91c24-3972-496d-a12f-209c35f4cc6c"
+          }
+        ],
+        "links": {
+          "manifest": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/endpoints/manifest/827712a5-f942-4997-91c3-7c6cde35600b",
+          "copyTo": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.0/models/827712a5-f942-4997-91c3-7c6cde35600b/copy"
+        },
+        "properties": {
+          "deprecationDates": {
+            "adaptationDateTime": "2022-11-04T01:00:00Z",
+            "transcriptionDateTime": "2023-05-04T02:00:00Z"
+          }
+        },
+        "lastActionDateTime": "2019-01-07T12:36:07Z",
+        "status": "Running",
+        "createdDateTime": "2019-01-07T12:34:12Z",
+        "locale": "en-US",
+        "displayName": "Language model",
+        "description": "This is a language model"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "code": "InvalidRequest",
+        "message": "The base model isn't valid for this operation.",
+        "innerError": {
+          "code": "InvalidBaseModel",
+          "message": "The base model isn't valid for this operation."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "code": "Unauthorized",
+        "message": "Authentication is required to access the resource."
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "code": "Forbidden",
+        "message": "No permission to access this resource."
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "code": "NotFound",
+        "message": "The specified entity cannot be found."
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "code": "TooManyRequests",
+        "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+      }
+    }
+  }
+}

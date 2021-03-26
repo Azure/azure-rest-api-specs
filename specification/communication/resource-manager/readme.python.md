@@ -13,7 +13,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.communication
   package-name: azure-mgmt-communication
-  package-version: 1.0.0rc1
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 
@@ -37,7 +37,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-communication
 no-namespace-folders: true
-package-version: 1.0.0rc1
+package-version: 1.0.0
 ```
 
 ```yaml $(python) && $(python-mode) == 'update' && $(track2)

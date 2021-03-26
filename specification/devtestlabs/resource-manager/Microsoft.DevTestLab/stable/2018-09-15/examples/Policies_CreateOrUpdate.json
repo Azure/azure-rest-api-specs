@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{labName}",
+    "policySetName": "{policySetName}",
+    "name": "{policyName}",
+    "policy": {
+      "location": "{location}",
+      "tags": {
+        "tagName1": "tagValue1"
+      },
+      "properties": {
+        "description": "{policyDescription}",
+        "status": "{policyStatus}",
+        "factName": "{policyFactName}",
+        "factData": "{policyFactData}",
+        "threshold": "{policyThreshold}",
+        "evaluatorType": "{policyEvaluatorType}"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies/{policyName}",
+        "name": "{labName}",
+        "type": "Microsoft.DevTestLab/labs/policies",
+        "location": "{location}",
+        "properties": {
+          "description": "{policyDescription}",
+          "status": "{policyStatus}",
+          "factName": "{policyFactName}",
+          "factData": "{policyFactData}",
+          "threshold": "{policyThreshold}",
+          "evaluatorType": "{policyEvaluatorType}",
+          "createdDate": "2018-10-01T18:40:48.1739018-07:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        }
+      },
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies/{policyName}",
+        "name": "{labName}",
+        "type": "Microsoft.DevTestLab/labs/policySets/policies",
+        "location": "{location}",
+        "properties": {
+          "description": "{policyDescription}",
+          "status": "{policyStatus}",
+          "factName": "{policyFactName}",
+          "factData": "{policyFactData}",
+          "threshold": "{policyThreshold}",
+          "evaluatorType": "{policyEvaluatorType}",
+          "createdDate": "2018-10-01T18:40:48.1739018-07:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        }
+      },
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  }
+}

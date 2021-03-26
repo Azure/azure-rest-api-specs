@@ -48,10 +48,10 @@
         "description": "Gets the workspaces in a subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -59,6 +59,12 @@
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -81,13 +87,13 @@
         "description": "Gets workspaces in a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -95,6 +101,12 @@
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -117,7 +129,7 @@
         "description": "Create or update a workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
@@ -132,10 +144,10 @@
             "description": "The parameters required to create or update a workspace."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -153,6 +165,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -170,16 +188,16 @@
         "description": "Deletes a workspace resource. To recover the workspace, create it again with the same name, in the same subscription, resource group and location. The name is kept for 14 days and cannot be used for another workspace. To remove the workspace completely and release the name, use the force flag.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "force",
@@ -198,6 +216,12 @@
           },
           "204": {
             "description": "NoContent response definition."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -215,16 +239,16 @@
         "description": "Gets a workspace instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -232,6 +256,12 @@
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -249,7 +279,7 @@
         "description": "Updates a workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
@@ -264,10 +294,10 @@
             "description": "The parameters required to patch a workspace."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -275,6 +305,12 @@
             "description": "The existing workspace was successfully updated. Check provisioningStatus to see detailed status.",
             "schema": {
               "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -294,10 +330,10 @@
         "description": "Gets recently deleted workspaces in a subscription, available for recovery.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -305,6 +341,12 @@
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -327,13 +369,13 @@
         "description": "Gets recently deleted workspaces in a resource group, available for recovery.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -341,6 +383,12 @@
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -363,7 +411,8 @@
             "PerNode",
             "PerGB2018",
             "Standalone",
-            "CapacityReservation"
+            "CapacityReservation",
+            "LACluster"
           ],
           "x-ms-enum": {
             "name": "WorkspaceSkuNameEnum",
@@ -481,13 +530,22 @@
         "retentionInDays": {
           "type": "integer",
           "format": "int32",
-          "minimum": 30,
-          "maximum": 730,
-          "description": "The workspace data retention in days, between 30 and 730."
+          "x-nullable": true,
+          "description": "The workspace data retention in days. Allowed values are per pricing plan. See pricing tiers documentation for details."
         },
         "workspaceCapping": {
           "$ref": "#/definitions/WorkspaceCapping",
           "description": "The daily volume cap for ingestion."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "Workspace creation date.",
+          "readOnly": true
+        },
+        "modifiedDate": {
+          "type": "string",
+          "description": "Workspace modification date.",
+          "readOnly": true
         },
         "publicNetworkAccessForIngestion": {
           "description": "The network access type for accessing Log Analytics ingestion.",
@@ -497,6 +555,10 @@
           "description": "The network access type for accessing Log Analytics query.",
           "$ref": "#/definitions/PublicNetworkAccessType"
         },
+        "forceCmkForQuery": {
+          "type": "boolean",
+          "description": "Indicates whether customer managed storage is mandatory for query management."
+        },
         "privateLinkScopedResources": {
           "readOnly": true,
           "type": "array",
@@ -504,9 +566,19 @@
             "$ref": "#/definitions/PrivateLinkScopedResource"
           },
           "description": "List of linked private link scope resources."
+        },
+        "features": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceFeatures",
+          "description": "Workspace features."
         }
       },
       "description": "Workspace properties."
+    },
+    "WorkspaceFeatures": {
+      "properties": {},
+      "additionalProperties": true,
+      "description": "Workspace features."
     },
     "PrivateLinkScopedResource": {
       "properties": {
@@ -535,7 +607,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "The top level Workspace resource container."
@@ -562,7 +634,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/AzureEntityResource"
         }
       ],
       "description": "The top level Workspace resource container."

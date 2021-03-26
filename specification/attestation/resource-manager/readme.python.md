@@ -23,13 +23,15 @@ namespace: azure.mgmt.attestation
 package-name: azure-mgmt-attestation
 package-version: 0.1.0
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation/azure/mgmt/attestation
 ```
-``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation

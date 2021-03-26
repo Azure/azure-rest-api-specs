@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "{devtestlabName}",
+    "name": "{userName}",
+    "user": {
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "identity": {
+            "principalName": "{principalName}",
+            "principalId": "{principalId}",
+            "tenantId": "{tenantId}",
+            "objectId": "{objectId}",
+            "appId": "{appId}"
+          },
+          "secretStore": {
+            "keyVaultUri": "users/{userName}",
+            "keyVaultId": "{keyVaultId}"
+          },
+          "createdDate": "2018-10-01T18:40:48.1739018-07:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        }
+      },
+      "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}",
+      "name": "{userName}",
+      "type": "Microsoft.DevTestLab/labs/users",
+      "location": "{location}",
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  }
+}

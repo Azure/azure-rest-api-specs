@@ -421,7 +421,7 @@
       }
     },
     "AmazonS3ReadSettings": {
-      "description": "Azure data lake store read settings.",
+      "description": "Amazon S3 read settings.",
       "type": "object",
       "allOf": [
         {
@@ -589,6 +589,108 @@
         "useTempFileRename": {
           "description": "Upload to temporary file(s) and rename. Disable this option if your SFTP server doesn't support rename operation. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
+        }
+      }
+    },
+    "AmazonS3CompatibleReadSettings": {
+      "description": "Amazon S3 Compatible read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Amazon S3 Compatible wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Amazon S3 Compatible wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the S3 Compatible object name. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OracleCloudStorageReadSettings": {
+      "description": "Oracle Cloud Storage read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Oracle Cloud Storage wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Oracle Cloud Storage wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the Oracle Cloud Storage object name. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
     },

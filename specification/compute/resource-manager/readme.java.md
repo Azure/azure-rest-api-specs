@@ -16,12 +16,26 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-compute
 
 ```yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2020-10-01-preview
   - tag: package-2020-06-01
   - tag: package-2019-07  
   - tag: package-disks-2018-04
   - tag: package-compute-only-2017-12
   - tag: package-skus-2017-09
   - tag: package-compute-2017-03
+```
+
+### Tag: package-2020-10-01-preview and java
+
+These settings apply only when `--tag=package-2020-10-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-10-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.compute.v2020_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/compute/mgmt-v2020_10_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2020-06-01 and java

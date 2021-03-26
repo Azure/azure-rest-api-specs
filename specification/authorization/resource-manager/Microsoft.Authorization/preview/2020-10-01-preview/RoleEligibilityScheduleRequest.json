@@ -47,7 +47,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The scope of the role eligibility schedule request to create. The scope can be any REST resource instance. For example, use '/subscriptions/{subscription-id}/' for a subscription, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
+            "description": "The scope of the role eligibility schedule request to create. The scope can be any REST resource instance. For example, use '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/' for a subscription, '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
             "x-ms-skip-url-encoding": true
           },
           {
@@ -423,6 +423,12 @@
           "type": "string",
           "readOnly": true,
           "description": "Id of the user who created this request"
+        },
+        "expandedProperties": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Additional properties of principal, scope and role definition",
+          "$ref": "#/definitions/ExpandedProperties"
         }
       },
       "required": [
@@ -495,6 +501,68 @@
         }
       },
       "description": "An error response from the service."
+    },
+    "ExpandedProperties": {
+      "properties": {
+        "scope": {
+          "type": "object",
+          "description": "Details of the resource scope",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Scope id of the resource"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the resource"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the resource"
+            }
+          }
+        },
+        "roleDefinition": {
+          "type": "object",
+          "description": "Details of role definition",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the role definition"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the role definition"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the role definition"
+            }
+          }
+        },
+        "principal": {
+          "type": "object",
+          "description": "Details of the principal",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the principal"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the principal"
+            },
+            "email": {
+              "type": "string",
+              "description": "Email id of the principal"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the principal"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {

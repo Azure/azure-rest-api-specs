@@ -9,4 +9,10 @@ az:
   package-name: azure-mgmt-adp
 az-output-folder: $(azure-cli-extension-folder)/src/adp
 python-sdk-output-folder: "$(az-output-folder)/azext_adp/vendored_sdks/adp"
+
+directive:
+- from: swagger-document
+  where: $.definitions.DataPoolLocation
+  transform: >
+    $.properties.encryption["x-ms-client-flatten"] = true;
 ```

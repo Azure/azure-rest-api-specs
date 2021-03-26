@@ -33,6 +33,7 @@ If any further question about AME onboarding or validation tools, please view th
 - [ ] Ensure to check this box if one of the following scenarios meet updates in the PR, so that label “WaitForARMFeedback” will be added automatically to involve ARM API Review. Failure to comply may result in delays for manifest application. Note this does not apply to data plane APIs, all “removals” and “adding a new property” no more require ARM API review.
   - Adding new API(s)
   - Adding a new API version
+  -  [ ] Ensure to copy the existing version into new directory structure for first commit (including refactoring) and then push new changes including version updates in separate commits. This is required to review the changes efficiently.
   - Adding a new service
 
 - [ ] Please ensure you've reviewed following [guidelines](https://aka.ms/rpguidelines) including [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md). Estimated time (4 hours). This is required before you can request review from ARM API Review board.

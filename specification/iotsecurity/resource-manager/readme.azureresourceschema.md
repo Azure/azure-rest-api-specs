@@ -21,5 +21,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.IoTSecurity/preview/2021-02-01-preview/defenderSettings.json
   - Microsoft.IoTSecurity/preview/2021-02-01-preview/operations.json
+  - Microsoft.IoTSecurity/preview/2021-02-01-preview/sites.json
+  - Microsoft.IoTSecurity/preview/2021-02-01-preview/sensors.json
+  - Microsoft.IoTSecurity/preview/2021-02-01-preview/onPremiseSensors.json
 
 ```

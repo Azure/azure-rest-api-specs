@@ -6,11 +6,23 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-communication-2020-08-20
   - tag: schema-communication-2020-08-20-preview
 
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-communication-2020-08-20 and azureresourceschema
+
+``` yaml $(tag) == 'schema-communication-2020-08-20' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Communication/stable/2020-08-20/CommunicationService.json
+
+```
 
 ### Tag: schema-communication-2020-08-20-preview and azureresourceschema
 
