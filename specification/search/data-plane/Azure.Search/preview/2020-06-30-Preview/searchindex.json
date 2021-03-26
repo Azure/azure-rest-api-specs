@@ -333,7 +333,7 @@
                 }
               ]
             },
-            "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the |count-<number of answers> option after the answers parameter value. Default is 1.",
+            "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character '|' followed by the 'count-<number of answers>' option after the answers parameter value, such as 'extractive|count-3'. Default count is 1.",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
@@ -1106,6 +1106,7 @@
         "highlights": {
           "type": "string",
           "readOnly": true,
+          "x-nullable": true,
           "description": "Same text passage as in the Text property with highlighted text phrases most relevant to the query."
         }
       },
@@ -1122,6 +1123,7 @@
         "highlights": {
           "type": "string",
           "readOnly": true,
+          "x-nullable": true,
           "description": "Same text passage as in the Text property with highlighted phrases most relevant to the query."
         }
       },
@@ -1457,7 +1459,7 @@
           }
         ]
       },
-      "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the |count-<number of answers> option after the answers parameter value. Default is 1."
+      "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character '|' followed by the 'count-<number of answers>' option after the answers parameter value, such as 'extractive|count-3'. Default count is 1."
     },
     "QueryLanguage": {
       "type": "string",
