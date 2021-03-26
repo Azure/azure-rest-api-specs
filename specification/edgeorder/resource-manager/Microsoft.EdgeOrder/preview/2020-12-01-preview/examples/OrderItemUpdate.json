@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "TestRG",
+    "orderItemName": "TestOrderItemName01",
+    "api-version": "2020-12-01-preview",
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "Referer": [
+      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName01?api-version=2020-12-01-preview"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "493"
+    ],
+    "orderItemUpdateParameter": {
+      "properties": {
+        "forwardAddress": {
+          "contactDetails": {
+            "contactName": "Updated contact name",
+            "phone": "22222",
+            "emailList": [
+              "testemail@microsoft.com"
+            ]
+          }
+        },
+        "preferences": {
+          "transportPreferences": {
+            "preferredShipmentType": "CustomerManaged"
+          }
+        }
+      },
+      "tags": {
+        "pigeon": "bird",
+        "tiger": "animal",
+        "ant": "insect"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "orderItemDetails": {
+            "productDetails": {
+              "hierarchyInformation": {
+                "productFamilyName": "azurestackedge",
+                "productLineName": "azure stack edge_pl",
+                "productName": "azure stack edge pro - fpga",
+                "configurationName": "azure stack edge pro - fpga 1 gpu"
+              },
+              "count": 0,
+              "deviceDetails": []
+            },
+            "orderItemType": "Purchase",
+            "currentStage": {
+              "stageStatus": "InProgress",
+              "stageName": "InReview",
+              "startTime": "2021-03-24T15:17:13.1376775+05:30"
+            },
+            "orderItemStageHistory": [
+              {
+                "stageStatus": "None",
+                "stageName": "InReview"
+              },
+              {
+                "stageStatus": "None",
+                "stageName": "Placed"
+              },
+              {
+                "stageStatus": "None",
+                "stageName": "Confirmed"
+              },
+              {
+                "stageStatus": "None",
+                "stageName": "ReadyForDispatch"
+              }
+            ],
+            "preferences": {
+              "transportPreferences": {
+                "preferredShipmentType": "CustomerManaged"
+              }
+            },
+            "notificationEmailList": [],
+            "cancellationStatus": "Cancellable",
+            "deletionStatus": "Allowed",
+            "returnStatus": "Returnable"
+          },
+          "addressDetails": {
+            "forwardAddress": {
+              "contactDetails": {
+                "contactName": "Updated contact name",
+                "phone": "22222",
+                "emailList": [
+                  "testemail@microsoft.com"
+                ]
+              }
+            }
+          },
+          "startTime": "2021-03-24T15:17:13.1376775+05:30",
+          "orderId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/locations/westus/orders/TestOrderItemName01"
+        },
+        "location": "westus",
+        "tags": {
+          "pigeon": "bird",
+          "tiger": "animal",
+          "ant": "insect"
+        },
+        "name": "TestOrderItemName01",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName01",
+        "type": "Microsoft.EdgeOrder/orderItems"
+      }
+    },
+    "202": {}
+  }
+}
