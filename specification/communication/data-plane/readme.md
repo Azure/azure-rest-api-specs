@@ -125,13 +125,13 @@ input-file:
 
 ## Supression
 ``` yaml
-- directive
+directive:
   - where:
-    - readme.md
+    - $.paths["*"]
     suppress:
-    - UNREFERENCED_JSON_FILE
-    - "AutoRest exception"
-    - R2005
+    - UNREFERENCED_JSON_FILE # We believe this is an error
+    - "AutoRest exception" # We believe this is an error
+    - R2005 #Long running operation status code
     reason:
     - The unreferenced file and API version error could not be resolved after close observation.
     - Approval from Azure review board that Long Running Operations can return 202s.
