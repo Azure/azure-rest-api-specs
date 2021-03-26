@@ -202,6 +202,30 @@
           },
           "description": "The metric dimensions.",
           "readOnly": true
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Indicates whether regional MDM account is enabled.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account.",
+          "readOnly": true
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "The source MDM namespace.",
+          "readOnly": true
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The supported time grain types.",
+          "readOnly": true
         }
       },
       "type": "object",
@@ -279,6 +303,29 @@
         "properties": {
           "$ref": "#/definitions/Properties",
           "description": "Operation properties format."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Whether the operation applies to data-plane.",
+          "x-nullable": true
+        },
+        "actionType": {
+          "type": "string",
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "values": [
+              {
+                "value": "Internal",
+                "description": "An internal action."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Indicates the action type.",
+          "x-nullable": true
         }
       },
       "type": "object",
@@ -404,6 +451,10 @@
         "encryption": {
           "$ref": "#/definitions/AccountEncryption",
           "description": "The account encryption properties."
+        },
+        "keyDelivery": {
+          "$ref": "#/definitions/KeyDelivery",
+          "description": "The Key Delivery properties for Media Services account."
         }
       },
       "type": "object",
@@ -576,6 +627,49 @@
       "required": [
         "type"
       ]
+    },
+    "AccessControl": {
+      "properties": {
+        "defaultAction": {
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "DefaultAction",
+            "values": [
+              {
+                "value": "Allow",
+                "description": "All public IP addresses are allowed."
+              },
+              {
+                "value": "Deny",
+                "description": "Public IP addresses are blocked."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The behavior for IP access control in Key Delivery."
+        },
+        "ipAllowList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The IP allow list for access control in Key Delivery. If the default action is set to 'Allow', the IP allow list must be empty."
+        }
+      },
+      "type": "object"
+    },
+    "KeyDelivery": {
+      "properties": {
+        "accessControl": {
+          "$ref": "#/definitions/AccessControl",
+          "description": "The access control properties for Key Delivery."
+        }
+      },
+      "type": "object"
     },
     "OperationCollection": {
       "properties": {
@@ -840,6 +934,9 @@
         "x-ms-examples": {
           "Delete a Media Services account": {
             "$ref": "examples/accounts-delete.json"
+          },
+          "Deleting already deleted Media services account": {
+            "$ref": "examples/accounts-delete-no-content.json"
           }
         }
       },
@@ -1371,47 +1468,6 @@
         "x-ms-examples": {
           "List all Media Services accounts": {
             "$ref": "examples/accounts-subscription-list-all-accounts.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Media/mediaservices/{accountName}": {
-      "get": {
-        "summary": "Get a Media Services account",
-        "description": "Get the details of a Media Services account",
-        "operationId": "Mediaservices_GetBySubscription",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MediaService"
-            }
-          },
-          "default": {
-            "description": "Detailed error information.",
-            "schema": {
-              "$ref": "./Common.json#/definitions/ApiError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "description": "The Media Services account name.",
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "x-ms-examples": {
-          "Get a Media Services account by name": {
-            "$ref": "examples/accounts-subscription-get-by-name.json"
           }
         }
       }
