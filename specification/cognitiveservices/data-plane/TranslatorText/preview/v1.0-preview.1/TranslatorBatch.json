@@ -1111,6 +1111,46 @@
         }
       }
     },
+    "Status": {
+      "description": "List of possible statuses for job or document",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Cancelled",
+        "Cancelling",
+        "ValidationFailed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotStarted"
+          },
+          {
+            "value": "Running"
+          },
+          {
+            "value": "Succeeded"
+          },
+          {
+            "value": "Failed"
+          },
+          {
+            "value": "Cancelled"
+          },
+          {
+            "value": "Cancelling"
+          },
+          {
+            "value": "ValidationFailed"
+          }
+        ]
+      }
+    },
     "ErrorCodeV2": {
       "description": "Enums containing high level error codes.",
       "enum": [
@@ -1287,9 +1327,7 @@
           "example": "2020-01-20T11:41:07.7010000-08:00"
         },
         "status": {
-          "description": "Overall Operation status",
-          "type": "string",
-          "example": "Succeeded"
+          "$ref": "#/definitions/Status"
         },
         "error": {
           "$ref": "#/definitions/ErrorV2"
@@ -1355,8 +1393,7 @@
           "example": "2020-01-20T11:41:07.7010000-08:00"
         },
         "status": {
-          "description": "Status / progress of the translation of the Document.",
-          "type": "string"
+          "$ref": "#/definitions/Status"
         },
         "to": {
           "description": "To language",
