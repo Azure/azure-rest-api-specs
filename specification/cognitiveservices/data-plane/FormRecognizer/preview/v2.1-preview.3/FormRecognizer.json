@@ -2090,6 +2090,21 @@
                     ],
                     "x-nullable": false
                 },
+                "valueGender": {
+                    "description": "Gender value: M, F, or X.",
+                    "type": "string",
+                    "enum": [
+                        "M",
+                        "F",
+                        "X"
+                    ],
+                    "x-nullable": false
+                },
+                "valueCountry": {
+                    "description": "3-letter country code (ISO 3166-1 alpha-3).",
+                    "type": "string",
+                    "x-nullable": false
+                },
                 "text": {
                     "description": "Text content of the extracted field.",
                     "type": "string"
@@ -2129,7 +2144,9 @@
                 "integer",
                 "array",
                 "object",
-                "selectionMark"
+                "selectionMark",
+                "gender",
+                "country"
             ],
             "x-ms-enum": {
                 "name": "FieldValueType",
