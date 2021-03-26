@@ -126,8 +126,8 @@ input-file:
 ## Supression
 ``` yaml
 directive:
-  - where:
-    - $.paths["*"]
+  - from:
+    - phonenumbers.json
     suppress:
     - UNREFERENCED_JSON_FILE # We believe this is an error
     - "AutoRest exception" # We believe this is an error
