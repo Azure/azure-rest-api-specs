@@ -123,6 +123,20 @@ input-file:
   - Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json
 ```
 
+## Supression
+``` yaml
+- directive
+  - where:
+    - $..paths["Microsoft.CommunicationServicesPhoneNumbers/stable/2021-03-07/**/*"]
+    suppress:
+    - UNREFERENCED_JSON_FILE
+    - AutoRest exception
+    - R2005
+    reason:
+    - The unreferenced file and API version error could not be resolved after close observation.
+    - Approval from Azure review board that Long Running Operations can return 202s.
+```
+
 ---
 
 # Code Generation
@@ -147,3 +161,5 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+
