@@ -13,12 +13,18 @@
             "name": "myMapsAccount2",
             "type": "Microsoft.Maps/accounts",
             "location": "global",
+            "kind": "Gen1",
             "tags": {
               "test": "true"
             },
             "sku": {
               "name": "S0",
               "tier": "Standard"
+            },
+            "properties": {
+              "x-ms-client-id": "string",
+              "provisioningState": "Succeeded",
+              "disableLocalAuth": false
             }
           },
           {
@@ -26,12 +32,18 @@
             "name": "myMapsAccount",
             "type": "Microsoft.Maps/accounts",
             "location": "global",
+            "kind": "Gen2",
             "tags": {
               "test": "true"
             },
             "sku": {
-              "name": "S0",
+              "name": "G2",
               "tier": "Standard"
+            },
+            "properties": {
+              "x-ms-client-id": "string",
+              "provisioningState": "Succeeded",
+              "disableLocalAuth": true
             }
           }
         ]

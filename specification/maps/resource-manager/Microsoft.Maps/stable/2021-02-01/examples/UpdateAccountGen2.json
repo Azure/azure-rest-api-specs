@@ -3,7 +3,13 @@
     "api-version": "2021-02-01",
     "subscriptionId": "21a9967a-e8a9-4656-a70b-96ff1c4d05a0",
     "resourceGroupName": "myResourceGroup",
-    "accountName": "myMapsAccount"
+    "accountName": "myMapsAccount",
+    "MapsAccountUpdateParameters": {
+      "kind": "Gen2",
+      "sku": {
+        "name": "G2"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -12,26 +18,15 @@
         "name": "myMapsAccount",
         "type": "Microsoft.Maps/accounts",
         "location": "global",
-        "kind": "Gen1",
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "Application",
-          "createdAt": "2021-02-01T01:01:01.1075056Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "Application",
-          "lastModifiedAt": "2021-02-01T01:01:01.1075056Z"
-        },
-        "tags": {
-          "test": "true"
-        },
+        "kind": "Gen2",
         "sku": {
-          "name": "S0",
+          "name": "G2",
           "tier": "Standard"
         },
         "properties": {
           "x-ms-client-id": "string",
-          "disableLocalAuth": false,
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "disableLocalAuth": false
         }
       }
     }
