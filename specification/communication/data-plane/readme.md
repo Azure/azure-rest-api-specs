@@ -24,26 +24,6 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the communicationservices.
 
-```yaml
-openapi-type: data-plane
-tag: package-2021-03-07
-```
-
-### Tag: package-2021-03-07
-
-These settings apply only when `--tag=package-2021-03-07` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-03-07'
-input-file:
-  - Microsoft.CommunicationServicesPhoneNumbers/stable/2021-03-07/phonenumbers.json
-title:
-  Azure Communication Services
-```
-
-```yaml
-openapi-type: data-plane
-tag: package-2020-07-20-preview1
-```
 
 ### Tag: package-2020-07-20-preview1
 
@@ -101,6 +81,7 @@ These settings apply only when `--tag=package-2021-03-07` is specified on the co
 input-file:
   - Microsoft.CommunicationServicesIdentity/stable/2021-03-07/CommunicationIdentity.json
   - Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json
+  - Microsoft.CommunicationServicesPhoneNumbers/stable/2021-03-07/phonenumbers.json
 title:
   Azure Communication Services
 ```
@@ -133,7 +114,7 @@ directive:
     reason:
     - Approval from Azure review board that Long Running Operations can return 202s.
   - from:
-    - DeleteOperation.json
+    - readme.md
     suppress:
     - UNREFERENCED_JSON_FILE #Long running operation status code
     reason:
