@@ -7,12 +7,12 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: Microsoft.ChangeAnalysis
-package-name: changeanalysis
+package-name: azure-mgmt-changeanalysis
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ```yaml $(python) && $(track2)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/azure-mgmt/changeanalysis
+output-folder: $(python-sdks-folder)/changeanalysis/azure-mgmt-changeanalysis/azure/mgmt/changeanalysis
 ```
