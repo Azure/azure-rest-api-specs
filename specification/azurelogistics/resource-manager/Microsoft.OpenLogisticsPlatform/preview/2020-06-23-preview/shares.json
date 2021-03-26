@@ -60,7 +60,6 @@
           }
         ],
         "responses": {
- 
           "200": {
             "description": "",
             "schema": {
@@ -273,6 +272,18 @@
     }
   },
   "definitions": {
+    "ShareProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ]
+    },
     "ShareState": {
       "type": "string",
       "readOnly": true,
@@ -312,8 +323,10 @@
           "description": "Location of the resource.",
           "type": "string",
           "readOnly": false,
-		   "x-ms-mutability": ["create", "read"]
-
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "etag": {
           "description": "The etag",
@@ -328,11 +341,10 @@
             "type": "string"
           }
         },
-		"systemData": {
-          "$ref": "#/definitions/SystemData",
+        "systemData": {
+          "$ref": "#/definitions/ShareSystemData",
           "readOnly": true
         }
-
       },
       "x-ms-azure-resource": true
     },
@@ -344,21 +356,25 @@
         }
       ],
       "properties": {
-	    
         "properties": {
           "type": "object",
           "properties": {
             "targetTenantId": {
               "type": "string",
               "readOnly": false,
-			  "x-ms-mutability": [
-                 "read",
-                 "create"
+              "x-ms-mutability": [
+                "read",
+                "create"
               ]
             },
             "description": {
               "type": "string",
               "readOnly": false
+            },
+            "provisioningState": {
+              "description": "The provisioning state of the resource.",
+              "readOnly": true,
+              "$ref": "#/definitions/ShareProvisioningState"
             },
             "shareState": {
               "$ref": "#/definitions/ShareState"
@@ -378,11 +394,10 @@
         }
       }
     },
-	 "SystemData": {
+    "ShareSystemData": {
       "description": "Read only system data",
       "type": "object",
       "properties": {
-
         "createdAt": {
           "type": "string",
           "format": "date-time",

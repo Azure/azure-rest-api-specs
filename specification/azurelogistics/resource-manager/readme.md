@@ -41,6 +41,7 @@ input-file:
   - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/shares.json
   - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/shareSubscriptions.json
   - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/shareInvites.json
+  - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/applicationRegistrations.json
 ```
 
 ---
