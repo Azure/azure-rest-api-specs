@@ -718,6 +718,14 @@
       },
       "description": "Specifies the operating system settings for the hybrid machine."
     },
+    "DetectedProperties": {
+      "readOnly": true,
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Detected properties from the machine."
+    },
     "MachineProperties": {
       "properties": {
         "locationData": {
@@ -832,6 +840,14 @@
         "privateLinkScopeResourceId": {
           "type": "string",
           "description": "The resource id of the private link scope this machine is assigned to, if any."
+        },
+        "parentClusterResourceId": {
+          "type": "string",
+          "description": "The resource id of the parent cluster (Azure HCI) this machine is assigned to, if any."
+        },
+        "detectedProperties": {
+          "$ref": "#/definitions/DetectedProperties",
+          "description": "Detected properties from the machine."
         }
       },
       "description": "Describes the properties of a hybrid machine."
@@ -840,6 +856,10 @@
       "properties": {
         "locationData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
+        },
+        "parentClusterResourceId": {
+          "type": "string",
+          "description": "The resource id of the parent cluster (Azure HCI) this machine is assigned to, if any."
         },
         "privateLinkScopeResourceId": {
           "type": "string",
