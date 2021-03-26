@@ -127,7 +127,7 @@ input-file:
 ``` yaml
 - directive
   - where:
-    - $..paths["Microsoft.CommunicationServicesPhoneNumbers/stable/2021-03-07/*"]
+    - readme.md
     suppress:
     - UNREFERENCED_JSON_FILE
     - "AutoRest exception"
