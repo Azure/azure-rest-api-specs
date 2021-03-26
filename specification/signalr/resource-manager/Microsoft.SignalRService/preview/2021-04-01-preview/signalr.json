@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-07-01-preview",
+    "version": "2021-04-01-preview",
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service"
   },
@@ -36,9 +36,9 @@
             }
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -91,9 +91,9 @@
             }
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -134,9 +134,9 @@
             }
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -173,9 +173,9 @@
             }
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -215,9 +215,9 @@
             }
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -249,7 +249,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -260,9 +260,9 @@
             }
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -298,7 +298,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -318,9 +318,9 @@
             "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result.."
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -348,10 +348,13 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success. The response indicates the resource is already deleted."
+          },
           "202": {
             "description": "Accepted. The response indicates the delete operation is performed in the background."
           },
@@ -359,9 +362,9 @@
             "description": "Success. The response indicates the resource is already deleted."
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -398,7 +401,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -412,9 +415,9 @@
             "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result.."
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -444,7 +447,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -455,9 +458,9 @@
             }
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -468,18 +471,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List private endpoint connections",
+        "operationId": "SignalRPrivateEndpointConnections_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a list of private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRPrivateEndpointConnections_List": {
+            "$ref": "./examples/SignalRPrivateEndpointConnections_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "SignalR"
         ],
-        "description": "Get the specified private endpoint connection associated with a SignalR resource.",
+        "description": "Get the specified private endpoint connection",
         "operationId": "SignalRPrivateEndpointConnections_Get",
         "parameters": [
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the private endpoint connection associated with the SignalR resource.",
+            "description": "The name of the private endpoint connection",
             "required": true,
             "type": "string"
           },
@@ -493,20 +541,20 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes a list of private link resources.",
+            "description": "Success. The response describes a private endpoint connection.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -520,20 +568,20 @@
         "tags": [
           "SignalR"
         ],
-        "description": "Update the state of specified private endpoint connection associated with a SignalR resource.",
+        "description": "Update the state of specified private endpoint connection",
         "operationId": "SignalRPrivateEndpointConnections_Update",
         "parameters": [
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the private endpoint connection associated with the SignalR resource.",
+            "description": "The name of the private endpoint connection",
             "required": true,
             "type": "string"
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "The resource of private endpoint and its properties.",
+            "description": "The resource of private endpoint and its properties",
             "required": false,
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
@@ -549,7 +597,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -560,9 +608,9 @@
             }
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -576,13 +624,13 @@
         "tags": [
           "SignalR"
         ],
-        "description": "Delete the specified private endpoint connection associated with a SignalR resource.",
+        "description": "Delete the specified private endpoint connection",
         "operationId": "SignalRPrivateEndpointConnections_Delete",
         "parameters": [
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the private endpoint connection associated with the SignalR resource.",
+            "description": "The name of the private endpoint connection",
             "required": true,
             "type": "string"
           },
@@ -596,20 +644,23 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success. The response indicates the resource is already deleted."
+          },
           "202": {
-            "description": "Success"
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
           },
           "204": {
             "description": "Success. The response indicates the private endpoint connection is already deleted."
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -626,7 +677,7 @@
         "tags": [
           "SignalR"
         ],
-        "description": "Get the private link resources that need to be created for a SignalR resource.",
+        "description": "Get the private link resources that need to be created for a resource.",
         "operationId": "SignalRPrivateLinkResources_List",
         "parameters": [
           {
@@ -639,7 +690,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -650,9 +701,9 @@
             }
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -693,20 +744,20 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created and an async operation is executing in background to make the new key to take effect. The response contains new keys and a Location header to query the async operation result.",
+          "202": {
+            "description": "Accepted and an async operation is executing in background to make the new key to take effect. The response contains new access keys and a Location header to query the async operation result.",
             "schema": {
               "$ref": "#/definitions/SignalRKeys"
             }
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -739,7 +790,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/SignalRServiceName"
+            "$ref": "#/parameters/ResourceName"
           }
         ],
         "responses": {
@@ -750,9 +801,9 @@
             "description": "Success. The response indicates the operation is successful and no content will be returned."
           },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -763,6 +814,214 @@
         "x-ms-examples": {
           "SignalR_Restart": {
             "$ref": "./examples/SignalR_Restart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List shared private link resources",
+        "operationId": "SignalRSharedPrivateLinkResources_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a list of shared private link resources.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRSharedPrivateLinkResources_List": {
+            "$ref": "./examples/SignalRSharedPrivateLinkResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the specified shared private link resource",
+        "operationId": "SignalRSharedPrivateLinkResources_Get",
+        "parameters": [
+          {
+            "name": "sharedPrivateLinkResourceName",
+            "in": "path",
+            "description": "The name of the shared private link resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a shared private link resource.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRSharedPrivateLinkResources_Get": {
+            "$ref": "./examples/SignalRSharedPrivateLinkResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a shared private link resource",
+        "operationId": "SignalRSharedPrivateLinkResources_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "sharedPrivateLinkResourceName",
+            "in": "path",
+            "description": "The name of the shared private link resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The shared private link resource",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response indicates the shared private link resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response indicates the shared private link resource is created.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRSharedPrivateLinkResources_CreateOrUpdate": {
+            "$ref": "./examples/SignalRSharedPrivateLinkResources_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Delete the specified shared private link resource",
+        "operationId": "SignalRSharedPrivateLinkResources_Delete",
+        "parameters": [
+          {
+            "name": "sharedPrivateLinkResourceName",
+            "in": "path",
+            "description": "The name of the shared private link resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the resource is already deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the private endpoint connection is already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRSharedPrivateLinkResources_Delete": {
+            "$ref": "./examples/SignalRSharedPrivateLinkResources_Delete.json"
           }
         }
       }
@@ -803,51 +1062,13 @@
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Contains information about an API error.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseBody",
-          "description": "Describes a particular API error with an error code and a message."
-        }
-      }
-    },
-    "ErrorResponseBody": {
-      "description": "Describes a particular API error with an error code and a message.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "An error code that describes the error condition more precisely than an HTTP status code. \r\nCan be used to programmatically handle specific error cases.",
-          "type": "string"
-        },
-        "message": {
-          "description": "A message that describes the error in detail and provides debugging information.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The target of the particular error (for example, the name of the property in error).",
-          "type": "string"
-        },
-        "details": {
-          "description": "Contains nested errors that are related to this error.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponseBody"
-          }
-        }
-      }
-    },
     "FeatureFlags": {
-      "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.",
+      "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\r\n- EnableMessagingLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\r\n- EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: \"true\"/\"false\", to enable/disable live trace feature.",
       "enum": [
         "ServiceMode",
         "EnableConnectivityLogs",
-        "EnableMessagingLogs"
+        "EnableMessagingLogs",
+        "EnableLiveTrace"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1003,7 +1224,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The SignalR service name to validate. e.g.\"my-signalR-name-here\"",
+          "description": "The resource name to validate. e.g.\"my-resource-name\"",
           "type": "string"
         }
       }
@@ -1133,7 +1354,7 @@
       }
     },
     "PrivateEndpointConnection": {
-      "description": "A private endpoint connection to SignalR resource",
+      "description": "A private endpoint connection to an azure resource",
       "type": "object",
       "allOf": [
         {
@@ -1141,10 +1362,32 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Properties of the private endpoint connection",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionList": {
+      "description": "A list of private endpoint connections",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of the private endpoint connections",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.",
+          "type": "string"
         }
       }
     },
@@ -1184,7 +1427,7 @@
       }
     },
     "PrivateLinkResourceList": {
-      "description": "Contains a list of AzSignalR.Models.Response.PrivateLink.PrivateLinkResource and a possible link to query more results",
+      "description": "Contains a list of PrivateLinkResource and a possible link to query more results",
       "type": "object",
       "properties": {
         "value": {
@@ -1220,6 +1463,13 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "shareablePrivateLinkResourceTypes": {
+          "description": "The list of resources that are onboarded to private link service",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareablePrivateLinkResourceType"
           }
         }
       }
@@ -1344,7 +1594,7 @@
         },
         "capacity": {
           "format": "int32",
-          "description": "Optional, integer. The unit count of SignalR resource. 1 by default.\r\n\r\nIf present, following values are allowed:\r\n    Free: 1\r\n    Standard: 1,2,5,10,20,50,100",
+          "description": "Optional, integer. The unit count of the resource. 1 by default.\r\n\r\nIf present, following values are allowed:\r\n    Free: 1\r\n    Standard: 1,2,5,10,20,50,100",
           "type": "integer"
         }
       }
@@ -1394,6 +1644,123 @@
         }
       }
     },
+    "ShareablePrivateLinkResourceProperties": {
+      "description": "Describes the properties of a resource type that has been onboarded to private link service",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the resource type that has been onboarded to private link service",
+          "type": "string"
+        },
+        "groupId": {
+          "description": "The resource provider group id for the resource that has been onboarded to private link service",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource provider type for the resource that has been onboarded to private link service",
+          "type": "string"
+        }
+      }
+    },
+    "ShareablePrivateLinkResourceType": {
+      "description": "Describes a  resource type that has been onboarded to private link service",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the resource type that has been onboarded to private link service",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ShareablePrivateLinkResourceProperties",
+          "description": "Describes the properties of a resource type that has been onboarded to private link service"
+        }
+      }
+    },
+    "SharedPrivateLinkResource": {
+      "description": "Describes a Shared Private Link Resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
+          "description": "Describes the properties of a Shared Private Link Resource",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SharedPrivateLinkResourceList": {
+      "description": "A list of shared private link resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of the shared private link resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.",
+          "type": "string"
+        }
+      }
+    },
+    "SharedPrivateLinkResourceProperties": {
+      "description": "Describes the properties of an existing Shared Private Link Resource",
+      "required": [
+        "groupId",
+        "privateLinkResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The group id from the provider of resource the shared private link resource is for",
+          "type": "string"
+        },
+        "privateLinkResourceId": {
+          "description": "The resource id of the resource the shared private link resource is for",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the shared private link resource",
+          "readOnly": true
+        },
+        "requestMessage": {
+          "description": "The request message for requesting approval of the shared private link resource",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceStatus",
+          "description": "Status of the shared private link resource",
+          "readOnly": true
+        }
+      }
+    },
+    "SharedPrivateLinkResourceStatus": {
+      "description": "Status of the shared private link resource",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected",
+        "Timeout"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SharedPrivateLinkResourceStatus",
+        "modelAsString": true
+      }
+    },
     "SignalRCorsSettings": {
       "description": "Cross-Origin Resource Sharing (CORS) settings.",
       "type": "object",
@@ -1407,31 +1774,6 @@
         }
       }
     },
-    "SignalRCreateOrUpdateProperties": {
-      "description": "Settings used to provision or configure the resource.",
-      "type": "object",
-      "properties": {
-        "features": {
-          "description": "List of SignalR featureFlags. e.g. ServiceMode.\r\n\r\nFeatureFlags that are not included in the parameters for the update operation will not be modified.\r\nAnd the response will only include featureFlags that are explicitly set. \r\nWhen a featureFlag is not explicitly set, SignalR service will use its globally default value. \r\nBut keep in mind, the default value doesn't mean \"false\". It varies in terms of different FeatureFlags.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SignalRFeature"
-          }
-        },
-        "cors": {
-          "$ref": "#/definitions/SignalRCorsSettings",
-          "description": "Cross-Origin Resource Sharing (CORS) settings."
-        },
-        "upstream": {
-          "$ref": "#/definitions/ServerlessUpstreamSettings",
-          "description": "Upstream settings when the Azure SignalR is in server-less mode."
-        },
-        "networkACLs": {
-          "$ref": "#/definitions/SignalRNetworkACLs",
-          "description": "Network ACLs"
-        }
-      }
-    },
     "SignalRFeature": {
       "description": "Feature of a SignalR resource, which controls the SignalR runtime behavior.",
       "required": [
@@ -1442,7 +1784,7 @@
       "properties": {
         "flag": {
           "$ref": "#/definitions/FeatureFlags",
-          "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively."
+          "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\r\n- EnableMessagingLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\r\n- EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: \"true\"/\"false\", to enable/disable live trace feature."
         },
         "value": {
           "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/azure/azure-signalr/ for allowed values.",
@@ -1506,11 +1848,6 @@
     "SignalRProperties": {
       "description": "A class that describes the properties of the resource",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SignalRCreateOrUpdateProperties"
-        }
-      ],
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1552,9 +1889,36 @@
           },
           "readOnly": true
         },
+        "sharedPrivateLinkResources": {
+          "description": "The list of shared private link resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResource"
+          },
+          "readOnly": true
+        },
         "tls": {
           "$ref": "#/definitions/SignalRTlsSettings",
           "description": "TLS settings."
+        },
+        "features": {
+          "description": "List of the featureFlags.\r\n\r\nFeatureFlags that are not included in the parameters for the update operation will not be modified.\r\nAnd the response will only include featureFlags that are explicitly set. \r\nWhen a featureFlag is not explicitly set, its globally default value will be used\r\nBut keep in mind, the default value doesn't mean \"false\". It varies in terms of different FeatureFlags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignalRFeature"
+          }
+        },
+        "cors": {
+          "$ref": "#/definitions/SignalRCorsSettings",
+          "description": "Cross-Origin Resource Sharing (CORS) settings."
+        },
+        "upstream": {
+          "$ref": "#/definitions/ServerlessUpstreamSettings",
+          "description": "Upstream settings when the service is in server-less mode."
+        },
+        "networkACLs": {
+          "$ref": "#/definitions/SignalRNetworkACLs",
+          "description": "Network ACLs"
         }
       }
     },
@@ -1563,7 +1927,8 @@
       "enum": [
         "ClientConnection",
         "ServerConnection",
-        "RESTAPI"
+        "RESTAPI",
+        "Trace"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1600,6 +1965,11 @@
         "identity": {
           "$ref": "#/definitions/ManagedIdentity",
           "description": "The managed identity response"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
         }
       }
     },
@@ -1824,10 +2194,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SignalRServiceName": {
+    "ResourceName": {
       "name": "resourceName",
       "in": "path",
-      "description": "The name of the SignalR resource.",
+      "description": "The name of the resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

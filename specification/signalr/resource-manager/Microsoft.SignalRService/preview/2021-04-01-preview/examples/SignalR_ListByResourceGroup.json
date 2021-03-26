@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2020-07-01-preview",
+    "api-version": "2021-04-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup"
   },
@@ -24,6 +24,14 @@
               "version": "1.0",
               "privateEndpointConnections": [
                 {
+                  "systemData": {
+                    "createdBy": "string",
+                    "createdByType": "User",
+                    "createdAt": "2015-02-03T04:05:06Z",
+                    "lastModifiedBy": "string",
+                    "lastModifiedByType": "User",
+                    "lastModifiedAt": "2015-02-03T04:05:06Z"
+                  },
                   "properties": {
                     "provisioningState": "Succeeded",
                     "privateEndpoint": {
@@ -31,12 +39,11 @@
                     },
                     "privateLinkServiceConnectionState": {
                       "status": "Approved",
-                      "description": null,
                       "actionsRequired": "None"
                     }
                   },
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/privateEndpointConnections/mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e",
-                  "name": "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/privateEndpointConnections/mysignalrservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+                  "name": "mysignalrservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
                   "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections"
                 }
               ],
@@ -58,6 +65,11 @@
                   "flag": "EnableMessagingLogs",
                   "value": "False",
                   "properties": {}
+                },
+                {
+                  "flag": "EnableLiveTrace",
+                  "value": "False",
+                  "properties": {}
                 }
               ],
               "cors": {
@@ -69,11 +81,7 @@
               "upstream": {
                 "templates": [
                   {
-                    "hubPattern": null,
-                    "eventPattern": null,
-                    "categoryPattern": null,
-                    "urlTemplate": "http://foo.com",
-                    "auth": null
+                    "urlTemplate": "http://foo.com"
                   }
                 ]
               },
@@ -82,16 +90,14 @@
                 "publicNetwork": {
                   "allow": [
                     "ClientConnection"
-                  ],
-                  "deny": null
+                  ]
                 },
                 "privateEndpoints": [
                   {
-                    "name": "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+                    "name": "mysignalrservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
                     "allow": [
                       "ServerConnection"
-                    ],
-                    "deny": null
+                    ]
                   }
                 ]
               }
@@ -101,6 +107,14 @@
               "type": "SystemAssigned",
               "principalId": "00000000-0000-0000-0000-000000000000",
               "tenantId": "00000000-0000-0000-0000-000000000000"
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2015-02-03T04:05:06Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2015-02-03T04:05:06Z"
             },
             "location": "eastus",
             "tags": {
