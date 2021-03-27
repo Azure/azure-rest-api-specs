@@ -34,10 +34,9 @@
         "tags": [
           "Migrations"
         ],
+        "operationId": "Migrations_Get",
         "produces": [
-          "text/plain",
           "application/json",
-          "text/json"
         ],
         "parameters": [
           {
@@ -77,12 +76,14 @@
             }
           },
           "400": {
+            "x-ms-error-response": true,
             "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/InvalidInput"
             }
           },
           "500": {
+            "x-ms-error-response": true,
             "description": "Server Error",
             "schema": {
               "$ref": "#/definitions/InternalServerError"
@@ -91,7 +92,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/UnknownError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -100,15 +101,14 @@
         "tags": [
           "Migrations"
         ],
+        "operationId": "Migrations_Post",
         "consumes": [
           "application/json-patch+json",
           "application/json",
           "text/json"
         ],
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -153,12 +153,14 @@
             }
           },
           "400": {
+            "x-ms-error-response": true
             "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/InvalidInput"
             }
           },
           "500": {
+            "x-ms-error-response": true,
             "description": "Server Error",
             "schema": {
               "$ref": "#/definitions/InternalServerError"
@@ -167,7 +169,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/UnknownError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -179,9 +181,7 @@
           "Migrations"
         ],
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -220,15 +220,26 @@
         "responses": {
           "200": {
             "description": "Success",
-            "schema": {}
+            "schema": {
+                "oneOf": [
+                    {
+                      "$ref": "#/definitions/MigrationDetails"
+                    },
+                    {
+                      "$ref": "#/definitions/MigrationDBDetails"
+                    }
+                  ]
+            }
           },
           "400": {
+            "x-ms-error-response": true,
             "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/InvalidInput"
             }
           },
           "500": {
+            "x-ms-error-response": true,
             "description": "Server Error",
             "schema": {
               "$ref": "#/definitions/InternalServerError"
@@ -237,7 +248,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/UnknownError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -254,9 +265,7 @@
           "text/json"
         ],
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -300,12 +309,14 @@
             }
           },
           "400": {
+            "x-ms-error-response": true,
             "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/InvalidInput"
             }
           },
           "500": {
+            "x-ms-error-response": true,
             "description": "Server Error",
             "schema": {
               "$ref": "#/definitions/InternalServerError"
@@ -314,7 +325,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/UnknownError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -872,6 +883,20 @@
         "CutoverTriggered",
         "Canceled"
       ]
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "tier": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": {}
     },
     "TargetDBOverwriteConfirmationSubStateDetails": {
       "properties": {
