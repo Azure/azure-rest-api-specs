@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2020-09
+tag: package-2020-10
 ```
 
 ### Suppression
@@ -53,6 +53,44 @@ directive:
     from: WebApps.json
     where: $.definitions.KeyInfo.properties
     reason: Model type is not an Azure resource
+```
+
+### Tag: package-2020-10
+These settings apply only when `--tag=package-2020-10` or `--tag=package-2020-10-only` is specified on the command line.
+NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2020-06-01 are included.
+``` yaml $(tag) == 'package-2020-10' || $(tag) == 'package-2020-10-only'
+input-file:
+- Microsoft.CertificateRegistration/stable/2020-10-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2020-10-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2020-10-01/Domains.json
+- Microsoft.DomainRegistration/stable/2020-10-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2020-10-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2020-10-01/Certificates.json
+- Microsoft.Web/stable/2020-10-01/CommonDefinitions.json
+- Microsoft.Web/stable/2020-10-01/DeletedWebApps.json
+- Microsoft.Web/stable/2020-10-01/Diagnostics.json
+- Microsoft.Web/stable/2020-10-01/Provider.json
+- Microsoft.Web/stable/2020-10-01/Recommendations.json
+- Microsoft.Web/stable/2020-10-01/ResourceProvider.json
+- Microsoft.Web/stable/2020-10-01/WebApps.json
+- Microsoft.Web/stable/2020-10-01/StaticSites.json
+- Microsoft.Web/stable/2020-10-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2020-10-01/AppServicePlans.json
+- Microsoft.Web/stable/2020-10-01/ResourceHealthMetadata.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfo
+  suppress: R4015
+  reason: Does not have list operation
 ```
 
 ### Tag: package-2020-09
@@ -1114,6 +1152,7 @@ swagger-to-sdk:
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-web
       - python ./scripts/trim_aio.py ./sdk/appservice/azure-mgmt-web
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -1133,100 +1172,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.appservice
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-appservice
-directive:
-  from: WebApps.json
-  where: $.definitions.MSDeploy.properties.properties
-  transform: >
-    delete $.$ref;
-    $['allOf'] = [{'$ref':'#/definitions/MSDeployCore'}];
-    return $;
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2019-08
-  - tag: package-2018-02
-  - tag: package-2016-03-01-web
-  - tag: package-2016-08-01-web
-  - tag: package-2016-09-01-web
-```
-
-### Tag: package-2019-08 and java
-
-These settings apply only when `--tag=package-2019-08 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-08' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appservice.v2019_08_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2019_08_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-02 and java
-
-These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appservice.v2018_02_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2018_02_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2016-03-01-web and java
-
-These settings apply only when `--tag=package-2016-03-01-web --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-03-01-web' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appservice.v2016_03_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2016_03_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2016-08-01-web and java
-
-These settings apply only when `--tag=package-2016-08-01-web --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-08-01-web' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appservice.v2016_08_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2016_08_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2016-09-01-web and java
-
-These settings apply only when `--tag=package-2016-09-01-web --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-09-01-web' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.appservice.v2016_09_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2016_09_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 ### Tag: package-2018-03-01-hybrid
 
