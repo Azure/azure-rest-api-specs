@@ -34,24 +34,167 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Authorization/privateLinkAssociations":{
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Authorization/privateLinkAssociations/":{
       "get": {
         "tags": [
-          "PrivateLinks"
+          "PrivateLinkAssociation"
         ],
-        "operationId": "PrivateLinks_Get",
-        "summary": "Get a ",
-        "description": "",
+        "operationId": "PrivateLinkAssociation_Get",
+        "description": "Get a PLA for a MG scope",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateLinkAssociation"
+        ],
+        "operationId": "PrivateLinkAssociation_Put",
+        "description": "Create a PrivateLinkAssociation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "name": "GUID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the PLA"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "Additional properties "
+          }
+        ],
+        "responses": {
+
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateLinkAssociation"
+        ],
+        "operationId": "PrivateLinkAssociation_Delete",
+        "description": "Delete a PrivateLinkAssociation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkAssociationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+        }
+      }
+    }
+  },
+  "/subscriptions/{subscriptionID}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/resourceManagementPrivateLinks/{rmplName}": {
+    "put": {
+      "tags": [
+        "ResourceManagementPrivateLink"
+      ],
+      "operationId": "ResourceManagementPrivateLink_Put",
+      "description": "",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "name": "location",
+          "in": "body",
+          "required": true,
+          "description": "The region to create the Resource Management Private Link"
+        }
+      ]
+    }
+  },
+  "/subscriptions/{subscriptionID}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints": {
+    "put": {
+      "tags": [
+        "PrivateEndpoint"
+      ],
+      "operationId": "PrivateEndpoint_Put",
+      "description": "Create a Private Endpoint.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        }
+      ]
+    },
+    "get": {
+      "tags": [
+        "PrivateEndpoint"
+      ],
+      "operationId": "PrivateEndpoint_Get",
+      "description": "Get all private endpoints in a subscription",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+
       }
     }
   },
   "definitions": {
+    "TempName": {
+      "properties" {
+        "privateLink": {
 
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": ""
+          }
+        }
+      }
+    }
   },
   "parameters": {
     "ApiVersionParameter": {
@@ -60,6 +203,23 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for this operation."
+    },
+    "GroupIdParameter": {
+      "name": "groupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The management group ID.",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "PrivateLinkAssociationIdParameter": {
+      "name": "GUID",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the PLA"
     }
   }
 }
