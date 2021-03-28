@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Direct Methods for Live Video Analytics on IoT Edge.",
-    "version": "2.0.0",
-    "title": "Direct Methods for Live Video Analytics on IoT Edge",
+    "description": "Direct Methods for Azure Video Analyzer on IoT Edge.",
+    "version": "1.0.0",
+    "title": "Direct Methods for Azure Video Analyzer on IoT Edge",
     "contact": {
       "email": "amshelp@microsoft.com"
     }
@@ -37,10 +37,10 @@
           "type": "string",
           "description": "api version",
           "enum": [
-            "2.0"
+            "1.0"
           ],
           "x-ms-enum": {
-            "name": "ApiVersionEnum",
+            "name": "apiVersionEnum",
             "modelAsString": false
           }
         }
@@ -48,65 +48,65 @@
       "discriminator": "methodName",
       "description": "Base Class for Method Requests."
     },
-    "MediaGraphTopologySetRequest": {
+    "PipelineTopologySetRequest": {
       "type": "object",
-      "x-ms-discriminator-value": "GraphTopologySet",
+      "x-ms-discriminator-value": "pipelineTopologySet",
       "allOf": [
         {
           "$ref": "#/definitions/MethodRequest"
         }
       ],
       "required": [
-        "graph"
+        "pipelineTopology"
       ],
       "properties": {
-        "graph": {
-          "$ref": "./LiveVideoAnalytics.json#/definitions/MediaGraphTopology"
+        "pipelineTopology": {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/PipelineTopology"
         }
       },
-      "description": "Represents the MediaGraphTopologySetRequest."
+      "description": "Represents the pipelineTopologySet request."
     },
-    "MediaGraphTopologySetRequestBody": {
+    "PipelineTopologySetRequestBody": {
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MethodRequest"
         },
         {
-          "$ref": "./LiveVideoAnalytics.json#/definitions/MediaGraphTopology"
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/PipelineTopology"
         }
       ],
-      "description": "Represents the MediaGraphTopologySetRequest body."
+      "description": "Represents the pipelineTopologySet request body."
     },
-    "MediaGraphInstanceSetRequest": {
+    "LivePipelineSetRequest": {
       "type": "object",
-      "x-ms-discriminator-value": "GraphInstanceSet",
+      "x-ms-discriminator-value": "livePipelineSet",
       "allOf": [
         {
           "$ref": "#/definitions/MethodRequest"
         }
       ],
       "required": [
-        "instance"
+        "livePipeline"
       ],
       "properties": {
-        "instance": {
-          "$ref": "./LiveVideoAnalytics.json#/definitions/MediaGraphInstance"
+        "livePipeline": {
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/LivePipeline"
         }
       },
-      "description": "Represents the MediaGraphInstanceSetRequest."
+      "description": "Represents the livePipelineSet request."
     },
-    "MediaGraphInstanceSetRequestBody": {
+    "livePipelineSetRequestBody": {
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MethodRequest"
         },
         {
-          "$ref": "./LiveVideoAnalytics.json#/definitions/MediaGraphInstance"
+          "$ref": "./AzureVideoAnalyzer.json#/definitions/LivePipeline"
         }
       ],
-      "description": "Represents the MediaGraphInstanceSetRequest body."
+      "description": "Represents the livePipelineSet request body."
     },
     "ItemNonSetRequestBase": {
       "type": "object",
@@ -125,85 +125,85 @@
         }
       }
     },
-    "MediaGraphTopologyListRequest": {
+    "PipelineTopologyListRequest": {
       "type": "object",
-      "x-ms-discriminator-value": "GraphTopologyList",
+      "x-ms-discriminator-value": "pipelineTopologyList",
       "allOf": [
         {
           "$ref": "#/definitions/MethodRequest"
         }
       ],
-      "description": "Represents the MediaGraphTopologyListRequest."
+      "description": "Represents the pipelineTopologyList request."
     },
-    "MediaGraphTopologyGetRequest": {
+    "PipelineTopologyGetRequest": {
       "type": "object",
-      "x-ms-discriminator-value": "GraphTopologyGet",
+      "x-ms-discriminator-value": "pipelineTopologyGet",
       "allOf": [
         {
           "$ref": "#/definitions/ItemNonSetRequestBase"
         }
       ],
-      "description": "Represents the MediaGraphTopologyGetRequest."
+      "description": "Represents the pipelineTopologyGet request."
     },
-    "MediaGraphTopologyDeleteRequest": {
+    "PipelineTopologyDeleteRequest": {
       "type": "object",
-      "x-ms-discriminator-value": "GraphTopologyDelete",
+      "x-ms-discriminator-value": "pipelineTopologyDelete",
       "allOf": [
         {
           "$ref": "#/definitions/ItemNonSetRequestBase"
         }
       ],
-      "description": "Represents the MediaGraphTopologyDeleteRequest."
+      "description": "Represents the pipelineTopologyDelete request."
     },
-    "MediaGraphInstanceListRequest": {
+    "LivePipelineListRequest": {
       "type": "object",
-      "x-ms-discriminator-value": "GraphInstanceList",
+      "x-ms-discriminator-value": "livePipelineList",
       "allOf": [
         {
           "$ref": "#/definitions/MethodRequest"
         }
       ],
-      "description": "Represents the MediaGraphInstanceListRequest."
+      "description": "Represents the livePipelineList request."
     },
-    "MediaGraphInstanceGetRequest": {
+    "LivePipelineGetRequest": {
       "type": "object",
-      "x-ms-discriminator-value": "GraphInstanceGet",
+      "x-ms-discriminator-value": "livePipelineGet",
       "allOf": [
         {
           "$ref": "#/definitions/ItemNonSetRequestBase"
         }
       ],
-      "description": "Represents the MediaGraphInstanceGetRequest."
+      "description": "Represents the livePipelineGet request."
     },
-    "MediaGraphInstanceActivateRequest": {
+    "LivePipelineActivateRequest": {
       "type": "object",
-      "x-ms-discriminator-value": "GraphInstanceActivate",
+      "x-ms-discriminator-value": "livePipelineActivate",
       "allOf": [
         {
           "$ref": "#/definitions/ItemNonSetRequestBase"
         }
       ],
-      "description": "Represents the MediaGraphInstanceActivateRequest."
+      "description": "Represents the livePipelineActivate request."
     },
-    "MediaGraphInstanceDeActivateRequest": {
+    "LivePipelineDeactivateRequest": {
       "type": "object",
-      "x-ms-discriminator-value": "GraphInstanceDeactivate",
+      "x-ms-discriminator-value": "livePipelineDeactivate",
       "allOf": [
         {
           "$ref": "#/definitions/ItemNonSetRequestBase"
         }
       ],
-      "description": "Represents the MediaGraphInstanceDeactivateRequest."
+      "description": "Represents the livePipelineDeactivate request."
     },
-    "MediaGraphInstanceDeleteRequest": {
+    "LivePipelineDeleteRequest": {
       "type": "object",
-      "x-ms-discriminator-value": "GraphInstanceDelete",
+      "x-ms-discriminator-value": "livePipelineDelete",
       "allOf": [
         {
           "$ref": "#/definitions/ItemNonSetRequestBase"
         }
       ],
-      "description": "Represents the MediaGraphInstanceDeleteRequest."
+      "description": "Represents the livePipelineDelete request."
     }
   }
 }

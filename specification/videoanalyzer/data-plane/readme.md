@@ -1,16 +1,16 @@
-# MediaServices - Live Video Analytics Edge
+# Azure Video Analyzer Edge
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Live video analytics edge.
+This is the AutoRest configuration file for Azure video analyzer edge.
 
-These swaggers are used to generate the SDKs for Live Video Analytics. These SDKs are models only (no client) and customer would need to use IoT SDK to send direct method calls to IoT hub. These SDKs are not ARM based and doesn't do any REST calls. all operations are sent as direct methods on IoT hub.
+These swaggers are used to generate the SDKs for Azure Video Analyzer. These SDKs are models only (no client) and customer would need to use IoT SDK to send direct method calls to IoT hub. These SDKs are not ARM based and doesn't do any REST calls. all operations are sent as direct methods on IoT hub.
 
 ---
 
 ## Getting Started
 
-To build the SDK for Live video analytics edge, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Azure video analyzer edge, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -24,11 +24,11 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the Live video analytics API.
+These are the global settings for the Azure video analyzer edge API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-lva-2-0-0-preview
+tag: package-ava-edge-1-0-0-preview
 
 directive:
   - where:
@@ -37,14 +37,14 @@ directive:
       - RequiredReadOnlyProperties
 ```
 
-### Tag: package-lva-1-0-4-preview
+### Tag: package-ava-edge-1-0-0-preview
 
-These settings apply only when `--tag=package-lva-2-0-0-preview` is specified on the command line.
+These settings apply only when `--tag=package-ava-edge-1-0-0-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-lva-2-0-0-preview'
+``` yaml $(tag) == 'package-ava-edge-1-0-0-preview'
 input-file:
-  - LiveVideoAnalytics.Edge/preview/2.0.0/LiveVideoAnalytics.json
-  - LiveVideoAnalytics.Edge/preview/2.0.0/LiveVideoAnalyticsSdkDefinitions.json
+  - VideoAnalyzer.Edge/preview/2.0.0/AzureVideoAnalyzer.json
+  - VideoAnalyzer.Edge/preview/2.0.0/AzureVideoAnalyzerSdkDefinitions.json
 ```
 
 ---
@@ -60,7 +60,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_media_lva_edge']
+      - bundle install && rake arm:regen_all_profiles['azure_media_ava_edge']
 ```
 
 ## C#
@@ -73,11 +73,11 @@ csharp:
   azure-arm: false
   payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Media.LiveVideoAnalytics.Edge
-  output-folder: $(csharp-sdks-folder)/mediaservices/Microsoft.Azure.Media.LiveVideoAnalytics.Edge/src/Generated
+  namespace: Microsoft.Azure.Media.AzureVideoAnalyzer.Edge
+  output-folder: $(csharp-sdks-folder)/mediaservices/Microsoft.Azure.Media.AzureVideoAnalyzer.Edge/src/Generated
   clear-output-folder: true
   use-internal-constructors: true
-  override-client-name: LiveVideoAnalyticsEdgeClient
+  override-client-name: AzureVideoAnalyzerEdgeClient
   use-datetimeoffset: true
 ```
 ## Multi-API/Profile support for AutoRest v3 generators
@@ -92,7 +92,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/LiveVideoAnalytics.Edge/preview/2.0.0/LiveVideoAnalytics.json
+  - $(this-folder)/VideoAnalyzer.Edge/preview/2.0.0/AzureVideoAnalyzer.json
 
 ```
 

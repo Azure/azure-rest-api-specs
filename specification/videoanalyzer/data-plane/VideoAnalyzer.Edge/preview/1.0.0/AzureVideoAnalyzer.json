@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Direct Methods for Live Video Analytics on IoT Edge.",
-    "version": "2.0.0",
-    "title": "Direct Methods for Live Video Analytics on IoT Edge",
+    "description": "Direct Methods for Azure Video Analyzer on IoT Edge.",
+    "version": "1.0.0",
+    "title": "Direct Methods for Azure Video Analyzer on IoT Edge",
     "contact": {
       "email": "amshelp@microsoft.com"
     }
@@ -22,7 +22,7 @@
     }
   },
   "definitions": {
-    "MediaGraphInstance": {
+    "LivePipeline": {
       "type": "object",
       "required": [
         "name"
@@ -30,123 +30,73 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The identifier for the media graph instance."
+          "description": "The identifier for the live pipeline."
         },
         "systemData": {
-          "$ref": "#/definitions/MediaGraphSystemData"
+          "$ref": "#/definitions/SystemData",
+          "description": "The system data for a resource."
         },
         "properties": {
-          "$ref": "#/definitions/MediaGraphInstanceProperties"
+          "$ref": "#/definitions/LivePipelineProperties",
+          "description": "The properties of the live pipeline."
         }
       },
-      "description": "Represents an instance of a media graph."
+      "description": "Represents a unique live pipeline."
     },
-    "MediaGraphInstanceProperties": {
+    "LivePipelineProperties": {
       "type": "object",
       "properties": {
         "description": {
           "type": "string",
-          "description": "An optional description for the instance."
+          "description": "An optional description for the live pipeline."
         },
         "topologyName": {
           "type": "string",
-          "description": "The name of the media graph topology that this instance will run. A topology with this name should already have been set in the Edge module."
+          "description": "The name of the pipeline topology that this live pipeline will run. A pipeline topology with this name should already have been set in the Edge module."
         },
         "parameters": {
           "type": "array",
-          "description": "List of one or more graph instance parameters.",
+          "description": "List of one or more live pipeline parameters.",
           "items": {
-            "$ref": "#/definitions/MediaGraphParameterDefinition"
+            "$ref": "#/definitions/ParameterDefinition"
           }
         },
         "state": {
           "type": "string",
-          "description": "Allowed states for a graph instance.",
+          "description": "Allowed states for a live pipeline.",
           "enum": [
-            "Inactive",
-            "Activating",
-            "Active",
-            "Deactivating"
+            "inactive",
+            "activating",
+            "active",
+            "deactivating"
           ],
           "x-ms-enum": {
-            "name": "MediaGraphInstanceState",
+            "name": "livePipelineState",
             "values": [
               {
-                "value": "Inactive",
-                "description": "The media graph instance is idle and not processing media."
+                "value": "inactive",
+                "description": "The live pipeline is idle and not processing media."
               },
               {
-                "value": "Activating",
-                "description": "The media graph instance is transitioning into the active state."
+                "value": "activating",
+                "description": "The live pipeline is transitioning into the active state."
               },
               {
-                "value": "Active",
-                "description": "The media graph instance is active and processing media."
+                "value": "active",
+                "description": "The live pipeline is active and processing media."
               },
               {
-                "value": "Deactivating",
-                "description": "The media graph instance is transitioning into the inactive state."
+                "value": "deactivating",
+                "description": "The live pipeline is transitioning into the inactive state."
               }
             ],
             "modelAsString": true
           }
         }
       },
-      "description": "Properties of a media graph instance."
+      "description": "Properties of a live pipeline."
     },
-    "MediaGraphParameterDefinition": {
-      "type": "object",
-      "required": [
-        "name",
-        "value"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the parameter defined in the media graph topology."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value to supply for the named parameter defined in the media graph topology."
-        }
-      },
-      "description": "A key-value pair. A media graph topology allows certain values to be parameterized. When an instance is created, the parameters are supplied with arguments specific to that instance. This allows the same graph topology to be used as a blueprint for multiple graph instances with different values for the parameters."
-    },
-    "MediaGraphInstanceCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "A collection of media graph instances.",
-          "items": {
-            "$ref": "#/definitions/MediaGraphInstance"
-          }
-        },
-        "@continuationToken": {
-          "type": "string",
-          "description": "A continuation token to use in subsequent calls to enumerate through the graph instance collection. This is used when the collection contains too many results to return in one response."
-        }
-      },
-      "description": "A collection of media graph instances."
-    },
-    "MediaGraphTopologyCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "A collection of media graph topologies.",
-          "items": {
-            "$ref": "#/definitions/MediaGraphTopology"
-          }
-        },
-        "@continuationToken": {
-          "type": "string",
-          "description": "A continuation token to use in subsequent calls to enumerate through the graph topologies collection. This is used when the collection contains too many results to return in one response."
-        }
-      },
-      "description": "A collection of media graph topologies."
-    },
-    "MediaGraphTopology": {
+    "ParameterDefinition": {
       "type": "object",
       "required": [
         "name"
@@ -154,56 +104,109 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The identifier for the media graph topology."
+          "description": "The name of the parameter defined in the pipeline topology."
         },
-        "systemData": {
-          "$ref": "#/definitions/MediaGraphSystemData"
-        },
-        "properties": {
-          "$ref": "#/definitions/MediaGraphTopologyProperties"
+        "value": {
+          "type": "string",
+          "description": "The value to supply for the named parameter defined in the pipeline topology."
         }
       },
-      "description": "The definition of a media graph topology."
+      "description": "A key-value pair. A pipeline topology allows certain values to be parameterized. When a live pipeline is created, the parameters are supplied with arguments specific to that instance. This allows the same pipeline topology to be used as a blueprint for multiple streams with different values for the parameters."
     },
-    "MediaGraphTopologyProperties": {
+    "LivePipelineCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A collection of live pipelines.",
+          "items": {
+            "$ref": "#/definitions/LivePipeline"
+          }
+        },
+        "@continuationToken": {
+          "type": "string",
+          "description": "A continuation token to use in subsequent calls to enumerate through the live pipeline collection. This is used when the collection contains too many results to return in one response."
+        }
+      },
+      "description": "A collection of streams."
+    },
+    "PipelineTopologyCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A collection of pipeline topologies.",
+          "items": {
+            "$ref": "#/definitions/PipelineTopology"
+          }
+        },
+        "@continuationToken": {
+          "type": "string",
+          "description": "A continuation token to use in subsequent calls to enumerate through the pipeline topology collection. This is used when the collection contains too many results to return in one response."
+        }
+      },
+      "description": "A collection of pipeline topologies."
+    },
+    "PipelineTopology": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The identifier for the pipeline topology."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "The system data for a resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/PipelineTopologyProperties",
+          "description": "The properties of the pipeline topology."
+        }
+      },
+      "description": "The definition of a pipeline topology."
+    },
+    "PipelineTopologyProperties": {
       "type": "object",
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description of a media graph topology. It is recommended to use this to describe the expected use of the topology."
+          "description": "A description of a pipeline topology. It is recommended to use this to describe the expected use of the pipeline topology."
         },
         "parameters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MediaGraphParameterDeclaration"
+            "$ref": "#/definitions/ParameterDeclaration"
           },
-          "description": "The list of parameters defined in the topology. The value for these parameters are supplied by instances of this topology."
+          "description": "The list of parameters defined in the pipeline topology. The value for these parameters are supplied by streams of this pipeline topology."
         },
         "sources": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MediaGraphSource"
+            "$ref": "#/definitions/Source"
           },
-          "description": "The list of source nodes in this topology."
+          "description": "The list of source nodes in this pipeline topology."
         },
         "processors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MediaGraphProcessor"
+            "$ref": "#/definitions/Processor"
           },
-          "description": "The list of processor nodes in this topology."
+          "description": "The list of processor nodes in this pipeline topology."
         },
         "sinks": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MediaGraphSink"
+            "$ref": "#/definitions/Sink"
           },
-          "description": "The list of sink nodes in this topology."
+          "description": "The list of sink nodes in this pipeline topology."
         }
       },
-      "description": "A description of the properties of a media graph topology."
+      "description": "A description of the properties of a pipeline topology."
     },
-    "MediaGraphSystemData": {
+    "SystemData": {
       "type": "object",
       "properties": {
         "createdAt": {
@@ -217,9 +220,9 @@
           "description": "The timestamp of resource last modification (UTC)."
         }
       },
-      "description": "The system data for a resource. This is used by both topologies and instances."
+      "description": "The system data for a resource. This is used by both pipeline topologies and live pipelines."
     },
-    "MediaGraphParameterDeclaration": {
+    "ParameterDeclaration": {
       "type": "object",
       "required": [
         "name",
@@ -235,33 +238,33 @@
           "type": "string",
           "description": "The type of the parameter.",
           "enum": [
-            "String",
-            "SecretString",
-            "Int",
-            "Double",
-            "Bool"
+            "string",
+            "secretString",
+            "int",
+            "double",
+            "bool"
           ],
           "x-ms-enum": {
-            "name": "MediaGraphParameterType",
+            "name": "parameterType",
             "values": [
               {
-                "value": "String",
+                "value": "string",
                 "description": "A string parameter value."
               },
               {
-                "value": "SecretString",
+                "value": "secretString",
                 "description": "A string to hold sensitive information as parameter value."
               },
               {
-                "value": "Int",
+                "value": "int",
                 "description": "A 32-bit signed integer as parameter value."
               },
               {
-                "value": "Double",
+                "value": "double",
                 "description": "A 64-bit double-precision floating point type as parameter value."
               },
               {
-                "value": "Bool",
+                "value": "bool",
                 "description": "A boolean value that is either true or false."
               }
             ],
@@ -274,12 +277,12 @@
         },
         "default": {
           "type": "string",
-          "description": "The default value for the parameter to be used if the media graph instance does not specify a value."
+          "description": "The default value for the parameter to be used if the live pipeline does not specify a value."
         }
       },
-      "description": "The declaration of a parameter in the media graph topology. A media graph topology can be authored with parameters. Then, during graph instance creation, the value for those parameters can be specified. This allows the same graph topology to be used as a blueprint for multiple graph instances with different values for the parameters."
+      "description": "The declaration of a parameter in the pipeline topology. A topology can be authored with parameters. Then, during live pipeline creation, the value for those parameters can be specified. This allows the same pipeline topology to be used as a blueprint for multiple live pipelines with different values for the parameters."
     },
-    "MediaGraphSource": {
+    "Source": {
       "type": "object",
       "required": [
         "@type",
@@ -296,27 +299,27 @@
           "description": "The name to be used for this source node."
         }
       },
-      "description": "A source node in a media graph."
+      "description": "A source node in a pipeline topology."
     },
-    "MediaGraphRtspSource": {
+    "RtspSource": {
       "type": "object",
       "properties": {
         "transport": {
           "type": "string",
           "description": "Underlying RTSP transport. This is used to enable or disable HTTP tunneling.",
           "enum": [
-            "Http",
-            "Tcp"
+            "http",
+            "tcp"
           ],
           "x-ms-enum": {
-            "name": "MediaGraphRtspTransport",
+            "name": "rtspTransport",
             "values": [
               {
-                "value": "Http",
+                "value": "http",
                 "description": "HTTP/HTTPS transport. This should be used when HTTP tunneling is desired."
               },
               {
-                "value": "Tcp",
+                "value": "tcp",
                 "description": "TCP transport. This should be used when HTTP tunneling is NOT desired."
               }
             ],
@@ -325,7 +328,7 @@
         },
         "endpoint": {
           "description": "RTSP endpoint of the stream that is being connected to.",
-          "$ref": "#/definitions/MediaGraphEndpoint"
+          "$ref": "#/definitions/Endpoint"
         }
       },
       "required": [
@@ -333,13 +336,13 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphSource"
+          "$ref": "#/definitions/Source"
         }
       ],
-      "description": "Enables a media graph to capture media from a RTSP server.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphRtspSource"
+      "description": "Enables a pipeline topology to capture media from a RTSP server.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.RtspSource"
     },
-    "MediaGraphIoTHubMessageSource": {
+    "IotHubMessageSource": {
       "type": "object",
       "properties": {
         "hubInputName": {
@@ -349,18 +352,18 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphSource"
+          "$ref": "#/definitions/Source"
         }
       ],
-      "description": "Enables a media graph to receive messages via routes declared in the IoT Edge deployment manifest.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphIoTHubMessageSource"
+      "description": "Enables a pipeline topology to receive messages via routes declared in the IoT Edge deployment manifest.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.IotHubMessageSource"
     },
-    "MediaGraphIoTHubMessageSink": {
+    "IotHubMessageSink": {
       "type": "object",
       "properties": {
         "hubOutputName": {
           "type": "string",
-          "description": "Name of the output path to which the media graph will publish message. These messages can then be delivered to desired destinations by declaring routes referencing the output path in the IoT Edge deployment manifest."
+          "description": "Name of the output path to which the pipeline topology will publish message. These messages can then be delivered to desired destinations by declaring routes referencing the output path in the IoT Edge deployment manifest."
         }
       },
       "required": [
@@ -369,13 +372,13 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphSink"
+          "$ref": "#/definitions/Sink"
         }
       ],
-      "description": "Enables a media graph to publish messages that can be delivered via routes declared in the IoT Edge deployment manifest.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphIoTHubMessageSink"
+      "description": "Enables a pipeline topology to publish messages that can be delivered via routes declared in the IoT Edge deployment manifest.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.IotHubMessageSink"
     },
-    "MediaGraphEndpoint": {
+    "Endpoint": {
       "type": "object",
       "required": [
         "@type",
@@ -389,7 +392,7 @@
         },
         "credentials": {
           "description": "Polymorphic credentials to be presented to the endpoint.",
-          "$ref": "#/definitions/MediaGraphCredentials"
+          "$ref": "#/definitions/Credentials"
         },
         "url": {
           "type": "string",
@@ -398,7 +401,7 @@
       },
       "description": "Base class for endpoints."
     },
-    "MediaGraphCredentials": {
+    "Credentials": {
       "type": "object",
       "required": [
         "@type"
@@ -412,7 +415,7 @@
       },
       "description": "Credentials to present during authentication."
     },
-    "MediaGraphUsernamePasswordCredentials": {
+    "UsernamePasswordCredentials": {
       "type": "object",
       "properties": {
         "username": {
@@ -430,13 +433,13 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphCredentials"
+          "$ref": "#/definitions/Credentials"
         }
       ],
       "description": "Username/password credential pair.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphUsernamePasswordCredentials"
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.UsernamePasswordCredentials"
     },
-    "MediaGraphHttpHeaderCredentials": {
+    "HttpHeaderCredentials": {
       "type": "object",
       "properties": {
         "headerName": {
@@ -454,43 +457,62 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphCredentials"
+          "$ref": "#/definitions/Credentials"
         }
       ],
       "description": "Http header service credentials.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphHttpHeaderCredentials"
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.HttpHeaderCredentials"
     },
-    "MediaGraphUnsecuredEndpoint": {
+    "UnsecuredEndpoint": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphEndpoint"
+          "$ref": "#/definitions/Endpoint"
         }
       ],
-      "description": "An endpoint that the media graph can connect to, with no encryption in transit.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphUnsecuredEndpoint"
+      "description": "An endpoint that the pipeline topology can connect to, with no encryption in transit.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.UnsecuredEndpoint"
     },
-    "MediaGraphTlsEndpoint": {
+    "TlsEndpoint": {
       "type": "object",
       "properties": {
         "trustedCertificates": {
           "description": "Trusted certificates when authenticating a TLS connection. Null designates that Azure Media Service's source of trust should be used.",
-          "$ref": "#/definitions/MediaGraphCertificateSource"
+          "$ref": "#/definitions/CertificateSource"
         },
         "validationOptions": {
           "description": "Validation options to use when authenticating a TLS connection. By default, strict validation is used.",
-          "$ref": "#/definitions/MediaGraphTlsValidationOptions"
+          "$ref": "#/definitions/TlsValidationOptions"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphEndpoint"
+          "$ref": "#/definitions/Endpoint"
         }
       ],
-      "description": "A TLS endpoint for media graph external connections.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphTlsEndpoint"
+      "description": "A TLS endpoint for pipeline topology external connections.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.TlsEndpoint"
     },
-    "MediaGraphCertificateSource": {
+    "SymmetricKeyCredentials": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Symmetric key credential."
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Credentials"
+        }
+      ],
+      "description": "Symmetric key credential.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SymmetricKeyCredentials"
+    },
+    "CertificateSource": {
       "type": "object",
       "required": [
         "@type"
@@ -504,7 +526,7 @@
       },
       "description": "Base class for certificate sources."
     },
-    "MediaGraphTlsValidationOptions": {
+    "TlsValidationOptions": {
       "type": "object",
       "properties": {
         "ignoreHostname": {
@@ -518,7 +540,7 @@
       },
       "description": "Options for controlling the authentication of TLS endpoints."
     },
-    "MediaGraphPemCertificateList": {
+    "PemCertificateList": {
       "type": "object",
       "properties": {
         "certificates": {
@@ -534,13 +556,13 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphCertificateSource"
+          "$ref": "#/definitions/CertificateSource"
         }
       ],
       "description": "A list of PEM formatted certificates.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphPemCertificateList"
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.PemCertificateList"
     },
-    "MediaGraphSink": {
+    "Sink": {
       "type": "object",
       "required": [
         "@type",
@@ -555,19 +577,19 @@
         },
         "name": {
           "type": "string",
-          "description": "The name to be used for the media graph sink."
+          "description": "The name to be used for the topology sink."
         },
         "inputs": {
           "type": "array",
-          "description": "An array of the names of the other nodes in the media graph, the outputs of which are used as input for this sink node.",
+          "description": "An array of the names of the other nodes in the pipeline topology, the outputs of which are used as input for this sink node.",
           "items": {
-            "$ref": "#/definitions/MediaGraphNodeInput"
+            "$ref": "#/definitions/NodeInput"
           }
         }
       },
-      "description": "Enables a media graph to write media data to a destination outside of the Live Video Analytics IoT Edge module."
+      "description": "Enables a pipeline topology to write media data to a destination outside of the Azure Video Analyzer IoT Edge module."
     },
-    "MediaGraphNodeInput": {
+    "NodeInput": {
       "type": "object",
       "required": [
         "nodeName"
@@ -575,19 +597,19 @@
       "properties": {
         "nodeName": {
           "type": "string",
-          "description": "The name of another node in the media graph, the output of which is used as input to this node."
+          "description": "The name of another node in the pipeline topology, the output of which is used as input to this node."
         },
         "outputSelectors": {
           "type": "array",
           "description": "Allows for the selection of particular streams from another node.",
           "items": {
-            "$ref": "#/definitions/MediaGraphOutputSelector"
+            "$ref": "#/definitions/OutputSelector"
           }
         }
       },
-      "description": "Represents the input to any node in a media graph."
+      "description": "Represents the input to any node in a topology."
     },
-    "MediaGraphOutputSelector": {
+    "OutputSelector": {
       "type": "object",
       "properties": {
         "property": {
@@ -597,7 +619,7 @@
             "mediaType"
           ],
           "x-ms-enum": {
-            "name": "MediaGraphOutputSelectorProperty",
+            "name": "outputSelectorProperty",
             "values": [
               {
                 "value": "mediaType",
@@ -615,7 +637,7 @@
             "isNot"
           ],
           "x-ms-enum": {
-            "name": "MediaGraphOutputSelectorOperator",
+            "name": "outputSelectorOperator",
             "values": [
               {
                 "value": "is",
@@ -636,7 +658,7 @@
       },
       "description": "Allows for the selection of particular streams from another node."
     },
-    "MediaGraphFileSink": {
+    "FileSink": {
       "type": "object",
       "properties": {
         "baseDirectoryPath": {
@@ -647,7 +669,7 @@
         "fileNamePattern": {
           "type": "string",
           "description": "File name pattern for creating new files on the Edge device. The pattern must include at least one system variable. See the documentation for available variables and additional examples.",
-          "example": "mySampleFile-${System.GraphTopologyName}-${System.GraphInstanceName}-${System.DateTime}"
+          "example": "mySampleFile-${System.PipelineTopologyName}-${System.LivePipelineName}-${System.DateTime}"
         },
         "maximumSizeMiB": {
           "type": "string",
@@ -661,19 +683,19 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphSink"
+          "$ref": "#/definitions/Sink"
         }
       ],
-      "description": "Enables a media graph to write/store media (video and audio) to a file on the Edge device.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphFileSink"
+      "description": "Enables a topology to write/store media (video and audio) to a file on the Edge device.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.FileSink"
     },
-    "MediaGraphAssetSink": {
+    "AssetSink": {
       "type": "object",
       "properties": {
-        "assetNamePattern": {
+        "assetContainerSasUrl": {
           "type": "string",
-          "description": "A name pattern when creating new assets. The pattern must include at least one system variable. See the documentation for available variables and additional examples.",
-          "example": "MySampleAsset-${System.GraphTopologyName}-${System.GraphInstanceName}-${System.DateTime}"
+          "description": "An Azure Storage SAS Url which points to container, such as the one created for an Azure Media Services asset.",
+          "example": "https://azurestorage.com/mycontainer?sig=mysecretkey"
         },
         "segmentLength": {
           "type": "string",
@@ -683,7 +705,7 @@
         "localMediaCachePath": {
           "type": "string",
           "description": "Path to a local file system directory for temporary caching of media before writing to an Asset. Used when the Edge device is temporarily disconnected from Azure.",
-          "example": "/var/lib/lva/tmp/"
+          "example": "/var/lib/tmp/"
         },
         "localMediaCacheMaximumSizeMiB": {
           "type": "string",
@@ -692,19 +714,75 @@
       },
       "required": [
         "@type",
-        "assetNamePattern",
+        "assetContainerSasUrl",
         "localMediaCachePath",
         "localMediaCacheMaximumSizeMiB"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphSink"
+          "$ref": "#/definitions/Sink"
         }
       ],
-      "description": "Enables a media graph to record media to an Azure Media Services asset for subsequent playback.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphAssetSink"
+      "description": "Enables a pipeline topology to record media to an Azure Media Services asset for subsequent playback.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.AssetSink"
     },
-    "MediaGraphProcessor": {
+    "VideoCreationProperties": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "An optional title for the video."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the video."
+        },
+        "segmentLength": {
+          "type": "string",
+          "example": "PT30S",
+          "description": "When writing media to video, wait until at least this duration of media has been accumulated on the Edge. Expressed in increments of 30 seconds, with a minimum of 30 seconds and a recommended maximum of 5 minutes."
+        }
+      },
+      "description": "Properties which will be used only if a video is being created."
+    },
+    "VideoSink": {
+      "type": "object",
+      "properties": {
+        "videoName": {
+          "type": "string",
+          "description": "Name of a new or existing Video Analyzer video entity to use as media output.",
+          "example": "myVideo001"
+        },
+        "videoCreationProperties": {
+          "type": "string",
+          "description": "Optional properties which will be used only if a video is being created.",
+          "$ref": "#/definitions/VideoCreationProperties"
+        },
+        "localMediaCachePath": {
+          "type": "string",
+          "description": "Path to a local file system directory for temporary caching of media before writing to a video. This local cache will grow if the connection to Azure is not stable.",
+          "example": "/var/lib/tmp/"
+        },
+        "localMediaCacheMaximumSizeMiB": {
+          "type": "string",
+          "description": "Maximum amount of disk space that can be used for temporary caching of media."
+        }
+      },
+      "required": [
+        "@type",
+        "videoName",
+        "localMediaCachePath",
+        "localMediaCacheMaximumSizeMiB"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Sink"
+        }
+      ],
+      "description": "Enables a pipeline topology to record media to an Azure Video Analyzer video for subsequent playback.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.VideoSink"
+    },
+    "Processor": {
       "type": "object",
       "required": [
         "@type",
@@ -723,38 +801,38 @@
         },
         "inputs": {
           "type": "array",
-          "description": "An array of the names of the other nodes in the media graph, the outputs of which are used as input for this processor node.",
+          "description": "An array of the names of the other nodes in the topology, the outputs of which are used as input for this processor node.",
           "items": {
-            "$ref": "#/definitions/MediaGraphNodeInput"
+            "$ref": "#/definitions/NodeInput"
           }
         }
       },
-      "description": "A node that represents the desired processing of media in a graph. Takes media and/or events as inputs, and emits media and/or event as output."
+      "description": "A node that represents the desired processing of media in a topology. Takes media and/or events as inputs, and emits media and/or event as output."
     },
-    "MediaGraphMotionDetectionProcessor": {
+    "MotionDetectionProcessor": {
       "type": "object",
       "properties": {
         "sensitivity": {
           "type": "string",
           "description": "Enumeration that specifies the sensitivity of the motion detection processor.",
           "enum": [
-            "Low",
-            "Medium",
-            "High"
+            "low",
+            "medium",
+            "high"
           ],
           "x-ms-enum": {
-            "name": "MediaGraphMotionDetectionSensitivity",
+            "name": "motionDetectionSensitivity",
             "values": [
               {
-                "value": "Low",
+                "value": "low",
                 "description": "Low Sensitivity."
               },
               {
-                "value": "Medium",
+                "value": "medium",
                 "description": "Medium Sensitivity."
               },
               {
-                "value": "High",
+                "value": "high",
                 "description": "High Sensitivity."
               }
             ],
@@ -772,13 +850,74 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphProcessor"
+          "$ref": "#/definitions/Processor"
         }
       ],
       "description": "A node that accepts raw video as input, and detects if there are moving objects present. If so, then it emits an event, and allows frames where motion was detected to pass through. Other frames are blocked/dropped.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphMotionDetectionProcessor"
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.MotionDetectionProcessor"
     },
-    "MediaGraphExtensionProcessorBase": {
+    "ObjectTrackingProcessor": {
+      "type": "object",
+      "properties": {
+        "accuracy": {
+          "type": "string",
+          "description": "Enumeration that controls the accuracy of the tracker.",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "x-ms-enum": {
+            "name": "objectTrackingAccuracy",
+            "values": [
+              {
+                "value": "low",
+                "description": "Low Accuracy."
+              },
+              {
+                "value": "medium",
+                "description": "Medium Accuracy."
+              },
+              {
+                "value": "high",
+                "description": "High Accuracy."
+              }
+            ],
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Processor"
+        }
+      ],
+      "description": "A node that accepts raw video as input, and detects objects.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ObjectTrackingProcessor"
+    },
+    "LineCrossingProcessor": {
+      "type": "object",
+      "required": [
+        "lines"
+      ],
+      "properties": {
+        "lines": {
+          "type": "array",
+          "description": "An array of lines used to compute line crossing events.",
+          "items": {
+            "$ref": "#/definitions/Line"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Processor"
+        }
+      ],
+      "description": "A node that accepts raw video as input, and detects when an object crosses a line.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.LineCrossingProcessor"
+    },
+    "ExtensionProcessorBase": {
       "type": "object",
       "required": [
         "endpoint",
@@ -787,37 +926,42 @@
       "properties": {
         "endpoint": {
           "description": "Endpoint to which this processor should connect.",
-          "$ref": "#/definitions/MediaGraphEndpoint"
+          "$ref": "#/definitions/Endpoint"
         },
         "image": {
           "description": "Describes the parameters of the image that is sent as input to the endpoint.",
-          "$ref": "#/definitions/MediaGraphImage"
+          "$ref": "#/definitions/Image"
         },
         "samplingOptions": {
           "description": "Describes the sampling options to be applied when forwarding samples to the extension.",
-          "$ref": "#/definitions/MediaGraphSamplingOptions"
+          "$ref": "#/definitions/SamplingOptions"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphProcessor"
+          "$ref": "#/definitions/Processor"
         }
       ],
-      "description": "Processor that allows for extensions outside of the Live Video Analytics Edge module to be integrated into the graph. It is the base class for various different kinds of extension processor types.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphExtensionProcessorBase"
+      "description": "Processor that allows for extensions outside of the Azure Video Analyzer Edge module to be integrated into the pipeline topology. It is the base class for various different kinds of extension processor types.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ExtensionProcessorBase"
     },
-    "MediaGraphCognitiveServicesVisionExtension": {
+    "CognitiveServicesVisionExtension": {
       "type": "object",
-      "properties": {},
+      "properties": {
+        "extensionConfiguration": {
+          "type": "string",
+          "description": "Optional configuration to pass to the CognitiveServicesVision extension."
+        }
+      },
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphExtensionProcessorBase"
+          "$ref": "#/definitions/ExtensionProcessorBase"
         }
       ],
-      "description": "A processor that allows the media graph to send video frames to a Cognitive Services Vision extension. Inference results are relayed to downstream nodes.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphCognitiveServicesVisionExtension"
+      "description": "A processor that allows the pipeline topology to send video frames to a Cognitive Services Vision extension. Inference results are relayed to downstream nodes.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.CognitiveServicesVisionExtension"
     },
-    "MediaGraphGrpcExtension": {
+    "GrpcExtension": {
       "type": "object",
       "required": [
         "dataTransfer"
@@ -825,7 +969,7 @@
       "properties": {
         "dataTransfer": {
           "description": "How media should be transferred to the inference engine.",
-          "$ref": "#/definitions/MediaGraphGrpcExtensionDataTransfer"
+          "$ref": "#/definitions/GrpcExtensionDataTransfer"
         },
         "extensionConfiguration": {
           "type": "string",
@@ -834,13 +978,13 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphExtensionProcessorBase"
+          "$ref": "#/definitions/ExtensionProcessorBase"
         }
       ],
-      "description": "A processor that allows the media graph to send video frames to an external inference container over a gRPC connection. This can be done using shared memory (for high frame rates), or over the network. Inference results are relayed to downstream nodes.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphGrpcExtension"
+      "description": "A processor that allows the pipeline topology to send video frames to an external inference container over a gRPC connection. This can be done using shared memory (for high frame rates), or over the network. Inference results are relayed to downstream nodes.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.GrpcExtension"
     },
-    "MediaGraphGrpcExtensionDataTransfer": {
+    "GrpcExtensionDataTransfer": {
       "type": "object",
       "required": [
         "mode"
@@ -854,18 +998,18 @@
           "type": "string",
           "description": "How frame data should be transmitted to the inference engine.",
           "enum": [
-            "Embedded",
-            "SharedMemory"
+            "embedded",
+            "sharedMemory"
           ],
           "x-ms-enum": {
-            "name": "MediaGraphGrpcExtensionDataTransferMode",
+            "name": "grpcExtensionDataTransferMode",
             "values": [
               {
-                "value": "Embedded",
+                "value": "embedded",
                 "description": "Frames are transferred embedded into the gRPC messages."
               },
               {
-                "value": "SharedMemory",
+                "value": "sharedMemory",
                 "description": "Frames are transferred through shared memory."
               }
             ],
@@ -874,31 +1018,31 @@
         }
       },
       "description": "Describes how media should be transferred to the inference engine.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphGrpcExtensionDataTransfer"
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.GrpcExtensionDataTransfer"
     },
-    "MediaGraphHttpExtension": {
+    "HttpExtension": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphExtensionProcessorBase"
+          "$ref": "#/definitions/ExtensionProcessorBase"
         }
       ],
-      "description": "A processor that allows the media graph to send video frames (mostly at low frame rates e.g. <5 fps) to an external inference container over an HTTP-based RESTful API. Inference results are relayed to downstream nodes.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphHttpExtension"
+      "description": "A processor that allows the pipeline topology to send video frames (mostly at low frame rates e.g. <5 fps) to an external inference container over an HTTP-based RESTful API. Inference results are relayed to downstream nodes.",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.HttpExtension"
     },
-    "MediaGraphImage": {
+    "Image": {
       "type": "object",
       "properties": {
         "scale": {
-          "$ref": "#/definitions/MediaGraphImageScale"
+          "$ref": "#/definitions/ImageScale"
         },
         "format": {
-          "$ref": "#/definitions/MediaGraphImageFormat"
+          "$ref": "#/definitions/ImageFormat"
         }
       },
       "description": "Describes the properties of an image frame."
     },
-    "MediaGraphSamplingOptions": {
+    "SamplingOptions": {
       "type": "object",
       "properties": {
         "skipSamplesWithoutAnnotation": {
@@ -912,30 +1056,30 @@
       },
       "description": "Describes the properties of a sample."
     },
-    "MediaGraphImageScale": {
+    "ImageScale": {
       "type": "object",
       "properties": {
         "mode": {
           "type": "string",
           "description": "Describes the modes for scaling an input video frame into an image, before it is sent to an inference engine.",
           "enum": [
-            "PreserveAspectRatio",
-            "Pad",
-            "Stretch"
+            "preserveAspectRatio",
+            "pad",
+            "stretch"
           ],
           "x-ms-enum": {
-            "name": "MediaGraphImageScaleMode",
+            "name": "imageScaleMode",
             "values": [
               {
-                "value": "PreserveAspectRatio",
+                "value": "preserveAspectRatio",
                 "description": "Use the same aspect ratio as the input frame."
               },
               {
-                "value": "Pad",
+                "value": "pad",
                 "description": "Center pad the input frame to match the given dimensions."
               },
               {
-                "value": "Stretch",
+                "value": "stretch",
                 "description": "Stretch input frame to match given dimensions."
               }
             ],
@@ -953,7 +1097,7 @@
       },
       "description": "The scaling mode for the image."
     },
-    "MediaGraphImageFormat": {
+    "ImageFormat": {
       "type": "object",
       "required": [
         "@type"
@@ -966,9 +1110,9 @@
         }
       },
       "description": "Encoding settings for an image.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphImageFormat"
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ImageFormat"
     },
-    "MediaGraphImageFormatRaw": {
+    "ImageFormatRaw": {
       "type": "object",
       "required": [
         "pixelFormat"
@@ -978,63 +1122,63 @@
           "type": "string",
           "description": "The pixel format that will be used to encode images.",
           "enum": [
-            "Yuv420p",
-            "Rgb565be",
-            "Rgb565le",
-            "Rgb555be",
-            "Rgb555le",
-            "Rgb24",
-            "Bgr24",
-            "Argb",
-            "Rgba",
-            "Abgr",
-            "Bgra"
+            "yuv420p",
+            "rgb565be",
+            "rgb565le",
+            "rgb555be",
+            "rgb555le",
+            "rgb24",
+            "bgr24",
+            "argb",
+            "rgba",
+            "abgr",
+            "bgra"
           ],
           "x-ms-enum": {
-            "name": "MediaGraphImageFormatRawPixelFormat",
+            "name": "imageFormatRawPixelFormat",
             "values": [
               {
-                "value": "Yuv420p",
+                "value": "yuv420p",
                 "description": "Planar YUV 4:2:0, 12bpp, (1 Cr and Cb sample per 2x2 Y samples)."
               },
               {
-                "value": "Rgb565be",
+                "value": "rgb565be",
                 "description": "Packed RGB 5:6:5, 16bpp, (msb)   5R 6G 5B(lsb), big-endian."
               },
               {
-                "value": "Rgb565le",
+                "value": "rgb565le",
                 "description": "Packed RGB 5:6:5, 16bpp, (msb)   5R 6G 5B(lsb), little-endian."
               },
               {
-                "value": "Rgb555be",
+                "value": "rgb555be",
                 "description": "Packed RGB 5:5:5, 16bpp, (msb)1X 5R 5G 5B(lsb), big-endian , X=unused/undefined."
               },
               {
-                "value": "Rgb555le",
+                "value": "rgb555le",
                 "description": "Packed RGB 5:5:5, 16bpp, (msb)1X 5R 5G 5B(lsb), little-endian, X=unused/undefined."
               },
               {
-                "value": "Rgb24",
+                "value": "rgb24",
                 "description": "Packed RGB 8:8:8, 24bpp, RGBRGB."
               },
               {
-                "value": "Bgr24",
+                "value": "bgr24",
                 "description": "Packed RGB 8:8:8, 24bpp, BGRBGR."
               },
               {
-                "value": "Argb",
+                "value": "argb",
                 "description": "Packed ARGB 8:8:8:8, 32bpp, ARGBARGB."
               },
               {
-                "value": "Rgba",
+                "value": "rgba",
                 "description": "Packed RGBA 8:8:8:8, 32bpp, RGBARGBA."
               },
               {
-                "value": "Abgr",
+                "value": "abgr",
                 "description": "Packed ABGR 8:8:8:8, 32bpp, ABGRABGR."
               },
               {
-                "value": "Bgra",
+                "value": "bgra",
                 "description": "Packed BGRA 8:8:8:8, 32bpp, BGRABGRA."
               }
             ],
@@ -1044,13 +1188,13 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphImageFormat"
+          "$ref": "#/definitions/ImageFormat"
         }
       ],
       "description": "Encoding settings for raw images.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphImageFormatRaw"
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ImageFormatRaw"
     },
-    "MediaGraphImageFormatJpeg": {
+    "ImageFormatJpeg": {
       "type": "object",
       "properties": {
         "quality": {
@@ -1060,35 +1204,89 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphImageFormat"
+          "$ref": "#/definitions/ImageFormat"
         }
       ],
       "description": "Encoding settings for Jpeg images.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphImageFormatJpeg"
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ImageFormatJpeg"
     },
-    "MediaGraphImageFormatBmp": {
+    "ImageFormatBmp": {
       "type": "object",
       "properties": {},
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphImageFormat"
+          "$ref": "#/definitions/ImageFormat"
         }
       ],
       "description": "Encoding settings for Bmp images.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphImageFormatBmp"
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ImageFormatBmp"
     },
-    "MediaGraphImageFormatPng": {
+    "ImageFormatPng": {
       "type": "object",
       "properties": {},
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphImageFormat"
+          "$ref": "#/definitions/ImageFormat"
         }
       ],
       "description": "Encoding settings for Png images.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphImageFormatPng"
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.ImageFormatPng"
     },
-    "MediaGraphSignalGateProcessor": {
+    "Line": {
+      "type": "object",
+      "required": [
+        "name",
+        "line"
+      ],
+      "properties": {
+        "line": {
+          "$ref": "#/definitions/LineCoordinates",
+          "description": "Sets the properties of the line."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the line."
+        }
+      },
+      "description": "Describes the properties of a line."
+    },
+    "LineCoordinates": {
+      "type": "object",
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "$ref": "#/definitions/Point",
+          "description": "Sets the coordinates of the starting point for the line."
+        },
+        "end": {
+          "$ref": "#/definitions/Point",
+          "description": "Sets the coordinates of the ending point for the line."
+        }
+      },
+      "description": "Describes the start point and end point of a line in the frame."
+    },
+    "Point": {
+      "type": "object",
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "type": "string",
+          "description": "The X value of the point ranging from 0 to 1 starting from the left side of the frame."
+        },
+        "y": {
+          "type": "string",
+          "description": "The Y value of the point ranging from 0 to 1 starting from the upper side of the frame."
+        }
+      },
+      "description": "Describes the x and y value of a point in the frame."
+    },
+    "SignalGateProcessor": {
       "type": "object",
       "properties": {
         "activationEvaluationWindow": {
@@ -1114,11 +1312,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/MediaGraphProcessor"
+          "$ref": "#/definitions/Processor"
         }
       ],
       "description": "A signal gate determines when to block (gate) incoming media, and when to allow it through. It gathers input events over the activationEvaluationWindow, and determines whether to open or close the gate.",
-      "x-ms-discriminator-value": "#Microsoft.Media.MediaGraphSignalGateProcessor"
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SignalGateProcessor"
     }
   }
 }
