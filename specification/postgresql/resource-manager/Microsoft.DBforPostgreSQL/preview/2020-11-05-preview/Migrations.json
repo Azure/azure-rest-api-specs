@@ -129,16 +129,11 @@
             "type": "string"
           },
           {
+            "name": "parameters",
             "in": "body",
-            "name": "body",
             "required": false,
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/MigrationCreateRequest"
-                },
-                {}
-              ]
+              "$ref": "#/definitions/MigrationCreateRequest"
             }
           }
         ],
@@ -286,10 +281,30 @@
             "format": "uuid"
           },
           {
+            "name": "parameters",
             "in": "body",
-            "name": "body",
-            "required": false,
-            "schema": {}
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Database"
+            },
+            "description": "The required parameters for creating or updating a database."
+          }
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/MigrationStateTransitionRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DBsToMigrateSpecificationRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/MigrationSchedulingRequest"
+                  }
+                ]
           }
         ],
         "responses": {
