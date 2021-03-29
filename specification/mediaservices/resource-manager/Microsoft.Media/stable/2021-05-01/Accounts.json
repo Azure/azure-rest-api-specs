@@ -485,6 +485,33 @@
       },
       "type": "object"
     },
+    "MediaServiceUpdate": {
+      "description": "A Media Services account update.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/MediaServiceProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/MediaServiceIdentity",
+          "description": "The Managed Identity for the Media Services account."
+        }
+      },
+      "type": "object"
+    },
     "ListEdgePoliciesInput": {
       "properties": {
         "deviceId": {
@@ -945,7 +972,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MediaService"
+              "$ref": "#/definitions/MediaServiceUpdate"
             }
           },
           "default": {
