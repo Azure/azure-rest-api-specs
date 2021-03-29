@@ -28,17 +28,17 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-2021-05-01-preview
+tag: package-preivew-2021-05-01
 ```
 
 
-### Tag: package-2021-05-01-preview
+### Tag: package-preivew-2021-05-01
 
-These settings apply only when `--tag=package-2021-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preivew-2021-05-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-05-01-preview'
+```yaml $(tag) == 'package-preivew-2021-05-01'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/preivew-2021-05-01/extensions.json
 ```
 ### Tag: package-2021-03-01
 
