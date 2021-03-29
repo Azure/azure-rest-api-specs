@@ -673,6 +673,7 @@ input-file:
   - Microsoft.Sql/preview/2020-11-01-preview/ReplicationLinks.json
   - Microsoft.Sql/preview/2020-11-01-preview/RestorableDroppedDatabases.json
   - Microsoft.Sql/preview/2020-11-01-preview/RestorableDroppedManagedDatabases.json
+  - Microsoft.Sql/preview/2020-11-01-preview/RestorableDroppedManagedInstances.json
   - Microsoft.Sql/preview/2020-11-01-preview/RestorePoints.json
   - Microsoft.Sql/preview/2020-11-01-preview/SensitivityLabels.json
   - Microsoft.Sql/preview/2020-11-01-preview/ServerAdvisors.json
