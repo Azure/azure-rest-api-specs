@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.ProviderHub
-  output-folder: $(csharp-sdks-folder)/providerhub/management/Microsoft.ProviderHub/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.ProviderHub
+  output-folder: $(csharp-sdks-folder)/providerhub/Microsoft.Azure.Management.ProviderHub/src/Generated
 ```

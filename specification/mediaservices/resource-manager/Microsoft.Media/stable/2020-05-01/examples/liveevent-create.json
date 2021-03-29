@@ -15,7 +15,18 @@
         "description": "test event 1",
         "input": {
           "streamingProtocol": "RTMP",
-          "keyFrameIntervalDuration": "PT6S"
+          "keyFrameIntervalDuration": "PT6S",
+          "accessControl": {
+            "ip": {
+              "allow": [
+                {
+                  "name": "AllowAll",
+                  "address": "0.0.0.0",
+                  "subnetPrefixLength": 0
+                }
+              ]
+            }
+          }
         },
         "preview": {
           "accessControl": {
@@ -56,7 +67,18 @@
             "keyFrameIntervalDuration": "PT6S",
             "streamingProtocol": "FragmentedMP4",
             "accessToken": "<accessToken>",
-            "endpoints": []
+            "endpoints": [],
+            "accessControl": {
+              "ip": {
+                "allow": [
+                  {
+                    "name": "AllowAll",
+                    "address": "0.0.0.0",
+                    "subnetPrefixLength": 0
+                  }
+                ]
+              }
+            }
           },
           "preview": {
             "previewLocator": "c91726b4-880c-4090-94aa-e6ddb1384b37",
@@ -107,7 +129,18 @@
             "keyFrameIntervalDuration": "PT6S",
             "streamingProtocol": "FragmentedMP4",
             "accessToken": "<accessToken>",
-            "endpoints": []
+            "endpoints": [],
+            "accessControl": {
+              "ip": {
+                "allow": [
+                  {
+                    "name": "AllowAll",
+                    "address": "0.0.0.0",
+                    "subnetPrefixLength": 0
+                  }
+                ]
+              }
+            }
           },
           "preview": {
             "previewLocator": "c91726b4-880c-4090-94aa-e6ddb1384b37",
