@@ -10,6 +10,8 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.cdn
 package-name: azure-mgmt-cdn
+package-version: 2.0.0
+clear-output-folder: true
 modelerfour: 
   lenient-model-deduplication: true
 directive:
