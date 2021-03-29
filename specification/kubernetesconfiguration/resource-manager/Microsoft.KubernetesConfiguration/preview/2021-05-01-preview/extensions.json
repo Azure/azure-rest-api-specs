@@ -86,6 +86,12 @@
               "$ref": "#/definitions/Extension"
             }
           },
+          "200": {
+            "description": "Request received successfully for an existing resource.",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -103,7 +109,7 @@
           "Extensions",
           "ClusterExtensions"
         ],
-        "description": "Gets details of the Kubernetes Cluster Extension.",
+        "description": "Gets Kubernetes Cluster Extension.",
         "operationId": "Extensions_Get",
         "x-ms-examples": {
           "Get Extension": {
@@ -156,7 +162,7 @@
         "description": "Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.",
         "operationId": "Extensions_Delete",
         "x-ms-examples": {
-          "Get Extension": {
+          "Delete Extension": {
             "$ref": "./examples/DeleteExtension.json"
           }
         },
@@ -181,9 +187,18 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "forceDelete",
+            "in": "query",
+            "description": "Delete the extension resource in Azure - not the normal asynchronous delete.",
+            "type": "boolean"
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted.  The request has been accepted for processing."
           },
@@ -209,10 +224,10 @@
           "Extensions",
           "ClusterExtensions"
         ],
-        "description": "List all Source Control Configurations.",
+        "description": "List all Extensions in the cluster.",
         "operationId": "Extensions_List",
         "x-ms-examples": {
-          "List Source Control Configuration": {
+          "List Extensions": {
             "$ref": "./examples/ListExtensions.json"
           }
         },
@@ -241,6 +256,151 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ExtensionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Operations in a Cluster"
+        ],
+        "operationId": "OperationStatus_List",
+        "description": "List Async Operations, currently in progress, in a cluster",
+        "x-ms-examples": {
+          "AsyncOperationStatus List": {
+            "$ref": "./examples/ListAsyncOperationStatus.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operations in a cluster",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "operation Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Operation Status"
+        ],
+        "operationId": "OperationStatus_Get",
+        "description": "Get Async Operation status",
+        "x-ms-examples": {
+          "AsyncOperationStatus Get": {
+            "$ref": "./examples/GetAsyncOperationStatus.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Status",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.KubernetesConfiguration/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Operations List": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "description": "List all the available operations the KubernetesConfiguration resource provider supports in this api-version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -357,25 +517,21 @@
           "properties": {
             "extensionType": {
               "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher.",
-              "type": "string",
-              "required": true
+              "type": "string"
             },
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
               "type": "boolean",
-              "default": true,
-              "required": false
+              "default": true
             },
             "releaseTrain": {
               "description": "ReleaseTrain this extension participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
               "type": "string",
-              "required": false,
               "default": "Stable"
             },
             "version": {
               "description": "Version of the extension for this extension, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'.",
-              "type": "string",
-              "requried": false
+              "type": "string"
             },
             "scope": {
               "description": "Scope at which the extension is installed.",
@@ -384,7 +540,7 @@
             "configurationSettings": {
               "description": "Configuration settings, as name-value pairs for configuring this extension.",
               "type": "object",
-              "requried": false,
+              "x-nullable": true,
               "additionalProperties": {
                 "type": "string"
               }
@@ -392,7 +548,6 @@
             "configurationProtectedSettings": {
               "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
               "type": "object",
-              "requried": false,
               "x-nullable": true,
               "x-ms-secret": true,
               "additionalProperties": {
@@ -420,15 +575,6 @@
               "x-nullable": true,
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
             },
-            "identity": {
-              "type": "object",
-              "description": "Identity of the Extension resource",
-              "ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
-            },
-            "location": {
-              "type": "string",
-              "description": "Location of the identity - same as that of the parent resource."
-            },
             "customLocationSettings": {
               "description": "Custom Location settings properties.",
               "type": "object",
@@ -446,6 +592,10 @@
             }
           }
         },
+        "identity": {
+          "description": "Identity of the Extension resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
+        },
         "systemData": {
           "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -453,7 +603,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -472,6 +622,60 @@
           "type": "string",
           "readOnly": true,
           "description": "URL to get the next set of extension objects, if any."
+        }
+      }
+    },
+    "OperationStatusResult": {
+      "description": "The current status of an async operation.",
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Additional information, if available.",
+          "type": "object",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "description": "If present, details of the operation error.",
+          "type": "object",
+          "readOnly": true,
+          "x-nullable": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "OperationStatusList": {
+      "description": "The async operations in progress, in the cluster.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationStatusResult"
+          },
+          "description": "List of async operations in progress, in the cluster."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of Operation Result objects, if any."
         }
       }
     }
