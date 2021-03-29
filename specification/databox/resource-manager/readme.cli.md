@@ -9,6 +9,7 @@ cli:
   namespace: azure.mgmt.databox
   test-scenario:
     - name: JobsCreate
+    - name: JobsGet6
     - name: JobsGet5
     - name: JobsGet4
     - name: JobsGet3
@@ -29,4 +30,5 @@ cli:
     - name: ServiceValidateInputs
     - name: AvailableSkusPost
     - name: JobsDelete
+    - name: JobMitigate
 ```
