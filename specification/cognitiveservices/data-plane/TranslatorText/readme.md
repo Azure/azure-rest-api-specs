@@ -37,7 +37,7 @@ input-file: preview/v1.0-preview.1/TranslatorBatch.json
 
 ### 1.0 Batch API
 This setting is for batch document translator and only applied when `--tag=release_1_0` is specified on the command line.
-``` yaml $(tag) == 'release_1_0_preview.1'
+``` yaml $(tag) == 'release_1_0'
 input-file: stable/v1.0/TranslatorBatch.json
 ```
 
@@ -121,7 +121,7 @@ These settings apply only when `--tag=release_1_0_preview.1 --nodejs` is specifi
 
 These settings apply only when `--tag=release_1_0 --nodejs` is specified on the command line.
 
-``` yaml $(tag) == 'release_1_0_preview.1' && $(nodejs)
+``` yaml $(tag) == 'release_1_0' && $(nodejs)
   package-version: 1.0
 ```
 
