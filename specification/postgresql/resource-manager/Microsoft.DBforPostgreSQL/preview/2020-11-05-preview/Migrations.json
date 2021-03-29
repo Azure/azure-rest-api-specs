@@ -103,9 +103,7 @@
         ],
         "operationId": "Migrations_Post",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -180,6 +178,7 @@
         "tags": [
           "Migrations"
         ],
+        "operationId": "Migrations_MigrationId_Get",
         "produces": [
           "application/json"
         ],
@@ -252,10 +251,9 @@
         "tags": [
           "Migrations"
         ],
+        "operationId": "Migrations_TargetState_Put",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -693,8 +691,7 @@
         "targetDBServerMetadata": {
           "$ref": "#/definitions/DBServerMetadata_sku"
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "MigrationDetailsBase": {
       "type": "object",
