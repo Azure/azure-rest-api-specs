@@ -20,7 +20,7 @@ Please also specify `--azureresourceschema-folder=<path to the root directory of
 
 ### Tag: schema-keyvault-2020-04-01-preview and azureresourceschema
 
-``` yaml $(tag) == 'schema-keyvault-2020-04-01-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-keyvault-2021-04-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
