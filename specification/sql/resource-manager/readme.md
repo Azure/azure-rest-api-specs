@@ -224,7 +224,6 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
-- Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/databases.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
@@ -243,6 +242,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
+- Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
 
 
 # Needed when there is more than one input file
@@ -333,7 +333,6 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
-- Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
 - Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
@@ -348,6 +347,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
+- Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
 
 # Needed when there is more than one input file
 override-info:
@@ -426,7 +426,6 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
-- Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
 - Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
@@ -441,6 +440,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
+- Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
 
 # Needed when there is more than one input file
 override-info:
