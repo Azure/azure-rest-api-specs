@@ -38,6 +38,10 @@ These settings apply only when `--tag=package-2021-03-25-preview` is specified o
 ``` yaml $(tag) == 'package-2021-03-25-preview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-03-25-preview/postgresql.json
+directive:
+  - suppress: R4009
+    from: postgresql.json
+    reason: This version doesn't support systemData.
 ```
 
 
