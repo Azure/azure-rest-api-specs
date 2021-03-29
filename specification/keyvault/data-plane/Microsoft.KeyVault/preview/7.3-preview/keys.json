@@ -1607,6 +1607,20 @@
         "kek": {
           "$ref": "#/definitions/JsonWebKey",
           "description": "The export key encryption Json web key. This key MUST be a RSA key that supports encryption."
+        },
+        "enc": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The encryption algorithm to use to protected the exported key material",
+          "enum": [
+            "CKM_RSA_AES_KEY_WRAP",
+            "RSA_AES_KEY_WRAP_256",
+            "RSA_AES_KEY_WRAP_384"
+          ],
+          "x-ms-enum": {
+            "name": "KeyEncryptionAlgorithm",
+            "modelAsString": true
+          }
         }
       },
       "description": "The export key parameters.",
@@ -1621,6 +1635,24 @@
           "type": "string",
           "minLength": 1,
           "description": "The target environment assertion."
+        },
+        "nonce": {
+          "type": "string",
+          "description": "A client provided nonce for freshness."
+        },
+        "enc": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The encryption algorithm to use to protected the exported key material",
+          "enum": [
+            "CKM_RSA_AES_KEY_WRAP",
+            "RSA_AES_KEY_WRAP_256",
+            "RSA_AES_KEY_WRAP_384"
+          ],
+          "x-ms-enum": {
+            "name": "KeyEncryptionAlgorithm",
+            "modelAsString": true
+          }
         }
       },
       "description": "The release key parameters.",
@@ -1959,12 +1991,11 @@
       "properties": {
         "value": {
           "type": "string",
-          "format": "base64url",
           "readOnly": true,
-          "description": "The blob containing the released key."
+          "description": "A signed object containing the released key."
         }
       },
-      "description": "The release result, containing the released key blob."
+      "description": "The release result, containing the released key."
     }
   },
   "parameters": {
