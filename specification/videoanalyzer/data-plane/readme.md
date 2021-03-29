@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Azure video analyzer edge.
+This is the AutoRest configuration file for Azure Video Analyzer edge.
 
 These swaggers are used to generate the SDKs for Azure Video Analyzer. These SDKs are models only (no client) and customer would need to use IoT SDK to send direct method calls to IoT hub. These SDKs are not ARM based and doesn't do any REST calls. all operations are sent as direct methods on IoT hub.
 
@@ -10,7 +10,7 @@ These swaggers are used to generate the SDKs for Azure Video Analyzer. These SDK
 
 ## Getting Started
 
-To build the SDK for Azure video analyzer edge, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Azure Video Analyzer edge, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -24,7 +24,7 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the Azure video analyzer edge API.
+These are the global settings for the Azure Video Analyzer edge API.
 
 ``` yaml
 openapi-type: data-plane
@@ -43,8 +43,8 @@ These settings apply only when `--tag=package-ava-edge-1-0-0-preview` is specifi
 
 ``` yaml $(tag) == 'package-ava-edge-1-0-0-preview'
 input-file:
-  - VideoAnalyzer.Edge/preview/2.0.0/AzureVideoAnalyzer.json
-  - VideoAnalyzer.Edge/preview/2.0.0/AzureVideoAnalyzerSdkDefinitions.json
+  - VideoAnalyzer.Edge/preview/1.0.0/AzureVideoAnalyzer.json
+  - VideoAnalyzer.Edge/preview/1.0.0/AzureVideoAnalyzerSdkDefinitions.json
 ```
 
 ---
@@ -92,7 +92,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/VideoAnalyzer.Edge/preview/2.0.0/AzureVideoAnalyzer.json
+  - $(this-folder)/VideoAnalyzer.Edge/preview/1.0.0/AzureVideoAnalyzer.json
 
 ```
 
