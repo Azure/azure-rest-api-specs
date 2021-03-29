@@ -1088,9 +1088,78 @@
           }
         }
       }
+    },
+    "/randomnumbers": {
+      "post": {
+        "tags": [
+          "RandomNumbers"
+        ],
+        "operationId": "getRandomNumbers",
+        "summary": "Get the requested number of bytes containing random values.",
+        "description": "Get the requested number of bytes containing random values from a managed HSM.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/GetRandomNumbersRequest"
+            },
+            "description": "The request object to get random numbers."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The bytes encoded as a base64url string.",
+            "schema": {
+              "$ref": "#/definitions/GetRandomNumbersResponse"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetRandomNumbers": {
+            "$ref": "./examples/RandomNumbers-example.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "GetRandomNumbersRequest": {
+      "properties": {
+        "bytesLength": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 128,
+          "description": "The requested number of random bytes."
+        }
+      },
+      "description": "The get random numbers request object.",
+      "required": [
+        "bytesLength"
+      ]
+    },
+    "GetRandomNumbersResponse": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The bytes encoded as a base64url string."
+        }
+      },
+      "description": "The get random numbers response object containing the bytes."
+    },
     "KeyReleasePolicy": {
       "properties": {
         "contentType": {
