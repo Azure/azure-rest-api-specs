@@ -26,7 +26,7 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-preivew-2021-05-01' && $(go)
 namespace: kubernetesconfiguration
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/preivew-2021-05-01/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/preivew-2021-05-01/$(namespace)
 ```
 
 ### Tag: package-2021-03-01 and go
