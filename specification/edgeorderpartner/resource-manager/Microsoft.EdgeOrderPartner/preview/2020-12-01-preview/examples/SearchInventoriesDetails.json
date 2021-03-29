@@ -1,13 +1,13 @@
 {
   "parameters": {
-    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "subscriptionId": "b783ea86-c85c-4175-b76d-3992656af50d",
     "api-version": "2020-12-01-preview",
     "$expand": "details",
     "User-Agent": [
       "vscode-restclient"
     ],
     "Referer": [
-      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/providers/Microsoft.EdgeOrderPartner/searchInventories?api-version=2020-12-01-preview&$expand=details"
+      "https://localhost/subscriptions/b783ea86-c85c-4175-b76d-3992656af50d/providers/Microsoft.EdgeOrderPartner/searchInventories?api-version=2020-12-01-preview&$expand=details"
     ],
     "Content-Type": [
       "application/json; charset=utf-8"
@@ -17,7 +17,7 @@
     ],
     "searchInventoriesRequest": {
       "serialNumber": "SerialNumber1",
-      "familyIdentifier": "FamilyIdentifier"
+      "familyIdentifier": "AzureStackEdge"
     }
   },
   "responses": {
@@ -27,42 +27,42 @@
           {
             "properties": {
               "serialNumber": "SerialNumber1",
+              "location": "westus",
               "orderItem": {
-                "armId": "ArmId",
-                "orderItemType": "Purchase"
+                "armId": "/subscriptions/b783ea86-c85c-4175-b76d-3992656af50d/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orders/TestOrderName1",
+                "orderItemType": "Rental"
               },
               "configuration": {
-                "familyIdentifier": "FamilyIdentifier",
-                "productLineIdentifier": "ProductLineIdentifier",
-                "productIdentifier": "ProductIdentifier",
-                "configurationIdentifier": "ConfigurationIdentifier",
-                "configurationIdentifierOnDevice": "ConfigurationIdentifierOnDevice"
+                "familyIdentifier": "AzureStackEdge",
+                "productLineIdentifier": "AzureStackEdgePL",
+                "productIdentifier": "AzureStackEdgeProGPU",
+                "configurationIdentifier": "EdgeP_Base",
+                "configurationIdentifierOnDevice": "EdgeP_High"
               },
               "managementResource": {
-                "armId": "ArmId",
-                "tenantId": "guid"
+                "armId": "/subscriptions/c783ea86-c85c-4175-b76d-3992656af50d/resourceGroups/EdgeTestRG/providers/Microsoft.DataBoxEdge/DataBoxEdgeDevices/TestEdgeDeviceName1",
+                "tenantId": "a783ea86-c85c-4175-b76d-3992656af50d"
               },
               "inventory": {
                 "status": "Healthy",
                 "location": "Rack",
-                "registrationAllowed": false
+                "registrationAllowed": true
               },
-              "location": "It can be used in update API.",
               "details": {
                 "orderItem": {
                   "status": {
-                    "stageStatus": "InProgress",
-                    "stageName": "DevicePrepared",
-                    "displayName": "DevicePrepared - InProgress",
-                    "startTime": "2021-12-03T10:38:38+05:30"
+                    "stageStatus": "Succeeded",
+                    "stageName": "Delivered",
+                    "displayName": "Delivered - Succeeded",
+                    "startTime": "2020-08-07T10:50:36.3341513+05:30"
                   },
                   "subscription": {
-                    "id": "guid",
+                    "id": "b783ea86-c85c-4175-b76d-3992656af50d",
                     "state": "Registered",
                     "quotaId": "Internal_2014-09-01"
                   }
                 },
-                "inventoryMetadata": "partner specific any serialzed string. Blackbox for service. Service will store and just return it.",
+                "inventoryMetadata": "This is currently in Japan",
                 "configuration": {
                   "specifications": [
                     {
@@ -81,17 +81,16 @@
                 },
                 "inventory": {
                   "additionalData": {
-                    "key1": "Value1",
-                    "key2": "Value2"
+                    "SourceCountry": "USA",
+                    "ManuacturingYear": "2020"
                   }
                 },
                 "billing": {
-                  "billingType": "Example",
-                  "status": "statusExample"
+                  "billingType": "Pav2",
+                  "status": "InProgress"
                 },
-                "secrets": {
-                  "key1": "Value1",
-                  "key2": "Value2"
+                "inventorySecrets": {
+                  "PublicCert": "<PublicCert>"
                 }
               }
             }

@@ -57,7 +57,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrderPartner/locations/{location}/inventories/{serialNumber}/manageInventoryMetadata": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrderPartner/locations/{location}/productFamilies/{familyIdentifier}/inventories/{serialNumber}/manageInventoryMetadata": {
       "post": {
         "tags": [
           "PartnerInventory"
@@ -71,6 +71,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/familyIdentifierParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -95,10 +98,10 @@
         ],
         "responses": {
           "200": {
-            "description": "\"No content\""
+            "description": "\"Success\""
           },
           "202": {
-            "description": "\"No content\""
+            "description": "\"Request is accepted to manage inventory metadata\""
           },
           "204": {
             "description": "\"No content\""
@@ -118,7 +121,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrderPartner/locations/{location}/inventories/{serialNumber}/manageLink": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrderPartner/locations/{location}/productFamilies/{familyIdentifier}/inventories/{serialNumber}/manageLink": {
       "post": {
         "tags": [
           "PartnerInventory"
@@ -132,6 +135,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/familyIdentifierParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -156,7 +162,7 @@
         ],
         "responses": {
           "200": {
-            "description": "\"No content\""
+            "description": "\"Success\""
           },
           "204": {
             "description": "\"No content\""
@@ -218,6 +224,9 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "SearchInventories": {
@@ -406,13 +415,14 @@
           "description": "Represents additional details about billing for the inventory",
           "readOnly": true
         },
-        "secrets": {
+        "inventorySecrets": {
           "description": "Represents secrets on the inventory",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -481,15 +491,10 @@
     "ManageInventoryMetadataRequest": {
       "description": "Request body for ManageInventoryMetadata call",
       "required": [
-        "familyIdentifier",
         "inventoryMetadata"
       ],
       "type": "object",
       "properties": {
-        "familyIdentifier": {
-          "description": "Family identifier for inventory",
-          "type": "string"
-        },
         "inventoryMetadata": {
           "description": "Inventory metadata to be updated",
           "type": "string"
@@ -503,17 +508,12 @@
     "ManageLinkRequest": {
       "description": "Request body for ManageLink call",
       "required": [
-        "familyIdentifier",
         "managementResourceArmId",
         "operation",
         "tenantId"
       ],
       "type": "object",
       "properties": {
-        "familyIdentifier": {
-          "description": "Family identifier for inventory",
-          "type": "string"
-        },
         "managementResourceArmId": {
           "description": "Arm Id of the management resource to which inventory is to be linked\r\nFor unlink operation, enter empty string",
           "type": "string"
@@ -572,7 +572,7 @@
       "type": "object",
       "properties": {
         "armId": {
-          "description": "Arm ID of order item ",
+          "description": "Arm ID of order item",
           "type": "string",
           "readOnly": true
         },
@@ -667,7 +667,7 @@
             "InReview",
             "Confirmed",
             "ReadyForDispatch",
-            "Dispatched",
+            "Shipped",
             "Delivered",
             "InUse"
           ],
@@ -745,7 +745,7 @@
                 "description": "Order is ready for dispatch"
               },
               {
-                "value": "Dispatched",
+                "value": "Shipped",
                 "description": "Order is in transit to customer"
               },
               {
@@ -860,6 +860,14 @@
     }
   },
   "parameters": {
+    "familyIdentifierParameter": {
+      "name": "familyIdentifier",
+      "in": "path",
+      "description": "Unique identifier for the product family",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "locationParameter": {
       "name": "location",
       "in": "path",
@@ -896,4 +904,3 @@
     }
   ]
 }
-																					

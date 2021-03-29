@@ -1,12 +1,12 @@
 {
   "parameters": {
-    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "subscriptionId": "b783ea86-c85c-4175-b76d-3992656af50d",
     "api-version": "2020-12-01-preview",
     "User-Agent": [
       "vscode-restclient"
     ],
     "Referer": [
-      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/providers/Microsoft.EdgeOrderPartner/searchInventories?api-version=2020-12-01-preview"
+      "https://localhost/subscriptions/b783ea86-c85c-4175-b76d-3992656af50d/providers/Microsoft.EdgeOrderPartner/searchInventories?api-version=2020-12-01-preview"
     ],
     "Content-Type": [
       "application/json; charset=utf-8"
@@ -16,7 +16,7 @@
     ],
     "searchInventoriesRequest": {
       "serialNumber": "SerialNumber1",
-      "familyIdentifier": "FamilyIdentifier"
+      "familyIdentifier": "AzureStackEdge"
     }
   },
   "responses": {
@@ -26,27 +26,27 @@
           {
             "properties": {
               "serialNumber": "SerialNumber1",
+              "location": "westus",
               "orderItem": {
-                "armId": "ArmId",
-                "orderItemType": "Purchase"
+                "armId": "/subscriptions/b783ea86-c85c-4175-b76d-3992656af50d/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orders/TestOrderName1",
+                "orderItemType": "Rental"
               },
               "configuration": {
-                "familyIdentifier": "FamilyIdentifier",
-                "productLineIdentifier": "ProductLineIdentifier",
-                "productIdentifier": "ProductIdentifier",
-                "configurationIdentifier": "ConfigurationIdentifier",
-                "configurationIdentifierOnDevice": "ConfigurationIdentifierOnDevice"
+                "familyIdentifier": "AzureStackEdge",
+                "productLineIdentifier": "AzureStackEdgePL",
+                "productIdentifier": "AzureStackEdgeProGPU",
+                "configurationIdentifier": "EdgeP_Base",
+                "configurationIdentifierOnDevice": "EdgeP_High"
               },
               "managementResource": {
-                "armId": "ArmId",
-                "tenantId": "guid"
+                "armId": "/subscriptions/c783ea86-c85c-4175-b76d-3992656af50d/resourceGroups/EdgeTestRG/providers/Microsoft.DataBoxEdge/DataBoxEdgeDevices/TestEdgeDeviceName1",
+                "tenantId": "a783ea86-c85c-4175-b76d-3992656af50d"
               },
               "inventory": {
                 "status": "Healthy",
                 "location": "Rack",
-                "registrationAllowed": false
-              },
-              "location": "It can be used in update API."
+                "registrationAllowed": true
+              }
             }
           }
         ]
