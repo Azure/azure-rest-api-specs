@@ -408,6 +408,7 @@
       "additionalProperties": {}
     },
     "DBsToMigrateSpecificationRequest": {
+      "type": "object",
       "properties": {
         "dBsToMigrate": {
           "type": "array",
@@ -421,8 +422,7 @@
       "allOf": [
         {
           "$ref": "#/definitions/MigrationStateTransitionRequest"
-        },
-        {}
+        }
       ]
     },
     "DMSDBDataMigrationDetails": {
@@ -876,20 +876,6 @@
         "CutoverTriggered",
         "Canceled"
       ]
-    },
-    "Sku": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "tier": {
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": {}
     },
     "TargetDBOverwriteConfirmationSubStateDetails": {
       "properties": {
