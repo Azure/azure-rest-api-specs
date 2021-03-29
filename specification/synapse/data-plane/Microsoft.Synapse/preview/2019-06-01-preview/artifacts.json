@@ -2705,7 +2705,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/KqlScript"
+              "$ref": "#/definitions/KqlScriptResource"
             }
           }
         ],
@@ -2713,7 +2713,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/KqlScript"
+              "$ref": "#/definitions/KqlScriptResource"
             }
           },
           "202": {
@@ -2749,9 +2749,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/KqlScript"
+              "$ref": "#/definitions/KqlScriptResource"
             }
           },
           "default": {
@@ -4793,7 +4793,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/KqlScript"
+            "$ref": "#/definitions/KqlScriptResource"
           }
         },
         "nextLink": {
@@ -4801,8 +4801,11 @@
         }
       }
     },
-    "KqlScript": {
+    "KqlScriptResource": {
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -4810,37 +4813,35 @@
           "type": "string"
         },
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/KqlScript",
+          "description": "Properties of sql script."
+        }
+      }
+    },
+    "KqlScript": {
+      "properties": {
+        "content": {
           "properties": {
-            "content": {
+            "query": {
+              "type": "string"
+            },
+            "metadata": {
               "type": "object",
               "properties": {
-                "query": {
+                "language": {
                   "type": "string"
-                },
-                "metadata": {
-                  "type": "object",
-                  "properties": {
-                    "language": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "currentConnection": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string"
-                    },
-                    "type": {
-                      "type": "string"
-                    }
-                  }
                 }
               }
             },
-            "type": {
-              "type": "string"
+            "currentConnection": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
             }
           }
         }
