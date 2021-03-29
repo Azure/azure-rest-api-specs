@@ -90,6 +90,17 @@ title:
   Azure Communication Services
 ```
 
+### Tag: package-chat-2021-03-07
+
+These settings apply only when `--tag=package-2021-03-01-preview5` is specified on the command line.
+
+```yaml $(tag) == 'package-chat-2021-03-07'
+input-file:
+  - Microsoft.CommunicationServicesChat/stable/2021-03-07/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
 ### Tag: package-2020-07-20-preview2
 
 These settings apply only when `--tag=package-2020-07-20-preview2` is specified on the command line.
@@ -106,6 +117,17 @@ These settings apply only when `--tag=package-2021-03-07` is specified on the co
 ```yaml $(tag) == 'package-2021-03-07'
 input-file:
   - Microsoft.CommunicationServicesIdentity/stable/2021-03-07/CommunicationIdentity.json
+title:
+  Azure Communication Services
+```
+
+### Tag: package-phonenumbers-2021-03-07
+
+These settings apply only when `--tag=package-phonenumbers-2021-03-07` is specified on the command line.
+
+```yaml $(tag) == 'package-phonenumbers-2021-03-07'
+input-file:
+  - Microsoft.CommunicationServicesPhoneNumbers/stable/2021-03-07/phonenumbers.json
 title:
   Azure Communication Services
 ```
@@ -138,6 +160,17 @@ These settings apply only when `--tag=package-2020-11-19-preview1` is specified 
 ```yaml $(tag) == 'package-2020-11-19-preview1'
 input-file:
   - Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json
+```
+
+## Supression
+``` yaml
+directive:
+  - from:
+    - phonenumbers.json
+    suppress:
+    - R2005 #Long running operation status code
+    reason:
+    - Approval from Azure review board that Long Running Operations can return 202s.
 ```
 
 ---
