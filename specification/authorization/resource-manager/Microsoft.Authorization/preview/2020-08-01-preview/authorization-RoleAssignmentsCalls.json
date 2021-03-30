@@ -249,13 +249,6 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
-          "500": {
-            "x-ms-error-response": true,
-            "description": "Error.",
-            "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -342,13 +335,6 @@
             "description": "Returns whether or not validation was successful.",
             "schema": {
               "$ref": "#/definitions/ValidationResponse"
-            }
-          },
-          "500": {
-            "x-ms-error-response": true,
-            "description": "Error.",
-            "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
             }
           },
           "default": {
@@ -476,13 +462,6 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
-          "500": {
-            "x-ms-error-response": true,
-            "description": "Error.",
-            "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -559,13 +538,6 @@
               "$ref": "#/definitions/ValidationResponse"
             }
           },
-          "500": {
-            "x-ms-error-response": true,
-            "description": "Error.",
-            "schema": {
-              "$ref": "#/definitions/CustomErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -585,15 +557,6 @@
     }
   },
   "definitions": {
-    "CustomErrorResponse": {
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Description of the error."
-        }
-      },
-      "description": "Descriptive error response."
-    },
     "ValidationResponseErrorInfo": {
       "description": "Failed validation result details",
       "properties": {
@@ -617,7 +580,7 @@
           "type": "boolean",
           "description": "Whether or not validation succeeded"
         },
-        "validationErrorInfo": {
+        "errorInfo": {
           "description": "Failed validation result details",
           "$ref": "#/definitions/ValidationResponseErrorInfo"
         }
@@ -652,6 +615,7 @@
     "RoleAssignmentProperties": {
       "properties": {
         "scope": {
+          "readOnly": true,
           "type": "string",
           "description": "The role assignment scope."
         },
