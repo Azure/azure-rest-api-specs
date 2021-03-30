@@ -544,6 +544,11 @@
                 "type": "string",
                 "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
               },
+              "x-ms-resource-type": {
+                "x-ms-client-name": "ResourceType",
+                "description": "The type of the resource.  The value may be \"file\" or \"directory\".  If not set, the value is \"file\".",
+                "type": "string"
+              },
               "Date": {
                 "type": "string",
                 "format": "date-time-rfc1123",
@@ -960,7 +965,7 @@
                 "format": "date-time-rfc1123"
               },
               "x-ms-request-id": {
-                "x-ms-client-name": "RequestId", 
+                "x-ms-client-name": "RequestId",
                 "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation.",
                 "pattern": "^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$",
                 "type": "string"
@@ -1628,7 +1633,7 @@
                 "format": "date-time-rfc1123"
               },
               "x-ms-request-id": {
-                "x-ms-client-name": "RequestId", 
+                "x-ms-client-name": "RequestId",
                 "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation.",
                 "pattern": "^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$",
                 "type": "string"
