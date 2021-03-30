@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterType}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}": {
       "get": {
         "description": "Get Extension Type details",
         "operationId": "ClusterExtensionType_Get",
@@ -54,7 +54,7 @@
             "$ref": "#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "#/parameters/ClusterResourceNameParameter"
+            "$ref": "#/parameters/ClusterTypeParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -82,7 +82,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterType}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
       "get": {
         "description": "Get Extension Types",
         "operationId": "ClusterExtensionTypes_List",
@@ -102,7 +102,7 @@
             "$ref": "#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "#/parameters/ClusterResourceNameParameter"
+            "$ref": "#/parameters/ClusterTypeParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -130,7 +130,52 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/{clusterRp}/locations/{location}/extensionTypes": {
+    "/subscriptions/{subscriptionId}/providers/{clusterRp}/{clusterType}/locations/{location}/extensionTypes/{extensionTypeName}/versions": {
+      "get": {
+        "description": "List available versions for an Extension Type",
+        "operationId": "ExtensionTypeVersion_List",
+        "x-ms-examples": {
+          "ExtensionTypeVersion_List": {
+            "$ref": "./examples/ExtensionTypeVersion_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionLocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionTypeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{clusterRp}/{clusterType}/locations/{location}/extensionTypes": {
       "get": {
         "tags": [
           "ExtensionType"
@@ -148,6 +193,9 @@
           },
           {
             "$ref": "#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterTypeParameter"
           },
           {
             "$ref": "#/parameters/ExtensionLocationParameter"
@@ -209,7 +257,8 @@
           "description": "The link to fetch the next page of Extension Types"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "description": "Represents an Extension Type."
@@ -233,6 +282,42 @@
         }
       },
       "description": "Properties of the connected cluster."
+    },
+    "ExtensionVersionList": {
+      "description": "List versions for an Extension",
+      "properties": {
+        "value": {
+          "description": "The list of extension versions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionVersion"
+          }
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of Extension Types",
+          "type": "string"
+        }
+      }
+    },
+    "ExtensionVersion": {
+      "description": "Represents an Extension version.",
+      "type": "object",
+      "properties": {
+        "releaseTrain": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The release train associated with the Extension versoin"
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version for this Extension Type"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
     },
     "SupportedScopes": {
       "type": "object",
@@ -275,8 +360,8 @@
       "description": "The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).",
       "x-ms-parameter-location": "method"
     },
-    "ClusterResourceNameParameter": {
-      "name": "clusterResourceName",
+    "ClusterTypeParameter": {
+      "name": "clusterType",
       "in": "path",
       "required": true,
       "type": "string",
