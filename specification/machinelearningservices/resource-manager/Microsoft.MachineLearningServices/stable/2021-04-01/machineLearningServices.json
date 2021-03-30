@@ -3222,6 +3222,18 @@
           "type": "string",
           "description": "The description of the Machine Learning compute."
         },
+        "createdOn": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The time at which the compute was created."
+        },
+        "modifiedOn": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The time at which the compute was last modified."
+        },
         "resourceId": {
           "type": "string",
           "description": "ARM resource id of the underlying compute"
@@ -4157,6 +4169,11 @@
         "message": {
           "type": "string",
           "description": "Error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error",
           "readOnly": true
         },
         "details": {
