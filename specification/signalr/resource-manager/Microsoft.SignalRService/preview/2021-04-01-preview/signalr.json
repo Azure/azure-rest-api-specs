@@ -71,7 +71,7 @@
             "name": "parameters",
             "in": "body",
             "description": "Parameters supplied to the operation.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/NameAvailabilityParameters"
             }
@@ -283,7 +283,7 @@
             "name": "parameters",
             "in": "body",
             "description": "Parameters for the create or update operation",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/SignalRResource"
             }
@@ -386,7 +386,7 @@
             "name": "parameters",
             "in": "body",
             "description": "Parameters for the update operation",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/SignalRResource"
             }
@@ -582,7 +582,7 @@
             "name": "parameters",
             "in": "body",
             "description": "The resource of private endpoint and its properties",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -729,7 +729,7 @@
             "name": "parameters",
             "in": "body",
             "description": "Parameter that describes the Regenerate Key Operation.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RegenerateKeyParameters"
             }
@@ -929,7 +929,7 @@
             "name": "parameters",
             "in": "body",
             "description": "The shared private link resource",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/SharedPrivateLinkResource"
             }
@@ -1807,19 +1807,23 @@
       "properties": {
         "primaryKey": {
           "description": "The primary access key.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "secondaryKey": {
           "description": "The secondary access key.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "primaryConnectionString": {
           "description": "Connection string constructed via the primaryKey",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "secondaryConnectionString": {
           "description": "Connection string constructed via the secondaryKey",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
