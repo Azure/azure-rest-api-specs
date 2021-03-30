@@ -1,0 +1,389 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-04-01-preview",
+    "title": "SynapseEventStreamsV1ManagementClient",
+    "description": "The Azure Synapse EventStreams management API provides a RESTful set of web APIs that interact with Azure Synapse to manage your EventStream resources. The API enables users to create, retrieve, update, and delete EventStreams."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/eventStreams/{eventStreamName}": {
+      "get": {
+        "tags": [
+          "EventStreams"
+        ],
+        "description": "Gets an EventStream.",
+        "operationId": "EventStreams _Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/EventStreamNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified EventStream.",
+            "schema": {
+              "$ref": "#/definitions/EventStream"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Gets a EventStream.": {
+            "$ref": "./examples/GetEventStream.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EventStreams"
+        ],
+        "description": "Creates a new EventStream or updates an existing EventStream.",
+        "operationId": "EventStreams_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/EventStreamNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested EventStream resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventStream"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the EventStream.",
+            "schema": {
+              "$ref": "#/definitions/EventStream"
+            }
+          },
+          "202": {
+            "description": "Creating or updating the EventStream is in progress."
+          },
+          "201": {
+            "description": "Successfully created the EventStream.",
+            "schema": {
+              "$ref": "#/definitions/EventStream"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates a EventStream.": {
+            "$ref": "./examples/PutEventStream.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EventStreams"
+        ],
+        "description": "Deletes the EventStream.",
+        "operationId": "EventStreams_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/EventStreamNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the EventStream."
+          },
+          "202": {
+            "description": "Deleting the EventStream is in progress."
+          },
+          "204": {
+            "description": "The specified EventStream does not exist."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a EventStream.": {
+            "$ref": "./examples/DeleteEventStream.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EventStreams"
+        ],
+        "description": "Updates an existing database.",
+        "operationId": "EventStreams_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/EventStreamNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested EventStream resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventStreamUpdate"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/EventStream"
+            }
+          },
+          "202": {
+            "description": "Updating the eventstream is in progress."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates a EventStream.": {
+            "$ref": "./examples/PatchEventStream.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/EventStreams": {
+      "get": {
+        "tags": [
+          "EventStreams"
+        ],
+        "description": "Gets a list of eventstreams.",
+        "operationId": "EventStreams_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of eventstreams.",
+            "schema": {
+              "$ref": "#/definitions/EventStreamListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of eventstreams.": {
+            "$ref": "./examples/ListEventStreamsByWorkspace.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EventStreamProperties": {
+      "description": "The eventstream's properties.",
+      "type": "object",
+      "properties": {
+        "partitionIds": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Current number of partitions on the Event Stream."
+        },
+        "workSpaceId": {
+          "format": "uuid",
+          "description": "The unique identifier of the synapse workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "The current provisioning state of the Event Stream.",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Active",
+            "Updating",
+            "Disabling",
+            "Disabled",
+            "Deleting",
+            "Deleted",
+            "Failed",
+            "Moving"
+          ],
+          "x-ms-enum": {
+            "name": "EventStreamEntityState",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "EventStream": {
+      "description": "A event stream resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../common/v1/types.json#/definitions/SystemData",
+          "description": "SystemData of the Event Stream.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/EventStreamProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EventStreamUpdate": {
+      "description": "A eventstream resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventStreamProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EventStreamListResult": {
+      "description": "A list of eventstreams.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventStream"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
