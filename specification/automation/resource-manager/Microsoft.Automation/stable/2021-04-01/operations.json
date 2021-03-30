@@ -73,7 +73,12 @@
           "Operations"
         ],
         "description": "Returns a azure storage URI to upload certificate or module temporarily",
-        "operationId": "getSASUriForUpload",
+        "operationId": "GetSASUriForUpload",
+        "x-ms-examples": {
+          "Get SAS Upload uri": {
+            "$ref": "./examples/getSASUriForUpload.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
@@ -111,6 +116,11 @@
         ],
         "description": "Lists all scripts present in automation gallery based on type",
         "operationId": "GalleryItems_List",
+        "x-ms-examples": {
+          "List gallery items": {
+            "$ref": "./examples/listGalleryItems.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
@@ -129,7 +139,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation. It can be used to filter by type of Runbook"
+            "description": "The filter to apply on the operation. Filtering is based on standard OData specification"
           }
         ],
         "responses": {
@@ -200,6 +210,10 @@
             "$ref": "#/definitions/RunbookGalleryItem"
           },
           "description": "List of Gallery items supported by the Automation resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to get the next set of results."
         }
       },
       "description": "The response model for the list of Gallery items operations"
