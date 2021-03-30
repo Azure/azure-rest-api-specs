@@ -297,65 +297,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orderCollections": {
-      "get": {
-        "tags": [
-          "OrderCollections"
-        ],
-        "description": "Lists order collections at subscription level.",
-        "operationId": "ListOrderCollectionsAtSubscriptionLevel",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "$skipToken is supported on Get list of order collections, which provides the next page in the list of order collections.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Order collection object",
-            "schema": {
-              "$ref": "#/definitions/OrderCollectionResourceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListOrderCollectionsAtSubscriptionLevel": {
-            "$ref": "./examples/OrderCollectionListAtSubscriptionLevel.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders": {
       "get": {
         "tags": [
           "Orders"
         ],
         "description": "Lists order at subscription level.",
-        "operationId": "ListOrdersAtSubscriptionLevel",
+        "operationId": "ListOrderAtSubscriptionLevel",
         "consumes": [
           "application/json"
         ],
@@ -370,16 +318,9 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "$filter is supported to filter based on order collection id. Filter supports only equals operation.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "$skipToken",
             "in": "query",
-            "description": "$skipToken is supported on Get list of orders, which provides the next page in the list of order.",
+            "description": "$skipToken is supported on Get list of order, which provides the next page in the list of order.",
             "required": false,
             "type": "string"
           }
@@ -402,8 +343,67 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListOrdersAtSubscriptionLevel": {
-            "$ref": "./examples/OrderGetBySubscription.json"
+          "ListOrderAtSubscriptionLevel": {
+            "$ref": "./examples/ListOrderAtSubscriptionLevel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orderItems": {
+      "get": {
+        "tags": [
+          "OrderItems"
+        ],
+        "description": "Lists order at subscription level.",
+        "operationId": "ListOrderItemsAtSubscriptionLevel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "$filter is supported to filter based on order id. Filter supports only equals operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "$skipToken is supported on Get list of orders, which provides the next page in the list of order.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order item object",
+            "schema": {
+              "$ref": "#/definitions/OrderItemResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOrderItemsAtSubscriptionLevel": {
+            "$ref": "./examples/OrderItemGetBySubscription.json"
           }
         }
       }
@@ -693,291 +693,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orderCollections": {
-      "get": {
-        "tags": [
-          "OrderCollections"
-        ],
-        "description": "Lists order collections at resource group level.",
-        "operationId": "ListOrderCollectionsAtResourceGroupLevel",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "$skipToken is supported on Get list of order collections, which provides the next page in the list of order collections.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Order collection object",
-            "schema": {
-              "$ref": "#/definitions/OrderCollectionResourceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListOrderCollectionsAtResourceGroupLevel": {
-            "$ref": "./examples/OrderCollectionListAtRGLevel.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orderCollections/{orderCollectionName}": {
-      "get": {
-        "tags": [
-          "OrderCollections"
-        ],
-        "description": "Gets an order collection.",
-        "operationId": "GetOrderCollectionByName",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/orderCollectionNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Order collection object",
-            "schema": {
-              "$ref": "#/definitions/OrderCollectionResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetOrderCollectionByName": {
-            "$ref": "./examples/OrderCollectionGet.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "OrderCollections"
-        ],
-        "description": "Creates an order collection. Existing order collection cannot be updated with this api and should instead be updated with the Update order collection API.",
-        "operationId": "CreateOrderCollection",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/orderCollectionNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "orderCollectionResource",
-            "in": "body",
-            "description": "Order collection details from request body.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OrderCollectionResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns order collection object",
-            "schema": {
-              "$ref": "#/definitions/OrderCollectionResource"
-            }
-          },
-          "202": {
-            "description": "Accepted request to create order collection."
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "CreateOrderCollection": {
-            "$ref": "./examples/OrderCollectionCreate.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "OrderCollections"
-        ],
-        "description": "Deletes an order collection.",
-        "operationId": "DeleteOrderCollectionByName",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/orderCollectionNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Just for swagger we are adding this status code"
-          },
-          "202": {
-            "description": "Accepted delete request for an order collection"
-          },
-          "204": {
-            "description": "No content. Order collection deleted"
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DeleteOrderCollectionByName": {
-            "$ref": "./examples/OrderCollectionDelete.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "OrderCollections"
-        ],
-        "description": "Updates the properties of an existing order collection.",
-        "operationId": "UpdateOrderCollection",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/orderCollectionNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Defines the If-Match condition. The patch will be performed only if the ETag of the order collection on the server matches this value.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "orderCollectionUpdateParameter",
-            "in": "body",
-            "description": "order collection update parameters from request body.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OrderCollectionUpdateParameter"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted request for order collection update."
-          },
-          "200": {
-            "description": "Order collection object",
-            "schema": {
-              "$ref": "#/definitions/OrderCollectionResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "UpdateOrderCollection": {
-            "$ref": "./examples/OrderCollectionUpdate.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders": {
       "get": {
         "tags": [
           "Orders"
         ],
         "description": "Lists order at resource group level.",
-        "operationId": "ListOrdersAtResourceGroupLevel",
+        "operationId": "ListOrderAtResourceGroupLevel",
         "consumes": [
           "application/json"
         ],
@@ -995,16 +717,9 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "$filter is supported to filter based on order collection id. Filter supports only equals operation.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "$skipToken",
             "in": "query",
-            "description": "$skipToken is supported on Get list of orders, which provides the next page in the list of order.",
+            "description": "$skipToken is supported on Get list of order, which provides the next page in the list of order.",
             "required": false,
             "type": "string"
           }
@@ -1027,13 +742,13 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListOrdersAtResourceGroupLevel": {
-            "$ref": "./examples/OrderGetByRG.json"
+          "ListOrderAtResourceGroupLevel": {
+            "$ref": "./examples/ListOrderAtResourceGroupLevel.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders/{orderName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}": {
       "get": {
         "tags": [
           "Orders"
@@ -1057,6 +772,9 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -1076,16 +794,126 @@
         },
         "x-ms-examples": {
           "GetOrderByName": {
-            "$ref": "./examples/OrderGet.json"
+            "$ref": "./examples/GetOrderByName.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orderItems": {
+      "get": {
+        "tags": [
+          "OrderItems"
+        ],
+        "description": "Lists order item at resource group level.",
+        "operationId": "ListOrderItemsAtResourceGroupLevel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "$filter is supported to filter based on order id. Filter supports only equals operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "$skipToken is supported on Get list of order items, which provides the next page in the list of order items.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Order item object",
+            "schema": {
+              "$ref": "#/definitions/OrderItemResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOrderItemsAtResourceGroupLevel": {
+            "$ref": "./examples/OrderItemGetByRG.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orderItems/{orderItemName}": {
+      "get": {
+        "tags": [
+          "OrderItems"
+        ],
+        "description": "Gets an order item.",
+        "operationId": "GetOrderItemByName",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderItemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order item object",
+            "schema": {
+              "$ref": "#/definitions/OrderItemResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetOrderItemByName": {
+            "$ref": "./examples/OrderItemGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "Orders"
+          "OrderItems"
         ],
-        "description": "Creates an order. Existing order cannot be updated with this api and should instead be updated with the Update order API.",
-        "operationId": "CreateOrder",
+        "description": "Creates an order item. Existing order item cannot be updated with this api and should instead be updated with the Update order item API.",
+        "operationId": "CreateOrderItem",
         "consumes": [
           "application/json"
         ],
@@ -1094,7 +922,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/orderNameParameter"
+            "$ref": "#/parameters/orderItemNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1106,24 +934,24 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "orderResource",
+            "name": "orderItemResource",
             "in": "body",
-            "description": "Order details from request body.",
+            "description": "Order item details from request body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OrderResource"
+              "$ref": "#/definitions/OrderItemResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Returns order object",
+            "description": "Returns order item object",
             "schema": {
-              "$ref": "#/definitions/OrderResource"
+              "$ref": "#/definitions/OrderItemResource"
             }
           },
           "202": {
-            "description": "Accepted request to create order."
+            "description": "Accepted request to create order item."
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
@@ -1134,17 +962,17 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "CreateOrder": {
-            "$ref": "./examples/OrderCreate.json"
+          "CreateOrderItem": {
+            "$ref": "./examples/OrderItemCreate.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Orders"
+          "OrderItems"
         ],
-        "description": "Deletes an order.",
-        "operationId": "DeleteOrderByName",
+        "description": "Deletes an order item.",
+        "operationId": "DeleteOrderItemByName",
         "consumes": [
           "application/json"
         ],
@@ -1153,7 +981,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/orderNameParameter"
+            "$ref": "#/parameters/orderItemNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1167,13 +995,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Order Deleted"
+            "description": "Order Item Deleted"
           },
           "202": {
-            "description": "Accepted delete request for an order"
+            "description": "Accepted delete request for an order item"
           },
           "204": {
-            "description": "No content. Order deleted"
+            "description": "No content. Order item deleted"
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
@@ -1184,17 +1012,17 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "DeleteOrderByName": {
-            "$ref": "./examples/OrderDelete.json"
+          "DeleteOrderItemByName": {
+            "$ref": "./examples/OrderItemDelete.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "Orders"
+          "OrderItems"
         ],
-        "description": "Updates the properties of an existing order.",
-        "operationId": "UpdateOrder",
+        "description": "Updates the properties of an existing order item.",
+        "operationId": "UpdateOrderItem",
         "consumes": [
           "application/json"
         ],
@@ -1203,7 +1031,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/orderNameParameter"
+            "$ref": "#/parameters/orderItemNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1222,23 +1050,23 @@
             "type": "string"
           },
           {
-            "name": "orderUpdateParameter",
+            "name": "orderItemUpdateParameter",
             "in": "body",
-            "description": "order update parameters from request body.",
+            "description": "order item update parameters from request body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OrderUpdateParameter"
+              "$ref": "#/definitions/OrderItemUpdateParameter"
             }
           }
         ],
         "responses": {
           "202": {
-            "description": "Accepted request for order update."
+            "description": "Accepted request for order item update."
           },
           "200": {
-            "description": "Order resource object",
+            "description": "Order item resource object",
             "schema": {
-              "$ref": "#/definitions/OrderResource"
+              "$ref": "#/definitions/OrderItemResource"
             }
           },
           "default": {
@@ -1250,19 +1078,19 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "UpdateOrder": {
-            "$ref": "./examples/OrderUpdate.json"
+          "UpdateOrderItem": {
+            "$ref": "./examples/OrderItemUpdate.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders/{orderName}/cancel": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orderItems/{orderItemName}/cancel": {
       "post": {
         "tags": [
-          "Orders"
+          "OrderItems"
         ],
-        "description": "Cancel order.",
-        "operationId": "CancelOrder",
+        "description": "Cancel order item.",
+        "operationId": "CancelOrderItem",
         "consumes": [
           "application/json"
         ],
@@ -1271,7 +1099,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/orderNameParameter"
+            "$ref": "#/parameters/orderItemNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1307,19 +1135,19 @@
           }
         },
         "x-ms-examples": {
-          "CancelOrder": {
-            "$ref": "./examples/OrderCancel.json"
+          "CancelOrderItem": {
+            "$ref": "./examples/OrderItemCancel.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders/{orderName}/return": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orderItems/{orderItemName}/return": {
       "post": {
         "tags": [
-          "Orders"
+          "OrderItems"
         ],
-        "description": "Return order.",
-        "operationId": "ReturnOrder",
+        "description": "Return order item.",
+        "operationId": "ReturnOrderItem",
         "consumes": [
           "application/json"
         ],
@@ -1328,7 +1156,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/orderNameParameter"
+            "$ref": "#/parameters/orderItemNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1340,12 +1168,12 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "returnOrderDetails",
+            "name": "returnOrderItemDetails",
             "in": "body",
-            "description": "Return order CurrentStatus.",
+            "description": "Return order item CurrentStatus.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ReturnOrderDetails"
+              "$ref": "#/definitions/ReturnOrderItemDetails"
             }
           }
         ],
@@ -1354,7 +1182,7 @@
             "description": "Success"
           },
           "202": {
-            "description": "\"Return order request accepted.\""
+            "description": "\"Return order item request accepted.\""
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
@@ -1365,8 +1193,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ReturnOrder": {
-            "$ref": "./examples/OrderReturn.json"
+          "ReturnOrderItem": {
+            "$ref": "./examples/OrderItemReturn.json"
           }
         }
       }
@@ -1387,11 +1215,11 @@
     "AddressDetails": {
       "description": "Address details for an order.",
       "required": [
-        "shippingAddress"
+        "forwardAddress"
       ],
       "type": "object",
       "properties": {
-        "shippingAddress": {
+        "forwardAddress": {
           "$ref": "#/definitions/AddressProperties",
           "description": "Customer address and contact details. It should be address resource"
         },
@@ -1655,37 +1483,6 @@
         }
       }
     },
-    "CloudError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudError"
-          },
-          "readOnly": true
-        },
-        "additionalInfo": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdditionalErrorInfo"
-          },
-          "readOnly": true
-        }
-      },
-      "x-ms-external": true
-    },
     "CommonProperties": {
       "description": "Represents common properties across product hierarchy",
       "type": "object",
@@ -1720,6 +1517,9 @@
     },
     "ConfigurationFilters": {
       "description": "Configuration filters",
+      "required": [
+        "hierarchyInformation"
+      ],
       "type": "object",
       "properties": {
         "hierarchyInformation": {
@@ -1727,8 +1527,12 @@
           "description": "Product hierarchy information"
         },
         "filterableProperty": {
-          "$ref": "#/definitions/FilterableProperty",
-          "description": "Filters specific to product"
+          "description": "Filters specific to product",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterableProperty"
+          }
         }
       }
     },
@@ -1796,7 +1600,8 @@
       "description": "Contact Details.",
       "required": [
         "contactName",
-        "phone"
+        "phone",
+        "emailList"
       ],
       "type": "object",
       "properties": {
@@ -1815,6 +1620,13 @@
         "mobile": {
           "description": "Mobile number of the contact person.",
           "type": "string"
+        },
+        "emailList": {
+          "description": "List of Email-ids to be notified about job progress.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1822,46 +1634,62 @@
       "description": "Cost information for the product system",
       "type": "object",
       "properties": {
-        "primaryMeterType": {
-          "description": "Primary meter i.e. basic billing type for the product system.",
-          "enum": [
-            "ServiceFee",
-            "ShippingFee",
-            "LostOrDamagedFee",
-            "LateDayFee"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "MeterType",
-            "modelAsExtensible": true,
-            "values": [
-              {
-                "value": "ServiceFee",
-                "description": "Service usage fee."
-              },
-              {
-                "value": "ShippingFee",
-                "description": "Shipping fee."
-              },
-              {
-                "value": "LostOrDamagedFee",
-                "description": "Fee charged if the device is lost or damaged."
-              },
-              {
-                "value": "LateDayFee",
-                "description": "Fee charged if the device is kept longer that the allotted days."
-              }
-            ]
-          }
-        },
-        "meterDetails": {
+        "billingMeterDetails": {
           "description": "Details on the various billing aspects for the product system.",
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MeterDetails"
+            "$ref": "#/definitions/BillingMeterDetails"
           },
+          "readOnly": true
+        },
+        "billingInfoUrl": {
+          "description": "Default url to display billing information",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingMeterDetails": {
+      "description": "Holds billing meter details for each type of billing",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Represents Billing type name",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterDetails": {
+          "$ref": "#/definitions/MeterDetails",
+          "description": "Represents MeterDetails",
+          "readOnly": true
+        },
+        "meteringType": {
+          "description": "Represents Metering type (eg one-time or recurrent)",
+          "enum": [
+            "OneTime",
+            "Recurring"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MeteringType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "OneTime",
+                "description": "One time billing."
+              },
+              {
+                "value": "Recurring",
+                "description": "Recurring billing."
+              }
+            ]
+          }
+        },
+        "frequency": {
+          "description": "Frequency of recurrence",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -1937,7 +1765,7 @@
           "readOnly": true
         },
         "deviceHistory": {
-          "description": "Package Shipping details",
+          "description": "Device history",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -1947,17 +1775,47 @@
         }
       }
     },
+    "EncryptionPreferences": {
+      "description": "Preferences related to the double encryption",
+      "type": "object",
+      "properties": {
+        "doubleEncryptionStatus": {
+          "description": "Defines secondary layer of software-based encryption enablement.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DoubleEncryptionStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Disabled",
+                "description": "Double encryption is disabled"
+              },
+              {
+                "value": "Enabled",
+                "description": "Double encryption is enabled"
+              }
+            ]
+          }
+        }
+      }
+    },
     "FilterableProperty": {
       "description": "Class defining the list of filter values on a filter type as part of configuration request.",
       "required": [
-        "type"
+        "type",
+        "supportedValues"
       ],
       "type": "object",
       "properties": {
         "type": {
           "description": "Type of product filter.",
           "enum": [
-            "ShipToCountries"
+            "ShipToCountries",
+            "DoubleEncryptionStatus"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1967,6 +1825,10 @@
               {
                 "value": "ShipToCountries",
                 "description": "Ship to country"
+              },
+              {
+                "value": "DoubleEncryptionStatus",
+                "description": "Double encryption status"
               }
             ]
           }
@@ -2096,54 +1958,77 @@
         }
       }
     },
+    "ManagementResourceDetails": {
+      "description": "Management resource details to link device",
+      "type": "object",
+      "required": [
+        "managementResourceArmId"
+      ],
+      "properties": {
+        "managementResourceArmId": {
+          "description": "Management resource ARM ID",
+          "type": "string"
+        }
+      }
+    },
     "MeterDetails": {
-      "description": "Billing details for each meter.",
+      "description": "Holds details about billing type and its meter guids",
       "type": "object",
       "properties": {
-        "meterId": {
-          "description": "MeterId/ Billing Guid against which the product system will be charged",
-          "type": "string",
-          "readOnly": true
-        },
-        "meterType": {
-          "description": "Category of the billing meter.",
+        "billingType": {
+          "description": "Represents billing type.",
           "enum": [
-            "ServiceFee",
-            "ShippingFee",
-            "LostOrDamagedFee",
-            "LateDayFee"
+            "Pav2",
+            "Purchase"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "MeterType",
+            "name": "BillingType",
             "modelAsExtensible": true,
             "values": [
               {
-                "value": "ServiceFee",
-                "description": "Service usage fee."
+                "value": "Pav2",
+                "description": "Pav2 billing type."
               },
               {
-                "value": "ShippingFee",
-                "description": "Shipping fee."
-              },
-              {
-                "value": "LostOrDamagedFee",
-                "description": "Fee charged if the device is lost or damaged."
-              },
-              {
-                "value": "LateDayFee",
-                "description": "Fee charged if the device is kept longer that the allotted days."
+                "value": "Purchase",
+                "description": "Purchase billing type."
               }
             ]
           }
         },
-        "billingModel": {
-          "$ref": "#/definitions/BillingModel",
-          "description": "Billing model to represent billing cycle, i.e. Monthly, biweekly, daily, hourly etc.",
+        "multiplier": {
+          "format": "double",
+          "description": "Billing unit applicable for Pav2 billing",
+          "type": "number",
           "readOnly": true
+        },
+        "chargingType": {
+          "description": "Charging type.",
+          "enum": [
+            "PerOrder",
+            "PerDevice"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ChargingType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "PerOrder",
+                "description": "Per order charging type."
+              },
+              {
+                "value": "PerDevice",
+                "description": "Per device charging type."
+              }
+            ]
+          }
         }
-      }
+      },
+      "x-ms-discriminator-value": "billingType"
     },
     "NotificationPreference": {
       "description": "Notification preference for a job stage.",
@@ -2157,7 +2042,7 @@
           "description": "Name of the stage.",
           "enum": [
             "DevicePrepared",
-            "Dispatched",
+            "Shipped",
             "Delivered",
             "PickedUp",
             "AtAzureDC",
@@ -2173,7 +2058,7 @@
                 "description": "Notification at device prepared stage."
               },
               {
-                "value": "Dispatched",
+                "value": "Shipped",
                 "description": "Notification at device dispatched stage."
               },
               {
@@ -2201,38 +2086,50 @@
         }
       }
     },
-    "OrderCollectionProperties": {
-      "description": "Represents order collection details.",
-      "required": [
-        "orderIds"
-      ],
+    "OrderProperties": {
+      "description": "Represents order details.",
       "type": "object",
       "properties": {
-        "orderIds": {
-          "description": "List of order ARM Ids which are part of an order collection.",
+        "orderItemIds": {
+          "description": "List of order item ARM Ids which are part of an order.",
           "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
+        },
+        "currentStage": {
+          "$ref": "#/definitions/StageDetails",
+          "description": "Order current status.",
+          "readOnly": true
+        },
+        "orderStageHistory": {
+          "description": "Order status history.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StageDetails"
+          },
+          "readOnly": true
         }
       }
     },
-    "OrderCollectionResource": {
-      "description": "Specifies the properties or parameters for an order collection. Order collection is a grouping of one or more orders.",
+    "OrderResource": {
+      "description": "Specifies the properties or parameters for an order. Order is a grouping of one or more order items.",
       "required": [
         "properties"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OrderCollectionProperties",
-          "description": "Order collection properties",
+          "$ref": "#/definitions/OrderProperties",
+          "description": "Order properties",
           "x-ms-client-flatten": true
         },
         "systemData": {
@@ -2242,43 +2139,30 @@
         }
       }
     },
-    "OrderCollectionResourceList": {
-      "description": "Specifies the list of order collections.",
+    "OrderItemResourceList": {
+      "description": "List of orderItems.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of order collection resources.",
+          "description": "List of order item resources.",
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OrderCollectionResource"
+            "$ref": "#/definitions/OrderItemResource"
           },
           "readOnly": true
         },
         "nextLink": {
-          "description": "Link for the next set of order collection resources.",
+          "description": "Link for the next set of order item resources.",
           "type": "string"
         }
       }
     },
-    "OrderCollectionUpdateParameter": {
-      "description": "Specifies the parameters which can be updated for an order collection.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "OrderDetails": {
-      "description": "Order details",
+    "OrderItemDetails": {
+      "description": "Order item details",
       "required": [
         "productDetails",
-        "orderType"
+        "orderItemType"
       ],
       "type": "object",
       "properties": {
@@ -2286,39 +2170,39 @@
           "$ref": "#/definitions/ProductDetails",
           "description": "Unique identifier for configuration."
         },
-        "orderType": {
-          "description": "Order type.",
+        "orderItemType": {
+          "description": "Order item type.",
           "enum": [
             "Purchase",
             "Rental"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "OrderType",
+            "name": "OrderItemType",
             "modelAsExtensible": true,
             "values": [
               {
                 "value": "Purchase",
-                "description": "Purchase Order."
+                "description": "Purchase OrderItem."
               },
               {
                 "value": "Rental",
-                "description": "Rental Order."
+                "description": "Rental OrderItem."
               }
             ]
           }
         },
-        "currentStatus": {
-          "$ref": "#/definitions/OrderStatusDetails",
-          "description": "Current Order Status",
+        "currentStage": {
+          "$ref": "#/definitions/StageDetails",
+          "description": "Current Order item Status",
           "readOnly": true
         },
-        "orderStatusHistory": {
-          "description": "Order history",
+        "orderItemStageHistory": {
+          "description": "Order item status history",
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OrderStatusDetails"
+            "$ref": "#/definitions/StageDetails"
           },
           "readOnly": true
         },
@@ -2337,7 +2221,7 @@
           "readOnly": true
         },
         "notificationEmailList": {
-          "description": "Package Shipping details",
+          "description": "Additional notification email list",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2359,26 +2243,26 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "OrderCancellationEnum",
+            "name": "OrderItemCancellationEnum",
             "modelAsExtensible": true,
             "values": [
               {
                 "value": "Cancellable",
-                "description": "Order can be cancelled without fee."
+                "description": "Order item can be cancelled without fee."
               },
               {
                 "value": "CancellableWithFee",
-                "description": "Order can be cancelled with fee."
+                "description": "Order item can be cancelled with fee."
               },
               {
                 "value": "NotCancellable",
-                "description": "Order not cancellable."
+                "description": "Order item not cancellable."
               }
             ]
           }
         },
         "deletionStatus": {
-          "description": "Describes whether the order is deletable or not.",
+          "description": "Describes whether the order item is deletable or not.",
           "enum": [
             "Allowed",
             "NotAllowed"
@@ -2406,7 +2290,7 @@
           "readOnly": true
         },
         "returnStatus": {
-          "description": "Describes whether the order is returnable or not.",
+          "description": "Describes whether the order item is returnable or not.",
           "enum": [
             "Returnable",
             "ReturnableWithFee",
@@ -2415,20 +2299,20 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "OrderReturnEnum",
+            "name": "OrderItemReturnEnum",
             "modelAsExtensible": true,
             "values": [
               {
                 "value": "Returnable",
-                "description": "Order can be returned without fee."
+                "description": "Order item can be returned without fee."
               },
               {
                 "value": "ReturnableWithFee",
-                "description": "Order can be returned with fee."
+                "description": "Order item can be returned with fee."
               },
               {
                 "value": "NotReturnable",
-                "description": "Order not returnable."
+                "description": "Order item not returnable."
               }
             ]
           }
@@ -2438,24 +2322,29 @@
           "description": "parent RP details",
           "readOnly": true
         },
+        "managementResourceDetails": {
+          "$ref": "#/definitions/ManagementResourceDetails",
+          "description": "Management resource details"
+        },
         "error": {
-          "$ref": "#/definitions/CloudError",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
           "description": "Top level error for the job.",
           "readOnly": true
         }
       }
     },
-    "OrderProperties": {
-      "description": "Represents order details.",
+    "OrderItemProperties": {
+      "description": "Represents order item details.",
       "required": [
-        "orderDetails",
-        "addressDetails"
+        "orderItemDetails",
+        "addressDetails",
+        "orderId"
       ],
       "type": "object",
       "properties": {
-        "orderDetails": {
-          "$ref": "#/definitions/OrderDetails",
-          "description": "Represents order details."
+        "orderItemDetails": {
+          "$ref": "#/definitions/OrderItemDetails",
+          "description": "Represents order item details."
         },
         "addressDetails": {
           "$ref": "#/definitions/AddressDetails",
@@ -2463,19 +2352,18 @@
         },
         "startTime": {
           "format": "date-time",
-          "description": "Start time of order",
+          "description": "Start time of order item",
           "type": "string",
           "readOnly": true
         },
-        "orderCollectionId": {
-          "description": "Id of the order collection to which order belongs to",
-          "type": "string",
-          "readOnly": true
+        "orderId": {
+          "description": "Id of the order to which order items belongs to",
+          "type": "string"
         }
       }
     },
-    "OrderResource": {
-      "description": "Represents order contract",
+    "OrderItemResource": {
+      "description": "Represents order item contract",
       "required": [
         "properties"
       ],
@@ -2487,8 +2375,8 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OrderProperties",
-          "description": "Order properties",
+          "$ref": "#/definitions/OrderItemProperties",
+          "description": "Order item properties",
           "x-ms-client-flatten": true
         },
         "systemData": {
@@ -2517,29 +2405,181 @@
         }
       }
     },
-    "OrderStatusDetails": {
-      "description": "Order status CurrentStatus",
+    "StageDetails": {
+      "description": "Resource stage details",
       "type": "object",
       "properties": {
-        "orderStatus": {
-          "description": "Order status",
+        "stageStatus": {
+          "description": "Stage status",
+          "enum": [
+            "None",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Cancelling"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StageStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No status available yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Stage is in progress."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Stage has succeeded."
+              },
+              {
+                "value": "Failed",
+                "description": "Stage has failed."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Stage has been cancelled."
+              },
+              {
+                "value": "Cancelling",
+                "description": "Stage is cancelling."
+              }
+            ]
+          }
+        },
+        "stageName": {
+          "description": "Stage name",
+          "enum": [
+            "DeviceOrdered",
+            "DevicePrepared",
+            "PickedUp",
+            "AtAzureDC",
+            "DataCopy",
+            "Completed",
+            "CompletedWithErrors",
+            "Cancelled",
+            "Aborted",
+            "CompletedWithWarnings",
+            "ReadyToDispatchFromAzureDC",
+            "ReadyToReceiveAtAzureDC",
+            "Placed",
+            "InReview",
+            "Confirmed",
+            "ReadyForDispatch",
+            "Shipped",
+            "Delivered",
+            "InUse"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StageName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DeviceOrdered",
+                "description": "An order has been created."
+              },
+              {
+                "value": "DevicePrepared",
+                "description": "A device has been prepared for the order."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Device has been picked up from user and in transit to Azure datacenter."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Device has been received at Azure datacenter from the user."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Data copy from the device at Azure datacenter."
+              },
+              {
+                "value": "Completed",
+                "description": "Order has completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Order has completed with errors."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Order has been cancelled."
+              },
+              {
+                "value": "Aborted",
+                "description": "Order has been aborted."
+              },
+              {
+                "value": "CompletedWithWarnings",
+                "description": "Order has completed with warnings."
+              },
+              {
+                "value": "ReadyToDispatchFromAzureDC",
+                "description": "Device is ready to be handed to customer from Azure DC."
+              },
+              {
+                "value": "ReadyToReceiveAtAzureDC",
+                "description": "Device can be dropped off at Azure DC."
+              },
+              {
+                "value": "Placed",
+                "description": "Currently in draft mode and can still be cancelled"
+              },
+              {
+                "value": "InReview",
+                "description": "Order is currently in draft mode and can still be cancelled"
+              },
+              {
+                "value": "Confirmed",
+                "description": "Order is confirmed"
+              },
+              {
+                "value": "ReadyForDispatch",
+                "description": "Order is ready for dispatch"
+              },
+              {
+                "value": "Shipped",
+                "description": "Order is in transit to customer"
+              },
+              {
+                "value": "Delivered",
+                "description": "Order is delivered to customer"
+              },
+              {
+                "value": "InUse",
+                "description": "Order is in use at customer site"
+              }
+            ]
+          }
+        },
+        "displayName": {
+          "description": "Display name of the resource stage.",
           "type": "string",
           "readOnly": true
         },
-        "lastUpdatedTime": {
-          "description": "last time order was updated",
+        "startTime": {
           "format": "date-time",
-          "type": "string"
+          "description": "Stage start time",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "OrderUpdateParameter": {
-      "description": "Updates order parameters.",
+    "OrderItemUpdateParameter": {
+      "description": "Updates order item parameters.",
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OrderUpdateProperties",
-          "description": "Order update properties",
+          "$ref": "#/definitions/OrderItemUpdateProperties",
+          "description": "Order item update properties",
           "x-ms-client-flatten": true
         },
         "tags": {
@@ -2551,11 +2591,11 @@
         }
       }
     },
-    "OrderUpdateProperties": {
-      "description": "Order update properties.",
+    "OrderItemUpdateProperties": {
+      "description": "Order item update properties.",
       "type": "object",
       "properties": {
-        "shippingAddress": {
+        "forwardAddress": {
           "$ref": "#/definitions/AddressProperties",
           "description": "Updates forward shipping address and contact details."
         },
@@ -2573,6 +2613,23 @@
         }
       }
     },
+    "Pav2MeterDetails": {
+      "description": "Billing type PAV2 meter details",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MeterDetails"
+        }
+      ],
+      "properties": {
+        "meterGuid": {
+          "description": "Validation status of requested data center and transport.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "Pav2"
+    },
     "Preferences": {
       "description": "Preferences related to the order",
       "type": "object",
@@ -2588,6 +2645,10 @@
         "transportPreferences": {
           "$ref": "#/definitions/TransportPreferences",
           "description": "Preferences related to the shipment logistics of the order."
+        },
+        "encryptionPreferences": {
+          "$ref": "#/definitions/EncryptionPreferences",
+          "description": "Preferences related to the Encryption."
         }
       }
     },
@@ -2692,7 +2753,11 @@
           "description": "Dictionary of filterable properties on product family.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/FilterableProperty"
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FilterableProperty"
+            }
           }
         },
         "customerSubscriptionDetails": {
@@ -2785,6 +2850,33 @@
         }
       }
     },
+    "PurchaseMeterDetails": {
+      "description": "Billing type Purchase meter details",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MeterDetails"
+        }
+      ],
+      "properties": {
+        "productId": {
+          "description": "Product Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuId": {
+          "description": "Sku Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "termId": {
+          "description": "Term Id",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "Purchase"
+    },
     "ResourceIdentity": {
       "description": "Msi identity details of the resource",
       "type": "object",
@@ -2810,8 +2902,8 @@
       "type": "object",
       "properties": {}
     },
-    "ReturnOrderDetails": {
-      "description": "Return order request body",
+    "ReturnOrderItemDetails": {
+      "description": "Return order item request body",
       "required": [
         "returnReason"
       ],
@@ -2943,6 +3035,7 @@
       }
     },
     "CustomerSubscriptionDetails": {
+      "description": "Holds Customer subscription details. Clients can display available products to unregistered customers by explicitly passing subscription details",
       "required": [
         "quotaId"
       ],
@@ -2967,6 +3060,7 @@
       }
     },
     "CustomerSubscriptionRegisteredFeatures": {
+      "description": "Represents subscription registered features",
       "type": "object",
       "properties": {
         "name": {
@@ -3031,18 +3125,18 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "orderCollectionNameParameter": {
-      "name": "orderCollectionName",
-      "in": "path",
-      "description": "The name of the order collection",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "orderNameParameter": {
       "name": "orderName",
       "in": "path",
       "description": "The name of the order",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "orderItemNameParameter": {
+      "name": "orderItemName",
+      "in": "path",
+      "description": "The name of the order item",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
