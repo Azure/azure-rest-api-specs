@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-1.0.0` is specified on the command
 
 ```yaml $(tag) == 'package-1.0.0'
 input-file:
-  - Microsoft.IoTCentral/stable/1.0.0/iotcentralapps.json
+  - Microsoft.IoTCentral/stable/1.0.0/iotcentral.json
 ```
 ---
 
