@@ -25,3 +25,16 @@ nodejs:
   generate-package-json: true
   generate-readme-md: true
 ```
+
+These settings apply only when `--nodejs --tag=release_5_0_preview.2` is specified on the command line.
+Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-for-node clone>`.
+
+``` yaml $(tag) == 'release_5_0_preview.2' && $(nodejs)
+nodejs:
+  package-name: azure-cognitiveservices-qnamaker-preview
+  output-folder: $(node-sdks-folder)/lib/services/cognitiveServicesQnAMaker/preview
+  azure-arm: false
+  generate-license-txt: true
+  generate-package-json: true
+  generate-readme-md: true
+```
