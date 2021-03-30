@@ -1211,9 +1211,17 @@
           "type": "string",
           "readOnly": true
         },
-        "networkSettings": {
-          "description": "Network Settings",
-          "$ref": "#/definitions/NetworkSettings"
+        "publicNetworkAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Enable or Disable pubic network access to workspace",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkspacePublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1268,9 +1276,17 @@
           "description": "The encryption details of the workspace",
           "$ref": "#/definitions/EncryptionDetails"
         },
-        "networkSettings": {
-          "description": "Network Settings",
-          "$ref": "#/definitions/NetworkSettings"
+        "publicNetworkAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Enable or Disable pubic network access to workspace",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkspacePublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1401,24 +1417,6 @@
         "value"
       ],
       "description": "The response to a list restorable dropped Sql pools request"
-    },
-    "NetworkSettings": {
-      "description": "Network Settings",
-      "type": "object",
-      "properties": {
-        "publicNetworkAccess": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "description": "Enable or Disable pubic network access to workspace",
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WorkspacePublicNetworkAccess",
-            "modelAsString": true
-          }
-        }
-      }
     }
   },
   "parameters": {
