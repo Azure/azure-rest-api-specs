@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-01-11",
+    "version": "2020-03-30",
     "title": "HealthcareApisClient",
     "description": "Use this API to manage Microsoft HealthcareApis services in your Azure subscription."
   },
@@ -173,10 +173,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The tags for the resource were updated successfully.",
+            "description": "The tags/properties for the resource were updated successfully.",
             "schema": {
               "$ref": "#/definitions/ServicesDescription"
             }
+          },
+          "202": {
+            "description": "Accepted - Patch request accepted; the operation will complete asynchronously."
           },
           "default": {
             "description": "DefaultErrorResponse",
@@ -469,7 +472,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -517,7 +520,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -569,7 +572,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -659,7 +662,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -708,7 +711,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -822,6 +825,7 @@
       "properties": {
         "offerThroughput": {
           "type": "integer",
+          "format": "int32",
           "description": "The provisioned throughput for the backing database.",
           "readOnly": false,
           "minimum": 400,
@@ -885,6 +889,7 @@
         },
         "maxAge": {
           "type": "integer",
+          "format": "int32",
           "description": "The max age to be allowed via CORS.",
           "readOnly": false,
           "minimum": 0,
@@ -943,9 +948,6 @@
           "x-ms-client-flatten": false,
           "description": "The common properties of a service.",
           "$ref": "#/definitions/ServicesProperties"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -1134,6 +1136,10 @@
           "type": "string",
           "description": "Operation name: {provider}/{resource}/{read | write | action | delete}"
         },
+        "isDataAction": {
+          "description": "Gets or sets a value indicating whether the operation is a data action or not",
+          "type": "boolean"
+        },
         "origin": {
           "readOnly": true,
           "type": "string",
@@ -1142,6 +1148,10 @@
         "display": {
           "description": "The information displayed about the operation.",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
@@ -1170,6 +1180,11 @@
           "description": "Friendly description for the operation,"
         }
       }
+    },
+    "OperationProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {}
     },
     "ServicesPropertiesUpdateParameters": {
       "description": "The properties for updating a service instance.",
@@ -1275,58 +1290,6 @@
           "description": "Additional properties of the operation result."
         }
       }
-    },
-    "PrivateEndpointConnection": {
-      "properties": {
-        "systemData": {
-          "description": "System metadata for this resource.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
-        }
-      ],
-      "description": "The Private Endpoint Connection resource."
-    },
-    "PrivateLinkResource": {
-      "properties": {
-        "systemData": {
-          "description": "System metadata for this resource.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
-        }
-      ],
-      "description": "The Private Endpoint Connection resource."
-    },
-    "PrivateEndpointConnectionListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private endpoint connections",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
-        }
-      },
-      "description": "List of private endpoint connection associated with the specified storage account"
-    },
-    "PrivateLinkResourceListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private link resources",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        }
-      },
-      "description": "A list of private link resources"
     }
   },
   "parameters": {
