@@ -243,6 +243,7 @@
     },
     "ExtensionType": {
       "type": "object",
+      "description": "Represents an Extension Type.",
       "required": [
         "properties"
       ],
@@ -250,7 +251,12 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExtensionTypeProperties",
-          "description": "Describes the Resource Type properties."
+          "description": "Describes the Resource Type properties.",
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+            }
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -260,8 +266,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
-      },
-      "description": "Represents an Extension Type."
+      }
     },
     "ExtensionTypeProperties": {
       "type": "object",
@@ -301,23 +306,33 @@
     },
     "ExtensionVersion": {
       "description": "Represents an Extension version.",
-      "type": "object",
       "properties": {
-        "releaseTrain": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The release train associated with the Extension versoin"
-        },
-        "version": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The version for this Extension Type"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "releaseTrain": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The release train associated with the Extension verion"
+            },
+            "version": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The version for this Extension Type"
+            },
+            "systemData": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+              "readOnly": true
+            }
+          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SupportedScopes": {
       "type": "object",
@@ -336,15 +351,24 @@
       "type": "object",
       "description": "Extension scope settings",
       "properties": {
-        "allowMultipleInstances": {
-          "type": "boolean",
-          "description": "Describes if multiple instances of the extension are allowed"
-        },
-        "defaultReleaseNamespace": {
-          "type": "string",
-          "description": "Default extension release namespace"
+        "properties": {
+          "properties": {
+            "allowMultipleInstances": {
+              "type": "boolean",
+              "description": "Describes if multiple instances of the extension are allowed"
+            },
+            "defaultReleaseNamespace": {
+              "type": "string",
+              "description": "Default extension release namespace"
+            }
+          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
     }
   },
   "parameters": {
