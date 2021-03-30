@@ -41,7 +41,7 @@ tag: package-policy-2020-09
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2020-10
+tag: package-resources-2021-01
 ```
 
 ``` yaml $(package-subscriptions)
@@ -64,6 +64,15 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2019-06-preview
 ```
 
+### Tag: package-resources-2021-01
+
+These settings apply only when `--tag=package-resources-2021-01` is specified on the command line.
+
+```yaml $(tag) == 'package-resources-2021-01'
+input-file:
+  - Microsoft.Resources/stable/2021-01-01/resources.json
+```
+
 ### Tag: package-resources-2020-10
 
 These settings apply only when `--tag=package-resources-2020-10` is specified on the command line.
@@ -83,6 +92,7 @@ input-file:
 - Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
 - Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
+- Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
 
 # Needed when there is more than one input file
 override-info:
