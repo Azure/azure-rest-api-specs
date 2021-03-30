@@ -3312,6 +3312,23 @@
                 "aksNetworkingConfiguration": {
                   "description": "AKS networking configuration for vnet",
                   "$ref": "#/definitions/AksNetworkingConfiguration"
+                },
+                "LoadBalancerType": {
+                  "description": "Load Balancer Type",
+                  "type": "string",
+                  "default": "PublicIp",
+                  "enum": [
+                    "PublicIp",
+                    "InternalLoadBalancer"
+                  ],
+                  "x-ms-enum": {
+                    "name": "LoadBalancerType",
+                    "modelAsString": true
+                  }
+                },
+                "LoadBalancerSubnet": {
+                  "description": "Load Balancer Subnet",
+                  "type": "string"
                 }
               }
             }
