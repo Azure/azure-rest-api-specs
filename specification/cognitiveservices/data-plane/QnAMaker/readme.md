@@ -189,6 +189,21 @@ java:
   with-single-async-method: true
 ```
 
+
+These settings apply only when `--java --tag=release_5_0_preview` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java) && $(tag) == 'release_5_0_preview.2'
+java:
+  azure-arm: true
+  namespace: com.microsoft.azure.cognitiveservices.knowledge.qnamaker
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/knowledge/qnamaker/preview
+  with-optional-parameters: true
+  with-single-async-method: true
+```
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
