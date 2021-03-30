@@ -93,6 +93,7 @@ This document lists the set of automated rules that can be validated against swa
 | [ROUNDTRIP_ADDITIONAL_PROPERTY](#ROUNDTRIP_ADDITIONAL_PROPERTY) | |
 | [LRO_RESPONSE_CODE](#LRO_RESPONSE_CODE) | |
 | [LRO_RESPONSE_HEADER](#LRO_RESPONSE_HEADER) | |
+| [MISSING_RESOURCE_ID](#MISSING_RESOURCE_ID) | |
 
 
 ### Validation Warnings
@@ -832,16 +833,24 @@ This document lists the set of automated rules that can be validated against swa
 
 ### <a name="LRO_RESPONSE_CODE" />LRO_RESPONSE_CODE
 
-**Output Message**: Patch/Post long running operation must return 201 or 202, Delete long running operation must return 202 or 204, Put long running operation must return 202 or 201 or 200, but {statusCode} returned.
+**Output Message**: Respond to the initial request of a long running operation, Patch/Post call must return 201 or 202, Delete call must return 202 or 204, Put call must return 202 or 201 or 200, but {statusCode} being returned.
 
-**Description**: Long running operation must return specific response code as per http method type when this operation is annotated with x-ms-long-running-operation:true.
+**Description**: Long running operation must return specific response code as per http method type when this operation is annotated with x-ms-long-running-operation:true. See [RPC - Asynchronous Operations](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations) for more details.
 
 **How to fix the violation**: Correct the response code per the guidance or remove annotation of x-ms-long-running-operation.
 
 ### <a name="LRO_RESPONSE_HEADER" />LRO_RESPONSE_HEADER
 
-**Output Message**: Long running operation should return {header} in header but not provided.
+**Output Message**: Long running operation should return {header} in header but not being provided.
 
 **Description**: Long running operation must return location header or azure-AsyncOperation header in response when this operation is annotated with x-ms-long-running-operation:true.
 
 **How to fix the violation**: Adding one of these headers to the response.
+
+### <a name="MISSING_RESOURCE_ID" />MISSING_RESOURCE_ID
+
+**Output Message**: id is required to return in response of GET/PUT resource calls but not being provided.
+
+**Description**: `id` is a required field of azure resource to return in response body of each GET or PUT call when this resource is annotated as x-ms-azure-resource: true. This field is important to the platform because it is used as the identifier for references on other objects. e.g. "id": "/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}".
+
+**How to fix the violation**: Adding id to the response body.
