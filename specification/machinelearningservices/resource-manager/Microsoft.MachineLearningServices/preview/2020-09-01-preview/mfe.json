@@ -4969,11 +4969,11 @@
     "ComponentInput": {
       "required": [
         "dataType",
-        "type"
+        "componentInputType"
       ],
       "type": "object",
       "properties": {
-        "type": {
+        "componentInputType": {
           "description": "Type of ComponentInput.",
           "$ref": "#/definitions/ComponentInputType",
           "x-ms-mutability": [
@@ -5015,7 +5015,7 @@
           ]
         }
       },
-      "discriminator": "type",
+      "discriminator": "componentInputType",
       "additionalProperties": false
     },
     "ComponentInputRangedNumber": {
@@ -5117,7 +5117,7 @@
     "Component": {
       "type": "object",
       "properties": {
-        "type": {
+        "componentType": {
           "description": "Component Type, should match the schema.",
           "$ref": "#/definitions/ComponentType",
           "x-ms-mutability": [
@@ -5546,11 +5546,11 @@
     },
     "DatastoreCredentials": {
       "required": [
-        "type"
+        "datastoreCredentialsType"
       ],
       "type": "object",
       "properties": {
-        "type": {
+        "datastoreCredentialsType": {
           "description": "Credential type used to authentication with storage.",
           "$ref": "#/definitions/CredentialsType"
         },
@@ -5860,11 +5860,11 @@
     },
     "DatastoreContents": {
       "required": [
-        "type"
+        "datastoreContentsType"
       ],
       "type": "object",
       "properties": {
-        "type": {
+        "datastoreContentsType": {
           "description": "Storage type backing the datastore.",
           "$ref": "#/definitions/ContentsType"
         },
@@ -6299,11 +6299,11 @@
     "DockerSpecification": {
       "description": "Class to represent configuration settings for Docker",
       "required": [
-        "type"
+        "dockerSpecificationType"
       ],
       "type": "object",
       "properties": {
-        "type": {
+        "dockerSpecificationType": {
           "description": "Docker specification must be either Build or Image",
           "$ref": "#/definitions/DockerSpecificationType",
           "x-ms-mutability": [
@@ -6320,7 +6320,7 @@
           ]
         }
       },
-      "discriminator": "type",
+      "discriminator": "dockerSpecificationType",
       "additionalProperties": false
     },
     "DockerImage": {
@@ -6423,7 +6423,7 @@
       "description": "Data Transfer Object (DTO) for an Execution Environment Specification. Name and\r\nversion should default to the AzureML-Minimal environment version tested with the\r\ncurrent SDK client version as this is a main use-case.\r\n<see href=\"https://repo2docker.readthedocs.io/en/latest/specification.html\" />",
       "type": "object",
       "properties": {
-        "type": {
+        "environmentSpecificationType": {
           "description": "Environment specification is either user managed or curated by the Azure ML service\r\n<see href=\"https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments\" />",
           "$ref": "#/definitions/EnvironmentSpecificationType",
           "readOnly": true,
@@ -7650,7 +7650,7 @@
             "read"
           ]
         },
-        "type": {
+        "pipelineType": {
           "description": "Type of PipelineJob",
           "$ref": "#/definitions/PipelineType",
           "x-ms-mutability": [
