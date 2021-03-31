@@ -715,7 +715,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "#/definitions/CheckNameAvailabilityRequestBody"
             },
             "description": "The request body parameters to provide for the check name availability request"
           },
@@ -727,7 +727,7 @@
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses. If a resource provider does not support paging, it should return the same body but leave nextLink empty for future compatibility.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. ",
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+              "$ref": "#/definitions/CheckNameAvailabilityResponseBody"
             }
           },
           "default": {
@@ -2430,7 +2430,7 @@
         }
       }
     },
-    "CheckNameAvailabilityRequest": {
+    "CheckNameAvailabilityRequestBody": {
       "description": "The request body for a request to Bot Service Management to check availability of a bot name.",
       "type": "object",
       "properties": {
@@ -2444,7 +2444,7 @@
         }
       }
     },
-    "CheckNameAvailabilityResponse": {
+    "CheckNameAvailabilityResponseBody": {
       "description": "The response body returned for a request to Bot Service Management to check availability of a bot name.",
       "type": "object",
       "properties": {
