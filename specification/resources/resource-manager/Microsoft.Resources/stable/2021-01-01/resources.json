@@ -6093,7 +6093,8 @@
             "Create",
             "Delete",
             "Modify",
-            "Array"
+            "Array",
+            "NoEffect"
           ],
           "x-ms-enum": {
             "name": "PropertyChangeType",
@@ -6114,6 +6115,10 @@
               {
                 "value": "Array",
                 "description": "The property is an array and contains nested changes."
+              },
+              {
+                "value": "NoEffect",
+                "description": "The property will not be set or updated."
               }
             ]
           }
@@ -6156,7 +6161,8 @@
             "Ignore",
             "Deploy",
             "NoChange",
-            "Modify"
+            "Modify",
+            "Unsupported"
           ],
           "x-ms-enum": {
             "name": "ChangeType",
@@ -6185,9 +6191,17 @@
               {
                 "value": "Modify",
                 "description": "The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will change."
+              },
+              {
+                "value": "Unsupported",
+                "description": "The resource is not supported by What-If."
               }
             ]
           }
+        },
+        "unsupportedReason": {
+          "type": "string",
+          "description": "The explanation about why the resource is unsupported by What-If."
         },
         "before": {
           "type": "object",

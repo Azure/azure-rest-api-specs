@@ -6,8 +6,11 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-authorization-2021-03-01-preview
+  - tag: schema-authorization-2021-01-01-preview
   - tag: schema-authorization-2020-10-01-preview
   - tag: schema-authorization-2020-04-01-preview
+  - tag: schema-authorization-2020-03-01-preview
   - tag: schema-authorization-2018-09-01-preview
   - tag: schema-authorization-2018-07-01-preview
   - tag: schema-authorization-2018-05-01-preview
@@ -19,6 +22,28 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-authorization-2021-03-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-authorization-2021-03-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Authorization/preview/2021-03-01-preview/authorization-AccessReviewCalls.json
+
+```
+
+### Tag: schema-authorization-2021-01-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-authorization-2021-01-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Authorization/preview/2021-01-01-preview/authorization-RoleAssignmentApprovalCalls.json
+
+```
 
 ### Tag: schema-authorization-2020-10-01-preview and azureresourceschema
 
@@ -46,6 +71,23 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
+
+```
+
+### Tag: schema-authorization-2020-03-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-authorization-2020-03-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Authorization/preview/2020-03-01-preview/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/preview/2020-03-01-preview/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/preview/2020-03-01-preview/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/preview/2020-03-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2020-03-01-preview/authorization-DenyAssignmentGetCalls.json
+  - Microsoft.Authorization/preview/2020-03-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2020-03-01-preview/authorization-PermissionsCalls.json
 
 ```
 

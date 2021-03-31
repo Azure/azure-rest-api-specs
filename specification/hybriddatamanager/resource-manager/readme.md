@@ -43,12 +43,6 @@ directive:
     - R2062 #to suppress (XmsResourceInPutResponse/R2062/ARMViolation)
 ```
 
-``` yaml
-openapi-type: arm
-tag: package-2016-06
-```
-
-
 ### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
