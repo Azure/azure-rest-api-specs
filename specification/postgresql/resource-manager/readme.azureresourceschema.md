@@ -6,7 +6,6 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: schema-dbforpostgresql-2021-03-25-preview
   - tag: schema-dbforpostgresql-2020-11-05-preview
   - tag: schema-dbforpostgresql-2020-02-14-preview
   - tag: schema-dbforpostgresql-2020-01-01
@@ -17,17 +16,6 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-### Tag: schema-dbforpostgresql-2021-03-25-preview and azureresourceschema
-
-``` yaml $(tag) == 'schema-dbforpostgresql-2021-03-25-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-
-# all the input files in this apiVersion
-input-file:
-  - Microsoft.DBforPostgreSQL/preview/2021-03-25-preview/postgresql.json
-
-```
 
 ### Tag: schema-dbforpostgresql-2020-11-05-preview and azureresourceschema
 
