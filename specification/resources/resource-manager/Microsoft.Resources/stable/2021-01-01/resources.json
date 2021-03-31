@@ -5381,6 +5381,26 @@
       ],
       "description": "Resource information."
     },
+    "ExtendedLocation": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "EdgeZone"
+          ],
+          "x-ms-enum": {
+            "name": "ExtendedLocationType",
+            "modelAsString": true
+          },
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      },
+      "description": "Resource extended location."
+    },
     "GenericResourceExpanded": {
       "properties": {
         "createdTime": {
@@ -5953,6 +5973,14 @@
         "location": {
           "type": "string",
           "description": "Resource location"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Resource extended location."
         },
         "tags": {
           "type": "object",
