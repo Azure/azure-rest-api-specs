@@ -857,6 +857,32 @@
       ],
       "type": "string"
     },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the sku, typically, tier + family + cores, e.g. Standard_D4s_v3."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of the particular SKU, e.g. Burstable.",
+          "enum": [
+            "Burstable",
+            "GeneralPurpose",
+            "MemoryOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "tier"
+      ],
+      "description": "Sku information related properties of a server."
+    },
     "TargetDBOverwriteConfirmationSubStateDetails": {
       "type": "object",
       "allOf": [
