@@ -65,6 +65,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/osOptions/default": {
+      "get": {
+        "tags": [
+          "ContainerServices"
+        ],
+        "operationId": "ContainerServices_GetOSOptions",
+        "summary": "Gets supported OS options in the specified subscription.",
+        "description": "Gets supported OS options in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceTypeParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OSOptionProfile"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Container Service OS Options": {
+            "$ref": "./examples/ContainerServiceGetOSOptions.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/managedClusters": {
       "get": {
         "tags": [
@@ -4398,6 +4441,66 @@
           "description": "The type of the extended location."
         }
       }
+    },
+    "OSOptionProperty": {
+      "properties": {
+        "os-type": {
+          "type": "string",
+          "description": "OS type."
+        },
+        "enable-fips-image": {
+          "type": "boolean",
+          "description": "Whether FIPS image is enabled."
+        }
+      },
+      "required": [
+        "os-type",
+        "enable-fips-image"
+      ],
+      "description": "OS option property."
+    },
+    "OSOptionPropertyList": {
+      "properties": {
+        "osOptionPropertyList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OSOptionProperty"
+          },
+          "description": "The list of OS option properties."
+        }
+      },
+      "required": [
+        "osOptionPropertyList"
+      ],
+      "description": "The list of OS option properties."
+    },
+    "OSOptionProfile": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Id of the OS option profile."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the OS option profile."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the OS option profile."
+        },
+        "properties": {
+          "$ref": "#/definitions/OSOptionPropertyList",
+          "description": "The list of an OS option properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The OS option profile."
     }
   },
   "parameters": {
@@ -4435,6 +4538,22 @@
       "maxLength": 63,
       "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "description": "The name of the managed cluster resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of a supported Azure region.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceTypeParameter": {
+      "name": "resource-type",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "resource type for which the OS options needs to be returned",
       "x-ms-parameter-location": "method"
     }
   }
