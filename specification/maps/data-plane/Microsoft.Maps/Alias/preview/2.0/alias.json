@@ -149,7 +149,7 @@
           "201": {
             "description": "Content created successfully. The response body contains the newly created alias id `aliasId`.",
             "schema": {
-              "$ref": "#/definitions/AliasCreateResponse"
+              "$ref": "#/definitions/AliasItem"
             },
             "headers": {
               "Access-Control-Expose-Headers": {
@@ -245,7 +245,7 @@
           "200": {
             "description": "Alias was assigned successfully.",
             "schema": {
-              "$ref": "#/definitions/AliasListItem"
+              "$ref": "#/definitions/AliasItem"
             }
           },
           "400": {
@@ -332,7 +332,7 @@
           "200": {
             "description": "Get alias request completed successfully. The response body contains the previously created alias.",
             "schema": {
-              "$ref": "#/definitions/AliasListItem"
+              "$ref": "#/definitions/AliasItem"
             }
           },
           "400": {
@@ -426,7 +426,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/AliasListItem"
+            "$ref": "#/definitions/AliasItem"
           }
         },
         "nextLink": {
@@ -436,7 +436,7 @@
         }
       }
     },
-    "AliasListItem": {
+    "AliasItem": {
       "description": "Detailed information for the alias.",
       "type": "object",
       "properties": {
