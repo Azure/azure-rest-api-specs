@@ -30,11 +30,11 @@ tag: package-2020-07-20-preview1
 ```
 
 
-### Tag: package-2020-11-19-preview1
+### Tag: package-common-2020-11-19-preview1
 
-These settings apply only when `--tag=package-2020-11-19-preview1` is specified on the command line.
+These settings apply only when `--tag=package-common-2020-11-19-preview1` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-11-19-preview1'
+```yaml $(tag) == 'package-common-2020-11-19-preview1'
 input-file:
   - preview/2020-11-19-preview1/common.json
 ```
@@ -45,17 +45,6 @@ These settings apply only when `--tag=package-2021-03-07-stable` is specified on
 ```yaml $(tag) == 'package-2020-11-19-preview1'
 input-file:
   - stable/2021-03-07/common.json
-```
-
-## Supression
-``` yaml
-directive:
-  - from:
-    - phonenumbers.json
-    suppress:
-    - R2005 #Long running operation status code
-    reason:
-    - Approval from Azure review board that Long Running Operations can return 202s.
 ```
 
 ---
