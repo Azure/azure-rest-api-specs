@@ -502,7 +502,7 @@
         "error": {
           "allOf": [
             {
-              "$ref": "#/definitions/UnknownError"
+              "$ref": "#/definitions/CloudError"
             }
           ]
         }
@@ -576,7 +576,7 @@
         "setupLogicalReplicationOnSourceDBIfNeeded": {
           "type": "boolean"
         },
-        "overwriteDBsinTarget": {
+        "overwriteDBsInTarget": {
           "type": "boolean"
         },
         "migrationWindowStartTimeInUtc": {
@@ -614,7 +614,7 @@
         "setupLogicalReplicationOnSourceDBIfNeeded": {
           "type": "boolean"
         },
-        "overwriteDBsinTarget": {
+        "overwriteDBsInTarget": {
           "type": "boolean"
         },
         "migrationWindowStartTimeInUtc": {
@@ -884,16 +884,14 @@
         }
       }
     },
-    "UnknownError": {
-      "type": "object",
+    "CloudError": {
+      "x-ms-external": true,
       "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
-      }
+      },
+      "description": "An error response from the Batch service."
     }
   }
 }
