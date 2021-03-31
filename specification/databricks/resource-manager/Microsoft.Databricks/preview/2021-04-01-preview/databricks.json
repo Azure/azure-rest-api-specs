@@ -369,6 +369,16 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WorkspaceProperties",
           "description": "The workspace properties."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the resource."
+        },
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "required": [
@@ -431,17 +441,7 @@
         },
         "storageAccountIdentity": {
           "description": "The details of Managed Identity of Storage Account",
-          "$ref": "#/definitions/DbfsIdentityConfiguration"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU of the resource."
-        },
-        "systemData": {
-          "description": "The system metadata relating to this resource",
-          "type": "object",
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/ManagedIdentityConfiguration"
         }
       },
       "required": [
@@ -556,7 +556,7 @@
         "modelAsString": true
       }
     },
-    "DbfsIdentityConfiguration": {
+    "ManagedIdentityConfiguration": {
       "description": "The Managed Identity details for storage account.",
       "properties": {
         "principalId": {
