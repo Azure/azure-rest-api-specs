@@ -1259,6 +1259,10 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js web/resource-manager
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
