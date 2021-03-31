@@ -39,6 +39,14 @@ input-file:
   - preview/2020-11-19-preview1/common.json
 ```
 
+### Tag: package-2021-03-07-stable
+These settings apply only when `--tag=package-2021-03-07-stable` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11-19-preview1'
+input-file:
+  - stable/2021-03-07/common.json
+```
+
 ## Supression
 ``` yaml
 directive:
