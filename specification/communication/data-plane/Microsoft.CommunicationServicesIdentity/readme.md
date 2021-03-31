@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2020-07-20-preview2` is specified 
 
 ```yaml $(tag) == 'package-2020-07-20-preview2'
 input-file:
-  - Microsoft.CommunicationServicesIdentity/preview/2020-07-20-preview2/CommunicationIdentity.json
+  - preview/2020-07-20-preview2/CommunicationIdentity.json
 ```
 
 ### Tag: package-2021-03-07
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2021-03-07` is specified on the co
 
 ```yaml $(tag) == 'package-2021-03-07'
 input-file:
-  - Microsoft.CommunicationServicesIdentity/stable/2021-03-07/CommunicationIdentity.json
+  - stable/2021-03-07/CommunicationIdentity.json
 title:
   Azure Communication Services
 ```
@@ -56,8 +56,7 @@ These settings apply only when `--tag=package-2021-02-22-preview1` is specified 
 
 ```yaml $(tag) == 'package-2021-02-22-preview1'
 input-file:
-  - Microsoft.CommunicationServicesTurn/preview/2021-02-22-preview1/CommunicationTurn.json
-  - Microsoft.CommunicationServicesIdentity/preview/2021-02-22-preview1/CommunicationIdentity.json
+  - preview/2021-02-22-preview1/CommunicationIdentity.json
 ```
 
 ---
