@@ -29,72 +29,6 @@ openapi-type: data-plane
 tag: package-2020-07-20-preview1
 ```
 
-### Tag: package-2020-07-20-preview1
-
-These settings apply only when `--tag=package-2020-07-20-preview1` is specified on the command line.
-
-```yaml $(tag) == 'package-2020-07-20-preview1'
-input-file:
-  - Microsoft.CommunicationServicesAdministration/preview/2020-07-20-preview1/communicationservicesadministration.json
-  - Microsoft.CommunicationServicesSms/preview/2020-07-20-preview1/communicationservicessms.json
-title:
-  Azure Communication Services
-```
-
-### Tag: package-2020-09-21-preview2
-
-These settings apply only when `--tag=package-2020-09-21-preview2` is specified on the command line.
-
-```yaml $(tag) == 'package-2020-09-21-preview2'
-input-file:
-  - Microsoft.CommunicationServicesChat/preview/2020-09-21-preview2/communicationserviceschat.json
-title:
-  Azure Communication Services
-```
-
-### Tag: package-2020-11-01-preview3
-
-These settings apply only when `--tag=package-2020-11-01-preview3` is specified on the command line.
-
-```yaml $(tag) == 'package-2020-11-01-preview3'
-input-file:
-  - Microsoft.CommunicationServicesChat/preview/2020-11-01-preview3/communicationserviceschat.json
-title:
-  Azure Communication Services
-```
-
-### Tag: package-2021-01-27-preview4
-
-These settings apply only when `--tag=package-2021-01-27-preview4` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-01-27-preview4'
-input-file:
-  - Microsoft.CommunicationServicesChat/preview/2021-01-27-preview4/communicationserviceschat.json
-title:
-  Azure Communication Services
-```
-
-### Tag: package-2021-03-01-preview5
-
-These settings apply only when `--tag=package-2021-03-01-preview5` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-03-01-preview5'
-input-file:
-  - Microsoft.CommunicationServicesChat/preview/2021-03-01-preview5/communicationserviceschat.json
-title:
-  Azure Communication Services
-```
-
-### Tag: package-chat-2021-03-07
-
-These settings apply only when `--tag=package-chat-2021-03-07` is specified on the command line.
-
-```yaml $(tag) == 'package-chat-2021-03-07'
-input-file:
-  - Microsoft.CommunicationServicesChat/stable/2021-03-07/communicationserviceschat.json
-title:
-  Azure Communication Services
-```
 
 ### Tag: package-2020-07-20-preview2
 
@@ -116,28 +50,6 @@ title:
   Azure Communication Services
 ```
 
-### Tag: package-phonenumbers-2021-03-07
-
-These settings apply only when `--tag=package-phonenumbers-2021-03-07` is specified on the command line.
-
-```yaml $(tag) == 'package-phonenumbers-2021-03-07'
-input-file:
-  - Microsoft.CommunicationServicesPhoneNumbers/stable/2021-03-07/phonenumbers.json
-title:
-  Azure Communication Services
-```
-
-### Tag: package-sms-2021-03-07
-
-These settings apply only when `--tag=package-sms-2021-03-07` is specified on the command line.
-
-```yaml $(tag) == 'package-sms-2021-03-07'
-input-file:
-  - Microsoft.CommunicationServicesSms/stable/2021-03-07/communicationservicessms.json
-title:
-  Azure Communication Services
-```
-
 ### Tag: package-2021-02-22-preview1
 
 These settings apply only when `--tag=package-2021-02-22-preview1` is specified on the command line.
@@ -146,38 +58,6 @@ These settings apply only when `--tag=package-2021-02-22-preview1` is specified 
 input-file:
   - Microsoft.CommunicationServicesTurn/preview/2021-02-22-preview1/CommunicationTurn.json
   - Microsoft.CommunicationServicesIdentity/preview/2021-02-22-preview1/CommunicationIdentity.json
-```
-
-### Tag: package-2020-11-19-preview1
-
-These settings apply only when `--tag=package-2020-11-19-preview1` is specified on the command line.
-
-```yaml $(tag) == 'package-2020-11-19-preview1'
-input-file:
-  - Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json
-```
-
-### Tag: package-phonenumber-2021-03-07
-
-These settings apply only when `--tag=package-phonenumber-2021-03-07` is specified on the command line.
-
-```yaml $(tag) == 'package-phonenumber-2021-03-07'
-input-file:
-  - Microsoft.CommunicationServicesPhoneNumbers/stable/2021-03-07/phonenumbers.json
-title:
-  Azure Communication Services
-```
-
-
-## Supression
-``` yaml
-directive:
-  - from:
-    - phonenumbers.json
-    suppress:
-    - R2005 #Long running operation status code
-    reason:
-    - Approval from Azure review board that Long Running Operations can return 202s.
 ```
 
 ---
