@@ -71,7 +71,7 @@
             "name": "parameters",
             "in": "body",
             "description": "Parameters supplied to the operation.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/NameAvailabilityParameters"
             }
@@ -283,7 +283,7 @@
             "name": "parameters",
             "in": "body",
             "description": "Parameters for the create or update operation",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/WebPubSubResource"
             }
@@ -386,7 +386,7 @@
             "name": "parameters",
             "in": "body",
             "description": "Parameters for the update operation",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/WebPubSubResource"
             }
@@ -582,7 +582,7 @@
             "name": "parameters",
             "in": "body",
             "description": "The resource of private endpoint and its properties",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -729,7 +729,7 @@
             "name": "parameters",
             "in": "body",
             "description": "Parameter that describes the Regenerate Key Operation.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RegenerateKeyParameters"
             }
@@ -929,7 +929,7 @@
             "name": "parameters",
             "in": "body",
             "description": "The shared private link resource",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/SharedPrivateLinkResource"
             }
@@ -1086,17 +1086,34 @@
       "type": "object",
       "properties": {
         "urlTemplate": {
-          "description": "Gets or sets the EventHandler URL template. You can use a predefined parameter {event} inside the template, the value of the EventHandler URL is dynamically calculated when the client request comes in.\r\nFor example, UrlTemplate can be `http://example.com/api/{event}`. The host part can't contains parameters.",
+          "description": "Gets or sets the EventHandler URL template. You can use a predefined parameter {hub} and {event} inside the template, the value of the EventHandler URL is dynamically calculated when the client request comes in.\r\nFor example, UrlTemplate can be `http://example.com/api/{hub}/{event}`. The host part can't contains parameters.",
           "type": "string"
         },
-        "eventPattern": {
-          "description": "Gets or sets the matching pattern for event names. If not set, it matches any event.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any event name\r\n    2. Combine multiple events with \",\", for example \"connect,disconnect\", it matches event \"connect\" and \"disconnect\"\r\n    3. The single event name, for example, \"connect\", it matches \"connect\"",
+        "userEventPattern": {
+          "description": "Gets or sets the matching pattern for event names.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any event name\r\n    2. Combine multiple events with \",\", for example \"event1,event2\", it matches event \"event1\" and \"event2\"\r\n    3. The single event name, for example, \"event1\", it matches \"event1\"",
+          "type": "string"
+        },
+        "systemEventPattern": {
+          "description": "Gets ot sets the system event pattern.\r\nThere are 2 kind of patterns supported:\r\n    1. The single event name, for example, \"connect\", it matches \"connect\"\r\n    2. Combine multiple events with \",\", for example \"connect,disconnected\", it matches event \"connect\" and \"disconnected\"",
           "type": "string"
         },
         "auth": {
           "$ref": "#/definitions/UpstreamAuthSettings",
           "description": "Gets or sets the auth settings for an event handler. If not set, no auth is used."
         }
+      }
+    },
+    "FeatureFlags": {
+      "description": "FeatureFlags is the supported features of Azure SignalR service.\n - EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\n - EnableMessagingLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\n - EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: \"true\"/\"false\", to enable/disable live trace feature.\n ",
+      "enum": [
+        "EnableConnectivityLogs",
+        "EnableMessagingLogs",
+        "EnableLiveTrace"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureFlags",
+        "modelAsString": true
       }
     },
     "KeyType": {
@@ -1886,14 +1903,28 @@
         }
       }
     },
-    "WebPubSubCorsSettings": {
-      "description": "Cross-Origin Resource Sharing (CORS) settings.",
+    "WebPubSubFeature": {
+      "description": "Feature of a resource, which controls the runtime behavior.",
+      "required": [
+        "flag",
+        "value"
+      ],
       "type": "object",
       "properties": {
-        "allowedOrigins": {
-          "description": "Gets or sets the list of origins that should be allowed to make cross-origin calls (for example: http://example.com:12345). Use \"*\" to allow all. If omitted, allow all by default.",
-          "type": "array",
-          "items": {
+        "flag": {
+          "$ref": "#/definitions/FeatureFlags",
+          "description": "FeatureFlags is the supported features of Azure SignalR service.\n - EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\n - EnableMessagingLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\n - EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: \"true\"/\"false\", to enable/disable live trace feature.\n "
+        },
+        "value": {
+          "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/azure/azure-signalr/ for allowed values.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "properties": {
+          "description": "Optional properties related to this feature.",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         }
@@ -1905,19 +1936,23 @@
       "properties": {
         "primaryKey": {
           "description": "The primary access key.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "secondaryKey": {
           "description": "The secondary access key.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "primaryConnectionString": {
           "description": "Connection string constructed via the primaryKey",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "secondaryConnectionString": {
           "description": "Connection string constructed via the secondaryKey",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -1999,13 +2034,21 @@
           "$ref": "#/definitions/WebPubSubTlsSettings",
           "description": "TLS settings."
         },
-        "cors": {
-          "$ref": "#/definitions/WebPubSubCorsSettings",
-          "description": "Cross-Origin Resource Sharing (CORS) settings."
+        "features": {
+          "description": "List of the featureFlags.\r\n\r\nFeatureFlags that are not included in the parameters for the update operation will not be modified.\r\nAnd the response will only include featureFlags that are explicitly set. \r\nWhen a featureFlag is not explicitly set, its globally default value will be used\r\nBut keep in mind, the default value doesn't mean \"false\". It varies in terms of different FeatureFlags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebPubSubFeature"
+          }
         },
         "eventHandler": {
           "$ref": "#/definitions/EventHandlerSettings",
           "description": "The settings for event handler in webpubsub service."
+        },
+        "anonymousConnectPolicy": {
+          "description": "The settings for configuring anonymous connection: \"allow\" or \"deny\". Default to \"deny\".",
+          "default": "deny",
+          "type": "string"
         },
         "networkACLs": {
           "$ref": "#/definitions/WebPubSubNetworkACLs",

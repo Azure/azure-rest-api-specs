@@ -10,28 +10,44 @@
         "tls": {
           "clientCertEnabled": false
         },
-        "cors": {
-          "allowedOrigins": [
-            "https://foo.com",
-            "https://bar.com"
-          ]
-        },
+        "features": [
+          {
+            "flag": "ServiceMode",
+            "value": "Serverless",
+            "properties": {}
+          },
+          {
+            "flag": "EnableConnectivityLogs",
+            "value": "True",
+            "properties": {}
+          },
+          {
+            "flag": "EnableMessagingLogs",
+            "value": "False",
+            "properties": {}
+          },
+          {
+            "flag": "EnableLiveTrace",
+            "value": "False",
+            "properties": {}
+          }
+        ],
         "eventHandler": {
           "items": {
             "hub1": [
               {
                 "urlTemplate": "https://example.com/chat/api/hub1",
-                "eventPattern": "*"
+                "userEventPattern": "*"
               }
             ],
             "hub2": [
               {
                 "urlTemplate": "https://example.com/chat/api/hub2/example1",
-                "eventPattern": "example1"
+                "userEventPattern": "example1"
               },
               {
                 "urlTemplate": "https://example.com/chat/api/hub2/example2",
-                "eventPattern": "example2"
+                "userEventPattern": "example2"
               }
             ]
           }
@@ -110,24 +126,41 @@
           "tls": {
             "clientCertEnabled": true
           },
-          "cors": {
-            "allowedOrigins": [
-              "https://foo.com",
-              "https://bar.com"
-            ]
-          },
+          "features": [
+            {
+              "flag": "ServiceMode",
+              "value": "Serverless",
+              "properties": {}
+            },
+            {
+              "flag": "EnableConnectivityLogs",
+              "value": "True",
+              "properties": {}
+            },
+            {
+              "flag": "EnableMessagingLogs",
+              "value": "False",
+              "properties": {}
+            },
+            {
+              "flag": "EnableLiveTrace",
+              "value": "False",
+              "properties": {}
+            }
+          ],
           "eventHandler": {
             "items": {
               "hub1": [
                 {
                   "urlTemplate": "https://example.com/chat/api/hub1",
-                  "eventPattern": "*"
+                  "userEventPattern": "*",
+                  "systemEventPattern": "connect,connected"
                 }
               ],
               "hub2": [
                 {
                   "urlTemplate": "https://example.com/chat/api/hub2/example1",
-                  "eventPattern": "example1",
+                  "userEventPattern": "example1",
                   "auth": {
                     "type": "ManagedIdentity",
                     "managedIdentity": {
@@ -137,11 +170,12 @@
                 },
                 {
                   "urlTemplate": "https://example.com/chat/api/hub2/example2",
-                  "eventPattern": "example2"
+                  "userEventPattern": "example2"
                 }
               ]
             }
           },
+          "anonymousConnectPolicy": "deny",
           "networkACLs": {
             "defaultAction": "Deny",
             "publicNetwork": {

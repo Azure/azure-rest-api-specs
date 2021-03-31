@@ -45,6 +45,7 @@ directive:
   - suppress: AvoidNestedProperties
     where:
     - $.definitions.ShareablePrivateLinkResourceType.properties.properties
+    - $.definitions.WebPubSubFeature.properties.properties
     reason:  The 'properties' is a user-defined dictionary, cannot be flattened.
   - suppress: PutInOperationName
     where:
