@@ -49,6 +49,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-powershell
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
@@ -89,9 +90,9 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
-## Trenton
+## Terraform
 
-See configuration in [readme.trenton.md](./readme.trenton.md)
+See configuration in [readme.terraform.md](./readme.terraform.md)
 
 ## AzureResourceSchema
 
@@ -112,17 +113,3 @@ cli:
   clear-output-folder: false
 ```
 
-## trenton
-
-These settings apply only when `--trenton` is specified on the command line.
-
-``` yaml $(trenton)
-trenton:
-  cli_name: customproviders
-  azure_arm: true
-  license_header: MICROSOFT_MIT_NO_VERSION
-  payload_flattening_threshold: 2
-  namespace: azure.mgmt.customproviders
-  package_name: azure-mgmt-customproviders
-  clear_output_folder: false
-```
