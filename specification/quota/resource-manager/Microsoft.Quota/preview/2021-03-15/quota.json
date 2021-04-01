@@ -542,11 +542,13 @@
         "limit": {
           "description": "The quota limit.",
           "type": "integer",
+          "format": "int32",
           "readOnly": false
         },
         "currentValue": {
           "description": "The current resource usages information.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "unit": {
@@ -575,7 +577,11 @@
         "properties": {
           "description": "Additional properties for the specific resource provider.",
           "type": "object"
-        }
+        },
+        "systemData": {
+      "$ref": "v2/types.json#/definitions/systemData",
+       "readOnly" : true
+    }
       }
     },
     "ResourceName": {
@@ -645,6 +651,7 @@
         "limit": {
           "description": "The Resource limit.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "name": {
