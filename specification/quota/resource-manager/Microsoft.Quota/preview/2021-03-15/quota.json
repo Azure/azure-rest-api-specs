@@ -365,7 +365,7 @@
         }
       }
     },
-    "/providers/Microsoft.Quota/quotaMetadata/": {
+    "/providers/Microsoft.Quota/quotaMetadata": {
       "get": {
         "tags": [
           "QuotaMatadata"
@@ -1002,28 +1002,24 @@
         }
       }
     },
-    "QuotaTypeInformationDimension1List": {
+    "QuotaTypeInformationDimensionList": {
       "description": "Quota types information list.",
       "type": "object",
       "properties": {
-        "dimension": {
+        "resourceType": {
           "type": "string",
-          "description": "The display name"
-        },
-        "dimensionDisplayName": {
-          "type": "string",
-          "description": "The property value"
+          "description": "The resource type"
         },
         "value": {
           "description": "The quota type information.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/QuotaTypeInformationDimension1"
+            "$ref": "#/definitions/QuotaTypeDimensionInformation"
           }
         }
       }
     },
-    "QuotaTypeInformationDimension1": {
+    "QuotaTypeDimensionInformation": {
       "type": "object",
       "description": "Quota type information.",
       "properties": {
@@ -1035,253 +1031,9 @@
           "type": "string",
           "description": "The display name."
         },
-        "properties": {
-          "type": "object",
-          "$ref": "#/definitions/QuotaDimensionInformation1"
-        }
-      }
-    },
-    "QuotaDimensionInformation1": {
-      "type": "object",
-      "description": "Quota dimension properties",
-      "properties": {
-        "dimension": {
+        "id": {
           "type": "string",
-          "description": "The dimension name."
-        },
-        "dimensionDisplayName": {
-          "type": "string",
-          "description": "The dimension display name."
-        },
-        "value": {
-          "$ref": "#/definitions/QuotaTypeInformationDimension2List"
-        }
-      }
-    },
-    "QuotaTypeInformationDimension2": {
-      "type": "object",
-      "description": "Quota type information.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The property name"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name"
-        },
-        "properties": {
-          "type": "object",
-          "$ref": "#/definitions/QuotaDimensionInformation2"
-        }
-      }
-    },
-    "QuotaDimensionInformation2": {
-      "type": "object",
-      "description": "Quota dimension properties",
-      "properties": {
-        "dimension": {
-          "type": "string",
-          "description": "The dimension name."
-        },
-        "dimensionDisplayName": {
-          "type": "string",
-          "description": "The dimension display name."
-        },
-        "value": {
-          "$ref": "#/definitions/QuotaTypeInformationDimension3List"
-        }
-      }
-    },
-    "QuotaTypeInformationDimension2List": {
-      "description": "Quota types information list.",
-      "type": "object",
-      "properties": {
-        "dimension": {
-          "type": "string",
-          "description": "The display name"
-        },
-        "dimensionDisplayName": {
-          "type": "string",
-          "description": "The property value"
-        },
-        "value": {
-          "description": "The quota type information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QuotaTypeInformationDimension2"
-          }
-        }
-      }
-    },
-    "QuotaTypeInformationDimension3": {
-      "type": "object",
-      "description": "Quota type information.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The property name"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name"
-        },
-        "properties": {
-          "type": "object",
-          "$ref": "#/definitions/QuotaDimensionInformation3"
-        }
-      }
-    },
-    "QuotaDimensionInformation3": {
-      "type": "object",
-      "description": "Quota dimension properties",
-      "properties": {
-        "dimension": {
-          "type": "string",
-          "description": "The dimension name."
-        },
-        "dimensionDisplayName": {
-          "type": "string",
-          "description": "The dimension display name."
-        },
-        "value": {
-          "$ref": "#/definitions/QuotaTypeInformationDimension3List"
-        }
-      }
-    },
-    "QuotaTypeInformationDimension3List": {
-      "description": "Quota types information list.",
-      "type": "object",
-      "properties": {
-        "dimension": {
-          "type": "string",
-          "description": "The display name"
-        },
-        "dimensionDisplayName": {
-          "type": "string",
-          "description": "The property value"
-        },
-        "value": {
-          "description": "The quota type information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QuotaTypeInformationDimension3"
-          }
-        }
-      }
-    },
-    "QuotaTypeInformationDimension4": {
-      "type": "object",
-      "description": "Quota type information.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The property name"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name"
-        },
-        "properties": {
-          "type": "object",
-          "$ref": "#/definitions/QuotaDimensionInformation4"
-        }
-      }
-    },
-    "QuotaDimensionInformation4": {
-      "type": "object",
-      "description": "Quota dimension properties",
-      "properties": {
-        "dimension": {
-          "type": "string",
-          "description": "The dimension name."
-        },
-        "dimensionDisplayName": {
-          "type": "string",
-          "description": "The dimension display name."
-        },
-        "value": {
-          "$ref": "#/definitions/QuotaTypeInformationDimension4List"
-        }
-      }
-    },
-    "QuotaTypeInformationDimension4List": {
-      "description": "Quota types information list.",
-      "type": "object",
-      "properties": {
-        "dimension": {
-          "type": "string",
-          "description": "The display name"
-        },
-        "dimensionDisplayName": {
-          "type": "string",
-          "description": "The property value"
-        },
-        "value": {
-          "description": "The quota type information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QuotaTypeInformationDimensionEndList"
-          }
-        }
-      }
-    },
-    "QuotaTypeInformationDimensionEndList": {
-      "description": "Quota types information list.",
-      "type": "object",
-      "properties": {
-        "dimension": {
-          "type": "string",
-          "description": "The display name"
-        },
-        "properties": {
-          "type": "object",
-          "$ref": "#/definitions/QuotaDimensionInformationEnd"
-        }
-      }
-    },
-    "QuotaDimensionInformationEnd": {
-      "type": "object",
-      "description": "Quota dimension properties",
-      "properties": {
-        "dimension": {
-          "type": "string",
-          "description": "The dimension name."
-        },
-        "dimensionDisplayName": {
-          "type": "string",
-          "description": "The dimension display name."
-        },
-        "value": {
-          "$ref": "#/definitions/QuotaTypeInformationDimensionEnd"
-        }
-      }
-    },
-    "QuotaTypeInformationDimensionEnd": {
-      "type": "object",
-      "description": "Quota type information.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The property name"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name"
-        }
-      }
-    },
-    "QuotaTypesList": {
-      "description": "Quota types information.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The quota type information. \r\n It creates a circular reference. We can limit the depth to 4 and define 4 lists with different names(QuotaDimensionTypesLevel1,so on) for reference at each level.",
-          "type": "array",
-          "items": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/QuotaTypeInformationDimension1List"
-          }
+           "description": "The dimension id."
         }
       }
     },
@@ -1296,7 +1048,7 @@
         "properties": {
           "description": "The quota type properties for the resource id.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/QuotaTypeInformationDimension1List"
+          "$ref": "#/definitions/QuotaTypeInformationDimensionList"
         }
       }
     },
