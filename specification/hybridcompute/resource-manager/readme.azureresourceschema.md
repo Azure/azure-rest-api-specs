@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-hybridcompute-2021-03-25-preview
   - tag: schema-hybridcompute-2020-08-15-preview
   - tag: schema-hybridcompute-2020-08-02
   - tag: schema-hybridcompute-2020-07-30-preview
@@ -16,6 +17,18 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-hybridcompute-2021-03-25-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-hybridcompute-2021-03-25-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.HybridCompute/preview/2021-03-25-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2021-03-25-preview/privateLinkScopes.json
+
+```
 
 ### Tag: schema-hybridcompute-2020-08-15-preview and azureresourceschema
 
