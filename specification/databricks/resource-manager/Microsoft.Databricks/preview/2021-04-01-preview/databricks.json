@@ -442,6 +442,19 @@
         "storageAccountIdentity": {
           "description": "The details of Managed Identity of Storage Account",
           "$ref": "#/definitions/ManagedIdentityConfiguration"
+        },
+        "encryption": {
+          "type": "object",
+          "description": "Encryption properties for databricks workspace",
+          "properties": {
+            "entities": {
+              "$ref": "#/definitions/EncryptionEntitiesDefinition",
+              "description": "Encryption entities definition for the workspace."
+            }
+          },
+          "required": [
+            "entities"
+          ]
         }
       },
       "required": [
@@ -748,6 +761,56 @@
           "x-ms-client-name": "KeyVaultUri"
         }
       },
+      "description": "The object that contains details of encryption used on the workspace."
+    },
+    "EncryptionEntitiesDefinition": {
+      "properties": {
+        "managedServices": {
+          "type": "object",
+          "description": "Encryption properties for the databricks managed services.",
+          "$ref": "#/definitions/EncryptionV2"
+        }
+      }
+    },
+    "EncryptionV2": {
+      "properties": {
+        "keySource": {
+          "type": "string",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Keyvault",
+          "enum": [
+            "Microsoft.Keyvault"
+          ],
+          "x-ms-enum": {
+            "name": "KeySource",
+            "modelAsString": true
+          }
+        },
+        "keyVaultProperties": {
+          "properties": {
+            "keyVaulturi": {
+              "type": "string",
+              "description": "The Uri of KeyVault."
+            },
+            "keyName": {
+              "type": "string",
+              "description": "The name of KeyVault key."
+            },
+            "keyVersion": {
+              "type": "string",
+              "description": "The version of KeyVault key."
+            }
+          },
+          "required": [
+            "keyVaulturi",
+            "keyName"
+          ],
+          "description": "Key Vault input properties for encryption."
+        }
+      },
+      "required": [
+        "keySource",
+        "keyVaultProperties"
+      ],
       "description": "The object that contains details of encryption used on the workspace."
     },
     "WorkspaceProviderAuthorization": {
