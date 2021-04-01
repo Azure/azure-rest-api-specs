@@ -3361,11 +3361,6 @@
             "type": "string"
           },
           {
-            "in": "header",
-            "name": "apim-subscription-id",
-            "required": true
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "",
@@ -4990,6 +4985,18 @@
         "message": {
           "type": "string",
           "description": "Show failure message when operation fails (omitted when operation succeeds)."
+        }
+      }
+    },
+    "PersistedFaceResponse": {
+      "type": "object",
+      "properties": {
+        "persistedFaceId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "userData": {
+          "type": "string"
         }
       }
     },
