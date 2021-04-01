@@ -1,0 +1,905 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-12-01-preview",
+    "title": "Edge Ordering Service-Partner"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.EdgeOrderPartner/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "This method gets all the operations that are exposed for customer.",
+        "operationId": "ListOperationsPartner",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperationsPartner": {
+            "$ref": "./examples/ListOperationsPartner.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrderPartner/locations/{location}/productFamilies/{familyIdentifier}/inventories/{serialNumber}/manageInventoryMetadata": {
+      "post": {
+        "tags": [
+          "PartnerInventory"
+        ],
+        "summary": "API for updating inventory metadata and inventory configuration",
+        "operationId": "ManageInventoryMetadata",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/familyIdentifierParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/serialNumberParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "manageInventoryMetadataRequest",
+            "in": "body",
+            "description": "Updates inventory metadata and inventory configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManageInventoryMetadataRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "\"Success\""
+          },
+          "202": {
+            "description": "\"Request is accepted to manage inventory metadata\""
+          },
+          "204": {
+            "description": "\"No content\""
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ManageInventoryMetadata": {
+            "$ref": "./examples/ManageInventoryMetadata.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrderPartner/locations/{location}/productFamilies/{familyIdentifier}/inventories/{serialNumber}/manageLink": {
+      "post": {
+        "tags": [
+          "PartnerInventory"
+        ],
+        "summary": "API for linking management resource with inventory",
+        "operationId": "ManageLink",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/familyIdentifierParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/serialNumberParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "manageLinkRequest",
+            "in": "body",
+            "description": "Links the management resource to the inventory",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManageLinkRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "\"Success\""
+          },
+          "204": {
+            "description": "\"No content\""
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManageLink": {
+            "$ref": "./examples/ManageLink.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrderPartner/searchInventories": {
+      "post": {
+        "tags": [
+          "PartnerInventory"
+        ],
+        "summary": "API for Search inventories",
+        "operationId": "SearchInventories",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "searchInventoriesRequest",
+            "in": "body",
+            "description": "Searches inventories with the given filters and returns in the form of a list",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchInventoriesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PartnerInventoryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SearchInventories": {
+            "$ref": "./examples/SearchInventories.json"
+          },
+          "SearchInventoriesDetails": {
+            "$ref": "./examples/SearchInventoriesDetails.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdditionalErrorInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "info": {
+          "type": "object"
+        }
+      }
+    },
+    "AdditionalInventoryDetails": {
+      "description": "Contains additional data about inventory in dictionary format",
+      "type": "object",
+      "properties": {
+        "additionalData": {
+          "description": "Additional Data",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AdditionalOrderItemDetails": {
+      "description": "Contains additional order item details",
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/StageDetails",
+          "description": "Order item status",
+          "readOnly": true
+        },
+        "subscription": {
+          "$ref": "#/definitions/SubscriptionDetails",
+          "description": "Subscription details",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingDetails": {
+      "description": "Contains billing details for the inventory",
+      "type": "object",
+      "properties": {
+        "billingType": {
+          "description": "Billing type for the inventory",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Billing status for the inventory",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudError"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalErrorInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ConfigurationData": {
+      "description": "Contains information about inventory configuration",
+      "type": "object",
+      "properties": {
+        "familyIdentifier": {
+          "description": "Family identifier of inventory",
+          "type": "string",
+          "readOnly": true
+        },
+        "productLineIdentifier": {
+          "description": "Product Line identifier of inventory",
+          "type": "string",
+          "readOnly": true
+        },
+        "productIdentifier": {
+          "description": "Product identifier of inventory",
+          "type": "string",
+          "readOnly": true
+        },
+        "configurationIdentifier": {
+          "description": "Configuration identifier of inventory",
+          "type": "string",
+          "readOnly": true
+        },
+        "configurationIdentifierOnDevice": {
+          "description": "Configuration identifier on device - this is used in case of any mismatch\r\nbetween actual configuration on inventory and configuration stored in service",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigurationDetails": {
+      "description": "Contains additional configuration details about inventory",
+      "type": "object",
+      "properties": {
+        "specifications": {
+          "description": "Collection of specification details about the inventory",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpecificationDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigurationOnDevice": {
+      "description": "Configuration parameters for ManageInventoryMetadata call",
+      "required": [
+        "configurationIdentifier"
+      ],
+      "type": "object",
+      "properties": {
+        "configurationIdentifier": {
+          "description": "Configuration identifier on device",
+          "type": "string"
+        }
+      }
+    },
+    "InventoryAdditionalDetails": {
+      "description": "Represents additional details about the partner inventory",
+      "type": "object",
+      "properties": {
+        "orderItem": {
+          "$ref": "#/definitions/AdditionalOrderItemDetails",
+          "description": "Represents additional details about the order item"
+        },
+        "inventoryMetadata": {
+          "description": "Contains inventory metadata",
+          "type": "string",
+          "readOnly": true
+        },
+        "configuration": {
+          "$ref": "#/definitions/ConfigurationDetails",
+          "description": "Represents additional details about the configuration",
+          "readOnly": true
+        },
+        "inventory": {
+          "$ref": "#/definitions/AdditionalInventoryDetails",
+          "description": "Represents additional data about the inventory",
+          "readOnly": true
+        },
+        "billing": {
+          "$ref": "#/definitions/BillingDetails",
+          "description": "Represents additional details about billing for the inventory",
+          "readOnly": true
+        },
+        "inventorySecrets": {
+          "description": "Represents secrets on the inventory",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InventoryData": {
+      "description": "Contains basic information about inventory",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Inventory status",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Inventory location",
+          "type": "string",
+          "readOnly": true
+        },
+        "registrationAllowed": {
+          "description": "Boolean flag to indicate if registration is allowed",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "InventoryProperties": {
+      "description": "Represents inventory properties",
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "description": "Serial number of the device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "orderItem": {
+          "$ref": "#/definitions/OrderItemData",
+          "description": "Represents basic order item data.",
+          "readOnly": true
+        },
+        "configuration": {
+          "$ref": "#/definitions/ConfigurationData",
+          "description": "Represents basic configuration data.",
+          "readOnly": true
+        },
+        "managementResource": {
+          "$ref": "#/definitions/ManagementResourceData",
+          "description": "Represents management resource data associated with inventory.",
+          "readOnly": true
+        },
+        "inventory": {
+          "$ref": "#/definitions/InventoryData",
+          "description": "Represents basic inventory data.",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of inventory",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "$ref": "#/definitions/InventoryAdditionalDetails",
+          "description": "Represents additional details of inventory",
+          "readOnly": true
+        }
+      }
+    },
+    "ManageInventoryMetadataRequest": {
+      "description": "Request body for ManageInventoryMetadata call",
+      "required": [
+        "inventoryMetadata"
+      ],
+      "type": "object",
+      "properties": {
+        "inventoryMetadata": {
+          "description": "Inventory metadata to be updated",
+          "type": "string"
+        },
+        "configurationOnDevice": {
+          "$ref": "#/definitions/ConfigurationOnDevice",
+          "description": "Inventory configuration to be updated"
+        }
+      }
+    },
+    "ManageLinkRequest": {
+      "description": "Request body for ManageLink call",
+      "required": [
+        "managementResourceArmId",
+        "operation",
+        "tenantId"
+      ],
+      "type": "object",
+      "properties": {
+        "managementResourceArmId": {
+          "description": "Arm Id of the management resource to which inventory is to be linked\r\nFor unlink operation, enter empty string",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation to be performed - Link, Unlink, Relink",
+          "enum": [
+            "Link",
+            "Unlink",
+            "Relink"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManageLinkOperation",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Link",
+                "description": "Link."
+              },
+              {
+                "value": "Unlink",
+                "description": "Unlink."
+              },
+              {
+                "value": "Relink",
+                "description": "Relink."
+              }
+            ]
+          }
+        },
+        "tenantId": {
+          "description": "Tenant ID of management resource associated with inventory",
+          "type": "string"
+        }
+      }
+    },
+    "ManagementResourceData": {
+      "description": "Contains information about management resource",
+      "type": "object",
+      "properties": {
+        "armId": {
+          "description": "Arm ID of management resource associated with inventory",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant ID of management resource associated with inventory",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OrderItemData": {
+      "description": "Contains information about the order item to which inventory belongs",
+      "type": "object",
+      "properties": {
+        "armId": {
+          "description": "Arm ID of order item",
+          "type": "string",
+          "readOnly": true
+        },
+        "orderItemType": {
+          "description": "Order item type - purchase or rental",
+          "enum": [
+            "Purchase",
+            "Rental"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OrderItemType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Purchase",
+                "description": "Purchase OrderItem."
+              },
+              {
+                "value": "Rental",
+                "description": "Rental OrderItem."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "StageDetails": {
+      "description": "Resource stage details.",
+      "type": "object",
+      "properties": {
+        "stageStatus": {
+          "description": "Stage status.",
+          "enum": [
+            "None",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Cancelling"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StageStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No status available yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Stage is in progress."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Stage has succeeded."
+              },
+              {
+                "value": "Failed",
+                "description": "Stage has failed."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Stage has been cancelled."
+              },
+              {
+                "value": "Cancelling",
+                "description": "Stage is cancelling."
+              }
+            ]
+          }
+        },
+        "stageName": {
+          "description": "Stage name",
+          "enum": [
+            "DeviceOrdered",
+            "DevicePrepared",
+            "PickedUp",
+            "AtAzureDC",
+            "DataCopy",
+            "Completed",
+            "CompletedWithErrors",
+            "Cancelled",
+            "Aborted",
+            "CompletedWithWarnings",
+            "ReadyToDispatchFromAzureDC",
+            "ReadyToReceiveAtAzureDC",
+            "Placed",
+            "InReview",
+            "Confirmed",
+            "ReadyForDispatch",
+            "Shipped",
+            "Delivered",
+            "InUse"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StageName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DeviceOrdered",
+                "description": "An order has been created."
+              },
+              {
+                "value": "DevicePrepared",
+                "description": "A device has been prepared for the order."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Device has been picked up from user and in transit to Azure datacenter."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Device has been received at Azure datacenter from the user."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Data copy from the device at Azure datacenter."
+              },
+              {
+                "value": "Completed",
+                "description": "Order has completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Order has completed with errors."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Order has been cancelled."
+              },
+              {
+                "value": "Aborted",
+                "description": "Order has been aborted."
+              },
+              {
+                "value": "Current"
+              },
+              {
+                "value": "CompletedWithWarnings",
+                "description": "Order has completed with warnings."
+              },
+              {
+                "value": "ReadyToDispatchFromAzureDC",
+                "description": "Device is ready to be handed to customer from Azure DC."
+              },
+              {
+                "value": "ReadyToReceiveAtAzureDC",
+                "description": "Device can be dropped off at Azure DC."
+              },
+              {
+                "value": "Placed",
+                "description": "Currently in draft mode and can still be cancelled"
+              },
+              {
+                "value": "InReview",
+                "description": "Order is currently in draft mode and can still be cancelled"
+              },
+              {
+                "value": "Confirmed",
+                "description": "Order is confirmed"
+              },
+              {
+                "value": "ReadyForDispatch",
+                "description": "Order is ready for dispatch"
+              },
+              {
+                "value": "Shipped",
+                "description": "Order is in transit to customer"
+              },
+              {
+                "value": "Delivered",
+                "description": "Order is delivered to customer"
+              },
+              {
+                "value": "InUse",
+                "description": "Order is in use at customer site"
+              }
+            ]
+          }
+        },
+        "displayName": {
+          "description": "Display name of the resource stage.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Stage start time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PartnerInventory": {
+      "description": "Represents partner inventory contract",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InventoryProperties",
+          "description": "Inventory properties",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PartnerInventoryList": {
+      "description": "Represents the list of partner inventories",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of partner inventories",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartnerInventory"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link for the next set of partner inventories.",
+          "type": "string"
+        }
+      }
+    },
+    "SearchInventoriesRequest": {
+      "description": "Request body for SearchInventories call",
+      "required": [
+        "serialNumber",
+        "familyIdentifier"
+      ],
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "description": "Serial number of the inventory",
+          "type": "string"
+        },
+        "familyIdentifier": {
+          "description": "Family identifier for inventory",
+          "type": "string"
+        }
+      }
+    },
+    "SpecificationDetails": {
+      "description": "Specification details for the inventory",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the specification property",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Value of the specification property",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionDetails": {
+      "description": "Contains subscription details",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Subscription Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "Subscription State",
+          "type": "string",
+          "readOnly": true
+        },
+        "quotaId": {
+          "description": "Subscription QuotaId",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "familyIdentifierParameter": {
+      "name": "familyIdentifier",
+      "in": "path",
+      "description": "Unique identifier for the product family",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "The location of the resource",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "serialNumberParameter": {
+      "name": "serialNumber",
+      "in": "path",
+      "description": "The serial number of the device",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
