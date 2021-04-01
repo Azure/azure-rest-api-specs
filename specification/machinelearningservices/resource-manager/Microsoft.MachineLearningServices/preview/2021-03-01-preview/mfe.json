@@ -87,6 +87,77 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Update a batch inference deployment.",
+        "operationId": "BatchDeployments_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The identifier for the Batch inference deployment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Batch inference deployment definition object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartialBatchDeploymentPartialTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Batch Deployment.": {
+            "$ref": "./examples/BatchDeployment/update.json"
+          }
+        }
+      },
       "get": {
         "tags": [
           "BatchDeployment"
@@ -340,6 +411,69 @@
         "x-ms-examples": {
           "CreateOrUpdate Batch Endpoint.": {
             "$ref": "./examples/BatchEndpoint/createOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Update a batch inference endpoint.",
+        "operationId": "BatchEndpoints_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Name for the Batch inference endpoint.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Mutable batch inference endpoint definition object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartialBatchEndpointPartialTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/update.json"
           }
         }
       },
@@ -5028,6 +5162,68 @@
       },
       "additionalProperties": false
     },
+    "PartialBatchDeployment": {
+      "description": "Mutable batch inference settings per deployment.",
+      "type": "object",
+      "additionalProperties": false
+    },
+    "PartialBatchDeploymentPartialTrackedResource": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentityInArm"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/PartialBatchDeployment"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
     "BatchDeploymentTrackedResourceArmPaginatedResult": {
       "description": "A paginated list of BatchDeployment entities.",
       "type": "object",
@@ -5126,6 +5322,68 @@
         "properties": {
           "description": "Additional attributes of the entity.",
           "$ref": "#/definitions/BatchEndpoint"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialBatchEndpoint": {
+      "description": "Mutable Batch endpoint configuration",
+      "type": "object",
+      "additionalProperties": false
+    },
+    "PartialBatchEndpointPartialTrackedResource": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentityInArm"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/PartialBatchEndpoint"
         },
         "systemData": {
           "description": "System data associated with resource provider",
