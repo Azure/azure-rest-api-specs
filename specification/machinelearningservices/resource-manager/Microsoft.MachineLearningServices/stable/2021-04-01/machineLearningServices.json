@@ -873,7 +873,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Compute update initiated.",
             "schema": {
               "$ref": "#/definitions/ComputeResource"
@@ -3222,6 +3222,18 @@
           "type": "string",
           "description": "The description of the Machine Learning compute."
         },
+        "createdOn": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The time at which the compute was created."
+        },
+        "modifiedOn": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The time at which the compute was last modified."
+        },
         "resourceId": {
           "type": "string",
           "description": "ARM resource id of the underlying compute"
@@ -3273,7 +3285,7 @@
                   "description": "Number of agents",
                   "type": "integer",
                   "format": "int32",
-                  "minimum": 1
+                  "minimum": 0
                 },
                 "agentVmSize": {
                   "description": "Agent virtual machine size",
@@ -3300,6 +3312,23 @@
                 "aksNetworkingConfiguration": {
                   "description": "AKS networking configuration for vnet",
                   "$ref": "#/definitions/AksNetworkingConfiguration"
+                },
+                "LoadBalancerType": {
+                  "description": "Load Balancer Type",
+                  "type": "string",
+                  "default": "PublicIp",
+                  "enum": [
+                    "PublicIp",
+                    "InternalLoadBalancer"
+                  ],
+                  "x-ms-enum": {
+                    "name": "LoadBalancerType",
+                    "modelAsString": true
+                  }
+                },
+                "LoadBalancerSubnet": {
+                  "description": "Load Balancer Subnet",
+                  "type": "string"
                 }
               }
             }
@@ -3584,6 +3613,10 @@
                 "administratorAccount": {
                   "description": "Admin credentials for virtual machine",
                   "$ref": "#/definitions/VirtualMachineSshCredentials"
+                },
+                "isNotebookInstanceCompute": {
+                  "description": "Indicates whether this compute will be used for running notebooks.",
+                  "type": "boolean"
                 }
               }
             }
@@ -3746,6 +3779,14 @@
         "cname": {
           "description": "CNAME of the cert",
           "type": "string"
+        },
+        "leafDomainLabel": {
+          "description": "Leaf domain label of public endpoint",
+          "type": "string"
+        },
+        "overwriteExistingDomain": {
+          "description": "Indicates whether to overwrite existing domain label.",
+          "type": "boolean"
         }
       }
     },
@@ -4111,7 +4152,8 @@
         "VirtualMachine",
         "HDInsight",
         "Databricks",
-        "DataLakeAnalytics"
+        "DataLakeAnalytics",
+        "SynapseSpark"
       ],
       "x-ms-enum": {
         "name": "ComputeType",
@@ -4157,6 +4199,11 @@
         "message": {
           "type": "string",
           "description": "Error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error",
           "readOnly": true
         },
         "details": {
