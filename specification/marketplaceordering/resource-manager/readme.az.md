@@ -33,31 +33,46 @@ directive:
     set:
       group: term
   - where:
-      command: term show-agreement
+      command: term create
     set:
-      command: term show
+      command: term accept
+  - where:
+      command: term accept
+    set:
+      command-description: Accept marketplace terms.
   - where: 
-      command: term sign
       parameter-name: publisher-id 
     set:
-      name: publisher
+      parameter-name: publisher
+  - where: 
+      parameter-name: offer-id 
+    set:
+      parameter-name: offer
+  - where: 
+      parameter-name: plan-id 
+    set:
+      parameter-name: plan
 
 cli:
   cli-directive:
     - where:
         group: MarketplaceAgreements
-        op: Get
+        op: GetAgreement
       hidden: true
     - where:
         group: MarketplaceAgreements
-        op: Create
+        op: Sign
+      hidden: true
+    - where:
+        group: MarketplaceAgreements
+        op: Cancel
       hidden: true
     - where:
         group: MarketplaceAgreements
         op: List
       hidden: true
-    # - where:
-    #     group: Operations
-    #     op: List
-    #   hidden: true
+    - where:
+        group: MarketplaceAgreements
+        set:
+          extensionMode: preview
 ```
