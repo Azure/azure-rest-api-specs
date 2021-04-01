@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "subscriptionId": "b783ea86-c85c-4175-b76d-3992656af50d",
+    "api-version": "2020-12-01-preview",
+    "$expand": "details",
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "Referer": [
+      "https://localhost/subscriptions/b783ea86-c85c-4175-b76d-3992656af50d/providers/Microsoft.EdgeOrderPartner/searchInventories?api-version=2020-12-01-preview&$expand=details"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "75"
+    ],
+    "searchInventoriesRequest": {
+      "serialNumber": "SerialNumber1",
+      "familyIdentifier": "AzureStackEdge"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "serialNumber": "SerialNumber1",
+              "location": "westus",
+              "orderItem": {
+                "armId": "/subscriptions/b783ea86-c85c-4175-b76d-3992656af50d/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orders/TestOrderName1",
+                "orderItemType": "Rental"
+              },
+              "configuration": {
+                "familyIdentifier": "AzureStackEdge",
+                "productLineIdentifier": "AzureStackEdgePL",
+                "productIdentifier": "AzureStackEdgeProGPU",
+                "configurationIdentifier": "EdgeP_Base",
+                "configurationIdentifierOnDevice": "EdgeP_High"
+              },
+              "managementResource": {
+                "armId": "/subscriptions/c783ea86-c85c-4175-b76d-3992656af50d/resourceGroups/EdgeTestRG/providers/Microsoft.DataBoxEdge/DataBoxEdgeDevices/TestEdgeDeviceName1",
+                "tenantId": "a783ea86-c85c-4175-b76d-3992656af50d"
+              },
+              "inventory": {
+                "status": "Healthy",
+                "location": "Rack",
+                "registrationAllowed": true
+              },
+              "details": {
+                "orderItem": {
+                  "status": {
+                    "stageStatus": "Succeeded",
+                    "stageName": "Delivered",
+                    "displayName": "Delivered - Succeeded",
+                    "startTime": "2020-08-07T10:50:36.3341513+05:30"
+                  },
+                  "subscription": {
+                    "id": "b783ea86-c85c-4175-b76d-3992656af50d",
+                    "state": "Registered",
+                    "quotaId": "Internal_2014-09-01"
+                  }
+                },
+                "inventoryMetadata": "This is currently in Japan",
+                "configuration": {
+                  "specifications": [
+                    {
+                      "name": "Cores",
+                      "value": "24"
+                    },
+                    {
+                      "name": "Memory",
+                      "value": "128 GB"
+                    },
+                    {
+                      "name": "Storage",
+                      "value": "~8 TB"
+                    }
+                  ]
+                },
+                "inventory": {
+                  "additionalData": {
+                    "SourceCountry": "USA",
+                    "ManuacturingYear": "2020"
+                  }
+                },
+                "billing": {
+                  "billingType": "Pav2",
+                  "status": "InProgress"
+                },
+                "inventorySecrets": {
+                  "PublicCert": "<PublicCert>"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
