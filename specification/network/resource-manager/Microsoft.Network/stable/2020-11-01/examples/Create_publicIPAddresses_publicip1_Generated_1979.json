@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_load_balancer_ip_config000001",
+    "publicIpAddressName": "publicip1",
+    "parameters": {
+      "location": "eastus2",
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "publicip1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/publicIPAddresses/publicip1",
+        "etag": "W/\"e02cf45b-c318-4185-81a2-5f84afb27d6e\"",
+        "location": "eastus2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "68308ed3-d0ea-46d2-b225-b4bbfc649689",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Dynamic",
+          "idleTimeoutInMinutes": 4,
+          "ipTags": []
+        },
+        "type": "Microsoft.Network/publicIPAddresses",
+        "sku": {
+          "name": "Basic",
+          "tier": "Regional"
+        }
+      }
+    }
+  }
+}

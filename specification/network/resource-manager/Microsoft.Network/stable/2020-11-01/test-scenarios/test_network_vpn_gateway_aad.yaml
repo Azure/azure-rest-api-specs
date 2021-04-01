@@ -1,0 +1,92 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vpn_gateway_aad
+    steps:
+      - step: RawStep_2721
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway_aad_000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway_aad_000001","name":"cli_test_vpn_gateway_aad_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-05T06:05:32Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_ip
+        resourceName: publicIPAddresses_ip
+        exampleFile: ../examples/Create_publicIPAddresses_ip_Generated_2723.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2724
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway_aad_000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway_aad_000001","name":"cli_test_vpn_gateway_aad_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-05T06:05:32Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet
+        resourceName: virtualNetworks_vnet
+        exampleFile: ../examples/Create_virtualNetworks_vnet_Generated_2726.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2727
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vpn_gateway_aad_000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet-gateway create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --vnet --public-ip-address --gateway-type --vpn-type --sku
+            --client-protocol --address-prefixes
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_gateway_aad_000001","name":"cli_test_vpn_gateway_aad_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-05T06:05:32Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gw
+        resourceName: virtualNetworkGateways_gw
+        exampleFile: ../examples/Create_virtualNetworkGateways_gw_Generated_2729.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+      - step: Update_virtualNetworkGateways_gw_2731
+        resourceName: virtualNetworkGateways_gw
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/vpnClientConfiguration/aadTenant
+            value: >-
+              https://login.microsoftonline.com/0ab2c4f4-81e6-44cc-a0b2-b3a47a1443f4
+          - add: /properties/vpnClientConfiguration/aadAudience
+            value: a21fce82-76af-45e6-8583-a08cb3b956f9
+          - add: /properties/vpnClientConfiguration/aadIssuer
+            value: https://sts.windows.net/0ab2c4f4-81e6-44cc-a0b2-b3a47a1443f4/
+      - step: Update_virtualNetworkGateways_gw_2733
+        resourceName: virtualNetworkGateways_gw
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/vpnClientConfiguration/vpnAuthenticationTypes/0
+          - remove: /properties/vpnClientConfiguration/aadTenant
+          - remove: /properties/vpnClientConfiguration/aadAudience
+          - remove: /properties/vpnClientConfiguration/aadIssuer
+    variables:
+      publicIpAddressName: ip
+      virtualNetworkName: vnet
+      virtualNetworkGatewayName: gw

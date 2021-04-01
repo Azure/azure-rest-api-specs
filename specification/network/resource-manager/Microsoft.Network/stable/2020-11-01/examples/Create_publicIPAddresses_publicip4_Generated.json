@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_cr_load_balancer000001",
+    "publicIpAddressName": "publicip4",
+    "parameters": {
+      "location": "westus",
+      "sku": {
+        "name": "Standard",
+        "tier": "Global"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Static",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "publicip4",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cr_load_balancer000001/providers/Microsoft.Network/publicIPAddresses/publicip4",
+        "etag": "W/\"0a7ca8c0-2bdd-4cc3-ad3f-ebc218141fd4\"",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "db3ab5a4-ff63-40e9-9d45-9a5a812dad98",
+          "ipAddress": "52.250.216.15",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Static",
+          "idleTimeoutInMinutes": 4,
+          "ipTags": []
+        },
+        "type": "Microsoft.Network/publicIPAddresses",
+        "sku": {
+          "name": "Standard",
+          "tier": "Global"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_virtual_hub_router000001",
+    "virtualNetworkName": "vnet2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "vnet2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_virtual_hub_router000001/providers/Microsoft.Network/virtualNetworks/vnet2",
+        "etag": "W/\"c35e8631-5f8d-47c8-94dc-3bb968f7cdd3\"",
+        "type": "Microsoft.Network/virtualNetworks",
+        "location": "centraluseuap",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "7416e485-5ee5-43fa-9618-19aaa9a92ae6",
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/24"
+            ]
+          },
+          "dhcpOptions": {
+            "dnsServers": []
+          },
+          "subnets": [
+            {
+              "name": "RouteServerSubnet",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_virtual_hub_router000001/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/RouteServerSubnet",
+              "etag": "W/\"c35e8631-5f8d-47c8-94dc-3bb968f7cdd3\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "10.0.0.0/24",
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Enabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+              },
+              "type": "Microsoft.Network/virtualNetworks/subnets"
+            }
+          ],
+          "virtualNetworkPeerings": [],
+          "enableDdosProtection": false
+        }
+      }
+    }
+  }
+}

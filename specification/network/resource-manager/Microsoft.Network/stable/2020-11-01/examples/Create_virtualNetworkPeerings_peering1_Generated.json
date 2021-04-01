@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_vnet_peering000001",
+    "virtualNetworkName": "vnet1",
+    "virtualNetworkPeeringName": "peering1",
+    "VirtualNetworkPeeringParameters": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet1",
+      "name": "peering1",
+      "properties": {
+        "allowVirtualNetworkAccess": false,
+        "allowForwardedTraffic": true,
+        "allowGatewayTransit": false,
+        "useRemoteGateways": true,
+        "remoteVirtualNetwork": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet2"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "peering1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peering1",
+        "etag": "W/\"e8b76ba3-b1c7-456a-9e58-8b59ed603345\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "4e94f660-b49c-0c99-1863-ec4eb772c8e1",
+          "peeringState": "Connected",
+          "remoteVirtualNetwork": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet2"
+          },
+          "allowVirtualNetworkAccess": false,
+          "allowForwardedTraffic": true,
+          "allowGatewayTransit": false,
+          "useRemoteGateways": true,
+          "doNotVerifyRemoteGateways": false,
+          "remoteGateways": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworkGateways/gateway1"
+            }
+          ],
+          "remoteAddressSpace": {
+            "addressPrefixes": [
+              "11.0.0.0/16"
+            ]
+          },
+          "routeServiceVips": {}
+        },
+        "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings"
+      }
+    }
+  }
+}

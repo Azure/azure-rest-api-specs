@@ -1,0 +1,47 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_traffic_manager2
+    steps:
+      - step: RawStep_2468
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager2000001/providers/Microsoft.Network/trafficmanagerprofiles/mytmprofile2?api-version=2018-04-01
+        requestBody: >-
+          {"tags":{"foo":"doo"},"location":"global","properties":{"profileStatus":"Enabled","trafficRoutingMethod":"Multivalue","dnsConfig":{"relativeName":"mytrafficmanager001100a2","ttl":30},"monitorConfig":{"protocol":"HTTP","port":80,"path":"/"},"maxReturn":3}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network traffic-manager profile create
+          Connection: keep-alive
+          Content-Length: '278'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --routing-method --unique-dns-name --max-return --tags'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-trafficmanager/0.51.0
+            Azure-SDK-For-Python AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager2000001/providers/Microsoft.Network/trafficManagerProfiles/mytmprofile2","name":"mytmprofile2","type":"Microsoft.Network/trafficManagerProfiles","location":"global","tags":{"foo":"doo"},"properties":{"profileStatus":"Enabled","trafficRoutingMethod":"MultiValue","dnsConfig":{"relativeName":"mytrafficmanager001100a2","fqdn":"mytrafficmanager001100a2.trafficmanager.net","ttl":30},"monitorConfig":{"profileMonitorStatus":"Inactive","protocol":"HTTP","port":80,"path":"/","intervalInSeconds":30,"toleratedNumberOfFailures":3,"timeoutInSeconds":10},"endpoints":[],"trafficViewEnrollmentStatus":"Disabled","maxReturn":3}}
+      - step: RawStep_2469
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager2000001/providers/Microsoft.Network/trafficmanagerprofiles/mytmprofile2?api-version=2018-04-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager2000001/providers/Microsoft.Network/trafficManagerProfiles/mytmprofile2","name":"mytmprofile2","type":"Microsoft.Network/trafficManagerProfiles","tags":{"foo":"boo"},"location":"global","properties":{"profileStatus":"Enabled","trafficRoutingMethod":"Multivalue","dnsConfig":{"relativeName":"mytrafficmanager001100a2","ttl":30},"monitorConfig":{"profileMonitorStatus":"Inactive","protocol":"HTTP","port":80,"path":"/","intervalInSeconds":30,"timeoutInSeconds":10,"toleratedNumberOfFailures":3},"endpoints":[],"trafficViewEnrollmentStatus":"Disabled","maxReturn":4}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network traffic-manager profile update
+          Connection: keep-alive
+          Content-Length: '747'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --routing-method --max-return --tags'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-trafficmanager/0.51.0
+            Azure-SDK-For-Python AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_traffic_manager2000001/providers/Microsoft.Network/trafficManagerProfiles/mytmprofile2","name":"mytmprofile2","type":"Microsoft.Network/trafficManagerProfiles","location":"global","tags":{"foo":"boo"},"properties":{"profileStatus":"Enabled","trafficRoutingMethod":"MultiValue","dnsConfig":{"relativeName":"mytrafficmanager001100a2","fqdn":"mytrafficmanager001100a2.trafficmanager.net","ttl":30},"monitorConfig":{"profileMonitorStatus":"Inactive","protocol":"HTTP","port":80,"path":"/","intervalInSeconds":30,"toleratedNumberOfFailures":3,"timeoutInSeconds":10},"endpoints":[],"trafficViewEnrollmentStatus":"Disabled","maxReturn":4}}

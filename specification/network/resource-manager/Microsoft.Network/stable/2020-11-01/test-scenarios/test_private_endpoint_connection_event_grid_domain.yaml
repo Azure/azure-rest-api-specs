@@ -1,0 +1,249 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_private_endpoint_connection_event_grid_domain
+    steps:
+      - step: Create_virtualNetworks_cli000003
+        resourceName: virtualNetworks_cli000003
+        exampleFile: ../examples/Create_virtualNetworks_cli000003_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Update_virtualNetworks_cli000003_3249
+        resourceName: virtualNetworks_cli000003
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/0
+            value:
+              name: cli000004
+              properties:
+                addressPrefix: 10.0.0.0/24
+                provisioningState: Succeeded
+                delegations: []
+                privateEndpointNetworkPolicies: Enabled
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/virtualNetworks/cli000003/subnets/cli000004
+              type: Microsoft.Network/virtualNetworks/subnets
+      - step: Subnets_Get_3250
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_cli000004
+        resourceName: subnets_cli000004
+        exampleFile: >-
+          ../examples/Create_subnets_appgw_private_endpoint_subnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: RawStep_3252
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007?api-version=2020-10-15-preview
+        requestBody: >-
+          {"location":"centraluseuap","properties":{"inputSchema":"EventGridSchema","publicNetworkAccess":"disabled"},"sku":{"name":"Basic"},"identity":{"type":"None"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid domain create
+          Connection: keep-alive
+          Content-Length: '170'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '--name --resource-group --location --public-network-access'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"properties":{"provisioningState":"Creating","endpoint":null,"inputSchema":"EventGridSchema","publicNetworkAccess":"Disabled"},"sku":{"name":"Basic"},"identity":{"type":"None","principalId":null,"tenantId":null,"userAssignedIdentities":null},"systemData":null,"location":"centraluseuap","tags":null,"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007","name":"cli000007","type":"Microsoft.EventGrid/domains"}
+      - step: RawStep_3253
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.EventGrid/locations/centraluseuap/operationsStatus/1B7DDF1E-484F-4E28-9DBC-EB04DAA2777D?api-version=2020-10-15-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid domain create
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --location --public-network-access'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+        responseExpected: >-
+          {"id":"https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.EventGrid/locations/centraluseuap/operationsStatus/1B7DDF1E-484F-4E28-9DBC-EB04DAA2777D?api-version=2020-10-15-preview","name":"1b7ddf1e-484f-4e28-9dbc-eb04daa2777d","status":"Succeeded"}
+      - step: RawStep_3254
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007?api-version=2020-10-15-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid domain create
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --location --public-network-access'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+        responseExpected: >-
+          {"properties":{"provisioningState":"Succeeded","endpoint":"https://cli000007.centraluseuap-1.eventgrid.azure.net/api/events","inputSchema":"EventGridSchema","metricResourceId":"79783d30-8990-4eb0-8be5-9b48288eeb1b","publicNetworkAccess":"Disabled"},"sku":{"name":"Basic"},"identity":{"type":"None","principalId":null,"tenantId":null,"userAssignedIdentities":null},"systemData":null,"location":"centraluseuap","tags":null,"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007","name":"cli000007","type":"Microsoft.EventGrid/domains"}
+      - step: Create_privateEndpoints_cli000005
+        resourceName: privateEndpoints_cli000005
+        exampleFile: ../examples/Create_privateEndpoints_cli000005_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_3256
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007?api-version=2020-10-15-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid domain show
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+          accept-language: en-US
+        responseExpected: >-
+          {"properties":{"privateEndpointConnections":[{"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/privateEndpoints/cli000005"},"groupIds":["domain"],"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Succeeded"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4","name":"cli000005.d98749a1-4978-4185-a95d-bfce223633d4","type":"Microsoft.EventGrid/domains/privateEndpointConnections"}],"provisioningState":"Succeeded","endpoint":"https://cli000007.centraluseuap-1.eventgrid.azure.net/api/events","inputSchema":"EventGridSchema","metricResourceId":"79783d30-8990-4eb0-8be5-9b48288eeb1b","publicNetworkAccess":"Disabled"},"sku":{"name":"Basic"},"identity":{"type":"None","principalId":null,"tenantId":null,"userAssignedIdentities":null},"systemData":null,"location":"centraluseuap","tags":null,"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007","name":"cli000007","type":"Microsoft.EventGrid/domains"}
+      - step: RawStep_3257
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections?api-version=2020-04-01-preview
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection list
+          Connection: keep-alive
+          ParameterSetName: '--resource-group --name --type'
+          User-Agent: python/3.7.9 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"value":[{"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/privateEndpoints/cli000005"},"groupIds":["domain"],"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Succeeded"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4","name":"cli000005.d98749a1-4978-4185-a95d-bfce223633d4","type":"Microsoft.EventGrid/domains/privateEndpointConnections"}]}
+      - step: RawStep_3258
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4?api-version=2020-04-01-preview
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection show
+          Connection: keep-alive
+          ParameterSetName: '--resource-group --resource-name --name --type'
+          User-Agent: python/3.7.9 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/privateEndpoints/cli000005"},"groupIds":["domain"],"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Succeeded"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4","name":"cli000005.d98749a1-4978-4185-a95d-bfce223633d4","type":"Microsoft.EventGrid/domains/privateEndpointConnections"}
+      - step: RawStep_3259
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4?api-version=2020-04-01-preview
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection approve
+          Connection: keep-alive
+          ParameterSetName: '--resource-group --resource-name --name --type --description'
+          User-Agent: python/3.7.9 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/privateEndpoints/cli000005"},"groupIds":["domain"],"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-approved","actionsRequired":"None"},"provisioningState":"Succeeded"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4","name":"cli000005.d98749a1-4978-4185-a95d-bfce223633d4","type":"Microsoft.EventGrid/domains/privateEndpointConnections"}
+      - step: RawStep_3260
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4?api-version=2020-04-01-preview
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/privateEndpoints/cli000005"},"groupIds":["domain"],"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!","actionsRequired":"None"},"provisioningState":"Succeeded"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4","name":"cli000005.d98749a1-4978-4185-a95d-bfce223633d4","type":"Microsoft.EventGrid/domains/privateEndpointConnections"}
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection approve
+          Connection: keep-alive
+          Content-Length: '888'
+          Content-Type: application/json
+          ParameterSetName: '--resource-group --resource-name --name --type --description'
+          User-Agent: python/3.7.9 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        statusCode: 201
+        responseExpected: >-
+          {"properties":{"privateEndpoint":null,"groupIds":null,"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!","actionsRequired":"None"},"provisioningState":"Updating"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4","name":"cli000005.d98749a1-4978-4185-a95d-bfce223633d4","type":"Microsoft.EventGrid/domains/privateEndpointConnections"}
+      - step: RawStep_3261
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4?api-version=2020-04-01-preview
+        requestBody: >-
+          {"properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000002/providers/Microsoft.Network/privateEndpoints/cli000005"},"groupIds":["domain"],"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Succeeded"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4","name":"cli000005.d98749a1-4978-4185-a95d-bfce223633d4","type":"Microsoft.EventGrid/domains/privateEndpointConnections"}
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection reject
+          Connection: keep-alive
+          Content-Length: '888'
+          Content-Type: application/json
+          ParameterSetName: '--resource-group --resource-name --name --type --description'
+          User-Agent: python/3.7.9 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        statusCode: 201
+        responseExpected: >-
+          {"properties":{"privateEndpoint":null,"groupIds":null,"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!","actionsRequired":"None"},"provisioningState":"Updating"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4","name":"cli000005.d98749a1-4978-4185-a95d-bfce223633d4","type":"Microsoft.EventGrid/domains/privateEndpointConnections"}
+      - step: RawStep_3262
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007/privateEndpointConnections/cli000005.d98749a1-4978-4185-a95d-bfce223633d4?api-version=2020-04-01-preview
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection delete
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '--resource-group --resource-name --name --type -y'
+          User-Agent: python/3.7.9 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        statusCode: 202
+      - step: PrivateEndpoints_Delete_3263
+        exampleFile: ../examples/PrivateEndpoints_Delete_30_Generated.json
+        operationId: PrivateEndpoints_Delete
+      - step: Subnets_Delete_3264
+        exampleFile: ../examples/Subnets_Delete_2532_Generated.json
+        operationId: Subnets_Delete
+      - step: VirtualNetworks_Delete_3265
+        exampleFile: ../examples/VirtualNetworks_Delete_2466_Generated.json
+        operationId: VirtualNetworks_Delete
+      - step: RawStep_3266
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_pec000001/providers/Microsoft.EventGrid/domains/cli000007?api-version=2020-10-15-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid domain delete
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '--name --resource-group'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+          accept-language: en-US
+        statusCode: 202
+      - step: RawStep_3267
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.EventGrid/locations/centraluseuap/operationsStatus/E69926FD-998E-43F9-94E0-A6727C7ED339?api-version=2020-10-15-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid domain delete
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+        responseExpected: >-
+          {"id":"https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.EventGrid/locations/centraluseuap/operationsStatus/E69926FD-998E-43F9-94E0-A6727C7ED339?api-version=2020-10-15-preview","name":"e69926fd-998e-43f9-94e0-a6727c7ed339","status":"Succeeded"}
+    variables:
+      virtualNetworkName: cli000003
+      subnetName: cli000004
+      privateEndpointName: cli000005

@@ -1,0 +1,107 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_disk_access_private_endpoint
+    steps:
+      - step: RawStep_67
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name?api-version=2020-05-01
+        requestBody: '{"location":"centraluseuap"}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: disk-access create
+          Connection: keep-alive
+          Content-Length: '29'
+          Content-Type: application/json
+          ParameterSetName: '-g -l -n'
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-compute/19.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        statusCode: 202
+        responseExpected: >-
+          {"name":"disk_access_name","type":"Microsoft.Compute/diskAccesses","location":"centraluseuap"}
+      - step: RawStep_68
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name/privateLinkResources?api-version=2020-05-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-link-resource list
+          Connection: keep-alive
+          ParameterSetName: '-g -n --type'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        responseExpected: >-
+          {"value":[{"name":"disks","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name/privateLinkResources/disks","type":"Microsoft.Compute/diskAccesses/privateLinkResources","properties":{"groupId":"disks","requiredMembers":["diskAccess_1"],"requiredZoneNames":["privatelink.blob.core.windows.net"]}}]}
+      - step: RawStep_69
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_disk_access_private_endpoint_000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001","name":"test_disk_access_private_endpoint_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T07:19:37Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_private_endpoint_vnet
+        resourceName: virtualNetworks_private_endpoint_vnet
+        exampleFile: >-
+          ../examples/Create_virtualNetworks_private_endpoint_vnet_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_71
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_private_endpoint_subnet
+        resourceName: subnets_private_endpoint_subnet
+        exampleFile: >-
+          ../examples/Create_subnets_appgw_private_endpoint_subnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: RawStep_73
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_disk_access_private_endpoint_000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --vnet-name --subnet --private-connection-resource-id
+            --group-ids --connection-name
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001","name":"test_disk_access_private_endpoint_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T07:19:37Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_privateEndpoints_private_endpoint_name
+        resourceName: privateEndpoints_private_endpoint_name
+        exampleFile: >-
+          ../examples/Create_privateEndpoints_private_endpoint_name_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_75
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name?api-version=2020-05-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection list
+          Connection: keep-alive
+          ParameterSetName: '-g -n --type'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        responseExpected: >-
+          {"name":"disk_access_name","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name","type":"Microsoft.Compute/diskAccesses","location":"centraluseuap","properties":{"privateEndpointConnections":[{"name":"disk_access_name.25f47cc2-89f2-4d94-a79c-d5deb048eae1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Compute/diskAccesses/disk_access_name/privateEndpointConnections/disk_access_name.25f47cc2-89f2-4d94-a79c-d5deb048eae1","type":"Microsoft.Compute/diskAccesses/PrivateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_disk_access_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/private_endpoint_name"},"privateLinkServiceConnectionState":{"actionsRequired":"None","description":"Auto-Approved","status":"Approved"}}}],"provisioningState":"Succeeded","timeCreated":"2021-03-04T07:19:44.6039971+00:00"}}
+    variables:
+      virtualNetworkName: private_endpoint_vnet
+      subnetName: private_endpoint_subnet
+      privateEndpointName: private_endpoint_name

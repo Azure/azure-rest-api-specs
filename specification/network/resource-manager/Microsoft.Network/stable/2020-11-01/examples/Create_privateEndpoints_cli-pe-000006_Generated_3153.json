@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "clitest.rg000001",
+    "privateEndpointName": "cli-pe-000006",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000003/subnets/cli-subnet-000004"
+        },
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "cli-pec-000009",
+            "properties": {
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002",
+              "groupIds": [
+                "postgresqlServer"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cli-pe-000006",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006",
+        "etag": "W/\"88927c21-7f68-438a-9d00-6f10f32b9032\"",
+        "type": "Microsoft.Network/privateEndpoints",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "8003235b-58b5-4d11-a796-032a261cd125",
+          "privateLinkServiceConnections": [],
+          "manualPrivateLinkServiceConnections": [
+            {
+              "name": "cli-pec-000009",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006/manualPrivateLinkServiceConnections/cli-pec-000009",
+              "etag": "W/\"88927c21-7f68-438a-9d00-6f10f32b9032\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.DBforPostgreSQL/servers/azuredbclitest000002",
+                "groupIds": [
+                  "postgresqlServer"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "status": "Pending",
+                  "description": "",
+                  "actionsRequired": "None"
+                }
+              },
+              "type": "Microsoft.Network/privateEndpoints/manualPrivateLinkServiceConnections"
+            }
+          ],
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000003/subnets/cli-subnet-000004"
+          },
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/networkInterfaces/cli-pe-000006.nic.c07c9a9b-e189-4c39-be88-2122be8dece7"
+            }
+          ],
+          "customDnsConfigs": []
+        }
+      }
+    }
+  }
+}

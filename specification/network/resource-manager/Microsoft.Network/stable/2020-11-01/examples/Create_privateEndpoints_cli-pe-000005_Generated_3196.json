@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_cosmosdb_pe000001",
+    "privateEndpointName": "cli-pe-000005",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cosmosdb_pe000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000003/subnets/cli-subnet-000004"
+        },
+        "privateLinkServiceConnections": [
+          {
+            "name": "cli-pec-000006",
+            "properties": {
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cosmosdb_pe000001/providers/Microsoft.DocumentDB/databaseAccounts/cli-test-cosmosdb-pe-000002",
+              "groupIds": [
+                "Sql"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cli-pe-000005",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cosmosdb_pe000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005",
+        "etag": "W/\"f2e62f56-8414-4632-9245-0768359f5ec4\"",
+        "type": "Microsoft.Network/privateEndpoints",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "ce406735-198e-4be9-965b-2380d2bf3daa",
+          "privateLinkServiceConnections": [
+            {
+              "name": "cli-pec-000006",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cosmosdb_pe000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005/privateLinkServiceConnections/cli-pec-000006",
+              "etag": "W/\"f2e62f56-8414-4632-9245-0768359f5ec4\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cosmosdb_pe000001/providers/Microsoft.DocumentDB/databaseAccounts/cli-test-cosmosdb-pe-000002",
+                "groupIds": [
+                  "Sql"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "",
+                  "actionsRequired": "None"
+                }
+              },
+              "type": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections"
+            }
+          ],
+          "manualPrivateLinkServiceConnections": [],
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cosmosdb_pe000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000003/subnets/cli-subnet-000004"
+          },
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cosmosdb_pe000001/providers/Microsoft.Network/networkInterfaces/cli-pe-000005.nic.4d3f32c7-050e-411a-a110-f29bd1801eeb"
+            }
+          ],
+          "customDnsConfigs": [
+            {
+              "fqdn": "cli-test-cosmosdb-pe-000002.documents.azure.com",
+              "ipAddresses": [
+                "10.0.0.4"
+              ]
+            },
+            {
+              "fqdn": "cli-test-cosmosdb-pe-000002-westus.documents.azure.com",
+              "ipAddresses": [
+                "10.0.0.5"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

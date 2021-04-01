@@ -1,0 +1,763 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_private_endpoint_connection_search
+    steps:
+      - step: RawStep_3298
+        method: POST
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/validate?api-version=2020-10-01
+        requestBody: "{\"properties\": {\"parameters\": {\"name\": {\"value\": \"cli-test-azs-000002\"}, \"location\": {\"value\": \"eastus\"}}, \"mode\": \"Incremental\", template:{\r\n    \"$schema\": \"http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#\",\r\n    \"contentVersion\": \"1.0.0.0\",\r\n    \"parameters\": {\r\n        \"name\": {\r\n            \"type\": \"string\"\r\n        },\r\n        \"location\": {\r\n            \"type\": \"string\"\r\n        }\r\n    },\r\n    \"resources\": [\r\n        {\r\n            \"apiVersion\": \"2020-08-01\",\r\n            \"name\": \"[parameters('name')]\",\r\n            \"location\": \"[parameters('location')]\",\r\n            \"type\": \"Microsoft.Search/searchServices\",\r\n            \"properties\": {\r\n                \"replicaCount\": 1,\r\n                \"partitionCount\": 1,\r\n                \"publicNetworkAccess\": \"disabled\"\r\n            },\r\n            \"sku\": {\r\n                \"name\": \"basic\"\r\n            }\r\n        }\r\n    ]\r\n}}}"
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          Content-Length: '928'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/cli-test-azs-plr-000003","name":"cli-test-azs-plr-000003","type":"Microsoft.Resources/deployments","properties":{"templateHash":"589883213037629613","parameters":{"name":{"type":"String","value":"cli-test-azs-000002"},"location":{"type":"String","value":"eastus"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-25T17:32:40.0220267Z","duration":"PT0S","correlationId":"84dddf0b-6f85-4c93-91d2-ecf44b3dbdd7","providers":[{"namespace":"Microsoft.Search","resourceTypes":[{"resourceType":"searchServices","locations":["eastus"]}]}],"dependencies":[],"validatedResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002"}]}}
+      - step: RawStep_3299
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: "{\"properties\": {\"parameters\": {\"name\": {\"value\": \"cli-test-azs-000002\"}, \"location\": {\"value\": \"eastus\"}}, \"mode\": \"Incremental\", template:{\r\n    \"$schema\": \"http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#\",\r\n    \"contentVersion\": \"1.0.0.0\",\r\n    \"parameters\": {\r\n        \"name\": {\r\n            \"type\": \"string\"\r\n        },\r\n        \"location\": {\r\n            \"type\": \"string\"\r\n        }\r\n    },\r\n    \"resources\": [\r\n        {\r\n            \"apiVersion\": \"2020-08-01\",\r\n            \"name\": \"[parameters('name')]\",\r\n            \"location\": \"[parameters('location')]\",\r\n            \"type\": \"Microsoft.Search/searchServices\",\r\n            \"properties\": {\r\n                \"replicaCount\": 1,\r\n                \"partitionCount\": 1,\r\n                \"publicNetworkAccess\": \"disabled\"\r\n            },\r\n            \"sku\": {\r\n                \"name\": \"basic\"\r\n            }\r\n        }\r\n    ]\r\n}}}"
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          Content-Length: '928'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/cli-test-azs-plr-000003","name":"cli-test-azs-plr-000003","type":"Microsoft.Resources/deployments","properties":{"templateHash":"589883213037629613","parameters":{"name":{"type":"String","value":"cli-test-azs-000002"},"location":{"type":"String","value":"eastus"}},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-25T17:32:42.9111988Z","duration":"PT1.4550618S","correlationId":"53d29872-3389-4195-b05a-d2409f9ab013","providers":[{"namespace":"Microsoft.Search","resourceTypes":[{"resourceType":"searchServices","locations":["eastus"]}]}],"dependencies":[]}}
+      - step: RawStep_3300
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3301
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3302
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3303
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3304
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3305
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3306
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3307
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3308
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3309
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3310
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3311
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3312
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3313
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3314
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3315
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3316
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3317
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3318
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3319
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3320
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3321
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3322
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3323
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3324
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3325
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3326
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3327
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3328
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3329
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3330
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_3331
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585849133240214768?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_3332
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '--name -g --template-file --parameters --parameters'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Resources/deployments/cli-test-azs-plr-000003","name":"cli-test-azs-plr-000003","type":"Microsoft.Resources/deployments","properties":{"templateHash":"589883213037629613","parameters":{"name":{"type":"String","value":"cli-test-azs-000002"},"location":{"type":"String","value":"eastus"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-25T17:48:35.2542006Z","duration":"PT15M53.7980636S","correlationId":"53d29872-3389-4195-b05a-d2409f9ab013","providers":[{"namespace":"Microsoft.Search","resourceTypes":[{"resourceType":"searchServices","locations":["eastus"]}]}],"dependencies":[],"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002"}]}}
+      - step: RawStep_3333
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateLinkResources?api-version=2020-08-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-link-resource list
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --type'
+          User-Agent: python/3.8.6 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateLinkResources/searchService","name":"searchService","type":"Microsoft.Search/searchServices/privateLinkResources","properties":{"groupId":"searchService","requiredMembers":["searchService"],"requiredZoneNames":["privatelink.search.windows.net"],"shareablePrivateLinkResourceTypes":[{"name":"blob","properties":{"type":"Microsoft.Storage/storageAccounts","groupId":"blob","description":"Azure
+          Cognitive Search indexers can connect to blobs in Azure Storage for
+          reading data (data source), for writing intermediate results of
+          indexer execution (annotation cache, preview) or for storing any
+          knowledge store projections
+          (preview)"}},{"name":"table","properties":{"type":"Microsoft.Storage/storageAccounts","groupId":"table","description":"Azure
+          Cognitive Search indexers can connect to tables in Azure Storage for
+          reading data (data source), for writing book-keeping information about
+          intermediate results of indexer execution (annotation cache, preview)
+          or for storing any knowledge store projections
+          (preview)"}},{"name":"Sql","properties":{"type":"Microsoft.DocumentDB/databaseAccounts","groupId":"Sql","description":"Azure
+          Cognitive Search indexers can connect to CosmosDB using the SQL head
+          for reading data (data
+          source)."}},{"name":"plr","properties":{"type":"Microsoft.Sql/servers","groupId":"sqlServer","description":"Azure
+          Cognitive Search indexers can connect to AzureSQL databases in a SQL
+          server for reading data (data
+          source)."}},{"name":"vault","properties":{"type":"Microsoft.KeyVault/vaults","groupId":"vault","description":"Azure
+          Cognitive Search can access keys in Azure Key Vault to encrypt search
+          index and synonym map data"}}]}}]}
+      - step: RawStep_3334
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-n -g --subnet-name'
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001","name":"test_search_service_private_endpoint_000001","type":"Microsoft.Resources/resourceGroups","location":"eastus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-25T17:32:34Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_cli-vnet-000004
+        resourceName: virtualNetworks_cli-vnet-000004
+        exampleFile: ../examples/Create_virtualNetworks_cli-vnet-000004_Generated_3336.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_3337
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_cli-subnet-000005
+        resourceName: subnets_cli-subnet-000005
+        exampleFile: >-
+          ../examples/Create_subnets_appgw_private_endpoint_subnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: RawStep_3339
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_search_service_private_endpoint_000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --vnet-name --subnet --connection-name
+            --private-connection-resource-id --group-id --manual-request
+          User-Agent: >-
+            python/3.8.6 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.21.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001","name":"test_search_service_private_endpoint_000001","type":"Microsoft.Resources/resourceGroups","location":"eastus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-25T17:32:34Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_privateEndpoints_cli-pe-000006
+        resourceName: privateEndpoints_cli-pe-000006
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000006_Generated_3341.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_3342
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections?api-version=2020-08-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection list
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --type'
+          User-Agent: python/3.8.6 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","name":"cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","type":"Microsoft.Search/searchServices/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":null,"actionsRequired":"None"}}}],"nextLink":null}
+      - step: RawStep_3343
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11?api-version=2020-08-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection show
+          Connection: keep-alive
+          ParameterSetName: '--id'
+          User-Agent: python/3.8.6 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","name":"cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","type":"Microsoft.Search/searchServices/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":null,"actionsRequired":"None"}}}
+      - step: RawStep_3344
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11?api-version=2020-08-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection show
+          Connection: keep-alive
+          ParameterSetName: '--resource-name --name --resource-group --type'
+          User-Agent: python/3.8.6 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","name":"cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","type":"Microsoft.Search/searchServices/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":null,"actionsRequired":"None"}}}
+      - step: RawStep_3345
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11?api-version=2020-08-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection approve
+          Connection: keep-alive
+          ParameterSetName: '--resource-name --resource-group --name --type --description'
+          User-Agent: python/3.8.6 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","name":"cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","type":"Microsoft.Search/searchServices/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Pending","description":null,"actionsRequired":"None"}}}
+      - step: RawStep_3346
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11?api-version=2020-08-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","name":"cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","type":"Microsoft.Search/searchServices/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Approved.","actionsRequired":"None"}}}
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection approve
+          Connection: keep-alive
+          Content-Length: '826'
+          Content-Type: application/json
+          ParameterSetName: '--resource-name --resource-group --name --type --description'
+          User-Agent: python/3.8.6 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","name":"cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","type":"Microsoft.Search/searchServices/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Approved.","actionsRequired":"None"}}}
+      - step: RawStep_3347
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11?api-version=2020-08-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","name":"cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","type":"Microsoft.Search/searchServices/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"Rejected.","actionsRequired":"None"}}}
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection reject
+          Connection: keep-alive
+          Content-Length: '826'
+          Content-Type: application/json
+          ParameterSetName: '--id --description'
+          User-Agent: python/3.8.6 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","name":"cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","type":"Microsoft.Search/searchServices/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"Rejected.","actionsRequired":"None"}}}
+      - step: RawStep_3348
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11?api-version=2020-08-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","name":"cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","type":"Microsoft.Search/searchServices/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Approved.","actionsRequired":"None"}}}
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection approve
+          Connection: keep-alive
+          Content-Length: '826'
+          Content-Type: application/json
+          ParameterSetName: '--resource-name --resource-group --name --type --description'
+          User-Agent: python/3.8.6 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        statusCode: 400
+        responseExpected: >-
+          {"error":{"code":"OperationNotAllowed","message":"Could not update
+          Private Endpoint connection status from 'Rejected' to 'Approved':
+          cli-pe-000006. RequestId:
+          442189d7-611c-44e2-a156-e963d542b7d3","target":null,"details":null}}
+      - step: RawStep_3349
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections?api-version=2020-08-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection list
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --type'
+          User-Agent: python/3.8.6 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","name":"cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","type":"Microsoft.Search/searchServices/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"Rejected.","actionsRequired":"None"}}}],"nextLink":null}
+      - step: RawStep_3350
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11?api-version=2020-08-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection delete
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '--id -y'
+          User-Agent: python/3.8.6 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Search/searchServices/cli-test-azs-000002/privateEndpointConnections/cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","name":"cli-pe-000006.bfcc824f-3a7e-4c20-b357-b1fc30e29b11","type":"Microsoft.Search/searchServices/privateEndpointConnections","properties":{"privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_search_service_private_endpoint_000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000006"},"privateLinkServiceConnectionState":{"status":"Disconnected","description":"Remove
+          request from customer.","actionsRequired":"None"}}}
+    variables:
+      virtualNetworkName: cli-vnet-000004
+      subnetName: cli-subnet-000005
+      privateEndpointName: cli-pe-000006

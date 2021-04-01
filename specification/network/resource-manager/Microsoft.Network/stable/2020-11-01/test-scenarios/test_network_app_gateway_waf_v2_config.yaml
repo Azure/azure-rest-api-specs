@@ -1,0 +1,113 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_app_gateway_waf_v2_config
+    steps:
+      - step: RawStep_1244
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_app_gateway_waf_v2_config000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_v2_config000001","name":"cli_test_app_gateway_waf_v2_config000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:58:01Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pip1
+        resourceName: publicIPAddresses_pip1
+        exampleFile: ../examples/Create_publicIPAddresses_pip1_Generated_1246.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_1247
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_app_gateway_waf_v2_config000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet --vnet-name --public-ip-address --sku --no-wait'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_v2_config000001","name":"cli_test_app_gateway_waf_v2_config000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:58:01Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1248
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_app_gateway_waf_v2_config000001%27%20and%20name%20eq%20%27vnet1%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FvirtualNetworks%27&api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet --vnet-name --public-ip-address --sku --no-wait'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: '{"value":[]}'
+      - step: RawStep_1249
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_app_gateway_waf_v2_config000001%27%20and%20name%20eq%20%27pip1%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FpublicIPAddresses%27&api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet --vnet-name --public-ip-address --sku --no-wait'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_v2_config000001/providers/Microsoft.Network/publicIPAddresses/pip1","name":"pip1","type":"Microsoft.Network/publicIPAddresses","sku":{"name":"Standard","tier":"Regional"},"location":"westus"}]}
+      - step: RawStep_1250
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_app_gateway_waf_v2_config000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{"appGwID":"[resourceId('Microsoft.Network/applicationGateways',
+          'ag1')]"},"resources":[{"name":"vnet1","type":"Microsoft.Network/virtualNetworks","location":"westus","apiVersion":"2015-06-15","dependsOn":[],"tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"subnets":[{"name":"subnet1","properties":{"addressPrefix":"10.0.0.0/24"}}]}},{"type":"Microsoft.Network/applicationGateways","name":"ag1","location":"westus","tags":{},"apiVersion":"2020-11-01","dependsOn":["Microsoft.Network/virtualNetworks/vnet1"],"properties":{"backendAddressPools":[{"name":"appGatewayBackendPool"}],"backendHttpSettingsCollection":[{"name":"appGatewayBackendHttpSettings","properties":{"Port":80,"Protocol":"Http","CookieBasedAffinity":"disabled","connectionDraining":{"enabled":false,"drainTimeoutInSec":1}}}],"frontendIPConfigurations":[{"name":"appGatewayFrontendIP","properties":{"publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_v2_config000001/providers/Microsoft.Network/publicIPAddresses/pip1"}}}],"frontendPorts":[{"name":"appGatewayFrontendPort","properties":{"Port":80}}],"gatewayIPConfigurations":[{"name":"appGatewayFrontendIP","properties":{"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_v2_config000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"}}}],"httpListeners":[{"name":"appGatewayHttpListener","properties":{"FrontendIpConfiguration":{"Id":"[concat(variables('appGwID'),
+          '/frontendIPConfigurations/appGatewayFrontendIP')]"},"FrontendPort":{"Id":"[concat(variables('appGwID'),
+          '/frontendPorts/appGatewayFrontendPort')]"},"Protocol":"http","SslCertificate":null}}],"sku":{"name":"WAF_v2","tier":"WAF_v2","capacity":2},"requestRoutingRules":[{"Name":"rule1","properties":{"RuleType":"Basic","httpListener":{"id":"[concat(variables('appGwID'),
+          '/httpListeners/appGatewayHttpListener')]"},"backendAddressPool":{"id":"[concat(variables('appGwID'),
+          '/backendAddressPools/appGatewayBackendPool')]"},"backendHttpSettings":{"id":"[concat(variables('appGwID'),
+          '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"}}}],"privateLinkConfigurations":[]},"zones":null}],"outputs":{"applicationGateway":{"type":"object","value":"[reference('ag1')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          Content-Length: '2743'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n --subnet --vnet-name --public-ip-address --sku --no-wait'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_v2_config000001/providers/Microsoft.Resources/deployments/ag_deploy_7aumTNeZ0xo6HRUyYCm63lPPHwOskdKd","name":"ag_deploy_7aumTNeZ0xo6HRUyYCm63lPPHwOskdKd","type":"Microsoft.Resources/deployments","properties":{"templateHash":"684277778392141342","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-04T05:58:15.9638997Z","duration":"PT2.0666484S","correlationId":"ea8d543f-bcf8-4e9b-a302-4f6dc298b254","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["westus"]},{"resourceType":"applicationGateways","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_v2_config000001/providers/Microsoft.Network/virtualNetworks/vnet1","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"vnet1"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_app_gateway_waf_v2_config000001/providers/Microsoft.Network/applicationGateways/ag1","resourceType":"Microsoft.Network/applicationGateways","resourceName":"ag1"}]}}
+      - step: ApplicationGateways_Get_1251
+        exampleFile: ../examples/ApplicationGateways_Get_1251_Generated.json
+        operationId: ApplicationGateways_Get
+      - step: Create_applicationGateways_ag1
+        resourceName: applicationGateways_ag1
+        exampleFile: ../examples/Create_applicationGateways_ag1_Generated_1253.json
+        operationId: ApplicationGateways_CreateOrUpdate
+    variables:
+      publicIpAddressName: pip1
+      applicationGatewayName: ag1

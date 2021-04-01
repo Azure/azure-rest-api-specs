@@ -1,0 +1,10 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_zoned_public_ip
+    steps:
+      - step: Create_publicIPAddresses_pubip
+        resourceName: publicIPAddresses_pubip
+        exampleFile: ../examples/Create_publicIPAddresses_pubip_Generated.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+    variables:
+      publicIpAddressName: pubip

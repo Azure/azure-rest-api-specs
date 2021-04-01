@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "fanqiu_cli_test_network_private_endpoints000001",
+    "virtualNetworkName": "cli-vnet-000003",
+    "parameters": {
+      "location": "CentralUSEuap",
+      "tags": {},
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "dhcpOptions": {},
+        "subnets": [
+          {
+            "name": "cli-subnet-000004",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cli-vnet-000003",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000003",
+        "etag": "W/\"6d4d9b2c-bcf2-46ca-b3e4-774d999538c8\"",
+        "type": "Microsoft.Network/virtualNetworks",
+        "location": "centraluseuap",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "085983b5-eb20-426a-a85a-24e3fb660427",
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/16"
+            ]
+          },
+          "dhcpOptions": {
+            "dnsServers": []
+          },
+          "subnets": [
+            {
+              "name": "cli-subnet-000004",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000003/subnets/cli-subnet-000004",
+              "etag": "W/\"6d4d9b2c-bcf2-46ca-b3e4-774d999538c8\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "10.0.0.0/24",
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Enabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+              },
+              "type": "Microsoft.Network/virtualNetworks/subnets"
+            }
+          ],
+          "virtualNetworkPeerings": [],
+          "enableDdosProtection": false
+        }
+      }
+    }
+  }
+}

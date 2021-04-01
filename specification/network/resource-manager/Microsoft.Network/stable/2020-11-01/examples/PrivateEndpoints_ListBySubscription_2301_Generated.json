@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "pe1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateEndpoints/pe1",
+            "etag": "W/\"ae44f25f-53fe-4c39-8eb3-955b37d899ae\"",
+            "type": "Microsoft.Network/privateEndpoints",
+            "location": "centralus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceGuid": "de778ee9-f688-4a08-9f3a-5bd6dbbffa0f",
+              "privateLinkServiceConnections": [
+                {
+                  "name": "tttt",
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateEndpoints/pe1/privateLinkServiceConnections/tttt",
+                  "etag": "W/\"ae44f25f-53fe-4c39-8eb3-955b37d899ae\"",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateLinkServices/lks1",
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "",
+                      "actionsRequired": "None"
+                    }
+                  },
+                  "type": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections"
+                }
+              ],
+              "manualPrivateLinkServiceConnections": [],
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2"
+              },
+              "networkInterfaces": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/networkInterfaces/pe1.nic.19e0e385-33cc-478d-ba98-997a576c106c"
+                }
+              ],
+              "customDnsConfigs": []
+            }
+          },
+          {
+            "name": "bim-pe3",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/bim-rg/providers/Microsoft.Network/privateEndpoints/bim-pe3",
+            "etag": "W/\"24338562-390d-4f40-93b7-b18d53c1e9a5\"",
+            "type": "Microsoft.Network/privateEndpoints",
+            "location": "centraluseuap",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Failed",
+              "resourceGuid": "3bb37f83-e3af-4699-bd18-da11114493c2",
+              "privateLinkServiceConnections": [
+                {
+                  "name": "bim-pe3",
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/bim-rg/providers/Microsoft.Network/privateEndpoints/bim-pe3/privateLinkServiceConnections/bim-pe3",
+                  "etag": "W/\"24338562-390d-4f40-93b7-b18d53c1e9a5\"",
+                  "properties": {
+                    "provisioningState": "Failed",
+                    "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/bim-rg/providers/Microsoft.KeyVault/vaults/bim-kv5",
+                    "groupIds": [
+                      "vault"
+                    ],
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "",
+                      "actionsRequired": "None"
+                    }
+                  },
+                  "type": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections"
+                }
+              ],
+              "manualPrivateLinkServiceConnections": [],
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/bim-rg/providers/Microsoft.Network/virtualNetworks/bim-vnet3/subnets/default"
+              },
+              "networkInterfaces": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/bim-rg/providers/Microsoft.Network/networkInterfaces/bim-pe3.nic.405cb318-6279-4d72-8c8c-76914c9f5f89"
+                }
+              ],
+              "customDnsConfigs": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

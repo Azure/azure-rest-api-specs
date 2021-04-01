@@ -1,0 +1,146 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_active_active_cross_premise_connection000001",
+    "virtualNetworkGatewayName": "gw1",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "foo": "doo"
+      },
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "vnetGatewayConfig0",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet"
+              },
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/publicIPAddresses/gwip1"
+              }
+            }
+          },
+          {
+            "name": "vnetGatewayConfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet"
+              },
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/publicIPAddresses/gwip2"
+              }
+            }
+          }
+        ],
+        "gatewayType": "Vpn",
+        "vpnType": "RouteBased",
+        "enableBgp": true,
+        "activeActive": true,
+        "sku": {
+          "name": "HighPerformance",
+          "tier": "HighPerformance"
+        },
+        "bgpSettings": {
+          "asn": 65010
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "gw1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1",
+        "etag": "W/\"31e3dd8f-06df-476c-a797-2de03fdb9032\"",
+        "type": "Microsoft.Network/virtualNetworkGateways",
+        "location": "westus",
+        "tags": {
+          "foo": "doo"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "8ddd6d3f-d708-4082-83bf-271f4065cb28",
+          "packetCaptureDiagnosticState": "None",
+          "enablePrivateIpAddress": false,
+          "ipConfigurations": [
+            {
+              "name": "vnetGatewayConfig0",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1/ipConfigurations/vnetGatewayConfig0",
+              "etag": "W/\"31e3dd8f-06df-476c-a797-2de03fdb9032\"",
+              "type": "Microsoft.Network/virtualNetworkGateways/ipConfigurations",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/publicIPAddresses/gwip1"
+                },
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet"
+                }
+              }
+            },
+            {
+              "name": "vnetGatewayConfig1",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1/ipConfigurations/vnetGatewayConfig1",
+              "etag": "W/\"31e3dd8f-06df-476c-a797-2de03fdb9032\"",
+              "type": "Microsoft.Network/virtualNetworkGateways/ipConfigurations",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/publicIPAddresses/gwip2"
+                },
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet"
+                }
+              }
+            }
+          ],
+          "natRules": [],
+          "enableBgpRouteTranslationForNat": false,
+          "sku": {
+            "name": "HighPerformance",
+            "tier": "HighPerformance",
+            "capacity": 2
+          },
+          "gatewayType": "Vpn",
+          "vpnType": "RouteBased",
+          "enableBgp": true,
+          "activeActive": true,
+          "bgpSettings": {
+            "asn": 65010,
+            "bgpPeeringAddress": "10.12.255.4,10.12.255.5",
+            "peerWeight": 0,
+            "bgpPeeringAddresses": [
+              {
+                "ipconfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1/ipConfigurations/vnetGatewayConfig0",
+                "defaultBgpIpAddresses": [
+                  "10.12.255.4"
+                ],
+                "customBgpIpAddresses": [],
+                "tunnelIpAddresses": [
+                  "104.42.170.9"
+                ]
+              },
+              {
+                "ipconfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1/ipConfigurations/vnetGatewayConfig1",
+                "defaultBgpIpAddresses": [
+                  "10.12.255.5"
+                ],
+                "customBgpIpAddresses": [],
+                "tunnelIpAddresses": [
+                  "104.42.170.51"
+                ]
+              }
+            ]
+          },
+          "vpnGatewayGeneration": "Generation1"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "clitest.rg000001",
+    "privateEndpointName": "priv_endpoint000005",
+    "parameters": {
+      "location": "centraluseuap",
+      "properties": {
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/testvnet000003/subnets/testsubnet000004"
+        },
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "priv_endpointconn000006",
+            "properties": {
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002",
+              "groupIds": [
+                "registry"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "priv_endpoint000005",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000005",
+        "etag": "W/\"9d546cfc-7d20-43f7-84fb-307200d264f1\"",
+        "type": "Microsoft.Network/privateEndpoints",
+        "location": "centraluseuap",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "36dbc561-9516-419a-b03c-517208fc6530",
+          "privateLinkServiceConnections": [],
+          "manualPrivateLinkServiceConnections": [
+            {
+              "name": "priv_endpointconn000006",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000005/manualPrivateLinkServiceConnections/priv_endpointconn000006",
+              "etag": "W/\"9d546cfc-7d20-43f7-84fb-307200d264f1\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.ContainerRegistry/registries/testreg000002",
+                "groupIds": [
+                  "registry"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "status": "Pending",
+                  "description": "",
+                  "actionsRequired": "None"
+                }
+              },
+              "type": "Microsoft.Network/privateEndpoints/manualPrivateLinkServiceConnections"
+            }
+          ],
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/testvnet000003/subnets/testsubnet000004"
+          },
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/networkInterfaces/priv_endpoint000005.nic.17d328bc-044b-404f-af6d-367770b7e514"
+            }
+          ],
+          "customDnsConfigs": []
+        }
+      }
+    }
+  }
+}

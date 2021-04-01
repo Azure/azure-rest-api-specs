@@ -1,0 +1,970 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_active_active_cross_premise_connection
+    steps:
+      - step: RawStep_702
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --address-prefix --subnet-name --subnet-prefix'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:26:47Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_704
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:26:47Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_gwip1
+        resourceName: publicIPAddresses_gwip1
+        exampleFile: ../examples/Create_publicIPAddresses_gwip1_Generated.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_706
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:26:47Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_gwip2
+        resourceName: publicIPAddresses_gwip2
+        exampleFile: ../examples/Create_publicIPAddresses_gwip2_Generated.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+        variables:
+          publicIpAddressName: gwip2
+      - step: RawStep_708
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet --sku --asn --public-ip-addresses --tags'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:26:47Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gw1
+        resourceName: virtualNetworkGateways_gw1
+        exampleFile: ../examples/Create_virtualNetworkGateways_gw1_Generated.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+      - step: Update_virtualNetworkGateways_gw1_711
+        resourceName: virtualNetworkGateways_gw1
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /tags/foo
+            value: boo
+          - replace: /properties/provisioningState
+            value: Updating
+          - remove: /properties/ipConfigurations/1
+          - replace: /properties/ipConfigurations/0/properties/provisioningState
+            value: Updating
+          - replace: /properties/activeActive
+            value: false
+          - remove: /properties/bgpSettings/bgpPeeringAddresses/1
+          - add: /properties/vpnClientConfiguration
+            value:
+              vpnClientProtocols:
+                - OpenVPN
+                - IkeV2
+              vpnAuthenticationTypes: []
+              vpnClientRootCertificates: []
+              vpnClientRevokedCertificates: []
+              radiusServers: []
+              vpnClientIpsecPolicies: []
+      - step: Create_localNetworkGateways_lgw2
+        resourceName: localNetworkGateways_lgw2
+        exampleFile: ../examples/Create_localNetworkGateways_lgw2_Generated.json
+        operationId: LocalNetworkGateways_CreateOrUpdate
+      - step: RawStep_713
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:26:47Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_714
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{"sharedKey":{"type":"securestring","metadata":{"description":"Secure
+          sharedKey"}}},"variables":{},"resources":[{"type":"Microsoft.Network/connections","name":"Vnet1toSite5_1","location":"westus","tags":{},"apiVersion":"2015-06-15","dependsOn":[],"properties":{"virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"},"enableBgp":true,"connectionType":"IPSec","routingWeight":10,"usePolicyBasedTrafficSelectors":false,"expressRouteGatewayBypass":null,"localNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/localNetworkGateways/lgw2"},"sharedKey":"[parameters('sharedKey')]"}}],"outputs":{"resource":{"type":"object","value":"[reference('Vnet1toSite5_1')]"}}},"parameters":{"sharedKey":{"value":"abc123"}},"mode":"Incremental"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          Content-Length: '1265'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_7pK3sqVtVDSgf7jsx39ykNgKJDxqKYQi","name":"vpn_connection_deploy_7pK3sqVtVDSgf7jsx39ykNgKJDxqKYQi","type":"Microsoft.Resources/deployments","properties":{"templateHash":"11174998631416344359","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-04T06:49:19.5986605Z","duration":"PT2.1388949S","correlationId":"f17826fa-8391-4092-91f1-eba800aa4ef5","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[]}}
+      - step: RawStep_715
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_716
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_717
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_718
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_719
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_720
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_721
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_722
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_723
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_724
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_725
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_726
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_727
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_728
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_729
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_730
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_731
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_732
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_733
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_734
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_735
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_736
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_737
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_738
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_739
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_740
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_741
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_742
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_743
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_744
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_745
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_746
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_747
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_748
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_749
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_750
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_751
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_752
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_753
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_754
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_755
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_756
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_757
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_758
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_759
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_760
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867663280178500?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_761
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_7pK3sqVtVDSgf7jsx39ykNgKJDxqKYQi","name":"vpn_connection_deploy_7pK3sqVtVDSgf7jsx39ykNgKJDxqKYQi","type":"Microsoft.Resources/deployments","properties":{"templateHash":"11174998631416344359","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-04T07:12:45.0677363Z","duration":"PT23M27.6079707S","correlationId":"f17826fa-8391-4092-91f1-eba800aa4ef5","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[],"outputs":{"resource":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"540646dd-ff9f-4035-b82c-6a19219c32f5","virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"},"localNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/localNetworkGateways/lgw2"},"connectionType":"IPsec","connectionProtocol":"IKEv2","routingWeight":10,"sharedKey":"abc123","enableBgp":true,"useLocalAzureIpAddress":false,"trafficSelectorPolicies":[],"connectionStatus":"Unknown","ingressBytesTransferred":0,"egressBytesTransferred":0,"dpdTimeoutSeconds":0,"connectionMode":"Default"}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/connections/Vnet1toSite5_1"}]}}
+      - step: VirtualNetworkGatewayConnections_ResetSharedKey_762
+        exampleFile: >-
+          ../examples/VirtualNetworkGatewayConnections_ResetSharedKey_762_Generated.json
+        operationId: VirtualNetworkGatewayConnections_ResetSharedKey
+      - step: Create_sharedkey_Vnet1toSite5_1
+        resourceName: sharedkey_Vnet1toSite5_1
+        exampleFile: ../examples/Create_sharedkey_Vnet1toSite5_1_Generated.json
+        operationId: VirtualNetworkGatewayConnections_SetSharedKey
+      - step: Create_localNetworkGateways_lgw3
+        resourceName: localNetworkGateways_lgw3
+        exampleFile: ../examples/Create_localNetworkGateways_lgw3_Generated.json
+        operationId: LocalNetworkGateways_CreateOrUpdate
+        variables:
+          localNetworkGatewayName: lgw3
+      - step: RawStep_765
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001","name":"cli_test_active_active_cross_premise_connection000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:26:47Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_766
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{"sharedKey":{"type":"securestring","metadata":{"description":"Secure
+          sharedKey"}}},"variables":{},"resources":[{"type":"Microsoft.Network/connections","name":"Vnet1toSite5_2","location":"westus","tags":{},"apiVersion":"2015-06-15","dependsOn":[],"properties":{"virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"},"enableBgp":true,"connectionType":"IPSec","routingWeight":10,"usePolicyBasedTrafficSelectors":false,"expressRouteGatewayBypass":null,"localNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/localNetworkGateways/lgw3"},"sharedKey":"[parameters('sharedKey')]"}}],"outputs":{"resource":{"type":"object","value":"[reference('Vnet1toSite5_2')]"}}},"parameters":{"sharedKey":{"value":"abc123"}},"mode":"Incremental"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          Content-Length: '1265'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_x3yernuYVE86X15JLJysWGwJNxEZplPB","name":"vpn_connection_deploy_x3yernuYVE86X15JLJysWGwJNxEZplPB","type":"Microsoft.Resources/deployments","properties":{"templateHash":"10168345827506864151","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-04T07:14:36.6076371Z","duration":"PT1.9668853S","correlationId":"859e588c-9902-4997-9cb7-63b5020c2004","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[]}}
+      - step: RawStep_767
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867648108368774?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_768
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867648108368774?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_769
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-connection create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-gateway1 --local-gateway2 --shared-key --enable-bgp'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Resources/deployments/vpn_connection_deploy_x3yernuYVE86X15JLJysWGwJNxEZplPB","name":"vpn_connection_deploy_x3yernuYVE86X15JLJysWGwJNxEZplPB","type":"Microsoft.Resources/deployments","properties":{"templateHash":"10168345827506864151","parameters":{"sharedKey":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-04T07:15:22.7384248Z","duration":"PT48.097673S","correlationId":"859e588c-9902-4997-9cb7-63b5020c2004","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"connections","locations":["westus"]}]}],"dependencies":[],"outputs":{"resource":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"14a582b7-a683-4b9c-a88c-57ba5e5f13da","virtualNetworkGateway1":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"},"localNetworkGateway2":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/localNetworkGateways/lgw3"},"connectionType":"IPsec","connectionProtocol":"IKEv2","routingWeight":10,"sharedKey":"abc123","enableBgp":true,"useLocalAzureIpAddress":false,"trafficSelectorPolicies":[],"connectionStatus":"Unknown","ingressBytesTransferred":0,"egressBytesTransferred":0,"dpdTimeoutSeconds":0,"connectionMode":"Default"}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/connections/Vnet1toSite5_2"}]}}
+    variables:
+      virtualNetworkName: vnet1
+      publicIpAddressName: gwip1
+      virtualNetworkGatewayName: gw1
+      localNetworkGatewayName: lgw2
+      virtualNetworkGatewayConnectionName: Vnet1toSite5_1

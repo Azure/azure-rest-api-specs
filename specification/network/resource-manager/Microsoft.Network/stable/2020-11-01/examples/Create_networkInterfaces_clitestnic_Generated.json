@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_lb_address_pool_addresses000001",
+    "networkInterfaceName": "clitestnic",
+    "parameters": {
+      "location": "eastus2",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAddressVersion": "IPv4",
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet/subnets/subnet1"
+              }
+            }
+          }
+        ],
+        "dnsSettings": {
+          "dnsServers": []
+        },
+        "enableIPForwarding": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "clitestnic",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/networkInterfaces/clitestnic",
+        "etag": "W/\"8e641713-33e3-4c0f-b437-42a98615cd2d\"",
+        "location": "eastus2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "f7f19041-4a4e-46e7-9a0b-c8ba869a3824",
+          "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/networkInterfaces/clitestnic/ipConfigurations/ipconfig1",
+              "etag": "W/\"8e641713-33e3-4c0f-b437-42a98615cd2d\"",
+              "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateIPAddress": "10.0.0.4",
+                "privateIPAllocationMethod": "Dynamic",
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet/subnets/subnet1"
+                },
+                "primary": true,
+                "privateIPAddressVersion": "IPv4"
+              }
+            }
+          ],
+          "dnsSettings": {
+            "dnsServers": [],
+            "appliedDnsServers": [],
+            "internalDomainNameSuffix": "2frqc4biezeuzoplvpo3dae3se.cx.internal.cloudapp.net"
+          },
+          "enableAcceleratedNetworking": false,
+          "enableIPForwarding": false,
+          "hostedWorkloads": [],
+          "tapConfigurations": [],
+          "nicType": "Standard"
+        },
+        "type": "Microsoft.Network/networkInterfaces"
+      }
+    }
+  }
+}

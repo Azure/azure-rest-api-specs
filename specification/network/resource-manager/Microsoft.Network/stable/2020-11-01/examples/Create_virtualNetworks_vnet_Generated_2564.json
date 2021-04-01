@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test_network_vnet_gateway_multi_auth1000001",
+    "virtualNetworkName": "vnet",
+    "parameters": {
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "dhcpOptions": {},
+        "subnets": [
+          {
+            "name": "GatewaySubnet",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "vnet",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_vnet_gateway_multi_auth1000001/providers/Microsoft.Network/virtualNetworks/vnet",
+        "etag": "W/\"69088cfc-3e6e-47c0-a226-46f5518d060f\"",
+        "type": "Microsoft.Network/virtualNetworks",
+        "location": "westus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "ee22817a-3227-4cb3-9134-e6e654f95ece",
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/16"
+            ]
+          },
+          "dhcpOptions": {
+            "dnsServers": []
+          },
+          "subnets": [
+            {
+              "name": "GatewaySubnet",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_vnet_gateway_multi_auth1000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/GatewaySubnet",
+              "etag": "W/\"69088cfc-3e6e-47c0-a226-46f5518d060f\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "10.0.0.0/24",
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Enabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+              },
+              "type": "Microsoft.Network/virtualNetworks/subnets"
+            }
+          ],
+          "virtualNetworkPeerings": [],
+          "enableDdosProtection": false
+        }
+      }
+    }
+  }
+}

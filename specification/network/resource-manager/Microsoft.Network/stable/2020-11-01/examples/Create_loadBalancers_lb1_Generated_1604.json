@@ -1,0 +1,163 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_cross_region_lb_rules000001",
+    "loadBalancerName": "lb1",
+    "parameters": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1",
+      "location": "westus",
+      "tags": {},
+      "sku": {
+        "name": "Standard",
+        "tier": "Global"
+      },
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "name": "LoadBalancerFrontEnd",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAddressVersion": "IPv4",
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool",
+            "name": "lb1bepool",
+            "properties": {
+              "loadBalancerBackendAddresses": []
+            }
+          }
+        ],
+        "loadBalancingRules": [
+          {
+            "name": "rule2",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd",
+                "name": "LoadBalancerFrontEnd",
+                "properties": {
+                  "privateIPAllocationMethod": "Dynamic",
+                  "privateIPAddressVersion": "IPv4",
+                  "publicIPAddress": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"
+                  }
+                }
+              },
+              "backendAddressPool": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool",
+                "name": "lb1bepool",
+                "properties": {
+                  "loadBalancerBackendAddresses": []
+                }
+              },
+              "protocol": "Tcp",
+              "loadDistribution": "default",
+              "frontendPort": 60,
+              "backendPort": 60
+            }
+          }
+        ],
+        "probes": [],
+        "inboundNatRules": [],
+        "inboundNatPools": [],
+        "outboundRules": []
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "lb1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1",
+        "etag": "W/\"c0b15b25-6fed-4995-bd3b-d0cdcf91c07e\"",
+        "type": "Microsoft.Network/loadBalancers",
+        "location": "westus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "2a7c5413-1709-4fe4-bcf6-6f0484d792ca",
+          "frontendIPConfigurations": [
+            {
+              "name": "LoadBalancerFrontEnd",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd",
+              "etag": "W/\"c0b15b25-6fed-4995-bd3b-d0cdcf91c07e\"",
+              "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/publicIPAddresses/PublicIPlb1"
+                },
+                "loadBalancingRules": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1/loadBalancingRules/rule2"
+                  }
+                ],
+                "privateIPAddressVersion": "IPv4"
+              }
+            }
+          ],
+          "backendAddressPools": [
+            {
+              "name": "lb1bepool",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool",
+              "etag": "W/\"c0b15b25-6fed-4995-bd3b-d0cdcf91c07e\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "loadBalancerBackendAddresses": [],
+                "loadBalancingRules": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1/loadBalancingRules/rule2"
+                  }
+                ]
+              },
+              "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+            }
+          ],
+          "loadBalancingRules": [
+            {
+              "name": "rule2",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1/loadBalancingRules/rule2",
+              "etag": "W/\"c0b15b25-6fed-4995-bd3b-d0cdcf91c07e\"",
+              "type": "Microsoft.Network/loadBalancers/loadBalancingRules",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "frontendIPConfiguration": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd"
+                },
+                "frontendPort": 60,
+                "backendPort": 60,
+                "enableFloatingIP": false,
+                "idleTimeoutInMinutes": 4,
+                "protocol": "Tcp",
+                "enableDestinationServiceEndpoint": false,
+                "enableTcpReset": false,
+                "allowBackendPortConflict": false,
+                "loadDistribution": "Default",
+                "disableOutboundSnat": false,
+                "backendAddressPool": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_rules000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool"
+                }
+              }
+            }
+          ],
+          "probes": [],
+          "inboundNatRules": [],
+          "outboundRules": [],
+          "inboundNatPools": []
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Global"
+        }
+      }
+    }
+  }
+}

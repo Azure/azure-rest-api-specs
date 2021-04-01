@@ -1,0 +1,144 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_security_partner_provider
+    steps:
+      - step: RawStep_2398
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vwan create
+          Connection: keep-alive
+          ParameterSetName: '-n -g --type'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:43:26Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2399
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan?api-version=2020-05-01
+        requestBody: '{"location":"westus"}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vwan create
+          Connection: keep-alive
+          Content-Length: '22'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --type'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-network/10.2.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"name":"clitestvwan","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan","etag":"W/\"87fb538e-63a6-4e74-8b7a-f9c0e3a770e8\"","type":"Microsoft.Network/virtualWans","location":"westus","properties":{"provisioningState":"Updating","disableVpnEncryption":false,"allowBranchToBranchTraffic":true,"office365LocalBreakoutCategory":"None","type":"Standard"}}
+      - step: RawStep_2400
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualHubs/clitestvhub?api-version=2020-05-01
+        requestBody: >-
+          {"location":"westus","properties":{"virtualWan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan"},"addressPrefix":"10.5.0.0/16","sku":"Standard"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vhub create
+          Connection: keep-alive
+          Content-Length: '309'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n --vwan --address-prefix -l --sku'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-network/10.2.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"name":"clitestvhub","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualHubs/clitestvhub","etag":"W/\"566a6daa-77de-4aa9-8441-e1fa20bfe4cf\"","type":"Microsoft.Network/virtualHubs","location":"westus","properties":{"provisioningState":"Updating","virtualHubRouteTableV2s":[],"addressPrefix":"10.5.0.0/16","virtualRouterAsn":0,"virtualRouterIps":[],"routeTable":{"routes":[]},"virtualWan":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualWans/clitestvwan"},"sku":"Standard","routingState":"None"}}
+      - step: RawStep_2401
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vhub'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:43:26Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2402
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/vpnGateways/cligateway?api-version=2020-05-01
+        requestBody: >-
+          {"location":"westus","properties":{"virtualHub":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualHubs/clitestvhub"},"bgpSettings":{}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vpn-gateway create
+          Connection: keep-alive
+          Content-Length: '277'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n --vhub'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-network/10.2.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"name":"cligateway","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/vpnGateways/cligateway","etag":"W/\"b4d75e79-121d-4c4e-9dc4-b10cd781c871\"","type":"Microsoft.Network/vpnGateways","location":"westus","properties":{"provisioningState":"Updating","connections":[],"virtualHub":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualHubs/clitestvhub"},"bgpSettings":{"asn":65515,"peerWeight":0},"vpnGatewayScaleUnit":1,"packetCaptureDiagnosticState":"None","ipConfigurations":[],"natRules":[],"enableBgpRouteTranslationForNat":false,"isRoutingPreferenceInternet":false}}
+      - step: RawStep_2403
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network security-partner-provider create
+          Connection: keep-alive
+          ParameterSetName: '-n -g --vhub --provider'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:43:26Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_securityPartnerProviders_clisecuritypartnerprovider
+        resourceName: securityPartnerProviders_clisecuritypartnerprovider
+        exampleFile: >-
+          ../examples/Create_securityPartnerProviders_clisecuritypartnerprovider_Generated.json
+        operationId: SecurityPartnerProviders_CreateOrUpdate
+      - step: Update_securityPartnerProviders_clisecuritypartnerprovider_2406
+        resourceName: securityPartnerProviders_clisecuritypartnerprovider
+        operationId: SecurityPartnerProviders_CreateOrUpdate
+        resourceUpdate:
+          - add: /tags
+            value:
+              a: b
+      - step: SecurityPartnerProviders_ListByResourceGroup_2407
+        exampleFile: >-
+          ../examples/SecurityPartnerProviders_ListByResourceGroup_2407_Generated.json
+        operationId: SecurityPartnerProviders_ListByResourceGroup
+      - step: SecurityPartnerProviders_List_2408
+        exampleFile: ../examples/SecurityPartnerProviders_List_2408_Generated.json
+        operationId: SecurityPartnerProviders_List
+      - step: SecurityPartnerProviders_Delete_2409
+        exampleFile: ../examples/SecurityPartnerProviders_Delete_2409_Generated.json
+        operationId: SecurityPartnerProviders_Delete
+    variables:
+      securityPartnerProviderName: clisecuritypartnerprovider

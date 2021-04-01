@@ -1,0 +1,105 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vnet_gateway_multi_auth1
+    steps:
+      - step: RawStep_2562
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_network_vnet_gateway_multi_auth1000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_vnet_gateway_multi_auth1000001","name":"test_network_vnet_gateway_multi_auth1000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-22T02:48:37Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet
+        resourceName: virtualNetworks_vnet
+        exampleFile: ../examples/Create_virtualNetworks_vnet_Generated_2564.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2565
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_network_vnet_gateway_multi_auth1000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_vnet_gateway_multi_auth1000001","name":"test_network_vnet_gateway_multi_auth1000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-22T02:48:37Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pip
+        resourceName: publicIPAddresses_pip
+        exampleFile: ../examples/Create_publicIPAddresses_pip_Generated_2567.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2568
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_network_vnet_gateway_multi_auth1000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet-gateway create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --public-ip-address --vnet --sku --gateway-type --vpn-type
+            --address-prefix --client-protocol
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_vnet_gateway_multi_auth1000001","name":"test_network_vnet_gateway_multi_auth1000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-22T02:48:37Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gw
+        resourceName: virtualNetworkGateways_gw
+        exampleFile: ../examples/Create_virtualNetworkGateways_gw_Generated_2570.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+      - step: Update_virtualNetworkGateways_gw_2572
+        resourceName: virtualNetworkGateways_gw
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/vpnClientConfiguration/vpnAuthenticationTypes/0
+            value: AAD
+          - add: /properties/vpnClientConfiguration/vpnAuthenticationTypes/1
+            value: Certificate
+          - add: /properties/vpnClientConfiguration/vpnAuthenticationTypes/2
+            value: Radius
+          - add: /properties/vpnClientConfiguration/vpnClientRootCertificates/0
+            value:
+              name: root-cert
+              properties:
+                publicCertData: >-
+                  LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURhekNDQWxPZ0F3SUJBZ0lVSi9lY2lya3FMaGZwRm5rU0p1by9ISytTcTNVd0RRWUpLb1pJaHZjTkFRRUwKQlFBd1JURUxNQWtHQTFVRUJoTUNRVlV4RXpBUkJnTlZCQWdNQ2xOdmJXVXRVM1JoZEdVeElUQWZCZ05WQkFvTQpHRWx1ZEdWeWJtVjBJRmRwWkdkcGRITWdVSFI1SUV4MFpEQWVGdzB5TURFeE1Ua3dOak13TlROYUZ3MHlNVEV4Ck1Ua3dOak13TlROYU1FVXhDekFKQmdOVkJBWVRBa0ZWTVJNd0VRWURWUVFJREFwVGIyMWxMVk4wWVhSbE1TRXcKSHdZRFZRUUtEQmhKYm5SbGNtNWxkQ0JYYVdSbmFYUnpJRkIwZVNCTWRHUXdnZ0VpTUEwR0NTcUdTSWIzRFFFQgpBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRRFdHNnFzMmUyeURmaTFRbnpON1NIdnNkeVgxY3R5QXc0a0RNL005OTV4CklrR2JkU2dkS2hiMDlqbFlmWUdvZlFMbnpyNmhBbWU5Uk8wMXk2NldGSFVtZ25aaGhTbEx6ajBJMkZOSmNDUi8KMHhPa0hqOTNLQ1QyQWRWQ0FkTDhXTi9PR0h5UkNHYm1wdkIrcXVJRGlDNE9TUG9qQ2J0NUVXc1pOTnFDTDNkSworYzJzUGNCZjdCQUd5blp0TW5xcVBFQi9rUVBUa2FrSExCUVRuYUsvcUoweEgyVFlFdWhMblJGWjczcjV4V0lvCmNRWEltQUFhTVd6NFR0T0VSU3p0TWdxMkV0aUJsRjR6azBSRjE0MUdsOEVDOXBMVmRkVVRYWXN6cjU0WDcxQjEKVldKYjIxakVqVktSRFVrSnZuelhQRzlGeDg3ckttWVQ1ZFlkcGxYTzFqL3BBZ01CQUFHalV6QlJNQjBHQTFVZApEZ1FXQkJTV1ZzTERsY0s0SkdXWFNxazk2aG43b05zaUVqQWZCZ05WSFNNRUdEQVdnQlNXVnNMRGxjSzRKR1dYClNxazk2aG43b05zaUVqQVBCZ05WSFJNQkFmOEVCVEFEQVFIL01BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQ1QKcU82aXlWQ2I3b1NhaDVGdUQwV2wrZVNqa1dlaVplckxSVWRKZXNIaXFrYmJXSkVPOUNXbW1HS0R4V05NSVhUbwppbjdCczEwZXIrV0swZjcwekRCbDQxREd2L3ZKSFFHUkVDSlBkQ1FzenAwOWxkSlAzV2VveXBPME8zYzZiMUM1CmRuZmw3UTJnY2haVDcvcS93Z2xUMnI0MncydWx3anIwVGdCT2p0QlV1VGhWL2tuS0phZUZqQTdQbmFWWWI0M3YKMmx2YzlaNjBkTk5sVlA3NG52VnhNQmpURUxncVVMeHVub240M1EvZkFvZjRUdTJ2YlVqcTFIRzMrOHFXU29WYwpSUnJyV2JBS1NHMktIR05FVFEvL1RaUmFKaGJPU21Od2hzdk94VmhrY3phblNTcmRXc1dSYTNVakV2QldKSUlmCnlDQU1TY0YwbXlsczl0a1VydWxXCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+                provisioningState: Succeeded
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_vnet_gateway_multi_auth1000001/providers/Microsoft.Network/virtualNetworkGateways/gw/vpnClientRootCertificates/root-cert
+              type: >-
+                Microsoft.Network/virtualNetworkGateways/vpnClientRootCertificates
+          - add: /properties/vpnClientConfiguration/radiusServerAddress
+            value: 30.1.1.15
+          - add: /properties/vpnClientConfiguration/radiusServerSecret
+            value: 111_aaa
+          - add: /properties/vpnClientConfiguration/aadTenant
+            value: >-
+              https://login.microsoftonline.com/0ab2c4f4-81e6-44cc-a0b2-b3a47a1443f4
+          - add: /properties/vpnClientConfiguration/aadAudience
+            value: a21fce82-76af-45e6-8583-a08cb3b956f9
+          - add: /properties/vpnClientConfiguration/aadIssuer
+            value: https://sts.windows.net/0ab2c4f4-81e6-44cc-a0b2-b3a47a1443f4/
+    variables:
+      virtualNetworkName: vnet
+      publicIpAddressName: pip
+      virtualNetworkGatewayName: gw

@@ -1,0 +1,124 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_cross_region_lb_address_pool
+    steps:
+      - step: RawStep_1535
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_cross_region_lb_address_pool000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network cross-region-lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001","name":"cli_test_cross_region_lb_address_pool000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:11:40Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1536
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_cross_region_lb_address_pool000001%27%20and%20name%20eq%20%27None%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FpublicIPAddresses%27&api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network cross-region-lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: '{"value":[]}'
+      - step: RawStep_1537
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{},"resources":[{"apiVersion":"2020-11-01","type":"Microsoft.Network/publicIPAddresses","name":"PublicIPcross_region_lb000002","location":"eastus2","tags":{},"dependsOn":[],"properties":{"publicIPAllocationMethod":"Static"},"sku":{"name":"standard","tier":"Global"}},{"type":"Microsoft.Network/loadBalancers","name":"cross_region_lb000002","location":"eastus2","tags":{},"apiVersion":"2020-11-01","dependsOn":["Microsoft.Network/publicIpAddresses/PublicIPcross_region_lb000002"],"properties":{"backendAddressPools":[{"name":"cross_region_lb000002bepool"}],"frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","properties":{"publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/publicIPAddresses/PublicIPcross_region_lb000002"}}}]},"sku":{"name":"standard","tier":"Global"}}],"outputs":{"loadBalancer":{"type":"object","value":"[reference('cross_region_lb000002')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network cross-region-lb create
+          Connection: keep-alive
+          Content-Length: '1314'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Resources/deployments/lb_deploy_wyQs83XPydoxLiwBdTvzT471sNHFXo8h","name":"lb_deploy_wyQs83XPydoxLiwBdTvzT471sNHFXo8h","type":"Microsoft.Resources/deployments","properties":{"templateHash":"8968388700922272189","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-04T06:11:48.1406838Z","duration":"PT2.5384386S","correlationId":"456ca4b4-23da-4813-bbf4-801b82886a32","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"publicIPAddresses","locations":["eastus2"]},{"resourceType":"loadBalancers","locations":["eastus2"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/publicIPAddresses/PublicIPcross_region_lb000002","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"PublicIPcross_region_lb000002"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000002","resourceType":"Microsoft.Network/loadBalancers","resourceName":"cross_region_lb000002"}]}}
+      - step: RawStep_1538
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867685798753779?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network cross-region-lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_1539
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network cross-region-lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Resources/deployments/lb_deploy_wyQs83XPydoxLiwBdTvzT471sNHFXo8h","name":"lb_deploy_wyQs83XPydoxLiwBdTvzT471sNHFXo8h","type":"Microsoft.Resources/deployments","properties":{"templateHash":"8968388700922272189","parameters":{},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-04T06:12:10.2088645Z","duration":"PT24.6066193S","correlationId":"456ca4b4-23da-4813-bbf4-801b82886a32","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"publicIPAddresses","locations":["eastus2"]},{"resourceType":"loadBalancers","locations":["eastus2"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/publicIPAddresses/PublicIPcross_region_lb000002","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"PublicIPcross_region_lb000002"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000002","resourceType":"Microsoft.Network/loadBalancers","resourceName":"cross_region_lb000002"}],"outputs":{"loadBalancer":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"0739937d-4692-4a73-b01e-37635eb5cf88","frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000002/frontendIPConfigurations/LoadBalancerFrontEnd","etag":"W/\"6b7aa8d9-532e-40b6-ba4d-68e42ed20074\"","type":"Microsoft.Network/loadBalancers/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAllocationMethod":"Dynamic","publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/publicIPAddresses/PublicIPcross_region_lb000002"},"privateIPAddressVersion":"IPv4"}}],"backendAddressPools":[{"name":"cross_region_lb000002bepool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000002/backendAddressPools/cross_region_lb000002bepool","etag":"W/\"6b7aa8d9-532e-40b6-ba4d-68e42ed20074\"","properties":{"provisioningState":"Succeeded","loadBalancerBackendAddresses":[]},"type":"Microsoft.Network/loadBalancers/backendAddressPools"}],"loadBalancingRules":[],"probes":[],"inboundNatRules":[],"outboundRules":[],"inboundNatPools":[]}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/loadBalancers/cross_region_lb000002"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_cross_region_lb_address_pool000001/providers/Microsoft.Network/publicIPAddresses/PublicIPcross_region_lb000002"}]}}
+      - step: Create_backendAddressPools_bap1
+        resourceName: backendAddressPools_bap1
+        exampleFile: ../examples/Create_backendAddressPools_bap1_Generated.json
+        operationId: LoadBalancerBackendAddressPools_CreateOrUpdate
+      - step: Create_backendAddressPools_bap2
+        resourceName: backendAddressPools_bap2
+        exampleFile: ../examples/Create_backendAddressPools_bap1_Generated.json
+        operationId: LoadBalancerBackendAddressPools_CreateOrUpdate
+        variables:
+          backendAddressPoolName: bap2
+      - step: Create_backendAddressPools_bap3
+        resourceName: backendAddressPools_bap3
+        exampleFile: ../examples/Create_backendAddressPools_bap1_Generated.json
+        operationId: LoadBalancerBackendAddressPools_CreateOrUpdate
+        variables:
+          backendAddressPoolName: bap3
+      - step: LoadBalancerBackendAddressPools_List_1543
+        exampleFile: ../examples/LoadBalancerBackendAddressPools_List_1543_Generated.json
+        operationId: LoadBalancerBackendAddressPools_List
+      - step: LoadBalancerBackendAddressPools_Get_1544
+        exampleFile: ../examples/LoadBalancerBackendAddressPools_Get_1544_Generated.json
+        operationId: LoadBalancerBackendAddressPools_Get
+      - step: LoadBalancers_Get_1545
+        exampleFile: ../examples/LoadBalancers_Get_1545_Generated.json
+        operationId: LoadBalancers_Get
+      - step: LoadBalancerBackendAddressPools_Delete_1546
+        exampleFile: ../examples/LoadBalancerBackendAddressPools_Delete_1546_Generated.json
+        operationId: LoadBalancerBackendAddressPools_Delete
+      - step: LoadBalancerBackendAddressPools_List_1547
+        exampleFile: ../examples/LoadBalancerBackendAddressPools_List_1547_Generated.json
+        operationId: LoadBalancerBackendAddressPools_List
+    variables:
+      loadBalancerName: cross_region_lb000002
+      backendAddressPoolName: bap1

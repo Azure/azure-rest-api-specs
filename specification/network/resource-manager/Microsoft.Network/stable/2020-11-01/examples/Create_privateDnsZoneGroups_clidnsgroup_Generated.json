@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "fanqiu_cli_test_network_private_endpoints000001",
+    "privateEndpointName": "cli-pe-000005",
+    "privateDnsZoneGroupName": "clidnsgroup",
+    "parameters": {
+      "name": "clidnsgroup",
+      "properties": {
+        "privateDnsZoneConfigs": [
+          {
+            "name": "clizone1",
+            "properties": {
+              "privateDnsZoneId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsZones/www.clizone1.com"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "clidnsgroup",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005/privateDnsZoneGroups/clidnsgroup",
+        "etag": "W/\"09e9a4c3-d550-465c-aff7-7af7a9f8b11b\"",
+        "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateDnsZoneConfigs": [
+            {
+              "name": "clizone1",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005/privateDnsZoneGroups/clidnsgroup/privateDnsZoneConfigs/clizone1",
+              "etag": "W/\"09e9a4c3-d550-465c-aff7-7af7a9f8b11b\"",
+              "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups/privateDnsZoneConfigs",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateDnsZoneId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsZones/www.clizone1.com",
+                "recordSets": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

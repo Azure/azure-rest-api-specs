@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test_network_bastion_host000001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "clibastion",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/bastionHosts/clibastion",
+            "etag": "W/\"11e93e1d-98c9-42cb-8e0b-f0fddbd4ec81\"",
+            "type": "Microsoft.Network/bastionHosts",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "dnsName": "bst-fb35c7ea-9b6a-4447-931e-d25720ac2cae.bastion.azure.com",
+              "scaleUnits": 2,
+              "ipConfigurations": [
+                {
+                  "name": "bastion_ip_config",
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/bastionHosts/clibastion/bastionHostIpConfigurations/bastion_ip_config",
+                  "etag": "W/\"11e93e1d-98c9-42cb-8e0b-f0fddbd4ec81\"",
+                  "type": "Microsoft.Network/bastionHosts/bastionHostIpConfigurations",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateIPAllocationMethod": "Dynamic",
+                    "publicIPAddress": {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/publicIPAddresses/ip1"
+                    },
+                    "subnet": {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_bastion_host000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/AzureBastionSubnet"
+                    }
+                  }
+                }
+              ],
+              "bastionShareableLinks": {}
+            }
+          }
+        ]
+      }
+    }
+  }
+}

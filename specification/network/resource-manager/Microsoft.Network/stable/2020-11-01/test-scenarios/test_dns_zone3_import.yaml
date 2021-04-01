@@ -1,0 +1,1156 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_dns_zone3_import
+    steps:
+      - step: RawStep_338
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com?api-version=2018-05-01
+        requestBody: '{"location":"global","properties":{"zoneType":"Public"}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '60'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com","name":"zone3.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-ccfa-a733b810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-06.azure-dns.com.","ns2-06.azure-dns.net.","ns3-06.azure-dns.org.","ns4-06.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_339
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/SOA/@?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"3b2c3f21-c503-4891-a853-775e7d4074d7","properties":{"fqdn":"zone3.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.microsoft.com","expireTime":2419200,"host":"ns1-06.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_340
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/SOA/@?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":86400,"SOARecord":{"host":"ns1-06.azure-dns.com.","email":"hostmaster.zone3.com.","serialNumber":2003080800,"refreshTime":43200,"retryTime":900,"expireTime":1814400,"minimumTTL":10800}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '224'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"30b024a6-ee32-4ad2-b65d-6c92e00b2648","properties":{"fqdn":"zone3.com.","TTL":86400,"SOARecord":{"email":"hostmaster.zone3.com.","expireTime":1814400,"host":"ns1-06.azure-dns.com.","minimumTTL":10800,"refreshTime":43200,"retryTime":900,"serialNumber":2003080800},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_341
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/NS/@?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"225e4785-08ef-4046-9852-300004549812","properties":{"fqdn":"zone3.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_342
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/NS/@?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"225e4785-08ef-4046-9852-300004549812","properties":{"TTL":86400,"targetResource":{},"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '268'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"0e3cd89e-e82f-4880-8df1-06a9e66b797f","properties":{"fqdn":"zone3.com.","TTL":86400,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_343
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/A/test-a?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '71'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/test-a","name":"test-a","type":"Microsoft.Network/dnszones/A","etag":"278bc2f5-c189-427b-bf65-8f61e86f8887","properties":{"fqdn":"test-a.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_344
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/AAAA/test-aaaa?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"AAAARecords":[{"ipv6Address":"2001:cafe:130::100"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '85'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/AAAA/test-aaaa","name":"test-aaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"faefa879-091f-4477-a865-f80b50c44df1","properties":{"fqdn":"test-aaaa.zone3.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:cafe:130::100"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_345
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/CNAME/test-cname?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"target.com."}}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '70'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/CNAME/test-cname","name":"test-cname","type":"Microsoft.Network/dnszones/CNAME","etag":"f65873ed-3c6d-4d9f-8bf1-0247cfa5475d","properties":{"fqdn":"test-cname.zone3.com.","TTL":3600,"CNAMERecord":{"cname":"target.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_346
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/CNAME/test-cname2?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"CNAMERecord":{"cname":"target.org.zone3.com."}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '80'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/CNAME/test-cname2","name":"test-cname2","type":"Microsoft.Network/dnszones/CNAME","etag":"dca19327-fb86-4cef-b18b-96399178a0e0","properties":{"fqdn":"test-cname2.zone3.com.","TTL":3600,"CNAMERecord":{"cname":"target.org.zone3.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_347
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/MX/test-mx?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"MXRecords":[{"preference":10,"exchange":"mail.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '89'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"a32e7e33-7ade-4963-9fb0-9dd86c01c349","properties":{"fqdn":"test-mx.zone3.com.","TTL":3600,"MXRecords":[{"exchange":"mail.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_348
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/NS/test-ns?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"NSRecords":[{"nsdname":"ns1.com."}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '69'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"99895b95-0ffa-4ea1-befb-fbab22d02d6c","properties":{"fqdn":"test-ns.zone3.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1.com."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_349
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/SRV/_sip._tcp.test-srv?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SRVRecords":[{"priority":1,"weight":2,"port":3,"target":"target.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '111'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SRV/_sip._tcp.test-srv","name":"_sip._tcp.test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"f555faf4-b967-4920-9c86-d5b1bf1ac87f","properties":{"fqdn":"_sip._tcp.test-srv.zone3.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"target.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_350
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/TXT/test-txt?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"TXTRecords":[{"value":["string 1"]}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '70'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/test-txt","name":"test-txt","type":"Microsoft.Network/dnszones/TXT","etag":"3fd06a86-8899-40f5-a707-fab1893cc991","properties":{"fqdn":"test-txt.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string
+          1"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_351
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/A/d1?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"12.1.2.3"},{"ipv4Address":"12.2.3.4"},{"ipv4Address":"12.3.4.5"},{"ipv4Address":"12.4.5.6"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '159'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/d1","name":"d1","type":"Microsoft.Network/dnszones/A","etag":"50bd3932-8aef-4545-9e92-9c990358ed06","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"12.1.2.3"},{"ipv4Address":"12.2.3.4"},{"ipv4Address":"12.3.4.5"},{"ipv4Address":"12.4.5.6"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_352
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/NS/d1?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"NSRecords":[{"nsdname":"hood.com."}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '70'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/d1","name":"d1","type":"Microsoft.Network/dnszones/NS","etag":"8b5c1ad0-c319-4501-bb7c-cfaa5ec82302","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"NSRecords":[{"nsdname":"hood.com."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_353
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/TXT/d1?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"TXTRecords":[{"value":["fishfishfish"]}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '74'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/d1","name":"d1","type":"Microsoft.Network/dnszones/TXT","etag":"be5967b6-0fec-4aea-b0d0-c84d759caada","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"TXTRecords":[{"value":["fishfishfish"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_354
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/A/f1?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"11.1.2.3"},{"ipv4Address":"11.2.3.3"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '101'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/f1","name":"f1","type":"Microsoft.Network/dnszones/A","etag":"ac848276-49eb-40e0-afe8-0cf8c1269aa0","properties":{"fqdn":"f1.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"11.1.2.3"},{"ipv4Address":"11.2.3.3"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_355
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/A/f2?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"11.2.3.4"},{"ipv4Address":"11.5.6.7"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '101'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/f2","name":"f2","type":"Microsoft.Network/dnszones/A","etag":"c7be0710-fad2-4c48-86cd-50823410f838","properties":{"fqdn":"f2.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"11.2.3.4"},{"ipv4Address":"11.5.6.7"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_356
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/SRV/_sip._tcp?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SRVRecords":[{"priority":10,"weight":20,"port":30,"target":"foo.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '111'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SRV/_sip._tcp","name":"_sip._tcp","type":"Microsoft.Network/dnszones/SRV","etag":"87f080fa-d7d4-4ad6-aab4-7ba78adfcaa9","properties":{"fqdn":"_sip._tcp.zone3.com.","TTL":3600,"SRVRecords":[{"port":30,"priority":10,"target":"foo.com.","weight":20}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_357
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/MX/mail?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"MXRecords":[{"preference":100,"exchange":"mail.test.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '95'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/MX/mail","name":"mail","type":"Microsoft.Network/dnszones/MX","etag":"369d41cb-c2d3-4922-97b3-1742224dde89","properties":{"fqdn":"mail.zone3.com.","TTL":3600,"MXRecords":[{"exchange":"mail.test.com.","preference":100}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_358
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/A/noclass?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"},{"ipv4Address":"2.3.4.5"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '99'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/noclass","name":"noclass","type":"Microsoft.Network/dnszones/A","etag":"6530ee1d-c59f-4a86-a782-14a9299dc185","properties":{"fqdn":"noclass.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"},{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_359
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/TXT/txt1?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"TXTRecords":[{"value":["string 1 only"]}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '75'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt1","name":"txt1","type":"Microsoft.Network/dnszones/TXT","etag":"e191add4-e4c4-4e5e-9f62-9913e6c72515","properties":{"fqdn":"txt1.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string
+          1 only"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_360
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/TXT/txt2?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"TXTRecords":[{"value":["string1string2"]}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '76'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt2","name":"txt2","type":"Microsoft.Network/dnszones/TXT","etag":"4cfd54b9-12bc-4b69-883e-12aad4d3e189","properties":{"fqdn":"txt2.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string1string2"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_361
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/TXT/txt3?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"TXTRecords":[{"value":["this is a very long
+          string with lots of text, in fact is has 74 charactersthis is a very
+          long string with lots of text, in fact is has 74 charactersthis is a
+          very long string with lots of text, in fact is has 74 charactersthis
+          is a very long string with l","ots of text, in fact is has 74
+          characters"]},{"value":["string;string;string"]}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '399'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt3","name":"txt3","type":"Microsoft.Network/dnszones/TXT","etag":"5203fb59-f986-4697-b03a-068b2d2d5de0","properties":{"fqdn":"txt3.zone3.com.","TTL":3600,"TXTRecords":[{"value":["this
+          is a very long string with lots of text, in fact is has 74
+          charactersthis is a very long string with lots of text, in fact is has
+          74 charactersthis is a very long string with lots of text, in fact is
+          has 74 charactersthis is a very long string with l","ots of text, in
+          fact is has 74
+          characters"]},{"value":["string;string;string"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_362
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/recordsets?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set list
+          Connection: keep-alive
+          ParameterSetName: '-g -z'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"0e3cd89e-e82f-4880-8df1-06a9e66b797f","properties":{"fqdn":"zone3.com.","TTL":86400,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"30b024a6-ee32-4ad2-b65d-6c92e00b2648","properties":{"fqdn":"zone3.com.","TTL":86400,"SOARecord":{"email":"hostmaster.zone3.com.","expireTime":1814400,"host":"ns1-06.azure-dns.com.","minimumTTL":10800,"refreshTime":43200,"retryTime":900,"serialNumber":2003080800},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SRV/_sip._tcp","name":"_sip._tcp","type":"Microsoft.Network/dnszones/SRV","etag":"87f080fa-d7d4-4ad6-aab4-7ba78adfcaa9","properties":{"fqdn":"_sip._tcp.zone3.com.","TTL":3600,"SRVRecords":[{"port":30,"priority":10,"target":"foo.com.","weight":20}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/d1","name":"d1","type":"Microsoft.Network/dnszones/A","etag":"50bd3932-8aef-4545-9e92-9c990358ed06","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"12.1.2.3"},{"ipv4Address":"12.2.3.4"},{"ipv4Address":"12.3.4.5"},{"ipv4Address":"12.4.5.6"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/d1","name":"d1","type":"Microsoft.Network/dnszones/NS","etag":"8b5c1ad0-c319-4501-bb7c-cfaa5ec82302","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"NSRecords":[{"nsdname":"hood.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/d1","name":"d1","type":"Microsoft.Network/dnszones/TXT","etag":"be5967b6-0fec-4aea-b0d0-c84d759caada","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"TXTRecords":[{"value":["fishfishfish"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/f1","name":"f1","type":"Microsoft.Network/dnszones/A","etag":"ac848276-49eb-40e0-afe8-0cf8c1269aa0","properties":{"fqdn":"f1.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"11.1.2.3"},{"ipv4Address":"11.2.3.3"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/f2","name":"f2","type":"Microsoft.Network/dnszones/A","etag":"c7be0710-fad2-4c48-86cd-50823410f838","properties":{"fqdn":"f2.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"11.2.3.4"},{"ipv4Address":"11.5.6.7"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/MX/mail","name":"mail","type":"Microsoft.Network/dnszones/MX","etag":"369d41cb-c2d3-4922-97b3-1742224dde89","properties":{"fqdn":"mail.zone3.com.","TTL":3600,"MXRecords":[{"exchange":"mail.test.com.","preference":100}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/noclass","name":"noclass","type":"Microsoft.Network/dnszones/A","etag":"6530ee1d-c59f-4a86-a782-14a9299dc185","properties":{"fqdn":"noclass.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"},{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/test-a","name":"test-a","type":"Microsoft.Network/dnszones/A","etag":"278bc2f5-c189-427b-bf65-8f61e86f8887","properties":{"fqdn":"test-a.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/AAAA/test-aaaa","name":"test-aaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"faefa879-091f-4477-a865-f80b50c44df1","properties":{"fqdn":"test-aaaa.zone3.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:cafe:130::100"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/CNAME/test-cname","name":"test-cname","type":"Microsoft.Network/dnszones/CNAME","etag":"f65873ed-3c6d-4d9f-8bf1-0247cfa5475d","properties":{"fqdn":"test-cname.zone3.com.","TTL":3600,"CNAMERecord":{"cname":"target.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/CNAME/test-cname2","name":"test-cname2","type":"Microsoft.Network/dnszones/CNAME","etag":"dca19327-fb86-4cef-b18b-96399178a0e0","properties":{"fqdn":"test-cname2.zone3.com.","TTL":3600,"CNAMERecord":{"cname":"target.org.zone3.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"a32e7e33-7ade-4963-9fb0-9dd86c01c349","properties":{"fqdn":"test-mx.zone3.com.","TTL":3600,"MXRecords":[{"exchange":"mail.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"99895b95-0ffa-4ea1-befb-fbab22d02d6c","properties":{"fqdn":"test-ns.zone3.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SRV/_sip._tcp.test-srv","name":"_sip._tcp.test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"f555faf4-b967-4920-9c86-d5b1bf1ac87f","properties":{"fqdn":"_sip._tcp.test-srv.zone3.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"target.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/test-txt","name":"test-txt","type":"Microsoft.Network/dnszones/TXT","etag":"3fd06a86-8899-40f5-a707-fab1893cc991","properties":{"fqdn":"test-txt.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string
+          1"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt1","name":"txt1","type":"Microsoft.Network/dnszones/TXT","etag":"e191add4-e4c4-4e5e-9f62-9913e6c72515","properties":{"fqdn":"txt1.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string
+          1
+          only"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt2","name":"txt2","type":"Microsoft.Network/dnszones/TXT","etag":"4cfd54b9-12bc-4b69-883e-12aad4d3e189","properties":{"fqdn":"txt2.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string1string2"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt3","name":"txt3","type":"Microsoft.Network/dnszones/TXT","etag":"5203fb59-f986-4697-b03a-068b2d2d5de0","properties":{"fqdn":"txt3.zone3.com.","TTL":3600,"TXTRecords":[{"value":["this
+          is a very long string with lots of text, in fact is has 74
+          charactersthis is a very long string with lots of text, in fact is has
+          74 charactersthis is a very long string with lots of text, in fact is
+          has 74 charactersthis is a very long string with l","ots of text, in
+          fact is has 74
+          characters"]},{"value":["string;string;string"]}],"targetResource":{},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_363
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/recordsets?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone export
+          Connection: keep-alive
+          ParameterSetName: '-g -n --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"0e3cd89e-e82f-4880-8df1-06a9e66b797f","properties":{"fqdn":"zone3.com.","TTL":86400,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"30b024a6-ee32-4ad2-b65d-6c92e00b2648","properties":{"fqdn":"zone3.com.","TTL":86400,"SOARecord":{"email":"hostmaster.zone3.com.","expireTime":1814400,"host":"ns1-06.azure-dns.com.","minimumTTL":10800,"refreshTime":43200,"retryTime":900,"serialNumber":2003080800},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SRV/_sip._tcp","name":"_sip._tcp","type":"Microsoft.Network/dnszones/SRV","etag":"87f080fa-d7d4-4ad6-aab4-7ba78adfcaa9","properties":{"fqdn":"_sip._tcp.zone3.com.","TTL":3600,"SRVRecords":[{"port":30,"priority":10,"target":"foo.com.","weight":20}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/d1","name":"d1","type":"Microsoft.Network/dnszones/A","etag":"50bd3932-8aef-4545-9e92-9c990358ed06","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"12.1.2.3"},{"ipv4Address":"12.2.3.4"},{"ipv4Address":"12.3.4.5"},{"ipv4Address":"12.4.5.6"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/d1","name":"d1","type":"Microsoft.Network/dnszones/NS","etag":"8b5c1ad0-c319-4501-bb7c-cfaa5ec82302","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"NSRecords":[{"nsdname":"hood.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/d1","name":"d1","type":"Microsoft.Network/dnszones/TXT","etag":"be5967b6-0fec-4aea-b0d0-c84d759caada","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"TXTRecords":[{"value":["fishfishfish"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/f1","name":"f1","type":"Microsoft.Network/dnszones/A","etag":"ac848276-49eb-40e0-afe8-0cf8c1269aa0","properties":{"fqdn":"f1.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"11.1.2.3"},{"ipv4Address":"11.2.3.3"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/f2","name":"f2","type":"Microsoft.Network/dnszones/A","etag":"c7be0710-fad2-4c48-86cd-50823410f838","properties":{"fqdn":"f2.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"11.2.3.4"},{"ipv4Address":"11.5.6.7"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/MX/mail","name":"mail","type":"Microsoft.Network/dnszones/MX","etag":"369d41cb-c2d3-4922-97b3-1742224dde89","properties":{"fqdn":"mail.zone3.com.","TTL":3600,"MXRecords":[{"exchange":"mail.test.com.","preference":100}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/noclass","name":"noclass","type":"Microsoft.Network/dnszones/A","etag":"6530ee1d-c59f-4a86-a782-14a9299dc185","properties":{"fqdn":"noclass.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"},{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/test-a","name":"test-a","type":"Microsoft.Network/dnszones/A","etag":"278bc2f5-c189-427b-bf65-8f61e86f8887","properties":{"fqdn":"test-a.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/AAAA/test-aaaa","name":"test-aaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"faefa879-091f-4477-a865-f80b50c44df1","properties":{"fqdn":"test-aaaa.zone3.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:cafe:130::100"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/CNAME/test-cname","name":"test-cname","type":"Microsoft.Network/dnszones/CNAME","etag":"f65873ed-3c6d-4d9f-8bf1-0247cfa5475d","properties":{"fqdn":"test-cname.zone3.com.","TTL":3600,"CNAMERecord":{"cname":"target.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/CNAME/test-cname2","name":"test-cname2","type":"Microsoft.Network/dnszones/CNAME","etag":"dca19327-fb86-4cef-b18b-96399178a0e0","properties":{"fqdn":"test-cname2.zone3.com.","TTL":3600,"CNAMERecord":{"cname":"target.org.zone3.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"a32e7e33-7ade-4963-9fb0-9dd86c01c349","properties":{"fqdn":"test-mx.zone3.com.","TTL":3600,"MXRecords":[{"exchange":"mail.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"99895b95-0ffa-4ea1-befb-fbab22d02d6c","properties":{"fqdn":"test-ns.zone3.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SRV/_sip._tcp.test-srv","name":"_sip._tcp.test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"f555faf4-b967-4920-9c86-d5b1bf1ac87f","properties":{"fqdn":"_sip._tcp.test-srv.zone3.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"target.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/test-txt","name":"test-txt","type":"Microsoft.Network/dnszones/TXT","etag":"3fd06a86-8899-40f5-a707-fab1893cc991","properties":{"fqdn":"test-txt.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string
+          1"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt1","name":"txt1","type":"Microsoft.Network/dnszones/TXT","etag":"e191add4-e4c4-4e5e-9f62-9913e6c72515","properties":{"fqdn":"txt1.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string
+          1
+          only"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt2","name":"txt2","type":"Microsoft.Network/dnszones/TXT","etag":"4cfd54b9-12bc-4b69-883e-12aad4d3e189","properties":{"fqdn":"txt2.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string1string2"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt3","name":"txt3","type":"Microsoft.Network/dnszones/TXT","etag":"5203fb59-f986-4697-b03a-068b2d2d5de0","properties":{"fqdn":"txt3.zone3.com.","TTL":3600,"TXTRecords":[{"value":["this
+          is a very long string with lots of text, in fact is has 74
+          charactersthis is a very long string with lots of text, in fact is has
+          74 charactersthis is a very long string with lots of text, in fact is
+          has 74 charactersthis is a very long string with l","ots of text, in
+          fact is has 74
+          characters"]},{"value":["string;string;string"]}],"targetResource":{},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_364
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone delete
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g -n -y'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 202
+      - step: RawStep_365
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsOperationStatuses/delzone63750432975372519828044c11?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone delete
+          Connection: keep-alive
+          ParameterSetName: '-g -n -y'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_366
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com?api-version=2018-05-01
+        requestBody: '{"location":"global","properties":{"zoneType":"Public"}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '60'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com","name":"zone3.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-1780-284fb810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-06.azure-dns.com.","ns2-06.azure-dns.net.","ns3-06.azure-dns.org.","ns4-06.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_367
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/SOA/@?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"c64da7e9-5f25-402d-bb5e-729315fb6c51","properties":{"fqdn":"zone3.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.microsoft.com","expireTime":2419200,"host":"ns1-06.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_368
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/SOA/@?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":86400,"SOARecord":{"host":"ns1-06.azure-dns.com.","email":"hostmaster.zone3.com.","serialNumber":2003080800,"refreshTime":43200,"retryTime":900,"expireTime":1814400,"minimumTTL":10800}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '224'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"c9a12bd4-295f-466f-a0e6-ac50f638ce3c","properties":{"fqdn":"zone3.com.","TTL":86400,"SOARecord":{"email":"hostmaster.zone3.com.","expireTime":1814400,"host":"ns1-06.azure-dns.com.","minimumTTL":10800,"refreshTime":43200,"retryTime":900,"serialNumber":2003080800},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_369
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/NS/@?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"aa02e9c3-ca23-47a5-8603-75d1428daa68","properties":{"fqdn":"zone3.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_370
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/NS/@?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"aa02e9c3-ca23-47a5-8603-75d1428daa68","properties":{"TTL":86400,"targetResource":{},"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '268'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"b7011406-76c8-4a07-ab9f-6932d130b9e9","properties":{"fqdn":"zone3.com.","TTL":86400,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_371
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/SRV/_sip._tcp?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SRVRecords":[{"priority":10,"weight":20,"port":30,"target":"foo.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '111'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SRV/_sip._tcp","name":"_sip._tcp","type":"Microsoft.Network/dnszones/SRV","etag":"618cb2f0-0243-4828-a6b9-7f7d12ce2aa2","properties":{"fqdn":"_sip._tcp.zone3.com.","TTL":3600,"SRVRecords":[{"port":30,"priority":10,"target":"foo.com.","weight":20}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_372
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/A/d1?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"12.1.2.3"},{"ipv4Address":"12.2.3.4"},{"ipv4Address":"12.3.4.5"},{"ipv4Address":"12.4.5.6"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '159'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/d1","name":"d1","type":"Microsoft.Network/dnszones/A","etag":"cc1a47b6-e678-4ccb-82e9-0542fdd91d25","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"12.1.2.3"},{"ipv4Address":"12.2.3.4"},{"ipv4Address":"12.3.4.5"},{"ipv4Address":"12.4.5.6"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_373
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/NS/d1?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"NSRecords":[{"nsdname":"hood.com."}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '70'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/d1","name":"d1","type":"Microsoft.Network/dnszones/NS","etag":"9274de62-9285-4f3e-b83d-7177e9c42a1f","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"NSRecords":[{"nsdname":"hood.com."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_374
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/TXT/d1?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"TXTRecords":[{"value":["fishfishfish"]}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '74'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/d1","name":"d1","type":"Microsoft.Network/dnszones/TXT","etag":"2d2f9956-1c53-4d6c-b8ef-47d2f877f703","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"TXTRecords":[{"value":["fishfishfish"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_375
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/A/f1?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"11.1.2.3"},{"ipv4Address":"11.2.3.3"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '101'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/f1","name":"f1","type":"Microsoft.Network/dnszones/A","etag":"362efaf9-441e-4edf-a40d-aa04acea3c38","properties":{"fqdn":"f1.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"11.1.2.3"},{"ipv4Address":"11.2.3.3"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_376
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/A/f2?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"11.2.3.4"},{"ipv4Address":"11.5.6.7"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '101'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/f2","name":"f2","type":"Microsoft.Network/dnszones/A","etag":"889d40a7-6b11-46b5-a8ab-5a25a52518a7","properties":{"fqdn":"f2.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"11.2.3.4"},{"ipv4Address":"11.5.6.7"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_377
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/MX/mail?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"MXRecords":[{"preference":100,"exchange":"mail.test.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '95'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/MX/mail","name":"mail","type":"Microsoft.Network/dnszones/MX","etag":"c9d4d773-3e08-4e95-9925-90f0fd9baf28","properties":{"fqdn":"mail.zone3.com.","TTL":3600,"MXRecords":[{"exchange":"mail.test.com.","preference":100}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_378
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/A/noclass?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"},{"ipv4Address":"2.3.4.5"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '99'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/noclass","name":"noclass","type":"Microsoft.Network/dnszones/A","etag":"8f3db9cd-f225-417c-a1bd-8ea841eaa82b","properties":{"fqdn":"noclass.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"},{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_379
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/A/test-a?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '71'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/test-a","name":"test-a","type":"Microsoft.Network/dnszones/A","etag":"cb0c98e7-e42d-49ea-8a61-35d0db825eed","properties":{"fqdn":"test-a.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_380
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/AAAA/test-aaaa?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"AAAARecords":[{"ipv6Address":"2001:cafe:130::100"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '85'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/AAAA/test-aaaa","name":"test-aaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"cceb06de-ec19-47db-a1e9-ecba268939c8","properties":{"fqdn":"test-aaaa.zone3.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:cafe:130::100"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_381
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/CNAME/test-cname?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"target.com."}}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '70'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/CNAME/test-cname","name":"test-cname","type":"Microsoft.Network/dnszones/CNAME","etag":"5d68d7af-e18c-4d60-b82f-910a1e1d1298","properties":{"fqdn":"test-cname.zone3.com.","TTL":3600,"CNAMERecord":{"cname":"target.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_382
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/CNAME/test-cname2?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"CNAMERecord":{"cname":"target.org.zone3.com."}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '80'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/CNAME/test-cname2","name":"test-cname2","type":"Microsoft.Network/dnszones/CNAME","etag":"e0c48f13-b021-4548-84b5-f58a9b8b6ca6","properties":{"fqdn":"test-cname2.zone3.com.","TTL":3600,"CNAMERecord":{"cname":"target.org.zone3.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_383
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/MX/test-mx?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"MXRecords":[{"preference":10,"exchange":"mail.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '89'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"04610ce5-4352-4ecd-b497-561efb416cc1","properties":{"fqdn":"test-mx.zone3.com.","TTL":3600,"MXRecords":[{"exchange":"mail.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_384
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/NS/test-ns?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"NSRecords":[{"nsdname":"ns1.com."}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '69'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"ecb3a802-393f-464b-84c4-6091ee91a293","properties":{"fqdn":"test-ns.zone3.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1.com."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_385
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/SRV/_sip._tcp.test-srv?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SRVRecords":[{"priority":1,"weight":2,"port":3,"target":"target.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '111'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SRV/_sip._tcp.test-srv","name":"_sip._tcp.test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"f894f8d6-a843-4919-911b-d78f7e4304d1","properties":{"fqdn":"_sip._tcp.test-srv.zone3.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"target.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_386
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/TXT/test-txt?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"TXTRecords":[{"value":["string 1"]}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '70'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/test-txt","name":"test-txt","type":"Microsoft.Network/dnszones/TXT","etag":"f251fbe5-6325-4dce-8926-189cc5f67956","properties":{"fqdn":"test-txt.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string
+          1"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_387
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/TXT/txt1?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"TXTRecords":[{"value":["string 1 only"]}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '75'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt1","name":"txt1","type":"Microsoft.Network/dnszones/TXT","etag":"0e35aedb-1ec3-49b2-bd7b-15511c880ced","properties":{"fqdn":"txt1.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string
+          1 only"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_388
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/TXT/txt2?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"TXTRecords":[{"value":["string1string2"]}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '76'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt2","name":"txt2","type":"Microsoft.Network/dnszones/TXT","etag":"917f1401-0ba4-400d-9c12-84377d0843a1","properties":{"fqdn":"txt2.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string1string2"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_389
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/TXT/txt3?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"TXTRecords":[{"value":["this is a very long
+          string with lots of text, in fact is has 74 charactersthis is a very
+          long string with lots of text, in fact is has 74 charactersthis is a
+          very long string with lots of text, in fact is has 74 charactersthis
+          is a very long string with l","ots of text, in fact is has 74
+          characters"]},{"value":["string;string;string"]}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '399'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt3","name":"txt3","type":"Microsoft.Network/dnszones/TXT","etag":"8876cc24-1dca-4d9b-a97e-4c55f3cb8b93","properties":{"fqdn":"txt3.zone3.com.","TTL":3600,"TXTRecords":[{"value":["this
+          is a very long string with lots of text, in fact is has 74
+          charactersthis is a very long string with lots of text, in fact is has
+          74 charactersthis is a very long string with lots of text, in fact is
+          has 74 charactersthis is a very long string with l","ots of text, in
+          fact is has 74
+          characters"]},{"value":["string;string;string"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_390
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnsZones/zone3.com/recordsets?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set list
+          Connection: keep-alive
+          ParameterSetName: '-g -z'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"b7011406-76c8-4a07-ab9f-6932d130b9e9","properties":{"fqdn":"zone3.com.","TTL":86400,"NSRecords":[{"nsdname":"ns1-06.azure-dns.com."},{"nsdname":"ns2-06.azure-dns.net."},{"nsdname":"ns3-06.azure-dns.org."},{"nsdname":"ns4-06.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"c9a12bd4-295f-466f-a0e6-ac50f638ce3c","properties":{"fqdn":"zone3.com.","TTL":86400,"SOARecord":{"email":"hostmaster.zone3.com.","expireTime":1814400,"host":"ns1-06.azure-dns.com.","minimumTTL":10800,"refreshTime":43200,"retryTime":900,"serialNumber":2003080800},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SRV/_sip._tcp","name":"_sip._tcp","type":"Microsoft.Network/dnszones/SRV","etag":"618cb2f0-0243-4828-a6b9-7f7d12ce2aa2","properties":{"fqdn":"_sip._tcp.zone3.com.","TTL":3600,"SRVRecords":[{"port":30,"priority":10,"target":"foo.com.","weight":20}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/d1","name":"d1","type":"Microsoft.Network/dnszones/A","etag":"cc1a47b6-e678-4ccb-82e9-0542fdd91d25","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"12.1.2.3"},{"ipv4Address":"12.2.3.4"},{"ipv4Address":"12.3.4.5"},{"ipv4Address":"12.4.5.6"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/d1","name":"d1","type":"Microsoft.Network/dnszones/NS","etag":"9274de62-9285-4f3e-b83d-7177e9c42a1f","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"NSRecords":[{"nsdname":"hood.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/d1","name":"d1","type":"Microsoft.Network/dnszones/TXT","etag":"2d2f9956-1c53-4d6c-b8ef-47d2f877f703","properties":{"fqdn":"d1.zone3.com.","TTL":3600,"TXTRecords":[{"value":["fishfishfish"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/f1","name":"f1","type":"Microsoft.Network/dnszones/A","etag":"362efaf9-441e-4edf-a40d-aa04acea3c38","properties":{"fqdn":"f1.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"11.1.2.3"},{"ipv4Address":"11.2.3.3"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/f2","name":"f2","type":"Microsoft.Network/dnszones/A","etag":"889d40a7-6b11-46b5-a8ab-5a25a52518a7","properties":{"fqdn":"f2.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"11.2.3.4"},{"ipv4Address":"11.5.6.7"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/MX/mail","name":"mail","type":"Microsoft.Network/dnszones/MX","etag":"c9d4d773-3e08-4e95-9925-90f0fd9baf28","properties":{"fqdn":"mail.zone3.com.","TTL":3600,"MXRecords":[{"exchange":"mail.test.com.","preference":100}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/noclass","name":"noclass","type":"Microsoft.Network/dnszones/A","etag":"8f3db9cd-f225-417c-a1bd-8ea841eaa82b","properties":{"fqdn":"noclass.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"},{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/A/test-a","name":"test-a","type":"Microsoft.Network/dnszones/A","etag":"cb0c98e7-e42d-49ea-8a61-35d0db825eed","properties":{"fqdn":"test-a.zone3.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/AAAA/test-aaaa","name":"test-aaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"cceb06de-ec19-47db-a1e9-ecba268939c8","properties":{"fqdn":"test-aaaa.zone3.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:cafe:130::100"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/CNAME/test-cname","name":"test-cname","type":"Microsoft.Network/dnszones/CNAME","etag":"5d68d7af-e18c-4d60-b82f-910a1e1d1298","properties":{"fqdn":"test-cname.zone3.com.","TTL":3600,"CNAMERecord":{"cname":"target.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/CNAME/test-cname2","name":"test-cname2","type":"Microsoft.Network/dnszones/CNAME","etag":"e0c48f13-b021-4548-84b5-f58a9b8b6ca6","properties":{"fqdn":"test-cname2.zone3.com.","TTL":3600,"CNAMERecord":{"cname":"target.org.zone3.com."},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"04610ce5-4352-4ecd-b497-561efb416cc1","properties":{"fqdn":"test-mx.zone3.com.","TTL":3600,"MXRecords":[{"exchange":"mail.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"ecb3a802-393f-464b-84c4-6091ee91a293","properties":{"fqdn":"test-ns.zone3.com.","TTL":3600,"NSRecords":[{"nsdname":"ns1.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/SRV/_sip._tcp.test-srv","name":"_sip._tcp.test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"f894f8d6-a843-4919-911b-d78f7e4304d1","properties":{"fqdn":"_sip._tcp.test-srv.zone3.com.","TTL":3600,"SRVRecords":[{"port":3,"priority":1,"target":"target.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/test-txt","name":"test-txt","type":"Microsoft.Network/dnszones/TXT","etag":"f251fbe5-6325-4dce-8926-189cc5f67956","properties":{"fqdn":"test-txt.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string
+          1"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt1","name":"txt1","type":"Microsoft.Network/dnszones/TXT","etag":"0e35aedb-1ec3-49b2-bd7b-15511c880ced","properties":{"fqdn":"txt1.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string
+          1
+          only"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt2","name":"txt2","type":"Microsoft.Network/dnszones/TXT","etag":"917f1401-0ba4-400d-9c12-84377d0843a1","properties":{"fqdn":"txt2.zone3.com.","TTL":3600,"TXTRecords":[{"value":["string1string2"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone3_import000001/providers/Microsoft.Network/dnszones/zone3.com/TXT/txt3","name":"txt3","type":"Microsoft.Network/dnszones/TXT","etag":"8876cc24-1dca-4d9b-a97e-4c55f3cb8b93","properties":{"fqdn":"txt3.zone3.com.","TTL":3600,"TXTRecords":[{"value":["this
+          is a very long string with lots of text, in fact is has 74
+          charactersthis is a very long string with lots of text, in fact is has
+          74 charactersthis is a very long string with lots of text, in fact is
+          has 74 charactersthis is a very long string with l","ots of text, in
+          fact is has 74
+          characters"]},{"value":["string;string;string"]}],"targetResource":{},"provisioningState":"Succeeded"}}]}

@@ -1,0 +1,336 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_load_balancer_ip_config
+    steps:
+      - step: RawStep_1977
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001","name":"cli_test_load_balancer_ip_config000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:57:55Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_publicip1
+        resourceName: publicIPAddresses_publicip1
+        exampleFile: ../examples/Create_publicIPAddresses_publicip1_Generated_1979.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_1980
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001","name":"cli_test_load_balancer_ip_config000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:57:55Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_publicip2
+        resourceName: publicIPAddresses_publicip2
+        exampleFile: ../examples/Create_publicIPAddresses_publicip2_Generated_1982.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+        variables:
+          publicIpAddressName: publicip2
+      - step: RawStep_1983
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001","name":"cli_test_load_balancer_ip_config000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:57:55Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_publicip3
+        resourceName: publicIPAddresses_publicip3
+        exampleFile: ../examples/Create_publicIPAddresses_publicip3_Generated_1985.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+        variables:
+          publicIpAddressName: publicip3
+      - step: RawStep_1986
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --public-ip-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001","name":"cli_test_load_balancer_ip_config000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:57:55Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1987
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_load_balancer_ip_config000001%27%20and%20name%20eq%20%27publicip1%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FpublicIPAddresses%27&api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --public-ip-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/publicIPAddresses/publicip1","name":"publicip1","type":"Microsoft.Network/publicIPAddresses","sku":{"name":"Basic"},"location":"eastus2"}]}
+      - step: RawStep_1988
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{},"resources":[{"type":"Microsoft.Network/loadBalancers","name":"lb1","location":"eastus2","tags":{},"apiVersion":"2020-11-01","dependsOn":[],"properties":{"backendAddressPools":[{"name":"lb1bepool"}],"frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","properties":{"publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/publicIPAddresses/publicip1"},"privateIPAddressVersion":"IPv4"}}]},"sku":{"name":"Basic"}}],"outputs":{"loadBalancer":{"type":"object","value":"[reference('lb1')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          Content-Length: '898'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n --public-ip-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Resources/deployments/lb_deploy_RwW5aTN9fuusYXaF5obg7DfEcIpNI2kV","name":"lb_deploy_RwW5aTN9fuusYXaF5obg7DfEcIpNI2kV","type":"Microsoft.Resources/deployments","properties":{"templateHash":"13745420320780930851","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-04T05:58:36.4613361Z","duration":"PT2.670615S","correlationId":"e644e21a-e5ad-4e67-ad33-5979f7a5f2eb","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"loadBalancers","locations":["eastus2"]}]}],"dependencies":[]}}
+      - step: RawStep_1989
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867693716868983?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --public-ip-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_1990
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --public-ip-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Resources/deployments/lb_deploy_RwW5aTN9fuusYXaF5obg7DfEcIpNI2kV","name":"lb_deploy_RwW5aTN9fuusYXaF5obg7DfEcIpNI2kV","type":"Microsoft.Resources/deployments","properties":{"templateHash":"13745420320780930851","parameters":{},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-04T05:58:46.2801039Z","duration":"PT12.4893828S","correlationId":"e644e21a-e5ad-4e67-ad33-5979f7a5f2eb","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"loadBalancers","locations":["eastus2"]}]}],"dependencies":[],"outputs":{"loadBalancer":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"075201b2-89fc-4459-958d-85f4d564facf","frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/LoadBalancerFrontEnd","etag":"W/\"00b81996-e640-49cc-9bc5-20375216f169\"","type":"Microsoft.Network/loadBalancers/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAllocationMethod":"Dynamic","publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/publicIPAddresses/publicip1"},"privateIPAddressVersion":"IPv4"}}],"backendAddressPools":[{"name":"lb1bepool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/lb1bepool","etag":"W/\"00b81996-e640-49cc-9bc5-20375216f169\"","properties":{"provisioningState":"Succeeded"},"type":"Microsoft.Network/loadBalancers/backendAddressPools"}],"loadBalancingRules":[],"probes":[],"inboundNatRules":[],"inboundNatPools":[]}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/loadBalancers/lb1"}]}}
+      - step: RawStep_1991
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001","name":"cli_test_load_balancer_ip_config000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:57:55Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_1993.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Update_virtualNetworks_vnet1_1995
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/1
+            value:
+              name: subnet2
+              properties:
+                addressPrefix: 10.0.1.0/24
+                provisioningState: Succeeded
+                delegations: []
+                privateEndpointNetworkPolicies: Enabled
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2
+              type: Microsoft.Network/virtualNetworks/subnets
+      - step: RawStep_1996
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet --vnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001","name":"cli_test_load_balancer_ip_config000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:57:55Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1997
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_load_balancer_ip_config000001%27%20and%20name%20eq%20%27vnet1%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FvirtualNetworks%27&api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet --vnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/virtualNetworks/vnet1","name":"vnet1","type":"Microsoft.Network/virtualNetworks","location":"eastus2","tags":{}}]}
+      - step: RawStep_1998
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{},"resources":[{"type":"Microsoft.Network/loadBalancers","name":"lb2","location":"eastus2","tags":{},"apiVersion":"2020-11-01","dependsOn":[],"properties":{"backendAddressPools":[{"name":"lb2bepool"}],"frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","properties":{"privateIPAllocationMethod":"Dynamic","privateIPAddress":null,"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},"privateIPAddressVersion":"IPv4"}}]},"sku":{"name":"Basic"}}],"outputs":{"loadBalancer":{"type":"object","value":"[reference('lb2')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          Content-Length: '965'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n --subnet --vnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Resources/deployments/lb_deploy_CowodbHxKX68ciRa9DZYxsr7UaqzZhCQ","name":"lb_deploy_CowodbHxKX68ciRa9DZYxsr7UaqzZhCQ","type":"Microsoft.Resources/deployments","properties":{"templateHash":"15936155368046319172","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-04T05:59:34.0280988Z","duration":"PT2.6745466S","correlationId":"5cbd77cf-aed2-4269-b711-c6bdba6a51b7","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"loadBalancers","locations":["eastus2"]}]}],"dependencies":[]}}
+      - step: RawStep_1999
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867693141240709?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet --vnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_2000
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet --vnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Resources/deployments/lb_deploy_CowodbHxKX68ciRa9DZYxsr7UaqzZhCQ","name":"lb_deploy_CowodbHxKX68ciRa9DZYxsr7UaqzZhCQ","type":"Microsoft.Resources/deployments","properties":{"templateHash":"15936155368046319172","parameters":{},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-04T05:59:45.6008649Z","duration":"PT14.2473127S","correlationId":"5cbd77cf-aed2-4269-b711-c6bdba6a51b7","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"loadBalancers","locations":["eastus2"]}]}],"dependencies":[],"outputs":{"loadBalancer":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"fbf77f5e-8b34-4f6e-b194-d4bd715be4b0","frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/loadBalancers/lb2/frontendIPConfigurations/LoadBalancerFrontEnd","etag":"W/\"4348f349-5f53-414f-8501-f0276901fd95\"","type":"Microsoft.Network/loadBalancers/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAddress":"10.0.0.4","privateIPAllocationMethod":"Dynamic","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"},"privateIPAddressVersion":"IPv4"}}],"backendAddressPools":[{"name":"lb2bepool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/loadBalancers/lb2/backendAddressPools/lb2bepool","etag":"W/\"4348f349-5f53-414f-8501-f0276901fd95\"","properties":{"provisioningState":"Succeeded"},"type":"Microsoft.Network/loadBalancers/backendAddressPools"}],"loadBalancingRules":[],"probes":[],"inboundNatRules":[],"inboundNatPools":[]}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/loadBalancers/lb2"}]}}
+      - step: LoadBalancers_Get_2001
+        exampleFile: ../examples/LoadBalancers_Get_2001_Generated.json
+        operationId: LoadBalancers_Get
+      - step: Create_loadBalancers_lb1
+        resourceName: loadBalancers_lb1
+        exampleFile: ../examples/Create_loadBalancers_lb1_Generated_2003.json
+        operationId: LoadBalancers_CreateOrUpdate
+      - step: Update_loadBalancers_lb1_2005
+        resourceName: loadBalancers_lb1
+        operationId: LoadBalancers_CreateOrUpdate
+        resourceUpdate:
+          - replace: >-
+              /properties/frontendIPConfigurations/1/properties/publicIPAddress/id
+            value: >-
+              /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/publicIPAddresses/publicip3
+      - step: Update_loadBalancers_lb1_2007
+        resourceName: loadBalancers_lb1
+        operationId: LoadBalancers_CreateOrUpdate
+        resourceUpdate:
+          - replace: >-
+              /properties/frontendIPConfigurations/1/properties/publicIPAddress/id
+            value: >-
+              /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/publicIPAddresses/publicip2
+      - step: Update_loadBalancers_lb1_2009
+        resourceName: loadBalancers_lb1
+        operationId: LoadBalancers_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/frontendIPConfigurations/1
+      - step: LoadBalancers_Get_2010
+        exampleFile: ../examples/LoadBalancers_Get_2010_Generated.json
+        operationId: LoadBalancers_Get
+        variables:
+          loadBalancerName: lb2
+      - step: Create_loadBalancers_lb2
+        resourceName: loadBalancers_lb2
+        exampleFile: ../examples/Create_loadBalancers_lb2_Generated_2012.json
+        operationId: LoadBalancers_CreateOrUpdate
+        variables:
+          loadBalancerName: lb2
+      - step: Update_loadBalancers_lb2_2014
+        resourceName: loadBalancers_lb2
+        operationId: LoadBalancers_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/frontendIPConfigurations/1/properties/privateIPAddress
+            value: 10.0.1.100
+          - replace: /properties/frontendIPConfigurations/1/properties/subnet/id
+            value: >-
+              /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_load_balancer_ip_config000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2
+        variables:
+          loadBalancerName: lb2
+    variables:
+      publicIpAddressName: publicip1
+      virtualNetworkName: vnet1
+      loadBalancerName: lb1

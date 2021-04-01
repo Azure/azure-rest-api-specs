@@ -1,0 +1,1260 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_dns
+    steps:
+      - step: RawStep_76
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/dnszones?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone list
+          Connection: keep-alive
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone2_importt4tcbnizwp3ou5tcjniq7emnv6mkhxsyeprkdrgdsavvallsoh75eey/providers/Microsoft.Network/dnszones/zone2.com","name":"zone2.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-2022-dd5db810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-08.azure-dns.com.","ns2-08.azure-dns.net.","ns3-08.azure-dns.org.","ns4-08.azure-dns.info."],"numberOfRecordSets":38,"serveRecordsBelowDelegation":null,"zoneType":"Public"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import5yqxnsrublcz23s3fwdbqi6n2punz3d23zgk2twnkgg5xd6lxqsptaz/providers/Microsoft.Network/dnszones/zone9.com","name":"zone9.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-6cb3-9d74b810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-08.azure-dns.com.","ns2-08.azure-dns.net.","ns3-08.azure-dns.org.","ns4-08.azure-dns.info."],"numberOfRecordSets":8,"serveRecordsBelowDelegation":null,"zoneType":"Public"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_aliasnruaw2b7eetfiqgcdxefhncymcaja3cp3pxgoqh3774quku2qakq4kyum/providers/Microsoft.Network/dnszones/mytestzone1.com","name":"mytestzone1.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-072a-916ab810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-06.azure-dns.com.","ns2-06.azure-dns.net.","ns3-06.azure-dns.org.","ns4-06.azure-dns.info."],"numberOfRecordSets":3,"serveRecordsBelowDelegation":null,"zoneType":"Public"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns_if_none_matchtcl56gtg4op3aradju6hnoksj4vk6gkmltjwndw5rkrqsndye/providers/Microsoft.Network/dnszones/myzonex.com","name":"myzonex.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-c367-a868b810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-03.azure-dns.com.","ns2-03.azure-dns.net.","ns3-03.azure-dns.org.","ns4-03.azure-dns.info."],"numberOfRecordSets":11,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}]}
+      - step: RawStep_77
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com?api-version=2018-05-01
+        requestBody: '{"location":"global","properties":{"zoneType":"Public"}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone create
+          Connection: keep-alive
+          Content-Length: '60'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com","name":"myzonex.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-dbcd-678bb810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-04.azure-dns.com.","ns2-04.azure-dns.net.","ns3-04.azure-dns.org.","ns4-04.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_78
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone list
+          Connection: keep-alive
+          ParameterSetName: '-g'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com","name":"myzonex.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-dbcd-678bb810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-04.azure-dns.com.","ns2-04.azure-dns.net.","ns3-04.azure-dns.org.","ns4-04.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}]}
+      - step: RawStep_79
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone show
+          Connection: keep-alive
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com","name":"myzonex.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-dbcd-678bb810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-04.azure-dns.com.","ns2-04.azure-dns.net.","ns3-04.azure-dns.org.","ns4-04.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_80
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a create
+          Connection: keep-alive
+          Content-Length: '29'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --zone-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"a13be2bb-da8b-4172-9361-2c98e0d12e9b","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_81
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"a13be2bb-da8b-4172-9361-2c98e0d12e9b","properties":{"TTL":3600,"targetResource":{},"ARecords":[{"ipv4Address":"10.0.0.10"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a add-record
+          Connection: keep-alive
+          Content-Length: '143'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --ipv4-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"368f7ff7-6d09-498b-b9b5-72db64dc42d3","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_82
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsaalt?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a add-record
+          Connection: keep-alive
+          Content-Length: '73'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --ipv4-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsaalt","name":"myrsaalt","type":"Microsoft.Network/dnszones/A","etag":"2a807b83-59a6-4e85-a718-621c9dcbdf05","properties":{"fqdn":"myrsaalt.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_83
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/AAAA/myrsaaaa?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set aaaa create
+          Connection: keep-alive
+          Content-Length: '29'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --zone-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/AAAA/myrsaaaa","name":"myrsaaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"09ef6cd6-89c0-4659-9032-3f01a3f8163e","properties":{"fqdn":"myrsaaaa.myzonex.com.","TTL":3600,"AAAARecords":[],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_84
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/AAAA/myrsaaaa?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"09ef6cd6-89c0-4659-9032-3f01a3f8163e","properties":{"TTL":3600,"targetResource":{},"AAAARecords":[{"ipv6Address":"2001:db8:0:1:1:1:1:1"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set aaaa add-record
+          Connection: keep-alive
+          Content-Length: '157'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --ipv6-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/AAAA/myrsaaaa","name":"myrsaaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"7f5e9c6a-f893-4e7a-8f83-c61f542b96bd","properties":{"fqdn":"myrsaaaa.myzonex.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:db8:0:1:1:1:1:1"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_85
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/AAAA/myrsaaaaalt?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"AAAARecords":[{"ipv6Address":"2001:db8:0:1:1:1:1:1"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set aaaa add-record
+          Connection: keep-alive
+          Content-Length: '87'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --ipv6-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/AAAA/myrsaaaaalt","name":"myrsaaaaalt","type":"Microsoft.Network/dnszones/AAAA","etag":"61491f73-aa82-4166-882a-89a327f7f190","properties":{"fqdn":"myrsaaaaalt.myzonex.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:db8:0:1:1:1:1:1"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_86
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/CAA/myrscaa?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set caa create
+          Connection: keep-alive
+          Content-Length: '29'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --zone-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CAA/myrscaa","name":"myrscaa","type":"Microsoft.Network/dnszones/CAA","etag":"04217b3d-2018-4734-9a09-63b97e976a9b","properties":{"fqdn":"myrscaa.myzonex.com.","TTL":3600,"caaRecords":[],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_87
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/CAA/myrscaa?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"04217b3d-2018-4734-9a09-63b97e976a9b","properties":{"TTL":3600,"targetResource":{},"caaRecords":[{"flags":0,"tag":"foo","value":"my
+          value"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set caa add-record
+          Connection: keep-alive
+          Content-Length: '164'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --flags --tag --value'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CAA/myrscaa","name":"myrscaa","type":"Microsoft.Network/dnszones/CAA","etag":"09cb4854-a1c7-4530-ae49-879d3e94ecd6","properties":{"fqdn":"myrscaa.myzonex.com.","TTL":3600,"caaRecords":[{"flags":0,"tag":"foo","value":"my
+          value"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_88
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/CAA/myrscaaalt?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"caaRecords":[{"flags":0,"tag":"foo","value":"my
+          value"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set caa add-record
+          Connection: keep-alive
+          Content-Length: '94'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --flags --tag --value'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CAA/myrscaaalt","name":"myrscaaalt","type":"Microsoft.Network/dnszones/CAA","etag":"03ae70f3-b467-4563-b505-c76262b3289f","properties":{"fqdn":"myrscaaalt.myzonex.com.","TTL":3600,"caaRecords":[{"flags":0,"tag":"foo","value":"my
+          value"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_89
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/CNAME/myrscname?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set cname create
+          Connection: keep-alive
+          Content-Length: '29'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --zone-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CNAME/myrscname","name":"myrscname","type":"Microsoft.Network/dnszones/CNAME","etag":"6d3187a6-08b7-48d2-9435-9e765be51703","properties":{"fqdn":"myrscname.myzonex.com.","TTL":3600,"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_90
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/CNAME/myrscname?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"6d3187a6-08b7-48d2-9435-9e765be51703","properties":{"TTL":3600,"targetResource":{},"CNAMERecord":{"cname":"mycname"}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set cname set-record
+          Connection: keep-alive
+          Content-Length: '136'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --cname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CNAME/myrscname","name":"myrscname","type":"Microsoft.Network/dnszones/CNAME","etag":"59f33f5d-b232-4c84-97fb-70907068bab1","properties":{"fqdn":"myrscname.myzonex.com.","TTL":3600,"CNAMERecord":{"cname":"mycname"},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_91
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/CNAME/myrscnamealt?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"CNAMERecord":{"cname":"mycname"}}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set cname set-record
+          Connection: keep-alive
+          Content-Length: '66'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --cname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CNAME/myrscnamealt","name":"myrscnamealt","type":"Microsoft.Network/dnszones/CNAME","etag":"619c7064-8972-4ac0-8c89-3b4230000bb8","properties":{"fqdn":"myrscnamealt.myzonex.com.","TTL":3600,"CNAMERecord":{"cname":"mycname"},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_92
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/MX/myrsmx?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set mx create
+          Connection: keep-alive
+          Content-Length: '29'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --zone-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/MX/myrsmx","name":"myrsmx","type":"Microsoft.Network/dnszones/MX","etag":"d403a74d-29ce-478c-9f31-7f4677e7717c","properties":{"fqdn":"myrsmx.myzonex.com.","TTL":3600,"MXRecords":[],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_93
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/MX/myrsmx?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"d403a74d-29ce-478c-9f31-7f4677e7717c","properties":{"TTL":3600,"targetResource":{},"MXRecords":[{"preference":13,"exchange":"12"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set mx add-record
+          Connection: keep-alive
+          Content-Length: '152'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --exchange --preference'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/MX/myrsmx","name":"myrsmx","type":"Microsoft.Network/dnszones/MX","etag":"231c9777-82db-4d05-b223-45abba01a176","properties":{"fqdn":"myrsmx.myzonex.com.","TTL":3600,"MXRecords":[{"exchange":"12","preference":13}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_94
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/MX/myrsmxalt?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"MXRecords":[{"preference":13,"exchange":"12"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set mx add-record
+          Connection: keep-alive
+          Content-Length: '82'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --exchange --preference'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/MX/myrsmxalt","name":"myrsmxalt","type":"Microsoft.Network/dnszones/MX","etag":"a0c77708-6c9b-4cf1-ab84-9f9519560fb5","properties":{"fqdn":"myrsmxalt.myzonex.com.","TTL":3600,"MXRecords":[{"exchange":"12","preference":13}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_95
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/NS/myrsns?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set ns create
+          Connection: keep-alive
+          Content-Length: '29'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --zone-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/NS/myrsns","name":"myrsns","type":"Microsoft.Network/dnszones/NS","etag":"602eb3d4-935c-43a6-9900-e3fd760eea73","properties":{"fqdn":"myrsns.myzonex.com.","TTL":3600,"NSRecords":[],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_96
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/NS/myrsns?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"602eb3d4-935c-43a6-9900-e3fd760eea73","properties":{"TTL":3600,"targetResource":{},"NSRecords":[{"nsdname":"foobar.com"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set ns add-record
+          Connection: keep-alive
+          Content-Length: '141'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --nsdname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/NS/myrsns","name":"myrsns","type":"Microsoft.Network/dnszones/NS","etag":"6432a3ef-aa26-486b-a297-ad922f0d16a2","properties":{"fqdn":"myrsns.myzonex.com.","TTL":3600,"NSRecords":[{"nsdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_97
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/NS/myrsnsalt?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"NSRecords":[{"nsdname":"foobar.com"}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set ns add-record
+          Connection: keep-alive
+          Content-Length: '71'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --nsdname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/NS/myrsnsalt","name":"myrsnsalt","type":"Microsoft.Network/dnszones/NS","etag":"617a9750-7c33-4fba-84ad-875dda4bec72","properties":{"fqdn":"myrsnsalt.myzonex.com.","TTL":3600,"NSRecords":[{"nsdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_98
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/PTR/myrsptr?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set ptr create
+          Connection: keep-alive
+          Content-Length: '29'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --zone-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/PTR/myrsptr","name":"myrsptr","type":"Microsoft.Network/dnszones/PTR","etag":"b9408ac5-7cc1-4ced-810d-327390b63950","properties":{"fqdn":"myrsptr.myzonex.com.","TTL":3600,"PTRRecords":[],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_99
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/PTR/myrsptr?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"b9408ac5-7cc1-4ced-810d-327390b63950","properties":{"TTL":3600,"targetResource":{},"PTRRecords":[{"ptrdname":"foobar.com"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set ptr add-record
+          Connection: keep-alive
+          Content-Length: '143'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --ptrdname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/PTR/myrsptr","name":"myrsptr","type":"Microsoft.Network/dnszones/PTR","etag":"80bbf903-c508-4e31-90f9-edb4b80f48cd","properties":{"fqdn":"myrsptr.myzonex.com.","TTL":3600,"PTRRecords":[{"ptrdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_100
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/PTR/myrsptralt?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"PTRRecords":[{"ptrdname":"foobar.com"}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set ptr add-record
+          Connection: keep-alive
+          Content-Length: '73'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --ptrdname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/PTR/myrsptralt","name":"myrsptralt","type":"Microsoft.Network/dnszones/PTR","etag":"6d56e8b4-10fa-40d1-93d1-e36d4e41e390","properties":{"fqdn":"myrsptralt.myzonex.com.","TTL":3600,"PTRRecords":[{"ptrdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_101
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/SRV/myrssrv?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set srv create
+          Connection: keep-alive
+          Content-Length: '29'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --zone-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/SRV/myrssrv","name":"myrssrv","type":"Microsoft.Network/dnszones/SRV","etag":"4f82ad5c-209d-4c2d-986e-4387f18ccc13","properties":{"fqdn":"myrssrv.myzonex.com.","TTL":3600,"SRVRecords":[],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_102
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/SRV/myrssrv?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"4f82ad5c-209d-4c2d-986e-4387f18ccc13","properties":{"TTL":3600,"targetResource":{},"SRVRecords":[{"priority":1,"weight":50,"port":1234,"target":"target.com"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set srv add-record
+          Connection: keep-alive
+          Content-Length: '184'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --port --priority --target --weight'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/SRV/myrssrv","name":"myrssrv","type":"Microsoft.Network/dnszones/SRV","etag":"fbde9ed7-f732-4d5e-b981-0f6c561beae0","properties":{"fqdn":"myrssrv.myzonex.com.","TTL":3600,"SRVRecords":[{"port":1234,"priority":1,"target":"target.com","weight":50}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_103
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/SRV/myrssrvalt?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SRVRecords":[{"priority":1,"weight":50,"port":1234,"target":"target.com"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set srv add-record
+          Connection: keep-alive
+          Content-Length: '114'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --port --priority --target --weight'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/SRV/myrssrvalt","name":"myrssrvalt","type":"Microsoft.Network/dnszones/SRV","etag":"013106af-7172-48b1-b2f5-fac63d6ffb62","properties":{"fqdn":"myrssrvalt.myzonex.com.","TTL":3600,"SRVRecords":[{"port":1234,"priority":1,"target":"target.com","weight":50}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_104
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT/myrstxt?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set txt create
+          Connection: keep-alive
+          Content-Length: '29'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --zone-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxt","name":"myrstxt","type":"Microsoft.Network/dnszones/TXT","etag":"f600f2a5-e6a4-479b-9b92-c93779791025","properties":{"fqdn":"myrstxt.myzonex.com.","TTL":3600,"TXTRecords":[],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_105
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT/myrstxt?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"f600f2a5-e6a4-479b-9b92-c93779791025","properties":{"TTL":3600,"targetResource":{},"TXTRecords":[{"value":["some_text"]}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set txt add-record
+          Connection: keep-alive
+          Content-Length: '141'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --value'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxt","name":"myrstxt","type":"Microsoft.Network/dnszones/TXT","etag":"c0a1bc91-e5b3-406c-85d8-d553c47d2762","properties":{"fqdn":"myrstxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["some_text"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_106
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT/myrstxtalt?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"TXTRecords":[{"value":["some_text"]}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set txt add-record
+          Connection: keep-alive
+          Content-Length: '71'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --value'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxtalt","name":"myrstxtalt","type":"Microsoft.Network/dnszones/TXT","etag":"d9cac378-44c9-445b-b1cc-8fac03a0dd2e","properties":{"fqdn":"myrstxtalt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["some_text"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_107
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a add-record
+          Connection: keep-alive
+          ParameterSetName: '-g --zone-name --record-set-name --ipv4-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"368f7ff7-6d09-498b-b9b5-72db64dc42d3","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_108
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"368f7ff7-6d09-498b-b9b5-72db64dc42d3","properties":{"TTL":3600,"targetResource":{},"ARecords":[{"ipv4Address":"10.0.0.10"},{"ipv4Address":"10.0.0.11"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a add-record
+          Connection: keep-alive
+          Content-Length: '173'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --ipv4-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"c5182726-e0ea-4306-89f4-afe293b8100d","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"},{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_109
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/SOA/@?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set soa update
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g --zone-name --email --expire-time --minimum-ttl --refresh-time
+            --retry-time --serial-number
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"bc2960a4-deb0-4387-9b0e-dfd4d1ad82ae","properties":{"fqdn":"myzonex.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.microsoft.com","expireTime":2419200,"host":"ns1-04.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_110
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/SOA/@?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set soa update
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g --zone-name --email --expire-time --minimum-ttl --refresh-time
+            --retry-time --serial-number
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"bc2960a4-deb0-4387-9b0e-dfd4d1ad82ae","properties":{"fqdn":"myzonex.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.microsoft.com","expireTime":2419200,"host":"ns1-04.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_111
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/SOA/@?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"bc2960a4-deb0-4387-9b0e-dfd4d1ad82ae","properties":{"TTL":3600,"targetResource":{},"SOARecord":{"host":"ns1-04.azure-dns.com.","email":"foo.com","serialNumber":123,"refreshTime":60,"retryTime":90,"expireTime":30,"minimumTTL":20}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set soa update
+          Connection: keep-alive
+          Content-Length: '260'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: >-
+            -g --zone-name --email --expire-time --minimum-ttl --refresh-time
+            --retry-time --serial-number
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"4f8f9967-6600-4ae3-9dc8-9c638551c188","properties":{"fqdn":"myzonex.com.","TTL":3600,"SOARecord":{"email":"foo.com","expireTime":30,"host":"ns1-04.azure-dns.com.","minimumTTL":20,"refreshTime":60,"retryTime":90,"serialNumber":123},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_112
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT/longtxt?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"TXTRecords":[{"value":["012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234","56789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"]}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set txt add-record
+          Connection: keep-alive
+          Content-Length: '566'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -z -n -v'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/longtxt","name":"longtxt","type":"Microsoft.Network/dnszones/TXT","etag":"1f440e1d-8ac9-410f-8f28-ef9b7f12f625","properties":{"fqdn":"longtxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234","56789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_113
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone show
+          Connection: keep-alive
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com","name":"myzonex.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-dbcd-678bb810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-04.azure-dns.com.","ns2-04.azure-dns.net.","ns3-04.azure-dns.org.","ns4-04.azure-dns.info."],"numberOfRecordSets":21,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_114
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a show
+          Connection: keep-alive
+          ParameterSetName: '-n -g --zone-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"c5182726-e0ea-4306-89f4-afe293b8100d","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"},{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_115
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/recordsets?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set list
+          Connection: keep-alive
+          ParameterSetName: '-g -z'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"c9edcd18-a0bf-4ab6-af44-d81db1435bd4","properties":{"fqdn":"myzonex.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-04.azure-dns.com."},{"nsdname":"ns2-04.azure-dns.net."},{"nsdname":"ns3-04.azure-dns.org."},{"nsdname":"ns4-04.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"4f8f9967-6600-4ae3-9dc8-9c638551c188","properties":{"fqdn":"myzonex.com.","TTL":3600,"SOARecord":{"email":"foo.com","expireTime":30,"host":"ns1-04.azure-dns.com.","minimumTTL":20,"refreshTime":60,"retryTime":90,"serialNumber":123},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/longtxt","name":"longtxt","type":"Microsoft.Network/dnszones/TXT","etag":"1f440e1d-8ac9-410f-8f28-ef9b7f12f625","properties":{"fqdn":"longtxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234","56789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"c5182726-e0ea-4306-89f4-afe293b8100d","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"},{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/AAAA/myrsaaaa","name":"myrsaaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"7f5e9c6a-f893-4e7a-8f83-c61f542b96bd","properties":{"fqdn":"myrsaaaa.myzonex.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:db8:0:1:1:1:1:1"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/AAAA/myrsaaaaalt","name":"myrsaaaaalt","type":"Microsoft.Network/dnszones/AAAA","etag":"61491f73-aa82-4166-882a-89a327f7f190","properties":{"fqdn":"myrsaaaaalt.myzonex.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:db8:0:1:1:1:1:1"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsaalt","name":"myrsaalt","type":"Microsoft.Network/dnszones/A","etag":"2a807b83-59a6-4e85-a718-621c9dcbdf05","properties":{"fqdn":"myrsaalt.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CAA/myrscaa","name":"myrscaa","type":"Microsoft.Network/dnszones/CAA","etag":"09cb4854-a1c7-4530-ae49-879d3e94ecd6","properties":{"fqdn":"myrscaa.myzonex.com.","TTL":3600,"caaRecords":[{"flags":0,"tag":"foo","value":"my
+          value"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CAA/myrscaaalt","name":"myrscaaalt","type":"Microsoft.Network/dnszones/CAA","etag":"03ae70f3-b467-4563-b505-c76262b3289f","properties":{"fqdn":"myrscaaalt.myzonex.com.","TTL":3600,"caaRecords":[{"flags":0,"tag":"foo","value":"my
+          value"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CNAME/myrscname","name":"myrscname","type":"Microsoft.Network/dnszones/CNAME","etag":"59f33f5d-b232-4c84-97fb-70907068bab1","properties":{"fqdn":"myrscname.myzonex.com.","TTL":3600,"CNAMERecord":{"cname":"mycname"},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CNAME/myrscnamealt","name":"myrscnamealt","type":"Microsoft.Network/dnszones/CNAME","etag":"619c7064-8972-4ac0-8c89-3b4230000bb8","properties":{"fqdn":"myrscnamealt.myzonex.com.","TTL":3600,"CNAMERecord":{"cname":"mycname"},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/MX/myrsmx","name":"myrsmx","type":"Microsoft.Network/dnszones/MX","etag":"231c9777-82db-4d05-b223-45abba01a176","properties":{"fqdn":"myrsmx.myzonex.com.","TTL":3600,"MXRecords":[{"exchange":"12","preference":13}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/MX/myrsmxalt","name":"myrsmxalt","type":"Microsoft.Network/dnszones/MX","etag":"a0c77708-6c9b-4cf1-ab84-9f9519560fb5","properties":{"fqdn":"myrsmxalt.myzonex.com.","TTL":3600,"MXRecords":[{"exchange":"12","preference":13}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/NS/myrsns","name":"myrsns","type":"Microsoft.Network/dnszones/NS","etag":"6432a3ef-aa26-486b-a297-ad922f0d16a2","properties":{"fqdn":"myrsns.myzonex.com.","TTL":3600,"NSRecords":[{"nsdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/NS/myrsnsalt","name":"myrsnsalt","type":"Microsoft.Network/dnszones/NS","etag":"617a9750-7c33-4fba-84ad-875dda4bec72","properties":{"fqdn":"myrsnsalt.myzonex.com.","TTL":3600,"NSRecords":[{"nsdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/PTR/myrsptr","name":"myrsptr","type":"Microsoft.Network/dnszones/PTR","etag":"80bbf903-c508-4e31-90f9-edb4b80f48cd","properties":{"fqdn":"myrsptr.myzonex.com.","TTL":3600,"PTRRecords":[{"ptrdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/PTR/myrsptralt","name":"myrsptralt","type":"Microsoft.Network/dnszones/PTR","etag":"6d56e8b4-10fa-40d1-93d1-e36d4e41e390","properties":{"fqdn":"myrsptralt.myzonex.com.","TTL":3600,"PTRRecords":[{"ptrdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/SRV/myrssrv","name":"myrssrv","type":"Microsoft.Network/dnszones/SRV","etag":"fbde9ed7-f732-4d5e-b981-0f6c561beae0","properties":{"fqdn":"myrssrv.myzonex.com.","TTL":3600,"SRVRecords":[{"port":1234,"priority":1,"target":"target.com","weight":50}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/SRV/myrssrvalt","name":"myrssrvalt","type":"Microsoft.Network/dnszones/SRV","etag":"013106af-7172-48b1-b2f5-fac63d6ffb62","properties":{"fqdn":"myrssrvalt.myzonex.com.","TTL":3600,"SRVRecords":[{"port":1234,"priority":1,"target":"target.com","weight":50}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxt","name":"myrstxt","type":"Microsoft.Network/dnszones/TXT","etag":"c0a1bc91-e5b3-406c-85d8-d553c47d2762","properties":{"fqdn":"myrstxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["some_text"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxtalt","name":"myrstxtalt","type":"Microsoft.Network/dnszones/TXT","etag":"d9cac378-44c9-445b-b1cc-8fac03a0dd2e","properties":{"fqdn":"myrstxtalt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["some_text"]}],"targetResource":{},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_116
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set txt list
+          Connection: keep-alive
+          ParameterSetName: '-g -z'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/longtxt","name":"longtxt","type":"Microsoft.Network/dnszones/TXT","etag":"1f440e1d-8ac9-410f-8f28-ef9b7f12f625","properties":{"fqdn":"longtxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234","56789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxt","name":"myrstxt","type":"Microsoft.Network/dnszones/TXT","etag":"c0a1bc91-e5b3-406c-85d8-d553c47d2762","properties":{"fqdn":"myrstxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["some_text"]}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxtalt","name":"myrstxtalt","type":"Microsoft.Network/dnszones/TXT","etag":"d9cac378-44c9-445b-b1cc-8fac03a0dd2e","properties":{"fqdn":"myrstxtalt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["some_text"]}],"targetResource":{},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_117
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a remove-record
+          Connection: keep-alive
+          ParameterSetName: '-g --zone-name --record-set-name --ipv4-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"c5182726-e0ea-4306-89f4-afe293b8100d","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.10"},{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_118
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"c5182726-e0ea-4306-89f4-afe293b8100d","properties":{"TTL":3600,"targetResource":{},"ARecords":[{"ipv4Address":"10.0.0.11"}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a remove-record
+          Connection: keep-alive
+          Content-Length: '143'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g --zone-name --record-set-name --ipv4-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"5e1c3683-b59b-4388-986a-a803c0b316f2","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_119
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/AAAA/myrsaaaa?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set aaaa remove-record
+          Connection: keep-alive
+          ParameterSetName: '-g --zone-name --record-set-name --ipv6-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/AAAA/myrsaaaa","name":"myrsaaaa","type":"Microsoft.Network/dnszones/AAAA","etag":"7f5e9c6a-f893-4e7a-8f83-c61f542b96bd","properties":{"fqdn":"myrsaaaa.myzonex.com.","TTL":3600,"AAAARecords":[{"ipv6Address":"2001:db8:0:1:1:1:1:1"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_120
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/AAAA/myrsaaaa?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set aaaa remove-record
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g --zone-name --record-set-name --ipv6-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+      - step: RawStep_121
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/CAA/myrscaa?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set caa remove-record
+          Connection: keep-alive
+          ParameterSetName: '-g --zone-name --record-set-name --flags --tag --value'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CAA/myrscaa","name":"myrscaa","type":"Microsoft.Network/dnszones/CAA","etag":"09cb4854-a1c7-4530-ae49-879d3e94ecd6","properties":{"fqdn":"myrscaa.myzonex.com.","TTL":3600,"caaRecords":[{"flags":0,"tag":"foo","value":"my
+          value"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_122
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/CAA/myrscaa?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set caa remove-record
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g --zone-name --record-set-name --flags --tag --value'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+      - step: RawStep_123
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/CNAME/myrscname?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set cname remove-record
+          Connection: keep-alive
+          ParameterSetName: '-g --zone-name --record-set-name --cname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/CNAME/myrscname","name":"myrscname","type":"Microsoft.Network/dnszones/CNAME","etag":"59f33f5d-b232-4c84-97fb-70907068bab1","properties":{"fqdn":"myrscname.myzonex.com.","TTL":3600,"CNAMERecord":{"cname":"mycname"},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_124
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/CNAME/myrscname?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set cname remove-record
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g --zone-name --record-set-name --cname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+      - step: RawStep_125
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/MX/myrsmx?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set mx remove-record
+          Connection: keep-alive
+          ParameterSetName: '-g --zone-name --record-set-name --exchange --preference'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/MX/myrsmx","name":"myrsmx","type":"Microsoft.Network/dnszones/MX","etag":"231c9777-82db-4d05-b223-45abba01a176","properties":{"fqdn":"myrsmx.myzonex.com.","TTL":3600,"MXRecords":[{"exchange":"12","preference":13}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_126
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/MX/myrsmx?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set mx remove-record
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g --zone-name --record-set-name --exchange --preference'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+      - step: RawStep_127
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/NS/myrsns?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set ns remove-record
+          Connection: keep-alive
+          ParameterSetName: '-g --zone-name --record-set-name --nsdname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/NS/myrsns","name":"myrsns","type":"Microsoft.Network/dnszones/NS","etag":"6432a3ef-aa26-486b-a297-ad922f0d16a2","properties":{"fqdn":"myrsns.myzonex.com.","TTL":3600,"NSRecords":[{"nsdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_128
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/NS/myrsns?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set ns remove-record
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g --zone-name --record-set-name --nsdname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+      - step: RawStep_129
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/PTR/myrsptr?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set ptr remove-record
+          Connection: keep-alive
+          ParameterSetName: '-g --zone-name --record-set-name --ptrdname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/PTR/myrsptr","name":"myrsptr","type":"Microsoft.Network/dnszones/PTR","etag":"80bbf903-c508-4e31-90f9-edb4b80f48cd","properties":{"fqdn":"myrsptr.myzonex.com.","TTL":3600,"PTRRecords":[{"ptrdname":"foobar.com"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_130
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/PTR/myrsptr?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set ptr remove-record
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g --zone-name --record-set-name --ptrdname'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+      - step: RawStep_131
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/SRV/myrssrv?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set srv remove-record
+          Connection: keep-alive
+          ParameterSetName: '-g --zone-name --record-set-name --port --priority --target --weight'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/SRV/myrssrv","name":"myrssrv","type":"Microsoft.Network/dnszones/SRV","etag":"fbde9ed7-f732-4d5e-b981-0f6c561beae0","properties":{"fqdn":"myrssrv.myzonex.com.","TTL":3600,"SRVRecords":[{"port":1234,"priority":1,"target":"target.com","weight":50}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_132
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/SRV/myrssrv?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set srv remove-record
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g --zone-name --record-set-name --port --priority --target --weight'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+      - step: RawStep_133
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT/myrstxt?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set txt remove-record
+          Connection: keep-alive
+          ParameterSetName: '-g --zone-name --record-set-name --value'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/TXT/myrstxt","name":"myrstxt","type":"Microsoft.Network/dnszones/TXT","etag":"c0a1bc91-e5b3-406c-85d8-d553c47d2762","properties":{"fqdn":"myrstxt.myzonex.com.","TTL":3600,"TXTRecords":[{"value":["some_text"]}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_134
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/TXT/myrstxt?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set txt remove-record
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g --zone-name --record-set-name --value'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+      - step: RawStep_135
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a show
+          Connection: keep-alive
+          ParameterSetName: '-n -g --zone-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"5e1c3683-b59b-4388-986a-a803c0b316f2","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_136
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a remove-record
+          Connection: keep-alive
+          ParameterSetName: '-g --zone-name --record-set-name --ipv4-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnszones/myzonex.com/A/myrsa","name":"myrsa","type":"Microsoft.Network/dnszones/A","etag":"5e1c3683-b59b-4388-986a-a803c0b316f2","properties":{"fqdn":"myrsa.myzonex.com.","TTL":3600,"ARecords":[{"ipv4Address":"10.0.0.11"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_137
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a remove-record
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g --zone-name --record-set-name --ipv4-address'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+      - step: RawStep_138
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/A/myrsa?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set a delete
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-n -g --zone-name -y'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 204
+      - step: RawStep_139
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com/CNAME/myrscname?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set cname delete
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-n -g --zone-name -y'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 204
+      - step: RawStep_140
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsZones/myzonex.com?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone delete
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g -n -y'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 202
+      - step: RawStep_141
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_dns000001/providers/Microsoft.Network/dnsOperationStatuses/delzone63750433215478053067d6f210?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone delete
+          Connection: keep-alive
+          ParameterSetName: '-g -n -y'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'

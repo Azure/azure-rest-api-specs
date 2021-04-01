@@ -1,0 +1,140 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_private_link_resource_event_grid
+    steps:
+      - step: RawStep_3413
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/topics/cli000002?api-version=2020-10-15-preview
+        requestBody: >-
+          {"location":"centraluseuap","properties":{"inputSchema":"EventGridSchema","publicNetworkAccess":"disabled"},"sku":{"name":"Basic"},"identity":{"type":"None"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid topic create
+          Connection: keep-alive
+          Content-Length: '170'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '--name --resource-group --location --public-network-access'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"properties":{"provisioningState":"Creating","endpoint":null,"inputSchema":"EventGridSchema","publicNetworkAccess":"Disabled"},"sku":{"name":"Basic"},"identity":{"type":"None","principalId":null,"tenantId":null,"userAssignedIdentities":null},"systemData":null,"location":"centraluseuap","tags":null,"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/topics/cli000002","name":"cli000002","type":"Microsoft.EventGrid/topics"}
+      - step: RawStep_3414
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.EventGrid/locations/centraluseuap/operationsStatus/296E108F-7BCF-4D08-A637-0CD1A65E8802?api-version=2020-10-15-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid topic create
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --location --public-network-access'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+        responseExpected: >-
+          {"id":"https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.EventGrid/locations/centraluseuap/operationsStatus/296E108F-7BCF-4D08-A637-0CD1A65E8802?api-version=2020-10-15-preview","name":"296e108f-7bcf-4d08-a637-0cd1a65e8802","status":"Succeeded"}
+      - step: RawStep_3415
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/topics/cli000002?api-version=2020-10-15-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid topic create
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --location --public-network-access'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+        responseExpected: >-
+          {"properties":{"provisioningState":"Succeeded","endpoint":"https://cli000002.centraluseuap-1.eventgrid.azure.net/api/events","inputSchema":"EventGridSchema","metricResourceId":"a6b644bd-ed92-44f4-ad15-5e04ace0ebea","publicNetworkAccess":"Disabled"},"sku":{"name":"Basic"},"identity":{"type":"None","principalId":null,"tenantId":null,"userAssignedIdentities":null},"kind":"Azure","systemData":null,"location":"centraluseuap","tags":null,"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/topics/cli000002","name":"cli000002","type":"Microsoft.EventGrid/topics"}
+      - step: RawStep_3416
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/topics/cli000002/privateLinkResources?api-version=2020-04-01-preview
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-link-resource list
+          Connection: keep-alive
+          ParameterSetName: '--id'
+          User-Agent: python/3.7.9 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"value":[{"properties":{"groupId":"topic","displayName":"Event Grid
+          topic","requiredMembers":["topic"],"requiredZoneNames":["privatelink.eventgrid.azure.net"]},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/topics/cli000002/privateLinkResources/topic","name":"topic","type":"Microsoft.EventGrid/topics/privateLinkResources"}]}
+      - step: RawStep_3417
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/domains/cli000003?api-version=2020-10-15-preview
+        requestBody: >-
+          {"location":"centraluseuap","properties":{"inputSchema":"EventGridSchema","publicNetworkAccess":"disabled"},"sku":{"name":"Basic"},"identity":{"type":"None"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid domain create
+          Connection: keep-alive
+          Content-Length: '170'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '--name --resource-group --location --public-network-access'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"properties":{"provisioningState":"Creating","endpoint":null,"inputSchema":"EventGridSchema","publicNetworkAccess":"Disabled"},"sku":{"name":"Basic"},"identity":{"type":"None","principalId":null,"tenantId":null,"userAssignedIdentities":null},"systemData":null,"location":"centraluseuap","tags":null,"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/domains/cli000003","name":"cli000003","type":"Microsoft.EventGrid/domains"}
+      - step: RawStep_3418
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.EventGrid/locations/centraluseuap/operationsStatus/9B67014C-C747-4321-BC9D-4D90E7E327B4?api-version=2020-10-15-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid domain create
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --location --public-network-access'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+        responseExpected: >-
+          {"id":"https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.EventGrid/locations/centraluseuap/operationsStatus/9B67014C-C747-4321-BC9D-4D90E7E327B4?api-version=2020-10-15-preview","name":"9b67014c-c747-4321-bc9d-4d90e7e327b4","status":"Succeeded"}
+      - step: RawStep_3419
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/domains/cli000003?api-version=2020-10-15-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: eventgrid domain create
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --location --public-network-access'
+          User-Agent: >-
+            python/3.7.9 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-eventgrid/3.0.0rc9
+            Azure-SDK-For-Python AZURECLI/2.21.0
+        responseExpected: >-
+          {"properties":{"provisioningState":"Succeeded","endpoint":"https://cli000003.centraluseuap-1.eventgrid.azure.net/api/events","inputSchema":"EventGridSchema","metricResourceId":"5f82e849-a322-4072-85a5-91f7c576c8ce","publicNetworkAccess":"Disabled"},"sku":{"name":"Basic"},"identity":{"type":"None","principalId":null,"tenantId":null,"userAssignedIdentities":null},"systemData":null,"location":"centraluseuap","tags":null,"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/domains/cli000003","name":"cli000003","type":"Microsoft.EventGrid/domains"}
+      - step: RawStep_3420
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/domains/cli000003/privateLinkResources?api-version=2020-04-01-preview
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-link-resource list
+          Connection: keep-alive
+          ParameterSetName: '--id'
+          User-Agent: python/3.7.9 (Windows-10-10.0.19041-SP0) AZURECLI/2.21.0
+        responseExpected: >-
+          {"value":[{"properties":{"groupId":"domain","displayName":"Event Grid
+          domain","requiredMembers":["domain"],"requiredZoneNames":["privatelink.eventgrid.azure.net"]},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_event_grid_plr000001/providers/Microsoft.EventGrid/domains/cli000003/privateLinkResources/domain","name":"domain","type":"Microsoft.EventGrid/domains/privateLinkResources"}]}

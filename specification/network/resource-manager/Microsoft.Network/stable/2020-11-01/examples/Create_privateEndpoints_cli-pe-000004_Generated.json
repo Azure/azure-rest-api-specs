@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "clitest.rg000001",
+    "privateEndpointName": "cli-pe-000004",
+    "parameters": {
+      "location": "westus2",
+      "properties": {
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000002/subnets/cli-subnet-000003"
+        },
+        "privateLinkServiceConnections": [
+          {
+            "name": "cli-pec-000005",
+            "properties": {
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig",
+              "groupIds": [
+                "configurationStores"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cli-pe-000004",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000004",
+        "etag": "W/\"dc87dd02-e40e-419d-88d9-804eb599e924\"",
+        "type": "Microsoft.Network/privateEndpoints",
+        "location": "westus2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "cafae6c0-3c89-453c-986c-48b983da68ec",
+          "privateLinkServiceConnections": [
+            {
+              "name": "cli-pec-000005",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000004/privateLinkServiceConnections/cli-pec-000005",
+              "etag": "W/\"dc87dd02-e40e-419d-88d9-804eb599e924\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig",
+                "groupIds": [
+                  "configurationStores"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-Approved",
+                  "actionsRequired": "None"
+                }
+              },
+              "type": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections"
+            }
+          ],
+          "manualPrivateLinkServiceConnections": [],
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/cli-vnet-000002/subnets/cli-subnet-000003"
+          },
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/networkInterfaces/cli-pe-000004.nic.15a9eaed-6df6-40a6-951f-6d2d968a72f7"
+            }
+          ],
+          "customDnsConfigs": [
+            {
+              "fqdn": "clitestappconfig.azconfig.io",
+              "ipAddresses": [
+                "10.0.0.4"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

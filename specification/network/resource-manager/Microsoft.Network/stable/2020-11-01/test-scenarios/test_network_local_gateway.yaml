@@ -1,0 +1,67 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_local_gateway
+    steps:
+      - step: RawStep_2033
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/local_gateway_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network local-gateway create
+          Connection: keep-alive
+          ParameterSetName: '--resource-group --name --gateway-ip-address --tags'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/local_gateway_scenario000001","name":"local_gateway_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:05:57Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_localNetworkGateways_lgw1
+        resourceName: localNetworkGateways_lgw1
+        exampleFile: ../examples/Create_localNetworkGateways_lgw1_Generated.json
+        operationId: LocalNetworkGateways_CreateOrUpdate
+      - step: Update_localNetworkGateways_lgw1_2036
+        resourceName: localNetworkGateways_lgw1
+        operationId: LocalNetworkGateways_CreateOrUpdate
+        resourceUpdate:
+          - replace: /tags/foo
+            value: boo
+      - step: RawStep_2037
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/local_gateway_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network local-gateway create
+          Connection: keep-alive
+          ParameterSetName: >-
+            --resource-group --name --gateway-ip-address
+            --local-address-prefixes
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/local_gateway_scenario000001","name":"local_gateway_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:05:57Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_localNetworkGateways_lgw2
+        resourceName: localNetworkGateways_lgw2
+        exampleFile: ../examples/Create_localNetworkGateways_lgw2_Generated_2039.json
+        operationId: LocalNetworkGateways_CreateOrUpdate
+        variables:
+          localNetworkGatewayName: lgw2
+      - step: LocalNetworkGateways_List_2040
+        exampleFile: ../examples/LocalNetworkGateways_List_2040_Generated.json
+        operationId: LocalNetworkGateways_List
+      - step: LocalNetworkGateways_Delete_2041
+        exampleFile: ../examples/LocalNetworkGateways_Delete_2041_Generated.json
+        operationId: LocalNetworkGateways_Delete
+      - step: LocalNetworkGateways_List_2042
+        exampleFile: ../examples/LocalNetworkGateways_List_2042_Generated.json
+        operationId: LocalNetworkGateways_List
+    variables:
+      localNetworkGatewayName: lgw1

@@ -1,0 +1,220 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_private_endpoint_private_dns_zone_group
+    steps:
+      - step: Create_virtualNetworks_cli-vnet-000003
+        resourceName: virtualNetworks_cli-vnet-000003
+        exampleFile: ../examples/Create_virtualNetworks_cli-vnet-000003_Generated_2263.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_2264
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_cli-subnet-000004
+        resourceName: subnets_cli-subnet-000004
+        exampleFile: >-
+          ../examples/Create_subnets_appgw_private_endpoint_subnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: RawStep_2266
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002/privateLinkResources?api-version=2021-01-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: storage account private-link-resource list
+          Connection: keep-alive
+          ParameterSetName: '--account-name -g'
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-storage/17.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002/privateLinkResources/blob","name":"blob","type":"Microsoft.Storage/storageAccounts/privateLinkResources","properties":{"groupId":"blob","requiredMembers":["blob"],"requiredZoneNames":["privatelink.blob.core.windows.net"]}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002/privateLinkResources/table","name":"table","type":"Microsoft.Storage/storageAccounts/privateLinkResources","properties":{"groupId":"table","requiredMembers":["table"],"requiredZoneNames":["privatelink.table.core.windows.net"]}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002/privateLinkResources/queue","name":"queue","type":"Microsoft.Storage/storageAccounts/privateLinkResources","properties":{"groupId":"queue","requiredMembers":["queue"],"requiredZoneNames":["privatelink.queue.core.windows.net"]}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002/privateLinkResources/file","name":"file","type":"Microsoft.Storage/storageAccounts/privateLinkResources","properties":{"groupId":"file","requiredMembers":["file"],"requiredZoneNames":["privatelink.file.core.windows.net"]}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002/privateLinkResources/web","name":"web","type":"Microsoft.Storage/storageAccounts/privateLinkResources","properties":{"groupId":"web","requiredMembers":["web"],"requiredZoneNames":["privatelink.web.core.windows.net"]}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002/privateLinkResources/dfs","name":"dfs","type":"Microsoft.Storage/storageAccounts/privateLinkResources","properties":{"groupId":"dfs","requiredMembers":["dfs"],"requiredZoneNames":["privatelink.dfs.core.windows.net"]}}]}
+      - step: RawStep_2267
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002?api-version=2021-01-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: storage account show
+          Connection: keep-alive
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-storage/17.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"sku":{"name":"Standard_LRS","tier":"Standard"},"kind":"StorageV2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002","name":"saplr000002","type":"Microsoft.Storage/storageAccounts","location":"westus","tags":{},"properties":{"privateEndpointConnections":[],"networkAcls":{"bypass":"AzureServices","virtualNetworkRules":[],"ipRules":[],"defaultAction":"Allow"},"supportsHttpsTrafficOnly":true,"encryption":{"services":{"file":{"keyType":"Account","enabled":true,"lastEnabledTime":"2021-03-04T08:40:09.2106184Z"},"blob":{"keyType":"Account","enabled":true,"lastEnabledTime":"2021-03-04T08:40:09.2106184Z"}},"keySource":"Microsoft.Storage"},"accessTier":"Hot","provisioningState":"Succeeded","creationTime":"2021-03-04T08:40:09.1481369Z","primaryEndpoints":{"dfs":"https://saplr000002.dfs.core.windows.net/","web":"https://saplr000002.z22.web.core.windows.net/","blob":"https://saplr000002.blob.core.windows.net/","queue":"https://saplr000002.queue.core.windows.net/","table":"https://saplr000002.table.core.windows.net/","file":"https://saplr000002.file.core.windows.net/"},"primaryLocation":"westus","statusOfPrimary":"available"}}
+      - step: Create_privateEndpoints_cli-pe-000005
+        resourceName: privateEndpoints_cli-pe-000005
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000005_Generated_2269.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_2270
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002?api-version=2021-01-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: storage account show
+          Connection: keep-alive
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-storage/17.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"sku":{"name":"Standard_LRS","tier":"Standard"},"kind":"StorageV2","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002","name":"saplr000002","type":"Microsoft.Storage/storageAccounts","location":"westus","tags":{},"properties":{"privateEndpointConnections":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002/privateEndpointConnections/saplr000002.16c82ae8-4f0b-49f9-8441-23fd19618668","name":"saplr000002.16c82ae8-4f0b-49f9-8441-23fd19618668","type":"Microsoft.Storage/storageAccounts/privateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-Approved","actionRequired":"None"}}}],"networkAcls":{"bypass":"AzureServices","virtualNetworkRules":[],"ipRules":[],"defaultAction":"Allow"},"supportsHttpsTrafficOnly":true,"encryption":{"services":{"file":{"keyType":"Account","enabled":true,"lastEnabledTime":"2021-03-04T08:40:09.2106184Z"},"blob":{"keyType":"Account","enabled":true,"lastEnabledTime":"2021-03-04T08:40:09.2106184Z"}},"keySource":"Microsoft.Storage"},"accessTier":"Hot","provisioningState":"Succeeded","creationTime":"2021-03-04T08:40:09.1481369Z","primaryEndpoints":{"dfs":"https://saplr000002.dfs.core.windows.net/","web":"https://saplr000002.z22.web.core.windows.net/","blob":"https://saplr000002.blob.core.windows.net/","queue":"https://saplr000002.queue.core.windows.net/","table":"https://saplr000002.table.core.windows.net/","file":"https://saplr000002.file.core.windows.net/"},"primaryLocation":"westus","statusOfPrimary":"available"}}
+      - step: RawStep_2271
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002/privateEndpointConnections/saplr000002.16c82ae8-4f0b-49f9-8441-23fd19618668?api-version=2021-01-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: storage account private-endpoint-connection show
+          Connection: keep-alive
+          ParameterSetName: '--account-name -g --name'
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-storage/17.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Storage/storageAccounts/saplr000002/privateEndpointConnections/saplr000002.16c82ae8-4f0b-49f9-8441-23fd19618668","name":"saplr000002.16c82ae8-4f0b-49f9-8441-23fd19618668","type":"Microsoft.Storage/storageAccounts/privateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-Approved","actionRequired":"None"}}}
+      - step: RawStep_2272
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsZones/www.clizone1.com?api-version=2018-09-01
+        requestBody: '{"location":"global"}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-dns zone create
+          Connection: keep-alive
+          Content-Length: '22'
+          Content-Type: application/json; charset=utf-8
+          If-None-Match: '*'
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-privatedns/0.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 202
+        responseExpected: '{}'
+      - step: RawStep_2273
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsOperationStatuses/RnJvbnRFbmRBc3luY09wZXJhdGlvbjtVcHNlcnRQcml2YXRlRG5zWm9uZTs3ZTQ2YmI1ZC05ZWY3LTQyYjctOWU1ZS03ZDhjZTg3Y2Q2MmM=?api-version=2018-09-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-dns zone create
+          Connection: keep-alive
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-privatedns/0.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_2274
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsZones/www.clizone1.com?api-version=2018-09-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-dns zone create
+          Connection: keep-alive
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-privatedns/0.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsZones/www.clizone1.com","name":"www.clizone1.com","type":"Microsoft.Network/privateDnsZones","etag":"9072129a-cdb3-43be-ae26-d9db88e3ba41","location":"global","properties":{"maxNumberOfRecordSets":25000,"maxNumberOfVirtualNetworkLinks":1000,"maxNumberOfVirtualNetworkLinksWithRegistration":100,"numberOfRecordSets":1,"numberOfVirtualNetworkLinks":0,"numberOfVirtualNetworkLinksWithRegistration":0,"provisioningState":"Succeeded"}}
+      - step: RawStep_2275
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsZones/www.clizone2.com?api-version=2018-09-01
+        requestBody: '{"location":"global"}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-dns zone create
+          Connection: keep-alive
+          Content-Length: '22'
+          Content-Type: application/json; charset=utf-8
+          If-None-Match: '*'
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-privatedns/0.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 202
+        responseExpected: '{}'
+      - step: RawStep_2276
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsOperationStatuses/RnJvbnRFbmRBc3luY09wZXJhdGlvbjtVcHNlcnRQcml2YXRlRG5zWm9uZTtlMmM3ZmFiZC1lOTcxLTQzMTgtYjRmYi1jMjY0ZTZhNTkxYzg=?api-version=2018-09-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-dns zone create
+          Connection: keep-alive
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-privatedns/0.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_2277
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsZones/www.clizone2.com?api-version=2018-09-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-dns zone create
+          Connection: keep-alive
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-privatedns/0.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsZones/www.clizone2.com","name":"www.clizone2.com","type":"Microsoft.Network/privateDnsZones","etag":"9ee10365-e435-45b8-a85d-d738e985756f","location":"global","properties":{"maxNumberOfRecordSets":25000,"maxNumberOfVirtualNetworkLinks":1000,"maxNumberOfVirtualNetworkLinksWithRegistration":100,"numberOfRecordSets":1,"numberOfVirtualNetworkLinks":0,"numberOfVirtualNetworkLinksWithRegistration":0,"provisioningState":"Succeeded"}}
+      - step: Create_privateDnsZoneGroups_clidnsgroup
+        resourceName: privateDnsZoneGroups_clidnsgroup
+        exampleFile: ../examples/Create_privateDnsZoneGroups_clidnsgroup_Generated.json
+        operationId: PrivateDnsZoneGroups_CreateOrUpdate
+      - step: Update_privateDnsZoneGroups_clidnsgroup_2280
+        resourceName: privateDnsZoneGroups_clidnsgroup
+        operationId: PrivateDnsZoneGroups_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/privateDnsZoneConfigs/1
+            value:
+              name: clizone2
+              properties:
+                privateDnsZoneId: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateDnsZones/www.clizone2.com
+                provisioningState: Succeeded
+                recordSets: []
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fanqiu_cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000005/privateDnsZoneGroups/clidnsgroup/privateDnsZoneConfigs/clizone2
+              type: >-
+                Microsoft.Network/privateEndpoints/privateDnsZoneGroups/privateDnsZoneConfigs
+      - step: PrivateDnsZoneGroups_List_2281
+        exampleFile: ../examples/PrivateDnsZoneGroups_List_2281_Generated.json
+        operationId: PrivateDnsZoneGroups_List
+      - step: Update_privateDnsZoneGroups_clidnsgroup_2283
+        resourceName: privateDnsZoneGroups_clidnsgroup
+        operationId: PrivateDnsZoneGroups_CreateOrUpdate
+        resourceUpdate:
+          - remove: /properties/privateDnsZoneConfigs/1
+      - step: PrivateDnsZoneGroups_Delete_2284
+        exampleFile: ../examples/PrivateDnsZoneGroups_Delete_2284_Generated.json
+        operationId: PrivateDnsZoneGroups_Delete
+    variables:
+      virtualNetworkName: cli-vnet-000003
+      subnetName: cli-subnet-000004
+      privateEndpointName: cli-pe-000005
+      privateDnsZoneGroupName: clidnsgroup

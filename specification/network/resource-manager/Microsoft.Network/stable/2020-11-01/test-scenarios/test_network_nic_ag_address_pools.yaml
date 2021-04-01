@@ -1,0 +1,149 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_nic_ag_address_pools
+    steps:
+      - step: RawStep_2112
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_ag_address_pools000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet-name --defer'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_ag_address_pools000001","name":"cli_test_nic_ag_address_pools000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:04:25Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2114.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2115
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_ag_address_pools000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-name --subnet --no-wait'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_ag_address_pools000001","name":"cli_test_nic_ag_address_pools000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:04:25Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2116
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_nic_ag_address_pools000001%27%20and%20name%20eq%20%27vnet1%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FvirtualNetworks%27&api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --vnet-name --subnet --no-wait'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_ag_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1","name":"vnet1","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{}}]}
+      - step: RawStep_2117
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_ag_address_pools000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{"appGwID":"[resourceId('Microsoft.Network/applicationGateways',
+          'ag1')]"},"resources":[{"type":"Microsoft.Network/applicationGateways","name":"ag1","location":"westus","tags":{},"apiVersion":"2020-11-01","dependsOn":[],"properties":{"backendAddressPools":[{"name":"appGatewayBackendPool"}],"backendHttpSettingsCollection":[{"name":"appGatewayBackendHttpSettings","properties":{"Port":80,"Protocol":"Http","CookieBasedAffinity":"disabled","connectionDraining":{"enabled":false,"drainTimeoutInSec":1}}}],"frontendIPConfigurations":[{"name":"appGatewayPrivateFrontendIP","properties":{"privateIPAllocationMethod":"Dynamic","privateIPAddress":null,"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_ag_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"}}}],"frontendPorts":[{"name":"appGatewayFrontendPort","properties":{"Port":80}}],"gatewayIPConfigurations":[{"name":"appGatewayPrivateFrontendIP","properties":{"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_ag_address_pools000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"}}}],"httpListeners":[{"name":"appGatewayHttpListener","properties":{"FrontendIpConfiguration":{"Id":"[concat(variables('appGwID'),
+          '/frontendIPConfigurations/appGatewayPrivateFrontendIP')]"},"FrontendPort":{"Id":"[concat(variables('appGwID'),
+          '/frontendPorts/appGatewayFrontendPort')]"},"Protocol":"http","SslCertificate":null}}],"sku":{"name":"Standard_Medium","tier":"Standard","capacity":2},"requestRoutingRules":[{"Name":"rule1","properties":{"RuleType":"Basic","httpListener":{"id":"[concat(variables('appGwID'),
+          '/httpListeners/appGatewayHttpListener')]"},"backendAddressPool":{"id":"[concat(variables('appGwID'),
+          '/backendAddressPools/appGatewayBackendPool')]"},"backendHttpSettings":{"id":"[concat(variables('appGwID'),
+          '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"}}}],"privateLinkConfigurations":[]},"zones":null}],"outputs":{"applicationGateway":{"type":"object","value":"[reference('ag1')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          Content-Length: '2511'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n --vnet-name --subnet --no-wait'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_ag_address_pools000001/providers/Microsoft.Resources/deployments/ag_deploy_e7IjieOdyQyivtFvMxWmy3yqiFG3KvK2","name":"ag_deploy_e7IjieOdyQyivtFvMxWmy3yqiFG3KvK2","type":"Microsoft.Resources/deployments","properties":{"templateHash":"7595658913987090560","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-04T06:04:42.8382525Z","duration":"PT1.905066S","correlationId":"74dcbfc7-cb80-46db-9d9f-9ad27a97c298","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"applicationGateways","locations":["westus"]}]}],"dependencies":[]}}
+      - step: ApplicationGateways_Get_2118
+        exampleFile: ../examples/ApplicationGateways_Get_2118_Generated.json
+        operationId: ApplicationGateways_Get
+      - step: Create_applicationGateways_ag1
+        resourceName: applicationGateways_ag1
+        exampleFile: ../examples/Create_applicationGateways_ag1_Generated_2120.json
+        operationId: ApplicationGateways_CreateOrUpdate
+      - step: RawStep_2121
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_ag_address_pools000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network nic create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet --vnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_ag_address_pools000001","name":"cli_test_nic_ag_address_pools000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:04:25Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkInterfaces_nic1
+        resourceName: networkInterfaces_nic1
+        exampleFile: ../examples/Create_networkInterfaces_nic1_Generated.json
+        operationId: NetworkInterfaces_CreateOrUpdate
+      - step: Update_networkInterfaces_nic1_2124
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - add: >-
+              /properties/ipConfigurations/0/properties/applicationGatewayBackendAddressPools
+            value:
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_ag_address_pools000001/providers/Microsoft.Network/applicationGateways/ag1/backendAddressPools/pool1
+      - step: Update_networkInterfaces_nic1_2126
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - remove: >-
+              /properties/ipConfigurations/0/properties/applicationGatewayBackendAddressPools/0
+      - step: Update_networkInterfaces_nic1_2128
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - add: >-
+              /properties/ipConfigurations/0/properties/applicationGatewayBackendAddressPools
+            value:
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_ag_address_pools000001/providers/Microsoft.Network/applicationGateways/ag1/backendAddressPools/pool1
+      - step: Update_networkInterfaces_nic1_2130
+        resourceName: networkInterfaces_nic1
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - remove: >-
+              /properties/ipConfigurations/0/properties/applicationGatewayBackendAddressPools/0
+    variables:
+      virtualNetworkName: vnet1
+      applicationGatewayName: ag1
+      networkInterfaceName: nic1

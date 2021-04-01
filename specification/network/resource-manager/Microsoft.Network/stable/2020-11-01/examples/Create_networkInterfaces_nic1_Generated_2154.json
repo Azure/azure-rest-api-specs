@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_nic_app_gateway000001",
+    "networkInterfaceName": "nic1",
+    "parameters": {
+      "location": "eastus2",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "applicationGatewayBackendAddressPools": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_app_gateway000001/providers/Microsoft.Network/applicationGateways/ag1/backendAddressPools/appGatewayBackendPool"
+                }
+              ],
+              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAddressVersion": "IPv4",
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_app_gateway000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2"
+              }
+            }
+          }
+        ],
+        "dnsSettings": {
+          "dnsServers": []
+        },
+        "enableIPForwarding": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "nic1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_app_gateway000001/providers/Microsoft.Network/networkInterfaces/nic1",
+        "etag": "W/\"937402d5-7246-42c5-86e4-143bed70e67b\"",
+        "location": "eastus2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "62d8002c-798a-47c8-addd-88e02bf57ab4",
+          "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_app_gateway000001/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1",
+              "etag": "W/\"937402d5-7246-42c5-86e4-143bed70e67b\"",
+              "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateIPAddress": "10.0.1.4",
+                "privateIPAllocationMethod": "Dynamic",
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_app_gateway000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2"
+                },
+                "primary": true,
+                "privateIPAddressVersion": "IPv4",
+                "applicationGatewayBackendAddressPools": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_app_gateway000001/providers/Microsoft.Network/applicationGateways/ag1/backendAddressPools/appGatewayBackendPool"
+                  }
+                ]
+              }
+            }
+          ],
+          "dnsSettings": {
+            "dnsServers": [],
+            "appliedDnsServers": [],
+            "internalDomainNameSuffix": "ffwycee04veelgrqjxhp53ezch.cx.internal.cloudapp.net"
+          },
+          "enableAcceleratedNetworking": false,
+          "enableIPForwarding": false,
+          "hostedWorkloads": [],
+          "tapConfigurations": [],
+          "nicType": "Standard"
+        },
+        "type": "Microsoft.Network/networkInterfaces"
+      }
+    }
+  }
+}

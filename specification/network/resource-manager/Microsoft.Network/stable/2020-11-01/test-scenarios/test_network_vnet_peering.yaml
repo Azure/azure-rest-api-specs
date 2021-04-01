@@ -1,0 +1,145 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vnet_peering
+    steps:
+      - step: RawStep_2599
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_peering000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001","name":"cli_test_vnet_peering000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:37:45Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2601.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2602
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_peering000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet-name --address-prefix --subnet-prefix'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001","name":"cli_test_vnet_peering000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:37:45Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet2
+        resourceName: virtualNetworks_vnet2
+        exampleFile: ../examples/Create_virtualNetworks_vnet2_Generated_2604.json
+        operationId: VirtualNetworks_CreateOrUpdate
+        variables:
+          virtualNetworkName: vnet2
+      - step: RawStep_2605
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_peering000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001","name":"cli_test_vnet_peering000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:37:45Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_ip1
+        resourceName: publicIPAddresses_ip1
+        exampleFile: ../examples/Create_publicIPAddresses_ip1_Generated_2607.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: VirtualNetworks_Get_2608
+        exampleFile: ../examples/VirtualNetworks_Get_2608_Generated.json
+        operationId: VirtualNetworks_Get
+        variables:
+          virtualNetworkName: vnet2
+      - step: RawStep_2609
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_vnet_peering000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --public-ip-address --vnet --tags'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001","name":"cli_test_vnet_peering000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:37:45Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworkGateways_gateway1
+        resourceName: virtualNetworkGateways_gateway1
+        exampleFile: ../examples/Create_virtualNetworkGateways_gateway1_Generated.json
+        operationId: VirtualNetworkGateways_CreateOrUpdate
+      - step: VirtualNetworks_Get_2611
+        exampleFile: ../examples/VirtualNetworks_Get_2611_Generated.json
+        operationId: VirtualNetworks_Get
+      - step: Create_virtualNetworkPeerings_peering2
+        resourceName: virtualNetworkPeerings_peering2
+        exampleFile: ../examples/Create_virtualNetworkPeerings_peering2_Generated.json
+        operationId: VirtualNetworkPeerings_CreateOrUpdate
+        variables:
+          virtualNetworkName: vnet2
+      - step: Create_virtualNetworkPeerings_peering1
+        resourceName: virtualNetworkPeerings_peering1
+        exampleFile: ../examples/Create_virtualNetworkPeerings_peering1_Generated.json
+        operationId: VirtualNetworkPeerings_CreateOrUpdate
+        variables:
+          virtualNetworkPeeringName: peering1
+      - step: VirtualNetworkPeerings_List_2615
+        exampleFile: ../examples/VirtualNetworkPeerings_List_2615_Generated.json
+        operationId: VirtualNetworkPeerings_List
+        variables:
+          virtualNetworkName: vnet2
+      - step: Update_virtualNetworkPeerings_peering1_2617
+        resourceName: virtualNetworkPeerings_peering1
+        operationId: VirtualNetworkPeerings_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/useRemoteGateways
+            value: false
+          - remove: /properties/remoteGateways
+        variables:
+          virtualNetworkPeeringName: peering1
+      - step: VirtualNetworkPeerings_Delete_2618
+        exampleFile: ../examples/VirtualNetworkPeerings_Delete_2618_Generated.json
+        operationId: VirtualNetworkPeerings_Delete
+        variables:
+          virtualNetworkPeeringName: peering1
+      - step: VirtualNetworkPeerings_List_2619
+        exampleFile: ../examples/VirtualNetworkPeerings_List_2619_Generated.json
+        operationId: VirtualNetworkPeerings_List
+      - step: VirtualNetworkPeerings_Delete_2620
+        exampleFile: ../examples/VirtualNetworkPeerings_Delete_2618_Generated.json
+        operationId: VirtualNetworkPeerings_Delete
+        variables:
+          virtualNetworkName: vnet2
+      - step: VirtualNetworkGateways_Delete_2621
+        exampleFile: ../examples/VirtualNetworkGateways_Delete_2621_Generated.json
+        operationId: VirtualNetworkGateways_Delete
+    variables:
+      virtualNetworkName: vnet1
+      publicIpAddressName: ip1
+      virtualNetworkGatewayName: gateway1
+      virtualNetworkPeeringName: peering2

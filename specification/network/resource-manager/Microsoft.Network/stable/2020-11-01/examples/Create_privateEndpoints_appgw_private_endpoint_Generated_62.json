@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test_appgw_private_endpoint_with_overwrite_default000001",
+    "privateEndpointName": "appgw_private_endpoint",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_appgw_private_endpoint_with_overwrite_default000001/providers/Microsoft.Network/virtualNetworks/appgw_private_endpoint_vnet/subnets/appgw_private_endpoint_subnet"
+        },
+        "privateLinkServiceConnections": [
+          {
+            "name": "appgw_private_endpoint_connection",
+            "properties": {
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_appgw_private_endpoint_with_overwrite_default000001/providers/Microsoft.Network/applicationGateways/appgw",
+              "groupIds": [
+                "appGatewayFrontendIP"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "appgw_private_endpoint",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_appgw_private_endpoint_with_overwrite_default000001/providers/Microsoft.Network/privateEndpoints/appgw_private_endpoint",
+        "etag": "W/\"b6933b9f-b4ce-4b0f-ae34-0e10194c8b4b\"",
+        "type": "Microsoft.Network/privateEndpoints",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "22dee20a-8d5b-4a9a-b1e1-18ec3e6839d1",
+          "privateLinkServiceConnections": [
+            {
+              "name": "appgw_private_endpoint_connection",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_appgw_private_endpoint_with_overwrite_default000001/providers/Microsoft.Network/privateEndpoints/appgw_private_endpoint/privateLinkServiceConnections/appgw_private_endpoint_connection",
+              "etag": "W/\"b6933b9f-b4ce-4b0f-ae34-0e10194c8b4b\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_appgw_private_endpoint_with_overwrite_default000001/providers/Microsoft.Network/applicationGateways/appgw",
+                "resolvedPrivateLinkServiceLocation": "westus",
+                "groupIds": [
+                  "appGatewayFrontendIP"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "",
+                  "actionsRequired": "None"
+                }
+              },
+              "type": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections"
+            }
+          ],
+          "manualPrivateLinkServiceConnections": [],
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_appgw_private_endpoint_with_overwrite_default000001/providers/Microsoft.Network/virtualNetworks/appgw_private_endpoint_vnet/subnets/appgw_private_endpoint_subnet"
+          },
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_appgw_private_endpoint_with_overwrite_default000001/providers/Microsoft.Network/networkInterfaces/appgw_private_endpoint.nic.4a258e6e-6907-44a1-9440-c2085b33493b"
+            }
+          ],
+          "customDnsConfigs": []
+        }
+      }
+    }
+  }
+}

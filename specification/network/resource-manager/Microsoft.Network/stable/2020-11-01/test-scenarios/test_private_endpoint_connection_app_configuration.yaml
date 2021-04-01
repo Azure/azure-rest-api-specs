@@ -1,0 +1,336 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_private_endpoint_connection_app_configuration
+    steps:
+      - step: RawStep_3169
+        method: POST
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001/providers/Microsoft.Resources/deployments/mock-deployment/validate?api-version=2020-10-01
+        requestBody: >-
+          {"properties": {"parameters": {"target_resource_name": {"value":
+          "clitestappconfig"}}, "mode": "Incremental", template:{
+              "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {
+                  "target_resource_name": {
+                      "defaultValue": "ernestt-appconfig-privatelink",
+                      "type": "String"
+                  }
+              },
+              "variables": {},
+              "resources": [
+                  {
+                      "type": "Microsoft.AppConfiguration/configurationStores",
+                      "apiVersion": "2020-06-01",
+                      "name": "[parameters('target_resource_name')]",
+                      "location": "westus",
+                      "sku": {
+                          "name": "standard"
+                      },
+                      "properties": {
+                          "encryption": {}
+                      }
+                  }
+              ]
+          }}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          Content-Length: '832'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -p -f'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Resources/deployments/appconfiguration_configurationstores_template","name":"appconfiguration_configurationstores_template","type":"Microsoft.Resources/deployments","properties":{"templateHash":"7483349641174567162","parameters":{"target_resource_name":{"type":"String","value":"clitestappconfig"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-04T07:35:37.6009591Z","duration":"PT0S","correlationId":"1e75d1ca-b244-4ab1-a720-d6871bc849d8","providers":[{"namespace":"Microsoft.AppConfiguration","resourceTypes":[{"resourceType":"configurationStores","locations":["westus"]}]}],"dependencies":[],"validatedResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig"}]}}
+      - step: RawStep_3170
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties": {"parameters": {"target_resource_name": {"value":
+          "clitestappconfig"}}, "mode": "Incremental", template:{
+              "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {
+                  "target_resource_name": {
+                      "defaultValue": "ernestt-appconfig-privatelink",
+                      "type": "String"
+                  }
+              },
+              "variables": {},
+              "resources": [
+                  {
+                      "type": "Microsoft.AppConfiguration/configurationStores",
+                      "apiVersion": "2020-06-01",
+                      "name": "[parameters('target_resource_name')]",
+                      "location": "westus",
+                      "sku": {
+                          "name": "standard"
+                      },
+                      "properties": {
+                          "encryption": {}
+                      }
+                  }
+              ]
+          }}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          Content-Length: '832'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -p -f'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Resources/deployments/appconfiguration_configurationstores_template","name":"appconfiguration_configurationstores_template","type":"Microsoft.Resources/deployments","properties":{"templateHash":"7483349641174567162","parameters":{"target_resource_name":{"type":"String","value":"clitestappconfig"}},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-04T07:35:41.1928311Z","duration":"PT1.8917267S","correlationId":"7de10867-781e-4d01-a222-ee7b8c71385c","providers":[{"namespace":"Microsoft.AppConfiguration","resourceTypes":[{"resourceType":"configurationStores","locations":["westus"]}]}],"dependencies":[]}}
+      - step: RawStep_3171
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867635461765149?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '-g -p -f'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_3172
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: deployment group create
+          Connection: keep-alive
+          ParameterSetName: '-g -p -f'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Resources/deployments/appconfiguration_configurationstores_template","name":"appconfiguration_configurationstores_template","type":"Microsoft.Resources/deployments","properties":{"templateHash":"7483349641174567162","parameters":{"target_resource_name":{"type":"String","value":"clitestappconfig"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-04T07:36:01.7260022Z","duration":"PT22.4248978S","correlationId":"7de10867-781e-4d01-a222-ee7b8c71385c","providers":[{"namespace":"Microsoft.AppConfiguration","resourceTypes":[{"resourceType":"configurationStores","locations":["westus"]}]}],"dependencies":[],"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig"}]}}
+      - step: RawStep_3173
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-n -g --subnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T07:35:31Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_cli-vnet-000002
+        resourceName: virtualNetworks_cli-vnet-000002
+        exampleFile: ../examples/Create_virtualNetworks_cli-vnet-000002_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_3175
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_cli-subnet-000003
+        resourceName: subnets_cli-subnet-000003
+        exampleFile: >-
+          ../examples/Create_subnets_appgw_private_endpoint_subnet_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: RawStep_3177
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateLinkResources?api-version=2020-06-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-link-resource list
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --type'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        responseExpected: >-
+          {"value":[{"id":"subscriptions/0b1f6471-1bf0-4dda-aec3-cb9272f09590/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateLinkResources/configurationStores","name":"configurationStores","type":"Microsoft.AppConfiguration/configurationStores/privateLinkResources","properties":{"groupId":"configurationStores","requiredMembers":["configurationStores"],"requiredZoneNames":["privatelink.azconfig.io"]}}],"nextLink":null}
+      - step: RawStep_3178
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --vnet-name --subnet --connection-name
+            --private-connection-resource-id --group-id
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T07:35:31Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_privateEndpoints_cli-pe-000004
+        resourceName: privateEndpoints_cli-pe-000004
+        exampleFile: ../examples/Create_privateEndpoints_cli-pe-000004_Generated.json
+        operationId: PrivateEndpoints_CreateOrUpdate
+      - step: RawStep_3180
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections?api-version=2020-06-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection list
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --type'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        responseExpected: >-
+          {"value":[{"type":"Microsoft.AppConfiguration/configurationStores/privateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000004"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-Approved"}},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005","name":"cli-pec-000005"}],"nextLink":null}
+      - step: RawStep_3181
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005?api-version=2020-06-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection show
+          Connection: keep-alive
+          ParameterSetName: '--id'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        responseExpected: >-
+          {"type":"Microsoft.AppConfiguration/configurationStores/privateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000004"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-Approved"}},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005","name":"cli-pec-000005"}
+      - step: RawStep_3182
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005?api-version=2020-06-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection show
+          Connection: keep-alive
+          ParameterSetName: '--resource-name --name --resource-group --type'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        responseExpected: >-
+          {"type":"Microsoft.AppConfiguration/configurationStores/privateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000004"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-Approved"}},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005","name":"cli-pec-000005"}
+      - step: RawStep_3183
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005?api-version=2020-06-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection show
+          Connection: keep-alive
+          ParameterSetName: '--resource-name -n -g --type'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        responseExpected: >-
+          {"type":"Microsoft.AppConfiguration/configurationStores/privateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000004"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-Approved"}},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005","name":"cli-pec-000005"}
+      - step: RawStep_3184
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005?api-version=2020-06-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection approve
+          Connection: keep-alive
+          ParameterSetName: '--resource-name --resource-group --name --type --description'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        responseExpected: >-
+          {"type":"Microsoft.AppConfiguration/configurationStores/privateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000004"},"privateLinkServiceConnectionState":{"status":"Approved","description":"Auto-Approved"}},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005","name":"cli-pec-000005"}
+      - step: RawStep_3185
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005?api-version=2020-06-01
+        requestBody: >-
+          {"type":"Microsoft.AppConfiguration/configurationStores/privateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000004"},"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!"}},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005","name":"cli-pec-000005"}
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection approve
+          Connection: keep-alive
+          Content-Length: '789'
+          Content-Type: application/json
+          ParameterSetName: '--resource-name --resource-group --name --type --description'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        statusCode: 201
+        responseExpected: >-
+          {"type":"Microsoft.AppConfiguration/configurationStores/privateEndpointConnections","properties":{"provisioningState":"Updating","privateEndpoint":null,"privateLinkServiceConnectionState":{"status":"Approved","description":"You
+          are
+          approved!"}},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005","name":"cli-pec-000005"}
+      - step: RawStep_3186
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005?api-version=2020-06-01
+        requestBody: >-
+          {"type":"Microsoft.AppConfiguration/configurationStores/privateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000004"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!"}},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005","name":"cli-pec-000005"}
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection reject
+          Connection: keep-alive
+          Content-Length: '789'
+          Content-Type: application/json
+          ParameterSetName: '--id --description'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        statusCode: 201
+        responseExpected: >-
+          {"type":"Microsoft.AppConfiguration/configurationStores/privateEndpointConnections","properties":{"provisioningState":"Updating","privateEndpoint":null,"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!"}},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005","name":"cli-pec-000005"}
+      - step: RawStep_3187
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections?api-version=2020-06-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection list
+          Connection: keep-alive
+          ParameterSetName: '--name --resource-group --type'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        responseExpected: >-
+          {"value":[{"type":"Microsoft.AppConfiguration/configurationStores/privateEndpointConnections","properties":{"provisioningState":"Succeeded","privateEndpoint":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/cli-pe-000004"},"privateLinkServiceConnectionState":{"status":"Rejected","description":"You
+          are
+          rejected!"}},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005","name":"cli-pec-000005"}],"nextLink":null}
+      - step: RawStep_3188
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.AppConfiguration/configurationStores/clitestappconfig/privateEndpointConnections/cli-pec-000005?api-version=2020-06-01
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          CommandName: network private-endpoint-connection delete
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '--id -y'
+          User-Agent: python/3.7.3 (Windows-10-10.0.19041-SP0) AZURECLI/2.20.0
+        statusCode: 202
+        responseExpected: >-
+          {"type":"Microsoft.AppConfiguration/configurationStores/privateEndpointConnections","properties":{"provisioningState":"Deleting","privateEndpoint":null,"privateLinkServiceConnectionState":null},"id":null,"name":"cli-pec-000005"}
+    variables:
+      virtualNetworkName: cli-vnet-000002
+      subnetName: cli-subnet-000003
+      privateEndpointName: cli-pe-000004

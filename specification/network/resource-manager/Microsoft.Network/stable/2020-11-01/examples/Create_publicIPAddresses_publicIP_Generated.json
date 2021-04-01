@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test_network_appgw_creation_with_public_and_private_ip000001",
+    "publicIpAddressName": "publicIP",
+    "parameters": {
+      "location": "westus",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Static",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "publicIP",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_appgw_creation_with_public_and_private_ip000001/providers/Microsoft.Network/publicIPAddresses/publicIP",
+        "etag": "W/\"3c0e49b0-391a-4cec-a34a-a2252642442e\"",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "73fe58b3-6435-4fdf-b134-b7893784804b",
+          "ipAddress": "13.64.195.97",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Static",
+          "idleTimeoutInMinutes": 4,
+          "ipTags": []
+        },
+        "type": "Microsoft.Network/publicIPAddresses",
+        "sku": {
+          "name": "Standard",
+          "tier": "Regional"
+        }
+      }
+    }
+  }
+}
