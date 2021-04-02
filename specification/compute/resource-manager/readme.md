@@ -221,7 +221,7 @@ These settings apply only when `--tag=package-2021-03-01-CloudService-Only` is s
 
 ``` yaml $(tag) == 'package-2021-03-01'
 input-file:
-- Microsoft.Compute/stable/2021-03-01/cloudservice.json
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
 ```
 
 ### Tag: package-2021-03-01
