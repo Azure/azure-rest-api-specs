@@ -25,5 +25,5 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ```yaml $(tag) == 'package-2021-03-15' && $(ruby)
 namespace: Microsoft.Quota
-output-folder: $(ruby-sdks-folder)/quota
+output-folder: $(ruby-sdks-folder)/quota-preview
 ```

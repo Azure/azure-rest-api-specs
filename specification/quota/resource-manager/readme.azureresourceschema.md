@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-quota-2021-03-15
+  - tag: schema-quota-2021-03-15-preview
  
 ```
 
