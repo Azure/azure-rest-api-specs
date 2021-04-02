@@ -3712,6 +3712,12 @@
             "$ref": "#/definitions/Customer"
           }
         },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
           "type": "string",
@@ -4584,6 +4590,14 @@
           "items": {
             "$ref": "#/definitions/TargetCloud"
           }
+        },
+        "tags": {
+          "description": "Tags of billing profiles.",
+          "type": "object",
+          "additionalProperties": {
+              "type": "string"
+          },
+          "maxItems": 1000
         }
       }
     },
@@ -4705,6 +4719,12 @@
           "items": {
             "$ref": "#/definitions/InvoiceSection"
           }
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
@@ -5543,6 +5563,12 @@
           "items": {
             "$ref": "#/definitions/BillingSubscription"
           }
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
