@@ -100,6 +100,18 @@ directive:
       - $.definitions.Operation.properties.isDataAction
       - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable 
     reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
+  - from: agfood.json
+    suppress: R4000  # DescriptionAndTitleMissing
+    where:
+      - $.definitions.Error.properties.innererror
+      - $.definitions.ErrorResponse.properties.error
+      - $.definitions.Extension.properties.properties
+      - $.definitions.Extension.properties.systemData
+      - $.definitions.FarmBeats.properties.properties
+      - $.definitions.FarmBeats.properties.systemData
+      - $.definitions.InnerError.properties.innererror
+      - $.definitions.Operation.properties.display
+    reason: Model has description added in it's schema.
   - from: types.json
     suppress: R4000  # DescriptionAndTitleMissing
     where: $.definitions.Resource
