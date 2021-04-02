@@ -4005,6 +4005,10 @@
           "description": "Indicates whether user has read access to the billing account.",
           "type": "boolean",
           "readOnly": true
+        },
+        "notificationEmailAddress": {
+          "description": "Notification email address, only for legacy accounts",
+          "type": "string"
         }
       }
     },
@@ -4229,7 +4233,7 @@
           "type": "boolean",
           "readOnly": true
         },
-        "marketplacesEnabled": {
+        "marketplaceEnabled": {
           "description": "The policy that controls whether Azure marketplace purchases are allowed in the enrollment.",
           "type": "boolean",
           "readOnly": true
@@ -4310,6 +4314,10 @@
         },
         "accountOwner": {
           "description": "The owner of the enrollment account.",
+          "type": "string"
+        },
+        "accountOwnerEmail": {
+          "description": "The enrollment account owner email address.",
           "type": "string"
         },
         "status": {
@@ -4605,6 +4613,10 @@
       "properties": {
         "firstName": {
           "description": "First name.",
+          "type": "string"
+        },
+        "middleName": {
+          "description": "Middle name.",
           "type": "string"
         },
         "lastName": {
@@ -6057,6 +6069,11 @@
           "type": "string",
           "readOnly": true
         },
+        "isDataAction": {
+          "description": "Identies if the operation is a data operation.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "display": {
           "description": "The object that represents the operation.",
           "properties": {
@@ -6072,6 +6089,11 @@
             },
             "operation": {
               "description": "Operation type such as read, write and delete.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Description of operation.",
               "type": "string",
               "readOnly": true
             }
