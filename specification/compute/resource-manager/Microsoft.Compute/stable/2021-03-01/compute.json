@@ -12554,6 +12554,10 @@
             "modelAsString": true
           }
         },
+        "enableHotpatching": {
+          "type": "boolean",
+          "description": "Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode' must be set to 'AutomaticByPlatform'."
+        },
         "assessmentMode": {
           "type": "string",
           "description": "Specifies the mode of VM Guest patch assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine.<br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true. ",
@@ -12565,10 +12569,6 @@
             "name": "WindowsPatchAssessmentMode",
             "modelAsString": true
           }
-        },
-        "enableHotpatching": {
-          "type": "boolean",
-          "description": "Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode' must be set to 'AutomaticByPlatform'."
         }
       },
       "description": "Specifies settings related to VM Guest Patching on Windows."
