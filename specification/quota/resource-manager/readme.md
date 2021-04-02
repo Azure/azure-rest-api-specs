@@ -140,6 +140,10 @@ See configuration in [readme.azureresourceschema.md](./readme.azureresourceschem
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## Ruby
+
+See configuration in [readme.java.md](./readme.ruby.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
