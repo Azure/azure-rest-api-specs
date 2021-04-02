@@ -26,6 +26,14 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-2021-03-15' && $(java) && $(multiapi)
 java:
+  namespace: com.microsoft.azure.management.quota.v2021_03_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/quota/mgmt-v2021_03_15
+regenerate-manager: true
+generate-interface: true
+```
+
+``` yaml $(tag) == 'package-2021-03-15-preview' && $(java) && $(multiapi)
+java:
   namespace: com.microsoft.azure.management.quota.v2021_03_15_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/quota/mgmt-v2021_03_15_preview
 regenerate-manager: true
