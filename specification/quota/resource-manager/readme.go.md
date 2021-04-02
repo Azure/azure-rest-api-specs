@@ -6,7 +6,7 @@ These settings apply only when `--go` is specified on the command line.
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
-  namespace: reservations
+  namespace: quota
 ```
 
 ### Go multi-api

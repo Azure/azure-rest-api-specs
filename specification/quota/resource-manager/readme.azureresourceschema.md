@@ -23,14 +23,14 @@ input-file:
 
 ```
 
-### Tag: schema-quota-2020-10-25 and azureresourceschema
+### Tag: schema-quota-2021-03-15 and azureresourceschema
 
-``` yaml $(tag) == 'schema-quota-2020-10-25' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-quota-2021-03-15' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Quota/stable/2020-10-25/quota.json
+  - Microsoft.Quota/stable/2021-03-15/quota.json
 
 ```
 
