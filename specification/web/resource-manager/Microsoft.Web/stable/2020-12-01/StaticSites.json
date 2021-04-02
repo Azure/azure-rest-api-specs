@@ -2730,6 +2730,14 @@
           "$ref": "#/definitions/StaticSiteTemplateOptions",
           "description": "Template options for generating a new repository."
         },
+        "privateEndpointConnections": {
+          "description": "Private endpoint connections",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResponseMessageEnvelope[RemotePrivateEndpointConnection]"
+          },
+          "readOnly": true
+        },
         "contentDistributionEndpoint": {
           "description": "The content distribution endpoint for the static site.",
           "type": "string",
