@@ -48,7 +48,17 @@ These settings apply only when `--tag=package-2021-03-15-preview` is specified o
 input-file:
   - Microsoft.Quota/preview/2021-03-15/quota.json
 ```
+### Supressions
 
+``` yaml
+directive:
+- suppress:
+    - R3007 # The 'PutGetPatchResponseSchema' Both get and put/Patch is using same data model - CurrentQuotaLimitBase.
+    - R4009 # The 'RequiredReadOnlySystemData' It will be added later, if needed.
+    - R4018 # The 'OperationsApiResponseSchema' It will be added later, if needed. The current API provides in this format.
+```
+
+---
 ---
 # Code Generation
 
