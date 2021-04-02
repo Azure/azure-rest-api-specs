@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "installationsName": "testInstallation",
+    "resourceGroupName": "testRG",
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "installations": {
+      "location": "eastus",
+      "extendedLocation": {
+        "type": "customLocation",
+        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/testRG/providers/microsoft.extendedlocation/customlocations/customLocation"
+      },
+      "properties": {
+        "reference": "getporter/porter-hello:v0.1.1",
+        "action": "install"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "testInstallation",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Contoso/installations/testInstallation",
+        "type": "Microsoft.Contoso/installations",
+        "location": "East US",
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/testRG/providers/microsoft.extendedlocation/customlocations/customLocation"
+        },
+        "properties": {
+          "reference": "getporter/porter-hello:v0.1.1",
+          "action": "install"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "testInstallation",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Contoso/installations/testInstallation",
+        "type": "Microsoft.Contoso/installations",
+        "location": "East US",
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/testRG/providers/microsoft.extendedlocation/customlocations/customLocation"
+        },
+        "properties": {
+          "reference": "getporter/porter-hello:v0.1.1",
+          "action": "install"
+        }
+      }
+    }
+  }
+}

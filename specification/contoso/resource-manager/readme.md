@@ -39,4 +39,24 @@ input-file:
   - Microsoft.Contoso/preview/2020-01-01-preview/tower.json
 ```
 
----
+### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+  - Microsoft.Contoso/preview/2021-04-01-preview/cnab.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: RequiredReadOnlySystemData
+    from: cnab.json
+    reason: This is an RPaaS Bridge type
+```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
