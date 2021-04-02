@@ -5725,16 +5725,16 @@
     },
     "DatastoreCredentials": {
       "required": [
-        "type"
+        "credentialsType"
       ],
       "type": "object",
       "properties": {
-        "type": {
+        "credentialsType": {
           "description": "Credential type used to authentication with storage.",
           "$ref": "#/definitions/CredentialsType"
         }
       },
-      "discriminator": "type",
+      "discriminator": "credentialsType",
       "additionalProperties": false
     },
     "AccountKeyCredentials": {
@@ -5912,22 +5912,22 @@
     },
     "DatastoreContents": {
       "required": [
-        "type"
+        "contentsType"
       ],
       "type": "object",
       "properties": {
-        "type": {
+        "contentsType": {
           "description": "Storage type backing the datastore.",
           "$ref": "#/definitions/ContentsType"
         }
       },
-      "discriminator": "type",
+      "discriminator": "contentsType",
       "additionalProperties": false
     },
     "DatastoresContentsWithCredentials": {
       "required": [
         "credentials",
-        "type"
+        "contentsType"
       ],
       "type": "object",
       "allOf": [
@@ -5940,7 +5940,7 @@
           "$ref": "#/definitions/DatastoreCredentials"
         }
       },
-      "discriminator": "type",
+      "discriminator": "contentsType",
       "additionalProperties": false
     },
     "AzureStorageContents": {
@@ -5950,7 +5950,7 @@
         "credentials",
         "endpoint",
         "protocol",
-        "type"
+        "contentsType"
       ],
       "type": "object",
       "allOf": [
@@ -5998,7 +5998,7 @@
           ]
         }
       },
-      "discriminator": "type",
+      "discriminator": "contentsType",
       "additionalProperties": false
     },
     "AzureBlobContents": {
@@ -6016,7 +6016,7 @@
         }
       ],
       "properties": {
-        "type": {
+        "contentsType": {
           "$ref": "#/definitions/ContentsType",
           "readOnly": true
         }
@@ -6036,7 +6036,7 @@
         }
       ],
       "properties": {
-        "type": {
+        "contentsType": {
           "$ref": "#/definitions/ContentsType",
           "readOnly": true
         },
@@ -6064,7 +6064,7 @@
         }
       ],
       "properties": {
-        "type": {
+        "contentsType": {
           "$ref": "#/definitions/ContentsType",
           "readOnly": true
         }
@@ -6087,7 +6087,7 @@
         }
       ],
       "properties": {
-        "type": {
+        "contentsType": {
           "$ref": "#/definitions/ContentsType",
           "readOnly": true
         }
@@ -6102,7 +6102,7 @@
         "endpoint",
         "portNumber",
         "serverName",
-        "type"
+        "contentsType"
       ],
       "type": "object",
       "allOf": [
@@ -6111,7 +6111,7 @@
         }
       ],
       "properties": {
-        "type": {
+        "contentsType": {
           "$ref": "#/definitions/ContentsType"
         },
         "databaseName": {
@@ -6152,7 +6152,7 @@
           ]
         }
       },
-      "discriminator": "type",
+      "discriminator": "contentsType",
       "x-ms-discriminator-value": "AzureSqlDatabase",
       "additionalProperties": false
     },
@@ -6171,7 +6171,7 @@
         }
       ],
       "properties": {
-        "type": {
+        "contentsType": {
           "$ref": "#/definitions/ContentsType",
           "readOnly": true
         },
@@ -6564,11 +6564,11 @@
     "DockerSpecification": {
       "description": "Class to represent configuration settings for Docker",
       "required": [
-        "type"
+        "dockerSpecificationType"
       ],
       "type": "object",
       "properties": {
-        "type": {
+        "dockerSpecificationType": {
           "description": "Docker specification must be either Build or Image",
           "$ref": "#/definitions/DockerSpecificationType",
           "x-ms-mutability": [
@@ -6585,7 +6585,7 @@
           ]
         }
       },
-      "discriminator": "type",
+      "discriminator": "dockerSpecificationType",
       "additionalProperties": false
     },
     "DockerImage": {
@@ -6688,7 +6688,7 @@
       "description": "Data Transfer Object (DTO) for an Execution Environment Specification. Name and\r\nversion should default to the AzureML-Minimal environment version tested with the\r\ncurrent SDK client version as this is a main use-case.\r\n<see href=\"https://repo2docker.readthedocs.io/en/latest/specification.html\" />",
       "type": "object",
       "properties": {
-        "type": {
+        "environmentSpecificationType": {
           "description": "Environment specification is either user managed or curated by the Azure ML service\r\n<see href=\"https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments\" />",
           "$ref": "#/definitions/EnvironmentSpecificationType",
           "readOnly": true,
@@ -6861,7 +6861,7 @@
       "description": "Job endpoint definition",
       "type": "object",
       "properties": {
-        "type": {
+        "jobEndpointType": {
           "description": "Endpoint type.",
           "type": "string",
           "x-ms-mutability": [
@@ -8620,11 +8620,11 @@
     "OnlineDeployment": {
       "required": [
         "model",
-        "type"
+        "endpointComputeType"
       ],
       "type": "object",
       "properties": {
-        "type": {
+        "endpointComputeType": {
           "$ref": "#/definitions/EndpointComputeType"
         },
         "scaleSettings": {
@@ -8677,7 +8677,7 @@
           }
         }
       },
-      "discriminator": "type",
+      "discriminator": "endpointComputeType",
       "additionalProperties": false
     },
     "K8sOnlineDeployment": {
@@ -8775,11 +8775,11 @@
     "PartialOnlineDeployment": {
       "description": "Mutable online deployment configuration",
       "required": [
-        "type"
+        "endpointComputeType"
       ],
       "type": "object",
       "properties": {
-        "type": {
+        "endpointComputeType": {
           "$ref": "#/definitions/EndpointComputeType"
         },
         "scaleSettings": {
@@ -8795,7 +8795,7 @@
           "$ref": "#/definitions/ProbeSettings"
         }
       },
-      "discriminator": "type",
+      "discriminator": "endpointComputeType",
       "additionalProperties": false
     },
     "K8sPartialOnlineDeployment": {
