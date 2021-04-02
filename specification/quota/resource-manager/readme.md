@@ -38,8 +38,6 @@ input-file:
   - Microsoft.Quota/stable/2021-03-15/quota.json
 ```
 
----
-
 ### Tag: package-2021-03-15-preview
 
 These settings apply only when `--tag=package-2021-03-15-preview` is specified on the command line.
@@ -48,6 +46,8 @@ These settings apply only when `--tag=package-2021-03-15-preview` is specified o
 input-file:
   - Microsoft.Quota/preview/2021-03-15/quota.json
 ```
+
+---
 ### Supressions
 
 ``` yaml
