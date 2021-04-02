@@ -26,14 +26,14 @@ These are the global settings for the Quota API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-03-15
+tag: package-2021-03-15-preview
 ```
 
-### Tag: package-preview-2021-03-15
+### Tag: package-2021-03-15-preview
 
-These settings apply only when `--tag=package-preview-2021-03-15` is specified on the command line.
+These settings apply only when `--tag=package-2021-03-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-03-15'
+```yaml $(tag) == 'package-2021-03-15-preview'
 input-file:
   - Microsoft.Quota/preview/2021-03-15/quota.json
 ```
@@ -51,9 +51,14 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js reservations/resource-manager
 ```
 
 ## C#
@@ -100,9 +105,29 @@ python:
   output-folder: $(python-sdks-folder)/quota/azure-mgmt-quota
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
+
+## AZ
+
+ See configuration in [readme.az.md](./readme.az.md)
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
