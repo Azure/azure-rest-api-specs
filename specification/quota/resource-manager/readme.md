@@ -93,7 +93,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Quota
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/reservations/Microsoft.Azure.Management.Reservations/src/Generated
+  output-folder: $(csharp-sdks-folder)/quota/Microsoft.Azure.Management.Quota/src/Generated
   clear-output-folder: true
 ```
 
