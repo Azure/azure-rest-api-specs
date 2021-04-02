@@ -210,6 +210,15 @@ directive:
 
 ```
 
+### Tag: package-2021-03-01-CloudService-Only
+
+These settings apply only when `--tag=package-2021-03-01-CloudService-Only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01'
+input-file:
+- Microsoft.Compute/stable/2021-03-01/cloudservice.json
+```
+
 ### Tag: package-2021-03-01
 
 These settings apply only when `--tag=package-2021-03-01` is specified on the command line.
