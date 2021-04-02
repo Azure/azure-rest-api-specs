@@ -2688,6 +2688,160 @@
     }
   },
   "definitions": {
+    "ArmPlan": {
+      "description": "The plan object in Azure Resource Manager, represents a marketplace plan.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "The publisher.",
+          "type": "string"
+        },
+        "product": {
+          "description": "The product.",
+          "type": "string"
+        },
+        "promotionCode": {
+          "description": "The promotion code.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of product.",
+          "type": "string"
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "description": "A remote private endpoint connection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "RemotePrivateEndpointConnection resource specific properties",
+          "properties": {
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true
+            },
+            "privateEndpoint": {
+              "$ref": "./CommonDefinitions.json#/definitions/ArmIdWrapper",
+              "description": "PrivateEndpoint of a remote private endpoint connection"
+            },
+            "privateLinkServiceConnectionState": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionState"
+            },
+            "ipAddresses": {
+              "description": "Private IPAddresses mapped to the remote private endpoint",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ResponseMessageEnvelopeIdentity": {
+      "description": "MSI property in ARM response envelope",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of managed service identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "description": "Tenant of managed service identity.",
+          "type": "string"
+        },
+        "principalId": {
+          "description": "Principal Id of managed service identity.",
+          "type": "string"
+        },
+        "userAssignedIdentities": {
+          "description": "Dictionary of User Assigned Managed Service Identities with ResourceId as Key",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityInformation"
+          }
+        }
+      }
+    },
+    "ResponseMessageEnvelope[RemotePrivateEndpointConnection]": {
+      "description": "Message envelope that contains the common Azure resource manager properties and the resource provider specific content.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id. Typically ID is populated only for responses to GET requests. Caller is responsible for passing in this\nvalue for GET requests only.\nFor example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupId}/providers/Microsoft.Web/sites/{sitename}",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of resource e.g \"Microsoft.Web/sites\".",
+          "type": "string"
+        },
+        "location": {
+          "description": "Geographical region resource belongs to e.g. SouthCentralUS, SouthEastAsia.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags associated with resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "plan": {
+          "$ref": "#/definitions/ArmPlan",
+          "description": "Azure resource manager plan."
+        },
+        "properties": {
+          "$ref": "#/definitions/RemotePrivateEndpointConnection",
+          "description": "Resource specific properties."
+        },
+        "sku": {
+          "$ref": "./CommonDefinitions.json#/definitions/SkuDescription",
+          "description": "SKU description of the resource."
+        },
+        "status": {
+          "description": "Azure-AsyncOperation Status info.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "./CommonDefinitions.json#/definitions/ErrorEntity",
+          "description": "Azure-AsyncOperation Error info."
+        },
+        "identity": {
+          "$ref": "#/definitions/ResponseMessageEnvelopeIdentity",
+          "description": "MSI resource"
+        },
+        "zones": {
+          "description": "Logical Availability Zones the service is hosted in",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "StaticSite": {
       "description": "A static site.",
       "type": "object",
