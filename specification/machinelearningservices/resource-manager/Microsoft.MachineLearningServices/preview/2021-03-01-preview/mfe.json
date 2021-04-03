@@ -670,7 +670,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/EndpointAuthKeysTrackedResource"
+              "$ref": "#/definitions/EndpointAuthKeys"
             }
           }
         },
@@ -5442,40 +5442,6 @@
         },
         "nextLink": {
           "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "EndpointAuthKeysTrackedResource": {
-      "required": [
-        "location",
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "kind": {
-          "type": "string"
-        },
-        "identity": {
-          "description": "Service identity associated with a resource.",
-          "$ref": "#/definitions/ResourceIdentityInArm"
-        },
-        "properties": {
-          "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/EndpointAuthKeys"
-        },
-        "systemData": {
-          "description": "System data associated with resource provider",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
         }
       },
       "additionalProperties": false
