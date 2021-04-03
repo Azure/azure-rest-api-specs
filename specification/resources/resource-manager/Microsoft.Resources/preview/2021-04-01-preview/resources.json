@@ -2908,7 +2908,10 @@
           ],
           "responses": {
               "202": {
-                  "description": "Accepted"                    
+                  "description": "Accepted",
+                  "schema": {
+                    "type": "string",
+                    "description": "token"
               },
               "default": {
                   "description": "Error response describing why the operation failed.",
@@ -2993,7 +2996,7 @@
           }
       }
   },
-  "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/FinalizeResourceCopy/{token}": {
+  "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/finalizeResourceCopy/{token}": {
       "post": {
           "tags": [
               "Resources"
@@ -5925,9 +5928,9 @@
                                 "InProgress"
                             ],
                             "x-ms-enum": {
-                                "name": "ProvisioningState",
+                                "name": "CopyState",
                                 "modelAsString": true
-                            }                    
+                            }
                         }
                     }
                 },
