@@ -61,9 +61,19 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2019-06-preview
+tag: package-preview-2021-04
 ```
 
+
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.Resources/preview/2021-04-01-preview/resources.json
+  - Microsoft.Resources/preview/2021-04-01-preview/subscriptions.json
+```
 ### Tag: package-resources-2021-01
 
 These settings apply only when `--tag=package-resources-2021-01` is specified on the command line.
@@ -98,8 +108,6 @@ These settings apply only when `--tag=package-preview-2020-08` is specified on t
 input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
-
-
 
 ### Tag: package-subscriptions-2021-01
 
