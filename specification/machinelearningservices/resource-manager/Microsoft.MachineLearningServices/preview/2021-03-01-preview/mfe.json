@@ -5276,6 +5276,28 @@
       },
       "additionalProperties": false
     },
+    "EndpointAuthKeys": {
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "description": "The primary key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "secondaryKey": {
+          "description": "The secondary key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
     "BatchEndpoint": {
       "description": "Batch endpoint configuration",
       "type": "object",
@@ -5319,6 +5341,14 @@
           "x-ms-mutability": [
             "read"
           ]
+        },
+        "keys": {
+          "description": "EndpointAuthKeys to set initially on an Endpoint.\r\nThis property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.",
+          "$ref": "#/definitions/EndpointAuthKeys",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
         }
       },
       "additionalProperties": false
@@ -5412,30 +5442,6 @@
         },
         "nextLink": {
           "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "EndpointAuthKeys": {
-      "type": "object",
-      "properties": {
-        "primaryKey": {
-          "description": "The primary key.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-ms-secret": true
-        },
-        "secondaryKey": {
-          "description": "The secondary key.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-ms-secret": true
         }
       },
       "additionalProperties": false
@@ -8985,6 +8991,14 @@
         "authMode": {
           "description": "Inference endpoint authentication mode type",
           "$ref": "#/definitions/EndpointAuthMode"
+        },
+        "keys": {
+          "description": "EndpointAuthKeys to set initially on an Endpoint.\r\nThis property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.",
+          "$ref": "#/definitions/EndpointAuthKeys",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
         }
       },
       "additionalProperties": false
