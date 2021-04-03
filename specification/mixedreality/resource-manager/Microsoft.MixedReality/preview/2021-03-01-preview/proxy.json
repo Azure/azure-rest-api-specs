@@ -256,6 +256,10 @@
           "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.",
           "type": "string"
         },
+        "supportedAggregationType": {
+          "description": "Supported aggregation types. Valid values: Average, Minimum, Maximum, Total, Count.",
+          "type": "array"
+        },
         "internalMetricName": {
           "description": "Internal metric name.",
           "type": "string"
@@ -267,6 +271,9 @@
           "items": {
             "$ref": "#/definitions/MetricDimension"
           }
+        },
+        "lockedAggregationType":{
+          "description": "Locked aggregation type of the metric"
         }
       }
     },
@@ -285,6 +292,10 @@
         "internalName": {
           "description": "Internal name of the dimension.",
           "type": "string"
+        },
+        "toBeExportedForShoebox":{
+          "description": "Flag to indicate export for Shoebox",
+          "type":"boolean"
         }
       }
     },
