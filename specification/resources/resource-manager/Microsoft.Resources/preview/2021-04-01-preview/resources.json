@@ -3002,8 +3002,8 @@
               "Resources"
           ],
           "operationId": "Resources_FinalizeResourceCopy",
-          "summary": "Gets all resource copy status under the given subscription.",
-          "description": "This operation returns all resource copy status under the given subscription.",
+          "summary": "Finalizes resource copy for the given resource",
+          "description": "Finalizes resource copy.",
           "parameters": [
               {
                   "$ref": "#/parameters/ApiVersionParameter"
@@ -3055,13 +3055,7 @@
               "202": {
                   "description": "Accepted"
                   }
-              },
-              "default": {
-                  "description": "Error response describing why the operation failed.",
-                  "schema": {
-                      "$ref": "#/definitions/CloudError"
-                }
-            }
+              }
         }
     },
     "/subscriptions/{subscriptionId}/resources": {
