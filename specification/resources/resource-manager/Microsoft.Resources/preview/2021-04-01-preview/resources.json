@@ -2910,8 +2910,7 @@
               "202": {
                   "description": "Accepted",
                   "schema": {
-                    "type": "string",
-                    "description": "token"
+                    "$ref": "#/definitions/ResourceCopyResponse"
               },
               "default": {
                   "description": "Error response describing why the operation failed.",
@@ -5903,6 +5902,14 @@
             "targetLocation",
             "resources"
         ]
+    },
+    "ResourceCopyResponse" : {
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Resource copy token."
+        }
+      }
     },
     "ResourceCopyStatus": {
         "properties": {
