@@ -5360,6 +5360,16 @@
     "PartialBatchEndpoint": {
       "description": "Mutable Batch endpoint configuration",
       "type": "object",
+      "properties": {
+        "traffic": {
+          "description": "Traffic rules on how the traffic will be routed across deployments.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
       "additionalProperties": false
     },
     "PartialBatchEndpointPartialTrackedResource": {
