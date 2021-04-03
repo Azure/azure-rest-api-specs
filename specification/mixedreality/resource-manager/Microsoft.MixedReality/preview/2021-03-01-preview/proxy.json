@@ -258,7 +258,10 @@
         },
         "supportedAggregationType": {
           "description": "Supported aggregation types. Valid values: Average, Minimum, Maximum, Total, Count.",
-          "type": "array"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification/properties/aggregationType"
+          }
         },
         "internalMetricName": {
           "description": "Internal metric name.",
