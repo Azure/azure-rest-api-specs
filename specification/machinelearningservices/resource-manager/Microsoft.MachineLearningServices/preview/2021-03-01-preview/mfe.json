@@ -6815,185 +6815,6 @@
       },
       "additionalProperties": false
     },
-    "JobOutput": {
-      "type": "object",
-      "properties": {
-        "datastoreId": {
-          "description": "ARM ID of the datastore where the job logs and artifacts are stored, or null for the default container (\"azureml\") in the workspace's storage account.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "path": {
-          "description": "Path within the datastore to the job logs and artifacts.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "JobProvisioningState": {
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "InProgress"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "JobProvisioningState",
-        "modelAsString": true
-      },
-      "additionalProperties": false
-    },
-    "JobEndpoint": {
-      "description": "Job endpoint definition",
-      "type": "object",
-      "properties": {
-        "jobEndpointType": {
-          "description": "Endpoint type.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "port": {
-          "format": "int32",
-          "description": "Port for endpoint.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "endpoint": {
-          "description": "Url for endpoint.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "JobBase": {
-      "description": "Job base definition",
-      "required": [
-        "jobType"
-      ],
-      "type": "object",
-      "properties": {
-        "jobType": {
-          "description": "Specifies the type of job.",
-          "$ref": "#/definitions/JobType",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/JobProvisioningState",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "interactionEndpoints": {
-          "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/JobEndpoint"
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "description": {
-          "description": "The asset description text.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "discriminator": "jobType",
-      "additionalProperties": false
-    },
-    "ComputeJobBase": {
-      "description": "Compute job base definition",
-      "required": [
-        "compute",
-        "jobType"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobBase"
-        }
-      ],
-      "properties": {
-        "experimentName": {
-          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "compute": {
-          "description": "Compute binding for the job.",
-          "$ref": "#/definitions/ComputeConfiguration",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "output": {
-          "description": "Location of the job output logs and artifacts.",
-          "$ref": "#/definitions/JobOutput",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "priority": {
-          "format": "int32",
-          "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview  is only for whitelisted customers",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "discriminator": "jobType",
-      "additionalProperties": false
-    },
     "DataBindingMode": {
       "description": "Describes how the data should be attached to the container.",
       "enum": [
@@ -7249,6 +7070,185 @@
         }
       },
       "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
+    },
+    "JobOutput": {
+      "type": "object",
+      "properties": {
+        "datastoreId": {
+          "description": "ARM ID of the datastore where the job logs and artifacts are stored, or null for the default container (\"azureml\") in the workspace's storage account.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "path": {
+          "description": "Path within the datastore to the job logs and artifacts.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "JobProvisioningState": {
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobProvisioningState",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "JobEndpoint": {
+      "description": "Job endpoint definition",
+      "type": "object",
+      "properties": {
+        "jobEndpointType": {
+          "description": "Endpoint type.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "port": {
+          "format": "int32",
+          "description": "Port for endpoint.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "description": "Url for endpoint.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "JobBase": {
+      "description": "Job base definition",
+      "required": [
+        "jobType"
+      ],
+      "type": "object",
+      "properties": {
+        "jobType": {
+          "description": "Specifies the type of job.",
+          "$ref": "#/definitions/JobType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/JobProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "interactionEndpoints": {
+          "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JobEndpoint"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "discriminator": "jobType",
+      "additionalProperties": false
+    },
+    "ComputeJobBase": {
+      "description": "Compute job base definition",
+      "required": [
+        "compute",
+        "jobType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobBase"
+        }
+      ],
+      "properties": {
+        "experimentName": {
+          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "compute": {
+          "description": "Compute binding for the job.",
+          "$ref": "#/definitions/ComputeConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "output": {
+          "description": "Location of the job output logs and artifacts.",
+          "$ref": "#/definitions/JobOutput",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview  is only for whitelisted customers",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "jobType",
       "additionalProperties": false
     },
     "CommandJob": {
