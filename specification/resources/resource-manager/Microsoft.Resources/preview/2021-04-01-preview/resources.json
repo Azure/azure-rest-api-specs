@@ -2910,7 +2910,7 @@
               "202": {
                   "description": "Accepted",
                   "schema": {
-                    "$ref": "#/definitions/ResourceCopyResponse"
+                    "$ref": "#/definitions/ResourceCopyToken"
                   }
               },
               "default": {
@@ -2996,7 +2996,7 @@
           }
       }
   },
-  "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/finalizeResourceCopy/{token}": {
+  "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/finalizeResourceCopy": {
       "post": {
           "tags": [
               "Resources"
@@ -3043,11 +3043,12 @@
                   "description": "Resource name."
               },
               {
-                  "name": "token",
-                  "in": "path",
-                  "required": true,
-                  "type": "string",
-                  "description": "Resource copy token."
+                "name": "parameters",
+                "in": "body",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/ResourceCopyToken"
+                }
               }
           ],
           "responses": {
@@ -5904,7 +5905,7 @@
             "resources"
         ]
     },
-    "ResourceCopyResponse" : {
+    "ResourceCopyToken" : {
       "properties": {
         "token": {
           "type": "string",
