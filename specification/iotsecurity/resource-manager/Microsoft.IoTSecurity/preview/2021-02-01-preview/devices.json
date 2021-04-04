@@ -58,6 +58,13 @@
           },
           {
             "$ref": "#/parameters/DeviceGroupName"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "required": false,
+            "type": "string",
+            "description": "Skip token used for pagination"
           }
         ],
         "responses": {
@@ -106,13 +113,6 @@
           },
           {
             "$ref": "#/parameters/DeviceId"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "required": false,
-            "type": "string",
-            "description": "Skip token used for pagination"
           }
         ],
         "responses": {
@@ -223,7 +223,7 @@
           },
           "description": "Device onboarding status."
         },
-        "name": {
+        "deviceName": {
           "type": "string",
           "description": "Device name"
         },
@@ -285,7 +285,7 @@
           },
           "description": "Device criticality."
         },
-        "tags": {
+        "deviceTags": {
           "type": "array",
           "description": "Device tags",
           "items": {
@@ -308,7 +308,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Last time the device was updated."
+          "description": "Last time the device was updated by the profiler."
         },
         "hardware": {
           "type": "object",
