@@ -182,6 +182,51 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates": {
+      "get": {
+        "x-ms-examples": {
+          "Get all Sentinel onboarding states": {
+            "$ref": "./examples/alertRules/GetAllSentinelOnboardingStates.json"
+          }
+        },
+        "tags": [
+          "SentinelOnboardingStates"
+        ],
+        "description": "Gets all Sentinel onboarding states",
+        "operationId": "SentinelOnboardingStates_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingStatesList"
+            }
+          },
+          "default": {
+            "description": "Error in listing the Sentinel onboarding states",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -210,6 +255,21 @@
         }
       },
       "type": "object"
+    },
+    "SentinelOnboardingStatesList": {
+      "description": "List of the Sentinel onboarding states",
+      "properties": {
+        "value": {
+          "description": "Array of Sentinel onboarding states",
+          "items": {
+            "$ref": "#/definitions/SentinelOnboardingState"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
     }
   },
   "parameters": {
