@@ -61,7 +61,7 @@ directive:
     reason: The Setting does not support list by subscription. It's not a top-level resource. To get the Setting, we should have a subscription as well as a resource group and Log Analytics workspace.
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/OnboardingStates.json
-    where: $.definitions.OnboardingStates
+    where: $.definitions.SentinelOnboardingState
     reason: The SentinelOnboardingState does not support list by subscription. It's not a top-level resource. To get the SentinelOnboardingState, we should have a subscription as well as a resource group and Log Analytics workspace.
 ```
 

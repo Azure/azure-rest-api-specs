@@ -45,7 +45,7 @@
           "SentinelOnboardingStates"
         ],
         "description": "Get Sentinel onboarding state",
-        "operationId": "SentinelOnboardingState_Get",
+        "operationId": "SentinelOnboardingStates_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -91,7 +91,7 @@
           "SentinelOnboardingStates"
         ],
         "description": "Create Sentinel onboarding state",
-        "operationId": "SentinelOnboardingState_Create",
+        "operationId": "SentinelOnboardingStates_Create",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -146,7 +146,7 @@
           "SentinelOnboardingStates"
         ],
         "description": "Delete Sentinel onboarding state",
-        "operationId": "SentinelOnboardingState_Delete",
+        "operationId": "SentinelOnboardingStates_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -193,9 +193,11 @@
       ],
       "description": "Sentinel onboarding state",
       "properties": {
-        "customerManagedKey": {
-          "description": "Flag that indicates the status of the CMK setting",
-          "type": "boolean"
+        "properties": {
+          "customerManagedKey": {
+            "description": "Flag that indicates the status of the CMK setting",
+            "type": "boolean"
+          }
         }
       },
       "type": "object"
