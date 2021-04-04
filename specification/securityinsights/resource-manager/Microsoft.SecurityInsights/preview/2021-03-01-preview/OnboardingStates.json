@@ -42,7 +42,7 @@
           }
         },
         "tags": [
-          "SentinelOnboardingState"
+          "SentinelOnboardingStates"
         ],
         "description": "Get Sentinel onboarding state",
         "operationId": "SentinelOnboardingState_Get",
@@ -88,10 +88,10 @@
           }
         },
         "tags": [
-          "SentinelOnboardingState"
+          "SentinelOnboardingStates"
         ],
         "description": "Create Sentinel onboarding state",
-        "operationId": "SentinelOnboardingState_Update",
+        "operationId": "SentinelOnboardingState_Create",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -143,7 +143,7 @@
           }
         },
         "tags": [
-          "SentinelOnboardingState"
+          "SentinelOnboardingStates"
         ],
         "description": "Delete Sentinel onboarding state",
         "operationId": "SentinelOnboardingState_Delete",
@@ -186,6 +186,11 @@
   },
   "definitions": {
     "SentinelOnboardingState": {
+      "allOf": [
+        {
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
       "description": "Sentinel onboarding state",
       "properties": {
         "customerManagedKey": {
