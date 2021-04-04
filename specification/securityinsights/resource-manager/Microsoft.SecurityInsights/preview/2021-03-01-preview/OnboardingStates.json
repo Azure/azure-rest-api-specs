@@ -193,12 +193,20 @@
       ],
       "description": "Sentinel onboarding state",
       "properties": {
-        "properties": {
-          "customerManagedKey": {
-            "description": "Flag that indicates the status of the CMK setting",
-            "type": "boolean"
-          },
-          "x-ms-client-flatten": true
+      },
+      "type": "object"
+    },
+    "DefaultSentinelOnboardingState": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SentinelOnboardingState"
+        }
+      ],
+      "description": "Default Sentinel onboarding state",
+      "properties": {
+        "customerManagedKey": {
+          "description": "Flag that indicates the status of the CMK setting",
+          "type": "boolean"
         }
       },
       "type": "object"
