@@ -4377,6 +4377,12 @@
           "$ref": "#/definitions/InventoryItemProperties"
         }
       ],
+      "properties": {
+        "parent": {
+          "description": "Parent resourcePool inventory resource details.",
+          "$ref": "#/definitions/InventoryItemDetails"
+        }
+      },
       "x-ms-discriminator-value": "ResourcePool"
     },
     "VirtualMachineInventoryItem": {
@@ -4406,6 +4412,14 @@
         "folderPath": {
           "description": "Gets or sets the folder path of the vm.",
           "type": "string"
+        },
+        "host": {
+          "description": "Host inventory resource details.",
+          "$ref": "#/definitions/InventoryItemDetails"
+        },
+        "resourcePool": {
+          "description": "ResourcePool inventory resource details.",
+          "$ref": "#/definitions/InventoryItemDetails"
         }
       },
       "x-ms-discriminator-value": "VirtualMachine"
@@ -4471,6 +4485,20 @@
       "x-ms-enum": {
         "name": "InventoryType",
         "modelAsString": true
+      }
+    },
+    "InventoryItemDetails": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "inventoryItemId": {
+          "description": "Gets or sets the inventory Item ID for the resource.",
+          "type": "string"
+        },
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the resource.",
+          "type": "string"
+        }
       }
     },
     "HybridIdentityMetadataList": {
