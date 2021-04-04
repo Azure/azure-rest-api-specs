@@ -620,10 +620,18 @@
             "modelAsString": true
           }
         },
-        "privateLinkEnabled": {
-          "type": "boolean",
-          "default": false,
-          "description": "Boolean property which represents if a connected cluster resource has been enabled for private link."
+        "privateLinkState": {
+          "type": "string",
+          "description": "Property which describes the state of private link on a connected cluster resource.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkState",
+            "modelAsString": true
+          }
         },
         "privateLinkScopeResourceId": {
           "type": "string",
@@ -705,9 +713,17 @@
     "ConnectedClusterPatchProperties": {
       "type": "object",
       "properties": {
-        "privateLinkEnabled": {
-          "type": "boolean",
-          "description": "Boolean property which represents if a connected cluster resource has been enabled for private link."
+        "privateLinkState": {
+          "type": "string",
+          "description": "Property which describes the state of private link on a connected cluster resource.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkState",
+            "modelAsString": true
+          }
         },
         "privateLinkScopeResourceId": {
           "type": "string",
