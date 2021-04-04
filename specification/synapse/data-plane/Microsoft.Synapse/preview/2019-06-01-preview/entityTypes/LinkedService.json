@@ -104,6 +104,7 @@
     },
     "AzureStorageLinkedServiceTypeProperties": {
       "description": "Azure Storage linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The connection string. It is mutually exclusive with sasUri property. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -129,6 +130,7 @@
     },
     "AzureBlobStorageLinkedServiceTypeProperties": {
       "description": "Azure Blob Storage linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "type": "object",
@@ -162,6 +164,10 @@
           "type": "object",
           "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
         },
+        "azureCloudType": {
+          "type": "object",
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
+        },
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
@@ -190,6 +196,7 @@
     },
     "AzureSqlDWLinkedServiceTypeProperties": {
       "description": "Azure SQL Data Warehouse linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -210,6 +217,10 @@
         "tenant": {
           "type": "object",
           "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "azureCloudType": {
+          "type": "object",
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -242,6 +253,7 @@
     },
     "SqlServerLinkedServiceTypeProperties": {
       "description": "SQL Server linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -286,6 +298,7 @@
     },
     "AzureSqlDatabaseLinkedServiceTypeProperties": {
       "description": "Azure SQL Database linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -306,6 +319,10 @@
         "tenant": {
           "type": "object",
           "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "azureCloudType": {
+          "type": "object",
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -338,6 +355,7 @@
     },
     "AzureSqlMILinkedServiceTypeProperties": {
       "description": "Azure SQL Managed Instance linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -358,6 +376,10 @@
         "tenant": {
           "type": "object",
           "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "azureCloudType": {
+          "type": "object",
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -390,6 +412,7 @@
     },
     "AzureBatchLinkedServiceTypeProperties": {
       "description": "Azure Batch linked service properties.",
+      "type": "object",
       "properties": {
         "accountName": {
           "type": "object",
@@ -445,6 +468,7 @@
     },
     "AzureKeyVaultLinkedServiceTypeProperties": {
       "description": "Azure Key Vault linked service properties.",
+      "type": "object",
       "properties": {
         "baseUrl": {
           "type": "object",
@@ -477,6 +501,7 @@
     },
     "CosmosDbLinkedServiceTypeProperties": {
       "description": "CosmosDB linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -522,6 +547,7 @@
     },
     "DynamicsLinkedServiceTypeProperties": {
       "description": "Dynamics linked service properties.",
+      "type": "object",
       "properties": {
         "deploymentType": {
           "x-ms-enum": {
@@ -536,19 +562,19 @@
           "description": "The deployment type of the Dynamics instance. 'Online' for Dynamics Online and 'OnPremisesWithIfd' for Dynamics on-premises with Ifd. Type: string (or Expression with resultType string)."
         },
         "hostName": {
-          "type": "string",
+          "type": "object",
           "description": "The host name of the on-premises Dynamics server. The property is required for on-prem and not allowed for online. Type: string (or Expression with resultType string)."
         },
         "port": {
-          "type": "string",
+          "type": "object",
           "description": "The port of on-premises Dynamics server. The property is required for on-prem and not allowed for online. Default is 443. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "serviceUri": {
-          "type": "string",
+          "type": "object",
           "description": "The URL to the Microsoft Dynamics server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string)."
         },
         "organizationName": {
-          "type": "string",
+          "type": "object",
           "description": "The organization name of the Dynamics instance. The property is required for on-prem and required for online when there are more than one Dynamics instances associated with the user. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
@@ -585,7 +611,7 @@
             "ServicePrincipalKey",
             "ServicePrincipalCert"
           ],
-          "type": "string",
+          "type": "object",
           "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalCredential": {
@@ -624,6 +650,7 @@
     },
     "DynamicsCrmLinkedServiceTypeProperties": {
       "description": "Dynamics CRM linked service properties.",
+      "type": "object",
       "properties": {
         "deploymentType": {
           "x-ms-enum": {
@@ -679,16 +706,8 @@
           "description": "The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalCredentialType": {
-          "x-ms-enum": {
-            "name": "DynamicsServicePrincipalCredentialType",
-            "modelAsString": true
-          },
-          "enum": [
-            "ServicePrincipalKey",
-            "ServicePrincipalCert"
-          ],
-          "type": "string",
-          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+          "type": "object",
+          "description": "A string from ServicePrincipalCredentialEnum or an expression"
         },
         "servicePrincipalCredential": {
           "$ref": "../artifacts.json#/definitions/SecretBase",
@@ -703,6 +722,18 @@
         "deploymentType",
         "authenticationType"
       ]
+    },
+    "ServicePrincipalCredentialEnum": {
+      "x-ms-enum": {
+        "name": "DynamicsServicePrincipalCredentialType",
+        "modelAsString": true
+      },
+      "enum": [
+        "ServicePrincipalKey",
+        "ServicePrincipalCert"
+      ],
+      "type": "object",
+      "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
     },
     "CommonDataServiceForAppsLinkedService": {
       "x-ms-discriminator-value": "CommonDataServiceForApps",
@@ -726,6 +757,7 @@
     },
     "CommonDataServiceForAppsLinkedServiceTypeProperties": {
       "description": "Common Data Service for Apps linked service properties.",
+      "type": "object",
       "properties": {
         "deploymentType": {
           "x-ms-enum": {
@@ -781,16 +813,8 @@
           "description": "The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalCredentialType": {
-          "x-ms-enum": {
-            "name": "DynamicsServicePrincipalCredentialType",
-            "modelAsString": true
-          },
-          "enum": [
-            "ServicePrincipalKey",
-            "ServicePrincipalCert"
-          ],
-          "type": "string",
-          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+          "type": "object",
+          "description": "A string from ServicePrincipalCredentialEnum or an expression"
         },
         "servicePrincipalCredential": {
           "$ref": "../artifacts.json#/definitions/SecretBase",
@@ -828,6 +852,7 @@
     },
     "HDInsightLinkedServiceTypeProperties": {
       "description": "HDInsight linked service properties.",
+      "type": "object",
       "properties": {
         "clusterUri": {
           "type": "object",
@@ -888,6 +913,7 @@
     },
     "FileServerLinkedServiceTypeProperties": {
       "description": "File system linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "type": "object",
@@ -932,6 +958,7 @@
     },
     "AzureFileStorageLinkedServiceTypeProperties": {
       "description": "Azure File Storage linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "type": "object",
@@ -944,6 +971,30 @@
         "password": {
           "description": "Password to logon the server.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "connectionString": {
+          "type": "object",
+          "description": "The connection string. It is mutually exclusive with sasUri property. Type: string, SecureString or AzureKeyVaultSecretReference."
+        },
+        "accountKey": {
+          "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of accountKey in connection string."
+        },
+        "sasUri": {
+          "description": "SAS URI of the Azure File resource. It is mutually exclusive with connectionString property. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "sasToken": {
+          "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of sasToken in sas uri."
+        },
+        "fileShare": {
+          "description": "The azure file share name. It is required when auth with accountKey/sasToken. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "snapshot": {
+          "description": "The azure file share snapshot version. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "encryptedCredential": {
           "type": "object",
@@ -976,6 +1027,7 @@
     },
     "GoogleCloudStorageLinkedServiceTypeProperties": {
       "description": "Google Cloud Storage linked service properties.",
+      "type": "object",
       "properties": {
         "accessKeyId": {
           "type": "object",
@@ -1017,6 +1069,7 @@
     },
     "OracleLinkedServiceTypeProperties": {
       "description": "Oracle database linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -1057,6 +1110,7 @@
     },
     "AzureMySqlLinkedServiceTypeProperties": {
       "description": "Azure MySQL database linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -1097,6 +1151,7 @@
     },
     "MySqlLinkedServiceTypeProperties": {
       "description": "MySQL linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The connection string.",
@@ -1137,6 +1192,7 @@
     },
     "PostgreSqlLinkedServiceTypeProperties": {
       "description": "PostgreSQL linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The connection string.",
@@ -1177,6 +1233,7 @@
     },
     "SybaseLinkedServiceTypeProperties": {
       "description": "Sybase linked service properties.",
+      "type": "object",
       "properties": {
         "server": {
           "type": "object",
@@ -1242,17 +1299,22 @@
     },
     "Db2LinkedServiceTypeProperties": {
       "description": "DB2 linked service properties.",
+      "type": "object",
       "properties": {
+        "connectionString": {
+          "type": "object",
+          "description": "The connection string. It is mutually exclusive with server, database, authenticationType, userName, packageCollection and certificateCommonName property. Type: string, SecureString or AzureKeyVaultSecretReference."
+        },
         "server": {
           "type": "object",
-          "description": "Server name for connection. Type: string (or Expression with resultType string)."
+          "description": "Server name for connection. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "database": {
           "type": "object",
-          "description": "Database name for connection. Type: string (or Expression with resultType string)."
+          "description": "Database name for connection. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
-          "description": "AuthenticationType to be used for connection.",
+          "description": "AuthenticationType to be used for connection. It is mutually exclusive with connectionString property.",
           "type": "string",
           "enum": [
             "Basic"
@@ -1264,7 +1326,7 @@
         },
         "username": {
           "type": "object",
-          "description": "Username for authentication. Type: string (or Expression with resultType string)."
+          "description": "Username for authentication. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "password": {
           "description": "Password for authentication.",
@@ -1272,15 +1334,15 @@
         },
         "packageCollection": {
           "type": "object",
-          "description": "Under where packages are created when querying database. Type: string (or Expression with resultType string)."
+          "description": "Under where packages are created when querying database. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "certificateCommonName": {
           "type": "object",
-          "description": "Certificate Common Name when TLS is enabled. Type: string (or Expression with resultType string)."
+          "description": "Certificate Common Name when TLS is enabled. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -1310,6 +1372,7 @@
     },
     "TeradataLinkedServiceTypeProperties": {
       "description": "Teradata linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "Teradata ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -1367,6 +1430,7 @@
     },
     "AzureMLLinkedServiceTypeProperties": {
       "description": "Azure ML Studio Web Service linked service properties.",
+      "type": "object",
       "properties": {
         "mlEndpoint": {
           "type": "object",
@@ -1424,6 +1488,7 @@
     },
     "AzureMLServiceLinkedServiceTypeProperties": {
       "description": "Azure ML Service linked service properties.",
+      "type": "object",
       "properties": {
         "subscriptionId": {
           "type": "object",
@@ -1482,6 +1547,7 @@
     },
     "OdbcLinkedServiceTypeProperties": {
       "description": "ODBC linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The non-access credential portion of the connection string as well as an optional encrypted credential. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -1534,6 +1600,7 @@
     },
     "InformixLinkedServiceTypeProperties": {
       "description": "Informix linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The non-access credential portion of the connection string as well as an optional encrypted credential. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -1586,6 +1653,7 @@
     },
     "MicrosoftAccessLinkedServiceTypeProperties": {
       "description": "Microsoft Access linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The non-access credential portion of the connection string as well as an optional encrypted credential. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -1638,6 +1706,7 @@
     },
     "HdfsLinkedServiceTypeProperties": {
       "description": "HDFS linked service properties.",
+      "type": "object",
       "properties": {
         "url": {
           "type": "object",
@@ -1686,6 +1755,7 @@
     },
     "ODataLinkedServiceTypeProperties": {
       "description": "OData linked service properties.",
+      "type": "object",
       "properties": {
         "url": {
           "type": "object",
@@ -1721,6 +1791,10 @@
         "servicePrincipalId": {
           "type": "object",
           "description": "Specify the application id of your application registered in Azure Active Directory. Type: string (or Expression with resultType string)."
+        },
+        "azureCloudType": {
+          "type": "object",
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
         "aadResourceId": {
           "type": "object",
@@ -1808,6 +1882,7 @@
     },
     "WebAnonymousAuthentication": {
       "description": "A WebLinkedService that uses anonymous authentication to communicate with an HTTP endpoint.",
+      "type": "object",
       "x-ms-discriminator-value": "Anonymous",
       "allOf": [
         {
@@ -1817,6 +1892,7 @@
     },
     "WebBasicAuthentication": {
       "description": "A WebLinkedService that uses basic authentication to communicate with an HTTP endpoint.",
+      "type": "object",
       "x-ms-discriminator-value": "Basic",
       "allOf": [
         {
@@ -1840,6 +1916,7 @@
     },
     "WebClientCertificateAuthentication": {
       "description": "A WebLinkedService that uses client certificate based authentication to communicate with an HTTP endpoint. This scheme follows mutual authentication; the server must also provide valid credentials to the client.",
+      "type": "object",
       "x-ms-discriminator-value": "ClientCertificate",
       "allOf": [
         {
@@ -1883,6 +1960,7 @@
     },
     "CassandraLinkedServiceTypeProperties": {
       "description": "Cassandra linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "type": "object",
@@ -1935,6 +2013,7 @@
     },
     "MongoDbLinkedServiceTypeProperties": {
       "description": "MongoDB linked service properties.",
+      "type": "object",
       "properties": {
         "server": {
           "type": "object",
@@ -1990,6 +2069,44 @@
         "databaseName"
       ]
     },
+    "MongoDbAtlasLinkedService": {
+      "x-ms-discriminator-value": "MongoDbAtlas",
+      "description": "Linked service for MongoDB Atlas data source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "MongoDB Atlas linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MongoDbAtlasLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "MongoDbAtlasLinkedServiceTypeProperties": {
+      "description": "MongoDB Atlas linked service properties.",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The MongoDB Atlas connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "database": {
+          "type": "object",
+          "description": "The name of the MongoDB Atlas database that you want to access. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString",
+        "database"
+      ]
+    },
     "MongoDbV2LinkedService": {
       "x-ms-discriminator-value": "MongoDbV2",
       "description": "Linked service for MongoDB data source.",
@@ -2012,6 +2129,7 @@
     },
     "MongoDbV2LinkedServiceTypeProperties": {
       "description": "MongoDB linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The MongoDB connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -2049,6 +2167,7 @@
     },
     "CosmosDbMongoDbApiLinkedServiceTypeProperties": {
       "description": "CosmosDB (MongoDB API) linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "The CosmosDB (MongoDB API) connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -2086,6 +2205,7 @@
     },
     "AzureDataLakeStoreLinkedServiceTypeProperties": {
       "description": "Azure Data Lake Store linked service properties.",
+      "type": "object",
       "properties": {
         "dataLakeStoreUri": {
           "type": "object",
@@ -2102,6 +2222,10 @@
         "tenant": {
           "type": "object",
           "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "azureCloudType": {
+          "type": "object",
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
         "accountName": {
           "type": "object",
@@ -2146,6 +2270,7 @@
     },
     "AzureBlobFSLinkedServiceTypeProperties": {
       "description": "Azure Data Lake Storage Gen2 linked service properties.",
+      "type": "object",
       "properties": {
         "url": {
           "type": "object",
@@ -2166,6 +2291,10 @@
         "tenant": {
           "type": "object",
           "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "azureCloudType": {
+          "type": "object",
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -2198,6 +2327,7 @@
     },
     "Office365LinkedServiceTypeProperties": {
       "description": "Office365 linked service properties.",
+      "type": "object",
       "properties": {
         "office365TenantId": {
           "type": "object",
@@ -2249,6 +2379,7 @@
     },
     "SalesforceLinkedServiceTypeProperties": {
       "description": "Salesforce linked service properties.",
+      "type": "object",
       "properties": {
         "environmentUrl": {
           "type": "object",
@@ -2263,8 +2394,12 @@
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "securityToken": {
-          "description": "The security token is required to remotely access Salesforce instance.",
+          "description": "The security token is optional to remotely access Salesforce instance.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "apiVersion": {
+          "type": "object",
+          "description": "The Salesforce API version used in ADF. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -2294,6 +2429,7 @@
     },
     "SalesforceServiceCloudLinkedServiceTypeProperties": {
       "description": "Salesforce Service Cloud linked service properties.",
+      "type": "object",
       "properties": {
         "environmentUrl": {
           "type": "object",
@@ -2308,8 +2444,12 @@
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "securityToken": {
-          "description": "The security token is required to remotely access Salesforce instance.",
+          "description": "The security token is optional to remotely access Salesforce instance.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "apiVersion": {
+          "type": "object",
+          "description": "The Salesforce API version used in ADF. Type: string (or Expression with resultType string)."
         },
         "extendedProperties": {
           "type": "object",
@@ -2343,6 +2483,7 @@
     },
     "SapCloudForCustomerLinkedServiceTypeProperties": {
       "description": "SAP Cloud for Customer linked service properties.",
+      "type": "object",
       "properties": {
         "url": {
           "type": "object",
@@ -2387,6 +2528,7 @@
     },
     "SapEccLinkedServiceTypeProperties": {
       "description": "SAP ECC linked service properties.",
+      "type": "object",
       "properties": {
         "url": {
           "type": "string",
@@ -2431,6 +2573,7 @@
     },
     "SapOpenHubLinkedServiceTypeProperties": {
       "description": "Properties specific to SAP Business Warehouse Open Hub Destination linked service type.",
+      "type": "object",
       "properties": {
         "server": {
           "type": "object",
@@ -2448,6 +2591,10 @@
           "type": "object",
           "description": "Language of the BW system where the open hub destination is located. The default value is EN. Type: string (or Expression with resultType string)."
         },
+        "systemId": {
+          "type": "object",
+          "description": "SystemID of the SAP system where the table is located. Type: string (or Expression with resultType string)."
+        },
         "userName": {
           "type": "object",
           "description": "Username to access the SAP BW server where the open hub destination is located. Type: string (or Expression with resultType string)."
@@ -2455,6 +2602,18 @@
         "password": {
           "description": "Password to access the SAP BW server where the open hub destination is located.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "messageServer": {
+          "type": "object",
+          "description": "The hostname of the SAP Message Server. Type: string (or Expression with resultType string)."
+        },
+        "messageServerService": {
+          "type": "object",
+          "description": "The service name or port number of the Message Server. Type: string (or Expression with resultType string)."
+        },
+        "logonGroup": {
+          "type": "object",
+          "description": "The Logon Group for the SAP System. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -2489,6 +2648,7 @@
     },
     "RestServiceLinkedServiceTypeProperties": {
       "description": "Rest Service linked service properties.",
+      "type": "object",
       "properties": {
         "url": {
           "description": "The base URL of the REST service.",
@@ -2532,6 +2692,10 @@
           "description": "The tenant information (domain name or tenant ID) used in AadServicePrincipal authentication type under which your application resides.",
           "type": "object"
         },
+        "azureCloudType": {
+          "type": "object",
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
+        },
         "aadResourceId": {
           "description": "The resource you are requesting authorization to use.",
           "type": "object"
@@ -2568,7 +2732,12 @@
     },
     "AmazonS3LinkedServiceTypeProperties": {
       "description": "Amazon S3 linked service properties.",
+      "type": "object",
       "properties": {
+        "authenticationType": {
+          "type": "object",
+          "description": "The authentication type of S3. Allowed value: AccessKey (default) or TemporarySecurityCredentials. Type: string (or Expression with resultType string)."
+        },
         "accessKeyId": {
           "type": "object",
           "description": "The access key identifier of the Amazon S3 Identity and Access Management (IAM) user. Type: string (or Expression with resultType string)."
@@ -2580,6 +2749,10 @@
         "serviceUrl": {
           "type": "object",
           "description": "This value specifies the endpoint to access with the S3 Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string)."
+        },
+        "sessionToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The session token for the S3 temporary security credential."
         },
         "encryptedCredential": {
           "type": "object",
@@ -2609,6 +2782,7 @@
     },
     "AmazonRedshiftLinkedServiceTypeProperties": {
       "description": "Amazon Redshift linked service properties.",
+      "type": "object",
       "properties": {
         "server": {
           "type": "object",
@@ -2682,6 +2856,7 @@
     },
     "AzureSearchLinkedServiceTypeProperties": {
       "description": "Windows Azure Search Service linked service properties.",
+      "type": "object",
       "properties": {
         "url": {
           "type": "object",
@@ -2722,6 +2897,7 @@
     },
     "HttpLinkedServiceTypeProperties": {
       "description": "Properties specific to this linked service type.",
+      "type": "object",
       "properties": {
         "url": {
           "type": "object",
@@ -2793,6 +2969,7 @@
     },
     "FtpServerLinkedServiceTypeProperties": {
       "description": "Properties specific to this linked service type.",
+      "type": "object",
       "properties": {
         "host": {
           "type": "object",
@@ -2861,6 +3038,7 @@
     },
     "SftpServerLinkedServiceTypeProperties": {
       "description": "Properties specific to this linked service type.",
+      "type": "object",
       "properties": {
         "host": {
           "type": "object",
@@ -2941,6 +3119,7 @@
     },
     "SapBWLinkedServiceTypeProperties": {
       "description": "Properties specific to this linked service type.",
+      "type": "object",
       "properties": {
         "server": {
           "type": "object",
@@ -2995,6 +3174,7 @@
     },
     "SapHanaLinkedServiceProperties": {
       "description": "Properties specific to this linked service type.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "type": "object",
@@ -3055,6 +3235,7 @@
     },
     "AmazonMWSLinkedServiceTypeProperties": {
       "description": "Amazon Marketplace Web Service linked service properties.",
+      "type": "object",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Amazon MWS server, (i.e. mws.amazonservices.com)",
@@ -3126,6 +3307,7 @@
     },
     "AzurePostgreSqlLinkedServiceTypeProperties": {
       "description": "Azure PostgreSQL linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -3163,7 +3345,12 @@
     },
     "ConcurLinkedServiceTypeProperties": {
       "description": "Concur Service linked service properties.",
+      "type": "object",
       "properties": {
+        "connectionProperties": {
+          "description": "Properties used to connect to Concur. It is mutually exclusive with any other properties in the linked service. Type: object.",
+          "type": "object"
+        },
         "clientId": {
           "description": "Application client_id supplied by Concur App Management.",
           "type": "object"
@@ -3220,6 +3407,7 @@
     },
     "CouchbaseLinkedServiceTypeProperties": {
       "description": "Couchbase server linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -3257,6 +3445,7 @@
     },
     "DrillLinkedServiceTypeProperties": {
       "description": "Drill server linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -3294,6 +3483,7 @@
     },
     "EloquaLinkedServiceTypeProperties": {
       "description": "Eloqua server linked service properties.",
+      "type": "object",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Eloqua server. (i.e. eloqua.example.com)",
@@ -3351,6 +3541,7 @@
     },
     "GoogleBigQueryLinkedServiceTypeProperties": {
       "description": "Google BigQuery service linked service properties.",
+      "type": "object",
       "properties": {
         "project": {
           "description": "The default BigQuery project to query against.",
@@ -3436,6 +3627,7 @@
     },
     "GreenplumLinkedServiceTypeProperties": {
       "description": "Greenplum Database linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -3473,6 +3665,7 @@
     },
     "HBaseLinkedServiceTypeProperties": {
       "description": "HBase server linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "description": "The IP address or host name of the HBase server. (i.e. 192.168.222.160)",
@@ -3554,6 +3747,7 @@
     },
     "HiveLinkedServiceTypeProperties": {
       "description": "Hive Server linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "description": "IP address or host name of the Hive server, separated by ';' for multiple hosts (only when serviceDiscoveryMode is enable).",
@@ -3679,6 +3873,7 @@
     },
     "HubspotLinkedServiceTypeProperties": {
       "description": "Hubspot Service linked service properties.",
+      "type": "object",
       "properties": {
         "clientId": {
           "description": "The client ID associated with your Hubspot application.",
@@ -3739,6 +3934,7 @@
     },
     "ImpalaLinkedServiceTypeProperties": {
       "description": "Impala server linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "description": "The IP address or host name of the Impala server. (i.e. 192.168.222.160)",
@@ -3821,6 +4017,7 @@
     },
     "JiraLinkedServiceTypeProperties": {
       "description": "Jira Service linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "description": "The IP address or host name of the Jira service. (e.g. jira.example.com)",
@@ -3882,6 +4079,7 @@
     },
     "MagentoLinkedServiceTypeProperties": {
       "description": "Magento server linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "description": "The URL of the Magento instance. (i.e. 192.168.222.110/magento3)",
@@ -3934,6 +4132,7 @@
     },
     "MariaDBLinkedServiceTypeProperties": {
       "description": "MariaDB server linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -3971,6 +4170,7 @@
     },
     "AzureMariaDBLinkedServiceTypeProperties": {
       "description": "Azure Database for MariaDB linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -4008,6 +4208,7 @@
     },
     "MarketoLinkedServiceTypeProperties": {
       "description": "Marketo server linked service properties.",
+      "type": "object",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Marketo server. (i.e. 123-ABC-321.mktorest.com)",
@@ -4065,6 +4266,7 @@
     },
     "PaypalLinkedServiceTypeProperties": {
       "description": "Paypal Service linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "description": "The URL of the PayPal instance. (i.e. api.sandbox.paypal.com)",
@@ -4122,6 +4324,7 @@
     },
     "PhoenixLinkedServiceTypeProperties": {
       "description": "Phoenix server linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "description": "The IP address or host name of the Phoenix server. (i.e. 192.168.222.160)",
@@ -4208,6 +4411,7 @@
     },
     "PrestoLinkedServiceTypeProperties": {
       "description": "Presto server linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "description": "The IP address or host name of the Presto server. (i.e. 192.168.222.160)",
@@ -4303,7 +4507,12 @@
     },
     "QuickBooksLinkedServiceTypeProperties": {
       "description": "QuickBooks server linked service properties.",
+      "type": "object",
       "properties": {
+        "connectionProperties": {
+          "description": "Properties used to connect to QuickBooks. It is mutually exclusive with any other properties in the linked service. Type: object.",
+          "type": "object"
+        },
         "endpoint": {
           "description": "The endpoint of the QuickBooks server. (i.e. quickbooks.api.intuit.com)",
           "type": "object"
@@ -4368,6 +4577,7 @@
     },
     "ServiceNowLinkedServiceTypeProperties": {
       "description": "ServiceNow server linked service properties.",
+      "type": "object",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the ServiceNow server. (i.e. <instance>.service-now.com)",
@@ -4445,6 +4655,7 @@
     },
     "ShopifyLinkedServiceTypeProperties": {
       "description": "Shopify Service linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "description": "The endpoint of the Shopify server. (i.e. mystore.myshopify.com)",
@@ -4497,6 +4708,7 @@
     },
     "SparkLinkedServiceTypeProperties": {
       "description": "Spark Server linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "description": "IP address or host name of the Spark server",
@@ -4611,7 +4823,12 @@
     },
     "SquareLinkedServiceTypeProperties": {
       "description": "Square Service linked service properties.",
+      "type": "object",
       "properties": {
+        "connectionProperties": {
+          "description": "Properties used to connect to Square. It is mutually exclusive with any other properties in the linked service. Type: object.",
+          "type": "object"
+        },
         "host": {
           "description": "The URL of the Square instance. (i.e. mystore.mysquare.com)",
           "type": "object"
@@ -4673,7 +4890,12 @@
     },
     "XeroLinkedServiceTypeProperties": {
       "description": "Xero Service linked service properties.",
+      "type": "object",
       "properties": {
+        "connectionProperties": {
+          "description": "Properties used to connect to Xero. It is mutually exclusive with any other properties in the linked service. Type: object.",
+          "type": "object"
+        },
         "host": {
           "description": "The endpoint of the Xero server. (i.e. api.xero.com)",
           "type": "object"
@@ -4729,7 +4951,12 @@
     },
     "ZohoLinkedServiceTypeProperties": {
       "description": "Zoho server linked service properties.",
+      "type": "object",
       "properties": {
+        "connectionProperties": {
+          "description": "Properties used to connect to Zoho. It is mutually exclusive with any other properties in the linked service. Type: object.",
+          "type": "object"
+        },
         "endpoint": {
           "description": "The endpoint of the Zoho server. (i.e. crm.zoho.com/crm/private)",
           "type": "object"
@@ -4781,6 +5008,7 @@
     },
     "VerticaLinkedServiceTypeProperties": {
       "description": "Vertica linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -4818,6 +5046,7 @@
     },
     "NetezzaLinkedServiceTypeProperties": {
       "description": "Netezza linked service properties.",
+      "type": "object",
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -4855,7 +5084,12 @@
     },
     "SalesforceMarketingCloudLinkedServiceTypeProperties": {
       "description": "Salesforce Marketing Cloud linked service properties.",
+      "type": "object",
       "properties": {
+        "connectionProperties": {
+          "description": "Properties used to connect to Salesforce Marketing Cloud. It is mutually exclusive with any other properties in the linked service. Type: object.",
+          "type": "object"
+        },
         "clientId": {
           "description": "The client ID associated with the Salesforce Marketing Cloud application. Type: string (or Expression with resultType string).",
           "type": "object"
@@ -4907,6 +5141,7 @@
     },
     "HDInsightOnDemandLinkedServiceTypeProperties": {
       "description": "HDInsight ondemand linked service properties.",
+      "type": "object",
       "properties": {
         "clusterSize": {
           "type": "object",
@@ -5115,6 +5350,7 @@
     },
     "AzureDataLakeAnalyticsLinkedServiceTypeProperties": {
       "description": "Azure Data Lake Analytics linked service properties.",
+      "type": "object",
       "properties": {
         "accountName": {
           "type": "object",
@@ -5176,6 +5412,7 @@
     },
     "AzureDatabricksLinkedServiceTypeProperties": {
       "description": "Azure Databricks linked service properties.",
+      "type": "object",
       "properties": {
         "domain": {
           "type": "object",
@@ -5184,6 +5421,14 @@
         "accessToken": {
           "description": "Access token for databricks REST API. Refer to https://docs.azuredatabricks.net/api/latest/authentication.html. Type: string (or Expression with resultType string).",
           "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Required to specify MSI, if using Workspace resource id for databricks REST API. Type: string (or Expression with resultType string)."
+        },
+        "workspaceResourceId": {
+          "type": "object",
+          "description": "Workspace resource id for databricks REST API. Type: string (or Expression with resultType string)."
         },
         "existingClusterId": {
           "type": "object",
@@ -5229,6 +5474,10 @@
             "description": "Type: string (or Expression with resultType string)."
           }
         },
+        "newClusterLogDestination": {
+          "type": "object",
+          "description": "Specify a location to deliver Spark driver, worker, and event logs. Type: string (or Expression with resultType string)."
+        },
         "newClusterDriverNodeType": {
           "type": "object",
           "description": "The driver node type for the new job cluster. This property is ignored in instance pool configurations. Type: string (or Expression with resultType string)."
@@ -5240,6 +5489,55 @@
         "newClusterEnableElasticDisk": {
           "type": "object",
           "description": "Enable the elastic disk on the new cluster. This property is now ignored, and takes the default elastic disk behavior in Databricks (elastic disks are always enabled). Type: boolean (or Expression with resultType boolean)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "policyId": {
+          "type": "object",
+          "description": "The policy id for limiting the ability to configure clusters based on a user defined set of rules. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "domain"
+      ]
+    },
+    "AzureDatabricksDeltaLakeLinkedService": {
+      "x-ms-discriminator-value": "AzureDatabricksDeltaLake",
+      "description": "Azure Databricks Delta Lake linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Databricks Delta Lake linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureDatabricksDetltaLakeLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureDatabricksDetltaLakeLinkedServiceTypeProperties": {
+      "description": "Azure Databricks Delta Lake linked service properties.",
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "object",
+          "description": "<REGION>.azuredatabricks.net, domain name of your Databricks deployment. Type: string (or Expression with resultType string)."
+        },
+        "accessToken": {
+          "description": "Access token for databricks REST API. Refer to https://docs.azuredatabricks.net/api/latest/authentication.html. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "clusterId": {
+          "type": "object",
+          "description": "The id of an existing interactive cluster that will be used for all runs of this job. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -5273,6 +5571,7 @@
     },
     "ResponsysLinkedServiceTypeProperties": {
       "description": "Responsys linked service properties.",
+      "type": "object",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Responsys server.",
@@ -5330,6 +5629,7 @@
     },
     "DynamicsAXLinkedServiceTypeProperties": {
       "description": "Dynamics AX linked service properties.",
+      "type": "object",
       "properties": {
         "url": {
           "description": "The Dynamics AX (or Dynamics 365 Finance and Operations) instance OData endpoint.",
@@ -5386,6 +5686,7 @@
     },
     "OracleServiceCloudLinkedServiceTypeProperties": {
       "description": "Oracle Service Cloud linked service properties.",
+      "type": "object",
       "properties": {
         "host": {
           "description": "The URL of the Oracle Service Cloud instance.",
@@ -5444,6 +5745,7 @@
     },
     "GoogleAdWordsLinkedServiceTypeProperties": {
       "description": "Google AdWords service linked service properties.",
+      "type": "object",
       "properties": {
         "clientCustomerID": {
           "description": "The Client customer ID of the AdWords account that you want to fetch report data for.",
@@ -5526,6 +5828,7 @@
     },
     "SapTableLinkedServiceTypeProperties": {
       "description": "Properties specific to this linked service type.",
+      "type": "object",
       "properties": {
         "server": {
           "type": "object",
@@ -5615,6 +5918,7 @@
     },
     "AzureDataExplorerLinkedServiceTypeProperties": {
       "description": "Azure Data Explorer (Kusto) linked service properties.",
+      "type": "object",
       "properties": {
         "endpoint": {
           "description": "The endpoint of Azure Data Explorer (the engine's endpoint). URL will be in the format https://<clusterName>.<regionName>.kusto.windows.net. Type: string (or Expression with resultType string)",
@@ -5667,6 +5971,7 @@
     },
     "AzureFunctionLinkedServiceTypeProperties": {
       "description": "Azure Function linked service properties.",
+      "type": "object",
       "properties": {
         "functionAppUrl": {
           "description": "The endpoint of the Azure Function App. URL will be in the format https://<accountName>.azurewebsites.net.",
@@ -5683,6 +5988,99 @@
       },
       "required": [
         "functionAppUrl"
+      ]
+    },
+    "SnowflakeLinkedService": {
+      "x-ms-discriminator-value": "Snowflake",
+      "description": "Snowflake linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SnowflakeLinkedServiceTypeProperties": {
+      "description": "Snowflake linked service properties.",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of snowflake. Type: string, SecureString.",
+          "type": "object"
+        },
+        "password": {
+          "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "SharePointOnlineListLinkedService": {
+      "x-ms-discriminator-value": "SharePointOnlineList",
+      "description": "SharePoint Online List linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SharePoint Online List linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharePointOnlineListLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SharePointOnlineListLinkedServiceTypeProperties": {
+      "description": "SharePoint Online List linked service properties.",
+      "type": "object",
+      "properties": {
+        "siteUrl": {
+          "type": "object",
+          "description": "The URL of the SharePoint Online site. For example, https://contoso.sharepoint.com/sites/siteName. Type: string (or Expression with resultType string)."
+        },
+        "tenantId": {
+          "type": "object",
+          "description": "The tenant ID under which your application resides. You can find it from Azure portal Active Directory overview page. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The application (client) ID of your application registered in Azure Active Directory. Make sure to grant SharePoint site permission to this application. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "description": "The client secret of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "siteUrl",
+        "tenantId",
+        "servicePrincipalId",
+        "servicePrincipalKey"
       ]
     }
   }
