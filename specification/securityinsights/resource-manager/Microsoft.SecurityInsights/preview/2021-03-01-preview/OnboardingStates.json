@@ -185,6 +185,16 @@
     }
   },
   "definitions": {
+    "CustomerManagedKey": {
+      "description": "The CMK setting object",
+      "type": "object",
+      "properties": {
+        "customerManagedKey": {
+            "description": "Flag that indicates the status of the CMK setting",
+            "type": "boolean"
+          }
+      }
+    },
     "SentinelOnboardingState": {
       "allOf": [
         {
@@ -192,21 +202,11 @@
         }
       ],
       "description": "Sentinel onboarding state",
-      "type": "object"
-    },
-    "DefaultSentinelOnboardingState": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/SentinelOnboardingState"
-        }
-      ],
-      "description": "Default Sentinel onboarding state",
       "properties": {
         "properties": {
-          "customerManagedKey": {
-            "description": "Flag that indicates the status of the CMK setting",
-            "type": "boolean"
-          }
+          "$ref": "#/definitions/CustomerManagedKey",
+          "description": "The Sentinel onboarding state object",
+          "x-ms-client-flatten": true
         }
       },
       "type": "object"
