@@ -1730,7 +1730,7 @@
       }
     },
     "Setting": {
-      "description": "State of the myscope Setting",
+      "description": "State of the myscope setting.",
       "type": "object",
       "allOf": [
         {
@@ -1799,7 +1799,9 @@
           "x-nullable": true
         },
         "cache": {
-          "$ref": "#/definitions/Cache"
+          "items": {
+            "$ref": "#/definitions/Cache"
+          }
         }
       },
       "required": [
@@ -2048,23 +2050,23 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Resource Id."
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "Resource name."
         },
         "kind": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource kind",
+          "description": "Resource kind.",
           "maxLength": 10
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "description": "Resource type."
         }
       },
       "x-ms-azure-resource": true
