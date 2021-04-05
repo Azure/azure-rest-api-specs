@@ -99,7 +99,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Setting"
+              "$ref": "#/definitions/MyScopeSetting"
             }
           },
           "default": {
@@ -136,7 +136,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Setting"
+              "$ref": "#/definitions/MyScopeSetting"
             },
             "description": "Body supplied to the CreateOrUpdate setting operation."
           }
@@ -145,7 +145,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Setting"
+              "$ref": "#/definitions/MyScopeSetting"
             }
           },
           "default": {
@@ -1718,7 +1718,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Setting"
+            "$ref": "#/definitions/MyScopeSetting"
           },
           "maxItems": 10
         },
@@ -1729,7 +1729,7 @@
         }
       }
     },
-    "Setting": {
+    "MyScopeSetting": {
       "description": "State of Setting",
       "type": "object",
       "allOf": [
@@ -1787,8 +1787,62 @@
         "scope": {
           "description": "For the myscope setting, sets the default scope the current user will see when they sign into Azure Cost Management in the Azure portal.",
           "type": "string"
+        },
+        "startOn": {
+          "description": "Indicates what scope Cost Management in the Azure portal should default to. Allowed values: LastUsed.",
+          "type": "string",
+          "enum": [
+            "LastUsed",
+            "ScopePicker",
+            "SpecificScope"
+          ],
+          "x-nullable": true
+        },
+        "cache": {
+          "$ref": "#/definitions/Cache"
         }
-      }
+      },
+      "required": [
+        "scope"
+      ]
+    },
+    "Cache": {
+      "type": "object",
+      "description": "List of scopes with additional details used by Cost Management in the Azure portal.",
+      "properties": {
+        "id": {
+          "description": "Resource ID used by Resource Manager to uniquely identify the scope.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Display name for the scope.",
+          "type": "string"
+        },
+        "channel": {
+          "description": "Indicates the account type. Allowed values include: EA, PAYG, Modern, Internal, Unknown.",
+          "type": "string"
+        },
+        "subchannel": {
+          "description": "Indicates the type of modern account. Allowed values include: Individual, Enterprise, Partner, Indirect.",
+          "type": "string"
+        },
+        "parent": {
+          "description": "Resource ID of the parent scope. For instance, subscription's resource ID for a resource group or a management group resource ID for a subscription.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "status": {
+          "description": "Indicates the status of the scope. Status only applies to subscriptions and billing accounts.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "channel",
+        "subchannel"
+      ]
     },
     "ViewProperties": {
       "type": "object",
