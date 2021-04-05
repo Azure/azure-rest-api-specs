@@ -69,6 +69,28 @@
               "type": "string"
             }
           }
+        },
+        "policy": {
+          "$ref": "#/definitions/PipelinePolicy"
+        }
+      }
+    },
+    "PipelinePolicy": {
+      "description": "Pipeline Policy.",
+      "type": "object",
+      "properties": {
+        "elapsedTimeMetric": {
+          "$ref": "#/definitions/PipelineElapsedTimeMetricPolicy"
+        }
+      }
+    },
+    "PipelineElapsedTimeMetricPolicy": {
+      "description": "Pipeline ElapsedTime Metric Policy.",
+      "type": "object",
+      "properties": {
+        "duration": {
+          "description": "TimeSpan value, after which an Azure Monitoring Metric is fired.",
+          "type": "object"
         }
       }
     },
@@ -399,7 +421,7 @@
       }
     },
     "AmazonS3ReadSettings": {
-      "description": "Azure data lake store read settings.",
+      "description": "Amazon S3 read settings.",
       "type": "object",
       "allOf": [
         {
@@ -567,6 +589,108 @@
         "useTempFileRename": {
           "description": "Upload to temporary file(s) and rename. Disable this option if your SFTP server doesn't support rename operation. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
+        }
+      }
+    },
+    "AmazonS3CompatibleReadSettings": {
+      "description": "Amazon S3 Compatible read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Amazon S3 Compatible wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Amazon S3 Compatible wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the S3 Compatible object name. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OracleCloudStorageReadSettings": {
+      "description": "Oracle Cloud Storage read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Oracle Cloud Storage wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Oracle Cloud Storage wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the Oracle Cloud Storage object name. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -5562,6 +5686,10 @@
         "retentionTimeInDays": {
           "type": "object",
           "description": "The retention time for the files submitted for custom activity. Type: double (or Expression with resultType double)."
+        },
+        "autoUserSpecification": {
+          "type": "object",
+          "description": "Elevation level and scope for the user, default is nonadmin task. Type: string (or Expression with resultType double)."
         }
       },
       "required": [
@@ -5829,24 +5957,28 @@
       "description": "Web activity authentication properties.",
       "properties": {
         "type": {
-          "description": "Web activity authentication (Basic/ClientCertificate/MSI)",
+          "description": "Web activity authentication (Basic/ClientCertificate/MSI/ServicePrincipal)",
           "type": "string"
         },
         "pfx": {
-          "description": "Base64-encoded contents of a PFX file.",
+          "description": "Base64-encoded contents of a PFX file or Certificate when used for ServicePrincipal",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "username": {
-          "description": "Web activity authentication user name for basic authentication.",
-          "type": "string"
+          "description": "Web activity authentication user name for basic authentication or ClientID when used for ServicePrincipal. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "password": {
-          "description": "Password for the PFX file or basic authentication.",
+          "description": "Password for the PFX file or basic authentication / Secret when used for ServicePrincipal",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "resource": {
-          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
-          "type": "string"
+          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "userTenant": {
+          "description": "TenantId for which Azure Auth token will be requested when using ServicePrincipal Authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       },
       "required": [
@@ -6233,12 +6365,24 @@
           "description": "ID of the published Azure ML pipeline. Type: string (or Expression with resultType string).",
           "type": "object"
         },
+        "mlPipelineEndpointId": {
+          "description": "ID of the published Azure ML pipeline endpoint. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the published Azure ML pipeline endpoint. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
         "experimentName": {
           "description": "Run history experiment name of the pipeline run. This information will be passed in the ExperimentName property of the published pipeline execution request. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "mlPipelineParameters": {
           "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
+          "type": "object"
+        },
+        "dataPathAssignments": {
+          "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
           "type": "object"
         },
         "mlParentRunId": {
@@ -6249,13 +6393,18 @@
           "description": "Whether to continue execution of other steps in the PipelineRun if a step fails. This information will be passed in the continueOnStepFailure property of the published pipeline execution request. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
-      },
-      "required": [
-        "mlPipelineId"
-      ]
+      }
     },
     "AzureMLPipelineParameters": {
       "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Type: string (or Expression with resultType string)."
+      }
+    },
+    "AzureDataPathAssignments": {
+      "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request.",
       "type": "object",
       "additionalProperties": {
         "type": "object",

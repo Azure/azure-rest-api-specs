@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-servicefabric-2020-12-01-preview
   - tag: schema-servicefabric-2020-03-01
   - tag: schema-servicefabric-2020-01-01-preview
   - tag: schema-servicefabric-2019-11-01-preview
@@ -19,6 +20,18 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-servicefabric-2020-12-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-servicefabric-2020-12-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ServiceFabric/preview/2020-12-01-preview/cluster.json
+  - Microsoft.ServiceFabric/preview/2020-12-01-preview/application.json
+
+```
 
 ### Tag: schema-servicefabric-2020-03-01 and azureresourceschema
 
