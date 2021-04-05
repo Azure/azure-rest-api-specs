@@ -167,6 +167,29 @@
     }
   },
   "definitions": {
+    "ConversionErrorCode": {
+      "enum": [
+        "UNKNOWN",
+        "NO_ERROR",
+        "SERVICE_ERROR",
+        "INVALID_ASSET_URI",
+        "INVALID_JOB_ID",
+        "INVALID_GRAVITY",
+        "INVALID_SCALE",
+        "ASSET_SIZE_TOO_LARGE",
+        "ASSET_DIMENSIONS_OUT_OF_BOUNDS",
+        "ZERO_FACES",
+        "INVALID_FACE_VERTICES",
+        "ZERO_TRAJECTORIES_GENERATED",
+        "TOO_MANY_RIG_POSES",
+        "ASSET_CANNOT_BE_CONVERTED"
+      ],
+	  "type": "string",
+      "x-ms-enum": {
+        "name": "ConversionErrorCode",
+        "modelAsString": false
+      }
+    },
     "JobStatus": {
       "enum": [
         "NotStarted",
@@ -334,7 +357,7 @@
       }
     },
     "IngestionProperties": {
-      "description": "Represents the status of an AOA ingestion job.",
+      "description": "Represents the status of an AOA asset conversion job.",
       "type": "object",
       "properties": {
         "clientErrorDetails": {
@@ -347,9 +370,12 @@
           "type": "string",
           "readOnly": true
         },
+        "errorCode": {
+          "$ref": "#/definitions/ConversionErrorCode"
+        },
         "jobId": {
           "format": "uuid",
-          "description": "Identifier for the AOA Ingestion Job.",
+          "description": "Identifier for the AOA asset conversion job.",
           "type": "string",
           "readOnly": true
         },
@@ -368,12 +394,12 @@
         },
         "inputAssetUri": {
           "format": "uri",
-          "description": "The Uri to the Asset to be ingested by the AOA Ingestion Service. This asset needs to have been uploaded to the service using an endpoint provided from a call to the GetUploadUri API.",
+          "description": "The Uri to the Asset to be ingested by the AOA asset conversion service. This asset needs to have been uploaded to the service using an endpoint provided from a call to the GetUploadUri API.",
           "type": "string"
         },
         "accountId": {
           "format": "uuid",
-          "description": "Identifier for the Account owning the AOA Ingestion Job.",
+          "description": "Identifier for the Account owning the asset conversion job.",
           "type": "string",
           "readOnly": true
         },
