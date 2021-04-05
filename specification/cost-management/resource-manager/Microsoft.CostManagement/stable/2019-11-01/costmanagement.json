@@ -99,7 +99,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/MyScopeSetting"
+              "$ref": "#/definitions/Setting"
             }
           },
           "default": {
@@ -136,7 +136,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MyScopeSetting"
+              "$ref": "#/definitions/Setting"
             },
             "description": "Body supplied to the CreateOrUpdate setting operation."
           }
@@ -145,7 +145,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/MyScopeSetting"
+              "$ref": "#/definitions/Setting"
             }
           },
           "default": {
@@ -1718,7 +1718,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/MyScopeSetting"
+            "$ref": "#/definitions/Setting"
           },
           "maxItems": 10
         },
@@ -1729,8 +1729,8 @@
         }
       }
     },
-    "MyScopeSetting": {
-      "description": "State of Setting",
+    "Setting": {
+      "description": "State of the myscope Setting",
       "type": "object",
       "allOf": [
         {
@@ -1785,7 +1785,7 @@
       "description": "The properties of the setting.",
       "properties": {
         "scope": {
-          "description": "For the myscope setting, sets the default scope the current user will see when they sign into Azure Cost Management in the Azure portal.",
+          "description": "Sets the default scope the current user will see when they sign into Azure Cost Management in the Azure portal.",
           "type": "string"
         },
         "startOn": {
@@ -1823,7 +1823,7 @@
           "type": "string"
         },
         "subchannel": {
-          "description": "Indicates the type of modern account. Allowed values include: Individual, Enterprise, Partner, Indirect.",
+          "description": "Indicates the type of modern account. Allowed values include: Individual, Enterprise, Partner, Indirect, NotApplicable",
           "type": "string"
         },
         "parent": {
