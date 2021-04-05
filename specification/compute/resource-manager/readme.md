@@ -224,7 +224,7 @@ input-file:
 - Microsoft.Compute/stable/2021-03-01/compute.json
 - Microsoft.Compute/stable/2021-03-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2020-09-30/disk.json
+- Microsoft.Compute/stable/2020-12-01/disk.json
 - Microsoft.Compute/stable/2019-12-01/gallery.json
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
 ```
@@ -235,6 +235,7 @@ These settings apply only when `--tag=package-2021-03-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2021-03-01-only'
 input-file:
+- Microsoft.Compute/stable/2021-03-01/cloudService.json
 - Microsoft.Compute/stable/2021-03-01/compute.json
 - Microsoft.Compute/stable/2021-03-01/runCommands.json
 ```
