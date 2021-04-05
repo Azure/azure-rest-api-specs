@@ -60,6 +60,7 @@ input-file:
 - Microsoft.Cache/stable/2018-01-01/RedisCache.json
 - Microsoft.Web/stable/2018-01-01/Web.json
 - Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
+- Microsoft.PolicyInsights/stable/2018-01-01/PolicyInsights.json
 ```
 
 ### Suppression
