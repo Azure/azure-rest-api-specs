@@ -42,6 +42,9 @@
         "x-ms-examples": {
           "CreateClusterExample": {
             "$ref": "./examples/CreateClusterExample.json"
+          },
+          "CreateClusterPrivateLinkExample": {
+            "$ref": "./examples/CreateClusterPrivateLinkExample.json"
           }
         },
         "parameters": [
@@ -105,6 +108,9 @@
         "x-ms-examples": {
           "UpdateClusterExample": {
             "$ref": "./examples/UpdateClusterExample.json"
+          },
+          "UpdateClusterPrivateLinkExample": {
+            "$ref": "./examples/UpdateClusterPrivateLinkExample.json"
           }
         },
         "parameters": [
@@ -614,6 +620,19 @@
             "modelAsString": true
           }
         },
+        "privateLinkState": {
+          "type": "string",
+          "description": "Property which describes the state of private link on a connected cluster resource.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkState",
+            "modelAsString": true
+          }
+        },
         "privateLinkScopeResourceId": {
           "type": "string",
           "description": "The resource id of the private link scope this connected cluster is assigned to, if any."
@@ -694,6 +713,18 @@
     "ConnectedClusterPatchProperties": {
       "type": "object",
       "properties": {
+        "privateLinkState": {
+          "type": "string",
+          "description": "Property which describes the state of private link on a connected cluster resource.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkState",
+            "modelAsString": true
+          }
+        },
         "privateLinkScopeResourceId": {
           "type": "string",
           "description": "The resource id of the private link scope this connected cluster is assigned to, if any."
