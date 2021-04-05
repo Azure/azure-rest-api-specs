@@ -735,25 +735,25 @@
       "type": "object",
       "description": "Template Spec Version properties.",
       "properties": {
-        "artifacts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TemplateSpecArtifact"
-          },
-          "description": "An array of Template Spec artifacts."
-        },
         "description": {
           "type": "string",
           "maxLength": 4096,
           "description": "Template Spec version description."
         },
+        "linkedTemplates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedTemplateArtifact"
+          },
+          "description": "An array of linked template artifacts."
+        },
         "metadata": {
           "type": "object",
           "description": "The version metadata. Metadata is an open-ended object and is typically a collection of key-value pairs."
         },
-        "template": {
+        "mainTemplate": {
           "type": "object",
-          "description": "The Azure Resource Manager template content."
+          "description": "The main Azure Resource Manager template content."
         },
         "uiFormDefinition": {
           "type": "object",
@@ -778,55 +778,22 @@
         }
       }
     },
-    "TemplateSpecArtifact": {
+    "LinkedTemplateArtifact": {
       "type": "object",
-      "discriminator": "kind",
-      "description": "Represents a Template Spec artifact.",
+      "description": "Represents a Template Spec artifact containing an embedded Azure Resource Manager template for use as a linked template.",
       "properties": {
         "path": {
           "type": "string",
           "description": "A filesystem safe relative path of the artifact."
         },
-        "kind": {
-          "type": "string",
-          "description": "The kind of artifact.",
-          "enum": [
-            "template"
-          ],
-          "x-ms-enum": {
-            "name": "TemplateSpecArtifactKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "template",
-                "description": "The artifact represents an embedded Azure Resource Manager template."
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "kind",
-        "path"
-      ]
-    },
-    "TemplateSpecTemplateArtifact": {
-      "type": "object",
-      "x-ms-discriminator-value": "template",
-      "description": "Represents a Template Spec artifact containing an embedded Azure Resource Manager template.",
-      "properties": {
         "template": {
           "type": "object",
           "description": "The Azure Resource Manager template."
         }
       },
       "required": [
-        "template"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TemplateSpecArtifact"
-        }
+        "template",
+        "path"
       ]
     },
     "TemplateSpecVersionInfo": {
