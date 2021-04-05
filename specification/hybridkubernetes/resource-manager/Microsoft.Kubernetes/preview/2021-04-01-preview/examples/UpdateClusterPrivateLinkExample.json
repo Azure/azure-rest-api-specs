@@ -1,9 +1,19 @@
 {
   "parameters": {
+    "api-version": "2021-04-01-preview",
     "subscriptionId": "1bfbb5d0-917e-4346-9026-1d3b344417f5",
     "resourceGroupName": "k8sc-rg",
     "clusterName": "testCluster",
-    "api-version": "2021-04-01-preview"
+    "ConnectedClusterPatch": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      },
+      "properties": {
+        "privateLinkState": "Enabled",
+        "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -22,8 +32,6 @@
           "lastModifiedAt": "2020-12-17T07:14:58.865041Z"
         },
         "identity": {
-          "principalId": "d8cd1fd9-154f-4da7-b348-595f283c13a3",
-          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
           "type": "SystemAssigned"
         },
         "properties": {
@@ -31,7 +39,8 @@
           "kubernetesVersion": "1.17.0",
           "totalNodeCount": 2,
           "agentVersion": "0.1.0",
-          "privateLinkState": "Disabled",
+          "privateLinkState": "Enabled",
+          "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName",
           "provisioningState": "Succeeded"
         }
       }
