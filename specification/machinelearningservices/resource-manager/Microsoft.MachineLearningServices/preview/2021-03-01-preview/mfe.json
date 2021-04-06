@@ -8342,6 +8342,21 @@
       },
       "additionalProperties": false
     },
+    "Flavor": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "ModelVersion": {
       "description": "Details of an ModelDto",
       "required": [
@@ -8351,12 +8366,9 @@
       "properties": {
         "flavors": {
           "description": "Dictionary mapping model flavors to their properties.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Flavor"
           }
         },
         "datastoreId": {
