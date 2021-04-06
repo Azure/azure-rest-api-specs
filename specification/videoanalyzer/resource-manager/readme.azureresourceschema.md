@@ -19,5 +19,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Media/preview/2021-05-01-preview/videoanalyzer.json
+  - Microsoft.Media/preview/2021-05-01-preview/VideoAnalyzers.json
+  - Microsoft.Media/preview/2021-05-01-preview/EdgeModules.json
 ```

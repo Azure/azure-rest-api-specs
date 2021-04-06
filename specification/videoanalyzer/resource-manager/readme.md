@@ -35,7 +35,8 @@ These settings apply only when `--tag=package-2021-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-05-01-preview'
 input-file:
-  - Microsoft.Media/preview/2021-05-01-preview/videoanalyzer.json
+  - Microsoft.Media/preview/2021-05-01-preview/VideoAnalyzers.json
+  - Microsoft.Media/preview/2021-05-01-preview/EdgeModules.json
 ```
 
 ---
@@ -53,6 +54,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js videoanalyzer/resource-manager
@@ -77,6 +79,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
 
 ## AzureResourceSchema
 
