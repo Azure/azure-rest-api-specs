@@ -4687,6 +4687,22 @@
         "channelIntegrityKeyVersion": {
           "description": "The version of Channel Integrity Key stored in the Client Key Vault",
           "type": "string"
+        },
+        "syncStatus": {
+          "description": "For changing or to initiate the resync to key-vault set the status to KeyVaultSyncPending, rest of the status will not be applicable.",
+          "enum": [
+            "KeyVaultSynced",
+            "KeyVaultSyncFailed",
+            "KeyVaultNotConfigured",
+            "KeyVaultSyncPending",
+            "KeyVaultSyncing",
+            "KeyVaultNotSynced"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KeyVaultSyncStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4722,6 +4738,30 @@
         "channelIntegrityKeyVersion": {
           "description": "The version of Channel Integrity Key stored in the Client Key Vault",
           "type": "string"
+        },
+        "keyVaultSyncStatus": {
+          "description": "Key vault sync status",
+          "enum": [
+            "KeyVaultSynced",
+            "KeyVaultSyncFailed",
+            "KeyVaultNotConfigured",
+            "KeyVaultSyncPending",
+            "KeyVaultSyncing",
+            "KeyVaultNotSynced"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KeyVaultSyncStatus",
+            "modelAsString": true
+          }
+        },
+        "deviceSecrets": {
+          "description": "Device secrets, will be returned only with ODataFilter $expand=deviceSecrets",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Secret"
+          },
+          "readOnly": true
         }
       }
     },
@@ -4952,10 +4992,14 @@
             "EdgeP_High",
             "EdgePR_Base",
             "EdgePR_Base_UPS",
+            "EP2_64_1VPU_W",
+            "EP2_128_1T4_Mx1_W",
+            "EP2_256_2T4_W",
             "EdgeMR_Mini",
             "RCA_Small",
             "RCA_Large",
-            "RDC"
+            "RDC",
+            "Management"
           ],
           "type": "string",
           "readOnly": true,
@@ -6158,6 +6202,14 @@
           "$ref": "#/definitions/AsymmetricEncryptedSecret",
           "description": "Activation key of the MEC."
         },
+        "controllerEndpoint": {
+          "description": "Controller Endpoint.",
+          "type": "string"
+        },
+        "resourceUniqueId": {
+          "description": "Unique Id of the Resource.",
+          "type": "string"
+        },
         "roleStatus": {
           "description": "Role status.",
           "enum": [
@@ -7324,6 +7376,20 @@
         }
       }
     },
+    "Secret": {
+      "description": "Holds device secret either as a KeyVault reference or as an encrypted value.",
+      "type": "object",
+      "properties": {
+        "encryptedSecret": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "Encrypted (using device public key) secret value."
+        },
+        "keyVaultId": {
+          "description": "Id of the Key-Vault where secret is stored (ex: secrets/AuthClientSecret/82ef4346187a4033a10d629cde07d740).",
+          "type": "string"
+        }
+      }
+    },
     "SecuritySettings": {
       "description": "The security settings of a device.",
       "required": [
@@ -7563,10 +7629,14 @@
             "EdgeP_High",
             "EdgePR_Base",
             "EdgePR_Base_UPS",
+            "EP2_64_1VPU_W",
+            "EP2_128_1T4_Mx1_W",
+            "EP2_256_2T4_W",
             "EdgeMR_Mini",
             "RCA_Small",
             "RCA_Large",
-            "RDC"
+            "RDC",
+            "Management"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8100,6 +8170,71 @@
         }
       }
     },
+    "UpdateDetails": {
+      "description": "Update Sepcific attributes",
+      "type": "object",
+      "properties": {
+        "updateTitle": {
+          "description": "Title of the Update",
+          "type": "string"
+        },
+        "updateSize": {
+          "format": "double",
+          "description": "Size of the update(In Bytes)",
+          "type": "number"
+        },
+        "updateType": {
+          "description": "Type of the Update",
+          "enum": [
+            "Software",
+            "Kubernetes",
+            "Firmware"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UpdateType",
+            "modelAsString": true
+          }
+        },
+        "targetVersion": {
+          "description": "Target Version number",
+          "type": "string"
+        },
+        "estimatedInstallTimeInMins": {
+          "format": "int32",
+          "description": "Estimated Install Time for the update",
+          "type": "integer"
+        },
+        "rebootBehavior": {
+          "description": "Indicates if updates are available and at least one of the updates needs a reboot.",
+          "enum": [
+            "NeverReboots",
+            "RequiresReboot",
+            "RequestReboot"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InstallRebootBehavior",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Status of the update.",
+          "enum": [
+            "DownloadPending",
+            "DownloadStarted",
+            "DownloadCompleted",
+            "InstallStarted",
+            "InstallCompleted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UpdateStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "UpdateDownloadProgress": {
       "description": "Details about the download progress of update.",
       "type": "object",
@@ -8219,11 +8354,57 @@
           "type": "string",
           "readOnly": true
         },
+        "lastCompletedDownloadJobId": {
+          "description": "JobId of the last ran download job.(Can be success/cancelled/failed)",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastDownloadJobStatus": {
+          "description": "JobStatus of the last ran download job.",
+          "enum": [
+            "Invalid",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Paused",
+            "Scheduled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          }
+        },
         "lastCompletedInstallJobDateTime": {
           "format": "date-time",
           "description": "The time when the last Install job was completed (success/cancelled/failed) on the appliance.",
           "type": "string",
           "readOnly": true
+        },
+        "lastCompletedInstallJobId": {
+          "description": "JobId of the last ran install job.(Can be success/cancelled/failed)",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastInstallJobStatus": {
+          "description": "JobStatus of the last ran install job.",
+          "enum": [
+            "Invalid",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Paused",
+            "Scheduled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          }
         },
         "totalNumberOfUpdatesAvailable": {
           "format": "int32",
@@ -8303,10 +8484,25 @@
           },
           "readOnly": true
         },
+        "updates": {
+          "description": "The list of updates available for install.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateDetails"
+          },
+          "readOnly": true
+        },
         "totalUpdateSizeInBytes": {
           "format": "double",
           "description": "The total size of updates available for download in bytes.",
           "type": "number",
+          "readOnly": true
+        },
+        "totalTimeInMinutes": {
+          "format": "int32",
+          "description": "The total time in Minutes",
+          "type": "integer",
           "readOnly": true
         }
       }
