@@ -398,6 +398,7 @@
         ],
         "description": "Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry",
         "operationId": "Workspaces_ResyncKeys",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Resync Workspace Keys": {
             "$ref": "./examples/resyncWorkspaceKeys.json"
@@ -420,6 +421,9 @@
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was accepted; the request was well-formed and received properly."
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -1216,7 +1220,7 @@
           "WorkspaceSkus"
         ],
         "description": "Lists all skus with associated features",
-        "operationId": "ListSkus",
+        "operationId": "Workspace_ListSkus",
         "x-ms-examples": {
           "List Skus": {
             "$ref": "./examples/ListSkus.json"
@@ -2369,6 +2373,22 @@
         "primaryUserAssignedIdentity": {
           "description": "The user assigned identity resource id that represents the workspace identity.",
           "type": "string"
+        },
+        "subscriptionState": {
+          "readOnly": true,
+          "$ref": "#/definitions/SubscriptionState"
+        },
+        "subscriptionStatusChangeTimeStampUtc": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "title": "Subscription state change time.",
+          "description": "The time at which the subscription state changed."
+        },
+        "tenantId": {
+          "description": "The tenant id associated with this workspace.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3203,6 +3223,18 @@
           "type": "string",
           "description": "The description of the Machine Learning compute."
         },
+        "createdOn": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The time at which the compute was created."
+        },
+        "modifiedOn": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The time at which the compute was last modified."
+        },
         "resourceId": {
           "type": "string",
           "description": "ARM resource id of the underlying compute"
@@ -3254,7 +3286,7 @@
                   "description": "Number of agents",
                   "type": "integer",
                   "format": "int32",
-                  "minimum": 1
+                  "minimum": 0
                 },
                 "agentVmSize": {
                   "description": "Agent virtual machine size",
@@ -3281,6 +3313,23 @@
                 "aksNetworkingConfiguration": {
                   "description": "AKS networking configuration for vnet",
                   "$ref": "#/definitions/AksNetworkingConfiguration"
+                },
+                "LoadBalancerType": {
+                  "description": "Load Balancer Type",
+                  "type": "string",
+                  "default": "PublicIp",
+                  "enum": [
+                    "PublicIp",
+                    "InternalLoadBalancer"
+                  ],
+                  "x-ms-enum": {
+                    "name": "LoadBalancerType",
+                    "modelAsString": true
+                  }
+                },
+                "LoadBalancerSubnet": {
+                  "description": "Load Balancer Subnet",
+                  "type": "string"
                 }
               }
             }
@@ -3565,6 +3614,10 @@
                 "administratorAccount": {
                   "description": "Admin credentials for virtual machine",
                   "$ref": "#/definitions/VirtualMachineSshCredentials"
+                },
+                "isNotebookInstanceCompute": {
+                  "description": "Indicates whether this compute will be used for running notebooks.",
+                  "type": "boolean"
                 }
               }
             }
@@ -3727,6 +3780,14 @@
         "cname": {
           "description": "CNAME of the cert",
           "type": "string"
+        },
+        "leafDomainLabel": {
+          "description": "Leaf domain label of public endpoint",
+          "type": "string"
+        },
+        "overwriteExistingDomain": {
+          "description": "Indicates whether to overwrite existing domain label.",
+          "type": "boolean"
         }
       }
     },
@@ -4092,11 +4153,28 @@
         "VirtualMachine",
         "HDInsight",
         "Databricks",
-        "DataLakeAnalytics"
+        "DataLakeAnalytics",
+        "SynapseSpark"
       ],
       "x-ms-enum": {
         "name": "ComputeType",
         "modelAsString": true
+      }
+    },
+    "SubscriptionState": {
+      "type": "string",
+      "description": "The state AzureML workspace's subscription",
+      "enum": [
+        "suspended",
+        "active",
+        "expired",
+        "submitted",
+        "rejected",
+        "cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriptionState",
+        "modelAsString": false
       }
     },
     "MachineLearningServiceError": {
@@ -4122,6 +4200,11 @@
         "message": {
           "type": "string",
           "description": "Error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error",
           "readOnly": true
         },
         "details": {
@@ -4566,10 +4649,7 @@
           "description": "The ArmId of the user assigned identity that will be used to access the customer managed key vault",
           "type": "string"
         }
-      },
-      "required": [
-        "userAssignedIdentity"
-      ]
+      }
     },
     "ServiceResource": {
       "type": "object",
