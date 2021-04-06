@@ -26,7 +26,7 @@ These are the global settings for the changeanalysis.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-04-01-preview
+tag: package-2021-04-01
 ```
 
 ### Tag: package-2020-04-01-preview
@@ -58,7 +58,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
