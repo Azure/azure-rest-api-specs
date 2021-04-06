@@ -82,6 +82,15 @@ directive:
     reason: x-ms-paths extension was previously required. Suppressing so that we don't have to make changes to existing APIs.
 ```
 
+### Tag: package-2021-04-06-preview-only
+
+These settings apply only when `--tag=package-2021-04-06-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-06-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-04-06-preview/authorization-AccessReviewCalls.json
+```
+
 ### Tag: package-2021-03-01-preview-only
 
 These settings apply only when `--tag=package-2021-03-01-preview-only` is specified on the command line.

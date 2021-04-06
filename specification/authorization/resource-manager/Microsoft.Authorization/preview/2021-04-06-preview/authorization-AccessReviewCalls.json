@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-03-01-preview",
+    "version": "2021-04-06-preview",
     "title": "AuthorizationManagementClient",
     "description": "Access reviews service provides the workflow for running access reviews on different kind of resources."
   },
@@ -1106,7 +1106,7 @@
           "readOnly": true,
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AccessReviewScope",
-          "description": "This is used to define what to include in scope of the review. The scope definition includes the resourceId and roleDefinitionId."
+          "description": "This is used to define what to include in scope of the review. The scope definition includes the resourceId, roleDefinitionId, principalType, and assignmentType."
         },
         "reviewers": {
           "type": "array",
@@ -1384,6 +1384,19 @@
           ],
           "x-ms-enum": {
             "name": "AccessReviewScopePrincipalType",
+            "modelAsString": true
+          }
+        },
+        "assignmentType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment type eligible/active to review",
+          "enum": [
+            "eligible",
+            "active"
+          ],
+          "x-ms-enum": {
+            "name": "AccessReviewScopeAssignmentType",
             "modelAsString": true
           }
         }
