@@ -149,6 +149,18 @@ directive:
     from: appconfiguration.json
     where: $.definitions.KeyValueProperties.properties.locked
     reason: This is data plane level information proxied through the RP and cannot be changed.
+  - suppress: EnumInsteadOfBoolean
+    from: appconfiguration.json
+    where: $.definitions.ConfigurationStoreProperties.properties.disableLocalAuth
+    reason: This is a standardized ARM API.
+  - suppress: EnumInsteadOfBoolean
+    from: appconfiguration.json
+    where: $.definitions.ConfigurationStorePropertiesUpdateParameters.properties.disableLocalAuth
+    reason: This is a standardized ARM API.
+  - suppress: EnumInsteadOfBoolean
+    from: appconfiguration.json
+    where: $.definitions.OperationDefinition.properties.isDataAction
+    reason: This is a standardized ARM API.
 ```
 
 ## AzureResourceSchema

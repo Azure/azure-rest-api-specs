@@ -4,13 +4,12 @@
     "resourceGroupName": "myResourceGroup",
     "configStoreName": "contoso",
     "api-version": "2021-03-01-preview",
-    "configStoreCreationParameters": {
-      "location": "westus",
+    "configStoreUpdateParameters": {
       "sku": {
         "name": "Standard"
       },
-      "tags": {
-        "myTag": "myTagValue"
+      "properties": {
+        "disableLocalAuth": true 
       }
     }
   },
@@ -28,8 +27,9 @@
               "identityClientId": null
             }
           },
-          "disableLocalAuth": false,
-          "privateEndpointConnections": []
+          "disableLocalAuth": true,
+          "privateEndpointConnections": [],
+          "publicNetworkAccess": "Disabled"
         },
         "systemData": {
           "createdBy": "foo@contoso.com",
@@ -45,16 +45,14 @@
         "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
         "name": "contoso",
         "location": "westus",
-        "tags": {
-          "myTag": "myTagValue"
-        }
+        "tags": { }
       }
     },
     "201": {
       "body": {
         "type": "Microsoft.AppConfiguration/configurationStores",
         "properties": {
-          "provisioningState": "Creating",
+          "provisioningState": "Updating",
           "creationDate": "2018-04-24T16:30:55+00:00",
           "endpoint": "https://contoso.azconfig.io",
           "encryption": {
@@ -63,8 +61,9 @@
               "identityClientId": null
             }
           },
-          "disableLocalAuth": false,
-          "privateEndpointConnections": []
+          "disableLocalAuth": true,
+          "privateEndpointConnections": [],
+          "publicNetworkAccess": "Disabled"
         },
         "systemData": {
           "createdBy": "foo@contoso.com",
@@ -80,9 +79,7 @@
         "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
         "name": "contoso",
         "location": "westus",
-        "tags": {
-          "myTag": "myTagValue"
-        }
+        "tags": { }
       }
     }
   }
