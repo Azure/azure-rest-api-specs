@@ -428,7 +428,7 @@
           "DefaultAccount"
         ],
         "summary": "Sets the default account for the scope.",
-        "description": "Set the default account for the scope.",
+        "description": "Sets the default account for the scope.",
         "operationId": "DefaultAccounts_Set",
         "parameters": [
           {
@@ -471,7 +471,7 @@
           "DefaultAccount"
         ],
         "summary": "Removes the default account from the scope.",
-        "description": "Remove the default account from the scope.",
+        "description": "Removes the default account from the scope.",
         "operationId": "DefaultAccounts_Remove",
         "parameters": [
           {
@@ -1083,6 +1083,15 @@
             "name": "publicNetworkAccess",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -1114,7 +1123,6 @@
       }
     },
     "CloudConnectors": {
-      "description": "Properties for configuring third party cloud connections.",
       "type": "object",
       "properties": {
         "awsExternalId": {
@@ -1179,6 +1187,58 @@
           "description": "Gets the managed storage account resource identifier.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string"
+        },
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string"
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of the last modification the resource (UTC).",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "description": "The identity that last modified the resource.",
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1291,8 +1351,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AccountProperties",
-          "description": "The account properties.",
-          "x-ms-client-flatten": true
+          "description": "The account properties."
         },
         "tags": {
           "description": "Tags on the azure resource.",
@@ -1352,94 +1411,6 @@
         "subscriptionId": {
           "description": "The subscription ID of the account that is set as the default.",
           "type": "string"
-        }
-      }
-    },
-    "DeletedAccountList": {
-      "description": "Paged list of soft deleted account resources",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "count": {
-          "format": "int64",
-          "description": "Total item count.",
-          "type": "integer"
-        },
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Collection of items of type results.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeletedAccount"
-          }
-        }
-      }
-    },
-    "DeletedAccount": {
-      "description": "Soft Deleted Account resource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Gets or sets the properties.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DeletedAccountProperties"
-            }
-          ],
-          "readOnly": true,
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DeletedAccountProperties": {
-      "description": "The soft deleted account properties",
-      "type": "object",
-      "properties": {
-        "accountId": {
-          "description": "Gets the account identifier associated with resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "deletedBy": {
-          "description": "Gets the user identifier that deleted resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "deletionDate": {
-          "format": "date-time",
-          "description": "Gets the time at which the resource was soft deleted.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Gets the resource location.",
-          "type": "string",
-          "readOnly": true
-        },
-        "scheduledPurgeDate": {
-          "format": "date-time",
-          "description": "Gets the scheduled purge datetime.",
-          "type": "string",
-          "readOnly": true
-        },
-        "tags": {
-          "description": "Gets the account tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
         }
       }
     },
@@ -1707,17 +1678,26 @@
     "PrivateLinkResource": {
       "description": "A privately linkable resource.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
+        "id": {
+          "description": "The private link resource identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The private link resource name.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "The private link resource properties.",
-          "readOnly": true,
-          "x-ms-client-flatten": true
+          "readOnly": true
+        },
+        "type": {
+          "description": "The private link resource type.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1851,13 +1831,6 @@
     }
   },
   "parameters": {
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
-      "required": true,
-      "type": "string"
-    },
     "subscriptionId": {
       "name": "subscriptionId",
       "in": "path",
@@ -1865,18 +1838,25 @@
       "required": true,
       "type": "string"
     },
-    "resourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The resource group name.",
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+      "type": "string"
     },
     "accountName": {
       "name": "accountName",
       "in": "path",
       "description": "The name of the account.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The resource group name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
