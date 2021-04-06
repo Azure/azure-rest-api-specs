@@ -77,6 +77,8 @@ directive:
     reason: Preview versions still in use
   - suppress: RequiredSystemDataInNewApiVersions
     reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
+  - suppress: RequiredReadOnlySystemData
+    reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
   - suppress: XmsPathsMustOverloadPaths
     from: authorization-RoleDefinitionsCalls.json
     reason: x-ms-paths extension was previously required. Suppressing so that we don't have to make changes to existing APIs.
