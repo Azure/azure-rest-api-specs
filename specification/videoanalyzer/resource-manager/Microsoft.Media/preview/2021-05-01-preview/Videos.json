@@ -1,0 +1,1042 @@
+{
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Video Analyzer Resource Provider",
+    "description": "This swagger defines the Video Resource Provider APIs of Azure Video Analyzers",
+    "version": "2021-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "definitions": {
+    "VideoPlayback": {
+      "properties": {
+        "archiveBaseUrl": {
+          "type": "string",
+          "description": "The video archive base url."
+        }
+      },
+      "type": "object",
+      "description": "The video playback url."
+    },
+    "VideoFlags": {
+      "properties": {
+        "canStream": {
+          "type": "boolean",
+          "description": "The video can be streamed."
+        },
+        "hasData": {
+          "type": "boolean",
+          "description": "The video has data."
+        },
+        "isRecording": {
+          "type": "boolean",
+          "description": "The video is recording."
+        }
+      },
+      "type": "object",
+      "required": [
+        "canStream",
+        "hasData",
+        "isRecording"
+      ],
+      "description": "The video flags that represent the state of the video."
+    },
+    "VideoMediaInfo": {
+      "properties": {
+        "segmentLength": {
+          "type": "string",
+          "description": "The video segment length which is defined as a time period specified by a ISO8601 compliant format (i.e. PT30S = 30 seconds)."
+        }
+      },
+      "type": "object",
+      "description": "The video media info."
+    },
+    "VideoPlaybackToken": {
+      "properties": {
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date of the playback token. The format follows the ISO8601 standard. For example: 2021-12-31T00:00:00Z.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "token": {
+          "type": "string",
+          "description": "The content of the video playback token.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "The video playback token."
+    },
+    "VideoProperties": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "A video title."
+        },
+        "description": {
+          "type": "string",
+          "description": "A video description."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ContinuousArchive"
+          ],
+          "x-ms-enum": {
+            "name": "VideoType",
+            "values": [
+              {
+                "value": "ContinuousArchive",
+                "description": "Video type is continuous archive. TODO what is continuous archive?"
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Allowed types for a video.",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "flags": {
+          "$ref": "#/definitions/VideoFlags",
+          "description": "Video flags.",
+          "readOnly": true
+        },
+        "playback": {
+          "$ref": "#/definitions/VideoPlayback",
+          "description": "A video's playback urls.",
+          "readOnly": true
+        },
+        "mediaInfo": {
+          "$ref": "#/definitions/VideoMediaInfo",
+          "description": "A video's media info.",
+          "readOnly": true
+        }
+      },
+      "type": "object",
+      "description": "Describes the properties of a video."
+    },
+    "Authentication": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Base entity for access policy authentication."
+    },
+    "Claim": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Claim name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Claim value."
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ],
+      "description": "Claim entity."
+    },
+    "JwtAuthentication": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JwtAuthentication",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Authentication"
+        }
+      ],
+      "properties": {
+        "issuers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of issuers."
+        },
+        "audiences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of audiences."
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Claim"
+          },
+          "description": "List of additional claims."
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenKey"
+          },
+          "description": "List of keys."
+        }
+      },
+      "type": "object",
+      "required": [
+        "issuers",
+        "audiences",
+        "keys"
+      ],
+      "description": "Access policy JWT authentication."
+    },
+    "TokenKey": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "kid": {
+          "type": "string",
+          "description": "Key id."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type",
+        "kid"
+      ],
+      "description": "Base entity for token key which is a public key."
+    },
+    "RsaTokenKey": {
+      "x-ms-discriminator-value": "#Microsoft.Media.RsaTokenKey",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TokenKey"
+        }
+      ],
+      "properties": {
+        "alg": {
+          "type": "string",
+          "enum": [
+            "RS256",
+            "RS384",
+            "RS512"
+          ],
+          "x-ms-enum": {
+            "name": "AccessPolicyRsaAlgo",
+            "values": [
+              {
+                "value": "RS256",
+                "description": "RSA 256."
+              },
+              {
+                "value": "RS384",
+                "description": "RSA 384."
+              },
+              {
+                "value": "RS512",
+                "description": "RSA 512."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "RSA algorithm."
+        },
+        "n": {
+          "type": "string",
+          "description": "N value."
+        },
+        "e": {
+          "type": "string",
+          "description": "E value."
+        }
+      },
+      "type": "object",
+      "required": [
+        "alg",
+        "n",
+        "e"
+      ],
+      "description": "Rsa token key."
+    },
+    "EccTokenKey": {
+      "x-ms-discriminator-value": "#Microsoft.Media.EccTokenKey",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TokenKey"
+        }
+      ],
+      "properties": {
+        "alg": {
+          "type": "string",
+          "enum": [
+            "ES256",
+            "ES384",
+            "ES512"
+          ],
+          "x-ms-enum": {
+            "name": "AccessPolicyEccAlgo",
+            "values": [
+              {
+                "value": "ES256",
+                "description": "ECC 256."
+              },
+              {
+                "value": "ES384",
+                "description": "ECC 384."
+              },
+              {
+                "value": "ES512",
+                "description": "ECC 512."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "ECC algorithm."
+        },
+        "x": {
+          "type": "string",
+          "description": "X value."
+        },
+        "y": {
+          "type": "string",
+          "description": "Y value."
+        }
+      },
+      "type": "object",
+      "required": [
+        "alg",
+        "x",
+        "y"
+      ],
+      "description": "Ecc token key."
+    },
+    "AccessPolicyProperties": {
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": [
+            "Reader"
+          ],
+          "x-ms-enum": {
+            "name": "AccessPolicyRole",
+            "values": [
+              {
+                "value": "Reader",
+                "description": "Reader role."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Access policy role"
+        },
+        "authentication": {
+          "$ref": "#/definitions/Authentication",
+          "description": "Access policy authentication"
+        }
+      },
+      "type": "object",
+      "required": [
+        "role",
+        "authentication"
+      ],
+      "description": "Describes the properties of an access policy."
+    },
+    "VideoEntity": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VideoProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "SystemData": {
+      "properties": {},
+      "type": "object"
+    },
+    "AccessPolicyEntity": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccessPolicyProperties",
+          "description": "The resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "VideoEntityCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoEntity"
+          },
+          "description": "A collection of VideoEntity items."
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "A link to the next page of the collection (when the collection contains too many results to return in one response)."
+        }
+      },
+      "type": "object",
+      "description": "A collection of VideoEntity items."
+    },
+    "AccessPolicyEntityCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessPolicyEntity"
+          },
+          "description": "A collection of AccessPolicyEntity items."
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "A link to the next page of the collection (when the collection contains too many results to return in one response)."
+        }
+      },
+      "type": "object",
+      "description": "A collection of AccessPolicyEntity items."
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos": {
+      "get": {
+        "summary": "List video entities.",
+        "description": "Lists video entities.",
+        "operationId": "Videos_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoEntityCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
+        "x-ms-examples": {
+          "Lists video entities.": {
+            "$ref": "examples/video-list.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}": {
+      "get": {
+        "summary": "Get video entity.",
+        "description": "Gets a video entity.",
+        "operationId": "Videos_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "videoName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Gets a video entity.": {
+            "$ref": "examples/video-get.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Register video entity",
+        "description": "Register video entity.",
+        "operationId": "Videos_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "videoName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Register video entity.": {
+            "$ref": "examples/video-create.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete video entity",
+        "description": "Deletes a video entity.",
+        "operationId": "Videos_Delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "videoName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Deletes a video entity.": {
+            "$ref": "examples/video-delete.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update video entity.",
+        "description": "Updates the video entity",
+        "operationId": "Videos_Update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "videoName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VideoEntity"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Update video entity.": {
+            "$ref": "examples/video-patch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}/playbackAuthorization": {
+      "get": {
+        "summary": "Generate a playback token for media endpoint authorization.",
+        "description": "Generate a playback token for media endpoint authorization.",
+        "operationId": "Videos_PlaybackAuthorization",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VideoPlaybackToken"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "videoName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Video name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Generate a playback token for media endpoint authorization.": {
+            "$ref": "examples/video-getPlaybackAuthorization.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies": {
+      "get": {
+        "summary": "List access policy entities.",
+        "description": "Lists access policy entities.",
+        "operationId": "AccessPolicies_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntityCollection"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n."
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        },
+        "x-ms-examples": {
+          "Lists access policy entities.": {
+            "$ref": "examples/access-policy-list.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies/{accessPolicyName}": {
+      "get": {
+        "summary": "Get access policy entity.",
+        "description": "Gets an access policy entity.",
+        "operationId": "AccessPolicies_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Access Policy name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Gets an access policy entity.": {
+            "$ref": "examples/access-policy-get.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Register access policy entity",
+        "description": "Register access policy entity.",
+        "operationId": "AccessPolicies_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Access Policy name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Register access policy entity.": {
+            "$ref": "examples/access-policy-create.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete access policy entity",
+        "description": "Deletes an access policy entity.",
+        "operationId": "AccessPolicies_Delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Access Policy name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Deletes an access policy entity.": {
+            "$ref": "examples/access-policy-delete.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update access policy entity",
+        "description": "Updates the access policy entity.",
+        "operationId": "AccessPolicies_Update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AzureVideoAnalyzerAccountName"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Access Policy name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyEntity"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Update access policy entity.": {
+            "$ref": "examples/access-policy-patch.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique identifier for a Microsoft Azure subscription."
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group within the Azure subscription.",
+      "x-ms-parameter-location": "method"
+    },
+    "AzureVideoAnalyzerAccountName": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure Video Analyzer account name.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Version of the API to be used with the client request."
+    }
+  }
+}

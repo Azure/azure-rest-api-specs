@@ -21,4 +21,5 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.Media/preview/2021-05-01-preview/VideoAnalyzers.json
   - Microsoft.Media/preview/2021-05-01-preview/EdgeModules.json
+  - Microsoft.Media/preview/2021-05-01-preview/Videos.json
 ```

@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2021-05-01-preview` is specified o
 input-file:
   - Microsoft.Media/preview/2021-05-01-preview/VideoAnalyzers.json
   - Microsoft.Media/preview/2021-05-01-preview/EdgeModules.json
+  - Microsoft.Media/preview/2021-05-01-preview/Videos.json
 ```
 
 ---
