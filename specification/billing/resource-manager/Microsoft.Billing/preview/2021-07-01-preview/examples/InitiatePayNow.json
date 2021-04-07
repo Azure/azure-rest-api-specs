@@ -1,10 +1,22 @@
 {
   "parameters": {
-    "api-version": "2020-12-15-preview",
+    "api-version": "2021-07-01-preview",
     "billingAccountName": "{billingAccountName}",
-    "payNowName": "{payNowName}"
+    "parameters": {
+      "properties": {
+        "invoiceName": "EA00001",
+        "payOffBillingAccountName": "4999919",
+        "payOffDate": "2020-09-10"
+      }
+    }
   },
   "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/payNow/operationResults/ed2975a8-8f77-43bb-a717-ace54326b14b?api-version=2021-07-01-preview",
+        "Retry-After": "60"
+      }
+    },
     "200": {
       "body": {
         "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/payNow/{payNowName}",
