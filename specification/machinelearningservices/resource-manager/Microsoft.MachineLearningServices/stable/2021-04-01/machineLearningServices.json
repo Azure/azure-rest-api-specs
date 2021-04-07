@@ -3717,6 +3717,67 @@
       ],
       "x-ms-discriminator-value": "DataLakeAnalytics"
     },
+    "SynapseSpark": {
+      "description": "A SynapseSpark compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "description": "AKS properties",
+              "properties": {
+                "autoScaleProperties": {
+                  "description": "Auto scale properties.",
+                  "$ref": "#/definitions/AutoScaleProperties"
+                },
+                "autoPauseProperties": {
+                  "description": "Auto pause properties.",
+                  "$ref": "#/definitions/AutoPauseProperties"
+                },
+                "sparkVersion": {
+                  "description": "Spark version.",
+                  "type": "string"
+                },
+                "nodeCount": {
+                  "description": "The number of compute nodes currently assigned to the compute.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nodeSize": {
+                  "description": "Node size.",
+                  "type": "string"
+                },
+                "nodeSizeFamily": {
+                  "description": "Node size family.",
+                  "type": "string"
+                },
+                "subscriptionId": {
+                  "description": "Azure subscription identifier.",
+                  "type": "string"
+                },
+                "resourceGroup": {
+                  "description": "Name of the resource group in which workspace is located.",
+                  "type": "string"
+                },
+                "workspaceName": {
+                  "description": "Name of Azure Machine Learning workspace.",
+                  "type": "string"
+                },
+                "poolName": {
+                  "description": "Pool name.",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "SynapseSpark"
+    },
     "ServicePrincipalCredentials": {
       "type": "object",
       "description": "Service principal credentials.",
@@ -6586,6 +6647,36 @@
         "timeout": {
           "description": "Optional time period passed to timeout command.",
           "type": "string"
+        }
+      }
+    },
+    "AutoScaleProperties": {
+      "type": "object",
+      "description": "Auto scale properties",
+      "properties": {
+        "minNodeCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "maxNodeCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "AutoPauseProperties": {
+      "type": "object",
+      "description": "Auto pause properties",
+      "properties": {
+        "delayInMinutes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "enabled": {
+          "type": "boolean"
         }
       }
     }
