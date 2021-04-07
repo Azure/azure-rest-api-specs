@@ -203,6 +203,20 @@ directive:
     reason: 'Previously implemented operation apis are using an incorrect RP case format which I cannot change.'
 ```
 
+### Tag: package-2020-11-20
+
+These settings apply only when `--tag=package-2020-11-20` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11-20'
+input-file:
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
+  - Microsoft.Insights/stable/2020-11-20/examples\WorkbookTemplateAdd.json
+  - Microsoft.Insights/stable/2020-11-20/examples\WorkbookTemplateDelete.json
+  - Microsoft.Insights/stable/2020-11-20/examples\WorkbookTemplateGet.json
+  - Microsoft.Insights/stable/2020-11-20/examples\WorkbookTemplatesList.json
+  - Microsoft.Insights/stable/2020-11-20/examples\WorkbookTemplateUpdate.json
+```
+
 ### Tag: package-2020-02-12
 
 These settings apply only when `--tag=package-2020-02-12` is specified on the command line.
