@@ -348,6 +348,55 @@
           "nextLinkName": "nextLink"
         }
       }
+    },    
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "MHSMListPrivateEndpointConnections"
+        ],
+        "operationId": "MHSMPrivateEndpointConnections_ListByResource",
+        "description": "The List operation gets information about the private endpoint connections associated with the managed HSM Pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the managed HSM Pool"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about all managed HSM Pools in the specified subscription.",
+            "schema": {
+              "$ref": "#/definitions/MHSMPrivateEndpointConnectionsListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List managed HSM Pools in a subscription": {
+            "$ref": "./examples/ManagedHsm_ListPrivateEndpointConnectionsByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/deletedManagedHSMs": {
       "get": {
@@ -983,6 +1032,22 @@
         }
       },
       "description": "List of managed HSM Pools"
+    },
+    "MHSMPrivateEndpointConnectionsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MHSMPrivateEndpointConnection"
+          },
+          "description": "The private endpoint connection associated with a managed HSM Pools."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of managed HSM Pools."
+        }
+      },
+      "description": "List of private endpoint connections associated with a managed HSM Pools"
     },
     "ManagedHsmError": {
       "properties": {
