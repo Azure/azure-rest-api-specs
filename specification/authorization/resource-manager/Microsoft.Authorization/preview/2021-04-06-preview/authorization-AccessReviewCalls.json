@@ -1106,7 +1106,7 @@
           "readOnly": true,
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AccessReviewScope",
-          "description": "This is used to define what to include in scope of the review. The scope definition includes the resourceId, roleDefinitionId, principalType, and assignmentType."
+          "description": "This is used to define what to include in scope of the review. The scope definition includes the resourceId, roleDefinitionId, principalType, and assignmentState."
         },
         "reviewers": {
           "type": "array",
@@ -1387,7 +1387,7 @@
             "modelAsString": true
           }
         },
-        "assignmentType": {
+        "assignmentState": {
           "type": "string",
           "readOnly": true,
           "description": "The role assignment type eligible/active to review",
@@ -1396,7 +1396,7 @@
             "active"
           ],
           "x-ms-enum": {
-            "name": "AccessReviewScopeAssignmentType",
+            "name": "AccessReviewScopeAssignmentState",
             "modelAsString": true
           }
         }
