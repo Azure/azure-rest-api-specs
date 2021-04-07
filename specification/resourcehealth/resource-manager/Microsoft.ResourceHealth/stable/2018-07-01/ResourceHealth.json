@@ -46,6 +46,9 @@
             "$ref": "#/parameters/FilterParameter"
           },
           {
+            "$ref": "#/parameters/QueryStartTimeParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -572,6 +575,7 @@
                     "properties": {
                       "groupId": {
                         "type": "integer",
+			"format": "int64",
                         "description": "Recommended action group Id for the service health event."
                       },
                       "actionText": {
@@ -608,6 +612,7 @@
             },
             "priority": {
               "type": "integer",
+	      "format": "int64",
               "description": "Priority level of the event."
             },
             "lastUpdateTime": {
@@ -1110,6 +1115,11 @@
       "description": "The Get EmergingIssues operation response.",
       "type": "object",
       "properties": {
+      	"systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "$ref": "#/definitions/emergingIssue",
           "description": "The emerging issue entity properties.",
@@ -1214,20 +1224,26 @@
       "description": "Error details.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "The error details.",
-          "type": "string",
-          "readOnly": true
+	"error": {
+          "description": "Error details.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "The error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "The error message.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "description": "The error details.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         }
       }
     },
@@ -1356,7 +1372,15 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN",
+      "description": "A valid odata query to limit the events returned. The logical operators and, or, equal, not equal, and top are supported. For example, $filter=Properties/EventType eq 'ServiceIssue' or Properties/EventType eq 'PlannedMaintenance' OR %24filter=Properties%2FEventType%20eq%20%27ServiceIssue%27%20or%20Properties%2FEventType%20eq%20%27PlannedMaintenance%27",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryStartTimeParameter": {
+      "name": "queryStartTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Specifies from when to return events, based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020",
       "x-ms-parameter-location": "method"
     },
     "ExpandParameter": {
