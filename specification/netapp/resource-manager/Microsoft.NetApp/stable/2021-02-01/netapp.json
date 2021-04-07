@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2020-12-01",
+    "version": "2021-02-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -2959,6 +2959,10 @@
           "readOnly": true,
           "description": "The system meta data relating to this resource.",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "identity": {
+          "description": "Resource Identity",
+          "$ref": "#/definitions/resourceIdentity"
         }
       }
     },
@@ -2994,6 +2998,10 @@
           "description": "NetApp Account properties",
           "$ref": "#/definitions/accountProperties",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "description": "Resource Identity",
+          "$ref": "#/definitions/resourceIdentity"
         }
       }
     },
@@ -3174,7 +3182,63 @@
       "properties": {
         "keySource": {
           "type": "string",
-          "description": "Encryption Key Source. Possible values are: 'Microsoft.NetApp'."
+          "description": "Encryption Key Source. Possible values are: Microsoft.KeyVault, Microsoft.NetApp."
+        },
+        "keyVaultProperties": {
+          "type": "object",
+          "description": "Key Vault Properties. Required if Encryption Key Source is Microsoft.KeyVault.",
+          "properties": {
+            "keyVaultId": {
+              "type": "string",
+              "description": "Id the of Azure Key Vault Configuration"
+            },
+            "keyVaultUri": {
+              "type": "string",
+              "description": "URI for the Azure Key Vault managing the keys"
+            },
+            "keyName": {
+              "type": "string",
+              "description": "Name of the Azure Key Vault key"
+            },
+            "status": {
+              "type": "string",
+              "readOnly": true,
+              "description": "Status of the Azure Key Vault configuration",
+              "enum": [
+                "Created",
+                "Updating",
+                "InUse",
+                "Deleted",
+                "Error"
+              ],
+              "x-ms-enum": {
+                "name": "AzureKeyVaultEncryptionStatus",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Created",
+                    "description": "Azure Key Vault configuration created but not in use"
+                  },
+                  {
+                    "value": "InUse",
+                    "description": "Azure Key Vault configuration in use by Volume"
+                  },
+                  {
+                    "value": "Deleted",
+                    "description": "Azure Key Vault configuration Deleted"
+                  },
+                  {
+                    "value": "Error",
+                    "description": "Error with the Azure Key Vault configuration"
+                  },
+                  {
+                    "value": "Updating",
+                    "description": "Azure Key Vault configuration Updating"
+                  }
+                ]
+              }
+            }
+          }
         }
       }
     },
@@ -4683,6 +4747,12 @@
           "type": "string",
           "readOnly": true,
           "description": "Volume name"
+        },
+        "useExistingSnapshot": {
+          "type": "boolean",
+          "description": "Manual backup an already existing snapshot. This will always be false for scheduled backups and true/false for manual backups",
+          "example": true,
+          "default": false
         }
       }
     },
@@ -5131,7 +5201,7 @@
       "in": "query",
       "type": "string",
       "required": true,
-      "default": "2020-12-01"
+      "default": "2021-02-01"
     }
   }
 }
