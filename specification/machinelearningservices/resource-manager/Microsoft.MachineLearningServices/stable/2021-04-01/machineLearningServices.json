@@ -3251,6 +3251,10 @@
           "type": "boolean",
           "description": "Indicating whether the compute was provisioned by user and brought from outside if true, or machine learning service provisioned it if false.",
           "readOnly": true
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Opt-out of local authentication and ensure customers can use only MSI and AAD exclusively for authentication."
         }
       },
       "required": [
@@ -4717,10 +4721,10 @@
       "description": "The type of identity that creates/modifies resources",
       "type": "string",
       "enum": [
-        "user",
-        "application",
-        "managedIdentity",
-        "key"
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
       ],
       "x-ms-enum": {
         "name": "IdentityType",
