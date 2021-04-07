@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapistorageprod.blob.core.windows.net/sdkautomation/prod/schemas/specificationRepositoryConfiguration.schema.json",
-  "pipelineName": "automation - sdk",
-  "sdkRepositoryMappings": {
+  "pipelineName": "automation - sdk - test",
+    "sdkRepositoryMappings": {
     "azure-sdk-for-go": {
       "integrationRepository": "AzureSDKAutomation/azure-sdk-for-go",
       "mainRepository": "Azure/azure-sdk-for-go"
@@ -40,44 +40,22 @@
     "azure-resource-manager-schemas": {
       "integrationRepository": "AzureSDKAutomation/azure-resource-manager-schemas",
       "mainRepository": "Azure/azure-resource-manager-schemas"
-    },
-    "azure-powershell": {
-      "integrationRepository": "AzureSDKAutomation/azure-powershell",
-      "mainRepository": "Azure/azure-powershell"
     }
   },
   "overrides": {
-    "Azure/azure-rest-api-specs-pr": {
+    "openapi-env-test/azure-rest-api-specs": {
       "sdkRepositoryMappings": {
-        "azure-sdk-for-go": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-go-pr",
-          "mainRepository": "Azure/azure-sdk-for-go-pr"
-        },
-        "azure-sdk-for-java": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-java-pr",
-          "mainRepository": "Azure/azure-sdk-for-java-pr",
-          "configFilePath": "eng/mgmt/automation/swagger_to_sdk_config.json"
-        },
-        "azure-sdk-for-js": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-js-pr",
-          "mainRepository": "Azure/azure-sdk-for-js-pr"
-        },
-        "azure-sdk-for-net": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-net-pr",
-          "mainRepository": "Azure/azure-sdk-for-net-pr"
-        },
-        "azure-sdk-for-python": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
-          "mainRepository": "Azure/azure-sdk-for-python-pr",
-          "mainBranch": "release/v3"
+        "azure-sdk-for-terraform": {
+          "integrationRepository": "test-repo-billy/azure-sdk-for-trenton",
+          "mainRepository": "test-repo-billy/azure-sdk-for-trenton",
+          "mainBranch": "secondary"
         },
         "azure-sdk-for-python-track2": {
-          "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
-          "mainRepository": "Azure/azure-sdk-for-python-pr"
+          "mainRepository": "openapi-env-test/azure-sdk-for-python",
+          "mainBranch": "python-track2-test"
         },
-        "azure-cli-extensions": {
-          "integrationRepository": "azure-sdk/azure-cli-extensions-pr",
-          "mainRepository": "Azure/azure-cli-extensions-pr"
+        "azure-sdk-for-net": {
+          "mainRepository": "openapi-env-test/azure-sdk-for-net"
         }
       }
     }
