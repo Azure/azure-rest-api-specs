@@ -36,6 +36,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/library.json
 
 ```
+
 ### Tag: schema-synapse-2020-04-01-preview and azureresourceschema
 
 ``` yaml $(tag) == 'schema-synapse-2020-04-01-preview' && $(azureresourceschema)
