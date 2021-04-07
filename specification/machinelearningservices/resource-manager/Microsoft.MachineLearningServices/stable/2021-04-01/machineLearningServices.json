@@ -2374,17 +2374,6 @@
           "description": "The user assigned identity resource id that represents the workspace identity.",
           "type": "string"
         },
-        "subscriptionState": {
-          "readOnly": true,
-          "$ref": "#/definitions/SubscriptionState"
-        },
-        "subscriptionStatusChangeTimeStampUtc": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "title": "Subscription state change time.",
-          "description": "The time at which the subscription state changed."
-        },
         "tenantId": {
           "description": "The tenant id associated with this workspace.",
           "type": "string",
@@ -4175,22 +4164,6 @@
       "x-ms-enum": {
         "name": "ComputeType",
         "modelAsString": true
-      }
-    },
-    "SubscriptionState": {
-      "type": "string",
-      "description": "The state AzureML workspace's subscription",
-      "enum": [
-        "suspended",
-        "active",
-        "expired",
-        "submitted",
-        "rejected",
-        "cancelled"
-      ],
-      "x-ms-enum": {
-        "name": "SubscriptionState",
-        "modelAsString": false
       }
     },
     "MachineLearningServiceError": {
