@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "subscriptionId": "591e76c3-3e97-44db-879c-3e2b12961b62",
+    "resourceGroupName": "testrg",
+    "accountName": "testaccount2",
+    "accessPolicyName": "accessPolicyName1",
+    "api-version": "2021-05-01-preview",
+    "parameters": {
+      "properties": {
+        "authentication": {
+          "@odata.type": "#Microsoft.Media.JwtAuthentication",
+          "keys": [
+            {
+              "@odata.type": "#Microsoft.Media.RsaTokenKey",
+              "alg": "RS256",
+              "kid": "123",
+              "n": "012301",
+              "e": "AQAB"
+            },
+            {
+              "@odata.type": "#Microsoft.Media.EccTokenKey",
+              "alg": "Updated",
+              "kid": "124",
+              "x": "xxx",
+              "y": "yyy"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "accessPolicyName1",
+        "id": "/subscriptions/591e76c3-3e97-44db-879c-3e2b12961b62/resourceGroups/testrg/providers/Microsoft.Media/videoAnalyzers/testaccount2/accesspolicies/accessPolicyName1",
+        "type": "Microsoft.Media/videoAnalyzers/accesspolicies",
+        "properties": {
+          "role": "Reader",
+          "authentication": {
+            "@odata.type": "#Microsoft.Media.JwtAuthentication",
+            "issuers": [
+              "issuer1",
+              "issuer2"
+            ],
+            "audiences": [
+              "audience"
+            ],
+            "claims": [
+              {
+                "name": "claimname1",
+                "value": "claimvalue1"
+              },
+              {
+                "name": "claimname2",
+                "value": "claimvalue2"
+              }
+            ],
+            "keys": [
+              {
+                "@odata.type": "#Microsoft.Media.RsaTokenKey",
+                "kid": "123",
+                "alg": "RS256",
+                "n": "012301",
+                "e": "AQAB"
+              },
+              {
+                "@odata.type": "#Microsoft.Media.EccTokenKey",
+                "kid": "124",
+                "alg": "ES256",
+                "x": "xxx",
+                "y": "yyy"
+              }
+            ]
+          }
+        },
+        "systemData": {}
+      }
+    }
+  }
+}
