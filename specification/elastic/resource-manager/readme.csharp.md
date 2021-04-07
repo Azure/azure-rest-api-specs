@@ -9,6 +9,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Elastic
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/confluent/Microsoft.Azure.Management.Elastic/src/Generated
+  output-folder: $(csharp-sdks-folder)/elastic/Microsoft.Azure.Management.Elastic/src/Generated
   clear-output-folder: true
 ```
