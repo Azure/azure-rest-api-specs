@@ -2000,6 +2000,87 @@
         "cognitiveServicesSubscriptionId"
       ]
     },
+    "TelephonyChannel": {
+      "type": "object",
+      "x-ms-discriminator-value": "TelephonyChannel",
+      "description": "Telephony channel definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TelephonyChannelProperties",
+          "description": "The set of properties specific to Telephony channel resource"
+        }
+      }
+    },
+    "TelephonyChannelProperties": {
+      "properties": {
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TelephonyChannelResourcePhoneNumber"
+          },
+          "description": "The list of Phone Numbers"
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether this channel is enabled for the bot"
+        },
+        "premiumSKU": {
+          "type": "string",
+          "description": "premiumSKU - reserved for microsoft internal use onl"
+        }
+      },
+      "description": "The parameters to provide for the Telephony channel.",
+      "required": [
+        "isEnabled"
+      ]
+    },
+    "TelephonyChannelResourcePhoneNumber": {
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "phoneNumber e.g. +1657207450"
+        },
+        "acsEndpoint": {
+          "type": "string",
+          "description": "acsEndPoint"
+        },
+        "acsSecret": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "acsSecret"
+        },
+        "acsResourceId": {
+          "type": "string",
+          "description": "fully qualified ACS resource id e.g. /subscriptions/<subId>/resourceGroups/<resGroupId>/providers/Microsoft.Communication/CommunicationServices/<acsResId>"
+        },
+        "cognitiveServiceSubscriptionKey": {
+          "type": "string",
+          "description": "acsSecret"
+        },
+        "cognitiveServiceRegion": {
+          "type": "string",
+          "description": "cognitiveServiceRegion"
+        },
+        "defaultLocale": {
+          "type": "string",
+          "description": "defaultLocale - optional"
+        }
+      },
+      "description": "A Phone Number with acs Details",
+      "required": [
+        "phoneNumber",
+        "acsEndpoint",
+        "acsSecret",
+        "acsResourceId",
+        "cognitiveServiceSubscriptionKey",
+        "cognitiveServiceRegion"
+      ]
+    },
     "ChannelResponseList": {
       "properties": {
         "nextLink": {
@@ -2564,7 +2645,8 @@
         "DirectLineChannel",
         "SmsChannel",
         "LineChannel",
-        "DirectLineSpeechChannel"
+        "DirectLineSpeechChannel",
+        "TelephonyChannel"
       ],
       "x-ms-enum": {
         "name": "channelName",
@@ -2608,6 +2690,9 @@
           },
           {
             "value": "DirectLineSpeechChannel"
+          },
+          {
+            "value": "TelephonyChannel"
           }
         ]
       },
