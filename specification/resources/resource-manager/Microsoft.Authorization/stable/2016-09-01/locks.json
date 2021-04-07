@@ -56,6 +56,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List provider operations": {
+            "$ref": "./examples/ListProviderOperations.json"
+          }
         }
       }
     },
@@ -114,6 +119,11 @@
               "$ref": "#/definitions/ManagementLockObject"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create management lock at resource group level": {
+            "$ref": "./examples/ManagementLocks_CreateOrUpdateAtResourceGroupLevel.json"
+          }
         }
       },
       "delete": {
@@ -155,6 +165,11 @@
           "200": {
             "description": "OK"
           }
+        },
+        "x-ms-examples": {
+          "Delete management lock at resource group level": {
+            "$ref": "./examples/ManagementLocks_DeleteAtResourceGroupLevel.json"
+          }
         }
       },
       "get": {
@@ -194,6 +209,11 @@
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get management lock at resource group level": {
+            "$ref": "./examples/ManagementLocks_GetAtResourceGroupLevel.json"
           }
         }
       }
@@ -246,6 +266,11 @@
               "$ref": "#/definitions/ManagementLockObject"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create management lock at scope": {
+            "$ref": "./examples/ManagementLocks_CreateOrUpdateAtScope.json"
+          }
         }
       },
       "delete": {
@@ -280,6 +305,11 @@
           "200": {
             "description": "OK"
           }
+        },
+        "x-ms-examples": {
+          "Delete management lock at scope": {
+            "$ref": "./examples/ManagementLocks_DeleteAtScope.json"
+          }
         }
       },
       "get": {
@@ -313,6 +343,11 @@
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get management lock at scope": {
+            "$ref": "./examples/ManagementLocks_GetAtScope.json"
           }
         }
       }
@@ -402,6 +437,11 @@
               "$ref": "#/definitions/ManagementLockObject"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create management lock at resource level": {
+            "$ref": "./examples/ManagementLocks_CreateOrUpdateAtResourceLevel.json"
+          }
         }
       },
       "delete": {
@@ -473,6 +513,11 @@
           "200": {
             "description": "OK"
           }
+        },
+        "x-ms-examples": {
+          "Delete management lock at resource level": {
+            "$ref": "./examples/ManagementLocks_DeleteAtResourceLevel.json"
+          }
         }
       },
       "get": {
@@ -543,6 +588,11 @@
               "$ref": "#/definitions/ManagementLockObject"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get management lock at resource level": {
+            "$ref": "./examples/ManagementLocks_GetAtResourceLevel.json"
+          }
         }
       }
     },
@@ -591,6 +641,11 @@
               "$ref": "#/definitions/ManagementLockObject"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create management lock at subscription level": {
+            "$ref": "./examples/ManagementLocks_CreateOrUpdateAtSubscriptionLevel.json"
+          }
         }
       },
       "delete": {
@@ -622,6 +677,11 @@
           "200": {
             "description": "OK"
           }
+        },
+        "x-ms-examples": {
+          "Delete management lock at subscription level": {
+            "$ref": "./examples/ManagementLocks_DeleteAtSubscriptionLevel.json"
+          }
         }
       },
       "get": {
@@ -651,6 +711,11 @@
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get management lock at subscription level": {
+            "$ref": "./examples/ManagementLocks_GetAtSubscriptionLevel.json"
           }
         }
       }
@@ -698,7 +763,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ManagementLockObject"
+        "x-ms-odata": "#/definitions/ManagementLockObject",
+        "x-ms-examples": {
+          "List management groups at resource group level": {
+            "$ref": "./examples/ManagementLocks_ListAtResourceGroupLevel.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks": {
@@ -774,7 +844,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ManagementLockObject"
+        "x-ms-odata": "#/definitions/ManagementLockObject",
+        "x-ms-examples": {
+          "List management locks at resource level": {
+            "$ref": "./examples/ManagementLocks_ListAtResourceLevel.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks": {
@@ -810,7 +885,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ManagementLockObject"
+        "x-ms-odata": "#/definitions/ManagementLockObject",
+        "x-ms-examples": {
+          "List management locks at subscription level": {
+            "$ref": "./examples/ManagementLocks_ListAtSubscriptionLevel.json"
+          }
+        }
       }
     },
     "/{scope}/providers/Microsoft.Authorization/locks": {
@@ -850,7 +930,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ManagementLockObject"
+        "x-ms-odata": "#/definitions/ManagementLockObject",
+        "x-ms-examples": {
+          "List management locks at scope": {
+            "$ref": "./examples/ManagementLocks_ListAtScope.json"
+          }
+        }
       }
     }
   },
