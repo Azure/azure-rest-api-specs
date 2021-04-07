@@ -575,7 +575,6 @@
                     "properties": {
                       "groupId": {
                         "type": "integer",
-			"format": "int64",
                         "description": "Recommended action group Id for the service health event."
                       },
                       "actionText": {
@@ -612,7 +611,6 @@
             },
             "priority": {
               "type": "integer",
-	      "format": "int64",
               "description": "Priority level of the event."
             },
             "lastUpdateTime": {
@@ -1219,26 +1217,20 @@
       "description": "Error details.",
       "type": "object",
       "properties": {
-	"error": {
-          "description": "Error details.",
-          "type": "object",
-          "properties": {
-            "code": {
-              "description": "The error code.",
-              "type": "string",
-              "readOnly": true
-            },
-            "message": {
-              "description": "The error message.",
-              "type": "string",
-              "readOnly": true
-            },
-            "details": {
-              "description": "The error details.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "The error details.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
