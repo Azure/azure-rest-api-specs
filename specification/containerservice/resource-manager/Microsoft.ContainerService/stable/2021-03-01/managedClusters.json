@@ -2281,7 +2281,7 @@
           "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 0 to 100 (inclusive) for user pools and in the range of 1 to 100 (inclusive) for system pools. The default value is 1."
         },
         "vmSize": {
-          "$ref": "#/definitions/ContainerServiceVMSize",
+          "type": "string",
           "description": "Size of agent VMs."
         },
         "osDiskSizeGB": {
@@ -2290,7 +2290,7 @@
         },
         "osDiskType": {
           "$ref": "#/definitions/OSDiskType",
-          "description": "OS disk type to be used for machines in a given agent pool. Allowed values are 'Ephemeral' and 'Managed'. Defaults to 'Managed'. May not be changed after creation."
+          "description": "OS disk type to be used for machines in a given agent pool. Allowed values are 'Ephemeral' and 'Managed'. If unspecified, defaults to 'Ephemeral' when the VM supports ephemeral OS and has a cache disk larger than the requested OSDiskSizeGB. Otherwise, defaults to 'Managed'. May not be changed after creation."
         },
         "kubeletDiskType": {
           "$ref": "#/definitions/KubeletDiskType",
