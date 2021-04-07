@@ -2877,9 +2877,17 @@
           },
           "readOnly": true
         },
-        "allowStagingEnvironments": {
-          "description": "<code>false</code> if staged sites are not allowed for this static web app; otherwise, <code>true</code>.",
-          "type": "boolean"
+        "stagingEnvironmentPolicy": {
+          "description": "State indicating whether staging environments are allowed or not allowed for a static web app.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StagingEnvironmentPolicy",
+            "modelAsString": false
+          }
         },
         "allowConfigFileUpdates": {
           "description": "<code>false</code> if config file is locked for this static web app; otherwise, <code>true</code>.",
@@ -3603,21 +3611,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "UserAssignedIdentityInformation": {
-      "description": "Principal and Tenant Id associated with UserAssigned MSI ResourceId",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "type": "string"
-        },
-        "clientId": {
-          "type": "string"
-        },
-        "identityUrl": {
-          "type": "string"
         }
       }
     }
