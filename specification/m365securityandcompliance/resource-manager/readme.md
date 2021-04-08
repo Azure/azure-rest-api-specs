@@ -45,21 +45,6 @@ input-file:
 - Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForSCCPowershell.json
 ```
 
-### Tag: package-2021-03-25-preview
-
-These settings apply only when `--tag=package-2021-03-25-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-03-25-preview'
-input-file:
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/common-types.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForEDMUpload.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForM365ComplianceCenter.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForM365SecurityCenter.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForO365ManagementActivityAPI.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForSCCPowershell.json
-- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForMIPPolicySync.json
-```
-
 ---
 # Code Generation
 
