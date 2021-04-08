@@ -37,7 +37,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dynamics365Fraudprotection/instances/{instanceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dynamics365FraudProtection/instances/{instanceName}": {
       "get": {
         "description": "Gets details about the specified instances.",
         "x-ms-examples": {
@@ -251,7 +251,7 @@
         }
       }
     },
-    "/providers/Microsoft.Dynamics365Fraudprotection/operations": {
+    "/providers/Microsoft.Dynamics365FraudProtection/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -281,13 +281,13 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Get a list of operations supported by Microsoft.Dynamics365Fraudprotection resource provider": {
+          "Get a list of operations supported by Microsoft.Dynamics365FraudProtection resource provider": {
             "$ref": "./examples/ListOperations.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dynamics365Fraudprotection/instances": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dynamics365FraudProtection/instances": {
       "get": {
         "description": "Gets all the Dedicated instance for the given resource group.",
         "x-ms-examples": {
@@ -329,7 +329,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Dynamics365Fraudprotection/instances": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Dynamics365FraudProtection/instances": {
       "get": {
         "description": "Lists all the Dedicated instances for the given subscription.",
         "x-ms-examples": {
@@ -368,7 +368,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Dynamics365Fraudprotection/locations/{location}/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Dynamics365FraudProtection/locations/{location}/checkNameAvailability": {
       "post": {
         "x-ms-examples": {
           "Check name availability of an instance": {
@@ -473,16 +473,15 @@
           "readOnly": true
         }
       },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-      },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
-      ]
+      ],
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
     },
     "DFPInstances": {
       "description": "An array of DFP instance resources.",
@@ -604,7 +603,7 @@
         },
         "type": {
           "type": "string",
-          "default": "Microsoft.Dynamics365Fraudprotection/instances",
+          "default": "Microsoft.Dynamics365FraudProtection/instances",
           "description": "The resource type of DFP instance."
         }
       }
