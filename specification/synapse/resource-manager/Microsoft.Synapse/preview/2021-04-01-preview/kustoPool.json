@@ -1346,6 +1346,66 @@
       ],
       "description": "Class representing an data connection.",
       "discriminator": "kind"
+    },
+    "EventHubDataConnection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The Event Hub data connection properties to validate.",
+          "$ref": "#/definitions/EventHubConnectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnection"
+        }
+      ],
+      "description": "Class representing an event hub data connection.",
+      "x-ms-discriminator-value": "EventHub"
+    },
+    "EventHubConnectionProperties": {
+      "properties": {
+        "eventHubResourceId": {
+          "type": "string",
+          "description": "The resource ID of the event hub to be used to create a data connection."
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "The event hub consumer group."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table where the data should be ingested. Optionally the table information can be added to each message."
+        },
+        "mappingRuleName": {
+          "type": "string",
+          "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
+        },
+        "dataFormat": {
+          "$ref": "#/definitions/EventHubDataFormat",
+          "description": "The data format of the message. Optionally the data format can be added to each message."
+        },
+        "eventSystemProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "System properties of the event hub"
+        },
+        "compression": {
+          "$ref": "#/definitions/Compression",
+          "description": "The event hub messages compression type"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "required": [
+        "eventHubResourceId",
+        "consumerGroup"
+      ],
+      "description": "Class representing the Kusto event hub connection properties."
     }
   },
   "parameters": {
