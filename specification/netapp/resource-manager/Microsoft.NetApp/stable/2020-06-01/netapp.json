@@ -1103,7 +1103,7 @@
           "Volumes Replication"
         ],
         "summary": "Resync volume replication",
-        "description": "Resync the connection on the destination volume. If the operation is ran on the source volume it will reverse-resync the connection and sync from source to destination.",
+        "description": "Resync the connection on the destination volume. If the operation is ran on the source volume it will reverse-resync the connection and sync from destination to source.",
         "operationId": "Volumes_ResyncReplication",
         "parameters": [
           {
@@ -1683,7 +1683,7 @@
         "tags": [
           "Snapshot Policy"
         ],
-        "operationId": "snapshotPolicies_Get",
+        "operationId": "SnapshotPolicies_Get",
         "description": "Get a snapshot Policy",
         "responses": {
           "200": {
@@ -1706,7 +1706,7 @@
         "tags": [
           "Snapshot Policy"
         ],
-        "operationId": "snapshotPolicies_Create",
+        "operationId": "SnapshotPolicies_Create",
         "description": "Create a snapshot policy",
         "parameters": [
           {
@@ -1747,7 +1747,7 @@
         "tags": [
           "Snapshot Policy"
         ],
-        "operationId": "snapshotPolicies_Update",
+        "operationId": "SnapshotPolicies_Update",
         "description": "Patch a snapshot policy",
         "parameters": [
           {
@@ -1781,7 +1781,7 @@
         "tags": [
           "Snapshot Policy"
         ],
-        "operationId": "snapshotPolicies_Delete",
+        "operationId": "SnapshotPolicies_Delete",
         "description": "Delete snapshot policy",
         "responses": {
           "200": {
@@ -2296,7 +2296,7 @@
         ],
         "summary": "Get a backup Policy",
         "description": "Get a particular backup Policy",
-        "operationId": "backupPolicies_Get",
+        "operationId": "BackupPolicies_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -2337,7 +2337,7 @@
         ],
         "summary": "Create a backup policy",
         "description": "Create a backup policy for Netapp Account",
-        "operationId": "backupPolicies_Create",
+        "operationId": "BackupPolicies_Create",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -2397,7 +2397,7 @@
         ],
         "summary": "Patch a backup policy",
         "description": "Patch a backup policy for Netapp Account",
-        "operationId": "backupPolicies_Update",
+        "operationId": "BackupPolicies_Update",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -2447,7 +2447,7 @@
         ],
         "summary": "Delete a backup policy",
         "description": "Delete backup policy",
-        "operationId": "backupPolicies_Delete",
+        "operationId": "BackupPolicies_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -2868,6 +2868,7 @@
       "properties": {
         "activeDirectoryId": {
           "type": "string",
+          "default": "guid id",
           "description": "Id of the Active Directory"
         },
         "username": {
@@ -2938,6 +2939,7 @@
         },
         "organizationalUnit": {
           "type": "string",
+          "default": "CN=Computers",
           "description": "The Organizational Unit (OU) within the Windows Active Directory"
         },
         "site": {
@@ -3100,15 +3102,13 @@
           "type": "number",
           "description": "Total throughput of pool in Mibps",
           "example": 164.221,
-          "readOnly": true,
-          "multipleOf": 0.001
+          "readOnly": true
         },
         "utilizedThroughputMibps": {
           "type": "number",
           "description": "Utilized throughput of pool in Mibps",
           "example": 164.221,
-          "readOnly": true,
-          "multipleOf": 0.001
+          "readOnly": true
         },
         "qosType": {
           "title": "qosType",
@@ -3359,7 +3359,7 @@
         },
         "protocolTypes": {
           "title": "protocolTypes",
-          "description": "Set of protocol types",
+          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
           "type": "array",
           "items": {
             "type": "string"
@@ -3376,6 +3376,7 @@
         "snapshotId": {
           "title": "Snapshot ID",
           "type": "string",
+          "x-nullable": true,
           "description": "UUID v4 or resource identifier used to identify the Snapshot.",
           "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
           "maxLength": 36,
@@ -3408,6 +3409,7 @@
         "mountTargets": {
           "title": "mountTargets",
           "type": "array",
+          "readOnly": true,
           "description": "List of mount targets",
           "items": {
             "$ref": "#/definitions/mountTargetProperties"
@@ -3447,6 +3449,7 @@
         },
         "snapshotDirectoryVisible": {
           "type": "boolean",
+          "default": true,
           "description": "If enabled (true) the volume will contain a read-only .snapshot directory which provides access to each of the volume's snapshots (default to true)."
         },
         "kerberosEnabled": {
@@ -3457,7 +3460,8 @@
         },
         "securityStyle": {
           "type": "string",
-          "description": "The security style of volume",
+          "description": "The security style of volume, default unix, defaults to ntfs for dual protocol or CIFS protocol",
+          "default": "unix",
           "enum": [
             "ntfs",
             "unix"
@@ -3470,9 +3474,10 @@
         "throughputMibps": {
           "title": "Maximum throughput in Mibps that can be achieved by this volume",
           "type": "number",
-          "example": "128.22",
+          "default": 0.0,
+          "example": 128.22,
           "maximum": 4500,
-          "minimum": 1,
+          "minimum": 0,
           "multipleOf": 0.001
         }
       }
@@ -3488,6 +3493,7 @@
         },
         "unixReadOnly": {
           "type": "boolean",
+          "default": false,
           "description": "Read only access"
         },
         "unixReadWrite": {
@@ -3532,6 +3538,7 @@
         },
         "cifs": {
           "type": "boolean",
+          "default": false,
           "description": "Allows CIFS protocol"
         },
         "nfsv3": {
@@ -3606,9 +3613,7 @@
           "enum": [
             "_10minutely",
             "hourly",
-            "daily",
-            "weekly",
-            "monthly"
+            "daily"
           ],
           "x-ms-enum": {
             "name": "ReplicationSchedule",
@@ -3774,7 +3779,7 @@
         "throughputMibps": {
           "title": "Maximum throughput in Mibps that can be achieved by this volume",
           "type": "number",
-          "example": "128.22",
+          "example": 128.22,
           "maximum": 4500,
           "minimum": 1,
           "multipleOf": 0.001
@@ -3963,41 +3968,43 @@
       "description": "Snapshot policy properties",
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Snapshot policy name"
+        },
         "hourlySchedule": {
           "title": "hourlySchedule",
           "description": "Schedule for hourly snapshots",
           "type": "object",
-          "items": {
-            "$ref": "#/definitions/hourlySchedule"
-          }
+          "$ref": "#/definitions/hourlySchedule"
         },
         "dailySchedule": {
           "title": "dailySchedule",
           "description": "Schedule for daily snapshots",
           "type": "object",
-          "items": {
-            "$ref": "#/definitions/dailySchedule"
-          }
+          "$ref": "#/definitions/dailySchedule"
         },
         "weeklySchedule": {
           "title": "weeklySchedule",
           "description": "Schedule for weekly snapshots",
           "type": "object",
-          "items": {
-            "$ref": "#/definitions/weeklySchedule"
-          }
+          "$ref": "#/definitions/weeklySchedule"
         },
         "monthlySchedule": {
           "title": "monthlySchedule",
           "description": "Schedule for monthly snapshots",
           "type": "object",
-          "items": {
-            "$ref": "#/definitions/monthlySchedule"
-          }
+          "$ref": "#/definitions/monthlySchedule"
         },
         "enabled": {
           "type": "boolean",
           "description": "The property to decide policy is enabled or not"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure lifecycle management"
         }
       }
     },
@@ -4156,7 +4163,7 @@
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4178,13 +4185,13 @@
         "hour": {
           "type": "integer",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
-          "example": "11",
+          "example": 11,
           "format": "int32"
         },
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4211,13 +4218,13 @@
         "hour": {
           "type": "integer",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
-          "example": "11",
+          "example": 11,
           "format": "int32"
         },
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4244,13 +4251,13 @@
         "hour": {
           "type": "integer",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
-          "example": "11",
+          "example": 11,
           "format": "int32"
         },
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4375,6 +4382,16 @@
       "description": "Backup properties",
       "type": "object",
       "properties": {
+        "backupId": {
+          "title": "backupId",
+          "type": "string",
+          "readOnly": true,
+          "description": "UUID v4 used to identify the Backup",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
         "creationDate": {
           "title": "name",
           "type": "string",
@@ -4399,9 +4416,29 @@
           "description": "Label for backup"
         },
         "backupType": {
+          "title": "backupType",
           "type": "string",
           "readOnly": true,
-          "description": "Type of backup adhoc or scheduled"
+          "description": "Type of backup Manual or Scheduled",
+          "enum": [
+            "Manual",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "backupType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Manual",
+                "description": "Manual backup"
+              },
+              {
+                "value": "Scheduled",
+                "description": "Scheduled backup"
+              }
+            ]
+          },
+          "example": "Manual"
         }
       }
     },

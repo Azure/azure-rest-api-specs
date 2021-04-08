@@ -4079,6 +4079,246 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateEndPointConnections": {
+      "get": {
+        "tags": [
+          "privateEndPointConnections"
+        ],
+        "operationId": "privateEndPointConnections_ListByFactory",
+        "x-ms-examples": {
+          "privateEndPointConnections_ListByFactory": {
+            "$ref": "./examples/PrivateEndPointConnections_ListByFactory.json"
+          }
+        },
+        "description": "Lists Private endpoint connections",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "put": {
+        "tags": [
+          "privateEndpointConnections"
+        ],
+        "description": "Approves or rejects a private endpoint connection",
+        "operationId": "PrivateEndpointConnection_CreateOrUpdate",
+        "x-ms-examples": {
+          "Approves or rejects a private endpoint connection for a factory.": {
+            "$ref": "./examples/ApproveRejectPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the private endpoint connection entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "privateEndpointWrapper",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkConnectionApprovalRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from PUT privateEndpointConnections operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "privateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection",
+        "operationId": "PrivateEndpointConnection_Get",
+        "x-ms-examples": {
+          "Get a private endpoint connection for a datafactory.": {
+            "$ref": "./examples/GetPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the private endpoint connection entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from GET privateEndpointConnections operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "privateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection",
+        "operationId": "PrivateEndpointConnection_Delete",
+        "x-ms-examples": {
+          "Delete a private endpoint connection for a datafactory.": {
+            "$ref": "./examples/DeletePrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "An error response received from DELETE privateEndpointConnections operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "privateLinkResources"
+        ],
+        "description": "Gets the private link resources",
+        "operationId": "privateLinkResources_Get",
+        "x-ms-examples": {
+          "Get private link resources of a site": {
+            "$ref": "./examples/GetPrivateLinkResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesWrapper"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4886,6 +5126,56 @@
         "globalParameters": {
           "$ref": "#/definitions/GlobalParameterDefinitionSpecification",
           "description": "List of parameters for factory."
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionConfiguration",
+          "description": "Properties to enable Customer Managed Key for the factory."
+        },
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the data factory.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EncryptionConfiguration": {
+      "description": "Definition of CMK for the factory.",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key in Azure Key Vault to use as Customer Managed Key."
+        },
+        "vaultBaseUrl": {
+          "type": "string",
+          "description": "The url of the Azure Key Vault used for CMK."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key used for CMK. If not provided, latest version will be used."
+        },
+        "identity": {
+          "$ref": "#/definitions/CMKIdentityDefinition",
+          "description": "User assigned identity to use to authenticate to customer's key vault. If not provided Managed Service Identity will be used."
+        }
+      },
+      "required": [
+        "keyName",
+        "vaultBaseUrl"
+      ]
+    },
+    "CMKIdentityDefinition": {
+      "description": "Managed Identity used for CMK.",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The resource id of the user assigned identity to authenticate to customer's key vault."
         }
       }
     },
@@ -5046,13 +5336,15 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The identity type. Currently the only supported type is 'SystemAssigned'.",
+          "description": "The identity type.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned"
           ],
           "x-ms-enum": {
             "name": "FactoryIdentityType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "principalId": {
@@ -5066,11 +5358,27 @@
           "format": "uuid",
           "readOnly": true,
           "description": "The client tenant id of the identity."
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentitiesDefinitionSpecification",
+          "description": "List of user assigned identities for the factory."
         }
       },
       "required": [
         "type"
       ]
+    },
+    "UserAssignedIdentitiesDefinitionSpecification": {
+      "description": "Definition of all user assigned identities for a factory.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedIdentitySpecification"
+      }
+    },
+    "UserAssignedIdentitySpecification": {
+      "description": "Definition of a single user assigned identity for a factory.",
+      "type": "object",
+      "properties": {}
     },
     "DatasetReference": {
       "description": "Dataset reference type.",
@@ -6363,6 +6671,26 @@
         }
       }
     },
+    "ManagedVirtualNetworkReference": {
+      "description": "Managed Virtual Network reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Managed Virtual Network reference type.",
+          "enum": [
+            "ManagedVirtualNetworkReference"
+          ]
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference ManagedVirtualNetwork name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
     "ManagedVirtualNetworkResource": {
       "description": "Managed Virtual Network resource type.",
       "allOf": [
@@ -6379,6 +6707,167 @@
       "required": [
         "properties"
       ]
+    },
+    "PrivateEndpointConnectionListResponse": {
+      "description": "A list of linked service resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Private Endpoint Connections.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionResource": {
+      "description": "Private Endpoint Connection ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RemotePrivateEndpointConnection",
+          "description": "Core resource properties"
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "description": "A remote private endpoint connection",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/ArmIdWrapper",
+          "description": "PrivateEndpoint of a remote private endpoint connection"
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkConnectionState"
+        }
+      }
+    },
+    "ArmIdWrapper": {
+      "description": "A wrapper for an ARM resource id",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkConnectionState": {
+      "description": "The state of a private link connection",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of a private link connection",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of a private link connection",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "ActionsRequired for a private link connection",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkConnectionApprovalRequestResource": {
+      "description": "Private Endpoint Connection Approval ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
+          "description": "Core resource properties"
+        }
+      }
+    },
+    "PrivateLinkConnectionApprovalRequest": {
+      "description": "A request to approve or reject a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkConnectionState"
+        }
+      }
+    },
+    "PrivateLinkResourcesWrapper": {
+      "description": "Wrapper for a collection of private link resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Core resource properties"
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "GroupId of a private link resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "RequiredMembers of a private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "RequiredZoneNames of a private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -6532,6 +7021,14 @@
       "in": "query",
       "required": true,
       "type": "string"
+    },
+    "privateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "description": "The private endpoint connection name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }

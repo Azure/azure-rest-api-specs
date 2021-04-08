@@ -203,6 +203,52 @@
         }
       }
     },
+    "/linkedservices/{linkedServiceName}/rename": {
+      "post": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedService_RenameLinkedService",
+        "x-ms-examples": {
+          "LinkedServices_Rename": {
+            "$ref": "./examples/LinkedServices_Rename.json"
+          }
+        },
+        "description": "Renames a linked service.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/datasets": {
       "get": {
         "tags": [
@@ -380,6 +426,52 @@
         }
       }
     },
+    "/datasets/{datasetName}/rename": {
+      "post": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Dataset_RenameDataset",
+        "x-ms-examples": {
+          "Datasets_Rename": {
+            "$ref": "./examples/Datasets_Rename.json"
+          }
+        },
+        "description": "Renames a dataset.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/datasetName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/pipelines": {
       "get": {
         "tags": [
@@ -547,6 +639,52 @@
           },
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/pipelines/{pipelineName}/rename": {
+      "post": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_RenamePipeline",
+        "x-ms-examples": {
+          "Pipelines_Rename": {
+            "$ref": "./examples/Pipelines_Rename.json"
+          }
+        },
+        "description": "Renames a pipeline.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -1405,6 +1543,52 @@
         }
       }
     },
+    "/dataflows/{dataFlowName}/rename": {
+      "post": {
+        "tags": [
+          "dataflows"
+        ],
+        "operationId": "DataFlow_RenameDataFlow",
+        "x-ms-examples": {
+          "DataFlows_Rename": {
+            "$ref": "./examples/DataFlows_Rename.json"
+          }
+        },
+        "description": "Renames a dataflow.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/dataFlowName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/dataflows": {
       "get": {
         "tags": [
@@ -1713,6 +1897,7 @@
           }
         },
         "description": "Creates or updates a Sql Script.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/sqlScriptName"
@@ -1743,6 +1928,9 @@
             "schema": {
               "$ref": "#/definitions/SqlScriptResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -1807,6 +1995,7 @@
           }
         },
         "description": "Deletes a Sql Script.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/sqlScriptName"
@@ -1819,8 +2008,57 @@
           "200": {
             "description": "OK."
           },
+          "202": {
+            "description": "Accepted."
+          },
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/sqlScripts/{sqlScriptName}/rename": {
+      "post": {
+        "tags": [
+          "sqlScripts"
+        ],
+        "operationId": "SqlScript_RenameSqlScript",
+        "x-ms-examples": {
+          "SqlScripts_Rename": {
+            "$ref": "./examples/SqlScripts_Rename.json"
+          }
+        },
+        "description": "Renames a sqlScript.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/sqlScriptName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -1882,6 +2120,7 @@
           }
         },
         "description": "Creates or updates a Spark Job Definition.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/sparkJobDefinitionName"
@@ -1912,6 +2151,9 @@
             "schema": {
               "$ref": "#/definitions/SparkJobDefinitionResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -1976,6 +2218,7 @@
           }
         },
         "description": "Deletes a Spark Job Definition.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/sparkJobDefinitionName"
@@ -1987,6 +2230,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -2036,6 +2282,52 @@
             "schema": {
               "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
             }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/sparkJobDefinitions/{sparkJobDefinitionName}/rename": {
+      "post": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_RenameSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Rename": {
+            "$ref": "./examples/SparkJobDefinitions_Rename.json"
+          }
+        },
+        "description": "Renames a sparkJobDefinition.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkJobDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -2310,76 +2602,66 @@
           }
         }
       }
+    },
+    "/notebooks/{notebookName}/rename": {
+      "post": {
+        "tags": [
+          "notebooks"
+        ],
+        "operationId": "Notebook_RenameNotebook",
+        "x-ms-examples": {
+          "Notebooks_Rename": {
+            "$ref": "./examples/Notebooks_Rename.json"
+          }
+        },
+        "description": "Renames a notebook.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/NotebookName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactRenameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "Azure Synapse top-level resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource identifier.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The resource tags."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Etag identifies change in the resource.",
-          "readOnly": true
-        }
-      }
-    },
     "SubResource": {
       "description": "Azure Synapse nested resource, which belongs to a workspace.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource identifier.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "Etag identifies change in the resource.",
-          "readOnly": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
         }
-      }
+      ]
     },
     "SubResourceDebugResource": {
       "description": "Azure Synapse nested debug resource.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2475,6 +2757,7 @@
     },
     "IntegrationRuntimeReference": {
       "description": "Integration runtime reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -3068,6 +3351,7 @@
     },
     "PipelineReference": {
       "description": "Pipeline reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -3096,6 +3380,7 @@
     },
     "TriggerPipelineReference": {
       "description": "Pipeline that needs to be triggered with the given parameters.",
+      "type": "object",
       "properties": {
         "pipelineReference": {
           "description": "Pipeline reference.",
@@ -3109,6 +3394,7 @@
     },
     "TriggerResource": {
       "description": "Trigger resource type.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -3151,31 +3437,9 @@
         }
       }
     },
-    "Workspace": {
-      "description": "Workspace resource type.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/WorkspaceIdentity",
-          "description": "Managed service identity of the workspace."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WorkspaceProperties",
-          "description": "Properties of the workspace."
-        }
-      },
-      "additionalProperties": {
-        "type": "object"
-      }
-    },
     "WorkspaceUpdateParameters": {
       "description": "Parameters for updating a workspace resource.",
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -3192,6 +3456,7 @@
     },
     "WorkspaceIdentity": {
       "description": "Identity properties of the workspace resource.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -3219,37 +3484,9 @@
         "type"
       ]
     },
-    "WorkspaceProperties": {
-      "description": "Workspace resource properties.",
-      "properties": {
-        "provisioningState": {
-          "description": "Workspace provisioning state, example Succeeded.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createTime": {
-          "description": "Time the workspace was created in ISO8601 format.",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        },
-        "version": {
-          "description": "Version of the workspace.",
-          "type": "string",
-          "readOnly": true
-        },
-        "defaultStorage": {
-          "description": "Linked service reference.",
-          "$ref": "#/definitions/LinkedServiceReference"
-        },
-        "defaultSqlServer": {
-          "description": "Linked service reference.",
-          "$ref": "#/definitions/LinkedServiceReference"
-        }
-      }
-    },
     "DatasetReference": {
       "description": "Dataset reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -3278,6 +3515,7 @@
     },
     "DatasetResource": {
       "description": "Dataset resource type.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -3295,6 +3533,7 @@
     },
     "DatasetDebugResource": {
       "description": "Dataset debug resource.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResourceDebugResource"
@@ -3312,6 +3551,7 @@
     },
     "LinkedServiceReference": {
       "description": "Linked service reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -3340,6 +3580,7 @@
     },
     "LinkedServiceResource": {
       "description": "Linked service resource type.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -3357,6 +3598,7 @@
     },
     "LinkedServiceDebugResource": {
       "description": "Linked service debug resource.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResourceDebugResource"
@@ -3394,18 +3636,34 @@
     },
     "SqlScriptResource": {
       "description": "Sql Script resource type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
+      "type": "object",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
         "properties": {
           "$ref": "./entityTypes/SqlScript.json#/definitions/SqlScript",
           "description": "Properties of sql script."
         }
       },
       "required": [
+        "name",
         "properties"
       ]
     },
@@ -3431,6 +3689,7 @@
     },
     "SparkJobDefinitionResource": {
       "description": "Spark job definition resource type.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -3468,23 +3727,40 @@
     },
     "NotebookResource": {
       "description": "Notebook resource type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
+      "type": "object",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
         "properties": {
           "$ref": "./entityTypes/Notebook.json#/definitions/Notebook",
           "description": "Properties of Notebook."
         }
       },
       "required": [
+        "name",
         "properties"
       ]
     },
     "DataFlowResource": {
       "description": "Data flow resource type.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -3502,6 +3778,7 @@
     },
     "DataFlowReference": {
       "description": "Data flow reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -3533,6 +3810,7 @@
     },
     "DataFlowStagingInfo": {
       "description": "Staging info for execute data flow activity.",
+      "type": "object",
       "properties": {
         "linkedService": {
           "description": "Staging linked service reference.",
@@ -3619,6 +3897,7 @@
     },
     "DataFlowDebugResource": {
       "description": "Data flow debug resource.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResourceDebugResource"
@@ -3864,7 +4143,8 @@
           "description": "The end time of a pipeline run in ISO8601 format.",
           "type": "string",
           "format": "date-time",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         },
         "durationInMs": {
           "description": "The duration of a pipeline run.",
@@ -4138,6 +4418,7 @@
     },
     "RerunTriggerResource": {
       "description": "RerunTrigger resource type.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -4217,6 +4498,7 @@
     },
     "SynapseNotebookReference": {
       "description": "Synapse notebook reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -4241,6 +4523,7 @@
     },
     "SynapseSparkJobReference": {
       "description": "Synapse spark job reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -4265,6 +4548,7 @@
     },
     "SqlPoolReference": {
       "description": "SQL pool reference type.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -4286,6 +4570,19 @@
         "type",
         "referenceName"
       ]
+    },
+    "ArtifactRenameRequest": {
+      "description": "Request body structure for rename artifact.",
+      "type": "object",
+      "properties": {
+        "newName": {
+          "description": "New name of the artifact.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+          "minLength": 1,
+          "maxLength": 260
+        }
+      }
     }
   },
   "parameters": {

@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "ConstosoRG",
+    "cloudServiceName": "{cs-name}",
+    "roleInstanceName": "{roleInstance-name}",
+    "api-version": "2021-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{roleInstance-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/{roleInstance-name}",
+        "type": "Microsoft.Compute/cloudServices/roleInstances",
+        "location": "eastus2euap",
+        "sku": {
+          "name": "Standard_D1_v2",
+          "tier": "Standard"
+        },
+        "properties": {
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/ConstosoRG/providers/Microsoft.Compute/cloudServices/{cs-name}/roleInstances/{roleInstance-name}/networkInterfaces/nic1"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -708,6 +708,9 @@
           },
           "Get a AML Compute": {
             "$ref": "./examples/getAmlCompute.json"
+          },
+          "Get an ComputeInstance": {
+            "$ref": "./examples/getComputeInstance.json"
           }
         },
         "parameters": [
@@ -753,6 +756,12 @@
         "x-ms-examples": {
           "Create a AML Compute": {
             "$ref": "./examples/createBasicAmlCompute.json"
+          },
+          "Create an ComputeInstance Compute with minimal inputs": {
+            "$ref": "./examples/createComputeInstanceMinimal.json"
+          },
+          "Create an ComputeInstance Compute": {
+            "$ref": "./examples/createComputeInstance.json"
           },
           "Create AKS Compute": {
             "$ref": "./examples/createBasicAKSCompute.json"
@@ -965,6 +974,10 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "nodes"
+        },
         "x-ms-examples": {
           "Get compute nodes information for a compute": {
             "$ref": "./examples/amlComputeListNodes.json"
@@ -1008,6 +1021,135 @@
             "schema": {
               "$ref": "#/definitions/ComputeSecrets"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/start": {
+      "post": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_Start",
+        "description": "Posts a start action to a compute instance",
+        "x-ms-examples": {
+          "Start ComputeInstance Compute": {
+            "$ref": "./examples/startComputeInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/stop": {
+      "post": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_Stop",
+        "description": "Posts a stop action to a compute instance",
+        "x-ms-examples": {
+          "Stop ComputeInstance Compute": {
+            "$ref": "./examples/stopComputeInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/restart": {
+      "post": {
+        "tags": [
+          "OperationalizationClusters",
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_Restart",
+        "description": "Posts a restart action to a compute instance",
+        "x-ms-examples": {
+          "Restart ComputeInstance Compute": {
+            "$ref": "./examples/restartComputeInstance.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1643,6 +1785,286 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "operationId": "Notebooks_Prepare",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Prepare Notebook": {
+            "$ref": "./examples/workspacePrepareNotebook.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotebookResourceInfo"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "operationId": "Notebooks_ListKeys",
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/listNotebookKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ListNotebookKeysResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections": {
+      "get": {
+        "tags": [
+          "WorkspaceConnections"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ListWorkspaceConnections": {
+            "$ref": "./examples/listWorkspaceConnections.json"
+          }
+        },
+        "operationId": "WorkspaceConnections_List",
+        "description": "List all connections under a AML workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes a paginated array of Workspace connections and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedWorkspaceConnectionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}": {
+      "put": {
+        "tags": [
+          "WorkspaceConnections"
+        ],
+        "operationId": "WorkspaceConnections_Create",
+        "description": "Add a new workspace connection.",
+        "x-ms-examples": {
+          "CreateWorkspaceConnection": {
+            "$ref": "./examples/createWorkspaceConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The object for creating or updating a new workspace connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created the workspace connection.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "WorkspaceConnections"
+        ],
+        "operationId": "WorkspaceConnections_Get",
+        "description": "Get the detail of a workspace connection.",
+        "x-ms-examples": {
+          "GetWorkspaceConnection": {
+            "$ref": "./examples/getWorkspaceConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the detail of the linked workspace.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WorkspaceConnections"
+        ],
+        "operationId": "WorkspaceConnections_Delete",
+        "description": "Delete a workspace connection.",
+        "x-ms-examples": {
+          "DeleteWorkspaceConnection": {
+            "$ref": "./examples/deleteWorkspaceConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the workspace connection."
+          },
+          "204": {
+            "description": "Specific workspace connection not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1848,6 +2270,30 @@
         "name": "OrderString",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "ConnectionName": {
+      "name": "connectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Friendly name of the workspace connection",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetParameter": {
+      "in": "query",
+      "name": "target",
+      "type": "string",
+      "description": "Target of the workspace connection.",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "CategoryParameter": {
+      "in": "query",
+      "name": "category",
+      "type": "string",
+      "description": "Category of the workspace connection.",
+      "required": false,
       "x-ms-parameter-location": "method"
     }
   },
@@ -2374,6 +2820,10 @@
             "name": "QuotaUnit",
             "modelAsString": true
           }
+        },
+        "location": {
+          "description": "Region of the AML workspace in the id.",
+          "type": "string"
         }
       },
       "description": "The properties for Quota update or retrieval."
@@ -2482,6 +2932,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Specifies the resource ID."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Region of the AML workspace in the id."
         },
         "type": {
           "readOnly": true,
@@ -2834,7 +3289,7 @@
                   "format": "int32",
                   "minimum": 1
                 },
-                "agentVMSize": {
+                "agentVmSize": {
                   "description": "Agent virtual machine size",
                   "type": "string"
                 },
@@ -2869,6 +3324,7 @@
                 "osType": {
                   "description": "Compute OS Type",
                   "type": "string",
+                  "default": "Linux",
                   "enum": [
                     "Linux",
                     "Windows"
@@ -2993,6 +3449,112 @@
         }
       ],
       "x-ms-discriminator-value": "AmlCompute"
+    },
+    "ComputeInstance": {
+      "description": "An Azure Machine Learning compute instance.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "description": "Compute Instance properties",
+              "type": "object",
+              "properties": {
+                "vmSize": {
+                  "description": "Virtual Machine Size",
+                  "type": "string"
+                },
+                "subnet": {
+                  "title": "Subnet.",
+                  "description": "Virtual network subnet resource ID the compute nodes belong to.",
+                  "$ref": "#/definitions/ResourceId"
+                },
+                "applicationSharingPolicy": {
+                  "type": "string",
+                  "default": "Shared",
+                  "title": "Sharing policy for applications on this compute instance",
+                  "description": "Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.",
+                  "enum": [
+                    "Personal",
+                    "Shared"
+                  ],
+                  "x-ms-enum": {
+                    "name": "applicationSharingPolicy",
+                    "modelAsString": true
+                  }
+                },
+                "sshSettings": {
+                  "description": "Specifies policy and settings for SSH access.",
+                  "$ref": "#/definitions/ComputeInstanceSshSettings"
+                },
+                "connectivityEndpoints": {
+                  "readOnly": true,
+                  "description": "Describes all connectivity endpoints available for this ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceConnectivityEndpoints"
+                },
+                "applications": {
+                  "type": "array",
+                  "readOnly": true,
+                  "description": "Describes available applications and their endpoints on this ComputeInstance.",
+                  "items": {
+                    "$ref": "#/definitions/ComputeInstanceApplication"
+                  }
+                },
+                "createdBy": {
+                  "readOnly": true,
+                  "description": "Describes information on user who created this ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceCreatedBy"
+                },
+                "errors": {
+                  "readOnly": true,
+                  "title": "Errors.",
+                  "description": "Collection of errors encountered on this ComputeInstance.",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/MachineLearningServiceError"
+                  }
+                },
+                "state": {
+                  "description": "The current state of this ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceState",
+                  "readOnly": true
+                },
+                "computeInstanceAuthorizationType": {
+                  "type": "string",
+                  "title": "Compute Instance Authorization type.",
+                  "description": "The Compute Instance Authorization type. Available values are personal (default).",
+                  "default": "personal",
+                  "enum": [
+                    "personal"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ComputeInstanceAuthorizationType",
+                    "modelAsString": true
+                  }
+                },
+                "personalComputeInstanceSettings": {
+                  "title": "Personal Compute Instance settings.",
+                  "description": "Settings for a personal compute instance.",
+                  "$ref": "#/definitions/PersonalComputeInstanceSettings"
+                },
+                "setupScripts": {
+                  "description": "Details of customized scripts to execute for setting up the cluster.",
+                  "$ref": "#/definitions/SetupScripts"
+                },
+                "lastOperation": {
+                  "description": "The last operation on ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceLastOperation",
+                  "readOnly": true
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "ComputeInstance"
     },
     "VirtualMachine": {
       "description": "A Machine Learning compute based on Azure Virtual Machines.",
@@ -3165,7 +3727,8 @@
           "type": "string",
           "enum": [
             "Disabled",
-            "Enabled"
+            "Enabled",
+            "Auto"
           ]
         },
         "cert": {
@@ -3370,6 +3933,11 @@
                 "$ref": "#/definitions/AmlComputeNodeInformation"
               },
               "description": "The collection of returned AmlCompute nodes details."
+            },
+            "nextLink": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The continuation token."
             }
           }
         }
@@ -3534,6 +4102,7 @@
       "enum": [
         "AKS",
         "AmlCompute",
+        "ComputeInstance",
         "DataFactory",
         "VirtualMachine",
         "HDInsight",
@@ -4050,9 +4619,33 @@
     "LinkedServiceProps": {
       "type": "object",
       "description": "LinkedService specific properties.",
+      "required": [
+        "linkedServiceResourceId"
+      ],
       "properties": {
         "linkedServiceResourceId": {
           "description": "ResourceId of the link target of the linked service.",
+          "type": "string"
+        },
+        "linkType": {
+          "description": "Type of the link target.",
+          "type": "string",
+          "enum": [
+            "Synapse"
+          ],
+          "x-ms-enum": {
+            "name": "LinkedServiceLinkType",
+            "modelAsString": false
+          }
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "The creation time of the linked service.",
+          "type": "string"
+        },
+        "modifiedTime": {
+          "format": "date-time",
+          "description": "The last modified time of the linked service.",
           "type": "string"
         }
       }
@@ -5551,6 +6144,374 @@
         }
       ],
       "x-ms-discriminator-value": "Custom"
+    },
+    "ComputeInstanceSshSettings": {
+      "type": "object",
+      "description": "Specifies policy and settings for SSH access.",
+      "properties": {
+        "sshPublicAccess": {
+          "type": "string",
+          "default": "Disabled",
+          "title": "Access policy for SSH",
+          "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "sshPublicAccess",
+            "modelAsString": true
+          }
+        },
+        "adminUserName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes the admin user name."
+        },
+        "sshPort": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Describes the port for connecting through SSH."
+        },
+        "adminPublicKey": {
+          "type": "string",
+          "description": "Specifies the SSH rsa public key file as a string. Use \"ssh-keygen -t rsa -b 2048\" to generate your SSH key pairs."
+        }
+      }
+    },
+    "ComputeInstanceState": {
+      "type": "string",
+      "description": "Current state of an ComputeInstance.",
+      "enum": [
+        "Creating",
+        "CreateFailed",
+        "Deleting",
+        "Running",
+        "Restarting",
+        "JobRunning",
+        "SettingUp",
+        "SetupFailed",
+        "Starting",
+        "Stopped",
+        "Stopping",
+        "UserSettingUp",
+        "UserSetupFailed",
+        "Unknown",
+        "Unusable"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeInstanceState",
+        "modelAsString": true
+      }
+    },
+    "ComputeInstanceLastOperation": {
+      "type": "object",
+      "description": "The last operation on ComputeInstance.",
+      "properties": {
+        "operationName": {
+          "type": "string",
+          "description": "Name of the last operation.",
+          "enum": [
+            "Create",
+            "Start",
+            "Stop",
+            "Restart",
+            "Reimage",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "OperationName",
+            "modelAsString": true
+          }
+        },
+        "operationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the last operation."
+        },
+        "operationStatus": {
+          "type": "string",
+          "description": "Operation status.",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "CreateFailed",
+            "StartFailed",
+            "StopFailed",
+            "RestartFailed",
+            "ReimageFailed",
+            "DeleteFailed"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ComputeInstanceApplication": {
+      "type": "object",
+      "description": "Defines an Aml Instance application and its connectivity endpoint URI.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Name of the ComputeInstance application."
+        },
+        "endpointUri": {
+          "type": "string",
+          "description": "Application' endpoint URI."
+        }
+      }
+    },
+    "ComputeInstanceConnectivityEndpoints": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Defines all connectivity endpoints and properties for an ComputeInstance.",
+      "properties": {
+        "publicIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Public IP Address of this ComputeInstance."
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed)."
+        }
+      }
+    },
+    "ComputeInstanceCreatedBy": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Describes information on user who created this ComputeInstance.",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the user."
+        },
+        "userOrgId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Uniquely identifies user' Azure Active Directory organization."
+        },
+        "userId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Uniquely identifies the user within his/her organization."
+        }
+      }
+    },
+    "PersonalComputeInstanceSettings": {
+      "type": "object",
+      "properties": {
+        "assignedUser": {
+          "$ref": "#/definitions/AssignedUser",
+          "title": "Assigned User.",
+          "description": "A user explicitly assigned to a personal compute instance."
+        }
+      },
+      "description": "Settings for a personal compute instance."
+    },
+    "AssignedUser": {
+      "type": "object",
+      "description": "A user that can be assigned to a compute instance.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "User’s AAD Object Id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "User’s AAD Tenant Id."
+        }
+      },
+      "required": [
+        "objectId",
+        "tenantId"
+      ]
+    },
+    "NotebookListCredentialsResult": {
+      "type": "object",
+      "properties": {
+        "primaryAccessKey": {
+          "type": "string"
+        },
+        "secondaryAccessKey": {
+          "type": "string"
+        }
+      }
+    },
+    "NotebookResourceInfo": {
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "the data plane resourceId that used to initialize notebook component"
+        },
+        "notebookPreparationError": {
+          "$ref": "#/definitions/NotebookPreparationError",
+          "description": "The error that occurs when preparing notebook."
+        }
+      }
+    },
+    "NotebookPreparationError": {
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ListNotebookKeysResult": {
+      "type": "object",
+      "properties": {
+        "primaryAccessKey": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "secondaryAccessKey": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedWorkspaceConnectionsList": {
+      "type": "object",
+      "description": "Paginated list of Workspace connection objects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of Workspace connection objects.",
+          "items": {
+            "$ref": "#/definitions/WorkspaceConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A continuation link (absolute URI) to the next page of results in the list."
+        }
+      }
+    },
+    "WorkspaceConnection": {
+      "x-ms-azure-resource": true,
+      "description": "Workspace connection.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ResourceId of the workspace connection.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Friendly name of the workspace connection.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of workspace connection.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties of workspace connection.",
+          "$ref": "#/definitions/WorkspaceConnectionProps",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkspaceConnectionDto": {
+      "type": "object",
+      "description": "object used for creating workspace connection.",
+      "properties": {
+        "name": {
+          "description": "Friendly name of the workspace connection",
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties of workspace connection.",
+          "$ref": "#/definitions/WorkspaceConnectionProps",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkspaceConnectionProps": {
+      "type": "object",
+      "description": "Workspace Connection specific properties.",
+      "properties": {
+        "category": {
+          "description": "Category of the workspace connection.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Target of the workspace connection.",
+          "type": "string"
+        },
+        "authType": {
+          "description": "Authorization type of the workspace connection.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value details of the workspace connection.",
+          "type": "string"
+        }
+      }
+    },
+    "SetupScripts": {
+      "type": "object",
+      "description": "Details of customized scripts to execute for setting up the cluster.",
+      "properties": {
+        "scripts": {
+          "description": "Customized setup scripts",
+          "$ref": "#/definitions/ScriptsToExecute"
+        }
+      }
+    },
+    "ScriptsToExecute": {
+      "type": "object",
+      "description": "Customized setup scripts",
+      "properties": {
+        "startupScript": {
+          "description": "Script that's run every time the machine starts.",
+          "$ref": "#/definitions/ScriptReference"
+        },
+        "creationScript": {
+          "description": "Script that's run only once during provision of the compute.",
+          "$ref": "#/definitions/ScriptReference"
+        }
+      }
+    },
+    "ScriptReference": {
+      "type": "object",
+      "description": "Script reference",
+      "properties": {
+        "scriptSource": {
+          "description": "The storage source of the script: inline, workspace.",
+          "type": "string"
+        },
+        "scriptData": {
+          "description": "The location of scripts in the mounted volume.",
+          "type": "string"
+        },
+        "scriptArguments": {
+          "description": "Optional command line arguments passed to the script to run.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "Optional time period passed to timeout command.",
+          "type": "string"
+        }
+      }
     }
   }
 }

@@ -122,6 +122,9 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/IotDefenderSettingsModel"
           }
         ],
         "responses": {
@@ -215,6 +218,46 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings/default/downloadManagerActivation": {
+      "post": {
+        "x-ms-examples": {
+          "Download quota data of the subscription": {
+            "$ref": "./examples/IotDefenderSettings/DownloadManagerActivation.json"
+          }
+        },
+        "tags": [
+          "IoT Defender Settings"
+        ],
+        "operationId": "IotDefenderSettings_DownloadManagerActivation",
+        "description": "Download manager activation data defined for this subscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "produces": [
+          "application/zip"
+        ],
+        "responses": {
+          "200": {
+            "description": "Downloaded file",
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -251,7 +294,38 @@
     "IotDefenderSettingsProperties": {
       "type": "object",
       "description": "IoT Defender settings properties",
-      "properties": {}
+      "properties": {
+        "deviceQuota": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1000,
+          "description": "Size of the device quota (as a opposed to a Pay as You Go billing model). Value is required to be in multiples of 1000."
+        },
+        "sentinelWorkspaceResourceIds": {
+          "type": "array",
+          "description": "Sentinel Workspace Resource Ids",
+          "items": {
+            "type": "string"
+          }
+        },
+        "onboardingKind": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "MigratedToAzure"
+          ],
+          "description": "The kind of onboarding for the subscription",
+          "x-ms-enum": {
+            "name": "OnboardingKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "deviceQuota",
+        "sentinelWorkspaceResourceIds",
+        "onboardingKind"
+      ]
     },
     "DownloadLink": {
       "type": "string",
@@ -277,7 +351,8 @@
           "readOnly": true,
           "enum": [
             "Latest",
-            "Previous"
+            "Previous",
+            "Preview"
           ],
           "x-ms-enum": {
             "name": "versionKind",
@@ -288,11 +363,30 @@
               },
               {
                 "value": "Previous"
+              },
+              {
+                "value": "Preview"
               }
             ]
           }
         }
       }
+    },
+    "UpgradePackageDownloadInfo": {
+      "type": "object",
+      "description": "Information on a specific package upgrade download",
+      "properties": {
+        "fromVersion": {
+          "type": "string",
+          "description": "Minimum base version for upgrade",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PackageDownloadInfo"
+        }
+      ]
     },
     "PackageDownloads": {
       "type": "object",
@@ -353,7 +447,7 @@
               "type": "array",
               "description": "Sensor upgrade package downloads (on existing installations)",
               "items": {
-                "$ref": "#/definitions/PackageDownloadInfo"
+                "$ref": "#/definitions/UpgradePackageDownloadInfo"
               }
             }
           }
@@ -422,24 +516,64 @@
               "description": "Central Manager upgrade package downloads (on existing installations)",
               "readOnly": true,
               "items": {
-                "$ref": "#/definitions/PackageDownloadInfo"
+                "$ref": "#/definitions/UpgradePackageDownloadInfo"
               }
             }
           }
         },
         "threatIntelligence": {
-          "type": "object",
+          "type": "array",
           "description": "All downloads for threat intelligence",
           "readOnly": true,
-          "properties": {
-            "link": {
-              "description": "Download link",
-              "$ref": "#/definitions/DownloadLink"
-            }
+          "items": {
+            "$ref": "#/definitions/PackageDownloadInfo"
+          }
+        },
+        "snmp": {
+          "type": "array",
+          "description": "SNMP Server file",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PackageDownloadInfo"
+          }
+        },
+        "wmiTool": {
+          "type": "array",
+          "description": "Used for local configuration export",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PackageDownloadInfo"
+          }
+        },
+        "authorizedDevicesImportTemplate": {
+          "type": "array",
+          "description": "Authorized devices import template",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PackageDownloadInfo"
+          }
+        },
+        "deviceInformationUpdateImportTemplate": {
+          "type": "array",
+          "description": "Authorized devices import template",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PackageDownloadInfo"
           }
         }
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "IotDefenderSettingsModel": {
+      "name": "iotDefenderSettingsModel",
+      "in": "body",
+      "required": true,
+      "description": "The IoT defender settings model",
+      "schema": {
+        "$ref": "#/definitions/IotDefenderSettingsModel"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

@@ -62,6 +62,26 @@
             "schema": {
               "$ref": "#/definitions/Vault"
             }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "A conflict occurred to prevent the operation from completing.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -129,6 +149,26 @@
             "schema": {
               "$ref": "#/definitions/Vault"
             }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "A conflict occurred to prevent the operation from completing.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -177,6 +217,19 @@
           },
           "204": {
             "description": "No Content."
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -224,6 +277,12 @@
             "description": "Retrieved vault",
             "schema": {
               "$ref": "#/definitions/Vault"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -307,6 +366,33 @@
             "schema": {
               "$ref": "#/definitions/VaultAccessPolicyParameters"
             }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "A conflict occurred to prevent the operation from completing.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -357,6 +443,12 @@
             "schema": {
               "$ref": "#/definitions/VaultListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -403,6 +495,12 @@
             "schema": {
               "$ref": "#/definitions/VaultListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -441,6 +539,12 @@
             "description": "Retrieved information about all deleted key vaults in a subscription.",
             "schema": {
               "$ref": "#/definitions/DeletedVaultListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -495,6 +599,12 @@
             "schema": {
               "$ref": "#/definitions/DeletedVault"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -546,6 +656,26 @@
           },
           "202": {
             "description": "Vault is being purged."
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -607,6 +737,12 @@
             "schema": {
               "$ref": "#/definitions/ResourceListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -651,6 +787,12 @@
             "description": "OK -- Operation to check the vault name availability was successful.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -705,6 +847,9 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -763,7 +908,8 @@
             "headers": {
               "Retry-After": {
                 "description": "(specified only if operation does not finish synchronously) The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               },
               "Azure-AsyncOperation": {
                 "description": "(specified only if operation does not finish synchronously) The URI to poll for completion status. The response of this URI may be synchronous or asynchronous.",
@@ -825,7 +971,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in the location header.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               },
               "Location": {
                 "description": "The URI to poll for completion status.",
@@ -924,6 +1071,7 @@
           "enum": [
             "A"
           ],
+          "x-ms-client-default": "A",
           "x-ms-enum": {
             "name": "SkuFamily",
             "modelAsString": true
@@ -983,6 +1131,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "encrypt",
               "decrypt",
               "wrapKey",
@@ -1012,6 +1161,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "get",
               "list",
               "set",
@@ -1033,6 +1183,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "get",
               "list",
               "delete",
@@ -1062,6 +1213,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "get",
               "list",
               "delete",
@@ -1107,7 +1259,12 @@
         },
         "vaultUri": {
           "type": "string",
-          "description": "The URI of the vault for performing operations on keys and secrets."
+          "description": "The URI of the vault for performing operations on keys and secrets. This property is readonly"
+        },
+        "hsmPoolResourceId": {
+          "type": "string",
+          "description": "The resource id of HSM Pool.",
+          "readOnly": true
         },
         "enabledForDeployment": {
           "type": "boolean",
@@ -1147,7 +1304,11 @@
           "x-ms-enum": {
             "name": "CreateMode",
             "modelAsString": false
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "enablePurgeProtection": {
           "type": "boolean",
@@ -1156,6 +1317,18 @@
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Rules governing the accessibility of the key vault from specific network locations."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the vault.",
+          "enum": [
+            "Succeeded",
+            "RegisteringDns"
+          ],
+          "x-ms-enum": {
+            "name": "VaultProvisioningState",
+            "modelAsString": true
+          }
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -1284,6 +1457,11 @@
             "type": "string"
           },
           "description": "Tags of the original vault."
+        },
+        "purgeProtectionEnabled": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Purge protection status of the original vault."
         }
       },
       "description": "Properties of the deleted vault."
@@ -1620,6 +1798,10 @@
         "id": {
           "type": "string",
           "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Property to specify whether NRP will ignore the check if parent subnet has serviceEndpoints configured."
         }
       },
       "required": [
@@ -1629,6 +1811,14 @@
     },
     "PrivateEndpointConnectionItem": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of private endpoint connection."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
+        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
@@ -1643,6 +1833,10 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Resource properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
         }
       },
       "allOf": [
@@ -1690,7 +1884,7 @@
           "type": "string",
           "description": "The reason for approval or rejection."
         },
-        "actionRequired": {
+        "actionsRequired": {
           "type": "string",
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }

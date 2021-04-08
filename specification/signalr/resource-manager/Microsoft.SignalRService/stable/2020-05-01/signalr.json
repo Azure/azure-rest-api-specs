@@ -1138,12 +1138,14 @@
           "description": "Optional tier of this particular SKU. 'Standard' or 'Free'. \r\n\r\n`Basic` is deprecated, use `Standard` instead."
         },
         "size": {
-          "description": "Optional string. For future use.",
-          "type": "string"
+          "description": "Not used. Retained for future use.",
+          "type": "string",
+          "readOnly": true
         },
         "family": {
-          "description": "Optional string. For future use.",
-          "type": "string"
+          "description": "Not used. Retained for future use.",
+          "type": "string",
+          "readOnly": true
         },
         "capacity": {
           "format": "int32",
@@ -1242,7 +1244,8 @@
       "properties": {
         "hostNamePrefix": {
           "description": "Prefix for the hostName of the SignalR service. Retained for future use.\r\nThe hostname will be of format: &lt;hostNamePrefix&gt;.service.signalr.net.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "features": {
           "description": "List of SignalR featureFlags. e.g. ServiceMode.\r\n\r\nFeatureFlags that are not included in the parameters for the update operation will not be modified.\r\nAnd the response will only include featureFlags that are explicitly set. \r\nWhen a featureFlag is not explicitly set, SignalR service will use its globally default value. \r\nBut keep in mind, the default value doesn't mean \"false\". It varies in terms of different FeatureFlags.",
@@ -1337,7 +1340,8 @@
       "properties": {
         "defaultAction": {
           "$ref": "#/definitions/ACLAction",
-          "description": "Default action when no other rule matches"
+          "description": "Default action when no other rule matches",
+          "default": "Deny"
         },
         "publicNetwork": {
           "$ref": "#/definitions/NetworkACL",

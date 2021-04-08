@@ -6,15 +6,19 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2016-01
+  - tag: schema-powerbi-2016-01-29
+
 ```
 
-### Tag: package-2016-01 and azureresourceschema
-
-These settings apply only when `--tag=package-2016-01 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2016-01' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
+### Tag: schema-powerbi-2016-01-29 and azureresourceschema
 
+``` yaml $(tag) == 'schema-powerbi-2016-01-29' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.PowerBI/stable/2016-01-29/powerbiembedded.json
+
+```
