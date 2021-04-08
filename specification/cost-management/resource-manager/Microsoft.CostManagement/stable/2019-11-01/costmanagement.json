@@ -1730,7 +1730,7 @@
       }
     },
     "Setting": {
-      "description": "State of Setting",
+      "description": "State of the myscope setting.",
       "type": "object",
       "allOf": [
         {
@@ -1785,9 +1785,66 @@
       "description": "The properties of the setting.",
       "properties": {
         "scope": {
-          "description": "For the myscope setting, sets the default scope the current user will see when they sign into Azure Cost Management in the Azure portal.",
+          "description": "Sets the default scope the current user will see when they sign into Azure Cost Management in the Azure portal.",
           "type": "string"
+        },
+        "startOn": {
+          "description": "Indicates what scope Cost Management in the Azure portal should default to. Allowed values: LastUsed.",
+          "type": "string",
+          "enum": [
+            "LastUsed",
+            "ScopePicker",
+            "SpecificScope"
+          ],
+          "x-nullable": true
+        },
+        "cache": {
+          "$ref": "#/definitions/Cache"
         }
+      },
+      "required": [
+        "scope"
+      ]
+    },
+    "Cache": {
+      "type": "array",
+      "description": "Array of scopes with additional details used by Cost Management in the Azure portal.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Resource ID used by Resource Manager to uniquely identify the scope.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Display name for the scope.",
+            "type": "string"
+          },
+          "channel": {
+            "description": "Indicates the account type. Allowed values include: EA, PAYG, Modern, Internal, Unknown.",
+            "type": "string"
+          },
+          "subchannel": {
+            "description": "Indicates the type of modern account. Allowed values include: Individual, Enterprise, Partner, Indirect, NotApplicable",
+            "type": "string"
+          },
+          "parent": {
+            "description": "Resource ID of the parent scope. For instance, subscription's resource ID for a resource group or a management group resource ID for a subscription.",
+            "type": "string",
+            "x-nullable": true
+          },
+          "status": {
+            "description": "Indicates the status of the scope. Status only applies to subscriptions and billing accounts.",
+            "type": "string",
+            "x-nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "channel",
+          "subchannel"
+        ]
       }
     },
     "ViewProperties": {
@@ -1994,23 +2051,23 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Resource Id."
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "Resource name."
         },
         "kind": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource kind",
+          "description": "Resource kind.",
           "maxLength": 10
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "description": "Resource type."
         }
       },
       "x-ms-azure-resource": true
