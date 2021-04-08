@@ -76,12 +76,12 @@
       }
     },
     "200Async": {
-      "description": "The operation is complete.  If the operation was successful, use the resource-location header to obtain the path to the result.",
+      "description": "The operation is complete.  If the operation was successful, use the Resource-Location header to obtain the path to the result.",
       "schema": {
         "$ref": "#/definitions/LongRunningOperationResult"
       },
       "headers": {
-        "resource-location": {
+        "Resource-Location": {
           "type": "string",
           "description": "If successful, a URI where details on the newly created resource can be found."
         }
@@ -90,7 +90,7 @@
      "202": {
       "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the location Header to obtain status.",
       "headers": {
-        "operation-location": {
+        "Operation-Location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
         }

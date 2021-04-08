@@ -75,22 +75,22 @@
         "$ref": "#/definitions/ODataErrorResponse"
       }
     },
-    "201Async": {
-      "description": "The resource has been created successfully.",
+    "200Async": {
+      "description": "The operation is running or complete.  If the operation was successful, use the Resource-Location header to obtain the path to the result.",
       "schema": {
         "$ref": "#/definitions/LongRunningOperationResult"
       },
       "headers": {
-        "Location": {
+        "Resource-Location": {
           "type": "string",
-          "description": "A URI where details on the newly created resource can be found."
+          "description": "If successful, a URI where details on the newly created resource can be found."
         }
       }
     },
-    "202Async": {
-      "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+    "202": {
+      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
       "headers": {
-        "Location": {
+        "Operation-Location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
         }
@@ -184,16 +184,25 @@
       "x-ms-parameter-location": "method"
     },
     "Description": {
-        "name": "description",
-        "description": "The description to be given to the upload.",
-        "type": "string",
-        "in": "query",
-        "required": false,
-        "x-ms-parameter-location": "method"
-      }  
+      "name": "description",
+      "description": "The description to be given to the upload.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "OperationId": {
+      "name": "operationId",
+      "type": "string",
+      "in": "path",
+      "description": "The ID to query the status for the data upload request.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  
   },
   "paths": {
-    "/mapData/upload": {
+    "/mapData": {
       "post": {
         "x-publish": true,
         "description": "**Data Upload API**\n\n**Applies to:** S1 pricing tier.\n\nThe Data Upload API allows the caller to upload data content to the Azure Maps service.\nYou can use this API in a scenario like uploading a collection of Geofences in `GeoJSON` \nformat, for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Upload Request\n\nTo upload your content you will use a `POST` request. The request body will contain the data to upload. The \n`dataFormat` query parameter will contain the format for the data, the `dataSharingLevel` query parameter \ncan contain the sharing level for the data. The `Content-Type` header will be set to the content type of the \ndata.\n\nFor example, to upload a collection of geofences  in `GeoJSON` format, set the request body to the geofence \ncontent. Set the `dataFormat` query parameter to _geojson_, and set the `Content-Type` header to either one \nof the following media types:\n\n- `application/json`\n- `application/vnd.geo+json`\n- `application/octet-stream`\n\nHere's a sample request body for uploading a simple Geofence represented as a circle geometry using a center \npoint and a radius. The sample below is in `GeoJSON`:\n\n```json\n{\n    \"type\": \"FeatureCollection\",\n    \"features\": [{\n        \"type\": \"Feature\",\n        \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [-122.126986, 47.639754]\n        },\n        \"properties\": {\n            \"geometryId\": \"001\",\n            \"radius\": 500\n        }\n    }]\n}\n```\n\nThe Data Upload API performs a \n[long-running request](https://docs.microsoft.com/azure/azure-maps/private-atlas-long-running-operation).\n\n## Data Upload Limits\n\nPlease, be aware that currently every Azure Maps account has a [data storage limit](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-maps-limits). \nOnce the storage limit is reached, all the new upload API calls will return a `409 Conflict` http error response. \nYou can always use the [Data Delete API](https://docs.microsoft.com/rest/api/maps/data/deletepreview) to \ndelete old/unused content and create space for new uploads.",
@@ -240,11 +249,58 @@
               "$ref": "#/definitions/ODataErrorResponse"
             }
           },
-          "201": {
-            "$ref": "#/responses/201Async"
-          },
           "202": {
-            "$ref": "#/responses/202Async"
+            "$ref": "#/responses/202"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "get": {
+        "x-publish": true,
+        "description": "**Data List API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nThis API allows the caller to fetch a list of all content uploaded previously using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview).   \n\n\n### Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n\n### List Data Response\n\nThe Data List API returns the complete list of all data in `json` format. The response contains the following details for each data resource:\n\n  > udid - The unique data id for the data resource.\n\n  > location - The location of the data resource. Execute a HTTP `GET` on this location to download the data.\n\n\nHere's a sample response returning the `udid` and `location` of 3 data resources:  \n\n<br>\n\n```json\n{\n    \"mapDataList\": \n    [\n        {\n            \"udid\": \"9a1288fa-1858-4a3b-b68d-13a8j5af7d7c\",\n            \"location\": \"https://atlas.microsoft.com/mapData/9a1288fa-1858-4a3b-b68d-13a8j5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 29920,\n            \"uploadStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n            \"location\": \"https://atlas.microsoft.com/mapData/8b1288fa-1958-4a2b-b68e-13a7i5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1339,\n            \"uploadStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"7c1288fa-2058-4a1b-b68f-13a6h5af7d7c\",\n            \"location\": \"https://atlas.microsoft.com/mapData/7c1288fa-2058-4a1b-b68f-13a6h5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1650,\n            \"uploadStatus\": \"Pending\"\n        }]\n}\n```\n\n<br>",
+        "operationId": "Data_ListPreview",
+        "x-ms-examples": {
+          "List all the previously uploaded data": {
+            "$ref": "./examples/List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List data request completed successfully. The response body contains a list of all the previously uploaded data.",
+            "schema": {
+              "$ref": "#/definitions/MapDataListResponse"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the Download API response."
+              }
+            }
           },
           "400": {
             "$ref": "#/responses/400"
@@ -311,11 +367,8 @@
               "$ref": "#/definitions/ODataErrorResponse"
             }
           },
-          "201": {
-            "$ref": "#/responses/201Async"
-          },
           "202": {
-            "$ref": "#/responses/202Async"
+            "$ref": "#/responses/202"
           },
           "400": {
             "$ref": "#/responses/400"
@@ -413,9 +466,6 @@
         "responses": {
           "204": {
             "description": "Data delete request completed successfully. The content for `udid` was deleted on the server.",
-            "schema": {
-              "$ref": "#/definitions/MapDataDeleteResponse"
-            }
           },
           "400": {
             "$ref": "#/responses/400"
@@ -435,58 +485,33 @@
         }
       }
     },
-    "/mapData": {
+    "/mapData/operations/{operationId}": {
       "get": {
-        "x-publish": true,
-        "description": "**Data List API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nThis API allows the caller to fetch a list of all content uploaded previously using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview).   \n\n\n### Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n\n### List Data Response\n\nThe Data List API returns the complete list of all data in `json` format. The response contains the following details for each data resource:\n\n  > udid - The unique data id for the data resource.\n\n  > location - The location of the data resource. Execute a HTTP `GET` on this location to download the data.\n\n\nHere's a sample response returning the `udid` and `location` of 3 data resources:  \n\n<br>\n\n```json\n{\n    \"mapDataList\": \n    [\n        {\n            \"udid\": \"9a1288fa-1858-4a3b-b68d-13a8j5af7d7c\",\n            \"location\": \"https://atlas.microsoft.com/mapData/9a1288fa-1858-4a3b-b68d-13a8j5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 29920,\n            \"uploadStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n            \"location\": \"https://atlas.microsoft.com/mapData/8b1288fa-1958-4a2b-b68e-13a7i5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1339,\n            \"uploadStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"7c1288fa-2058-4a1b-b68f-13a6h5af7d7c\",\n            \"location\": \"https://atlas.microsoft.com/mapData/7c1288fa-2058-4a1b-b68f-13a6h5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1650,\n            \"uploadStatus\": \"Pending\"\n        }]\n}\n```\n\n<br>",
-        "operationId": "Data_ListPreview",
-        "x-ms-examples": {
-          "List all the previously uploaded data": {
-            "$ref": "./examples/List.json"
-          }
-        },
+        "description": "This path will be obtained from a call to POST /mapData.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once completed.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ClientId"
-          },
           {
             "$ref": "#/parameters/SubscriptionKey"
           },
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
           }
         ],
-        "responses": {
+
+        "responses":{
           "200": {
-            "description": "List data request completed successfully. The response body contains a list of all the previously uploaded data.",
-            "schema": {
-              "$ref": "#/definitions/MapDataListResponse"
-            },
-            "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "The content-type for the Download API response."
-              }
-            }
+            "$ref": "#/responses/200Async"
           },
           "400": {
             "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
           }
         }
       }
     }
+
+
   },
   "definitions": {
     "ODataErrorResponse": {
@@ -586,10 +611,6 @@
     },
     "MapDataDownloadResponse": {
       "description": "The response model for the Data Download API. The response body will contain the content for the passed in `udid`.",
-      "type": "object"
-    },
-    "MapDataDeleteResponse": {
-      "description": "The response model for the Data Delete API. The response body will be empty signifying there's no content available for the `udid` anymore.",
       "type": "object"
     },
     "MapDataListResponse": {
