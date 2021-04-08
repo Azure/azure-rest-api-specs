@@ -6,8 +6,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ```yaml $(python) && $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: Microsoft.HybridNetwork
-package-name: hybridnetwork
+namespace: azure.mgmt.HybridNetwork
+package-name: azure-mgmt-hybridnetwork
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
