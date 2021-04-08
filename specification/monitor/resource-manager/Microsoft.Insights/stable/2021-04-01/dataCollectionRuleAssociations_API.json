@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Monitor Data Collection Rule Associations API",
     "description": "Provides operations for working with Azure Monitor data collection rule associations",
-    "version": "2019-11-01-preview",
+    "version": "2021-04-01",
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
     }
@@ -263,6 +263,11 @@
           "type": "string",
           "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule"
         },
+        "dataCollectionEndpointId": {
+          "description": "The resource ID of the data collection endpoint that is to be associated.",
+          "type": "string",
+          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myCollectionEndpoint"
+        },
         "provisioningState": {
           "description": "The resource provisioning state.",
           "enum": [
@@ -328,6 +333,18 @@
         "etag": {
           "description": "Resource entity tag (ETag).",
           "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+            }
+          ],
           "readOnly": true,
           "x-ms-mutability": [
             "read"
