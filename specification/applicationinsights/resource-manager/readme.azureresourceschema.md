@@ -30,7 +30,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Insights/stable/2020-11-20/workbooktemplates_API.json
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
 
 ```
 
