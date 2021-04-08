@@ -19,5 +19,5 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.DFP/preview/2021-02-01-preview/dfp.json
+  - Microsoft.Dynamics365Fraudprotection/preview/2021-02-01-preview/dfp.json
 ```

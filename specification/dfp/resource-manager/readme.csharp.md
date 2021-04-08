@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.DFP
-  output-folder: $(csharp-sdks-folder)/dfp/management/Microsoft.DFP/GeneratedProtocol
+  namespace: Microsoft.Dynamics365Fraudprotection
+  output-folder: $(csharp-sdks-folder)/dfp/management/Microsoft.Dynamics365Fraudprotection/GeneratedProtocol
 ```
