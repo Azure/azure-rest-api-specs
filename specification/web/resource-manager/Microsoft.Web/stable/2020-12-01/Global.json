@@ -51,11 +51,6 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Deleted Web App": {
-            "$ref": "./examples/GetDeletedWebApp.json"
-          }
         }
       }
     },
@@ -98,10 +93,103 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/operationResults": {
+      "get": {
+        "tags": [
+          "Global"
+        ],
+        "summary": "Gets all the operations for a subscription in a given region",
+        "description": "Description for Gets all the operations for a subscription in a given region",
+        "operationId": "Global_GetSubscriptionOperations",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ArmOperationResponse"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
         },
         "x-ms-examples": {
-          "Get Deleted Web App Snapshots": {
-            "$ref": "./examples/GetDeletedWebAppSnapshots.json"
+          "Gets all the operations for a subscription in a given region": {
+            "$ref": "./examples/GetSubscriptionOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "Global"
+        ],
+        "summary": "Gets an operation in a subscription and given region",
+        "description": "Description for Gets an operation in a subscription and given region",
+        "operationId": "Global_GetSubscriptionOperation",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArmOperationResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an operation in a subscription and given region": {
+            "$ref": "./examples/GetSubscriptionOperation.json"
           }
         }
       }
@@ -118,14 +206,14 @@
           {
             "name": "location",
             "in": "path",
-            "description": "Location name",
+            "description": "Location",
             "required": true,
             "type": "string"
           },
           {
             "name": "operationId",
             "in": "path",
-            "description": "Operation Id",
+            "description": "OperationId",
             "required": true,
             "type": "string"
           },
@@ -155,7 +243,45 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "ArmOperationResponse": {
+      "description": "ArmOperationResponse",
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id",
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ArmOperationResponseError",
+          "description": "Error"
+        }
+      }
+    },
+    "ArmOperationResponseError": {
+      "description": "ArmOperationResponse",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Code",
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
   "parameters": {
     "subscriptionIdParameter": {
       "name": "subscriptionId",

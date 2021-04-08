@@ -460,8 +460,7 @@
         },
         "accessKey": {
           "description": "Access key for the storage account.",
-          "type": "string",
-          "x-ms-secret": true
+          "type": "string"
         },
         "mountPath": {
           "description": "Path to mount the storage within the site's runtime environment.",
@@ -782,10 +781,7 @@
           "description": "Raw row values",
           "type": "array",
           "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "type": "string"
           }
         }
       }
@@ -910,7 +906,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Id of detector",
+          "description": "Id",
           "type": "string",
           "readOnly": true
         },
@@ -1667,6 +1663,41 @@
         }
       }
     },
+    "PrivateEndpointConnectionResource": {
+      "description": "Private Endpoint Connection ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "PrivateEndpointConnectionResource resource specific properties",
+          "properties": {
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true
+            },
+            "privateEndpoint": {
+              "$ref": "#/definitions/ArmIdWrapper",
+              "description": "PrivateEndpoint of a remote private endpoint connection"
+            },
+            "privateLinkServiceConnectionState": {
+              "$ref": "#/definitions/PrivateLinkConnectionState"
+            },
+            "ipAddresses": {
+              "description": "Private IPAddresses mapped to the remote private endpoint",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "PrivateLinkConnectionApprovalRequest": {
       "description": "A request to approve or reject a private endpoint connection",
       "type": "object",
@@ -2359,6 +2390,10 @@
             "storageAccountRequired": {
               "description": "Checks if Customer provided storage account is required",
               "type": "boolean"
+            },
+            "virtualNetworkSubnetId": {
+              "description": "Azure Resource Manager ID of the Virtual network and subnet to be joined by Regional VNET Integration.\nThis must be of the form /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
@@ -2455,7 +2490,7 @@
           }
         },
         "azureStorageAccounts": {
-          "description": "List of Azure Storage Accounts.",
+          "description": "AzureStorageAccounts.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/AzureStorageInfoValue"
@@ -2607,6 +2642,10 @@
           "format": "int32",
           "description": "The number of private ports assigned to this app. These will be assigned dynamically on runtime.",
           "type": "integer"
+        },
+        "publicNetworkAccess": {
+          "description": "Property to allow or block all public trafic.",
+          "type": "string"
         },
         "cors": {
           "$ref": "#/definitions/CorsSettings",
@@ -2786,36 +2825,6 @@
         }
       }
     },
-    "SkuCapacity": {
-      "description": "Description of the App Service plan scale options.",
-      "type": "object",
-      "properties": {
-        "minimum": {
-          "format": "int32",
-          "description": "Minimum number of workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "maximum": {
-          "format": "int32",
-          "description": "Maximum number of workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "elasticMaximum": {
-          "format": "int32",
-          "description": "Maximum number of Elastic workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "default": {
-          "format": "int32",
-          "description": "Default number of workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "scaleType": {
-          "description": "Available scale configurations for an App Service plan.",
-          "type": "string"
-        }
-      }
-    },
     "SkuDescription": {
       "description": "Description of a SKU for a scalable resource.",
       "type": "object",
@@ -2840,10 +2849,6 @@
           "format": "int32",
           "description": "Current number of instances assigned to the resource.",
           "type": "integer"
-        },
-        "skuCapacity": {
-          "$ref": "#/definitions/SkuCapacity",
-          "description": "Min, max, and default scale values of the SKU."
         },
         "locations": {
           "description": "Locations of the SKU.",

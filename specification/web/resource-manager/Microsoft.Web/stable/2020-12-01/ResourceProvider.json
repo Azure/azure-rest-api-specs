@@ -47,11 +47,6 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Generate Github Access Token For AppService CLI": {
-            "$ref": "./examples/GenerateGithubAccessTokenForAppserviceCLIAsync.json"
-          }
         }
       }
     },
@@ -296,6 +291,112 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/customhostnames": {
+      "get": {
+        "summary": "List all hostnames in a subscription",
+        "description": "Description for List all hostnames in a subscription",
+        "operationId": "ListCustomHostNames",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/IdentifierCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/customhostnames/{hostName}": {
+      "get": {
+        "summary": "Get custom hostname",
+        "description": "Description for Get custom hostname",
+        "operationId": "GetCustomHostName",
+        "parameters": [
+          {
+            "name": "hostName",
+            "in": "path",
+            "description": "Hostname in the hostname binding.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/customhostnames/{hostname}/sites": {
+      "get": {
+        "summary": "Get custom hostname",
+        "description": "Description for Get custom hostname",
+        "operationId": "ListCustomHostNameSites",
+        "parameters": [
+          {
+            "name": "hostname",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/IdentifierCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -897,7 +998,7 @@
           "type": "string"
         },
         "capacity": {
-          "$ref": "./CommonDefinitions.json#/definitions/SkuCapacity",
+          "$ref": "#/definitions/SkuCapacity",
           "description": "Min, max, and default scale values of the SKU."
         },
         "locations": {
@@ -1080,6 +1181,36 @@
         "isFqdn": {
           "description": "Is fully qualified domain name.",
           "type": "boolean"
+        }
+      }
+    },
+    "SkuCapacity": {
+      "description": "Description of the App Service plan scale options.",
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "format": "int32",
+          "description": "Minimum number of workers for this App Service plan SKU.",
+          "type": "integer"
+        },
+        "maximum": {
+          "format": "int32",
+          "description": "Maximum number of workers for this App Service plan SKU.",
+          "type": "integer"
+        },
+        "elasticMaximum": {
+          "format": "int32",
+          "description": "Maximum number of Elastic workers for this App Service plan SKU.",
+          "type": "integer"
+        },
+        "default": {
+          "format": "int32",
+          "description": "Default number of workers for this App Service plan SKU.",
+          "type": "integer"
+        },
+        "scaleType": {
+          "description": "Available scale configurations for an App Service plan.",
+          "type": "string"
         }
       }
     },
