@@ -34,27 +34,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Authorization/privateLinkAssociations/":{
-      "get": {
-        "tags": [
-          "PrivateLinkAssociation"
-        ],
-        "operationId": "PrivateLinkAssociation_Get",
-        "description": "Get a PLA for a MG scope",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/GroupIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-
-          }
-        }
-      },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Authorization/privateLinkAssociations/{plaID}":{
       "put": {
         "tags": [
           "PrivateLinkAssociation"
@@ -69,21 +49,31 @@
             "$ref": "#/parameters/GroupIdParameter"
           },
           {
-            "name": "GUID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The ID of the PLA"
+            "$ref": "#/parameters/PrivateLinkAssociationIdParameter"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "required": true,
-            "description": "Additional properties "
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkAssociationProperties"
+            },
+            "description": "Parameters supplied to create the private link association."
           }
         ],
         "responses": {
-
+          "200": {
+            "description": "Ok - Returns information about the new private link association.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkAssociationPropertiesExpanded"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
         }
       },
       "delete": {
@@ -112,76 +102,186 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionID}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/resourceManagementPrivateLinks/{rmplName}": {
-    "put": {
-      "tags": [
-        "ResourceManagementPrivateLink"
-      ],
-      "operationId": "ResourceManagementPrivateLink_Put",
-      "description": "",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "name": "location",
-          "in": "body",
-          "required": true,
-          "description": "The region to create the Resource Management Private Link"
-        }
-      ]
-    }
-  },
-  "/subscriptions/{subscriptionID}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints": {
-    "put": {
-      "tags": [
-        "PrivateEndpoint"
-      ],
-      "operationId": "PrivateEndpoint_Put",
-      "description": "Create a Private Endpoint.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-        }
-      ]
     },
-    "get": {
-      "tags": [
-        "PrivateEndpoint"
-      ],
-      "operationId": "PrivateEndpoint_Get",
-      "description": "Get all private endpoints in a subscription",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Authorization/privateLinkAssociations":{
+      "get": {
+        "tags": [
+          "PrivateLinkAssociation"
+        ],
+        "operationId": "PrivateLinkAssociation_Get",
+        "description": "Get a private link association for a management group scope",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded",
+            "schema":{
+              "$ref": "#/definitions/PrivateLinkAssociationGetResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
         }
-      ],
-      "responses": {
-
+      }
+    },
+    "/subscriptions/{subscriptionID}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/resourceManagementPrivateLinks/{rmplName}": {
+      "put": {
+        "tags": [
+          "ResourceManagementPrivateLink"
+        ],
+        "operationId": "ResourceManagementPrivateLink_Put",
+        "description": "Create a resource management group private link.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceManagementPrivateLinkParameter"
+          },
+          {
+            "name": "location",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementPrivateLinkLocation"
+            },
+            "description": "The region to create the Resource Management private link."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementPrivateLink"
+            }
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/CloudError"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ResourceManagementPrivateLink"
+        ],
+        "operationId": "ResourceManagementPrivateLink_Get",
+        "description": "Get a resource management private link(resource-level).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceManagementPrivateLinkParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. Returns information about the resource management private link.",
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementPrivateLink"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceManagementPrivateLink"
+        ],
+        "operationId": "ResourceManagementPrivateLink_Delete",
+        "description": "Delete a resource management private link.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceManagementPrivateLinkParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/CloudError"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionID}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/resourceManagementPrivateLinks": {
+      "get": {
+        "tags": [
+          "ResourceManagementPrivateLink"
+        ],
+        "operationId": "ResourceManagementPrivateLink_List",
+        "description": "Get all the resource management private links in a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Returns an array of private links.",
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementPrivateLinkListResult"
+            }
+          }
+        }
       }
     }
   },
   "definitions": {
-    "TempName": {
-      "properties" {
+    "PrivateLinkAssociationProperties": {
+      "properties": {
         "privateLink": {
-
+          "type": "string",
+          "description": "The rmpl Resource ID."
         },
         "publicNetworkAccess": {
           "type": "string",
@@ -190,10 +290,133 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": ""
+            "name": "publicNetworkAccessOptions",
+            "modelAsString": true
           }
         }
       }
+    },
+    "PrivateLinkAssociationGetResult": {
+      "description": "Result of the request to get PLA for a MG scope. ",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkAssociation"
+          },
+          "description": "private link association information."
+
+        }
+      }
+    },
+    "PrivateLinkAssociationPropertiesExpanded": {
+      "properties": {
+        "privateLink": {
+          "type": "string",
+          "description": "The rmpl Resource ID."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "publicNetworkAccessOptions",
+            "modelAsString": true
+          }
+        },
+        "tenantID": {
+          "type": "string",
+          "description": "The TenantID."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The scope of the private link association."
+        }
+      },
+      "description": "Private Link Association Properties."
+    },
+    "PrivateLinkAssociation": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkAssociationPropertiesExpanded",
+          "description": "The private link association properties."
+        },
+        "id": {
+          "type": "string",
+          "description": "The plaResourceID."
+        },
+        "type": {
+          "type": "string",
+          "description": "The operation type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The pla name."
+        }
+      }
+    },
+    "ResourceManagementPrivateLink": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceManagementPrivateLinkEndpointConnections"
+        },
+        "id": {
+          "type": "string",
+          "description": "The rmplResourceID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The rmpl Name."
+        },
+        "type": {
+          "type": "string",
+          "description": "The operation type."
+        },
+        "location": {
+          "type": "string",
+          "description": "the region of the rmpl"
+        }
+      }
+    },
+    "ResourceManagementPrivateLinkLocation": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "the region to create private link association."
+        }
+      }
+    },
+    "ResourceManagementPrivateLinkEndpointConnections": {
+      "properties": {
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private endpoint connections."
+        }
+      }
+    },
+    "ResourceManagementPrivateLinkListResult": {
+      "properties": {
+        "": {
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/ResourceManagementPrivateLink"
+          }
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response for a resource management request."
     }
   },
   "parameters": {
@@ -214,12 +437,26 @@
       "minLength": 1,
       "maxLength": 90
     },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription."
+    },
     "PrivateLinkAssociationIdParameter": {
-      "name": "GUID",
+      "name": "plaId",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The ID of the PLA"
+    },
+    "ResourceManagementPrivateLinkParameter": {
+      "name": "rmplName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource management private link."
     }
   }
 }
