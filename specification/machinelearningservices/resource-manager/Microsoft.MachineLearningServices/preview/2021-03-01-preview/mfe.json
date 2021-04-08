@@ -7190,10 +7190,8 @@
       "discriminator": "jobType",
       "additionalProperties": false
     },
-    "ComputeJobBase": {
-      "description": "Compute job base definition",
+    "ExperimentJobBase": {
       "required": [
-        "compute",
         "jobType"
       ],
       "type": "object",
@@ -7211,19 +7209,36 @@
             "read"
           ]
         },
-        "compute": {
-          "description": "Compute binding for the job.",
-          "$ref": "#/definitions/ComputeConfiguration",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "output": {
           "description": "Location of the job output logs and artifacts.",
           "$ref": "#/definitions/JobOutput",
           "readOnly": true,
           "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "discriminator": "jobType",
+      "additionalProperties": false
+    },
+    "ComputeJobBase": {
+      "description": "Compute job base definition",
+      "required": [
+        "compute",
+        "jobType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExperimentJobBase"
+        }
+      ],
+      "properties": {
+        "compute": {
+          "description": "Compute binding for the job.",
+          "$ref": "#/definitions/ComputeConfiguration",
+          "x-ms-mutability": [
+            "create",
             "read"
           ]
         },
