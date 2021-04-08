@@ -43,6 +43,7 @@ input-file:
 - Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForM365SecurityCenter.json
 - Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForO365ManagementActivityAPI.json
 - Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForSCCPowershell.json
+- Microsoft.M365SecurityAndCompliance/preview/2021-03-25-preview/privateLinkServicesForMIPPolicySync.json
 ```
 
 ---
