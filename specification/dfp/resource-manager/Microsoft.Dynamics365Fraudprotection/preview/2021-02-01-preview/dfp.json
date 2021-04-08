@@ -80,7 +80,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -142,7 +142,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -189,7 +189,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -245,7 +245,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -267,13 +267,13 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -320,7 +320,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -359,7 +359,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -414,7 +414,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -422,42 +422,6 @@
     }
   },
   "definitions": {
-    "OperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of operations supported by Microsoft.Dynamics365Fraudprotection resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of operations, if there are any."
-        }
-      },
-      "description": "Result of a request to list all operations supported by Microsoft.DevOps resource provider."
-    },
-    "Operation": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Name of the operation."
-        },
-        "isDataAction": {
-          "type": "string",
-          "description": "Indicates whether the operation applies to data-plane."
-        },
-        "display": {
-          "description": "Display information of the operation.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OperationDisplayValue"
-        }
-      },
-      "description": "Properties of an Operation."
-    },
     "OperationDisplayValue": {
       "properties": {
         "operation": {
@@ -514,7 +478,7 @@
           "description": "Key-value pairs of additional resource provisioning properties."
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of the resource.",
           "readOnly": true
         }
@@ -660,22 +624,13 @@
         }
       }
     },
-    "ErrorResponse": {
+    "CloudError": {
       "type": "object",
       "description": "Describes the format of Error response.",
       "properties": {
         "error": {
           "description": "The error object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "Error code"
-            },
-            "message": {
-              "type": "string",
-              "description": "Error message indicating why the operation failed."
-            }
-          }
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       }
     },
@@ -713,53 +668,6 @@
           "type": "string",
           "description": "The detailed message of the request unavailability."
         }
-      }
-    },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "An identifier for the identity that created the resource"
-        },
-        "createdByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that created the resource"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "An identifier for the identity that last modified the resource"
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that last modified the resource"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
-        }
-      }
-    },
-    "IdentityType": {
-      "description": "The type of identity that created/modified the resource.",
-      "type": "string",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": true
       }
     }
   },

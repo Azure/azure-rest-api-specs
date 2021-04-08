@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2021-02-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-02-01-preview'
 input-file:
-  - Microsoft.DFP/preview/2021-02-01-preview/dfp.json
+  - Microsoft.Dynamics365Fraudprotection/preview/2021-02-01-preview/dfp.json
 ```
 
 ---
