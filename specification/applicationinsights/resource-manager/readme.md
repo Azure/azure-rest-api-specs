@@ -133,6 +133,12 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: workbooks_API.json
     reason: 'consistent with existing default error response'
+  - suppress: R4009
+    from: workbookTemplates_API.json
+    reason: Existing APIs don't have systemData attribute. Suppressing so don't have to make breaking change
+  - suppress: R4017
+    from: workbookTemplates_API.json
+    reason: Does not support list by subscription
   - suppress: DefaultErrorResponseSchema
     from: workbookOperations_API.json
     reason: 'consistent with existing default error response'
@@ -210,11 +216,6 @@ These settings apply only when `--tag=package-2020-11-20` is specified on the co
 ``` yaml $(tag) == 'package-2020-11-20'
 input-file:
   - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
-  - Microsoft.Insights/stable/2020-11-20/examples/WorkbookTemplateAdd.json
-  - Microsoft.Insights/stable/2020-11-20/examples/WorkbookTemplateDelete.json
-  - Microsoft.Insights/stable/2020-11-20/examples/WorkbookTemplateGet.json
-  - Microsoft.Insights/stable/2020-11-20/examples/WorkbookTemplatesList.json
-  - Microsoft.Insights/stable/2020-11-20/examples/WorkbookTemplateUpdate.json
 ```
 
 ### Tag: package-2020-02-12

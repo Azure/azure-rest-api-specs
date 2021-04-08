@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooktemplates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/workbooktemplates": {
       "get": {
         "description": "Get all Workbook templates defined within a specified resource group.",
         "operationId": "WorkbookTemplates_ListByResourceGroup",
@@ -73,7 +73,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooktemplates/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/workbooktemplates/{resourceName}": {
       "get": {
         "description": "Get a single workbook template by its resourceName.",
         "operationId": "WorkbookTemplates_Get",
@@ -324,7 +324,8 @@
       "properties": {
         "priority": {
           "type": "integer",
-          "description": "Priority of the template. Determines which template to open when a workbook gallery is opened in viewer mode."
+          "description": "Priority of the template. Determines which template to open when a workbook gallery is opened in viewer mode.",
+          "format": "int32"
         },
         "author": {
           "type": "string",
@@ -370,7 +371,8 @@
         },
         "order": {
           "type": "integer",
-          "description": "Order of the template within the gallery."
+          "description": "Order of the template within the gallery.",
+          "format": "int32"
         },
         "resourceType": {
           "type": "string",
@@ -429,6 +431,16 @@
       "description": "Error Field contract."
     },
     "WorkbookError": {
+      "description": "Error message that will indicate why the operation failed.",
+      "properties": {
+        "error": {
+          "description": "Error message object that will indicate why the operation failed.",
+          "$ref": "#/definitions/WorkbookErrorBody"
+        }
+      }
+    },
+    "WorkbookErrorBody": {
+      "description": "Error message body that will indicate why the operation failed.",
       "properties": {
         "code": {
           "type": "string",
@@ -445,8 +457,7 @@
           },
           "description": "The list of invalid fields send in request, in case of validation error."
         }
-      },
-      "description": "Error message body that will indicate why the operation failed."
+      }
     }
   },
   "parameters": {
