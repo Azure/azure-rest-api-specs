@@ -626,6 +626,309 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/dataConnections": {
+      "get": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Returns the list of data connections of the given Kusto pool database.",
+        "operationId": "DataConnections_ListByDatabase",
+        "x-ms-examples": {
+          "KustoDatabasesListByCluster": {
+            "$ref": "./examples/KustoDataConnectionsListByDatabase.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of data connections.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/dataConnections/{dataConnectionName}": {
+      "get": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Returns a data connection.",
+        "operationId": "DataConnections_Get",
+        "x-ms-examples": {
+          "KustoDataConnectionsGet": {
+            "$ref": "./examples/KustoDataConnectionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Creates or updates a data connection.",
+        "operationId": "DataConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoDataConnectionsCreateOrUpdate": {
+            "$ref": "./examples/KustoDataConnectionsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            },
+            "description": "The data connection parameters supplied to the CreateOrUpdate operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "201": {
+            "description": "Successfully created the data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted the create data connection request.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Updates a data connection.",
+        "operationId": "DataConnections_Update",
+        "x-ms-examples": {
+          "KustoDataConnectionsUpdate": {
+            "$ref": "./examples/KustoDataConnectionsUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            },
+            "description": "The data connection parameters supplied to the Update operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "201": {
+            "description": "Successfully updated the data connection.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted the update data connection request.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "DataConnections"
+        ],
+        "description": "Deletes the data connection with the given name.",
+        "operationId": "DataConnections_Delete",
+        "x-ms-examples": {
+          "KustoDataConnectionsDelete": {
+            "$ref": "./examples/KustoDataConnectionsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataConnectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the data connection."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "The specified data connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -962,6 +1265,49 @@
       ],
       "description": "Class representing a Kusto database.",
       "discriminator": "kind"
+    },
+    "DataConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataConnection"
+          },
+          "description": "The list of Kusto data connections."
+        }
+      },
+      "description": "The list Kusto data connections operation response."
+    },
+    "DataConnection": {
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "kind": {
+          "description": "Kind of the endpoint for the data connection",
+          "enum": [
+            "EventHub",
+            "EventGrid",
+            "IotHub"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataConnectionKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing an data connection.",
+      "discriminator": "kind"
     }
   },
   "parameters": {
@@ -985,6 +1331,14 @@
       "name": "databaseName",
       "in": "path",
       "description": "The name of the database in the Kusto pool.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DataConnectionNameParameter": {
+      "name": "dataConnectionName",
+      "in": "path",
+      "description": "The name of the data connection.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
