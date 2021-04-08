@@ -527,8 +527,20 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The Creator is updated with the provided parameters.",
+            "schema": {
+              "$ref": "#/definitions/Creator"
+            }
+          },
           "201": {
-            "description": "The Creator will be created asynchronously. The Creator will be ready to use once the provisioningState property changed from 'Created' to 'Succeeded' through creators Get API.",
+            "description": "The Creator will be created asynchronously. The Creator will be ready to use once the provisioningState property changed to 'Succeeded' through creators Get API.",
+            "schema": {
+              "$ref": "#/definitions/Creator"
+            }
+          },
+          "202": {
+            "description": "The Creator will be created asynchronously. The Creator will be ready to use once the provisioningState property changed to 'Succeeded' through creators Get API.",
             "schema": {
               "$ref": "#/definitions/Creator"
             }
@@ -718,7 +730,6 @@
         }
       },
       "required": [
-        "location",
         "properties"
       ],
       "allOf": [
@@ -751,7 +762,6 @@
         }
       },
       "required": [
-        "location",
         "sku"
       ],
       "allOf": [
