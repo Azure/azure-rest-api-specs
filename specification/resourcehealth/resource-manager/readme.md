@@ -109,6 +109,7 @@ namespace: com.microsoft.azure.management.resourcehealth
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resourcehealth
+service-name: ResourceHealth
 ```
 
 ### Java multi-api
