@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-keyvault-2021-04-01-preview
   - tag: schema-keyvault-2020-04-01-preview
   - tag: schema-keyvault-2019-09-01
   - tag: schema-keyvault-2018-02-14-preview
@@ -16,6 +17,20 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-keyvault-2020-04-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-keyvault-2021-04-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.KeyVault/preview/2021-04-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/secrets.json
+
+```
 
 ### Tag: schema-keyvault-2020-04-01-preview and azureresourceschema
 
