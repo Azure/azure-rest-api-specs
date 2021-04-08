@@ -26,7 +26,16 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-07-01-preview
+tag: package-2021-03-01-preview
+```
+
+### Tag: package-2021-03-01-preview
+
+These settings apply only when `--tag=2021-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01-preview'
+input-file:
+- Microsoft.AppConfiguration/preview/2021-03-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2020-07-01-preview
@@ -140,6 +149,18 @@ directive:
     from: appconfiguration.json
     where: $.definitions.KeyValueProperties.properties.locked
     reason: This is data plane level information proxied through the RP and cannot be changed.
+  - suppress: EnumInsteadOfBoolean
+    from: appconfiguration.json
+    where: $.definitions.ConfigurationStoreProperties.properties.disableLocalAuth
+    reason: This is a standardized ARM API.
+  - suppress: EnumInsteadOfBoolean
+    from: appconfiguration.json
+    where: $.definitions.ConfigurationStorePropertiesUpdateParameters.properties.disableLocalAuth
+    reason: This is a standardized ARM API.
+  - suppress: EnumInsteadOfBoolean
+    from: appconfiguration.json
+    where: $.definitions.OperationDefinition.properties.isDataAction
+    reason: This is a standardized ARM API.
 ```
 
 ## AzureResourceSchema
