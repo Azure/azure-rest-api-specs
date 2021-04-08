@@ -51,7 +51,7 @@ input-file:
   - Microsoft.Sql/preview/2021-02-01-preview/DatabaseSecurityAlertPolicies.json
   - Microsoft.Sql/preview/2021-02-01-preview/DatabaseTables.json
   - Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
-  - Microsoft.Sql/preview/2021-02-01-preview/DatabaseVulnerabilityAssesmentRuleBaselines.json
+  - Microsoft.Sql/preview/2021-02-01-preview/DatabaseVulnerabilityAssessmentRuleBaselines.json
   - Microsoft.Sql/preview/2021-02-01-preview/DatabaseVulnerabilityAssessmentScans.json
   - Microsoft.Sql/preview/2021-02-01-preview/DatabaseVulnerabilityAssessments.json
   - Microsoft.Sql/preview/2021-02-01-preview/Databases.json
