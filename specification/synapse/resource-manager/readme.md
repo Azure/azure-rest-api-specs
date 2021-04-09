@@ -141,7 +141,7 @@ directive:
       - $.definitions.DataMaskingRule
       - $.definitions.SqlPoolOperation
   - suppress: R4015
-    reason: Needs implmentation
+    reason: Needs implementation
     from: Microsoft.Synapse/preview/2019-06-01-preview/workspace_managedIdentity.json
     where:
       - $.definitions.ManagedIdentitySqlControlSettingsInfo
@@ -177,7 +177,7 @@ directive:
       - $.definitions.DataMaskingRule
       - $.definitions.SqlPoolOperation
   - suppress: R4015
-    reason: Needs implmentation
+    reason: Needs implementation
     from: Microsoft.Synapse/stable/2020-12-01/workspace_managedIdentity.json
     where:
       - $.definitions.ManagedIdentitySqlControlSettingsInfo
