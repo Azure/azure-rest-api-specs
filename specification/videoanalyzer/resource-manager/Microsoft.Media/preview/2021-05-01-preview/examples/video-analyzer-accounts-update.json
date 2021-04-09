@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contoso",
     "accountName": "contosotv",
-    "api-version": "2021-03-01-preview",
+    "api-version": "2021-05-01-preview",
     "parameters": {
       "tags": {
         "key1": "value3"
@@ -13,8 +13,8 @@
   "responses": {
     "200": {
       "body": {
-        "name": "contosotv",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/videoAnalyzers/contosotv",
+        "name": "contosomovies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/videoAnalyzers/contosomovies",
         "type": "Microsoft.Media/videoAnalyzers",
         "location": "South Central US",
         "tags": {
@@ -23,13 +23,40 @@
           "tag3": "value3"
         },
         "properties": {
-          "videoAnalyzerId": "00000000-0000-0000-0000-000000000000",
+          "encryption": {
+            "type": "SystemKey"
+          },
           "storageAccounts": [
             {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Storage/storageAccounts/contosotvstore",
-              "type": "Primary"
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/storage1",
+              "identity": {
+                "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2"
+              }
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "ClientApi",
+              "endpointUrl": "https://77d7106674e0454eba85e5ede58cedbc.api.southcentralus.videoanalyzer.azure.net"
             }
           ]
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            },
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            },
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id3": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
         },
         "systemData": {
           "createdBy": "fakeapplication@contoso.com",

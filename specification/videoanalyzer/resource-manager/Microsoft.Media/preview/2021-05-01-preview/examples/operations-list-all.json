@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contoso",
-    "api-version": "2021-03-01-preview"
+    "api-version": "2021-05-01-preview"
   },
   "responses": {
     "200": {
@@ -105,6 +105,15 @@
               "resource": "Media Services Account",
               "operation": "List policies for an edge device.",
               "description": "List policies for an edge device."
+            }
+          },
+          {
+            "name": "Microsoft.Media/mediaservices/PrivateEndpointConnectionsApproval/action",
+            "display": {
+              "provider": "Microsoft Media Services",
+              "resource": "Media Services Account",
+              "operation": "Approve Private Endpoint Connections",
+              "description": "Approve Private Endpoint Connections"
             }
           },
           {
@@ -695,13 +704,7 @@
                     "unit": "BitsPerSecond",
                     "aggregationType": "Average",
                     "lockAggregationType": "Total",
-                    "dimensions": [
-                      {
-                        "name": "VmId",
-                        "displayName": "VM ID",
-                        "toBeExportedForShoebox": false
-                      }
-                    ],
+                    "dimensions": [],
                     "supportedAggregationTypes": [
                       "Average",
                       "Minimum",
@@ -714,13 +717,7 @@
                     "displayDescription": "CPU usage for premium streaming endpoints. This data is not available for standard streaming endpoints.",
                     "unit": "Percent",
                     "aggregationType": "Average",
-                    "dimensions": [
-                      {
-                        "name": "VmId",
-                        "displayName": "VM ID",
-                        "toBeExportedForShoebox": false
-                      }
-                    ],
+                    "dimensions": [],
                     "supportedAggregationTypes": [
                       "Average",
                       "Minimum",
@@ -729,78 +726,6 @@
                   }
                 ]
               }
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/streamingEndpoints/privateLinkResources/read",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Streaming Endpoint Private Link Resource",
-              "operation": "Read Streaming Endpoint Private Link Resource",
-              "description": "Read any Streaming Endpoint Private Link Resource"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/streamingEndpoints/privateEndpointConnectionProxies/read",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Streaming Endpoint Private Endpoint Connection Proxy",
-              "operation": "Streaming Endpoint Read Private Endpoint Connection Proxy",
-              "description": "Read any Streaming Endpoint Private Endpoint Connection Proxy"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/streamingEndpoints/privateEndpointConnectionProxies/write",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Streaming Endpoint Private Endpoint Connection Proxy",
-              "operation": "Create Streaming Endpoint Private Endpoint Connection Proxy",
-              "description": "Create Streaming Endpoint Private Endpoint Connection Proxy"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/streamingEndpoints/privateEndpointConnectionProxies/delete",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Streaming Endpoint Private Endpoint Connection Proxy",
-              "operation": "Delete Streaming Endpoint Private Endpoint Connection Proxy",
-              "description": "Delete Streaming Endpoint Private Endpoint Connection Proxy"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/streamingEndpoints/privateEndpointConnectionProxies/validate/action",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Streaming Endpoint Private Endpoint Connection Proxy",
-              "operation": "Validate Streaming Endpoint Private Endpoint Connection Proxy",
-              "description": "Validate Streaming Endpoint Private Endpoint Connection Proxy"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/streamingEndpoints/privateEndpointConnections/read",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Streaming Endpoint Private Endpoint Connection",
-              "operation": "Read Streaming Endpoint Private Endpoint Connection",
-              "description": "Read any Streaming Endpoint Private Endpoint Connection"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/streamingEndpoints/privateEndpointConnections/write",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Streaming Endpoint Private Endpoint Connection",
-              "operation": "Create Streaming Endpoint Private Endpoint Connection",
-              "description": "Create Streaming Endpoint Private Endpoint Connection"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/streamingEndpoints/privateEndpointConnections/delete",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Streaming Endpoint Private Endpoint Connection",
-              "operation": "Delete Streaming Endpoint Private Endpoint Connection",
-              "description": "Delete Streaming Endpoint Private Endpoint Connection"
             }
           },
           {
@@ -999,78 +924,6 @@
             }
           },
           {
-            "name": "Microsoft.Media/mediaservices/liveEvents/privateLinkResources/read",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Live Event Private Link Resource",
-              "operation": "Read Live Event Private Link Resource",
-              "description": "Read any Live Event Private Link Resource"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/liveEvents/privateEndpointConnectionProxies/read",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Live Event Private Endpoint Connection Proxy",
-              "operation": "Read Live Event Private Endpoint Connection Proxy",
-              "description": "Read any Live Event Private Endpoint Connection Proxy"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/liveEvents/privateEndpointConnectionProxies/write",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Live Event Private Endpoint Connection Proxy",
-              "operation": "Create Live Event Private Endpoint Connection Proxy",
-              "description": "Create Live Event Private Endpoint Connection Proxy"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/liveEvents/privateEndpointConnectionProxies/delete",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Live Event Private Endpoint Connection Proxy",
-              "operation": "Delete Live Event Private Endpoint Connection Proxy",
-              "description": "Delete Live Event Private Endpoint Connection Proxy"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/liveEvents/privateEndpointConnectionProxies/validate/action",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Live Event Private Endpoint Connection Proxy",
-              "operation": "Validate Live Event Private Endpoint Connection Proxy",
-              "description": "Validate Live Event Private Endpoint Connection Proxy"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/liveEvents/privateEndpointConnections/read",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Live Event Private Endpoint Connection",
-              "operation": "Read Live Event Private Endpoint Connection",
-              "description": "Read any Live Event Private Endpoint Connection"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/liveEvents/privateEndpointConnections/write",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Live Event Private Endpoint Connection",
-              "operation": "Create Live Event Private Endpoint Connection",
-              "description": "Create Live Event Private Endpoint Connection"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/liveEvents/privateEndpointConnections/delete",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Live Event Private Endpoint Connection",
-              "operation": "Delete Live Event Private Endpoint Connection",
-              "description": "Delete Live Event Private Endpoint Connection"
-            }
-          },
-          {
             "name": "Microsoft.Media/mediaservices/streamingEndpointOperations/read",
             "display": {
               "provider": "Microsoft Media Services",
@@ -1095,24 +948,6 @@
               "resource": "Live Output Operation",
               "operation": "Read Live Output Operation",
               "description": "Read any Live Output Operation"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/streamingPrivateEndpointConnectionOperations/read",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Streaming Private Endpoint Connection Operation",
-              "operation": "Read Streaming Private Endpoint Connection Operation",
-              "description": "Read any Streaming Private Endpoint Connection Operation"
-            }
-          },
-          {
-            "name": "Microsoft.Media/mediaservices/streamingPrivateEndpointConnectionProxyOperations/read",
-            "display": {
-              "provider": "Microsoft Media Services",
-              "resource": "Streaming Private Endpoint Connection Proxy Operation",
-              "operation": "Read Streaming Private Endpoint Connection Proxy Operation",
-              "description": "Read any Streaming Private Endpoint Connection Proxy Operation"
             }
           },
           {
@@ -1346,6 +1181,30 @@
                     "name": "RunningChannelsAndLiveEventsCount",
                     "displayName": "Running live event count",
                     "displayDescription": "The total number of running live events in the current media services account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "ClusterResource_ChannelsAndLiveEvents",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ]
+                  },
+                  {
+                    "name": "MaxChannelsAndLiveEventsCount",
+                    "displayName": "Max live event quota",
+                    "displayDescription": "The maximum number of live events allowed in the current media services account",
+                    "unit": "Count",
+                    "aggregationType": "Average",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmNamespace": "ClusterResource_ChannelsAndLiveEvents",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ]
+                  },
+                  {
+                    "name": "MaxRunningChannelsAndLiveEventsCount",
+                    "displayName": "Max running live event quota",
+                    "displayDescription": "The maximum number of running live events allowed in the current media services account",
                     "unit": "Count",
                     "aggregationType": "Average",
                     "enableRegionalMdmAccount": true,
