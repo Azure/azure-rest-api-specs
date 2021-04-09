@@ -1,0 +1,436 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-07-30-preview",
+    "title": "ComputeDiskAdminManagementClient",
+    "description": "The Admin Compute Disk Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskmigrationjobs": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of disk migration jobs.": {
+            "$ref": "./examples/DiskMigrationJobs/List.json"
+          }
+        },
+        "tags": [
+          "DiskMigrationJobs"
+        ],
+        "operationId": "DiskMigrationJobs_List",
+        "description": "Returns a list of disk migration jobs.",
+        "parameters": [
+          {
+            "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "DiskMigrationJobs.json#/parameters/MigrationJobStatusParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The list of disk migration jobs has been returned.",
+            "schema": {
+              "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJobList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskmigrationjobs/{migrationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the requested disk migration job.": {
+            "$ref": "./examples/DiskMigrationJobs/Get.json"
+          }
+        },
+        "tags": [
+          "DiskMigrationJobs"
+        ],
+        "operationId": "DiskMigrationJobs_Get",
+        "description": "Returns the requested disk migration job.",
+        "parameters": [
+          {
+            "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "DiskMigrationJobs.json#/parameters/MigrationIdParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The disk migration job has been returned.",
+            "schema": {
+              "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create a disk migration job.": {
+            "$ref": "./examples/DiskMigrationJobs/Create.json"
+          }
+        },
+        "tags": [
+          "DiskMigrationJobs"
+        ],
+        "operationId": "DiskMigrationJobs_Create",
+        "description": "Create a disk migration job.",
+        "parameters": [
+          {
+            "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "DiskMigrationJobs.json#/parameters/MigrationIdParameter"
+          },
+          {
+            "$ref": "DiskMigrationJobs.json#/parameters/TargetShareParameter"
+          },
+          {
+            "$ref": "DiskMigrationJobs.json#/parameters/TargetScaleUnitParameter"
+          },
+          {
+            "$ref": "DiskMigrationJobs.json#/parameters/TargetVolumeLabelParameter"
+          },
+          {
+            "$ref": "DiskMigrationJobs.json#/parameters/DiskListParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK --  Disk migration job is created successfully.",
+            "schema": {
+              "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskmigrationjobs/{migrationId}/Cancel": {
+      "post": {
+        "x-ms-examples": {
+          "Cancel a disk migration job.": {
+            "$ref": "./examples/DiskMigrationJobs/Cancel.json"
+          }
+        },
+        "tags": [
+          "DiskMigrationJobs"
+        ],
+        "operationId": "DiskMigrationJobs_Cancel",
+        "description": "Cancel a disk migration job.",
+        "parameters": [
+          {
+            "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "DiskMigrationJobs.json#/parameters/MigrationIdParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK --  Disk migration job cancellation is called.",
+            "schema": {
+              "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MigrationJobStatus": {
+      "description": "Migration job status.",
+      "type": "string",
+      "enum": [
+        "Undefined",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationJobStatus",
+        "modelAsString": true
+      }
+    },
+    "MigrationSubTaskStatus": {
+      "description": "Migration child task status.",
+      "type": "string",
+      "enum": [
+        "Undefined",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending",
+        "Skipped"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationSubTaskStatus",
+        "modelAsString": true
+      }
+    },
+    "MigrationSubTaskProperties": {
+      "description": "Disk migration child task properties.",
+      "type": "object",
+      "properties": {
+        "migrationSubtaskStatus": {
+          "description": "The disk migration child task status.",
+          "$ref": "DiskMigrationJobs.json#/definitions/MigrationSubTaskStatus",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason of task failure.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The task start time.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The task end time.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "targetShare": {
+          "description": "The target share of migration task.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceShare": {
+          "description": "The source share of migration task.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetDiskStateForMigration": {
+          "description": "The disk status.",
+          "$ref": "Disks.json#/definitions/DiskState",
+          "readOnly": true
+        },
+        "diskId": {
+          "description": "The id of disk.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MigrationSubTaskList": {
+      "description": "List of disk migration tasks.",
+      "type": "array",
+      "items": {
+        "$ref": "DiskMigrationJobs.json#/definitions/MigrationSubTask"
+      }
+    },
+    "MigrationSubTask": {
+      "description": "Disk migration child task.",
+      "type": "object",
+      "properties": {
+        "migrationSubTaskId": {
+          "description": "The id of migration child task.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "DiskMigrationJobs.json#/definitions/MigrationSubTaskProperties",
+          "description": "Disk migration child task properties."
+        }
+      }
+    },
+    "DiskMigrationJobProperties": {
+      "description": "Disk migration job properties.",
+      "type": "object",
+      "properties": {
+        "migrationId": {
+          "description": "The disk migration id.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of disk migration job.",
+          "$ref": "DiskMigrationJobs.json#/definitions/MigrationJobStatus",
+          "readOnly": true
+        },
+        "subtasks": {
+          "description": "The list of child migration tasks.",
+          "$ref": "DiskMigrationJobs.json#/definitions/MigrationSubTaskList",
+          "readOnly": true
+        },
+        "creationTime": {
+          "description": "The job creation time.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The job start time.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The job end time.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "targetShare": {
+          "description": "The target share of migration job.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DiskMigrationJob": {
+      "description": "Disk migration job.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJobProperties",
+          "description": "Disk migration properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../2015-12-01-preview/Compute.json#/definitions/Resource"
+        }
+      ]
+    },
+    "DiskMigrationJobList": {
+      "type": "object",
+      "description": "List of disk migration jobs.",
+      "properties": {
+        "value": {
+          "description": "List of disk migration jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "DiskMigrationJobs.json#/definitions/DiskMigrationJob"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "DiskListInput": {
+      "type": "array",
+      "description": "List of disks.",
+      "items": {
+        "$ref": "Disks.json#/definitions/Disk"
+      }
+    }
+  },
+  "parameters": {
+    "MigrationJobStatusParameter": {
+      "description": "The parameters of disk migration job status.",
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MigrationIdParameter": {
+      "description": "The migration job guid name.",
+      "name": "migrationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetShareParameter": {
+      "description": "The target share name.",
+      "name": "targetShare",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetScaleUnitParameter": {
+      "description": "The target scale unit name.",
+      "name": "targetScaleUnit",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetVolumeLabelParameter": {
+      "description": "The target volume label.",
+      "name": "targetVolumeLabel",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DiskListParameter": {
+      "description": "The parameters of disk list.",
+      "name": "disks",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "DiskMigrationJobs.json#/definitions/DiskListInput"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
