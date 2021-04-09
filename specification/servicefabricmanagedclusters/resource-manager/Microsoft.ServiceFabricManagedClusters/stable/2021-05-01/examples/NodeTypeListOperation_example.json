@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2021-01-01-preview"
+    "api-version": "2021-05-01"
   },
   "responses": {
     "200": {
@@ -18,6 +18,7 @@
             "properties": {
               "isPrimary": true,
               "dataDiskSizeGB": 100,
+              "dataDiskType": "StandardSSD_LRS",
               "placementProperties": {},
               "capacities": {},
               "vmSize": "Standard_D2",
@@ -25,7 +26,8 @@
               "vmImageOffer": "WindowsServer",
               "vmImageSku": "2016-Datacenter",
               "vmImageVersion": "latest",
-              "vmInstanceCount": 5
+              "vmInstanceCount": 5,
+              "isStateless": false
             }
           },
           {
@@ -36,14 +38,16 @@
             "properties": {
               "isPrimary": false,
               "dataDiskSizeGB": 200,
+              "dataDiskType": "Premium_LRS",
               "placementProperties": {},
               "capacities": {},
-              "vmSize": "Standard_D3",
+              "vmSize": "Standard_DS3",
               "vmImagePublisher": "MicrosoftWindowsServer",
               "vmImageOffer": "WindowsServer",
               "vmImageSku": "2016-Datacenter-Server-Core",
               "vmImageVersion": "latest",
               "vmInstanceCount": 10,
+              "isStateless": false,
               "vmSecrets": [
                 {
                   "sourceVault": {

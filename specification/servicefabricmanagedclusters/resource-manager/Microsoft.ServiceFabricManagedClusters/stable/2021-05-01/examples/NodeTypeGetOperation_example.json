@@ -4,7 +4,7 @@
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
     "nodeTypeName": "FE",
-    "api-version": "2021-01-01-preview"
+    "api-version": "2021-05-01"
   },
   "responses": {
     "200": {
@@ -17,6 +17,7 @@
         "properties": {
           "isPrimary": true,
           "dataDiskSizeGB": 100,
+          "dataDiskType": "StandardSSD_LRS",
           "placementProperties": {},
           "capacities": {},
           "vmSize": "Standard_D2",
@@ -25,6 +26,7 @@
           "vmImageSku": "2016-Datacenter",
           "vmImageVersion": "latest",
           "vmInstanceCount": 5,
+          "isStateless": false,
           "vmSecrets": [
             {
               "sourceVault": {

@@ -3,11 +3,12 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2021-01-01-preview",
+    "api-version": "2021-05-01",
     "parameters": {
       "location": "eastus",
       "properties": {
-        "clusterCodeVersion": "7.1.168.9494",
+        "clusterUpgradeMode": "Automatic",
+        "clusterUpgradeCadence": "Wave1",
         "dnsName": "myCluster",
         "adminUserName": "vmadmin",
         "adminPassword": "{vm-password}",
@@ -28,8 +29,8 @@
   "responses": {
     "202": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-01-01-preview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-01-01-preview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-05-01",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-05-01"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -44,7 +45,8 @@
         "properties": {
           "provisioningState": "Updating",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
-          "clusterCodeVersion": "7.1.168.9494",
+          "clusterUpgradeMode": "Automatic",
+          "clusterUpgradeCadence": "Wave1",
           "clusterState": "WaitingForNodes",
           "dnsName": "myCluster",
           "fqdn": "MyCluster.eastus.cloudapp.azure.com",
@@ -71,8 +73,8 @@
     },
     "200": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-01-01-preview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-01-01-preview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-05-01",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2021-05-01"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -87,7 +89,8 @@
         "properties": {
           "provisioningState": "Creating",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
-          "clusterCodeVersion": "7.1.168.9494",
+          "clusterUpgradeMode": "Automatic",
+          "clusterUpgradeCadence": "Wave1",
           "clusterState": "WaitingForNodes",
           "dnsName": "myCluster",
           "fqdn": "MyCluster.eastus.cloudapp.azure.com",

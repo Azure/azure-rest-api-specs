@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2021-01-01-preview",
+    "api-version": "2021-05-01",
     "parameters": {
       "tags": {
         "a": "b"
@@ -25,6 +25,8 @@
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
           "clusterCodeVersion": "7.1.168.9494",
+          "clusterUpgradeMode": "Automatic",
+          "clusterUpgradeCadence": "Wave0",
           "clusterState": "WaitingForNodes",
           "dnsName": "myCluster",
           "fqdn": "MyCluster.eastus.cloudapp.azure.com",
@@ -37,18 +39,21 @@
             {
               "frontendPort": 80,
               "backendPort": 80,
+              "probePort": 80,
               "protocol": "http",
               "probeProtocol": "http"
             },
             {
               "frontendPort": 443,
               "backendPort": 443,
+              "probePort": 443,
               "protocol": "http",
               "probeProtocol": "http"
             },
             {
               "frontendPort": 10000,
               "backendPort": 10000,
+              "probePort": 10000,
               "protocol": "tcp",
               "probeProtocol": "http"
             }
