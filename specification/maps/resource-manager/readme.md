@@ -253,10 +253,6 @@ directive:
       - $.definitions.MetricSpecification.properties.fillGapWithZero
     from: maps-management.json
     reason: standard property being applied to all azure resources.
-  - suppress: LongRunningOperationsWithLongRunningExtension
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}"].delete'
-    from: maps-management.json
-    reason: 'When adding x-ms-long-running-operation, tooling does not support correct validations and fails.'
 ```
 
 ## AzureResourceSchema
