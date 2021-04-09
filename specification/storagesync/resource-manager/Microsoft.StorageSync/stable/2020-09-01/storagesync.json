@@ -3218,6 +3218,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageSyncServiceProperties",
           "description": "Storage Sync Service properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       }
     },
@@ -3234,6 +3239,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SyncGroupProperties",
           "description": "SyncGroup properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       }
     },
@@ -3250,6 +3260,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CloudEndpointProperties",
           "description": "Cloud Endpoint properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       }
     },
@@ -3414,12 +3429,14 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 100,
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days."
@@ -3544,6 +3561,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServerEndpointProperties",
           "description": "Server Endpoint properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       }
     },
@@ -3560,6 +3582,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RegisteredServerProperties",
           "description": "RegisteredServer properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       }
     },
@@ -3893,6 +3920,7 @@
         },
         "pauseWaitForSyncDrainTimePeriodInSeconds": {
           "type": "integer",
+          "format": "int64",
           "description": "Pre Restore pause wait for sync drain time period in seconds."
         }
       }
@@ -4062,6 +4090,7 @@
         },
         "storageSyncServiceStatus": {
           "type": "integer",
+          "format": "int32",
           "description": "Storage Sync service status.",
           "readOnly": true
         },
@@ -4188,6 +4217,7 @@
         },
         "serverManagementErrorCode": {
           "type": "integer",
+          "format": "int64",
           "description": "Registered Server Management Error Code",
           "readOnly": true
         },
@@ -4333,12 +4363,14 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 100,
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days."
@@ -4371,12 +4403,14 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 100,
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days."
