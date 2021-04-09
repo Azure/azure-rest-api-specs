@@ -96,6 +96,7 @@
           "Instances"
         ],
         "operationId": "Instances_Create",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -134,7 +135,13 @@
             }
           },
           "201": {
-            "description": "InProgress. The operation is still in progress.",
+            "description": "InProgress. The resource will be created asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DFPInstance"
+            }
+          },
+          "202": {
+            "description": "InProgress. Accepted. The resource will be updated asynchronously.",
             "schema": {
               "$ref": "#/definitions/DFPInstance"
             }
@@ -158,6 +165,7 @@
           "Instances"
         ],
         "operationId": "Instances_Delete",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -183,6 +191,9 @@
           "200": {
             "description": "OK."
           },
+          "202": {
+            "description": "Accepted. The resource will be deleted asynchronously."
+          },
           "204": {
             "description": "No Content."
           },
@@ -205,6 +216,7 @@
           "Instances"
         ],
         "operationId": "Instances_Update",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -238,6 +250,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DFPInstance"
+            }
+          },
+          "202": {
+            "description": "Accepted. The resource will be updated asynchronously.",
             "schema": {
               "$ref": "#/definitions/DFPInstance"
             }
