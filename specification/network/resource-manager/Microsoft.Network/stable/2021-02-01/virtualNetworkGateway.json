@@ -2802,10 +2802,6 @@
           "type": "string",
           "description": "MAS FIJI customer vnet resource id. VirtualNetworkGateway of type local gateway is associated with the customer vnet."
         },
-        "virtualNetworkExtendedLocation": {
-          "description": "The extended location of type local virtual network gateway.",
-          "$ref": "./network.json#/definitions/ExtendedLocation"
-        },
         "natRules": {
           "type": "array",
           "items": {
@@ -3216,6 +3212,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat",
           "description": "Properties of the virtual network gateway."
+        },
+        "extendedLocation": {
+          "description": "The extended location of type local virtual network gateway.",
+          "$ref": "./network.json#/definitions/ExtendedLocation"
         },
         "etag": {
           "readOnly": true,
