@@ -909,10 +909,10 @@
       "description": "The set of keys which can be used to access the Maps REST APIs. Two keys are provided for key rotation without interruption.",
       "type": "object",
       "properties": {
-        "id": {
+        "primaryKeyLastUpdated": {
           "type": "string",
           "readOnly": true,
-          "description": "The full Azure resource identifier of the Maps Account."
+          "description": "The last updated date and time of the primary key."
         },
         "primaryKey": {
           "type": "string",
@@ -923,6 +923,11 @@
           "type": "string",
           "readOnly": true,
           "description": "The secondary key for accessing the Maps REST APIs."
+        },
+        "secondaryKeyLastUpdated": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The last updated date and time of the secondary key."
         }
       }
     },
