@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-synapse-2021-03-01
   - tag: schema-synapse-2020-12-01
   - tag: schema-synapse-2020-04-01-preview
   - tag: schema-synapse-2019-06-01-preview
@@ -13,6 +14,29 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-synapse-2021-03-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-synapse-2021-03-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Synapse/stable/2021-03-01/bigDataPool.json
+  - Microsoft.Synapse/stable/2021-03-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-03-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-03-01/integrationRuntime.json
+  - Microsoft.Synapse/stable/2021-03-01/keys.json
+  - Microsoft.Synapse/stable/2021-03-01/library.json
+  - Microsoft.Synapse/stable/2021-03-01/operations.json
+  - Microsoft.Synapse/stable/2021-03-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-03-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-03-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-03-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-03-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-03-01/workspace.json
+
+```
 
 ### Tag: schema-synapse-2020-12-01 and azureresourceschema
 

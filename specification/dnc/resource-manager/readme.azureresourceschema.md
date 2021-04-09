@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-delegatednetwork-2021-03-15
+  - tag: schema-delegatednetwork-2020-08-08-preview
 
 ```
 
@@ -24,6 +25,7 @@ input-file:
   - Microsoft.DelegatedNetwork/stable/2021-03-15/delegatedSubnets.json
   - Microsoft.DelegatedNetwork/stable/2021-03-15/operations.json
   - Microsoft.DelegatedNetwork/stable/2021-03-15/common-types.json
+
 ```
 
 ### Tag: schema-delegatednetwork-2020-08-08-preview and azureresourceschema
@@ -38,4 +40,5 @@ input-file:
   - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/delegatedSubnets.json
   - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/operations.json
   - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/common-types.json
+
 ```

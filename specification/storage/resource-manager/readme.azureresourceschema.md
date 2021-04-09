@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-storage-2021-02-01
   - tag: schema-storage-2021-01-01
   - tag: schema-storage-2020-08-01-preview
   - tag: schema-storage-2019-06-01
@@ -25,6 +26,21 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-storage-2021-02-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-storage-2021-02-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Storage/stable/2021-02-01/storage.json
+  - Microsoft.Storage/stable/2021-02-01/blob.json
+  - Microsoft.Storage/stable/2021-02-01/file.json
+  - Microsoft.Storage/stable/2021-02-01/queue.json
+  - Microsoft.Storage/stable/2021-02-01/table.json
+
+```
 
 ### Tag: schema-storage-2021-01-01 and azureresourceschema
 

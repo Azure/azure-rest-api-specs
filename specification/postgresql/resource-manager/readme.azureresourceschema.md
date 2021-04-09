@@ -60,6 +60,7 @@ input-file:
   - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
   - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
   - Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
+  - Microsoft.DBforPostgreSQL/stable/2018-06-01/PerformanceRecommendations.json
 
 ```
 
