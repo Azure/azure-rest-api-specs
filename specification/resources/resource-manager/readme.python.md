@@ -35,7 +35,7 @@ batch:
   - tag: package-policy-2020-09
   - tag: package-policy-2019-09
   - tag: package-policy-2019-06
-  - tag: package-policy-2019-01  
+  - tag: package-policy-2019-01
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2017-06
@@ -60,8 +60,8 @@ batch:
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
   - tag: package-deploymentscripts-2020-10
-  - tag: package-deploymentscripts-2019-10-preview  
-  - tag: package-templatespecs-2019-06-preview 
+  - tag: package-deploymentscripts-2019-10-preview
+  - tag: package-templatespecs-2019-06-preview
 ```
 
 ```yaml $(multiapi) && $(track2)
@@ -78,7 +78,7 @@ batch:
   - tag: package-policy-2020-09
   - tag: package-policy-2019-09
   - tag: package-policy-2019-06
-  - tag: package-policy-2019-01  
+  - tag: package-policy-2019-01
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2017-06
@@ -106,13 +106,14 @@ batch:
   - tag: package-subscriptions-2016-06
   - multiapiscript-subscriptions: true
   - tag: package-deploymentscripts-2020-10
-  - tag: package-deploymentscripts-2019-10-preview  
+  - tag: package-deploymentscripts-2019-10-preview
   - multiapiscript-deploymentscripts: true
-  - tag: package-templatespecs-2019-06-preview 
+  - tag: package-templatespecs-2019-06-preview
   - multiapiscript-templatespecs: true
 ```
 
 ```yaml $(multiapiscript-features)
+package-name: azure-mgmt-resource#features
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features
 clear-output-folder: false
@@ -120,6 +121,7 @@ perform-load: false
 ```
 
 ```yaml $(multiapiscript-policy)
+package-name: azure-mgmt-resource#policy
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy
 clear-output-folder: false
@@ -127,6 +129,7 @@ perform-load: false
 ```
 
 ```yaml $(multiapiscript-resources)
+package-name: azure-mgmt-resource#resources
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources
 clear-output-folder: false
@@ -134,6 +137,7 @@ perform-load: false
 ```
 
 ```yaml $(multiapiscript-subscriptions)
+package-name: azure-mgmt-resource#subscriptions
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions
 clear-output-folder: false
@@ -141,6 +145,7 @@ perform-load: false
 ```
 
 ```yaml $(multiapiscript-deploymentscripts)
+package-name: azure-mgmt-resource#deploymentscripts
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentscripts
 clear-output-folder: false
@@ -149,6 +154,7 @@ perform-load: false
 
 
 ```yaml $(multiapiscript-templatespecs)
+package-name: azure-mgmt-resource#templatespecs
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs
 clear-output-folder: false
@@ -157,6 +163,7 @@ perform-load: false
 
 
 ```yaml $(multiapiscript-locks)
+package-name: azure-mgmt-resource#locks
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/locks
 clear-output-folder: false
@@ -164,6 +171,7 @@ perform-load: false
 ```
 
 ```yaml $(multiapiscript-links)
+package-name: azure-mgmt-resource#links
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/links
 clear-output-folder: false
