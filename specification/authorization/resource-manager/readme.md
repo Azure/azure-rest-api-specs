@@ -77,6 +77,8 @@ directive:
     reason: Preview versions still in use
   - suppress: RequiredSystemDataInNewApiVersions
     reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
+  - suppress: RequiredReadOnlySystemData
+    reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
   - suppress: XmsPathsMustOverloadPaths
     from: authorization-RoleDefinitionsCalls.json
     reason: x-ms-paths extension was previously required. Suppressing so that we don't have to make changes to existing APIs.
@@ -105,6 +107,7 @@ input-file:
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+- Microsoft.Authorization/preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2020-08-01-preview
