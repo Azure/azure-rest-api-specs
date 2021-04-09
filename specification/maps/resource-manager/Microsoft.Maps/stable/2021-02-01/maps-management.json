@@ -242,8 +242,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null,
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -285,8 +284,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null,
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -418,8 +416,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null,
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -455,8 +452,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null,
-          "itemName": "value"
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -528,7 +524,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Creator is updated with the provided parameters.",
+            "description": "The Creator is updated with the provided p.",
             "schema": {
               "$ref": "#/definitions/Creator"
             }
@@ -826,6 +822,10 @@
           "items": {
             "$ref": "#/definitions/MapsAccount"
           }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
         }
       }
     },
@@ -840,6 +840,10 @@
           "items": {
             "$ref": "#/definitions/Creator"
           }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
         }
       }
     },
@@ -1075,7 +1079,7 @@
       "description": "Additional Map account properties",
       "type": "object",
       "properties": {
-        "x-ms-client-id": {
+        "uniqueId": {
           "description": "A unique identifier for the maps account",
           "type": "string",
           "readOnly": true
@@ -1104,7 +1108,9 @@
         "storageUnits": {
           "description": "The storage units to be allocated. Integer values from 1 to 100, inclusive.",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 100
         }
       },
       "required": [
