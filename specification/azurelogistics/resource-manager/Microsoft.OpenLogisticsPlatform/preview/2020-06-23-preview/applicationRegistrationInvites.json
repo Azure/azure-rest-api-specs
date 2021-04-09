@@ -1,0 +1,164 @@
+{
+  "x-generator": "NSwag v13.2.5.0 (NJsonSchema v10.1.7.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "OSCPControlPlaneServiceAPI",
+    "description": "REST APIs for OSCP Control Plane Service",
+    "version": "2020-06-23-preview"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.OpenLogisticsPlatform/applicationRegistrationInvites": {
+      "get": {
+        "tags": [
+          "ApplicationRegistrationInvite"
+        ],
+        "operationId": "ApplicationRegistrationInvite_List",
+        "x-ms-examples": {
+          "Share Get": {
+            "$ref": "./examples/ApplicationRegistrationInvite_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationManifestIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationRegistrationInviteList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationRegistrationInvite": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "Name to display for application to register"
+            },
+            "applicationManifestId": {
+              "type": "string",
+              "description": "Manifest id for application to register"
+            },
+            "parameters": {
+              "type": "object",
+              "description": "Parameters required by application to register, should match parameters in application manifest",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "resources": {
+              "type": "array",
+              "description": "List of resources required by application to register, e.g. share. should match resources in application manifest",
+              "items": {
+                "$ref": "#/definitions/ApplicationRegistrationInviteResource"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ApplicationRegistrationInviteResource": {
+      "type": "object",
+      "description": "A resources required by the application to register, e.g. share. should match resources in application manifest",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationRegistrationInviteResourceShareProperties"
+        }
+      }
+    },
+    "ApplicationRegistrationInviteResourceShareProperties": {
+      "type": "object",
+      "description": "Application share resource information for application registration invite.",
+      "properties": {
+        "shareId": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationRegistrationInviteList": {
+      "description": "The list of ApplicationRegistrationInvite resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of ApplicationRegistration resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of ApplicationRegistrationInvites.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationRegistrationInvite"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApplicationManifestIdParameter": {
+      "type": "string",
+      "name": "application-manifest-id",
+      "description": "The manifest Id of application. This is the Id of your application manifest.",
+      "in": "query",
+      "required": true,
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

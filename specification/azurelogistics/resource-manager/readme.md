@@ -16,6 +16,8 @@ To see additional help and options, run:
 
 > `autorest --help`
 
+For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
+
 ---
 
 ## Configuration
@@ -42,6 +44,11 @@ input-file:
   - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/shareSubscriptions.json
   - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/shareInvites.json
   - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/applicationRegistrations.json
+  - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/eventGridFilters.json  
+  - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/applicationRegistrationInvites.json
+# Needed when there is more than one input file
+override-info:
+  title: LogisticsManagementClient
 ```
 
 ---
@@ -59,6 +66,12 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-java
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js azurelogistics/resource-manager
+  - repo: azure-cli-extensions
 ```
 
 ## Python
@@ -73,7 +86,7 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Typescript
+## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
@@ -84,3 +97,7 @@ See configuration in [readme.az.md](./readme.az.md)
 ## Cli
 
 See configuration in [readme.cli.md](./readme.cli.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

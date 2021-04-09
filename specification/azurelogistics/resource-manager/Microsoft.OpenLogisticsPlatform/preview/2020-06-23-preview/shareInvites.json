@@ -55,7 +55,7 @@
             "x-nullable": false,
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ShareInvitesErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -110,6 +110,9 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "type": "object",
           "properties": {
@@ -155,25 +158,6 @@
         }
       }
     },
-    "ShareInvitesErrorObject": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "ShareInvitesErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ShareInvitesErrorObject"
-        }
-      }
-    },
     "UnavailableReason": {
       "type": "string",
       "enum": [
@@ -188,16 +172,8 @@
         "name": "UnavailableReason",
         "modelAsString": false
       },
-      "description": "Reason for unavailability of the service."
+      "description": "Specifies the reason for the unavailability of the service."
     }
   },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    }
-  }
+  "parameters": {}
 }

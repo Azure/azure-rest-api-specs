@@ -48,21 +48,21 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -88,16 +88,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "workspace",
@@ -110,9 +110,16 @@
           }
         ],
         "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
           "201": {
             "x-nullable": false,
-            "description": "Created.",
+            "description": "Returned when the operation is created.",
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
@@ -121,7 +128,7 @@
             "x-nullable": false,
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -134,7 +141,6 @@
         "tags": [
           "Workspace"
         ],
-        "description": "Deletes a workspace for given workspace name.",
         "operationId": "Workspace_Delete",
         "x-ms-examples": {
           "Workspace Delete": {
@@ -143,33 +149,33 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK."
+            "description": "Returned when the operation is successful."
           },
           "202": {
-            "description": "Accepted."
+            "description": "Returned when the operation is accepted."
           },
           "204": {
-            "description": "No content."
+            "description": "Returned when the operation returns no content."
           },
           "default": {
             "x-nullable": false,
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -191,13 +197,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -214,7 +220,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "Returned when the operation is successful.",
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
@@ -223,7 +229,7 @@
             "x-nullable": false,
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -243,19 +249,19 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "x-nullable": false,
-            "description": "OK.",
+            "description": "Returned when the operation is successful.",
             "schema": {
               "$ref": "#/definitions/WorkspaceList"
             }
@@ -264,7 +270,7 @@
             "x-nullable": false,
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -284,16 +290,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "x-nullable": false,
-            "description": "OK.",
+            "description": "Returned when the operation is successful.",
             "schema": {
               "$ref": "#/definitions/WorkspaceList"
             }
@@ -302,7 +308,7 @@
             "x-nullable": false,
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -319,13 +325,13 @@
             "$ref": "./examples/Namespaces_CheckNameAvailability.json"
           }
         },
-        "description": "Checks namespace availability.",
+        "description": "Check the given Namespace name availability.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "nameAvailabilityRequest",
@@ -334,12 +340,12 @@
             "schema": {
               "$ref": "#/definitions/NameAvailabilityRequest"
             },
-            "description": "Parameters to check availability of a Namespace."
+            "description": "Parameters to check the availability of the given Namespace name"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "Check availability returned successfully.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
@@ -347,7 +353,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -371,33 +377,40 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Region name the operation will lookup."
+            "description": "The region name which the operation will lookup into."
           },
           {
             "name": "operationStatusId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Operation status identifier."
+            "description": "The target operation status Id."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK. The operation completed.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
-            "description": "Accepted.",
+            "description": "Accepted. The operation is ongoing.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -417,54 +430,22 @@
         "Failed"
       ]
     },
-    "Resource": {
-      "description": "Azure Open Supply Chain Platform top level resource.",
-      "properties": {
-        "id": {
-          "description": "Azure resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Azure resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Azure resource type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Location of the resource.",
-          "type": "string",
-          "readOnly": false
-        },
-        "etag": {
-          "description": "The etag",
-          "type": "string",
-          "readOnly": false
-        },
-        "tags": {
-          "description": "resource tags.",
-          "type": "object",
-          "readOnly": false,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "Workspace": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "Workspace resource type.",
       "properties": {
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
         "properties": {
           "type": "object",
           "properties": {
@@ -545,42 +526,6 @@
         }
       }
     },
-    "ErrorObject": {
-      "type": "object",
-      "description": "Defines the structure of an Azure Open Supply Chain Platform error.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Defines the structure of an Azure Open Supply Chain Platform error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorObject",
-          "description": "Properties of the Error Response."
-        }
-      }
-    },
-    "CheckNameAvailabilityParameter": {
-      "description": "Parameters supplied to check Namespace availability.",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name to check the namespace name availability"
-        }
-      }
-    },
     "UnavailableReason": {
       "type": "string",
       "enum": [
@@ -595,18 +540,19 @@
         "name": "UnavailableReason",
         "modelAsString": false
       },
-      "description": "Reason for unavailability of the service."
+      "description": "Specifies the reason for the unavailability of the service."
     },
     "CheckNameAvailabilityResult": {
+      "type": "object",
       "properties": {
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "Message explaining the Reason value in more detail."
+          "description": "The detailed info regarding the reason associated with the Namespace."
         },
         "nameAvailable": {
           "type": "boolean",
-          "description": "Indicates namespace availability; true - if available; false - if not available."
+          "description": "Value indicating Namespace is availability, true if the Namespace is available; otherwise, false."
         },
         "reason": {
           "$ref": "#/definitions/UnavailableReason",
@@ -614,121 +560,9 @@
         }
       },
       "description": "The Result of the CheckNameAvailability operation"
-    },
-    "OperationStatus": {
-      "description": "The status of operation.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Operation Status identifier."
-        },
-        "fullyQualifiedResourceId": {
-          "type": "string",
-          "description": "The resource identifier."
-        },
-        "name": {
-          "type": "string",
-          "description": "The operation name."
-        },
-        "operationId": {
-          "type": "string",
-          "description": "The operation Id."
-        },
-        "startTime": {
-          "type": "string",
-          "description": "The start time of the operation."
-        },
-        "endTime": {
-          "type": "string",
-          "description": "The end time of the operation."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the operation."
-        },
-        "percentComplete": {
-          "type": "string",
-          "description": "The percentage completion."
-        },
-        "error": {
-          "type": "object",
-          "description": "The error detail of the operation if any.",
-          "$ref": "#/definitions/ExtendedErrorInfo"
-        },
-        "operations": {
-          "description": "The error message details",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationStatus"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ExtendedErrorInfo": {
-      "type": "object",
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "The error message details",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExtendedErrorInfo"
-          },
-          "readOnly": true
-        },
-        "additionalInfo": {
-          "description": "Additional error information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TypedErrorInfo"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "TypedErrorInfo": {
-      "description": "Error type details.",
-      "properties": {
-        "type": {
-           "description": "Type of error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "info": {
-          "description": "The details of the error type.",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "An unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "WorkspaceNameParameter": {
       "type": "string",
       "name": "workspaceName",
@@ -736,13 +570,6 @@
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }

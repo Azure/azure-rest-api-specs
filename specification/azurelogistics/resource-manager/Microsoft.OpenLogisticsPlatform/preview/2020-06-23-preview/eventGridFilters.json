@@ -31,59 +31,15 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/applicationRegistrations/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/eventGridFilters/{eventGridFilterName}": {
       "get": {
         "tags": [
-          "ApplicationRegistration"
+          "EventGridFilter"
         ],
-        "operationId": "ApplicationRegistration_List",
+        "operationId": "EventGridFilter_Get",
         "x-ms-examples": {
-          "ApplicationRegistration List": {
-            "$ref": "./examples/ApplicationRegistration_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ApplicationRegistrationList"
-            }
-          },
-          "default": {
-            "description": "",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/applicationRegistrations/{applicationRegistrationName}": {
-      "get": {
-        "tags": [
-          "ApplicationRegistration"
-        ],
-        "operationId": "ApplicationRegistration_Get",
-        "x-ms-examples": {
-          "ApplicationRegistration Get": {
-            "$ref": "./examples/ApplicationRegistration_Get.json"
+          "EventGridFilter Get": {
+            "$ref": "./examples/EventGridFilter_Get.json"
           }
         },
         "parameters": [
@@ -97,7 +53,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApplicationRegistrationNameParameter"
+            "$ref": "#/parameters/EventGridFilterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -107,7 +63,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ApplicationRegistration"
+              "$ref": "#/definitions/EventGridFilter"
             }
           },
           "default": {
@@ -120,12 +76,12 @@
       },
       "put": {
         "tags": [
-          "ApplicationRegistration"
+          "EventGridFilter"
         ],
-        "operationId": "ApplicationRegistration_Put",
+        "operationId": "EventGridFilter_Put",
         "x-ms-examples": {
-          "ApplicationRegistration Put": {
-            "$ref": "./examples/ApplicationRegistration_Put.json"
+          "EventGridFilter Put": {
+            "$ref": "./examples/EventGridFilter_Put.json"
           }
         },
         "parameters": [
@@ -139,17 +95,17 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApplicationRegistrationNameParameter"
+            "$ref": "#/parameters/EventGridFilterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "ApplicationRegistration",
+            "name": "eventGridFilter",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApplicationRegistration"
+              "$ref": "#/definitions/EventGridFilter"
             }
           }
         ],
@@ -158,7 +114,7 @@
             "x-nullable": false,
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ApplicationRegistration"
+              "$ref": "#/definitions/EventGridFilter"
             }
           },
           "default": {
@@ -173,12 +129,12 @@
       },
       "delete": {
         "tags": [
-          "ApplicationRegistration"
+          "EventGridFilter"
         ],
-        "operationId": "ApplicationRegistration_Delete",
+        "operationId": "EventGridFilter_Delete",
         "x-ms-examples": {
-          "ApplicationRegistration Delete": {
-            "$ref": "./examples/ApplicationRegistration_Delete.json"
+          "EventGridFilter Delete": {
+            "$ref": "./examples/EventGridFilter_Delete.json"
           }
         },
         "parameters": [
@@ -192,7 +148,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApplicationRegistrationNameParameter"
+            "$ref": "#/parameters/EventGridFilterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -214,10 +170,56 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/eventGridFilters": {
+      "get": {
+        "tags": [
+          "EventGridFilter"
+        ],
+        "operationId": "EventGridFilter_List",
+        "x-ms-examples": {
+          "EventGridFilter List": {
+            "$ref": "./examples/EventGridFilter_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterList"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "ApplicationRegistration": {
+    "EventGridFilter": {
       "type": "object",
       "allOf": [
         {
@@ -231,89 +233,70 @@
         "properties": {
           "type": "object",
           "properties": {
-            "displayName": {
-              "type": "string",
-              "description": "Name to display for application to register"
-            },
-            "applicationManifestId": {
-              "type": "string",
-              "description": "Manifest id for application to register"
-            },
-            "parameters": {
-              "type": "object",
-              "description": "Parameters required by application to register, should match parameters in application manifest",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "resources": {
-              "type": "array",
-              "description": "List of resources required by application to register, e.g. share. should match resources in application manifest",
-              "items": {
-                "$ref": "#/definitions/ApplicationRegistrationResource"
-              }
+            "filter": {
+              "$ref": "#/definitions/Filter"
             },
             "provisioningState": {
               "description": "The provisioning state of the resource.",
               "readOnly": true,
-              "$ref": "#/definitions/ApplicationRegistrationProvisioningState"
+              "$ref": "#/definitions/EventGridFilterProvisioningState"
             }
           }
         }
       }
     },
-    "ApplicationRegistrationResource": {
+    "Filter": {
       "type": "object",
-      "description": "A resources required by application to register, e.g. share. should match resources in application manifest",
+      "description": "Configuration of the EventGrid filter",
       "properties": {
-        "type": {
+        "subjectBeginsWith": {
+          "description": "Filter configuration: Removes all events with a subject that does not start with this string",
           "type": "string"
         },
-        "properties": {
-          "$ref": "#/definitions/ApplicationRegistrationResourceShareProperties"
-        }
-      }
-    },
-    "ApplicationRegistrationResourceShareProperties": {
-      "type": "object",
-      "description": "The share-specific properties for shares affiliated with application registrations",
-      "properties": {
-        "accessAssignments": {
+        "subjectEndsWith": {
+          "description": "Filter configuration: Removes all events with a subject that does not end with this string",
+          "type": "string"
+        },
+        "includedEventTypes": {
+          "description": "Event types subscribed",
           "type": "array",
           "items": {
-            "$ref": "shares.json#/definitions/AccessAssignment"
+            "type": "string"
           }
         }
       }
     },
-    "ApplicationRegistrationList": {
-      "description": "The list of ApplicationRegistration resources.",
+    "EventGridFilterList": {
+      "description": "The list of event grid filter resources.",
       "type": "object",
       "properties": {
         "nextLink": {
-          "description": "The link used to get the next page of ApplicationRegistration resources list.",
+          "description": "The link used to get the next page of event grid filter resources list.",
           "type": "string"
         },
         "value": {
-          "description": "The list of ApplicationRegistrations.",
+          "description": "The list of event grid filters.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApplicationRegistration"
+            "$ref": "#/definitions/EventGridFilter"
           }
         }
       }
     },
-    "ApplicationRegistrationProvisioningState": {
+    "EventGridFilterProvisioningState": {
       "type": "string",
       "readOnly": true,
       "description": "The current provisioning state.",
       "enum": [
-        "Accepted",
         "Succeeded",
-        "Creating",
-        "Deleting",
-        "Failed"
-      ]
+        "Failed",
+        "Canceled",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
@@ -325,10 +308,10 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "ApplicationRegistrationNameParameter": {
+    "EventGridFilterNameParameter": {
       "type": "string",
-      "name": "applicationRegistrationName",
-      "description": "Application Registration Name",
+      "name": "eventGridFilterName",
+      "description": "The name of resource. This is the name of your Azure Supply Chain Service's workspace.",
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"

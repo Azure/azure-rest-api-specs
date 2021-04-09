@@ -8,6 +8,7 @@ typescript:
   azure-arm: true
   package-name: "@azure/logistics"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/logistics"
+  payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
 ```
