@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-eventhub-2021-01-01-preview
   - tag: schema-eventhub-2018-01-01-preview
   - tag: schema-eventhub-2017-04-01
   - tag: schema-eventhub-2015-08-01
@@ -14,6 +15,24 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-eventhub-2021-01-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-eventhub-2021-01-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.EventHub/preview/2021-01-01-preview/namespaces-preview.json
+  - Microsoft.EventHub/preview/2021-01-01-preview/operations.json
+  - Microsoft.EventHub/preview/2021-01-01-preview/eventhubs.json
+  - Microsoft.EventHub/preview/2021-01-01-preview/disasterRecoveryConfigs.json
+  - Microsoft.EventHub/preview/2021-01-01-preview/networkrulessets-preview.json
+  - Microsoft.EventHub/preview/2021-01-01-preview/AuthorizationRules.json
+  - Microsoft.EventHub/preview/2021-01-01-preview/consumergroups.json
+  - Microsoft.EventHub/preview/2021-01-01-preview/CheckNameAvailability.json
+
+```
 
 ### Tag: schema-eventhub-2018-01-01-preview and azureresourceschema
 

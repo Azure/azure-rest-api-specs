@@ -38,7 +38,6 @@ input-file:
 
 ```
 
-
 ### Tag: schema-netapp-2020-11-01 and azureresourceschema
 
 ``` yaml $(tag) == 'schema-netapp-2020-11-01' && $(azureresourceschema)
