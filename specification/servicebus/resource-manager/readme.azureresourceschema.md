@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-servicebus-2021-01-01-preview
   - tag: schema-servicebus-2018-01-01-preview
   - tag: schema-servicebus-2017-04-01
   - tag: schema-servicebus-2015-08-01
@@ -13,6 +14,27 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-servicebus-2021-01-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-servicebus-2021-01-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ServiceBus/preview/2021-01-01-preview/namespace-preview.json
+  - Microsoft.ServiceBus/preview/2021-01-01-preview/operations.json
+  - Microsoft.ServiceBus/preview/2021-01-01-preview/DisasterRecoveryConfig.json
+  - Microsoft.ServiceBus/preview/2021-01-01-preview/migrationconfigs.json
+  - Microsoft.ServiceBus/preview/2021-01-01-preview/networksets.json
+  - Microsoft.ServiceBus/preview/2021-01-01-preview/AuthorizationRules.json
+  - Microsoft.ServiceBus/preview/2021-01-01-preview/Queue.json
+  - Microsoft.ServiceBus/preview/2021-01-01-preview/topics.json
+  - Microsoft.ServiceBus/preview/2021-01-01-preview/Rules.json
+  - Microsoft.ServiceBus/preview/2021-01-01-preview/subscriptions.json
+  - Microsoft.ServiceBus/preview/2021-01-01-preview/CheckNameAvailability.json
+
+```
 
 ### Tag: schema-servicebus-2018-01-01-preview and azureresourceschema
 
