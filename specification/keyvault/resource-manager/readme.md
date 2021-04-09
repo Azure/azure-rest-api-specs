@@ -42,6 +42,17 @@ input-file:
   - Microsoft.KeyVault/preview/2021-04-01-preview/providers.json
   - Microsoft.KeyVault/preview/2021-04-01-preview/secrets.json
 ```
+### Tag: package-preview-2020-04-only
+
+These settings apply only when `--tag=package-preview-2020-04-only` is specified on the command line.
+This tag is for the development of preview features related to managed HSM of Azure CLI and PowerShell.
+
+``` yaml $(tag) == 'package-preview-2020-04-only'
+input-file:
+  - Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
+```
+
+
 ### Tag: package-preview-2020-04
 
 These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.

@@ -24,7 +24,7 @@ batch:
   - tag: package-2019-09
   - tag: package-2018-02
   - tag: package-2016-10
-  - tag: package-preview-2020-04
+  - tag: package-preview-2020-04-only
   - tag: package-preview-2021-04
   - multiapiscript: true
 ```
@@ -43,11 +43,11 @@ namespace: azure.mgmt.keyvault.v2021_04_01_preview
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2021_04_01_preview
 ```
 
-### Tag: package-preview-2020-04 and python
+### Tag: package-preview-2020-04-only and python
 
-These settings apply only when `--tag=package-preview-2020-04 --python` is specified on the command line.
+These settings apply only when `--tag=package-preview-2020-04-only --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2020-04'
+``` yaml $(tag) == 'package-preview-2020-04-only'
 namespace: azure.mgmt.keyvault.v2020_04_01_preview
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2020_04_01_preview
 ```
