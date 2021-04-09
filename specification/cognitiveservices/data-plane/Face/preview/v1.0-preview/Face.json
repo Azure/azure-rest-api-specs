@@ -18,7 +18,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}",
+    "hostTemplate": "{Endpoint}/face/v1.0-preview",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -26,7 +26,6 @@
       }
     ]
   },
-  "basePath": "/face/v1.0-preview",
   "paths": {
     "/findsimilars": {
       "post": {
@@ -2819,6 +2818,7 @@
           "PersonDirectory"
         ],
         "summary": "Retrieve list of person information in person directory.",
+        "operationId": "PersonDirectory_GetPersons",
         "produces": [
           "application/json"
         ],
@@ -2857,6 +2857,7 @@
           "PersonDirectory"
         ],
         "summary": "Creates a new person in person directory.",
+        "operationId": "PersonDirectory_CreatePerson",
         "consumes": [
           "application/json"
         ],
@@ -2901,6 +2902,7 @@
           "PersonDirectory"
         ],
         "summary": "Update name or userData of a person.",
+        "operationId": "PersonDirectory_UpdatePerson",
         "consumes": [
           "application/json"
         ],
@@ -2946,6 +2948,7 @@
           "PersonDirectory"
         ],
         "summary": "Delete an existing person from person directory. \r\nThe persistedFaceId, userData, person name and face feature(s) in the person entry will all be deleted.",
+        "operationId": "PersonDirectory_DeletePerson",
         "produces": [
           "application/json"
         ],
@@ -2977,6 +2980,7 @@
           "PersonDirectory"
         ],
         "summary": "Retrieve a person's name and userData, and the persisted faceIds representing the registered person face feature(s).",
+        "operationId": "PersonDirectory_GetPerson",
         "produces": [
           "application/json"
         ],
@@ -3014,6 +3018,7 @@
           "PersonDirectory"
         ],
         "summary": "Add a new face to person.",
+        "operationId": "PersonDirectory_AddPersonFace",
         "produces": [
           "application/json"
         ],
@@ -3083,6 +3088,7 @@
           "PersonDirectory"
         ],
         "summary": "Retrieve person face information. The persisted person face is specified by its personId and persistedFaceId.",
+        "operationId": "PersonDirectory_GetPersonFaces",
         "produces": [
           "application/json"
         ],
@@ -3130,6 +3136,7 @@
           "PersonDirectory"
         ],
         "summary": "Delete an existing person face from person directory. \r\nThe persistedFaceId, userData, and face feature in the person entry will all be deleted.",
+        "operationId": "PersonDirectory_DeletePersonFace",
         "produces": [
           "application/json"
         ],
@@ -3182,6 +3189,7 @@
           "PersonDirectory"
         ],
         "summary": "Retrieve person face information. The persisted person face is specified by its personId and persistedFaceId.",
+        "operationId": "PersonDirectory_GetPersonFace",
         "produces": [
           "application/json"
         ],
@@ -3234,6 +3242,7 @@
           "PersonDirectory"
         ],
         "summary": "Update the data of a person face.",
+        "operationId": "PersonDirectory_UpdatePersonFace",
         "consumes": [
           "application/json"
         ],
@@ -3297,6 +3306,7 @@
           "PersonDirectory"
         ],
         "summary": "Creates a new dynamic person group with specified dynamicPersonGroupId, name, and user-provided userData.\r\nA dynamic person group is a container that references persons.\r\nAfter creation, use \"DynamicPersonGroup - Update\" to add/remove persons into the search space.\r\nDynamicPersonGroup and UserData will be stored on server until DynamicPersonGroup Delete is called.",
+        "operationId": "PersonDirectory_CreateDynamicPersonGroup",
         "consumes": [
           "application/json"
         ],
@@ -3347,6 +3357,7 @@
           "PersonDirectory"
         ],
         "summary": "Updates an existing dynamic person group with specified dynamicPersonGroupId, name, and user-provided userData.",
+        "operationId": "PersonDirectory_UpdateDynamicPersonGroup",
         "consumes": [
           "application/json"
         ],
@@ -3400,6 +3411,7 @@
           "PersonDirectory"
         ],
         "summary": "Get metadata on a dynamic person group.",
+        "operationId": "PersonDirectory_GetDynamicPersonGroup",
         "produces": [
           "application/json"
         ],
@@ -3438,6 +3450,7 @@
           "PersonDirectory"
         ],
         "summary": "Delete an existing dynamic person group. \r\nNote that Persons are not deleted with this operation. To delete person call Person Delete.",
+        "operationId": "PersonDirectory_DeleteDynamicPersonGroup",
         "produces": [
           "application/json"
         ],
@@ -3478,6 +3491,7 @@
           "PersonDirectory"
         ],
         "summary": "Retrieve list of persons referenced in a given DynamicPersonGroup person directory.",
+        "operationId": "PersonDirectory_ListDynamicPersonGroupPersons",
         "produces": [
           "application/json"
         ],
@@ -3530,6 +3544,7 @@
           "PersonDirectory"
         ],
         "summary": "Retrieve list of dynamic person groups in person directory.",
+        "operationId": "PersonDirectory_ListDynamicPersonGroups",
         "produces": [
           "application/json"
         ],
@@ -3575,6 +3590,7 @@
           "PersonDirectory"
         ],
         "summary": "List the dynamic person groups that a person has been referenced in.",
+        "operationId": "PersonDirectory_ListDynamicPersonGroupPersonReferences",
         "produces": [
           "application/json"
         ],
