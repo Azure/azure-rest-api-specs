@@ -4598,8 +4598,8 @@
     }
   },
   "definitions": {
-    "ResourceIdentityType": {
-      "description": "Defines values for ResourceIdentityType.",
+    "ResourceIdentityAssignment": {
+      "description": "Defines values for a ResourceIdentity's type.",
       "enum": [
         "SystemAssigned",
         "UserAssigned",
@@ -4608,7 +4608,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ResourceIdentityType",
+        "name": "ResourceIdentityAssignment",
         "modelAsString": true
       },
       "additionalProperties": false
@@ -4633,8 +4633,8 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "Defines values for ResourceIdentityType.",
-          "$ref": "#/definitions/ResourceIdentityType"
+          "description": "Defines values for a ResourceIdentity's type.",
+          "$ref": "#/definitions/ResourceIdentityAssignment"
         },
         "principalId": {
           "description": "Oid that used as the \"client_id\" when authenticating",
