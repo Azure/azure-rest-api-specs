@@ -18,7 +18,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/face/v1.0-preview",
+    "hostTemplate": "{Endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -26,6 +26,7 @@
       }
     ]
   },
+  "basePath": "/face/v1.0-preview",
   "paths": {
     "/findsimilars": {
       "post": {
@@ -4365,7 +4366,7 @@
           "pattern": "^[a-z0-9-_]+$"
         },
         "personIds": {
-          "description": "Array of personIds breated in PersonDirectory - PersonCreate. The valid number of personIds is between [1,30]. Providing a single '*' in the array identifies against all persons inside the PersonDirectory. Parameter personGroupId, largePersonGroupId, dynamicPersonGroupId, or personIds should not be provided at the same time.",
+          "description": "Array of personIds created in PersonDirectory - PersonCreate. The valid number of personIds is between [1,30]. Providing a single '*' in the array identifies against all persons inside the PersonDirectory. Parameter personGroupId, largePersonGroupId, dynamicPersonGroupId, or personIds should not be provided at the same time.",
           "type": "array",
           "maxItems": 30,
           "items": {
@@ -4461,7 +4462,7 @@
         "personId": {
           "type": "string",
           "format": "uuid",
-          "description": "Specify a certain person in a person group, a large person group, or person directory (if personGroupId and largePersonGroupId are ommited). personId is created in PersonGroup Person - Create or LargePersonGroup Person - Create or PersonDirectory - Create."
+          "description": "Specify a certain person in a person group, a large person group, or person directory (if personGroupId and largePersonGroupId are omitted). personId is created in PersonGroup Person - Create or LargePersonGroup Person - Create or PersonDirectory - Create."
         }
       }
     },
