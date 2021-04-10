@@ -3,7 +3,7 @@
   "info": {
     "title": "Cosmos DB",
     "description": "Azure Cosmos DB Database Service Resource Provider REST API",
-    "version": "2021-03-15"
+    "version": "2021-04-15"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -5230,6 +5230,15 @@
       },
       "description": "Error Response."
     },
+    "CloudError": {
+      "x-ms-external": true,
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
     "ErrorResponseUpdatedFormat": {
       "description": "An error response from the service.",
       "properties": {
@@ -6066,7 +6075,7 @@
           "readOnly": true,
           "description": "List of Private Endpoint Connections configured for the Cosmos DB account.",
           "items": {
-            "$ref": "../../stable/2021-03-15/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../stable/2021-04-15/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
           }
         },
         "enableMultipleWriteLocations": {
