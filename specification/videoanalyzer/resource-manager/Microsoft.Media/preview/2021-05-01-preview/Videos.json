@@ -5,7 +5,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Video Analyzer",
-    "description": "This swagger defines the Video Resource Provider APIs of Azure Video Analyzers",
+    "description": "Azure Video Analyzer resource provider API definition.",
     "version": "2021-05-01-preview"
   },
   "host": "management.azure.com",
@@ -27,29 +27,29 @@
     }
   },
   "definitions": {
-    "VideoPlayback": {
+    "VideoStreaming": {
       "properties": {
         "archiveBaseUrl": {
           "type": "string",
-          "description": "The video archive base url."
+          "description": "Video streaming base URL for the video archive. When present, archived video can be played through the Azure Video Analyzer player. Alternatively, this URL can be used with compatible DASH or HLS players by appending the following to the base URL:\r\n\r\n  - HLSv4:     /manifest(format=m3u8-aapl).m3u8\r\n  - HLS CMAF:  /manifest(format=m3u8-cmaf)\r\n  - DASH CMAF: /manifest(format=mpd-time-cmaf)\r\n\r\nMoreover, an ongoing video recording can be played in \"live mode\" with latencies which are approximately double of the chosen video segment length."
         }
       },
       "type": "object",
-      "description": "The video playback url."
+      "description": "Video streaming holds information about video streaming URLs."
     },
     "VideoFlags": {
       "properties": {
         "canStream": {
           "type": "boolean",
-          "description": "The video can be streamed."
+          "description": "Value indicating whether or not the video can be streamed. Only \"archive\" type videos can be streamed."
         },
         "hasData": {
           "type": "boolean",
-          "description": "The video has data."
+          "description": "Value indicating whether or not there has ever been data recorded or uploaded into the video. Newly created videos have this value set to false."
         },
         "isRecording": {
           "type": "boolean",
-          "description": "The video is recording."
+          "description": "Value indicating whether or not the video is currently being referenced be an active live pipeline. The fact that is being referenced, doesn't necessarily indicate that data is being received. For example, video recording may be gated on events or camera may not be accessible at the time."
         }
       },
       "type": "object",
@@ -58,107 +58,107 @@
         "hasData",
         "isRecording"
       ],
-      "description": "The video flags that represent the state of the video."
+      "description": "Video flags contain information about the available video actions and its dynamic properties based on the current video state."
     },
     "VideoMediaInfo": {
       "properties": {
         "segmentLength": {
           "type": "string",
-          "description": "The video segment length which is defined as a time period specified by a ISO8601 compliant format (i.e. PT30S = 30 seconds)."
+          "description": "Video segment length indicates the length of individual video files (segments) which are persisted to storage. Smaller segments provide lower archive playback latency but generate larger volume of storage transactions. Larger segments reduce the amount of storage transactions while increasing the archive playback latency. Value must be specified in ISO8601 duration format (i.e. \"PT30S\" equals 30 seconds) and can vary between 30 seconds to 5 minutes, in 30 seconds increments."
         }
       },
       "type": "object",
-      "description": "The video media info."
+      "description": "Contains information about the video and audio content."
     },
     "VideoPlaybackToken": {
       "properties": {
         "expirationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The expiration date of the playback token. The format follows the ISO8601 standard. For example: 2021-12-31T00:00:00Z.",
+          "description": "The streaming token expiration date in ISO8601 format (eg. 2021-01-01T00:00:00Z).",
           "readOnly": true,
           "x-nullable": false
         },
         "token": {
           "type": "string",
-          "description": "The content of the video playback token.",
+          "description": "The streaming token value to be added to the video streaming URL as the value for a \"token\" query string parameter. The token is specific to a single video.",
           "readOnly": true
         }
       },
       "type": "object",
-      "description": "The video playback token."
+      "description": "Video streaming token grants access to the video streaming URLs which can be used by an compatible HLS or DASH player."
     },
     "VideoProperties": {
       "properties": {
         "title": {
           "type": "string",
-          "description": "A video title."
+          "description": "Optional video title provided by the user. Value can be up to 256 characters long."
         },
         "description": {
           "type": "string",
-          "description": "A video description."
+          "description": "Optional video description provided by the user. Value can be up to 2048 characters long."
         },
         "type": {
           "type": "string",
           "enum": [
-            "ContinuousArchive"
+            "Archive"
           ],
           "x-ms-enum": {
             "name": "VideoType",
             "values": [
               {
-                "value": "ContinuousArchive",
-                "description": "Video type is continuous archive. TODO what is continuous archive?"
+                "value": "Archive",
+                "description": "Archive is flexible format that represents a video stream associated with wall-clock time. The video archive can either be continuous or discontinuous. An archive is discontinuous when there are gaps in the recording due to various reasons, such as the live pipeline being stopped, camera being disconnected or due to the use of event based recordings through the use of a signal gate. Finally, there is no limit to the archive duration and new video data can be appended to the existing archive at any time, as long as the same video codec and codec parameters are being used."
               }
             ],
             "modelAsString": true
           },
-          "description": "Allowed types for a video.",
+          "description": "Type of the video archive. Different archive formats provide different capabilities.",
           "readOnly": true,
           "x-nullable": false
         },
         "flags": {
           "$ref": "#/definitions/VideoFlags",
-          "description": "Video flags.",
+          "description": "Video flags contain information about the available video actions and its dynamic properties based on the current video state.",
           "readOnly": true
         },
-        "playback": {
-          "$ref": "#/definitions/VideoPlayback",
-          "description": "A video's playback urls.",
+        "streaming": {
+          "$ref": "#/definitions/VideoStreaming",
+          "description": "Video streaming holds information about video streaming URLs.",
           "readOnly": true
         },
         "mediaInfo": {
           "$ref": "#/definitions/VideoMediaInfo",
-          "description": "A video's media info.",
+          "description": "Contains information about the video and audio content.",
           "readOnly": true
         }
       },
       "type": "object",
-      "description": "Describes the properties of a video."
+      "description": "Application level properties for the video resource."
     },
     "Authentication": {
-      "discriminator": "@odata.type",
+      "discriminator": "@type",
       "properties": {
-        "@odata.type": {
+        "@type": {
           "type": "string",
           "description": "The discriminator for derived types."
         }
       },
       "type": "object",
       "required": [
-        "@odata.type"
+        "@type"
       ],
-      "description": "Base entity for access policy authentication."
+      "description": "Base class for access policies authentication methods."
     },
     "Claim": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "Claim name."
+          "description": "Name of the claim which must be present on the token."
         },
         "value": {
           "type": "string",
-          "description": "Claim value."
+          "description": "Expected value of the claim to be present on the token."
         }
       },
       "type": "object",
@@ -166,7 +166,7 @@
         "name",
         "value"
       ],
-      "description": "Claim entity."
+      "description": "Properties for expected token claims."
     },
     "JwtAuthentication": {
       "x-ms-discriminator-value": "#Microsoft.Media.JwtAuthentication",
@@ -181,56 +181,51 @@
           "items": {
             "type": "string"
           },
-          "description": "List of issuers."
+          "description": "List of expected token issuers. Token issuer is valid if it matches at least one of the given values."
         },
         "audiences": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of audiences."
+          "description": "List of expected token audiences. Token audience is valid if it matches at least one of the given values."
         },
         "claims": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Claim"
           },
-          "description": "List of additional claims."
+          "description": "List of additional token claims to be validated. Token must contains all claims and respective values for it to be valid."
         },
         "keys": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TokenKey"
           },
-          "description": "List of keys."
+          "description": "List of keys which can be used to validate access tokens. Having multiple keys allow for seamless key rotation of the token signing key. Token signature must match exactly one key."
         }
       },
       "type": "object",
-      "required": [
-        "issuers",
-        "audiences",
-        "keys"
-      ],
-      "description": "Access policy JWT authentication."
+      "description": "Properties for access validation based on JSON Web Tokens (JWT)."
     },
     "TokenKey": {
-      "discriminator": "@odata.type",
+      "discriminator": "@type",
       "properties": {
-        "@odata.type": {
+        "@type": {
           "type": "string",
           "description": "The discriminator for derived types."
         },
         "kid": {
           "type": "string",
-          "description": "Key id."
+          "description": "JWT token key id. Validation keys are looked up based on the key id present on the JWT token header."
         }
       },
       "type": "object",
       "required": [
-        "@odata.type",
+        "@type",
         "kid"
       ],
-      "description": "Base entity for token key which is a public key."
+      "description": "Key properties for JWT token validation."
     },
     "RsaTokenKey": {
       "x-ms-discriminator-value": "#Microsoft.Media.RsaTokenKey",
@@ -252,28 +247,28 @@
             "values": [
               {
                 "value": "RS256",
-                "description": "RSA 256."
+                "description": "RS256"
               },
               {
                 "value": "RS384",
-                "description": "RSA 384."
+                "description": "RS384"
               },
               {
                 "value": "RS512",
-                "description": "RSA 512."
+                "description": "RS512"
               }
             ],
             "modelAsString": true
           },
-          "description": "RSA algorithm."
+          "description": "RSA algorithm to be used: RS256, RS384 or RS512."
         },
         "n": {
           "type": "string",
-          "description": "N value."
+          "description": "RSA public key modulus."
         },
         "e": {
           "type": "string",
-          "description": "E value."
+          "description": "RSA public key exponent."
         }
       },
       "type": "object",
@@ -282,7 +277,7 @@
         "n",
         "e"
       ],
-      "description": "Rsa token key."
+      "description": "Required validation properties for tokens generated with RSA algorithm."
     },
     "EccTokenKey": {
       "x-ms-discriminator-value": "#Microsoft.Media.EccTokenKey",
@@ -304,28 +299,28 @@
             "values": [
               {
                 "value": "ES256",
-                "description": "ECC 256."
+                "description": "ES265"
               },
               {
                 "value": "ES384",
-                "description": "ECC 384."
+                "description": "ES384"
               },
               {
                 "value": "ES512",
-                "description": "ECC 512."
+                "description": "ES512"
               }
             ],
             "modelAsString": true
           },
-          "description": "ECC algorithm."
+          "description": "Elliptical curve algorithm to be used: ES256, ES384 or ES512."
         },
         "x": {
           "type": "string",
-          "description": "X value."
+          "description": "X coordinate."
         },
         "y": {
           "type": "string",
-          "description": "Y value."
+          "description": "Y coordinate."
         }
       },
       "type": "object",
@@ -334,7 +329,7 @@
         "x",
         "y"
       ],
-      "description": "Ecc token key."
+      "description": "Required validation properties for tokens generated with Elliptical Curve algorithm."
     },
     "AccessPolicyProperties": {
       "properties": {
@@ -348,24 +343,21 @@
             "values": [
               {
                 "value": "Reader",
-                "description": "Reader role."
+                "description": "Reader role allows for read-only operations to be performed through the client APIs."
               }
             ],
             "modelAsString": true
           },
-          "description": "Access policy role"
+          "description": "Defines the access level granted by this policy.",
+          "x-nullable": true
         },
         "authentication": {
           "$ref": "#/definitions/Authentication",
-          "description": "Access policy authentication"
+          "description": "Authentication method to be used when validating client API access."
         }
       },
       "type": "object",
-      "required": [
-        "role",
-        "authentication"
-      ],
-      "description": "Describes the properties of an access policy."
+      "description": "Application level properties for the access policy resource."
     },
     "VideoEntity": {
       "allOf": [
@@ -385,10 +377,6 @@
           "readOnly": true
         }
       },
-      "type": "object"
-    },
-    "SystemData": {
-      "properties": {},
       "type": "object"
     },
     "AccessPolicyEntity": {
@@ -420,7 +408,7 @@
           },
           "description": "A collection of VideoEntity items."
         },
-        "@odata.nextLink": {
+        "@nextLink": {
           "type": "string",
           "description": "A link to the next page of the collection (when the collection contains too many results to return in one response)."
         }
@@ -437,7 +425,7 @@
           },
           "description": "A collection of AccessPolicyEntity items."
         },
-        "@odata.nextLink": {
+        "@nextLink": {
           "type": "string",
           "description": "A link to the next page of the collection (when the collection contains too many results to return in one response)."
         }
@@ -449,8 +437,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos": {
       "get": {
-        "summary": "List video entities.",
-        "description": "Lists video entities.",
+        "summary": "List all existing video resources.",
+        "description": "List all existing video resources.",
         "operationId": "Videos_List",
         "responses": {
           "200": {
@@ -488,7 +476,7 @@
           }
         ],
         "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
+          "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
           "Lists video entities.": {
@@ -499,8 +487,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}": {
       "get": {
-        "summary": "Get video entity.",
-        "description": "Gets a video entity.",
+        "summary": "Retrieves an existing video resource.",
+        "description": "Retrieves an existing video resource.",
         "operationId": "Videos_Get",
         "responses": {
           "200": {
@@ -544,8 +532,8 @@
         }
       },
       "put": {
-        "summary": "Register video entity",
-        "description": "Register video entity.",
+        "summary": "Creates a new video resource or updates an existing one.",
+        "description": "Creates a new video resource or updates an existing one.",
         "operationId": "Videos_CreateOrUpdate",
         "responses": {
           "200": {
@@ -604,8 +592,8 @@
         }
       },
       "delete": {
-        "summary": "Delete video entity",
-        "description": "Deletes a video entity.",
+        "summary": "Deletes an existing video resource and its underlying data.",
+        "description": "Deletes an existing video resource and its underlying data. This operation is irreversible.",
         "operationId": "Videos_Delete",
         "responses": {
           "200": {
@@ -649,8 +637,8 @@
         }
       },
       "patch": {
-        "summary": "Update video entity.",
-        "description": "Updates the video entity",
+        "summary": "Updates individual properties of an existing video resource.",
+        "description": "Updates individual properties of an existing video resource.",
         "operationId": "Videos_Update",
         "responses": {
           "200": {
@@ -703,11 +691,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}/playbackAuthorization": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}/streamingAuthorization": {
       "get": {
-        "summary": "Generate a playback token for media endpoint authorization.",
-        "description": "Generate a playback token for media endpoint authorization.",
-        "operationId": "Videos_PlaybackAuthorization",
+        "summary": "Generates a streaming token which can be used for video playback.",
+        "description": "Generates a streaming token which can be used for video playback.",
+        "operationId": "Videos_StreamingAuthorization",
         "responses": {
           "200": {
             "description": "OK",
@@ -745,15 +733,15 @@
         ],
         "x-ms-examples": {
           "Generate a playback token for media endpoint authorization.": {
-            "$ref": "examples/video-getPlaybackAuthorization.json"
+            "$ref": "examples/video-getStreamingAuthorization.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies": {
       "get": {
-        "summary": "List access policy entities.",
-        "description": "Lists access policy entities.",
+        "summary": "List all existing access policy resources.",
+        "description": "List all existing access policy resources.",
         "operationId": "AccessPolicies_List",
         "responses": {
           "200": {
@@ -791,7 +779,7 @@
           }
         ],
         "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
+          "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
           "Lists access policy entities.": {
@@ -802,8 +790,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies/{accessPolicyName}": {
       "get": {
-        "summary": "Get access policy entity.",
-        "description": "Gets an access policy entity.",
+        "summary": "Retrieves an existing access policy resource.",
+        "description": "Retrieves an existing access policy resource.",
         "operationId": "AccessPolicies_Get",
         "responses": {
           "200": {
@@ -847,8 +835,8 @@
         }
       },
       "put": {
-        "summary": "Register access policy entity",
-        "description": "Register access policy entity.",
+        "summary": "Creates a new access policy resource or updates an existing one.",
+        "description": "Creates a new access policy resource or updates an existing one.",
         "operationId": "AccessPolicies_CreateOrUpdate",
         "responses": {
           "200": {
@@ -907,8 +895,8 @@
         }
       },
       "delete": {
-        "summary": "Delete access policy entity",
-        "description": "Deletes an access policy entity.",
+        "summary": "Deletes an existing access policy resource.",
+        "description": "Deletes an existing access policy resource.",
         "operationId": "AccessPolicies_Delete",
         "responses": {
           "200": {
@@ -952,8 +940,8 @@
         }
       },
       "patch": {
-        "summary": "Update access policy entity",
-        "description": "Updates the access policy entity.",
+        "summary": "Updates individual properties of an existing access policy resource.",
+        "description": "Updates individual properties of an existing access policy resource.",
         "operationId": "AccessPolicies_Update",
         "responses": {
           "200": {
