@@ -323,6 +323,178 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterVersions/{clusterVersion}": {
+      "get": {
+        "operationId": "ManagedClusterVersion_Get",
+        "summary": "Gets information about a Service Fabric managed cluster code version available in the specified location.",
+        "description": "Gets information about an available Service Fabric managed cluster code version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/clusterVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Get cluster version": {
+            "$ref": "./examples/ManagedClusterVersionGet_example.json"
+          }
+        },
+        "tags": [
+          "ManagedClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterCodeVersionListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/managedClusterVersions/{clusterVersion}": {
+      "get": {
+        "operationId": "ManagedClusterVersion_GetByEnvironment",
+        "summary": "Gets information about a Service Fabric cluster code version available for the specified environment.",
+        "description": "Gets information about an available Service Fabric cluster code version by environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/clusterVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "Get cluster version by environment": {
+            "$ref": "./examples/ManagedClusterVersionGetByEnvironment_example.json"
+          }
+        },
+        "tags": [
+          "ManagedClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterCodeVersionListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterVersions": {
+      "get": {
+        "operationId": "ManagedClusterVersion_List",
+        "summary": "Gets the list of Service Fabric cluster code versions available for the specified location.",
+        "description": "Gets all available code versions for Service Fabric cluster resources by location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "List cluster versions": {
+            "$ref": "./examples/ManagedClusterVersionList_example.json"
+          }
+        },
+        "tags": [
+          "ManagedClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterCodeVersionListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/managedClusterVersions": {
+      "get": {
+        "operationId": "ManagedClusterVersion_ListByEnvironment",
+        "summary": "Gets the list of Service Fabric cluster code versions available for the specified environment.",
+        "description": "Gets all available code versions for Service Fabric cluster resources by environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/locationForClusterCodeVersions"
+          },
+          {
+            "$ref": "#/parameters/environment"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "x-ms-examples": {
+          "List cluster versions by environment": {
+            "$ref": "./examples/ManagedClusterVersionListByEnvironment.json"
+          }
+        },
+        "tags": [
+          "ManagedClusterVersion"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedClusterCodeVersionListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ServiceFabric/operations": {
       "get": {
         "tags": [
@@ -430,6 +602,18 @@
       },
       "description": "Client certificate definition."
     },
+    "ClusterState": {
+      "type": "string",
+      "description": "The current state of the cluster.\n\n  - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.\n  - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.\n  - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.\n  - Upgrading - Indicates that the cluster is being upgraded with the user provided configuration.\n  - UpgradeFailed - Indicates that the last upgrade for the cluster has failed.\n  - Ready - Indicates that the cluster is in a stable state.\n",
+      "enum": [
+        "WaitingForNodes",
+        "Deploying",
+        "BaselineUpgrade",
+        "Upgrading",
+        "UpgradeFailed",
+        "Ready"
+      ]
+    },
     "ClusterUpgradeCadence": {
       "type": "string",
       "enum": [
@@ -457,17 +641,28 @@
       },
       "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0."
     },
-    "ClusterState": {
+    "ClusterUpgradeMode": {
       "type": "string",
-      "description": "The current state of the cluster.\n\n  - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.\n  - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.\n  - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.\n  - Upgrading - Indicates that the cluster is being upgraded with the user provided configuration.\n  - UpgradeFailed - Indicates that the last upgrade for the cluster has failed.\n  - Ready - Indicates that the cluster is in a stable state.\n",
+      "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n",
       "enum": [
-        "WaitingForNodes",
-        "Deploying",
-        "BaselineUpgrade",
-        "Upgrading",
-        "UpgradeFailed",
-        "Ready"
-      ]
+        "Automatic",
+        "Manual"
+      ],
+      "default": "Automatic",
+      "x-ms-enum": {
+        "name": "ClusterUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Automatic",
+            "description": "The cluster will be automatically upgraded to the latest Service Fabric runtime version, **clusterUpgradeCadence** will determine when the upgrade starts after the new version becomes available."
+          },
+          {
+            "value": "Manual",
+            "description": "The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource."
+          }
+        ]
+      }
     },
     "LoadBalancingRule": {
       "required": [
@@ -552,6 +747,38 @@
           "description": "The sku of the managed cluster"
         }
       }
+    },
+    "ManagedClusterCodeVersionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedClusterCodeVersionResult"
+          }
+        }
+      },
+      "description": "The list results of the Service Fabric runtime versions."
+    },
+    "ManagedClusterCodeVersionResult": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identification of the result"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the result"
+        },
+        "type": {
+          "type": "string",
+          "description": "The result resource type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedClusterVersionDetails"
+        }
+      },
+      "description": "The result of the Service Fabric runtime versions"
     },
     "ManagedClusterListResult": {
       "properties": {
@@ -671,14 +898,14 @@
         },
         "clusterCodeVersion": {
           "type": "string",
-          "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](./ClusterVersion.md). To get the list of available version for existing clusters use **availableClusterVersions**."
+          "description": "The Service Fabric runtime version of the cluster. This property is required when **clusterUpgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](./ClusterVersion.md). To get the list of available version for existing clusters use **availableClusterVersions**."
         },
         "clusterUpgradeMode": {
-          "$ref": "#/definitions/UpgradeMode"
+          "$ref": "#/definitions/ClusterUpgradeMode"
         },
         "clusterUpgradeCadence": {
           "$ref": "#/definitions/ClusterUpgradeCadence",
-          "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0. Only applies when **upgradeMode** is set to 'Automatic'."
+          "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0. Only applies when **clusterUpgradeMode** is set to 'Automatic'."
         },
         "addonFeatures": {
           "type": "array",
@@ -714,6 +941,22 @@
         }
       },
       "description": "Managed cluster update request"
+    },
+    "ManagedClusterVersionDetails": {
+      "properties": {
+        "codeVersion": {
+          "type": "string",
+          "description": "The Service Fabric runtime version of the cluster."
+        },
+        "supportExpiryUtc": {
+          "type": "string",
+          "description": "The date of expiry of support of the version."
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType"
+        }
+      },
+      "description": "The detail of the Service Fabric runtime version result"
     },
     "NetworkSecurityRule": {
       "required": [
@@ -811,6 +1054,13 @@
       },
       "description": "Describes a network security rule."
     },
+    "OsType": {
+      "type": "string",
+      "description": "Cluster operating system, the default will be Windows",
+      "enum": [
+        "Windows"
+      ]
+    },
     "Sku": {
       "required": [
         "name"
@@ -830,15 +1080,6 @@
         "Basic",
         "Standard"
       ]
-    },
-    "UpgradeMode": {
-      "type": "string",
-      "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n\n  - Automatic - The cluster will be automatically upgraded to the latest Service Fabric runtime version, **clusterUpgradeCadence** will determine when the upgrade starts after the new version becomes available.\n  - Manual - The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource.\n",
-      "enum": [
-        "Automatic",
-        "Manual"
-      ],
-      "default": "Automatic"
     },
     "AvailableOperationDisplay": {
       "properties": {
@@ -1076,6 +1317,33 @@
       "name": "clusterName",
       "in": "path",
       "description": "The name of the cluster resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "clusterVersion": {
+      "name": "clusterVersion",
+      "in": "path",
+      "description": "The cluster code version.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "environment": {
+      "name": "environment",
+      "in": "path",
+      "description": "The operating system of the cluster. The default means all.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Windows"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "locationForClusterCodeVersions": {
+      "name": "location",
+      "in": "path",
+      "description": "The location for the cluster code versions. This is different from cluster location.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
