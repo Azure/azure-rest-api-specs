@@ -14,12 +14,14 @@
             "location": "westus",
             "properties": {
               "provisioningState": "Succeeded",
+              "enableDiskEncryption": false,
+              "enableStreamingIngest": true,
               "keyVaultProperties": {
                 "keyVaultUri": "https://dummy.keyvault.com",
                 "keyName": "keyName",
                 "keyVersion": "keyVersion"
               },
-              "engineType": "V2"
+              "engineType": "V3"
             },
             "sku": {
               "name": "Standard_L8s",
@@ -34,7 +36,10 @@
             "type": "Microsoft.Kusto/Clusters",
             "location": "westus",
             "properties": {
-              "provisioningState": "Succeeded"
+              "provisioningState": "Succeeded",
+              "enableDiskEncryption": true,
+              "enableStreamingIngest": true,
+              "engineType": "V2"
             },
             "sku": {
               "name": "Standard_L8s",

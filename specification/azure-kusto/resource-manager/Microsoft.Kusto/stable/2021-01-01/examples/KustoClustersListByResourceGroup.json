@@ -15,6 +15,8 @@
             "location": "westus",
             "properties": {
               "provisioningState": "Succeeded",
+              "enableDiskEncryption": false,
+              "enableStreamingIngest": true,
               "keyVaultProperties": {
                 "keyVaultUri": "https://dummy.keyvault.com",
                 "keyName": "keyName",
@@ -35,6 +37,9 @@
             "type": "Microsoft.Kusto/Clusters",
             "location": "westus",
             "properties": {
+              "enableDiskEncryption": true,
+              "enableStreamingIngest": true,
+              "engineType": "V3",
               "provisioningState": "Succeeded"
             },
             "sku": {
