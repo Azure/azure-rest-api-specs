@@ -261,9 +261,6 @@ csharp:
   namespace: Microsoft.Azure.Management.Synapse
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
   clear-output-folder: true
-batch:
- - tag: package-sqlGen3-2020-04-01-preview
- - tag: package-preview-2021-04
 ```
 
 ## Go
