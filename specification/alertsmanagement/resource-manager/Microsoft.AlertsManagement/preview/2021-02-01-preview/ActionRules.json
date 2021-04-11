@@ -316,15 +316,12 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Returns true if deleted successfully",
+            "description": "Successful request to delete an action rule",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
                 "description": "Service generated Request ID."
               }
-            },
-            "schema": {
-              "type": "boolean"
             }
           },
           "default": {
@@ -717,12 +714,12 @@
           "type": "array",
           "description": "List of recurrences",
           "items": {
-            "$ref": "#/definitions/Recurrences"
+            "$ref": "#/definitions/Recurrence"
           }
         }
       }
     },
-    "Recurrences": {
+    "Recurrence": {
       "type": "object",
       "description": "Recurrence object",
       "discriminator": "recurrenceType",
@@ -753,7 +750,7 @@
         }
       }
     },
-    "Daily": {
+    "DailyRecurrence": {
       "x-ms-discriminator-value": "Daily",
       "type": "object",
       "description": "Daily recurrence object",
@@ -763,14 +760,14 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Recurrences"
+          "$ref": "#/definitions/Recurrence"
         },
         {
           "type": "object"
         }
       ]
     },
-    "Weekly": {
+    "WeeklyRecurrence": {
       "x-ms-discriminator-value": "Weekly",
       "type": "object",
       "description": "Weekly recurrence object",
@@ -779,7 +776,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Recurrences"
+          "$ref": "#/definitions/Recurrence"
         },
         {
           "type": "object",
@@ -795,7 +792,7 @@
         }
       ]
     },
-    "Monthly": {
+    "MonthlyRecurrence": {
       "x-ms-discriminator-value": "Monthly",
       "type": "object",
       "description": "Monthly recurrence object",
@@ -804,7 +801,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Recurrences"
+          "$ref": "#/definitions/Recurrence"
         },
         {
           "properties": {
@@ -877,7 +874,7 @@
           "type": "array",
           "description": "Actions to be applied",
           "items": {
-            "$ref": "#/definitions/Actions"
+            "$ref": "#/definitions/Action"
           }
         },
         "description": {
@@ -890,9 +887,9 @@
         }
       }
     },
-    "Actions": {
+    "Action": {
       "type": "object",
-      "description": "Actions to be applied",
+      "description": "Action to be applied",
       "discriminator": "actionType",
       "required": [
         "actionType"
@@ -921,7 +918,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Actions"
+          "$ref": "#/definitions/Action"
         },
         {
           "type": "object",
@@ -943,7 +940,7 @@
       "description": "Indicates if all action groups should be removed",
       "allOf": [
         {
-          "$ref": "#/definitions/Actions"
+          "$ref": "#/definitions/Action"
         },
         {
           "type": "object"
