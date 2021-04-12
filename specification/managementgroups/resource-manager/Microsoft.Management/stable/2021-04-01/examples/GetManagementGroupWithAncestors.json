@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "api-version": "2020-10-01",
-    "groupId": "20000000-0001-0000-0000-000000000000",
+    "api-version": "2021-04-01",
+    "groupId": "20000000-0001-0000-0000-00000000000",
     "$expand": "ancestors",
     "Cache-Control": "no-cache"
   },
@@ -24,8 +24,14 @@
               "displayName": "Parent display name"
             },
 			"managementGroupAncestors": [
-			  "20000000-0000-0000-0000-000000000001",
-			  "20000000-0000-0000-0000-000000000000"
+			  {
+			    "name": "20000000-0000-0000-0000-000000000001",
+				"displayName": "Parent display name"
+			  },
+			  {
+			    "name": "20000000-0000-0000-0000-000000000000",
+				"displayName": "Grandparent display name"
+			  },
 			]
           }
         }
