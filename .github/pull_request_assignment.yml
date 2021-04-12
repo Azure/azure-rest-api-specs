@@ -1,5 +1,19 @@
 ---
 - rule:
+    # translator data-plane PR
+    paths:
+      - "specification/cognitiveservices/data-plane/TranslatorText/**"
+    reviewers:
+      - kristapratico
+      - maririos
+
+- rule:
+    paths:
+      - "specification/confidentialledger/data-plane/**"
+    reviewers:
+      - christothes 
+
+- rule:
     # eventgrid data-plane PR
     paths:
       - "specification/eventgrid/data-plane/**"
@@ -11,7 +25,7 @@
     paths:
       - "specification/synapse/data-plane/**"
     reviewers:
-      - jonathandturner
+      - lmazuel
 
 - rule:
     # data-plane PR
@@ -37,7 +51,7 @@
       - kairu-ms
 
 - rule:
-    paths: "specification/@(resources|powerplatform|appplatform)/**"
+    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate)/**"
     reviewers:
       - raych1
       
@@ -149,7 +163,13 @@
     paths:
       - "specification/servicelinker/**"
     reviewers:
-      - PhoenixHe-msft
+      - raych1
+      
+- rule:
+    paths:
+      - "specification/keyvault/**"
+    reviewers:
+      - zhenglaizhang
 
 - rule:
     paths: 
