@@ -34,6 +34,12 @@
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -83,6 +89,12 @@
             "schema": {
               "$ref": "#/definitions/NameAvailability"
             }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -112,6 +124,12 @@
             "description": "Success. The response describes the list of SignalR services in the subscription.",
             "schema": {
               "$ref": "#/definitions/SignalRResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -148,6 +166,12 @@
             "description": "Success. The response describes the list of SignalR services in a resourceGroup.",
             "schema": {
               "$ref": "#/definitions/SignalRResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -187,6 +211,12 @@
             "description": "Success. The response describes SignalR service access keys.",
             "schema": {
               "$ref": "#/definitions/SignalRKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -233,6 +263,12 @@
             "schema": {
               "$ref": "#/definitions/SignalRKeys"
             }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -273,6 +309,12 @@
             "schema": {
               "$ref": "#/definitions/SignalRResource"
             }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -311,6 +353,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success. The response describes a SignalR service.",
+            "schema": {
+              "$ref": "#/definitions/SignalRResource"
+            }
+          },
           "201": {
             "description": "Created. The response describes the new service and contains a Location header to query the operation result.",
             "schema": {
@@ -319,6 +367,12 @@
           },
           "202": {
             "description": "Accepted. The response indicates the exiting SignalR service is now updating and contains a Location header to query the operation result.."
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -354,6 +408,12 @@
           },
           "204": {
             "description": "Success. The response indicates the resource is already deleted."
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -394,13 +454,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes a SignalR service which is not up-to-date.",
+            "description": "Success. The response describes a SignalR service.",
             "schema": {
               "$ref": "#/definitions/SignalRResource"
             }
           },
           "202": {
             "description": "Accepted. The response indicates the exiting SignalR service is now updating  and contains a Location header to query the operation result.."
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -438,6 +504,12 @@
           },
           "204": {
             "description": "Success. The response indicates the operation is successful and no content will be returned."
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -478,6 +550,12 @@
             "description": "Success. The response describe the usage quotas of a subscription in specified region.",
             "schema": {
               "$ref": "#/definitions/SignalRUsageList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -575,6 +653,13 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           }
+        },
+        "logSpecifications": {
+          "description": "Specifications of the Logs for Azure Monitoring.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
         }
       }
     },
@@ -619,6 +704,20 @@
         }
       }
     },
+    "LogSpecification": {
+      "description": "Specifications of the Logs for Azure Monitoring.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log.",
+          "type": "string"
+        }
+      }
+    },
     "Dimension": {
       "description": "Specifications of the Dimension of metrics.",
       "type": "object",
@@ -638,6 +737,45 @@
         "toBeExportedForShoebox": {
           "description": "A Boolean flag indicating whether this dimension should be included for the shoebox export scenario.",
           "type": "boolean"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Contains information about an API error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "Describes a particular API error with an error code and a message."
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Describes a particular API error with an error code and a message.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "An error code that describes the error condition more precisely than an HTTP status code. \r\nCan be used to programmatically handle specific error cases.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A message that describes the error in detail and provides debugging information.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error (for example, the name of the property in error).",
+          "type": "string"
+        },
+        "details": {
+          "description": "Contains nested errors that are related to this error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
         }
       }
     },
@@ -909,9 +1047,10 @@
       "type": "object",
       "properties": {
         "flag": {
-          "description": "Kind of feature. Required.",
+          "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.",
           "enum": [
-            "ServiceMode"
+            "ServiceMode",
+            "EnableConnectivityLogs"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -920,7 +1059,7 @@
           }
         },
         "value": {
-          "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/en-us/azure/azure-signalr/ for allowed values.",
+          "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/azure/azure-signalr/ for allowed values.",
           "maxLength": 128,
           "minLength": 1,
           "type": "string"

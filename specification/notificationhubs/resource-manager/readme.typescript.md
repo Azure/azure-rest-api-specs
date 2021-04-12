@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-notificationhubs"
   output-folder: "$(typescript-sdks-folder)/sdk/notificationhubs/arm-notificationhubs"
+  clear-output-folder: true
   generate-metadata: true
 ```

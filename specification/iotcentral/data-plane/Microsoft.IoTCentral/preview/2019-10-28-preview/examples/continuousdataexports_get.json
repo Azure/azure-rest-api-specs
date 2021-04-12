@@ -1,0 +1,30 @@
+{
+  "title": "Get export",
+  "description": "Get an export using its Id.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "export_id": "16cad42a-bd47-4684-b106-9f9b4d2d02e9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "16cad42a-bd47-4684-b106-9f9b4d2d02e9",
+        "etag": "076f201d-e9c3-4bef-af0a-608420ba4526",
+        "displayName": "Export to Storage 1",
+        "endpoint": {
+          "type": "StorageEndpoint",
+          "connectionString": "DefaultEndpointsProtocol=https;AccountName=jeffscratchppe;AccountKey=*****;EndpointSuffix=core.windows.net",
+          "name": "cde"
+        },
+        "status": "running",
+        "enabled": true,
+        "sources": [
+          "devices",
+          "deviceTemplates",
+          "telemetry"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2016-03-19",
+    "subscriptionId": "subid",
+    "createUpdateParameters": {
+      "location": "westus",
+      "tags": {},
+      "kind": "GlobalDocumentDB",
+      "properties": {
+        "databaseAccountOfferType": "Standard",
+        "ipRangeFilter": "10.10.10.10",
+        "isVirtualNetworkFilterEnabled": true,
+        "virtualNetworkRules": [
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+            "ignoreMissingVNetServiceEndpoint": false
+          }
+        ],
+        "locations": [
+          {
+            "failoverPriority": 0,
+            "locationName": "southcentralus",
+            "isZoneRedundant": false
+          },
+          {
+            "failoverPriority": 1,
+            "locationName": "eastus",
+            "isZoneRedundant": false
+          }
+        ],
+        "consistencyPolicy": {
+          "defaultConsistencyLevel": "BoundedStaleness",
+          "maxIntervalInSeconds": 10,
+          "maxStalenessPrefix": 200
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
+        "name": "ddb1",
+        "location": "West US",
+        "type": "Microsoft.DocumentDB/databaseAccounts",
+        "kind": "GlobalDocumentDB",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Initializing",
+          "ipRangeFilter": "10.10.10.10",
+          "isVirtualNetworkFilterEnabled": true,
+          "databaseAccountOfferType": "Standard",
+          "consistencyPolicy": {
+            "defaultConsistencyLevel": "BoundedStaleness",
+            "maxIntervalInSeconds": 10,
+            "maxStalenessPrefix": 200
+          },
+          "writeLocations": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            }
+          ],
+          "readLocations": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 0,
+              "isZoneRedundant": false
+            },
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "provisioningState": "Initializing",
+              "failoverPriority": 1,
+              "isZoneRedundant": false
+            }
+          ],
+          "failoverPolicies": [
+            {
+              "id": "ddb1-southcentralus",
+              "locationName": "South Central US",
+              "failoverPriority": 0
+            },
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "failoverPriority": 1
+            }
+          ],
+          "virtualNetworkRules": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

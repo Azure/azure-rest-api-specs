@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "SdkRg9836",
+    "location": "westus",
+    "api-version": "2019-09-01",
+    "x-ms-client-request-id": [
+      "ee686d79-42c2-4b01-9afe-5e99f4cabfee"
+    ],
+    "accept-language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.26614.01",
+      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.2.0"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "311"
+    ],
+    "validationRequest": {
+      "validationCategory": "JobCreationValidation",
+      "individualRequestDetails": [
+        {
+          "validationType": "ValidateDataDestinationDetails",
+          "location": "westus",
+          "destinationAccountDetails": [
+            {
+              "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
+              "dataDestinationType": "StorageAccount"
+            }
+          ]
+        },
+        {
+          "validationType": "ValidateAddress",
+          "shippingAddress": {
+            "streetAddress1": "16 TOWNSEND ST",
+            "streetAddress2": "Unit 1",
+            "city": "San Francisco",
+            "stateOrProvince": "CA",
+            "country": "US",
+            "postalCode": "94107",
+            "companyName": "Microsoft",
+            "addressType": "Commercial"
+          },
+          "deviceType": "DataBox"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "status": "AllValidToProceed",
+          "individualResponseDetails": [
+            {
+              "validationType": "ValidateDataDestinationDetails",
+              "error": {},
+              "status": "Valid"
+            },
+            {
+              "validationStatus": "Valid",
+              "alternateAddresses": [
+                {
+                  "streetAddress1": "16 TOWNSEND ST",
+                  "streetAddress2": "Unit 1",
+                  "streetAddress3": "",
+                  "city": "SAN FRANCISCO",
+                  "stateOrProvince": "CA",
+                  "country": "US",
+                  "postalCode": "94107",
+                  "addressType": "None"
+                }
+              ],
+              "validationType": "ValidateAddress",
+              "error": {}
+            }
+          ]
+        }
+      }
+    }
+  }
+}

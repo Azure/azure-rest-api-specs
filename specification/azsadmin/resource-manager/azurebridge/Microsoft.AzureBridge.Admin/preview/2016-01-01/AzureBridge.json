@@ -5,7 +5,7 @@
     "title": "AzureBridgeAdminClient",
     "description": "AzureBridge Admin Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -33,8 +33,17 @@
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
+        "produces": [
+          "application/json"
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -47,17 +56,14 @@
       "type": "object",
       "properties": {
         "id": {
-          "readOnly": true,
           "description": "URI of the resource.",
           "type": "string"
         },
         "name": {
-          "readOnly": true,
           "description": "Name of the resource.",
           "type": "string"
         },
         "type": {
-          "readOnly": true,
           "description": "Type of resource.",
           "type": "string"
         },
@@ -207,6 +213,10 @@
         "productProperties": {
           "description": "the product properties. At the moment only VirtualMachineProductProperties is allowed.",
           "$ref": "#/definitions/ProductProperties"
+        },
+        "compatibility": {
+          "description": "Product compatibility with current device.",
+          "$ref": "#/definitions/Compatibility"
         }
       }
     },
@@ -266,6 +276,251 @@
       "items": {
         "$ref": "#/definitions/ProductLink"
       }
+    },
+    "Compatibility": {
+      "description": "Product compatibility",
+      "type": "object",
+      "properties": {
+        "isCompatible": {
+          "description": "Tells if product is compatible with current device",
+          "type": "boolean"
+        },
+        "message": {
+          "description": "Short error message if any compatibility issues are found",
+          "type": "string"
+        },
+        "description": {
+          "description": "Full error message if any compatibility issues are found",
+          "type": "string"
+        },
+        "issues": {
+          "description": "List of all issues found",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompatibilityIssue"
+          }
+        }
+      }
+    },
+    "CompatibilityIssue": {
+      "description": "Compatibility issue",
+      "type": "string",
+      "enum": [
+        "HigherDeviceVersionRequired",
+        "LowerDeviceVersionRequired",
+        "CapacityBillingModelRequired",
+        "PayAsYouGoBillingModelRequired",
+        "DevelopmentBillingModelRequired",
+        "AzureADIdentitySystemRequired",
+        "ADFSIdentitySystemRequired",
+        "ConnectionToInternetRequired",
+        "ConnectionToAzureRequired",
+        "DisconnectedEnvironmentRequired"
+      ],
+      "x-ms-enum": {
+        "name": "CompatibilityIssue",
+        "modelAsString": true
+      }
+    },
+    "DownloadedProductResource": {
+      "description": "Downloaded product resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the resource.",
+          "$ref": "#/definitions/DownloadedProduct"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "AzureBridge.json#/definitions/Resource"
+        }
+      ]
+    },
+    "DownloadedProduct": {
+      "description": "Properties for aggregate usage.",
+      "type": "object",
+      "properties": {
+        "vmExtensionType": {
+          "description": "Extension type of the VM.",
+          "type": "string"
+        },
+        "links": {
+          "description": "Gallery item identity.",
+          "$ref": "AzureBridge.json#/definitions/ProductLinks"
+        },
+        "legalTerms": {
+          "description": "Legal terms for the product.",
+          "type": "string"
+        },
+        "privacyPolicy": {
+          "description": "Privacy policy of the product.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "AzureBridge.json#/definitions/ProvisioningState"
+        },
+        "galleryPackageBlobSasUri": {
+          "description": "The URI to the .azpkg file that provides information required for showing product in the gallery.",
+          "type": "string"
+        },
+        "productDetailsProperties": {
+          "description": "Specifies additional properties describing the product.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExtendedProductProperties",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "AzureBridge.json#/definitions/ProductBase"
+        }
+      ]
+    },
+    "ExtendedProductProperties": {
+      "description": "Product information.",
+      "type": "object",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualMachineExtensionProductProperties"
+        },
+        {
+          "$ref": "#/definitions/VirtualMachineProductProperties"
+        }
+      ]
+    },
+    "VirtualMachineExtensionProductProperties": {
+      "description": "Product information.",
+      "type": "object",
+      "properties": {
+        "computeRole": {
+          "description": "Specifies kind of compute role included in the package.",
+          "$ref": "#/definitions/ComputeRole",
+          "readOnly": true
+        },
+        "isSystemExtension": {
+          "description": "Specifies if product is a Virtual Machine Extension.",
+          "type": "boolean"
+        },
+        "sourceBlob": {
+          "description": "Specifies a download location where content can be downloaded from.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Uri",
+          "readOnly": true
+        },
+        "supportMultipleExtensions": {
+          "description": "Indicates if specified product supports multiple extensions.",
+          "type": "boolean"
+        },
+        "version": {
+          "description": "Specifies product version.",
+          "type": "string"
+        },
+        "vmOsType": {
+          "description": "Specifies operating system used by the product.",
+          "$ref": "#/definitions/OperatingSystem",
+          "readOnly": true
+        },
+        "vmScaleSetEnabled": {
+          "description": "Indicates if virtual machine Scale Set is enabled in the specified product.",
+          "type": "boolean"
+        }
+      }
+    },
+    "VirtualMachineProductProperties": {
+      "description": "Product information.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Specifies product version.",
+          "type": "string"
+        },
+        "osDiskImage": {
+          "description": "OS disk image used by product.",
+          "$ref": "#/definitions/OsDiskImage",
+          "readOnly": true
+        },
+        "dataDiskImages": {
+          "description": "List of attached data disks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataDiskImage"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ComputeRole": {
+      "description": "Compute role type (IaaS or PaaS).",
+      "type": "string",
+      "enum": [
+        "None",
+        "IaaS",
+        "PaaS"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeRole",
+        "modelAsString": true
+      }
+    },
+    "Uri": {
+      "description": "The URI.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "The URI.",
+          "type": "string"
+        }
+      }
+    },
+    "OperatingSystem": {
+      "description": "Operating system type (Windows or Linux).",
+      "type": "string",
+      "enum": [
+        "None",
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "OperatingSystem",
+        "modelAsString": true
+      }
+    },
+    "OsDiskImage": {
+      "description": "OS disk image.",
+      "type": "object",
+      "properties": {
+        "operatingSystem": {
+          "description": "OS operating system type.",
+          "$ref": "#/definitions/OperatingSystem",
+          "readOnly": true
+        },
+        "sourceBlobSasUri": {
+          "description": "SAS key for source blob.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataDiskImage": {
+      "description": "Data disk image.",
+      "type": "object",
+      "properties": {
+        "lun": {
+          "description": "The LUN.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "sourceBlobSasUri": {
+          "description": "SAS key for source blob.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -300,9 +555,9 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ResourceGroupParameter": {
+    "ResourceGroupNameParameter": {
       "description": "The resource group the resource is located under.",
-      "name": "resourceGroup",
+      "name": "resourceGroupName",
       "in": "path",
       "type": "string",
       "required": true,

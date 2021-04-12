@@ -1,0 +1,171 @@
+{
+  "title": "Get a merged device template by Id",
+  "description": "Get a single merged view of a device template by Id. The merged view of a device template contains the overrides and initial values from the solutionModel merged into the capabilityModel. This operation does not return device templates in draft state.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "device_template_id": "urn:sbk9sd6sl:modelDefinition:u3b_fwd7os"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "urn:sbk9sd6sl:modelDefinition:u3b_fwd7os",
+        "etag": "\"1800bfd5-0000-0d00-0000-5d96df080000\"",
+        "types": [
+          "DeviceModel"
+        ],
+        "displayName": "RS40 Occupancy Sensor",
+        "capabilityModel": {
+          "@id": "urn:rigado:RS40_Occupancy_Sensor:1",
+          "@type": [
+            "CapabilityModel"
+          ],
+          "implements": [
+            {
+              "@id": "urn:rigado:RS40_Occupancy_Sensor:Device_information_RS40_Occupancy_Sensor:1",
+              "@type": [
+                "InterfaceInstance"
+              ],
+              "name": "Device_information_RS40_Occupancy_Sensor",
+              "schema": {
+                "@id": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+                "@type": [
+                  "Interface"
+                ],
+                "displayName": "Device Information",
+                "contents": [
+                  {
+                    "@id": "urn:azureiot:DeviceManagement:DeviceInformation:manufacturer:1",
+                    "@type": [
+                      "Property"
+                    ],
+                    "description": "Company name of the device manufacturer. This could be the same as the name of the original equipment manufacturer (OEM). Ex. Contoso.",
+                    "displayName": "Manufacturer",
+                    "name": "manufacturer",
+                    "schema": "string"
+                  },
+                  {
+                    "@id": "urn:azureiot:DeviceManagement:DeviceInformation:model:1",
+                    "@type": [
+                      "Property"
+                    ],
+                    "description": "Device model name or ID. Ex. Surface Book 2.",
+                    "displayName": "Device model",
+                    "name": "model",
+                    "schema": "string"
+                  },
+                  {
+                    "@id": "urn:azureiot:DeviceManagement:DeviceInformation:swVersion:1",
+                    "@type": [
+                      "Property"
+                    ],
+                    "description": "Version of the software on your device. This could be the version of your firmware. Ex. 1.3.45",
+                    "displayName": "Software version",
+                    "name": "swVersion",
+                    "schema": "string"
+                  },
+                  {
+                    "@id": "urn:azureiot:DeviceManagement:DeviceInformation:osName:1",
+                    "@type": [
+                      "Property"
+                    ],
+                    "description": "Name of the operating system on the device. Ex. Windows 10 IoT Core.",
+                    "displayName": "Operating system name",
+                    "name": "osName",
+                    "schema": "string"
+                  },
+                  {
+                    "@id": "urn:azureiot:DeviceManagement:DeviceInformation:processorArchitecture:1",
+                    "@type": [
+                      "Property"
+                    ],
+                    "description": "Architecture of the processor on the device. Ex. x64 or ARM.",
+                    "displayName": "Processor architecture",
+                    "name": "processorArchitecture",
+                    "schema": "string"
+                  },
+                  {
+                    "@id": "urn:azureiot:DeviceManagement:DeviceInformation:processorManufacturer:1",
+                    "@type": [
+                      "Property"
+                    ],
+                    "description": "Name of the manufacturer of the processor on the device. Ex. Intel.",
+                    "displayName": "Processor manufacturer",
+                    "name": "processorManufacturer",
+                    "schema": "string"
+                  },
+                  {
+                    "@id": "urn:azureiot:DeviceManagement:DeviceInformation:totalStorage:1",
+                    "@type": [
+                      "Property"
+                    ],
+                    "description": "Total available storage on the device in kilobytes. Ex. 2048000 kilobytes.",
+                    "displayName": "Total storage",
+                    "name": "totalStorage",
+                    "displayUnit": "kilobytes",
+                    "schema": "long"
+                  },
+                  {
+                    "@id": "urn:azureiot:DeviceManagement:DeviceInformation:totalMemory:1",
+                    "@type": [
+                      "Property"
+                    ],
+                    "description": "Total available memory on the device in kilobytes. Ex. 256000 kilobytes.",
+                    "displayName": "Total memory",
+                    "name": "totalMemory",
+                    "displayUnit": "kilobytes",
+                    "schema": "long"
+                  }
+                ]
+              }
+            },
+            {
+              "@id": "urn:rigado:RS40_Occupancy_Sensor:RS40_Occupancy_Sensor:1",
+              "@type": [
+                "InterfaceInstance"
+              ],
+              "name": "RS40_Occupancy_Sensor",
+              "schema": {
+                "@id": "urn:rigado:interfaces:RS40_Occupancy_Sensor:1",
+                "@type": [
+                  "Interface"
+                ],
+                "displayName": "Interface",
+                "contents": [
+                  {
+                    "@id": "urn:rigado:interfaces:RS40_Occupancy_Sensor:count:1",
+                    "@type": [
+                      "Telemetry"
+                    ],
+                    "comment": "",
+                    "description": "Count of motion events seen in the previous interval",
+                    "displayName": "count",
+                    "name": "count",
+                    "schema": "integer"
+                  },
+                  {
+                    "@id": "urn:rigado:interfaces:RS40_Occupancy_Sensor:state:1",
+                    "@type": [
+                      "Telemetry"
+                    ],
+                    "description": "Occupancy State",
+                    "displayName": "state",
+                    "name": "state",
+                    "schema": "boolean"
+                  }
+                ]
+              }
+            }
+          ],
+          "displayName": "RS40 Occupancy Sensor"
+        },
+        "solutionModel": {
+          "@id": "urn:sbk9sd6sl:modelDefinition:rxyaituqzz",
+          "@type": [
+            "SolutionModel"
+          ]
+        }
+      }
+    }
+  }
+}

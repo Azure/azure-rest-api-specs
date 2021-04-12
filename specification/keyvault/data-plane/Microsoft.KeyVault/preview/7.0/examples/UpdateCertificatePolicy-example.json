@@ -1,5 +1,6 @@
 {
   "parameters": {
+    "vaultBaseUrl": "https://myvault.vault.azure.net/",
     "certificate-name": "updateCert01",
     "api-version": "7.0-preview",
     "certificatePolicy": {
@@ -39,7 +40,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "https://testvault1021.vault.azure.net/certificates/updateCert01/policy",
+        "id": "https://myvault.vault.azure.net/certificates/updateCert01/policy",
         "key_props": {
           "exportable": true,
           "kty": "RSA",
@@ -53,10 +54,7 @@
           "subject": "CN=KeyVaultTest",
           "ekus": [],
           "key_usage": [],
-          "validity_months": 297,
-          "basic_constraints": {
-            "ca": false
-          }
+          "validity_months": 297
         },
         "lifetime_actions": [
           {

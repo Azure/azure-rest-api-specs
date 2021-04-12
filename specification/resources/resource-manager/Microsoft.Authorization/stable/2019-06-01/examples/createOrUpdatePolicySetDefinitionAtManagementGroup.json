@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "managementGroupId": "MyManagementGroup",
+    "policySetDefinitionName": "CostManagement",
+    "api-version": "2019-06-01",
+    "parameters": {
+      "properties": {
+        "displayName": "Cost Management",
+        "description": "Policies to enforce low cost storage SKUs",
+        "metadata": {
+          "category": "Cost Management"
+        },
+        "policyDefinitions": [
+          {
+            "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+            "parameters": {
+              "listOfAllowedSKUs": {
+                "value": [
+                  "Standard_GRS",
+                  "Standard_LRS"
+                ]
+              }
+            }
+          },
+          {
+            "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+            "parameters": {
+              "prefix": {
+                "value": "DeptA"
+              },
+              "suffix": {
+                "value": "-LC"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policySetDefinitions/CostManagement",
+        "type": "Microsoft.Authorization/policySetDefinitions",
+        "name": "CostManagement",
+        "properties": {
+          "displayName": "Cost Management",
+          "description": "Policies to enforce low cost storage SKUs",
+          "metadata": {
+            "category": "Cost Management"
+          },
+          "policyDefinitions": [
+            {
+              "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "value": [
+                    "Standard_GRS",
+                    "Standard_LRS"
+                  ]
+                }
+              }
+            },
+            {
+              "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+              "parameters": {
+                "prefix": {
+                  "value": "DeptA"
+                },
+                "suffix": {
+                  "value": "-LC"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policySetDefinitions/CostManagement",
+        "type": "Microsoft.Authorization/policySetDefinitions",
+        "name": "CostManagement",
+        "properties": {
+          "displayName": "Cost Management",
+          "description": "Policies to enforce low cost storage SKUs",
+          "metadata": {
+            "category": "Cost Management"
+          },
+          "policyDefinitions": [
+            {
+              "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "value": [
+                    "Standard_GRS",
+                    "Standard_LRS"
+                  ]
+                }
+              }
+            },
+            {
+              "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+              "parameters": {
+                "prefix": {
+                  "value": "DeptA"
+                },
+                "suffix": {
+                  "value": "-LC"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

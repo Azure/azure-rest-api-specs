@@ -27,7 +27,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-02-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.storagesync.v2019_02_01
-  output-folder: $(azure-libraries-for-java-folder)/storagesync/resource-manager/v2019_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/storagesync/mgmt-v2019_02_01
 regenerate-manager: true
 generate-interface: true
 ```

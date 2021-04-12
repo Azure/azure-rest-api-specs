@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "api-version": "2020-12-01-preview",
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "Referer": [
+      "https://localhost/subscriptions/{{subscriptionId}}/providers/Microsoft.EdgeOrder/listConfigurations?api-version=2020-12-01-preview"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "498"
+    ],
+    "configurationsRequest": {
+      "configurationFilters": [
+        {
+          "hierarchyInformation": {
+            "productFamilyName": "azurestackedge",
+            "productLineName": "azure stack edge_pl",
+            "productName": "azure stack edge pro - gpu"
+          },
+          "filterableProperty": [
+            {
+              "type": "ShipToCountries",
+              "supportedValues": [
+                "US"
+              ]
+            },
+            {
+              "type": "DoubleEncryptionStatus",
+              "supportedValues": [
+                "Enabled"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "specifications": [
+                {
+                  "name": "Cores",
+                  "value": "24"
+                },
+                {
+                  "name": "Memory",
+                  "value": "128 GB"
+                },
+                {
+                  "name": "Storage",
+                  "value": "~8 TB"
+                }
+              ],
+              "filterableProperties": [
+                {
+                  "type": "ShipToCountries",
+                  "supportedValues": [
+                    "US",
+                    "UK"
+                  ]
+                },
+                {
+                  "type": "DoubleEncryptionStatus",
+                  "supportedValues": [
+                    "Enabled"
+                  ]
+                }
+              ],
+              "displayName": "azurestackedgepro-gpu 1 GPU",
+              "description": {
+                "descriptionType": "Base",
+                "keywords": [],
+                "attributes": [],
+                "links": []
+              },
+              "imageInformation": [],
+              "availabilityInformation": {
+                "availabilityStage": "Available",
+                "disabledReason": "None"
+              },
+              "hierarchyInformation": {
+                "productFamilyName": "azurestackedge",
+                "productLineName": "azure stack edge_pl",
+                "productName": "azure stack edge pro - gpu",
+                "configurationName": "azurestackedgepro-gpu1 gpu"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

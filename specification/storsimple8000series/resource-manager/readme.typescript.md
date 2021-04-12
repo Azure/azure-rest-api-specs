@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-storsimple8000series"
   output-folder: "$(typescript-sdks-folder)/sdk/storsimple8000series/arm-storsimple8000series"
+  clear-output-folder: true
   generate-metadata: true
 ```

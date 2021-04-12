@@ -1,0 +1,54 @@
+{
+  "title": "Get device properties in component",
+  "description": "Get the read-write property values within a component of a device.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "device_id": "mx1",
+    "component_name": "settings"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "fanSpeed": 35,
+        "voltage": 5,
+        "current": 2,
+        "irSwitch": true,
+        "$metadata": {
+          "fanSpeed": {
+            "desiredValue": 35,
+            "ackDesiredState": {
+              "code": 200,
+              "version": 2,
+              "description": "Processed"
+            }
+          },
+          "voltage": {
+            "desiredValue": 5,
+            "ackDesiredState": {
+              "code": 200,
+              "version": 2,
+              "description": "Processed"
+            }
+          },
+          "current": {
+            "desiredValue": 2,
+            "ackDesiredState": {
+              "code": 200,
+              "version": 2,
+              "description": "Processed"
+            }
+          },
+          "irSwitch": {
+            "desiredValue": true,
+            "ackDesiredState": {
+              "code": 200,
+              "version": 2,
+              "description": "Processed"
+            }
+          }
+        }
+      }
+    }
+  }
+}
