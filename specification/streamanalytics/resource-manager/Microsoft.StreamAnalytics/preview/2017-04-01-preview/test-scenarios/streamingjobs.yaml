@@ -1,0 +1,23 @@
+scope: ResourceGroup
+testScenarios:
+  - description: >-
+      Microsoft.StreamAnalytics/streamingjobs Create a streaming job shell (a
+      streaming job with no inputs, outputs, transformation, or functions)
+    steps:
+      - step: >-
+          Create a streaming job shell (a streaming job with no inputs, outputs,
+          transformation, or functions)
+        exampleFile: ../examples/StreamingJob_Create_JobShell.json
+      - step: Delete a streaming job
+        exampleFile: ../examples/StreamingJob_Delete.json
+  - description: >-
+      Microsoft.StreamAnalytics/streamingjobs Create a complete streaming job (a
+      streaming job with a transformation, at least 1 input and at least 1
+      output)
+    steps:
+      - step: >-
+          Create a complete streaming job (a streaming job with a
+          transformation, at least 1 input and at least 1 output)
+        exampleFile: ../examples/StreamingJob_Create_CompleteJob.json
+      - step: Delete a streaming job
+        exampleFile: ../examples/StreamingJob_Delete.json
