@@ -1,0 +1,325 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Database Service Resource Provider REST API",
+    "version": "2021-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/services/{serviceName}": {
+      "put": {
+        "tags": [
+          "DataTransfer",
+          "SqlDedicatedGateway"
+        ],
+        "x-ms-examples": {
+          "DataTransferServiceCreate": {
+            "$ref": "./examples/CosmosDBDataTransferServiceCreate.json"
+          },
+          "SqlDedicatedGatewayServiceCreate": {
+            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceCreate.json"
+          }
+        },
+        "operationId": "Service_Create",
+        "description": "Creates a service.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/serviceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "servicesCreateUpdateParameter",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesCreateUpdateParameters"
+            },
+            "description": "The Service configuration parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service status.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "202": {
+            "description": "The job will complete asynchronously."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServicesCreateUpdateParameters": {
+      "description": "Service create or update parameters.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The properties for creating services.",
+          "$ref": "#/definitions/ServicesCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "ServicesCreateUpdateProperties": {
+      "description": "Describes the service response property.",
+      "type": "object",
+      "properties": {
+        "instanceSize": {
+          "type": "string",
+          "enum": [
+            "Cosmos.D4s",
+            "Cosmos.D8s",
+            "Cosmos.D16s"
+          ],
+          "description": "Instance type for the service.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ServiceInstanceSize"
+          }
+        },
+        "instanceCount": {
+          "description": "Instance count for the service.",
+          "type": "number"
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      },
+      "required": [
+        "instanceSize",
+        "instanceCount"
+      ]
+    },
+    "ServiceResource": {
+      "description": "Services response resource.",
+      "type": "object",
+      "x-ms-client-flatten": true,
+        "properties": {
+          "creationTime": {
+            "readOnly": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "Time of the last state change (ISO-8601 format)."
+          },
+          "instanceSize": {
+            "type": "string",
+            "enum": [
+              "Cosmos.D4s",
+              "Cosmos.D8s",
+              "Cosmos.D16s"
+            ],
+            "description": "Instance type for the service.",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "InstanceSize"
+            }
+          },
+          "instanceCount": {
+            "description": "Instance count for the service.",
+            "type": "number"
+          },
+          "serviceType": {
+            "type": "string",
+            "description": "The type of Azure resource."
+          },
+          "status":{
+            "type": "string",
+            "description": "Status of the Service"
+          }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required":   [
+        "properties"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "DataTransferServiceResource": {
+      "description": "Describes the service response property.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResource"
+        }
+      ],
+      "properties": {
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains all of the locations for the service.",
+          "items": {
+            "$ref": "#/definitions/DataTransferRegionalServiceLocation"
+          }
+        }
+      }
+    },
+    "SqlDedicatedGatewayServiceResource": {
+      "description": "Describes the service response property.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResource"
+        }
+      ],
+      "properties": {
+        "SqlDedicatedGatewayEndpoint": {
+          "type": "string",
+          "description": "SQL endpoint for the service."
+        },
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains all of the locations for the service.",
+          "items": {
+            "$ref": "#/definitions/SqlDedicatedGatewayRegionalServiceLocation"
+          }
+        }
+      },
+      "required":[
+        "properties"
+      ]
+    },
+    "DataTransferRegionalServiceLocation": {
+      "description": "Resource for a regional service location.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The regional service name."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location name."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Running",
+            "Updating",
+            "Deleting",
+            "Error",
+            "Stopped"
+          ],
+          "description": "Describes the status of a service.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DataTransferRegionStatus"
+          }
+        }
+      }
+    },
+    "SqlDedicatedGatewayRegionalServiceLocation": {
+      "description": "Resource for a regional service location.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The regional service name."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location name."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Running",
+            "Updating",
+            "Deleting",
+            "Error",
+            "Stopped"
+          ],
+          "description": "Describes the status of a service.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SQLRegionStatus"
+          }
+        },
+        "sqlDedicatedGatewayEndpoint": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The regional endpoint for SQL."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "accountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB database account name.",
+      "minLength": 3,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+    },
+ "serviceNameParameter": {
+      "name": "serviceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB service name.",
+      "minLength": 3,
+      "maxLength": 50
+    }
+  }
+}
