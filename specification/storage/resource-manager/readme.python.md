@@ -2,7 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-``` yaml $(python) && $(track2)
+``` yaml
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-storage
