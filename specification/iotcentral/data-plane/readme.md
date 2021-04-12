@@ -18,15 +18,15 @@ These are the global settings for the IoT Central API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2019-10-28-preview
+tag: package-2021-04-30-preview
 ```
 
-### Tag: package-2019-10-28-preview
-These settings apply only when `--tag=package-2019-10-28-preview` is specified on the command line.
+### Tag: package-2021-04-30-preview
+These settings apply only when `--tag=package-2021-04-30-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-10-28-preview'
+```yaml $(tag) == 'package-2021-04-30-preview'
 input-file:
-  - Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentral.json
+  - Microsoft.IoTCentral/preview/2021-04-30-preview/iotcentral.json
 ```
 
 ### Tag: package-1.0.0
@@ -59,7 +59,7 @@ nodejs:
 ## tag: preview
 ``` yaml $(tag) == 'preview'
 input-file:
-  - $(this-folder)/Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentral.json
+  - $(this-folder)/Microsoft.IoTCentral/preview/2021-04-30-preview/iotcentral.json
 ```
 
 ## tag: 1.0.0
@@ -80,7 +80,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentral.json
+  - $(this-folder)/Microsoft.IoTCentral/preview/2021-04-30-preview/iotcentral.json
 
 ```
 
