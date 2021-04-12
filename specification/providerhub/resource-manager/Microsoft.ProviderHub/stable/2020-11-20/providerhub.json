@@ -2259,26 +2259,7 @@
       ],
       "properties": {
         "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "MovingResources",
-            "TransientFailure",
-            "RolloutInProgress"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "specification": {
           "allOf": [
@@ -2319,25 +2300,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "InnerError": {
-      "description": "Inner error containing list of errors.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Specific error code than was provided by the containing error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "innerError": {
-          "description": "Object containing more specific information than the current object about the error.",
-          "type": "object",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": {
-        "type": "object"
-      }
-    },
     "Error": {
       "description": "Standard error object.",
       "type": "object",
@@ -2366,12 +2328,8 @@
           "readOnly": true
         },
         "innerError": {
-          "description": "Object containing more specific information than  the current object about the error.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/InnerError"
-            }
-          ],
+          "description": "Object containing more specific information than the current object about the error.",
+          "type": "object",
           "readOnly": true
         }
       }
@@ -2488,38 +2446,14 @@
       ],
       "properties": {
         "nextTrafficRegion": {
-          "enum": [
-            "NotSpecified",
-            "Canary",
-            "LowTraffic",
-            "MediumTraffic",
-            "HighTraffic",
-            "None",
-            "RestOfTheWorldGroupOne",
-            "RestOfTheWorldGroupTwo"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TrafficRegionCategory",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "nextTrafficRegionScheduledTime": {
           "format": "date-time",
           "type": "string"
         },
         "subscriptionReregistrationResult": {
-          "enum": [
-            "NotApplicable",
-            "ConditionalUpdate",
-            "ForcedUpdate",
-            "Failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SubscriptionReregistrationResult",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
@@ -2527,26 +2461,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "MovingResources",
-            "TransientFailure",
-            "RolloutInProgress"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "specification": {
           "allOf": [
@@ -2634,15 +2549,7 @@
       "type": "object",
       "properties": {
         "requiredFeaturesPolicy": {
-          "enum": [
-            "Any",
-            "All"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "FeaturesPolicy",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
@@ -2650,18 +2557,7 @@
       "type": "object",
       "properties": {
         "optInHeaders": {
-          "enum": [
-            "NotSpecified",
-            "SignedUserToken",
-            "ClientGroupMembership",
-            "SignedAuxiliaryTokens",
-            "UnboundedClientGroupMembership"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OptInHeaderType",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
@@ -2725,27 +2621,10 @@
           "type": "string"
         },
         "direction": {
-          "enum": [
-            "None",
-            "Request",
-            "Response"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "LoggingDirections",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "detailLevel": {
-          "enum": [
-            "None",
-            "Body"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "LoggingDetails",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "hiddenPropertyPaths": {
           "allOf": [
@@ -2764,16 +2643,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "NotSpecified",
-            "NumberOfRequests",
-            "NumberOfResources"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ThrottlingMetricType",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "limit": {
           "format": "int64",
@@ -2853,18 +2723,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "NotSpecified",
-            "SystemAssigned",
-            "UserAssigned",
-            "Actor",
-            "DelegatedResourceIdentity"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IdentityManagementTypes",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "applicationId": {
           "type": "string"
@@ -2875,18 +2734,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "NotSpecified",
-            "SystemAssigned",
-            "UserAssigned",
-            "Actor",
-            "DelegatedResourceIdentity"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IdentityManagementTypes",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
@@ -2894,19 +2742,7 @@
       "type": "object",
       "properties": {
         "state": {
-          "enum": [
-            "NotDefined",
-            "Enabled",
-            "Warned",
-            "PastDue",
-            "Disabled",
-            "Deleted"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SubscriptionState",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "allowedActions": {
           "type": "array",
@@ -2969,29 +2805,10 @@
       "type": "object",
       "properties": {
         "capabilities": {
-          "enum": [
-            "Default",
-            "Preflight"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TemplateDeploymentCapabilities",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "preflightOptions": {
-          "enum": [
-            "None",
-            "ValidationRequests",
-            "DeploymentRequests",
-            "TestOnly",
-            "RegisteredOnly"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TemplateDeploymentPreflightOptions",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
@@ -3014,29 +2831,10 @@
       "type": "object",
       "properties": {
         "linkedOperation": {
-          "enum": [
-            "None",
-            "CrossResourceGroupResourceMove",
-            "CrossSubscriptionResourceMove"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "LinkedOperation",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "linkedAction": {
-          "enum": [
-            "NotSpecified",
-            "Blocked",
-            "Validate",
-            "Enabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "LinkedAction",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
@@ -3047,34 +2845,10 @@
           "type": "string"
         },
         "routingType": {
-          "enum": [
-            "Default",
-            "ProxyOnly",
-            "HostBased",
-            "Extension",
-            "Tenant",
-            "Fanout",
-            "LocationBased",
-            "Failover",
-            "CascadeExtension"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RoutingType",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "resourceValidation": {
-          "enum": [
-            "NotSpecified",
-            "ReservedWords",
-            "ProfaneWords"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceValidation",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "allowedUnauthorizedActions": {
           "type": "array",
@@ -3132,7 +2906,10 @@
           ]
         },
         "metadata": {
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "requiredFeatures": {
           "type": "array",
@@ -3195,16 +2972,7 @@
           }
         },
         "resourceDeletionPolicy": {
-          "enum": [
-            "NotSpecified",
-            "Cascade",
-            "Force"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ManifestResourceDeletionPolicy",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
@@ -3249,7 +3017,10 @@
         "resourceAccessRoles": {
           "type": "array",
           "items": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         }
       }
@@ -3265,16 +3036,7 @@
           "type": "string"
         },
         "effect": {
-          "enum": [
-            "NotSpecified",
-            "Allow",
-            "Disallow"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceProviderCapabilitiesEffect",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "requiredFeatures": {
           "type": "array",
@@ -3322,21 +3084,7 @@
           "type": "string"
         },
         "providerType": {
-          "enum": [
-            "NotSpecified",
-            "Internal",
-            "External",
-            "Hidden",
-            "RegistrationFree",
-            "LegacyRegistrationRequired",
-            "TenantOnly",
-            "AuthorizationFree"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceProviderType",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "requiredFeatures": {
           "type": "array",
@@ -3378,7 +3126,10 @@
           }
         },
         "metadata": {
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "globalNotificationEndpoints": {
           "type": "array",
@@ -3434,27 +3185,10 @@
       "type": "object",
       "properties": {
         "notificationMode": {
-          "enum": [
-            "NotSpecified",
-            "EventHub",
-            "WebHook"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "NotificationMode",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "messageScope": {
-          "enum": [
-            "NotSpecified",
-            "RegisteredSubscriptions"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MessageScope",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "includedEvents": {
           "type": "array",
@@ -3632,7 +3366,7 @@
     "ThirdPartyProviderAuthorization": {
       "type": "object",
       "properties": {
-        "authorizations": {
+        "authorizationsz": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LightHouseAuthorization"
@@ -3676,41 +3410,10 @@
       "type": "object",
       "properties": {
         "state": {
-          "enum": [
-            "Registered",
-            "Unregistered",
-            "Warned",
-            "Suspended",
-            "Deleted",
-            "WarnedToRegistered",
-            "WarnedToSuspended",
-            "WarnedToDeleted",
-            "WarnedToUnregistered",
-            "SuspendedToRegistered",
-            "SuspendedToWarned",
-            "SuspendedToDeleted",
-            "SuspendedToUnregistered"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SubscriptionTransitioningState",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "action": {
-          "enum": [
-            "NotDefined",
-            "DeleteAllResources",
-            "SoftDeleteAllResources",
-            "NoOp",
-            "BillingCancellation",
-            "UndoSoftDelete"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SubscriptionNotificationOperation",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
@@ -3738,16 +3441,7 @@
         "preflightOptions": {
           "type": "array",
           "items": {
-            "enum": [
-              "None",
-              "ContinueDeploymentOnFailure",
-              "DefaultValidationOnly"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "PreflightOption",
-              "modelAsString": true
-            }
+            "type": "string"
           }
         }
       }
@@ -3775,21 +3469,7 @@
           "type": "string"
         },
         "providerType": {
-          "enum": [
-            "NotSpecified",
-            "Internal",
-            "External",
-            "Hidden",
-            "RegistrationFree",
-            "LegacyRegistrationRequired",
-            "TenantOnly",
-            "AuthorizationFree"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceProviderType",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "requiredFeatures": {
           "type": "array",
@@ -3825,7 +3505,10 @@
           }
         },
         "metadata": {
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "templateDeploymentOptions": {
           "allOf": [
@@ -3852,26 +3535,7 @@
           ]
         },
         "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "MovingResources",
-            "TransientFailure",
-            "RolloutInProgress"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "subscriptionLifecycleNotificationSpecifications": {
           "allOf": [
@@ -3924,29 +3588,7 @@
         "extensionCategories": {
           "type": "array",
           "items": {
-            "enum": [
-              "NotSpecified",
-              "ResourceCreationValidate",
-              "ResourceCreationBegin",
-              "ResourceCreationCompleted",
-              "ResourceReadValidate",
-              "ResourceReadBegin",
-              "ResourcePatchValidate",
-              "ResourcePatchCompleted",
-              "ResourceDeletionValidate",
-              "ResourceDeletionBegin",
-              "ResourceDeletionCompleted",
-              "ResourcePostAction",
-              "SubscriptionLifecycleNotification",
-              "ResourcePatchBegin",
-              "ResourceMoveBegin",
-              "ResourceMoveCompleted"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ExtensionCategory",
-              "modelAsString": true
-            }
+            "type": "string"
           }
         },
         "timeout": {
@@ -4004,31 +3646,13 @@
         "request": {
           "type": "array",
           "items": {
-            "enum": [
-              "NotSpecified",
-              "DoNotMergeExistingReadOnlyAndSecretProperties",
-              "IncludeInternalMetadata"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ExtensionOptionType",
-              "modelAsString": true
-            }
+            "type": "string"
           }
         },
         "response": {
           "type": "array",
           "items": {
-            "enum": [
-              "NotSpecified",
-              "DoNotMergeExistingReadOnlyAndSecretProperties",
-              "IncludeInternalMetadata"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ExtensionOptionType",
-              "modelAsString": true
-            }
+            "type": "string"
           }
         }
       }
@@ -4091,34 +3715,10 @@
       "type": "object",
       "properties": {
         "routingType": {
-          "enum": [
-            "Default",
-            "ProxyOnly",
-            "HostBased",
-            "Extension",
-            "Tenant",
-            "Fanout",
-            "LocationBased",
-            "Failover",
-            "CascadeExtension"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RoutingType",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "regionality": {
-          "enum": [
-            "NotSpecified",
-            "Global",
-            "Regional"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Regionality",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "endpoints": {
           "type": "array",
@@ -4198,26 +3798,7 @@
           "type": "boolean"
         },
         "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "MovingResources",
-            "TransientFailure",
-            "RolloutInProgress"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "enableThirdPartyS2S": {
           "type": "boolean"
@@ -4292,16 +3873,7 @@
           ]
         },
         "resourceDeletionPolicy": {
-          "enum": [
-            "NotSpecified",
-            "CascadeDeleteAll",
-            "CascadeDeleteProxyOnlyChildren"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceDeletionPolicy",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
@@ -4426,16 +3998,7 @@
           "type": "integer"
         },
         "scaleType": {
-          "enum": [
-            "None",
-            "Manual",
-            "Automatic"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SkuScaleType",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
