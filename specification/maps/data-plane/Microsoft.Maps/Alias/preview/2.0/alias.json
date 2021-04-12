@@ -265,7 +265,6 @@
           }
         }
       },
-
       "delete": {
         "x-publish": true,
         "description": "**Alias - Delete API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nThis API allows the caller to delete a previously created alias.<br>    \nYou can also use this API to delete old/unused aliases to create space for new content.\nThis API does not delete the references resource, only the alias referencing the resource.\n\n\n### Submit Delete Request\n\nTo delete your alias you will issue a `DELETE` request where the path will contain the `aliasId` of the alias to delete.<br> \n\n\n### Delete Alias Response\n\nThe Delete API returns a HTTP `204 No Content` response with an empty body, if the alias was deleted successfully.<br>    \nA HTTP `400 Bad Request` error response will be returned if the alias with the passed-in `aliasId` is not found.    ",
@@ -307,7 +306,6 @@
           }
         }
       },
-
       "get": {
         "x-publish": true,
         "description": "**Alias - Get Details API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nThis API allows the caller to fetch the details of a previously created alias.\n\n\n### Submit Get Details Request\n\nTo get the details of your alias, you will issue a `GET` request with the `aliasId` in the path.<br>\n\n\n### Get Details Response\n\nThe Get Details API returns the previously created alias in `json` format. The response contains the following details for the alias resource:\n\n  > createdTimestamp - The timestamp that the alias was created.\n  > aliasId - The id for the alias.\n  > resourceId - The id for the resource that this alias references (could be null if the alias has not been assigned).\n  > lastUpdatedTimestamp - The last time the alias was assigned to a resource.\n\n\nHere's a sample response:  \n\n<br>\n\n```json\n{\n  \"createdTimestamp\": \"2020-02-13T21:19:11.123Z\",\n  \"aliasId\": \"a8a4b8bb-ecf4-fb27-a618-f41721552766\",\n  \"resourceId\": \"e89aebb9-70a3-8fe1-32bb-1fbd0c725f14\",\n  \"lastUpdatedTimestamp\": \"2020-02-13T21:19:22.123Z\"\n}\n```",

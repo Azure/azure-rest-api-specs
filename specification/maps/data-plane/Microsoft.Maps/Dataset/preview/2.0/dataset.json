@@ -257,7 +257,6 @@
         "x-publish": true,
         "description": "**Dataset Get API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Dataset APIs are part of Creator.\nThis API allows the caller to fetch a previously successfully created dataset.\n",
         "operationId": "Dataset_GetPreview",
-
         "parameters": [
           {
             "$ref": "#/parameters/DatasetId"
@@ -337,7 +336,7 @@
     },
     "/datasets/operations/{operationId}": {
       "get": {
-        "description": "This path will be obtained from a call to /datasets/create.  While in progress, an http202 will be returned, followed by an http200 once completed.",
+        "description": "This path will be obtained from a call to /datasets/create.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionKey"
@@ -349,8 +348,7 @@
             "$ref": "#/parameters/OperationId"
           }
         ],
-
-        "responses":{
+        "responses": {
           "200": {
             "$ref": "#/responses/200Async"
           },

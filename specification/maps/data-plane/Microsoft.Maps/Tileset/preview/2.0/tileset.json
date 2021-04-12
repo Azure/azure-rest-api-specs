@@ -87,7 +87,7 @@
         }
       }
     },
-     "202": {
+    "202": {
       "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the location Header to obtain status.",
       "headers": {
         "Operation-Location": {
@@ -363,10 +363,9 @@
         }
       }
     },
-
     "/tilesets/operations/{operationId}": {
       "get": {
-        "description": "This path will be obtained from a call to /tilesets/create.  While in progress, an http202 will be returned, followed by an http200 once completed.",
+        "description": "This path will be obtained from a call to /tilesets/create.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionKey"
@@ -378,8 +377,7 @@
             "$ref": "#/parameters/OperationId"
           }
         ],
-
-        "responses":{
+        "responses": {
           "200": {
             "$ref": "#/responses/200Async"
           },
@@ -389,7 +387,6 @@
         }
       }
     }
-
   },
   "definitions": {
     "ODataErrorResponse": {

@@ -163,7 +163,6 @@
       "required": true,
       "x-ms-parameter-location": "method"
     }
-
   },
   "paths": {
     "/conversions": {
@@ -356,7 +355,7 @@
     },
     "/conversions/operations/{operationId}": {
       "get": {
-        "description": "This path will be obtained from a call to POST /conversions.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once completed.",
+        "description": "This path will be obtained from a call to POST /conversions.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionKey"
@@ -368,8 +367,7 @@
             "$ref": "#/parameters/OperationId"
           }
         ],
-
-        "responses":{
+        "responses": {
           "200": {
             "$ref": "#/responses/200Async"
           },
@@ -379,7 +377,6 @@
         }
       }
     }
-
   },
   "definitions": {
     "ODataErrorResponse": {
