@@ -2,6 +2,7 @@
   "parameters": {
     "api-version": "2020-10-01",
     "groupId": "20000000-0001-0000-0000-000000000000",
+    "$expand": "ancestors",
     "Cache-Control": "no-cache"
   },
   "responses": {
@@ -16,12 +17,16 @@
           "details": {
             "version": 1,
             "updatedTime": "2018-01-01T00:00:00.00Z",
-            "updatedBy": "16b8ef21-5c9f-420c-bcc9-e4f8c9f30b4b",
+            "updatedBy": "Test",
             "parent": {
-              "id": "/providers/Microsoft.Management/managementGroups/RootGroup",
-              "name": "RootGroup",
-              "displayName": "RootGroup"
-            }
+              "id": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000001",
+              "name": "20000000-0000-0000-0000-000000000001",
+              "displayName": "Parent display name"
+            },
+			"managementGroupAncestors": [
+			  "20000000-0000-0000-0000-000000000001",
+			  "20000000-0000-0000-0000-000000000000"
+			]
           }
         }
       }
