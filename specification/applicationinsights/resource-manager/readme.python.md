@@ -160,7 +160,7 @@ These settings apply only when `--tag=package-preview-2020-06-only --python` is 
 ``` yaml $(tag) == 'package-preview-2020-06-only' && $(python) && !$(track2)
 python:
   namespace: azure.mgmt.applicationinsights.v2020_06_02_preview
-  output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_06_02-preview
+  output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_06_02_preview
 ```
 ``` yaml $(tag) == 'package-preview-2020-06-only' && $(python) && $(track2)
 namespace: azure.mgmt.applicationinsights.v2020_06_02_preview
