@@ -34,48 +34,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/services": {
-      "get": {
-        "x-ms-examples": {
-          "CosmosDBServicesList": {
-            "$ref": "./examples/CosmosDBServicesList.json"
-          }
-        },
-        "operationId": "Service_List",
-        "description": "Gets the status of service.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The ServiceResource.",
-            "schema": {
-              "$ref": "#/definitions/ServiceResourceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/services/{serviceName}": {
       "put": {
         "tags": [
@@ -110,13 +68,13 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "createUpdateParameters",
+            "name": "servicesCreateUpdateParameter",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceResourceCreateUpdateParameters"
+              "$ref": "#/definitions/ServicesCreateUpdateParameters"
             },
-            "description": "The Service resource parameters."
+            "description": "The Service configuration parameters."
           }
         ],
         "responses": {
@@ -128,224 +86,110 @@
           },
           "202": {
             "description": "The job will complete asynchronously."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "DataTransfer",
-          "SqlDedicatedGateway"
-        ],
-        "x-ms-examples": {
-          "DataTransferServiceGet": {
-            "$ref": "./examples/CosmosDBDataTransferServiceGet.json"
-          },
-          "SqlDedicatedGatewayServiceGet": {
-            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceGet.json"
-          }
-        },
-        "operationId": "Service_Get",
-        "description": "Gets the status of service.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/serviceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The ServiceResource.",
-            "schema": {
-              "$ref": "#/definitions/ServiceResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "DataTransfer",
-          "SqlDedicatedGateway"
-        ],
-        "x-ms-examples": {
-          "DataTransferServiceDelete": {
-            "$ref": "./examples/CosmosDBDataTransferServiceDelete.json"
-          },
-          "SqlDedicatedGatewayServiceDelete": {
-            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceDelete.json"
-          }
-        },
-        "operationId": "Service_Delete",
-        "description": "Deletes service with the given serviceName.",
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/serviceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The job will complete asynchronously."
-          },
-          "204": {
-            "description": "The response for service deletion."
-          },
-          "200": {
-            "description": "The response for service deletion."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
-            }
           }
         }
       }
     }
   },
   "definitions": {
-    "ServiceResourceProperties": {
-      "description": "Services response resource.",
+    "ServicesCreateUpdateParameters": {
+      "description": "Service create or update parameters.",
       "type": "object",
-      "discriminator": "serviceType",
       "properties": {
-        "creationTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Time of the last state change (ISO-8601 format)."
-        },
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The properties for creating services.",
+          "$ref": "#/definitions/ServicesCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "ServicesCreateUpdateProperties": {
+      "description": "Describes the service response property.",
+      "type": "object",
+      "properties": {
         "instanceSize": {
-          "$ref": "#/definitions/ServiceResourceInstanceSize"
+          "type": "string",
+          "enum": [
+            "Cosmos.D4s",
+            "Cosmos.D8s",
+            "Cosmos.D16s"
+          ],
+          "description": "Instance type for the service.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ServiceInstanceSize"
+          }
         },
         "instanceCount": {
           "description": "Instance count for the service.",
-          "type": "integer",
-          "minimum": 0,
-          "format": "int32"
+          "type": "number"
         },
         "serviceType": {
-          "$ref": "#/definitions/ServiceType"
-        },
-        "status": {
-          "readOnly": true,
-          "$ref": "#/definitions/ServiceResourceStatus"
+          "type": "string",
+          "description": "The type of Azure resource."
         }
+      },
+      "required": [
+        "instanceSize",
+        "instanceCount"
+      ]
+    },
+    "ServiceResource": {
+      "description": "Services response resource.",
+      "type": "object",
+      "x-ms-client-flatten": true,
+        "properties": {
+          "creationTime": {
+            "readOnly": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "Time of the last state change (ISO-8601 format)."
+          },
+          "instanceSize": {
+            "type": "string",
+            "enum": [
+              "Cosmos.D4s",
+              "Cosmos.D8s",
+              "Cosmos.D16s"
+            ],
+            "description": "Instance type for the service.",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "InstanceSize"
+            }
+          },
+          "instanceCount": {
+            "description": "Instance count for the service.",
+            "type": "number"
+          },
+          "serviceType": {
+            "type": "string",
+            "description": "The type of Azure resource."
+          },
+          "status":{
+            "type": "string",
+            "description": "Status of the Service"
+          }
       },
       "additionalProperties": {
         "type": "object"
       },
-      "required": [
-        "serviceType"
-      ]
-    },
-    "ServiceResource": {
-      "description": "Properties for the database account.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": ".../../cosmos-db.json#/definitions/ARMProxyResource"
-        }
+      "required":   [
+        "properties"
       ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": false,
-          "$ref": "#/definitions/ServiceResourceProperties"
-        }
-      }
-    },
-    "ServiceResourceCreateUpdateParameters": {
-      "description": "Parameters for Create or Update Request for ServiceResource",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
-        }
-      }
-    },
-    "ServiceResourceCreateUpdateProperties": {
-      "description": "Properties in ServiceResourceCreateUpdateParameters.",
-      "type": "object",
-      "properties": {
-        "instanceSize": {
-          "$ref": "#/definitions/ServiceResourceInstanceSize"
-        },
-        "instanceCount": {
-          "description": "Instance count for the service.",
-          "type": "integer",
-          "minimum": 0,
-          "format": "int32"
-        },
-        "serviceType": {
-          "$ref": "#/definitions/ServiceType"
-        }
-      }
-    },
-    "ServiceResourceListResult": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceResource"
-          },
-          "description": "List of Service Resource and their properties."
-        }
-      },
-      "description": "The List operation response, that contains the Service Resource and their properties."
+      "x-ms-azure-resource": true
     },
     "DataTransferServiceResource": {
       "description": "Describes the service response property.",
       "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": false,
-          "$ref": "#/definitions/DataTransferServiceResourceProperties"
-        }
-      }
-    },
-    "DataTransferServiceResourceProperties": {
-      "description": "Properties for DataTransferServiceResource.",
-      "type": "object",
-      "x-ms-discriminator-value": "DataTransfer",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceResourceProperties"
+          "$ref": "#/definitions/ServiceResource"
         }
       ],
       "properties": {
@@ -354,49 +198,40 @@
           "readOnly": true,
           "description": "An array that contains all of the locations for the service.",
           "items": {
-            "$ref": "#/definitions/DataTransferRegionalServiceResource"
+            "$ref": "#/definitions/DataTransferRegionalServiceLocation"
           }
         }
       }
     },
     "SqlDedicatedGatewayServiceResource": {
-      "description": "Describes the service response property for SqlDedicatedGateway.",
+      "description": "Describes the service response property.",
       "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": false,
-          "$ref": "#/definitions/SqlDedicatedGatewayServiceResourceProperties"
-        }
-      }
-    },
-    "SqlDedicatedGatewayServiceResourceProperties": {
-      "description": "Properties for SqlDedicatedGatewayServiceResource.",
-      "type": "object",
-      "x-ms-discriminator-value": "SqlDedicatedGateway",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceResourceProperties"
+          "$ref": "#/definitions/ServiceResource"
         }
       ],
       "properties": {
-        "sqlDedicatedGatewayEndpoint": {
+        "SqlDedicatedGatewayEndpoint": {
           "type": "string",
-          "description": "SqlDedicatedGateway endpoint for the service."
+          "description": "SQL endpoint for the service."
         },
         "locations": {
           "type": "array",
           "readOnly": true,
           "description": "An array that contains all of the locations for the service.",
           "items": {
-            "$ref": "#/definitions/SqlDedicatedGatewayRegionalServiceResource"
+            "$ref": "#/definitions/SqlDedicatedGatewayRegionalServiceLocation"
           }
         }
-      }
+      },
+      "required":[
+        "properties"
+      ]
     },
-    "RegionalServiceResource": {
+    "DataTransferRegionalServiceLocation": {
       "description": "Resource for a regional service location.",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "name": {
           "readOnly": true,
@@ -409,76 +244,58 @@
           "description": "The location name."
         },
         "status": {
-          "readOnly": true,
-          "$ref": "#/definitions/ServiceResourceStatus"
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Running",
+            "Updating",
+            "Deleting",
+            "Error",
+            "Stopped"
+          ],
+          "description": "Describes the status of a service.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DataTransferRegionStatus"
+          }
         }
       }
     },
-    "SqlDedicatedGatewayRegionalServiceResource": {
+    "SqlDedicatedGatewayRegionalServiceLocation": {
       "description": "Resource for a regional service location.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegionalServiceResource"
-        }
-      ],
       "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The regional service name."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location name."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Running",
+            "Updating",
+            "Deleting",
+            "Error",
+            "Stopped"
+          ],
+          "description": "Describes the status of a service.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SQLRegionStatus"
+          }
+        },
         "sqlDedicatedGatewayEndpoint": {
           "readOnly": true,
           "type": "string",
-          "description": "The regional endpoint for SqlDedicatedGateway."
+          "description": "The regional endpoint for SQL."
         }
-      }
-    },
-    "DataTransferRegionalServiceResource": {
-      "description": "Resource for a regional service location.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegionalServiceResource"
-        }
-      ]
-    },
-    "ServiceResourceStatus": {
-      "type": "string",
-      "enum": [
-        "Creating",
-        "Running",
-        "Updating",
-        "Deleting",
-        "Error",
-        "Stopped"
-      ],
-      "readOnly": true,
-      "description": "Describes the status of a service.",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "ServiceStatus"
-      }
-    },
-    "ServiceResourceInstanceSize": {
-      "type": "string",
-      "enum": [
-        "Cosmos.D4s",
-        "Cosmos.D8s",
-        "Cosmos.D16s"
-      ],
-      "description": "Instance type for the service.",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "ServiceSize"
-      }
-    },
-    "ServiceType": {
-      "type": "string",
-      "enum": [
-        "SqlDedicatedGateway",
-        "DataTransfer"
-      ],
-      "description": "ServiceType for the service.",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "ServiceType"
       }
     }
   },
@@ -494,7 +311,7 @@
       "maxLength": 50,
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
     },
-    "serviceNameParameter": {
+ "serviceNameParameter": {
       "name": "serviceName",
       "in": "path",
       "required": true,
