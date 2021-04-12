@@ -1,7 +1,6 @@
 # IoT Central - API client generation
 > see https://aka.ms/autorest
 This is the AutoRest configuration file for Azure IoT Central.
----
 
 ## Getting Started
 To build the SDK for Azure IoT Central, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
