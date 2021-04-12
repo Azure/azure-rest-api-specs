@@ -6,6 +6,7 @@ These settings apply only when `--python` is specified on the command line.
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-storage
+package-version: 1.0.0b1
 no-namespace-folders: true
 modelerfour:
   lenient-model-deduplication: true
