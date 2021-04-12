@@ -7,7 +7,20 @@
     "clusterName": "cluster1",
     "HDInsightCluster": {
       "location": "West US 2",
-      "properties": {}
+      "properties": {
+        "clusterType": "kafka",
+        "stackVersion": "2.4.1-1.0",
+        "computeProfile": {
+          "vmSize": "Standard_D3_v2",
+          "minCount": 4,
+          "maxCount": 10
+        },
+        "scaleProfile": {
+          "minCount": 3,
+          "maxCount": 6
+        },
+        "kafkaProfile": {}
+      }
     }
   },
   "responses": {
@@ -18,8 +31,18 @@
         "type": "Microsoft.HDInsight/clusterPools/clusters",
         "properties": {
           "provisioningState": "Succeeded",
-          "replicas": 2,
-          "enableLivy": true
+          "clusterType": "kafka",
+          "stackVersion": "2.4.1-1.0",
+          "computeProfile": {
+            "vmSize": "Standard_D3_v2",
+            "minCount": 4,
+            "maxCount": 10
+          },
+          "scaleProfile": {
+            "minCount": 3,
+            "maxCount": 6
+          },
+          "kafkaProfile": {}
         },
         "systemData": {
           "createdBy": "string",
@@ -39,8 +62,18 @@
         "type": "Microsoft.HDInsight/clusterPools/clusters",
         "properties": {
           "provisioningState": "Accepted",
-          "replicas": 2,
-          "enableLivy": true
+          "clusterType": "kafka",
+          "stackVersion": "2.4.1-1.0",
+          "computeProfile": {
+            "vmSize": "Standard_D3_v2",
+            "minCount": 4,
+            "maxCount": 10
+          },
+          "scaleProfile": {
+            "minCount": 3,
+            "maxCount": 6
+          },
+          "kafkaProfile": {}
         },
         "systemData": {
           "createdBy": "string",

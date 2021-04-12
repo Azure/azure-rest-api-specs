@@ -709,14 +709,64 @@
           },
           "readOnly": true
         },
-        "replicas": {
-          "description": "Number of replicas.",
-          "type": "integer",
-          "format": "int32"
+        "clusterType": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The type of cluster."
         },
-        "enableLivy": {
-          "description": "Enable livy.",
-          "type": "boolean"
+        "stackVersion": {
+          "type": "string",
+          "description": "The cluster's stack version.",
+          "pattern": "^(0|[1-9][0-9]{0,8})\\.(0|[1-9][0-9]{0,8})\\.(0|[1-9][0-9]{0,8})-(0|[1-9][0-9]{0,8})\\.(0|[1-9][0-9]{0,8})$"
+        },
+        "computeProfile": {
+          "type": "object",
+          "description": "The compute profile.",
+          "properties": {
+            "vmSize": {
+              "type": "string",
+              "description": "The virtual machine SKU."
+            },
+            "minCount": {
+              "description": "Minimum number of virtual machines.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxCount": {
+              "description": "Maximum number of virtual machines.",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "scaleProfile": {
+          "type": "object",
+          "description": "Cluster worker count.",
+          "properties": {
+            "minCount": {
+              "description": "Minimum number of workers.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxCount": {
+              "description": "Maximum number of workers.",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "kafkaProfile": {
+          "type": "object",
+          "description": "Kafka cluster profile.",
+          "properties": {}
+        },
+        "prestoProfile": {
+          "type": "object",
+          "description": "Presto cluster profile.",
+          "properties": {}
         }
       },
       "description": "Cluster resource properties."
