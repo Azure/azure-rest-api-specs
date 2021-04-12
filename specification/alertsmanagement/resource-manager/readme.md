@@ -52,6 +52,7 @@ These settings apply only when `--tag=package-2021-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-04'
 input-file:
+  - Microsoft.AlertsManagement/stable/2021-04-01/AlertsManagement.json
   - Microsoft.AlertsManagement/stable/2021-04-01/SmartDetectorAlertRulesApi.json
 ```
 ### Tag: package-preview-2021-01
