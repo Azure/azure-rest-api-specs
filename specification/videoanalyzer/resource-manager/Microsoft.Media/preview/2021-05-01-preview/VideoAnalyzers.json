@@ -345,27 +345,6 @@
         "name"
       ]
     },
-    "EntityNameAvailabilityCheckOutput": {
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean",
-          "description": "Specifies if the name is available."
-        },
-        "reason": {
-          "type": "string",
-          "description": "Specifies the reason if the name is not available."
-        },
-        "message": {
-          "type": "string",
-          "description": "Specifies the detailed reason if the name is not available."
-        }
-      },
-      "type": "object",
-      "required": [
-        "nameAvailable"
-      ],
-      "description": "The response from the check name availability request."
-    },
     "StorageAccount": {
       "properties": {
         "id": {
@@ -638,20 +617,6 @@
       },
       "type": "object",
       "description": "A collection of VideoAnalyzer items."
-    },
-    "CheckNameAvailabilityInput": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name to check for availability."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the input to check."
-        }
-      },
-      "type": "object",
-      "description": "The input for the operation of checking for the availability of a name."
     }
   },
   "paths": {
@@ -976,7 +941,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/EntityNameAvailabilityCheckOutput"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
@@ -1002,7 +967,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityInput"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityRequest"
             },
             "description": "The request parameters"
           },
