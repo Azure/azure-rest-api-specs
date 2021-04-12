@@ -14,7 +14,7 @@ directive:
 
 ``` yaml $(go)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
 ```
 
