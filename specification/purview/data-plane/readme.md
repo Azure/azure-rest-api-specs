@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2020-12-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-12-01-preview'
 input-file:
-- preview/2020-12-01-preview/purviewcatalog.json
+- Azure.Purview.Catalog/preview/2020-12-01-preview/purviewcatalog.json
 ```
 
 ---
