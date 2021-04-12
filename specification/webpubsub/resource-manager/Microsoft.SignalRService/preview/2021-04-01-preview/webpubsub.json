@@ -2048,6 +2048,11 @@
         "networkACLs": {
           "$ref": "#/definitions/WebPubSubNetworkACLs",
           "description": "Network ACLs"
+        },
+        "publicNetworkAccess": {
+          "description": "Enable or disable public network access. Default to \"Enabled\".\r\nWhen it's Enabled, network ACLs still apply.\r\nWhen it's Disabled, public network access is always disabled no matter what you set in network ACLs.",
+          "default": "Enabled",
+          "type": "string"
         }
       }
     },
