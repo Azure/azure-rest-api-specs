@@ -691,72 +691,6 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resources": {
-      "get": {
-        "tags": [
-          "Vaults"
-        ],
-        "operationId": "Vaults_List",
-        "description": "The List operation gets information about the vaults associated with the subscription.",
-        "parameters": [
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "resourceType eq 'Microsoft.KeyVault/vaults'"
-            ],
-            "description": "The filter to apply on the operation."
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of results to return."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "2015-11-01"
-            ],
-            "description": "Azure Resource Manager Api Version."
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get information about all key vaults in the subscription.",
-            "schema": {
-              "$ref": "#/definitions/ResourceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List vaults in the specified subscription": {
-            "$ref": "./examples/listVault.json"
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/checkNameAvailability": {
       "post": {
         "tags": [
@@ -1650,22 +1584,6 @@
         }
       },
       "description": "List of vaults"
-    },
-    "ResourceListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Resource"
-          },
-          "description": "The list of vault resources."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of vault resources."
-        }
-      },
-      "description": "List of vault resources."
     },
     "Resource": {
       "properties": {
