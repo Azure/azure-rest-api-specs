@@ -138,7 +138,5 @@ See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

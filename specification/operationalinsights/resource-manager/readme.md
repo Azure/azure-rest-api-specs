@@ -225,7 +225,5 @@ directive:
     reason: properties etag defined as eTag in model
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

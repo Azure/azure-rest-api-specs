@@ -109,9 +109,7 @@ See configuration in [readme.java.md](./readme.java.md)
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Terraform
 

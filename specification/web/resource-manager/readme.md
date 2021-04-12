@@ -1318,7 +1318,5 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/Recommendations.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

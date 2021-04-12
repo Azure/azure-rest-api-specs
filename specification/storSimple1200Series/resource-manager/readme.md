@@ -100,7 +100,5 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storsimple1200series
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

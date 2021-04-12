@@ -76,7 +76,5 @@ csharp:
 
 See configuration in [readme.cli.md](./readme.cli.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

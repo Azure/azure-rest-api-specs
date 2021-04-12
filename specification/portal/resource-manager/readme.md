@@ -117,7 +117,5 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

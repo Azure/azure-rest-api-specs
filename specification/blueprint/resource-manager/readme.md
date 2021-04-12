@@ -134,7 +134,5 @@ directive:
     reason: OperationsAPI for Microsoft.Management is out of scope.    
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -218,7 +218,5 @@ directive:
     reason: Output not required for job update
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

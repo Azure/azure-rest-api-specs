@@ -203,7 +203,5 @@ directive:
       - DataFlow add type required  
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

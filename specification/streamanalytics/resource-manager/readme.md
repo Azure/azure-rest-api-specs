@@ -229,7 +229,5 @@ directive:
     reason:  Operations API under 2017-04-01-preview is the super-set of all RPs operations (across all API-versions).
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

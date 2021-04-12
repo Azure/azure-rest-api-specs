@@ -258,7 +258,5 @@ directive:
     reason: This is false positive, 'linkedServers' is not a tracked resource.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

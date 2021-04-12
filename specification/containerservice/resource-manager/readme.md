@@ -689,6 +689,4 @@ directive:
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

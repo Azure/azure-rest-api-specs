@@ -106,7 +106,5 @@ directive:
     reason: This is an issue with the common resource definition. The properties in the resource definition actually has a title and description.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

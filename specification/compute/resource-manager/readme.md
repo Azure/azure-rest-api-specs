@@ -857,6 +857,4 @@ input-file:
 - Microsoft.Compute/stable/2019-07-01/disk.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

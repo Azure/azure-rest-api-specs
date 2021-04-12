@@ -129,9 +129,7 @@ swagger-to-sdk:
 
 ---
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## az CLI
 

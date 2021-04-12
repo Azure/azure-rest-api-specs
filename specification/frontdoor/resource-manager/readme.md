@@ -262,6 +262,4 @@ directive:
     reason: Direct copy of ValidateCustomDomain API in CDN Resource Provider.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

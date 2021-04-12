@@ -226,7 +226,5 @@ directive:
     reason: False positive. Structure is the same with addition of provisioningStatus property.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

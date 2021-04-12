@@ -503,6 +503,4 @@ input-file:
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

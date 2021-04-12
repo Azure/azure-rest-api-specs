@@ -666,6 +666,4 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

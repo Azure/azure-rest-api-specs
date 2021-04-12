@@ -163,7 +163,5 @@ directive:
     reason: This is a standardized ARM API.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -1383,6 +1383,4 @@ directive:
     reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

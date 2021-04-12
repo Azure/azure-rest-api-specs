@@ -95,9 +95,7 @@ See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
 See configuration in [readme.terraform.md](./readme.terraform.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## cli
 

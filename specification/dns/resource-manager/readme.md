@@ -237,7 +237,5 @@ input-file:
 - Microsoft.Network/stable/2016-04-01/dns.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

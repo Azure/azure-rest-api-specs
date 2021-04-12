@@ -157,9 +157,7 @@ directive:
     reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## cli
 

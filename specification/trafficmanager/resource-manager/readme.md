@@ -258,7 +258,5 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-trafficmanager
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -177,6 +177,4 @@ See configuration in [readme.python.md](./readme.python.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

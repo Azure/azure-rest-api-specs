@@ -149,7 +149,5 @@ csharp:
   namespace: Microsoft.CloudShell
   output-folder: $(csharp-sdks-folder)/CloudShell/management/Microsoft.CloudShell/GeneratedProtocol
 ```
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

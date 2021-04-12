@@ -90,7 +90,5 @@ See configuration in [readme.node.md](./readme.node.md)
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

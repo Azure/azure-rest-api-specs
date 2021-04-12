@@ -147,7 +147,5 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-hybriddatamanager
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

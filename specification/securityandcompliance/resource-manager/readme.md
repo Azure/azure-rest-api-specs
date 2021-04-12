@@ -157,7 +157,5 @@ See configuration in [readme.python.md](./readme.python.md)
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -209,7 +209,5 @@ directive:
     reason: Common types warning.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

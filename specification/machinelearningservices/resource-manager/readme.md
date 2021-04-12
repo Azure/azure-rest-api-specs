@@ -452,6 +452,4 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
