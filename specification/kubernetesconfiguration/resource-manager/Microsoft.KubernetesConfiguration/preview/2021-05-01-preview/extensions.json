@@ -272,6 +272,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations": {
       "get": {
+        "tags": [
+          "Operations in a Cluster"
+        ],
+        "operationId": "OperationStatus_List",
+        "description": "List Async Operations, currently in progress, in a cluster",
+        "x-ms-examples": {
+          "AsyncOperationStatus List": {
+            "$ref": "./examples/ListAsyncOperationStatus.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -295,16 +305,6 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Operations in a Cluster"
-        ],
-        "operationId": "OperationStatus_List",
-        "description": "List Async Operations, currently in progress, in a cluster",
-        "x-ms-examples": {
-          "AsyncOperationStatus List": {
-            "$ref": "./examples/ListAsyncOperationStatus.json"
-          }
-        },
         "responses": {
           "200": {
             "description": "Operations in a cluster",
@@ -318,11 +318,24 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}": {
       "get": {
+        "tags": [
+          "Operation Status"
+        ],
+        "operationId": "OperationStatus_Get",
+        "description": "Get Async Operation status",
+        "x-ms-examples": {
+          "AsyncOperationStatus Get": {
+            "$ref": "./examples/GetAsyncOperationStatus.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -353,16 +366,6 @@
             "type": "string"
           }
         ],
-        "tags": [
-          "Operation Status"
-        ],
-        "operationId": "OperationStatus_Get",
-        "description": "Get Async Operation status",
-        "x-ms-examples": {
-          "AsyncOperationStatus Get": {
-            "$ref": "./examples/GetAsyncOperationStatus.json"
-          }
-        },
         "responses": {
           "200": {
             "description": "Operation Status",
@@ -461,8 +464,9 @@
       "enum": [
         "Succeeded",
         "Failed",
-        "Cancelled",
+        "Canceled",
         "Creating",
+        "Updating",
         "Deleting"
       ],
       "x-ms-enum": {
