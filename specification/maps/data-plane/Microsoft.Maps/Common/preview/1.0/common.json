@@ -215,6 +215,7 @@
       ]
     },
     "MultiPointData": {
+      "type": "object",
       "description": "Data contained by a `MultiPoint`.",
       "properties": {
         "coordinates": {
@@ -242,6 +243,7 @@
       ]
     },
     "LineStringData": {
+      "type": "object",
       "properties": {
         "coordinates": {
           "description": "Coordinates for the `LineString` geometry.",
@@ -283,6 +285,7 @@
       ]
     },
     "MultiPolygonData": {
+      "type": "object",
       "properties": {
         "coordinates": {
           "description": "Contains a list of valid `GeoJSON` Polygon objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
@@ -312,6 +315,7 @@
       ]
     },
     "MultiPointStringData": {
+      "type": "object",
       "properties": {
         "type": {
           "description": "Specifies the `type` for the geometry. Value should always be equal to \"MultiLineString\".",
@@ -345,6 +349,7 @@
       ]
     },
     "PolygonData": {
+      "type": "object",
       "properties": {
         "coordinates": {
           "description": "Coordinates for the `Polygon` geometry type.",
@@ -371,6 +376,7 @@
       ]
     },
     "GeometryCollectionData": {
+      "type": "object",
       "properties": {
         "geometries": {
           "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
@@ -411,14 +417,12 @@
         "latitude": {
           "description": "Latitude property",
           "type": "number",
-          "format": "double",
-          "readOnly": true
+          "format": "double"
         },
         "longitude": {
           "description": "Longitude property",
           "type": "number",
-          "format": "double",
-          "readOnly": true
+          "format": "double"
         }
       }
     }
