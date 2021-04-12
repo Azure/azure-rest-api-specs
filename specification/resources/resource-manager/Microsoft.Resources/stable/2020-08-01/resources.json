@@ -4891,6 +4891,12 @@
           "readOnly": true,
           "description": "The default API version."
         },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          }
+        },
         "apiProfiles": {
           "type": "array",
           "readOnly": true,
@@ -6226,6 +6232,20 @@
         "error": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
           "description": "The error reported by the operation."
+        }
+      }
+    },
+    "ZoneMapping": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
