@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2020-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2020-09-01'
 input-file:
-  - Microsoft.StorageSync/2020-09-01/storagesync.json
+  - Microsoft.StorageSync/stable/2020-09-01/storagesync.json
 ```
 ### Tag: package-2020-03-01
 
