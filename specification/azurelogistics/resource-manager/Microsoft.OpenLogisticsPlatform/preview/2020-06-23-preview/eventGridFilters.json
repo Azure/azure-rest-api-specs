@@ -236,6 +236,9 @@
             "filter": {
               "$ref": "#/definitions/Filter"
             },
+            "subscriberIdentityInfo": {
+              "$ref": "#/definitions/SubscriberIdentityInfo"
+            },
             "provisioningState": {
               "description": "The provisioning state of the resource.",
               "readOnly": true,
@@ -263,6 +266,26 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "SubscriberIdentityInfo": {
+      "type": "object",
+      "properties": {
+        "clientPrincipalId": {
+          "type": "string"
+        },
+        "clientObjectId": {
+          "type": "string"
+        },
+        "clientTenantId": {
+          "type": "string"
+        },
+        "clientApplicationId": {
+          "type": "string"
+        },
+        "clientAuthorizationSource": {
+          "type": "string"
         }
       }
     },
