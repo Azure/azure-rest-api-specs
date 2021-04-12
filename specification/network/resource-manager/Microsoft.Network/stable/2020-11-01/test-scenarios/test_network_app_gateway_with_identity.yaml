@@ -1,0 +1,572 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_app_gateway_with_identity
+    steps:
+      - step: RawStep_1316
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: identity create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001","name":"cli_test_ag_identity000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:41:38Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1317
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1?api-version=2015-08-31-preview
+        requestBody: '{"location":"westus"}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: identity create
+          Connection: keep-alive
+          Content-Length: '22'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-msi/0.2.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1","name":"id1","type":"Microsoft.ManagedIdentity/userAssignedIdentities","location":"westus","tags":{},"properties":{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","principalId":"8dc51b48-3b90-4b9a-8ebe-579c48c8e417","clientId":"7bd2ded5-c571-4ea4-bc51-25158284cb55","clientSecretUrl":"https://control-westus.identity.azure.net/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1/credentials?tid=54826b22-38d6-4fb2-bad9-b7b93a3e9c5a&oid=8dc51b48-3b90-4b9a-8ebe-579c48c8e417&aid=7bd2ded5-c571-4ea4-bc51-25158284cb55"}}
+      - step: RawStep_1318
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: identity create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001","name":"cli_test_ag_identity000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:41:38Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1319
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2?api-version=2015-08-31-preview
+        requestBody: '{"location":"westus"}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: identity create
+          Connection: keep-alive
+          Content-Length: '22'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-msi/0.2.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2","name":"id2","type":"Microsoft.ManagedIdentity/userAssignedIdentities","location":"westus","tags":{},"properties":{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","principalId":"92be5909-8c84-461f-8b25-8501e0e922fb","clientId":"19145f3f-e77f-4f58-a779-23a796f1a30c","clientSecretUrl":"https://control-westus.identity.azure.net/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2/credentials?tid=54826b22-38d6-4fb2-bad9-b7b93a3e9c5a&oid=92be5909-8c84-461f-8b25-8501e0e922fb&aid=19145f3f-e77f-4f58-a779-23a796f1a30c"}}
+      - step: RawStep_1320
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: keyvault create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001","name":"cli_test_ag_identity000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:41:38Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1321
+        method: GET
+        rawUrl: >-
+          https://graph.windows.net/00000000-0000-0000-0000-000000000000/me?api-version=1.6
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          Connection: keep-alive
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-graphrbac/0.60.0 Azure-SDK-For-Python
+          accept-language: en-US
+        responseExpected: >-
+          {"odata.metadata":"https://graph.windows.net/00000000-0000-0000-0000-000000000000/$metadata#directoryObjects/@Element","odata.type":"Microsoft.DirectoryServices.User","objectType":"User","objectId":"3bd37d68-b234-4fcd-bc83-0fedb27ccf5c","deletionTimestamp":null,"accountEnabled":true,"ageGroup":null,"assignedLicenses":[],"assignedPlans":[],"city":null,"companyName":null,"consentProvidedForMinor":null,"country":null,"createdDateTime":"2020-09-14T05:46:25Z","creationType":"Invitation","department":null,"dirSyncEnabled":null,"displayName":"Yuchao
+          Yan","employeeId":null,"facsimileTelephoneNumber":null,"givenName":null,"immutableId":null,"isCompromised":null,"jobTitle":null,"lastDirSyncTime":null,"legalAgeGroupClassification":null,"mail":"yuchaoyan@microsoft.com","mailNickname":"yuchaoyan_microsoft.com#EXT#","mobile":null,"onPremisesDistinguishedName":null,"onPremisesSecurityIdentifier":null,"otherMails":["yuchaoyan@microsoft.com"],"passwordPolicies":null,"passwordProfile":null,"physicalDeliveryOfficeName":null,"postalCode":null,"preferredLanguage":null,"provisionedPlans":[],"provisioningErrors":[],"proxyAddresses":["SMTP:yuchaoyan@microsoft.com"],"refreshTokensValidFromDateTime":"2020-09-14T05:46:24Z","showInAddressList":false,"signInNames":[],"sipProxyAddress":null,"state":null,"streetAddress":null,"surname":null,"telephoneNumber":null,"thumbnailPhoto@odata.mediaEditLink":"directoryObjects/3bd37d68-b234-4fcd-bc83-0fedb27ccf5c/Microsoft.DirectoryServices.User/thumbnailPhoto","usageLocation":null,"userIdentities":[],"userPrincipalName":"yuchaoyan_microsoft.com#EXT#@AzureSDKTeam.onmicrosoft.com","userState":"Accepted","userStateChangedOn":"2020-09-14T05:47:14Z","userType":"Guest"}
+      - step: RawStep_1322
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002?api-version=2019-09-01
+        requestBody: >-
+          {"location":"westus","properties":{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","sku":{"family":"A","name":"premium"},"accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"3bd37d68-b234-4fcd-bc83-0fedb27ccf5c","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}}],"softDeleteRetentionInDays":90,"networkAcls":{"bypass":"AzureServices","defaultAction":"Allow"}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: keyvault create
+          Connection: keep-alive
+          Content-Length: '848'
+          Content-Type: application/json
+          ParameterSetName: '-g -n --sku'
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-keyvault/8.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002","name":"cli-test-keyvault-000002","type":"Microsoft.KeyVault/vaults","location":"westus","tags":{},"properties":{"sku":{"family":"A","name":"premium"},"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"3bd37d68-b234-4fcd-bc83-0fedb27ccf5c","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}}],"enabledForDeployment":false,"enableSoftDelete":true,"softDeleteRetentionInDays":90,"vaultUri":"https://cli-test-keyvault-000002.vault.azure.net","provisioningState":"RegisteringDns"}}
+      - step: RawStep_1323
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002?api-version=2019-09-01
+        requestBody: >-
+          {"location":"westus","tags":{},"properties":{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","sku":{"family":"A","name":"premium"},"accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"3bd37d68-b234-4fcd-bc83-0fedb27ccf5c","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}},{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"92be5909-8c84-461f-8b25-8501e0e922fb","permissions":{"secrets":["get","set","list"]}}],"vaultUri":"https://cli-test-keyvault-000002.vault.azure.net/","enabledForDeployment":false,"enableSoftDelete":true,"softDeleteRetentionInDays":90}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: keyvault set-policy
+          Connection: keep-alive
+          Content-Length: '1070'
+          Content-Type: application/json
+          ParameterSetName: '-g -n --object-id --secret-permissions'
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-keyvault/8.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002","name":"cli-test-keyvault-000002","type":"Microsoft.KeyVault/vaults","location":"westus","tags":{},"properties":{"sku":{"family":"A","name":"premium"},"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"3bd37d68-b234-4fcd-bc83-0fedb27ccf5c","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}},{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"92be5909-8c84-461f-8b25-8501e0e922fb","permissions":{"secrets":["get","set","list"]}}],"enabledForDeployment":false,"enableSoftDelete":true,"softDeleteRetentionInDays":90,"vaultUri":"https://cli-test-keyvault-000002.vault.azure.net/","provisioningState":"Succeeded"}}
+      - step: RawStep_1324
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002?api-version=2019-09-01
+        requestBody: >-
+          {"location":"westus","properties":{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","sku":{"family":"A","name":"premium"},"accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"3bd37d68-b234-4fcd-bc83-0fedb27ccf5c","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}},{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"92be5909-8c84-461f-8b25-8501e0e922fb","permissions":{"secrets":["get","set","list"]}}],"vaultUri":"https://cli-test-keyvault-000002.vault.azure.net/","enabledForDeployment":false,"enableSoftDelete":true,"softDeleteRetentionInDays":90}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: keyvault update
+          Connection: keep-alive
+          Content-Length: '1058'
+          Content-Type: application/json
+          ParameterSetName: '-n --enable-soft-delete -g'
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-keyvault/8.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.KeyVault/vaults/cli-test-keyvault-000002","name":"cli-test-keyvault-000002","type":"Microsoft.KeyVault/vaults","location":"westus","tags":{},"properties":{"sku":{"family":"A","name":"premium"},"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","accessPolicies":[{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"3bd37d68-b234-4fcd-bc83-0fedb27ccf5c","permissions":{"keys":["get","create","delete","list","update","import","backup","restore","recover"],"secrets":["get","list","set","delete","backup","restore","recover"],"certificates":["get","list","delete","create","import","update","managecontacts","getissuers","listissuers","setissuers","deleteissuers","manageissuers","recover"],"storage":["get","list","delete","set","update","regeneratekey","setsas","listsas","getsas","deletesas"]}},{"tenantId":"54826b22-38d6-4fb2-bad9-b7b93a3e9c5a","objectId":"92be5909-8c84-461f-8b25-8501e0e922fb","permissions":{"secrets":["get","set","list"]}}],"enabledForDeployment":false,"enableSoftDelete":true,"softDeleteRetentionInDays":90,"vaultUri":"https://cli-test-keyvault-000002.vault.azure.net/","provisioningState":"Succeeded"}}
+      - step: RawStep_1325
+        method: POST
+        rawUrl: >-
+          https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/create?api-version=7.0
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          Connection: keep-alive
+          Content-Length: '0'
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-keyvault/7.0 Azure-SDK-For-Python
+          accept-language: en-US
+        statusCode: 401
+        responseExpected: >-
+          {"error":{"code":"Unauthorized","message":"Request is missing a Bearer
+          or PoP token."}}
+      - step: RawStep_1326
+        method: POST
+        rawUrl: >-
+          https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/create?api-version=7.0
+        requestBody: >-
+          {"policy":{"key_props":{"exportable":true,"kty":"RSA","key_size":2048,"reuse_key":true},"secret_props":{"contentType":"application/x-pkcs12"},"x509_props":{"subject":"CN=CLIGetDefaultPolicy","key_usage":["cRLSign","dataEncipherment","digitalSignature","keyEncipherment","keyAgreement","keyCertSign"],"validity_months":12},"lifetime_actions":[{"trigger":{"days_before_expiry":90},"action":{"action_type":"AutoRenew"}}],"issuer":{"name":"Self"}},"attributes":{"enabled":true}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          Connection: keep-alive
+          Content-Length: '511'
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-keyvault/7.0 Azure-SDK-For-Python
+          accept-language: en-US
+        statusCode: 202
+        responseExpected: >-
+          {"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending","issuer":{"name":"Self"},"csr":"MIICrjCCAZYCAQAwHjEcMBoGA1UEAxMTQ0xJR2V0RGVmYXVsdFBvbGljeTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALotLB69bhDMUap8Vml07g48N5H4DiFhi8hlswmvkWvK8oASw8TfvPV7c4mm4RCRDo22mapZsmsM122ZBzGjn3ZH4OQNS4z2Unx4HqUhXWDij0k0qUl6yr2vNfw/+c+uoa7uiVQ8FJSG2MHldU+nfkdv1pa/F4pga39BNTJJmtz5evjxTZqvCdLk/sl8k4sUbzEwT2bGhZ+SQ259eZsbhvAU8mzWEwugAckPuH8kPjp0DWTQvWSH0n69fWXlbHe8CnankgCRwtmnVfiu/IGzq7lCnEBPV8hbkLj31iPMY+M5Gx3F0pm1q6KwktsKsr8SIEu+YFI+EywuwkQVL7fPVMECAwEAAaBLMEkGCSqGSIb3DQEJDjE8MDowDgYDVR0PAQH/BAQDAgG+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAJBgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQA60wf1fLDByJZtdY2+aWMeDnToRU1w4az8icI4aOAAPxejKFv+iNLf0xklsEvTQl4Cgdj+JFixjqEnKFdoYrdyVyx1Y8WJz4safCcbaQ0HvekXWsXqrOUrBA/nLDCuyaTyypXThCEh6Nw6Dpzy3rmGP+MbUxrGHTVYZ+bQAOBm9OLlymhAU8BBWcrBIsdfp17c7JU/AIlyniaP1G5prku52q8CC/pP0kO3XojZeOMzYgWE3FaurGpbiQ05+3zu4T7P0/f++dd1klZJKpG6+w7/OUIg492suVyJUJZNWooZuSyC4dr0h/ZspPEUsrPRhV1K8cTLB50jr3tY4LzastyE","cancellation_requested":false,"status":"inProgress","status_details":"Pending
+          certificate created. Certificate request is in progress. This may take
+          some time based on the issuer provider. Please check again
+          later.","request_id":"1a5f314cd6654764b08ba128d3b5a2c0"}
+      - step: RawStep_1327
+        method: GET
+        rawUrl: >-
+          https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending?api-version=7.0
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          Connection: keep-alive
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-keyvault/7.0 Azure-SDK-For-Python
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending","issuer":{"name":"Self"},"csr":"MIICrjCCAZYCAQAwHjEcMBoGA1UEAxMTQ0xJR2V0RGVmYXVsdFBvbGljeTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALotLB69bhDMUap8Vml07g48N5H4DiFhi8hlswmvkWvK8oASw8TfvPV7c4mm4RCRDo22mapZsmsM122ZBzGjn3ZH4OQNS4z2Unx4HqUhXWDij0k0qUl6yr2vNfw/+c+uoa7uiVQ8FJSG2MHldU+nfkdv1pa/F4pga39BNTJJmtz5evjxTZqvCdLk/sl8k4sUbzEwT2bGhZ+SQ259eZsbhvAU8mzWEwugAckPuH8kPjp0DWTQvWSH0n69fWXlbHe8CnankgCRwtmnVfiu/IGzq7lCnEBPV8hbkLj31iPMY+M5Gx3F0pm1q6KwktsKsr8SIEu+YFI+EywuwkQVL7fPVMECAwEAAaBLMEkGCSqGSIb3DQEJDjE8MDowDgYDVR0PAQH/BAQDAgG+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAJBgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQA60wf1fLDByJZtdY2+aWMeDnToRU1w4az8icI4aOAAPxejKFv+iNLf0xklsEvTQl4Cgdj+JFixjqEnKFdoYrdyVyx1Y8WJz4safCcbaQ0HvekXWsXqrOUrBA/nLDCuyaTyypXThCEh6Nw6Dpzy3rmGP+MbUxrGHTVYZ+bQAOBm9OLlymhAU8BBWcrBIsdfp17c7JU/AIlyniaP1G5prku52q8CC/pP0kO3XojZeOMzYgWE3FaurGpbiQ05+3zu4T7P0/f++dd1klZJKpG6+w7/OUIg492suVyJUJZNWooZuSyC4dr0h/ZspPEUsrPRhV1K8cTLB50jr3tY4LzastyE","cancellation_requested":false,"status":"inProgress","status_details":"Pending
+          certificate created. Certificate request is in progress. This may take
+          some time based on the issuer provider. Please check again
+          later.","request_id":"1a5f314cd6654764b08ba128d3b5a2c0"}
+      - step: RawStep_1328
+        method: GET
+        rawUrl: >-
+          https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending?api-version=7.0
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          Connection: keep-alive
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-keyvault/7.0 Azure-SDK-For-Python
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending","issuer":{"name":"Self"},"csr":"MIICrjCCAZYCAQAwHjEcMBoGA1UEAxMTQ0xJR2V0RGVmYXVsdFBvbGljeTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALotLB69bhDMUap8Vml07g48N5H4DiFhi8hlswmvkWvK8oASw8TfvPV7c4mm4RCRDo22mapZsmsM122ZBzGjn3ZH4OQNS4z2Unx4HqUhXWDij0k0qUl6yr2vNfw/+c+uoa7uiVQ8FJSG2MHldU+nfkdv1pa/F4pga39BNTJJmtz5evjxTZqvCdLk/sl8k4sUbzEwT2bGhZ+SQ259eZsbhvAU8mzWEwugAckPuH8kPjp0DWTQvWSH0n69fWXlbHe8CnankgCRwtmnVfiu/IGzq7lCnEBPV8hbkLj31iPMY+M5Gx3F0pm1q6KwktsKsr8SIEu+YFI+EywuwkQVL7fPVMECAwEAAaBLMEkGCSqGSIb3DQEJDjE8MDowDgYDVR0PAQH/BAQDAgG+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAJBgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQA60wf1fLDByJZtdY2+aWMeDnToRU1w4az8icI4aOAAPxejKFv+iNLf0xklsEvTQl4Cgdj+JFixjqEnKFdoYrdyVyx1Y8WJz4safCcbaQ0HvekXWsXqrOUrBA/nLDCuyaTyypXThCEh6Nw6Dpzy3rmGP+MbUxrGHTVYZ+bQAOBm9OLlymhAU8BBWcrBIsdfp17c7JU/AIlyniaP1G5prku52q8CC/pP0kO3XojZeOMzYgWE3FaurGpbiQ05+3zu4T7P0/f++dd1klZJKpG6+w7/OUIg492suVyJUJZNWooZuSyC4dr0h/ZspPEUsrPRhV1K8cTLB50jr3tY4LzastyE","cancellation_requested":false,"status":"completed","target":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate","request_id":"1a5f314cd6654764b08ba128d3b5a2c0"}
+      - step: RawStep_1329
+        method: GET
+        rawUrl: >-
+          https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/?api-version=7.0
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          Connection: keep-alive
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-keyvault/7.0 Azure-SDK-For-Python
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/efe8256adef146da8437c42a11e0a021","kid":"https://cli-test-keyvault-000002.vault.azure.net/keys/MyCertificate/efe8256adef146da8437c42a11e0a021","sid":"https://cli-test-keyvault-000002.vault.azure.net/secrets/MyCertificate/efe8256adef146da8437c42a11e0a021","x5t":"cfWyd1NIqvAkF5JqRFYA2rHncgs","cer":"MIIDQjCCAiqgAwIBAgIQHlofVsv1RNiwfz7HfACvuDANBgkqhkiG9w0BAQsFADAeMRwwGgYDVQQDExNDTElHZXREZWZhdWx0UG9saWN5MB4XDTIxMDMwNDA1MzI1OVoXDTIyMDMwNDA1NDI1OVowHjEcMBoGA1UEAxMTQ0xJR2V0RGVmYXVsdFBvbGljeTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALotLB69bhDMUap8Vml07g48N5H4DiFhi8hlswmvkWvK8oASw8TfvPV7c4mm4RCRDo22mapZsmsM122ZBzGjn3ZH4OQNS4z2Unx4HqUhXWDij0k0qUl6yr2vNfw/+c+uoa7uiVQ8FJSG2MHldU+nfkdv1pa/F4pga39BNTJJmtz5evjxTZqvCdLk/sl8k4sUbzEwT2bGhZ+SQ259eZsbhvAU8mzWEwugAckPuH8kPjp0DWTQvWSH0n69fWXlbHe8CnankgCRwtmnVfiu/IGzq7lCnEBPV8hbkLj31iPMY+M5Gx3F0pm1q6KwktsKsr8SIEu+YFI+EywuwkQVL7fPVMECAwEAAaN8MHowDgYDVR0PAQH/BAQDAgG+MAkGA1UdEwQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMB8GA1UdIwQYMBaAFLUQCEcxqSvNc4MWE8/8fxOMRMQ7MB0GA1UdDgQWBBS1EAhHMakrzXODFhPP/H8TjETEOzANBgkqhkiG9w0BAQsFAAOCAQEAt1BvXPEiuSFVOc+5ilm0s8KAiBBRDjfLp45FJ/R2sKx+xQaBlOIZDVzvhkN7VynzwzDDyacLdTbbsNwyOMF1+xfN+9tJLtBZ5N2I5pmIHrBszpXftoG566GzOBhsrly6Ovlxuk2kuxTJWH9alzbJ3cLuS+HpQEaQ1DDTN2uzHDK0Ip+AtT+XYODfyO0wv+mk54I3fjUCeFTmSnFLXYezmLyb6SeCTL574oWszPXC+Wi0lZlNr4yU+HynJ2rd7EqaXXLiYmm3CcblXtKiQzQ1SsXLL5u0meg11eP29SN1OCYKNhsGWcMd8X1YHu9TqLtB4rryAB7d/71XvrZRUupngg==","attributes":{"enabled":true,"nbf":1614835979,"exp":1646372579,"created":1614836579,"updated":1614836579,"recoveryLevel":"Recoverable+Purgeable"},"policy":{"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/policy","key_props":{"exportable":true,"kty":"RSA","key_size":2048,"reuse_key":true},"secret_props":{"contentType":"application/x-pkcs12"},"x509_props":{"subject":"CN=CLIGetDefaultPolicy","ekus":["1.3.6.1.5.5.7.3.1","1.3.6.1.5.5.7.3.2"],"key_usage":["cRLSign","dataEncipherment","digitalSignature","keyAgreement","keyCertSign","keyEncipherment"],"validity_months":12,"basic_constraints":{"ca":false}},"lifetime_actions":[{"trigger":{"days_before_expiry":90},"action":{"action_type":"AutoRenew"}}],"issuer":{"name":"Self"},"attributes":{"enabled":true,"created":1614836565,"updated":1614836565}},"pending":{"id":"https://cli-test-keyvault-000002.vault.azure.net/certificates/MyCertificate/pending"}}
+      - step: RawStep_1330
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001","name":"cli_test_ag_identity000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:41:38Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_ip1
+        resourceName: publicIPAddresses_ip1
+        exampleFile: ../examples/Create_publicIPAddresses_ip1_Generated_1332.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_1333
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001","name":"cli_test_ag_identity000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:41:38Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_1334
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_ag_identity000001%27%20and%20name%20eq%20%27None%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FvirtualNetworks%27&api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: '{"value":[]}'
+      - step: RawStep_1335
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_ag_identity000001%27%20and%20name%20eq%20%27ip1%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FpublicIPAddresses%27&api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/publicIPAddresses/ip1","name":"ip1","type":"Microsoft.Network/publicIPAddresses","sku":{"name":"Standard","tier":"Regional"},"location":"westus"}]}
+      - step: RawStep_1336
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{"appGwID":"[resourceId('Microsoft.Network/applicationGateways',
+          'gateway')]"},"resources":[{"name":"gatewayVnet","type":"Microsoft.Network/virtualNetworks","location":"westus","apiVersion":"2015-06-15","dependsOn":[],"tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"subnets":[{"name":"default","properties":{"addressPrefix":"10.0.0.0/24"}}]}},{"type":"Microsoft.Network/applicationGateways","name":"gateway","location":"westus","tags":{},"apiVersion":"2020-11-01","dependsOn":["Microsoft.Network/virtualNetworks/gatewayVnet"],"properties":{"backendAddressPools":[{"name":"appGatewayBackendPool"}],"backendHttpSettingsCollection":[{"name":"appGatewayBackendHttpSettings","properties":{"Port":80,"Protocol":"Http","CookieBasedAffinity":"disabled","connectionDraining":{"enabled":false,"drainTimeoutInSec":1}}}],"frontendIPConfigurations":[{"name":"appGatewayFrontendIP","properties":{"publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/publicIPAddresses/ip1"}}}],"frontendPorts":[{"name":"appGatewayFrontendPort","properties":{"Port":80}}],"gatewayIPConfigurations":[{"name":"appGatewayFrontendIP","properties":{"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/virtualNetworks/gatewayVnet/subnets/default"}}}],"httpListeners":[{"name":"appGatewayHttpListener","properties":{"FrontendIpConfiguration":{"Id":"[concat(variables('appGwID'),
+          '/frontendIPConfigurations/appGatewayFrontendIP')]"},"FrontendPort":{"Id":"[concat(variables('appGwID'),
+          '/frontendPorts/appGatewayFrontendPort')]"},"Protocol":"http","SslCertificate":null}}],"sku":{"name":"Standard_v2","tier":"Standard_v2","capacity":2},"requestRoutingRules":[{"Name":"rule1","properties":{"RuleType":"Basic","httpListener":{"id":"[concat(variables('appGwID'),
+          '/httpListeners/appGatewayHttpListener')]"},"backendAddressPool":{"id":"[concat(variables('appGwID'),
+          '/backendAddressPools/appGatewayBackendPool')]"},"backendHttpSettings":{"id":"[concat(variables('appGwID'),
+          '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"}}}],"privateLinkConfigurations":[]},"zones":null,"identity":{"type":"UserAssigned","userAssignedIdentities":{"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1":{}}}}],"outputs":{"applicationGateway":{"type":"object","value":"[reference('gateway')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          Content-Length: '3061'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/ag_deploy_bNSZhjHXYmvzdvA5wDwk0pdH7y1hjOxJ","name":"ag_deploy_bNSZhjHXYmvzdvA5wDwk0pdH7y1hjOxJ","type":"Microsoft.Resources/deployments","properties":{"templateHash":"13371814059815763122","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-04T05:43:16.5626009Z","duration":"PT1.9403464S","correlationId":"6e78280e-8005-47cf-a1a6-c458ac8f7acb","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["westus"]},{"resourceType":"applicationGateways","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/virtualNetworks/gatewayVnet","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"gatewayVnet"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway","resourceType":"Microsoft.Network/applicationGateways","resourceName":"gateway"}]}}
+      - step: RawStep_1337
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867702908553694?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1338
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867702908553694?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1339
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867702908553694?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1340
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867702908553694?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1341
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867702908553694?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1342
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867702908553694?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1343
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867702908553694?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1344
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867702908553694?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1345
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867702908553694?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_1346
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867702908553694?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_1347
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network application-gateway create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --sku --public-ip-address --identity'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Resources/deployments/ag_deploy_bNSZhjHXYmvzdvA5wDwk0pdH7y1hjOxJ","name":"ag_deploy_bNSZhjHXYmvzdvA5wDwk0pdH7y1hjOxJ","type":"Microsoft.Resources/deployments","properties":{"templateHash":"13371814059815763122","parameters":{},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-04T05:48:01.9867701Z","duration":"PT4M47.3645156S","correlationId":"6e78280e-8005-47cf-a1a6-c458ac8f7acb","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["westus"]},{"resourceType":"applicationGateways","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/virtualNetworks/gatewayVnet","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"gatewayVnet"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway","resourceType":"Microsoft.Network/applicationGateways","resourceName":"gateway"}],"outputs":{"applicationGateway":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"3ea8866d-4029-4942-9168-2f2694f23448","sku":{"name":"Standard_v2","tier":"Standard_v2","capacity":2},"operationalState":"Running","gatewayIPConfigurations":[{"name":"appGatewayFrontendIP","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/gatewayIPConfigurations/appGatewayFrontendIP","etag":"W/\"15c1f9a3-5450-45e5-be0a-c8e6b8cd0b8c\"","properties":{"provisioningState":"Succeeded","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/virtualNetworks/gatewayVnet/subnets/default"}},"type":"Microsoft.Network/applicationGateways/gatewayIPConfigurations"}],"sslCertificates":[],"trustedRootCertificates":[],"trustedClientCertificates":[],"sslProfiles":[],"frontendIPConfigurations":[{"name":"appGatewayFrontendIP","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/frontendIPConfigurations/appGatewayFrontendIP","etag":"W/\"15c1f9a3-5450-45e5-be0a-c8e6b8cd0b8c\"","type":"Microsoft.Network/applicationGateways/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAllocationMethod":"Dynamic","publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/publicIPAddresses/ip1"},"httpListeners":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/httpListeners/appGatewayHttpListener"}]}}],"frontendPorts":[{"name":"appGatewayFrontendPort","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/frontendPorts/appGatewayFrontendPort","etag":"W/\"15c1f9a3-5450-45e5-be0a-c8e6b8cd0b8c\"","properties":{"provisioningState":"Succeeded","port":80,"httpListeners":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/httpListeners/appGatewayHttpListener"}]},"type":"Microsoft.Network/applicationGateways/frontendPorts"}],"backendAddressPools":[{"name":"appGatewayBackendPool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/backendAddressPools/appGatewayBackendPool","etag":"W/\"15c1f9a3-5450-45e5-be0a-c8e6b8cd0b8c\"","properties":{"provisioningState":"Succeeded","backendAddresses":[],"requestRoutingRules":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/requestRoutingRules/rule1"}]},"type":"Microsoft.Network/applicationGateways/backendAddressPools"}],"loadDistributionPolicies":[],"backendHttpSettingsCollection":[{"name":"appGatewayBackendHttpSettings","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/backendHttpSettingsCollection/appGatewayBackendHttpSettings","etag":"W/\"15c1f9a3-5450-45e5-be0a-c8e6b8cd0b8c\"","properties":{"provisioningState":"Succeeded","port":80,"protocol":"Http","cookieBasedAffinity":"Disabled","connectionDraining":{"enabled":false,"drainTimeoutInSec":1},"pickHostNameFromBackendAddress":false,"requestTimeout":30,"requestRoutingRules":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/requestRoutingRules/rule1"}]},"type":"Microsoft.Network/applicationGateways/backendHttpSettingsCollection"}],"httpListeners":[{"name":"appGatewayHttpListener","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/httpListeners/appGatewayHttpListener","etag":"W/\"15c1f9a3-5450-45e5-be0a-c8e6b8cd0b8c\"","properties":{"provisioningState":"Succeeded","frontendIPConfiguration":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/frontendIPConfigurations/appGatewayFrontendIP"},"frontendPort":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/frontendPorts/appGatewayFrontendPort"},"protocol":"Http","hostNames":[],"requireServerNameIndication":false,"requestRoutingRules":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/requestRoutingRules/rule1"}]},"type":"Microsoft.Network/applicationGateways/httpListeners"}],"urlPathMaps":[],"requestRoutingRules":[{"name":"rule1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/requestRoutingRules/rule1","etag":"W/\"15c1f9a3-5450-45e5-be0a-c8e6b8cd0b8c\"","properties":{"provisioningState":"Succeeded","ruleType":"Basic","httpListener":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/httpListeners/appGatewayHttpListener"},"backendAddressPool":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/backendAddressPools/appGatewayBackendPool"},"backendHttpSettings":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/backendHttpSettingsCollection/appGatewayBackendHttpSettings"}},"type":"Microsoft.Network/applicationGateways/requestRoutingRules"}],"probes":[],"rewriteRuleSets":[],"redirectConfigurations":[],"privateLinkConfigurations":[],"privateEndpointConnections":[]}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/virtualNetworks/gatewayVnet"}]}}
+      - step: ApplicationGateways_Get_1348
+        exampleFile: ../examples/ApplicationGateways_Get_1348_Generated.json
+        operationId: ApplicationGateways_Get
+      - step: Create_applicationGateways_gateway
+        resourceName: applicationGateways_gateway
+        exampleFile: ../examples/Create_applicationGateways_gateway_Generated.json
+        operationId: ApplicationGateways_CreateOrUpdate
+      - step: Update_applicationGateways_gateway_1351
+        resourceName: applicationGateways_gateway
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /identity
+            value:
+              type: userAssigned
+              userAssignedIdentities:
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2: {}
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_ag_identity000001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2:
+                  principalId: 92be5909-8c84-461f-8b25-8501e0e922fb
+                  clientId: 19145f3f-e77f-4f58-a779-23a796f1a30c
+      - step: Update_applicationGateways_gateway_1353
+        resourceName: applicationGateways_gateway
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/sslCertificates/0
+            value:
+              name: MySSLCert
+              properties:
+                keyVaultSecretId: >-
+                  https://cli-test-keyvault-000002.vault.azure.net/secrets/MyCertificate/efe8256adef146da8437c42a11e0a021
+                provisioningState: Succeeded
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/sslCertificates/MySSLCert
+              type: Microsoft.Network/applicationGateways/sslCertificates
+      - step: Update_applicationGateways_gateway_1355
+        resourceName: applicationGateways_gateway
+        operationId: ApplicationGateways_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/trustedRootCertificates/0
+            value:
+              name: cert1
+              properties:
+                keyVaultSecretId: >-
+                  https://cli-test-keyvault-000002.vault.azure.net/secrets/MyCertificate/efe8256adef146da8437c42a11e0a021
+                provisioningState: Succeeded
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_ag_identity000001/providers/Microsoft.Network/applicationGateways/gateway/trustedRootCertificates/cert1
+              type: Microsoft.Network/applicationGateways/trustedRootCertificates
+    variables:
+      publicIpAddressName: ip1
+      applicationGatewayName: gateway

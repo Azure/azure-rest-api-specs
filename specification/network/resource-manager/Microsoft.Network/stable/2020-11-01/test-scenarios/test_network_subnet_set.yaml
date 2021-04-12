@@ -1,0 +1,78 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_subnet_set
+    steps:
+      - step: RawStep_2455
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_subnet_set_test000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: >-
+            --resource-group --name --address-prefix --subnet-name
+            --subnet-prefix
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_subnet_set_test000001","name":"cli_subnet_set_test000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:19:27Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2457.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2458
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_subnet_set_test000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network nsg create
+          Connection: keep-alive
+          ParameterSetName: '--resource-group --name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_subnet_set_test000001","name":"cli_subnet_set_test000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:19:27Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkSecurityGroups_test-vnet-nsg
+        resourceName: networkSecurityGroups_test-vnet-nsg
+        exampleFile: ../examples/Create_networkSecurityGroups_test-vnet-nsg_Generated.json
+        operationId: NetworkSecurityGroups_CreateOrUpdate
+      - step: Subnets_Get_2460
+        exampleFile: ../examples/Subnets_Get_2460_Generated.json
+        operationId: Subnets_Get
+      - step: Create_subnets_default
+        resourceName: subnets_default
+        exampleFile: ../examples/Create_subnets_default_Generated.json
+        operationId: Subnets_CreateOrUpdate
+      - step: Update_subnets_default_2463
+        resourceName: subnets_default
+        operationId: Subnets_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/addressPrefix
+            value: 123.0.0.0/24
+      - step: Update_subnets_default_2465
+        resourceName: subnets_default
+        operationId: Subnets_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/addressPrefix
+            value: 123.0.5.0/24
+          - remove: /properties/networkSecurityGroup
+      - step: VirtualNetworks_Delete_2466
+        exampleFile: ../examples/VirtualNetworks_Delete_2466_Generated.json
+        operationId: VirtualNetworks_Delete
+      - step: NetworkSecurityGroups_Delete_2467
+        exampleFile: ../examples/NetworkSecurityGroups_Delete_2260_Generated.json
+        operationId: NetworkSecurityGroups_Delete
+    variables:
+      virtualNetworkName: vnet1
+      networkSecurityGroupName: test-vnet-nsg
+      subnetName: default

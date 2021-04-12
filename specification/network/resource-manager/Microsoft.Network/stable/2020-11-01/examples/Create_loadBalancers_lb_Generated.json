@@ -1,0 +1,136 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test_network_lb_frontend_ip_zone000001",
+    "loadBalancerName": "lb",
+    "parameters": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb",
+      "location": "eastus2",
+      "tags": {},
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "name": "LoadBalancerFrontEnd",
+            "properties": {
+              "privateIPAddress": "10.0.0.4",
+              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAddressVersion": "IPv4",
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet"
+              }
+            }
+          },
+          {
+            "name": "LoadBalancerFrontEnd2",
+            "zones": [
+              "1",
+              "2",
+              "3"
+            ],
+            "properties": {
+              "privateIPAllocationMethod": "dynamic",
+              "privateIPAddressVersion": "IPv4",
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/lbbepool",
+            "name": "lbbepool",
+            "properties": {
+              "loadBalancerBackendAddresses": []
+            }
+          }
+        ],
+        "loadBalancingRules": [],
+        "probes": [],
+        "inboundNatRules": [],
+        "inboundNatPools": [],
+        "outboundRules": []
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "lb",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb",
+        "etag": "W/\"a0d67bfd-e592-4c7f-abbd-11978ee5c11d\"",
+        "type": "Microsoft.Network/loadBalancers",
+        "location": "eastus2",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "d4b02ae7-7a81-485f-a963-43ea1ba52531",
+          "frontendIPConfigurations": [
+            {
+              "name": "LoadBalancerFrontEnd",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/LoadBalancerFrontEnd",
+              "etag": "W/\"a0d67bfd-e592-4c7f-abbd-11978ee5c11d\"",
+              "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateIPAddress": "10.0.0.4",
+                "privateIPAllocationMethod": "Dynamic",
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet"
+                },
+                "privateIPAddressVersion": "IPv4"
+              }
+            },
+            {
+              "name": "LoadBalancerFrontEnd2",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/LoadBalancerFrontEnd2",
+              "etag": "W/\"a0d67bfd-e592-4c7f-abbd-11978ee5c11d\"",
+              "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateIPAddress": "10.0.0.5",
+                "privateIPAllocationMethod": "Dynamic",
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet"
+                },
+                "privateIPAddressVersion": "IPv4"
+              },
+              "zones": [
+                "1",
+                "2",
+                "3"
+              ]
+            }
+          ],
+          "backendAddressPools": [
+            {
+              "name": "lbbepool",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/lbbepool",
+              "etag": "W/\"a0d67bfd-e592-4c7f-abbd-11978ee5c11d\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "loadBalancerBackendAddresses": []
+              },
+              "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+            }
+          ],
+          "loadBalancingRules": [],
+          "probes": [],
+          "inboundNatRules": [],
+          "outboundRules": [],
+          "inboundNatPools": []
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Regional"
+        }
+      }
+    }
+  }
+}

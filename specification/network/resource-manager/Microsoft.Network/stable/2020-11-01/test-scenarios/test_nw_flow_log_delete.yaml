@@ -1,0 +1,211 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_nw_flow_log_delete
+    steps:
+      - step: RawStep_3093
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_nw_flow_log_000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network nsg create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_nw_flow_log_000001","name":"test_nw_flow_log_000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T07:02:11Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkSecurityGroups_nsg1
+        resourceName: networkSecurityGroups_nsg1
+        exampleFile: ../examples/Create_networkSecurityGroups_nsg1_Generated_3095.json
+        operationId: NetworkSecurityGroups_CreateOrUpdate
+      - step: RawStep_3096
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_nw_flow_log_000001/providers/Microsoft.OperationalInsights/workspaces/clitest000003?api-version=2020-08-01
+        requestBody: >-
+          {"location":"westus","properties":{"sku":{"name":"PerGB2018"},"retentionInDays":30,"workspaceCapping":{}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: monitor log-analytics workspace create
+          Connection: keep-alive
+          Content-Length: '115'
+          Content-Type: application/json
+          ParameterSetName: '--resource-group --location --workspace-name'
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-mgmt-loganalytics/8.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        statusCode: 201
+        responseExpected: >-
+          {"properties":{"source":"Azure","customerId":"242d998a-b219-4f47-9ab0-e749ce0b899e","provisioningState":"Creating","sku":{"name":"pergb2018","maxCapacityReservationLevel":3000,"lastSkuUpdate":"Thu,
+          04 Mar 2021 07:03:09
+          GMT"},"retentionInDays":30,"features":{"legacy":0,"searchVersion":1,"enableLogAccessUsingOnlyResourcePermissions":true},"workspaceCapping":{"dailyQuotaGb":-1,"quotaNextResetTime":"Thu,
+          04 Mar 2021 21:00:00
+          GMT","dataIngestionStatus":"RespectQuota"},"publicNetworkAccessForIngestion":"Enabled","publicNetworkAccessForQuery":"Enabled","createdDate":"Thu,
+          04 Mar 2021 07:03:09 GMT","modifiedDate":"Thu, 04 Mar 2021 07:03:09
+          GMT"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_nw_flow_log_000001/providers/microsoft.operationalinsights/workspaces/clitest000003","name":"clitest000003","type":"Microsoft.OperationalInsights/workspaces","location":"westus"}
+      - step: NetworkWatchers_ListAll_3097
+        exampleFile: ../examples/NetworkWatchers_ListAll_2755_Generated.json
+        operationId: NetworkWatchers_ListAll
+      - step: RawStep_3098
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.operationalinsights?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher flow-log create
+          Connection: keep-alive
+          ParameterSetName: >-
+            --location --resource-group --nsg --storage-account --workspace
+            --name
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.OperationalInsights","namespace":"Microsoft.OperationalInsights","authorizations":[{"applicationId":"d2a0a418-0aac-4541-82b2-b3142c89da77","roleDefinitionId":"86695298-2eb9-48a7-9ec3-2fdb38b6878b"},{"applicationId":"ca7f3f0b-7d91-482c-8e09-c5d840d0eac5","roleDefinitionId":"5d5a2e56-9835-44aa-93db-d2f19e155438"}],"resourceTypes":[{"resourceType":"workspaces","locations":["East
+          US","West Europe","Southeast Asia","Australia Southeast","West Central
+          US","Japan East","UK South","Central India","Canada Central","West US
+          2","Australia Central","Australia East","France Central","Korea
+          Central","North Europe","Central US","East Asia","East US 2","South
+          Central US","North Central US","West US","UK West","South Africa
+          North","Brazil South","Switzerland North","Switzerland West","Germany
+          West Central","Australia Central 2","UAE Central","UAE North","Japan
+          West","Brazil Southeast","Norway
+          East"],"apiVersions":["2020-10-01","2020-08-01","2020-03-01-preview","2017-04-26-preview","2017-03-15-preview","2017-03-03-preview","2017-01-01-preview","2015-11-01-preview","2015-03-20"],"capabilities":"CrossResourceGroupResourceMove,
+          CrossSubscriptionResourceMove, SupportsTags,
+          SupportsLocation"},{"resourceType":"locations","locations":[],"apiVersions":["2020-10-01","2020-08-01","2020-03-01-preview","2019-08-01-preview","2017-04-26-preview","2017-03-15-preview","2017-03-03-preview","2017-01-01-preview","2015-11-01-preview","2015-03-20"],"defaultApiVersion":"2020-08-01","capabilities":"None"},{"resourceType":"locations/operationStatuses","locations":["East
+          US","West Europe","Southeast Asia","Australia Southeast","West Central
+          US","Japan East","UK South","Central India","Canada Central","West US
+          2","Australia Central","Australia East","France Central","Korea
+          Central","North Europe","Central US","East Asia","East US 2","South
+          Central US","North Central US","West US","UK West","South Africa
+          North","Brazil South","Switzerland North","Switzerland West","Germany
+          West Central","Australia Central 2","UAE Central","UAE North","Japan
+          West","Brazil Southeast","Norway
+          East"],"apiVersions":["2020-08-01","2020-03-01-preview","2019-08-01-preview","2017-04-26-preview","2017-03-15-preview","2017-03-03-preview","2017-01-01-preview","2015-11-01-preview","2015-03-20"],"defaultApiVersion":"2020-08-01","capabilities":"None"},{"resourceType":"workspaces/scopedPrivateLinkProxies","locations":["East
+          US","West Europe","Southeast Asia","Australia Southeast","West Central
+          US","Japan East","UK South","Central India","Canada Central","West US
+          2","Australia Central","Australia East","France Central","Korea
+          Central","North Europe","Central US","East Asia","East US 2","South
+          Central US","North Central US","West US","UK West","South Africa
+          North","Brazil South","Switzerland North","Switzerland West","Germany
+          West Central","Australia Central 2","UAE Central","UAE North","Japan
+          West","Brazil Southeast","Norway
+          East"],"apiVersions":["2020-03-01-preview","2019-08-01-preview","2015-11-01-preview"],"defaultApiVersion":"2020-03-01-preview","capabilities":"None"},{"resourceType":"workspaces/query","locations":[],"apiVersions":["2017-10-01"],"capabilities":"None"},{"resourceType":"workspaces/metadata","locations":[],"apiVersions":["2017-10-01"],"capabilities":"None"},{"resourceType":"workspaces/dataSources","locations":["East
+          US","West Europe","Southeast Asia","Australia Southeast","West Central
+          US","Japan East","UK South","Central India","Canada Central","West US
+          2","Australia Central","Australia East","France Central","Korea
+          Central","North Europe","Central US","East Asia","East US 2","South
+          Central US","North Central US","West US","UK West","South Africa
+          North","Brazil South","Switzerland North","Switzerland West","Germany
+          West Central","Australia Central 2","UAE Central","UAE North","Japan
+          West","Brazil Southeast","Norway
+          East"],"apiVersions":["2020-08-01","2020-03-01-preview","2015-11-01-preview"],"defaultApiVersion":"2020-08-01","capabilities":"None"},{"resourceType":"workspaces/linkedStorageAccounts","locations":["East
+          US","West Europe","Southeast Asia","Australia Southeast","West Central
+          US","Japan East","UK South","Central India","Canada Central","West US
+          2","Australia Central","Australia East","France Central","Korea
+          Central","North Europe","Central US","East Asia","East US 2","South
+          Central US","North Central US","West US","UK West","South Africa
+          North","Brazil South","Switzerland North","Switzerland West","Germany
+          West Central","Australia Central 2","UAE Central","UAE North","Japan
+          West","Brazil Southeast","Norway
+          East"],"apiVersions":["2020-08-01","2020-03-01-preview","2019-08-01-preview"],"defaultApiVersion":"2020-08-01","capabilities":"None"},{"resourceType":"workspaces/Tables","locations":["East
+          US","West Europe","Southeast Asia","Australia Southeast","West Central
+          US","Japan East","UK South","Central India","Canada Central","West US
+          2","Australia East","Australia Central","France Central","Korea
+          Central","North Europe","Central US","East Asia","East US 2","South
+          Central US","North Central US","West US","UK West","South Africa
+          North","Brazil South","Switzerland North","Switzerland West","Germany
+          West Central","Australia Central 2","UAE Central","UAE North","Japan
+          West","Brazil Southeast","Norway
+          East"],"apiVersions":["2020-08-01","2020-03-01-preview","2017-04-26-preview"],"capabilities":"None"},{"resourceType":"storageInsightConfigs","locations":[],"apiVersions":["2020-08-01","2020-03-01-preview","2014-10-10"],"capabilities":"SupportsExtension"},{"resourceType":"workspaces/linkedServices","locations":["East
+          US","West Europe","Southeast Asia","Australia Southeast","West Central
+          US","Japan East","UK South","Central India","Canada Central","West US
+          2","Australia Central","Australia East","France Central","Korea
+          Central","North Europe","Central US","East Asia","East US 2","South
+          Central US","North Central US","West US","UK West","South Africa
+          North","Brazil South","Switzerland North","Switzerland West","Germany
+          West Central","Australia Central 2","UAE Central","UAE North","Japan
+          West","Brazil Southeast","Norway
+          East"],"apiVersions":["2020-08-01","2020-03-01-preview","2019-08-01-preview","2015-11-01-preview"],"defaultApiVersion":"2020-08-01","capabilities":"None"},{"resourceType":"linkTargets","locations":["East
+          US"],"apiVersions":["2020-03-01-preview","2015-03-20"],"capabilities":"None"},{"resourceType":"deletedWorkspaces","locations":["East
+          US","West Europe","Southeast Asia","Australia Southeast","West Central
+          US","Japan East","UK South","Central India","Canada Central","West US
+          2","Australia Central","Australia East","France Central","Korea
+          Central","North Europe","Central US","East Asia","East US 2","South
+          Central US","North Central US","West US","UK West","South Africa
+          North","Brazil South","Switzerland North","Switzerland West","Germany
+          West Central","Australia Central 2","UAE Central","UAE North","Japan
+          West","Brazil Southeast","Norway
+          East"],"apiVersions":["2020-08-01","2020-03-01-preview"],"defaultApiVersion":"2020-08-01","capabilities":"None"},{"resourceType":"operations","locations":[],"apiVersions":["2020-10-01","2020-08-01","2020-03-01-preview","2015-11-01-preview","2014-11-10"],"defaultApiVersion":"2020-08-01","capabilities":"None"},{"resourceType":"clusters","locations":["East
+          US","West Europe","Southeast Asia","Australia Southeast","West Central
+          US","Japan East","UK South","Central India","Canada Central","West US
+          2","Australia Central","Australia East","France Central","Korea
+          Central","North Europe","Central US","East Asia","East US 2","South
+          Central US","North Central US","West US","UK West","South Africa
+          North","Switzerland North","Switzerland West","Germany West
+          Central","Australia Central 2","UAE Central","Brazil South","UAE
+          North","Japan West","Brazil Southeast","Norway
+          East"],"apiVersions":["2020-10-01","2020-08-01","2020-03-01-preview","2019-08-01-preview"],"defaultApiVersion":"2020-08-01","capabilities":"CrossResourceGroupResourceMove,
+          CrossSubscriptionResourceMove, SystemAssignedResourceIdentity,
+          SupportsTags,
+          SupportsLocation"},{"resourceType":"workspaces/dataExports","locations":["East
+          US","West Europe","Southeast Asia","Australia Southeast","West Central
+          US","Japan East","UK South","Central India","Canada Central","West US
+          2","Australia Central","Australia East","France Central","Korea
+          Central","North Europe","Central US","East Asia","East US 2","South
+          Central US","North Central US","West US","UK West","South Africa
+          North","Brazil South","Switzerland North","Switzerland West","Germany
+          West Central","Australia Central 2","UAE Central","UAE North","Japan
+          West","Brazil Southeast","Norway
+          East"],"apiVersions":["2020-08-01","2020-03-01-preview","2019-08-01-preview"],"defaultApiVersion":"2020-08-01","capabilities":"None"}],"registrationState":"Registered","registrationPolicy":"RegistrationRequired"}
+      - step: RawStep_3099
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_nw_flow_log_000001/providers/microsoft.operationalinsights/workspaces/clitest000003?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher flow-log create
+          Connection: keep-alive
+          ParameterSetName: >-
+            --location --resource-group --nsg --storage-account --workspace
+            --name
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"properties":{"source":"Azure","customerId":"242d998a-b219-4f47-9ab0-e749ce0b899e","provisioningState":"Succeeded","sku":{"name":"pergb2018","maxCapacityReservationLevel":3000,"lastSkuUpdate":"Thu,
+          04 Mar 2021 07:03:09
+          GMT"},"retentionInDays":30,"features":{"legacy":0,"searchVersion":1,"enableLogAccessUsingOnlyResourcePermissions":true},"workspaceCapping":{"dailyQuotaGb":-1,"quotaNextResetTime":"Thu,
+          04 Mar 2021 21:00:00
+          GMT","dataIngestionStatus":"RespectQuota"},"publicNetworkAccessForIngestion":"Enabled","publicNetworkAccessForQuery":"Enabled","createdDate":"Thu,
+          04 Mar 2021 07:03:09 GMT","modifiedDate":"Thu, 04 Mar 2021 07:03:10
+          GMT"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_nw_flow_log_000001/providers/microsoft.operationalinsights/workspaces/clitest000003","name":"clitest000003","type":"Microsoft.OperationalInsights/workspaces","location":"westus"}
+      - step: Create_flowLogs_flow_log_test2
+        resourceName: flowLogs_flow_log_test2
+        exampleFile: ../examples/Create_flowLogs_flow_log_test2_Generated.json
+        operationId: FlowLogs_CreateOrUpdate
+      - step: NetworkWatchers_ListAll_3101
+        exampleFile: ../examples/NetworkWatchers_ListAll_2755_Generated.json
+        operationId: NetworkWatchers_ListAll
+      - step: FlowLogs_Delete_3103
+        exampleFile: ../examples/FlowLogs_Delete_3103_Generated.json
+        operationId: FlowLogs_Delete
+      - step: NetworkWatchers_ListAll_3104
+        exampleFile: ../examples/NetworkWatchers_ListAll_2755_Generated.json
+        operationId: NetworkWatchers_ListAll
+    variables:
+      networkSecurityGroupName: nsg1
+      networkWatcherName: NetworkWatcher_westus
+      flowLogName: flow_log_test2

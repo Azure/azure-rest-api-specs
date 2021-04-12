@@ -1,0 +1,127 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_lb_address_pool_addresses000001",
+    "loadBalancerName": "lb1",
+    "backendAddressPoolName": "bap2",
+    "parameters": {
+      "name": "bap2",
+      "properties": {
+        "loadBalancerBackendAddresses": [
+          {
+            "name": "addr1",
+            "properties": {
+              "virtualNetwork": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet",
+                "properties": {
+                  "enableDdosProtection": false,
+                  "enableVmProtection": false
+                }
+              },
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet/subnets/subnet1"
+              },
+              "ipAddress": "10.0.0.1"
+            }
+          },
+          {
+            "name": "addr2",
+            "properties": {
+              "virtualNetwork": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet",
+                "properties": {
+                  "enableDdosProtection": false,
+                  "enableVmProtection": false
+                }
+              },
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet/subnets/subnetx"
+              },
+              "ipAddress": "10.0.0.2"
+            }
+          },
+          {
+            "name": "addr3",
+            "properties": {
+              "virtualNetwork": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet",
+                "properties": {
+                  "enableDdosProtection": false,
+                  "enableVmProtection": false
+                }
+              },
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet/subnets/subnet1"
+              },
+              "ipAddress": "10.0.0.3"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "bap2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bap2",
+        "etag": "W/\"8ce97b31-7025-4daf-b350-4408553f5feb\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "loadBalancerBackendAddresses": [
+            {
+              "name": "addr1",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bap2/loadBalancerBackendAddresses/addr1",
+              "etag": "W/\"8ce97b31-7025-4daf-b350-4408553f5feb\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "ipAddress": "10.0.0.1",
+                "virtualNetwork": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet"
+                },
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet/subnets/subnet1"
+                }
+              },
+              "type": "Microsoft.Network/loadBalancers/backendAddressPools/loadBalancerBackendAddresses"
+            },
+            {
+              "name": "addr2",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bap2/loadBalancerBackendAddresses/addr2",
+              "etag": "W/\"8ce97b31-7025-4daf-b350-4408553f5feb\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "ipAddress": "10.0.0.2",
+                "virtualNetwork": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet"
+                },
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet/subnets/subnetx"
+                }
+              },
+              "type": "Microsoft.Network/loadBalancers/backendAddressPools/loadBalancerBackendAddresses"
+            },
+            {
+              "name": "addr3",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/bap2/loadBalancerBackendAddresses/addr3",
+              "etag": "W/\"8ce97b31-7025-4daf-b350-4408553f5feb\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "ipAddress": "10.0.0.3",
+                "virtualNetwork": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet"
+                },
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet/subnets/subnet1"
+                }
+              },
+              "type": "Microsoft.Network/loadBalancers/backendAddressPools/loadBalancerBackendAddresses"
+            }
+          ]
+        },
+        "type": "Microsoft.Network/loadBalancers/backendAddressPools"
+      }
+    }
+  }
+}

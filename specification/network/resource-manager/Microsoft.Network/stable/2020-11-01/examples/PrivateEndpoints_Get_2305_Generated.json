@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_network_private_endpoints000001",
+    "privateEndpointName": "pe1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pe1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateEndpoints/pe1",
+        "etag": "W/\"798c8970-1cdf-466f-b7d4-1e4e153915e6\"",
+        "type": "Microsoft.Network/privateEndpoints",
+        "location": "centralus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "de778ee9-f688-4a08-9f3a-5bd6dbbffa0f",
+          "privateLinkServiceConnections": [
+            {
+              "name": "tttt",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateEndpoints/pe1/privateLinkServiceConnections/tttt",
+              "etag": "W/\"798c8970-1cdf-466f-b7d4-1e4e153915e6\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/privateLinkServices/lks1",
+                "privateLinkServiceConnectionState": {
+                  "status": "Rejected",
+                  "description": "",
+                  "actionsRequired": "need action"
+                }
+              },
+              "type": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections"
+            }
+          ],
+          "manualPrivateLinkServiceConnections": [],
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2"
+          },
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_private_endpoints000001/providers/Microsoft.Network/networkInterfaces/pe1.nic.19e0e385-33cc-478d-ba98-997a576c106c"
+            }
+          ],
+          "customDnsConfigs": []
+        }
+      }
+    }
+  }
+}

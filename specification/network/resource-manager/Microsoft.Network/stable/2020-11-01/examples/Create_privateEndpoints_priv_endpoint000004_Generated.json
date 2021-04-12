@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "clitest.rg000001",
+    "privateEndpointName": "priv_endpoint000004",
+    "parameters": {
+      "location": "westcentralus",
+      "properties": {
+        "subnet": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/testvnet000002/subnets/testsubnet000003"
+        },
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "priv_endpointconn000005",
+            "properties": {
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch",
+              "groupIds": [
+                "batchAccount"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "priv_endpoint000004",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000004",
+        "etag": "W/\"157b2465-0759-4ca9-887c-10af89c871be\"",
+        "type": "Microsoft.Network/privateEndpoints",
+        "location": "westcentralus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "774b5cd1-4b80-47cd-81d5-99b20dc0ffdc",
+          "privateLinkServiceConnections": [],
+          "manualPrivateLinkServiceConnections": [
+            {
+              "name": "priv_endpointconn000005",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/privateEndpoints/priv_endpoint000004/manualPrivateLinkServiceConnections/priv_endpointconn000005",
+              "etag": "W/\"157b2465-0759-4ca9-887c-10af89c871be\"",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Batch/batchAccounts/testplinksbatch",
+                "groupIds": [
+                  "batchAccount"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "status": "Pending",
+                  "description": "Manual approval still required",
+                  "actionsRequired": "Manual approval request"
+                }
+              },
+              "type": "Microsoft.Network/privateEndpoints/manualPrivateLinkServiceConnections"
+            }
+          ],
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/virtualNetworks/testvnet000002/subnets/testsubnet000003"
+          },
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Network/networkInterfaces/priv_endpoint000004.nic.8b82bdd7-a3e9-4769-9125-d21f2d31962f"
+            }
+          ],
+          "customDnsConfigs": []
+        }
+      }
+    }
+  }
+}

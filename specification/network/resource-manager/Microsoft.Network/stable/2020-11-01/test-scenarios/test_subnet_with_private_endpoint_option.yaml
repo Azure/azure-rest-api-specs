@@ -1,0 +1,66 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_subnet_with_private_endpoint_option
+    steps:
+      - step: RawStep_3443
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_subnet_with_private_endpoint_option000001?api-version=2020-06-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.6.8 (Windows-10-10.0.19041-SP0) msrest/0.6.18
+            msrest_azure/0.6.3 azure-mgmt-resource/10.2.0 Azure-SDK-For-Python
+            AZURECLI/2.11.1
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001","name":"test_subnet_with_private_endpoint_option000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2020-09-02T04:35:38Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_3444
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet?api-version=2020-05-01
+        requestBody: >-
+          {"location":"westus","tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          Content-Length: '123'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.6.8 (Windows-10-10.0.19041-SP0) msrest/0.6.18
+            msrest_azure/0.6.3 azure-mgmt-network/11.0.0 Azure-SDK-For-Python
+            AZURECLI/2.11.1
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"name":"MyVnet","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet","etag":"W/\"c67ebab2-e3df-4dd7-95c5-ca347dc55b97\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"33fbc4d1-e596-4bfc-ae13-826d83e4c2bf","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+      - step: RawStep_3445
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet?api-version=2020-05-01
+        requestBody: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet","location":"westus","tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[{"properties":{"addressPrefix":"10.0.1.0/24","privateEndpointNetworkPolicies":"Disabled"},"name":"MySubnet"}],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet subnet create
+          Connection: keep-alive
+          Content-Length: '561'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: >-
+            -g --vnet-name --address-prefixes --name
+            --disable-private-endpoint-network-policies
+          User-Agent: >-
+            python/3.6.8 (Windows-10-10.0.19041-SP0) msrest/0.6.18
+            msrest_azure/0.6.3 azure-mgmt-network/11.0.0 Azure-SDK-For-Python
+            AZURECLI/2.11.1
+          accept-language: en-US
+        responseExpected: >-
+          {"name":"MyVnet","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet","etag":"W/\"243c98e1-0869-4e02-8129-c002e28b7b44\"","type":"Microsoft.Network/virtualNetworks","location":"westus","tags":{},"properties":{"provisioningState":"Updating","resourceGuid":"33fbc4d1-e596-4bfc-ae13-826d83e4c2bf","addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"dhcpOptions":{"dnsServers":[]},"subnets":[{"name":"MySubnet","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_subnet_with_private_endpoint_option000001/providers/Microsoft.Network/virtualNetworks/MyVnet/subnets/MySubnet","etag":"W/\"243c98e1-0869-4e02-8129-c002e28b7b44\"","properties":{"provisioningState":"Updating","addressPrefix":"10.0.1.0/24","delegations":[],"privateEndpointNetworkPolicies":"Disabled","privateLinkServiceNetworkPolicies":"Enabled"},"type":"Microsoft.Network/virtualNetworks/subnets"}],"virtualNetworkPeerings":[],"enableDdosProtection":false,"enableVmProtection":false}}

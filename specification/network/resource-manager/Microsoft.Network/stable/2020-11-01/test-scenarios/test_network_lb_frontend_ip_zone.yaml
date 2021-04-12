@@ -1,0 +1,82 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_lb_frontend_ip_zone
+    steps:
+      - step: RawStep_1845
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27test_network_lb_frontend_ip_zone000001%27%20and%20name%20eq%20%27vnet%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FvirtualNetworks%27&api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -l -n --vnet-name --subnet --sku'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: '{"value":[]}'
+      - step: RawStep_1846
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{},"resources":[{"name":"vnet","type":"Microsoft.Network/virtualNetworks","location":"eastus2","apiVersion":"2015-06-15","dependsOn":[],"tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"subnets":[{"name":"subnet","properties":{"addressPrefix":"10.0.0.0/24"}}]}},{"type":"Microsoft.Network/loadBalancers","name":"lb","location":"eastus2","tags":{},"apiVersion":"2020-11-01","dependsOn":["Microsoft.Network/virtualNetworks/vnet"],"properties":{"backendAddressPools":[{"name":"lbbepool"}],"frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","properties":{"privateIPAllocationMethod":"Dynamic","privateIPAddress":null,"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet"},"privateIPAddressVersion":"IPv4"}}]},"sku":{"name":"Standard"}}],"outputs":{"loadBalancer":{"type":"object","value":"[reference('lb')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          Content-Length: '1297'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -l -n --vnet-name --subnet --sku'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Resources/deployments/lb_deploy_XZMSnRKL4GHjadfsGm9z21RovZvXQ4mI","name":"lb_deploy_XZMSnRKL4GHjadfsGm9z21RovZvXQ4mI","type":"Microsoft.Resources/deployments","properties":{"templateHash":"13051246335404165496","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-12T09:19:25.5273044Z","duration":"PT2.7523766S","correlationId":"83338846-be8b-4833-8199-62c04c481aa4","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["eastus2"]},{"resourceType":"loadBalancers","locations":["eastus2"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/virtualNetworks/vnet","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"vnet"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb","resourceType":"Microsoft.Network/loadBalancers","resourceName":"lb"}]}}
+      - step: RawStep_1847
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585860661227026926?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -l -n --vnet-name --subnet --sku'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_1848
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -l -n --vnet-name --subnet --sku'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Resources/deployments/lb_deploy_XZMSnRKL4GHjadfsGm9z21RovZvXQ4mI","name":"lb_deploy_XZMSnRKL4GHjadfsGm9z21RovZvXQ4mI","type":"Microsoft.Resources/deployments","properties":{"templateHash":"13051246335404165496","parameters":{},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-12T09:19:51.8904589Z","duration":"PT29.1155311S","correlationId":"83338846-be8b-4833-8199-62c04c481aa4","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["eastus2"]},{"resourceType":"loadBalancers","locations":["eastus2"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/virtualNetworks/vnet","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"vnet"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb","resourceType":"Microsoft.Network/loadBalancers","resourceName":"lb"}],"outputs":{"loadBalancer":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"d4b02ae7-7a81-485f-a963-43ea1ba52531","frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/LoadBalancerFrontEnd","etag":"W/\"1bf23b4b-054c-4c37-9933-5a2fd89fe81e\"","type":"Microsoft.Network/loadBalancers/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAddress":"10.0.0.4","privateIPAllocationMethod":"Dynamic","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet"},"privateIPAddressVersion":"IPv4"}}],"backendAddressPools":[{"name":"lbbepool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/lbbepool","etag":"W/\"1bf23b4b-054c-4c37-9933-5a2fd89fe81e\"","properties":{"provisioningState":"Succeeded","loadBalancerBackendAddresses":[]},"type":"Microsoft.Network/loadBalancers/backendAddressPools"}],"loadBalancingRules":[],"probes":[],"inboundNatRules":[],"outboundRules":[],"inboundNatPools":[]}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/loadBalancers/lb"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_network_lb_frontend_ip_zone000001/providers/Microsoft.Network/virtualNetworks/vnet"}]}}
+      - step: LoadBalancers_Get_1849
+        exampleFile: ../examples/LoadBalancers_Get_1849_Generated.json
+        operationId: LoadBalancers_Get
+      - step: Create_loadBalancers_lb
+        resourceName: loadBalancers_lb
+        exampleFile: ../examples/Create_loadBalancers_lb_Generated.json
+        operationId: LoadBalancers_CreateOrUpdate
+    variables:
+      loadBalancerName: lb

@@ -1,0 +1,134 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_private_endpoint_connection_private_link_scope
+    steps:
+      - step: RawStep_3291
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privateLinkScopes/clitestscopename?api-version=2019-10-17-preview
+        requestBody: '{"location":"Global"}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: monitor private-link-scope create
+          Connection: keep-alive
+          Content-Length: '22'
+          Content-Type: application/json
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            AZURECLI/2.19.1 azsdk-python-azure-mgmt-monitor/2.0.0 Python/3.7.4
+            (Windows-10-10.0.19041-SP0)
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privatelinkscopes/clitestscopename","name":"clitestscopename","type":"microsoft.insights/privatelinkscopes","location":"global","tags":{},"kind":null,"etag":"\"df00e0ff-0000-0700-0000-6035ec510000\"","systemData":{"createdBy":"fey@microsoft.com","createdByType":"User","createdAt":"2021-02-24T06:04:00.4960631Z","lastModifiedBy":"fey@microsoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T06:04:00.4960631Z"},"properties":{"scopeId":"73091681-4489-4822-853e-4401de03c72f","provisioningState":"Succeeded","privateEndpointConnections":[]}}
+      - step: RawStep_3292
+        method: PATCH
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privateLinkScopes/clitestscopename?api-version=2019-10-17-preview
+        requestBody: '{"tags":{"tag1":"d1"}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: monitor private-link-scope update
+          Connection: keep-alive
+          Content-Length: '24'
+          Content-Type: application/json
+          ParameterSetName: '-n -g --tags'
+          User-Agent: >-
+            AZURECLI/2.19.1 azsdk-python-azure-mgmt-monitor/2.0.0 Python/3.7.4
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privatelinkscopes/clitestscopename","name":"clitestscopename","type":"microsoft.insights/privatelinkscopes","location":"global","tags":{"tag1":"d1"},"kind":null,"etag":"\"e000d703-0000-0700-0000-6035ec560000\"","systemData":{"createdBy":"fey@microsoft.com","createdByType":"User","createdAt":"2021-02-24T06:04:00.4960631Z","lastModifiedBy":"fey@microsoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T06:04:04.9891352Z"},"properties":{"scopeId":"73091681-4489-4822-853e-4401de03c72f","provisioningState":"Succeeded"}}
+      - step: RawStep_3293
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privateLinkScopes/clitestscopename?api-version=2019-10-17-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: monitor private-link-scope show
+          Connection: keep-alive
+          ParameterSetName: '-n -g'
+          User-Agent: >-
+            AZURECLI/2.19.1 azsdk-python-azure-mgmt-monitor/2.0.0 Python/3.7.4
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privatelinkscopes/clitestscopename","name":"clitestscopename","type":"microsoft.insights/privatelinkscopes","location":"global","tags":{"tag1":"d1"},"kind":null,"etag":"\"e000d703-0000-0700-0000-6035ec560000\"","systemData":{"createdBy":"fey@microsoft.com","createdByType":"User","createdAt":"2021-02-24T06:04:00.4960631Z","lastModifiedBy":"fey@microsoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T06:04:04.9891352Z"},"properties":{"scopeId":"73091681-4489-4822-853e-4401de03c72f","provisioningState":"Succeeded"}}
+      - step: RawStep_3294
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privateLinkScopes?api-version=2019-10-17-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: monitor private-link-scope list
+          Connection: keep-alive
+          ParameterSetName: '-g'
+          User-Agent: >-
+            AZURECLI/2.19.1 azsdk-python-azure-mgmt-monitor/2.0.0 Python/3.7.4
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privatelinkscopes/clitestscopename","name":"clitestscopename","type":"microsoft.insights/privatelinkscopes","location":"global","tags":{"tag1":"d1"},"kind":null,"etag":"\"e000d703-0000-0700-0000-6035ec560000\"","systemData":{"createdBy":"fey@microsoft.com","createdByType":"User","createdAt":"2021-02-24T06:04:00.4960631Z","lastModifiedBy":"fey@microsoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T06:04:04.9891352Z"},"properties":{"scopeId":"73091681-4489-4822-853e-4401de03c72f","provisioningState":"Succeeded"}}],"nextLink":null}
+      - step: RawStep_3295
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.insights/privateLinkScopes?api-version=2019-10-17-preview
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: monitor private-link-scope list
+          Connection: keep-alive
+          User-Agent: >-
+            AZURECLI/2.19.1 azsdk-python-azure-mgmt-monitor/2.0.0 Python/3.7.4
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.insights/privatelinkscopes/clitestscopename","name":"clitestscopename","type":"microsoft.insights/privatelinkscopes","location":"global","tags":{"tag1":"d1"},"kind":null,"etag":"\"e000d703-0000-0700-0000-6035ec560000\"","systemData":{"createdBy":"fey@microsoft.com","createdByType":"User","createdAt":"2021-02-24T06:04:00.4960631Z","lastModifiedBy":"fey@microsoft.com","lastModifiedByType":"User","lastModifiedAt":"2021-02-24T06:04:04.9891352Z"},"properties":{"scopeId":"73091681-4489-4822-853e-4401de03c72f","provisioningState":"Succeeded"}}],"nextLink":null}
+      - step: RawStep_3296
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001/providers/Microsoft.OperationalInsights/workspaces/clitest000002?api-version=2020-08-01
+        requestBody: >-
+          {"location":"eastus","properties":{"sku":{"name":"PerGB2018"},"retentionInDays":30,"workspaceCapping":{}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: monitor log-analytics workspace create
+          Connection: keep-alive
+          Content-Length: '115'
+          Content-Type: application/json
+          ParameterSetName: '-n -g -l'
+          User-Agent: >-
+            AZURECLI/2.19.1 azsdk-python-mgmt-loganalytics/8.0.0 Python/3.7.4
+            (Windows-10-10.0.19041-SP0)
+        statusCode: 201
+        responseExpected: >-
+          {"properties":{"source":"Azure","customerId":"b3b30af9-1b97-450a-8078-7ce2f92edcf8","provisioningState":"Creating","sku":{"name":"pergb2018","maxCapacityReservationLevel":3000,"lastSkuUpdate":"Wed,
+          24 Feb 2021 06:04:25
+          GMT"},"retentionInDays":30,"features":{"legacy":0,"searchVersion":1,"enableLogAccessUsingOnlyResourcePermissions":true},"workspaceCapping":{"dailyQuotaGb":-1,"quotaNextResetTime":"Wed,
+          24 Feb 2021 19:00:00
+          GMT","dataIngestionStatus":"RespectQuota"},"publicNetworkAccessForIngestion":"Enabled","publicNetworkAccessForQuery":"Enabled","createdDate":"Wed,
+          24 Feb 2021 06:04:24 GMT","modifiedDate":"Wed, 24 Feb 2021 06:04:24
+          GMT"},"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001/providers/microsoft.operationalinsights/workspaces/clitest000002","name":"clitest000002","type":"Microsoft.OperationalInsights/workspaces","location":"eastus"}
+      - step: RawStep_3297
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/Microsoft.Insights/privateLinkScopes/clitestscopename/scopedResources/assigned_ws?api-version=2019-10-17-preview
+        requestBody: >-
+          {"properties":{"linkedResourceId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001/providers/microsoft.operationalinsights/workspaces/clitest000002"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: monitor private-link-scope scoped-resource create
+          Connection: keep-alive
+          Content-Length: '254'
+          Content-Type: application/json
+          ParameterSetName: '-g -n --linked-resource --scope-name'
+          User-Agent: >-
+            AZURECLI/2.19.1 azsdk-python-azure-mgmt-monitor/2.0.0 Python/3.7.4
+            (Windows-10-10.0.19041-SP0)
+        statusCode: 412
+        responseExpected: >-
+          {"error":{"code":"PreconditionFailed","message":"Resource
+          '/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001/providers/microsoft.operationalinsights/workspaces/clitest000002'
+          not found in 'AIMON'
+          environment","innererror":{"trace":["Microsoft.AppInsights.Nexus.ResourceStore.ResourceStoreException"]}}}

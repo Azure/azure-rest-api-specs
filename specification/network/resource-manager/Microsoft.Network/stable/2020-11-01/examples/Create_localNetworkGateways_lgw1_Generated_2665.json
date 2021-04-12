@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_vpn_connection_ipsec000001",
+    "localNetworkGatewayName": "lgw1",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "localNetworkAddressSpace": {
+          "addressPrefixes": [
+            "10.61.0.0/16",
+            "10.62.0.0/16"
+          ]
+        },
+        "gatewayIpAddress": "131.107.72.22"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "lgw1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/localNetworkGateways/lgw1",
+        "etag": "W/\"0673aa27-addd-4635-9fae-a110633d2747\"",
+        "type": "Microsoft.Network/localNetworkGateways",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "61980925-0b05-4dbc-85cf-e23491e6a597",
+          "localNetworkAddressSpace": {
+            "addressPrefixes": [
+              "10.61.0.0/16",
+              "10.62.0.0/16"
+            ]
+          },
+          "gatewayIpAddress": "131.107.72.22"
+        }
+      }
+    }
+  }
+}

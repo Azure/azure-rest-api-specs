@@ -1,0 +1,537 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_dns_zone9_import
+    steps:
+      - step: RawStep_550
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com?api-version=2018-05-01
+        requestBody: '{"location":"global","properties":{"zoneType":"Public"}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '60'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com","name":"zone9.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-f232-2063b810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-08.azure-dns.com.","ns2-08.azure-dns.net.","ns3-08.azure-dns.org.","ns4-08.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_551
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/SOA/@?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"09962015-d5f7-4291-bb71-96a41405714c","properties":{"fqdn":"zone9.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.microsoft.com","expireTime":2419200,"host":"ns1-08.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_552
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/SOA/@?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SOARecord":{"host":"ns1-08.azure-dns.com.","email":"azuredns-hostmaster.zone9.com.","serialNumber":1,"refreshTime":3600,"retryTime":300,"expireTime":2419200,"minimumTTL":300}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '220'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"fd1bbb9e-0849-45e3-86ec-609f196d890f","properties":{"fqdn":"zone9.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.zone9.com.","expireTime":2419200,"host":"ns1-08.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_553
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/NS/@?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"5b6f58cf-7868-409c-bbab-ea35990aa206","properties":{"fqdn":"zone9.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-08.azure-dns.com."},{"nsdname":"ns2-08.azure-dns.net."},{"nsdname":"ns3-08.azure-dns.org."},{"nsdname":"ns4-08.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_554
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/NS/@?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"5b6f58cf-7868-409c-bbab-ea35990aa206","properties":{"TTL":172800,"targetResource":{},"NSRecords":[{"nsdname":"ns1-08.azure-dns.com."},{"nsdname":"ns2-08.azure-dns.net."},{"nsdname":"ns3-08.azure-dns.org."},{"nsdname":"ns4-08.azure-dns.info."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '269'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"28b0b7e9-5863-4fe6-ad96-1f3c3e0fb869","properties":{"fqdn":"zone9.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-08.azure-dns.com."},{"nsdname":"ns2-08.azure-dns.net."},{"nsdname":"ns3-08.azure-dns.org."},{"nsdname":"ns4-08.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_555
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/NS/test-ns?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":300,"NSRecords":[{"nsdname":"ns1.zone9.com."}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '74'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"911246d9-137a-4411-849c-a2e60a6f1d22","properties":{"fqdn":"test-ns.zone9.com.","TTL":300,"NSRecords":[{"nsdname":"ns1.zone9.com."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_556
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/MX/test-mx?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":300,"MXRecords":[{"preference":10,"exchange":"mail.zone9.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '94'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"4edc02b0-1ead-4337-a4e3-98f1b20857e3","properties":{"fqdn":"test-mx.zone9.com.","TTL":300,"MXRecords":[{"exchange":"mail.zone9.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_557
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/SRV/_sip._tcp.test-srv?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":300,"SRVRecords":[{"priority":1,"weight":2,"port":3,"target":"target.zone9.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '116'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SRV/_sip._tcp.test-srv","name":"_sip._tcp.test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"c7fac1e8-e929-46d7-9b2a-0751a39d8fd7","properties":{"fqdn":"_sip._tcp.test-srv.zone9.com.","TTL":300,"SRVRecords":[{"port":3,"priority":1,"target":"target.zone9.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_558
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/A/ns?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '71'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/A/ns","name":"ns","type":"Microsoft.Network/dnszones/A","etag":"30097336-63d1-4087-ba31-e131ec3b5dda","properties":{"fqdn":"ns.zone9.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_559
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/A/*?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '71'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/A/*","name":"*","type":"Microsoft.Network/dnszones/A","etag":"a45d46a3-7982-4b84-8b11-74cb6da71673","properties":{"fqdn":"*.zone9.com.","TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_560
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/CNAME/www?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":300,"CNAMERecord":{"cname":"zone9.com."}}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '68'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/CNAME/www","name":"www","type":"Microsoft.Network/dnszones/CNAME","etag":"ed5456a4-9df0-48fa-92cc-a83849adbba8","properties":{"fqdn":"www.zone9.com.","TTL":300,"CNAMERecord":{"cname":"zone9.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_561
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/recordsets?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set list
+          Connection: keep-alive
+          ParameterSetName: '-g -z'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"28b0b7e9-5863-4fe6-ad96-1f3c3e0fb869","properties":{"fqdn":"zone9.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-08.azure-dns.com."},{"nsdname":"ns2-08.azure-dns.net."},{"nsdname":"ns3-08.azure-dns.org."},{"nsdname":"ns4-08.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"fd1bbb9e-0849-45e3-86ec-609f196d890f","properties":{"fqdn":"zone9.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.zone9.com.","expireTime":2419200,"host":"ns1-08.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/A/*","name":"*","type":"Microsoft.Network/dnszones/A","etag":"a45d46a3-7982-4b84-8b11-74cb6da71673","properties":{"fqdn":"*.zone9.com.","TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/A/ns","name":"ns","type":"Microsoft.Network/dnszones/A","etag":"30097336-63d1-4087-ba31-e131ec3b5dda","properties":{"fqdn":"ns.zone9.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"4edc02b0-1ead-4337-a4e3-98f1b20857e3","properties":{"fqdn":"test-mx.zone9.com.","TTL":300,"MXRecords":[{"exchange":"mail.zone9.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"911246d9-137a-4411-849c-a2e60a6f1d22","properties":{"fqdn":"test-ns.zone9.com.","TTL":300,"NSRecords":[{"nsdname":"ns1.zone9.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SRV/_sip._tcp.test-srv","name":"_sip._tcp.test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"c7fac1e8-e929-46d7-9b2a-0751a39d8fd7","properties":{"fqdn":"_sip._tcp.test-srv.zone9.com.","TTL":300,"SRVRecords":[{"port":3,"priority":1,"target":"target.zone9.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/CNAME/www","name":"www","type":"Microsoft.Network/dnszones/CNAME","etag":"ed5456a4-9df0-48fa-92cc-a83849adbba8","properties":{"fqdn":"www.zone9.com.","TTL":300,"CNAMERecord":{"cname":"zone9.com."},"targetResource":{},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_562
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/recordsets?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone export
+          Connection: keep-alive
+          ParameterSetName: '-g -n --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"28b0b7e9-5863-4fe6-ad96-1f3c3e0fb869","properties":{"fqdn":"zone9.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-08.azure-dns.com."},{"nsdname":"ns2-08.azure-dns.net."},{"nsdname":"ns3-08.azure-dns.org."},{"nsdname":"ns4-08.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"fd1bbb9e-0849-45e3-86ec-609f196d890f","properties":{"fqdn":"zone9.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.zone9.com.","expireTime":2419200,"host":"ns1-08.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/A/*","name":"*","type":"Microsoft.Network/dnszones/A","etag":"a45d46a3-7982-4b84-8b11-74cb6da71673","properties":{"fqdn":"*.zone9.com.","TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/A/ns","name":"ns","type":"Microsoft.Network/dnszones/A","etag":"30097336-63d1-4087-ba31-e131ec3b5dda","properties":{"fqdn":"ns.zone9.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"4edc02b0-1ead-4337-a4e3-98f1b20857e3","properties":{"fqdn":"test-mx.zone9.com.","TTL":300,"MXRecords":[{"exchange":"mail.zone9.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"911246d9-137a-4411-849c-a2e60a6f1d22","properties":{"fqdn":"test-ns.zone9.com.","TTL":300,"NSRecords":[{"nsdname":"ns1.zone9.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SRV/_sip._tcp.test-srv","name":"_sip._tcp.test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"c7fac1e8-e929-46d7-9b2a-0751a39d8fd7","properties":{"fqdn":"_sip._tcp.test-srv.zone9.com.","TTL":300,"SRVRecords":[{"port":3,"priority":1,"target":"target.zone9.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/CNAME/www","name":"www","type":"Microsoft.Network/dnszones/CNAME","etag":"ed5456a4-9df0-48fa-92cc-a83849adbba8","properties":{"fqdn":"www.zone9.com.","TTL":300,"CNAMERecord":{"cname":"zone9.com."},"targetResource":{},"provisioningState":"Succeeded"}}]}
+      - step: RawStep_563
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone delete
+          Connection: keep-alive
+          Content-Length: '0'
+          ParameterSetName: '-g -n -y'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 202
+      - step: RawStep_564
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsOperationStatuses/delzone637504330379154661bdccb654?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone delete
+          Connection: keep-alive
+          ParameterSetName: '-g -n -y'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_565
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com?api-version=2018-05-01
+        requestBody: '{"location":"global","properties":{"zoneType":"Public"}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '60'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com","name":"zone9.com","type":"Microsoft.Network/dnszones","etag":"00000002-0000-0000-6cb3-9d74b810d701","location":"global","tags":{},"properties":{"maxNumberOfRecordSets":10000,"maxNumberOfRecordsPerRecordSet":null,"nameServers":["ns1-08.azure-dns.com.","ns2-08.azure-dns.net.","ns3-08.azure-dns.org.","ns4-08.azure-dns.info."],"numberOfRecordSets":2,"serveRecordsBelowDelegation":null,"zoneType":"Public"}}
+      - step: RawStep_566
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/SOA/@?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"cdd038d9-5e69-41ca-95db-576fa5be90ef","properties":{"fqdn":"zone9.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.microsoft.com","expireTime":2419200,"host":"ns1-08.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_567
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/SOA/@?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":3600,"SOARecord":{"host":"ns1-08.azure-dns.com.","email":"azuredns-hostmaster.zone9.com.","serialNumber":1,"refreshTime":3600,"retryTime":300,"expireTime":2419200,"minimumTTL":300}}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '220'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"b048d1f5-720d-4627-bf13-d305fbc8994c","properties":{"fqdn":"zone9.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.zone9.com.","expireTime":2419200,"host":"ns1-08.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_568
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/NS/@?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"ad20b556-3304-47f5-98d5-3da5dec6a201","properties":{"fqdn":"zone9.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-08.azure-dns.com."},{"nsdname":"ns2-08.azure-dns.net."},{"nsdname":"ns3-08.azure-dns.org."},{"nsdname":"ns4-08.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_569
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/NS/@?api-version=2018-05-01
+        requestBody: >-
+          {"etag":"ad20b556-3304-47f5-98d5-3da5dec6a201","properties":{"TTL":172800,"targetResource":{},"NSRecords":[{"nsdname":"ns1-08.azure-dns.com."},{"nsdname":"ns2-08.azure-dns.net."},{"nsdname":"ns3-08.azure-dns.org."},{"nsdname":"ns4-08.azure-dns.info."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '269'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"ec02dfb9-3699-499e-99ab-f7a11f15b439","properties":{"fqdn":"zone9.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-08.azure-dns.com."},{"nsdname":"ns2-08.azure-dns.net."},{"nsdname":"ns3-08.azure-dns.org."},{"nsdname":"ns4-08.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_570
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/A/*?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '71'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/A/*","name":"*","type":"Microsoft.Network/dnszones/A","etag":"4eeaa713-08df-44c2-8df8-d63e9ec44c35","properties":{"fqdn":"*.zone9.com.","TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_571
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/A/ns?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '71'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/A/ns","name":"ns","type":"Microsoft.Network/dnszones/A","etag":"ebb1ecb9-cc38-4712-bce3-45cc3c358df7","properties":{"fqdn":"ns.zone9.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_572
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/MX/test-mx?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":300,"MXRecords":[{"preference":10,"exchange":"mail.zone9.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '94'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"5bb6ea37-ca15-432f-9d95-0cd5a26acd88","properties":{"fqdn":"test-mx.zone9.com.","TTL":300,"MXRecords":[{"exchange":"mail.zone9.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_573
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/NS/test-ns?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":300,"NSRecords":[{"nsdname":"ns1.zone9.com."}]}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '74'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"b7862fb1-70ae-4efa-bf23-fa7f6f2083fd","properties":{"fqdn":"test-ns.zone9.com.","TTL":300,"NSRecords":[{"nsdname":"ns1.zone9.com."}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_574
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/SRV/_sip._tcp.test-srv?api-version=2018-05-01
+        requestBody: >-
+          {"properties":{"TTL":300,"SRVRecords":[{"priority":1,"weight":2,"port":3,"target":"target.zone9.com."}]}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '116'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SRV/_sip._tcp.test-srv","name":"_sip._tcp.test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"0ae2cbf3-0b31-4666-a2e4-f02efac7f3ea","properties":{"fqdn":"_sip._tcp.test-srv.zone9.com.","TTL":300,"SRVRecords":[{"port":3,"priority":1,"target":"target.zone9.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_575
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/CNAME/www?api-version=2018-05-01
+        requestBody: '{"properties":{"TTL":300,"CNAMERecord":{"cname":"zone9.com."}}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns zone import
+          Connection: keep-alive
+          Content-Length: '68'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-n -g --file-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/CNAME/www","name":"www","type":"Microsoft.Network/dnszones/CNAME","etag":"328ae071-4603-4b16-95f0-d8a11f2917b2","properties":{"fqdn":"www.zone9.com.","TTL":300,"CNAMERecord":{"cname":"zone9.com."},"targetResource":{},"provisioningState":"Succeeded"}}
+      - step: RawStep_576
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnsZones/zone9.com/recordsets?api-version=2018-05-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network dns record-set list
+          Connection: keep-alive
+          ParameterSetName: '-g -z'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-dns/2.1.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/@","name":"@","type":"Microsoft.Network/dnszones/NS","etag":"ec02dfb9-3699-499e-99ab-f7a11f15b439","properties":{"fqdn":"zone9.com.","TTL":172800,"NSRecords":[{"nsdname":"ns1-08.azure-dns.com."},{"nsdname":"ns2-08.azure-dns.net."},{"nsdname":"ns3-08.azure-dns.org."},{"nsdname":"ns4-08.azure-dns.info."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SOA/@","name":"@","type":"Microsoft.Network/dnszones/SOA","etag":"b048d1f5-720d-4627-bf13-d305fbc8994c","properties":{"fqdn":"zone9.com.","TTL":3600,"SOARecord":{"email":"azuredns-hostmaster.zone9.com.","expireTime":2419200,"host":"ns1-08.azure-dns.com.","minimumTTL":300,"refreshTime":3600,"retryTime":300,"serialNumber":1},"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/A/*","name":"*","type":"Microsoft.Network/dnszones/A","etag":"4eeaa713-08df-44c2-8df8-d63e9ec44c35","properties":{"fqdn":"*.zone9.com.","TTL":3600,"ARecords":[{"ipv4Address":"2.3.4.5"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/A/ns","name":"ns","type":"Microsoft.Network/dnszones/A","etag":"ebb1ecb9-cc38-4712-bce3-45cc3c358df7","properties":{"fqdn":"ns.zone9.com.","TTL":3600,"ARecords":[{"ipv4Address":"1.2.3.4"}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/MX/test-mx","name":"test-mx","type":"Microsoft.Network/dnszones/MX","etag":"5bb6ea37-ca15-432f-9d95-0cd5a26acd88","properties":{"fqdn":"test-mx.zone9.com.","TTL":300,"MXRecords":[{"exchange":"mail.zone9.com.","preference":10}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/NS/test-ns","name":"test-ns","type":"Microsoft.Network/dnszones/NS","etag":"b7862fb1-70ae-4efa-bf23-fa7f6f2083fd","properties":{"fqdn":"test-ns.zone9.com.","TTL":300,"NSRecords":[{"nsdname":"ns1.zone9.com."}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/SRV/_sip._tcp.test-srv","name":"_sip._tcp.test-srv","type":"Microsoft.Network/dnszones/SRV","etag":"0ae2cbf3-0b31-4666-a2e4-f02efac7f3ea","properties":{"fqdn":"_sip._tcp.test-srv.zone9.com.","TTL":300,"SRVRecords":[{"port":3,"priority":1,"target":"target.zone9.com.","weight":2}],"targetResource":{},"provisioningState":"Succeeded"}},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_dns_zone9_import000001/providers/Microsoft.Network/dnszones/zone9.com/CNAME/www","name":"www","type":"Microsoft.Network/dnszones/CNAME","etag":"328ae071-4603-4b16-95f0-d8a11f2917b2","properties":{"fqdn":"www.zone9.com.","TTL":300,"CNAMERecord":{"cname":"zone9.com."},"targetResource":{},"provisioningState":"Succeeded"}}]}

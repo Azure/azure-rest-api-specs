@@ -1,0 +1,45 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_asg
+    steps:
+      - step: ApplicationSecurityGroups_ListAll_1481
+        exampleFile: ../examples/ApplicationSecurityGroups_ListAll_1481_Generated.json
+        operationId: ApplicationSecurityGroups_ListAll
+      - step: RawStep_1482
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_asg000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network asg create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --tags'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_asg000001","name":"cli_test_network_asg000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:36:17Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_applicationSecurityGroups_asg1
+        resourceName: applicationSecurityGroups_asg1
+        exampleFile: ../examples/Create_applicationSecurityGroups_asg1_Generated.json
+        operationId: ApplicationSecurityGroups_CreateOrUpdate
+      - step: Update_applicationSecurityGroups_asg1_1485
+        resourceName: applicationSecurityGroups_asg1
+        operationId: ApplicationSecurityGroups_CreateOrUpdate
+        resourceUpdate:
+          - replace: /tags/foo
+            value: bar
+      - step: ApplicationSecurityGroups_ListAll_1486
+        exampleFile: ../examples/ApplicationSecurityGroups_ListAll_1486_Generated.json
+        operationId: ApplicationSecurityGroups_ListAll
+      - step: ApplicationSecurityGroups_Delete_1487
+        exampleFile: ../examples/ApplicationSecurityGroups_Delete_1487_Generated.json
+        operationId: ApplicationSecurityGroups_Delete
+      - step: ApplicationSecurityGroups_ListAll_1488
+        exampleFile: ../examples/ApplicationSecurityGroups_ListAll_1481_Generated.json
+        operationId: ApplicationSecurityGroups_ListAll
+    variables:
+      applicationSecurityGroupName: asg1

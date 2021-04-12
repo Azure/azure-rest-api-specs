@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_vpn_connection_ipsec000001",
+    "virtualNetworkGatewayConnectionName": "conn1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "conn1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/connections/conn1",
+        "etag": "W/\"57871bb7-eb40-42a9-bc0e-13e1e41d785a\"",
+        "type": "Microsoft.Network/connections",
+        "location": "westus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "6b987140-5819-4fe1-9128-07abaeb49001",
+          "packetCaptureDiagnosticState": "None",
+          "virtualNetworkGateway1": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/virtualNetworkGateways/gw1"
+          },
+          "localNetworkGateway2": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vpn_connection_ipsec000001/providers/Microsoft.Network/localNetworkGateways/lgw1"
+          },
+          "connectionType": "IPsec",
+          "connectionProtocol": "IKEv2",
+          "routingWeight": 10,
+          "sharedKey": "AzureA1b2C3",
+          "enableBgp": false,
+          "useLocalAzureIpAddress": false,
+          "usePolicyBasedTrafficSelectors": false,
+          "ipsecPolicies": [],
+          "trafficSelectorPolicies": [],
+          "connectionStatus": "Unknown",
+          "ingressBytesTransferred": 0,
+          "egressBytesTransferred": 0,
+          "expressRouteGatewayBypass": false,
+          "dpdTimeoutSeconds": 0,
+          "connectionMode": "Default"
+        }
+      }
+    }
+  }
+}

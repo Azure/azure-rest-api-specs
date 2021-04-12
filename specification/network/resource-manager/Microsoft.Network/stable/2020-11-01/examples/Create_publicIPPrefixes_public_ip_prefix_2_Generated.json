@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_network_public_ip_prefix000001",
+    "publicIpPrefixName": "public_ip_prefix_2",
+    "parameters": {
+      "location": "eastus2",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "publicIPAddressVersion": "IPv6",
+        "prefixLength": 127
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "public_ip_prefix_2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_public_ip_prefix000001/providers/Microsoft.Network/publicIPPrefixes/public_ip_prefix_2",
+        "etag": "W/\"1f5d585e-8ce1-49ea-a2bd-24638db0929a\"",
+        "type": "Microsoft.Network/publicIPPrefixes",
+        "location": "eastus2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "7bda29e6-737f-48ed-b53e-305c5b65d38d",
+          "prefixLength": 127,
+          "publicIPAddressVersion": "IPv6",
+          "ipPrefix": "2603:1030:408:6::52/127",
+          "ipTags": []
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Regional"
+        }
+      }
+    }
+  }
+}

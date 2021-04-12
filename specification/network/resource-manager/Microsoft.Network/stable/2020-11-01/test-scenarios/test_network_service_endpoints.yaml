@@ -1,0 +1,144 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_service_endpoints
+    steps:
+      - step: AvailableEndpointServices_List_2412
+        exampleFile: ../examples/AvailableEndpointServices_List_2412_Generated.json
+        operationId: AvailableEndpointServices_List
+      - step: RawStep_2413
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/network_service_endpoint_scenario_test000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network service-endpoint policy create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --tags'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/network_service_endpoint_scenario_test000001","name":"network_service_endpoint_scenario_test000001","type":"Microsoft.Resources/resourceGroups","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:40:32Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_serviceEndpointPolicies_policy1
+        resourceName: serviceEndpointPolicies_policy1
+        exampleFile: ../examples/Create_serviceEndpointPolicies_policy1_Generated.json
+        operationId: ServiceEndpointPolicies_CreateOrUpdate
+      - step: Update_serviceEndpointPolicies_policy1_2416
+        resourceName: serviceEndpointPolicies_policy1
+        operationId: ServiceEndpointPolicies_CreateOrUpdate
+        resourceUpdate:
+          - replace: /tags/test
+            value: nest
+      - step: ServiceEndpointPolicies_ListByResourceGroup_2417
+        exampleFile: >-
+          ../examples/ServiceEndpointPolicies_ListByResourceGroup_2417_Generated.json
+        operationId: ServiceEndpointPolicies_ListByResourceGroup
+      - step: ServiceEndpointPolicies_Delete_2418
+        exampleFile: ../examples/ServiceEndpointPolicies_Delete_2418_Generated.json
+        operationId: ServiceEndpointPolicies_Delete
+      - step: ServiceEndpointPolicies_ListByResourceGroup_2419
+        exampleFile: >-
+          ../examples/ServiceEndpointPolicies_ListByResourceGroup_2419_Generated.json
+        operationId: ServiceEndpointPolicies_ListByResourceGroup
+      - step: RawStep_2420
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/network_service_endpoint_scenario_test000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network service-endpoint policy create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --tags'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/network_service_endpoint_scenario_test000001","name":"network_service_endpoint_scenario_test000001","type":"Microsoft.Resources/resourceGroups","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:40:32Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_serviceEndpointPolicies_policy1_2422
+        resourceName: serviceEndpointPolicies_policy1_2422
+        exampleFile: ../examples/Create_serviceEndpointPolicies_policy1_2422_Generated.json
+        operationId: ServiceEndpointPolicies_CreateOrUpdate
+      - step: Create_serviceEndpointPolicyDefinitions_storage-def
+        resourceName: serviceEndpointPolicyDefinitions_storage-def
+        exampleFile: >-
+          ../examples/Create_serviceEndpointPolicyDefinitions_storage-def_Generated.json
+        operationId: ServiceEndpointPolicyDefinitions_CreateOrUpdate
+      - step: Update_serviceEndpointPolicyDefinitions_storage-def_2425
+        resourceName: serviceEndpointPolicyDefinitions_storage-def
+        operationId: ServiceEndpointPolicyDefinitions_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/description
+            value: Better description
+      - step: ServiceEndpointPolicyDefinitions_ListByResourceGroup_2426
+        exampleFile: >-
+          ../examples/ServiceEndpointPolicyDefinitions_ListByResourceGroup_2426_Generated.json
+        operationId: ServiceEndpointPolicyDefinitions_ListByResourceGroup
+      - step: ServiceEndpointPolicyDefinitions_Delete_2427
+        exampleFile: >-
+          ../examples/ServiceEndpointPolicyDefinitions_Delete_2427_Generated.json
+        operationId: ServiceEndpointPolicyDefinitions_Delete
+      - step: ServiceEndpointPolicyDefinitions_ListByResourceGroup_2428
+        exampleFile: >-
+          ../examples/ServiceEndpointPolicyDefinitions_ListByResourceGroup_2428_Generated.json
+        operationId: ServiceEndpointPolicyDefinitions_ListByResourceGroup
+      - step: Create_serviceEndpointPolicyDefinitions_storage-def_2430
+        resourceName: serviceEndpointPolicyDefinitions_storage-def_2430
+        exampleFile: >-
+          ../examples/Create_serviceEndpointPolicyDefinitions_storage-def_2430_Generated.json
+        operationId: ServiceEndpointPolicyDefinitions_CreateOrUpdate
+      - step: RawStep_2431
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/network_service_endpoint_scenario_test000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/network_service_endpoint_scenario_test000001","name":"network_service_endpoint_scenario_test000001","type":"Microsoft.Resources/resourceGroups","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:40:32Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2433.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Update_virtualNetworks_vnet1_2435
+        resourceName: virtualNetworks_vnet1
+        operationId: VirtualNetworks_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/subnets/0
+            value:
+              name: subnet1
+              properties:
+                addressPrefix: 10.0.0.0/24
+                serviceEndpoints:
+                  - service: Microsoft.Storage
+                    provisioningState: Succeeded
+                    locations:
+                      - '*'
+                serviceEndpointPolicies:
+                  - id: >-
+                      /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/network_service_endpoint_scenario_test000001/providers/Microsoft.Network/serviceEndpointPolicies/policy1
+                provisioningState: Succeeded
+                delegations: []
+                privateEndpointNetworkPolicies: Enabled
+                privateLinkServiceNetworkPolicies: Enabled
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/network_service_endpoint_scenario_test000001/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+              type: Microsoft.Network/virtualNetworks/subnets
+    variables:
+      location: westcentralus
+      serviceEndpointPolicyName: policy1
+      serviceEndpointPolicyDefinitionName: storage-def
+      virtualNetworkName: vnet1

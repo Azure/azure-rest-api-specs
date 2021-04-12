@@ -1,0 +1,37 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vnet_local_context
+    steps:
+      - step: RawStep_2594
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/clitest.rg000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clitest.rg000001","name":"clitest.rg000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:56:22Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet-000002
+        resourceName: virtualNetworks_vnet-000002
+        exampleFile: ../examples/Create_virtualNetworks_vnet-000002_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_Get_2596
+        exampleFile: ../examples/Subnets_Get_4_Generated.json
+        operationId: Subnets_Get
+      - step: Subnets_Delete_2597
+        exampleFile: ../examples/Subnets_Delete_2532_Generated.json
+        operationId: Subnets_Delete
+      - step: VirtualNetworks_Delete_2598
+        exampleFile: ../examples/VirtualNetworks_Delete_2466_Generated.json
+        operationId: VirtualNetworks_Delete
+    variables:
+      virtualNetworkName: vnet-000002
+      subnetName: subnet-000003

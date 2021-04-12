@@ -1,0 +1,104 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_vnet_peering000001",
+    "virtualNetworkGatewayName": "gateway1",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "foo": "doo"
+      },
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "vnetGatewayConfig0",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/GatewaySubnet"
+              },
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/publicIPAddresses/ip1"
+              }
+            }
+          }
+        ],
+        "gatewayType": "Vpn",
+        "vpnType": "RouteBased",
+        "activeActive": false,
+        "sku": {
+          "name": "Basic",
+          "tier": "Basic"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "gateway1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworkGateways/gateway1",
+        "etag": "W/\"f4aa241f-0cf0-48a5-b601-4067595c0847\"",
+        "type": "Microsoft.Network/virtualNetworkGateways",
+        "location": "westus",
+        "tags": {
+          "foo": "doo"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "c8b7d9f3-6025-4ce0-9f24-a3efbe1b87f6",
+          "packetCaptureDiagnosticState": "None",
+          "enablePrivateIpAddress": false,
+          "ipConfigurations": [
+            {
+              "name": "vnetGatewayConfig0",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworkGateways/gateway1/ipConfigurations/vnetGatewayConfig0",
+              "etag": "W/\"f4aa241f-0cf0-48a5-b601-4067595c0847\"",
+              "type": "Microsoft.Network/virtualNetworkGateways/ipConfigurations",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/publicIPAddresses/ip1"
+                },
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/GatewaySubnet"
+                }
+              }
+            }
+          ],
+          "natRules": [],
+          "enableBgpRouteTranslationForNat": false,
+          "sku": {
+            "name": "Basic",
+            "tier": "Basic",
+            "capacity": 2
+          },
+          "gatewayType": "Vpn",
+          "vpnType": "RouteBased",
+          "enableBgp": false,
+          "activeActive": false,
+          "bgpSettings": {
+            "asn": 65515,
+            "bgpPeeringAddress": "11.0.0.254",
+            "peerWeight": 0,
+            "bgpPeeringAddresses": [
+              {
+                "ipconfigurationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_vnet_peering000001/providers/Microsoft.Network/virtualNetworkGateways/gateway1/ipConfigurations/vnetGatewayConfig0",
+                "defaultBgpIpAddresses": [
+                  "11.0.0.254"
+                ],
+                "customBgpIpAddresses": [],
+                "tunnelIpAddresses": [
+                  "104.42.172.214"
+                ]
+              }
+            ]
+          },
+          "vpnGatewayGeneration": "Generation1"
+        }
+      }
+    }
+  }
+}

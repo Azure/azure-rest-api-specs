@@ -1,0 +1,304 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_watcher
+    steps:
+      - step: RawStep_2734
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_watcher000001?api-version=2019-07-01
+        requestBody: >-
+          {"location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2018-08-28T17:33:22Z"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: group create
+          Connection: keep-alive
+          Content-Length: '117'
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 resourcemanagementclient/2.0.0
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001","name":"cli_test_network_watcher000001","location":"westcentralus","tags":{"product":"azurecli","cause":"automation","date":"2018-08-28T17:33:22Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2735
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Storage/storageAccounts/clitestnw000002?api-version=2018-07-01
+        requestBody: >-
+          {"sku":{"name":"Standard_LRS"},"kind":"Storage","location":"westcentralus","properties":{"supportsHttpsTrafficOnly":false,"isHnsEnabled":false}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: storage account create
+          Connection: keep-alive
+          Content-Length: '155'
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 azure-mgmt-storage/2.0.0rc4
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        statusCode: 202
+      - step: RawStep_2736
+        method: POST
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Storage/storageAccounts/clitestnw000002/listKeys?api-version=2018-07-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: storage account keys list
+          Connection: keep-alive
+          Content-Length: '0'
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 azure-mgmt-storage/2.0.0rc4
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        responseExpected: >-
+          {"keys":[{"keyName":"key1","value":"fevgcAhuN4Rq5FVuSob5qVPeakT18gxVC8sDvEtaw2Y9SicP7VQ4DY+/6ogEM1MLean686C4ABZA3tmArfu+/g==","permissions":"FULL"},{"keyName":"key2","value":"qhBO0usSRswxvjNm8k3VJdAZD6b0NEiOiIql2rjfljRROya7sAPd7cKXMzw//reIYMI94u3k32ygOZPClzxBuA==","permissions":"FULL"}]}
+      - step: RawStep_2737
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/networkWatchers?api-version=2018-07-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"name":"westus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tjp-rg/providers/Microsoft.Network/networkWatchers/westus-watcher","etag":"W/\"9d8a151e-443d-4e1a-b0e7-9131dea6a16f\"","type":"Microsoft.Network/networkWatchers","location":"westus","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}]}
+      - step: RawStep_2738
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westus2-watcher?api-version=2018-07-01
+        requestBody: '{"location":"westus2"}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          Content-Length: '23'
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"name":"westus2-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westus2-watcher","etag":"W/\"7fe8118f-0a83-4748-b75f-6a2c66b77a39\"","type":"Microsoft.Network/networkWatchers","location":"westus2","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}
+      - step: RawStep_2739
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westcentralus-watcher?api-version=2018-07-01
+        requestBody: '{"location":"westcentralus"}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          Content-Length: '29'
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"name":"westcentralus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westcentralus-watcher","etag":"W/\"0fb27484-2d77-462e-b8ba-eb62f2017694\"","type":"Microsoft.Network/networkWatchers","location":"westcentralus","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}
+      - step: RawStep_2740
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tjp-rg/providers/Microsoft.Network/networkWatchers/westus-watcher?api-version=2018-07-01
+        requestBody: '{"location":"westus"}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          Content-Length: '22'
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        responseExpected: >-
+          {"name":"westus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tjp-rg/providers/Microsoft.Network/networkWatchers/westus-watcher","etag":"W/\"9d8a151e-443d-4e1a-b0e7-9131dea6a16f\"","type":"Microsoft.Network/networkWatchers","location":"westus","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}
+      - step: RawStep_2741
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/networkWatchers?api-version=2018-07-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"name":"westus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tjp-rg/providers/Microsoft.Network/networkWatchers/westus-watcher","etag":"W/\"9d8a151e-443d-4e1a-b0e7-9131dea6a16f\"","type":"Microsoft.Network/networkWatchers","location":"westus","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}},{"name":"westcentralus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westcentralus-watcher","etag":"W/\"88e2075b-d8d7-44f3-8334-c337cac3a599\"","type":"Microsoft.Network/networkWatchers","location":"westcentralus","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}},{"name":"westus2-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westus2-watcher","etag":"W/\"f57d9557-77c7-438c-b3c2-d6b2bef56714\"","type":"Microsoft.Network/networkWatchers","location":"westus2","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}]}
+      - step: RawStep_2742
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/networkWatchers?api-version=2018-07-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"name":"westus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tjp-rg/providers/Microsoft.Network/networkWatchers/westus-watcher","etag":"W/\"9d8a151e-443d-4e1a-b0e7-9131dea6a16f\"","type":"Microsoft.Network/networkWatchers","location":"westus","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}},{"name":"westcentralus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westcentralus-watcher","etag":"W/\"88e2075b-d8d7-44f3-8334-c337cac3a599\"","type":"Microsoft.Network/networkWatchers","location":"westcentralus","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}},{"name":"westus2-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westus2-watcher","etag":"W/\"f57d9557-77c7-438c-b3c2-d6b2bef56714\"","type":"Microsoft.Network/networkWatchers","location":"westus2","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}]}
+      - step: RawStep_2743
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tjp-rg/providers/Microsoft.Network/networkWatchers/westus-watcher?api-version=2018-07-01
+        requestBody: '{"location":"westus","tags":{"foo":"doo"}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          Content-Length: '46'
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        responseExpected: >-
+          {"name":"westus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tjp-rg/providers/Microsoft.Network/networkWatchers/westus-watcher","etag":"W/\"87dd7a09-8479-45be-9eb0-081dcbdc1f3e\"","type":"Microsoft.Network/networkWatchers","location":"westus","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}
+      - step: RawStep_2744
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westus2-watcher?api-version=2018-07-01
+        requestBody: '{"location":"westus2","tags":{"foo":"doo"}}'
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          Content-Length: '47'
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        responseExpected: >-
+          {"name":"westus2-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westus2-watcher","etag":"W/\"e2e5be8f-fd12-4bd5-ad5d-e33123c55e3c\"","type":"Microsoft.Network/networkWatchers","location":"westus2","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}
+      - step: RawStep_2745
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/networkWatchers?api-version=2018-07-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"name":"westus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tjp-rg/providers/Microsoft.Network/networkWatchers/westus-watcher","etag":"W/\"87dd7a09-8479-45be-9eb0-081dcbdc1f3e\"","type":"Microsoft.Network/networkWatchers","location":"westus","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}},{"name":"westcentralus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westcentralus-watcher","etag":"W/\"88e2075b-d8d7-44f3-8334-c337cac3a599\"","type":"Microsoft.Network/networkWatchers","location":"westcentralus","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}},{"name":"westus2-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westus2-watcher","etag":"W/\"e2e5be8f-fd12-4bd5-ad5d-e33123c55e3c\"","type":"Microsoft.Network/networkWatchers","location":"westus2","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}]}
+      - step: RawStep_2746
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/networkWatchers?api-version=2018-07-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"name":"westus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tjp-rg/providers/Microsoft.Network/networkWatchers/westus-watcher","etag":"W/\"87dd7a09-8479-45be-9eb0-081dcbdc1f3e\"","type":"Microsoft.Network/networkWatchers","location":"westus","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}},{"name":"westcentralus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westcentralus-watcher","etag":"W/\"88e2075b-d8d7-44f3-8334-c337cac3a599\"","type":"Microsoft.Network/networkWatchers","location":"westcentralus","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}},{"name":"westus2-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westus2-watcher","etag":"W/\"e2e5be8f-fd12-4bd5-ad5d-e33123c55e3c\"","type":"Microsoft.Network/networkWatchers","location":"westus2","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}]}
+      - step: RawStep_2747
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westus2-watcher?api-version=2018-07-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          Content-Length: '0'
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        statusCode: 202
+      - step: RawStep_2748
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/networkWatchers?api-version=2018-07-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher configure
+          Connection: keep-alive
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"name":"westus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tjp-rg/providers/Microsoft.Network/networkWatchers/westus-watcher","etag":"W/\"87dd7a09-8479-45be-9eb0-081dcbdc1f3e\"","type":"Microsoft.Network/networkWatchers","location":"westus","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}},{"name":"westcentralus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westcentralus-watcher","etag":"W/\"88e2075b-d8d7-44f3-8334-c337cac3a599\"","type":"Microsoft.Network/networkWatchers","location":"westcentralus","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}]}
+      - step: RawStep_2749
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/networkWatchers?api-version=2018-07-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network watcher list
+          Connection: keep-alive
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 networkmanagementclient/2.0.1
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        responseExpected: >-
+          {"value":[{"name":"westus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tjp-rg/providers/Microsoft.Network/networkWatchers/westus-watcher","etag":"W/\"87dd7a09-8479-45be-9eb0-081dcbdc1f3e\"","type":"Microsoft.Network/networkWatchers","location":"westus","tags":{"foo":"doo"},"properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}},{"name":"westcentralus-watcher","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_watcher000001/providers/Microsoft.Network/networkWatchers/westcentralus-watcher","etag":"W/\"88e2075b-d8d7-44f3-8334-c337cac3a599\"","type":"Microsoft.Network/networkWatchers","location":"westcentralus","properties":{"provisioningState":"Succeeded","flowLogs":[],"runningOperationIds":[]}}]}
+      - step: RawStep_2750
+        method: DELETE
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_watcher000001?api-version=2019-07-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: group delete
+          Connection: keep-alive
+          Content-Length: '0'
+          Content-Type: application/json; charset=utf-8
+          User-Agent: >-
+            python/3.6.5 (Windows-10-10.0.17134-SP0) requests/2.19.1
+            msrest/0.5.4 msrest_azure/0.5.0 resourcemanagementclient/2.0.0
+            Azure-SDK-For-Python AZURECLI/2.0.45
+          accept-language: en-US
+        statusCode: 202

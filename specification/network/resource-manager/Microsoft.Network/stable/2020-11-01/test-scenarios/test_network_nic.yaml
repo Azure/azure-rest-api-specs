@@ -1,0 +1,438 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_nic
+    steps:
+      - step: RawStep_2051
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001","name":"cli_test_nic_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:07:28Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_myvnet
+        resourceName: virtualNetworks_myvnet
+        exampleFile: ../examples/Create_virtualNetworks_myvnet_Generated.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: RawStep_2053
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network nsg create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001","name":"cli_test_nic_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:07:28Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkSecurityGroups_mynsg
+        resourceName: networkSecurityGroups_mynsg
+        exampleFile: ../examples/Create_networkSecurityGroups_mynsg_Generated.json
+        operationId: NetworkSecurityGroups_CreateOrUpdate
+      - step: RawStep_2055
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network nsg create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001","name":"cli_test_nic_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:07:28Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkSecurityGroups_myothernsg
+        resourceName: networkSecurityGroups_myothernsg
+        exampleFile: ../examples/Create_networkSecurityGroups_myothernsg_Generated.json
+        operationId: NetworkSecurityGroups_CreateOrUpdate
+        variables:
+          networkSecurityGroupName: myothernsg
+      - step: RawStep_2057
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001","name":"cli_test_nic_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:07:28Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_publicip1
+        resourceName: publicIPAddresses_publicip1
+        exampleFile: ../examples/Create_publicIPAddresses_publicip1_Generated_2059.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2060
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001","name":"cli_test_nic_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:07:28Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2061
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?$filter=resourceGroup%20eq%20%27cli_test_nic_scenario000001%27%20and%20name%20eq%20%27None%27%20and%20resourceType%20eq%20%27Microsoft.Network%2FpublicIPAddresses%27&api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: '{"value":[]}'
+      - step: RawStep_2062
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{},"variables":{},"resources":[{"apiVersion":"2020-11-01","type":"Microsoft.Network/publicIPAddresses","name":"PublicIPmylb","location":"eastus2","tags":{},"dependsOn":[],"properties":{"publicIPAllocationMethod":"Dynamic"},"sku":{"name":"Basic"}},{"type":"Microsoft.Network/loadBalancers","name":"mylb","location":"eastus2","tags":{},"apiVersion":"2020-11-01","dependsOn":["Microsoft.Network/publicIpAddresses/PublicIPmylb"],"properties":{"backendAddressPools":[{"name":"mylbbepool"}],"frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","properties":{"publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/publicIPAddresses/PublicIPmylb"},"privateIPAddressVersion":"IPv4"}}]},"sku":{"name":"Basic"}}],"outputs":{"loadBalancer":{"type":"object","value":"[reference('mylb')]"}}},"parameters":{},"mode":"Incremental"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          Content-Length: '1188'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Resources/deployments/lb_deploy_QwPfVda7YjrTdN2OaFOYWlevKZRhiZYr","name":"lb_deploy_QwPfVda7YjrTdN2OaFOYWlevKZRhiZYr","type":"Microsoft.Resources/deployments","properties":{"templateHash":"11530877847139140660","parameters":{},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-04T06:08:21.7770209Z","duration":"PT1.0648927S","correlationId":"f4545fcd-23c6-46d2-9ce5-bb4758b0e0a6","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"publicIPAddresses","locations":["eastus2"]},{"resourceType":"loadBalancers","locations":["eastus2"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/publicIPAddresses/PublicIPmylb","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"PublicIPmylb"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb","resourceType":"Microsoft.Network/loadBalancers","resourceName":"mylb"}]}}
+      - step: RawStep_2063
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867687847654885?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_2064
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network lb create
+          Connection: keep-alive
+          ParameterSetName: '-g -n'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Resources/deployments/lb_deploy_QwPfVda7YjrTdN2OaFOYWlevKZRhiZYr","name":"lb_deploy_QwPfVda7YjrTdN2OaFOYWlevKZRhiZYr","type":"Microsoft.Resources/deployments","properties":{"templateHash":"11530877847139140660","parameters":{},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-04T06:08:44.015067Z","duration":"PT23.3029388S","correlationId":"f4545fcd-23c6-46d2-9ce5-bb4758b0e0a6","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"publicIPAddresses","locations":["eastus2"]},{"resourceType":"loadBalancers","locations":["eastus2"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/publicIPAddresses/PublicIPmylb","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"PublicIPmylb"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb","resourceType":"Microsoft.Network/loadBalancers","resourceName":"mylb"}],"outputs":{"loadBalancer":{"type":"Object","value":{"provisioningState":"Succeeded","resourceGuid":"3f7fb55a-d949-41cf-b6a9-fd0b59c4e862","frontendIPConfigurations":[{"name":"LoadBalancerFrontEnd","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/frontendIPConfigurations/LoadBalancerFrontEnd","etag":"W/\"3702133c-8f04-43e0-ad95-d1e6e9f41ad9\"","type":"Microsoft.Network/loadBalancers/frontendIPConfigurations","properties":{"provisioningState":"Succeeded","privateIPAllocationMethod":"Dynamic","publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/publicIPAddresses/PublicIPmylb"},"privateIPAddressVersion":"IPv4"}}],"backendAddressPools":[{"name":"mylbbepool","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/backendAddressPools/mylbbepool","etag":"W/\"3702133c-8f04-43e0-ad95-d1e6e9f41ad9\"","properties":{"provisioningState":"Succeeded"},"type":"Microsoft.Network/loadBalancers/backendAddressPools"}],"loadBalancingRules":[],"probes":[],"inboundNatRules":[],"inboundNatPools":[]}}},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/publicIPAddresses/PublicIPmylb"}]}}
+      - step: LoadBalancers_Get_2065
+        exampleFile: ../examples/LoadBalancers_Get_2065_Generated.json
+        operationId: LoadBalancers_Get
+      - step: Create_loadBalancers_mylb
+        resourceName: loadBalancers_mylb
+        exampleFile: ../examples/Create_loadBalancers_mylb_Generated.json
+        operationId: LoadBalancers_CreateOrUpdate
+      - step: Update_loadBalancers_mylb_2068
+        resourceName: loadBalancers_mylb
+        operationId: LoadBalancers_CreateOrUpdate
+        resourceUpdate:
+          - add: >-
+              /properties/frontendIPConfigurations/0/properties/inboundNatRules/1
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/inboundNatRules/rule2
+          - add: /properties/inboundNatRules/1
+            value:
+              name: rule2
+              properties:
+                frontendIPConfiguration:
+                  id: >-
+                    /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/frontendIPConfigurations/LoadBalancerFrontEnd
+                  name: LoadBalancerFrontEnd
+                  properties:
+                    privateIPAllocationMethod: Dynamic
+                    privateIPAddressVersion: IPv4
+                    publicIPAddress:
+                      id: >-
+                        /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/publicIPAddresses/PublicIPmylb
+                protocol: Tcp
+                frontendPort: 200
+                backendPort: 200
+                provisioningState: Succeeded
+                enableFloatingIP: false
+                idleTimeoutInMinutes: 4
+                enableDestinationServiceEndpoint: false
+                enableTcpReset: false
+                allowBackendPortConflict: false
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/inboundNatRules/rule2
+              type: Microsoft.Network/loadBalancers/inboundNatRules
+      - step: Update_loadBalancers_mylb_2070
+        resourceName: loadBalancers_mylb
+        operationId: LoadBalancers_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/backendAddressPools/1
+            value:
+              name: bap1
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/backendAddressPools/bap1
+              properties:
+                provisioningState: Succeeded
+              type: Microsoft.Network/loadBalancers/backendAddressPools
+      - step: Update_loadBalancers_mylb_2072
+        resourceName: loadBalancers_mylb
+        operationId: LoadBalancers_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/backendAddressPools/2
+            value:
+              name: bap2
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/backendAddressPools/bap2
+              properties:
+                provisioningState: Succeeded
+              type: Microsoft.Network/loadBalancers/backendAddressPools
+      - step: LoadBalancerBackendAddressPools_List_2073
+        exampleFile: ../examples/LoadBalancerBackendAddressPools_List_2073_Generated.json
+        operationId: LoadBalancerBackendAddressPools_List
+      - step: RawStep_2074
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network nic create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet --vnet-name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001","name":"cli_test_nic_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:07:28Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkInterfaces_cli-test-nic
+        resourceName: networkInterfaces_cli-test-nic
+        exampleFile: ../examples/Create_networkInterfaces_cli-test-nic_Generated.json
+        operationId: NetworkInterfaces_CreateOrUpdate
+      - step: RawStep_2076
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network nic create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --subnet --ip-forwarding --private-ip-address
+            --public-ip-address --internal-dns-name --dns-servers
+            --lb-address-pools --lb-inbound-nat-rules --accelerated-networking
+            --tags
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001","name":"cli_test_nic_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:07:28Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Update_networkInterfaces_cli-test-nic_2078
+        resourceName: networkInterfaces_cli-test-nic
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/ipConfigurations/0/properties/privateIPAddress
+            value: 10.0.0.15
+          - replace: >-
+              /properties/ipConfigurations/0/properties/privateIPAllocationMethod
+            value: Static
+          - add: >-
+              /properties/ipConfigurations/0/properties/loadBalancerBackendAddressPools
+            value:
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/backendAddressPools/mylbbepool
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/backendAddressPools/bap1
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/backendAddressPools/bap2
+          - add: >-
+              /properties/ipConfigurations/0/properties/loadBalancerInboundNatRules
+            value:
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/inboundNatRules/rule1
+              - id: >-
+                  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/loadBalancers/mylb/inboundNatRules/rule2
+          - add: /properties/ipConfigurations/0/properties/publicIPAddress
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/publicIPAddresses/publicip1
+          - add: /properties/dnsSettings/dnsServers/0
+            value: 100.1.2.3
+          - add: /properties/dnsSettings/internalDnsNameLabel
+            value: test
+          - add: /properties/dnsSettings/internalFqdn
+            value: test.nakdokup4kjezkrairyqdqevje.cx.internal.cloudapp.net
+          - replace: /properties/enableAcceleratedNetworking
+            value: true
+          - replace: /properties/enableIPForwarding
+            value: true
+          - add: /tags
+            value:
+              foo: doo
+      - step: RawStep_2079
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network nic create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --subnet --vnet-name --network-security-group'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001","name":"cli_test_nic_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:07:28Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Update_networkInterfaces_cli-test-nic_2081
+        resourceName: networkInterfaces_cli-test-nic
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - remove: /tags
+          - replace: >-
+              /properties/ipConfigurations/0/properties/privateIPAllocationMethod
+            value: Dynamic
+          - remove: /properties/ipConfigurations/0/properties/publicIPAddress
+          - remove: >-
+              /properties/ipConfigurations/0/properties/loadBalancerBackendAddressPools
+          - remove: >-
+              /properties/ipConfigurations/0/properties/loadBalancerInboundNatRules
+          - remove: /properties/dnsSettings/dnsServers/0
+          - remove: /properties/dnsSettings/internalDnsNameLabel
+          - remove: /properties/dnsSettings/internalFqdn
+          - replace: /properties/enableAcceleratedNetworking
+            value: false
+          - replace: /properties/enableIPForwarding
+            value: false
+          - add: /properties/networkSecurityGroup
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/networkSecurityGroups/mynsg
+      - step: RawStep_2082
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_nic_scenario000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network nic create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --subnet --vnet-name --network-security-group
+            --public-ip-address
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001","name":"cli_test_nic_scenario000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:07:28Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Update_networkInterfaces_cli-test-nic_2084
+        resourceName: networkInterfaces_cli-test-nic
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/ipConfigurations/0/properties/publicIPAddress
+            value:
+              id: >-
+                /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/publicIPAddresses/publicip1
+      - step: NetworkInterfaces_ListAll_2085
+        exampleFile: ../examples/NetworkInterfaces_ListAll_2085_Generated.json
+        operationId: NetworkInterfaces_ListAll
+      - step: NetworkInterfaces_List_2086
+        exampleFile: ../examples/NetworkInterfaces_List_2086_Generated.json
+        operationId: NetworkInterfaces_List
+      - step: Update_networkInterfaces_cli-test-nic_2088
+        resourceName: networkInterfaces_cli-test-nic
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - add: /properties/dnsSettings/internalDnsNameLabel
+            value: noodle
+          - add: /properties/dnsSettings/internalFqdn
+            value: noodle.nakdokup4kjezkrairyqdqevje.cx.internal.cloudapp.net
+          - replace: /properties/enableIPForwarding
+            value: true
+          - replace: /properties/networkSecurityGroup/id
+            value: >-
+              /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_nic_scenario000001/providers/Microsoft.Network/networkSecurityGroups/myothernsg
+      - step: Update_networkInterfaces_cli-test-nic_2090
+        resourceName: networkInterfaces_cli-test-nic
+        operationId: NetworkInterfaces_CreateOrUpdate
+        resourceUpdate:
+          - replace: /properties/dnsSettings/internalDnsNameLabel
+            value: doodle
+          - replace: /properties/dnsSettings/internalFqdn
+            value: doodle.nakdokup4kjezkrairyqdqevje.cx.internal.cloudapp.net
+          - replace: /properties/enableIPForwarding
+            value: false
+      - step: NetworkInterfaces_Delete_2091
+        exampleFile: ../examples/NetworkInterfaces_Delete_2091_Generated.json
+        operationId: NetworkInterfaces_Delete
+      - step: NetworkInterfaces_List_2092
+        exampleFile: ../examples/NetworkInterfaces_List_2092_Generated.json
+        operationId: NetworkInterfaces_List
+    variables:
+      virtualNetworkName: myvnet
+      networkSecurityGroupName: mynsg
+      publicIpAddressName: publicip1
+      loadBalancerName: mylb
+      networkInterfaceName: cli-test-nic

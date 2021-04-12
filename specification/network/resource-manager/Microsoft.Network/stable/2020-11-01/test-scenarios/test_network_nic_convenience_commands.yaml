@@ -1,0 +1,225 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_nic_convenience_commands
+    steps:
+      - step: RawStep_2161
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_nic_convenience_test000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: vm create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --image --admin-username --admin-password
+            --authentication-type --nsg-rule
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001","name":"cli_nic_convenience_test000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:10:47Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: RawStep_2162
+        method: GET
+        rawUrl: >-
+          https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-compute/quickstart-templates/aliases.json
+        requestHeaders:
+          Accept: '*/*'
+          Accept-Encoding: gzip, deflate
+          Connection: keep-alive
+          User-Agent: python-requests/2.25.1
+        responseExpected: >-
+          {"$schema":"http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json","contentVersion":"1.0.0.0","parameters":{},"variables":{},"resources":[],"outputs":{"aliases":{"type":"object","value":{"Linux":{"CentOS":{"publisher":"OpenLogic","offer":"CentOS","sku":"7.5","version":"latest"},"CoreOS":{"publisher":"CoreOS","offer":"CoreOS","sku":"Stable","version":"latest"},"Debian":{"publisher":"Debian","offer":"debian-10","sku":"10","version":"latest"},"openSUSE-Leap":{"publisher":"SUSE","offer":"openSUSE-Leap","sku":"42.3","version":"latest"},"RHEL":{"publisher":"RedHat","offer":"RHEL","sku":"7-LVM","version":"latest"},"SLES":{"publisher":"SUSE","offer":"SLES","sku":"15","version":"latest"},"UbuntuLTS":{"publisher":"Canonical","offer":"UbuntuServer","sku":"18.04-LTS","version":"latest"}},"Windows":{"Win2019Datacenter":{"publisher":"MicrosoftWindowsServer","offer":"WindowsServer","sku":"2019-Datacenter","version":"latest"},"Win2016Datacenter":{"publisher":"MicrosoftWindowsServer","offer":"WindowsServer","sku":"2016-Datacenter","version":"latest"},"Win2012R2Datacenter":{"publisher":"MicrosoftWindowsServer","offer":"WindowsServer","sku":"2012-R2-Datacenter","version":"latest"},"Win2012Datacenter":{"publisher":"MicrosoftWindowsServer","offer":"WindowsServer","sku":"2012-Datacenter","version":"latest"},"Win2008R2SP1":{"publisher":"MicrosoftWindowsServer","offer":"WindowsServer","sku":"2008-R2-SP1","version":"latest"}}}}}}
+      - step: RawStep_2163
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/virtualNetworks?api-version=2018-01-01
+        requestHeaders:
+          Accept: application/json, text/json
+          Accept-Encoding: gzip, deflate
+          CommandName: vm create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --image --admin-username --admin-password
+            --authentication-type --nsg-rule
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-network/18.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: '{"value":[]}'
+      - step: RawStep_2164
+        method: PUT
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_nic_convenience_test000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestBody: >-
+          {"properties":{"template":{"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion":"1.0.0.0","parameters":{"adminPassword":{"type":"securestring","metadata":{"description":"Secure
+          adminPassword"}}},"variables":{},"resources":[{"name":"conveniencevm1VNET","type":"Microsoft.Network/virtualNetworks","location":"westus","apiVersion":"2015-06-15","dependsOn":[],"tags":{},"properties":{"addressSpace":{"addressPrefixes":["10.0.0.0/16"]},"subnets":[{"name":"conveniencevm1Subnet","properties":{"addressPrefix":"10.0.0.0/24"}}]}},{"type":"Microsoft.Network/networkSecurityGroups","name":"conveniencevm1NSG","apiVersion":"2015-06-15","location":"westus","tags":{},"dependsOn":[]},{"apiVersion":"2018-01-01","type":"Microsoft.Network/publicIPAddresses","name":"conveniencevm1PublicIP","location":"westus","tags":{},"dependsOn":[],"properties":{"publicIPAllocationMethod":null}},{"apiVersion":"2015-06-15","type":"Microsoft.Network/networkInterfaces","name":"conveniencevm1VMNic","location":"westus","tags":{},"dependsOn":["Microsoft.Network/virtualNetworks/conveniencevm1VNET","Microsoft.Network/networkSecurityGroups/conveniencevm1NSG","Microsoft.Network/publicIpAddresses/conveniencevm1PublicIP"],"properties":{"ipConfigurations":[{"name":"ipconfigconveniencevm1","properties":{"privateIPAllocationMethod":"Dynamic","subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/virtualNetworks/conveniencevm1VNET/subnets/conveniencevm1Subnet"},"publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/publicIPAddresses/conveniencevm1PublicIP"}}}],"networkSecurityGroup":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkSecurityGroups/conveniencevm1NSG"}}},{"apiVersion":"2020-12-01","type":"Microsoft.Compute/virtualMachines","name":"conveniencevm1","location":"westus","tags":{},"dependsOn":["Microsoft.Network/networkInterfaces/conveniencevm1VMNic"],"properties":{"hardwareProfile":{"vmSize":"Standard_DS1_v2"},"networkProfile":{"networkInterfaces":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic"}]},"storageProfile":{"osDisk":{"createOption":"fromImage","name":null,"caching":"ReadWrite","managedDisk":{"storageAccountType":null}},"imageReference":{"publisher":"Canonical","offer":"UbuntuServer","sku":"18.04-LTS","version":"latest"}},"osProfile":{"computerName":"conveniencevm1","adminUsername":"myusername","adminPassword":"[parameters('adminPassword')]"}}}],"outputs":{}},"parameters":{"adminPassword":{"value":"aBcD1234!@#$"}},"mode":"Incremental"}}
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: vm create
+          Connection: keep-alive
+          Content-Length: '3223'
+          Content-Type: application/json; charset=utf-8
+          ParameterSetName: >-
+            -g -n --image --admin-username --admin-password
+            --authentication-type --nsg-rule
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        statusCode: 201
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Resources/deployments/vm_deploy_8QzR8ypwC7BQNFpexhuIYeGpoWNw90Tg","name":"vm_deploy_8QzR8ypwC7BQNFpexhuIYeGpoWNw90Tg","type":"Microsoft.Resources/deployments","properties":{"templateHash":"16478132969459650734","parameters":{"adminPassword":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Accepted","timestamp":"2021-03-04T06:10:55.2477319Z","duration":"PT2.3024478S","correlationId":"6be7d0b9-7af0-45ab-9fda-add092518760","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["westus"]},{"resourceType":"networkSecurityGroups","locations":["westus"]},{"resourceType":"publicIPAddresses","locations":["westus"]},{"resourceType":"networkInterfaces","locations":["westus"]}]},{"namespace":"Microsoft.Compute","resourceTypes":[{"resourceType":"virtualMachines","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/virtualNetworks/conveniencevm1VNET","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"conveniencevm1VNET"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkSecurityGroups/conveniencevm1NSG","resourceType":"Microsoft.Network/networkSecurityGroups","resourceName":"conveniencevm1NSG"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/publicIPAddresses/conveniencevm1PublicIP","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"conveniencevm1PublicIP"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic","resourceType":"Microsoft.Network/networkInterfaces","resourceName":"conveniencevm1VMNic"},{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic","resourceType":"Microsoft.Network/networkInterfaces","resourceName":"conveniencevm1VMNic"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Compute/virtualMachines/conveniencevm1","resourceType":"Microsoft.Compute/virtualMachines","resourceName":"conveniencevm1"}]}}
+      - step: RawStep_2165
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_nic_convenience_test000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867686325323497?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: vm create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --image --admin-username --admin-password
+            --authentication-type --nsg-rule
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_2166
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_nic_convenience_test000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867686325323497?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: vm create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --image --admin-username --admin-password
+            --authentication-type --nsg-rule
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Running"}'
+      - step: RawStep_2167
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_nic_convenience_test000001/providers/Microsoft.Resources/deployments/mock-deployment/operationStatuses/08585867686325323497?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: vm create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --image --admin-username --admin-password
+            --authentication-type --nsg-rule
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: '{"status":"Succeeded"}'
+      - step: RawStep_2168
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_nic_convenience_test000001/providers/Microsoft.Resources/deployments/mock-deployment?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: vm create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --image --admin-username --admin-password
+            --authentication-type --nsg-rule
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Resources/deployments/vm_deploy_8QzR8ypwC7BQNFpexhuIYeGpoWNw90Tg","name":"vm_deploy_8QzR8ypwC7BQNFpexhuIYeGpoWNw90Tg","type":"Microsoft.Resources/deployments","properties":{"templateHash":"16478132969459650734","parameters":{"adminPassword":{"type":"SecureString"}},"mode":"Incremental","provisioningState":"Succeeded","timestamp":"2021-03-04T06:12:14.7973244Z","duration":"PT1M21.8520403S","correlationId":"6be7d0b9-7af0-45ab-9fda-add092518760","providers":[{"namespace":"Microsoft.Network","resourceTypes":[{"resourceType":"virtualNetworks","locations":["westus"]},{"resourceType":"networkSecurityGroups","locations":["westus"]},{"resourceType":"publicIPAddresses","locations":["westus"]},{"resourceType":"networkInterfaces","locations":["westus"]}]},{"namespace":"Microsoft.Compute","resourceTypes":[{"resourceType":"virtualMachines","locations":["westus"]}]}],"dependencies":[{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/virtualNetworks/conveniencevm1VNET","resourceType":"Microsoft.Network/virtualNetworks","resourceName":"conveniencevm1VNET"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkSecurityGroups/conveniencevm1NSG","resourceType":"Microsoft.Network/networkSecurityGroups","resourceName":"conveniencevm1NSG"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/publicIPAddresses/conveniencevm1PublicIP","resourceType":"Microsoft.Network/publicIPAddresses","resourceName":"conveniencevm1PublicIP"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic","resourceType":"Microsoft.Network/networkInterfaces","resourceName":"conveniencevm1VMNic"},{"dependsOn":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic","resourceType":"Microsoft.Network/networkInterfaces","resourceName":"conveniencevm1VMNic"}],"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Compute/virtualMachines/conveniencevm1","resourceType":"Microsoft.Compute/virtualMachines","resourceName":"conveniencevm1"}],"outputs":{},"outputResources":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Compute/virtualMachines/conveniencevm1"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkSecurityGroups/conveniencevm1NSG"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/publicIPAddresses/conveniencevm1PublicIP"},{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/virtualNetworks/conveniencevm1VNET"}]}}
+      - step: RawStep_2169
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Compute/virtualMachines/conveniencevm1?$expand=instanceView&api-version=2020-12-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: vm create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --image --admin-username --admin-password
+            --authentication-type --nsg-rule
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-compute/19.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"name":"conveniencevm1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Compute/virtualMachines/conveniencevm1","type":"Microsoft.Compute/virtualMachines","location":"westus","tags":{},"properties":{"vmId":"9da75514-a942-46a1-8042-96d74013b736","hardwareProfile":{"vmSize":"Standard_DS1_v2"},"storageProfile":{"imageReference":{"publisher":"Canonical","offer":"UbuntuServer","sku":"18.04-LTS","version":"latest","exactVersion":"18.04.202101290"},"osDisk":{"osType":"Linux","name":"conveniencevm1_OsDisk_1_a68158192e3a4c708d294be1dae3d70f","createOption":"FromImage","caching":"ReadWrite","managedDisk":{"storageAccountType":"Premium_LRS","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Compute/disks/conveniencevm1_OsDisk_1_a68158192e3a4c708d294be1dae3d70f"},"diskSizeGB":30},"dataDisks":[]},"osProfile":{"computerName":"conveniencevm1","adminUsername":"myusername","linuxConfiguration":{"disablePasswordAuthentication":false,"provisionVMAgent":true,"patchSettings":{"patchMode":"ImageDefault"}},"secrets":[],"allowExtensionOperations":true,"requireGuestProvisionSignal":true},"networkProfile":{"networkInterfaces":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic"}]},"provisioningState":"Succeeded","instanceView":{"computerName":"conveniencevm1","osName":"ubuntu","osVersion":"18.04","vmAgent":{"vmAgentVersion":"2.2.53.1","statuses":[{"code":"ProvisioningState/succeeded","level":"Info","displayStatus":"Ready","message":"Guest
+          Agent is
+          running","time":"2021-03-04T06:12:25+00:00"}],"extensionHandlers":[]},"disks":[{"name":"conveniencevm1_OsDisk_1_a68158192e3a4c708d294be1dae3d70f","statuses":[{"code":"ProvisioningState/succeeded","level":"Info","displayStatus":"Provisioning
+          succeeded","time":"2021-03-04T06:11:33.7061565+00:00"}]}],"hyperVGeneration":"V1","statuses":[{"code":"ProvisioningState/succeeded","level":"Info","displayStatus":"Provisioning
+          succeeded","time":"2021-03-04T06:12:13.565768+00:00"},{"code":"PowerState/running","level":"Info","displayStatus":"VM
+          running"}]}}}
+      - step: RawStep_2170
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic?api-version=2018-01-01
+        requestHeaders:
+          Accept: application/json, text/json
+          Accept-Encoding: gzip, deflate
+          CommandName: vm create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --image --admin-username --admin-password
+            --authentication-type --nsg-rule
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-network/18.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"name":"conveniencevm1VMNic","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic","etag":"W/\"96117137-996e-4aaf-a6bc-ba864df8c29f\"","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"85624467-a110-4c0a-ab21-3ea7485da7f1","ipConfigurations":[{"name":"ipconfigconveniencevm1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic/ipConfigurations/ipconfigconveniencevm1","etag":"W/\"96117137-996e-4aaf-a6bc-ba864df8c29f\"","type":"Microsoft.Network/networkInterfaces/ipConfigurations","properties":{"provisioningState":"Succeeded","privateIPAddress":"10.0.0.4","privateIPAllocationMethod":"Dynamic","publicIPAddress":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/publicIPAddresses/conveniencevm1PublicIP"},"subnet":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/virtualNetworks/conveniencevm1VNET/subnets/conveniencevm1Subnet"},"primary":true,"privateIPAddressVersion":"IPv4"}}],"dnsSettings":{"dnsServers":[],"appliedDnsServers":[],"internalDomainNameSuffix":"cy041jbhnmderdbspau2at1kmf.dx.internal.cloudapp.net"},"macAddress":"00-0D-3A-33-76-ED","enableAcceleratedNetworking":false,"enableIPForwarding":false,"networkSecurityGroup":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkSecurityGroups/conveniencevm1NSG"},"primary":true,"virtualMachine":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Compute/virtualMachines/conveniencevm1"}},"type":"Microsoft.Network/networkInterfaces"}
+      - step: RawStep_2171
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/publicIPAddresses/conveniencevm1PublicIP?api-version=2018-01-01
+        requestHeaders:
+          Accept: application/json, text/json
+          Accept-Encoding: gzip, deflate
+          CommandName: vm create
+          Connection: keep-alive
+          ParameterSetName: >-
+            -g -n --image --admin-username --admin-password
+            --authentication-type --nsg-rule
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-network/18.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"name":"conveniencevm1PublicIP","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/publicIPAddresses/conveniencevm1PublicIP","etag":"W/\"3c05d285-5b61-4488-be38-f13267182cfa\"","location":"westus","tags":{},"properties":{"provisioningState":"Succeeded","resourceGuid":"34252d22-3231-4067-8968-4dfb5f2ecb89","ipAddress":"138.91.76.9","publicIPAddressVersion":"IPv4","publicIPAllocationMethod":"Dynamic","idleTimeoutInMinutes":4,"ipTags":[],"ipConfiguration":{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic/ipConfigurations/ipconfigconveniencevm1"}},"type":"Microsoft.Network/publicIPAddresses","sku":{"name":"Basic"}}
+      - step: RawStep_2172
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Compute/virtualMachines/conveniencevm1?api-version=2020-12-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: vm show
+          Connection: keep-alive
+          ParameterSetName: '-g -n --query'
+          User-Agent: >-
+            AZURECLI/2.20.0 azsdk-python-azure-mgmt-compute/19.0.0 Python/3.7.3
+            (Windows-10-10.0.19041-SP0)
+        responseExpected: >-
+          {"name":"conveniencevm1","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Compute/virtualMachines/conveniencevm1","type":"Microsoft.Compute/virtualMachines","location":"westus","tags":{},"properties":{"vmId":"9da75514-a942-46a1-8042-96d74013b736","hardwareProfile":{"vmSize":"Standard_DS1_v2"},"storageProfile":{"imageReference":{"publisher":"Canonical","offer":"UbuntuServer","sku":"18.04-LTS","version":"latest","exactVersion":"18.04.202101290"},"osDisk":{"osType":"Linux","name":"conveniencevm1_OsDisk_1_a68158192e3a4c708d294be1dae3d70f","createOption":"FromImage","caching":"ReadWrite","managedDisk":{"storageAccountType":"Premium_LRS","id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Compute/disks/conveniencevm1_OsDisk_1_a68158192e3a4c708d294be1dae3d70f"},"diskSizeGB":30},"dataDisks":[]},"osProfile":{"computerName":"conveniencevm1","adminUsername":"myusername","linuxConfiguration":{"disablePasswordAuthentication":false,"provisionVMAgent":true,"patchSettings":{"patchMode":"ImageDefault"}},"secrets":[],"allowExtensionOperations":true,"requireGuestProvisionSignal":true},"networkProfile":{"networkInterfaces":[{"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_nic_convenience_test000001/providers/Microsoft.Network/networkInterfaces/conveniencevm1VMNic"}]},"provisioningState":"Succeeded"}}
+      - step: NetworkInterfaces_ListEffectiveNetworkSecurityGroups_2173
+        exampleFile: >-
+          ../examples/NetworkInterfaces_ListEffectiveNetworkSecurityGroups_2173_Generated.json
+        operationId: NetworkInterfaces_ListEffectiveNetworkSecurityGroups
+      - step: NetworkInterfaces_GetEffectiveRouteTable_2174
+        exampleFile: >-
+          ../examples/NetworkInterfaces_GetEffectiveRouteTable_2174_Generated.json
+        operationId: NetworkInterfaces_GetEffectiveRouteTable
+    variables:
+      networkInterfaceName: conveniencevm1VMNic

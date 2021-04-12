@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_active_active_cross_premise_connection000001",
+    "localNetworkGatewayName": "lgw3",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "localNetworkAddressSpace": {
+          "addressPrefixes": [
+            "10.52.255.254/32"
+          ]
+        },
+        "gatewayIpAddress": "131.107.72.23",
+        "bgpSettings": {
+          "asn": 65050,
+          "bgpPeeringAddress": "10.52.255.254"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "lgw3",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_active_active_cross_premise_connection000001/providers/Microsoft.Network/localNetworkGateways/lgw3",
+        "etag": "W/\"17ceb5b3-0691-41b5-bef9-9b6bd61384a9\"",
+        "type": "Microsoft.Network/localNetworkGateways",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "18f68fbb-de9e-4a3c-868a-cedec987a403",
+          "localNetworkAddressSpace": {
+            "addressPrefixes": [
+              "10.52.255.254/32"
+            ]
+          },
+          "gatewayIpAddress": "131.107.72.23",
+          "bgpSettings": {
+            "asn": 65050,
+            "bgpPeeringAddress": "10.52.255.254",
+            "peerWeight": 0
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_route_table_operation
+    steps:
+      - step: RawStep_2385
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_route_table000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network route-table create
+          Connection: keep-alive
+          ParameterSetName: '-n -g --tags'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_route_table000001","name":"cli_test_route_table000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:16:25Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_routeTables_cli-test-route-table
+        resourceName: routeTables_cli-test-route-table
+        exampleFile: ../examples/Create_routeTables_cli-test-route-table_Generated.json
+        operationId: RouteTables_CreateOrUpdate
+      - step: Update_routeTables_cli-test-route-table_2388
+        resourceName: routeTables_cli-test-route-table
+        operationId: RouteTables_CreateOrUpdate
+        resourceUpdate:
+          - replace: /tags/foo
+            value: boo
+          - replace: /properties/disableBgpRoutePropagation
+            value: true
+      - step: Create_routes_my-route
+        resourceName: routes_my-route
+        exampleFile: ../examples/Create_routes_my-route_Generated.json
+        operationId: Routes_CreateOrUpdate
+      - step: RouteTables_ListAll_2390
+        exampleFile: ../examples/RouteTables_ListAll_2390_Generated.json
+        operationId: RouteTables_ListAll
+      - step: RouteTables_List_2391
+        exampleFile: ../examples/RouteTables_List_2391_Generated.json
+        operationId: RouteTables_List
+      - step: RouteTables_Get_2392
+        exampleFile: ../examples/RouteTables_Get_2392_Generated.json
+        operationId: RouteTables_Get
+      - step: Routes_List_2393
+        exampleFile: ../examples/Routes_List_2393_Generated.json
+        operationId: Routes_List
+      - step: Routes_Delete_2394
+        exampleFile: ../examples/Routes_Delete_2394_Generated.json
+        operationId: Routes_Delete
+      - step: Routes_List_2395
+        exampleFile: ../examples/Routes_List_2395_Generated.json
+        operationId: Routes_List
+      - step: RouteTables_Delete_2396
+        exampleFile: ../examples/RouteTables_Delete_2396_Generated.json
+        operationId: RouteTables_Delete
+      - step: RouteTables_List_2397
+        exampleFile: ../examples/RouteTables_List_2397_Generated.json
+        operationId: RouteTables_List
+    variables:
+      routeTableName: cli-test-route-table
+      routeName: my-route

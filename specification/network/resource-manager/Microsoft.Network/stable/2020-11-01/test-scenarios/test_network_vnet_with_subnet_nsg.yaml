@@ -1,0 +1,61 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_vnet_with_subnet_nsg
+    steps:
+      - step: RawStep_2640
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_vnet_with_subnet_nsg_test000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network nsg create
+          Connection: keep-alive
+          ParameterSetName: '--resource-group --name'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_vnet_with_subnet_nsg_test000001","name":"cli_vnet_with_subnet_nsg_test000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:15:06Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_networkSecurityGroups_nsg
+        resourceName: networkSecurityGroups_nsg
+        exampleFile: ../examples/Create_networkSecurityGroups_nsg_Generated.json
+        operationId: NetworkSecurityGroups_CreateOrUpdate
+      - step: RawStep_2642
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_vnet_with_subnet_nsg_test000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network vnet create
+          Connection: keep-alive
+          ParameterSetName: >-
+            --resource-group --name --address-prefixes --subnet-name
+            --subnet-prefixes --nsg
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_vnet_with_subnet_nsg_test000001","name":"cli_vnet_with_subnet_nsg_test000001","type":"Microsoft.Resources/resourceGroups","location":"westus","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T06:15:06Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_virtualNetworks_vnet1
+        resourceName: virtualNetworks_vnet1
+        exampleFile: ../examples/Create_virtualNetworks_vnet1_Generated_2644.json
+        operationId: VirtualNetworks_CreateOrUpdate
+      - step: Subnets_List_2645
+        exampleFile: ../examples/Subnets_List_2645_Generated.json
+        operationId: Subnets_List
+      - step: Subnets_Get_2646
+        exampleFile: ../examples/Subnets_Get_2646_Generated.json
+        operationId: Subnets_Get
+      - step: Subnets_Delete_2647
+        exampleFile: ../examples/Subnets_Delete_2532_Generated.json
+        operationId: Subnets_Delete
+    variables:
+      networkSecurityGroupName: nsg
+      virtualNetworkName: vnet1
+      subnetName: subnet1

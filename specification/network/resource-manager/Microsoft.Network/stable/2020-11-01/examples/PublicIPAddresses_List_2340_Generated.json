@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cli_test_public_ip000001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "pubipdns",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_public_ip000001/providers/Microsoft.Network/publicIPAddresses/pubipdns",
+            "etag": "W/\"3014c83b-de2d-4455-98fa-5face563670e\"",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceGuid": "1f0631ba-ad87-4231-bf75-f7f5b28f4ad8",
+              "ipAddress": "138.91.251.23",
+              "publicIPAddressVersion": "IPv4",
+              "publicIPAllocationMethod": "Static",
+              "idleTimeoutInMinutes": 4,
+              "dnsSettings": {
+                "domainNameLabel": "woot",
+                "fqdn": "woot.westus.cloudapp.azure.com"
+              },
+              "ipTags": []
+            },
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+              "name": "Basic",
+              "tier": "Regional"
+            }
+          },
+          {
+            "name": "pubipnodns",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_public_ip000001/providers/Microsoft.Network/publicIPAddresses/pubipnodns",
+            "etag": "W/\"20879521-10fc-4866-a691-7b31b1252dd0\"",
+            "location": "westus",
+            "tags": {
+              "foo": "doo"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceGuid": "1df7c6e7-44f1-4409-bab8-7b752ba8c56a",
+              "ipAddress": "138.91.249.243",
+              "publicIPAddressVersion": "IPv4",
+              "publicIPAllocationMethod": "Static",
+              "idleTimeoutInMinutes": 10,
+              "dnsSettings": {
+                "domainNameLabel": "wowza2",
+                "fqdn": "wowza2.westus.cloudapp.azure.com"
+              },
+              "ipTags": []
+            },
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+              "name": "Basic",
+              "tier": "Regional"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

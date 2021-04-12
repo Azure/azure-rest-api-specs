@@ -1,0 +1,132 @@
+scope: ResourceGroup
+testScenarios:
+  - description: test_network_public_ip_prefix
+    steps:
+      - step: RawStep_2344
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_public_ip_prefix000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip prefix create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --length'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_public_ip_prefix000001","name":"cli_test_network_public_ip_prefix000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:36:12Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPPrefixes_prefix1
+        resourceName: publicIPPrefixes_prefix1
+        exampleFile: ../examples/Create_publicIPPrefixes_prefix1_Generated_2346.json
+        operationId: PublicIPPrefixes_CreateOrUpdate
+      - step: Update_publicIPPrefixes_prefix1_2348
+        resourceName: publicIPPrefixes_prefix1
+        operationId: PublicIPPrefixes_CreateOrUpdate
+        resourceUpdate:
+          - add: /tags
+            value:
+              foo: doo
+      - step: PublicIPPrefixes_List_2349
+        exampleFile: ../examples/PublicIPPrefixes_List_2349_Generated.json
+        operationId: PublicIPPrefixes_List
+      - step: PublicIPPrefixes_Delete_2350
+        exampleFile: ../examples/PublicIPPrefixes_Delete_2350_Generated.json
+        operationId: PublicIPPrefixes_Delete
+      - step: PublicIPPrefixes_List_2351
+        exampleFile: ../examples/PublicIPPrefixes_List_2351_Generated.json
+        operationId: PublicIPPrefixes_List
+      - step: RawStep_2352
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_public_ip_prefix000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip prefix create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --length'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_public_ip_prefix000001","name":"cli_test_network_public_ip_prefix000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:36:12Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPPrefixes_prefix1_2354
+        resourceName: publicIPPrefixes_prefix1_2354
+        exampleFile: ../examples/Create_publicIPPrefixes_prefix1_2354_Generated.json
+        operationId: PublicIPPrefixes_CreateOrUpdate
+      - step: RawStep_2355
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_public_ip_prefix000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --public-ip-prefix --sku'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_public_ip_prefix000001","name":"cli_test_network_public_ip_prefix000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:36:12Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPAddresses_pip1
+        resourceName: publicIPAddresses_pip1
+        exampleFile: ../examples/Create_publicIPAddresses_pip1_Generated_2357.json
+        operationId: PublicIPAddresses_CreateOrUpdate
+      - step: RawStep_2358
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_public_ip_prefix000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip prefix create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --length'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_public_ip_prefix000001","name":"cli_test_network_public_ip_prefix000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:36:12Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPPrefixes_public_ip_prefix_0
+        resourceName: publicIPPrefixes_public_ip_prefix_0
+        exampleFile: ../examples/Create_publicIPPrefixes_public_ip_prefix_0_Generated.json
+        operationId: PublicIPPrefixes_CreateOrUpdate
+        variables:
+          publicIpPrefixName: public_ip_prefix_0
+      - step: RawStep_2360
+        method: GET
+        rawUrl: >-
+          https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/cli_test_network_public_ip_prefix000001?api-version=2020-10-01
+        requestHeaders:
+          Accept: application/json
+          Accept-Encoding: gzip, deflate
+          CommandName: network public-ip prefix create
+          Connection: keep-alive
+          ParameterSetName: '-g -n --length --version'
+          User-Agent: >-
+            python/3.7.3 (Windows-10-10.0.19041-SP0) msrest/0.6.21
+            msrest_azure/0.6.3 azure-mgmt-resource/12.0.0 Azure-SDK-For-Python
+            AZURECLI/2.20.0
+          accept-language: en-US
+        responseExpected: >-
+          {"id":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_network_public_ip_prefix000001","name":"cli_test_network_public_ip_prefix000001","type":"Microsoft.Resources/resourceGroups","location":"eastus2","tags":{"product":"azurecli","cause":"automation","date":"2021-03-04T05:36:12Z"},"properties":{"provisioningState":"Succeeded"}}
+      - step: Create_publicIPPrefixes_public_ip_prefix_2
+        resourceName: publicIPPrefixes_public_ip_prefix_2
+        exampleFile: ../examples/Create_publicIPPrefixes_public_ip_prefix_2_Generated.json
+        operationId: PublicIPPrefixes_CreateOrUpdate
+        variables:
+          publicIpPrefixName: public_ip_prefix_2
+    variables:
+      publicIpPrefixName: prefix1
+      publicIpAddressName: pip1

@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "network_service_endpoint_scenario_test000001",
+    "serviceEndpointPolicyName": "policy1",
+    "serviceEndpointPolicyDefinitionName": "storage-def",
+    "ServiceEndpointPolicyDefinitions": {
+      "properties": {
+        "service": "Microsoft.Storage",
+        "serviceResources": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "storage-def",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/network_service_endpoint_scenario_test000001/providers/Microsoft.Network/serviceEndpointPolicies/policy1/serviceEndpointPolicyDefinitions/storage-def",
+        "etag": "W/\"9f6a3046-0d21-4e7c-9bc4-d988fafc4bb3\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "service": "Microsoft.Storage",
+          "serviceResources": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000"
+          ]
+        },
+        "type": "Microsoft.Network/serviceEndpointPolicies/serviceEndpointPolicyDefinitions"
+      }
+    }
+  }
+}
