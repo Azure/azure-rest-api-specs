@@ -26,7 +26,7 @@ These are the global settings for the Web PubSub Service API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2020-10-01
+tag: package-2021-05-01-preview
 ```
 
 ### Suppression
@@ -39,13 +39,13 @@ directive:
     reason: There are a lot of APIs that does not have the example. While it is being worked upon disabling this to ensure that we catch and fix other violations
 ```
 
-### Tag: package-2020-10-01
+### Tag: package-2021-05-01-preview
 
-These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-05-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01'
+``` yaml $(tag) == 'package-2021-05-01-preview'
 input-file:
-- WebPubSub/preview/2020-10-01/webpubsub.json
+- WebPubSub/preview/2021-05-01-preview/webpubsub.json
 title: AzureMessagingWebPubSubServiceClient
 ```
 
@@ -147,7 +147,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/WebPubSub/preview/2020-10-01/webpubsub.json
+  - $(this-folder)/WebPubSub/preview/2021-05-01-preview/webpubsub.json
 
 ```
 
@@ -158,4 +158,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
