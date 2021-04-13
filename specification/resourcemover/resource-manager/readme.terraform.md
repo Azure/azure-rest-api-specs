@@ -18,3 +18,12 @@ overrides:
     set:
       - SchemaName: "dependency"
 ```
+
+
+```yaml $(tag) == 'package-2019-10-01-preview' && $(terraform)
+gosdk-folder: services/preview/resourcemover/mgmt/2019-10-01-preview/resourcemover
+```
+
+```yaml $(tag) == 'package-2021-01-01' && $(terraform)
+gosdk-folder: services/resourcemover/mgmt/2021-01-01/resourcemover
+```
