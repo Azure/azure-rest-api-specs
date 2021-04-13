@@ -1226,22 +1226,6 @@
           "items": {
             "$ref": "#/definitions/ManagementGroupChildInfo"
           }
-        },
-        "path": {
-          "description": "The path from the root to the current group.",
-          "x-nullable": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagementGroupPathElement"
-          }
-        },
-        "ancestors": {
-          "description": "The ancestors of the management group displayed in reversed order, from immediate parent to the root.",
-          "x-nullable": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagementGroupPathElement"
-          }
         }
       }
     },
@@ -1266,6 +1250,22 @@
         "parent": {
           "title": "Parent",
           "$ref": "#/definitions/ParentGroupInfo"
+        },
+        "path": {
+          "description": "The path from the root to the current group.",
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementGroupPathElement"
+          }
+        },
+        "ancestors": {
+          "description": "The ancestors of the management group displayed in reversed order, from immediate parent to the root.",
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementGroupPathElement"
+          }
         }
       }
     },
