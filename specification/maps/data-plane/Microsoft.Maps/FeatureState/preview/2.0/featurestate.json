@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Feature State Service",
-    "version": "1.0",
+    "version": "2.0",
     "description": "APIs for managing the dynamic feature states in Azure Maps."
   },
   "host": "atlas.microsoft.com",
@@ -93,11 +93,11 @@
     },
     "ApiVersion": {
       "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "description": "Version number of Azure Maps API. Current version is 2.0",
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "1.0",
+      "default": "2.0",
       "x-ms-parameter-location": "client"
     },
     "DatasetIdForCreate": {
@@ -158,144 +158,7 @@
     }
   },
   "paths": {
-    "/featureState/stateset/{statesetId}": {
-      "get": {
-        "x-publish": true,
-        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis GET API allows the user to get the stateset Information.\n\nThe stateset Information includes the datasetId associated to the stateset, and the styles of that stateset.",
-        "operationId": "FeatureState_GetStatesetPreview",
-        "x-ms-examples": {
-          "Get stateset information with a statesetId": {
-            "$ref": "./examples/GetStateset.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/StatesetIdInPath"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get request completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StatesetGetResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      },
-      "delete": {
-        "x-publish": true,
-        "description": "**Applies to:** S1 pricing tier. <br> This DELETE API allows the user to delete the stateset and the associated data.",
-        "operationId": "FeatureState_DeleteStatesetPreview",
-        "x-ms-examples": {
-          "Delete an existing stateset": {
-            "$ref": "./examples/DeleteStateset.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/StatesetIdInPath"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Stateset Deleted."
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      },
-      "put": {
-        "x-publish": true,
-        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis PUT API allows the user to update the stateset style rules.",
-        "operationId": "FeatureState_PutStatesetPreview",
-        "x-ms-examples": {
-          "Update stateset style rules with a statesetId": {
-            "$ref": "./examples/UpdateStateset.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/StatesetIdInPath"
-          },
-          {
-            "name": "statesetStyleUpdateRequestBody",
-            "in": "body",
-            "description": "The stateset style JSON data. Only style rules are allowed to be updated, update on keyname and type is not allowed.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StylesObject"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Stateset styles are updated successfully."
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/featureState/stateset": {
+    "/featureStateSets": {
       "post": {
         "x-publish": true,
         "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis POST API allows the user to create a new Stateset and define stateset style using request body.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Feature State API is part of Creator. \n\nThe Feature State service allows the user to update the states of a feature and query them to be used in other services. The dynamic properties of a feature that don't belong to the dataset are referred to as *states* here.\n\nThis Feature State service pivot on the Stateset. Like Tileset, Stateset encapsulates the storage mechanism for feature states for a dataset.\n\nOnce the stateset is created, users can use that statesetId to post feature state updates and retrieve the current feature states. A feature can have only one state at a given point in time. \n\nFeature state is defined by the key name, value and the timestamp. When a feature state update is posted to Azure Maps, the state value gets updated only if the provided state’s timestamp is later than the stored timestamp. \n\nAzure Maps MapControl provides a way to use these feature states to style the features. Please refer to the State Tile documentation for more information.",
@@ -391,14 +254,14 @@
         }
       }
     },
-    "/featureState/state": {
-      "get": {
+    "/featureStateSets/{statesetId}": {
+      "patch": {
         "x-publish": true,
-        "operationId": "FeatureState_GetStatesPreview",
-        "description": "**Applies to:** S1 pricing tier. <br> This API returns the current state information associated with the given feature in the given stateset.",
+        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis PATCH API allows the user to update the stateset style rules.",
+        "operationId": "FeatureState_PutStatesetPreview",
         "x-ms-examples": {
-          "Get the current states of a feature": {
-            "$ref": "./examples/GetStates.json"
+          "Update stateset style rules with a statesetId": {
+            "$ref": "./examples/UpdateStateset.json"
           }
         },
         "parameters": [
@@ -409,18 +272,21 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/StatesetId"
+            "$ref": "#/parameters/StatesetIdInPath"
           },
           {
-            "$ref": "#/parameters/FeatureIdGet"
+            "name": "statesetStyleUpdateRequestBody",
+            "in": "body",
+            "description": "The stateset style JSON data. Only style rules are allowed to be updated, update on keyname and type is not allowed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StylesObject"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Get request completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FeatureStatesStructure"
-            }
+            "description": "Stateset styles are updated successfully."
           },
           "400": {
             "$ref": "#/responses/400"
@@ -439,10 +305,97 @@
           }
         }
       },
-      "post": {
+      "delete": {
+        "x-publish": true,
+        "description": "**Applies to:** S1 pricing tier. <br> This DELETE API allows the user to delete the stateset and the associated data.",
+        "operationId": "FeatureState_DeleteStatesetPreview",
+        "x-ms-examples": {
+          "Delete an existing stateset": {
+            "$ref": "./examples/DeleteStateset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StatesetIdInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Stateset Deleted."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "get": {
+        "x-publish": true,
+        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis GET API allows the user to get the stateset Information.\n\nThe stateset Information includes the datasetId associated to the stateset, and the styles of that stateset.",
+        "operationId": "FeatureState_GetStatesetPreview",
+        "x-ms-examples": {
+          "Get stateset information with a statesetId": {
+            "$ref": "./examples/GetStateset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StatesetIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get request completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StatesetGetResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/featureStateSets/{statesetId}/featureStates/{featureId}": {
+      "put": {
         "x-publish": true,
         "operationId": "FeatureState_UpdateStatesPreview",
-        "description": "**Applies to:** S1 pricing tier. <br>\nThis POST API allows the user to update the state of the given feature in the given stateset.",
+        "description": "**Applies to:** S1 pricing tier. <br>\nThis PUT API allows the user to update the state of the given feature in the given stateset.",
         "x-ms-examples": {
           "Update the states of a feature": {
             "$ref": "./examples/UpdateStates.json"
@@ -467,7 +420,7 @@
             "description": "The feature state JSON data. A feature can have only one state at a given point in time. The specified state keyname must have been defined during the stateset creation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FeatureStatesStructure"
+              "$ref": "#/definitions/FeatureStateObject"
             }
           }
         ],
@@ -519,7 +472,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Feature states deleted successfully."
           },
           "400": {
@@ -536,6 +489,53 @@
           },
           "409": {
             "$ref": "#/responses/409"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "get": {
+        "x-publish": true,
+        "operationId": "FeatureState_GetStatesPreview",
+        "description": "**Applies to:** S1 pricing tier. <br> This API returns the current state information associated with the given feature in the given stateset.",
+        "x-ms-examples": {
+          "Get the current states of a feature": {
+            "$ref": "./examples/GetStates.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StatesetId"
+          },
+          {
+            "$ref": "#/parameters/FeatureIdGet"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get request completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FeatureStateObject"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
           },
           "500": {
             "$ref": "#/responses/500"
@@ -607,6 +607,11 @@
           "items": {
             "$ref": "#/definitions/StatesetInfoObject"
           }
+        },
+        "nextLink": {
+          "description": "If present, the location of the next page of data.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -645,12 +650,8 @@
       "description": "The feature states model for a feature.",
       "type": "object",
       "properties": {
-        "states": {
-          "description": "The feature states array.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FeatureStateObject"
-          }
+        "state": {
+          "$ref": "#/definitions/FeatureStateObject"
         }
       }
     },
