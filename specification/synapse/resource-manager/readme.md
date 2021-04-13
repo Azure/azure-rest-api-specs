@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Azure Synapse Analytics.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Azure Synapse Analytics, [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,44 @@ To build the SDK for Azure Synapse Analytics, [Install AutoRest](https://aka.ms/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
+
 These are the global settings for the Azure Synapse Analytics API.
 
 ``` yaml
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2020-12-01
+tag: package-2021-03
 generate-empty-classes: true
 ```
 
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.Synapse/stable/2021-03-01/bigDataPool.json
+  - Microsoft.Synapse/stable/2021-03-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-03-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-03-01/integrationRuntime.json
+  - Microsoft.Synapse/stable/2021-03-01/keys.json
+  - Microsoft.Synapse/stable/2021-03-01/library.json
+  - Microsoft.Synapse/stable/2021-03-01/operations.json
+  - Microsoft.Synapse/stable/2021-03-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-03-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-03-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-03-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-03-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-03-01/workspace.json
+```
 ### Tag: package-2019-06-01-preview
 
 These settings apply only when `--tag=package-2019-06-01-preview` is specified on the command line.
@@ -61,6 +83,7 @@ input-file:
 - Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
 - Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
 ```
+
 ### Tag: package-2020-12-01
 
 These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
@@ -79,6 +102,7 @@ input-file:
 - Microsoft.Synapse/stable/2020-12-01/privatelinkhub.json
 - Microsoft.Synapse/stable/2020-12-01/sqlServer.json
 - Microsoft.Synapse/stable/2020-12-01/keys.json
+- Microsoft.Synapse/stable/2020-12-01/library.json
 ```
 
 ## Suppressions
@@ -117,7 +141,7 @@ directive:
       - $.definitions.DataMaskingRule
       - $.definitions.SqlPoolOperation
   - suppress: R4015
-    reason: Needs implmentation
+    reason: Needs implementation
     from: Microsoft.Synapse/preview/2019-06-01-preview/workspace_managedIdentity.json
     where:
       - $.definitions.ManagedIdentitySqlControlSettingsInfo
@@ -153,7 +177,7 @@ directive:
       - $.definitions.DataMaskingRule
       - $.definitions.SqlPoolOperation
   - suppress: R4015
-    reason: Needs implmentation
+    reason: Needs implementation
     from: Microsoft.Synapse/stable/2020-12-01/workspace_managedIdentity.json
     where:
       - $.definitions.ManagedIdentitySqlControlSettingsInfo
@@ -167,11 +191,14 @@ directive:
       - $.definitions.IntegrationRuntimeResource.properties.properties
       - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
       - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
+  - suppress: R4009
+    reason: systemData will be in the next API version
+    from: Microsoft.Synapse/stable/2020-12-01/library.json
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -184,6 +211,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
     after_scripts:
@@ -218,4 +246,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

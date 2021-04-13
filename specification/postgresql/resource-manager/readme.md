@@ -112,6 +112,8 @@ input-file:
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforPostgreSQL/stable/2018-06-01/PerformanceRecommendations.json
+
 ```
 
 
@@ -156,7 +158,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -217,6 +219,7 @@ input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PerformanceRecommendations.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json

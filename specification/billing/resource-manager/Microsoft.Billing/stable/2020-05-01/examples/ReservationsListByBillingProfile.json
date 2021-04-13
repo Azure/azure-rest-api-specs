@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "$filter": "properties/reservedResourceType eq 'VirtualMachines'",
+    "$orderby": "properties/userFriendlyAppliedScopeType asc",
+    "refreshsummary": "true",
+    "selectedState": "Succeeded"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/microsoft.capacity/reservationOrders/00000000-0000-0000-0000-000000000001/reservations/00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000001/00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.Capacity/reservationOrders/reservations",
+            "location": "westus",
+            "sku": {
+              "name": "Standard_D1"
+            },
+            "properties": {
+              "appliedScopes": null,
+              "appliedScopeType": "Shared",
+              "reservedResourceType": "VirtualMachines",
+              "quantity": 2,
+              "provisioningState": "Succeeded",
+              "expiryDate": "2023-07-21",
+              "provisioningSubState": null,
+              "displayName": "VM_RI_07-21-2020_12-06",
+              "displayProvisioningState": "Succeeded",
+              "userFriendlyRenewState": "Off",
+              "userFriendlyAppliedScopeType": "Shared",
+              "effectiveDateTime": "0001-01-01T00:00:00",
+              "skuDescription": null,
+              "term": null,
+              "renew": false,
+              "renewSource": "/providers/Microsoft.Capacity/reservationorders/00000000-0000-0000-0000-000000000002/reservations/00000000-0000-0000-0000-000000000003",
+              "utilization": {
+                "trend": "UP",
+                "aggregates": [
+                  {
+                    "grain": 1.0,
+                    "grainUnit": "days",
+                    "value": 0.05,
+                    "valueUnit": "percentage"
+                  },
+                  {
+                    "grain": 7.0,
+                    "grainUnit": "days",
+                    "value": 0.05,
+                    "valueUnit": "percentage"
+                  },
+                  {
+                    "grain": 30.0,
+                    "grainUnit": "days",
+                    "value": 0.05,
+                    "valueUnit": "percentage"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "summary": {
+          "succeededCount": 1,
+          "failedCount": 0,
+          "expiringCount": 0,
+          "expiredCount": 0,
+          "pendingCount": 0,
+          "cancelledCount": 0
+        },
+        "nextLink": null
+      }
+    }
+  }
+}
