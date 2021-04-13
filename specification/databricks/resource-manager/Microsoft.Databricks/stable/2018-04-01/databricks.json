@@ -889,7 +889,16 @@
         },
         "storageAccountSkuName": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "Storage account SKU name."
+          "description": "Storage account SKU name, ex: Standard_GRS, Standard_LRS. Refer https://aka.ms/storageskus for valid inputs."
+        },
+        "vnetAddressPrefix": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Address prefix for Managed virtual network. Default value for this input is 10.139."
+        },
+        "resourceTags": {
+          "$ref": "#/definitions/WorkspaceCustomObjectParameter",
+          "readOnly": true,
+          "description": "List of tags applied to managed resources under MRG. These can be updated by updating tags at workspace level."
         }
       },
       "description": "Custom Parameters used for Cluster Creation."
