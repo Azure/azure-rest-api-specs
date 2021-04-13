@@ -535,17 +535,13 @@
               "$ref": "#/definitions/Creator"
             }
           },
-          "202": {
-            "description": "The Creator will be created asynchronously."
-          },
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "tags": [
@@ -628,8 +624,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The Maps Creator will be deleted asynchronously."
+          "200": {
+            "description": "The Maps Creator will be deleted."
           },
           "204": {
             "description": "The specified Maps Creator resource was not found. Nothing was deleted."
@@ -640,8 +636,7 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "get": {
         "tags": [
