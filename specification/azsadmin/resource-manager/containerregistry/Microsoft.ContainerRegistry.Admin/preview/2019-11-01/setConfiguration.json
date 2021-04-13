@@ -1,0 +1,115 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01-preview",
+    "title": "ContainerRegistryManagementClient",
+    "description": "Admin Container Registry Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/setConfiguration": {
+      "post": {
+        "x-ms-examples": {
+          "Returns container registry overall capacity properties.": {
+            "$ref": "./examples/Configuration/SetConfiguration.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistrySetConfiguration"
+        ],
+        "description": "Configure container registry overall capacity properties.",
+        "operationId": "ContainerRegistrySetConfiguration_Post",
+        "parameters": [
+          {
+            "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "quotas.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "quotas.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "setConfigurationRequest",
+            "in": "body",
+            "description": "The object containing information for the configuration request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistryCapacityProperty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Container registry overall capacity properties is being returned.",
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistryCapacity"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "quotas.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContainerRegistryCapacity": {
+      "description": "Container registry capacity property.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Container registry capacity property.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContainerRegistryCapacityProperty"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "quotas.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ContainerRegistryCapacityProperty": {
+      "description": "Container registry capacity property.",
+      "type": "object",
+      "properties": {
+        "maximumCapacityInGb": {
+          "description": "Total storage capacity (GB) which can used by the registry.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
