@@ -389,6 +389,45 @@
         }
       }
     },
+    "SubRequest": {
+      "type": "object",
+      "description": "The sub-request submitted with the quota request.",
+      "properties": {
+        "limit": {
+          "description": "The Resource limit.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The Resource name.",
+          "$ref": "#/definitions/ResourceName"
+        },
+        "resourceType": {
+          "description": "Resource type for which the quota check was made.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": " The units of the limit, such as - Count, Bytes, etc. Use the unit field provided in the Get quota response.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The quota request status.",
+          "$ref": "#/definitions/QuotaRequestState"
+        },
+        "message": {
+          "description": "User friendly status message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subRequestId": {
+          "description": "Sub request id for individual request.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "QuotaRequestState": {
       "description": "The quota request status.",
       "enum": [
