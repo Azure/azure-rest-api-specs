@@ -5178,6 +5178,7 @@
           }
         },
         "model": {
+          "description": "Model Configuration.",
           "$ref": "#/definitions/AssetReferenceBase"
         },
         "codeConfiguration": {
@@ -6020,6 +6021,7 @@
       ],
       "properties": {
         "credentials": {
+          "description": "Account credentials.",
           "$ref": "#/definitions/DatastoreCredentials"
         }
       },
@@ -6340,6 +6342,7 @@
       "type": "object",
       "properties": {
         "contents": {
+          "description": "Reference to the datastore storage contents.",
           "$ref": "#/definitions/DatastoreContents"
         },
         "hasBeenValidated": {
@@ -6780,6 +6783,7 @@
           ]
         },
         "docker": {
+          "description": "Configuration settings for Docker",
           "$ref": "#/definitions/DockerSpecification"
         },
         "condaFile": {
@@ -7431,7 +7435,12 @@
           ]
         },
         "distribution": {
-          "$ref": "#/definitions/DistributionConfiguration"
+          "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.",
+          "$ref": "#/definitions/DistributionConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "environmentVariables": {
           "description": "Environment variables included in the job.",
@@ -7445,7 +7454,12 @@
           ]
         },
         "identity": {
-          "$ref": "#/definitions/IdentityConfiguration"
+          "description": "Identity configuration. If set, this should be one of AmlToken, ManagedIdentity, or null.\r\nDefaults to AmlToken if null.",
+          "$ref": "#/definitions/IdentityConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "parameters": {
           "description": "Input parameters.",
@@ -7660,7 +7674,12 @@
           ]
         },
         "distribution": {
-          "$ref": "#/definitions/DistributionConfiguration"
+          "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.",
+          "$ref": "#/definitions/DistributionConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -7716,6 +7735,7 @@
           "type": "string"
         },
         "earlyTermination": {
+          "description": "Early termination policies enable canceling poor-performing runs before they complete",
           "$ref": "#/definitions/EarlyTerminationPolicy"
         },
         "objective": {
@@ -7725,7 +7745,12 @@
           "$ref": "#/definitions/TrialComponent"
         },
         "identity": {
-          "$ref": "#/definitions/IdentityConfiguration"
+          "description": "Identity configuration. If set, this should be one of AmlToken, ManagedIdentity or null.\r\nDefaults to AmlToken if null.",
+          "$ref": "#/definitions/IdentityConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "Sweep",
@@ -8110,7 +8135,12 @@
           "$ref": "#/definitions/MLAssistConfiguration"
         },
         "labelingJobMediaProperties": {
-          "$ref": "#/definitions/LabelingJobMediaProperties"
+          "description": "Media type specific properties in the job.",
+          "$ref": "#/definitions/LabelingJobMediaProperties",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "projectId": {
           "format": "uuid",
@@ -8174,7 +8204,9 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/JobBase"
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/JobBase",
+          "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -8763,6 +8795,7 @@
           }
         },
         "model": {
+          "description": "Model Configuration.",
           "$ref": "#/definitions/AssetReferenceBase"
         },
         "codeConfiguration": {
@@ -8847,6 +8880,7 @@
           "$ref": "#/definitions/ResourceIdentity"
         },
         "properties": {
+          "description": "Additional attributes of the entity.",
           "$ref": "#/definitions/OnlineDeployment"
         },
         "systemData": {
@@ -8954,6 +8988,7 @@
           "$ref": "#/definitions/ResourceIdentity"
         },
         "properties": {
+          "description": "Additional attributes of the entity.",
           "$ref": "#/definitions/PartialOnlineDeployment"
         }
       },
