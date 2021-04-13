@@ -46,7 +46,7 @@
           "400": {
             "description": "Invalid request.  Check input parameters",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
@@ -56,7 +56,7 @@
           "401": {
             "description": "Unauthorized.  Please check your credentials",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
@@ -66,7 +66,7 @@
           "429": {
             "description": "Too many requests",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
@@ -76,7 +76,7 @@
           "500": {
             "description": "Internal Server Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
@@ -86,7 +86,7 @@
           "503": {
             "description": "Server temporary unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
@@ -212,7 +212,7 @@
           "400": {
             "description": "Invalid request.  Check input parameters",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
@@ -222,7 +222,7 @@
           "401": {
             "description": "Unauthorized.  Please check your credentials",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
@@ -232,7 +232,7 @@
           "429": {
             "description": "Too many requests",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
@@ -242,7 +242,7 @@
           "500": {
             "description": "Internal Server Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
@@ -252,7 +252,7 @@
           "503": {
             "description": "Server temporary unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
@@ -321,7 +321,7 @@
           "401": {
             "description": "Unauthorized.  Please check your credentials",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
@@ -331,7 +331,7 @@
           "404": {
             "description": "Resource is not found",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
@@ -341,7 +341,7 @@
           "429": {
             "description": "Too many requests",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
@@ -351,7 +351,7 @@
           "500": {
             "description": "Internal Server Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
@@ -361,7 +361,7 @@
           "503": {
             "description": "Server temporary unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
@@ -419,7 +419,7 @@
           "401": {
             "description": "Unauthorized.  Please check your credentials",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
@@ -429,7 +429,7 @@
           "404": {
             "description": "Resource is not found",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
@@ -439,7 +439,7 @@
           "429": {
             "description": "Too many requests",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
@@ -449,7 +449,7 @@
           "500": {
             "description": "Internal Server Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
@@ -459,7 +459,7 @@
           "503": {
             "description": "Server temporary unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
@@ -503,7 +503,7 @@
           "401": {
             "description": "Unauthorized.  Please check your credentials",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
@@ -513,7 +513,7 @@
           "404": {
             "description": "Resource is not found",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
@@ -523,7 +523,7 @@
           "429": {
             "description": "Too many requests",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
@@ -533,7 +533,7 @@
           "500": {
             "description": "Internal Server Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
@@ -543,7 +543,7 @@
           "503": {
             "description": "Server temporary unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
@@ -675,7 +675,7 @@
           "400": {
             "description": "Invalid request.  Check input parameters",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
@@ -685,7 +685,7 @@
           "401": {
             "description": "Unauthorized.  Please check your credentials",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
@@ -695,7 +695,7 @@
           "404": {
             "description": "Resource is not found",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
@@ -705,7 +705,7 @@
           "429": {
             "description": "Too many requests",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
@@ -715,7 +715,7 @@
           "500": {
             "description": "Internal Server Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
@@ -725,7 +725,7 @@
           "503": {
             "description": "Server temporary unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
@@ -771,7 +771,7 @@
           "429": {
             "description": "Too many requests",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
@@ -781,7 +781,7 @@
           "500": {
             "description": "Internal Server Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
@@ -791,7 +791,7 @@
           "503": {
             "description": "Server temporary unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
@@ -834,7 +834,7 @@
           "429": {
             "description": "Too many requests",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
@@ -844,7 +844,7 @@
           "500": {
             "description": "Internal Server Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
@@ -854,7 +854,7 @@
           "503": {
             "description": "Server temporary unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
@@ -897,7 +897,7 @@
           "429": {
             "description": "Too many requests",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
@@ -907,7 +907,7 @@
           "500": {
             "description": "Internal Server Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
@@ -917,7 +917,7 @@
           "503": {
             "description": "Server temporary unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/TranslationErrorResponse"
             },
             "examples": {
               "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
@@ -1152,7 +1152,7 @@
         ]
       }
     },
-    "ErrorCodeV2": {
+    "TranslationErrorCode": {
       "description": "Enums containing high level error codes.",
       "enum": [
         "InvalidRequest",
@@ -1165,7 +1165,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ErrorCodeV2",
+        "name": "TranslationErrorCode",
         "modelAsString": true,
         "values": [
           {
@@ -1192,7 +1192,7 @@
         ]
       }
     },
-    "InnerErrorV2": {
+    "InnerTranslationError": {
       "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).",
       "required": [
         "code",
@@ -1214,11 +1214,11 @@
           "readOnly": true
         },
         "innerError": {
-          "$ref": "#/definitions/InnerErrorV2"
+          "$ref": "#/definitions/InnerTranslationError"
         }
       }
     },
-    "ErrorV2": {
+    "TranslationError": {
       "description": "This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
       "required": [
         "code",
@@ -1227,7 +1227,7 @@
       "type": "object",
       "properties": {
         "code": {
-          "$ref": "#/definitions/ErrorCodeV2"
+          "$ref": "#/definitions/TranslationErrorCode"
         },
         "message": {
           "description": "Gets high level error message.",
@@ -1239,7 +1239,7 @@
           "readOnly": true
         },
         "innerError": {
-          "$ref": "#/definitions/InnerErrorV2"
+          "$ref": "#/definitions/InnerTranslationError"
         }
       }
     },
@@ -1331,7 +1331,7 @@
           "$ref": "#/definitions/Status"
         },
         "error": {
-          "$ref": "#/definitions/ErrorV2"
+          "$ref": "#/definitions/TranslationError"
         },
         "summary": {
           "$ref": "#/definitions/StatusSummary"
@@ -1401,7 +1401,7 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/ErrorV2"
+          "$ref": "#/definitions/TranslationError"
         },
         "progress": {
           "format": "float",
@@ -1517,12 +1517,12 @@
         }
       }
     },
-    "ErrorResponseV2": {
+    "TranslationErrorResponse": {
       "description": "Contains unified error information used for HTTP responses across any Cognitive Service. Instances\r\ncan be created either through Microsoft.CloudAI.Containers.HttpStatusExceptionV2 or by returning it directly from\r\na controller.",
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorV2"
+          "$ref": "#/definitions/TranslationError"
         }
       }
     }
