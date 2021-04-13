@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "profileInfo": {
+      "locale": "en-us"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "profileId": "49a36324-fc4b-4387-aa06-090cfbf0064f",
+        "locale": "en-US",
+        "enrollmentStatus": "Enrolling",
+        "createdDateTime": "2015-04-23T18:25:43.41Z",
+        "lastUpdatedDateTime": "2015-04-23T18:25:43.41Z",
+        "enrollmentsCount": 0,
+        "enrollmentsLength": 0,
+        "enrollmentsSpeechLength": 0,
+        "remainingEnrollmentsSpeechLength": 20,
+        "modelVersion": "2019-12-05"
+      }
+    },
+    "400": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "Request body is missing."
+        }
+      }
+    },
+    "401": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized. Make sure subscription key is included and valid."
+        }
+      }
+    },
+    "403": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "Maximum allowed number of profiles is 10,000."
+        }
+      }
+    },
+    "415": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "UnsupportedMediaType",
+          "message": "Unsupported media type. Only 'application/JSON' is accepted."
+        }
+      }
+    },
+    "429": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "RateLimit",
+          "message": "Rate limit is exceeded."
+        }
+      }
+    },
+    "500": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error."
+        }
+      }
+    }
+  }
+}

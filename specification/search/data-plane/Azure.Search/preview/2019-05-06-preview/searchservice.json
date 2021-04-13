@@ -6834,7 +6834,6 @@
       },
       "required": [
         "name",
-        "description",
         "skills"
       ],
       "externalDocs": {
@@ -7137,6 +7136,11 @@
           "format": "int32",
           "x-nullable": true,
           "description": "A number indicating how many key phrases to return. If absent, all identified key phrases will be returned."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
         }
       },
       "externalDocs": {
@@ -7152,10 +7156,6 @@
         }
       ],
       "properties": {
-        "textExtractionAlgorithm": {
-          "$ref": "#/definitions/TextExtractionAlgorithm",
-          "description": "A value indicating which algorithm to use for extracting text. Default is printed."
-        },
         "defaultLanguageCode": {
           "$ref": "#/definitions/OcrSkillLanguage",
           "description": "A value indicating which language code to use. Default is en."
@@ -7213,6 +7213,18 @@
           "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
+      "properties": {
+        "defaultCountryHint": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A country code to use as a hint to the language detection model if it cannot disambiguate the language."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        }
+      },
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-language-detection"
       },
@@ -7437,30 +7449,6 @@
       ],
       "description": "Response from a list skillset request. If successful, it includes the full definitions of all skillsets."
     },
-    "TextExtractionAlgorithm": {
-      "type": "string",
-      "enum": [
-        "printed",
-        "handwritten"
-      ],
-      "x-ms-enum": {
-        "name": "TextExtractionAlgorithm",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "printed",
-            "name": "Printed",
-            "description": "An algorithm suitable for printed text."
-          },
-          {
-            "value": "handwritten",
-            "name": "Handwritten",
-            "description": "An algorithm suitable for handwritten text."
-          }
-        ]
-      },
-      "description": "A value indicating which algorithm to use. Default is printed."
-    },
     "TextSplitMode": {
       "type": "string",
       "enum": [
@@ -7469,7 +7457,7 @@
       ],
       "x-ms-enum": {
         "name": "TextSplitMode",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "value": "pages",
@@ -7498,7 +7486,7 @@
       ],
       "x-ms-enum": {
         "name": "VisualFeature",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "value": "adult",
@@ -7547,7 +7535,7 @@
       ],
       "x-ms-enum": {
         "name": "ImageDetail",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "value": "celebrities",
@@ -7576,7 +7564,7 @@
       ],
       "x-ms-enum": {
         "name": "EntityCategory",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "value": "location",

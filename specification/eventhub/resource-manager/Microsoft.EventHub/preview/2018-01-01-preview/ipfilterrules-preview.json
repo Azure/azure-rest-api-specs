@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules": {
       "get": {
         "tags": [
-          "Namespaces"
+          "IpFilterRules"
         ],
         "operationId": "Namespaces_ListIPFilterRules",
         "x-ms-examples": {
@@ -48,16 +48,16 @@
         "description": "Gets a list of IP Filter rules for a Namespace.",
         "parameters": [
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -70,7 +70,7 @@
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -82,7 +82,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/ipfilterrules/{ipFilterRuleName}": {
       "put": {
         "tags": [
-          "Namespaces"
+          "IpFilterRules"
         ],
         "operationId": "Namespaces_CreateOrUpdateIpFilterRule",
         "x-ms-examples": {
@@ -93,13 +93,13 @@
         "description": "Creates or updates an IpFilterRule for a Namespace.",
         "parameters": [
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/IpFilterRuleNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/IpFilterRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -111,10 +111,10 @@
             "description": "The Namespace IpFilterRule."
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -127,14 +127,14 @@
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
         "tags": [
-          "Namespaces"
+          "IpFilterRules"
         ],
         "operationId": "Namespaces_DeleteIpFilterRule",
         "x-ms-examples": {
@@ -145,19 +145,19 @@
         "description": "Deletes an IpFilterRule for a Namespace.",
         "parameters": [
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/IpFilterRuleNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/IpFilterRuleNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -170,14 +170,14 @@
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "get": {
         "tags": [
-          "Namespaces"
+          "IpFilterRules"
         ],
         "operationId": "Namespaces_GetIpFilterRule",
         "x-ms-examples": {
@@ -188,19 +188,19 @@
         "description": "Gets an IpFilterRule for a Namespace by rule name.",
         "parameters": [
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/IpFilterRuleNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/IpFilterRuleNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -213,7 +213,7 @@
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -252,7 +252,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../common/v1/definitions.json#/definitions/Resource"
+          "$ref": "../../../common/v1/definitions.json#/definitions/Resource"
         }
       ],
       "description": "Single item in a List or Get IpFilterRules operation"
