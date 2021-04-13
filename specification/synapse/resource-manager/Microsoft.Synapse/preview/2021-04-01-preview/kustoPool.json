@@ -59,7 +59,6 @@
         "tags": [
           "KustoPools"
         ],
-        "deprecated": false,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -79,19 +78,15 @@
             "schema": {
               "$ref": "#/definitions/KustoPoolListResult"
             },
-            "description": ""
+            "description": "List of Kusto pools under the Workspace."
           },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
-            "description": ""
+            "description": "Error response describing why the operation failed."
           }
         },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
         "x-ms-examples": {
           "List Kusto pools in a workspace": {
             "$ref": "./examples/KustoPoolsListByWorkspace.json"
@@ -938,6 +933,7 @@
         },
         "nextLink": {
           "type": "string",
+          "readOnly": true,
           "title": "The URL to get the next set of operation list results if there are any."
         }
       }
@@ -1367,7 +1363,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Class representing an data connection.",
+      "description": "Class representing a data connection.",
       "discriminator": "kind"
     },
     "EventHubDataConnection": {
