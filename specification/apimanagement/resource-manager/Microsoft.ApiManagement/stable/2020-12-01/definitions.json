@@ -3455,6 +3455,21 @@
     },
     "OperationResultContract": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationResultContractProperties",
+          "description": "Properties of the Operation Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Long Running Git Operation Results."
+    },
+    "OperationResultContractProperties": {
+      "properties": {
         "id": {
           "type": "string",
           "description": "Operation result identifier."
