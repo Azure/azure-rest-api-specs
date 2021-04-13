@@ -27,7 +27,7 @@ These are the global settings for MapsClient.
 ``` yaml
 title: MapsClient
 openapi-type: data-plane
-tag: package-1.0-preview
+tag: package-preview-2.0
 ```
 
 ### Suppression
@@ -40,6 +40,15 @@ directive:
 
 ```
 
+
+### Tag: package-preview-2.0
+
+These settings apply only when `--tag=package-preview-2.0` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2.0'
+input-file:
+  - Microsoft.Maps/Alias/preview/2.0/alias.json
+```
 ### Tag: package-1.0-preview
 
 These settings apply only when `--tag=package-1.0-preview` is specified on the command line.
