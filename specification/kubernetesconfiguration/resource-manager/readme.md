@@ -41,20 +41,20 @@ input-file:
   - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/extensions.json
   - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/extensionTypes.json
 ```
-### Tag: package-2021-03-01
+### Tag: package-2021-03
 
-These settings apply only when `--tag=package-2021-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-03-01'
+``` yaml $(tag) == 'package-2021-03'
 input-file:
   - Microsoft.KubernetesConfiguration/stable/2021-03-01/kubernetesconfiguration.json
 ```
 
-### Tag: package-2020-10-01-preview
+### Tag: package-preview-2020-10
 
-These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2020-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01-preview'
+``` yaml $(tag) == 'package-preview-2020-10'
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2020-10-01-preview/kubernetesconfiguration.json
 ```
