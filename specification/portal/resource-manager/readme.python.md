@@ -6,9 +6,11 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.portal
 package-name: azure-mgmt-portal
 no-namespace-folders: true
 package-version: 1.0.0b1
+clear-output-folder: true
 ```
 
 ``` yaml $(python-mode) == 'update' && $(track2)
