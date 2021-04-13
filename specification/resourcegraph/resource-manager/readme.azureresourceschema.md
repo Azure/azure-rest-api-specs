@@ -6,6 +6,8 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-resourcegraph-2021-03-01
+  - tag: schema-resourcegraph-2020-09-01-preview
   - tag: schema-resourcegraph-2020-04-01-preview
   - tag: schema-resourcegraph-2019-04-01
   - tag: schema-resourcegraph-2018-09-01-preview
@@ -13,6 +15,28 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-resourcegraph-2021-03-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-resourcegraph-2021-03-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ResourceGraph/stable/2021-03-01/resourcegraph.json
+
+```
+
+### Tag: schema-resourcegraph-2020-09-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-resourcegraph-2020-09-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+
+```
 
 ### Tag: schema-resourcegraph-2020-04-01-preview and azureresourceschema
 
@@ -22,8 +46,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
-  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcechanges.json
   - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcechanges.json
 
 ```
 
