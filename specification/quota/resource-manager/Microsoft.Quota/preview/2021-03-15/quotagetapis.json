@@ -389,6 +389,38 @@
         }
       }
     },
+    "QuotaRequestState": {
+      "description": "The quota request status.",
+      "enum": [
+        "Accepted",
+        "Invalid",
+        "Succeeded",
+        "Failed",
+        "InProgress"
+      ],
+      "readOnly": true,
+      "type": "string",
+      "x-ms-enum": {
+        "name": "QuotaRequestState",
+        "modelAsString": true
+      }
+    },
+    "ResourceTypesName": {
+      "description": "The resource types. For extendibility, we can keep it as string.",
+      "enum": [
+        "standard",
+        "dedicated",
+        "lowPriority",
+        "shared",
+        "serviceSpecific"
+      ],
+      "readOnly": false,
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": true
+      }
+    },
     "ExceptionResponse": {
       "type": "object",
       "properties": {
