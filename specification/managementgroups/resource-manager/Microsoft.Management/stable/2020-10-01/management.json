@@ -135,6 +135,12 @@
           "GetManagementGroup": {
             "$ref": "./examples/GetManagementGroup.json"
           },
+          "GetManagementGroupWithPath": {
+            "$ref": "./examples/GetManagementGroupWithPath.json"
+          },
+          "GetManagementGroupWithAncestors": {
+            "$ref": "./examples/GetManagementGroupWithAncestors.json"
+          },
           "GetManagementGroupWithExpand": {
             "$ref": "./examples/GetManagementGroupWithExpand.json"
           },
@@ -1229,14 +1235,14 @@
             "$ref": "#/definitions/ManagementGroupPathElement"
           }
         },
-		"ancestors": {
-		  "description": "The ancestors of the management group.",
-		  "x-nullable": true,
-		  "type": "array",
-		  "items": {
-		    "type": "string"
-		  }
-		}
+        "ancestors": {
+          "description": "The ancestors of the management group.",
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "ManagementGroupDetails": {
@@ -1959,7 +1965,7 @@
       "enum": [
         "children",
         "path",
-		"ancestors"
+        "ancestors"
       ],
       "x-ms-parameter-location": "method",
       "description": "The $expand=children query string parameter allows clients to request inclusion of children in the response payload.  $expand=path includes the path from the root group to the current group.  $expand=ancestors includes the ancestor Ids of the current group."
