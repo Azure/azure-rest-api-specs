@@ -1707,7 +1707,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DatastoreCredentials"
+              "$ref": "#/definitions/DatastoreSecrets"
             }
           }
         },
@@ -5726,6 +5726,126 @@
       },
       "additionalProperties": false
     },
+    "SecretsType": {
+      "enum": [
+        "AccountKey",
+        "Certificate",
+        "None",
+        "Sas",
+        "ServicePrincipal",
+        "SqlAdmin"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SecretsType",
+        "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "DatastoreSecrets": {
+      "required": [
+        "secretsType"
+      ],
+      "type": "object",
+      "properties": {
+        "secretsType": {
+          "description": "Credential type used to authentication with storage.",
+          "$ref": "#/definitions/SecretsType"
+        }
+      },
+      "discriminator": "secretsType",
+      "additionalProperties": false
+    },
+    "AccountKeyDatastoreSecrets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreSecrets"
+        }
+      ],
+      "properties": {
+        "key": {
+          "description": "Storage account key.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AccountKey",
+      "additionalProperties": false
+    },
+    "CertificateDatastoreSecrets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreSecrets"
+        }
+      ],
+      "properties": {
+        "certificate": {
+          "description": "Service principal certificate.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Certificate",
+      "additionalProperties": false
+    },
+    "NoneDatastoreSecrets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreSecrets"
+        }
+      ],
+      "x-ms-discriminator-value": "None",
+      "additionalProperties": false
+    },
+    "SasDatastoreSecrets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreSecrets"
+        }
+      ],
+      "properties": {
+        "sasToken": {
+          "description": "Storage container SAS token.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Sas",
+      "additionalProperties": false
+    },
+    "ServicePrincipalDatastoreSecrets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreSecrets"
+        }
+      ],
+      "properties": {
+        "clientSecret": {
+          "description": "Service principal secret.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "ServicePrincipal",
+      "additionalProperties": false
+    },
+    "SqlAdminDatastoreSecrets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreSecrets"
+        }
+      ],
+      "properties": {
+        "password": {
+          "description": "SQL database password.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "SqlAdmin",
+      "additionalProperties": false
+    },
     "DatastoreCredentials": {
       "required": [
         "credentialsType"
@@ -5735,6 +5855,15 @@
         "credentialsType": {
           "description": "Credential type used to authentication with storage.",
           "$ref": "#/definitions/CredentialsType"
+        },
+        "secrets": {
+          "description": "Credential secrets",
+          "$ref": "#/definitions/DatastoreSecrets",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
         }
       },
       "discriminator": "credentialsType",
@@ -5747,17 +5876,6 @@
           "$ref": "#/definitions/DatastoreCredentials"
         }
       ],
-      "properties": {
-        "key": {
-          "description": "Storage account key.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
-        }
-      },
       "x-ms-discriminator-value": "AccountKey",
       "additionalProperties": false
     },
@@ -5792,15 +5910,6 @@
           "description": "Service principal client ID.",
           "type": "string"
         },
-        "certificate": {
-          "description": "Service principal certificate.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
-        },
         "thumbprint": {
           "description": "Thumbprint of the certificate used for authentication.",
           "pattern": "[a-zA-Z0-9_]",
@@ -5827,17 +5936,6 @@
           "$ref": "#/definitions/DatastoreCredentials"
         }
       ],
-      "properties": {
-        "sasToken": {
-          "description": "Storage container SAS token.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
-        }
-      },
       "x-ms-discriminator-value": "Sas",
       "additionalProperties": false
     },
@@ -5870,15 +5968,6 @@
           "format": "uuid",
           "description": "Service principal client ID.",
           "type": "string"
-        },
-        "clientSecret": {
-          "description": "Service principal secret.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
         }
       },
       "x-ms-discriminator-value": "ServicePrincipal",
@@ -5899,15 +5988,6 @@
           "description": "SQL database user name.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
-        },
-        "password": {
-          "description": "SQL database password.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
         }
       },
       "x-ms-discriminator-value": "SqlAdmin",
