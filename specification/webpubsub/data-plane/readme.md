@@ -1,4 +1,4 @@
-# SignalR
+# Web PubSub Service
 
 > see https://aka.ms/autorest
 
