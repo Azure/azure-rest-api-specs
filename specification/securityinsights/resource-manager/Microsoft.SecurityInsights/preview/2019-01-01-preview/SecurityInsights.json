@@ -7793,24 +7793,15 @@
       "type": "object"
     },
     "EnrichmentDomainWhois": {
-      "description": "Whois information (plus timestamps) for a given domain",
+      "description": "Whois information for a given domain and associated metadata",
       "properties": {
         "domain": {
           "description": "The domain for this whois record",
           "type": "string"
         },
         "server": {
-          "description": "The timestamp at which this record was created",
-          "format": "date-time",
-          "type": "string"
-        },
-        "date": {
-          "description": "The date portion of the timestamp field",
-          "type": "string"
-        },
-        "timestamp": {
-          "description": "The timestamp at which this record was retrieved",
-          "format": "date-time",
+          "description": "The hostname of this registrar's whois server",
+          "format": "string",
           "type": "string"
         },
         "created": {
@@ -7881,7 +7872,7 @@
           "type": "string"
         },
         "url": {
-          "description": "This registrar's url",
+          "description": "This registrar's URL",
           "type": "string"
         },
         "whoisServer": {
@@ -7919,7 +7910,7 @@
           "type": "string"
         },
         "org": {
-          "description": "This contact's organization",
+          "description": "The organization for this contact",
           "type": "string"
         },
         "street": {
@@ -7930,31 +7921,31 @@
           }
         },
         "city": {
-          "description": "This contact's city",
+          "description": "The city for this contact",
           "type": "string"
         },
         "state": {
-          "description": "This contact's state",
+          "description": "The state for this contact",
           "type": "string"
         },
         "postal": {
-          "description": "This contact's postal code",
+          "description": "The postal code for this contact",
           "type": "string"
         },
         "country": {
-          "description": "This contact's country",
+          "description": "The country for this contact",
           "type": "string"
         },
         "phone": {
-          "description": "This contact's phone number",
+          "description": "The phone number for this contact",
           "type": "string"
         },
         "fax": {
-          "description": "This contact's fax number",
+          "description": "The fax number for this contact",
           "type": "string"
         },
         "email": {
-          "description": "This contact's email address",
+          "description": "The email address for this contact",
           "type": "string"
         }
       }
@@ -7963,74 +7954,74 @@
       "description": "Geodata information for a given IP address",
       "properties": {
         "asn": {
-          "description": "The autonomous system number associated with this IP",
+          "description": "The autonomous system number associated with this IP address",
           "type": "string"
         },
         "carrier": {
-          "description": "The name of the carrier for this IP",
+          "description": "The name of the carrier for this IP address",
           "type": "string"
         },
         "city": {
-          "description": "The city this IP is located in",
+          "description": "The city this IP address is located in",
           "type": "string"
         },
         "cityCf": {
-          "description": "A numeric rating of confidence that the value in 'city' is correct",
+          "description": "A numeric rating of confidence that the value in the 'city' field is correct, on a scale of 0-100",
           "type": "integer",
           "format": "int32"
         },
         "continent": {
-          "description": "The continent this IP is located on",
+          "description": "The continent this IP address is located on",
           "type": "string"
         },
         "country": {
-          "description": "The county this IP is located in",
+          "description": "The county this IP address is located in",
           "type": "string"
         },
         "countryCf": {
-          "description": "A numeric rating of confidence that the value in 'country' is correct",
+          "description": "A numeric rating of confidence that the value in the 'country' field is correct on a scale of 0-100",
           "type": "integer",
           "format": "int32"
         },
         "ipAddr": {
-          "description": "The dotted-decimal or colon-separated string representation of the IP",
+          "description": "The dotted-decimal or colon-separated string representation of the IP address",
           "type": "string"
         },
         "ipRoutingType": {
-          "description": "A description of the connection type of this IP",
+          "description": "A description of the connection type of this IP address",
           "type": "string"
         },
         "latitude": {
-          "description": "The latitude of this IP",
+          "description": "The latitude of this IP address",
           "type": "string"
         },
         "longitude": {
-          "description": "The longitude of this IP",
+          "description": "The longitude of this IP address",
           "type": "string"
         },
         "organization": {
-          "description": "The name of the organization for this IP",
+          "description": "The name of the organization for this IP address",
           "type": "string"
         },
         "organizationType": {
-          "description": "The type of the organization for this IP",
+          "description": "The type of the organization for this IP address",
           "type": "string"
         },
         "region": {
-          "description": "The geographic region this IP is locate in",
+          "description": "The geographic region this IP address is located in",
           "type": "string"
         },
         "state": {
-          "description": "The state this IP is located in",
+          "description": "The state this IP address is located in",
           "type": "string"
         },
         "stateCf": {
-          "description": "A numeric rating of confidence that the value in 'state' is correct",
+          "description": "A numeric rating of confidence that the value in the 'state' field is correct on a scale of 0-100",
           "type": "integer",
           "format": "int32"
         },
         "stateCode": {
-          "description": "The abbreviated name for the state this IP is located in",
+          "description": "The abbreviated name for the state this IP address is located in",
           "type": "string"
         }
       }
