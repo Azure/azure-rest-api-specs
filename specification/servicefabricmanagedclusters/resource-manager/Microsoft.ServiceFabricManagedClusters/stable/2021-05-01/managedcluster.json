@@ -354,7 +354,7 @@
           "200": {
             "description": "The operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedClusterCodeVersionListResult"
+              "$ref": "#/definitions/ManagedClusterCodeVersionResult"
             }
           },
           "default": {
@@ -400,7 +400,7 @@
           "200": {
             "description": "The operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedClusterCodeVersionListResult"
+              "$ref": "#/definitions/ManagedClusterCodeVersionResult"
             }
           },
           "default": {
@@ -604,7 +604,7 @@
     },
     "ClusterState": {
       "type": "string",
-      "description": "The current state of the cluster.\n\n  - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.\n  - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.\n  - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.\n  - Upgrading - Indicates that the cluster is being upgraded with the user provided configuration.\n  - UpgradeFailed - Indicates that the last upgrade for the cluster has failed.\n  - Ready - Indicates that the cluster is in a stable state.\n",
+      "description": "The current state of the cluster.\n",
       "enum": [
         "WaitingForNodes",
         "Deploying",
@@ -612,7 +612,37 @@
         "Upgrading",
         "UpgradeFailed",
         "Ready"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ClusterState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "WaitingForNodes",
+            "description": "Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it."
+          },
+          {
+            "value": "Deploying",
+            "description": "Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up."
+          },
+          {
+            "value": "BaselineUpgrade",
+            "description": "Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time."
+          },
+          {
+            "value": "Upgrading",
+            "description": "Indicates that the cluster is being upgraded with the user provided configuration."
+          },
+          {
+            "value": "UpgradeFailed",
+            "description": "Indicates that the last upgrade for the cluster has failed."
+          },
+          {
+            "value": "Ready",
+            "description": "Indicates that the cluster is in a stable state."
+          }
+        ]
+      }
     },
     "ClusterUpgradeCadence": {
       "type": "string",
@@ -1310,7 +1340,6 @@
       "enum": [
         "2021-05-01"
       ],
-      "default": "2021-05-01",
       "x-ms-parameter-location": "client"
     },
     "clusterNameParameter": {
