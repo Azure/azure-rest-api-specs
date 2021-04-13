@@ -250,8 +250,358 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "OperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of items."
+        }
+      }
+    },
+    "OperationResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource name."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of operation."
+        }
+      }
+    },
+    "QuotaRequestStatusDetails": {
+      "description": "The quota request status details.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The quota request status.",
+          "$ref": "#/definitions/QuotaRequestState",
+          "readOnly": true
+        },
+        "message": {
+          "description": "A user friendly message.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "QuotaRequestDetails": {
+      "type": "object",
+      "description": "The details of the quota Request.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The quota request Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the quota request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "The quota request details.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuotaRequestProperties"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.Quota/quotaLimits\""
+        }
+      }
+    },
+    "QuotaRequestDetailsList": {
+      "description": "Quota requests information.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The quota Requests.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaRequestDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The uri to fetch the next page of quota limits. When there are no more pages, this is null.",
+          "type": "string"
+        }
+      }
+    },
+    "QuotaRequestProperties": {
+      "type": "object",
+      "description": "The details of quota request.",
+      "properties": {
+        "provisioningState": {
+          "description": "The quota request status.",
+          "$ref": "#/definitions/QuotaRequestState"
+        },
+        "message": {
+          "description": "User friendly status message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestSubmitTime": {
+          "description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "value": {
+          "description": "The quotaRequests.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubRequest"
+          }
+        }
+      }
+    },
+    "ExceptionResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ServiceError",
+          "description": "The api error details."
+        }
+      },
+      "description": "The api error."
+    },
+    "quotaBucketProperties": {
+      "type": "object",
+      "description": "The resource provider quotaBucket properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name"
+        },
+        "displayName": {
+          "description": "The display name",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderDimension": {
+      "type": "object",
+      "description": "The resource provider resource dimension",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource dimension name"
+        },
+        "displayName": {
+          "description": "The display name",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderTemplate": {
+      "type": "object",
+      "description": "The resource provider resource template details",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type"
+        },
+        "dimensions": {
+          "description": "The resource provider dimensions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderDimension"
+          }
+        },
+        "quotaBuckets": {
+          "description": "The resource provider quotaBuckets",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/quotaBucketProperties"
+          }
+        }
+      }
+    },
+    "ResourceProviderTemplates": {
+      "type": "object",
+      "description": "List of resource provider templates",
+      "properties": {
+        "value": {
+          "description": "The resource provider templates",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderTemplate"
+          }
+        }
+      }
+    },
+    "ResourceProviderInformation": {
+      "type": "object",
+      "description": "The resource provider information",
+      "properties": {
+        "resourceProviderName": {
+          "type": "string",
+          "description": "The name of the resource provider"
+        },
+        "properties": {
+          "description": "The quota dimensions for the resource provider.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResourceProviderTemplates"
+        }
+      }
+    },
+    "resourceProvidersList": {
+      "type": "object",
+      "description": "List of resource providers.",
+      "properties": {
+        "value": {
+          "description": "The resource provider information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderInformation"
+          }
+        }
+      }
+    },
+    "QuotaTypeInformationDimensionList": {
+      "description": "Quota types information list.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type"
+        },
+        "value": {
+          "description": "The quota type information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaTypeDimensionInformation"
+          }
+        }
+      }
+    },
+    "QuotaTypeDimensionInformation": {
+      "type": "object",
+      "description": "Quota type information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The property name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "id": {
+          "type": "string",
+          "description": "The dimension id."
+        }
+      }
+    },
+    "QuotaTemplateDetails": {
+      "type": "object",
+      "description": "Quota template details.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type."
+        },
+        "properties": {
+          "description": "The quota type properties for the resource id.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuotaTypeInformationDimensionList"
+        }
+      }
+    },
+    "QuotaTemplatesDetails": {
+      "type": "object",
+      "description": "Quota templates details.",
+      "properties": {
+        "value": {
+          "description": "The quota templates information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaTemplateDetails"
+          }
+        }
+      }
+    },
+    "ServiceError": {
+      "description": "The api error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceErrorDetail"
+          },
+          "description": "The list of error details.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceErrorDetail": {
+      "description": "The error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message."
+        }
+      }
+    }
+  },
   "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "API version."
+    },
     "SubscriptionIdInParameters": {
       "name": "subscriptionId",
       "x-ms-parameter-location": "method",
