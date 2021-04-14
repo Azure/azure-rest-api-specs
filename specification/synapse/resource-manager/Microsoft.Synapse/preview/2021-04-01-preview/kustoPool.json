@@ -205,12 +205,6 @@
               "$ref": "#/definitions/KustoPool"
             }
           },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/KustoPool"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1077,8 +1071,7 @@
           }
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "The provisioned state of the resource."
         },
         "uri": {
