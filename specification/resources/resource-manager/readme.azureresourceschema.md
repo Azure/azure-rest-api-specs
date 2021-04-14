@@ -11,6 +11,7 @@ batch:
   - tag: schema-solutions-2018-06-01
   - tag: schema-solutions-2017-09-01
   - tag: schema-solutions-2016-09-01-preview
+  - tag: schema-resources-2021-01-01
   - tag: schema-resources-2020-10-01
   - tag: schema-resources-2020-08-01
   - tag: schema-resources-2020-06-01
@@ -109,6 +110,18 @@ input-file:
 
 ```
 
+### Tag: schema-resources-2021-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-resources-2021-01-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Resources/stable/2021-01-01/resources.json
+  - Microsoft.Resources/stable/2021-01-01/subscriptions.json
+
+```
+
 ### Tag: schema-resources-2020-10-01 and azureresourceschema
 
 ``` yaml $(tag) == 'schema-resources-2020-10-01' && $(azureresourceschema)
@@ -116,8 +129,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Resources/stable/2020-10-01/resources.json
   - Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
+  - Microsoft.Resources/stable/2020-10-01/resources.json
 
 ```
 

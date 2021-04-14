@@ -225,9 +225,10 @@ input-file:
 - Microsoft.Automation/stable/2019-06-01/dscConfiguration.json
 - Microsoft.Automation/stable/2019-06-01/job.json
 - Microsoft.Automation/stable/2019-06-01/operations.json
-- Microsoft.Automation/stable/2019-06-01/runbook.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2018-06-30/runbook.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
@@ -270,6 +271,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node

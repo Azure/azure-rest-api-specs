@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-communication-2020-08-20-preview
+  - tag: schema-communication-2020-08-20
 
 ```
 
@@ -20,5 +21,16 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService.json
+
+```
+
+### Tag: schema-communication-2020-08-20 and azureresourceschema
+
+``` yaml $(tag) == 'schema-communication-2020-08-20' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Communication/stable/2020-08-20/CommunicationService.json
 
 ```

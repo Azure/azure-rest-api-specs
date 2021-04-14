@@ -161,6 +161,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-dns
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -177,6 +178,10 @@ swagger-to-sdk:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
