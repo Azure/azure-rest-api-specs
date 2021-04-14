@@ -8,34 +8,34 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 python-mode: create
 python:
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: azure.maps
-  package-name: azure-maps
+  namespace: azure.maps.service
+  package-name: azure-maps-service
   package-version: 1.0-preview
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(track2)
 python-mode: create
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.maps
-package-name: azure-maps
+namespace: azure.maps.service
+package-name: azure-maps-service
 package-version: 1.0-preview
 clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'asdf' && !$(track2)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/maps/azure-maps/azure/maps/_generated
+  output-folder: $(python-sdks-folder)/maps/azure-maps-service/azure/maps/_generated
 ```
 ``` yaml $(python) && !$(track2)
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/maps/azure-maps
+  output-folder: $(python-sdks-folder)/maps/azure-maps-service
 ```
 ``` yaml $(python) && $(python-mode) == 'asdf' && $(track2)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/maps/azure-maps/azure/maps/_generated
+output-folder: $(python-sdks-folder)/maps/azure-maps-service/azure/maps/_generated
 ```
 ``` yaml $(python) && $(track2)
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/maps/azure-maps
+output-folder: $(python-sdks-folder)/maps/azure-maps-service
 ```

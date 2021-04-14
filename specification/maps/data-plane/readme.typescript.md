@@ -5,8 +5,9 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 
 ``` yaml $(typescript)
 typescript:
-  package-name: "@azure/maps"
-  output-folder: "$(typescript-sdks-folder)/sdk/maps/maps"
+  package-name: "azure-maps-rest"
+  output-folder: "$(typescript-sdks-folder)/sdk/maps/azure-maps-rest"
+  namespace: "atlas.service"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true

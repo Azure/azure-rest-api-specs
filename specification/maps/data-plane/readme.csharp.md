@@ -5,10 +5,9 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 
 ```yaml $(csharp)
 csharp:
+  sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 1
+  namespace: Azure.Maps.Service
+  output-folder: $(csharp-sdks-folder)/maps/Azure.Maps.Service/src/Generated
   clear-output-folder: true
-  client-side-validation: false
-  namespace: Microsoft.Maps
-  output-folder: $(csharp-sdks-folder)/maps/data-plane/Microsoft.Maps/GeneratedProtocol
 ```

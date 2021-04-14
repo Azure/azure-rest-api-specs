@@ -115,16 +115,7 @@ See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-namespace: com.microsoft.azure.maps
-license-header: MICROSOFT_MIT_NO_CODEGEN
-java: true
-payload-flattening-threshold: 0
-output-folder: $(azure-libraries-for-java-folder)/azure-maps
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 ## TypeScript
 
@@ -161,7 +152,7 @@ input-file:
   - $(this-folder)/Microsoft.Maps/Mobility/preview/1.0/mobility.json
   - $(this-folder)/Microsoft.Maps/Render/preview/1.0/render.json
   - $(this-folder)/Microsoft.Maps/Render/preview/2.0/render.json
-  #- $(this-folder)/Microsoft.Maps/Route/preview/1.0/route.json
+  - $(this-folder)/Microsoft.Maps/Route/preview/1.0/route.json
   - $(this-folder)/Microsoft.Maps/Search/preview/1.0/search.json
   - $(this-folder)/Microsoft.Maps/Spatial/preview/1.0/spatial.json
   - $(this-folder)/Microsoft.Maps/Tileset/preview/1.0/tileset.json
