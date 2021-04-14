@@ -24,17 +24,17 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the Instance Metadata Service API.
 
-```yaml
+``` yaml
 openapi-type: data-plane
 azure-arm: false
-tag: package-2020-09-01
+tag: package-2020-10-01
 ```
 
 ### Tag: package-2018-10-01
 
 These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-10-01'
+``` yaml $(tag) == 'package-2018-10-01'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
 ```
@@ -43,7 +43,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-02-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-02-01'
+``` yaml $(tag) == 'package-2019-02-01'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2019-02-01/imds.json
 ```
@@ -52,7 +52,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-03-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-03-11'
+``` yaml $(tag) == 'package-2019-03-11'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2019-03-11/imds.json
 ```
@@ -61,7 +61,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-04-30` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04-30'
+``` yaml $(tag) == 'package-2019-04-30'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2019-04-30/imds.json
 ```
@@ -70,7 +70,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-06-01'
+``` yaml $(tag) == 'package-2019-06-01'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2019-06-01/imds.json
 ```
@@ -79,7 +79,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-06-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-06-04'
+``` yaml $(tag) == 'package-2019-06-04'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2019-06-04/imds.json
 ```
@@ -88,7 +88,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-08-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-08-01'
+``` yaml $(tag) == 'package-2019-08-01'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
 ```
@@ -97,7 +97,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-08-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-08-15'
+``` yaml $(tag) == 'package-2019-08-15'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
 ```
@@ -106,7 +106,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-11-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-11-01'
+``` yaml $(tag) == 'package-2019-11-01'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2019-11-01/imds.json
 ```
@@ -115,7 +115,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06-01'
+``` yaml $(tag) == 'package-2020-06-01'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2020-06-01/imds.json
 ```
@@ -124,7 +124,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-07-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-07-15'
+``` yaml $(tag) == 'package-2020-07-15'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2020-07-15/imds.json
 ```
@@ -133,14 +133,23 @@ input-file:
 
 These settings apply only when `--tag=package-2020-09-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-09-01'
+``` yaml $(tag) == 'package-2020-09-01'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2020-09-01/imds.json
 ```
 
+### Tag: package-2020-10-01
+
+These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-10-01'
+input-file:
+  - Microsoft.InstanceMetadataService/stable/2020-10-01/imds.json
+```
+
 ## Suppression
 
-```yaml
+``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: The following properties follow the Oath2 spec, which does not use camelCase.
@@ -339,6 +348,22 @@ directive:
       - $.definitions.IdentityTokenResponse.properties.object_id
       - $.definitions.IdentityTokenResponse.properties.msi_res_id
       - $.definitions.IdentityErrorResponse.properties.error_description
+    
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The following properties follow the Oath2 spec, which does not use camelCase.
+    from: Microsoft.InstanceMetadataService/stable/2020-10-01/imds.json
+    where:
+      - $.definitions.IdentityTokenResponse.properties.access_token
+      - $.definitions.IdentityTokenResponse.properties.expires_in
+      - $.definitions.IdentityTokenResponse.properties.expires_on
+      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+      - $.definitions.IdentityTokenResponse.properties.not_before
+      - $.definitions.IdentityTokenResponse.properties.resource
+      - $.definitions.IdentityTokenResponse.properties.token_type
+      - $.definitions.IdentityTokenResponse.properties.client_id
+      - $.definitions.IdentityTokenResponse.properties.object_id
+      - $.definitions.IdentityTokenResponse.properties.msi_res_id
+      - $.definitions.IdentityErrorResponse.properties.error_description
 ```
 
 ---
@@ -349,7 +374,7 @@ directive:
 
 These settings apply only when --java is specified on the command line. Please also specify --azure-libraries-for-java-folder=`.
 
-```yaml $(java)
+``` yaml $(java)
 java:
   azure-arm: true
   fluent: true
@@ -364,7 +389,7 @@ java:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-```yaml $(swagger-to-sdk)
+``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
@@ -380,7 +405,7 @@ AutoRest V3 generators require the use of `--tag=all-api-versions` to select api
 
 This block is updated by an automatic script. Edits may be lost!
 
-```yaml $(tag) == 'all-api-versions' /* autogenerated */
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
 # include the azure profile definitions from the standard location
 require: $(this-folder)/../../../profiles/readme.md
 
@@ -398,12 +423,14 @@ input-file:
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2020-06-01/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2020-07-15/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2020-09-01/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2020-10-01/imds.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set,
 uncomment the `exclude-file` section below and add the file paths.
 
-```yaml $(tag) == 'all-api-versions'
+``` yaml $(tag) == 'all-api-versions'
 #exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
