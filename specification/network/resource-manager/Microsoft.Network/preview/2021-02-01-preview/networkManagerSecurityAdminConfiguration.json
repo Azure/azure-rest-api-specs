@@ -690,14 +690,14 @@
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the scope assignment resource."
+          "description": "The provisioning state of the resource."
         }
       },
       "description": "Defines the rule collection properties."
     },
     "BaseRule": {
       "properties": {
-        "securityRuleType": {
+        "ruleType": {
           "type": "string",
           "description": "Whether the rule collection is custom or default.",
           "enum": [
@@ -707,7 +707,7 @@
             "DefaultAdminRule"
           ],
           "x-ms-enum": {
-            "name": "SecurityRuleType",
+            "name": "RuleType",
             "modelAsString": true
           }
         },
@@ -723,9 +723,9 @@
         }
       ],
       "required": [
-        "securityRuleType"
+        "ruleType"
       ],
-      "discriminator": "securityRuleType",
+      "discriminator": "ruleType",
       "description": "Network base rule."
     },
     "AdminRule": {

@@ -216,7 +216,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Commit Succeed"
+            "description": "Post commit succeed",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerCommit"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -547,6 +550,11 @@
     },
     "NetworkManagerCommit": {
       "properties": {
+        "commitId": {
+           "type": "string",
+           "readOnly": true,
+           "description": "Commit Id."
+        },
         "targetLocations": {
           "type": "array",
           "items": {
