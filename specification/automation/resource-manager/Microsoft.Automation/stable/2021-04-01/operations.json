@@ -193,7 +193,9 @@
             "name": "parameters",
             "in": "body",
             "required": true,
-            "$ref": "#/definitions/GraphicalRunbookContent"
+            "schema": {
+              "$ref": "#/definitions/GraphicalRunbookContent"
+            }
           }
         ],
         "responses": {
@@ -347,8 +349,10 @@
     },
     "GraphicalRunbookContent": {
       "rawContent": {
-        "$ref": "#/definitions/RawGraphicalRunbookContent",
-        "x-nullable": true
+        "x-nullable": true,
+        "schema": {
+          "$ref": "#/definitions/RawGraphicalRunbookContent"
+        }
       },
       "graphRunbookJSON": {
         "type": "string",
