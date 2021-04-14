@@ -12,7 +12,7 @@
         }
       ],
       "importDenyRulesAsAdminRules": true,
-      "adminSecurityConfigurationUri": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityConfigurations/adminConfig",
+      "adminSecurityConfigurationUri": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/adminConfig",
       "removeAllowVnetInboundRule": true,
       "removeAllowAzureLoadBalancerInboundRule": true,
       "removeAllowVnetOutboundRule": true,
@@ -24,92 +24,82 @@
       "body": {
         "value": [
           {
-            "securityType": "UserPolicy",
-            "securityUserRule": {
-              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/securityConfigurations/myTestConfig/userRules/SampleRule",
-              "type": "Microsoft.Network/networkManagers/securityConfigurations/userRules",
-              "name": "SampleRule",
-              "systemData": {
-                "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-                "createdByType": "User",
-                "createdAt": "2021-01-11T18:52:27Z",
-                "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-                "lastModifiedByType": "User",
-                "lastModifiedAt": "2021-01-11T18:52:27Z"
-              },
-              "properties": {
-                "description": "Sample user rule",
-                "protocol": "Tcp",
-                "source": [
-                  {
-                    "addressPrefixType": "IPPrefix",
-                    "addressPrefix": "*"
-                  }
-                ],
-                "destination": [
-                  {
-                    "addressPrefixType": "IPPrefix",
-                    "addressPrefix": "*"
-                  }
-                ],
-                "sourcePortRanges": [
-                  "0-65535"
-                ],
-                "destinationPortRanges": [
-                  "22"
-                ],
-                "direction": "Inbound",
-                "provisioningState": "Succeeded"
-              }
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/adminConfig/rules/SampleRule",
+            "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections/AdminRules",
+            "name": "SampleRule",
+            "systemData": {
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "createdAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z"
             },
-            "securityAdminRule": null
+            "properties": {
+              "description": "Sample Admin rule",
+              "ruleType": "AdminRule",
+              "protocol": "Tcp",
+              "source": [
+                {
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
+                }
+              ],
+              "destination": [
+                {
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
+                }
+              ],
+              "sourcePortRanges": [
+                "0-65535"
+              ],
+              "destinationPortRanges": [
+                "22"
+              ],
+              "direction": "Inbound",
+              "protocol": "abc",
+              "access": "Deny",
+              "priority": 1,
+              "provisioningState": "Succeeded"
+            }
           },
           {
-            "securityType": "AdminPolicy",
-            "securityUserRule": null,
-            "securityAdminRule": {
-              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/securityConfigurations/adminConfig/adminRules/SampleAdminRule",
-              "type": "Microsoft.Network/networkManagers/securityConfigurations/adminRules",
-              "name": "SampleAdminRule",
-              "systemData": {
-                "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-                "createdByType": "User",
-                "createdAt": "2021-01-11T18:52:27Z",
-                "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-                "lastModifiedByType": "User",
-                "lastModifiedAt": "2021-01-11T18:52:27Z"
-              },
-              "properties": {
-                "description": "Sample admin rule",
-                "protocol": "Tcp",
-                "source": [
-                  {
-                    "addressPrefixType": "IPPrefix",
-                    "addressPrefix": "*"
-                  }
-                ],
-                "destination": [
-                  {
-                    "addressPrefixType": "IPPrefix",
-                    "addressPrefix": "*"
-                  }
-                ],
-                "sourcePortRanges": [
-                  "0-65535"
-                ],
-                "destinationPortRanges": [
-                  "22"
-                ],
-                "access": "Deny",
-                "priority": 1,
-                "direction": "Inbound",
-                "appliesToGroups": [
-                  {
-                    "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/networkGroups/testGroup"
-                  }
-                ],
-                "provisioningState": "Succeeded"
-              }
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/securityUserConfigurations/myTestConfig/ruleCollections/myTestConfig/rules/SampleUserRule",
+            "type": "Microsoft.Network/networkManagers/securityUserConfigurations/ruleCollections/UserRules",
+            "name": "SampleUserRule",
+            "systemData": {
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "createdAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z"
+            },
+            "properties": {
+              "description": "Sample user rule",
+              "protocol": "Tcp",
+              "ruleType": "UserRule",
+              "source": [
+                {
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
+                }
+              ],
+              "destination": [
+                {
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
+                }
+              ],
+              "sourcePortRanges": [
+                "0-65535"
+              ],
+              "destinationPortRanges": [
+                "22"
+              ],
+              "direction": "Inbound",
+              "provisioningState": "Succeeded"
             }
           }
         ],

@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/networkManagerEffectiveConfigurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConfigurations": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -55,7 +55,7 @@
           "$ref": "#/parameters/ListSkipTokenParameter"
         }
       ],
-      "get": {
+      "post": {
         "tags": [
           "NetworkManagerEffectiveConfiguration"
         ],
@@ -89,6 +89,10 @@
   "definitions": {
     "EffectiveConfiguration": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
         "configType": {
           "type": "string",
           "enum": [
@@ -100,29 +104,317 @@
             "name": "ConfigType",
             "modelAsString": true
           },
-          "description": "Effective configuration."
-        },
-        "connectivityConfiguration": {
-          "$ref": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfiguration",
-          "description": "Connectivity configuration object."
-        },
-        "securityAdminRule": {
-          "$ref": "./networkManagerSecurityConfiguration.json#/definitions/AdminRule",
-          "description": "Security admin rule object."
-        },
-        "securityUserRule": {
-          "$ref": "./networkManagerSecurityConfiguration.json#/definitions/UserRule",
-          "description": "Security user rule object."
+          "description": "Effective configuration Type."
         },
         "configurationGroups": {
           "type": "array",
           "items": {
-            "$ref": "./networkManagerGroup.json#/definitions/NetworkGroup"
+            "$ref": "#/definitions/NetworkGroup"
           },
           "description": "Effective configuration groups."
         }
       },
       "description": "The network manager effective configuration"
+    },
+    "EffectiveConnectivityConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfigurationProperties",
+          "description": "The Network Group properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveConfiguration"
+        }
+      ],
+      "description": "The network manager effective connectivity configuration",
+      "x-ms-discriminator-value": "EffectiveConnectivityConfiguration"
+    },
+    "ConnectivityGroupItem": {
+      "type": "object",
+      "properties": {
+        "networkGroupId": {
+          "type": "string",
+          "description": "Network group Id."
+        },
+        "useHubGateway": {
+          "type": "boolean",
+          "description": "Flag if need to use hub gateway."
+        },
+        "isGlobal": {
+          "type": "boolean",
+          "description": "Flag if global is supported."
+        },
+        "groupConnectivity": {
+          "type": "string",
+          "enum": [
+            "None",
+            "DirectlyConnected"
+          ],
+          "x-ms-enum": {
+            "name": "GroupConnectivity",
+            "modelAsString": true
+          },
+          "description": "Group connectivity type."
+        }
+      }
+    },
+    "EffectiveSecurityRuleCollection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EffectiveSecurityRuleCollectionProperties",
+          "description": "The effective security rule collection properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveConfiguration"
+        }
+      ],
+      "description": "The network manager effective security rule collection",
+      "x-ms-discriminator-value": "EffectiveSecurityRuleCollection"
+    },
+    "EffectiveSecurityRuleCollectionProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "A display name of the rule collection."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the rule collection."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveBaseRule"
+          },
+          "description": "Base rule List"
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "description": "Groups for configuration"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the scope assignment resource."
+        }
+      },
+      "description": "The network manager effective security rule collection properties"
+    },
+    "EffectiveBaseRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "properties": {
+          "$ref": "#/definitions/EffectiveBaseRulePropertiesFormat",
+          "x-ms-client-flatten": true,
+          "description": "Indicates the properties of the security user rule"
+        }
+      },
+      "description": "Network base rule."
+    },
+    "EffectiveBaseRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "A friendly name for the rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description for this rule."
+        },
+        "effectiveRuleType": {
+          "type": "string",
+          "description": "Whether the rule collection is custom or default.",
+          "enum": [
+            "AdminRule",
+            "UserRule",
+            "DefaultUserRule",
+            "DefaultAdminRule"
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveRuleType",
+            "modelAsString": true
+          }
+        },
+        "protocol": {
+          "type": "string",
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleProtocol",
+          "description": "Network protocol this rule applies to."
+        },
+        "source": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem"
+          },
+          "description": "The CIDR or source IP ranges."
+        },
+        "destination": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem"
+          },
+          "description": "The destination address prefixes. CIDR or destination IP ranges."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "The source port."
+          },
+          "description": "The source port ranges."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "The destination port."
+          },
+          "description": "The destination port ranges."
+        },
+        "direction": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleDirection",
+          "readOnly": true,
+          "description": "Indicates if the traffic matched against the rule in inbound or outbound."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the security Configuration resource."
+        }
+      }
+    },
+    "EffectiveAdminRule": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EffectiveAdminPropertiesFormat",
+          "x-ms-client-flatten": true,
+          "description": "Indicates the properties of the security admin rule"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseRule"
+        }
+      ],
+      "description": "Network admin rule.",
+      "x-ms-discriminator-value": "EffectiveAdminRule"
+    },
+    "EffectiveAdminPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "access": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleAccess",
+          "description": "Indicates the access allowed for this particular rule"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be between 1 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule."
+        },
+        "direction": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleDirection",
+          "description": "Indicates if the traffic matched against the rule in inbound or outbound."
+        }
+      },
+      "description": "Security rule resource."
+    },
+    "EffectiveDefaultAdminRule": {
+      "properties": {
+        "defaultRuleFlag": {
+          "type": "string",
+          "description": "Default rule flag."
+        },
+        "properties": {
+          "$ref": "#/definitions/EffectiveDefaultAdminPropertiesFormat",
+          "x-ms-client-flatten": true,
+          "description": "Indicates the properties of the security admin rule"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseRule"
+        }
+      ],
+      "description": "Network default admin rule.",
+      "x-ms-discriminator-value": "EffectiveDefaultAdminRule"
+    },
+    "EffectiveDefaultAdminPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "access": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleAccess",
+          "readOnly": true,
+          "description": "Indicates the access allowed for this particular rule"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The priority of the rule. The value can be between 1 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule."
+        },
+        "direction": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleDirection",
+          "readOnly": true,
+          "description": "Indicates if the traffic matched against the rule in inbound or outbound."
+        }
+      },
+      "description": "Security default rule resource."
+    },
+    "EffectiveUserRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseRule"
+        }
+      ],
+      "description": "Network security default user rule.",
+      "x-ms-discriminator-value": "EffectiveUserRule"
+    },
+    "EffectiveDefaultUserRule": {
+      "properties": {
+        "defaultRuleFlag": {
+          "type": "string",
+          "description": "Default rule flag."
+        },
+        "description": "Indicates the properties of the effective security default user rule"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseRule"
+        }
+      ],
+      "description": "Network security default user rule.",
+      "x-ms-discriminator-value": "EffectiveDefaultUserRule"
+    },
+    "NetworkGroup": {
+      "id": {
+        "type": "string",
+        "description": "Resource ID."
+      },
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "./networkManagerGroup.json#/definitions/NetworkGroupProperties",
+          "description": "The Network Group properties"
+        }
+      },
+      "description": "The network group resource"
     },
     "NetworkManagerEffectiveConfigurationListResult": {
       "properties": {

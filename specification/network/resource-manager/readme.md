@@ -124,7 +124,8 @@ input-file:
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerConnectivityConfiguration.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerEffectiveConfiguration.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerGroup.json
-  - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityUserConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityAdminConfiguration.json
   - Microsoft.Network/stable/2020-08-01/networkProfile.json
   - Microsoft.Network/stable/2020-08-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2020-08-01/networkVirtualAppliance.json
@@ -1663,7 +1664,10 @@ directive:
     from: networkManagerConnectivityConfiguration.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: networkManagerSecurityConfiguration.json
+    from: networkManagerSecurityUserConfiguration.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManagerSecurityAdminConfiguration.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkManager.json

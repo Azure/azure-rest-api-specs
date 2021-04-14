@@ -5,16 +5,11 @@
     "resourceGroupName": "rg1",
     "configurationName": "myTestSecurityConfig",
     "networkManagerName": "testNetworkManager",
-    "securityConfiguration": {
+    "securityAdminConfiguration": {
       "properties": {
         "description": "A sample policy",
-        "securityType": "UserPolicy",
-        "deleteExistingNSGs": true,
-        "appliesToGroups": [
-          {
-            "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
-          }
-        ]
+        "securityType": "AdminPolicy",
+        "deleteExistingNSGs": true
       }
     }
   },
@@ -36,13 +31,8 @@
           "displayName": "myTestSecurityConfig",
           "description": "A sample policy",
           "provisioningState": "Succeeded",
-          "securityType": "UserPolicy",
-          "deleteExistingNSGs": true,
-          "appliesToGroups": [
-            {
-              "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
-            }
-          ]
+          "securityType": "AdminPolicy",
+          "deleteExistingNSGs": true
         }
       }
     },
@@ -63,13 +53,8 @@
           "displayName": "myTestSecurityConfig",
           "description": "A sample policy",
           "provisioningState": "Succeeded",
-          "securityType": "UserPolicy",
-          "deleteExistingNSGs": true,
-          "appliesToGroups": [
-            {
-              "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
-            }
-          ]
+          "securityType": "AdminPolicy",
+          "deleteExistingNSGs": true
         }
       }
     }
