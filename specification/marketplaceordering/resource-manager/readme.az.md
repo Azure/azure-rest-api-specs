@@ -52,6 +52,10 @@ directive:
       parameter-name: plan-id 
     set:
       parameter-name: plan
+  - where: 
+      parameter-name: product
+    set:
+      parameter-name: offer
 
 cli:
   cli-directive:
@@ -75,4 +79,38 @@ cli:
         group: MarketplaceAgreements
         set:
           extensionMode: preview
+    - where:
+        group: MarketplaceAgreements
+        parameter: offerType
+      default-value: virtualmachine
+    - where:
+        group: MarketplaceAgreements
+        op: Create
+        param: licenseTextLink
+      hidden: true
+    - where:
+        group: MarketplaceAgreements
+        op: Create
+        param: privacyPolicyLink
+      hidden: true
+    - where:
+        group: MarketplaceAgreements
+        op: Create
+        param: marketplaceTermsLink
+      hidden: true
+    - where:
+        group: MarketplaceAgreements
+        op: Create
+        param: retrieveDatetime
+      hidden: true
+    - where:
+        group: MarketplaceAgreements
+        op: Create
+        param: signature
+      hidden: true
+    - where:
+        group: MarketplaceAgreements
+        op: Create
+        param: accepted
+      hidden: true
 ```
