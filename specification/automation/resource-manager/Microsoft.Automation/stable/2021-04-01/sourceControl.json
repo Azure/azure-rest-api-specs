@@ -436,6 +436,10 @@
           "format": "date-time",
           "x-nullable": false,
           "description": "The last modified time."
+        },
+        "securityToken": {
+          "description": "The authorization token for the repo of the source control.",
+          "$ref": "#/definitions/SourceControlSecurityTokenProperties"
         }
       },
       "description": "Definition of the source control properties"
@@ -501,11 +505,6 @@
           "maxLength": 512,
           "description": "The user description of the source control."
         },
-        "oAuthCallbackComplete": {
-          "type": "boolean",
-          "x-nullable": true,
-          "description": "Flag indicating whether the OAuth callback is complete. If this is false/null, securityToken should be present"
-        },
         "oAuthCallbackInfo": {
           "description": "The authorization token for the repo of the source control.",
           "x-nullable": true,
@@ -545,12 +544,12 @@
         "callbackUri": {
           "type": "string",
           "maxLength": 1024,
-          "description": "The callback uri for source control connection."
+          "description": "The callback uri for creating the access token for source control connection."
         },
         "authUri": {
           "type": "string",
           "maxLength": 1024,
-          "description": "The auth uri for source control connection."
+          "description": "The auth uri for creating the access token for source control connection."
         }
       }
     }
