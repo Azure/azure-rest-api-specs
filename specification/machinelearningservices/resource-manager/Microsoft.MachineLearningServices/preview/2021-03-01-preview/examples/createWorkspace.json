@@ -6,12 +6,11 @@
     "api-version": "2021-03-01-preview",
     "parameters": {
       "location": "eastus2euap",
-      "sku": {
-        "name": "Basic",
-        "tier": "Basic"
-      },
       "identity": {
-        "type": "SystemAssigned"
+        "type": "SystemAssigned,UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai": {}
+        }
       },
       "properties": {
         "friendlyName": "HelloName",
@@ -22,6 +21,9 @@
         "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount",
         "encryption": {
           "status": "Enabled",
+          "identity": {
+            "userAssignedIdentity": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai"
+          },
           "keyVaultProperties": {
             "keyVaultArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
             "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb",
@@ -53,11 +55,14 @@
         "identity": {
           "principalId": "00000000-1111-2222-3333-444444444444",
           "tenantId": "00000000-1111-2222-3333-444444444444",
-          "type": "SystemAssigned"
-        },
-        "sku": {
-          "name": "Basic",
-          "tier": "Basic"
+          "type": "SystemAssigned,UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai": {
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "tenantId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
         },
         "properties": {
           "containerRegistry": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry",
@@ -65,11 +70,13 @@
           "applicationInsights": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights",
           "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount",
           "discoveryUrl": "http://example.com",
-          "creationTime": "2017-03-01T23:14:37.0707808Z",
           "friendlyName": "HelloName",
           "description": "test description",
           "encryption": {
             "status": "Enabled",
+            "identity": {
+              "userAssignedIdentity": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai"
+            },
             "keyVaultProperties": {
               "keyVaultArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
               "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb",
@@ -98,9 +105,17 @@
         "name": "testworkspace",
         "type": "Microsoft.MachineLearningServices/workspaces",
         "location": "eastus2euap",
-        "sku": {
-          "name": "Basic",
-          "tier": "Basic"
+        "identity": {
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "type": "SystemAssigned,UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai": {
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "tenantId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
         },
         "properties": {
           "containerRegistry": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry",
@@ -108,11 +123,13 @@
           "applicationInsights": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights",
           "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount",
           "discoveryUrl": "http://example.com",
-          "creationTime": "2017-03-01T23:14:37.0707808Z",
           "friendlyName": "HelloName",
           "description": "test description",
           "encryption": {
             "status": "Enabled",
+            "identity": {
+              "userAssignedIdentity": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai"
+            },
             "keyVaultProperties": {
               "keyVaultArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
               "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb",
