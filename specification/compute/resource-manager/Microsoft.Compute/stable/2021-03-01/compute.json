@@ -7364,6 +7364,11 @@
           "$ref": "#/definitions/SubResource",
           "description": "Reference Id of the VM for which the restore points have to be created."
         },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the provisioning state of the restore point collection."
+        },
         "restorePoints": {
           "type": "array",
           "items": {
@@ -7583,7 +7588,7 @@
           "$ref": "#/definitions/ProxyResource"
         }
       ],
-      "description": "When creating a Restore Point, customer may only specify the disks that will be excluded."
+      "description": "When creating a Restore Point, customer may specify the disks that will be excluded."
     },
     "RestorePoint": {
       "properties": {
@@ -7595,7 +7600,7 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the provisioning state of restore point, which only appears in the response."
+          "description": "Gets the provisioning state of the restore point."
         },
         "consistencyMode": {
           "type": "string",
