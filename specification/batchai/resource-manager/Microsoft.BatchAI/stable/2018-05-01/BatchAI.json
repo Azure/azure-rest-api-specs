@@ -144,7 +144,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List file servers": {
+          "List workspaces": {
             "$ref": "./examples/ListWorkspace.json"
           }
         }
@@ -941,202 +941,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/fileServers/{fileServerName}": {
-      "put": {
-        "tags": [
-          "FileServer"
-        ],
-        "operationId": "FileServers_Create",
-        "description": "Creates a File Server in the given workspace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FileServerNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FileServerCreateParameters"
-            },
-            "description": "The parameters to provide for File Server creation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation was successful. The response contains the file server entity.",
-            "schema": {
-              "$ref": "#/definitions/FileServer"
-            }
-          },
-          "202": {
-            "description": "The operation will be completed asynchronously."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create a file server": {
-            "$ref": "./examples/PutFileServer.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "FileServer"
-        ],
-        "operationId": "FileServers_Delete",
-        "description": "Deletes a File Server.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FileServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation was successful."
-          },
-          "202": {
-            "description": "The operation will be completed asynchronously."
-          },
-          "204": {
-            "description": "No content."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Delete a file server": {
-            "$ref": "./examples/DeleteFileServer.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "FileServer"
-        ],
-        "operationId": "FileServers_Get",
-        "description": "Gets information about a File Server.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FileServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation was successful. The response contains information about the FileServer.",
-            "schema": {
-              "$ref": "#/definitions/FileServer"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a file server's information": {
-            "$ref": "./examples/GetFileServer.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/fileServers": {
-      "get": {
-        "tags": [
-          "FileServer"
-        ],
-        "operationId": "FileServers_ListByWorkspace",
-        "description": "Gets a list of File Servers associated with the specified workspace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MaxResultsParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation was successful. The response contains a list of File Servers and their properties.",
-            "schema": {
-              "$ref": "#/definitions/FileServerListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get a list of file servers": {
-            "$ref": "./examples/ListFileServerByWorkspace.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BatchAI/workspaces/{workspaceName}/clusters/{clusterName}": {
       "put": {
         "tags": [
@@ -1502,53 +1306,6 @@
       },
       "description": "The List Usages operation response."
     },
-    "FileServerBaseProperties": {
-      "properties": {
-        "vmSize": {
-          "type": "string",
-          "title": "VM size.",
-          "description": "The size of the virtual machine for the File Server. For information about available VM sizes from the Virtual Machines Marketplace, see Sizes for Virtual Machines (Linux)."
-        },
-        "sshConfiguration": {
-          "title": "SSH configuration.",
-          "description": "SSH configuration for the File Server node.",
-          "$ref": "#/definitions/SshConfiguration"
-        },
-        "dataDisks": {
-          "title": "Data disks.",
-          "description": "Settings for the data disks which will be created for the File Server.",
-          "$ref": "#/definitions/DataDisks"
-        },
-        "subnet": {
-          "title": "Subnet identifier.",
-          "description": "Identifier of an existing virtual network subnet to put the File Server in. If not provided, a new virtual network and subnet will be created.",
-          "$ref": "#/definitions/ResourceId"
-        }
-      },
-      "required": [
-        "vmSize",
-        "sshConfiguration",
-        "dataDisks"
-      ],
-      "description": "The properties of a file server."
-    },
-    "FileServerListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FileServer"
-          },
-          "description": "The collection of File Servers."
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The continuation token."
-        }
-      },
-      "description": "Values returned by the File Server List operation."
-    },
     "DataDisks": {
       "properties": {
         "diskSizeInGB": {
@@ -1573,13 +1330,6 @@
             "modelAsString": false
           }
         },
-        "diskCount": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": false,
-          "title": "Number of data disks.",
-          "description": "Number of data disks attached to the File Server. If multiple disks attached, they will be configured in RAID level 0."
-        },
         "storageAccountType": {
           "type": "string",
           "readOnly": false,
@@ -1597,7 +1347,6 @@
       },
       "required": [
         "diskSizeInGB",
-        "diskCount",
         "storageAccountType"
       ],
       "description": "Data disks settings."
@@ -1621,26 +1370,6 @@
       ],
       "description": "Key Vault Secret reference."
     },
-    "MountSettings": {
-      "properties": {
-        "mountPoint": {
-          "type": "string",
-          "title": "Mount Point.",
-          "description": "Path where the data disks are mounted on the File Server."
-        },
-        "fileServerPublicIP": {
-          "type": "string",
-          "title": "Public IP.",
-          "description": "Public IP address of the File Server which can be used to SSH to the node from outside of the subnet."
-        },
-        "fileServerInternalIP": {
-          "type": "string",
-          "title": "Internal IP.",
-          "description": "Internal IP address of the File Server which can be used to access the File Server from within the subnet."
-        }
-      },
-      "description": "File Server mount Information."
-    },
     "SshConfiguration": {
       "properties": {
         "publicIPsToAllow": {
@@ -1661,94 +1390,6 @@
         "userAccountSettings"
       ],
       "description": "SSH configuration."
-    },
-    "FileServerCreateParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FileServerBaseProperties",
-          "description": "The properties of the File Server.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "File Server creation parameters."
-    },
-    "FileServerProperties": {
-      "properties": {
-        "vmSize": {
-          "type": "string",
-          "title": "VM size.",
-          "description": "VM size of the File Server."
-        },
-        "sshConfiguration": {
-          "title": "SSH configuration.",
-          "description": "SSH configuration for accessing the File Server node.",
-          "$ref": "#/definitions/SshConfiguration"
-        },
-        "dataDisks": {
-          "title": "Data disks configuration.",
-          "description": "Information about disks attached to File Server VM.",
-          "$ref": "#/definitions/DataDisks"
-        },
-        "subnet": {
-          "title": "Subnet.",
-          "description": "File Server virtual network subnet resource ID.",
-          "$ref": "#/definitions/ResourceId"
-        },
-        "mountSettings": {
-          "title": "Mount settings.",
-          "description": "File Server mount settings.",
-          "readOnly": true,
-          "$ref": "#/definitions/MountSettings"
-        },
-        "provisioningStateTransitionTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "title": "Provisioning State Transition time.",
-          "description": "Time when the provisioning state was changed."
-        },
-        "creationTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "title": "Creation time.",
-          "description": "Time when the FileServer was created."
-        },
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": false,
-          "title": "Provisioning state.",
-          "description": "Provisioning state of the File Server. Possible values: creating - The File Server is getting created; updating - The File Server creation has been accepted and it is getting updated; deleting - The user has requested that the File Server be deleted, and it is in the process of being deleted; failed - The File Server creation has failed with the specified error code. Details about the error code are specified in the message field; succeeded - The File Server creation has succeeded.",
-          "enum": [
-            "creating",
-            "updating",
-            "deleting",
-            "succeeded",
-            "failed"
-          ],
-          "x-ms-enum": {
-            "name": "FileServerProvisioningState",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "File Server properties."
-    },
-    "FileServer": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FileServerProperties",
-          "description": "File Server properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "File Server information."
     },
     "ClusterBaseProperties": {
       "properties": {
@@ -1793,7 +1434,7 @@
         },
         "subnet": {
           "title": "Subnet.",
-          "description": "Existing virtual network subnet to put the cluster nodes in. Note, if a File Server mount configured in node setup, the File Server's subnet will be used automatically.",
+          "description": "Existing virtual network subnet to put the cluster nodes in.",
           "$ref": "#/definitions/ResourceId"
         }
       },
@@ -3154,35 +2795,6 @@
         "relativeMountPath"
       ]
     },
-    "FileServerReference": {
-      "properties": {
-        "fileServer": {
-          "title": "File server.",
-          "description": "Resource ID of the existing File Server to be mounted.",
-          "$ref": "#/definitions/ResourceId"
-        },
-        "sourceDirectory": {
-          "type": "string",
-          "title": "Source directory.",
-          "description": "File Server directory that needs to be mounted. If this property is not specified, the entire File Server will be mounted."
-        },
-        "relativeMountPath": {
-          "type": "string",
-          "title": "Relative mount path.",
-          "description": "The relative path on the compute node where the File Server will be mounted. Note that all cluster level file servers will be mounted under $AZ_BATCHAI_MOUNT_ROOT location and all job level file servers will be mounted under $AZ_BATCHAI_JOB_MOUNT_ROOT."
-        },
-        "mountOptions": {
-          "type": "string",
-          "title": "Mount options.",
-          "description": "Mount options to be passed to mount command."
-        }
-      },
-      "description": "File Server mounting configuration.",
-      "required": [
-        "fileServer",
-        "relativeMountPath"
-      ]
-    },
     "UnmanagedFileSystemReference": {
       "properties": {
         "mountCommand": {
@@ -3219,14 +2831,6 @@
           },
           "title": "Azure Blob file systems.",
           "description": "A collection of Azure Blob Containers that are to be mounted to the cluster nodes."
-        },
-        "fileServers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FileServerReference"
-          },
-          "title": "File Servers.",
-          "description": "A collection of Batch AI File Servers that are to be mounted to the cluster nodes."
         },
         "unmanagedFileSystems": {
           "type": "array",
@@ -3850,17 +3454,6 @@
       "maxLength": 64,
       "x-ms-parameter-location": "method",
       "description": "The name of the job within the specified resource group. Job names can only contain a combination of alphanumeric characters along with dash (-) and underscore (_). The name must be from 1 through 64 characters long."
-    },
-    "FileServerNameParameter": {
-      "name": "fileServerName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[-\\w_]+$",
-      "minLength": 1,
-      "maxLength": 64,
-      "x-ms-parameter-location": "method",
-      "description": "The name of the file server within the specified resource group. File server names can only contain a combination of alphanumeric characters along with dash (-) and underscore (_). The name must be from 1 through 64 characters long."
     },
     "ApiVersionParameter": {
       "name": "api-version",
