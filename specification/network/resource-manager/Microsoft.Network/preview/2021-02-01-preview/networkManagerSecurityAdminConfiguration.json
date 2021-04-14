@@ -699,7 +699,17 @@
       "properties": {
         "securityRuleType": {
           "type": "string",
-          "description": "Whether the rule collection is custom or default."
+          "description": "Whether the rule collection is custom or default.",
+          "enum": [
+            "AdminRule",
+            "UserRule",
+            "DefaultUserRule",
+            "DefaultAdminRule"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityRuleType",
+            "modelAsString": true
+          }
         },
         "systemData": {
           "readOnly": true,

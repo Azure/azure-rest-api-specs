@@ -95,6 +95,14 @@
         },
         "configType": {
           "type": "string",
+          "enum": [
+            "EffectiveConnectivityConfiguration",
+            "EffectiveSecurityRuleCollection"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigType",
+            "modelAsString": true
+          },
           "description": "Effective configuration Type."
         },
         "configurationGroups": {
@@ -211,12 +219,29 @@
           "type": "string",
           "description": "Resource ID."
         },
+        "effectiveRuleType": {
+          "type": "string",
+          "description": "Whether the rule collection is custom or default.",
+          "enum": [
+            "EffectiveAdminRule",
+            "EffectiveUserRule",
+            "EffectiveDefaultUserRule",
+            "EffectiveDefaultAdminRule"
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveRuleType",
+            "modelAsString": true
+          }
+        },
         "properties": {
           "$ref": "#/definitions/EffectiveBaseRulePropertiesFormat",
           "x-ms-client-flatten": true,
           "description": "Indicates the properties of the security user rule"
         }
       },
+      "required": [
+        "effectiveRuleType"
+      ],
       "discriminator": "effectiveRuleType",
       "description": "Network base rule."
     },
@@ -230,10 +255,6 @@
         "description": {
           "type": "string",
           "description": "A description for this rule."
-        },
-        "effectiveRuleType": {
-          "type": "string",
-          "description": "Whether the rule collection is custom or default."
         },
         "protocol": {
           "type": "string",
@@ -284,10 +305,7 @@
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the security Configuration resource."
         }
-      },
-      "required": [
-        "effectiveRuleType"
-      ]
+      }
     },
     "EffectiveAdminRule": {
       "properties": {
