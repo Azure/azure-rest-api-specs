@@ -302,7 +302,7 @@
             "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 AadOnlyAuthenticationIsEnabled - Azure Active Directory Only Authentication is enabled. Please contact your system administrator.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Successfully initiated deletion of the managed instance."
           },
           "204": {
             "description": "The specified managed instance does not exist."
@@ -629,7 +629,16 @@
             "Updating",
             "Unknown",
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Accepted",
+            "Created",
+            "Deleted",
+            "Unrecognized",
+            "Running",
+            "Canceled",
+            "NotSpecified",
+            "Registering",
+            "TimedOut"
           ],
           "type": "string",
           "readOnly": true
