@@ -234,9 +234,9 @@ input-file:
 
 ### Tag: package-2020-11-20
 
-These settings apply only when `--tag=package-2020-02-12` is specified on the command line.
+These settings apply only when `--tag=package-2020-11-20` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-02-12'
+``` yaml $(tag) == 'package-2020-11-20'
 input-file:
   - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
