@@ -5770,6 +5770,41 @@
       "x-ms-discriminator-value": "AccountKey",
       "additionalProperties": false
     },
+    "DatastoreCredentials": {
+      "required": [
+        "credentialsType"
+      ],
+      "type": "object",
+      "properties": {
+        "credentialsType": {
+          "description": "Credential type used to authentication with storage.",
+          "$ref": "#/definitions/CredentialsType"
+        }
+      },
+      "discriminator": "credentialsType",
+      "additionalProperties": false
+    },
+    "AccountKeyDatastoreCredentials": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreCredentials"
+        }
+      ],
+      "properties": {
+        "secrets": {
+          "description": "Storage account secrets.",
+          "$ref": "#/definitions/AccountKeyDatastoreSecrets",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      },
+      "x-ms-discriminator-value": "AccountKey",
+      "additionalProperties": false
+    },
     "CertificateDatastoreSecrets": {
       "type": "object",
       "allOf": [
@@ -5784,97 +5819,6 @@
         }
       },
       "x-ms-discriminator-value": "Certificate",
-      "additionalProperties": false
-    },
-    "NoneDatastoreSecrets": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreSecrets"
-        }
-      ],
-      "x-ms-discriminator-value": "None",
-      "additionalProperties": false
-    },
-    "SasDatastoreSecrets": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreSecrets"
-        }
-      ],
-      "properties": {
-        "sasToken": {
-          "description": "Storage container SAS token.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "Sas",
-      "additionalProperties": false
-    },
-    "ServicePrincipalDatastoreSecrets": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreSecrets"
-        }
-      ],
-      "properties": {
-        "clientSecret": {
-          "description": "Service principal secret.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "ServicePrincipal",
-      "additionalProperties": false
-    },
-    "SqlAdminDatastoreSecrets": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreSecrets"
-        }
-      ],
-      "properties": {
-        "password": {
-          "description": "SQL database password.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "SqlAdmin",
-      "additionalProperties": false
-    },
-    "DatastoreCredentials": {
-      "required": [
-        "credentialsType"
-      ],
-      "type": "object",
-      "properties": {
-        "credentialsType": {
-          "description": "Credential type used to authentication with storage.",
-          "$ref": "#/definitions/CredentialsType"
-        },
-        "secrets": {
-          "description": "Credential secrets",
-          "$ref": "#/definitions/DatastoreSecrets",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
-        }
-      },
-      "discriminator": "credentialsType",
-      "additionalProperties": false
-    },
-    "AccountKeyDatastoreCredentials": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreCredentials"
-        }
-      ],
-      "x-ms-discriminator-value": "AccountKey",
       "additionalProperties": false
     },
     "CertificateDatastoreCredentials": {
@@ -5912,9 +5856,28 @@
           "description": "Thumbprint of the certificate used for authentication.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
+        },
+        "secrets": {
+          "description": "Service principal secrets.",
+          "$ref": "#/definitions/CertificateDatastoreSecrets",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
         }
       },
       "x-ms-discriminator-value": "Certificate",
+      "additionalProperties": false
+    },
+    "NoneDatastoreSecrets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreSecrets"
+        }
+      ],
+      "x-ms-discriminator-value": "None",
       "additionalProperties": false
     },
     "NoneDatastoreCredentials": {
@@ -5924,7 +5887,33 @@
           "$ref": "#/definitions/DatastoreCredentials"
         }
       ],
+      "properties": {
+        "secrets": {
+          "$ref": "#/definitions/NoneDatastoreSecrets",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      },
       "x-ms-discriminator-value": "None",
+      "additionalProperties": false
+    },
+    "SasDatastoreSecrets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreSecrets"
+        }
+      ],
+      "properties": {
+        "sasToken": {
+          "description": "Storage container SAS token.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Sas",
       "additionalProperties": false
     },
     "SasDatastoreCredentials": {
@@ -5934,7 +5923,34 @@
           "$ref": "#/definitions/DatastoreCredentials"
         }
       ],
+      "properties": {
+        "secrets": {
+          "description": "Storage container secrets.",
+          "$ref": "#/definitions/SasDatastoreSecrets",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      },
       "x-ms-discriminator-value": "Sas",
+      "additionalProperties": false
+    },
+    "ServicePrincipalDatastoreSecrets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreSecrets"
+        }
+      ],
+      "properties": {
+        "clientSecret": {
+          "description": "Service principal secret.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "ServicePrincipal",
       "additionalProperties": false
     },
     "ServicePrincipalDatastoreCredentials": {
@@ -5966,9 +5982,34 @@
           "format": "uuid",
           "description": "Service principal client ID.",
           "type": "string"
+        },
+        "secrets": {
+          "description": "Service principal secrets.",
+          "$ref": "#/definitions/ServicePrincipalDatastoreSecrets",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
         }
       },
       "x-ms-discriminator-value": "ServicePrincipal",
+      "additionalProperties": false
+    },
+    "SqlAdminDatastoreSecrets": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreSecrets"
+        }
+      ],
+      "properties": {
+        "password": {
+          "description": "SQL database password.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "SqlAdmin",
       "additionalProperties": false
     },
     "SqlAdminDatastoreCredentials": {
@@ -5986,6 +6027,15 @@
           "description": "SQL database user name.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
+        },
+        "secrets": {
+          "description": "SQL database secrets.",
+          "$ref": "#/definitions/SqlAdminDatastoreSecrets",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
         }
       },
       "x-ms-discriminator-value": "SqlAdmin",
