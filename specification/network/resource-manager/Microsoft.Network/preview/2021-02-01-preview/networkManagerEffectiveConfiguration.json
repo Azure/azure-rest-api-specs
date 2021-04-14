@@ -391,8 +391,7 @@
         "defaultRuleFlag": {
           "type": "string",
           "description": "Default rule flag."
-        },
-        "description": "Indicates the properties of the effective security default user rule"
+        }
       },
       "allOf": [
         {
@@ -403,11 +402,11 @@
       "x-ms-discriminator-value": "EffectiveDefaultUserRule"
     },
     "NetworkGroup": {
-      "id": {
-        "type": "string",
-        "description": "Resource ID."
-      },
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "./networkManagerGroup.json#/definitions/NetworkGroupProperties",
