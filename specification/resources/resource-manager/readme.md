@@ -73,6 +73,10 @@ These settings apply only when `--tag=package-preview-2021-05` is specified on t
 input-file:
   - Microsoft.Resources/preview/2021-05-01-preview/resources.json
   - Microsoft.Resources/preview/2021-05-01-preview/subscriptions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 ### Tag: package-resources-2021-01
 
