@@ -348,41 +348,45 @@
       "description": "The response model for a gallery runbook"
     },
     "GraphicalRunbookContent": {
-      "rawContent": {
-        "x-nullable": true,
-        "schema": {
+      "properties": {
+        "type": "object",
+        "description": "Graphical Runbook Content of both raw and json content",
+        "rawContent": {
+          "x-nullable": true,
           "$ref": "#/definitions/RawGraphicalRunbookContent"
+        },
+        "graphRunbookJSON": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Graphical Runbook content as JSON"
         }
-      },
-      "graphRunbookJSON": {
-        "type": "string",
-        "x-nullable": true,
-        "description": "Graphical Runbook content as JSON"
-      },
-      "description": "Graphical Runbook Content of both raw and json content"
+      }
     },
     "RawGraphicalRunbookContent": {
-      "schemaVersion": {
-        "type": "string",
-        "description": "Schema version of the serializer."
-      },
-      "runbookDefinition": {
-        "type": "string",
-        "description": "Serialized Graphical runbook"
-      },
-      "runbookType": {
-        "type": "string",
-        "description": "Runbook Type",
-        "enum": [
-          "GraphPowerShell",
-          "GraphPowerShellWorkflow"
-        ],
-        "x-ms-enum": {
-          "name": "GraphRunbookType",
-          "modelAsString": true
+      "type": "object",
+      "description": "Raw Graphical Runbook content",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "description": "Schema version of the serializer."
+        },
+        "runbookDefinition": {
+          "type": "string",
+          "description": "Serialized Graphical runbook"
+        },
+        "runbookType": {
+          "type": "string",
+          "description": "Runbook Type",
+          "enum": [
+            "GraphPowerShell",
+            "GraphPowerShellWorkflow"
+          ],
+          "x-ms-enum": {
+            "name": "GraphRunbookType",
+            "modelAsString": true
+          }
         }
-      },
-      "description": "Raw Graphical Runbook content"
+      }
     }
   }
 }
