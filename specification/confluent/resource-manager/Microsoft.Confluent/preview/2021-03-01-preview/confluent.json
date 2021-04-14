@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Confluent",
-    "version": "2020-03-01"
+    "version": "2021-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -80,7 +80,7 @@
         "tags": [
           "Agreements"
         ],
-        "summary": "Accept marketplace terms.",
+        "summary": "Create Confluent Marketplace agreement in the subscription.",
         "operationId": "MarketplaceAgreements_Create",
         "consumes": [
           "application/json"
@@ -98,7 +98,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Confluent Agreement resource",
+            "description": "Confluent Marketplace Agreement resource",
             "schema": {
               "$ref": "#/definitions/ConfluentAgreementResource"
             }
@@ -444,7 +444,7 @@
             "description": "Accepted"
           },
           "204": {
-            "description": "NoContent"
+            "description": "The specified confluent resource does not exist in the subscription."
           },
           "default": {
             "description": "Default error response.",
@@ -506,23 +506,28 @@
       }
     },
     "ConfluentAgreementResource": {
-      "description": "Confluent Agreements Resource.",
+      "description": "Agreement Terms definition",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
-          "description": "ARM id of the resource.",
+          "description": "The ARM id of the resource.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "Name of the agreement.",
+          "description": "The name of the agreement.",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "The type of the resource.",
+          "description": "The type of the agreement.",
           "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         },
         "properties": {
@@ -602,7 +607,6 @@
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
-          "readOnly": true,
           "type": "string"
         }
       }
@@ -721,8 +725,7 @@
         },
         "status": {
           "description": "SaaS Offer Status",
-          "$ref": "#/definitions/SaaSOfferStatus",
-          "readOnly": true
+          "$ref": "#/definitions/SaaSOfferStatus"
         }
       }
     },
@@ -742,7 +745,7 @@
         },
         "emailAddress": {
           "description": "Email address",
-          "pattern": "\\S+@\\S+\\.\\S+",
+          "pattern": "^\\S+@\\S+\\.\\S+$",
           "type": "string"
         }
       }
@@ -774,19 +777,11 @@
         },
         "offerDetail": {
           "description": "Confluent offer detail",
-          "allOf": [
-            {
-              "$ref": "#/definitions/OfferDetail"
-            }
-          ]
+          "$ref": "#/definitions/OfferDetail"
         },
         "userDetail": {
           "description": "Subscriber detail",
-          "allOf": [
-            {
-              "$ref": "#/definitions/UserDetail"
-            }
-          ]
+          "$ref": "#/definitions/UserDetail"
         }
       }
     },
@@ -810,14 +805,15 @@
           "type": "string",
           "readOnly": true
         },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Organization resource properties",
-          "allOf": [
-            {
-              "$ref": "#/definitions/OrganizationResourceProperties"
-            }
-          ]
+          "$ref": "#/definitions/OrganizationResourceProperties"
         },
         "tags": {
           "type": "object",
@@ -871,7 +867,7 @@
       "required": true,
       "type": "string",
       "enum": [
-        "2020-03-01"
+        "2021-03-01-preview"
       ]
     },
     "SubscriptionIdParameter": {
