@@ -112,8 +112,12 @@
             "$ref": "#/definitions/NetworkGroup"
           },
           "description": "Effective configuration groups."
-        }
+        },
+        "required": [
+          "configType"
+        ]
       },
+      "discriminator": "configType",
       "description": "The network manager effective configuration"
     },
     "EffectiveConnectivityConfiguration": {
@@ -222,6 +226,7 @@
           "description": "Indicates the properties of the security user rule"
         }
       },
+      "discriminator": "effectiveRuleType",
       "description": "Network base rule."
     },
     "EffectiveBaseRulePropertiesFormat": {
@@ -297,7 +302,10 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the security Configuration resource."
-        }
+        },
+        "required": [
+          "effectiveRuleType"
+        ]
       }
     },
     "EffectiveAdminRule": {
