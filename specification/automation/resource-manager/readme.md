@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2021-04-01
+tag: package-2020-01-13-preview
 ```
 
 ### Tag: package-2015-10
@@ -237,36 +237,35 @@ These settings apply only when `--tag=package-2021-04-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-04-01'
 input-file:
-- Microsoft.Automation/stable/2021-04-01/privateEndpointConnection.json
-- Microsoft.Automation/stable/2021-04-01/privateLinkResources.json
-- Microsoft.Automation/stable/2021-04-01/python2package.json
-- Microsoft.Automation/stable/2021-04-01/dscNode.json
-- Microsoft.Automation/stable/2021-04-01/dscNodeConfiguration.json
-- Microsoft.Automation/stable/2021-04-01/dscCompilationJob.json
-- Microsoft.Automation/stable/2021-04-01/dscNodeCounts.json
-- Microsoft.Automation/stable/2021-04-01/sourceControl.json
-- Microsoft.Automation/stable/2021-04-01/sourceControlSyncJob.json
-- Microsoft.Automation/stable/2021-04-01/sourceControlSyncJobStreams.json
-- Microsoft.Automation/stable/2021-04-01/account.json
-- Microsoft.Automation/stable/2021-04-01/certificate.json
-- Microsoft.Automation/stable/2021-04-01/connection.json
-- Microsoft.Automation/stable/2021-04-01/connectionType.json
-- Microsoft.Automation/stable/2021-04-01/credential.json
-- Microsoft.Automation/stable/2021-04-01/hybridRunbookWorkerGroup.json
-- Microsoft.Automation/stable/2021-04-01/jobSchedule.json
-- Microsoft.Automation/stable/2021-04-01/linkedWorkspace.json
-- Microsoft.Automation/stable/2021-04-01/module.json
-- Microsoft.Automation/stable/2021-04-01/schedule.json
-- Microsoft.Automation/stable/2021-04-01/variable.json
-- Microsoft.Automation/stable/2021-04-01/watcher.json
-- Microsoft.Automation/stable/2021-04-01/dscConfiguration.json
-- Microsoft.Automation/stable/2021-04-01/job.json
 - Microsoft.Automation/stable/2021-04-01/operations.json
-- Microsoft.Automation/stable/2021-04-01/runbook.json
-- Microsoft.Automation/stable/2021-04-01/softwareUpdateConfiguration.json
-- Microsoft.Automation/stable/2021-04-01/softwareUpdateConfigurationRun.json
-- Microsoft.Automation/stable/2021-04-01/softwareUpdateConfigurationMachineRun.json
-- Microsoft.Automation/stable/2021-04-01/webhook.json
+- Microsoft.Automation/stable/2021-04-01/sourceControl.json
+- Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
+- Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
+- Microsoft.Automation/preview/2020-01-13-preview/python2package.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNodeConfiguration.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
+- Microsoft.Automation/preview/2020-01-13-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2020-01-13-preview/sourceControlSyncJobStreams.json
+- Microsoft.Automation/preview/2020-01-13-preview/account.json
+- Microsoft.Automation/preview/2020-01-13-preview/certificate.json
+- Microsoft.Automation/preview/2020-01-13-preview/connection.json
+- Microsoft.Automation/preview/2020-01-13-preview/connectionType.json
+- Microsoft.Automation/preview/2020-01-13-preview/credential.json
+- Microsoft.Automation/preview/2020-01-13-preview/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/preview/2020-01-13-preview/jobSchedule.json
+- Microsoft.Automation/preview/2020-01-13-preview/linkedWorkspace.json
+- Microsoft.Automation/preview/2020-01-13-preview/module.json
+- Microsoft.Automation/preview/2020-01-13-preview/schedule.json
+- Microsoft.Automation/preview/2020-01-13-preview/variable.json
+- Microsoft.Automation/preview/2020-01-13-preview/watcher.json
+- Microsoft.Automation/stable/2019-06-01/dscConfiguration.json
+- Microsoft.Automation/stable/2019-06-01/job.json
+- Microsoft.Automation/stable/2019-06-01/runbook.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
 ---

@@ -71,9 +71,3 @@ output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2019-06-01/$(namespac
 ``` yaml $(tag) == 'package-2020-01-13-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-01-13-preview/$(namespace)
 ```
-
-### Tag: package-2021-04-01 and go
-
-``` yaml $(tag) == 'package-2021-04-01' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-04-01/$(namespace)
-```
