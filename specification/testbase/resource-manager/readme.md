@@ -37,6 +37,10 @@ These settings apply only when `--tag=package-2020-12-16-preview` is specified o
 ```yaml $(tag) == 'package-2020-12-16-preview'
 input-file:
   - Microsoft.TestBase/preview/2020-12-16-preview/testbase.json
+directive:
+- suppress: R4031
+  from: testbase.json
+  reason: provisioningState is not required for Proxy Resources.
 ```
 
 ---
@@ -50,13 +54,23 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js testbase/resource-manager
+```
+## Suppression
+```
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.TestBase/preview/2020-12-16-preview/testbase.json
+    where:
+      - $.definitions.DownloadURLResponse.properties.downloadUrl
+    reason: Secrets are OK to return in a POST response according to ARM.
 ```
 
 ## Go
