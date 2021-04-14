@@ -4,7 +4,7 @@ These settings apply only when `--go` is specified on the command line.
 
 ``` yaml $(go)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: costmanagement
   clear-output-folder: true
 ```
@@ -17,6 +17,7 @@ batch:
    - tag: package-2019-01
    - tag: package-preview-2019-03
    - tag: package-2019-10
+   - tag: package-2020-06
 ```
 
 ### Tag: package-2018-05 and go
