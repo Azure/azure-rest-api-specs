@@ -89,94 +89,94 @@
           }
         }
       },
-    "get": {
-      "tags": [
-        "DataTransfer",
-        "SqlDedicatedGateway"
-      ],
-      "x-ms-examples": {
-        "DataTransferServiceGet": {
-          "$ref": "./examples/CosmosDBDataTransferServiceGet.json"
+      "get": {
+        "tags": [
+          "DataTransfer",
+          "SqlDedicatedGateway"
+        ],
+        "x-ms-examples": {
+          "DataTransferServiceGet": {
+            "$ref": "./examples/CosmosDBDataTransferServiceGet.json"
+          },
+          "SqlDedicatedGatewayServiceGet": {
+            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceGet.json"
+          }
         },
-        "SqlDedicatedGatewayServiceGet": {
-          "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceGet.json"
+        "operationId": "Service_Get",
+        "description": "Gets the status of service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/serviceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ServiceResource.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          }
         }
       },
-      "operationId": "Service_Get",
-      "description": "Gets the status of service.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+      "delete": {
+        "tags": [
+          "DataTransfer",
+          "SqlDedicatedGateway"
+        ],
+        "x-ms-examples": {
+          "DataTransferServiceDelete": {
+            "$ref": "./examples/CosmosDBDataTransferServiceDelete.json"
+          },
+          "SqlDedicatedGatewayServiceDelete": {
+            "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceDelete.json"
+          }
         },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/accountNameParameter"
-        },
-        {
-          "$ref": "#/parameters/serviceNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The ServiceResource.",
-          "schema": {
-            "$ref": "#/definitions/ServiceResource"
+        "operationId": "Service_Delete",
+        "description": "Deletes service with the given serviceName.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/serviceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The job will complete asynchronously."
+          },
+          "204": {
+            "description": "The response for service deletion."
+          },
+          "200": {
+            "description": "The response for service deletion."
           }
         }
       }
-    },
-    "delete": {
-      "tags": [
-        "DataTransfer",
-        "SqlDedicatedGateway"
-      ],
-      "x-ms-examples": {
-        "DataTransferServiceDelete": {
-          "$ref": "./examples/CosmosDBDataTransferServiceDelete.json"
-        },
-        "SqlDedicatedGatewayServiceDelete": {
-          "$ref": "./examples/CosmosDBSqlDedicatedGatewayServiceDelete.json"
-        }
-      },
-      "operationId": "Service_Delete",
-      "description": "Deletes service with the given serviceName.",
-      "x-ms-long-running-operation": true,
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/accountNameParameter"
-        },
-        {
-          "$ref": "#/parameters/serviceNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "responses": {
-        "202": {
-          "description": "The job will complete asynchronously."
-        },
-        "204": {
-          "description": "The response for service deletion."
-        },
-        "200": {
-          "description": "The response for service deletion."
-        }
-      }
     }
-  }
-},
+  },
   "definitions": {
     "ServicesCreateUpdateParameters": {
       "description": "Service create or update parameters.",
@@ -220,32 +220,32 @@
       "type": "object",
       "discriminator": "serviceType",
       "x-ms-client-flatten": true,
-        "properties": {
-          "creationTime": {
-            "readOnly": true,
-            "type": "string",
-            "format": "date-time",
-            "description": "Time of the last state change (ISO-8601 format)."
-          },
-          "instanceSize": {
-            "$ref": "#/definitions/ServiceResourceInstanceSize"
-          },
-          "instanceCount": {
-            "description": "Instance count for the service.",
-            "type": "integer"
-          },
-          "serviceType": {
-            "type": "string",
-            "description": "The type of Azure resource."
-          },
-          "status":{
-            "$ref": "#/definitions/ServiceResourceStatus"
-          }
+      "properties": {
+        "creationTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the last state change (ISO-8601 format)."
+        },
+        "instanceSize": {
+          "$ref": "#/definitions/ServiceResourceInstanceSize"
+        },
+        "instanceCount": {
+          "description": "Instance count for the service.",
+          "type": "integer"
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "status": {
+          "$ref": "#/definitions/ServiceResourceStatus"
+        }
       },
       "additionalProperties": {
         "type": "object"
       },
-      "required":   [
+      "required": [
         "serviceType"
       ],
       "x-ms-azure-resource": true
@@ -291,7 +291,7 @@
           }
         }
       },
-      "required":[
+      "required": [
         "SqlDedicatedGatewayEndpoint"
       ]
     },
@@ -381,7 +381,7 @@
       "maxLength": 50,
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
     },
- "serviceNameParameter": {
+    "serviceNameParameter": {
       "name": "serviceName",
       "in": "path",
       "required": true,
