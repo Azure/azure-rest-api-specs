@@ -36,7 +36,7 @@ tag: package-artifacts-2019-06-01-preview
 ```
 
 ``` yaml $(package-access-control)
-tag: package-access-control-2020-02-01-preview
+tag: package-access-control-2020-08-01-preview
 ```
 
 ``` yaml $(package-vnet)
