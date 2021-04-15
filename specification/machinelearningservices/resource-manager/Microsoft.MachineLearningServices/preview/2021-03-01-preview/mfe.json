@@ -6085,11 +6085,14 @@
       "discriminator": "contentsType",
       "additionalProperties": false
     },
-    "DatastoresContentsWithCredentials": {
-      "description": "Base definition for datastore contents with credentials.",
+    "AzureBlobContents": {
+      "description": "Azure Blob datastore configuration.",
       "required": [
-        "contentsType",
-        "credentials"
+        "accountName",
+        "containerName",
+        "credentials",
+        "endpoint",
+        "protocol"
       ],
       "type": "object",
       "allOf": [
@@ -6101,28 +6104,7 @@
         "credentials": {
           "description": "Account credentials.",
           "$ref": "#/definitions/DatastoreCredentials"
-        }
-      },
-      "discriminator": "contentsType",
-      "additionalProperties": false
-    },
-    "AzureStorageContents": {
-      "description": "Azure Storage datastore configuration.",
-      "required": [
-        "accountName",
-        "containerName",
-        "contentsType",
-        "credentials",
-        "endpoint",
-        "protocol"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoresContentsWithCredentials"
-        }
-      ],
-      "properties": {
+        },
         "accountName": {
           "description": "Storage account name.",
           "pattern": "[a-zA-Z0-9_]",
@@ -6162,30 +6144,6 @@
           ]
         }
       },
-      "discriminator": "contentsType",
-      "additionalProperties": false
-    },
-    "AzureBlobContents": {
-      "description": "Azure Blob datastore configuration.",
-      "required": [
-        "accountName",
-        "containerName",
-        "credentials",
-        "endpoint",
-        "protocol"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureStorageContents"
-        }
-      ],
-      "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType",
-          "readOnly": true
-        }
-      },
       "x-ms-discriminator-value": "AzureBlob",
       "additionalProperties": false
     },
@@ -6198,13 +6156,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoresContentsWithCredentials"
+          "$ref": "#/definitions/DatastoreContents"
         }
       ],
       "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType",
-          "readOnly": true
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
         },
         "storeName": {
           "description": "Azure Data Lake store name.",
@@ -6227,13 +6185,51 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureStorageContents"
+          "$ref": "#/definitions/DatastoreContents"
         }
       ],
       "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType",
-          "readOnly": true
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
+        },
+        "accountName": {
+          "description": "Storage account name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "containerName": {
+          "description": "Storage account container name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "description": "Azure cloud endpoint for the storage account.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "core.windows.net",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "protocol": {
+          "description": "Protocol used to communicate with the storage account.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "https",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "AzureDataLakeGen2",
@@ -6251,13 +6247,51 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureStorageContents"
+          "$ref": "#/definitions/DatastoreContents"
         }
       ],
       "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType",
-          "readOnly": true
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
+        },
+        "accountName": {
+          "description": "Storage account name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "containerName": {
+          "description": "Storage account container name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "description": "Azure cloud endpoint for the storage account.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "core.windows.net",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "protocol": {
+          "description": "Protocol used to communicate with the storage account.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "https",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "AzureFile",
@@ -6276,12 +6310,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoresContentsWithCredentials"
+          "$ref": "#/definitions/DatastoreContents"
         }
       ],
       "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType"
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
         },
         "databaseName": {
           "description": "Azure SQL database name.",
@@ -6341,9 +6376,46 @@
         }
       ],
       "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType",
-          "readOnly": true
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
+        },
+        "databaseName": {
+          "description": "Azure SQL database name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "description": "Azure cloud endpoint for the database.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "database.windows.net",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "portNumber": {
+          "format": "int32",
+          "description": "Azure SQL server port.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "serverName": {
+          "description": "Azure SQL server name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "enableSSL": {
           "description": "Whether the Azure PostgreSQL server requires SSL.",
@@ -7406,6 +7478,39 @@
         }
       ],
       "properties": {
+        "experimentName": {
+          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "output": {
+          "description": "Location of the job output logs and artifacts.",
+          "$ref": "#/definitions/JobOutput",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "compute": {
+          "description": "Compute binding for the job.",
+          "$ref": "#/definitions/ComputeConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview feature and only available to users on the allow list.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "status": {
           "description": "Status of the job.",
           "$ref": "#/definitions/JobStatus",
@@ -7730,6 +7835,39 @@
         }
       ],
       "properties": {
+        "experimentName": {
+          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "output": {
+          "description": "Location of the job output logs and artifacts.",
+          "$ref": "#/definitions/JobOutput",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "compute": {
+          "description": "Compute binding for the job.",
+          "$ref": "#/definitions/ComputeConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview feature and only available to users on the allow list.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "status": {
           "description": "The status of a job.",
           "$ref": "#/definitions/JobStatus",
@@ -8124,6 +8262,50 @@
       "description": "Labeling job definition",
       "type": "object",
       "properties": {
+        "jobType": {
+          "description": "Specifies the type of job.",
+          "$ref": "#/definitions/JobType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/JobProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "interactionEndpoints": {
+          "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JobEndpoint"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "labelCategories": {
           "description": "Label categories of the job.",
           "type": "object",
