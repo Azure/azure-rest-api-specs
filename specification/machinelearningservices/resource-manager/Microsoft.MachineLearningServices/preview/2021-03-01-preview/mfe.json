@@ -4904,7 +4904,7 @@
       "additionalProperties": false
     },
     "ComputeConfiguration": {
-      "description": "Compute binding definition.",
+      "description": "Configuration for compute binding.",
       "type": "object",
       "properties": {
         "target": {
@@ -5018,6 +5018,7 @@
       "additionalProperties": false
     },
     "ReferenceType": {
+      "description": "Enum to determine which reference method to use for an asset.",
       "enum": [
         "Id",
         "DataPath",
@@ -5031,6 +5032,7 @@
       "additionalProperties": false
     },
     "AssetReferenceBase": {
+      "description": "Base definition for asset references.",
       "required": [
         "referenceType"
       ],
@@ -5045,6 +5047,7 @@
       "additionalProperties": false
     },
     "IdAssetReference": {
+      "description": "Reference to an asset via it's resource ID.",
       "required": [
         "assetId"
       ],
@@ -5064,6 +5067,7 @@
       "additionalProperties": false
     },
     "DataPathAssetReference": {
+      "description": "Reference to an asset via it's path in a Datastore.",
       "type": "object",
       "allOf": [
         {
@@ -5072,9 +5076,11 @@
       ],
       "properties": {
         "path": {
+          "description": "The path of the file/directory in the datastore.",
           "type": "string"
         },
         "datastoreId": {
+          "description": "The resource ID of the datastore where the asset is located.",
           "type": "string"
         }
       },
@@ -5082,6 +5088,7 @@
       "additionalProperties": false
     },
     "OutputPathAssetReference": {
+      "description": "Reference to an asset via it's path in a job output.",
       "type": "object",
       "allOf": [
         {
@@ -5090,9 +5097,11 @@
       ],
       "properties": {
         "path": {
+          "description": "The path of the file/directory in the job output.",
           "type": "string"
         },
         "jobId": {
+          "description": "The resource ID of the job.",
           "type": "string"
         }
       },
@@ -5100,13 +5109,14 @@
       "additionalProperties": false
     },
     "CodeConfiguration": {
+      "description": "Configuration for a scoring code asset.",
       "required": [
         "scoringScript"
       ],
       "type": "object",
       "properties": {
         "codeId": {
-          "description": "The ID of the code asset.",
+          "description": "The resource ID of the code asset.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -5321,7 +5331,7 @@
       "additionalProperties": false
     },
     "BatchEndpoint": {
-      "description": "Batch endpoint configuration",
+      "description": "Batch endpoint configuration.",
       "type": "object",
       "properties": {
         "authMode": {
@@ -5348,7 +5358,7 @@
         },
         "scoringUri": {
           "format": "uri",
-          "description": "Endpoint URI",
+          "description": "Endpoint URI.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -5357,7 +5367,7 @@
         },
         "swaggerUri": {
           "format": "uri",
-          "description": "Endpoint Swagger URI",
+          "description": "Endpoint Swagger URI.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -5469,6 +5479,7 @@
       "additionalProperties": false
     },
     "CodeContainer": {
+      "description": "Code container for code asset versions.",
       "type": "object",
       "properties": {
         "properties": {
@@ -5535,18 +5546,18 @@
       "additionalProperties": false
     },
     "CodeVersion": {
-      "description": "Details of an RegisteredCode",
+      "description": "Code asset version details.",
       "required": [
         "path"
       ],
       "type": "object",
       "properties": {
         "datastoreId": {
-          "description": "The asset datastoreId",
+          "description": "The resource ID of the datastore where the asset is located.",
           "type": "string"
         },
         "path": {
-          "description": "The path of the file/directory.",
+          "description": "The path of the file/directory in the datastore.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
@@ -5625,6 +5636,7 @@
       "additionalProperties": false
     },
     "DataContainer": {
+      "description": "Container for data asset versions.",
       "type": "object",
       "properties": {
         "properties": {
@@ -5691,6 +5703,7 @@
       "additionalProperties": false
     },
     "ContentsType": {
+      "description": "Enum to determine the datastore contents type.",
       "enum": [
         "AzureBlob",
         "AzureDataLakeGen1",
@@ -5709,6 +5722,7 @@
       "additionalProperties": false
     },
     "CredentialsType": {
+      "description": "Enum to determine the datastore credentials type.",
       "enum": [
         "AccountKey",
         "Certificate",
@@ -5725,6 +5739,7 @@
       "additionalProperties": false
     },
     "SecretsType": {
+      "description": "Enum to determine the datastore secrets type.",
       "enum": [
         "AccountKey",
         "Certificate",
@@ -5741,6 +5756,7 @@
       "additionalProperties": false
     },
     "DatastoreSecrets": {
+      "description": "Base definition for datastore secrets.",
       "required": [
         "secretsType"
       ],
@@ -5755,6 +5771,7 @@
       "additionalProperties": false
     },
     "AccountKeyDatastoreSecrets": {
+      "description": "Datastore account key secrets.",
       "type": "object",
       "allOf": [
         {
@@ -5771,6 +5788,7 @@
       "additionalProperties": false
     },
     "DatastoreCredentials": {
+      "description": "Base definition for datastore credentials.",
       "required": [
         "credentialsType"
       ],
@@ -5785,6 +5803,7 @@
       "additionalProperties": false
     },
     "AccountKeyDatastoreCredentials": {
+      "description": "Account key datastore credentials configuration.",
       "type": "object",
       "allOf": [
         {
@@ -5806,6 +5825,7 @@
       "additionalProperties": false
     },
     "CertificateDatastoreSecrets": {
+      "description": "Datastore certificate secrets.",
       "type": "object",
       "allOf": [
         {
@@ -5822,6 +5842,7 @@
       "additionalProperties": false
     },
     "CertificateDatastoreCredentials": {
+      "description": "Certificate datastore credentials configuration.",
       "required": [
         "clientId",
         "tenantId",
@@ -5871,6 +5892,7 @@
       "additionalProperties": false
     },
     "NoneDatastoreSecrets": {
+      "description": "Empty/none datastore secret.",
       "type": "object",
       "allOf": [
         {
@@ -5881,6 +5903,7 @@
       "additionalProperties": false
     },
     "NoneDatastoreCredentials": {
+      "description": "Empty/none datastore credentials.",
       "type": "object",
       "allOf": [
         {
@@ -5901,6 +5924,7 @@
       "additionalProperties": false
     },
     "SasDatastoreSecrets": {
+      "description": "Datastore SAS secrets.",
       "type": "object",
       "allOf": [
         {
@@ -5917,6 +5941,7 @@
       "additionalProperties": false
     },
     "SasDatastoreCredentials": {
+      "description": "SAS datastore credentials configuration.",
       "type": "object",
       "allOf": [
         {
@@ -5938,6 +5963,7 @@
       "additionalProperties": false
     },
     "ServicePrincipalDatastoreSecrets": {
+      "description": "Datastore service principal secrets.",
       "type": "object",
       "allOf": [
         {
@@ -5954,6 +5980,7 @@
       "additionalProperties": false
     },
     "ServicePrincipalDatastoreCredentials": {
+      "description": "Service Principal datastore credentials configuration.",
       "required": [
         "clientId",
         "tenantId"
@@ -5997,6 +6024,7 @@
       "additionalProperties": false
     },
     "SqlAdminDatastoreSecrets": {
+      "description": "Datastore SQL Admin secrets.",
       "type": "object",
       "allOf": [
         {
@@ -6013,6 +6041,7 @@
       "additionalProperties": false
     },
     "SqlAdminDatastoreCredentials": {
+      "description": "SQL Admin datastore credentials configuration.",
       "required": [
         "userId"
       ],
@@ -6042,6 +6071,7 @@
       "additionalProperties": false
     },
     "DatastoreContents": {
+      "description": "Base definition for datastore contents configuration.",
       "required": [
         "contentsType"
       ],
@@ -6055,10 +6085,33 @@
       "discriminator": "contentsType",
       "additionalProperties": false
     },
-    "AzureBlobContents": {
+    "DatastoresContentsWithCredentials": {
+      "description": "Base definition for datastore contents with credentials.",
+      "required": [
+        "contentsType",
+        "credentials"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreContents"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
+        }
+      },
+      "discriminator": "contentsType",
+      "additionalProperties": false
+    },
+    "AzureStorageContents": {
+      "description": "Azure Storage datastore configuration.",
       "required": [
         "accountName",
         "containerName",
+        "contentsType",
         "credentials",
         "endpoint",
         "protocol"
@@ -6066,7 +6119,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoreContents"
+          "$ref": "#/definitions/DatastoresContentsWithCredentials"
         }
       ],
       "properties": {
@@ -6107,16 +6160,37 @@
             "create",
             "read"
           ]
-        },
-        "credentials": {
-          "description": "Account credentials.",
-          "$ref": "#/definitions/DatastoreCredentials"
+        }
+      },
+      "discriminator": "contentsType",
+      "additionalProperties": false
+    },
+    "AzureBlobContents": {
+      "description": "Azure Blob datastore configuration.",
+      "required": [
+        "accountName",
+        "containerName",
+        "credentials",
+        "endpoint",
+        "protocol"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureStorageContents"
+        }
+      ],
+      "properties": {
+        "contentsType": {
+          "$ref": "#/definitions/ContentsType",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "AzureBlob",
       "additionalProperties": false
     },
     "AzureDataLakeGen1Contents": {
+      "description": "Azure Data Lake Gen1 datastore configuration.",
       "required": [
         "credentials",
         "storeName"
@@ -6124,24 +6198,25 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoreContents"
+          "$ref": "#/definitions/DatastoresContentsWithCredentials"
         }
       ],
       "properties": {
+        "contentsType": {
+          "$ref": "#/definitions/ContentsType",
+          "readOnly": true
+        },
         "storeName": {
           "description": "Azure Data Lake store name.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
-        },
-        "credentials": {
-          "description": "Account credentials.",
-          "$ref": "#/definitions/DatastoreCredentials"
         }
       },
       "x-ms-discriminator-value": "AzureDataLakeGen1",
       "additionalProperties": false
     },
     "AzureDataLakeGen2Contents": {
+      "description": "Azure Data Lake Gen2 datastore configuration.",
       "required": [
         "accountName",
         "containerName",
@@ -6152,57 +6227,20 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoreContents"
+          "$ref": "#/definitions/AzureStorageContents"
         }
       ],
       "properties": {
-        "accountName": {
-          "description": "Storage account name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "containerName": {
-          "description": "Storage account container name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "endpoint": {
-          "description": "Azure cloud endpoint for the storage account.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "example": "core.windows.net",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "protocol": {
-          "description": "Protocol used to communicate with the storage account.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "example": "https",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "credentials": {
-          "description": "Account credentials.",
-          "$ref": "#/definitions/DatastoreCredentials"
+        "contentsType": {
+          "$ref": "#/definitions/ContentsType",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "AzureDataLakeGen2",
       "additionalProperties": false
     },
     "AzureFileContents": {
+      "description": "Azure File datastore configuration.",
       "required": [
         "accountName",
         "containerName",
@@ -6213,21 +6251,40 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoreContents"
+          "$ref": "#/definitions/AzureStorageContents"
         }
       ],
       "properties": {
-        "accountName": {
-          "description": "Storage account name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+        "contentsType": {
+          "$ref": "#/definitions/ContentsType",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "AzureFile",
+      "additionalProperties": false
+    },
+    "AzureSqlDatabaseContents": {
+      "description": "Azure SQL Database datastore configuration.",
+      "required": [
+        "contentsType",
+        "credentials",
+        "databaseName",
+        "endpoint",
+        "portNumber",
+        "serverName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoresContentsWithCredentials"
+        }
+      ],
+      "properties": {
+        "contentsType": {
+          "$ref": "#/definitions/ContentsType"
         },
-        "containerName": {
-          "description": "Storage account container name.",
+        "databaseName": {
+          "description": "Azure SQL database name.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -6236,34 +6293,40 @@
           ]
         },
         "endpoint": {
-          "description": "Azure cloud endpoint for the storage account.",
+          "description": "Azure cloud endpoint for the database.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
-          "example": "core.windows.net",
+          "example": "database.windows.net",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
-        "protocol": {
-          "description": "Protocol used to communicate with the storage account.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "example": "https",
+        "portNumber": {
+          "format": "int32",
+          "description": "Azure SQL server port.",
+          "type": "integer",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
-        "credentials": {
-          "description": "Account credentials.",
-          "$ref": "#/definitions/DatastoreCredentials"
+        "serverName": {
+          "description": "Azure SQL server name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
-      "x-ms-discriminator-value": "AzureFile",
+      "discriminator": "contentsType",
+      "x-ms-discriminator-value": "AzureSqlDatabase",
       "additionalProperties": false
     },
     "AzurePostgreSqlContents": {
+      "description": "Azure Postgre SQL datastore configuration.",
       "required": [
         "credentials",
         "databaseName",
@@ -6274,10 +6337,14 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoreContents"
+          "$ref": "#/definitions/AzureSqlDatabaseContents"
         }
       ],
       "properties": {
+        "contentsType": {
+          "$ref": "#/definitions/ContentsType",
+          "readOnly": true
+        },
         "enableSSL": {
           "description": "Whether the Azure PostgreSQL server requires SSL.",
           "type": "boolean",
@@ -6285,113 +6352,13 @@
             "create",
             "read"
           ]
-        },
-        "databaseName": {
-          "description": "Azure SQL database name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "endpoint": {
-          "description": "Azure cloud endpoint for the database.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "example": "database.windows.net",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "portNumber": {
-          "format": "int32",
-          "description": "Azure SQL server port.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "serverName": {
-          "description": "Azure SQL server name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "credentials": {
-          "description": "Account credentials.",
-          "$ref": "#/definitions/DatastoreCredentials"
         }
       },
       "x-ms-discriminator-value": "AzurePostgreSql",
       "additionalProperties": false
     },
-    "AzureSqlDatabaseContents": {
-      "required": [
-        "credentials",
-        "databaseName",
-        "endpoint",
-        "portNumber",
-        "serverName"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreContents"
-        }
-      ],
-      "properties": {
-        "databaseName": {
-          "description": "Azure SQL database name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "endpoint": {
-          "description": "Azure cloud endpoint for the database.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "example": "database.windows.net",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "portNumber": {
-          "format": "int32",
-          "description": "Azure SQL server port.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "serverName": {
-          "description": "Azure SQL server name.",
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "credentials": {
-          "description": "Account credentials.",
-          "$ref": "#/definitions/DatastoreCredentials"
-        }
-      },
-      "x-ms-discriminator-value": "AzureSqlDatabase",
-      "additionalProperties": false
-    },
     "GlusterFsContents": {
+      "description": "GlusterFs datastore configuration.",
       "required": [
         "serverAddress",
         "volumeName"
@@ -6426,6 +6393,7 @@
       "additionalProperties": false
     },
     "OriginType": {
+      "description": "Enum to determine the type of linked service.",
       "enum": [
         "Synapse"
       ],
@@ -6437,6 +6405,7 @@
       "additionalProperties": false
     },
     "LinkedInfo": {
+      "description": "Information about a datastore origin, if linked.",
       "type": "object",
       "properties": {
         "linkedId": {
@@ -6481,6 +6450,7 @@
           "$ref": "#/definitions/LinkedInfo"
         },
         "properties": {
+          "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -6558,7 +6528,7 @@
       "additionalProperties": false
     },
     "DataVersion": {
-      "description": "Details of an DatasetDto",
+      "description": "Data asset version details.",
       "required": [
         "path"
       ],
@@ -6569,11 +6539,11 @@
           "$ref": "#/definitions/DatasetType"
         },
         "datastoreId": {
-          "description": "The asset datastoreId",
+          "description": "The resource ID of the datastore where the asset is located.",
           "type": "string"
         },
         "path": {
-          "description": "The path of the file/directory.",
+          "description": "The path of the file/directory in the datastore.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
@@ -6652,6 +6622,7 @@
       "additionalProperties": false
     },
     "EnvironmentContainer": {
+      "description": "Container for environment specification versions.",
       "type": "object",
       "properties": {
         "properties": {
@@ -6988,6 +6959,7 @@
       "additionalProperties": false
     },
     "JobType": {
+      "description": "Enum to determine the type of job.",
       "enum": [
         "Command",
         "Sweep",
@@ -6997,28 +6969,6 @@
       "x-ms-enum": {
         "name": "JobType",
         "modelAsString": true
-      },
-      "additionalProperties": false
-    },
-    "JobOutput": {
-      "type": "object",
-      "properties": {
-        "datastoreId": {
-          "description": "ARM ID of the datastore where the job logs and artifacts are stored, or null for the default container (\"azureml\") in the workspace's storage account.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "path": {
-          "description": "Path within the datastore to the job logs and artifacts.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
       },
       "additionalProperties": false
     },
@@ -7061,6 +7011,7 @@
       "additionalProperties": false
     },
     "InputDataBinding": {
+      "description": "Input data binding configuration.",
       "type": "object",
       "properties": {
         "dataId": {
@@ -7091,10 +7042,11 @@
       "additionalProperties": false
     },
     "OutputDataBinding": {
+      "description": "Output data binding configuration.",
       "type": "object",
       "properties": {
         "datastoreId": {
-          "description": "ArmId of the datastore where the data output will be stored.",
+          "description": "Resource ID of the datastore where the data output will be stored.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -7129,6 +7081,7 @@
       "additionalProperties": false
     },
     "DistributionType": {
+      "description": "Enum to determine the job distribution type.",
       "enum": [
         "PyTorch",
         "TensorFlow",
@@ -7142,6 +7095,7 @@
       "additionalProperties": false
     },
     "DistributionConfiguration": {
+      "description": "Job distribution configuration.",
       "required": [
         "distributionType"
       ],
@@ -7160,6 +7114,7 @@
       "additionalProperties": false
     },
     "TensorFlow": {
+      "description": "Tensorflow distribution configuration.",
       "type": "object",
       "allOf": [
         {
@@ -7189,6 +7144,7 @@
       "additionalProperties": false
     },
     "Mpi": {
+      "description": "MPI distribution configuration.",
       "type": "object",
       "allOf": [
         {
@@ -7209,6 +7165,7 @@
       "additionalProperties": false
     },
     "PyTorch": {
+      "description": "Pytorch distribution configuration.",
       "type": "object",
       "allOf": [
         {
@@ -7226,6 +7183,7 @@
       "additionalProperties": false
     },
     "IdentityConfigurationType": {
+      "description": "Enum to determine identity framework.",
       "enum": [
         "Managed",
         "AMLToken"
@@ -7238,6 +7196,7 @@
       "additionalProperties": false
     },
     "IdentityConfiguration": {
+      "description": "Identity configuration.",
       "required": [
         "identityType"
       ],
@@ -7256,6 +7215,7 @@
       "additionalProperties": false
     },
     "AmlToken": {
+      "description": "AML Token identity configuration.",
       "type": "object",
       "allOf": [
         {
@@ -7266,6 +7226,7 @@
       "additionalProperties": false
     },
     "ManagedIdentity": {
+      "description": "Managed identity configuration.",
       "type": "object",
       "allOf": [
         {
@@ -7301,6 +7262,29 @@
         }
       },
       "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
+    },
+    "JobOutput": {
+      "description": "Job output details.",
+      "type": "object",
+      "properties": {
+        "datastoreId": {
+          "description": "Resource ID of the datastore where the job logs and artifacts are stored, or null for the default container (\"azureml\") in the workspace's storage account.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "path": {
+          "description": "Path within the datastore to the job logs and artifacts.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
       "additionalProperties": false
     },
     "JobProvisioningState": {
@@ -7410,16 +7394,47 @@
       "discriminator": "jobType",
       "additionalProperties": false
     },
-    "CommandJob": {
-      "description": "Code Job definition",
+    "ExperimentJobBase": {
       "required": [
-        "command",
-        "compute"
+        "jobType"
       ],
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/JobBase"
+        }
+      ],
+      "properties": {
+        "experimentName": {
+          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "output": {
+          "description": "Location of the job output logs and artifacts.",
+          "$ref": "#/definitions/JobOutput",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "discriminator": "jobType",
+      "additionalProperties": false
+    },
+    "ComputeJobBase": {
+      "description": "Compute job base definition",
+      "required": [
+        "compute",
+        "jobType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExperimentJobBase"
         }
       ],
       "properties": {
@@ -7439,22 +7454,27 @@
             "create",
             "read"
           ]
-        },
-        "experimentName": {
-          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "output": {
-          "description": "Location of the job output logs and artifacts.",
-          "$ref": "#/definitions/JobOutput",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+        }
+      },
+      "discriminator": "jobType",
+      "additionalProperties": false
+    },
+    "CommandJob": {
+      "description": "Code Job definition",
+      "required": [
+        "command",
+        "compute"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeJobBase"
+        }
+      ],
+      "properties": {
+        "jobType": {
+          "$ref": "#/definitions/JobType",
+          "readOnly": true
         },
         "status": {
           "description": "Status of the job.",
@@ -7777,42 +7797,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/JobBase"
+          "$ref": "#/definitions/ComputeJobBase"
         }
       ],
       "properties": {
-        "compute": {
-          "description": "Compute binding for the job.",
-          "$ref": "#/definitions/ComputeConfiguration",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "priority": {
-          "format": "int32",
-          "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview feature and only available to users on the allow list.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "experimentName": {
-          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "output": {
-          "description": "Location of the job output logs and artifacts.",
-          "$ref": "#/definitions/JobOutput",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+        "jobType": {
+          "$ref": "#/definitions/JobType",
+          "readOnly": true
         },
         "status": {
           "description": "The status of a job.",
@@ -7866,50 +7857,6 @@
         }
       },
       "x-ms-discriminator-value": "Sweep",
-      "additionalProperties": false
-    },
-    "JobBaseResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/JobBase"
-        },
-        "systemData": {
-          "description": "System data associated with resource provider",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "JobBaseResourceArmPaginatedResult": {
-      "description": "A paginated list of JobBase entities.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "An array of objects of type JobBase.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobBaseResource"
-          }
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      },
       "additionalProperties": false
     },
     "LabelClass": {
@@ -8251,25 +8198,12 @@
     "LabelingJob": {
       "description": "Labeling job definition",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobBase"
+        }
+      ],
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/JobProvisioningState",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "interactionEndpoints": {
-          "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/JobEndpoint"
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
         "labelCategories": {
           "description": "Label categories of the job.",
           "type": "object",
@@ -8355,24 +8289,52 @@
           "x-ms-mutability": [
             "read"
           ]
-        },
-        "description": {
-          "description": "The asset description text.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
+        }
+      },
+      "x-ms-discriminator-value": "Labeling",
+      "additionalProperties": false
+    },
+    "JobBaseResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
         "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/JobBase",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "JobBaseResourceArmPaginatedResult": {
+      "description": "A paginated list of JobBase entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type JobBase.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobBaseResource"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -8647,7 +8609,7 @@
       "additionalProperties": false
     },
     "ModelVersion": {
-      "description": "Details of an ModelDto",
+      "description": "Model asset version details.",
       "required": [
         "path"
       ],
@@ -8661,11 +8623,11 @@
           }
         },
         "datastoreId": {
-          "description": "The asset datastoreId",
+          "description": "The resource ID of the datastore where the asset is located.",
           "type": "string"
         },
         "path": {
-          "description": "The path of the file/directory.",
+          "description": "The path of the file/directory in the datastore.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
