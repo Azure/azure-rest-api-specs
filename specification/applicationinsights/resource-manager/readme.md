@@ -134,7 +134,7 @@ directive:
     from: workbooks_API.json
     reason: 'consistent with existing default error response'
   - suppress: DefaultErrorResponseSchema
-    from: aiOperations_API.json
+    from: workbookOperations_API.json
     reason: 'consistent with existing default error response'
   - suppress: RequiredDefaultResponse
     from: analyticsItems_API.json
