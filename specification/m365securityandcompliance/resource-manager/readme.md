@@ -63,6 +63,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
+  - repo: azure-cli-extensions
     after_scripts:
       - node sdkauto_afterscript.js m365securityandcompliance/resource-manager
 ```
