@@ -697,7 +697,7 @@
     },
     "BaseRule": {
       "properties": {
-        "ruleType": {
+        "kind": {
           "type": "string",
           "description": "Whether the rule collection is custom or default.",
           "enum": [
@@ -707,7 +707,7 @@
             "DefaultAdminRule"
           ],
           "x-ms-enum": {
-            "name": "RuleType",
+            "name": "Kind",
             "modelAsString": true
           }
         },
@@ -723,9 +723,9 @@
         }
       ],
       "required": [
-        "ruleType"
+        "kind"
       ],
-      "discriminator": "ruleType",
+      "discriminator": "kind",
       "description": "Network base rule."
     },
     "AdminRule": {
