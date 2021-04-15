@@ -2688,6 +2688,127 @@
     }
   },
   "definitions": {
+    "ArmPlan": {
+      "description": "The plan object in Azure Resource Manager, represents a marketplace plan.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "The publisher.",
+          "type": "string"
+        },
+        "product": {
+          "description": "The product.",
+          "type": "string"
+        },
+        "promotionCode": {
+          "description": "The promotion code.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of product.",
+          "type": "string"
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "description": "A remote private endpoint connection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "RemotePrivateEndpointConnection resource specific properties",
+          "properties": {
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true
+            },
+            "privateEndpoint": {
+              "$ref": "./CommonDefinitions.json#/definitions/ArmIdWrapper",
+              "description": "PrivateEndpoint of a remote private endpoint connection"
+            },
+            "privateLinkServiceConnectionState": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionState"
+            },
+            "ipAddresses": {
+              "description": "Private IPAddresses mapped to the remote private endpoint",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ResponseMessageEnvelope[RemotePrivateEndpointConnection]": {
+      "description": "Message envelope that contains the common Azure resource manager properties and the resource provider specific content.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id. Typically ID is populated only for responses to GET requests. Caller is responsible for passing in this\nvalue for GET requests only.\nFor example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupId}/providers/Microsoft.Web/sites/{sitename}",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of resource e.g \"Microsoft.Web/sites\".",
+          "type": "string"
+        },
+        "location": {
+          "description": "Geographical region resource belongs to e.g. SouthCentralUS, SouthEastAsia.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags associated with resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "plan": {
+          "$ref": "#/definitions/ArmPlan",
+          "description": "Azure resource manager plan."
+        },
+        "properties": {
+          "$ref": "#/definitions/RemotePrivateEndpointConnection",
+          "description": "Resource specific properties."
+        },
+        "sku": {
+          "$ref": "./CommonDefinitions.json#/definitions/SkuDescription",
+          "description": "SKU description of the resource."
+        },
+        "status": {
+          "description": "Azure-AsyncOperation Status info.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "./CommonDefinitions.json#/definitions/ErrorEntity",
+          "description": "Azure-AsyncOperation Error info."
+        },
+        "identity": {
+          "$ref": "./CommonDefinitions.json#/definitions/ManagedServiceIdentity",
+          "description": "MSI resource"
+        },
+        "zones": {
+          "description": "Logical Availability Zones the service is hosted in",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "StaticSite": {
       "description": "A static site.",
       "type": "object",
@@ -2730,6 +2851,14 @@
           "$ref": "#/definitions/StaticSiteTemplateOptions",
           "description": "Template options for generating a new repository."
         },
+        "privateEndpointConnections": {
+          "description": "Private endpoint connections",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResponseMessageEnvelope[RemotePrivateEndpointConnection]"
+          },
+          "readOnly": true
+        },
         "contentDistributionEndpoint": {
           "description": "The content distribution endpoint for the static site.",
           "type": "string",
@@ -2747,6 +2876,22 @@
             "$ref": "#/definitions/StaticSiteUserProvidedFunctionApp"
           },
           "readOnly": true
+        },
+        "stagingEnvironmentPolicy": {
+          "description": "State indicating whether staging environments are allowed or not allowed for a static web app.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StagingEnvironmentPolicy",
+            "modelAsString": false
+          }
+        },
+        "allowConfigFileUpdates": {
+          "description": "<code>false</code> if config file is locked for this static web app; otherwise, <code>true</code>.",
+          "type": "boolean"
         }
       }
     },
