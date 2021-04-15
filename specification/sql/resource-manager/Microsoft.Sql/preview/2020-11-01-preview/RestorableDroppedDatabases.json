@@ -162,8 +162,13 @@
           "type": "string",
           "readOnly": true
         },
-        "backupStorageAccountType": {
-          "description": "The backup storage account type.",
+        "backupStorageRedundancy": {
+          "description": "The storage account type used to store backups for this database.",
+          "enum": [
+            "Geo",
+            "Local",
+            "Zone"
+          ],
           "type": "string",
           "readOnly": true
         }
