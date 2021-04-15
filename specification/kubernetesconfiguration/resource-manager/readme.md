@@ -28,15 +28,15 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-preview-2021-05-01
+tag: package-preview-2021-05
 ```
 
 
-### Tag: package-preview-2021-05-01
+### Tag: package-preview-2021-05
 
-These settings apply only when `--tag=package-preview-2021-05-01` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-05-01'
+```yaml $(tag) == 'package-preview-2021-05'
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/extensions.json
   - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/extensionTypes.json
