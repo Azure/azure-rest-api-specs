@@ -7467,7 +7467,7 @@
       "additionalProperties": false
     },
     "CommandJob": {
-      "description": "Code Job definition",
+      "description": "Command Job definition",
       "required": [
         "command"
       ],
@@ -8261,51 +8261,12 @@
     "LabelingJob": {
       "description": "Labeling job definition",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobBase"
+        }
+      ],
       "properties": {
-        "jobType": {
-          "description": "Specifies the type of job.",
-          "$ref": "#/definitions/JobType",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/JobProvisioningState",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "interactionEndpoints": {
-          "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/JobEndpoint"
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "description": {
-          "description": "The asset description text.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "labelCategories": {
           "description": "Label categories of the job.",
           "type": "object",
@@ -8410,8 +8371,7 @@
       "properties": {
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/JobBase",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/JobBase"
         },
         "systemData": {
           "description": "System data associated with resource provider",
