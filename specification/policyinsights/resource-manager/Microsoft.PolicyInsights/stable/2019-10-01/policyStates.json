@@ -87,7 +87,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@odata.nextLink"
+          "nextLinkName": "@odata.nextLink",
+          "operationName": "PolicyStates_NextLink"
         },
         "x-ms-examples": {
           "Query latest at management group scope": {
@@ -1150,6 +1151,41 @@
         "x-ms-examples": {
           "List operations": {
             "$ref": "./examples/PolicyStates_ListOperations.json"
+          }
+        }
+      }
+    },
+    "/{nextLink}": {
+      "post": {
+        "operationId": "PolicyStates_NextLink",
+        "description": "Subsequent post calls to the next link",
+        "parameters": [
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/PolicyStatesQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query latest at resource group level policy assignment scope with next link": {
+            "$ref": "./examples/PolicyStates_QueryManagementGroupScopeNextLinkSkipToken.json"
           }
         }
       }
