@@ -780,9 +780,6 @@
           },
           "Creates or updates a SQL virtual machine for Storage Configuration Settings to EXTEND Data, Log or TempDB storage pool.": {
             "$ref": "./examples/CreateOrUpdateSqlVirtualMachineStorageConfigurationEXTEND.json"
-          },
-          "Creates or updates a SQL virtual machine for Automated Back up Settings with Weekly and Days of the week to run the back up.": {
-            "$ref": "./examples/CreateOrUpdateSqlVirtualMachineAutomatedBackupWeekly.json"
           }
         }
       },
@@ -1409,12 +1406,11 @@
         "type": {
           "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
           "enum": [
-            "None",
             "SystemAssigned"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "IdentityTypeWithNone",
+            "name": "IdentityType",
             "modelAsString": true
           }
         },
@@ -1644,26 +1640,6 @@
           "x-ms-enum": {
             "name": "FullBackupFrequencyType",
             "modelAsString": true
-          }
-        },
-        "daysOfWeek": {
-          "description": "Days of the week for the backups when FullBackupFrequency is set to Weekly.",
-          "type": "array",
-          "items": {
-            "enum": [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "DayOfWeek",
-              "modelAsString": true
-            }
           }
         },
         "fullBackupStartTime": {
