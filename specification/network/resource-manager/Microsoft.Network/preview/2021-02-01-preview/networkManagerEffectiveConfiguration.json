@@ -108,7 +108,7 @@
         "configurationGroups": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkGroup"
+            "$ref": "#/definitions/ConfigurationGroup"
           },
           "description": "Effective configuration groups."
         }
@@ -355,7 +355,7 @@
       "description": "Network security default user rule.",
       "x-ms-discriminator-value": "DefaultUserRule"
     },
-    "NetworkGroup": {
+    "ConfigurationGroup": {
       "properties": {
         "id": {
           "type": "string",
@@ -364,10 +364,10 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "./networkManagerGroup.json#/definitions/NetworkGroupProperties",
-          "description": "The network group properties"
+          "description": "The network configuration group properties"
         }
       },
-      "description": "The network group resource"
+      "description": "The network configuration group resource"
     },
     "NetworkManagerEffectiveConfigurationListResult": {
       "properties": {
