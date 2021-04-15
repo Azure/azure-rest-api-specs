@@ -41,6 +41,15 @@
         },
         "parameters": [
           {
+            "in": "body",
+            "name": "serviceTopologyInfo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceTopologyResource"
+            },
+            "description": "Source topology object defines the resource."
+          },
+          {
             "$ref": "#/parameters/subscriptionId"
           },
           {
@@ -51,15 +60,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "serviceTopologyInfo",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServiceTopologyResource"
-            },
-            "description": "Source topology object defines the resource."
           }
         ],
         "responses": {
