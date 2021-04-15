@@ -39,7 +39,7 @@
         "description": "Get Extension Type details",
         "operationId": "ClusterExtensionType_Get",
         "x-ms-examples": {
-          "ClusterExtensionType_Get": {
+          "ClusterExtensionType_Get_MaximumSet_Gen": {
             "$ref": "./examples/ClusterExtensionType_Get.json"
           }
         },
@@ -82,12 +82,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/connectedClusters/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
       "get": {
         "description": "Get Extension Types",
         "operationId": "ClusterExtensionTypes_List",
         "x-ms-examples": {
-          "ClusterExtensionTypes_List": {
+          "ClusterExtensionTypes_List_MaximumSet_Gen": {
             "$ref": "./examples/ClusterExtensionTypes_List.json"
           }
         },
@@ -97,6 +97,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterRpParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -129,7 +132,7 @@
         "description": "List available versions for an Extension Type",
         "operationId": "ExtensionTypeVersions_List",
         "x-ms-examples": {
-          "ExtensionTypeVersions_List": {
+          "ExtensionTypeVersions_List_MaximumSet_Gen": {
             "$ref": "./examples/ExtensionTypeVersions_List.json"
           }
         },
@@ -174,7 +177,7 @@
         "description": "List all Extension Types",
         "operationId": "LocationExtensionTypes_List",
         "x-ms-examples": {
-          "LocationExtensionTypes_List": {
+          "LocationExtensionTypes_List_MaximumSet_Gen": {
             "$ref": "./examples/LocationExtensionTypes_List.json"
           }
         },
@@ -236,12 +239,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExtensionTypeProperties",
-          "description": "Describes the Resource Type properties.",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-            }
-          ]
+          "description": "Describes the Resource Type properties."
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
@@ -304,12 +302,7 @@
                   "type": "string"
                 }
               }
-            },
-            "allOf": [
-              {
-                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-              }
-            ]
+            }
           }
         },
         "nextLink": {
