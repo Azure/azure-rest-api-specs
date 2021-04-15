@@ -7394,76 +7394,10 @@
       "discriminator": "jobType",
       "additionalProperties": false
     },
-    "ExperimentJobBase": {
-      "required": [
-        "jobType"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobBase"
-        }
-      ],
-      "properties": {
-        "experimentName": {
-          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "output": {
-          "description": "Location of the job output logs and artifacts.",
-          "$ref": "#/definitions/JobOutput",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      },
-      "discriminator": "jobType",
-      "additionalProperties": false
-    },
-    "ComputeJobBase": {
-      "description": "Compute job base definition",
-      "required": [
-        "compute",
-        "jobType"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExperimentJobBase"
-        }
-      ],
-      "properties": {
-        "compute": {
-          "description": "Compute binding for the job.",
-          "$ref": "#/definitions/ComputeConfiguration",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "priority": {
-          "format": "int32",
-          "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview feature and only available to users on the allow list.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "discriminator": "jobType",
-      "additionalProperties": false
-    },
     "CommandJob": {
       "description": "Code Job definition",
       "required": [
-        "command",
-        "compute"
+        "command"
       ],
       "type": "object",
       "allOf": [
@@ -7472,10 +7406,6 @@
         }
       ],
       "properties": {
-        "jobType": {
-          "$ref": "#/definitions/JobType",
-          "readOnly": true
-        },
         "status": {
           "description": "Status of the job.",
           "$ref": "#/definitions/JobStatus",
@@ -7790,7 +7720,6 @@
     "SweepJob": {
       "required": [
         "algorithm",
-        "compute",
         "objective",
         "searchSpace"
       ],
@@ -7801,10 +7730,6 @@
         }
       ],
       "properties": {
-        "jobType": {
-          "$ref": "#/definitions/JobType",
-          "readOnly": true
-        },
         "status": {
           "description": "The status of a job.",
           "$ref": "#/definitions/JobStatus",
