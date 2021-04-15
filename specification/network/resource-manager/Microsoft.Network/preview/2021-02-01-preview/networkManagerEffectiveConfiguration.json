@@ -93,14 +93,14 @@
           "type": "string",
           "description": "Resource ID."
         },
-        "configType": {
+        "kind": {
           "type": "string",
           "enum": [
             "ConnectivityConfiguration",
             "SecurityRuleCollection"
           ],
           "x-ms-enum": {
-            "name": "ConfigType",
+            "name": "kind",
             "modelAsString": true
           },
           "description": "Effective configuration Type."
@@ -114,9 +114,9 @@
         }
       },
       "required": [
-        "configType"
+        "kind"
       ],
-      "discriminator": "configType",
+      "discriminator": "kind",
       "description": "The network manager effective configuration"
     },
     "ConnectivityConfiguration": {
@@ -124,7 +124,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConnectivityConfigurationProperties",
-          "description": "The effective connectivity configuration"
+          "description": "Properties of a network manager connectivity configuration"
         }
       },
       "allOf": [
@@ -132,7 +132,7 @@
           "$ref": "#/definitions/EffectiveConfiguration"
         }
       ],
-      "description": "The network manager effective connectivity configuration",
+      "description": "The network manager connectivity configuration resource",
       "x-ms-discriminator-value": "ConnectivityConfiguration"
     },
     "SecurityRuleCollection": {
@@ -201,7 +201,7 @@
       "required": [
         "connectivityTopology"
       ],
-      "description": "Properties of network manager effective connectivity configuration"
+      "description": "Properties of network manager connectivity configuration"
     },
     "connectivityGroupItem": {
       "type": "object",
@@ -270,7 +270,7 @@
           "type": "string",
           "description": "Resource ID."
         },
-        "ruleType": {
+        "kind": {
           "type": "string",
           "description": "Whether the rule collection is custom or default.",
           "enum": [
@@ -280,15 +280,15 @@
             "DefaultAdminRule"
           ],
           "x-ms-enum": {
-            "name": "RuleType",
+            "name": "Kind",
             "modelAsString": true
           }
         }
       },
       "required": [
-        "ruleType"
+        "kind"
       ],
-      "discriminator": "ruleType",
+      "discriminator": "kind",
       "description": "Network base rule."
     },
     "AdminRule": {
