@@ -4285,9 +4285,6 @@
       }
     },
     "AzureSQLConnectionStringCredentialPatch": {
-      "required": [
-        "parameters"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -4302,9 +4299,6 @@
       "x-ms-discriminator-value": "AzureSQLConnectionString"
     },
     "DataLakeGen2SharedKeyCredentialPatch": {
-      "required": [
-        "parameters"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -4319,9 +4313,6 @@
       "x-ms-discriminator-value": "DataLakeGen2SharedKey"
     },
     "ServicePrincipalCredentialPatch": {
-      "required": [
-        "parameters"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -4336,9 +4327,6 @@
       "x-ms-discriminator-value": "ServicePrincipal"
     },
     "ServicePrincipalInKVCredentialPatch": {
-      "required": [
-        "parameters"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5430,9 +5418,6 @@
       "discriminator": "dataSourceType"
     },
     "AzureApplicationInsightsDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5447,9 +5432,6 @@
       "x-ms-discriminator-value": "AzureApplicationInsights"
     },
     "AzureBlobDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5464,9 +5446,6 @@
       "x-ms-discriminator-value": "AzureBlob"
     },
     "AzureCosmosDBDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5481,9 +5460,6 @@
       "x-ms-discriminator-value": "AzureCosmosDB"
     },
     "AzureDataExplorerDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5498,9 +5474,6 @@
       "x-ms-discriminator-value": "AzureDataExplorer"
     },
     "AzureDataLakeStorageGen2DataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5515,9 +5488,6 @@
       "x-ms-discriminator-value": "AzureDataLakeStorageGen2"
     },
     "AzureEventHubsDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5532,9 +5502,6 @@
       "x-ms-discriminator-value": "AzureEventHubs"
     },
     "AzureTableDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5549,9 +5516,6 @@
       "x-ms-discriminator-value": "AzureTable"
     },
     "ElasticsearchDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5566,9 +5530,6 @@
       "x-ms-discriminator-value": "Elasticsearch"
     },
     "HttpRequestDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5583,9 +5544,6 @@
       "x-ms-discriminator-value": "HttpRequest"
     },
     "InfluxDBDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5600,9 +5558,6 @@
       "x-ms-discriminator-value": "InfluxDB"
     },
     "MySqlDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5617,9 +5572,6 @@
       "x-ms-discriminator-value": "MySql"
     },
     "PostgreSqlDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5634,9 +5586,6 @@
       "x-ms-discriminator-value": "PostgreSql"
     },
     "SQLServerDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5657,9 +5606,6 @@
       "x-ms-discriminator-value": "SqlServer"
     },
     "MongoDBDataFeedPatch": {
-      "required": [
-        "dataSourceParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -5760,11 +5706,9 @@
     },
     "AnomalyFeedback": {
       "required": [
-        "startTime",
         "endTime",
-        "value",
-        "anomalyDetectionConfigurationId",
-        "anomalyDetectionConfigurationSnapshot"
+        "startTime",
+        "value"
       ],
       "type": "object",
       "allOf": [
@@ -5834,8 +5778,8 @@
     },
     "ChangePointFeedback": {
       "required": [
-        "startTime",
         "endTime",
+        "startTime",
         "value"
       ],
       "type": "object",
@@ -5875,8 +5819,6 @@
     },
     "CommentFeedback": {
       "required": [
-        "startTime",
-        "endTime",
         "value"
       ],
       "type": "object",
@@ -6226,9 +6168,6 @@
       "discriminator": "hookType"
     },
     "EmailHookInfoPatch": {
-      "required": [
-        "hookParameter"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -6243,9 +6182,6 @@
       "x-ms-discriminator-value": "Email"
     },
     "WebhookHookInfoPatch": {
-      "required": [
-        "hookParameter"
-      ],
       "type": "object",
       "allOf": [
         {
