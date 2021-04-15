@@ -20,3 +20,5 @@ python-sdk-output-folder: $(az-output-folder)/azext_m365securityandcompliance/ve
 #       - where:
 #             parameter: location
 #         required: true
+
+```
