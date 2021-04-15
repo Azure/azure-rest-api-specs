@@ -219,7 +219,11 @@
       "description": "Services response resource.",
       "type": "object",
       "discriminator": "serviceType",
-      "x-ms-client-flatten": true,
+      "allOf": [
+        {
+          "$ref": ".../../cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ],
       "properties": {
         "creationTime": {
           "readOnly": true,
@@ -278,7 +282,7 @@
         }
       ],
       "properties": {
-        "SqlDedicatedGatewayEndpoint": {
+        "sqlDedicatedGatewayEndpoint": {
           "type": "string",
           "description": "SqlDedicatedGateway endpoint for the service."
         },
