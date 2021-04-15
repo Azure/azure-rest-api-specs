@@ -216,27 +216,6 @@ These settings apply only when `--tag=package-preview-2021-03-only` is specified
 input-file:
   - Microsoft.Insights/preview/2021-03-03-preview/diagnosticServicesToken_API.json
 ```
-### Tag: package-2020-02-12
-
-These settings apply only when `--tag=package-2020-02-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-02-12'
-input-file:
-  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
-  - Microsoft.Insights/stable/2015-05-01/components_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
-  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
-  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
-  - Microsoft.Insights/stable/2015-05-01/webTests_API.json
-  - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
-  - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
-  - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
-```
 
 ### Tag: package-2020-10-20
 
@@ -244,6 +223,7 @@ These settings apply only when `--tag=package-2020-10-20` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-10-20'
 input-file:
+  - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
   - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
   - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
@@ -257,14 +237,13 @@ input-file:
   - Microsoft.Insights/stable/2015-05-01/webTests_API.json
   - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
   - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
-  - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
 ```
 
-### Tag: package-preview-2020-10
+### Tag: package-preview-2020-10-only
 
-These settings apply only when `--tag=package-preview-2020-10` is specified on the command line.
+These settings apply only when `--tag=package-preview-2020-10-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-10'
+```yaml $(tag) == 'package-preview-2020-10-only'
 input-file:
   - Microsoft.Insights/preview/2020-10-05-preview/webTests_API.json
 ```
