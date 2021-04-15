@@ -22,28 +22,28 @@ cli:
     - name: /privateLinkServicesForM365ComplianceCenter/get/List all privateLinkServicesForM365ComplianceCenter
     - name: /privateLinkServicesForM365ComplianceCenter/patch/Update privateLinkServiceForM365ComplianceCenter
     - name: /privateLinkServicesForM365ComplianceCenter/delete/Delete privateLinkServiceForM365ComplianceCenter
-	- split: privateLinkServicesForO365ManagementActivityAPI
+    - split: privateLinkServicesForO365ManagementActivityAPI
     - name: /privateLinkServicesForO365ManagementActivityAPI/put/Create a privateLinkServiceForO365ManagementActivityAPI
     - name: /privateLinkServicesForO365ManagementActivityAPI/get/Get privateLinkServiceForO365ManagementActivityAPI
     - name: /privateLinkServicesForO365ManagementActivityAPI/get/List privateLinkServicesForO365ManagementActivityAPI in resource group
     - name: /privateLinkServicesForO365ManagementActivityAPI/get/List all privateLinkServicesForO365ManagementActivityAPI
     - name: /privateLinkServicesForO365ManagementActivityAPI/patch/Update privateLinkServiceForO365ManagementActivityAPI
     - name: /privateLinkServicesForO365ManagementActivityAPI/delete/Delete privateLinkServiceForO365ManagementActivityAPI
-	- split: privateLinkServicesForEDMUpload
+    - split: privateLinkServicesForEDMUpload
     - name: /privateLinkServicesForEDMUpload/put/Create a privateLinkServiceForEDMUpload
     - name: /privateLinkServicesForEDMUpload/get/Get privateLinkServiceForEDMUpload
     - name: /privateLinkServicesForEDMUpload/get/List privateLinkServicesForEDMUpload in resource group
     - name: /privateLinkServicesForEDMUpload/get/List all privateLinkServicesForEDMUpload
     - name: /privateLinkServicesForEDMUpload/patch/Update privateLinkServiceForEDMUpload
     - name: /privateLinkServicesForEDMUpload/delete/Delete privateLinkServiceForEDMUpload
-	- split: privateLinkServicesForSCCPowershell
+    - split: privateLinkServicesForSCCPowershell
     - name: /privateLinkServicesForSCCPowershell/put/Create a privateLinkServiceForSCCPowershell
     - name: /privateLinkServicesForSCCPowershell/get/Get privateLinkServiceForSCCPowershell
     - name: /privateLinkServicesForSCCPowershell/get/List privateLinkServicesForSCCPowershell in resource group
     - name: /privateLinkServicesForSCCPowershell/get/List all privateLinkServicesForSCCPowershell
     - name: /privateLinkServicesForSCCPowershell/patch/Update privateLinkServiceForSCCPowershell
     - name: /privateLinkServicesForSCCPowershell/delete/Delete privateLinkServiceForSCCPowershell
-	- split: privateLinkServicesForMIPPolicySync
+    - split: privateLinkServicesForMIPPolicySync
     - name: /privateLinkServicesForMIPPolicySync/put/Create a privateLinkServiceForMIPPolicySync
     - name: /privateLinkServicesForMIPPolicySync/get/Get privateLinkServiceForMIPPolicySync
     - name: /privateLinkServicesForMIPPolicySync/get/List privateLinkServicesForMIPPolicySync in resource group
