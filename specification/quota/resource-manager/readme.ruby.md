@@ -23,7 +23,7 @@ output-folder: $(ruby-sdks-folder)/quota
 These settings apply only when `--tag=package-2021-03-15-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2021-03-15' && $(ruby)
+```yaml $(tag) == 'package-2021-03-15-preview' && $(ruby)
 namespace: Microsoft.Quota
 output-folder: $(ruby-sdks-folder)/quota-preview
 ```
