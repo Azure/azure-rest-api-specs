@@ -26,7 +26,7 @@ These are the global settings for the Quota API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-03-15-preview
+tag: package-2021-03-15
 ```
 
 ### Tag: package-2021-03-15
@@ -49,6 +49,7 @@ input-file:
 ```
 
 ---
+
 ### Supressions
 
 ``` yaml
