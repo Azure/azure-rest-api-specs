@@ -123,8 +123,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfigurationProperties",
-          "description": "The Network Group properties"
+          "$ref": "#/definitions/ConnectivityConfigurationProperties",
+          "description": "The connetivity configuration properties"
         }
       },
       "allOf": [
@@ -133,9 +133,77 @@
         }
       ],
       "description": "The network manager effective connectivity configuration",
-      "x-ms-discriminator-value": "EffectiveConnectivityConfiguration"
+      "x-ms-discriminator-value": "ConnectivityConfiguration"
     },
-    "ConnectivityGroupItem": {
+    "SecurityRuleCollection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RuleCollectionProperties",
+          "description": "The security rule collection properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveConfiguration"
+        }
+      ],
+      "description": "The network manager effective security rule collection",
+      "x-ms-discriminator-value": "SecurityRuleCollection"
+    },
+    "ConnectivityConfigurationProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "A friendly name for the resource."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the connectivity configuration."
+        },
+        "connectivityTopology": {
+          "type": "string",
+          "enum": [
+            "HubAndSpokeTopology",
+            "MeshTopology"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectivityTopology",
+            "modelAsString": true
+          },
+          "description": "Connectivity topology type."
+        },
+        "hubId": {
+          "type": "string",
+          "description": "The hub vnet Id."
+        },
+        "isGlobal": {
+          "type": "boolean",
+          "description": "Flag if global mesh is supported."
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/connectivityGroupItem"
+          },
+          "description": "Groups for configuration"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the connectivity configuration resource."
+        },
+        "deleteExistingPeering": {
+          "type": "boolean",
+          "description": "Flag if need to remove current existing peerings."
+        }
+      },
+      "required": [
+        "connectivityTopology"
+      ],
+      "description": "Properties of network manager connectivity configuration"
+    },
+    "connectivityGroupItem": {
       "type": "object",
       "properties": {
         "networkGroupId": {
@@ -163,22 +231,6 @@
           "description": "Group connectivity type."
         }
       }
-    },
-    "SecurityRuleCollection": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RuleCollectionProperties",
-          "description": "The security rule collection properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EffectiveConfiguration"
-        }
-      ],
-      "description": "The network manager effective security rule collection",
-      "x-ms-discriminator-value": "EffectiveSecurityRuleCollection"
     },
     "RuleCollectionProperties": {
       "properties": {
@@ -312,7 +364,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "./networkManagerGroup.json#/definitions/NetworkGroupProperties",
-          "description": "The Network Group properties"
+          "description": "The network group properties"
         }
       },
       "description": "The network group resource"
