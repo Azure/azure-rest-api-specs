@@ -491,7 +491,7 @@
       "default": "StandardSSD_LRS",
       "x-ms-enum": {
         "name": "DiskType",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "value": "Standard_LRS",
@@ -669,6 +669,11 @@
         "isStateless": {
           "type": "boolean",
           "description": "Indicates if the node type can only host Stateless workloads.",
+          "default": false
+        },
+        "multiplePlacementGroups": {
+          "type": "boolean",
+          "description": "Indicates if scale set associated with the node type can be composed of multiple placement groups.",
           "default": false
         },
         "provisioningState": {
@@ -911,7 +916,11 @@
         "Deleting",
         "Deleted",
         "Other"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ManagedResourceProvisioningState",
+        "modelAsString": false
+      }
     },
     "OperationResult": {
       "properties": {
