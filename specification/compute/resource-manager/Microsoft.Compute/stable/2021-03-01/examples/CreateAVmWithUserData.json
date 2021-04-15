@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "vmName": "myVM",
+    "vmName": "{vm-name}",
     "api-version": "2021-03-01",
     "parameters": {
       "location": "westus",
@@ -22,7 +22,7 @@
             "managedDisk": {
               "storageAccountType": "Standard_LRS"
             },
-            "name": "myVMosdisk",
+            "name": "vmOSdisk",
             "createOption": "FromImage"
           }
         },
@@ -38,7 +38,7 @@
         },
         "osProfile": {
           "adminUsername": "{your-username}",
-          "computerName": "myVM",
+          "computerName":  "{vm-name}",
           "adminPassword": "{your-password}"
         },
         "diagnosticsProfile": {
@@ -54,13 +54,13 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/{vm-name}",
         "type": "Microsoft.Compute/virtualMachines",
         "properties": {
           "osProfile": {
             "adminUsername": "{your-username}",
             "secrets": [],
-            "computerName": "myVM",
+            "computerName": "{vm-name}",
             "windowsConfiguration": {
               "provisionVMAgent": true,
               "enableAutomaticUpdates": true
@@ -87,7 +87,7 @@
               "osType": "Windows",
               "caching": "ReadWrite",
               "createOption": "FromImage",
-              "name": "myVMosdisk",
+              "name": "vmOSdisk",
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
               }
@@ -106,19 +106,19 @@
           },
           "provisioningState": "Creating"
         },
-        "name": "myVM",
+        "name": "{vm-name}",
         "location": "westus"
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/{vm-name}",
         "type": "Microsoft.Compute/virtualMachines",
         "properties": {
           "osProfile": {
             "adminUsername": "{your-username}",
             "secrets": [],
-            "computerName": "myVM",
+            "computerName": "{vm-name}",
             "windowsConfiguration": {
               "provisionVMAgent": true,
               "enableAutomaticUpdates": true
@@ -145,7 +145,7 @@
               "osType": "Windows",
               "caching": "ReadWrite",
               "createOption": "FromImage",
-              "name": "myVMosdisk",
+              "name": "vmOSdisk",
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
               }
@@ -164,7 +164,7 @@
           },
           "provisioningState": "Creating"
         },
-        "name": "myVM",
+        "name": "{vm-name}",
         "location": "westus"
       }
     }
