@@ -447,6 +447,119 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{serverFarmName}/recommendations": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Get all recommendations for an app service plan.",
+        "description": "Description for Get all recommendations for an app service plan.",
+        "operationId": "Recommendations_ListRecommendedRulesForServerFarm",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "serverFarmName",
+            "in": "path",
+            "description": "Name of the app service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featured",
+            "in": "query",
+            "description": "Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.",
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification'",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{serverFarmName}/recommendations/{name}": {
+      "get": {
+        "tags": [
+          "Recommendations"
+        ],
+        "summary": "Gets the detailed properties of the recommendation object for the specified server farm.",
+        "description": "Description for Gets the detailed properties of the recommendation object for the specified server farm.",
+        "operationId": "Recommendations_GetRuleDetailsByAppServicePlan",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "appServicePlanName",
+            "in": "query",
+            "description": "App service plan name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Recommendation rule name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverFarmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationRule"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendationHistory": {
       "get": {
         "tags": [
