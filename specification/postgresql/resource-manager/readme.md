@@ -63,6 +63,7 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
 ```
 
+
 ### Tag: package-2021-03-31-privatepreview
 
 These settings apply only when `--tag=package-2021-03-31-privatepreview` is specified on the command line.
@@ -71,6 +72,7 @@ These settings apply only when `--tag=package-2021-03-31-privatepreview` is spec
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
 ```
+
 
 ### Tag: package-2020-01-01-privatepreview
 

@@ -66,10 +66,8 @@
         "responses": {
           "200": {
             "description": "OK",
-            "in": "body",
-            "name": "body",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/PrivateDnsZoneSuffix"
             }
           },
           "default": {
@@ -83,6 +81,14 @@
     }
   },
   "definitions": {
+    "PrivateDnsZoneSuffix": {
+      "in": "body",
+      "name": "body",
+      "schema": {
+        "type": "string"
+      },
+      "description": "Represents the supported private DNS zone suffix."
+    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
