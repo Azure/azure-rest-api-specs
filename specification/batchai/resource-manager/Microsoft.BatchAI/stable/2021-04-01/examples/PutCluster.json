@@ -4,9 +4,48 @@
     "workspaceName": "demo_workspace",
     "clusterName": "demo_cluster",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "api-version": "2018-05-01"
+    "api-version": "2018-05-01",
+    "parameters": {
+      "properties": {
+        "scaleSettings": {
+          "manual": {
+            "nodeDeallocationOption": "requeue",
+            "targetNodeCount": 1
+          }
+        },
+        "userAccountSettings": {
+          "adminUserPassword": "admin_user_password",
+          "adminUserSshPublicKey": "ssh-rsa AAAAB3NzaC1yc...",
+          "adminUserName": "admin_user_name"
+        },
+        "nodeSetup": {
+          "mountVolumes": {
+            "azureFileShares": [
+              {
+                "relativeMountPath": "azfiles",
+                "directoryMode": "0777",
+                "accountName": "storage_account_name",
+                "azureFileUrl": "https://storage_account_name.file.core.windows.net/azure_file_share_name",
+                "fileMode": "0777",
+                "credentials": {
+                  "accountKey": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000=="
+                }
+              }
+            ]
+          }
+        },
+        "vmPriority": "dedicated",
+        "vmSize": "STANDARD_NC6"
+      }
+    }
   },
   "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.BatchAI/locations/eastus/operationresults/7e69f371-db62-4183-bba0-5ee577d43bd7?api-version=2018-05-01",
+        "Retry-After": 15
+      }
+    },
     "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/workspaces/demo_workspace/clusters/demo_cluster",
@@ -55,15 +94,6 @@
                   "relativeMountPath": "azfiles",
                   "fileMode": "0777",
                   "directoryMode": "0777"
-                }
-              ],
-              "fileServers": [
-                {
-                  "fileServer": {
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/workspaces/demo_workspace/fileservers/fileservercedd134b"
-                  },
-                  "relativeMountPath": "nfs",
-                  "mountOptions": "rw"
                 }
               ]
             }

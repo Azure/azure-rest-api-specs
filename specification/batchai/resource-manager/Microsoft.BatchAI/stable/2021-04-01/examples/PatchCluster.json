@@ -4,7 +4,17 @@
     "workspaceName": "demo_workspace",
     "clusterName": "demo_cluster",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "api-version": "2018-05-01"
+    "api-version": "2018-05-01",
+    "parameters": {
+      "properties": {
+        "scaleSettings": {
+          "autoScale": {
+            "minimumNodeCount": 0,
+            "maximumNodeCount": 10
+          }
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -14,10 +24,10 @@
         "type": "Microsoft.BatchAI/Clusters",
         "properties": {
           "provisioningState": "succeeded",
-          "allocationState": "resizing",
-          "creationTime": "2017-09-27T21:50:02.377Z",
-          "allocationStateTransitionTime": "2017-09-27T21:50:04.521Z",
-          "provisioningStateTransitionTime": "2017-09-27T21:50:03.828Z",
+          "allocationState": "steady",
+          "creationTime": "2017-09-27T21:43:55.215Z",
+          "allocationStateTransitionTime": "2017-09-27T21:43:57.664Z",
+          "provisioningStateTransitionTime": "2017-09-27T21:43:56.238Z",
           "vmSize": "STANDARD_NC6",
           "currentNodeCount": 0,
           "nodeStateCounts": {
@@ -29,9 +39,10 @@
           },
           "vmPriority": "dedicated",
           "scaleSettings": {
-            "manual": {
-              "targetNodeCount": 1,
-              "nodeDeallocationOption": "requeue"
+            "autoScale": {
+              "minimumNodeCount": 0,
+              "maximumNodeCount": 10,
+              "initialNodeCount": 0
             }
           },
           "virtualMachineConfiguration": {
@@ -56,20 +67,8 @@
                   "fileMode": "0777",
                   "directoryMode": "0777"
                 }
-              ],
-              "fileServers": [
-                {
-                  "fileServer": {
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/workspaces/demo_workspace/fileservers/fileservercedd134b"
-                  },
-                  "relativeMountPath": "nfs",
-                  "mountOptions": "rw"
-                }
               ]
             }
-          },
-          "subnet": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.Network/virtualNetworks/7feb1976-8c31-4f1f-bea2-86cb1839a7bavnet/subnets/Subnet-1"
           }
         }
       }
