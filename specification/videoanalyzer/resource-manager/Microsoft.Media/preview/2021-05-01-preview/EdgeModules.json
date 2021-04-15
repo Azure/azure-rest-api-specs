@@ -31,45 +31,45 @@
         "edgeModuleId": {
           "type": "string",
           "format": "uuid",
-          "description": "The ID of the Edge Module.",
+          "description": "Internal ID generated for the instance of the Video Analyzer edge module.",
           "readOnly": true,
           "x-nullable": false
         }
       },
       "type": "object",
-      "description": "The properties of the Edge Module."
+      "description": "Application level properties for the edge module resource."
     },
-    "GenerateProvisioningTokenInput": {
+    "ListProvisioningTokenInput": {
       "properties": {
         "expirationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The expiration date of the registration token. The module must be initialized prior to the token expiration date."
+          "description": "The desired expiration date of the registration token. The Azure Video Analyzer IoT edge module must be initialized and connected to the Internet prior to the token expiration date."
         }
       },
       "type": "object",
       "required": [
         "expirationDate"
       ],
-      "description": "The input parameters to generate registration token for the Edge Module."
+      "description": "The input parameters to generate registration token for the Azure Video Analyzer IoT edge module."
     },
     "EdgeModuleProvisioningToken": {
       "properties": {
         "expirationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The expiration date of the registration token. The module must be initialized prior to the token expiration date.",
+          "description": "The expiration date of the registration token. The Azure Video Analyzer IoT edge module must be initialized and connected to the Internet prior to the token expiration date.",
           "readOnly": true,
           "x-nullable": false
         },
         "token": {
           "type": "string",
-          "description": "The content of the registration token for the Edge Module.",
+          "description": "The token blob to be provided to the Azure Video Analyzer IoT edge module through the Azure IoT Edge module twin properties.",
           "readOnly": true
         }
       },
       "type": "object",
-      "description": "The registration token for the Edge Module."
+      "description": "Provisioning token properties. A provisioning token allows for a single instance of Azure Video analyzer IoT edge module to be initialized and authorized to the cloud account. The provisioning token itself is short lived and it is only used for the initial handshake between IoT edge module and the cloud. After the initial handshake, the IoT edge module will agree on a set of authentication keys which will be auto-rotated as long as the module is able to periodically connect to the cloud. A new provisioning token can be generated for the same IoT edge module in case the module state lost or reset."
     },
     "EdgeModuleEntity": {
       "allOf": [
@@ -113,8 +113,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/edgeModules": {
       "get": {
-        "summary": "List the registered edge modules.",
-        "description": "Lists the registered edge modules.",
+        "summary": "List all existing edge module resources.",
+        "description": "List all existing edge module resources.",
         "operationId": "EdgeModules_List",
         "responses": {
           "200": {
@@ -178,8 +178,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/edgeModules/{edgeModuleName}": {
       "get": {
-        "summary": "Get an edge module registration.",
-        "description": "Gets an edge module registration.",
+        "summary": "Retrieves an existing edge module resource.",
+        "description": "Retrieves an existing edge module resource.",
         "operationId": "EdgeModules_Get",
         "responses": {
           "200": {
@@ -223,8 +223,8 @@
         }
       },
       "put": {
-        "summary": "Register an edge module",
-        "description": "Register an edge module.",
+        "summary": "Creates a new edge module or updates an existing one.",
+        "description": "Creates a new edge module or updates an existing one. An edge module resource enables a single instance of an Azure Video Analyzer IoT edge module to interact with the Video Analyzer Account. This is used for authorization and also to make sure that the particular edge module instance only has access to the data it requires from the Azure Video Analyzer service. A new edge module resource should be created for every new instance of an Azure Video Analyzer edge module deployed to you Azure IoT edge environment. Edge module resources can be deleted if the specific module is not in use anymore.",
         "operationId": "EdgeModules_CreateOrUpdate",
         "responses": {
           "200": {
@@ -283,8 +283,8 @@
         }
       },
       "delete": {
-        "summary": "Delete an edge module registration",
-        "description": "Deletes an edge module registration thus preventing future connections from the module.",
+        "summary": "Deletes an existing edge module resource.",
+        "description": "Deletes an existing edge module resource. Deleting the edge module resource will prevent an Azure Video Analyzer IoT edge module which was previously initiated with the module provisioning token from communicating with the cloud.",
         "operationId": "EdgeModules_Delete",
         "responses": {
           "200": {
@@ -328,11 +328,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/edgeModules/{edgeModuleName}/generateProvisioningToken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/edgeModules/{edgeModuleName}/listProvisioningToken": {
       "post": {
-        "summary": "Generates a provisioning token for an edge module registration.",
-        "description": "Generates a provisioning token that is used to register an edge module.",
-        "operationId": "EdgeModules_GenerateProvisioningToken",
+        "summary": "Creates a new provisioning token.",
+        "description": "Creates a new provisioning token. A provisioning token allows for a single instance of Azure Video analyzer IoT edge module to be initialized and authorized to the cloud account. The provisioning token itself is short lived and it is only used for the initial handshake between IoT edge module and the cloud. After the initial handshake, the IoT edge module will agree on a set of authentication keys which will be auto-rotated as long as the module is able to periodically connect to the cloud. A new provisioning token can be generated for the same IoT edge module in case the module state lost or reset.",
+        "operationId": "EdgeModules_ListProvisioningToken",
         "responses": {
           "200": {
             "description": "OK",
@@ -369,7 +369,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GenerateProvisioningTokenInput"
+              "$ref": "#/definitions/ListProvisioningTokenInput"
             },
             "description": "The request parameters"
           },

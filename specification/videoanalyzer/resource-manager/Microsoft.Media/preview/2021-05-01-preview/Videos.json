@@ -71,7 +71,7 @@
       "type": "object",
       "description": "Contains information about the video and audio content."
     },
-    "VideoPlaybackToken": {
+    "VideoStreamingToken": {
       "properties": {
         "expirationDate": {
           "type": "string",
@@ -137,7 +137,7 @@
       "type": "object",
       "description": "Application level properties for the video resource."
     },
-    "Authentication": {
+    "AuthenticationBase": {
       "discriminator": "@type",
       "properties": {
         "@type": {
@@ -151,7 +151,7 @@
       ],
       "description": "Base class for access policies authentication methods."
     },
-    "Claim": {
+    "TokenClaim": {
       "properties": {
         "name": {
           "type": "string",
@@ -170,10 +170,10 @@
       "description": "Properties for expected token claims."
     },
     "JwtAuthentication": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JwtAuthentication",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.JwtAuthentication",
       "allOf": [
         {
-          "$ref": "#/definitions/Authentication"
+          "$ref": "#/definitions/AuthenticationBase"
         }
       ],
       "properties": {
@@ -194,7 +194,7 @@
         "claims": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Claim"
+            "$ref": "#/definitions/TokenClaim"
           },
           "description": "List of additional token claims to be validated. Token must contains all claims and respective values for it to be valid."
         },
@@ -229,7 +229,7 @@
       "description": "Key properties for JWT token validation."
     },
     "RsaTokenKey": {
-      "x-ms-discriminator-value": "#Microsoft.Media.RsaTokenKey",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.RsaTokenKey",
       "allOf": [
         {
           "$ref": "#/definitions/TokenKey"
@@ -281,7 +281,7 @@
       "description": "Required validation properties for tokens generated with RSA algorithm."
     },
     "EccTokenKey": {
-      "x-ms-discriminator-value": "#Microsoft.Media.EccTokenKey",
+      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.EccTokenKey",
       "allOf": [
         {
           "$ref": "#/definitions/TokenKey"
@@ -353,7 +353,7 @@
           "x-nullable": true
         },
         "authentication": {
-          "$ref": "#/definitions/Authentication",
+          "$ref": "#/definitions/AuthenticationBase",
           "description": "Authentication method to be used when validating client API access."
         }
       },
@@ -693,16 +693,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}/streamingAuthorization": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}/listStreamingToken": {
+      "post": {
         "summary": "Generates a streaming token which can be used for video playback.",
         "description": "Generates a streaming token which can be used for video playback.",
-        "operationId": "Videos_StreamingAuthorization",
+        "operationId": "Videos_ListStreamingToken",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VideoPlaybackToken"
+              "$ref": "#/definitions/VideoStreamingToken"
             }
           },
           "default": {
@@ -734,8 +734,8 @@
           }
         ],
         "x-ms-examples": {
-          "Generate a playback token for media endpoint authorization.": {
-            "$ref": "examples/video-getStreamingAuthorization.json"
+          "Generate a streaming token for media endpoint authorization.": {
+            "$ref": "examples/video-listStreamingToken.json"
           }
         }
       }
