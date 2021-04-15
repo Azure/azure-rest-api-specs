@@ -2259,7 +2259,26 @@
       ],
       "properties": {
         "provisioningState": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "specification": {
           "allOf": [
@@ -2446,14 +2465,38 @@
       ],
       "properties": {
         "nextTrafficRegion": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "Canary",
+            "LowTraffic",
+            "MediumTraffic",
+            "HighTraffic",
+            "None",
+            "RestOfTheWorldGroupOne",
+            "RestOfTheWorldGroupTwo"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TrafficRegionCategory",
+            "modelAsString": true
+          }
         },
         "nextTrafficRegionScheduledTime": {
           "format": "date-time",
           "type": "string"
         },
         "subscriptionReregistrationResult": {
-          "type": "string"
+          "enum": [
+            "NotApplicable",
+            "ConditionalUpdate",
+            "ForcedUpdate",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SubscriptionReregistrationResult",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2461,7 +2504,26 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "specification": {
           "allOf": [
@@ -2549,7 +2611,15 @@
       "type": "object",
       "properties": {
         "requiredFeaturesPolicy": {
-          "type": "string"
+          "enum": [
+            "Any",
+            "All"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeaturesPolicy",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2557,7 +2627,18 @@
       "type": "object",
       "properties": {
         "optInHeaders": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "SignedUserToken",
+            "ClientGroupMembership",
+            "SignedAuxiliaryTokens",
+            "UnboundedClientGroupMembership"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OptInHeaderType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2621,10 +2702,27 @@
           "type": "string"
         },
         "direction": {
-          "type": "string"
+          "enum": [
+            "None",
+            "Request",
+            "Response"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LoggingDirections",
+            "modelAsString": true
+          }
         },
         "detailLevel": {
-          "type": "string"
+          "enum": [
+            "None",
+            "Body"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LoggingDetails",
+            "modelAsString": true
+          }
         },
         "hiddenPropertyPaths": {
           "allOf": [
@@ -2643,7 +2741,16 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "NumberOfRequests",
+            "NumberOfResources"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ThrottlingMetricType",
+            "modelAsString": true
+          }
         },
         "limit": {
           "format": "int64",
@@ -2723,7 +2830,18 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "SystemAssigned",
+            "UserAssigned",
+            "Actor",
+            "DelegatedResourceIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityManagementTypes",
+            "modelAsString": true
+          }
         },
         "applicationId": {
           "type": "string"
@@ -2734,7 +2852,18 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "SystemAssigned",
+            "UserAssigned",
+            "Actor",
+            "DelegatedResourceIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityManagementTypes",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2742,7 +2871,19 @@
       "type": "object",
       "properties": {
         "state": {
-          "type": "string"
+          "enum": [
+            "NotDefined",
+            "Enabled",
+            "Warned",
+            "PastDue",
+            "Disabled",
+            "Deleted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": true
+          }
         },
         "allowedActions": {
           "type": "array",
@@ -2805,10 +2946,29 @@
       "type": "object",
       "properties": {
         "capabilities": {
-          "type": "string"
+          "enum": [
+            "Default",
+            "Preflight"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TemplateDeploymentCapabilities",
+            "modelAsString": true
+          }
         },
         "preflightOptions": {
-          "type": "string"
+          "enum": [
+            "None",
+            "ValidationRequests",
+            "DeploymentRequests",
+            "TestOnly",
+            "RegisteredOnly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TemplateDeploymentPreflightOptions",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2831,10 +2991,29 @@
       "type": "object",
       "properties": {
         "linkedOperation": {
-          "type": "string"
+          "enum": [
+            "None",
+            "CrossResourceGroupResourceMove",
+            "CrossSubscriptionResourceMove"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LinkedOperation",
+            "modelAsString": true
+          }
         },
         "linkedAction": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "Blocked",
+            "Validate",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LinkedAction",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2845,10 +3024,34 @@
           "type": "string"
         },
         "routingType": {
-          "type": "string"
+          "enum": [
+            "Default",
+            "ProxyOnly",
+            "HostBased",
+            "Extension",
+            "Tenant",
+            "Fanout",
+            "LocationBased",
+            "Failover",
+            "CascadeExtension"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoutingType",
+            "modelAsString": true
+          }
         },
         "resourceValidation": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "ReservedWords",
+            "ProfaneWords"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceValidation",
+            "modelAsString": true
+          }
         },
         "allowedUnauthorizedActions": {
           "type": "array",
@@ -2905,12 +3108,7 @@
             }
           ]
         },
-        "metadata": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
+        "metadata": {},
         "requiredFeatures": {
           "type": "array",
           "items": {
@@ -2972,7 +3170,16 @@
           }
         },
         "resourceDeletionPolicy": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "Cascade",
+            "Force"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManifestResourceDeletionPolicy",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3036,7 +3243,16 @@
           "type": "string"
         },
         "effect": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "Allow",
+            "Disallow"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceProviderCapabilitiesEffect",
+            "modelAsString": true
+          }
         },
         "requiredFeatures": {
           "type": "array",
@@ -3084,7 +3300,21 @@
           "type": "string"
         },
         "providerType": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "Internal",
+            "External",
+            "Hidden",
+            "RegistrationFree",
+            "LegacyRegistrationRequired",
+            "TenantOnly",
+            "AuthorizationFree"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceProviderType",
+            "modelAsString": true
+          }
         },
         "requiredFeatures": {
           "type": "array",
@@ -3185,10 +3415,27 @@
       "type": "object",
       "properties": {
         "notificationMode": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "EventHub",
+            "WebHook"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NotificationMode",
+            "modelAsString": true
+          }
         },
         "messageScope": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "RegisteredSubscriptions"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MessageScope",
+            "modelAsString": true
+          }
         },
         "includedEvents": {
           "type": "array",
@@ -3366,7 +3613,7 @@
     "ThirdPartyProviderAuthorization": {
       "type": "object",
       "properties": {
-        "authorizationsz": {
+        "authorizations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LightHouseAuthorization"
@@ -3387,18 +3634,10 @@
           }
         },
         "providerAuthentication": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceProviderAuthentication"
-            }
-          ]
+          "$ref": "#/definitions/ResourceProviderAuthentication"
         },
         "thirdPartyProviderAuthorization": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ThirdPartyProviderAuthorization"
-            }
-          ]
+          "$ref": "#/definitions/ThirdPartyProviderAuthorization"
         }
       }
     },
@@ -3410,10 +3649,41 @@
       "type": "object",
       "properties": {
         "state": {
-          "type": "string"
+          "enum": [
+            "Registered",
+            "Unregistered",
+            "Warned",
+            "Suspended",
+            "Deleted",
+            "WarnedToRegistered",
+            "WarnedToSuspended",
+            "WarnedToDeleted",
+            "WarnedToUnregistered",
+            "SuspendedToRegistered",
+            "SuspendedToWarned",
+            "SuspendedToDeleted",
+            "SuspendedToUnregistered"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SubscriptionTransitioningState",
+            "modelAsString": true
+          }
         },
         "action": {
-          "type": "string"
+          "enum": [
+            "NotDefined",
+            "DeleteAllResources",
+            "SoftDeleteAllResources",
+            "NoOp",
+            "BillingCancellation",
+            "UndoSoftDelete"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SubscriptionNotificationOperation",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3441,7 +3711,16 @@
         "preflightOptions": {
           "type": "array",
           "items": {
-            "type": "string"
+            "enum": [
+              "None",
+              "ContinueDeploymentOnFailure",
+              "DefaultValidationOnly"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "PreflightOption",
+              "modelAsString": true
+            }
           }
         }
       }
@@ -3469,7 +3748,21 @@
           "type": "string"
         },
         "providerType": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "Internal",
+            "External",
+            "Hidden",
+            "RegistrationFree",
+            "LegacyRegistrationRequired",
+            "TenantOnly",
+            "AuthorizationFree"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceProviderType",
+            "modelAsString": true
+          }
         },
         "requiredFeatures": {
           "type": "array",
@@ -3535,7 +3828,26 @@
           ]
         },
         "provisioningState": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "subscriptionLifecycleNotificationSpecifications": {
           "allOf": [
@@ -3588,7 +3900,29 @@
         "extensionCategories": {
           "type": "array",
           "items": {
-            "type": "string"
+            "enum": [
+              "NotSpecified",
+              "ResourceCreationValidate",
+              "ResourceCreationBegin",
+              "ResourceCreationCompleted",
+              "ResourceReadValidate",
+              "ResourceReadBegin",
+              "ResourcePatchValidate",
+              "ResourcePatchCompleted",
+              "ResourceDeletionValidate",
+              "ResourceDeletionBegin",
+              "ResourceDeletionCompleted",
+              "ResourcePostAction",
+              "SubscriptionLifecycleNotification",
+              "ResourcePatchBegin",
+              "ResourceMoveBegin",
+              "ResourceMoveCompleted"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ExtensionCategory",
+              "modelAsString": true
+            }
           }
         },
         "timeout": {
@@ -3646,13 +3980,31 @@
         "request": {
           "type": "array",
           "items": {
-            "type": "string"
+            "enum": [
+              "NotSpecified",
+              "DoNotMergeExistingReadOnlyAndSecretProperties",
+              "IncludeInternalMetadata"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ExtensionOptionType",
+              "modelAsString": true
+            }
           }
         },
         "response": {
           "type": "array",
           "items": {
-            "type": "string"
+            "enum": [
+              "NotSpecified",
+              "DoNotMergeExistingReadOnlyAndSecretProperties",
+              "IncludeInternalMetadata"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ExtensionOptionType",
+              "modelAsString": true
+            }
           }
         }
       }
@@ -3715,10 +4067,34 @@
       "type": "object",
       "properties": {
         "routingType": {
-          "type": "string"
+          "enum": [
+            "Default",
+            "ProxyOnly",
+            "HostBased",
+            "Extension",
+            "Tenant",
+            "Fanout",
+            "LocationBased",
+            "Failover",
+            "CascadeExtension"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoutingType",
+            "modelAsString": true
+          }
         },
         "regionality": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "Global",
+            "Regional"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Regionality",
+            "modelAsString": true
+          }
         },
         "endpoints": {
           "type": "array",
@@ -3798,7 +4174,26 @@
           "type": "boolean"
         },
         "provisioningState": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "enableThirdPartyS2S": {
           "type": "boolean"
@@ -3873,7 +4268,16 @@
           ]
         },
         "resourceDeletionPolicy": {
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "CascadeDeleteAll",
+            "CascadeDeleteProxyOnlyChildren"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceDeletionPolicy",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3998,7 +4402,16 @@
           "type": "integer"
         },
         "scaleType": {
-          "type": "string"
+          "enum": [
+            "None",
+            "Manual",
+            "Automatic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuScaleType",
+            "modelAsString": true
+          }
         }
       }
     },
