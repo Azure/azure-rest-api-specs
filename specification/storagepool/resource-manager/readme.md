@@ -26,16 +26,16 @@ These are the global settings for the storagepool.
 
 ```yaml
 openapi-type: arm
-tag: package-2020-03-15-preview
+tag: package-2021-04-01-preview
 ```
 
-### Tag: package-2020-03-15-preview
+### Tag: package-2021-04-01-preview
 
-These settings apply only when `--tag=package-2020-03-15-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-03-15-preview'
+```yaml $(tag) == 'package-2021-04-01-preview'
 input-file:
-  - Microsoft.StoragePool/preview/2020-03-15-preview/storagepool.json
+  - Microsoft.StoragePool/preview/2021-04-01-preview/storagepool.json
 ```
 
 ---

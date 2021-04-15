@@ -10,12 +10,12 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.StoragePool
   package-name: storagepool
-  package-version: 2020-03-15-preview
+  package-version: 2021-04-01-preview
   clear-output-folder: true
 ```
 
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/storage/v2020_03_15_preview
+  output-folder: $(python-sdks-folder)/storagepool/azure-mgmt-storagepool/azure/mgmt/storagepool/v2020_03_15_preview
 ```
