@@ -115,7 +115,7 @@
           "Operations"
         ],
         "description": "Lists all scripts present in automation gallery based on type",
-        "operationId": "GalleryItems_List",
+        "operationId": "getRunbookGalleryItems",
         "x-ms-examples": {
           "List gallery items": {
             "$ref": "./examples/listGalleryItems.json"
@@ -192,6 +192,7 @@
           {
             "name": "parameters",
             "in": "body",
+            "description": "Input data describing the graphical runbook.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/GraphicalRunbookContent"
@@ -353,9 +354,10 @@
       "properties": {
         "rawContent": {
           "x-nullable": true,
+          "description": "Raw graphical Runbook content.",
           "$ref": "#/definitions/RawGraphicalRunbookContent"
         },
-        "graphRunbookJSON": {
+        "graphRunbookJson": {
           "type": "string",
           "x-nullable": true,
           "description": "Graphical Runbook content as JSON"
