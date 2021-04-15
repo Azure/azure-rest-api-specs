@@ -109,8 +109,8 @@ batch:
   - tag: package-deploymentscripts-2020-10
   - tag: package-deploymentscripts-2019-10-preview
   - multiapiscript-deploymentscripts: true
-  - tag: package-templatespecs-2019-06-preview
   - tag: package-templatespecs-2021-03-preview
+  - tag: package-templatespecs-2019-06-preview
   - multiapiscript-templatespecs: true
 ```
 
