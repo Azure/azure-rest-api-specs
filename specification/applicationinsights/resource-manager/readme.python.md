@@ -35,6 +35,7 @@ batch:
   - tag: package-2020-02-02-preview
   - tag: package-2020-03-01-preview
   - tag: package-preview-2020-06-only
+  - tag: package-2020-10-only
 ```
 ``` yaml $(python) && $(multiapi) && $(track2)
 batch:
@@ -46,6 +47,7 @@ batch:
   - tag: package-2020-02-02-preview
   - tag: package-2020-03-01-preview
   - tag: package-preview-2020-06-only
+  - tag: package-2020-10-only
   - multiapiscript: true
 ```
 
@@ -165,4 +167,18 @@ python:
 ``` yaml $(tag) == 'package-preview-2020-06-only' && $(python) && $(track2)
 namespace: azure.mgmt.applicationinsights.v2020_06_02_preview
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_06_02_preview
+```
+
+### Tag: package-2020-10-only and python
+
+These settings apply only when `--tag=package-2020-10-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-only' && $(python) && !$(track2)
+python:
+  namespace: azure.mgmt.applicationinsights.v2020_10_20
+  output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_10_20
+```
+``` yaml $(tag) == 'package-2020-10-only' && $(python) && $(track2)
+namespace: azure.mgmt.applicationinsights.v2020_10_20
+output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_10_20
 ```
