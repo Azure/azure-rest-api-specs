@@ -22,8 +22,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
+  - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/kubernetesconfiguration.json
   - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/extensions.json
-
 ```
 
 ### Tag: schema-kubernetesconfiguration-2021-03-01 and azureresourceschema
