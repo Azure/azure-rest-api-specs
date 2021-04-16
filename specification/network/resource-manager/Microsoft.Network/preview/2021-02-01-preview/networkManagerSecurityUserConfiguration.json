@@ -110,7 +110,7 @@
         "operationId": "SecurityUserConfigurations_Get",
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "schema": {
               "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfiguration"
             }
@@ -540,7 +540,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a user rule.": {
+          "Delete a user rule": {
             "$ref": "./examples/NetworkManagerUserRuleDelete.json"
           }
         }
@@ -548,26 +548,6 @@
     }
   },
   "definitions": {
-    "SecurityConfigurationRuleListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/BaseRule"
-          },
-          "description": "A list of network manager security configuration rules"
-        },
-        "failedImport": {
-          "$ref": "#/definitions/FailedImport",
-          "description": "Failed Imports."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
-        }
-      },
-      "description": "Security configuration rule list result."
-    },
     "UserRule": {
       "properties": {
         "properties": {
@@ -598,21 +578,21 @@
         },
         "description": {
           "type": "string",
-          "description": "A description for this rule. Restricted to 140 chars."
+          "description": "A description for this rule."
         },
         "protocol": {
           "type": "string",
           "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleProtocol",
           "description": "Network protocol this rule applies to."
         },
-        "source": {
+        "sources": {
           "type": "array",
           "items": {
             "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem"
           },
           "description": "The CIDR or source IP ranges."
         },
-        "destination": {
+        "destinations": {
           "type": "array",
           "items": {
             "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem"
@@ -690,7 +670,7 @@
           "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleProtocol",
           "description": "Network protocol this rule applies to."
         },
-        "source": {
+        "sources": {
           "type": "array",
           "readOnly": true,
           "items": {
@@ -698,7 +678,7 @@
           },
           "description": "The CIDR or source IP ranges."
         },
-        "destination": {
+        "destinations": {
           "type": "array",
           "readOnly": true,
           "items": {
@@ -736,83 +716,6 @@
         }
       },
       "description": "Security default user rule resource."
-    },
-    "NetworkManagerSecurityConfigurationImport": {
-      "properties": {
-        "networkSecurityGroupImports": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityGroupImport"
-          },
-          "description": "List of nsg uris."
-        },
-        "importDenyRulesAsAdminRules": {
-          "type": "boolean",
-          "description": "Flag if import deny rules as admin rules."
-        },
-        "adminSecurityConfigurationUri": {
-          "type": "string",
-          "description": "Admin security configuration Uri."
-        },
-        "removeAllowVnetInboundRule": {
-          "type": "boolean",
-          "description": "Flag if need to remove allow vnet inbound rule."
-        },
-        "removeAllowAzureLoadBalancerInboundRule": {
-          "type": "boolean",
-          "description": "Flag if need to remove allow azure load balancer inbound rule."
-        },
-        "removeAllowVnetOutboundRule": {
-          "type": "boolean",
-          "description": "Flag if need to remove allow vnet outbound rule."
-        },
-        "removeAllowInternetOutboundRule": {
-          "type": "boolean",
-          "description": "Flag if need to remove allow Internet outbound rule."
-        }
-      },
-      "description": "Network manager security configuration import parameters."
-    },
-    "SecurityConfigurationImportResult": {
-      "properties": {
-        "userSecurityConfiguration": {
-          "type": "string",
-          "description": "User security configuration Id."
-        },
-        "adminSecurityConfiguration": {
-          "type": "string",
-          "description": "Admin security configuration Id."
-        },
-        "failedImport": {
-          "$ref": "#/definitions/FailedImport",
-          "description": "failed imports code and reason"
-        }
-      },
-      "description": "Security configuration import Result."
-    },
-    "FailedImport": {
-      "type": "object",
-      "description": "Failed imports object.",
-      "properties": {
-        "failureCode": {
-          "type": "string",
-          "description": "Failure code."
-        },
-        "failureReason": {
-          "type": "string",
-          "description": "Failure reason."
-        }
-      }
-    },
-    "NetworkSecurityGroupImport": {
-      "type": "object",
-      "description": "Network Security Group Import.",
-      "properties": {
-        "networkSecurityGroupUri": {
-          "type": "string",
-          "description": "Network Security Group Uri."
-        }
-      }
     }
   },
   "parameters": {

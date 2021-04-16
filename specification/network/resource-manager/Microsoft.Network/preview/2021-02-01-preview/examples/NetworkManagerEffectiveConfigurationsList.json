@@ -6,8 +6,8 @@
     "resourceGroupName": "myResourceGroup",
     "virtualNetworkName": "testVirtualNetwork",
     "parameters": {
-        "$top": 3,
-        "$skip": 0
+      "$top": 3,
+      "$skip": 0
     }
   },
   "responses": {
@@ -20,7 +20,7 @@
             "properties": {
               "displayName": "myTestConnectivityConfig",
               "description": "Sample Configuration",
-              "connectivityTopology": "HubAndSpokeTopology",
+              "connectivityTopology": "HubAndSpoke",
               "hubId": "subscriptions/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
               "deleteExistingPeering": true,
               "isGlobal": true,
@@ -67,13 +67,13 @@
                     "displayName": "SampleUserRule",
                     "description": "Sample User Rule",
                     "protocol": "Tcp",
-                    "source": [
+                    "sources": [
                       {
                         "addressPrefixType": "IPPrefix",
                         "addressPrefix": "*"
                       }
                     ],
-                    "destination": [
+                    "destinations": [
                       {
                         "addressPrefixType": "IPPrefix",
                         "addressPrefix": "*"

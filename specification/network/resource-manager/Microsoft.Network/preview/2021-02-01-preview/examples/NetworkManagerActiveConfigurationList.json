@@ -6,13 +6,13 @@
     "resourceGroupName": "myResourceGroup",
     "networkManagerName": "testNetworkManager",
     "parameters": {
-       "regions": [
-         "westus"
-       ],
-       "options":{
-          "$top": 3,
-          "$skip": 0
-       }
+      "regions": [
+        "westus"
+      ],
+      "options": {
+        "$top": 3,
+        "$skip": 0
+      }
     }
   },
   "responses": {
@@ -28,7 +28,7 @@
               "properties": {
                 "displayName": "myTestConnectivityConfig",
                 "description": "Sample Configuration",
-                "connectivityTopology": "HubAndSpokeTopology",
+                "connectivityTopology": "HubAndSpoke",
                 "hubId": "subscriptions/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
                 "deleteExistingPeering": false,
                 "isGlobal": false,
@@ -36,7 +36,7 @@
                   {
                     "networkGroupId": "subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/groups/group1",
                     "useHubGateway": false,
-                    "groupConnectivity": "Transitive",
+                    "groupConnectivity": "None",
                     "isGlobal": false
                   }
                 ],
@@ -79,13 +79,13 @@
                       "displayName": "SampleUserRule",
                       "description": "Sample User Rule",
                       "protocol": "Tcp",
-                      "source": [
+                      "sources": [
                         {
                           "addressPrefixType": "IPPrefix",
                           "addressPrefix": "*"
                         }
                       ],
-                      "destination": [
+                      "destinations": [
                         {
                           "addressPrefixType": "IPPrefix",
                           "addressPrefix": "*"

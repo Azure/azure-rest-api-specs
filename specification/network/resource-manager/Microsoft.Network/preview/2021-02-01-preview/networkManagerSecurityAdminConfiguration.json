@@ -591,7 +591,15 @@
           }
         },
         "deleteExistingNSGs": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteExistingNSGs",
+            "modelAsString": true
+          },
           "description": "Flag if need to delete existing network security groups."
         },
         "provisioningState": {
@@ -759,14 +767,14 @@
           "$ref": "#/definitions/RuleProtocol",
           "description": "Network protocol this rule applies to."
         },
-        "source": {
+        "sources": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AddressPrefixItem"
           },
           "description": "The CIDR or source IP ranges."
         },
-        "destination": {
+        "destinations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AddressPrefixItem"
@@ -854,7 +862,7 @@
           "$ref": "#/definitions/RuleProtocol",
           "description": "Network protocol this rule applies to."
         },
-        "source": {
+        "sources": {
           "type": "array",
           "readOnly": true,
           "items": {
@@ -862,7 +870,7 @@
           },
           "description": "The CIDR or source IP ranges."
         },
-        "destination": {
+        "destinations": {
           "type": "array",
           "readOnly": true,
           "items": {
