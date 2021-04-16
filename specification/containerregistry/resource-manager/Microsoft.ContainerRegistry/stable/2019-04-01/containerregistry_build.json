@@ -1274,6 +1274,9 @@
     },
     "TaskStepProperties": {
       "description": "Base properties for any task step.",
+      "required": [
+        "type"
+      ],
       "type": "object",
       "properties": {
         "type": {
@@ -1284,7 +1287,6 @@
             "EncodedTask"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "StepType",
             "modelAsString": true
@@ -2293,7 +2295,8 @@
     "DockerBuildStep": {
       "description": "The Docker build step.",
       "required": [
-        "dockerFilePath"
+        "dockerFilePath",
+        "type"
       ],
       "type": "object",
       "allOf": [
@@ -2340,7 +2343,8 @@
     "FileTaskStep": {
       "description": "The properties of a task step.",
       "required": [
-        "taskFilePath"
+        "taskFilePath",
+        "type"
       ],
       "type": "object",
       "allOf": [
@@ -2370,7 +2374,8 @@
     "EncodedTaskStep": {
       "description": "The properties of a encoded task step.",
       "required": [
-        "encodedTaskContent"
+        "encodedTaskContent",
+        "type"
       ],
       "type": "object",
       "allOf": [
