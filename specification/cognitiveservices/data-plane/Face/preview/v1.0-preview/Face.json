@@ -2482,7 +2482,7 @@
     "/operations/{operationId}": {
       "get": {
         "description": "Get status of a long running operation.",
-        "operationId": "AsyncOperationRoute",
+        "operationId": "Snapshot_GetOperationStatus",
         "parameters": [
           {
             "$ref": "#/parameters/operationId"
@@ -2508,6 +2508,916 @@
         "x-ms-examples": {
           "Get snapshot operation status example": {
             "$ref": "./examples/GetSnapshotOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/persons": {
+      "get": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Retrieve list of person information in person directory.",
+        "operationId": "PersonDirectory_GetPersons",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "start",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentResponse"
+            }
+          },
+          "400": {
+            "description": "BadArgument, 'start' is not valid person id.\nBadArgument, 'top' is invalid."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get person directory persons example": {
+            "$ref": "./examples/GetPersonDirectoryPersons.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Creates a new person in person directory.",
+        "operationId": "PersonDirectory_CreatePerson",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnrolledPerson"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PersonCreationResponse"
+            }
+          },
+          "400": {
+            "description": "BadArgument, 'name' is too long.\nBadArgument, 'name' is empty.\nBadArgument, 'userData' is too long.\nBadArgument, Request body is invalid."
+          },
+          "403": {
+            "description": "QuotaExceeded, Person number reached subscription level limit."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create person in person directory example": {
+            "$ref": "./examples/CreateNewPersonDirectoryPerson.json"
+          }
+        }
+      }
+    },
+    "/persons/{personId}": {
+      "patch": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Update name or userData of a person.",
+        "operationId": "PersonDirectory_UpdatePerson",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "personId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnrollmentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "BadArgument, 'name' is too long.\nBadArgument, 'userData' is too long.\nBadArgument, Both 'name' and 'userData' are empty.\nBadArgument, Request body is invalid."
+          },
+          "404": {
+            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\n"
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create person in person directory example": {
+            "$ref": "./examples/UpdatePersonDirectoryPerson.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Delete an existing person from person directory. \r\nThe persistedFaceId, userData, person name and face feature(s) in the person entry will all be deleted.",
+        "operationId": "PersonDirectory_DeletePerson",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "personId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete person from person directory example": {
+            "$ref": "./examples/DeletePersonDirectoryPerson.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Retrieve a person's name and userData, and the persisted faceIds representing the registered person face feature(s).",
+        "operationId": "PersonDirectory_GetPerson",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "personId",
+            "description": "Person id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnrolledPerson"
+            }
+          },
+          "404": {
+            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get person from person directory example": {
+            "$ref": "./examples/GetPersonDirectoryPerson.json"
+          }
+        }
+      }
+    },
+    "/persons/{personId}/recognitionModels/{recognitionModel}/persistedFaces": {
+      "post": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Add a new face to person.",
+        "operationId": "PersonDirectory_AddPersonFace",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "personId",
+            "description": "Person id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "recognitionModel",
+            "description": "Recognition model string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "detectionModel",
+            "description": "Detection model string.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "userData",
+            "description": "User data of person face.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "targetFace",
+            "description": "Target face.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentPrintResponse"
+            }
+          },
+          "400": {
+            "description": "BadArgument, 'userData' is too long.\nBadArgument, Invalid request body.\nBadArgument, Argument targetFace out of range, targetFace is valid but it's intersection with the entire image is empty.\nBadArgument, Invalid argument targetFace. Caused by invalid string format or invalid left/top/height/width value.\nBadArgument, 'personId' is invalid.\nBadArgument, 'recognitionModel' is invalid.\nBadArgument, Recognition model is not supported for this feature.\nBadArgument, 'detectionModel' is invalid.\nInvalidImage, Decoding error, image format unsupported.\nInvalidImage, No face detected in the image or in the specified targetFace area.\nInvalidImage, There is more than 1 face in the image or in the specified targetFace area.\nInvalidImageSize, Image size is too small.\nInvalidImageSize, Image size is too big."
+          },
+          "403": {
+            "description": "QuotaExceeded, Persisted face number reached limit."
+          },
+          "404": {
+            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
+          },
+          "409": {
+            "description": "ConcurrentOperationConflict, Unable to grab lock to perform face add. Try again in a bit."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add face to person in person directory example": {
+            "$ref": "./examples/AddPersonDirectoryPersonFaceFromUrl.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Retrieve person face information. The persisted person face is specified by its personId and persistedFaceId.",
+        "operationId": "PersonDirectory_GetPersonFaces",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "personId",
+            "description": "Target person to get persistedFaceIds from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "recognitionModel",
+            "description": "The 'recognitionModel' associated with this persisted face.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PersonResponse"
+            }
+          },
+          "400": {
+            "description": "BadArgument, 'recognitionModel' is not valid.\nBadArgument, Recognition model is not supported for this feature."
+          },
+          "404": {
+            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get person face in person directory example": {
+            "$ref": "./examples/GetPersonDirectoryPersonFace.json"
+          }
+        }
+      }
+    },
+    "/persons/{personId}/recognitionModels/{recognitionModel}/persistedFaces/{persistedFaceId}": {
+      "delete": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Delete an existing person face from person directory. \r\nThe persistedFaceId, userData, and face feature in the person entry will all be deleted.",
+        "operationId": "PersonDirectory_DeletePersonFace",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "personId",
+            "description": "Person id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "recognitionModel",
+            "description": "Recognition model string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "persistedFaceId",
+            "description": "Persisted face id to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "BadArgument, 'recognitionModel' is not valid.BadArgument, Recognition model is not supported for this feature.\n"
+          },
+          "404": {
+            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\nPersistedFaceNotFound, Persisted Face ID is invalid.\nFaceNotFound, Face is not found."
+          },
+          "409": {
+            "description": "ConcurrentOperationConflict, Unable to grab lock to perform face deletion. Try again in a bit."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete face from person directory person example": {
+            "$ref": "./examples/DeletePersonDirectoryPersonFace.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Retrieve person face information. The persisted person face is specified by its personId and persistedFaceId.",
+        "operationId": "PersonDirectory_GetPersonFace",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "personId",
+            "description": "Target person to get face from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "recognitionModel",
+            "description": "The 'recognitionModel' associated with this persisted face.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "persistedFaceId",
+            "description": "Target person face id to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PersistedFaceResponse"
+            }
+          },
+          "400": {
+            "description": "BadArgument, 'personId' is not valid.\nBadArgument, 'recognitionModel' is not valid.\nBadArgument, Recognition model is not supported for this feature.\n"
+          },
+          "404": {
+            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\nPersistedFaceNotFound, Persisted Face ID is invalid.\nFaceNotFound, Persisted Face is not found."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get person directory person face example": {
+            "$ref": "./examples/GetPersonDirectoryPersonFace.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Update the data of a person face.",
+        "operationId": "PersonDirectory_UpdatePersonFace",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "personId",
+            "description": "Target person to update face from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "recognitionModel",
+            "description": "The 'recognitionModel' associated with this persisted face.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "persistedFaceId",
+            "description": "PersistedFaceId created from Person Face Create",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Target person face id to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PersistedFaceWithType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "BadArgument, 'userData' is too long.\nBadArgument, 'userData' is empty.\nBadArgument, 'recognitionModel' is not valid.\nBadArgument, Recognition model is not supported for this feature.\nBadArgument, Request body is invalid."
+          },
+          "404": {
+            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\nPersistedFaceNotFound, Persisted Face ID is invalid.\nPersistedFaceNotFound, Persisted Face is not found."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update face from person directory person example": {
+            "$ref": "./examples/UpdatePersonDirectoryPersonFace.json"
+          }
+        }
+      }
+    },
+    "/dynamicpersongroups/{dynamicPersonGroupId}": {
+      "put": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Creates a new dynamic person group with specified dynamicPersonGroupId, name, and user-provided userData.\r\nA dynamic person group is a container that references persons.\r\nAfter creation, use \"DynamicPersonGroup - Update\" to add/remove persons into the search space.\r\nDynamicPersonGroup and UserData will be stored on server until DynamicPersonGroup Delete is called.",
+        "operationId": "PersonDirectory_CreateDynamicPersonGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dynamicPersonGroupId",
+            "description": "User provided dynamic person group Id. Valid format should be a string composed by numbers, English letters in lower case, '-', '_', and no longer than 64 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicPersonGroupCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "BadArgument, 'name' is too long..\nBadArgument, 'userData' is too long.\nBadArgument, Request body is invalid.\nBadArgument, Argument targetFace out of range, targetFace is valid but it's intersection with the entire image is empty.\nBadArgument, Invalid argument targetFace. Caused by invalid string format or invalid left/top/height/width value.\nBadArgument, Dynamic person group ID is invalid. Valid format should be a string composed by numbers, English letters in lower case, '-', '_', and no longer than 64 characters. "
+          },
+          "403": {
+            "description": "QuotaExceeded, Dynamic person group number reached limit."
+          },
+          "409": {
+            "description": "DynamicPersonGroupExists, Dynamic person group already exists.\nConcurrentOperationConflict, Concurrent operation conflict on requested resource."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create dynamic person group example": {
+            "$ref": "./examples/CreateNewDynamicPersonGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Updates an existing dynamic person group with specified dynamicPersonGroupId, name, and user-provided userData.",
+        "operationId": "PersonDirectory_UpdateDynamicPersonGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dynamicPersonGroupId",
+            "description": "User provided dynamic person group Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicPersonGroupUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "BadArgument, 'name' is too long.\nBadArgument, 'name' is empty.\nBadArgument, 'userData' is too long.\nBadArgument, Invalid request body.\nBadArgument, Dynamic person group ID is invalid. Valid format should be a string composed by numbers, English letters in lower case, '-', '_', and no longer than 64 characters."
+          },
+          "403": {
+            "description": "QuotaExceeded, Dynamic person group person size limit reached."
+          },
+          "404": {
+            "description": "DynamicPersonGroupNotFound, Dynamic person group is not found."
+          },
+          "409": {
+            "description": "ConcurrentOperationConflict, Concurrent operation conflict on requested resource."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update dynamic person group example": {
+            "$ref": "./examples/UpdateDynamicPersonGroup.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Get metadata on a dynamic person group.",
+        "operationId": "PersonDirectory_GetDynamicPersonGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dynamicPersonGroupId",
+            "description": "User provided dynamic person group id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DynamicPersonGroupGetResponse"
+            }
+          },
+          "400": {
+            "description": "BadArgument, Dynamic person group ID is invalid."
+          },
+          "404": {
+            "description": "DynamicPersonGroupNotFound, Dynamic person group is not found."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get dynamic person group example": {
+            "$ref": "./examples/GetDynamicPersonGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Delete an existing dynamic person group. \r\nNote that Persons are not deleted with this operation. To delete person call Person Delete.",
+        "operationId": "PersonDirectory_DeleteDynamicPersonGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dynamicPersonGroupId",
+            "description": "User provided dynamic person group Id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "BadArgument, Dynamic person group ID is invalid."
+          },
+          "404": {
+            "description": "DynamicPersonGroupNotFound, Dynamic person group id is not found."
+          },
+          "409": {
+            "description": "ConcurrentOperationConflict, Concurrent operation conflict on requested resource."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete dynamic person group example": {
+            "$ref": "./examples/DeleteDynamicPersonGroup.json"
+          }
+        }
+      }
+    },
+    "/dynamicpersongroups/{dynamicPersonGroupId}/persons": {
+      "get": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Retrieve list of persons referenced in a given DynamicPersonGroup person directory.",
+        "operationId": "PersonDirectory_ListDynamicPersonGroupPersons",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dynamicPersonGroupId",
+            "description": "Dynamic person group Id to list persons from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "start",
+            "description": "List persons from the least personId greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The number of persons to list, ranging in [1, 1000]. Default is 1000.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DynamicPersonGroupListPersonsResponse"
+            }
+          },
+          "400": {
+            "description": "BadArgument, Dynamic person group ID is invalid.\nBadArgument, 'start' is not valid.\nBadArgument, 'top' is not valid."
+          },
+          "404": {
+            "description": "DynamicPersonGroupNotFound, Dynamic person group is not found."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List dynamic person group persons example": {
+            "$ref": "./examples/ListDynamicPersonGroupPersons.json"
+          }
+        }
+      }
+    },
+    "/dynamicpersongroups": {
+      "get": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "Retrieve list of dynamic person groups in person directory.",
+        "operationId": "PersonDirectory_ListDynamicPersonGroups",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "start",
+            "description": "List dynamicPersonGroupId from the least dynamicPersonGroupId greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The number of dynamicPersonGroups to list, ranging in [1, 1000]. Default is 1000.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DynamicPersonGroupGetResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "BadArgument, 'start' is not valid.\nBadArgument, 'top' is not valid."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List dynamic person groups example": {
+            "$ref": "./examples/ListDynamicPersonGroups.json"
+          }
+        }
+      }
+    },
+    "/persons/{personId}/dynamicPersonGroupReferences": {
+      "get": {
+        "tags": [
+          "PersonDirectory"
+        ],
+        "summary": "List the dynamic person groups that a person has been referenced in.",
+        "operationId": "PersonDirectory_ListDynamicPersonGroupPersonReferences",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "personId",
+            "description": "Valid PersonId created from Person Create.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "start",
+            "description": "List dynamic person group id from the least dynamicPersonGroupId greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The number of dynamicPersonGroupId to list, ranging in [1, 1000]. Default is 1000.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PersonDynamicPersonGroupReferenceResponse"
+            }
+          },
+          "400": {
+            "description": "BadArgument, 'start' is not valid.\nBadArgument, 'top' is not valid."
+          },
+          "404": {
+            "description": "PersonNotFound, Person ID is invalid..\nPersonNotFound, Person was not found."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List dynamic person group references example": {
+            "$ref": "./examples/ListDynamicPersonGroupReferences.json"
           }
         }
       }
@@ -2812,215 +3722,18 @@
         }
       }
     },
-    "/persons": {
-      "get": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Retrieve list of person information in person directory.",
-        "operationId": "PersonDirectory_GetPersons",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "start",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "top",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/EnrollmentResponse"
-            }
-          },
-          "400": {
-            "description": "BadArgument, 'start' is not valid person id.\nBadArgument, 'top' is invalid."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Creates a new person in person directory.",
-        "operationId": "PersonDirectory_CreatePerson",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EnrolledPerson"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PersonCreationResponse"
-            }
-          },
-          "400": {
-            "description": "BadArgument, 'name' is too long.\nBadArgument, 'name' is empty.\nBadArgument, 'userData' is too long.\nBadArgument, Request body is invalid."
-          },
-          "403": {
-            "description": "QuotaExceeded, Person number reached subscription level limit."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/persons/{personId}": {
-      "patch": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Update name or userData of a person.",
-        "operationId": "PersonDirectory_UpdatePerson",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "personId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EnrollmentRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "BadArgument, 'name' is too long.\nBadArgument, 'userData' is too long.\nBadArgument, Both 'name' and 'userData' are empty.\nBadArgument, Request body is invalid."
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\n"
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Delete an existing person from person directory. \r\nThe persistedFaceId, userData, person name and face feature(s) in the person entry will all be deleted.",
-        "operationId": "PersonDirectory_DeletePerson",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "personId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Retrieve a person's name and userData, and the persisted faceIds representing the registered person face feature(s).",
-        "operationId": "PersonDirectory_GetPerson",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "personId",
-            "description": "Person id.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/EnrolledPerson"
-            }
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/persons/{personId}/recognitionModels/{recognitionModel}/persistedFaces": {
+    "/persons/{personId}/recognitionModels/{recognitionModel}/persistedFaces?overload=stream": {
       "post": {
         "tags": [
           "PersonDirectory"
         ],
         "summary": "Add a new face to person.",
-        "operationId": "PersonDirectory_AddPersonFace",
+        "operationId": "PersonDirectory_AddPersonFaceFromStream",
         "produces": [
           "application/json"
+        ],
+        "consumes": [
+          "application/octet-stream"
         ],
         "parameters": [
           {
@@ -3054,6 +3767,9 @@
             "name": "targetFace",
             "description": "Target face.",
             "type": "string"
+          },
+          {
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -3081,558 +3797,10 @@
               "$ref": "#/definitions/Error"
             }
           }
-        }
-      },
-      "get": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Retrieve person face information. The persisted person face is specified by its personId and persistedFaceId.",
-        "operationId": "PersonDirectory_GetPersonFaces",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "personId",
-            "description": "Target person to get persistedFaceIds from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "recognitionModel",
-            "description": "The 'recognitionModel' associated with this persisted face.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PersonResponse"
-            }
-          },
-          "400": {
-            "description": "BadArgument, 'recognitionModel' is not valid.\nBadArgument, Recognition model is not supported for this feature."
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/persons/{personId}/recognitionModels/{recognitionModel}/persistedFaces/{persistedFaceId}": {
-      "delete": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Delete an existing person face from person directory. \r\nThe persistedFaceId, userData, and face feature in the person entry will all be deleted.",
-        "operationId": "PersonDirectory_DeletePersonFace",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "personId",
-            "description": "Person id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "recognitionModel",
-            "description": "Recognition model string.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "persistedFaceId",
-            "description": "Persisted face id to delete.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "BadArgument, 'recognitionModel' is not valid.BadArgument, Recognition model is not supported for this feature.\n"
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\nPersistedFaceNotFound, Persisted Face ID is invalid.\nFaceNotFound, Face is not found."
-          },
-          "409": {
-            "description": "ConcurrentOperationConflict, Unable to grab lock to perform face deletion. Try again in a bit."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Retrieve person face information. The persisted person face is specified by its personId and persistedFaceId.",
-        "operationId": "PersonDirectory_GetPersonFace",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "personId",
-            "description": "Target person to get face from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "recognitionModel",
-            "description": "The 'recognitionModel' associated with this persisted face.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "persistedFaceId",
-            "description": "Target person face id to get.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PersistedFaceResponse"
-            }
-          },
-          "400": {
-            "description": "BadArgument, 'personId' is not valid.\nBadArgument, 'recognitionModel' is not valid.\nBadArgument, Recognition model is not supported for this feature.\n"
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\nPersistedFaceNotFound, Persisted Face ID is invalid.\nFaceNotFound, Persisted Face is not found."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Update the data of a person face.",
-        "operationId": "PersonDirectory_UpdatePersonFace",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "personId",
-            "description": "Target person to update face from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "recognitionModel",
-            "description": "The 'recognitionModel' associated with this persisted face.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "persistedFaceId",
-            "description": "PersistedFaceId created from Person Face Create",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Target person face id to update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PersistedFaceWithType"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "BadArgument, 'userData' is too long.\nBadArgument, 'userData' is empty.\nBadArgument, 'recognitionModel' is not valid.\nBadArgument, Recognition model is not supported for this feature.\nBadArgument, Request body is invalid."
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\nPersistedFaceNotFound, Persisted Face ID is invalid.\nPersistedFaceNotFound, Persisted Face is not found."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/dynamicpersongroups/{dynamicPersonGroupId}": {
-      "put": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Creates a new dynamic person group with specified dynamicPersonGroupId, name, and user-provided userData.\r\nA dynamic person group is a container that references persons.\r\nAfter creation, use \"DynamicPersonGroup - Update\" to add/remove persons into the search space.\r\nDynamicPersonGroup and UserData will be stored on server until DynamicPersonGroup Delete is called.",
-        "operationId": "PersonDirectory_CreateDynamicPersonGroup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dynamicPersonGroupId",
-            "description": "User provided dynamic person group Id. Valid format should be a string composed by numbers, English letters in lower case, '-', '_', and no longer than 64 characters.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DynamicPersonGroupCreateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "BadArgument, 'name' is too long..\nBadArgument, 'userData' is too long.\nBadArgument, Request body is invalid.\nBadArgument, Argument targetFace out of range, targetFace is valid but it's intersection with the entire image is empty.\nBadArgument, Invalid argument targetFace. Caused by invalid string format or invalid left/top/height/width value.\nBadArgument, Dynamic person group ID is invalid. Valid format should be a string composed by numbers, English letters in lower case, '-', '_', and no longer than 64 characters. "
-          },
-          "403": {
-            "description": "QuotaExceeded, Dynamic person group number reached limit."
-          },
-          "409": {
-            "description": "DynamicPersonGroupExists, Dynamic person group already exists.\nConcurrentOperationConflict, Concurrent operation conflict on requested resource."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Updates an existing dynamic person group with specified dynamicPersonGroupId, name, and user-provided userData.",
-        "operationId": "PersonDirectory_UpdateDynamicPersonGroup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dynamicPersonGroupId",
-            "description": "User provided dynamic person group Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DynamicPersonGroupUpdateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "BadArgument, 'name' is too long.\nBadArgument, 'name' is empty.\nBadArgument, 'userData' is too long.\nBadArgument, Invalid request body.\nBadArgument, Dynamic person group ID is invalid. Valid format should be a string composed by numbers, English letters in lower case, '-', '_', and no longer than 64 characters."
-          },
-          "403": {
-            "description": "QuotaExceeded, Dynamic person group person size limit reached."
-          },
-          "404": {
-            "description": "DynamicPersonGroupNotFound, Dynamic person group is not found."
-          },
-          "409": {
-            "description": "ConcurrentOperationConflict, Concurrent operation conflict on requested resource."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Get metadata on a dynamic person group.",
-        "operationId": "PersonDirectory_GetDynamicPersonGroup",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dynamicPersonGroupId",
-            "description": "User provided dynamic person group id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DynamicPersonGroupGetResponse"
-            }
-          },
-          "400": {
-            "description": "BadArgument, Dynamic person group ID is invalid."
-          },
-          "404": {
-            "description": "DynamicPersonGroupNotFound, Dynamic person group is not found."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Delete an existing dynamic person group. \r\nNote that Persons are not deleted with this operation. To delete person call Person Delete.",
-        "operationId": "PersonDirectory_DeleteDynamicPersonGroup",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dynamicPersonGroupId",
-            "description": "User provided dynamic person group Id.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "BadArgument, Dynamic person group ID is invalid."
-          },
-          "404": {
-            "description": "DynamicPersonGroupNotFound, Dynamic person group id is not found."
-          },
-          "409": {
-            "description": "ConcurrentOperationConflict, Concurrent operation conflict on requested resource."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/dynamicpersongroups/{dynamicPersonGroupId}/persons": {
-      "get": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Retrieve list of persons referenced in a given DynamicPersonGroup person directory.",
-        "operationId": "PersonDirectory_ListDynamicPersonGroupPersons",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dynamicPersonGroupId",
-            "description": "Dynamic person group Id to list persons from",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "start",
-            "description": "List persons from the least personId greater than the \"start\". It contains no more than 64 characters. Default is empty.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "top",
-            "description": "The number of persons to list, ranging in [1, 1000]. Default is 1000.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DynamicPersonGroupListPersonsResponse"
-            }
-          },
-          "400": {
-            "description": "BadArgument, Dynamic person group ID is invalid.\nBadArgument, 'start' is not valid.\nBadArgument, 'top' is not valid."
-          },
-          "404": {
-            "description": "DynamicPersonGroupNotFound, Dynamic person group is not found."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/dynamicpersongroups": {
-      "get": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "Retrieve list of dynamic person groups in person directory.",
-        "operationId": "PersonDirectory_ListDynamicPersonGroups",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "start",
-            "description": "List dynamicPersonGroupId from the least dynamicPersonGroupId greater than the \"start\". It contains no more than 64 characters. Default is empty.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "top",
-            "description": "The number of dynamicPersonGroups to list, ranging in [1, 1000]. Default is 1000.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DynamicPersonGroupGetResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "BadArgument, 'start' is not valid.\nBadArgument, 'top' is not valid."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/persons/{personId}/dynamicPersonGroupReferences": {
-      "get": {
-        "tags": [
-          "PersonDirectory"
-        ],
-        "summary": "List the dynamic person groups that a person has been referenced in.",
-        "operationId": "PersonDirectory_ListDynamicPersonGroupPersonReferences",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "personId",
-            "description": "Valid PersonId created from Person Create.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "start",
-            "description": "List dynamic person group id from the least dynamicPersonGroupId greater than the \"start\". It contains no more than 64 characters. Default is empty.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "top",
-            "description": "The number of dynamicPersonGroupId to list, ranging in [1, 1000]. Default is 1000.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PersonDynamicPersonGroupReferenceResponse"
-            }
-          },
-          "400": {
-            "description": "BadArgument, 'start' is not valid.\nBadArgument, 'top' is not valid."
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid..\nPersonNotFound, Person was not found."
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+        },
+        "x-ms-examples": {
+          "Add face to person directory person with stream example": {
+            "$ref": "./examples/AddPersonDirectoryPersonFaceFromStream.json"
           }
         }
       }
