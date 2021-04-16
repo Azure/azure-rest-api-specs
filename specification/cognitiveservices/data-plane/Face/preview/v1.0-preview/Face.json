@@ -2538,11 +2538,11 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/EnrollmentResponse"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EnrollmentResponse"
+              }
             }
-          },
-          "400": {
-            "description": "BadArgument, 'start' is not valid person id.\nBadArgument, 'top' is invalid."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -2585,12 +2585,6 @@
             "schema": {
               "$ref": "#/definitions/PersonCreationResponse"
             }
-          },
-          "400": {
-            "description": "BadArgument, 'name' is too long.\nBadArgument, 'name' is empty.\nBadArgument, 'userData' is too long.\nBadArgument, Request body is invalid."
-          },
-          "403": {
-            "description": "QuotaExceeded, Person number reached subscription level limit."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -2639,12 +2633,6 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "BadArgument, 'name' is too long.\nBadArgument, 'userData' is too long.\nBadArgument, Both 'name' and 'userData' are empty.\nBadArgument, Request body is invalid."
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\n"
-          },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
             "schema": {
@@ -2678,9 +2666,6 @@
         "responses": {
           "202": {
             "description": "Success"
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -2719,9 +2704,6 @@
             "schema": {
               "$ref": "#/definitions/EnrolledPerson"
             }
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -2788,18 +2770,6 @@
               "$ref": "#/definitions/EnrollmentPrintResponse"
             }
           },
-          "400": {
-            "description": "BadArgument, 'userData' is too long.\nBadArgument, Invalid request body.\nBadArgument, Argument targetFace out of range, targetFace is valid but it's intersection with the entire image is empty.\nBadArgument, Invalid argument targetFace. Caused by invalid string format or invalid left/top/height/width value.\nBadArgument, 'personId' is invalid.\nBadArgument, 'recognitionModel' is invalid.\nBadArgument, Recognition model is not supported for this feature.\nBadArgument, 'detectionModel' is invalid.\nInvalidImage, Decoding error, image format unsupported.\nInvalidImage, No face detected in the image or in the specified targetFace area.\nInvalidImage, There is more than 1 face in the image or in the specified targetFace area.\nInvalidImageSize, Image size is too small.\nInvalidImageSize, Image size is too big."
-          },
-          "403": {
-            "description": "QuotaExceeded, Persisted face number reached limit."
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
-          },
-          "409": {
-            "description": "ConcurrentOperationConflict, Unable to grab lock to perform face add. Try again in a bit."
-          },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
             "schema": {
@@ -2844,12 +2814,6 @@
             "schema": {
               "$ref": "#/definitions/PersonResponse"
             }
-          },
-          "400": {
-            "description": "BadArgument, 'recognitionModel' is not valid.\nBadArgument, Recognition model is not supported for this feature."
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -2902,15 +2866,6 @@
           "202": {
             "description": "Success"
           },
-          "400": {
-            "description": "BadArgument, 'recognitionModel' is not valid.BadArgument, Recognition model is not supported for this feature.\n"
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\nPersistedFaceNotFound, Persisted Face ID is invalid.\nFaceNotFound, Face is not found."
-          },
-          "409": {
-            "description": "ConcurrentOperationConflict, Unable to grab lock to perform face deletion. Try again in a bit."
-          },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
             "schema": {
@@ -2962,12 +2917,6 @@
             "schema": {
               "$ref": "#/definitions/PersistedFaceResponse"
             }
-          },
-          "400": {
-            "description": "BadArgument, 'personId' is not valid.\nBadArgument, 'recognitionModel' is not valid.\nBadArgument, Recognition model is not supported for this feature.\n"
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\nPersistedFaceNotFound, Persisted Face ID is invalid.\nFaceNotFound, Persisted Face is not found."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3030,12 +2979,6 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "BadArgument, 'userData' is too long.\nBadArgument, 'userData' is empty.\nBadArgument, 'recognitionModel' is not valid.\nBadArgument, Recognition model is not supported for this feature.\nBadArgument, Request body is invalid."
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found.\nPersistedFaceNotFound, Persisted Face ID is invalid.\nPersistedFaceNotFound, Persisted Face is not found."
-          },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
             "schema": {
@@ -3082,17 +3025,11 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "BadArgument, 'name' is too long..\nBadArgument, 'userData' is too long.\nBadArgument, Request body is invalid.\nBadArgument, Argument targetFace out of range, targetFace is valid but it's intersection with the entire image is empty.\nBadArgument, Invalid argument targetFace. Caused by invalid string format or invalid left/top/height/width value.\nBadArgument, Dynamic person group ID is invalid. Valid format should be a string composed by numbers, English letters in lower case, '-', '_', and no longer than 64 characters. "
-          },
-          "403": {
-            "description": "QuotaExceeded, Dynamic person group number reached limit."
-          },
-          "409": {
-            "description": "DynamicPersonGroupExists, Dynamic person group already exists.\nConcurrentOperationConflict, Concurrent operation conflict on requested resource."
+          "202": {
+            "description": "Success"
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3141,18 +3078,6 @@
           "202": {
             "description": "Success"
           },
-          "400": {
-            "description": "BadArgument, 'name' is too long.\nBadArgument, 'name' is empty.\nBadArgument, 'userData' is too long.\nBadArgument, Invalid request body.\nBadArgument, Dynamic person group ID is invalid. Valid format should be a string composed by numbers, English letters in lower case, '-', '_', and no longer than 64 characters."
-          },
-          "403": {
-            "description": "QuotaExceeded, Dynamic person group person size limit reached."
-          },
-          "404": {
-            "description": "DynamicPersonGroupNotFound, Dynamic person group is not found."
-          },
-          "409": {
-            "description": "ConcurrentOperationConflict, Concurrent operation conflict on requested resource."
-          },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
             "schema": {
@@ -3191,12 +3116,6 @@
               "$ref": "#/definitions/DynamicPersonGroupGetResponse"
             }
           },
-          "400": {
-            "description": "BadArgument, Dynamic person group ID is invalid."
-          },
-          "404": {
-            "description": "DynamicPersonGroupNotFound, Dynamic person group is not found."
-          },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
             "schema": {
@@ -3231,15 +3150,6 @@
         "responses": {
           "202": {
             "description": "Success"
-          },
-          "400": {
-            "description": "BadArgument, Dynamic person group ID is invalid."
-          },
-          "404": {
-            "description": "DynamicPersonGroupNotFound, Dynamic person group id is not found."
-          },
-          "409": {
-            "description": "ConcurrentOperationConflict, Concurrent operation conflict on requested resource."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3293,12 +3203,6 @@
               "$ref": "#/definitions/DynamicPersonGroupListPersonsResponse"
             }
           },
-          "400": {
-            "description": "BadArgument, Dynamic person group ID is invalid.\nBadArgument, 'start' is not valid.\nBadArgument, 'top' is not valid."
-          },
-          "404": {
-            "description": "DynamicPersonGroupNotFound, Dynamic person group is not found."
-          },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
             "schema": {
@@ -3346,9 +3250,6 @@
                 "$ref": "#/definitions/DynamicPersonGroupGetResponse"
               }
             }
-          },
-          "400": {
-            "description": "BadArgument, 'start' is not valid.\nBadArgument, 'top' is not valid."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3401,12 +3302,6 @@
             "schema": {
               "$ref": "#/definitions/PersonDynamicPersonGroupReferenceResponse"
             }
-          },
-          "400": {
-            "description": "BadArgument, 'start' is not valid.\nBadArgument, 'top' is not valid."
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid..\nPersonNotFound, Person was not found."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -3778,18 +3673,6 @@
             "schema": {
               "$ref": "#/definitions/EnrollmentPrintResponse"
             }
-          },
-          "400": {
-            "description": "BadArgument, 'userData' is too long.\nBadArgument, Invalid request body.\nBadArgument, Argument targetFace out of range, targetFace is valid but it's intersection with the entire image is empty.\nBadArgument, Invalid argument targetFace. Caused by invalid string format or invalid left/top/height/width value.\nBadArgument, 'personId' is invalid.\nBadArgument, 'recognitionModel' is invalid.\nBadArgument, Recognition model is not supported for this feature.\nBadArgument, 'detectionModel' is invalid.\nInvalidImage, Decoding error, image format unsupported.\nInvalidImage, No face detected in the image or in the specified targetFace area.\nInvalidImage, There is more than 1 face in the image or in the specified targetFace area.\nInvalidImageSize, Image size is too small.\nInvalidImageSize, Image size is too big."
-          },
-          "403": {
-            "description": "QuotaExceeded, Persisted face number reached limit."
-          },
-          "404": {
-            "description": "PersonNotFound, Person ID is invalid.\nPersonNotFound, Person is not found."
-          },
-          "409": {
-            "description": "ConcurrentOperationConflict, Unable to grab lock to perform face add. Try again in a bit."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
