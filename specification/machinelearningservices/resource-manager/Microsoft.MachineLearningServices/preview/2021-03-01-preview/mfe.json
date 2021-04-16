@@ -5516,8 +5516,7 @@
       "properties": {
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/CodeContainer",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/CodeContainer"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -5606,8 +5605,7 @@
       "properties": {
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/CodeVersion",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/CodeVersion"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -5673,8 +5671,7 @@
       "properties": {
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/DataContainer",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/DataContainer"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -6087,33 +6084,10 @@
       "discriminator": "contentsType",
       "additionalProperties": false
     },
-    "DatastoresContentsWithCredentials": {
-      "description": "Base definition for datastore contents with credentials.",
-      "required": [
-        "contentsType",
-        "credentials"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreContents"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "description": "Account credentials.",
-          "$ref": "#/definitions/DatastoreCredentials"
-        }
-      },
-      "discriminator": "contentsType",
-      "additionalProperties": false
-    },
-    "AzureStorageContents": {
-      "description": "Azure Storage datastore configuration.",
+    "AzureBlobContents": {
       "required": [
         "accountName",
         "containerName",
-        "contentsType",
         "credentials",
         "endpoint",
         "protocol"
@@ -6121,7 +6095,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoresContentsWithCredentials"
+          "$ref": "#/definitions/DatastoreContents"
         }
       ],
       "properties": {
@@ -6162,30 +6136,10 @@
             "create",
             "read"
           ]
-        }
-      },
-      "discriminator": "contentsType",
-      "additionalProperties": false
-    },
-    "AzureBlobContents": {
-      "description": "Azure Blob datastore configuration.",
-      "required": [
-        "accountName",
-        "containerName",
-        "credentials",
-        "endpoint",
-        "protocol"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureStorageContents"
-        }
-      ],
-      "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType",
-          "readOnly": true
+        },
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
         }
       },
       "x-ms-discriminator-value": "AzureBlob",
@@ -6200,18 +6154,18 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoresContentsWithCredentials"
+          "$ref": "#/definitions/DatastoreContents"
         }
       ],
       "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType",
-          "readOnly": true
-        },
         "storeName": {
           "description": "Azure Data Lake store name.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
+        },
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
         }
       },
       "x-ms-discriminator-value": "AzureDataLakeGen1",
@@ -6229,13 +6183,51 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureStorageContents"
+          "$ref": "#/definitions/DatastoreContents"
         }
       ],
       "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType",
-          "readOnly": true
+        "accountName": {
+          "description": "Storage account name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "containerName": {
+          "description": "Storage account container name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "description": "Azure cloud endpoint for the storage account.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "core.windows.net",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "protocol": {
+          "description": "Protocol used to communicate with the storage account.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "https",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
         }
       },
       "x-ms-discriminator-value": "AzureDataLakeGen2",
@@ -6253,22 +6245,59 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureStorageContents"
+          "$ref": "#/definitions/DatastoreContents"
         }
       ],
       "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType",
-          "readOnly": true
+        "accountName": {
+          "description": "Storage account name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "containerName": {
+          "description": "Storage account container name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "description": "Azure cloud endpoint for the storage account.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "core.windows.net",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "protocol": {
+          "description": "Protocol used to communicate with the storage account.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "https",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
         }
       },
       "x-ms-discriminator-value": "AzureFile",
       "additionalProperties": false
     },
-    "AzureSqlDatabaseContents": {
-      "description": "Azure SQL Database datastore configuration.",
+    "AzurePostgreSqlContents": {
+      "description": "Azure Postgre SQL datastore configuration.",
       "required": [
-        "contentsType",
         "credentials",
         "databaseName",
         "endpoint",
@@ -6278,12 +6307,17 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoresContentsWithCredentials"
+          "$ref": "#/definitions/DatastoreContents"
         }
       ],
       "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType"
+        "enableSSL": {
+          "description": "Whether the Azure PostgreSQL server requires SSL.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "databaseName": {
           "description": "Azure SQL database name.",
@@ -6321,14 +6355,17 @@
             "create",
             "read"
           ]
+        },
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
         }
       },
-      "discriminator": "contentsType",
-      "x-ms-discriminator-value": "AzureSqlDatabase",
+      "x-ms-discriminator-value": "AzurePostgreSql",
       "additionalProperties": false
     },
-    "AzurePostgreSqlContents": {
-      "description": "Azure Postgre SQL datastore configuration.",
+    "AzureSqlDatabaseContents": {
+      "description": "Azure SQL Database datastore configuration.",
       "required": [
         "credentials",
         "databaseName",
@@ -6339,24 +6376,53 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureSqlDatabaseContents"
+          "$ref": "#/definitions/DatastoreContents"
         }
       ],
       "properties": {
-        "contentsType": {
-          "$ref": "#/definitions/ContentsType",
-          "readOnly": true
-        },
-        "enableSSL": {
-          "description": "Whether the Azure PostgreSQL server requires SSL.",
-          "type": "boolean",
+        "databaseName": {
+          "description": "Azure SQL database name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
           "x-ms-mutability": [
             "create",
             "read"
           ]
+        },
+        "endpoint": {
+          "description": "Azure cloud endpoint for the database.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "example": "database.windows.net",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "portNumber": {
+          "format": "int32",
+          "description": "Azure SQL server port.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "serverName": {
+          "description": "Azure SQL server name.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "credentials": {
+          "description": "Account credentials.",
+          "$ref": "#/definitions/DatastoreCredentials"
         }
       },
-      "x-ms-discriminator-value": "AzurePostgreSql",
+      "x-ms-discriminator-value": "AzureSqlDatabase",
       "additionalProperties": false
     },
     "GlusterFsContents": {
@@ -6486,8 +6552,7 @@
       "properties": {
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/DatastoreProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/DatastoreProperties"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -6592,8 +6657,7 @@
       "properties": {
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/DataVersion",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/DataVersion"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -6659,8 +6723,7 @@
       "properties": {
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/EnvironmentContainer",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/EnvironmentContainer"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -6929,8 +6992,7 @@
       "properties": {
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/EnvironmentSpecificationVersion",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/EnvironmentSpecificationVersion"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -6971,6 +7033,28 @@
       "x-ms-enum": {
         "name": "JobType",
         "modelAsString": true
+      },
+      "additionalProperties": false
+    },
+    "JobOutput": {
+      "type": "object",
+      "properties": {
+        "datastoreId": {
+          "description": "ARM ID of the datastore where the job logs and artifacts are stored, or null for the default container (\"azureml\") in the workspace's storage account.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "path": {
+          "description": "Path within the datastore to the job logs and artifacts.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
       },
       "additionalProperties": false
     },
@@ -7266,29 +7350,6 @@
       "x-ms-discriminator-value": "Managed",
       "additionalProperties": false
     },
-    "JobOutput": {
-      "description": "Job output details.",
-      "type": "object",
-      "properties": {
-        "datastoreId": {
-          "description": "Resource ID of the datastore where the job logs and artifacts are stored, or null for the default container (\"azureml\") in the workspace's storage account.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "path": {
-          "description": "Path within the datastore to the job logs and artifacts.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
     "JobProvisioningState": {
       "enum": [
         "Succeeded",
@@ -7396,47 +7457,16 @@
       "discriminator": "jobType",
       "additionalProperties": false
     },
-    "ExperimentJobBase": {
+    "CommandJob": {
+      "description": "Code Job definition",
       "required": [
-        "jobType"
+        "command",
+        "compute"
       ],
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/JobBase"
-        }
-      ],
-      "properties": {
-        "experimentName": {
-          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "output": {
-          "description": "Location of the job output logs and artifacts.",
-          "$ref": "#/definitions/JobOutput",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      },
-      "discriminator": "jobType",
-      "additionalProperties": false
-    },
-    "ComputeJobBase": {
-      "description": "Compute job base definition",
-      "required": [
-        "compute",
-        "jobType"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExperimentJobBase"
         }
       ],
       "properties": {
@@ -7456,27 +7486,22 @@
             "create",
             "read"
           ]
-        }
-      },
-      "discriminator": "jobType",
-      "additionalProperties": false
-    },
-    "CommandJob": {
-      "description": "Code Job definition",
-      "required": [
-        "command",
-        "compute"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputeJobBase"
-        }
-      ],
-      "properties": {
-        "jobType": {
-          "$ref": "#/definitions/JobType",
-          "readOnly": true
+        },
+        "experimentName": {
+          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "output": {
+          "description": "Location of the job output logs and artifacts.",
+          "$ref": "#/definitions/JobOutput",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "status": {
           "description": "Status of the job.",
@@ -7799,13 +7824,42 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ComputeJobBase"
+          "$ref": "#/definitions/JobBase"
         }
       ],
       "properties": {
-        "jobType": {
-          "$ref": "#/definitions/JobType",
-          "readOnly": true
+        "compute": {
+          "description": "Compute binding for the job.",
+          "$ref": "#/definitions/ComputeConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview feature and only available to users on the allow list.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "experimentName": {
+          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "output": {
+          "description": "Location of the job output logs and artifacts.",
+          "$ref": "#/definitions/JobOutput",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "status": {
           "description": "The status of a job.",
@@ -7859,6 +7913,50 @@
         }
       },
       "x-ms-discriminator-value": "Sweep",
+      "additionalProperties": false
+    },
+    "JobBaseResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/JobBase"
+        },
+        "systemData": {
+          "description": "System data associated with resource provider",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "JobBaseResourceArmPaginatedResult": {
+      "description": "A paginated list of JobBase entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type JobBase.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobBaseResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
     "LabelClass": {
@@ -8199,13 +8297,37 @@
     },
     "LabelingJob": {
       "description": "Labeling job definition",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobBase"
-        }
+      "required": [
+        "jobType"
       ],
+      "type": "object",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/JobProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "jobType": {
+          "description": "Specifies the type of job. This field should always be set to \"Labeling\".",
+          "$ref": "#/definitions/JobType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "interactionEndpoints": {
+          "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JobEndpoint"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
         "labelCategories": {
           "description": "Label categories of the job.",
           "type": "object",
@@ -8291,52 +8413,24 @@
           "x-ms-mutability": [
             "read"
           ]
-        }
-      },
-      "x-ms-discriminator-value": "Labeling",
-      "additionalProperties": false
-    },
-    "JobBaseResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/JobBase",
-          "x-ms-client-flatten": true
         },
-        "systemData": {
-          "description": "System data associated with resource provider",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "JobBaseResourceArmPaginatedResult": {
-      "description": "A paginated list of JobBase entities.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "An array of objects of type JobBase.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobBaseResource"
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         },
-        "nextLink": {
-          "type": "string"
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": false
@@ -8355,8 +8449,7 @@
       "properties": {
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/LabelingJob",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/LabelingJob"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -8567,8 +8660,7 @@
       "properties": {
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/ModelContainer",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/ModelContainer"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -8676,8 +8768,7 @@
       "properties": {
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/ModelVersion",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/ModelVersion"
         },
         "systemData": {
           "description": "System data associated with resource provider",
