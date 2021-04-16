@@ -108,7 +108,7 @@
           "Document Translation"
         ],
         "summary": "Returns a list of batch requests submitted and the status for each request",
-        "description": "Returns a list of batch requests submitted and the status for each request.\r\nThis list only contains batch requests submitted by the user (based on the subscription). The status for each request is sorted by id.\r\n            \r\nIf the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.\r\nThe absence of a continuation token means that no additional pages are available.\r\n            \r\n$top and $skip query parameters can be used to specify a number of results to return and an offset for the collection.\r\n            \r\nThe server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned.",
+        "description": "Returns a list of batch requests submitted and the status for each request.\r\nThis list only contains batch requests submitted by the user (based on the resource).\r\n            \r\nIf the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.\r\nThe absence of a continuation token means that no additional pages are available.\r\n            \r\n$top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.\r\n            \r\n$top indicates the total number of records the user wants to be returned across all pages.\r\n$skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.\r\n$maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.\r\n            \r\n$orderBy query parameter can be used to sort the returned list (ex \"$orderBy=createdDateTimeUtc asc\" or \"$orderBy=createdDateTimeUtc desc\").\r\nThe default sorting is descending by createdDateTimeUtc.\r\nSome query parameters can be used to filter the returned list (ex: \"status=Succeeded,Cancelled\") will only return succeeded and cancelled operations.\r\ncreatedDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.\r\nThe supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).\r\n            \r\nThe server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned.",
         "operationId": "DocumentTranslation_GetOperations",
         "produces": [
           "application/json"
@@ -117,7 +117,26 @@
           {
             "in": "query",
             "name": "$top",
-            "description": "Take the $top entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
+            "description": "$top indicates the total number of records the user wants to be returned across all pages.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\n            \r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 0
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "$skip indicates the number of records to skip from the list of records held by the server based on the sorting method specified.  By default, we sort by descending start time.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\n            \r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "maximum": 2147483647,
+            "minimum": 0
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "$maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.\r\n            \r\nClients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server's default page size.",
             "type": "integer",
             "format": "int32",
             "default": 50,
@@ -126,13 +145,48 @@
           },
           {
             "in": "query",
-            "name": "$skip",
-            "description": "Skip the $skip entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
-            "type": "integer",
-            "format": "int32",
-            "default": 0,
-            "maximum": 2147483647,
-            "minimum": 0
+            "name": "ids",
+            "description": "Ids to use in filtering",
+            "type": "array",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "maxLength": 25
+          },
+          {
+            "in": "query",
+            "name": "statuses",
+            "description": "Statuses to use in filtering",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxLength": 5
+          },
+          {
+            "in": "query",
+            "name": "createdDateTimeUtcStart",
+            "description": "the start datetime to get items after",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "createdDateTimeUtcEnd",
+            "description": "the end datetime to get items before",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "$orderBy",
+            "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc', 'CreatedDateTimeUtc desc')",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxLength": 1
           }
         ],
         "responses": {
@@ -509,7 +563,7 @@
           "Document Translation"
         ],
         "summary": "Returns the status for all documents in a batch document translation request",
-        "description": "Returns the status for all documents in a batch document translation request.\r\n            \r\nThe documents included in the response are sorted by document Id in descending order. If the number of documents in the response exceeds our paging limit, server-side paging is used.\r\nPaginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\n$top and $skip query parameters can be used to specify a number of results to return and an offset for the collection.\r\nThe server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned.",
+        "description": "Returns the status for all documents in a batch document translation request.\r\n            \r\nIf the number of documents in the response exceeds our paging limit, server-side paging is used.\r\nPaginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\n$top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.\r\n            \r\n$top indicates the total number of records the user wants to be returned across all pages.\r\n$skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.\r\n$maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.\r\n            \r\n$orderBy query parameter can be used to sort the returned list (ex \"$orderBy=createdDateTimeUtc asc\" or \"$orderBy=createdDateTimeUtc desc\").\r\nThe default sorting is descending by createdDateTimeUtc.\r\nSome query parameters can be used to filter the returned list (ex: \"status=Succeeded,Cancelled\") will only return succeeded and cancelled documents.\r\ncreatedDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.\r\nThe supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned.",
         "operationId": "DocumentTranslation_GetOperationDocumentsStatus",
         "produces": [
           "application/json"
@@ -526,7 +580,26 @@
           {
             "in": "query",
             "name": "$top",
-            "description": "Take the $top entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
+            "description": "$top indicates the total number of records the user wants to be returned across all pages.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\n            \r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 0
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "$skip indicates the number of records to skip from the list of records held by the server based on the sorting method specified.  By default, we sort by descending start time.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\n            \r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "maximum": 2147483647,
+            "minimum": 0
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "$maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.\r\n            \r\nClients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server's default page size.",
             "type": "integer",
             "format": "int32",
             "default": 50,
@@ -535,13 +608,48 @@
           },
           {
             "in": "query",
-            "name": "$skip",
-            "description": "Skip the $skip entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
-            "type": "integer",
-            "format": "int32",
-            "default": 0,
-            "maximum": 2147483647,
-            "minimum": 0
+            "name": "ids",
+            "description": "Ids to use in filtering",
+            "type": "array",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "maxLength": 25
+          },
+          {
+            "in": "query",
+            "name": "statuses",
+            "description": "Statuses to use in filtering",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxLength": 5
+          },
+          {
+            "in": "query",
+            "name": "createdDateTimeUtcStart",
+            "description": "the start datetime to get items after",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "createdDateTimeUtcEnd",
+            "description": "the end datetime to get items before",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "$orderBy",
+            "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc', 'CreatedDateTimeUtc desc')",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxLength": 1
           }
         ],
         "responses": {
@@ -650,6 +758,13 @@
             "description": "Returns the list of supported document file formats",
             "schema": {
               "$ref": "#/definitions/FileFormatListResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Indicates how long to wait before making a new request.",
+                "type": "integer",
+                "format": "int32"
+              }
             }
           },
           "429": {
@@ -706,6 +821,13 @@
             "description": "Returns the list of supported glossary file formats",
             "schema": {
               "$ref": "#/definitions/FileFormatListResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Indicates how long to wait before making a new request.",
+                "type": "integer",
+                "format": "int32"
+              }
             }
           },
           "429": {
@@ -762,6 +884,13 @@
             "description": "Successful request and returns the list of storage sources",
             "schema": {
               "$ref": "#/definitions/StorageSourceListResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Indicates how long to wait before making a new request.",
+                "type": "integer",
+                "format": "int32"
+              }
             }
           },
           "429": {
@@ -863,6 +992,7 @@
     "Glossary": {
       "description": "Glossary / translation memory for the request",
       "required": [
+        "format",
         "glossaryUrl"
       ],
       "type": "object",
@@ -878,7 +1008,7 @@
           "example": "XLIFF"
         },
         "version": {
-          "description": "Version",
+          "description": "Optional Version.  If not specified, default is used.",
           "type": "string",
           "example": "2.0"
         },
@@ -1090,6 +1220,7 @@
     "ErrorV2": {
       "description": "This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
       "required": [
+        "code",
         "message"
       ],
       "type": "object",
@@ -1232,8 +1363,8 @@
         "createdDateTimeUtc",
         "id",
         "lastActionDateTimeUtc",
-        "path",
         "progress",
+        "sourcePath",
         "status",
         "to"
       ],
@@ -1241,6 +1372,11 @@
       "properties": {
         "path": {
           "description": "Location of the document or folder",
+          "type": "string",
+          "example": "https://myblob.blob.core.windows.net/mycontainer/fr/mydoc.txt"
+        },
+        "sourcePath": {
+          "description": "Location of the source document",
           "type": "string",
           "example": "https://myblob.blob.core.windows.net/mycontainer/fr/mydoc.txt"
         },
@@ -1309,6 +1445,11 @@
       }
     },
     "FileFormat": {
+      "required": [
+        "contentTypes",
+        "fileExtensions",
+        "format"
+      ],
       "type": "object",
       "properties": {
         "format": {
@@ -1329,6 +1470,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "defaultVersion": {
+          "description": "Default version if none is specified",
+          "type": "string"
         },
         "versions": {
           "description": "Supported Version",

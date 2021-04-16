@@ -1532,6 +1532,10 @@
           },
           "description": "Tags assigned to the key vault resource."
         },
+        "systemData": {
+          "description": "System metadata for the key vault.",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/VaultProperties",
           "description": "Properties of the vault"
@@ -1939,6 +1943,53 @@
         }
       },
       "description": "Properties of a private link resource."
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of key vault resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created key vault resource."
+        },
+        "createdByType": {
+          "description": "The type of identity that created key vault resource.",
+          "$ref": "#/definitions/IdentityType"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of key vault resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified key vault resource."
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified key vault resource.",
+          "$ref": "#/definitions/IdentityType"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of key vault resource last modification (UTC)."
+        }
+      }
+    },
+    "IdentityType": {
+      "type": "string",
+      "description": "The type of identity.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "identityType",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {

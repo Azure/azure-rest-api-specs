@@ -26,7 +26,7 @@ These are the global settings for the DataShare API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11-01
+tag: package-2020-09-01
 ```
 
 
