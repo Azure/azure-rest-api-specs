@@ -7384,16 +7384,25 @@
     }
   },
   "definitions": {
+    "RestorePointCollectionSourceProperties": {
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Reference id of the source resource from which the restore points have to be created."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the source resource used to create this restore point collection."
+        }
+      },
+      "description": "The properties of the source resource that this restore point collection is created from."
+    },
     "RestorePointCollectionProperties": {
       "properties": {
         "source": {
-          "id": {
-            "$ref": "#/definitions/SubResource",
-            "description": "Reference id of the source resource from which the restore points have to be created."
-          },
-          "location": {
-            "type": "string",
-            "description": "Location of the source resource used to create this restore point collection."
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/RestorePointCollectionSourceProperties"
           }
         },
         "provisioningState": {
