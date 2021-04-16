@@ -1983,6 +1983,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextList"
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -2121,7 +2124,7 @@
           }
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextList"
         },
         "responses": {
           "200": {
@@ -4554,7 +4557,11 @@
           "items": {
             "$ref": "#/definitions/backup"
           }
-        }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }        
       }
     },
     "backup": {
