@@ -227,8 +227,7 @@ directive:
     suppress:
       - NestedResourcesMustHaveListOperation
     reason:
-      - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=Restoreoints
-
+      - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
 ```
 
 ### Tag: package-2021-03-01
