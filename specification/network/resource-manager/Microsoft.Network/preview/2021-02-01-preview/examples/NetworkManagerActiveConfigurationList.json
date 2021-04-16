@@ -4,7 +4,16 @@
     "api-version": "2021-02-01-preview",
     "subscriptionId": "subscriptionA",
     "resourceGroupName": "myResourceGroup",
-    "networkManagerName": "testNetworkManager"
+    "networkManagerName": "testNetworkManager",
+    "parameters": {
+       "regions": [
+         "westus"
+       ],
+       "options":{
+          "$top": 3,
+          "$skip": 0
+       }
+    }
   },
   "responses": {
     "200": {
@@ -119,7 +128,9 @@
             }
           }
         ],
-        "nextLink": "{baseurl}/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/activeConfigurations?api-version=22021-02-01-preview&$skipToken=10"
+        "totalRecords": 1,
+        "firstIndex": 1,
+        "pageSize": 10
       }
     }
   }

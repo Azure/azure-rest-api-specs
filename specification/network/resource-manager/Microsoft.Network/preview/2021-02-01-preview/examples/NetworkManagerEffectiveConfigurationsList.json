@@ -4,7 +4,11 @@
     "api-version": "2021-02-01-preview",
     "subscriptionId": "subscriptionA",
     "resourceGroupName": "myResourceGroup",
-    "virtualNetworkName": "testVirtualNetwork"
+    "virtualNetworkName": "testVirtualNetwork",
+    "parameters": {
+        "$top": 3,
+        "$skip": 0
+    }
   },
   "responses": {
     "200": {
@@ -111,7 +115,9 @@
             ]
           }
         ],
-        "nextLink": "{baseurl}/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/testVirtualNetwork?api-version=2021-02-01-preview&$skipToken=10"
+        "totalRecords": 1,
+        "firstIndex": 1,
+        "pageSize": 10
       }
     }
   }

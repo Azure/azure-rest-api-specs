@@ -226,9 +226,6 @@
         ],
         "operationId": "EffectiveVirtualNetworks_ListByNetworkGroup",
         "description": "Lists all effective virtual networks by specified network group.",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -246,10 +243,13 @@
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ListTopParameter"
-          },
-          {
-            "$ref": "#/parameters/ListSkipTokenParameter"
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./networkManager.json#/definitions/QueryRequestOptions"
+            },
+            "description": "Parameters supplied to list correct page."
           }
         ],
         "responses": {
@@ -387,9 +387,9 @@
           "format": "int32",
           "type": "integer"
         },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
         }
       },
       "description": "Result of the request to list Effective Virtual Network. It contains a list of groups and a URL link to get the next set of results."

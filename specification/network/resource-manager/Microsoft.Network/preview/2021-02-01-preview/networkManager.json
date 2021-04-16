@@ -215,8 +215,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Post commit succeed",
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously",
             "schema": {
               "$ref": "#/definitions/NetworkManagerCommit"
             }
@@ -265,12 +265,6 @@
               "$ref": "#/definitions/NetworkManagerDeploymentStatusParameter"
             },
             "description": "Parameters supplied to specify which Managed Network deployment status is."
-          },
-          {
-            "$ref": "#/parameters/ListTopParameter"
-          },
-          {
-            "$ref": "#/parameters/ListSkipTokenParameter"
           }
         ],
         "responses": {
@@ -286,9 +280,6 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "NetworkManagerDeploymentStatusList": {
@@ -601,6 +592,10 @@
             "$ref": "#/definitions/DeploymentType"
           },
           "description": "List of configurations' deployment types."
+        },
+        "options": {
+          "description": "The query evaluation options",
+          "$ref": "#/definitions/QueryRequestOptions"
         }
       },
       "description": "Network Manager Deployment Status Parameter."
@@ -614,9 +609,24 @@
           },
           "description": "Gets a page of Network Manager Deployment Status"
         },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next page of results."
+        "totalRecords": {
+          "description": "Total Records.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "firstIndex": {
+          "description": "First Index.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "pageSize": {
+          "description": "Page Size.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
         }
       },
       "description": "A list of Network Manager Deployment Status"
@@ -683,9 +693,35 @@
         "conditionalMembers": {
           "type": "string",
           "description": "Conditional Members."
+        },
+        "options": {
+          "description": "The query evaluation options",
+          "$ref": "#/definitions/QueryRequestOptions"
         }
       },
       "description": "Effective Virtual Networks Parameter."
+    },
+    "QueryRequestOptions": {
+      "description": "The options for query evaluation",
+      "properties": {
+        "$skipToken": {
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
+          "type": "string"
+        },
+        "$top": {
+          "description": "The maximum number of rows that the query should return. Overrides the page size when ```$skipToken``` property is present.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "$skip": {
+          "description": "The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      }
     }
   },
   "parameters": {

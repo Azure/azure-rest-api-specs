@@ -49,19 +49,14 @@
           "$ref": "#/parameters/NetworkManagerNameParameter"
         },
         {
-          "$ref": "#/parameters/ListTopParameter"
-        },
-        {
-          "$ref": "#/parameters/ListSkipTokenParameter"
-        },
-        {
-          "name": "region",
-          "in": "query",
-          "description": "Location name",
-          "required": false,
-          "type": "string",
-          "x-ms-parameter-location": "method"
-        }
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ActiveConfigurationParameter"
+            },
+            "description": "Effective Virtual Networks Parameter."
+          }
       ],
       "post": {
         "tags": [
@@ -123,13 +118,45 @@
           },
           "description": "Gets a page of active configurations."
         },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next set of results."
+        "totalRecords": {
+          "description": "Total Records.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "firstIndex": {
+          "description": "First Index.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "pageSize": {
+          "description": "Page Size.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
         }
       },
       "description": "Result of the request to list active configurations. It contains a list of active configurations and a URL link to get the next set of results."
-    }
+    },
+    "ActiveConfigurationParameter": {
+      "properties": {
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "region Name."
+          },
+          "description": "List of regions."
+        },
+        "options": {
+          "description": "The query evaluation options",
+          "$ref": "./networkManager.json#/definitions/QueryRequestOptions"
+        }
+      },
+      "description": "Effective Virtual Networks Parameter."
+    }    
   },
   "parameters": {
     "ResourceGroupNameParameter": {
