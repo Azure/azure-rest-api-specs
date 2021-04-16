@@ -8,6 +8,12 @@
       - maririos
 
 - rule:
+    paths:
+      - "specification/confidentialledger/data-plane/**"
+    reviewers:
+      - christothes 
+
+- rule:
     # eventgrid data-plane PR
     paths:
       - "specification/eventgrid/data-plane/**"
@@ -24,12 +30,18 @@
 - rule:
     # data-plane PR
     paths:
+      - "specification/**/data-plane/iot**"
+    reviewers:
+      - drwill-ms
+
+- rule:
+    # data-plane PR
+    paths:
       - "specification/**/data-plane/**"
     reviewers:
       - anuchandy
       - jhendrixMSFT
       - tjprescott
-      
 
 - rule:
     paths:
@@ -158,6 +170,12 @@
       - "specification/servicelinker/**"
     reviewers:
       - raych1
+      
+- rule:
+    paths:
+      - "specification/keyvault/**"
+    reviewers:
+      - zhenglaizhang
 
 - rule:
     paths: 
