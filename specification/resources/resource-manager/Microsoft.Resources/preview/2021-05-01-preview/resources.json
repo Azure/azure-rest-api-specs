@@ -2925,10 +2925,13 @@
           }
         },
         "x-ms-examples": {
-          "Create deployment at a given scope.": {
+          "Copy resources.": {
             "$ref": "./examples/CopyResources.json"
+          },
+          "Validate copy resources": {
+            "$ref": "./examples/ValidateCopyResources.json"
           }
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/resourceCopyStatus/{token}": {
@@ -2967,7 +2970,12 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Copy resources.": {
+            "$ref": "./examples/ResourceCopyStatus.json"
+          }
+        } 
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/resourceCopiesStatus": {
@@ -3001,6 +3009,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Copy resources.": {
+            "$ref": "./examples/ResourceCopiesStatus.json"
           }
         }
       }
