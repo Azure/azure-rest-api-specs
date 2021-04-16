@@ -3732,8 +3732,11 @@
           }
         ],
         "x-ms-examples": {
-          "Get a restore point collection": {
+          "Get a restore point collection (but not the restore points contained in the restore point collection)": {
             "$ref": "./examples/GetRestorePointCollection.json"
+          },
+          "Get a restore point collection, including the restore points contained in the restore point collection": {
+            "$ref": "./examples/GetRestorePointCollectionWithContainedRestorePoints.json"
           }
         },
         "responses": {
@@ -3973,6 +3976,11 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-examples": {
+          "Get a restore point": {
+            "$ref": "./examples/GetRestorePoint.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
