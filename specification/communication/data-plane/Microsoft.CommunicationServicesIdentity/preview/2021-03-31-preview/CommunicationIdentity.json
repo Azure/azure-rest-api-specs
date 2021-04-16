@@ -6,6 +6,132 @@
     "version": "2021-03-31-preview"
   },
   "paths": {
+    "/identities": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Create a new identity.",
+        "operationId": "CommunicationIdentity_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "201": {
+            "description": "Created - Returns the created identity.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an Identity": {
+            "$ref": "./examples/CreateIdentity.json"
+          }
+        }
+      }
+    },
+    "/identities/{id}": {
+      "delete": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Delete the identity, revoke all tokens for the identity and delete all associated data.",
+        "operationId": "CommunicationIdentity_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identifier of the identity to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete an identity": {
+            "$ref": "./examples/DeleteIdentity.json"
+          }
+        }
+      }
+    },
+    "/identities/{id}/:revokeAccessTokens": {
+      "post": {
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Revoke all access tokens for the specific identity.",
+        "operationId": "CommunicationIdentity_RevokeAccessTokens",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identifier of the identity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Revoke access tokens": {
+            "$ref": "./examples/RevokeAccessTokens.json"
+          }
+        }
+      }
+    },
     "/m365identities/:issueAccessToken": {
       "post": {
         "tags": [
@@ -47,17 +173,140 @@
           }
         }
       }
+    },
+    "/identities/{id}/:issueAccessToken": {
+      "post": {
+        "tags": [
+          "Token"
+        ],
+        "summary": "Issue a new token for an identity.",
+        "operationId": "CommunicationIdentity_IssueAccessToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identifier of the identity to issue token for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Requesting scopes for the new token.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessToken"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue an access token": {
+            "$ref": "./examples/IssueAccessToken.json"
+          }
+        }
+      }
+    },
+    "/turn/{id}/:issueCredentials": {
+      "post": {
+        "tags": [
+          "Turn"
+        ],
+        "summary": "Issue TURN credentials for an existing identity.",
+        "operationId": "CommunicationIdentity_IssueTurnCredentials",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identifier of the existing identity to issue credentials for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationTurnCredentialsResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue Turn Credentials": {
+            "$ref": "./examples/IssueTurnCredentials.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "TeamsAccessTokenRequest": {
+    "CommunicationIdentityTokenScope": {
+      "description": "List of scopes for an access token.",
+      "enum": [
+        "chat",
+        "voip"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommunicationIdentityTokenScope",
+        "modelAsString": true
+      }
+    },
+    "CommunicationIdentityCreateRequest": {
+      "type": "object",
+      "properties": {
+        "createTokenWithScopes": {
+          "description": "Also create access token for the created identity.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentityTokenScope"
+          }
+        }
+      }
+    },
+    "CommunicationIdentity": {
+      "description": "A communication identity.",
       "required": [
-        "token"
+        "id"
       ],
       "type": "object",
       "properties": {
-        "token": {
-          "description": "The token acquired via MSAL.",
+        "id": {
+          "description": "Identifier of the identity.",
           "type": "string"
         }
       }
@@ -78,6 +327,96 @@
           "format": "date-time",
           "description": "The expiry time of the token.",
           "type": "string"
+        }
+      }
+    },
+    "CommunicationIdentityAccessTokenResult": {
+      "description": "A communication identity with access token.",
+      "required": [
+        "identity"
+      ],
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/CommunicationIdentity"
+        },
+        "accessToken": {
+          "$ref": "#/definitions/CommunicationIdentityAccessToken"
+        }
+      }
+    },
+    "TeamsAccessTokenRequest": {
+      "required": [
+        "token"
+      ],
+      "type": "object",
+      "properties": {
+        "token": {
+          "description": "The token acquired via MSAL.",
+          "type": "string"
+        }
+      }
+    },
+    "CommunicationIdentityAccessTokenRequest": {
+      "required": [
+        "scopes"
+      ],
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "description": "List of scopes attached to the token.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentityTokenScope"
+          }
+        }
+      }
+    },
+    "CommunicationTurnServer": {
+      "description": "An instance of a TURN server with credentials.",
+      "required": [
+        "credential",
+        "urls",
+        "username"
+      ],
+      "type": "object",
+      "properties": {
+        "urls": {
+          "description": "List of TURN server URLs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "username": {
+          "description": "User account name which uniquely identifies the credentials.",
+          "type": "string"
+        },
+        "credential": {
+          "description": "Credential for the server.",
+          "type": "string"
+        }
+      }
+    },
+    "CommunicationTurnCredentialsResponse": {
+      "description": "A TURN credentials response.",
+      "required": [
+        "expiresOn",
+        "turnServers"
+      ],
+      "type": "object",
+      "properties": {
+        "expiresOn": {
+          "format": "date-time",
+          "description": "The date for which the username and credentials are not longer valid.",
+          "type": "string"
+        },
+        "turnServers": {
+          "description": "An array representing the credentials and the TURN server URL.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationTurnServer"
+          }
         }
       }
     }
