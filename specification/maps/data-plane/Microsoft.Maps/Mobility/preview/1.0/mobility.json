@@ -83,52 +83,6 @@
     }
   },
   "parameters": {
-    "ClientId": {
-      "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
-      "type": "string",
-      "in": "header",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "SubscriptionKey": {
-      "name": "subscription-key",
-      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 1.0",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "default": "1.0",
-      "x-ms-parameter-location": "client"
-    },
-    "JsonFormat": {
-      "name": "format",
-      "description": "Desired format of the response. Only `json` format is supported.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "enum": [
-        "json"
-      ],
-      "x-ms-enum": {
-        "name": "JsonFormat",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "json",
-            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
     "MetroId": {
       "name": "metroId",
       "description": "The unique id of the metro area. Can be retrieved via [Get Metro Area API](https://aka.ms/AzureMapsMobilityMetro).",
@@ -160,16 +114,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "query",
@@ -202,8 +156,7 @@
                   "description": "2-character [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) alpha-2 country code. E.g. US."
                 }
               ]
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "$ref": "#/parameters/MobilityLanguage"
@@ -246,16 +199,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "query",
@@ -301,8 +254,7 @@
                   }
                 ]
               }
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "$ref": "#/parameters/MobilityLanguage"
@@ -345,16 +297,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "$ref": "#/parameters/MetroId"
@@ -431,16 +383,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "$ref": "#/parameters/MetroId"
@@ -541,16 +493,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "$ref": "#/parameters/MetroId"
@@ -586,8 +538,7 @@
                   "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
                 }
               ]
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "name": "detailType",
@@ -668,16 +619,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "$ref": "#/parameters/MetroId"
@@ -718,8 +669,7 @@
                   "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
                 }
               ]
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "name": "destination",
@@ -757,8 +707,7 @@
                   "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
                 }
               ]
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "name": "modeType",
@@ -791,8 +740,7 @@
                   }
                 ]
               }
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "name": "transitType",
@@ -850,8 +798,7 @@
                   }
                 ]
               }
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "name": "agency",
@@ -892,8 +839,7 @@
                   "description": "The name of the transit agency, e.g. Metro Transit."
                 }
               ]
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "name": "time",
@@ -1013,16 +959,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "query",
@@ -1057,8 +1003,7 @@
                   }
                 ]
               }
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "$ref": "#/parameters/MobilityLanguage"
@@ -1101,16 +1046,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "$ref": "#/parameters/MetroId"
@@ -1156,8 +1101,7 @@
                   "description": "Returns arrivals of a line to stops near the user’s location. The applicable location query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\"."
                 }
               ]
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "name": "stopQueryType",
@@ -1183,8 +1127,7 @@
                   "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
                 }
               ]
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "name": "limit",
@@ -1258,8 +1201,7 @@
                   }
                 ]
               }
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "name": "agency",
@@ -1300,8 +1242,7 @@
                   "description": "The name of the transit agency, e.g. Metro Transit."
                 }
               ]
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "name": "timeoutInSeconds",
