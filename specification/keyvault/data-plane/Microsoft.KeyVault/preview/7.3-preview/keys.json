@@ -1165,7 +1165,7 @@
         "contentType": {
           "description": "Content type and version of key release policy",
           "type": "string",
-          "default": "application/json; charset=utf-8; version=1.0"
+          "default": "application/json; charset=utf-8"
         },
         "data": {
           "description": "Blob encoding the policy rules under which the key can be released.",
@@ -1676,9 +1676,13 @@
     },
     "KeyExportParameters": {
       "properties": {
-        "kek": {
+        "wrappingKey": {
           "$ref": "#/definitions/JsonWebKey",
           "description": "The export key encryption Json web key. This key MUST be a RSA key that supports encryption."
+        },
+        "wrappingKid": {
+          "type": "string",
+          "description": "The export key encryption key identifier. This key MUST be a RSA key that supports encryption."
         },
         "enc": {
           "type": "string",
@@ -1695,18 +1699,14 @@
           }
         }
       },
-      "description": "The export key parameters.",
-      "required": [
-        "kek"
-      ]
+      "description": "The export key parameters."
     },
     "KeyReleaseParameters": {
       "properties": {
-        "env": {
-          "x-ms-client-name": "environment",
+        "target": {
           "type": "string",
           "minLength": 1,
-          "description": "The target environment assertion."
+          "description": "The attestation assertion for the target of the key release."
         },
         "nonce": {
           "type": "string",
@@ -1729,7 +1729,7 @@
       },
       "description": "The release key parameters.",
       "required": [
-        "env"
+        "target"
       ]
     },
     "KeyOperationsParameters": {
