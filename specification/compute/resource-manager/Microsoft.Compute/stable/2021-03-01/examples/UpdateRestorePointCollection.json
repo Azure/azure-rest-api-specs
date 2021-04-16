@@ -8,41 +8,28 @@
       "location": "norwayeast",
       "properties": {
         "source": {
-          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM"
-        }
+          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+          "location": "eastus"
+        },
+        "restorePointCollectionId": "638f052b-a7c2-450c-89e7-6a3b8f1d6a7c"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myRunCommand",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/runCommands/myRunCommand",
-        "type": "Microsoft.Compute/virtualMachines/runCommands",
-        "location": "westus",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
+        "name": "myRpc",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/myRpc",
+        "type": "Microsoft.Compute/restorePointCollection",
+        "location": "norwayeast",
         "properties": {
           "source": {
-            "script": "Write-Host Script Source Updated!"
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+            "location": "eastus"
           },
-          "parameters": [
-            {
-              "name": "param1",
-              "value": "value1"
-            },
-            {
-              "name": "param2",
-              "value": "value2"
-            }
-          ],
-          "asyncExecution": false,
-          "runAsUser": "user1",
-          "timeoutInSeconds": 3600,
-          "provisioningState": "Updating"
+          "restorePointCollectionId": "638f052b-a7c2-450c-89e7-6a3b8f1d6a7c"
         }
+      }
       }
     }
   }

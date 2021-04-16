@@ -3531,8 +3531,11 @@
         "operationId": "RestorePointCollections_CreateOrUpdate",
         "description": "The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details.",
         "x-ms-examples": {
-          "Create or update a restore point collection.": {
+          "Create a restore point collection.": {
             "$ref": "./examples/CreateARestorePointCollection.json"
+          },
+          "Update a restore point collection.": {
+            "$ref": "./examples/UpdateRestorePointCollection.json"
           }
         },
         "parameters": [
@@ -3728,6 +3731,11 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-examples": {
+          "Get a restore point collection": {
+            "$ref": "./examples/GetRestorePointCollection.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
