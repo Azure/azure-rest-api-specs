@@ -90,9 +90,6 @@
       "description": "Video streaming token grants access to the video streaming URLs which can be used by an compatible HLS or DASH player."
     },
     "VideoProperties": {
-      "required": [
-        "type"
-      ],
       "properties": {
         "title": {
           "type": "string",
@@ -118,6 +115,7 @@
             "modelAsString": true
           },
           "description": "Type of the video archive. Different archive formats provide different capabilities.",
+          "readOnly": true,
           "x-nullable": false
         },
         "flags": {
