@@ -47,15 +47,11 @@ directive:
   - where: 
       parameter-name: offer-id 
     set:
-      parameter-name: offer
+      parameter-name: product
   - where: 
       parameter-name: plan-id 
     set:
       parameter-name: plan
-  - where: 
-      parameter-name: product
-    set:
-      parameter-name: offer
 
 cli:
   cli-directive:
