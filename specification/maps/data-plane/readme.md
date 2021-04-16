@@ -79,7 +79,6 @@ input-file:
   - Microsoft.Maps/DEM/preview/1.0/elevation.json
   - Microsoft.Maps/DwgConversion/preview/1.0/dwgconversion.json
   - Microsoft.Maps/FeatureState/preview/1.0/featurestate.json
-  - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
   - Microsoft.Maps/Mobility/preview/1.0/mobility.json
   - Microsoft.Maps/Render/preview/1.0/render.json
@@ -147,7 +146,6 @@ input-file:
   - $(this-folder)/Microsoft.Maps/DEM/preview/1.0/elevation.json
   - $(this-folder)/Microsoft.Maps/DwgConversion/preview/1.0/dwgconversion.json
   - $(this-folder)/Microsoft.Maps/FeatureState/preview/1.0/featurestate.json
-  - $(this-folder)/Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - $(this-folder)/Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
   - $(this-folder)/Microsoft.Maps/Mobility/preview/1.0/mobility.json
   - $(this-folder)/Microsoft.Maps/Render/preview/1.0/render.json
