@@ -67,7 +67,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/PrivateDnsZoneSuffix"
             }
           },
           "default": {
@@ -81,6 +81,10 @@
     }
   },
   "definitions": {
+    "PrivateDnsZoneSuffix": {
+      "type": "string",
+      "description": "Represents a resource name availability."
+    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
