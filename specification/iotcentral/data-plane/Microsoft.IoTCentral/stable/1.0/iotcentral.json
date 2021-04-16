@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure IoT Central",
     "description": "Azure IoT Central is a service that makes it easy to connect, monitor, and manage your IoT devices at scale.",
-    "version": "1.0.0"
+    "version": "1.0"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{subdomain}.{baseDomain}",
@@ -16,7 +16,7 @@
       }
     ]
   },
-  "basePath": "/api/v1",
+  "basePath": "/api/1.0",
   "schemes": [
     "https"
   ],
@@ -85,25 +85,6 @@
         "type"
       ],
       "discriminator": "type"
-    },
-    "Collection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection of objects.",
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next page of objects.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "Device": {
       "type": "object",

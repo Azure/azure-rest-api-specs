@@ -29,11 +29,11 @@ input-file:
 ```
 
 ### Tag: package-1.0.0
-These settings apply only when `--tag=package-1.0.0` is specified on the command line.
+These settings apply only when `--tag=package-1.0` is specified on the command line.
 
-```yaml $(tag) == 'package-1.0.0'
+```yaml $(tag) == 'package-1.0'
 input-file:
-  - Microsoft.IoTCentral/stable/1.0.0/iotcentral.json
+  - Microsoft.IoTCentral/stable/1.0/iotcentral.json
 ```
 ---
 
@@ -61,10 +61,10 @@ input-file:
   - $(this-folder)/Microsoft.IoTCentral/preview/2021-04-30-preview/iotcentral.json
 ```
 
-## tag: 1.0.0
-```yaml $(tag) == '1.0.0'
+## tag: 1.0
+```yaml $(tag) == '1.0'
 input-file:
-  - $(this-folder)/Microsoft.IoTCentral/stable/1.0.0/iotcentral.json
+  - $(this-folder)/Microsoft.IoTCentral/stable/1.0/iotcentral.json
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
