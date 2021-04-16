@@ -138,11 +138,11 @@
       "description": "The network manager connectivity configuration resource",
       "x-ms-discriminator-value": "ConnectivityConfiguration"
     },
-    "SecurityRuleCollection": {
+    "EffectiveSecurityRuleCollection": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RuleCollectionProperties",
+          "$ref": "#/definitions/EffectiveRuleCollectionProperties",
           "description": "The security rule collection properties"
         }
       },
@@ -187,7 +187,7 @@
         "appliesToGroups": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/connectivityGroupItem"
+            "$ref": "#/definitions/EffectiveConnectivityGroupItem"
           },
           "description": "Groups for configuration"
         },
@@ -206,7 +206,7 @@
       ],
       "description": "Properties of network manager connectivity configuration"
     },
-    "connectivityGroupItem": {
+    "EffectiveConnectivityGroupItem": {
       "type": "object",
       "properties": {
         "networkGroupId": {
@@ -235,7 +235,7 @@
         }
       }
     },
-    "RuleCollectionProperties": {
+    "EffectiveRuleCollectionProperties": {
       "properties": {
         "displayName": {
           "type": "string",
@@ -267,7 +267,7 @@
       },
       "description": "The network manager security rule collection properties"
     },
-    "BaseRule": {
+    "EffectiveBaseRule": {
       "properties": {
         "id": {
           "type": "string",
@@ -294,7 +294,7 @@
       "discriminator": "kind",
       "description": "Network base rule."
     },
-    "AdminRule": {
+    "EffectiveAdminRule": {
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat",
@@ -304,13 +304,13 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BaseRule"
+          "$ref": "#/definitions/EffectiveBaseRule"
         }
       ],
       "description": "Network admin rule.",
       "x-ms-discriminator-value": "AdminRule"
     },
-    "DefaultAdminRule": {
+    "EffectiveDefaultAdminRule": {
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat",
@@ -320,13 +320,13 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BaseRule"
+          "$ref": "#/definitions/EffectiveBaseRule"
         }
       ],
       "description": "Network default admin rule.",
       "x-ms-discriminator-value": "DefaultAdminRule"
     },
-    "UserRule": {
+    "EffectiveUserRule": {
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/UserRulePropertiesFormat",
@@ -336,13 +336,13 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BaseRule"
+          "$ref": "#/definitions/EffectiveBaseRule"
         }
       ],
       "description": "Network security user rule.",
       "x-ms-discriminator-value": "UserRule"
     },
-    "DefaultUserRule": {
+    "EffectiveDefaultUserRule": {
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/DefaultUserRulePropertiesFormat",
@@ -352,7 +352,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BaseRule"
+          "$ref": "#/definitions/EffectiveBaseRule"
         }
       ],
       "description": "Network security default user rule.",
