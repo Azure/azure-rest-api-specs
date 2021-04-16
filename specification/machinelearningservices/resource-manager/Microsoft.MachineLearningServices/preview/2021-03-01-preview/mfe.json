@@ -14,7 +14,7 @@
         "tags": [
           "BatchDeployment"
         ],
-        "summary": "Creates a batch inference deployment.",
+        "summary": "Creates/updates a batch inference deployment.",
         "operationId": "BatchDeployments_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -4894,7 +4894,7 @@
           ]
         },
         "userAssignedIdentities": {
-          "description": "Dictionary of the user assigned identities, key is resource ID of the UAI.",
+          "description": "Dictionary of the user assigned identities, key is ARM resource ID of the UAI.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/UserAssignedIdentityMeta"
@@ -4904,11 +4904,11 @@
       "additionalProperties": false
     },
     "ComputeConfiguration": {
-      "description": "Compute binding definition.",
+      "description": "Configuration for compute binding.",
       "type": "object",
       "properties": {
         "target": {
-          "description": "Resource ID of the compute resource. Not used for Batch jobs.",
+          "description": "ARM resource ID of the compute resource. Not used for Batch jobs.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -5018,6 +5018,7 @@
       "additionalProperties": false
     },
     "ReferenceType": {
+      "description": "Enum to determine which reference method to use for an asset.",
       "enum": [
         "Id",
         "DataPath",
@@ -5031,6 +5032,7 @@
       "additionalProperties": false
     },
     "AssetReferenceBase": {
+      "description": "Base definition for asset references.",
       "required": [
         "referenceType"
       ],
@@ -5045,6 +5047,7 @@
       "additionalProperties": false
     },
     "IdAssetReference": {
+      "description": "Reference to an asset via it's ARM resource ID.",
       "required": [
         "assetId"
       ],
@@ -5064,6 +5067,7 @@
       "additionalProperties": false
     },
     "DataPathAssetReference": {
+      "description": "Reference to an asset via it's path in a Datastore.",
       "type": "object",
       "allOf": [
         {
@@ -5072,9 +5076,11 @@
       ],
       "properties": {
         "path": {
+          "description": "The path of the file/directory in the datastore.",
           "type": "string"
         },
         "datastoreId": {
+          "description": "The ARM resource ID of the datastore where the asset is located.",
           "type": "string"
         }
       },
@@ -5082,6 +5088,7 @@
       "additionalProperties": false
     },
     "OutputPathAssetReference": {
+      "description": "Reference to an asset via it's path in a job output.",
       "type": "object",
       "allOf": [
         {
@@ -5090,9 +5097,11 @@
       ],
       "properties": {
         "path": {
+          "description": "The path of the file/directory in the job output.",
           "type": "string"
         },
         "jobId": {
+          "description": "The ARM resource ID of the job.",
           "type": "string"
         }
       },
@@ -5100,13 +5109,14 @@
       "additionalProperties": false
     },
     "CodeConfiguration": {
+      "description": "Configuration for a scoring code asset.",
       "required": [
         "scoringScript"
       ],
       "type": "object",
       "properties": {
         "codeId": {
-          "description": "The ID of the code asset.",
+          "description": "The ARM resource ID of the code asset.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -5175,7 +5185,7 @@
           }
         },
         "model": {
-          "description": "Model Configuration.",
+          "description": "Reference to the model asset for the endpoint deployment.",
           "$ref": "#/definitions/AssetReferenceBase"
         },
         "codeConfiguration": {
@@ -5286,6 +5296,7 @@
       "additionalProperties": false
     },
     "EndpointAuthMode": {
+      "description": "Enum to determine endpoint authentication mode.",
       "enum": [
         "AMLToken",
         "Key",
@@ -5299,6 +5310,7 @@
       "additionalProperties": false
     },
     "EndpointAuthKeys": {
+      "description": "The keys for endpoint authentication.",
       "type": "object",
       "properties": {
         "primaryKey": {
@@ -5321,7 +5333,7 @@
       "additionalProperties": false
     },
     "BatchEndpoint": {
-      "description": "Batch endpoint configuration",
+      "description": "Batch endpoint configuration.",
       "type": "object",
       "properties": {
         "authMode": {
@@ -5348,7 +5360,7 @@
         },
         "scoringUri": {
           "format": "uri",
-          "description": "Endpoint URI",
+          "description": "Endpoint URI.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -5357,7 +5369,7 @@
         },
         "swaggerUri": {
           "format": "uri",
-          "description": "Endpoint Swagger URI",
+          "description": "Endpoint Swagger URI.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -5469,6 +5481,7 @@
       "additionalProperties": false
     },
     "CodeContainer": {
+      "description": "Code container for code asset versions.",
       "type": "object",
       "properties": {
         "properties": {
@@ -5534,18 +5547,18 @@
       "additionalProperties": false
     },
     "CodeVersion": {
-      "description": "Details of an RegisteredCode",
+      "description": "Code asset version details.",
       "required": [
         "path"
       ],
       "type": "object",
       "properties": {
         "datastoreId": {
-          "description": "The asset datastoreId",
+          "description": "The ARM resource ID of the datastore where the asset is located.",
           "type": "string"
         },
         "path": {
-          "description": "The path of the file/directory.",
+          "description": "The path of the file/directory in the datastore.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
@@ -5623,6 +5636,7 @@
       "additionalProperties": false
     },
     "DataContainer": {
+      "description": "Container for data asset versions.",
       "type": "object",
       "properties": {
         "properties": {
@@ -5688,6 +5702,7 @@
       "additionalProperties": false
     },
     "ContentsType": {
+      "description": "Enum to determine the datastore contents type.",
       "enum": [
         "AzureBlob",
         "AzureDataLakeGen1",
@@ -5706,6 +5721,7 @@
       "additionalProperties": false
     },
     "CredentialsType": {
+      "description": "Enum to determine the datastore credentials type.",
       "enum": [
         "AccountKey",
         "Certificate",
@@ -5722,6 +5738,7 @@
       "additionalProperties": false
     },
     "SecretsType": {
+      "description": "Enum to determine the datastore secrets type.",
       "enum": [
         "AccountKey",
         "Certificate",
@@ -5738,6 +5755,7 @@
       "additionalProperties": false
     },
     "DatastoreSecrets": {
+      "description": "Base definition for datastore secrets.",
       "required": [
         "secretsType"
       ],
@@ -5752,6 +5770,7 @@
       "additionalProperties": false
     },
     "AccountKeyDatastoreSecrets": {
+      "description": "Datastore account key secrets.",
       "type": "object",
       "allOf": [
         {
@@ -5768,6 +5787,7 @@
       "additionalProperties": false
     },
     "DatastoreCredentials": {
+      "description": "Base definition for datastore credentials.",
       "required": [
         "credentialsType"
       ],
@@ -5782,6 +5802,7 @@
       "additionalProperties": false
     },
     "AccountKeyDatastoreCredentials": {
+      "description": "Account key datastore credentials configuration.",
       "type": "object",
       "allOf": [
         {
@@ -5803,6 +5824,7 @@
       "additionalProperties": false
     },
     "CertificateDatastoreSecrets": {
+      "description": "Datastore certificate secrets.",
       "type": "object",
       "allOf": [
         {
@@ -5819,6 +5841,7 @@
       "additionalProperties": false
     },
     "CertificateDatastoreCredentials": {
+      "description": "Certificate datastore credentials configuration.",
       "required": [
         "clientId",
         "tenantId",
@@ -5868,6 +5891,7 @@
       "additionalProperties": false
     },
     "NoneDatastoreSecrets": {
+      "description": "Empty/none datastore secret.",
       "type": "object",
       "allOf": [
         {
@@ -5878,6 +5902,7 @@
       "additionalProperties": false
     },
     "NoneDatastoreCredentials": {
+      "description": "Empty/none datastore credentials.",
       "type": "object",
       "allOf": [
         {
@@ -5898,6 +5923,7 @@
       "additionalProperties": false
     },
     "SasDatastoreSecrets": {
+      "description": "Datastore SAS secrets.",
       "type": "object",
       "allOf": [
         {
@@ -5914,6 +5940,7 @@
       "additionalProperties": false
     },
     "SasDatastoreCredentials": {
+      "description": "SAS datastore credentials configuration.",
       "type": "object",
       "allOf": [
         {
@@ -5935,6 +5962,7 @@
       "additionalProperties": false
     },
     "ServicePrincipalDatastoreSecrets": {
+      "description": "Datastore service principal secrets.",
       "type": "object",
       "allOf": [
         {
@@ -5951,6 +5979,7 @@
       "additionalProperties": false
     },
     "ServicePrincipalDatastoreCredentials": {
+      "description": "Service Principal datastore credentials configuration.",
       "required": [
         "clientId",
         "tenantId"
@@ -5994,6 +6023,7 @@
       "additionalProperties": false
     },
     "SqlAdminDatastoreSecrets": {
+      "description": "Datastore SQL Admin secrets.",
       "type": "object",
       "allOf": [
         {
@@ -6010,6 +6040,7 @@
       "additionalProperties": false
     },
     "SqlAdminDatastoreCredentials": {
+      "description": "SQL Admin datastore credentials configuration.",
       "required": [
         "userId"
       ],
@@ -6039,6 +6070,7 @@
       "additionalProperties": false
     },
     "DatastoreContents": {
+      "description": "Base definition for datastore contents configuration.",
       "required": [
         "contentsType"
       ],
@@ -6114,6 +6146,7 @@
       "additionalProperties": false
     },
     "AzureDataLakeGen1Contents": {
+      "description": "Azure Data Lake Gen1 datastore configuration.",
       "required": [
         "credentials",
         "storeName"
@@ -6139,6 +6172,7 @@
       "additionalProperties": false
     },
     "AzureDataLakeGen2Contents": {
+      "description": "Azure Data Lake Gen2 datastore configuration.",
       "required": [
         "accountName",
         "containerName",
@@ -6200,6 +6234,7 @@
       "additionalProperties": false
     },
     "AzureFileContents": {
+      "description": "Azure File datastore configuration.",
       "required": [
         "accountName",
         "containerName",
@@ -6261,6 +6296,7 @@
       "additionalProperties": false
     },
     "AzurePostgreSqlContents": {
+      "description": "Azure Postgre SQL datastore configuration.",
       "required": [
         "credentials",
         "databaseName",
@@ -6329,6 +6365,7 @@
       "additionalProperties": false
     },
     "AzureSqlDatabaseContents": {
+      "description": "Azure SQL Database datastore configuration.",
       "required": [
         "credentials",
         "databaseName",
@@ -6389,6 +6426,7 @@
       "additionalProperties": false
     },
     "GlusterFsContents": {
+      "description": "GlusterFs datastore configuration.",
       "required": [
         "serverAddress",
         "volumeName"
@@ -6423,6 +6461,7 @@
       "additionalProperties": false
     },
     "OriginType": {
+      "description": "Enum to determine the type of linked service.",
       "enum": [
         "Synapse"
       ],
@@ -6434,6 +6473,7 @@
       "additionalProperties": false
     },
     "LinkedInfo": {
+      "description": "Information about a datastore origin, if linked.",
       "type": "object",
       "properties": {
         "linkedId": {
@@ -6478,6 +6518,7 @@
           "$ref": "#/definitions/LinkedInfo"
         },
         "properties": {
+          "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -6554,7 +6595,7 @@
       "additionalProperties": false
     },
     "DataVersion": {
-      "description": "Details of an DatasetDto",
+      "description": "Data asset version details.",
       "required": [
         "path"
       ],
@@ -6565,11 +6606,11 @@
           "$ref": "#/definitions/DatasetType"
         },
         "datastoreId": {
-          "description": "The asset datastoreId",
+          "description": "The ARM resource ID of the datastore where the asset is located.",
           "type": "string"
         },
         "path": {
-          "description": "The path of the file/directory.",
+          "description": "The path of the file/directory in the datastore.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
@@ -6647,6 +6688,7 @@
       "additionalProperties": false
     },
     "EnvironmentContainer": {
+      "description": "Container for environment specification versions.",
       "type": "object",
       "properties": {
         "properties": {
@@ -6981,6 +7023,7 @@
       "additionalProperties": false
     },
     "JobType": {
+      "description": "Enum to determine the type of job.",
       "enum": [
         "Command",
         "Sweep",
@@ -6994,6 +7037,7 @@
       "additionalProperties": false
     },
     "JobOutput": {
+      "description": "Job output definition containing information on where to find job output and logs.",
       "type": "object",
       "properties": {
         "datastoreId": {
@@ -7054,10 +7098,11 @@
       "additionalProperties": false
     },
     "InputDataBinding": {
+      "description": "Input data binding configuration.",
       "type": "object",
       "properties": {
         "dataId": {
-          "description": "ArmId of the registered dataVersion.",
+          "description": "ARM resource ID of the registered dataVersion.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -7084,10 +7129,11 @@
       "additionalProperties": false
     },
     "OutputDataBinding": {
+      "description": "Output data binding configuration.",
       "type": "object",
       "properties": {
         "datastoreId": {
-          "description": "ArmId of the datastore where the data output will be stored.",
+          "description": "ARM resource ID of the datastore where the data output will be stored.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -7122,6 +7168,7 @@
       "additionalProperties": false
     },
     "DistributionType": {
+      "description": "Enum to determine the job distribution type.",
       "enum": [
         "PyTorch",
         "TensorFlow",
@@ -7135,6 +7182,7 @@
       "additionalProperties": false
     },
     "DistributionConfiguration": {
+      "description": "Job distribution configuration.",
       "required": [
         "distributionType"
       ],
@@ -7153,6 +7201,7 @@
       "additionalProperties": false
     },
     "TensorFlow": {
+      "description": "Tensorflow distribution configuration.",
       "type": "object",
       "allOf": [
         {
@@ -7182,6 +7231,7 @@
       "additionalProperties": false
     },
     "Mpi": {
+      "description": "MPI distribution configuration.",
       "type": "object",
       "allOf": [
         {
@@ -7202,6 +7252,7 @@
       "additionalProperties": false
     },
     "PyTorch": {
+      "description": "Pytorch distribution configuration.",
       "type": "object",
       "allOf": [
         {
@@ -7219,6 +7270,7 @@
       "additionalProperties": false
     },
     "IdentityConfigurationType": {
+      "description": "Enum to determine identity framework.",
       "enum": [
         "Managed",
         "AMLToken"
@@ -7231,6 +7283,7 @@
       "additionalProperties": false
     },
     "IdentityConfiguration": {
+      "description": "Identity configuration.",
       "required": [
         "identityType"
       ],
@@ -7249,6 +7302,7 @@
       "additionalProperties": false
     },
     "AmlToken": {
+      "description": "AML Token identity configuration.",
       "type": "object",
       "allOf": [
         {
@@ -7259,6 +7313,7 @@
       "additionalProperties": false
     },
     "ManagedIdentity": {
+      "description": "Managed identity configuration.",
       "type": "object",
       "allOf": [
         {
@@ -7285,7 +7340,7 @@
           ]
         },
         "resourceId": {
-          "description": "Specifies a user-assigned identity by resource ID. For system-assigned, do not set this field.",
+          "description": "Specifies a user-assigned identity by ARM resource ID. For system-assigned, do not set this field.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -7349,7 +7404,7 @@
       "additionalProperties": false
     },
     "JobBase": {
-      "description": "Job base definition",
+      "description": "Base definition for a job.",
       "required": [
         "jobType"
       ],
@@ -7404,7 +7459,7 @@
       "additionalProperties": false
     },
     "CommandJob": {
-      "description": "Code Job definition",
+      "description": "Command Job definition",
       "required": [
         "command",
         "compute"
@@ -7463,7 +7518,7 @@
           "type": "string"
         },
         "codeId": {
-          "description": "The ID of the code asset.",
+          "description": "The ARM resource ID of the code asset.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -7481,7 +7536,7 @@
           ]
         },
         "environmentId": {
-          "description": "Environment specification of the job.",
+          "description": "The ARM resource ID of the Environment specification for the job.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -7680,6 +7735,7 @@
       "additionalProperties": false
     },
     "TrialComponent": {
+      "description": "Trial component definition.",
       "required": [
         "command"
       ],
@@ -7695,7 +7751,7 @@
           ]
         },
         "codeId": {
-          "description": "The ID of the code asset.",
+          "description": "The ARM resource ID of the code asset.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -7713,7 +7769,7 @@
           ]
         },
         "environmentId": {
-          "description": "Environment id of the job.",
+          "description": "The ARM resource ID of the Environment specification for the job.",
           "type": "string"
         },
         "inputDataBindings": {
@@ -7761,6 +7817,7 @@
       "additionalProperties": false
     },
     "SweepJob": {
+      "description": "Sweep Job definition",
       "required": [
         "algorithm",
         "compute",
@@ -8649,7 +8706,7 @@
       "additionalProperties": false
     },
     "ModelVersion": {
-      "description": "Details of an ModelDto",
+      "description": "Model asset version details.",
       "required": [
         "path"
       ],
@@ -8663,11 +8720,11 @@
           }
         },
         "datastoreId": {
-          "description": "The asset datastoreId",
+          "description": "The ARM resource ID of the datastore where the asset is located.",
           "type": "string"
         },
         "path": {
-          "description": "The path of the file/directory.",
+          "description": "The path of the file/directory in the datastore.",
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
@@ -8902,6 +8959,7 @@
       "type": "object",
       "properties": {
         "endpointComputeType": {
+          "description": "The compute type for the endpoint.",
           "$ref": "#/definitions/EndpointComputeType"
         },
         "scaleSettings": {
@@ -8911,6 +8969,7 @@
           "$ref": "#/definitions/OnlineRequestSettings"
         },
         "appInsightsEnabled": {
+          "description": "If true, enables application insights logging.",
           "type": "boolean"
         },
         "livenessProbe": {
@@ -8944,7 +9003,7 @@
           "$ref": "#/definitions/CodeConfiguration"
         },
         "environmentId": {
-          "description": "Environment specification for the endpoint deployment.",
+          "description": "The ARM resource ID of the Environment specification for the endpoint deployment.",
           "type": "string"
         },
         "environmentVariables": {
@@ -9212,7 +9271,7 @@
           ]
         },
         "target": {
-          "description": "Reference to compute Id if exist.\r\noptional",
+          "description": "The ARM resource ID of the compute if exist.\r\noptional",
           "type": "string"
         },
         "description": {

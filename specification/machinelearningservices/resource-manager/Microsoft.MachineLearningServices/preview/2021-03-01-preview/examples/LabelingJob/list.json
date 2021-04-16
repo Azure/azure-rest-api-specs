@@ -12,17 +12,11 @@
       "body": {
         "value": [
           {
-            "id": "string",
-            "name": "string",
-            "type": "string",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/labelingJobs/testLabelingJob",
+            "name": "testLabelingJob",
+            "type": "Microsoft.MachineLearningServices/workspaces/labelingJobs",
             "properties": {
               "jobType": "Labeling",
-              "interactionEndpoints": {
-                "type": {
-                  "endpoint": "string",
-                  "port": 1234
-                }
-              },
               "description": "string",
               "tags": {
                 "additionalProp1": "string",
@@ -35,77 +29,51 @@
                 "additionalProp3": "string"
               },
               "labelCategories": {
-                "additionalProp1": {
-                  "displayName": "string",
+                "myCategory1": {
+                  "displayName": "myCategory1Title",
                   "allowMultiSelect": true,
                   "classes": {
-                    "additionalProp1": {
-                      "displayName": "string",
+                    "myLabelClass1": {
+                      "displayName": "myLabelClass1",
                       "subclasses": {}
                     },
-                    "additionalProp2": {
-                      "displayName": "string",
-                      "subclasses": {}
-                    },
-                    "additionalProp3": {
-                      "displayName": "string",
+                    "myLabelClass2": {
+                      "displayName": "myLabelClass2",
                       "subclasses": {}
                     }
                   }
                 },
-                "additionalProp2": {
-                  "displayName": "string",
+                "myCategory2": {
+                  "displayName": "myCategory2Title",
                   "allowMultiSelect": true,
                   "classes": {
-                    "additionalProp1": {
-                      "displayName": "string",
+                    "myLabelClass1": {
+                      "displayName": "myLabelClass1",
                       "subclasses": {}
                     },
-                    "additionalProp2": {
-                      "displayName": "string",
-                      "subclasses": {}
-                    },
-                    "additionalProp3": {
-                      "displayName": "string",
-                      "subclasses": {}
-                    }
-                  }
-                },
-                "additionalProp3": {
-                  "displayName": "string",
-                  "allowMultiSelect": true,
-                  "classes": {
-                    "additionalProp1": {
-                      "displayName": "string",
-                      "subclasses": {}
-                    },
-                    "additionalProp2": {
-                      "displayName": "string",
-                      "subclasses": {}
-                    },
-                    "additionalProp3": {
-                      "displayName": "string",
+                    "myLabelClass2": {
+                      "displayName": "myLabelClass2",
                       "subclasses": {}
                     }
                   }
                 }
               },
               "jobInstructions": {
-                "uri": "string"
+                "uri": "link/to/instructions"
               },
               "datasetConfiguration": {
-                "assetName": "string",
+                "assetName": "myAsset",
                 "incrementalDatasetRefreshEnabled": true,
-                "datasetVersion": "string"
+                "datasetVersion": "1"
               },
               "mlAssistConfiguration": {
                 "inferencingComputeBinding": {
-                  "target": "string",
-                  "instanceCount": 0
+                  "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/myscoringcompute",
+                  "instanceCount": 1
                 },
                 "trainingComputeBinding": {
-                  "target": "string",
-                  "instanceCount": 0
+                  "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/mytrainingcompute",
+                  "instanceCount": 1
                 },
                 "mlAssistEnabled": true
               },
