@@ -234,6 +234,8 @@ namespace: com.microsoft.azure.management.machinelearning.services
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning/services
+
+service-name: MachineLearningServices
 ```
 
 ### Java multi-api
