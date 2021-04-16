@@ -5185,7 +5185,7 @@
           }
         },
         "model": {
-          "description": "Model Configuration.",
+          "description": "Reference to the model asset for the endpoint deployment.",
           "$ref": "#/definitions/AssetReferenceBase"
         },
         "codeConfiguration": {
@@ -5296,6 +5296,7 @@
       "additionalProperties": false
     },
     "EndpointAuthMode": {
+      "description": "Enum to determine endpoint authentication mode.",
       "enum": [
         "AMLToken",
         "Key",
@@ -5309,6 +5310,7 @@
       "additionalProperties": false
     },
     "EndpointAuthKeys": {
+      "description": "The keys for endpoint authentication.",
       "type": "object",
       "properties": {
         "primaryKey": {
@@ -7340,7 +7342,7 @@
       "additionalProperties": false
     },
     "JobBase": {
-      "description": "Job base definition",
+      "description": "Base definition for a job.",
       "required": [
         "jobType"
       ],
@@ -8863,6 +8865,7 @@
       "type": "object",
       "properties": {
         "endpointComputeType": {
+          "description": "The compute type for the endpoint.",
           "$ref": "#/definitions/EndpointComputeType"
         },
         "scaleSettings": {
@@ -8872,6 +8875,7 @@
           "$ref": "#/definitions/OnlineRequestSettings"
         },
         "appInsightsEnabled": {
+          "description": "If true, enables application insights logging.",
           "type": "boolean"
         },
         "livenessProbe": {
