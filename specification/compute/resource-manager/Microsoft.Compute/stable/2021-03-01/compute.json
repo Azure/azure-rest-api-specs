@@ -7401,14 +7401,16 @@
       "properties": {
         "source": {
           "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SubResource"
+          "properties": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/SubResource"
+              }
+            ],
+            "location": {
+              "type": "string",
+              "description": "Location of the source resource used to create this restore point collection."
             }
-          ],
-          "location": {
-            "type": "string",
-            "description": "Location of the source resource used to create this restore point collection."
           }
         },
         "provisioningState": {
