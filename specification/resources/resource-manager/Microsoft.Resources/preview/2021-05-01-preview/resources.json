@@ -3018,7 +3018,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/finalizeResourceCopy": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/finalizeResourceCopy/{token}": {
       "post": {
         "tags": [
           "Resources"
@@ -3065,13 +3065,12 @@
             "description": "Resource name."
           },
           {
-            "name": "parameters",
-            "in": "body",
+            "name": "token",
+            "in": "path",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceCopyToken"
-            }
-          }
+            "type": "string",
+            "description": "Resource copy token."
+          },
         ],
         "responses": {
           "202": {
