@@ -7401,9 +7401,13 @@
       "properties": {
         "properties": {
           "source": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/RestorePointCollectionSourceProperties"
+            "id": {
+              "$ref": "#/definitions/SubResource",
+              "description": "Reference id of the source resource from which the restore points have to be created."
+            },
+            "location": {
+              "type": "string",
+              "description": "Location of the source resource used to create this restore point collection."
             }
           },
           "provisioningState": {
