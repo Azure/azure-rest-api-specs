@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2021-04-01",
+    "version": "2021-05-01-preview",
     "description": "Provides operations for working with resources and resource groups."
   },
   "host": "management.azure.com",
@@ -2878,6 +2878,218 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/copyResources": {
+      "post": {
+        "tags": [
+          "Resources"
+        ],
+        "operationId": "Resources_CopyResources",
+        "summary": "Initiates resource copy from one region to another.",
+        "description": "The resources to be copied from one region to another. If validation is set to true, this operation validates resource copy from one region to another. When source resource group and target resource group are same, source ARM Id and target ARM Id cannot be same. The existingTarget represents the resource which already exists, and it will be used directly. Existing target resources may not be in the same RG with source resource, but they must exist in the target location.",
+        "parameters": [
+          {
+            "name": "validationOnly",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Determines if resource copy operation is only for validation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceCopyInfo"
+            },
+            "description": "Parameters for moving resources."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ResourceCopyToken"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy resources.": {
+            "$ref": "./examples/CopyResources.json"
+          },
+          "Validate copy resources": {
+            "$ref": "./examples/ValidateCopyResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/resourceCopyStatus/{token}": {
+      "get": {
+        "tags": [
+          "Resources"
+        ],
+        "operationId": "Resources_ResourceCopyStatus",
+        "summary": "Gets a single resource copy status under the given subscription and token.",
+        "description": "This operation returns resource copy status under the given subscription and token.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource copy token."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceCopyStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy resources.": {
+            "$ref": "./examples/ResourceCopyStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/resourceCopiesStatus": {
+      "get": {
+        "tags": [
+          "Resources"
+        ],
+        "operationId": "Resources_ResourceCopiesStatus",
+        "summary": "Gets all resource copy status under the given subscription.",
+        "description": "This operation returns all resource copy status under the given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceCopyStatus"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy resources.": {
+            "$ref": "./examples/ResourceCopiesStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/finalizeResourceCopy/{token}": {
+      "post": {
+        "tags": [
+          "Resources"
+        ],
+        "operationId": "Resources_FinalizeResourceCopy",
+        "summary": "Finalizes resource copy for the given resource",
+        "description": "Finalizes resource copy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource provider."
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource type."
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource name."
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource copy token."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy resources.": {
+            "$ref": "./examples/FinalizeResourceCopy.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resources": {
       "get": {
         "tags": [
@@ -5660,6 +5872,101 @@
         }
       },
       "description": "Parameters of move resources."
+    },
+    "ResourceCopyResourceList": {
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source resource Id to be moved."
+        },
+        "sourceApiVersion": {
+          "type": "string",
+          "description": "The API version used to get source resource."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target resource Id to be created."
+        },
+        "targetApiVersion": {
+          "type": "string",
+          "description": "The API version used on target location to put resource."
+        },
+        "existingTarget": {
+          "type": "string",
+          "description": "Existing target resource Id."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties to be applied on the target resource which is different from source resource."
+        }
+      },
+      "description": "Copy resource list.",
+      "required": [
+        "source",
+        "sourceApiVersion"
+      ]
+    },
+    "ResourceCopyInfo": {
+      "properties": {
+        "targetLocation": {
+          "type": "string",
+          "description": "Target location for the move."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceCopyResourceList"
+          },
+          "description": "Array of resources to be moved."
+        }
+      },
+      "description": "Parameters of copy resources.",
+      "required": [
+        "targetLocation",
+        "resources"
+      ]
+    },
+    "ResourceCopyToken": {
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Resource copy token."
+        }
+      }
+    },
+    "ResourceCopyStatus": {
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Resource copy token."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Source resource ARM Id."
+              },
+              "status": {
+                "type": "string",
+                "description": "Resource copy status.",
+                "enum": [
+                  "Succeeded",
+                  "Failed",
+                  "InProgress"
+                ],
+                "x-ms-enum": {
+                  "name": "CopyState",
+                  "modelAsString": true
+                }
+              }
+            }
+          },
+          "description": "Resources with resource copy status."
+        }
+      }
     },
     "ExportTemplateRequest": {
       "properties": {

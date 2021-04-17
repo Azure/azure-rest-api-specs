@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "my-resource-group",
+    "api-version": "2021-05-01-preview",
+    "validationOnly": "true",
+    "parameters": {
+      "targetLocation": "my-targetLocation",
+      "resources": [
+        {
+          "source": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.Compute/virtualMachines/my-machine",
+          "sourceApiVersion": "2016-01-01",
+          "target": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-targetResource-group/providers/Microsoft.Compute/virtualMachines/my-target-machine",
+          "targetApiVersion": "2019-01-01"
+        },
+        {
+          "source": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.Network/networkInterfaces/my-machine-networkinterface",
+          "sourceApiVersion": "2016-01-01",
+          "target": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-targetResource-group/providers/Microsoft.Network/networkInterfaces/my-target-machine-networkinterface",
+          "targetApiVersion": "2019-01-01"
+        },
+        {
+          "source": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.Compute/disks/my-machine-disk",
+          "sourceApiVersion": "2016-01-01",
+          "existingTarget": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-targetResource-group/providers/Microsoft.Compute/disks/my-target-machine-disk",
+          "targetApiVersion": "2019-01-01"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "token": "1cbf87b4-76b7-42fb-bdb8-abd79c739299"
+      }
+    }
+  }
+}
