@@ -7399,35 +7399,33 @@
     },
     "RestorePointCollectionProperties": {
       "properties": {
-        "properties": {
-          "source": {
-            "id": {
-              "$ref": "#/definitions/SubResource",
-              "description": "Reference id of the source resource from which the restore points have to be created."
-            },
-            "location": {
-              "type": "string",
-              "description": "Location of the source resource used to create this restore point collection."
-            }
+        "source": {
+          "id": {
+            "$ref": "#/definitions/SubResource",
+            "description": "Reference id of the source resource from which the restore points have to be created."
           },
-          "provisioningState": {
+          "location": {
             "type": "string",
-            "readOnly": true,
-            "description": "Gets the provisioning state of the restore point collection."
-          },
-          "restorePointCollectionId": {
-            "type": "string",
-            "readOnly": true,
-            "description": "Gets the unique id of the restore point collection."
-          },
-          "restorePoints": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/RestorePoint"
-            },
-            "description": "Gets a list containing all restore points created under this restore point collection."
+            "description": "Location of the source resource used to create this restore point collection."
           }
-        }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the provisioning state of the restore point collection."
+        },
+        "restorePointCollectionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the unique id of the restore point collection."
+        },
+        "restorePoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorePoint"
+          },
+          "description": "Gets a list containing all restore points created under this restore point collection."
+      }
       },
       "description": "The restore point collection properties."
     },
