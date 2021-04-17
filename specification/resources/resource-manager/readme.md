@@ -60,16 +60,12 @@ tag: package-managedapplications-2018-06
 tag: package-deploymentscripts-2020-10
 ```
 
-``` yaml $(package-templatespecs)
-tag: package-resources-2021-04
-```
-
 
 ### Tag: package-resources-2021-04
 
 These settings apply only when `--tag=package-resources-2021-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-04'
+```yaml $(tag) == 'package-resources-2021-04'
 input-file:
   - Microsoft.Resources/stable/2021-04-01/resources.json
 ```
@@ -78,7 +74,7 @@ input-file:
 
 These settings apply only when `--tag=package-subscriptions-2021-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-04'
+```yaml $(tag) == 'package-subscriptions-2021-04'
 input-file:
   - Microsoft.Resources/stable/2021-04-01/subscriptions.json
 ```
