@@ -7399,28 +7399,30 @@
     },
     "RestorePointCollectionProperties": {
       "properties": {
-        "source": {
-          "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/RestorePointCollectionSourceProperties"
-          }
-        },
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the provisioning state of the restore point collection."
-        },
-        "restorePointCollectionId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the unique id of the restore point collection."
-        },
-        "restorePoints": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RestorePoint"
+        "properties": {
+          "source": {
+            "properties": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/RestorePointCollectionSourceProperties"
+            }
           },
-          "description": "Gets a list containing all restore points created under this restore point collection."
+          "provisioningState": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Gets the provisioning state of the restore point collection."
+          },
+          "restorePointCollectionId": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Gets the unique id of the restore point collection."
+          },
+          "restorePoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RestorePoint"
+            },
+            "description": "Gets a list containing all restore points created under this restore point collection."
+          }
         }
       },
       "description": "The restore point collection properties."
