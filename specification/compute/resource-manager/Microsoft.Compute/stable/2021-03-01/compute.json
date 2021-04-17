@@ -7386,10 +7386,11 @@
   "definitions": {
     "RestorePointCollectionSourceProperties": {
       "properties": {
-        "id": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Reference id of the source resource from which the restore points have to be created."
-        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/SubResource"
+          }
+        ],
         "location": {
           "type": "string",
           "description": "Location of the source resource used to create this restore point collection."
@@ -7400,18 +7401,7 @@
     "RestorePointCollectionProperties": {
       "properties": {
         "source": {
-          "type": "object",
-          "properties": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/SubResource"
-              }
-            ],
-            "location": {
-              "type": "string",
-              "description": "Location of the source resource used to create this restore point collection."
-            }
-          }
+          "$ref": "#/definitions/RestorePointCollectionSourceProperties"
         },
         "provisioningState": {
           "type": "string",
