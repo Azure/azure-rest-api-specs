@@ -123,7 +123,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EffectiveConnectivityConfigurationProperties",
+          "$ref": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfigurationProperties",
           "description": "Properties of a network manager connectivity configuration"
         }
       },
@@ -133,7 +133,7 @@
         }
       ],
       "description": "The network manager connectivity configuration resource",
-      "x-ms-discriminator-value": "ConnectivityConfiguration"
+      "x-ms-discriminator-value": "EffectiveConnectivityConfiguration"
     },
     "EffectiveSecurityRuleCollection": {
       "properties": {
@@ -149,88 +149,7 @@
         }
       ],
       "description": "The network manager effective security rule collection",
-      "x-ms-discriminator-value": "SecurityRuleCollection"
-    },
-    "EffectiveConnectivityConfigurationProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "A friendly name for the resource."
-        },
-        "description": {
-          "type": "string",
-          "description": "A description of the connectivity configuration."
-        },
-        "connectivityTopology": {
-          "type": "string",
-          "enum": [
-            "HubAndSpoke",
-            "Mesh"
-          ],
-          "x-ms-enum": {
-            "name": "ConnectivityTopology",
-            "modelAsString": true
-          },
-          "description": "Connectivity topology type."
-        },
-        "hubId": {
-          "type": "string",
-          "description": "The hub vnet Id."
-        },
-        "isGlobal": {
-          "type": "boolean",
-          "description": "Flag if global mesh is supported."
-        },
-        "appliesToGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EffectiveConnectivityGroupItem"
-          },
-          "description": "Groups for configuration"
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the connectivity configuration resource."
-        },
-        "deleteExistingPeering": {
-          "type": "boolean",
-          "description": "Flag if need to remove current existing peerings."
-        }
-      },
-      "required": [
-        "connectivityTopology"
-      ],
-      "description": "Properties of network manager connectivity configuration"
-    },
-    "EffectiveConnectivityGroupItem": {
-      "type": "object",
-      "properties": {
-        "networkGroupId": {
-          "type": "string",
-          "description": "Network group Id."
-        },
-        "useHubGateway": {
-          "type": "boolean",
-          "description": "Flag if need to use hub gateway."
-        },
-        "isGlobal": {
-          "type": "boolean",
-          "description": "Flag if global is supported."
-        },
-        "groupConnectivity": {
-          "type": "string",
-          "enum": [
-            "None",
-            "DirectlyConnected"
-          ],
-          "x-ms-enum": {
-            "name": "GroupConnectivity",
-            "modelAsString": true
-          },
-          "description": "Group connectivity type."
-        }
-      }
+      "x-ms-discriminator-value": "EffectiveSecurityRuleCollection"
     },
     "EffectiveRuleCollectionProperties": {
       "properties": {
@@ -274,10 +193,10 @@
           "type": "string",
           "description": "Whether the rule collection is custom or default.",
           "enum": [
-            "AdminRule",
-            "UserRule",
-            "DefaultUserRule",
-            "DefaultAdminRule"
+            "EffectiveAdminRule",
+            "EffectiveUserRule",
+            "EffectiveDefaultUserRule",
+            "EffectiveDefaultAdminRule"
           ],
           "x-ms-enum": {
             "name": "Kind",
@@ -305,7 +224,7 @@
         }
       ],
       "description": "Network admin rule.",
-      "x-ms-discriminator-value": "AdminRule"
+      "x-ms-discriminator-value": "EffectiveAdminRule"
     },
     "EffectiveDefaultAdminRule": {
       "properties": {
@@ -321,7 +240,7 @@
         }
       ],
       "description": "Network default admin rule.",
-      "x-ms-discriminator-value": "DefaultAdminRule"
+      "x-ms-discriminator-value": "EffectiveDefaultAdminRule"
     },
     "EffectiveUserRule": {
       "properties": {
@@ -337,7 +256,7 @@
         }
       ],
       "description": "Network security user rule.",
-      "x-ms-discriminator-value": "UserRule"
+      "x-ms-discriminator-value": "EffectiveUserRule"
     },
     "EffectiveDefaultUserRule": {
       "properties": {
@@ -353,7 +272,7 @@
         }
       ],
       "description": "Network security default user rule.",
-      "x-ms-discriminator-value": "DefaultUserRule"
+      "x-ms-discriminator-value": "EffectiveDefaultUserRule"
     },
     "ConfigurationGroup": {
       "properties": {
