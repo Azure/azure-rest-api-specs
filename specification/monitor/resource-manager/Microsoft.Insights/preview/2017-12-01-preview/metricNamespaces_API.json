@@ -89,6 +89,19 @@
       },
       "description": "The fully qualified metric namespace name."
     },
+    "NamespaceClassification": {
+      "type": "string",
+      "description": "Kind of namespace",
+      "enum": [
+        "Platform",
+        "Custom",
+        "Qos"
+      ],
+      "x-ms-enum": {
+        "name": "NamespaceClassification",
+        "modelAsString": false
+      }
+    },
     "MetricNamespace": {
       "type": "object",
       "properties": {
@@ -102,7 +115,11 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the namespace."
+          "description": "The escaped name of the namespace."
+        },
+        "classification": {
+          "$ref": "#/definitions/NamespaceClassification",
+          "description": "Kind of namespace"
         },
         "properties": {
           "$ref": "#/definitions/MetricNamespaceName",
