@@ -127,7 +127,7 @@
     },
     "Unit": {
       "type": "string",
-      "description": "the unit of the metric.",
+      "description": "The unit of the metric.",
       "enum": [
         "Count",
         "Bytes",
@@ -267,6 +267,14 @@
         "name": {
           "$ref": "#/definitions/LocalizableString",
           "description": "the name and the display name of the metric, i.e. it is localizable string."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Detailed description of this metric."
+        },
+        "errorCode":{
+          "type": "string",
+          "description": "'Success' or the error details on query failures for this metric."
         },
         "unit": {
           "$ref": "#/definitions/Unit",
