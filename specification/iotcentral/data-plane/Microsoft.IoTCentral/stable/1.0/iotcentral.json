@@ -86,6 +86,25 @@
       ],
       "discriminator": "type"
     },
+    "Collection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of entities.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of entities.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Device": {
       "type": "object",
       "properties": {
