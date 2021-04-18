@@ -766,20 +766,17 @@
       "allOf": [
         {
           "$ref": "#/definitions/Recurrence"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "daysOfWeek": {
-              "type": "array",
-              "description": "Specifies the values for weekly recurrence pattern",
-              "items": {
-                "$ref": "#/definitions/DaysOfWeek"
-              }
-            }
+        }
+      ],
+      "properties": {
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Specifies the values for weekly recurrence pattern",
+          "items": {
+            "$ref": "#/definitions/DaysOfWeek"
           }
         }
-      ]
+      }
     },
     "MonthlyRecurrence": {
       "x-ms-discriminator-value": "Monthly",
@@ -791,20 +788,18 @@
       "allOf": [
         {
           "$ref": "#/definitions/Recurrence"
-        },
-        {
-          "properties": {
-            "daysOfMonth": {
-              "type": "array",
-              "description": "Specifies the values for monthly recurrence pattern",
-              "items": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
+        }
+      ],
+      "properties": {
+        "daysOfMonth": {
+          "type": "array",
+          "description": "Specifies the values for monthly recurrence pattern",
+          "items": {
+            "type": "integer",
+            "format": "int32"
           }
         }
-      ]
+      }
     },
     "DaysOfWeek": {
       "type": "string",
@@ -908,20 +903,17 @@
       "allOf": [
         {
           "$ref": "#/definitions/Action"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "actionGroupIds": {
-              "description": "List of action group Ids to add to action rule",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
+        }
+      ],
+      "properties": {
+        "actionGroupIds": {
+          "description": "List of action group Ids to add to action rule",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
-      ]
+      }
     },
     "RemoveAllActionGroups": {
       "x-ms-discriminator-value": "RemoveAllActionGroups",
