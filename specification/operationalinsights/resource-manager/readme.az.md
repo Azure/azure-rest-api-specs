@@ -14,7 +14,7 @@ python-sdk-output-folder: "$(az-output-folder)/azext_loganalytics/vendored_sdks/
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
-``` yaml $(az) && $(target-mode) == `core`
+``` yaml $(az) && $(target-mode) == 'core'
 az:
     extensions: loganalytics
     namespace: azure.mgmt.loganalytics
