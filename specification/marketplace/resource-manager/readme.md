@@ -36,15 +36,14 @@ The following packages may be composed from multiple api-versions.
 
 These settings apply only when `--tag=package-composite-v2` is specified on the command line.
 
-This section contains the "composite-v2" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v2" clients.
+This section contains the "composite-v2" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v1" clients.
 
 APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
 - Microsoft.Marketplace/stable/2021-06-01/Marketplace.json
-- Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
-- Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
+- Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
 ```
 
 ### Tag: package-composite-v1
@@ -59,6 +58,7 @@ APIs must only be added to this section when the API is publicly available in at
 input-file:
 - Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
 - Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
+- Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
 ```
 
 # Needed when there is more than one input file
