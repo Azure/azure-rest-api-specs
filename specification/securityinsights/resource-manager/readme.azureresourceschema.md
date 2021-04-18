@@ -22,6 +22,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2021-04-01/operations.json
 
 ```
 
