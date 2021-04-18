@@ -790,7 +790,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/graphQueries"
+                "$ref": "#/definitions/GraphQueries"
               }
             ]
           },
@@ -800,7 +800,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/sampleQueries"
+                "$ref": "#/definitions/SampleQueries"
               }
             ]
           },
@@ -811,7 +811,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/lastDataReceivedDataType"
+                "$ref": "#/definitions/LastDataReceivedDataType"
               }
             ]
           },
@@ -822,7 +822,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/connectivityCriteria"
+                "$ref": "#/definitions/ConnectivityCriteria"
               }
             ]
           },
@@ -830,18 +830,18 @@
         },
         "availability": {
           "description": "Connector Availability Status",
-          "$ref": "#/definitions/availability"
+          "$ref": "#/definitions/Availability"
         },
         "permissions": {
           "description": "Permissions required for the connector",
-          "$ref": "#/definitions/permissions"
+          "$ref": "#/definitions/Permissions"
         },
         "instructionSteps": {
           "description": "Instruction steps to enable the connector",
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/instructionSteps"
+                "$ref": "#/definitions/InstructionSteps"
               }
             ]
           },
@@ -849,7 +849,7 @@
         }
       }
     },
-    "lastDataReceivedDataType": {
+    "LastDataReceivedDataType": {
       "description": "Data type for last data received",
       "type": "object",
       "properties": {
@@ -863,7 +863,7 @@
         }
       }
     },
-    "permissions": {
+    "Permissions": {
       "description": "Permissions required for the connector",
       "type": "object",
       "properties": {
@@ -871,7 +871,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/resourceProvider"
+                "$ref": "#/definitions/ResourceProvider"
               }
             ]
           },
@@ -882,7 +882,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/customs"
+                "$ref": "#/definitions/Customs"
               }
             ]
           },
@@ -890,16 +890,16 @@
         }
       }
     },
-    "customs": {
+    "Customs": {
       "description": "Customs permissions required for the connector",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/customsPermission"
+          "$ref": "#/definitions/CustomsPermission"
         }
       ]
     },
-    "customsPermission": {
+    "CustomsPermission": {
       "description": "Customs permissions required for the connector",
       "type": "object",
       "properties": {
@@ -913,7 +913,7 @@
         }
       }
     },
-    "resourceProvider": {
+    "ResourceProvider": {
       "description": "Resource provider permissions required for the connector",
       "type": "object",
       "properties": {
@@ -948,11 +948,11 @@
         },
         "requiredPermissions": {
           "description": "Required permissions for the connector",
-          "$ref": "#/definitions/requiredPermissions"
+          "$ref": "#/definitions/RequiredPermissions"
         }
       }
     },
-    "instructionSteps": {
+    "InstructionSteps": {
       "description": "Instruction steps to enable the connector",
       "type": "object",
       "properties": {
@@ -1003,7 +1003,7 @@
         }
       }
     },
-    "requiredPermissions": {
+    "RequiredPermissions": {
       "description": "Required permissions for the connector",
       "type": "object",
       "properties": {
@@ -1025,7 +1025,7 @@
         }
       }
     },
-    "availability": {
+    "Availability": {
       "description": "Connector Availability Status",
       "type": "object",
       "properties": {
@@ -1041,7 +1041,7 @@
             4
           ],
           "x-ms-enum": {
-            "name": "availability",
+            "name": "Availability",
             "values": [
               {
                 "value": 1,
@@ -1068,7 +1068,7 @@
         }
       }
     },
-    "connectivityCriteria": {
+    "ConnectivityCriteria": {
       "description": "Setting for the connector check connectivity",
       "type": "object",
       "properties": {
@@ -1094,7 +1094,7 @@
         }
       }
     },
-    "sampleQueries": {
+    "SampleQueries": {
       "description": "",
       "type": "object",
       "properties": {
@@ -1108,7 +1108,7 @@
         }
       }
     },
-    "graphQueries": {
+    "GraphQueries": {
       "type": "object",
       "description": "",
       "properties": {
