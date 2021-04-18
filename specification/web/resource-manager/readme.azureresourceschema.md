@@ -6,6 +6,9 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-web-2020-12-01
+  - tag: schema-web-2020-10-01
+  - tag: schema-web-2020-09-01
   - tag: schema-web-2020-06-01
   - tag: schema-web-2019-08-01
   - tag: schema-web-2018-11-01
@@ -15,10 +18,16 @@ batch:
   - tag: schema-web-2016-03-01
   - tag: schema-web-2015-08-01-preview
   - tag: schema-web-2015-08-01
+  - tag: schema-domainregistration-2020-12-01
+  - tag: schema-domainregistration-2020-10-01
+  - tag: schema-domainregistration-2020-09-01
   - tag: schema-domainregistration-2020-06-01
   - tag: schema-domainregistration-2019-08-01
   - tag: schema-domainregistration-2018-02-01
   - tag: schema-domainregistration-2015-04-01
+  - tag: schema-certificateregistration-2020-12-01
+  - tag: schema-certificateregistration-2020-10-01
+  - tag: schema-certificateregistration-2020-09-01
   - tag: schema-certificateregistration-2020-06-01
   - tag: schema-certificateregistration-2019-08-01
   - tag: schema-certificateregistration-2018-02-01
@@ -27,6 +36,73 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-web-2020-12-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-web-2020-12-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/stable/2020-12-01/Certificates.json
+  - Microsoft.Web/stable/2020-12-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2020-12-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2020-12-01/Diagnostics.json
+  - Microsoft.Web/stable/2020-12-01/Global.json
+  - Microsoft.Web/stable/2020-12-01/Provider.json
+  - Microsoft.Web/stable/2020-12-01/Recommendations.json
+  - Microsoft.Web/stable/2020-12-01/ResourceProvider.json
+  - Microsoft.Web/stable/2020-12-01/WebApps.json
+  - Microsoft.Web/stable/2020-12-01/StaticSites.json
+  - Microsoft.Web/stable/2020-12-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2020-12-01/AppServicePlans.json
+  - Microsoft.Web/stable/2020-12-01/ResourceHealthMetadata.json
+
+```
+
+### Tag: schema-web-2020-10-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-web-2020-10-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/stable/2020-10-01/Certificates.json
+  - Microsoft.Web/stable/2020-10-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2020-10-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2020-10-01/Diagnostics.json
+  - Microsoft.Web/stable/2020-10-01/Provider.json
+  - Microsoft.Web/stable/2020-10-01/Recommendations.json
+  - Microsoft.Web/stable/2020-10-01/ResourceProvider.json
+  - Microsoft.Web/stable/2020-10-01/WebApps.json
+  - Microsoft.Web/stable/2020-10-01/StaticSites.json
+  - Microsoft.Web/stable/2020-10-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2020-10-01/AppServicePlans.json
+  - Microsoft.Web/stable/2020-10-01/ResourceHealthMetadata.json
+
+```
+
+### Tag: schema-web-2020-09-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-web-2020-09-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/stable/2020-09-01/Certificates.json
+  - Microsoft.Web/stable/2020-09-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2020-09-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2020-09-01/Diagnostics.json
+  - Microsoft.Web/stable/2020-09-01/Provider.json
+  - Microsoft.Web/stable/2020-09-01/Recommendations.json
+  - Microsoft.Web/stable/2020-09-01/ResourceProvider.json
+  - Microsoft.Web/stable/2020-09-01/WebApps.json
+  - Microsoft.Web/stable/2020-09-01/StaticSites.json
+  - Microsoft.Web/stable/2020-09-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2020-09-01/AppServicePlans.json
+  - Microsoft.Web/stable/2020-09-01/ResourceHealthMetadata.json
+
+```
 
 ### Tag: schema-web-2020-06-01 and azureresourceschema
 
@@ -168,6 +244,45 @@ input-file:
 
 ```
 
+### Tag: schema-domainregistration-2020-12-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-domainregistration-2020-12-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DomainRegistration/stable/2020-12-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2020-12-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2020-12-01/DomainRegistrationProvider.json
+
+```
+
+### Tag: schema-domainregistration-2020-10-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-domainregistration-2020-10-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DomainRegistration/stable/2020-10-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2020-10-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2020-10-01/DomainRegistrationProvider.json
+
+```
+
+### Tag: schema-domainregistration-2020-09-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-domainregistration-2020-09-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DomainRegistration/stable/2020-09-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2020-09-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2020-09-01/DomainRegistrationProvider.json
+
+```
+
 ### Tag: schema-domainregistration-2020-06-01 and azureresourceschema
 
 ``` yaml $(tag) == 'schema-domainregistration-2020-06-01' && $(azureresourceschema)
@@ -217,6 +332,43 @@ input-file:
   - Microsoft.DomainRegistration/stable/2015-04-01/Domains.json
   - Microsoft.DomainRegistration/stable/2015-04-01/TopLevelDomains.json
   - Microsoft.DomainRegistration/stable/2015-04-01/DomainRegistrationProvider.json
+
+```
+
+### Tag: schema-certificateregistration-2020-12-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-certificateregistration-2020-12-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.CertificateRegistration/stable/2020-12-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2020-12-01/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2020-12-01/CertificateRegistrationProvider.json
+
+```
+
+### Tag: schema-certificateregistration-2020-10-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-certificateregistration-2020-10-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.CertificateRegistration/stable/2020-10-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2020-10-01/CertificateRegistrationProvider.json
+
+```
+
+### Tag: schema-certificateregistration-2020-09-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-certificateregistration-2020-09-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.CertificateRegistration/stable/2020-09-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2020-09-01/CertificateRegistrationProvider.json
 
 ```
 

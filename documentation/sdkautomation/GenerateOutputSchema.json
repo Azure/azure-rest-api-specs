@@ -8,7 +8,9 @@
       }
     }
   },
-  "required": ["packages"],
+  "required": [
+    "packages"
+  ],
   "definitions": {
     "PackageResult": {
       "properties": {
@@ -20,7 +22,11 @@
         "result": {
           // Status of package. By default it's succeeded.
           "type": "string",
-          "enum": ["failed", "succeeded", "warning"],
+          "enum": [
+            "failed",
+            "succeeded",
+            "warning"
+          ],
           "default": "succeeded"
         },
         "path": {
@@ -52,7 +58,9 @@
               "type": "boolean"
             }
           },
-          "required": ["content"]
+          "required": [
+            "content"
+          ]
         },
         "artifacts": {
           "type": "array",
@@ -65,7 +73,9 @@
           "$ref": "InstallInstructionScriptOutput"
         }
       },
-      "required": ["path"]
+      "required": [
+        "path"
+      ]
     }
   }
 }

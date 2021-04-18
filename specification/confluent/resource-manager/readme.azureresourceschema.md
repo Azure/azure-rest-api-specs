@@ -8,6 +8,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 batch:
   - tag: schema-confluent-2020-03-01
   - tag: schema-confluent-2020-03-01-preview
+  - tag: schema-confluent-2021-03-01-preview
 
 ```
 
@@ -32,5 +33,16 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Confluent/preview/2020-03-01-preview/confluent.json
+
+```
+
+### Tag: schema-confluent-2021-03-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-confluent-2021-03-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Confluent/preview/2021-03-01-preview/confluent.json
 
 ```

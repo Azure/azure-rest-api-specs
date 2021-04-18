@@ -26,9 +26,27 @@ These are the global settings for the Azure NetApp Files API.
 
 ``` yaml
 title: NetAppManagementClient
-description: Microsoft NetApp Azure Resource Provider specification
+description: Microsoft NetApp Files Azure Resource Provider specification
 openapi-type: arm
-tag: package-netapp-2020-09-01
+tag: package-netapp-2020-12-01
+```
+
+### Tag: package-netapp-2020-12-01
+
+These settings apply only when `--tag=package-netapp-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2020-12-01'
+input-file:
+- Microsoft.NetApp/stable/2020-12-01/netapp.json
+```
+
+### Tag: package-netapp-2020-11-01
+
+These settings apply only when `--tag=package-netapp-2020-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2020-11-01'
+input-file:
+- Microsoft.NetApp/stable/2020-11-01/netapp.json
 ```
 
 ### Tag: package-netapp-2020-09-01
@@ -170,6 +188,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
@@ -205,18 +224,18 @@ See configuration in [readme.java.md](./readme.java.md)
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
+``` yaml $(terraform)
+terraform:
     cli-name: netapp
     azure_arm: true
     license_header: MICROSOFT_MIT_NO_VERSION
     payload_flattening_threshold: 2
     namespace: netapp
     package-name: netapp
-    clear_output_folder: false
+    clear-output-folder: false
 ```
 

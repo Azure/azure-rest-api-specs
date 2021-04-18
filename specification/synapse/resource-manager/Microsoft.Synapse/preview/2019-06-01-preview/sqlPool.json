@@ -709,6 +709,88 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/geoBackupPolicies/{geoBackupPolicyName}": {
+      "put": {
+        "tags": [
+          "SqlPools, GeoBackupPolicies"
+        ],
+        "deprecated": false,
+        "operationId": "SqlPoolGeoBackupPolicies_CreateOrUpdate",
+        "description": "Updates a SQL Pool geo backup policy.",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create geo backup policy": {
+            "$ref": "./examples/CreateOrUpdateGeoBackupPolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "geoBackupPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "description": "The name of the geo backup policy.",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "GeoBackupPolicyName"
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            },
+            "description": "The required parameters for creating or updating the geo backup policy."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        }
+      },
       "get": {
         "operationId": "SqlPoolGeoBackupPolicies_Get",
         "summary": "Get a SQL pool geo backup policy",
@@ -1086,6 +1168,187 @@
         "x-ms-examples": {
           "Lists a Sql Analytic pool's replication links": {
             "$ref": "./examples/SqlPoolReplicationLinks_GetByName.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/maintenancewindows/current": {
+      "get": {
+        "operationId": "SqlPoolMaintenanceWindows_Get",
+        "summary": "Get a SQL pool's Maintenance Windows.",
+        "description": "Get a SQL pool's Maintenance Windows.",
+        "tags": [
+          "SqlPools, MaintenanceWindows"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "maintenanceWindowName",
+            "in": "query",
+            "description": "Maintenance window name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindows"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Gets maintenance window settings for a selected SQL Analytics pool.": {
+            "$ref": "./examples/GetMaintenanceWindows.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlPoolMaintenanceWindows_CreateOrUpdate",
+        "summary": "Creates or updates a Sql pool's maintenance windows settings.",
+        "description": "Creates or updates a Sql pool's maintenance windows settings.",
+        "tags": [
+          "SqlPools, MaintenanceWindows"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "maintenanceWindowName",
+            "in": "query",
+            "description": "Maintenance window name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindows"
+            },
+            "description": "The required parameters for creating or updating Maintenance Windows settings"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set maintenance windows settings."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidMaintenanceWindowSelection - Invalid maintenance window selection."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Sets maintenance window settings for a selected SQL Analytics Pool.": {
+            "$ref": "./examples/CreateOrUpdateMaintenanceWindows.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/maintenanceWindowOptions/current": {
+      "get": {
+        "operationId": "SqlPoolMaintenanceWindowOptions_Get",
+        "summary": "SQL pool's available maintenance windows.",
+        "description": "Get list of SQL pool's available maintenance windows.",
+        "tags": [
+          "SqlPools, MaintenanceWindowOptions"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "maintenanceWindowOptionsName",
+            "in": "query",
+            "description": "Maintenance window options name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of maintenance windows options.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindowOptions"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get list of transparent data encryption configurations of a SQL Analytics pool": {
+            "$ref": "./examples/GetMaintenanceWindowOptions.json"
           }
         }
       }
@@ -1609,6 +1872,55 @@
             "$ref": "./examples/ListSqlPoolsSensitivityLabelsWithSourceCurrent.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "SqlPools, SensitivityLabels"
+        ],
+        "description": "Update sensitivity labels of a given SQL Pool using an operations batch.",
+        "operationId": "SqlPoolSensitivityLabels_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabelUpdateList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated sensitivity labels."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidSensitivityLabelsBatch - The specified sensitivity labels batch is not valid. Please provide batch operations\n\n * 400 SensitivityLabelsMissingSchema - Operation[{0}]: Missing schema information\n\n * 400 SensitivityLabelsMissingTable - Operation[{0}]: Missing table information\n\n * 400 SensitivityLabelsMissingColumn - Operation[{0}]: Missing column information\n\n * 400 SensitivityLabelsUpdateSameColumnMoreThanOnce - The column {0} can not be updated more than once in a single command\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - The provided �labelId� is invalid. Value must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - The provided �informationTypeId� is invalid. Value must be a GUID\n\n * 400 LabelMissing - Label is required. At least one of �labelName� or �labelId� must be provided\n\n * 400 InformationTypeMissing - Information type is required. At least one of �informationType� or �informationTypeId� must be provided\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 404 SensitivityLabelsSchemaNotFound - The schema {0} could not be found\n\n * 404 SensitivityLabelsTableNotFound - The table {0} could not be found in schema {1}\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Update sensitivity labels of a given database using an operations batch.": {
+            "$ref": "./examples/SensitivityLabelsCurrentUpdate.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/recommendedSensitivityLabels": {
@@ -1683,6 +1995,55 @@
         "x-ms-examples": {
           "Gets the recommended sensitivity labels of a given SQL Analytics pool": {
             "$ref": "./examples/ListSqlPoolSensitivityLabelsWithSourceRecommended.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlPools, SensitivityLabels"
+        ],
+        "description": "Update recommended sensitivity labels states of a given SQL Pool using an operations batch.",
+        "operationId": "SqlPoolRecommendedSensitivityLabels_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendedSensitivityLabelUpdateList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated recommended sensitivity labels."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidRecommendedSensitivityLabelsBatch - The specified recommended sensitivity labels operations are not valid\n\n * 400 SensitivityLabelsMissingSchema - Operation[{0}]: Missing schema information\n\n * 400 SensitivityLabelsMissingTable - Operation[{0}]: Missing table information\n\n * 400 SensitivityLabelsMissingColumn - Operation[{0}]: Missing column information\n\n * 400 SensitivityLabelsUpdateSameColumnMoreThanOnce - The column {0} can not be updated more than once in a single command\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - The provided �labelId� is invalid. Value must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - The provided �informationTypeId� is invalid. Value must be a GUID\n\n * 400 LabelMissing - Label is required. At least one of �labelName� or �labelId� must be provided\n\n * 400 InformationTypeMissing - Information type is required. At least one of �informationType� or �informationTypeId� must be provided\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 404 SensitivityLabelsSchemaNotFound - The schema {0} could not be found\n\n * 404 SensitivityLabelsTableNotFound - The table {0} could not be found in schema {1}\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Update recommended sensitivity labels of a given SQL Pool using an operations batch.": {
+            "$ref": "./examples/SensitivityLabelsRecommendedUpdate.json"
           }
         }
       }
@@ -3581,7 +3942,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             }
           }
         }
@@ -3635,7 +3996,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             }
           }
         }
@@ -3722,7 +4083,68 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SqlPools, DataMaskingRules"
+        ],
+        "operationId": "DataMaskingRules_Get",
+        "description": "Gets the specific Sql pool data masking rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/DataMaskingPolicyNameParameter"
+          },
+          {
+            "name": "dataMaskingRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the data masking rule."
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get data masking rule": {
+            "$ref": "./examples/DataMaskingRuleGet.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             }
           }
         }
@@ -3778,7 +4200,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             }
           }
         },
@@ -5380,6 +5802,122 @@
       },
       "description": "Represents the response to a List Sql pool replication link request."
     },
+    "MaintenanceWindowOptionsProperties": {
+      "description": "Maintenance window options properties.",
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "description": "Whether maintenance windows are enabled for the database.",
+          "type": "boolean"
+        },
+        "maintenanceWindowCycles": {
+          "description": "Available maintenance cycles e.g. {Saturday, 0, 48*60}, {Wednesday, 0, 24*60}.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowTimeRange"
+          }
+        },
+        "minDurationInMinutes": {
+          "format": "int32",
+          "description": "Minimum duration of maintenance window.",
+          "type": "integer"
+        },
+        "defaultDurationInMinutes": {
+          "format": "int32",
+          "description": "Default duration for maintenance window.",
+          "type": "integer"
+        },
+        "minCycles": {
+          "format": "int32",
+          "description": "Minimum number of maintenance windows cycles to be set on the database.",
+          "type": "integer"
+        },
+        "timeGranularityInMinutes": {
+          "format": "int32",
+          "description": "Time granularity in minutes for maintenance windows.",
+          "type": "integer"
+        },
+        "allowMultipleMaintenanceWindowsPerCycle": {
+          "description": "Whether we allow multiple maintenance windows per cycle.",
+          "type": "boolean"
+        }
+      }
+    },
+    "MaintenanceWindowOptions": {
+      "description": "Maintenance window options.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceWindowOptionsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MaintenanceWindowsProperties": {
+      "description": "Maintenance windows resource properties.",
+      "type": "object",
+      "properties": {
+        "timeRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowTimeRange"
+          }
+        }
+      }
+    },
+    "MaintenanceWindowTimeRange": {
+      "description": "Maintenance window time range.",
+      "type": "object",
+      "properties": {
+        "dayOfWeek": {
+          "description": "Day of maintenance window.",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "Start time minutes offset from 12am.",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Duration of maintenance window in minutes.",
+          "type": "string"
+        }
+      }
+    },
+    "MaintenanceWindows": {
+      "description": "Maintenance windows.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceWindowsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "TransparentDataEncryptionProperties": {
       "properties": {
         "status": {
@@ -5709,6 +6247,21 @@
       "description": "Properties of a sensitivity label.",
       "type": "object",
       "properties": {
+        "schemaName": {
+          "description": "The schema name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tableName": {
+          "description": "The table name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "columnName": {
+          "description": "The column name.",
+          "type": "string",
+          "readOnly": true
+        },
         "labelName": {
           "description": "The label name.",
           "type": "string"
@@ -5729,6 +6282,20 @@
           "description": "Is sensitivity recommendation disabled. Applicable for recommended sensitivity label only. Specifies whether the sensitivity recommendation on this column is disabled (dismissed) or not.",
           "type": "boolean",
           "readOnly": true
+        },
+        "rank": {
+          "enum": [
+            "None",
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SensitivityLabelRank",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -5745,6 +6312,11 @@
           "$ref": "#/definitions/SensitivityLabelProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "managedBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "managed by"
         }
       }
     },
@@ -5870,6 +6442,11 @@
             "name": "ColumnDataType",
             "modelAsString": true
           }
+        },
+        "isComputed": {
+          "type": "boolean",
+          "description": "Indicates whether column value is computed or not",
+          "readOnly": true
         }
       }
     },
@@ -6803,6 +7380,136 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "SensitivityLabelUpdateProperties": {
+      "description": "Properties of an operation executed on a sensitivity label.",
+      "required": [
+        "op",
+        "schema",
+        "table",
+        "column"
+      ],
+      "type": "object",
+      "properties": {
+        "op": {
+          "enum": [
+            "set",
+            "remove"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SensitivityLabelUpdateKind",
+            "modelAsString": false
+          }
+        },
+        "schema": {
+          "description": "Schema name of the column to update.",
+          "type": "string"
+        },
+        "table": {
+          "description": "Table name of the column to update.",
+          "type": "string"
+        },
+        "column": {
+          "description": "Column name to update.",
+          "type": "string"
+        },
+        "sensitivityLabel": {
+          "$ref": "#/definitions/SensitivityLabel",
+          "description": "The sensitivity label information to apply on a column."
+        }
+      }
+    },
+    "SensitivityLabelUpdate": {
+      "description": "A sensitivity label update operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SensitivityLabelUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SensitivityLabelUpdateList": {
+      "description": "A list of sensitivity label update operations.",
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SensitivityLabelUpdate"
+          }
+        }
+      }
+    },
+    "RecommendedSensitivityLabelUpdateProperties": {
+      "description": "Properties of an operation executed on a recommended sensitivity label.",
+      "required": [
+        "op",
+        "schema",
+        "table",
+        "column"
+      ],
+      "type": "object",
+      "properties": {
+        "op": {
+          "enum": [
+            "enable",
+            "disable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecommendedSensitivityLabelUpdateKind",
+            "modelAsString": false
+          }
+        },
+        "schema": {
+          "description": "Schema name of the column to update.",
+          "type": "string"
+        },
+        "table": {
+          "description": "Table name of the column to update.",
+          "type": "string"
+        },
+        "column": {
+          "description": "Column name to update.",
+          "type": "string"
+        }
+      }
+    },
+    "RecommendedSensitivityLabelUpdate": {
+      "description": "A recommended sensitivity label update operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendedSensitivityLabelUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecommendedSensitivityLabelUpdateList": {
+      "description": "A list of recommended sensitivity label update operations.",
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedSensitivityLabelUpdate"
+          }
         }
       }
     },

@@ -18,7 +18,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties/default": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties": {
       "get": {
         "tags": [
           "AadProperties"
@@ -37,6 +37,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -53,6 +60,7 @@
             }
           }
         },
+        "x-ms-odata": "#/definitions/BMSAADPropertiesQueryObject",
         "x-ms-examples": {
           "Get AAD Properties for authentication in the third region": {
             "$ref": "./examples/AzureIaasVm/BackupAadProperties_Get.json"
@@ -274,10 +282,6 @@
               "$ref": "#/definitions/NewErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Get Operation Results for Cross Region Restore": {
@@ -1840,6 +1844,20 @@
             "modelAsString": true
           },
           "readOnly": true
+        },
+        "recoveryPointTierDetails": {
+          "description": "Recovery point tier information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformation"
+          }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "description": "Eligibility of RP to be moved to another tier",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRecoveryPoint"
@@ -1895,6 +1913,10 @@
             "name": "RecoveryMode",
             "modelAsString": true
           }
+        },
+        "targetVirtualMachineId": {
+          "description": "This is the complete ARM Id of the target VM\r\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
@@ -2096,6 +2118,10 @@
         },
         "extendedInfo": {
           "description": "In Get Recovery Point, it tells whether extended information about recovery point is asked.",
+          "type": "boolean"
+        },
+        "moveReadyRPOnly": {
+          "description": "Whether the RP can be moved to another tier",
           "type": "boolean"
         }
       }
@@ -2865,6 +2891,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "description": "Eligibility of RP to be moved to another tier",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
         }
       },
       "x-ms-discriminator-value": "IaasVMRecoveryPoint"
@@ -3042,6 +3075,31 @@
         }
       },
       "discriminator": "jobType"
+    },
+    "BMSAADPropertiesQueryObject": {
+      "description": "Filters to list backup items.",
+      "type": "object",
+      "properties": {
+        "backupManagementType": {
+          "description": "Backup management type for the backed up item.",
+          "enum": [
+            "Invalid",
+            "AzureIaasVM",
+            "MAB",
+            "DPM",
+            "AzureBackupServer",
+            "AzureSql",
+            "AzureStorage",
+            "AzureWorkload",
+            "DefaultBackup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupManagementType",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "JobQueryObject": {
       "description": "Filters to list the jobs.",
@@ -3908,7 +3966,8 @@
           "enum": [
             "Invalid",
             "InstantRP",
-            "HardenedRP"
+            "HardenedRP",
+            "ArchivedRP"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3922,12 +3981,20 @@
             "Invalid",
             "Valid",
             "Disabled",
-            "Deleted"
+            "Deleted",
+            "Rehydrated"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPointTierStatus",
             "modelAsString": false
+          }
+        },
+        "extendedInfo": {
+          "description": "Recovery point tier status.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -4154,6 +4221,17 @@
         }
       },
       "x-ms-discriminator-value": "WorkloadCrrAccessToken"
+    },
+    "RecoveryPointMoveReadinessInfo": {
+      "type": "object",
+      "properties": {
+        "isReadyForMove": {
+          "type": "boolean"
+        },
+        "additionalInfo": {
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
