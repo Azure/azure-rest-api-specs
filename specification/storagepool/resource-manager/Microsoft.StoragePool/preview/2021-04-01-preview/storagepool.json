@@ -397,7 +397,7 @@
         "tags": [
           "DiskPools"
         ],
-        "operationId": "DiskPools_GetOutboundNetworkDependenciesEndpoints",
+        "operationId": "DiskPools_ListOutboundNetworkDependenciesEndpoints",
         "description": "Gets the network endpoints of all outbound dependencies of a Disk Pool",
         "parameters": [
           {
@@ -464,6 +464,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -501,6 +507,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -1202,9 +1214,11 @@
       "required": [
         "name"
       ],
+      "description": "Sku for Disk Pools",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "name": "Name of the Sku"
         },
         "tier": {
           "$ref": "#/definitions/DiskPoolTier",
@@ -1371,6 +1385,11 @@
           "x-ms-client-flatten": true,
           "description": "Properties for iSCSI Target operations.",
           "$ref": "#/definitions/IscsiTargetProperties"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "#/definitions/SystemMetadata"
         }
       },
       "allOf": [
