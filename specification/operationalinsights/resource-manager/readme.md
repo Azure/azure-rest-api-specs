@@ -182,9 +182,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
+  - repo: azure-cli-extensions
+  - repo: azure-powershell
     after_scripts:
       - node sdkauto_afterscript.js operationalinsights/resource-manager
-  - repo: azure-cli-extensions
 ```
 
 
