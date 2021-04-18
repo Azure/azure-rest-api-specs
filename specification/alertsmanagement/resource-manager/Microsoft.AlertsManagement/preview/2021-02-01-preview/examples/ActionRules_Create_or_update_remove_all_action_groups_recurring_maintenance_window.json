@@ -12,14 +12,15 @@
           "/subscriptions/subId1/resourceGroups/RGId1",
           "/subscriptions/subId1/resourceGroups/RGId2"
         ],
-        "conditions": {
-          "targetResourceType": {
+        "conditions": [
+          {
+            "field": "targetResourceType",
             "operator": "Equals",
             "values": [
               "microsoft.compute/virtualmachines"
             ]
           }
-        },
+        ],
         "actions": [
           {
             "actionType": "RemoveAllActionGroups"
@@ -60,14 +61,15 @@
             "/subscriptions/subId1/resourceGroups/RGId1",
             "/subscriptions/subId1/resourceGroups/RGId2"
           ],
-          "conditions": {
-            "targetResourceType": {
+          "conditions": [
+            {
+              "field": "targetResourceType",
               "operator": "Equals",
               "values": [
                 "microsoft.compute/virtualmachines"
               ]
             }
-          },
+          ],
           "actions": [
             {
               "actionType": "RemoveAllActionGroups"

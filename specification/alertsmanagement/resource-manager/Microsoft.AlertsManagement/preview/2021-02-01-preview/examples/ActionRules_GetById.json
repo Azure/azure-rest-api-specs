@@ -24,34 +24,38 @@
           "scopes": [
             "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
           ],
-          "conditions": {
-            "severity": {
+          "conditions": [
+            {
+              "field": "severity",
               "operator": "Equals",
               "values": [
                 "Sev0",
                 "Sev2"
               ]
             },
-            "monitorService": {
+            {
+              "field": "monitorService",
               "operator": "Equals",
               "values": [
                 "Platform",
                 "Application Insights"
               ]
             },
-            "monitorCondition": {
+            {
+              "field": "monitorCondition",
               "operator": "Equals",
               "values": [
                 "Fired"
               ]
             },
-            "targetResourceType": {
+            {
+              "field": "targetResourceType",
               "operator": "NotEquals",
               "values": [
                 "Microsoft.Compute/VirtualMachines"
               ]
             }
-          },
+          ],
           "schedulingConfig": {
             "effectiveFrom": "2018-01-10T22:05:09Z",
             "effectiveUntil": "2018-12-10T22:05:09Z",

@@ -22,28 +22,31 @@
               "scopes": [
                 "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
               ],
-              "conditions": {
-                "severity": {
+              "conditions": [
+                {
+                  "field": "severity",
                   "operator": "Equals",
                   "values": [
                     "Sev0",
                     "Sev2"
                   ]
                 },
-                "monitorService": {
+                {
+                  "field": "monitorService",
                   "operator": "Equals",
                   "values": [
                     "Platform",
                     "Application Insights"
                   ]
                 },
-                "targetResourceType": {
+                {
+                  "field": "targetResourceType",
                   "operator": "NotEquals",
                   "values": [
                     "Microsoft.Compute/VirtualMachines"
                   ]
                 }
-              },
+              ],
               "schedulingConfig": {
                 "effectiveFrom": "2018-09-12T06:00:00Z",
                 "effectiveUntil": "2018-09-20T14:00:00Z",
@@ -83,28 +86,31 @@
               "scopes": [
                 "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.Compute/VirtualMachines/testResource"
               ],
-              "conditions": {
-                "monitorCondition": {
+              "conditions": [
+                {
+                  "field": "monitorCondition",
                   "operator": "Equals",
                   "values": [
                     "Fired"
                   ]
                 },
-                "description": {
+                {
+                  "field": "description",
                   "operator": "Contains",
                   "values": [
                     "Percentage CPU greater than 80%",
                     "Metric alert on resource foo"
                   ]
                 },
-                "alertContext": {
+                {
+                  "field": "alertContext",
                   "operator": "DoesNotContain",
                   "values": [
                     "testresource",
                     "foo"
                   ]
                 }
-              },
+              ],
               "actions": [
                 {
                   "actionType": "AddActionGroups",

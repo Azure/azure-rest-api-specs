@@ -635,6 +635,22 @@
       "type": "object",
       "description": "Condition to trigger an action rule",
       "properties": {
+        "field": {
+          "type": "string",
+          "description": "Field for a given condition",
+          "enum": [
+            "monitorService",
+            "monitorCondition",
+            "targetResourceType",
+            "alertRuleId",
+            "description",
+            "alertContext"
+          ],
+          "x-ms-enum": {
+            "name": "Field",
+            "modelAsString": true
+          }
+        },
         "operator": {
           "type": "string",
           "description": "Operator for a given condition",
@@ -659,37 +675,10 @@
       }
     },
     "Conditions": {
-      "type": "object",
+      "type": "array",
       "description": "Conditions in alert instance to be matched for a given action rule. Default value is all. Multiple values could be provided with comma separation.",
-      "properties": {
-        "severity": {
-          "description": "Filter alerts by severity",
-          "$ref": "#/definitions/Condition"
-        },
-        "monitorService": {
-          "description": "Filter alerts by monitor service",
-          "$ref": "#/definitions/Condition"
-        },
-        "monitorCondition": {
-          "description": "Filter alerts by monitor condition",
-          "$ref": "#/definitions/Condition"
-        },
-        "targetResourceType": {
-          "description": "Filter alerts by target resource type",
-          "$ref": "#/definitions/Condition"
-        },
-        "alertRuleId": {
-          "description": "Filter alerts by alert rule id",
-          "$ref": "#/definitions/Condition"
-        },
-        "description": {
-          "description": "Filter alerts by alert rule description",
-          "$ref": "#/definitions/Condition"
-        },
-        "alertContext": {
-          "description": "Filter alerts by alert context (payload)",
-          "$ref": "#/definitions/Condition"
-        }
+      "items": {
+        "$ref": "#/definitions/Condition"
       }
     },
     "SchedulingConfig": {

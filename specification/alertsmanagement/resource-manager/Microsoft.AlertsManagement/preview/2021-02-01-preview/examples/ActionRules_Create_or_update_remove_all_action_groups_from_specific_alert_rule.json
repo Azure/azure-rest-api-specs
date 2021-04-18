@@ -11,14 +11,15 @@
         "scopes": [
           "/subscriptions/subId1"
         ],
-        "conditions": {
-          "alertRuleId": {
+        "conditions": [
+          {
+            "field": "alertRuleId",
             "operator": "Equals",
             "values": [
               "/subscriptions/suubId1/resourceGroups/Rgid2/providers/microsoft.insights/activityLogAlerts/RuleName"
             ]
           }
-        },
+        ],
         "actions": [
           {
             "actionType": "RemoveAllActiongroups"
@@ -44,14 +45,15 @@
           "scopes": [
             "/subscriptions/subId1"
           ],
-          "conditions": {
-            "alertRuleId": {
+          "conditions": [
+            {
+              "field": "alertRuleId",
               "operator": "Equals",
               "values": [
                 "/subscriptions/suubId1/resourceGroups/Rgid2/providers/microsoft.insights/activityLogAlerts/RuleName"
               ]
             }
-          },
+          ],
           "actions": [
             {
               "actionType": "RemoveAllActiongroups"
