@@ -1,38 +1,36 @@
 {
   "parameters": {
-    "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
-    "metric": "BlobCapacity",
-    "$filter": "BlobType eq '*'",
-    "top": "3",
-    "orderby": "Average asc",
-    "aggregation": "Average,count",
-    "interval": "PT1M",
+    "timespan": "2021-04-18T16:02:54.704Z/2021-04-19T16:02:54.704Z",
+    "metric": "Availability",
+    "$filter": "Authentication eq '*'",
     "resulttype": "metadata",
-    "resourceUri": "subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default",
+    "resourceUri": "subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv",
     "api-version": "2017-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
+        "timespan": "2021-04-18T16:02:54Z/2021-04-19T16:02:54Z",
+        "interval": "PT1M",
         "value": [
           {
-            "id": "/subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default/providers/Microsoft.Insights/metrics/BlobCapacity",
+            "id": "/subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/providers/Microsoft.Insights/metrics/Availability",
             "type": "Microsoft.Insights/metrics",
             "name": {
-              "value": "BlobCapacity",
-              "localizedValue": "Blob Capacity"
+              "value": "Availability",
+              "localizedValue": "Availability"
             },
-            "unit": "Bytes",
+            "displayDescription": "The percentage of availability for the storage service or the specified API operation. Availability is calculated by taking the TotalBillableRequests value and dividing it by the number of applicable requests, including those that produced unexpected errors. All unexpected errors result in reduced availability for the storage service or the specified API operation.",
+            "unit": "Percent",
             "timeseries": [
               {
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "blobtype",
-                      "localizedValue": "blobtype"
+                      "value": "authentication",
+                      "localizedValue": "authentication"
                     },
-                    "value": "BlockBlob"
+                    "value": "SAS"
                   }
                 ]
               },
@@ -40,16 +38,18 @@
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "blobtype",
-                      "localizedValue": "blobtype"
+                      "value": "authentication",
+                      "localizedValue": "authentication"
                     },
-                    "value": "PageBlob"
+                    "value": "AccountKey"
                   }
                 ]
               }
             ]
           }
-        ]
+        ],
+        "namespace": "microsoft.storage/storageaccounts",
+        "resourceregion": "westus2"
       }
     }
   }
