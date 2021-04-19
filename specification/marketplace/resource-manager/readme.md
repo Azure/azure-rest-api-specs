@@ -57,6 +57,7 @@ APIs must only be added to this section when the API is publicly available in at
 input-file:
 - Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
 - Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
+- Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
 ```
 
 # Needed when there is more than one input file
