@@ -4083,6 +4083,9 @@
       }
     },
     "AzureSQLConnectionStringCredential": {
+      "required": [
+        "parameters"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4109,6 +4112,9 @@
       }
     },
     "DataLakeGen2SharedKeyCredential": {
+      "required": [
+        "parameters"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4145,6 +4151,9 @@
       }
     },
     "ServicePrincipalCredential": {
+      "required": [
+        "parameters"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4196,6 +4205,9 @@
       }
     },
     "ServicePrincipalInKVCredential": {
+      "required": [
+        "parameters"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4673,7 +4685,7 @@
       "discriminator": "dataSourceType",
       "example": {
         "dataSourceParameter": {
-          "connectionString": "Server=your_sql_server,1433;Initial Catalog=your_database;Persist Security Info=False;User ID=your_user;Password=your_password;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+          "connectionString": "Server=PlaceholderSqlServer,1433;Initial Catalog=PlaceholderDatabase;User ID=PlaceholderUserName;Password=PlaceholderPassword;",
           "query": "select * from your_table where timestamp = @StartTime"
         },
         "dataFeedName": "Sample - cost/revenue - city/category",
@@ -4715,6 +4727,9 @@
       }
     },
     "AzureApplicationInsightsDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4751,6 +4766,9 @@
       }
     },
     "AzureBlobDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4792,6 +4810,9 @@
       }
     },
     "AzureCosmosDBDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4822,6 +4843,9 @@
       }
     },
     "AzureDataExplorerDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4867,6 +4891,9 @@
       }
     },
     "AzureDataLakeStorageGen2DataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4898,6 +4925,9 @@
       }
     },
     "AzureEventHubsDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4934,6 +4964,9 @@
       }
     },
     "AzureTableDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4975,6 +5008,9 @@
       }
     },
     "ElasticsearchDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5016,6 +5052,9 @@
       }
     },
     "HttpRequestDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5062,6 +5101,9 @@
       }
     },
     "InfluxDBDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5076,6 +5118,9 @@
       "x-ms-discriminator-value": "InfluxDB"
     },
     "MySqlDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5090,6 +5135,9 @@
       "x-ms-discriminator-value": "MySql"
     },
     "PostgreSqlDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5104,6 +5152,9 @@
       "x-ms-discriminator-value": "PostgreSql"
     },
     "SQLServerDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5140,6 +5191,9 @@
       }
     },
     "MongoDBDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5651,6 +5705,11 @@
       "discriminator": "feedbackType"
     },
     "AnomalyFeedback": {
+      "required": [
+        "endTime",
+        "startTime",
+        "value"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5718,6 +5777,11 @@
       }
     },
     "ChangePointFeedback": {
+      "required": [
+        "endTime",
+        "startTime",
+        "value"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5754,6 +5818,9 @@
       }
     },
     "CommentFeedback": {
+      "required": [
+        "value"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5805,6 +5872,9 @@
       }
     },
     "PeriodFeedback": {
+      "required": [
+        "value"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5961,6 +6031,9 @@
       "discriminator": "hookType"
     },
     "EmailHookInfo": {
+      "required": [
+        "hookParameter"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -6010,6 +6083,9 @@
       }
     },
     "WebhookHookInfo": {
+      "required": [
+        "hookParameter"
+      ],
       "type": "object",
       "allOf": [
         {
