@@ -195,7 +195,7 @@
               "$ref": "#/definitions/DiskPool"
             }
           },
-          "202": {
+          "201": {
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/DiskPool"
@@ -209,6 +209,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create or Update Disk pool": {
             "$ref": "./examples/DiskPools_Put.json"
@@ -246,10 +249,7 @@
             }
           },
           "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/DiskPool"
-            }
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
           },
           "default": {
             "description": "Error from the RP.",
@@ -263,7 +263,10 @@
             "$ref": "./examples/DiskPools_Patch.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -303,6 +306,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Delete Disk pool": {
             "$ref": "./examples/DiskPools_Delete.json"
@@ -356,7 +362,7 @@
           "DiskPoolSkus"
         ],
         "operationId": "DiskPoolSkus_List",
-        "description": "Lists available Disk Pool Skus.",
+        "description": "Lists available Disk Pool Skus in an Azure location.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -473,6 +479,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Start Disk Pool": {
             "$ref": "./examples/DiskPools_Start.json"
@@ -516,9 +525,54 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Deallocate Disk Pool": {
             "$ref": "./examples/DiskPools_Deallocate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StoragePool/{diskPoolName}/skus": {
+      "get": {
+        "tags": [
+          "DiskPools"
+        ],
+        "operationId": "DiskPools_ListSkus",
+        "description": "List of available skus to resize an existing Disk Pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkuList"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deallocate Disk Pool": {
+            "$ref": "./examples/DiskPools_ListSkus.json"
           }
         }
       }
@@ -602,7 +656,7 @@
               "$ref": "#/definitions/IscsiTarget"
             }
           },
-          "202": {
+          "201": {
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/IscsiTarget"
@@ -616,6 +670,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create or Update iSCSI Target": {
             "$ref": "./examples/IscsiTargets_Put.json"
@@ -656,10 +713,7 @@
             }
           },
           "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/IscsiTarget"
-            }
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
           },
           "default": {
             "description": "Error from the RP.",
@@ -669,6 +723,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Update iSCSI Target": {
             "$ref": "./examples/IscsiTargets_Patch.json"
@@ -716,6 +773,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Delete iSCSI Target": {
             "$ref": "./examples/IscsiTargets_Delete.json"
@@ -1186,6 +1246,11 @@
         "properties"
       ],
       "properties": {
+        "sku": {
+          "description": "Determines the SKU of the Disk Pool",
+          "type": "object",
+          "$ref": "#/definitions/DiskPoolSku"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties for Disk Pool update request.",
@@ -1274,11 +1339,6 @@
           "items": {
             "$ref": "#/definitions/AdditionalCapability"
           }
-        },
-        "sku": {
-          "description": "Determines the SKU of the Disk Pool",
-          "type": "object",
-          "$ref": "#/definitions/DiskPoolSku"
         }
       }
     },
@@ -1655,6 +1715,56 @@
         "modelAsString": true
       },
       "description": "ACL mode for iSCSI Target."
+    },
+    "ResourceSkuList": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "description": "List of Skus for a Disk Pool",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "description": "List of Skus",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSku"
+          }
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSku": {
+      "type": "object",
+      "description": "Sku for an ARM resource",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Type of Arm Resource"
+        },
+        "sku": {
+          "description": "Sku for ARM resource",
+          "$ref": "#/definitions/Sku"
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "Sku for ARM resource",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Sku name"
+        },
+        "tier": {
+          "type": "string",
+          "description": "Sku tier"
+        }
+      }
     },
     "SystemMetadata": {
       "type": "object",
