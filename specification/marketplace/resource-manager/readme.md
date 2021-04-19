@@ -57,21 +57,11 @@ APIs must only be added to this section when the API is publicly available in at
 input-file:
 - Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
 - Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
-- Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
 ```
 
 # Needed when there is more than one input file
 override-info:
   title: MarketplaceManagementClient
-```
-
-### Tag: package-2019-12-01
-
-These settings apply only when `--tag=package-2019-12-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-12-01'
-input-file:
-  - Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
 ```
 
 ### Tag: package-2020-01-01
