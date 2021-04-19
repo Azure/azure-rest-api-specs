@@ -567,10 +567,6 @@
       ],
       "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
       "properties": {
-        "alerts": {
-          "$ref": "#/definitions/DataConnectorDataTypeCommon",
-          "description": "Alerts data type connection."
-        },
         "discoveryLogs": {
           "$ref": "#/definitions/DataConnectorDataTypeCommon",
           "description": "Discovery log data type connection."
@@ -996,12 +992,12 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "type"
-          },
-          "required": [
-            "type"
-          ]
+          }
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "RequiredPermissions": {
       "description": "Required permissions for the connector",
@@ -1031,14 +1027,12 @@
       "properties": {
         "status": {
           "description": "",
-          "readOnly": true,
           "format": "int32",
           "type": "integer",
           "enum": [
             1,
             2,
-            3,
-            4
+            3
           ],
           "x-ms-enum": {
             "name": "Availability",
@@ -1053,10 +1047,6 @@
               },
               {
                 "value": 3,
-                "description": "ComingSoon"
-              },
-              {
-                "value": 4,
                 "description": "Internal"
               }
             ]
