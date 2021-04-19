@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}": {
       "put": {
         "tags": [
-          "Servers"
+          "GeoRestore"
         ],
         "operationId": "Servers_GeoCreate",
         "x-ms-examples": {
@@ -57,7 +57,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../2020-02-14-privatepreview/postgresql.json#/parameters/ServerNameParameter"
           },
           {
             "name": "parameters",
@@ -73,13 +73,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Server"
+              "$ref": "../2020-02-14-privatepreview/postgresql.json#/definitions/Server"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Server"
+              "$ref": "../2020-02-14-privatepreview/postgresql.json#/definitions/Server"
             }
           },
           "202": {
@@ -88,7 +88,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../2020-02-14-privatepreview/postgresql.json#/definitions/CloudError"
             }
           }
         },
@@ -118,7 +118,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../2020-02-14-privatepreview/postgresql.json#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
@@ -131,7 +131,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../2020-02-14-privatepreview/postgresql.json#/definitions/CloudError"
             }
           }
         }
@@ -168,7 +168,7 @@
       ],
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "../2020-02-14-privatepreview/postgresql.json#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
         },
         "location": {
@@ -182,224 +182,6 @@
         }
       },
       "description": "Represents a recoverable server resource."
-    },
-    "ServerVersion": {
-      "type": "string",
-      "description": "The version of a server.",
-      "enum": [
-        "12",
-        "11"
-      ],
-      "x-ms-enum": {
-        "name": "ServerVersion",
-        "modelAsString": true
-      }
-    },
-    "ServerProperties": {
-      "properties": {
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation).",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "administratorLoginPassword": {
-          "type": "string",
-          "description": "The administrator login password (required for server creation).",
-          "x-ms-secret": true,
-          "format": "password",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
-        },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "PostgreSQL Server version."
-        },
-        "state": {
-          "type": "string",
-          "description": "A state of a server that is visible to user.",
-          "readOnly": true,
-          "enum": [
-            "Ready",
-            "Dropping",
-            "Disabled",
-            "Starting",
-            "Stopping",
-            "Stopped",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ServerState",
-            "modelAsString": true
-          }
-        },
-        "haState": {
-          "type": "string",
-          "description": "A state of a HA server that is visible to user.",
-          "enum": [
-            "NotEnabled",
-            "CreatingStandby",
-            "ReplicatingData",
-            "FailingOver",
-            "Healthy",
-            "RemovingStandby"
-          ],
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ServerHAState",
-            "modelAsString": true
-          }
-        },
-        "fullyQualifiedDomainName": {
-          "type": "string",
-          "description": "The fully qualified domain name of a server.",
-          "readOnly": true
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of a server."
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
-          "description": "Storage profile of a server."
-        },
-        "publicNetworkAccess": {
-          "type": "string",
-          "description": "public network access is enabled or not",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ServerPublicNetworkAccessState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "maintenanceWindow": {
-          "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window of a server."
-        },
-        "haEnabled": {
-          "type": "string",
-          "description": "stand by count value can be either enabled or disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "HAEnabledEnum",
-            "modelAsString": false
-          }
-        },
-        "sourceServerName": {
-          "type": "string",
-          "description": "The source PostgreSQL server name to restore from."
-        },
-        "sourceSubscriptionId": {
-          "type": "string",
-          "description": "The subscription id of source PostgreSQL server name to restore from."
-        },
-        "sourceResourceGroupName": {
-          "type": "string",
-          "description": "The resource group name of source PostgreSQL server name to restore from."
-        },
-        "pointInTimeUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
-        },
-        "availabilityZone": {
-          "type": "string",
-          "description": "availability Zone information of the server."
-        },
-        "standbyAvailabilityZone": {
-          "type": "string",
-          "description": "availability Zone information of the server.",
-          "readOnly": true
-        },
-        "byokEnforcement": {
-          "type": "string",
-          "description": "Status showing whether the data encryption is enabled with customer-managed keys.",
-          "readOnly": true
-        },
-        "delegatedSubnetArguments": {
-          "properties": {
-            "subnetArmResourceId": {
-              "type": "string",
-              "description": "delegated subnet arm resource id."
-            }
-          }
-        },
-        "privateDnsZoneArguments": {
-          "properties": {
-            "privateDnsZoneArmResourceId": {
-              "type": "string",
-              "description": "private dns zone arm resource id."
-            }
-          }
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
-        }
-      },
-      "description": "The properties of a server."
-    },
-    "Server": {
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity",
-          "description": "The Azure Active Directory identity of the server."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The SKU (pricing tier) of the server."
-        },
-        "properties": {
-          "$ref": "#/definitions/ServerProperties",
-          "x-ms-client-flatten": true,
-          "description": "Properties of the server."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Represents a server."
-    },
-    "MaintenanceWindow": {
-      "type": "object",
-      "description": "Maintenance window of a server.",
-      "properties": {
-        "customWindow": {
-          "type": "string",
-          "description": "indicates whether custom window is enabled or disabled"
-        },
-        "startHour": {
-          "type": "integer",
-          "format": "int32",
-          "description": "start hour for maintenance window"
-        },
-        "startMinute": {
-          "type": "integer",
-          "format": "int32",
-          "description": "start minute for maintenance window"
-        },
-        "dayOfWeek": {
-          "type": "integer",
-          "format": "int32",
-          "description": "day of week for maintenance window"
-        }
-      }
     },
     "ServerForGeoRestore": {
       "properties": {
@@ -454,66 +236,6 @@
           ]
         }
       }
-    },
-    "StorageProfile": {
-      "properties": {
-        "backupRetentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Backup retention days for the server."
-        },
-        "storageMB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max storage allowed for a server."
-        }
-      },
-      "description": "Storage Profile properties of a server"
-    },
-    "Sku": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the sku, typically, tier + family + cores, e.g. Standard_D4s_v3."
-        },
-        "tier": {
-          "type": "string",
-          "description": "The tier of the particular SKU, e.g. Burstable.",
-          "enum": [
-            "Burstable",
-            "GeneralPurpose",
-            "MemoryOptimized"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "name",
-        "tier"
-      ],
-      "description": "Sku information related properties of a server."
-    },
-    "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      },
-      "description": "An error response from the Batch service."
-    }
-  },
-  "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
     }
   }
 }
