@@ -787,7 +787,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group.",
+            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated hosts under the dedicated host group.",
             "enum": [
               "instanceView",
               "userData"
@@ -3112,7 +3112,7 @@
             "$ref": "./examples/CreateAVmWithUefiSettings.json"
           },
           "Create a VM with UserData": {
-            "$ref": "./examples/CreateAVmWithUserData.json"
+            "$ref": "./examples/CreateOrUpdateAVmWithUserData.json"
           }
         }
       },
@@ -4228,7 +4228,7 @@
             "$ref": "./examples/CreateAScaleSetWithUefiSettings.json"
           },
           "Create a scale set with userData.": {
-            "$ref": "./examples/CreateAScaleSetWithUserData.json"
+            "$ref": "./examples/CreateOrUpdateAScaleSetWithUserData.json"
           }
         }
       },
@@ -11258,7 +11258,7 @@
         },
         "userData": {
           "type": "string",
-          "description": "UserData for the VMSS, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
+          "description": "UserData (which must be base-64 encoded) for the virtual machine scale set. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
