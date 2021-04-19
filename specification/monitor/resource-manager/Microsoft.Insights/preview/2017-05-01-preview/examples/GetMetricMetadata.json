@@ -1,36 +1,36 @@
 {
   "parameters": {
-    "timespan": "2021-04-18T16:02:54.704Z/2021-04-19T16:02:54.704Z",
-    "metric": "Availability",
-    "$filter": "Authentication eq '*'",
+    "timespan": "2021-04-18T22:14:26.647Z/2021-04-19T22:14:26.647Z",
+    "metric": "BlobCount",
+    "$filter": "BlobType eq '*'",
     "resulttype": "metadata",
-    "resourceUri": "subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv",
+    "resourceUri": "subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default",
     "api-version": "2017-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "timespan": "2021-04-18T16:02:54Z/2021-04-19T16:02:54Z",
-        "interval": "PT1M",
+        "timespan": "2021-04-18T22:14:26Z/2021-04-19T22:14:26Z",
+        "interval": "PT1H",
         "value": [
           {
-            "id": "/subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/providers/Microsoft.Insights/metrics/Availability",
+            "id": "/subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default/providers/Microsoft.Insights/metrics/BlobCount",
             "type": "Microsoft.Insights/metrics",
             "name": {
-              "value": "Availability",
-              "localizedValue": "Availability"
+              "value": "BlobCount",
+              "localizedValue": "Blob Count"
             },
-            "displayDescription": "The percentage of availability for the storage service or the specified API operation. Availability is calculated by taking the TotalBillableRequests value and dividing it by the number of applicable requests, including those that produced unexpected errors. All unexpected errors result in reduced availability for the storage service or the specified API operation.",
-            "unit": "Percent",
+            "displayDescription": "The number of blob objects stored in the storage account.",
+            "unit": "Count",
             "timeseries": [
               {
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "authentication",
-                      "localizedValue": "authentication"
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
                     },
-                    "value": "SAS"
+                    "value": "BlockBlob"
                   }
                 ]
               },
@@ -38,18 +38,27 @@
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "authentication",
-                      "localizedValue": "authentication"
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
                     },
-                    "value": "AccountKey"
+                    "value": "PageBlob"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
+                    },
+                    "value": "Azure Data Lake Storage"
                   }
                 ]
               }
             ]
           }
-        ],
-        "namespace": "microsoft.storage/storageaccounts",
-        "resourceregion": "westus2"
+        ]
       }
     }
   }
