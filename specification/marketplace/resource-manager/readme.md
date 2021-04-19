@@ -26,7 +26,7 @@ These are the global settings for the Marketplace API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-01-01
+tag: package-2021-06-01
 ```
 ### Composite packages
 
@@ -43,7 +43,6 @@ APIs must only be added to this section when the API is publicly available in at
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
 - Microsoft.Marketplace/stable/2021-06-01/Marketplace.json
-- Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
 ```
 
 ### Tag: package-composite-v1
@@ -58,7 +57,6 @@ APIs must only be added to this section when the API is publicly available in at
 input-file:
 - Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
 - Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
-- Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
 ```
 
 # Needed when there is more than one input file
@@ -82,6 +80,15 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
   - Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
+```
+
+### Tag: package-2020-12-01
+
+These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-01'
+input-file:
+  - Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
 ```
 
 ### Tag: package-2021-06-01
