@@ -16,7 +16,8 @@
         "required": true,
         "type": "string",
         "in": "path",
-        "x-ms-skip-url-encoding": true
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
       }
     ]
   },
@@ -212,10 +213,10 @@
     },
     "/app/transactions/{transactionId}": {
       "get": {
-        "operationId": "GetLedgerEntryForTransactionId",
+        "operationId": "GetLedgerEntry",
         "x-ms-examples": {
-          "GetLedgerEntryForTransactionId": {
-            "$ref": "./examples/ledger/GetLedgerEntryForTransactionId.json"
+          "GetLedgerEntry": {
+            "$ref": "./examples/ledger/GetLedgerEntry.json"
           }
         },
         "summary": "Gets the ledger entry at the specified transaction id. A sub-ledger id may optionally be specified to indicate the sub-ledger from which to fetch the value.",

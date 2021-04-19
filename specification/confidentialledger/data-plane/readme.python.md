@@ -13,7 +13,6 @@ python:
 
 ```yaml $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-multiapi: true
 no-namespace-folders: true
 package-name: azure-confidentialledger
 package-version: "0.1"
