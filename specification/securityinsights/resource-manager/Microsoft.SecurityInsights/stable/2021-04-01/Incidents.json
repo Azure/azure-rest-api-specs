@@ -391,6 +391,28 @@
     }
   },
   "definitions": {
+    "AttackTactic": {
+      "description": "The severity for alerts created by this alert rule.",
+      "enum": [
+        "InitialAccess",
+        "Execution",
+        "Persistence",
+        "PrivilegeEscalation",
+        "DefenseEvasion",
+        "CredentialAccess",
+        "Discovery",
+        "LateralMovement",
+        "Collection",
+        "Exfiltration",
+        "CommandAndControl",
+        "Impact"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AttackTactic"
+      }
+    },
     "ClientInfo": {
       "description": "Information on the client (user or application) that made some action",
       "properties": {
