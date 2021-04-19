@@ -43,13 +43,6 @@ directive:
     reason: This version doesn't support systemData.
   - no-inline:
     - Error
-  # Workaround for a corner case in autorest.powershell
-  - from: source-file-csharp
-    where: $
-    transform: $ = $.replace('public Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.IThirdPartyProviderAuthorization ProviderHubMetadataThirdPartyProviderAuthorization { get => ((Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.IProviderHubMetadataInternal)__providerHubMetadata).ThirdPartyProviderAuthorization; set => ((Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.IProviderHubMetadataInternal)__providerHubMetadata).ThirdPartyProviderAuthorization = value ?? null /* model class */; }', 'public Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.IThirdPartyProviderAuthorization ThirdPartyProviderAuthorization { get => ((Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.IProviderHubMetadataInternal)__providerHubMetadata).ThirdPartyProviderAuthorization; set => ((Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.IProviderHubMetadataInternal)__providerHubMetadata).ThirdPartyProviderAuthorization = value ?? null /* model class */; }');
-  - from: source-file-csharp
-    where: $
-    transform: $ = $.replace('public Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.ILightHouseAuthorization[] ThirdPartyProviderAuthorization { get => ((Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.IProviderHubMetadataInternal)__providerHubMetadata).ThirdPartyProviderAuthorizationAuthorizations; set => ((Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.IProviderHubMetadataInternal)__providerHubMetadata).ThirdPartyProviderAuthorizationAuthorizations = value ?? null /* arrayOf */; }', 'public Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.ILightHouseAuthorization[] ThirdPartyProviderAuthorizationAuthorizations { get => ((Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.IProviderHubMetadataInternal)__providerHubMetadata).ThirdPartyProviderAuthorizationAuthorizations; set => ((Microsoft.Azure.PowerShell.Cmdlets.ProviderHub.Models.Api20201120.IProviderHubMetadataInternal)__providerHubMetadata).ThirdPartyProviderAuthorizationAuthorizations = value ?? null /* arrayOf */; }');
 ```
 
 ---
