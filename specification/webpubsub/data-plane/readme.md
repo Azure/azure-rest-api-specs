@@ -102,8 +102,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: false
-  package-name: "@azure/webpubsub"
-  output-folder: "$(typescript-sdks-folder)/sdk/webpubsub/webpubsub"
+  package-name: "@azure/web-pubsub"
+  output-folder: "$(typescript-sdks-folder)/sdk/web-pubsub/web-pubsub"
   clear-output-folder: true
   generate-metadata: true
 ```
