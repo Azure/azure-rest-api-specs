@@ -50,7 +50,7 @@
           "200": {
             "description": "Success. The response describes the list of operations.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -2027,47 +2027,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
     "RedisCreateParameters": {
       "properties": {
         "properties": {
@@ -2150,7 +2109,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2221,7 +2180,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "A single Redis item in List or Get Operation."
@@ -2438,7 +2397,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Response to put/get patch schedules for Redis cache."
@@ -2491,7 +2450,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2598,23 +2557,6 @@
               "type": "string"
             }
           }
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of operations supported by the resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "URL to get the next set of operation list results if there are any."
         }
       }
     },
