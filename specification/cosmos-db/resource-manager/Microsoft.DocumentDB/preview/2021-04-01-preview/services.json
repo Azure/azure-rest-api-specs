@@ -215,7 +215,7 @@
         "instanceCount"
       ]
     },
-    "ServiceResource": {
+    "ServiceResourceGetProperties": {
       "description": "Services response resource.",
       "type": "object",
       "discriminator": "serviceType",
@@ -254,6 +254,16 @@
       ],
       "x-ms-azure-resource": true
     },
+    "ServiceResource": {
+      "description": "Properties for the database account.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceResourceGetProperties"
+        }
+      }
+    },
     "DataTransferServiceResource": {
       "description": "Describes the service response property.",
       "type": "object",
@@ -262,6 +272,14 @@
           "$ref": "#/definitions/ServiceResource"
         }
       ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataTransferServiceResourceGetProperties"
+        }
+      }
+    },
+    "DataTransferServiceResourceGetProperties": {
       "properties": {
         "locations": {
           "type": "array",
@@ -282,6 +300,17 @@
         }
       ],
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SqlDedicatedGatewayServiceResourceGetProperties"
+        }
+      },
+      "required": [
+        "sqlDedicatedGatewayEndpoint"
+      ]
+    },
+    "SqlDedicatedGatewayServiceResourceGetProperties": {
+      "properties": {
         "sqlDedicatedGatewayEndpoint": {
           "type": "string",
           "description": "SqlDedicatedGateway endpoint for the service."
@@ -294,10 +323,7 @@
             "$ref": "#/definitions/SqlDedicatedGatewayRegionalServiceResource"
           }
         }
-      },
-      "required": [
-        "sqlDedicatedGatewayEndpoint"
-      ]
+      }
     },
     "RegionalServiceResource": {
       "description": "Resource for a regional service location.",
