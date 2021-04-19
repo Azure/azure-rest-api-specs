@@ -85,52 +85,6 @@
     }
   },
   "parameters": {
-    "ClientId": {
-      "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
-      "type": "string",
-      "in": "header",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "SubscriptionKey": {
-      "name": "subscription-key",
-      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 1.0",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "default": "1.0",
-      "x-ms-parameter-location": "client"
-    },
-    "JsonFormat": {
-      "name": "format",
-      "description": "Desired format of the response. Only `json` format is supported.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "enum": [
-        "json"
-      ],
-      "x-ms-enum": {
-        "name": "JsonFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "json",
-            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
     "TimezoneAcceptLanguage": {
       "name": "Accept-Language",
       "in": "header",
@@ -215,13 +169,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TimezoneAcceptLanguage"
@@ -239,15 +193,14 @@
             "$ref": "#/parameters/TimezoneTransitionsYears"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "query",
             "in": "query",
             "description": "The IANA time zone ID.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -290,13 +243,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TimezoneAcceptLanguage"
@@ -314,7 +267,7 @@
             "$ref": "#/parameters/TimezoneTransitionsYears"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "query",
@@ -364,16 +317,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           }
         ],
         "responses": {
@@ -416,16 +369,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           }
         ],
         "responses": {
@@ -468,16 +421,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           }
         ],
         "responses": {
@@ -520,16 +473,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "query",

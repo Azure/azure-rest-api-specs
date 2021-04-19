@@ -103,52 +103,6 @@
     }
   },
   "parameters": {
-    "ClientId": {
-      "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
-      "type": "string",
-      "in": "header",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "SubscriptionKey": {
-      "name": "subscription-key",
-      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 1.0",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "default": "1.0",
-      "x-ms-parameter-location": "client"
-    },
-    "JsonFormat": {
-      "name": "format",
-      "description": "Desired format of the response. Only `json` format is supported.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "enum": [
-        "json"
-      ],
-      "x-ms-enum": {
-        "name": "JsonFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "json",
-            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
     "TextFormat": {
       "name": "format",
       "description": "Desired format of the response. Value can be either _json_ or _xml_.",
@@ -516,24 +470,23 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "geometries",
             "in": "query",
             "description": "Comma separated list of geometry UUIDs, previously retrieved from an Online Search request.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -576,13 +529,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TextFormat"
@@ -592,8 +545,7 @@
             "in": "query",
             "description": "The applicable query string (e.g., \"seattle\", \"pizza\"). Can _also_ be specified as a comma separated string composed by latitude followed by longitude (e.g., \"47.641268, -122.125679\"). Must be properly URL encoded.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Typeahead"
@@ -704,13 +656,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TextFormat"
@@ -720,8 +672,7 @@
             "in": "query",
             "description": "The POI name to search for (e.g., \"statue of liberty\", \"starbucks\"), must be properly URL encoded.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Typeahead"
@@ -809,13 +760,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TextFormat"
@@ -898,13 +849,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TextFormat"
@@ -914,8 +865,7 @@
             "in": "query",
             "description": "The POI category to search for (e.g., \"AIRPORT\", \"RESTAURANT\"), must be properly URL encoded. Supported main categories can be requested by calling [Get Search POI Category Tree API](https://aka.ms/AzureMapsPOICategoryTree). List of available categories can also be found [here](https://docs.microsoft.com/azure/azure-maps/supported-search-categories). We recommend to use POI Search Category Tree API to request the supported categories.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Typeahead"
@@ -1003,24 +953,23 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "language",
             "in": "query",
             "description": "Language in which search results should be returned. Should be one of supported IETF language tags, except NGT and NGT-Latn. Language tag is case insensitive. When data in specified language is not available for a specific field, default language is used (English).\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details.",
             "required": false,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1060,13 +1009,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TextFormat"
@@ -1076,8 +1025,7 @@
             "in": "query",
             "description": "The address to search for (e.g., \"1 Microsoft way, Redmond, WA\"), must be properly URL encoded.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Typeahead"
@@ -1153,13 +1101,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TextFormat"
@@ -1279,8 +1227,7 @@
                   "description": "Postal Code / Zip Code"
                 }
               ]
-            },
-            "x-ms-parameter-location": "method"
+            }
           },
           {
             "$ref": "#/parameters/View"
@@ -1323,13 +1270,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TextFormat"
@@ -1396,13 +1343,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/TextFormat"
@@ -1537,13 +1484,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/PoiQuery"
@@ -1619,13 +1566,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/CategorySet"
@@ -1716,16 +1663,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "searchFuzzyBatchRequestBody",
@@ -1784,16 +1731,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "searchAddressBatchRequestBody",
@@ -1852,16 +1799,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/JsonFormat"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/JsonFormat"
           },
           {
             "name": "searchAddressReverseBatchRequestBody",
