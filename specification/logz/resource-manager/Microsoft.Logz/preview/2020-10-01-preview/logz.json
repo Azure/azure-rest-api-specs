@@ -1430,8 +1430,16 @@
           "description": "Operation name, i.e., {provider}/{resource}/{operation}.",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
         }
       }
     },
@@ -1464,6 +1472,7 @@
         "Deleted",
         "NotSpecified"
       ],
+      "description": "Flag specifying if the resource provisioning state as tracked by ARM.",
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
@@ -1650,6 +1659,8 @@
           "readOnly": true
         },
         "systemData": {
+          "readOnly": true,
+          "description": "The system metadata relating to this resource",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "name": {
@@ -1779,6 +1790,9 @@
       "description": "Definition of the properties for a TagRules resource.",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
         "logRules": {
           "$ref": "#/definitions/LogRules"
         },
@@ -1806,6 +1820,11 @@
           "description": "The type of the rule set.",
           "type": "string",
           "readOnly": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "properties": {
           "$ref": "#/definitions/MonitoringTagRulesProperties"
