@@ -133,26 +133,6 @@
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
-    },
-    "xTileIndex": {
-      "name": "x",
-      "x-ms-client-name": "xTileIndex",
-      "in": "query",
-      "description": "X coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
-      "required": true,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "yTileIndex": {
-      "name": "y",
-      "x-ms-client-name": "yTileIndex",
-      "in": "query",
-      "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
-      "required": true,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -218,10 +198,10 @@
             "$ref": "#/parameters/RasterVectorZoom"
           },
           {
-            "$ref": "#/parameters/xTileIndex"
+            "$ref": "../../../Render/preview/1.0/render.json#/parameters/xTileIndex"
           },
           {
-            "$ref": "#/parameters/yTileIndex"
+            "$ref": "../../../Render/preview/1.0/render.json#/parameters/yTileIndex"
           },
           {
             "name": "thickness",
@@ -445,10 +425,10 @@
             "$ref": "#/parameters/RasterVectorZoom"
           },
           {
-            "$ref": "#/parameters/xTileIndex"
+            "$ref": "../../../Render/preview/1.0/render.json#/parameters/xTileIndex"
           },
           {
-            "$ref": "#/parameters/yTileIndex"
+            "$ref": "../../../Render/preview/1.0/render.json#/parameters/yTileIndex"
           },
           {
             "name": "t",
