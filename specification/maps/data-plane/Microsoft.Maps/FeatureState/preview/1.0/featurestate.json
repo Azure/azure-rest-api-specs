@@ -675,8 +675,8 @@
     },
     "StyleRuleBase": {
       "description": "contains common properties for numeric, string and boolean style rules.",
-      "type": "object",
       "discriminator": "type",
+      "type": "object",
       "required": [
         "keyName",
         "type"
@@ -696,7 +696,21 @@
           ],
           "x-ms-enum": {
             "name": "StyleRuleBaseType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "number",
+                "description": "Number type of stateset style."
+              },
+              {
+                "value": "boolean",
+                "description": "Boolean type of stateset style."
+              },
+              {
+                "value": "string",
+                "description": "String type of stateset style."
+              }
+            ]
           }
         }
       }
