@@ -2791,10 +2791,6 @@
             "type": "string"
           }
         },
-        "ssoContext": {
-          "type": "string",
-          "description": "Path to keyvault containing ssoContext secret."
-        },
         "ssoadfsAuthority": {
           "type": "string",
           "description": "URL to customer ADFS server for signing WVD SSO certificates."
@@ -2925,10 +2921,6 @@
         "vmTemplate": {
           "type": "string",
           "description": "VM template for sessionhosts configuration within hostpool."
-        },
-        "ssoContext": {
-          "type": "string",
-          "description": "Path to keyvault containing ssoContext secret."
         },
         "ssoadfsAuthority": {
           "type": "string",
@@ -3586,10 +3578,6 @@
           "type": "string",
           "description": "Alias of StartMenuItem."
         },
-        "friendlyName": {
-          "type": "string",
-          "description": "Friendly name of StartMenuItem."
-        },
         "filePath": {
           "type": "string",
           "description": "Path to the file of StartMenuItem."
@@ -4099,7 +4087,7 @@
           "type": "string",
           "description": "Starting time for ramp up period."
         },
-        "rampUpAlgorithm": {
+        "rampUpLoadBalancingAlgorithm": {
           "enum": [
             "BreadthFirst",
             "DepthFirst"
@@ -4111,7 +4099,7 @@
           "type": "string",
           "description": "Load balancing algorithm for ramp up period."
         },
-        "rampUpMinimumHostPct": {
+        "rampUpMinimumHostsPct": {
           "type": "integer",
           "format": "int32",
           "minimum": 0,
@@ -4189,7 +4177,7 @@
           "type": "string",
           "description": "Specifies when to stop hosts during ramp down period."
         },
-        "rampDownNotificationMinutes": {
+        "rampDownWaitTimeMinutes": {
           "type": "integer",
           "format": "int32",
           "description": "Number of minutes to wait to stop hosts during ramp down period."

@@ -150,13 +150,29 @@
       "required": true,
       "type": "string",
       "enum": [
-        "access"
+        "access",
+        "getAccess"
       ],
       "x-ms-enum": {
         "modelAsString": true,
         "name": "AccessIdName"
       },
       "description": "The identifier of the Access configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "SettingsParameter": {
+      "name": "settingsType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "public"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "settingsTypeName"
+      },
+      "description": "The identifier of the settings.",
       "x-ms-parameter-location": "method"
     },
     "ApiIdParameter": {
@@ -545,6 +561,16 @@
         "modelAsString": true,
         "name": "PolicyIdName"
       },
+      "x-ms-parameter-location": "method"
+    },
+    "PortalRevisionIdParameter": {
+      "name": "portalRevisionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Portal revision identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
       "x-ms-parameter-location": "method"
     },
     "ProductIdParameter": {

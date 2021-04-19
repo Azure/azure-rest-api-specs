@@ -431,6 +431,7 @@
         "version": {
           "readOnly": true,
           "type": "integer",
+          "format": "int32",
           "description": "Data Model Version"
         },
         "tenantId": {
@@ -504,6 +505,11 @@
           "$ref": "#/definitions/NotificationSettings",
           "description": "Notification Settings"
         },
+        "migrationProperties": {
+          "readOnly": true,
+          "$ref": "#/definitions/MigrationProperties",
+          "description": "Migration Properties"
+        },
         "filteredSync": {
           "type": "string",
           "enum": [
@@ -546,6 +552,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "description": "A flag to determine whether or not Secure LDAP is enabled or disabled.",
           "x-ms-enum": {
             "name": "Ldaps",
@@ -582,6 +589,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "description": "A flag to determine whether or not Secure LDAP access over the internet is enabled or disabled.",
           "x-ms-enum": {
             "name": "ExternalAccess",
@@ -736,6 +744,40 @@
         }
       }
     },
+    "MigrationProperties": {
+      "description": "Migration Properties",
+      "properties": {
+        "oldSubnetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Old Subnet Id"
+        },
+        "oldVnetSiteId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Old Vnet Site Id"
+        },
+        "migrationProgress": {
+          "readOnly": true,
+          "$ref": "#/definitions/MigrationProgress",
+          "description": "Migration Progress"
+        }
+      }
+    },
+    "MigrationProgress": {
+      "description": "Migration Progress",
+      "properties": {
+        "completionPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Completion Percentage"
+        },
+        "progressMessage": {
+          "type": "string",
+          "description": "Progress Message"
+        }
+      }
+    },
     "DomainSecuritySettings": {
       "description": "Domain Security Settings",
       "properties": {
@@ -745,6 +787,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not NtlmV1 is enabled or disabled.",
           "x-ms-enum": {
             "name": "NtlmV1",
@@ -757,6 +800,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not TlsV1 is enabled or disabled.",
           "x-ms-enum": {
             "name": "TlsV1",
@@ -769,6 +813,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not SyncNtlmPasswords is enabled or disabled.",
           "x-ms-enum": {
             "name": "SyncNtlmPasswords",
@@ -781,6 +826,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not SyncKerberosPasswords is enabled or disabled.",
           "x-ms-enum": {
             "name": "SyncKerberosPasswords",
@@ -793,6 +839,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not SyncOnPremPasswords is enabled or disabled.",
           "x-ms-enum": {
             "name": "SyncOnPremPasswords",

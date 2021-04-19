@@ -330,7 +330,7 @@
           "Actions"
         ],
         "description": "Gets the action of alert rule.",
-        "operationId": "AlertRules_GetAction",
+        "operationId": "Actions_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -379,7 +379,7 @@
           "Actions"
         ],
         "description": "Creates or updates the action of alert rule.",
-        "operationId": "AlertRules_CreateOrUpdateAction",
+        "operationId": "Actions_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -437,7 +437,7 @@
           "Actions"
         ],
         "description": "Delete the action of alert rule.",
-        "operationId": "AlertRules_DeleteAction",
+        "operationId": "Actions_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -563,6 +563,203 @@
             "schema": {
               "$ref": "#/definitions/AlertRuleTemplate"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/automationRules": {
+      "get": {
+        "x-ms-examples": {
+          "Get all automation rules.": {
+            "$ref": "./examples/automationRules/GetAllAutomationRules.json"
+          }
+        },
+        "tags": [
+          "Automation Rules"
+        ],
+        "description": "Gets all automation rules.",
+        "operationId": "AutomationRules_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutomationRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/automationRules/{automationRuleId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an automation rule.": {
+            "$ref": "./examples/automationRules/GetAutomationRule.json"
+          }
+        },
+        "tags": [
+          "Automation Rules"
+        ],
+        "description": "Gets the automation rule.",
+        "operationId": "AutomationRules_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AutomationRuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutomationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates an automation rule.": {
+            "$ref": "./examples/automationRules/CreateAutomationRule.json"
+          }
+        },
+        "tags": [
+          "Automation Rules"
+        ],
+        "description": "Creates or updates the automation rule.",
+        "operationId": "AutomationRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AutomationRuleId"
+          },
+          {
+            "$ref": "#/parameters/AutomationRule"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutomationRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AutomationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an automation rule.": {
+            "$ref": "./examples/automationRules/DeleteAutomationRule.json"
+          }
+        },
+        "tags": [
+          "Automation Rule"
+        ],
+        "description": "Delete the automation rule.",
+        "operationId": "AutomationRules_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AutomationRuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1732,6 +1929,15 @@
           },
           "Get a Office ATP data connector": {
             "$ref": "./examples/dataConnectors/GetOffice365AdvancedThreatProtectionById.json"
+          },
+          "Get a Dynamics365 data connector": {
+            "$ref": "./examples/dataConnectors/GetDynamics365DataConnectorById.json"
+          },
+          "Get a MicrosoftThreatProtection data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftThreatProtectionById.json"
+          },
+          "Get a MicrosoftThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftThreatIntelligenceById.json"
           }
         },
         "tags": [
@@ -1778,6 +1984,15 @@
         "x-ms-examples": {
           "Creates or updates an Office365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
+          },
+          "Creates or updates a Threat Intelligence Taxii data connector.": {
+            "$ref": "./examples/dataConnectors/CreateThreatIntelligenceTaxiiDataConnector.json"
+          },
+          "Creates or updates an Threat Intelligence Platform data connector.": {
+            "$ref": "./examples/dataConnectors/CreateThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a Dynamics365 data connector.": {
+            "$ref": "./examples/dataConnectors/CreateDynamics365DataConnetor.json"
           }
         },
         "tags": [
@@ -1905,6 +2120,15 @@
           },
           "Check requirements for OfficeATP.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsOfficeATP.json"
+          },
+          "Check requirements for Dynamics365.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsDynamics365.json"
+          },
+          "Check requirements for MicrosoftThreatProtection.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftThreatProtection.json"
+          },
+          "Check requirements for MicrosoftThreatIntelligence.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftThreatIntelligence.json"
           }
         },
         "tags": [
@@ -2046,6 +2270,18 @@
           },
           "Get an IoT device entity.": {
             "$ref": "./examples/entities/GetIoTDeviceEntityById.json"
+          },
+          "Get a mailCluster entity.": {
+            "$ref": "./examples/entities/GetMailClusterEntityById.json"
+          },
+          "Get a mailbox entity.": {
+            "$ref": "./examples/entities/GetMailboxEntityById.json"
+          },
+          "Get a mailMessage entity.": {
+            "$ref": "./examples/entities/GetMailMessageEntityById.json"
+          },
+          "Get a submissionMail entity.": {
+            "$ref": "./examples/entities/GetSubmissionMailEntityById.json"
           }
         },
         "tags": [
@@ -2180,6 +2416,108 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/EntityTimelineResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/queries": {
+      "get": {
+        "x-ms-examples": {
+          "Get Entity Query": {
+            "$ref": "./examples/entities/GetQueries.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Get Insights and Activities for an entity.",
+        "operationId": "Entities_Queries",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/EntityQueryKindParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetQueriesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/getInsights": {
+      "post": {
+        "x-ms-examples": {
+          "Entity Insight": {
+            "$ref": "./examples/entities/insights/PostGetInsights.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Execute Insights for an entity.",
+        "operationId": "Entities_GetInsights",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/GetInsightsEntityQueriesRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityGetInsightsResponse"
             }
           },
           "default": {
@@ -3727,7 +4065,7 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Creates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint twice : the first call will create am empty Watchlist, and the second one will create its Items.",
+        "description": "Creates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint twice : the first call will create an empty Watchlist, and the second one will create its Items.",
         "operationId": "Watchlists_Create",
         "parameters": [
           {
@@ -3763,6 +4101,215 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
+      "get": {
+        "x-ms-examples": {
+          "Get all watchlist Items.": {
+            "$ref": "./examples/watchlists/GetWatchlistItems.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Gets all watchlist Items.",
+        "operationId": "WatchlistItems_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItemList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a watchlist item.": {
+            "$ref": "./examples/watchlists/GetWatchlistItemById.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Gets a watchlist, without its watchlist items.",
+        "operationId": "WatchlistItems_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItemId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a watchlist Item.": {
+            "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Delete a watchlist item.",
+        "operationId": "WatchlistItems_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItemId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a watchlist item.": {
+            "$ref": "./examples/watchlists/CreateWatchlistItem.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Creates or updates a watchlist item.",
+        "operationId": "WatchlistItems_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItemId"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItem"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
             }
           },
           "default": {
@@ -4234,6 +4781,111 @@
     }
   },
   "definitions": {
+    "MLBehaviorAnalyticsAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents MLBehaviorAnalytics alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MLBehaviorAnalyticsAlertRuleProperties",
+          "description": "MLBehaviorAnalytics alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MLBehaviorAnalytics"
+    },
+    "MLBehaviorAnalyticsAlertRuleProperties": {
+      "description": "MLBehaviorAnalytics alert rule base property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert rule has been modified.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule.",
+          "readOnly": true
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "required": [
+        "alertRuleTemplateName",
+        "enabled"
+      ],
+      "type": "object"
+    },
+    "MLBehaviorAnalyticsAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents MLBehaviorAnalytics alert rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            }
+          ],
+          "description": "MLBehaviorAnalytics alert rule template properties.",
+          "properties": {
+            "severity": {
+              "$ref": "#/definitions/AlertSeverity",
+              "description": "The severity for alerts created by this alert rule."
+            },
+            "tactics": {
+              "description": "The tactics of the alert rule template.",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "severity",
+            "alertRulesCreatedByTemplateCount"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MLBehaviorAnalytics"
+    },
     "AADDataConnector": {
       "allOf": [
         {
@@ -4342,6 +4994,192 @@
         }
       ],
       "description": "AATP (Azure Advanced Threat Protection) requirements check properties.",
+      "type": "object"
+    },
+    "MSTIDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSTIDataConnectorProperties",
+          "description": "Microsoft Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MSTIDataConnectorDataTypes": {
+      "description": "The available data types for Microsoft Threat Intelligence Platforms data connector.",
+      "properties": {
+        "bingSafetyPhishingURL": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "properties": {
+            "lookbackPeriod": {
+              "description": "lookback period",
+              "type": "string"
+            }
+          },
+          "description": "Data type for Microsoft Threat Intelligence Platforms data connector.",
+          "type": "object",
+          "required": [
+            "lookbackPeriod"
+          ]
+        },
+        "microsoftEmergingThreatFeed": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "properties": {
+            "lookbackPeriod": {
+              "description": "lookback period",
+              "type": "string"
+            }
+          },
+          "description": "Data type for Microsoft Threat Intelligence Platforms data connector.",
+          "type": "object",
+          "required": [
+            "lookbackPeriod"
+          ]
+        }
+      },
+      "type": "object",
+      "required": [
+        "bingSafetyPhishingURL",
+        "microsoftEmergingThreatFeed"
+      ]
+    },
+    "MSTIDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MSTIDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "required": [
+        "dataTypes"
+      ],
+      "type": "object"
+    },
+    "MSTICheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents Microsoft Threat Intelligence requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSTICheckRequirementsProperties",
+          "description": "Microsoft Threat Intelligence requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MSTICheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence requirements check properties.",
+      "type": "object"
+    },
+    "MTPDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents MTP (Microsoft Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MTPDataConnectorProperties",
+          "description": "MTP (Microsoft Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatProtection"
+    },
+    "MTPDataConnectorDataTypes": {
+      "description": "The available data types for Microsoft Threat Protection Platforms data connector.",
+      "properties": {
+        "incidents": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for Microsoft Threat Protection Platforms data connector.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "incidents"
+      ]
+    },
+    "MTPDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MTP (Microsoft Threat Protection) data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MTPDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "required": [
+        "dataTypes"
+      ],
+      "type": "object"
+    },
+    "MtpCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents MTP (Microsoft Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MTPCheckRequirementsProperties",
+          "description": "MTP (Microsoft Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatProtection"
+    },
+    "MTPCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MTP (Microsoft Threat Protection) requirements check properties.",
       "type": "object"
     },
     "ASCDataConnector": {
@@ -4516,6 +5354,9 @@
           "type": "string"
         }
       },
+      "required": [
+        "logicAppResourceId"
+      ],
       "type": "object"
     },
     "ActionRequestProperties": {
@@ -4531,6 +5372,9 @@
           "type": "string"
         }
       },
+      "required": [
+        "triggerUri"
+      ],
       "type": "object"
     },
     "ActionResponse": {
@@ -4648,7 +5492,9 @@
           "enum": [
             "Scheduled",
             "MicrosoftSecurityIncidentCreation",
-            "Fusion"
+            "Fusion",
+            "MLBehaviorAnalytics",
+            "ThreatIntelligence"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4663,6 +5509,12 @@
               },
               {
                 "value": "Fusion"
+              },
+              {
+                "value": "MLBehaviorAnalytics"
+              },
+              {
+                "value": "ThreatIntelligence"
               }
             ]
           }
@@ -4712,6 +5564,12 @@
         "alertRulesCreatedByTemplateCount": {
           "description": "the number of alert rules that were created by this template",
           "type": "integer"
+        },
+        "lastUpdatedDateUTC": {
+          "description": "The last time that this alert rule template has been updated.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
         },
         "createdDateUTC": {
           "description": "The time that this alert rule template has been added.",
@@ -4863,7 +5721,10 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "alerts"
+      ]
     },
     "AttackTactic": {
       "description": "The severity for alerts created by this alert rule.",
@@ -4887,6 +5748,667 @@
         "modelAsString": true,
         "name": "AttackTactic"
       }
+    },
+    "AutomationRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents an automation rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationRuleProperties",
+          "description": "Automation rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "AutomationRuleAction": {
+      "description": "Describes an automation rule action",
+      "discriminator": "actionType",
+      "properties": {
+        "order": {
+          "description": "The order of execution of the automation rule action",
+          "type": "integer",
+          "format": "int32"
+        },
+        "actionType": {
+          "description": "The type of the automation rule action",
+          "enum": [
+            "ModifyProperties",
+            "RunPlaybook"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AutomationRuleActionType",
+            "values": [
+              {
+                "description": "Modify an object's properties",
+                "value": "ModifyProperties"
+              },
+              {
+                "description": "Run a playbook on an object",
+                "value": "RunPlaybook"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "order",
+        "actionType"
+      ],
+      "type": "object"
+    },
+    "AutomationRuleCondition": {
+      "description": "Describes an automation rule condition",
+      "discriminator": "conditionType",
+      "properties": {
+        "conditionType": {
+          "description": "The type of the automation rule condition",
+          "enum": [
+            "Property"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AutomationRuleConditionType",
+            "values": [
+              {
+                "description": "Evaluate an object property value",
+                "value": "Property"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "conditionType"
+      ],
+      "type": "object"
+    },
+    "AutomationRuleRunPlaybookAction": {
+      "description": "Describes an automation rule action to run a playbook",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleAction"
+        }
+      ],
+      "properties": {
+        "actionConfiguration": {
+          "description": "The configuration of the run playbook automation rule action",
+          "properties": {
+            "logicAppResourceId": {
+              "description": "The resource id of the playbook resource",
+              "type": "string"
+            },
+            "tenantId": {
+              "description": "The tenant id of the playbook resource",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "actionConfiguration"
+      ],
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "x-ms-discriminator-value": "RunPlaybook"
+    },
+    "AutomationRuleModifyPropertiesAction": {
+      "description": "Describes an automation rule action to modify an object's properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleAction"
+        }
+      ],
+      "properties": {
+        "actionConfiguration": {
+          "description": "The configuration of the modify properties automation rule action",
+          "properties": {
+            "classification": {
+              "$ref": "#/definitions/IncidentClassification",
+              "description": "The reason the incident was closed"
+            },
+            "classificationComment": {
+              "description": "Describes the reason the incident was closed",
+              "type": "string"
+            },
+            "classificationReason": {
+              "$ref": "#/definitions/IncidentClassificationReason",
+              "description": "The classification reason to close the incident with"
+            },
+            "labels": {
+              "description": "List of labels to add to the incident",
+              "items": {
+                "$ref": "#/definitions/IncidentLabel"
+              },
+              "type": "array"
+            },
+            "owner": {
+              "$ref": "#/definitions/IncidentOwnerInfo",
+              "description": "Describes a user that the incident is assigned to",
+              "type": "object"
+            },
+            "severity": {
+              "$ref": "#/definitions/IncidentSeverity",
+              "description": "The severity of the incident"
+            },
+            "status": {
+              "$ref": "#/definitions/IncidentStatus",
+              "description": "The status of the incident"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "actionConfiguration"
+      ],
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "x-ms-discriminator-value": "ModifyProperties"
+    },
+    "AutomationRulePropertyConditionSupportedProperty": {
+      "description": "The property to evaluate in an automation rule property condition",
+      "enum": [
+        "IncidentTitle",
+        "IncidentDescription",
+        "IncidentSeverity",
+        "IncidentStatus",
+        "IncidentTactics",
+        "IncidentRelatedAnalyticRuleIds",
+        "IncidentProviderName",
+        "AccountAadTenantId",
+        "AccountAadUserId",
+        "AccountName",
+        "AccountNTDomain",
+        "AccountPUID",
+        "AccountSid",
+        "AccountObjectGuid",
+        "AccountUPNSuffix",
+        "AzureResourceResourceId",
+        "AzureResourceSubscriptionId",
+        "CloudApplicationAppId",
+        "CloudApplicationAppName",
+        "DNSDomainName",
+        "FileDirectory",
+        "FileName",
+        "FileHashValue",
+        "HostAzureID",
+        "HostName",
+        "HostNetBiosName",
+        "HostNTDomain",
+        "HostOSVersion",
+        "IoTDeviceId",
+        "IoTDeviceName",
+        "IoTDeviceType",
+        "IoTDeviceVendor",
+        "IoTDeviceModel",
+        "IoTDeviceOperatingSystem",
+        "IPAddress",
+        "MailboxDisplayName",
+        "MailboxPrimaryAddress",
+        "MailboxUPN",
+        "MailMessageDeliveryAction",
+        "MailMessageDeliveryLocation",
+        "MailMessageRecipient",
+        "MailMessageSenderIP",
+        "MailMessageSubject",
+        "MailMessageP1Sender",
+        "MailMessageP2Sender",
+        "MalwareCategory",
+        "MalwareName",
+        "ProcessCommandLine",
+        "ProcessId",
+        "RegistryKey",
+        "RegistryValueData",
+        "Url"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AutomationRulePropertyConditionSupportedProperty",
+        "values": [
+          {
+            "description": "The title of the incident",
+            "value": "IncidentTitle"
+          },
+          {
+            "description": "The description of the incident",
+            "value": "IncidentDescription"
+          },
+          {
+            "description": "The severity of the incident",
+            "value": "IncidentSeverity"
+          },
+          {
+            "description": "The status of the incident",
+            "value": "IncidentStatus"
+          },
+          {
+            "description": "The tactics of the incident",
+            "value": "IncidentTactics"
+          },
+          {
+            "description": "The related Analytic rule ids of the incident",
+            "value": "IncidentRelatedAnalyticRuleIds"
+          },
+          {
+            "description": "The provider name of the incident",
+            "value": "IncidentProviderName"
+          },
+          {
+            "description": "The account Azure Active Directory tenant id",
+            "value": "AccountAadTenantId"
+          },
+          {
+            "description": "The account Azure Active Directory user id.",
+            "value": "AccountAadUserId"
+          },
+          {
+            "description": "The account name",
+            "value": "AccountName"
+          },
+          {
+            "description": "The account NetBIOS domain name",
+            "value": "AccountNTDomain"
+          },
+          {
+            "description": "The account Azure Active Directory Passport User ID",
+            "value": "AccountPUID"
+          },
+          {
+            "description": "The account security identifier",
+            "value": "AccountSid"
+          },
+          {
+            "description": "The account unique identifier",
+            "value": "AccountObjectGuid"
+          },
+          {
+            "description": "The account user principal name suffix",
+            "value": "AccountUPNSuffix"
+          },
+          {
+            "description": "The Azure resource id",
+            "value": "AzureResourceResourceId"
+          },
+          {
+            "description": "The Azure resource subscription id",
+            "value": "AzureResourceSubscriptionId"
+          },
+          {
+            "description": "The cloud application identifier",
+            "value": "CloudApplicationAppId"
+          },
+          {
+            "description": "The cloud application name",
+            "value": "CloudApplicationAppName"
+          },
+          {
+            "description": "The dns record domain name",
+            "value": "DNSDomainName"
+          },
+          {
+            "description": "The file directory full path",
+            "value": "FileDirectory"
+          },
+          {
+            "description": "The file name without path",
+            "value": "FileName"
+          },
+          {
+            "description": "The file hash value",
+            "value": "FileHashValue"
+          },
+          {
+            "description": "The host Azure resource id",
+            "value": "HostAzureID"
+          },
+          {
+            "description": "The host name without domain",
+            "value": "HostName"
+          },
+          {
+            "description": "The host NetBIOS name",
+            "value": "HostNetBiosName"
+          },
+          {
+            "description": "The host NT domain",
+            "value": "HostNTDomain"
+          },
+          {
+            "description": "The host operating system",
+            "value": "HostOSVersion"
+          },
+          {
+            "description": "The IoT device id",
+            "value": "IoTDeviceId"
+          },
+          {
+            "description": "The IoT device name",
+            "value": "IoTDeviceName"
+          },
+          {
+            "description": "The IoT device type",
+            "value": "IoTDeviceType"
+          },
+          {
+            "description": "The IoT device vendor",
+            "value": "IoTDeviceVendor"
+          },
+          {
+            "description": "The IoT device model",
+            "value": "IoTDeviceModel"
+          },
+          {
+            "description": "The IoT device operating system",
+            "value": "IoTDeviceOperatingSystem"
+          },
+          {
+            "description": "The IP address",
+            "value": "IPAddress"
+          },
+          {
+            "description": "The mailbox display name",
+            "value": "MailboxDisplayName"
+          },
+          {
+            "description": "The mailbox primary address",
+            "value": "MailboxPrimaryAddress"
+          },
+          {
+            "description": "The mailbox user principal name",
+            "value": "MailboxUPN"
+          },
+          {
+            "description": "The mail message delivery action",
+            "value": "MailMessageDeliveryAction"
+          },
+          {
+            "description": "The mail message delivery location",
+            "value": "MailMessageDeliveryLocation"
+          },
+          {
+            "description": "The mail message recipient",
+            "value": "MailMessageRecipient"
+          },
+          {
+            "description": "The mail message sender IP address",
+            "value": "MailMessageSenderIP"
+          },
+          {
+            "description": "The mail message subject",
+            "value": "MailMessageSubject"
+          },
+          {
+            "description": "The mail message P1 sender",
+            "value": "MailMessageP1Sender"
+          },
+          {
+            "description": "The mail message P2 sender",
+            "value": "MailMessageP2Sender"
+          },
+          {
+            "description": "The malware category",
+            "value": "MalwareCategory"
+          },
+          {
+            "description": "The malware name",
+            "value": "MalwareName"
+          },
+          {
+            "description": "The process execution command line",
+            "value": "ProcessCommandLine"
+          },
+          {
+            "description": "The process id",
+            "value": "ProcessId"
+          },
+          {
+            "description": "The registry key path",
+            "value": "RegistryKey"
+          },
+          {
+            "description": "The registry key value in string formatted representation",
+            "value": "RegistryValueData"
+          },
+          {
+            "description": "The url",
+            "value": "Url"
+          }
+        ]
+      }
+    },
+    "AutomationRulePropertyValuesCondition": {
+      "description": "Describes an automation rule condition that evaluates a property's value",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "description": "The configuration of the automation rule condition",
+          "properties": {
+            "propertyName": {
+              "$ref": "#/definitions/AutomationRulePropertyConditionSupportedProperty",
+              "description": "The property to evaluate"
+            },
+            "operator": {
+              "description": "The operator to use for evaluation the condition",
+              "enum": [
+                "Equals",
+                "NotEquals",
+                "Contains",
+                "NotContains",
+                "StartsWith",
+                "NotStartsWith",
+                "EndsWith",
+                "NotEndsWith"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "AutomationRulePropertyConditionSupportedOperator",
+                "values": [
+                  {
+                    "description": "Evaluates if the property equals at least one of the condition values",
+                    "value": "Equals"
+                  },
+                  {
+                    "description": "Evaluates if the property does not equal any of the condition values",
+                    "value": "NotEquals"
+                  },
+                  {
+                    "description": "Evaluates if the property contains at least one of the condition values",
+                    "value": "Contains"
+                  },
+                  {
+                    "description": "Evaluates if the property does not contain any of the condition values",
+                    "value": "NotContains"
+                  },
+                  {
+                    "description": "Evaluates if the property starts with any of the condition values",
+                    "value": "StartsWith"
+                  },
+                  {
+                    "description": "Evaluates if the property does not start with any of the condition values",
+                    "value": "NotStartsWith"
+                  },
+                  {
+                    "description": "Evaluates if the property ends with any of the condition values",
+                    "value": "EndsWith"
+                  },
+                  {
+                    "description": "Evaluates if the property does not end with any of the condition values",
+                    "value": "NotEndsWith"
+                  }
+                ]
+              }
+            },
+            "propertyValues": {
+              "description": "The values to use for evaluating the condition",
+              "items": {
+                "description": "A value to use for evaluating the condition",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "conditionProperties"
+      ],
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "x-ms-discriminator-value": "Property"
+    },
+    "AutomationRulesList": {
+      "description": "List all the automation rules.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of automation rules.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of automation rules.",
+          "items": {
+            "$ref": "#/definitions/AutomationRule"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AutomationRuleProperties": {
+      "description": "Describes automation rule properties",
+      "properties": {
+        "displayName": {
+          "description": "The display name of the automation  rule",
+          "type": "string"
+        },
+        "order": {
+          "description": "The order of execution of the automation rule",
+          "type": "integer",
+          "format": "int32"
+        },
+        "triggeringLogic": {
+          "$ref": "#/definitions/AutomationRuleTriggeringLogic",
+          "description": "The triggering logic of the automation rule",
+          "type": "object"
+        },
+        "actions": {
+          "description": "The actions to execute when the automation rule is triggered",
+          "items": {
+            "$ref": "#/definitions/AutomationRuleAction"
+          },
+          "type": "array"
+        },
+        "createdTimeUtc": {
+          "description": "The time the automation rule was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "description": "The last time the automation rule was updated",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/ClientInfo",
+          "description": "Describes the client that created the automation rule",
+          "readOnly": true,
+          "type": "object"
+        },
+        "lastModifiedBy": {
+          "$ref": "#/definitions/ClientInfo",
+          "description": "Describes the client that last updated the automation rule",
+          "readOnly": true,
+          "type": "object"
+        }
+      },
+      "required": [
+        "displayName",
+        "order",
+        "triggeringLogic",
+        "actions"
+      ],
+      "type": "object"
+    },
+    "AutomationRuleTriggeringLogic": {
+      "description": "Describes automation rule triggering logic",
+      "properties": {
+        "isEnabled": {
+          "description": "Determines whether the automation rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "expirationTimeUtc": {
+          "description": "Determines when the automation rule should automatically expire and be disabled.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "triggersOn": {
+          "description": "The type of object the automation rule triggers on",
+          "enum": [
+            "Incidents"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "TriggersOn",
+            "values": [
+              {
+                "description": "Trigger on Incidents",
+                "value": "Incidents"
+              }
+            ]
+          }
+        },
+        "triggersWhen": {
+          "description": "The type of event the automation rule triggers on",
+          "enum": [
+            "Created"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "TriggersWhen",
+            "values": [
+              {
+                "description": "Trigger on created objects",
+                "value": "Created"
+              }
+            ]
+          }
+        },
+        "conditions": {
+          "description": "The conditions to evaluate to determine if the automation rule should be triggered on a given object",
+          "items": {
+            "$ref": "#/definitions/AutomationRuleCondition"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "isEnabled",
+        "triggersOn",
+        "triggersWhen"
+      ],
+      "type": "object"
     },
     "AwsCloudTrailDataConnector": {
       "allOf": [
@@ -4918,7 +6440,10 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "logs"
+      ]
     },
     "AwsCloudTrailDataConnectorProperties": {
       "description": "Amazon Web Services CloudTrail data connector properties.",
@@ -4932,6 +6457,9 @@
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "AwsCloudTrailCheckRequirements": {
@@ -5243,6 +6771,21 @@
           "description": "Describes a user that updated the bookmark",
           "type": "object"
         },
+        "eventTime": {
+          "description": "The bookmark event time",
+          "format": "date-time",
+          "type": "string"
+        },
+        "queryStartTime": {
+          "description": "The start time for the query",
+          "format": "date-time",
+          "type": "string"
+        },
+        "queryEndTime": {
+          "description": "The end time for the query",
+          "format": "date-time",
+          "type": "string"
+        },
         "incidentInfo": {
           "$ref": "#/definitions/IncidentInfo",
           "description": "Describes an incident that relates to bookmark",
@@ -5289,6 +6832,13 @@
               "description": "Array of the expansion result entities.",
               "items": {
                 "$ref": "#/definitions/Entity"
+              },
+              "type": "array"
+            },
+            "edges": {
+              "description": "Array of expansion result connected entities",
+              "items": {
+                "$ref": "#/definitions/ConnectedEntity"
               },
               "type": "array"
             }
@@ -5476,6 +7026,15 @@
           "readOnly": true,
           "type": "string"
         },
+        "metrics": {
+          "description": "Dictionary of metrics, for example the number of alerts in the case",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "readOnly": true
+        },
         "owner": {
           "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that the case is assigned to",
@@ -5485,6 +7044,15 @@
           "description": "List of related alert identifiers",
           "items": {
             "description": "related alert id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "relatedAlertProductNames": {
+          "description": "List of related alert product names",
+          "items": {
+            "description": "related alert product name",
             "type": "string"
           },
           "readOnly": true,
@@ -5585,8 +7153,7 @@
       "required": [
         "title",
         "severity",
-        "status",
-        "startTimeUtc"
+        "status"
       ],
       "type": "object"
     },
@@ -5642,7 +7209,7 @@
       "description": "Aggregative results of cases by status property bag.",
       "properties": {
         "totalDismissedStatus": {
-          "description": "Total amount of open cases with status Dismissed",
+          "description": "Total amount of closed cases with status Dismissed",
           "readOnly": true,
           "type": "integer"
         },
@@ -5657,9 +7224,21 @@
           "type": "integer"
         },
         "totalResolvedStatus": {
-          "description": "Total amount of open cases with status Resolved",
+          "description": "Total amount of closed cases with status Resolved",
           "readOnly": true,
           "type": "integer"
+        },
+        "totalFalsePositiveStatus": {
+          "description": "Total amount of closed cases with status Closed and Close reason of False positive",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalTruePositiveStatus": {
+          "description": "Total amount of closed cases with status Closed and Close reason of True positive",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
         }
       },
       "type": "object"
@@ -5863,7 +7442,10 @@
           }
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "state"
+      ]
     },
     "DataConnectorKind": {
       "description": "Describes an Azure resource with kind.",
@@ -5880,7 +7462,10 @@
             "OfficeATP",
             "AmazonWebServicesCloudTrail",
             "AzureAdvancedThreatProtection",
-            "MicrosoftDefenderAdvancedThreatProtection"
+            "MicrosoftDefenderAdvancedThreatProtection",
+            "Dynamics365",
+            "MicrosoftThreatProtection",
+            "MicrosoftThreatIntelligence"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5916,6 +7501,15 @@
               },
               {
                 "value": "MicrosoftDefenderAdvancedThreatProtection"
+              },
+              {
+                "value": "Dynamics365"
+              },
+              {
+                "value": "MicrosoftThreatProtection"
+              },
+              {
+                "value": "MicrosoftThreatIntelligence"
               }
             ]
           }
@@ -5968,6 +7562,9 @@
           "type": "string"
         }
       },
+      "required": [
+        "tenantId"
+      ],
       "type": "object"
     },
     "DataConnectorWithAlertsProperties": {
@@ -6032,6 +7629,85 @@
       },
       "type": "object"
     },
+    "Dynamics365DataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Dynamics365 data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Dynamics365DataConnectorProperties",
+          "description": "Dynamics365 data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Dynamics365"
+    },
+    "Dynamics365DataConnectorDataTypes": {
+      "description": "The available data types for Dynamics365 data connector.",
+      "properties": {
+        "dynamics365CdsActivities": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Common Data Service data type connection.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "dynamics365CdsActivities"
+      ]
+    },
+    "Dynamics365DataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Dynamics365 data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/Dynamics365DataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "required": [
+        "dataTypes"
+      ],
+      "type": "object"
+    },
+    "Dynamics365CheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents Dynamics365 requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Dynamics365CheckRequirementsProperties",
+          "description": "Dynamics365 requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Dynamics365"
+    },
+    "Dynamics365CheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Dynamics365 requirements check properties.",
+      "type": "object"
+    },
     "Entity": {
       "allOf": [
         {
@@ -6047,6 +7723,23 @@
       "required": [
         "kind"
       ]
+    },
+    "EntityEdges": {
+      "description": "The edge that connects the entity to the other entity.",
+      "properties": {
+        "targetEntityId": {
+          "description": "The target entity Id.",
+          "type": "string"
+        },
+        "additionalData": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "A bag of custom fields that should be part of the entity and will be presented to the user.",
+          "type": "object"
+        }
+      },
+      "type": "object"
     },
     "EntityCommonProperties": {
       "description": "Entity common property bag.",
@@ -6134,6 +7827,13 @@
                 "$ref": "#/definitions/Entity"
               },
               "type": "array"
+            },
+            "edges": {
+              "description": "Array of edges that connects the entity to the list of entities.",
+              "items": {
+                "$ref": "#/definitions/EntityEdges"
+              },
+              "type": "array"
             }
           },
           "type": "object"
@@ -6151,6 +7851,18 @@
           "description": "The timeline result values.",
           "items": {
             "$ref": "#/definitions/EntityTimelineItem"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "GetQueriesResponse": {
+      "description": "Retrieve queries for entity result operation response.",
+      "properties": {
+        "value": {
+          "description": "The query result values.",
+          "items": {
+            "$ref": "#/definitions/EntityQueryItem"
           },
           "type": "array"
         }
@@ -6175,7 +7887,11 @@
         "Url",
         "IoTDevice",
         "SecurityAlert",
-        "Bookmark"
+        "Bookmark",
+        "Mailbox",
+        "MailCluster",
+        "MailMessage",
+        "SubmissionMail"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -6249,6 +7965,22 @@
           {
             "description": "Entity represents bookmark in the system.",
             "value": "Bookmark"
+          },
+          {
+            "description": "Entity represents mail cluster in the system.",
+            "value": "MailCluster"
+          },
+          {
+            "description": "Entity represents mail message in the system.",
+            "value": "MailMessage"
+          },
+          {
+            "description": "Entity represents mailbox in the system.",
+            "value": "Mailbox"
+          },
+          {
+            "description": "Entity represents submission mail in the system.",
+            "value": "SubmissionMail"
           }
         ]
       }
@@ -6272,7 +8004,11 @@
         "URL",
         "IoTDevice",
         "SecurityAlert",
-        "HuntingBookmark"
+        "HuntingBookmark",
+        "MailCluster",
+        "MailMessage",
+        "Mailbox",
+        "SubmissionMail"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -6346,6 +8082,22 @@
           {
             "description": "Entity represents HuntingBookmark in the system.",
             "value": "HuntingBookmark"
+          },
+          {
+            "description": "Entity represents mail cluster in the system.",
+            "value": "MailCluster"
+          },
+          {
+            "description": "Entity represents mail message in the system.",
+            "value": "MailMessage"
+          },
+          {
+            "description": "Entity represents mailbox in the system.",
+            "value": "Mailbox"
+          },
+          {
+            "description": "Entity represents submission mail in the system.",
+            "value": "SubmissionMail"
           }
         ]
       }
@@ -6389,7 +8141,8 @@
         "kind": {
           "description": "The kind of the entity query",
           "enum": [
-            "Expansion"
+            "Expansion",
+            "Insight"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6398,6 +8151,9 @@
             "values": [
               {
                 "value": "Expansion"
+              },
+              {
+                "value": "Insight"
               }
             ]
           }
@@ -6568,6 +8324,19 @@
         }
       },
       "type": "object"
+    },
+    "ConnectedEntity": {
+      "description": "Expansion result connected entities",
+      "properties": {
+        "targetEntityId": {
+          "description": "Entity Id of the connected entity",
+          "type": "string"
+        },
+        "additionalData": {
+          "description": "key-value pairs for a connected entity mapping",
+          "type": "object"
+        }
+      }
     },
     "TimelineResultsMetadata": {
       "description": "Expansion result metadata.",
@@ -6776,6 +8545,160 @@
       },
       "type": "object"
     },
+    "InsightQueryItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItem"
+        }
+      ],
+      "description": "Represents Insight Query.",
+      "properties": {
+        "properties": {
+          "description": "Properties bag for InsightQueryItem",
+          "$ref": "#/definitions/InsightQueryItemProperties"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Insight"
+    },
+    "InsightQueryItemProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItemProperties"
+        }
+      ],
+      "description": "Represents Insight Query.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The insight display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The insight description."
+        },
+        "baseQuery": {
+          "type": "string",
+          "description": "The base query of the insight."
+        },
+        "tableQuery": {
+          "type": "object",
+          "description": "The insight table query.",
+          "properties": {
+            "columnsDefinitions": {
+              "type": "array",
+              "description": "List of insight column definitions.",
+              "items": {
+                "properties": {
+                  "header": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "outputType": {
+                    "type": "string",
+                    "description": "Insights Column type.",
+                    "enum": [
+                      "Number",
+                      "String",
+                      "Date",
+                      "Entity"
+                    ],
+                    "x-ms-enum": {
+                      "modelAsString": true,
+                      "name": "outputType"
+                    }
+                  },
+                  "supportDeepLink": {
+                    "type": "boolean",
+                    "description": "Is query supports deep-link."
+                  }
+                }
+              }
+            },
+            "queriesDefinitions": {
+              "type": "array",
+              "description": "List of insight queries definitions.",
+              "items": {
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "summarize": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "project": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "linkColumnsDefinitions": {
+                    "type": "array",
+                    "description": "Insight column header.",
+                    "items": {
+                      "properties": {
+                        "projectedName": {
+                          "type": "string",
+                          "description": "Insight Link Definition Projected Name."
+                        },
+                        "Query": {
+                          "type": "string",
+                          "description": "Insight Link Definition Query."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "chartQuery": {
+          "type": "object",
+          "description": "The insight chart query."
+        },
+        "additionalQuery": {
+          "type": "object",
+          "description": "The activity query definitions.",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The insight query."
+            },
+            "text": {
+              "type": "string",
+              "description": "The insight text."
+            }
+          }
+        },
+        "defaultTimeRange": {
+          "type": "object",
+          "description": "The insight chart query.",
+          "properties": {
+            "beforeRange": {
+              "type": "string",
+              "description": "The padding for the start time of the query."
+            },
+            "afterRange": {
+              "type": "string",
+              "description": "The padding for the end time of the query."
+            }
+          }
+        },
+        "referenceTimeRange": {
+          "type": "object",
+          "description": "The insight chart query.",
+          "properties": {
+            "beforeRange": {
+              "type": "string",
+              "description": "Additional query time for looking back."
+            }
+          }
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Insight"
+    },
     "ActivityTimelineItem": {
       "allOf": [
         {
@@ -6845,6 +8768,10 @@
           "type": "string",
           "description": "The alert product name."
         },
+        "description": {
+          "type": "string",
+          "description": "The alert description."
+        },
         "displayName": {
           "type": "string",
           "description": "The alert name."
@@ -6875,7 +8802,6 @@
       },
       "required": [
         "azureResourceId",
-        "productName",
         "displayName",
         "severity",
         "endTimeUtc",
@@ -6935,13 +8861,7 @@
         }
       },
       "required": [
-        "azureResourceId",
-        "displayName",
-        "notes",
-        "endTimeUtc",
-        "startTimeUtc",
-        "createdBy",
-        "labels"
+        "azureResourceId"
       ],
       "type": "object",
       "x-ms-discriminator-value": "Bookmark"
@@ -7050,6 +8970,111 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
+    },
+    "ThreatIntelligenceAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents Threat Intelligence alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ThreatIntelligenceAlertRuleProperties",
+          "description": "Threat Intelligence alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligence"
+    },
+    "ThreatIntelligenceAlertRuleProperties": {
+      "description": "Threat Intelligence alert rule base property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert has been modified.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule.",
+          "readOnly": true
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "required": [
+        "alertRuleTemplateName",
+        "enabled"
+      ],
+      "type": "object"
+    },
+    "ThreatIntelligenceAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents Threat Intelligence alert rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            }
+          ],
+          "description": "Threat Intelligence alert rule template properties",
+          "properties": {
+            "severity": {
+              "$ref": "#/definitions/AlertSeverity",
+              "description": "The severity for alerts created by this alert rule."
+            },
+            "tactics": {
+              "description": "The tactics of the alert rule template",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "severity",
+            "alertRulesCreatedByTemplateCount"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligence"
     },
     "GeoLocation": {
       "description": "The geo-location context attached to the ip entity",
@@ -7161,7 +9186,8 @@
             "Linux",
             "Windows",
             "Android",
-            "IOS"
+            "IOS",
+            "Unknown"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -7183,6 +9209,10 @@
               {
                 "description": "Host with IOS operating system.",
                 "value": "IOS"
+              },
+              {
+                "description": "Host with Unknown operating system.",
+                "value": "Unknown"
               }
             ]
           }
@@ -7548,6 +9578,129 @@
       },
       "type": "object"
     },
+    "IncidentClassification": {
+      "description": "The reason the incident was closed",
+      "enum": [
+        "Undetermined",
+        "TruePositive",
+        "BenignPositive",
+        "FalsePositive"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IncidentClassification",
+        "values": [
+          {
+            "description": "Incident classification was undetermined",
+            "value": "Undetermined"
+          },
+          {
+            "description": "Incident was true positive",
+            "value": "TruePositive"
+          },
+          {
+            "description": "Incident was benign positive",
+            "value": "BenignPositive"
+          },
+          {
+            "description": "Incident was false positive",
+            "value": "FalsePositive"
+          }
+        ]
+      }
+    },
+    "IncidentClassificationReason": {
+      "description": "The classification reason the incident was closed with",
+      "enum": [
+        "SuspiciousActivity",
+        "SuspiciousButExpected",
+        "IncorrectAlertLogic",
+        "InaccurateData"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IncidentClassificationReason",
+        "values": [
+          {
+            "description": "Classification reason was suspicious activity",
+            "value": "SuspiciousActivity"
+          },
+          {
+            "description": "Classification reason was suspicious but expected",
+            "value": "SuspiciousButExpected"
+          },
+          {
+            "description": "Classification reason was incorrect alert logic",
+            "value": "IncorrectAlertLogic"
+          },
+          {
+            "description": "Classification reason was inaccurate data",
+            "value": "InaccurateData"
+          }
+        ]
+      }
+    },
+    "IncidentSeverity": {
+      "description": "The severity of the incident",
+      "enum": [
+        "High",
+        "Medium",
+        "Low",
+        "Informational"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IncidentSeverity",
+        "values": [
+          {
+            "description": "High severity",
+            "value": "High"
+          },
+          {
+            "description": "Medium severity",
+            "value": "Medium"
+          },
+          {
+            "description": "Low severity",
+            "value": "Low"
+          },
+          {
+            "description": "Informational severity",
+            "value": "Informational"
+          }
+        ]
+      }
+    },
+    "IncidentStatus": {
+      "description": "The status of the incident",
+      "enum": [
+        "New",
+        "Active",
+        "Closed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IncidentStatus",
+        "values": [
+          {
+            "description": "An active incident which isn't being handled currently",
+            "value": "New"
+          },
+          {
+            "description": "An active incident which is being handled",
+            "value": "Active"
+          },
+          {
+            "description": "A non-active incident",
+            "value": "Closed"
+          }
+        ]
+      }
+    },
     "IncidentProperties": {
       "description": "Describes incident properties",
       "properties": {
@@ -7558,72 +9711,16 @@
           "type": "object"
         },
         "classification": {
-          "description": "The reason the incident was closed",
-          "enum": [
-            "Undetermined",
-            "TruePositive",
-            "BenignPositive",
-            "FalsePositive"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentClassification",
-            "values": [
-              {
-                "description": "Incident classification was undetermined",
-                "value": "Undetermined"
-              },
-              {
-                "description": "Incident was true positive",
-                "value": "TruePositive"
-              },
-              {
-                "description": "Incident was benign positive",
-                "value": "BenignPositive"
-              },
-              {
-                "description": "Incident was false positive",
-                "value": "FalsePositive"
-              }
-            ]
-          }
+          "$ref": "#/definitions/IncidentClassification",
+          "description": "The reason the incident was closed"
         },
         "classificationComment": {
           "description": "Describes the reason the incident was closed",
           "type": "string"
         },
         "classificationReason": {
-          "description": "The classification reason the incident was closed with",
-          "enum": [
-            "SuspiciousActivity",
-            "SuspiciousButExpected",
-            "IncorrectAlertLogic",
-            "InaccurateData"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentClassificationReason",
-            "values": [
-              {
-                "description": "Classification reason was suspicious activity",
-                "value": "SuspiciousActivity"
-              },
-              {
-                "description": "Classification reason was suspicious but expected",
-                "value": "SuspiciousButExpected"
-              },
-              {
-                "description": "Classification reason was incorrect alert logic",
-                "value": "IncorrectAlertLogic"
-              },
-              {
-                "description": "Classification reason was inaccurate data",
-                "value": "InaccurateData"
-              }
-            ]
-          }
+          "$ref": "#/definitions/IncidentClassificationReason",
+          "description": "The classification reason the incident was closed with"
         },
         "createdTimeUtc": {
           "description": "The time the incident was created",
@@ -7657,6 +9754,14 @@
           },
           "type": "array"
         },
+        "providerName": {
+          "description": "The name of the source provider that generated the incident",
+          "type": "string"
+        },
+        "providerIncidentId": {
+          "description": "The incident ID assigned by the incident provider",
+          "type": "string"
+        },
         "lastActivityTimeUtc": {
           "description": "The time of the last activity in the incident",
           "format": "date-time",
@@ -7683,63 +9788,12 @@
           "type": "array"
         },
         "severity": {
-          "description": "The severity of the incident",
-          "enum": [
-            "High",
-            "Medium",
-            "Low",
-            "Informational"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentSeverity",
-            "values": [
-              {
-                "description": "High severity",
-                "value": "High"
-              },
-              {
-                "description": "Medium severity",
-                "value": "Medium"
-              },
-              {
-                "description": "Low severity",
-                "value": "Low"
-              },
-              {
-                "description": "Informational severity",
-                "value": "Informational"
-              }
-            ]
-          }
+          "$ref": "#/definitions/IncidentSeverity",
+          "description": "The severity of the incident"
         },
         "status": {
-          "description": "The status of the incident",
-          "enum": [
-            "New",
-            "Active",
-            "Closed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "IncidentStatus",
-            "values": [
-              {
-                "description": "An active incident which isn't being handled currently",
-                "value": "New"
-              },
-              {
-                "description": "An active incident which is being handled",
-                "value": "Active"
-              },
-              {
-                "description": "A non-active incident",
-                "value": "Closed"
-              }
-            ]
-          }
+          "$ref": "#/definitions/IncidentStatus",
+          "description": "The status of the incident"
         },
         "title": {
           "description": "The title of the incident",
@@ -7802,6 +9856,533 @@
       "description": "Label that will be used to tag and filter on.",
       "type": "string"
     },
+    "MailboxEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mailbox entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailboxEntityProperties",
+          "description": "Mailbox entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Mailbox"
+    },
+    "MailboxEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mailbox entity property bag.",
+      "properties": {
+        "mailboxPrimaryAddress": {
+          "description": "The mailbox's primary address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The mailbox's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "upn": {
+          "description": "The mailbox's UPN",
+          "readOnly": true,
+          "type": "string"
+        },
+        "externalDirectoryObjectId": {
+          "description": "The AzureAD identifier of mailbox. Similar to AadUserId in account entity but this property is specific to mailbox object on office side",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MailClusterEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mail cluster entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailClusterEntityProperties",
+          "description": "Mail cluster entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MailCluster"
+    },
+    "MailClusterEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mail cluster entity property bag.",
+      "properties": {
+        "networkMessageIds": {
+          "description": "The mail message IDs that are part of the mail cluster",
+          "items": {
+            "description": "A mail message ID",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "countByDeliveryStatus": {
+          "description": "Count of mail messages by DeliveryStatus string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "countByThreatType": {
+          "description": "Count of mail messages by ThreatType string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "countByProtectionStatus": {
+          "description": "Count of mail messages by ProtectionStatus string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "threats": {
+          "description": "The threats of mail messages that are part of the mail cluster",
+          "items": {
+            "description": "A threat",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "query": {
+          "description": "The query that was used to identify the messages of the mail cluster",
+          "readOnly": true,
+          "type": "string"
+        },
+        "queryTime": {
+          "description": "The query time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "mailCount": {
+          "description": "The number of mail messages that are part of the mail cluster",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "isVolumeAnomaly": {
+          "description": "Is this a volume anomaly mail cluster",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "source": {
+          "description": "The source of the mail cluster (default is 'O365 ATP')",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterSourceIdentifier": {
+          "description": "The id of the cluster source",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterSourceType": {
+          "description": "The type of the cluster source",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterQueryStartTime": {
+          "description": "The cluster query start time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterQueryEndTime": {
+          "description": "The cluster query end time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterGroup": {
+          "description": "The cluster group",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MailMessageEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mail message entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailMessageEntityProperties",
+          "description": "Mail message entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MailMessage"
+    },
+    "MailMessageEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mail message entity property bag.",
+      "properties": {
+        "fileEntityIds": {
+          "description": "The File entity ids of this mail message's attachments",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "recipient": {
+          "description": "The recipient of this mail message. Note that in case of multiple recipients the mail message is forked and each copy has one recipient",
+          "readOnly": true,
+          "type": "string"
+        },
+        "urls": {
+          "description": "The Urls contained in this mail message",
+          "items": {
+            "description": "A Url contained in this mail message",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "threats": {
+          "description": "The threats of this mail message",
+          "items": {
+            "description": "A threat of the mail message",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "p1Sender": {
+          "description": "The p1 sender's email address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p1SenderDisplayName": {
+          "description": "The p1 sender's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p1SenderDomain": {
+          "description": "The p1 sender's domain",
+          "readOnly": true,
+          "type": "string"
+        },
+        "senderIP": {
+          "description": "The sender's IP address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2Sender": {
+          "description": "The p2 sender's email address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2SenderDisplayName": {
+          "description": "The p2 sender's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2SenderDomain": {
+          "description": "The p2 sender's domain",
+          "readOnly": true,
+          "type": "string"
+        },
+        "receiveDate": {
+          "description": "The receive date of this message",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "networkMessageId": {
+          "description": "The network message id of this mail message",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "internetMessageId": {
+          "description": "The internet message id of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subject": {
+          "description": "The subject of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "language": {
+          "description": "The language of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatDetectionMethods": {
+          "description": "The threat detection methods",
+          "items": {
+            "description": "A threat detection method",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "bodyFingerprintBin1": {
+          "description": "The bodyFingerprintBin1",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin2": {
+          "description": "The bodyFingerprintBin2",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin3": {
+          "description": "The bodyFingerprintBin3",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin4": {
+          "description": "The bodyFingerprintBin4",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin5": {
+          "description": "The bodyFingerprintBin5",
+          "type": "integer",
+          "format": "int32"
+        },
+        "antispamDirection": {
+          "description": "The directionality of this mail message",
+          "enum": [
+            "Unknown",
+            "Inbound",
+            "Outbound",
+            "Intraorg"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AntispamMailDirection",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "Inbound",
+                "value": "Inbound"
+              },
+              {
+                "description": "Outbound",
+                "value": "Outbound"
+              },
+              {
+                "description": "Intraorg",
+                "value": "Intraorg"
+              }
+            ]
+          }
+        },
+        "deliveryAction": {
+          "description": "The delivery action of this mail message like Delivered, Blocked, Replaced etc",
+          "enum": [
+            "Unknown",
+            "DeliveredAsSpam",
+            "Delivered",
+            "Blocked",
+            "Replaced"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DeliveryAction",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "DeliveredAsSpam",
+                "value": "DeliveredAsSpam"
+              },
+              {
+                "description": "Delivered",
+                "value": "Delivered"
+              },
+              {
+                "description": "Blocked",
+                "value": "Blocked"
+              },
+              {
+                "description": "Replaced",
+                "value": "Replaced"
+              }
+            ]
+          }
+        },
+        "deliveryLocation": {
+          "description": "The delivery location of this mail message like Inbox, JunkFolder etc",
+          "enum": [
+            "Unknown",
+            "Inbox",
+            "JunkFolder",
+            "DeletedFolder",
+            "Quarantine",
+            "External",
+            "Failed",
+            "Dropped",
+            "Forwarded"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DeliveryLocation",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "Inbox",
+                "value": "Inbox"
+              },
+              {
+                "description": "JunkFolder",
+                "value": "JunkFolder"
+              },
+              {
+                "description": "DeletedFolder",
+                "value": "DeletedFolder"
+              },
+              {
+                "description": "Quarantine",
+                "value": "Quarantine"
+              },
+              {
+                "description": "External",
+                "value": "External"
+              },
+              {
+                "description": "Failed",
+                "value": "Failed"
+              },
+              {
+                "description": "Dropped",
+                "value": "Dropped"
+              },
+              {
+                "description": "Forwarded",
+                "value": "Forwarded"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
+    },
+    "SubmissionMailEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a submission mail entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubmissionMailEntityProperties",
+          "description": "Submission mail entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "SubmissionMail"
+    },
+    "SubmissionMailEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Submission mail entity property bag.",
+      "properties": {
+        "networkMessageId": {
+          "description": "The network message id of email to which submission belongs",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "submissionId": {
+          "description": "The submission id",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "submitter": {
+          "description": "The submitter",
+          "readOnly": true,
+          "type": "string"
+        },
+        "submissionDate": {
+          "description": "The submission date",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "The Time stamp when the message is received (Mail)",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "recipient": {
+          "description": "The recipient of the mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "sender": {
+          "description": "The sender of the mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "senderIp": {
+          "description": "The sender's IP",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subject": {
+          "description": "The subject of submission mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "reportType": {
+          "description": "The submission type for the given instance. This maps to Junk, Phish, Malware or NotJunk.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "MCASDataConnector": {
       "allOf": [
         {
@@ -7852,6 +10433,9 @@
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "MCASCheckRequirements": {
@@ -8223,9 +10807,8 @@
           "description": "The tenantId of the Office365 with the consent.",
           "type": "string"
         },
-        "tenantName": {
-          "description": "The tenant name of the Office365 with the consent.",
-          "readOnly": true,
+        "consentId": {
+          "description": "Help to easily cascade among the data layers.",
           "type": "string"
         }
       },
@@ -8279,7 +10862,12 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "exchange",
+        "sharePoint",
+        "teams"
+      ]
     },
     "OfficeDataConnectorProperties": {
       "allOf": [
@@ -8294,6 +10882,9 @@
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "Operation": {
@@ -8323,6 +10914,10 @@
         },
         "name": {
           "description": "Name of the operation",
+          "type": "string"
+        },
+        "origin": {
+          "description": "The origin of the operation",
           "type": "string"
         }
       }
@@ -8762,7 +11357,7 @@
       "x-ms-discriminator-value": "Scheduled"
     },
     "ScheduledAlertRuleCommonProperties": {
-      "description": "Schedule alert rule template property bag.",
+      "description": "Scheduled alert rule template property bag.",
       "properties": {
         "query": {
           "description": "The query that creates alerts for this rule.",
@@ -8996,7 +11591,8 @@
               "Account",
               "Host",
               "Ip",
-              "Url"
+              "Url",
+              "FileHash"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -9018,6 +11614,10 @@
                 {
                   "description": "Url entity",
                   "value": "Url"
+                },
+                {
+                  "description": "FileHash entity",
+                  "value": "FileHash"
                 }
               ]
             }
@@ -9501,22 +12101,34 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "indicators"
+      ]
     },
     "TIDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
-      "description": "Threat Intelligence Platforms data connector properties.",
+      "description": "TI (Threat Intelligence) data connector properties.",
       "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "tipLookbackPeriod": {
+          "description": "The lookback period for the feed to be imported.",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
         "dataTypes": {
           "$ref": "#/definitions/TIDataConnectorDataTypes",
           "description": "The available data types for the connector."
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "tenantId",
+        "dataTypes"
+      ]
     },
     "TICheckRequirements": {
       "allOf": [
@@ -9575,7 +12187,10 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "taxiiClient"
+      ]
     },
     "TiTaxiiDataConnectorProperties": {
       "allOf": [
@@ -9609,11 +12224,49 @@
           "description": "The password for the TAXII server.",
           "type": "string"
         },
+        "taxiiLookbackPeriod": {
+          "description": "The lookback period for the TAXII server.",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "pollingFrequency": {
+          "description": "The polling frequency for the TAXII server.",
+          "type": "string",
+          "x-nullable": true,
+          "enum": [
+            "OnceAMinute",
+            "OnceAnHour",
+            "OnceADay"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PollingFrequency",
+            "values": [
+              {
+                "description": "Once a minute",
+                "value": "OnceAMinute"
+              },
+              {
+                "description": "Once an hour",
+                "value": "OnceAnHour"
+              },
+              {
+                "description": "Once a day",
+                "value": "OnceADay"
+              }
+            ]
+          }
+        },
         "dataTypes": {
           "$ref": "#/definitions/TiTaxiiDataConnectorDataTypes",
           "description": "The available data types for Threat Intelligence TAXII data connector."
         }
       },
+      "required": [
+        "dataTypes",
+        "pollingFrequency"
+      ],
       "type": "object"
     },
     "TiTaxiiCheckRequirements": {
@@ -9675,6 +12328,34 @@
           "description": "Threat type (e.g. \"Botnet\")",
           "readOnly": true,
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IPSyncer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IPSyncerSettingsProperties",
+          "description": "IPSyncer properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "IPSyncer"
+    },
+    "IPSyncerSettingsProperties": {
+      "description": "IPSyncer property bag.",
+      "properties": {
+        "isEnabled": {
+          "description": "Determines whether the setting is enable or disabled.",
+          "readOnly": true,
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -9842,6 +12523,16 @@
           "readOnly": true,
           "type": "string"
         },
+        "deviceName": {
+          "description": "The friendly name of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "source": {
+          "description": "The source of the device",
+          "readOnly": true,
+          "type": "string"
+        },
         "iotSecurityAgentId": {
           "description": "The ID of the security agent running on the device",
           "format": "uuid",
@@ -9863,6 +12554,31 @@
           "readOnly": true,
           "type": "string"
         },
+        "macAddress": {
+          "description": "The MAC address of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "model": {
+          "description": "The model of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "The serial number of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "firmwareVersion": {
+          "description": "The firmware version of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "operatingSystem": {
+          "description": "The operating system of the device",
+          "readOnly": true,
+          "type": "string"
+        },
         "iotHubEntityId": {
           "description": "The AzureResource entity id of the IoT Hub",
           "readOnly": true,
@@ -9873,10 +12589,23 @@
           "readOnly": true,
           "type": "string"
         },
+        "ipAddressEntityId": {
+          "description": "The IP entity if of this device",
+          "readOnly": true,
+          "type": "string"
+        },
         "threatIntelligence": {
           "description": "A list of TI contexts attached to the IoTDevice entity.",
           "items": {
             "$ref": "#/definitions/ThreatIntelligence"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "protocols": {
+          "description": "A list of protocols of the IoTDevice entity.",
+          "items": {
+            "type": "string"
           },
           "readOnly": true,
           "type": "array"
@@ -9959,12 +12688,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "incidentId",
-        "severity",
-        "title",
-        "relationName"
-      ],
       "type": "object"
     },
     "WatchlistList": {
@@ -10094,12 +12817,110 @@
         "contentType": {
           "description": "The content type of the raw content. Example : text/csv or text/tsv ",
           "type": "string"
+        },
+        "uploadStatus": {
+          "description": "The status of the Watchlist upload : New, InProgress or Complete. Pls note : When a Watchlist upload status is equal to InProgress, the Watchlist cannot be deleted",
+          "type": "string"
+        },
+        "watchlistItemsCount": {
+          "description": "The number of Watchlist Items in the Watchlist",
+          "type": "integer",
+          "format": "int32"
         }
       },
       "required": [
         "displayName",
         "source",
         "provider"
+      ],
+      "type": "object"
+    },
+    "WatchlistItemList": {
+      "description": "List all the watchlist items.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of watchlist item.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of watchlist items.",
+          "items": {
+            "$ref": "#/definitions/WatchlistItem"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WatchlistItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Watchlist item in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WatchlistItemProperties",
+          "description": "Watchlist Item properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "WatchlistItemProperties": {
+      "description": "Describes watchlist item properties",
+      "properties": {
+        "watchlistItemType": {
+          "description": "The type of the watchlist item",
+          "type": "string"
+        },
+        "watchlistItemId": {
+          "description": "The id (a Guid) of the watchlist item",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenantId to which the watchlist item belongs to",
+          "type": "string"
+        },
+        "isDeleted": {
+          "description": "A flag that indicates if the watchlist item is deleted or not",
+          "type": "boolean"
+        },
+        "created": {
+          "description": "The time the watchlist item was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The last time the watchlist item was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the watchlist item",
+          "type": "object"
+        },
+        "updatedBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that updated the watchlist item",
+          "type": "object"
+        },
+        "itemsKeyValue": {
+          "description": "key-value pairs for a watchlist item",
+          "type": "object"
+        },
+        "entityMapping": {
+          "description": "key-value pairs for a watchlist item entity mapping",
+          "type": "object"
+        }
+      },
+      "required": [
+        "itemsKeyValue"
       ],
       "type": "object"
     },
@@ -10255,11 +13076,23 @@
           "description": "Pattern type of a threat intelligence entity",
           "type": "string"
         },
+        "patternVersion": {
+          "description": "Pattern version of a threat intelligence entity",
+          "type": "string"
+        },
         "killChainPhases": {
           "description": "Kill chain phases",
           "items": {
             "description": "Kill chain phase",
             "$ref": "#/definitions/ThreatIntelligenceKillChainPhase"
+          },
+          "type": "array"
+        },
+        "parsedPattern": {
+          "description": "Parsed patterns",
+          "items": {
+            "description": "Parsed pattern",
+            "$ref": "#/definitions/ThreatIntelligenceParsedPattern"
           },
           "type": "array"
         },
@@ -10271,11 +13104,19 @@
           "description": "Created by reference of threat intelligence entity",
           "type": "string"
         },
+        "defanged": {
+          "description": "Is threat intelligence entity defanged",
+          "type": "boolean"
+        },
+        "externalLastUpdatedTimeUtc": {
+          "description": "External last updated time in UTC",
+          "type": "string"
+        },
         "externalReferences": {
           "description": "External References",
           "items": {
             "description": "external_reference",
-            "type": "string"
+            "$ref": "#/definitions/ThreatIntelligenceExternalReference"
           },
           "type": "array"
         },
@@ -10284,6 +13125,14 @@
           "items": {
             "description": "Granular marking",
             "$ref": "#/definitions/ThreatIntelligenceGranularMarkingModel"
+          },
+          "type": "array"
+        },
+        "labels": {
+          "description": "Labels  of threat intelligence entity",
+          "items": {
+            "description": "label",
+            "type": "string"
           },
           "type": "array"
         },
@@ -10296,13 +13145,17 @@
           "type": "integer",
           "format": "int32"
         },
-        "labels": {
-          "description": "Labels  of threat intelligence entity",
+        "objectMarkingRefs": {
+          "description": "Threat intelligence entity object marking references",
           "items": {
-            "description": "label",
+            "description": "Threat intelligence entity object marking reference",
             "type": "string"
           },
           "type": "array"
+        },
+        "language": {
+          "description": "Language of threat intelligence entity",
+          "type": "string"
         },
         "threatTypes": {
           "description": "Threat types",
@@ -10327,6 +13180,11 @@
         "modified": {
           "description": "Modified by",
           "type": "string"
+        },
+        "extensions": {
+          "description": "Extensions map",
+          "type": "object",
+          "additionalProperties": {}
         }
       },
       "type": "object"
@@ -10340,8 +13198,39 @@
         },
         "phaseName": {
           "description": "Phase name",
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceParsedPattern": {
+      "description": "Describes parsed pattern entity",
+      "properties": {
+        "patternTypeKey": {
+          "description": "Pattern type key",
+          "type": "string"
+        },
+        "patternTypeValues": {
+          "description": "Pattern type keys",
+          "items": {
+            "description": "Pattern type key",
+            "$ref": "#/definitions/ThreatIntelligenceParsedPatternTypeValue"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceParsedPatternTypeValue": {
+      "description": "Describes threat kill chain phase entity",
+      "properties": {
+        "valueType": {
+          "description": "Type of the value",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of parsed pattern",
+          "type": "string"
         }
       },
       "type": "object"
@@ -10365,6 +13254,35 @@
             "type": "string"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceExternalReference": {
+      "description": "Describes external reference",
+      "properties": {
+        "description": {
+          "description": "External reference description",
+          "type": "string"
+        },
+        "externalId": {
+          "description": "External reference ID",
+          "type": "string"
+        },
+        "sourceName": {
+          "description": "External reference source name",
+          "type": "string"
+        },
+        "url": {
+          "description": "External reference URL",
+          "type": "string"
+        },
+        "hashes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "External reference hashes"
         }
       },
       "type": "object"
@@ -10578,6 +13496,237 @@
         }
       },
       "type": "object"
+    },
+    "EntityGetInsightsParameters": {
+      "description": "The parameters required to execute insights operation on the given entity.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "description": "The start timeline date, so the results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "The end timeline date, so the results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "addDefaultExtendedTimeRange": {
+          "description": "Indicates if query time range should be extended with default time range of the query. Default value is false",
+          "type": "boolean"
+        },
+        "insightQueryIds": {
+          "description": "List of Insights Query Id. If empty, default value is all insights of this entity",
+          "type": "array",
+          "items": {
+            "description": "Insight Query Id (GUID)",
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ]
+    },
+    "EntityGetInsightsResponse": {
+      "description": "The Get Insights result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "#/definitions/GetInsightsResultsMetadata",
+          "description": "The metadata from the get insights operation results."
+        },
+        "value": {
+          "description": "The insights result values.",
+          "items": {
+            "$ref": "#/definitions/EntityInsightItem"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "GetInsightsResultsMetadata": {
+      "description": "Get Insights result metadata.",
+      "properties": {
+        "totalCount": {
+          "description": "the total items found for the insights request",
+          "type": "integer",
+          "format": "int32"
+        },
+        "errors": {
+          "description": "information about the failed queries",
+          "items": {
+            "$ref": "#/definitions/GetInsightsError"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "totalCount"
+      ],
+      "type": "object"
+    },
+    "GetInsightsError": {
+      "description": "GetInsights Query Errors.",
+      "properties": {
+        "kind": {
+          "description": "the query kind",
+          "type": "string",
+          "enum": [
+            "Insight"
+          ]
+        },
+        "queryId": {
+          "description": "the query id",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "the error message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "errorMessage"
+      ],
+      "type": "object"
+    },
+    "EntityQueryItem": {
+      "description": "An abstract Query item for entity",
+      "type": "object",
+      "discriminator": "kind",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryKind"
+        }
+      ],
+      "properties": {
+        "id": {
+          "description": "Query Template ARM ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Query Template ARM Name",
+          "type": "string"
+        },
+        "type": {
+          "description": "ARM Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "EntityQueryItemProperties": {
+      "description": "An properties abstract Query item for entity",
+      "type": "object",
+      "properties": {
+        "dataTypes": {
+          "description": "Data types for template",
+          "type": "array",
+          "items": {
+            "properties": {
+              "dataType": {
+                "description": "Data type name",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "inputEntityType": {
+          "description": "The type of the entity",
+          "$ref": "#/definitions/EntityInnerType"
+        },
+        "requiredInputFieldsSets": {
+          "description": "Data types for template",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "entitiesFilter": {
+          "description": "The query applied only to entities matching to all filters",
+          "type": "object"
+        }
+      }
+    },
+    "EntityInsightItem": {
+      "description": "Entity insight Item.",
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "The query id of the insight"
+        },
+        "queryTimeInterval": {
+          "type": "object",
+          "description": "The Time interval that the query actually executed on.",
+          "properties": {
+            "startTime": {
+              "format": "date-time",
+              "type": "string",
+              "description": "Insight query start time"
+            },
+            "endTime": {
+              "format": "date-time",
+              "type": "string",
+              "description": "Insight query end time"
+            }
+          }
+        },
+        "tableQueryResults": {
+          "$ref": "#/definitions/InsightsTableResult",
+          "description": "Query results for table insights query."
+        },
+        "chartQueryResults": {
+          "type": "array",
+          "description": "Query results for table insights query.",
+          "items": {
+            "$ref": "#/definitions/InsightsTableResult",
+            "description": "Query results for table insights query."
+          }
+        }
+      }
+    },
+    "InsightsTableResult": {
+      "type": "object",
+      "description": "Query results for table insights query.",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "description": "Columns Metadata of the table",
+          "items": {
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "the type of the colum"
+              },
+              "name": {
+                "type": "string",
+                "description": "the name of the colum"
+              }
+            }
+          }
+        },
+        "rows": {
+          "type": "array",
+          "description": "Rows data of the table",
+          "items": {
+            "type": "array",
+            "description": "Single row of data",
+            "items": {
+              "type": "string",
+              "description": "Cell in the table"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -10621,6 +13770,24 @@
       "description": "Alert rule template ID",
       "in": "path",
       "name": "alertRuleTemplateId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AutomationRule": {
+      "description": "The automation rule",
+      "in": "body",
+      "name": "automationRule",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AutomationRule"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AutomationRuleId": {
+      "description": "Automation rule ID",
+      "in": "path",
+      "name": "automationRuleId",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -10773,6 +13940,16 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "GetInsightsEntityQueriesRequestBody": {
+      "description": "The parameters required to execute insights on the given entity.",
+      "name": "parameters",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EntityGetInsightsParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
     "EntityId": {
       "description": "entity ID",
       "in": "path",
@@ -10823,6 +14000,27 @@
       "name": "incidentId",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EntityQueryKindParam": {
+      "description": "The Kind parameter for queries",
+      "in": "query",
+      "name": "kind",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Insight"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityItemQueryKind",
+        "values": [
+          {
+            "description": "insight",
+            "value": "Insight"
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     },
     "ODataFilter": {
@@ -10949,6 +14147,24 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "WatchlistItem": {
+      "description": "The watchlist item",
+      "in": "body",
+      "name": "watchlistItem",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WatchlistItem"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "WatchlistItemId": {
+      "description": "Watchlist Item Id (GUID)",
+      "in": "path",
+      "name": "watchlistItemId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "ThreatIntelligenceName": {
       "description": "Threat intelligence indicator name field.",
       "in": "path",
@@ -10985,6 +14201,14 @@
       "schema": {
         "$ref": "#/definitions/ThreatIntelligenceFilteringCriteria"
       },
+      "x-ms-parameter-location": "method"
+    },
+    "ThreatIntelligenceIndicatorEntityKind": {
+      "description": "The threat intelligence entity kind",
+      "in": "query",
+      "name": "ctiEntityKind",
+      "required": false,
+      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "ThreatIntelligenceAppendTags": {

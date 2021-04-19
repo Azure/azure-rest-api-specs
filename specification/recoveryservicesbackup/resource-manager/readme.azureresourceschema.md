@@ -6,6 +6,11 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-recoveryservices-2021-02-01-preview
+  - tag: schema-recoveryservices-2021-02-01
+  - tag: schema-recoveryservices-2021-01-01
+  - tag: schema-recoveryservices-2020-12-01
+  - tag: schema-recoveryservices-2020-10-01
   - tag: schema-recoveryservices-2020-07-01
   - tag: schema-recoveryservices-2020-02-02
   - tag: schema-recoveryservices-2019-06-15
@@ -19,6 +24,61 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-recoveryservices-2021-02-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-recoveryservices-2021-02-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.RecoveryServices/preview/2021-02-01-preview/bms.json
+
+```
+
+### Tag: schema-recoveryservices-2021-02-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-recoveryservices-2021-02-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-02-01/bms.json
+
+```
+
+### Tag: schema-recoveryservices-2021-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-recoveryservices-2021-01-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-01-01/bms.json
+
+```
+
+### Tag: schema-recoveryservices-2020-12-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-recoveryservices-2020-12-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.RecoveryServices/stable/2020-12-01/bms.json
+
+```
+
+### Tag: schema-recoveryservices-2020-10-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-recoveryservices-2020-10-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.RecoveryServices/stable/2020-10-01/bms.json
+
+```
 
 ### Tag: schema-recoveryservices-2020-07-01 and azureresourceschema
 

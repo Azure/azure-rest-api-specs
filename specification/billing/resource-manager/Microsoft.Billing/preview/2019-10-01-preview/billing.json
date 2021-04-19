@@ -687,7 +687,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -947,7 +948,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -2479,7 +2481,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -2746,7 +2749,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -6214,14 +6218,26 @@
       "type": "string",
       "description": "Error code of the transfer validation response.",
       "enum": [
-        "InvalidSource",
-        "SubscriptionNotActive",
-        "InsufficientPermissionOnSource",
-        "InsufficientPermissionOnDestination",
-        "DestinationBillingProfilePastDue",
-        "SubscriptionTypeNotSupported",
+        "BillingAccountInactive",
         "CrossBillingAccountNotAllowed",
-        "NotAvailableForDestinationMarket"
+        "DestinationBillingProfileInactive",
+        "DestinationBillingProfileNotFound",
+        "DestinationBillingProfilePastDue",
+        "DestinationInvoiceSectionInactive",
+        "DestinationInvoiceSectionNotFound",
+        "InsufficientPermissionOnDestination",
+        "InsufficientPermissionOnSource",
+        "InvalidDestination",
+        "InvalidSource",
+        "MarketplaceNotEnabledOnDestination",
+        "NotAvailableForDestinationMarket",
+        "ProductInactive",
+        "ProductNotFound",
+        "ProductTypeNotSupported",
+        "SourceBillingProfilePastDue",
+        "SourceInvoiceSectionInactive",
+        "SubscriptionNotActive",
+        "SubscriptionTypeNotSupported"
       ],
       "x-ms-enum": {
         "name": "subscriptionTransferValidationErrorCode",
@@ -6866,6 +6882,7 @@
         "invoiceDay": {
           "description": "The day of the month when the invoice for the billing profile is generated.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "currency": {
@@ -8057,6 +8074,7 @@
         "quantity": {
           "description": "The quantity purchased in the transaction.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "invoiceSectionId": {

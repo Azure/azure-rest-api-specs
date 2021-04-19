@@ -120,11 +120,12 @@
         "microsoft.base.hybrid.road",
         "microsoft.imagery",
         "microsoft.weather.radar.main",
-        "microsoft.weather.infrared.main"
+        "microsoft.weather.infrared.main",
+        "microsoft.dem"
       ],
       "x-ms-enum": {
         "name": "TilesetID",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "value": "microsoft.base",
@@ -144,19 +145,19 @@
           },
           {
             "value": "microsoft.base.road",
-            "description": "All layers with our main style.<br>\n\nSupports zoom levels 0 through 18. Format: raster (png)."
+            "description": "All layers with our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
             "value": "microsoft.base.darkgrey",
-            "description": "All layers with our dark grey style.<br>\n\nSupports zoom levels 0 through 18. Format: raster (png)."
+            "description": "All layers with our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
             "value": "microsoft.base.labels.road",
-            "description": "Label data in our main style.<br>\n\nSupports zoom levels 0 through 18. Format: raster (png)."
+            "description": "Label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
             "value": "microsoft.base.hybrid.road",
-            "description": "Road, boundary and label data in our main style.<br>\n\nSupports zoom levels 0 through 18. Format: raster (png)."
+            "description": "Road, boundary and label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
             "value": "microsoft.imagery",
@@ -169,6 +170,10 @@
           {
             "value": "microsoft.weather.infrared.main",
             "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their temperature.  Please see [coverage information](https://aka.ms/AzureMapsWeatherCoverage) for Azure Maps Weather service. To learn more about the returned Satellite data, please see [Weather concepts](https://aka.ms/AzureMapsWeatherConcepts).<br>\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+          },
+          {
+            "value": "microsoft.dem",
+            "description": "Digital Elevation Model tiles. The tiles are in the GeoTIFF format with a single 32-bit floating point band. The tiles cover the whole landmass of Earth. Some small islands (e.g., atolls) might not be represented accurately.<br>\n* The vertical unit for measurement of elevation height is meters. An elevation value of -32767.0 is used for points that have no data value, most often returned where there isn't landmass (i.e. water).<br>\n* The horizontal reference datum is the World Geodetic System 1984 (WGS84-G1150) and the vertical reference datum is the Earth Gravitational Model 2008 (EGM2008).<br>\n* Tiles are 258x258 pixel squares rather than the standard 256 x 256. This is done to allow for accurate interpolation of values at the tile edges. As such adjacent tiles overlap by 1 pixel along all edges.<br>\n* Tile data comes from the [Airbus WorldDEM4Ortho product](https://www.intelligence-airbusds.com/worlddem-streaming/). Urban areas are approximately leveled down to ground level. All other areas are represented by the object surface level (e.g., trees). <br>\n\nSupports zoom level 13 only. Format: raster (tiff)."
           }
         ]
       },
@@ -236,7 +241,6 @@
   "paths": {
     "/map/tile": {
       "get": {
-        "x-publish": true,
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
         "operationId": "RenderV2_GetMapTilePreview",
         "x-ms-examples": {
@@ -286,7 +290,7 @@
             ],
             "x-ms-enum": {
               "name": "TileSize",
-              "modelAsString": false,
+              "modelAsString": true,
               "values": [
                 {
                   "value": "256",
@@ -294,7 +298,7 @@
                 },
                 {
                   "value": "512",
-                  "description": "Return a 512 by 512 pixel tile.  Available for all tilesetIds except for \n* microsoft.weather.radar.main\n* microsoft.weather.infrared.main\n* microsoft.base.hybrid"
+                  "description": "Return a 512 by 512 pixel tile.  Available for all tilesetIds except for \n* microsoft.weather.radar.main\n* microsoft.weather.infrared.main\n* microsoft.base.hybrid\n* microsoft.dem\n* microsoft.imagery"
                 }
               ]
             }

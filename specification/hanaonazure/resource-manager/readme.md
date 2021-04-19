@@ -62,7 +62,9 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-powershell
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -71,6 +73,9 @@ swagger-to-sdk:
     after_scripts:
       - node sdkauto_afterscript.js hanaonazure/resource-manager
 ```
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 

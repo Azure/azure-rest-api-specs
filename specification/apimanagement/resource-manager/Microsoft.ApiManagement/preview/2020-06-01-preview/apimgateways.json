@@ -1029,6 +1029,295 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/certificateAuthorities": {
+      "get": {
+        "tags": [
+          "GatewayCertificateAuthority"
+        ],
+        "operationId": "GatewayCertificateAuthority_ListByService",
+        "description": "Lists the collection of Certificate Authorities for the specified Gateway entity.",
+        "x-ms-examples": {
+          "ApiManagementListGatewaycertificateAuthorities": {
+            "$ref": "./examples/ApiManagementListGatewayCertificateAuthorities.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | eq, ne |  |</br>"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Collection of Gateway Certificate Authority entities.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayCertificateAuthorityCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./definitions.json#/definitions/GatewayCertificateAuthorityContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/certificateAuthorities/{certificateId}": {
+      "head": {
+        "tags": [
+          "GatewayCertificateAuthority"
+        ],
+        "operationId": "GatewayCertificateAuthority_GetEntityTag",
+        "description": "Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.",
+        "x-ms-examples": {
+          "ApiManagementHeadGatewayCertificateAuthority": {
+            "$ref": "./examples/ApiManagementHeadGatewayCertificateAuthority.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/CertificateIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified Gateway Certificate Authority entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GatewayCertificateAuthority"
+        ],
+        "operationId": "GatewayCertificateAuthority_Get",
+        "description": "Get assigned Gateway Certificate Authority details.",
+        "x-ms-examples": {
+          "ApiManagementGetGatewayCertificateAuthority": {
+            "$ref": "./examples/ApiManagementGetGatewayCertificateAuthority.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/CertificateIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Gateway Certificate Authority entity.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayCertificateAuthorityContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "GatewayCertificateAuthority"
+        ],
+        "operationId": "GatewayCertificateAuthority_CreateOrUpdate",
+        "description": "Assign Certificate entity to Gateway entity as Certificate Authority.",
+        "x-ms-examples": {
+          "ApiManagementCreateGatewayCertificateAuthority": {
+            "$ref": "./examples/ApiManagementCreateGatewayCertificateAuthority.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/CertificateIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayCertificateAuthorityContract"
+            }
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Certificate entity was successfully assigned to Gateway entity as Certificate Authority.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayCertificateAuthorityContract"
+            }
+          },
+          "200": {
+            "description": "Gateway Certificate Authority details were successfully updated",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayCertificateAuthorityContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GatewayCertificateAuthority"
+        ],
+        "operationId": "GatewayCertificateAuthority_Delete",
+        "description": "Remove relationship between Certificate Authority and Gateway entity.",
+        "x-ms-examples": {
+          "ApiManagementDeleteGatewayCertificateAuthority": {
+            "$ref": "./examples/ApiManagementDeleteGatewayCertificateAuthority.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/CertificateIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Certificate entity was successfully removed from Gateway entity as Certificate Authority."
+          },
+          "204": {
+            "description": "Certificate was successfully removed from Gateway entity as Certificate Authority by one of the previous requests or never assigned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {},
