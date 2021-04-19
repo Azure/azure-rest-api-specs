@@ -206,8 +206,7 @@
           "type": "integer"
         },
         "serviceType": {
-          "type": "string",
-          "description": "The type of Azure resource."
+          "$ref": "#/definitions/ServiceType"
         }
       },
       "required": [
@@ -219,11 +218,6 @@
       "description": "Services response resource.",
       "type": "object",
       "discriminator": "serviceType",
-      "allOf": [
-        {
-          "$ref": ".../../cosmos-db.json#/definitions/ARMProxyResource"
-        }
-      ],
       "properties": {
         "creationTime": {
           "readOnly": true,
@@ -239,8 +233,7 @@
           "type": "integer"
         },
         "serviceType": {
-          "type": "string",
-          "description": "The type of Azure resource."
+          "$ref": "#/definitions/ServiceType"
         },
         "status": {
           "$ref": "#/definitions/ServiceResourceStatus"
@@ -257,6 +250,11 @@
     "ServiceResource": {
       "description": "Properties for the database account.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": ".../../cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -393,6 +391,18 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ServiceSize"
+      }
+    },
+    "ServiceType": {
+      "type": "string",
+      "enum": [
+        "SqlDedicatedGateway",
+        "DataTransfer"
+      ],
+      "description": "ServiceType for the service.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ServiceType"
       }
     }
   },
