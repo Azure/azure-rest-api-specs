@@ -95,11 +95,9 @@ See [Test Step Schema](./TestDefinitionFileSchema.json#49).
 Defines one test step in test scenario.
 
 Should be on of the following:
-- [Test Definition Reference](#test-definition-reference)
-  - [Test Definition File](#test-definition-file)
-  - [Test Scenario](#test-scenario)
-  - [Test Step](#test-step)
-  - [Test Step Arm Template Deployment](#test-step-arm-template-deployment)
+- [Test Step Rest Call](#test-step-rest-call)
+- [Test Step Arm Template Deployment](#test-step-arm-template-deployment)
+- [Test Step Raw Call](#test-step-raw-call)
 
 All of the above definitions share the following fields:
 - **variables**
@@ -113,7 +111,7 @@ All of the above definitions share the following fields:
 
 See [Test Step Arm Template Deployment Schema](./TestDefinitionFileSchema.json#77).
 
-Step to deploy ARM template to the test scope. Template parameters will also interacts with variables automatically, see [Variables](./Variables.md).
+Step to deploy ARM template to the test scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
 **Example:**
 ```yaml
@@ -130,5 +128,42 @@ armTemplateParameters: ./dep-storage-account-params.json
   - **Type:** Optional, String
   - Path to ARM template parameter file. See [ARM Template Parameter File](https://docs.microsoft.com/azure/azure-resource-manager/templates/parameter-files).
 
+## Test Step Rest Call
 
+See [Test Step Rest Call Schema](./TestDefinitionFileSchema.json#96)
 
+Step to run a swagger operation defined rest call. This may not be just one http call.
+
+- If the operation is a long running operation (LRO), then follow the LRO polling strategy.
+  - Response statusCode must be 200 if the LRO succeeded, no matter what code the initial response is.
+  - If the LRO is PUT/PATCH, the runner should automatically insert a GET after the polling to verify the resource update result.
+- If the operation is DELETE, then after the operation, the runner should automatically insert a GET to verify resource cannot be found.
+
+Rest call step could be defined either by an example file, or by resourceName tracking and update.
+
+Rest call will have computed **requestParameter** and **responseExpected** after parsing and loading:
+- **requestParameter** 
+
+### Rest Call by Example File
+
+**Example:**
+```yaml
+step: Create_publicIPAddresses_pubipdns
+resourceName: publicIPAddresses_pubipdns
+exampleFile: ../examples/Create_publicIPAddresses_pubipdns_Generated.json
+operationId: PublicIPAddresses_CreateOrUpdate
+statusCode: 200
+```
+
+**Fields:**
+- **exampleFile**
+  - **Type:** Required, String
+  - Path to example file. Should be in format of "x-ms-example" files.
+- **operationId**
+  - **Type:** Optional, String
+  - OperationId defined in swagger operation. It could be skipped if the example file is referenced by only one operation so we could detect the operationId.
+- **statusCode:**
+  - **Type:** Optional, Number
+  - **Default:** 200
+  - Expected response code.
+  - For LRO it must be 200 to indicate succeeded result, and must be 400 to indicate failed result.
