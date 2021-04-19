@@ -34,6 +34,48 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/services": {
+      "get": {
+        "x-ms-examples": {
+          "CosmosDBServicesList": {
+            "$ref": "./examples/CosmosDBServicesList.json"
+          }
+        },
+        "operationId": "Service_List",
+        "description": "Gets the status of service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ServiceResource.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/services/{serviceName}": {
       "put": {
         "tags": [
@@ -86,6 +128,12 @@
           },
           "202": {
             "description": "The job will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
+            }
           }
         }
       },
@@ -126,6 +174,12 @@
             "description": "The ServiceResource.",
             "schema": {
               "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
             }
           }
         }
@@ -172,6 +226,12 @@
           },
           "200": {
             "description": "The response for service deletion."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": ".../../cosmos-db.json#/definitions/CloudError"
+            }
           }
         }
       }
@@ -203,7 +263,9 @@
         },
         "instanceCount": {
           "description": "Instance count for the service.",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1,
+          "format": "int32"
         },
         "serviceType": {
           "$ref": "#/definitions/ServiceType"
@@ -230,7 +292,9 @@
         },
         "instanceCount": {
           "description": "Instance count for the service.",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
         },
         "serviceType": {
           "$ref": "#/definitions/ServiceType"
@@ -261,6 +325,19 @@
           "$ref": "#/definitions/ServiceResourceGetProperties"
         }
       }
+    },
+    "ServiceResourceListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceResource"
+          },
+          "description": "List of SQL databases and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the SQL databases and their properties."
     },
     "DataTransferServiceResource": {
       "description": "Describes the service response property.",
