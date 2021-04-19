@@ -47,56 +47,6 @@
       "apiKeyQuery": []
     }
   ],
-  "responses": {
-    "400": {
-      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
-      "schema": {
-        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "401": {
-      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
-      "schema": {
-        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-      },
-      "headers": {
-        "WWW-Authenticate": {
-          "type": "string",
-          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
-        }
-      },
-      "x-ms-error-response": true
-    },
-    "403": {
-      "description": "Permission, capacity, or authentication issues.",
-      "schema": {
-        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "404": {
-      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
-      "schema": {
-        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "409": {
-      "description": "The request could not be completed due to a conflict with the current state of the resource. Likely caused by a parallel update to the same resource.",
-      "schema": {
-        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "500": {
-      "description": "An error occurred while processing the request. Please try again later.",
-      "schema": {
-        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-      },
-      "x-ms-error-response": true
-    }
-  },
   "parameters": {
     "DatasetIdForCreate": {
       "name": "datasetId",
@@ -185,19 +135,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -226,19 +176,19 @@
             "description": "Stateset Deleted."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -276,19 +226,19 @@
             "description": "Stateset styles are updated successfully."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       }
@@ -331,19 +281,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -372,19 +322,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       }
@@ -421,19 +371,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -474,19 +424,19 @@
             "description": "Feature states are updated successfully."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -521,22 +471,22 @@
             "description": "Feature states deleted successfully."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "409": {
-            "$ref": "#/responses/409"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/409"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       }
