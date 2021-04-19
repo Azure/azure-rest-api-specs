@@ -689,12 +689,14 @@
   "definitions": {
     "RunRequest": {
       "description": "The request parameters for scheduling a run.",
+      "required": [
+        "type"
+      ],
       "type": "object",
       "properties": {
         "type": {
           "description": "The type of the run request.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "isArchiveEnabled": {
           "description": "The value that indicates whether archiving is enabled for the run or not.",
@@ -1745,6 +1747,9 @@
     },
     "TaskStepUpdateParameters": {
       "description": "Base properties for updating any task step.",
+      "required": [
+        "type"
+      ],
       "type": "object",
       "properties": {
         "type": {
@@ -1755,7 +1760,6 @@
             "EncodedTask"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "StepType",
             "modelAsString": true
@@ -2404,6 +2408,9 @@
     },
     "DockerBuildStepUpdateParameters": {
       "description": "The properties for updating a docker build step.",
+      "required": [
+        "type"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -2446,6 +2453,9 @@
     },
     "FileTaskStepUpdateParameters": {
       "description": "The properties of updating a task step.",
+      "required": [
+        "type"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -2473,6 +2483,9 @@
     },
     "EncodedTaskStepUpdateParameters": {
       "description": "The properties for updating encoded task step.",
+      "required": [
+        "type"
+      ],
       "type": "object",
       "allOf": [
         {
