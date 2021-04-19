@@ -231,6 +231,59 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/onPremiseIotSensors/{onPremiseIotSensorName}/downloadResetPassword": {
+      "post": {
+        "x-ms-examples": {
+          "Download file for reset password of the sensor": {
+            "$ref": "./examples/OnPremiseIotSensors/DownloadResetPassword.json"
+          }
+        },
+        "tags": [
+          "IoT Sensors"
+        ],
+        "operationId": "OnPremiseIotSensors_DownloadResetPassword",
+        "description": "Download file for reset password of the sensor",
+        "produces": [
+          "application/zip"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/OnPremiseIotSensorName"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Input for reset password.",
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordInput"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Downloaded reset password file",
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -268,6 +321,16 @@
       "type": "object",
       "description": "On-premise IoT sensor properties",
       "properties": {}
+    },
+    "ResetPasswordInput": {
+      "description": "Reset password input.",
+      "type": "object",
+      "properties": {
+        "applianceId": {
+          "description": "The appliance id of the sensor.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {

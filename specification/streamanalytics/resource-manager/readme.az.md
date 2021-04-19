@@ -9,4 +9,5 @@ az:
   namespace: azure.mgmt.streamanalytics
 az-output-folder: $(azure-cli-extension-folder)/src/streamanalytics
 python-sdk-output-folder: "$(az-output-folder)/azext_streamanalytics/vendored_sdks/streamanalytics"
+sdk-no-flatten: true
 ```

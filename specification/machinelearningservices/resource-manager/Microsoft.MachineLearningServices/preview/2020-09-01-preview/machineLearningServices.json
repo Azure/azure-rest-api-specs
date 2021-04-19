@@ -974,6 +974,10 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "nodes"
+        },
         "x-ms-examples": {
           "Get compute nodes information for a compute": {
             "$ref": "./examples/amlComputeListNodes.json"
@@ -1781,6 +1785,286 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "operationId": "Notebooks_Prepare",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Prepare Notebook": {
+            "$ref": "./examples/workspacePrepareNotebook.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotebookResourceInfo"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "operationId": "Notebooks_ListKeys",
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/listNotebookKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ListNotebookKeysResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections": {
+      "get": {
+        "tags": [
+          "WorkspaceConnections"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ListWorkspaceConnections": {
+            "$ref": "./examples/listWorkspaceConnections.json"
+          }
+        },
+        "operationId": "WorkspaceConnections_List",
+        "description": "List all connections under a AML workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes a paginated array of Workspace connections and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedWorkspaceConnectionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}": {
+      "put": {
+        "tags": [
+          "WorkspaceConnections"
+        ],
+        "operationId": "WorkspaceConnections_Create",
+        "description": "Add a new workspace connection.",
+        "x-ms-examples": {
+          "CreateWorkspaceConnection": {
+            "$ref": "./examples/createWorkspaceConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The object for creating or updating a new workspace connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created the workspace connection.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "WorkspaceConnections"
+        ],
+        "operationId": "WorkspaceConnections_Get",
+        "description": "Get the detail of a workspace connection.",
+        "x-ms-examples": {
+          "GetWorkspaceConnection": {
+            "$ref": "./examples/getWorkspaceConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the detail of the linked workspace.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WorkspaceConnections"
+        ],
+        "operationId": "WorkspaceConnections_Delete",
+        "description": "Delete a workspace connection.",
+        "x-ms-examples": {
+          "DeleteWorkspaceConnection": {
+            "$ref": "./examples/deleteWorkspaceConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the workspace connection."
+          },
+          "204": {
+            "description": "Specific workspace connection not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1986,6 +2270,30 @@
         "name": "OrderString",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "ConnectionName": {
+      "name": "connectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Friendly name of the workspace connection",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetParameter": {
+      "in": "query",
+      "name": "target",
+      "type": "string",
+      "description": "Target of the workspace connection.",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "CategoryParameter": {
+      "in": "query",
+      "name": "category",
+      "type": "string",
+      "description": "Category of the workspace connection.",
+      "required": false,
       "x-ms-parameter-location": "method"
     }
   },
@@ -2248,11 +2556,6 @@
           "readOnly": true,
           "type": "string",
           "description": "Specifies the resource ID."
-        },
-        "amlWorkspaceLocation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Region of the AML workspace in the id."
         },
         "type": {
           "readOnly": true,
@@ -2517,6 +2820,10 @@
             "name": "QuotaUnit",
             "modelAsString": true
           }
+        },
+        "location": {
+          "description": "Region of the AML workspace in the id.",
+          "type": "string"
         }
       },
       "description": "The properties for Quota update or retrieval."
@@ -2529,10 +2836,6 @@
           "items": {
             "$ref": "#/definitions/QuotaBaseProperties"
           }
-        },
-        "location": {
-          "description": "Region of workspace quota to be updated.",
-          "type": "string"
         }
       },
       "description": "Quota update parameters."
@@ -2630,7 +2933,7 @@
           "type": "string",
           "description": "Specifies the resource ID."
         },
-        "amlWorkspaceLocation": {
+        "location": {
           "readOnly": true,
           "type": "string",
           "description": "Region of the AML workspace in the id."
@@ -2986,7 +3289,7 @@
                   "format": "int32",
                   "minimum": 1
                 },
-                "agentVMSize": {
+                "agentVmSize": {
                   "description": "Agent virtual machine size",
                   "type": "string"
                 },
@@ -3021,6 +3324,7 @@
                 "osType": {
                   "description": "Compute OS Type",
                   "type": "string",
+                  "default": "Linux",
                   "enum": [
                     "Linux",
                     "Windows"
@@ -3236,6 +3540,10 @@
                   "description": "Settings for a personal compute instance.",
                   "$ref": "#/definitions/PersonalComputeInstanceSettings"
                 },
+                "setupScripts": {
+                  "description": "Details of customized scripts to execute for setting up the cluster.",
+                  "$ref": "#/definitions/SetupScripts"
+                },
                 "lastOperation": {
                   "description": "The last operation on ComputeInstance.",
                   "$ref": "#/definitions/ComputeInstanceLastOperation",
@@ -3419,7 +3727,8 @@
           "type": "string",
           "enum": [
             "Disabled",
-            "Enabled"
+            "Enabled",
+            "Auto"
           ]
         },
         "cert": {
@@ -3624,6 +3933,11 @@
                 "$ref": "#/definitions/AmlComputeNodeInformation"
               },
               "description": "The collection of returned AmlCompute nodes details."
+            },
+            "nextLink": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The continuation token."
             }
           }
         }
@@ -6017,6 +6331,187 @@
         "objectId",
         "tenantId"
       ]
+    },
+    "NotebookListCredentialsResult": {
+      "type": "object",
+      "properties": {
+        "primaryAccessKey": {
+          "type": "string"
+        },
+        "secondaryAccessKey": {
+          "type": "string"
+        }
+      }
+    },
+    "NotebookResourceInfo": {
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "the data plane resourceId that used to initialize notebook component"
+        },
+        "notebookPreparationError": {
+          "$ref": "#/definitions/NotebookPreparationError",
+          "description": "The error that occurs when preparing notebook."
+        }
+      }
+    },
+    "NotebookPreparationError": {
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ListNotebookKeysResult": {
+      "type": "object",
+      "properties": {
+        "primaryAccessKey": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "secondaryAccessKey": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedWorkspaceConnectionsList": {
+      "type": "object",
+      "description": "Paginated list of Workspace connection objects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of Workspace connection objects.",
+          "items": {
+            "$ref": "#/definitions/WorkspaceConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A continuation link (absolute URI) to the next page of results in the list."
+        }
+      }
+    },
+    "WorkspaceConnection": {
+      "x-ms-azure-resource": true,
+      "description": "Workspace connection.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ResourceId of the workspace connection.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Friendly name of the workspace connection.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of workspace connection.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties of workspace connection.",
+          "$ref": "#/definitions/WorkspaceConnectionProps",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkspaceConnectionDto": {
+      "type": "object",
+      "description": "object used for creating workspace connection.",
+      "properties": {
+        "name": {
+          "description": "Friendly name of the workspace connection",
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties of workspace connection.",
+          "$ref": "#/definitions/WorkspaceConnectionProps",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkspaceConnectionProps": {
+      "type": "object",
+      "description": "Workspace Connection specific properties.",
+      "properties": {
+        "category": {
+          "description": "Category of the workspace connection.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Target of the workspace connection.",
+          "type": "string"
+        },
+        "authType": {
+          "description": "Authorization type of the workspace connection.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value details of the workspace connection.",
+          "type": "string"
+        }
+      }
+    },
+    "SetupScripts": {
+      "type": "object",
+      "description": "Details of customized scripts to execute for setting up the cluster.",
+      "properties": {
+        "scripts": {
+          "description": "Customized setup scripts",
+          "$ref": "#/definitions/ScriptsToExecute"
+        }
+      }
+    },
+    "ScriptsToExecute": {
+      "type": "object",
+      "description": "Customized setup scripts",
+      "properties": {
+        "startupScript": {
+          "description": "Script that's run every time the machine starts.",
+          "$ref": "#/definitions/ScriptReference"
+        },
+        "creationScript": {
+          "description": "Script that's run only once during provision of the compute.",
+          "$ref": "#/definitions/ScriptReference"
+        }
+      }
+    },
+    "ScriptReference": {
+      "type": "object",
+      "description": "Script reference",
+      "properties": {
+        "scriptSource": {
+          "description": "The storage source of the script: inline, workspace.",
+          "type": "string"
+        },
+        "scriptData": {
+          "description": "The location of scripts in the mounted volume.",
+          "type": "string"
+        },
+        "scriptArguments": {
+          "description": "Optional command line arguments passed to the script to run.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "Optional time period passed to timeout command.",
+          "type": "string"
+        }
+      }
     }
   }
 }

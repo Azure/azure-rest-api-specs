@@ -28,18 +28,27 @@ These are the global settings for the Azure Maintenance API.
 title: MaintenanceClient
 description: Maintenance Client
 openapi-type: arm
-tag: package-preview-2020-07
+tag: package-preview-2021-04
 ```
 
 
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.Maintenance/preview/2021-04-01-preview/Maintenance.json
+```
 ### Tag: package-preview-2020-07
 
 These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-07'
+``` yaml $(tag) == 'package-preview-2020-07'
 input-file:
   - Microsoft.Maintenance/preview/2020-07-01-preview/Maintenance.json
 ```
+
 ### Tag: package-2020-04
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
@@ -108,4 +117,3 @@ See configuration in [readme.java.md](./readme.java.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

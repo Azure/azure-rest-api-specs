@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2019-07-01-preview
 ```
 
+### Tag: package-2020-07-13-preview
+
+These settings apply only when `--tag=package-2020-07-13-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-13-preview'
+input-file:
+  - Microsoft.DevOps/preview/2020-07-13-preview/devops.json
+```
+
 ### Tag: package-2019-07-01-preview
 
 These settings apply only when `--tag=package-2019-07-01-preview` is specified on the command line.
@@ -88,12 +97,12 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
+``` yaml $(terraform)
+terraform:
     cli-name: devops
     azure_arm: true
     license_header: MICROSOFT_MIT_NO_VERSION

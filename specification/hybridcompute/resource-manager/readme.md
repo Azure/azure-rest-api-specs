@@ -26,19 +26,39 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-08-02
+tag: package-preview-2021-03
 ```
 
+
+### Tag: package-preview-2021-03
+
+These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-03'
+input-file:
+  - Microsoft.HybridCompute/preview/2021-03-25-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2021-03-25-preview/privateLinkScopes.json
+```
+### Tag: package-preview-2021-01
+
+These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-01'
+input-file:
+- Microsoft.HybridCompute/preview/2021-01-28-preview/HybridCompute.json
+- Microsoft.HybridCompute/preview/2021-01-28-preview/privateLinkScopes.json
+```
 
 ### Tag: package-preview-2020-08
 
 These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-08'
+``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
-  - Microsoft.HybridCompute/preview/2020-08-15-preview/HybridCompute.json
-  - Microsoft.HybridCompute/preview/2020-08-15-preview/privateLinkScopes.json
+- Microsoft.HybridCompute/preview/2020-08-15-preview/HybridCompute.json
+- Microsoft.HybridCompute/preview/2020-08-15-preview/privateLinkScopes.json
 ```
+
 ### Tag: package-2019-03
 
 These settings apply only when `--tag=package-2019-03` is specified on the command line.
@@ -95,8 +115,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-powershell
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -143,4 +165,3 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## TypeScript
 
 See configuration in [readme.typescript](./readme.typescript.md)
-

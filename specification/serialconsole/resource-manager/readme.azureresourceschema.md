@@ -20,5 +20,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.SerialConsole/stable/2018-05-01/serialconsole.json
+  - Microsoft.SerialConsole/stable/2018-05-01/serialport.json
 
 ```

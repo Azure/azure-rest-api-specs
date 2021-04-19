@@ -81,8 +81,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
   - Microsoft.Subscription/preview/2018-03-01-preview/operations.json
+  - Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
 
 ```
 

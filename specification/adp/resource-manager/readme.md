@@ -27,16 +27,26 @@ These are the global settings for the adp.
 ```yaml
 title: AdpManagementClient
 openapi-type: arm
-tag: package-2020-07-01-preview
+openapi-subtype: rpaas
+tag: package-2021-02-01-preview
 ```
 
 ### Tag: package-2020-07-01-preview
 
-These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
-
 ```yaml $(tag) == 'package-2020-07-01-preview'
+version: 2020-07-01-preview
+version-with-underscores: 2020_07_01_preview
 input-file:
   - Microsoft.AutonomousDevelopmentPlatform/preview/2020-07-01-preview/adp.json
+```
+
+### Tag: package-2021-02-01-preview
+
+```yaml $(tag) == 'package-2021-02-01-preview'
+version: 2021-02-01-preview
+version-with-underscores: 2021_02_01_preview
+input-file:
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2021-02-01-preview/adp.json
 ```
 
 ---

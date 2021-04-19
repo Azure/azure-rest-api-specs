@@ -2196,6 +2196,7 @@
           "$ref": "#/definitions/Resource"
         },
         {
+          "x-ms-client-name": "BaseManagedCluster",
           "properties": {
             "properties": {
               "description": "Properties of a managed cluster.",
@@ -2331,9 +2332,11 @@
         "identityProfile": {
           "additionalProperties": {
             "readOnly": true,
+            "x-ms-client-name": "managedClusterPropertiesIdentityProfileValue",
             "allOf": [
               {
-                "$ref": "#/definitions/UserAssignedIdentity"
+                "$ref": "#/definitions/UserAssignedIdentity",
+                "x-ms-client-name": "managedClusterPropertiesIdentityProfileValue"
               }
             ]
           },
@@ -2387,6 +2390,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-client-name": "ManagedClusterIdentityUserAssignedIdentitiesValue",
             "properties": {
               "principalId": {
                 "readOnly": true,

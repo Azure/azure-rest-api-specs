@@ -45,6 +45,23 @@ directive:
 
 ---
 
+### Tag: package-2021-03-preview-only
+
+These settings apply only when `--tag=package-2021-03-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-preview-only'
+input-file:
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
+directive:
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
+    where: $.definitions.Settings
+    reason: The Setting does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace. 
+```
+
+---
+
 ### Tag: package-2019-01-preview-only
 
 These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
@@ -58,6 +75,14 @@ directive:
     where: $.definitions.ThreatIntelligenceResource
     reason: Our API is designed based on per region per workspace concept. There is no use case of our customers to get all indicators in multiple workspaces.
     approved-by: "@cheggert"
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+    where: $.definitions.Watchlist
+    reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace. 
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+    where: $.definitions.AutomationRule
+    reason: The AutomationRule does not support list by subscription. It's not a top-level resource. To get the AutomationRule, we should have a subscription as well as a resource group and Log Analytics workspace. 
 ```
 
 ---
@@ -73,7 +98,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
