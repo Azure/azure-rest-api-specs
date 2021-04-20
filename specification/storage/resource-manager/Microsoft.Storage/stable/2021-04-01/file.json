@@ -209,15 +209,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "enum": [
-              "deleted",
-              "snapshots"
-            ],
-            "x-ms-enum": {
-              "name": "ListSharesExpand",
-              "modelAsString": true
-            },
-            "description": "Optional, used to expand the properties within share's properties."
+            "description": "Optional, used to expand the properties within share's properties. Valid values are: deleted, snapshots. Should be passed as a string with delimiter ','"
           }
         ],
         "responses": {
@@ -281,14 +273,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "enum": [
-              "snapshots"
-            ],
-            "x-ms-enum": {
-              "name": "PutSharesExpand",
-              "modelAsString": true
-            },
-            "description": "Optional, used to create a snapshot."
+            "description": "Optional, used to expand the properties within share's properties. Valid values are: snapshots. Should be passed as a string with delimiter ','"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -326,6 +311,9 @@
         "x-ms-examples": {
           "UpdateShares": {
             "$ref": "./examples/FileSharesPatch.json"
+          },
+          "UpdateShareAcls": {
+            "$ref": "./examples/FileShareAclsPatch.json"
           }
         },
         "description": "Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. ",
@@ -406,14 +394,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "enum": [
-              "stats"
-            ],
-            "x-ms-enum": {
-              "name": "GetShareExpand",
-              "modelAsString": false
-            },
-            "description": "Optional, used to expand the properties within share's properties."
+            "description": "Optional, used to expand the properties within share's properties. Valid values are: stats. Should be passed as a string with delimiter ','."
           },
           {
             "name": "x-ms-snapshot",
@@ -471,6 +452,13 @@
             "required": false,
             "type": "string",
             "description": "Optional, used to delete a snapshot."
+          },
+          {
+            "name": "$include",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Optional. Valid values are: snapshots, leased-snapshots, none. The default value is snapshots. For 'snapshots', the file share is deleted including all of its file share snapshots. If the file share contains leased-snapshots, the deletion fails. For 'leased-snapshots', the file share is deleted included all of its file share snapshots (leased/unleased). For 'none', the file share is deleted if it has no share snapshots. If the file share contains any snapshots (leased or unleased), the deletion fails."
           }
         ],
         "responses": {
@@ -534,6 +522,62 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/lease": {
+      "post": {
+        "tags": [
+          "FileShares"
+        ],
+        "operationId": "FileShares_Lease",
+        "x-ms-examples": {
+          "Acquire a lease on a share": {
+            "$ref": "./examples/FileSharesLease_Acquire.json"
+          },
+          "Break a lease on a share": {
+            "$ref": "./examples/FileSharesLease_Break.json"
+          }
+        },
+        "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
+        "parameters": [
+          {
+            "$ref": "./storage.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/ShareName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LeaseShareRequest"
+            },
+            "description": "Lease Share request body."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Lease Share operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LeaseShareResponse"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
             }
           }
         }
@@ -798,6 +842,55 @@
           "readOnly": true,
           "description": "The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files."
         },
+        "leaseStatus": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Locked",
+            "Unlocked"
+          ],
+          "x-ms-enum": {
+            "name": "LeaseStatus",
+            "modelAsString": true
+          },
+          "description": "The lease status of the share."
+        },
+        "leaseState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Available",
+            "Leased",
+            "Expired",
+            "Breaking",
+            "Broken"
+          ],
+          "x-ms-enum": {
+            "name": "LeaseState",
+            "modelAsString": true
+          },
+          "description": "Lease state of the share."
+        },
+        "leaseDuration": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Infinite",
+            "Fixed"
+          ],
+          "x-ms-enum": {
+            "name": "LeaseDuration",
+            "modelAsString": true
+          },
+          "description": "Specifies whether the lease on a share is of infinite or fixed duration, only when the share is leased."
+        },
+        "signedIdentifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignedIdentifier"
+          },
+          "description": "List of stored access policies specified on the share."
+        },
         "snapshotTime": {
           "type": "string",
           "format": "date-time",
@@ -806,6 +899,84 @@
         }
       },
       "description": "The properties of the file share."
+    },
+    "LeaseShareRequest": {
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "Acquire",
+            "Renew",
+            "Change",
+            "Release",
+            "Break"
+          ],
+          "description": "Specifies the lease action. Can be one of the available actions."
+        },
+        "leaseId": {
+          "type": "string",
+          "description": "Identifies the lease. Can be specified in any valid GUID string format."
+        },
+        "breakPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional. For a break action, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60."
+        },
+        "leaseDuration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Required for acquire. Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires."
+        },
+        "proposedLeaseId": {
+          "type": "string",
+          "description": "Optional for acquire, required for change. Proposed lease ID, in a GUID string format."
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "description": "Lease Share request schema."
+    },
+    "LeaseShareResponse": {
+      "properties": {
+        "leaseId": {
+          "type": "string",
+          "description": "Returned unique lease ID that must be included with any request to delete the share, or to renew, change, or release the lease."
+        },
+        "leaseTimeSeconds": {
+          "type": "string",
+          "description": "Approximate time remaining in the lease period, in seconds."
+        }
+      },
+      "description": "Lease Share response schema."
+    },
+    "SignedIdentifier": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "An unique identifier of the stored access policy."
+        },
+        "accessPolicy": {
+          "$ref": "#/definitions/AccessPolicy",
+          "description": "Access policy"
+        }
+      }
+    },
+    "AccessPolicy": {
+      "properties": {
+        "start": {
+          "type": "string",
+          "description": "Start time of the access policy"
+        },
+        "expiry": {
+          "type": "string",
+          "description": "Expiry time of the access policy"
+        },
+        "permission": {
+          "type": "string",
+          "description": "List of abbreviated permissions."
+        }
+      }
     },
     "CloudError": {
       "x-ms-external": true,

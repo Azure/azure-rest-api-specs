@@ -2426,6 +2426,21 @@
         "activeDirectoryProperties": {
           "$ref": "#/definitions/ActiveDirectoryProperties",
           "description": "Required if choose AD."
+        },
+        "defaultSharePermission": {
+          "type": "string",
+          "description": "Default share permission for users using Kerberos authentication if RBAC role is not assigned.",
+          "enum": [
+            "None",
+            "StorageFileDataSmbShareReader",
+            "StorageFileDataSmbShareContributor",
+            "StorageFileDataSmbShareElevatedContributor",
+            "StorageFileDataSmbShareOwner"
+          ],
+          "x-ms-enum": {
+            "name": "DefaultSharePermission",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -2562,6 +2577,10 @@
           "type": "boolean",
           "x-ms-client-name": "EnableNfsV3",
           "description": "NFS 3.0 protocol support enabled if set to true."
+        },
+        "allowCrossTenantReplication": {
+          "type": "boolean",
+          "description": "Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -3107,6 +3126,10 @@
           "type": "boolean",
           "x-ms-client-name": "EnableNfsV3",
           "description": "NFS 3.0 protocol support enabled if set to true."
+        },
+        "allowCrossTenantReplication": {
+          "type": "boolean",
+          "description": "Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property."
         }
       },
       "description": "Properties of the storage account."
@@ -3347,6 +3370,10 @@
         "allowSharedKeyAccess": {
           "type": "boolean",
           "description": "Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true."
+        },
+        "allowCrossTenantReplication": {
+          "type": "boolean",
+          "description": "Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property."
         }
       },
       "description": "The parameters used when updating a storage account."
@@ -4139,11 +4166,11 @@
         },
         "sourceAccount": {
           "type": "string",
-          "description": "Required. Source account name."
+          "description": "Required. Source account name. It should be full resource id if allowCrossTenantReplication set to false."
         },
         "destinationAccount": {
           "type": "string",
-          "description": "Required. Destination account name."
+          "description": "Required. Destination account name. It should be full resource id if allowCrossTenantReplication set to false."
         },
         "rules": {
           "type": "array",
