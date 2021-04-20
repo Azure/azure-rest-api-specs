@@ -142,7 +142,6 @@ input-file:
  - ./Microsoft.Sql/preview/2021-02-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/WorkloadGroups.json
-
 ```
 ### Tag: package-composite-v5
 
