@@ -671,6 +671,11 @@
           "description": "Indicates if the node type can only host Stateless workloads.",
           "default": false
         },
+        "multiplePlacementGroups": {
+          "type": "boolean",
+          "description": "Indicates if scale set associated with the node type can be composed of multiple placement groups.",
+          "default": false
+        },
         "provisioningState": {
           "$ref": "#/definitions/ManagedResourceProvisioningState",
           "readOnly": true,
@@ -911,7 +916,11 @@
         "Deleting",
         "Deleted",
         "Other"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ManagedResourceProvisioningState",
+        "modelAsString": true
+      }
     },
     "OperationResult": {
       "properties": {
