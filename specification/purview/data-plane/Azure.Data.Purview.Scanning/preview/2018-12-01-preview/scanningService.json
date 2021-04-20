@@ -5,6 +5,18 @@
     "description": "Creates a Microsoft.Scanning management client.",
     "version": "2018-12-01-preview"
   },
+  "produces": [
+    "application/json"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "paths": {
     "/azureKeyVaults/{azureKeyVaultName}": {
       "get": {
@@ -6913,6 +6925,15 @@
     }
   },
   "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "The scanning endpoint of your purview account. Example: https://{accountName}.scan.purview.azure.com",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
     "api-version": {
       "in": "query",
       "name": "api-version",
