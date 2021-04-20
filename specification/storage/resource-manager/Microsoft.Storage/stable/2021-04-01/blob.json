@@ -223,6 +223,9 @@
           },
           "PutContainerWithDefaultEncryptionScope": {
             "$ref": "./examples/BlobContainersPutDefaultEncryptionScope.json"
+          },
+          "PutContainerWithObjectLevelWorm": {
+            "$ref": "./examples/BlobContainersPutObjectLevelWorm.json"
           }
         },
         "description": "Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. ",
@@ -815,6 +818,45 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/migrate": {
+      "put": {
+        "tags": [
+          "BlobContainers"
+        ],
+        "operationId": "BlobContainers_ObjectLevelWorm",
+        "x-ms-examples": {
+          "VersionLevelWormContainerMigration": {
+            "$ref": "./examples/ObjectLevelWormContainerMigration.json"
+          }
+        },
+        "description": "This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container.",
+        "parameters": [
+          {
+            "$ref": "./storage.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/ContainerName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- returned when the blob container migration to support object level immutability completes."
+          },
+          "202": {
+            "description": "Accepted -- Blob Container migration to support object level immutability is accepted; operation will complete asynchronously."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -937,6 +979,10 @@
           "type": "boolean",
           "readOnly": true,
           "description": "The hasImmutabilityPolicy public property is set to true by SRP if ImmutabilityPolicy has been created for this container. The hasImmutabilityPolicy public property is set to false by SRP if ImmutabilityPolicy has not been created for this container."
+        },
+        "immutableStorageWithVersioning": {
+          "$ref": "#/definitions/ImmutableStorageWithVersioning",
+          "description": "The object level immutability property of the container. The property is immutable and can only be set to true at the container creation time. Existing containers must undergo a migration process."
         }
       },
       "description": "The properties of a container."
@@ -1023,6 +1069,34 @@
         "properties"
       ],
       "description": "The ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag."
+    },
+    "ImmutableStorageWithVersioning": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "This is an immutable property, when set to true it enables object level immutability at the container level."
+        },
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Returns the date and time the object level immutability was enabled."
+        },
+        "migrationState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "InProgress",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "MigrationState",
+            "modelAsString": true
+          },
+          "description": "This property denotes the container level immutability to object level immutability migration state."
+        }
+      },
+      "description": "Object level immutability properties of the container."
     },
     "UpdateHistoryProperty": {
       "properties": {
