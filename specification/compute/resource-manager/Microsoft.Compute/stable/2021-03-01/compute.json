@@ -3876,7 +3876,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RestorePointCreate"
+              "$ref": "#/definitions/RestorePoint"
             },
             "description": "Parameters supplied to the Create restore point operation."
           },
@@ -7403,12 +7403,12 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the provisioning state of the restore point collection."
+          "description": "The provisioning state of the restore point collection."
         },
         "restorePointCollectionId": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets the unique id of the restore point collection."
+          "description": "The unique id of the restore point collection."
         },
         "restorePoints": {
           "type": "array",
@@ -7416,7 +7416,7 @@
           "items": {
             "$ref": "#/definitions/RestorePoint"
           },
-          "description": "Gets a list containing all restore points created under this restore point collection."
+          "description": "A list containing all restore points created under this restore point collection."
         }
       },
       "description": "The restore point collection properties."
@@ -7610,23 +7610,6 @@
         }
       },
       "description": "Restore Point Provisioning details."
-    },
-    "RestorePointCreate": {
-      "properties": {
-        "excludeDisks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiEntityReference"
-          },
-          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "When creating a Restore Point, customer may specify the disks that will be excluded."
     },
     "RestorePoint": {
       "properties": {
