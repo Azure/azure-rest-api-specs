@@ -4255,10 +4255,6 @@
           "type": "boolean",
           "description": "Policy is enabled if set to true."
         },
-        "destination": {
-          "type": "string",
-          "description": "Container name where blob inventory files are stored. Must be pre-created."
-        },
         "type": {
           "type": "string",
           "description": "The valid value is Inventory",
@@ -4280,7 +4276,6 @@
       },
       "required": [
         "enabled",
-        "destination",
         "type",
         "rules"
       ],
@@ -4296,6 +4291,10 @@
           "type": "string",
           "description": "A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy."
         },
+        "destination": {
+          "type": "string",
+          "description": "Container name where blob inventory files are stored. Must be pre-created."
+        },
         "definition": {
           "$ref": "#/definitions/BlobInventoryPolicyDefinition",
           "description": "An object that defines the blob inventory policy rule."
@@ -4304,6 +4303,7 @@
       "required": [
         "name",
         "enabled",
+        "destination",
         "definition"
       ],
       "description": "An object that wraps the blob inventory rule. Each rule is uniquely defined by name."
@@ -4313,12 +4313,58 @@
         "filters": {
           "$ref": "#/definitions/BlobInventoryPolicyFilter",
           "description": "An object that defines the filter set."
+        },
+        "format": {
+          "type": "string",
+          "description": "This is a required field, it specifies the format for the inventory files.",
+          "enum": [
+            "Csv",
+            "Parquet"
+          ],
+          "x-ms-enum": {
+            "name": "format",
+            "modelAsString": true
+          }
+        },
+        "schedule": {
+          "type": "string",
+          "description": "This is a required field. This field is used to schedule an inventory formation.",
+          "enum": [
+            "Daily",
+            "Weekly"
+          ],
+          "x-ms-enum": {
+            "name": "schedule",
+            "modelAsString": true
+          }
+        },
+        "objectType": {
+          "type": "string",
+          "description": "This is a required field. This field specifies the scope of the inventory created either at the blob or container level.",
+          "enum": [
+            "Blob",
+            "Container"
+          ],
+          "x-ms-enum": {
+            "name": "objectType",
+            "modelAsString": true
+          }
+        },
+        "schemaFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "This is a required field. This field specifies the fields and properties of the object to be included in the inventory. Valid values for this field for the blob object type include Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType, AccessTier, AccessTierChangeTime, Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessedTime. Valid values for container object type include Name, Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold."
         }
       },
       "required": [
-        "filters"
+        "format",
+        "schedule",
+        "objectType",
+        "schemaFields"
       ],
-      "description": "An object that defines the blob inventory rule. Each definition consists of a set of filters."
+      "description": "An object that defines the blob inventory rule. Each definition consists of a set of filters, if no filter is specified then the rule applies to all the blobs in the account."
     },
     "BlobInventoryPolicyFilter": {
       "properties": {
