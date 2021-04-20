@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Machine Learning Workspaces",
     "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
-    "version": "2020-09-01-preview"
+    "version": "2021-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -43,7 +43,7 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -79,13 +79,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -120,13 +120,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -179,13 +179,13 @@
         "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -222,13 +222,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -273,13 +273,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -318,13 +318,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/PaginationParameter"
@@ -363,13 +363,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -398,6 +398,7 @@
         ],
         "description": "Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry",
         "operationId": "Workspaces_ResyncKeys",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Resync Workspace Keys": {
             "$ref": "./examples/resyncWorkspaceKeys.json"
@@ -405,13 +406,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -420,6 +421,9 @@
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was accepted; the request was well-formed and received properly."
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -439,10 +443,10 @@
         "description": "Gets the current usage information as well as limits for AML resources for given subscription and location.",
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "location",
@@ -488,10 +492,10 @@
             "pattern": "^[-\\w\\._]+$"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -535,10 +539,10 @@
             "description": "Quota update parameters."
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -562,7 +566,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/Quotas": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/quotas": {
       "get": {
         "tags": [
           "Quota"
@@ -571,10 +575,10 @@
         "description": "Gets the currently assigned Workspace Quotas based on VMFamily.",
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "location",
@@ -590,6 +594,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ListWorkspaceQuotas"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         },
@@ -617,10 +627,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/PaginationParameter"
@@ -663,16 +673,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/PaginationParameter"
@@ -715,10 +725,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -727,7 +737,7 @@
             "$ref": "#/parameters/ComputeNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -778,10 +788,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -790,7 +800,7 @@
             "$ref": "#/parameters/ComputeNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ComputeDefinitionParameter"
@@ -838,10 +848,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -850,7 +860,7 @@
             "$ref": "#/parameters/ComputeNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -892,10 +902,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -904,7 +914,7 @@
             "$ref": "#/parameters/ComputeNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/UnderlyingResourceActionParameter"
@@ -945,10 +955,10 @@
         "description": "Get the details (e.g IP address, port etc) of all the compute nodes in the compute.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -957,7 +967,7 @@
             "$ref": "#/parameters/ComputeNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -985,6 +995,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookAccessToken": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "return notebook access token and refresh token",
+        "operationId": "Workspaces_ListNotebookAccessToken",
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/listNotebookAccessToken.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/NotebookAccessTokenResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listKeys": {
       "post": {
         "tags": [
@@ -1000,10 +1052,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -1012,7 +1064,7 @@
             "$ref": "#/parameters/ComputeNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1044,12 +1096,13 @@
             "$ref": "./examples/startComputeInstance.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -1058,11 +1111,11 @@
             "$ref": "#/parameters/ComputeNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Success."
           },
           "default": {
@@ -1087,12 +1140,13 @@
             "$ref": "./examples/stopComputeInstance.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -1101,11 +1155,11 @@
             "$ref": "#/parameters/ComputeNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "Success."
           },
           "default": {
@@ -1132,10 +1186,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -1144,7 +1198,7 @@
             "$ref": "#/parameters/ComputeNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1166,7 +1220,7 @@
           "WorkspaceSkus"
         ],
         "description": "Lists all skus with associated features",
-        "operationId": "ListSkus",
+        "operationId": "Workspaces_ListSkus",
         "x-ms-examples": {
           "List Skus": {
             "$ref": "./examples/ListSkus.json"
@@ -1174,10 +1228,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1199,6 +1253,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_List",
+        "description": "List all the private endpoint connections associated with the workspace.",
+        "x-ms-examples": {
+          "StorageAccountListPrivateEndpointConnections": {
+            "$ref": "./examples/workspaceListPrivateEndpointConnections.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
@@ -1213,10 +1312,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -1225,7 +1324,7 @@
             "$ref": "#/parameters/PrivateEndpointConnectionName"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1238,7 +1337,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1256,10 +1355,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -1268,7 +1367,7 @@
             "$ref": "#/parameters/PrivateEndpointConnectionName"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "properties",
@@ -1290,7 +1389,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1308,10 +1407,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -1320,7 +1419,7 @@
             "$ref": "#/parameters/PrivateEndpointConnectionName"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1333,7 +1432,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1353,16 +1452,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1370,188 +1469,6 @@
             "description": "Successfully retrieved private link resources.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedServices": {
-      "get": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "x-ms-examples": {
-          "ListLinkedServices": {
-            "$ref": "./examples/listLinkedServices.json"
-          }
-        },
-        "operationId": "LinkedServices_List",
-        "description": "List all linked services under an AML workspace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the linked services.",
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedServices/{linkName}": {
-      "put": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "operationId": "LinkedServices_Create",
-        "description": "Add a new linked service.",
-        "x-ms-examples": {
-          "CreateLinkedService": {
-            "$ref": "./examples/createLinkedService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LinkName"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The object for creating or updating a linked service",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully created the linked service.",
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "operationId": "LinkedServices_Get",
-        "description": "Get the detail of a linked service.",
-        "x-ms-examples": {
-          "GetLinkedService": {
-            "$ref": "./examples/getLinkedService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LinkName"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the detail of the linked service.",
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "operationId": "LinkedServices_Delete",
-        "description": "Delete a linked service.",
-        "x-ms-examples": {
-          "DeleteLinkedService": {
-            "$ref": "./examples/deleteLinkedService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LinkName"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the linked service."
-          },
-          "204": {
-            "description": "Specific linked service not found."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1574,16 +1491,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/PaginationParameter"
@@ -1643,16 +1560,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/WebServiceNameParameter"
@@ -1693,16 +1610,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/WebServiceNameParameter"
@@ -1737,16 +1654,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/WebServiceNameParameter"
@@ -1803,13 +1720,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -1834,6 +1751,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "operationId": "StorageAccount_ListKeys",
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/listStorageAccountKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ListStorageAccountKeysResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys": {
       "post": {
         "tags": [
@@ -1847,13 +1805,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -1892,16 +1850,16 @@
         "description": "List all connections under a AML workspace.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/TargetParameter"
@@ -1940,10 +1898,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -1952,7 +1910,7 @@
             "$ref": "#/parameters/ConnectionName"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -1992,10 +1950,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -2004,7 +1962,7 @@
             "$ref": "#/parameters/ConnectionName"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2035,10 +1993,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -2047,7 +2005,7 @@
             "$ref": "#/parameters/ConnectionName"
           },
           {
-            "$ref": "#/parameters/APIVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2068,21 +2026,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "description": "Azure subscription identifier.",
-      "in": "path",
-      "type": "string",
-      "required": true
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "description": "Name of the resource group in which workspace is located.",
-      "in": "path",
-      "type": "string",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
     "WorkspaceNameParameter": {
       "name": "workspaceName",
       "description": "Name of Azure Machine Learning workspace.",
@@ -2115,16 +2058,9 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "APIVersionParameter": {
-      "in": "query",
-      "name": "api-version",
-      "type": "string",
-      "description": "Version of Azure Machine Learning resource provider API.",
-      "required": true
-    },
     "PaginationParameter": {
       "in": "query",
-      "name": "$skiptoken",
+      "name": "$skip",
       "type": "string",
       "description": "Continuation token for pagination.",
       "required": false,
@@ -2170,14 +2106,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the private endpoint connection associated with the workspace",
-      "x-ms-parameter-location": "method"
-    },
-    "LinkName": {
-      "name": "linkName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Friendly name of the linked workspace",
       "x-ms-parameter-location": "method"
     },
     "ModelIdParameter": {
@@ -2346,7 +2274,7 @@
       "description": "An object that represents a machine learning workspace.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2354,6 +2282,28 @@
           "$ref": "#/definitions/WorkspaceProperties",
           "description": "The properties of the machine learning workspace.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -2373,12 +2323,6 @@
         "friendlyName": {
           "description": "The friendly name for this workspace. This name in mutable",
           "type": "string"
-        },
-        "creationTime": {
-          "format": "date-time",
-          "description": "The creation time of the machine learning workspace in ISO8601 format.",
-          "type": "string",
-          "readOnly": true
         },
         "keyVault": {
           "description": "ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created",
@@ -2461,6 +2405,24 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of shared private link resources in this workspace."
+        },
+        "notebookInfo": {
+          "readOnly": true,
+          "$ref": "#/definitions/NotebookResourceInfo",
+          "description": "The notebook info of Azure ML workspace."
+        },
+        "serviceManagedResourcesSettings": {
+          "$ref": "#/definitions/ServiceManagedResourcesSettings",
+          "description": "The service managed resource settings."
+        },
+        "primaryUserAssignedIdentity": {
+          "description": "The user assigned identity resource id that represents the workspace identity.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id associated with this workspace.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2478,6 +2440,10 @@
           "$ref": "#/definitions/Sku",
           "description": "The sku of the workspace."
         },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
         "properties": {
           "$ref": "#/definitions/WorkspacePropertiesUpdateParameters",
           "description": "The properties that the machine learning workspace will be updated with.",
@@ -2494,6 +2460,18 @@
         },
         "friendlyName": {
           "description": "The friendly name for this workspace.",
+          "type": "string"
+        },
+        "imageBuildCompute": {
+          "description": "The compute name for image build",
+          "type": "string"
+        },
+        "serviceManagedResourcesSettings": {
+          "$ref": "#/definitions/ServiceManagedResourcesSettings",
+          "description": "The service managed resource settings."
+        },
+        "primaryUserAssignedIdentity": {
+          "description": "The user assigned identity resource id that represents the workspace identity.",
           "type": "string"
         }
       }
@@ -2556,6 +2534,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Specifies the resource ID."
+        },
+        "amlWorkspaceLocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Region of the AML workspace in the id."
         },
         "type": {
           "readOnly": true,
@@ -2820,10 +2803,6 @@
             "name": "QuotaUnit",
             "modelAsString": true
           }
-        },
-        "location": {
-          "description": "Region of the AML workspace in the id.",
-          "type": "string"
         }
       },
       "description": "The properties for Quota update or retrieval."
@@ -2836,6 +2815,10 @@
           "items": {
             "$ref": "#/definitions/QuotaBaseProperties"
           }
+        },
+        "location": {
+          "description": "Region of workspace quota to be updated.",
+          "type": "string"
         }
       },
       "description": "Quota update parameters."
@@ -2933,7 +2916,7 @@
           "type": "string",
           "description": "Specifies the resource ID."
         },
-        "location": {
+        "amlWorkspaceLocation": {
           "readOnly": true,
           "type": "string",
           "description": "Region of the AML workspace in the id."
@@ -3048,46 +3031,6 @@
         }
       }
     },
-    "Resource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "id": {
-          "description": "Specifies the resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Specifies the name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "The identity of the resource."
-        },
-        "location": {
-          "description": "Specifies the location of the resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Specifies the type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "tags": {
-          "description": "Contains resource tags defined as key/value pairs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The sku of the workspace."
-        }
-      }
-    },
     "ResourceId": {
       "properties": {
         "id": {
@@ -3106,7 +3049,8 @@
       "properties": {
         "userStorageKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "userStorageResourceId": {
           "readOnly": true,
@@ -3114,11 +3058,56 @@
         },
         "appInsightsInstrumentationKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "containerRegistryCredentials": {
           "readOnly": true,
           "$ref": "#/definitions/RegistryListCredentialsResult"
+        },
+        "notebookAccessKeys": {
+          "readOnly": true,
+          "$ref": "#/definitions/ListNotebookKeysResult"
+        }
+      }
+    },
+    "NotebookAccessTokenResult": {
+      "type": "object",
+      "properties": {
+        "notebookResourceId": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostName": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "publicDns": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "accessToken": {
+          "readOnly": true,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "tokenType": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "expiresIn": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "refreshToken": {
+          "readOnly": true,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "scope": {
+          "readOnly": true,
+          "type": "string"
         }
       }
     },
@@ -3176,7 +3165,7 @@
       "description": "Machine Learning compute object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         },
         {
           "type": "object",
@@ -3187,7 +3176,31 @@
             }
           }
         }
-      ]
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
     },
     "Compute": {
       "type": "object",
@@ -3226,15 +3239,15 @@
         },
         "createdOn": {
           "type": "string",
-          "description": "The date and time when the compute was created.",
+          "readOnly": true,
           "format": "date-time",
-          "readOnly": true
+          "description": "The time at which the compute was created."
         },
         "modifiedOn": {
           "type": "string",
-          "description": "The date and time when the compute was last modified.",
+          "readOnly": true,
           "format": "date-time",
-          "readOnly": true
+          "description": "The time at which the compute was last modified."
         },
         "resourceId": {
           "type": "string",
@@ -3252,6 +3265,10 @@
           "type": "boolean",
           "description": "Indicating whether the compute was provisioned by user and brought from outside if true, or machine learning service provisioned it if false.",
           "readOnly": true
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Opt-out of local authentication and ensure customers can use only MSI and AAD exclusively for authentication."
         }
       },
       "required": [
@@ -3287,11 +3304,25 @@
                   "description": "Number of agents",
                   "type": "integer",
                   "format": "int32",
-                  "minimum": 1
+                  "minimum": 0
                 },
                 "agentVmSize": {
                   "description": "Agent virtual machine size",
                   "type": "string"
+                },
+                "clusterPurpose": {
+                  "description": "Intended usage of the cluster",
+                  "type": "string",
+                  "default": "FastProd",
+                  "enum": [
+                    "FastProd",
+                    "DenseProd",
+                    "DevTest"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ClusterPurpose",
+                    "modelAsString": true
+                  }
                 },
                 "sslConfiguration": {
                   "description": "SSL configuration",
@@ -3300,6 +3331,23 @@
                 "aksNetworkingConfiguration": {
                   "description": "AKS networking configuration for vnet",
                   "$ref": "#/definitions/AksNetworkingConfiguration"
+                },
+                "loadBalancerType": {
+                  "description": "Load Balancer Type",
+                  "type": "string",
+                  "default": "PublicIp",
+                  "enum": [
+                    "PublicIp",
+                    "InternalLoadBalancer"
+                  ],
+                  "x-ms-enum": {
+                    "name": "LoadBalancerType",
+                    "modelAsString": true
+                  }
+                },
+                "loadBalancerSubnet": {
+                  "description": "Load Balancer Subnet",
+                  "type": "string"
                 }
               }
             }
@@ -3584,6 +3632,10 @@
                 "administratorAccount": {
                   "description": "Admin credentials for virtual machine",
                   "$ref": "#/definitions/VirtualMachineSshCredentials"
+                },
+                "isNotebookInstanceCompute": {
+                  "description": "Indicates whether this compute will be used for running notebooks.",
+                  "type": "boolean"
                 }
               }
             }
@@ -3648,6 +3700,10 @@
                 "databricksAccessToken": {
                   "description": "Databricks access token",
                   "type": "string"
+                },
+                "workspaceUrl": {
+                  "description": "Workspace Url",
+                  "type": "string"
                 }
               }
             }
@@ -3678,6 +3734,18 @@
         }
       ],
       "x-ms-discriminator-value": "DataLakeAnalytics"
+    },
+    "SynapseSpark": {
+      "description": "A SynapseSpark compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "$ref": "#/definitions/SynapseSparkPoolProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SynapseSpark"
     },
     "ServicePrincipalCredentials": {
       "type": "object",
@@ -3742,6 +3810,14 @@
         "cname": {
           "description": "CNAME of the cert",
           "type": "string"
+        },
+        "leafDomainLabel": {
+          "description": "Leaf domain label of public endpoint",
+          "type": "string"
+        },
+        "overwriteExistingDomain": {
+          "description": "Indicates whether to overwrite existing domain label.",
+          "type": "boolean"
         }
       }
     },
@@ -4107,7 +4183,8 @@
         "VirtualMachine",
         "HDInsight",
         "Databricks",
-        "DataLakeAnalytics"
+        "DataLakeAnalytics",
+        "SynapseSpark"
       ],
       "x-ms-enum": {
         "name": "ComputeType",
@@ -4137,6 +4214,11 @@
         "message": {
           "type": "string",
           "description": "Error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error",
           "readOnly": true
         },
         "details": {
@@ -4340,17 +4422,51 @@
         }
       }
     },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "List of private endpoint connection associated with the specified workspace"
+    },
     "PrivateEndpointConnection": {
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Resource properties."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "The Private Endpoint Connection resource."
@@ -4381,6 +4497,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The ARM identifier for Private Endpoint"
+        },
+        "subnetArmId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM identifier for Subnet resource that private endpoint links to"
         }
       },
       "description": "The Private Endpoint resource."
@@ -4450,11 +4571,33 @@
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "A private link resource"
@@ -4532,6 +4675,10 @@
             "modelAsString": true
           }
         },
+        "identity": {
+          "$ref": "#/definitions/IdentityForCmk",
+          "description": "The identity that will be used to access the key vault for encryption at rest."
+        },
         "keyVaultProperties": {
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "Customer Key vault properties."
@@ -4564,112 +4711,46 @@
       ],
       "type": "object"
     },
-    "LinkedServiceResponse": {
-      "description": "Linked service.",
+    "IdentityForCmk": {
+      "description": "Identity that will be used to access key vault for encryption at rest",
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "ResourceId of the link of the linked service.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Friendly name of the linked service.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type of linked service.",
-          "readOnly": true
-        },
-        "location": {
-          "description": "location of the linked service.",
+        "userAssignedIdentity": {
+          "description": "The ArmId of the user assigned identity that will be used to access the customer managed key vault",
           "type": "string"
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity"
-        },
-        "properties": {
-          "$ref": "#/definitions/LinkedServiceProps"
-        }
-      }
-    },
-    "LinkedServiceRequest": {
-      "type": "object",
-      "description": "object used for creating linked service.",
-      "properties": {
-        "name": {
-          "description": "Friendly name of the linked service",
-          "type": "string"
-        },
-        "location": {
-          "description": "location of the linked service.",
-          "type": "string"
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity"
-        },
-        "properties": {
-          "$ref": "#/definitions/LinkedServiceProps"
-        }
-      }
-    },
-    "LinkedServiceProps": {
-      "type": "object",
-      "description": "LinkedService specific properties.",
-      "required": [
-        "linkedServiceResourceId"
-      ],
-      "properties": {
-        "linkedServiceResourceId": {
-          "description": "ResourceId of the link target of the linked service.",
-          "type": "string"
-        },
-        "linkType": {
-          "description": "Type of the link target.",
-          "type": "string",
-          "enum": [
-            "Synapse"
-          ],
-          "x-ms-enum": {
-            "name": "LinkedServiceLinkType",
-            "modelAsString": false
-          }
-        },
-        "createdTime": {
-          "format": "date-time",
-          "description": "The creation time of the linked service.",
-          "type": "string"
-        },
-        "modifiedTime": {
-          "format": "date-time",
-          "description": "The last modified time of the linked service.",
-          "type": "string"
-        }
-      }
-    },
-    "LinkedServiceList": {
-      "type": "object",
-      "description": "List response of linked service.",
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "description": "Array of linked service.",
-          "items": {
-            "$ref": "#/definitions/LinkedServiceResponse"
-          }
         }
       }
     },
     "ServiceResource": {
       "type": "object",
       "description": "Machine Learning service object wrapped into ARM resource envelope.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         },
         {
           "type": "object",
@@ -4728,7 +4809,7 @@
           "description": "The error details.",
           "allOf": [
             {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           ],
           "readOnly": true
@@ -4900,13 +4981,25 @@
       "properties": {
         "cpu": {
           "format": "double",
-          "description": "The number of CPU cores on the container.",
+          "description": "The minimum amount of CPU cores to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 4
+        },
+        "cpuLimit": {
+          "format": "double",
+          "description": "The maximum amount of CPU cores allowed to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
           "type": "number",
           "example": 4
         },
         "memoryInGB": {
           "format": "double",
-          "description": "The amount of memory on the container in GB.",
+          "description": "The minimum amount of memory (in GB) to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 64
+        },
+        "memoryInGBLimit": {
+          "format": "double",
+          "description": "The maximum amount of memory (in GB) allowed to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
           "type": "number",
           "example": 64
         },
@@ -5705,7 +5798,7 @@
           "description": "The error details.",
           "allOf": [
             {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           ]
         }
@@ -6332,14 +6425,22 @@
         "tenantId"
       ]
     },
-    "NotebookListCredentialsResult": {
+    "ServiceManagedResourcesSettings": {
       "type": "object",
       "properties": {
-        "primaryAccessKey": {
-          "type": "string"
-        },
-        "secondaryAccessKey": {
-          "type": "string"
+        "cosmosDb": {
+          "$ref": "#/definitions/CosmosDbSettings",
+          "description": "The settings for the service managed cosmosdb account."
+        }
+      }
+    },
+    "CosmosDbSettings": {
+      "type": "object",
+      "properties": {
+        "collectionsThroughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The throughput of the collections in cosmosdb database"
         }
       }
     },
@@ -6376,11 +6477,23 @@
       "properties": {
         "primaryAccessKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "secondaryAccessKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ListStorageAccountKeysResult": {
+      "type": "object",
+      "properties": {
+        "userStorageKey": {
+          "readOnly": true,
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -6464,6 +6577,17 @@
         "value": {
           "description": "Value details of the workspace connection.",
           "type": "string"
+        },
+        "valueFormat": {
+          "description": "format for the workspace connection value",
+          "type": "string",
+          "enum": [
+            "JSON"
+          ],
+          "x-ms-enum": {
+            "name": "ValueFormat",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -6510,6 +6634,89 @@
         "timeout": {
           "description": "Optional time period passed to timeout command.",
           "type": "string"
+        }
+      }
+    },
+    "AutoScaleProperties": {
+      "type": "object",
+      "description": "Auto scale properties",
+      "properties": {
+        "minNodeCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "maxNodeCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "AutoPauseProperties": {
+      "type": "object",
+      "description": "Auto pause properties",
+      "properties": {
+        "delayInMinutes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SynapseSparkPoolProperties": {
+      "type": "object",
+      "description": "Properties specific to Synapse Spark pools.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "AKS properties",
+          "properties": {
+            "autoScaleProperties": {
+              "description": "Auto scale properties.",
+              "$ref": "#/definitions/AutoScaleProperties"
+            },
+            "autoPauseProperties": {
+              "description": "Auto pause properties.",
+              "$ref": "#/definitions/AutoPauseProperties"
+            },
+            "sparkVersion": {
+              "description": "Spark version.",
+              "type": "string"
+            },
+            "nodeCount": {
+              "description": "The number of compute nodes currently assigned to the compute.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "nodeSize": {
+              "description": "Node size.",
+              "type": "string"
+            },
+            "nodeSizeFamily": {
+              "description": "Node size family.",
+              "type": "string"
+            },
+            "subscriptionId": {
+              "description": "Azure subscription identifier.",
+              "type": "string"
+            },
+            "resourceGroup": {
+              "description": "Name of the resource group in which workspace is located.",
+              "type": "string"
+            },
+            "workspaceName": {
+              "description": "Name of Azure Machine Learning workspace.",
+              "type": "string"
+            },
+            "poolName": {
+              "description": "Pool name.",
+              "type": "string"
+            }
+          }
         }
       }
     }
