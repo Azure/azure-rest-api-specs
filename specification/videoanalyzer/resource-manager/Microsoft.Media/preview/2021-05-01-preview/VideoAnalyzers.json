@@ -349,11 +349,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the storage account resource. Video Analyzer relies on tables and queues as well as blobs, so the primary storage account must be a Standard Storage account (either Microsoft.ClassicStorage or Microsoft.Storage)."
+          "description": "The ID of the storage account resource. Video Analyzer relies on tables, queues, and blobs. The primary storage account must be a Standard Storage account (either Microsoft.ClassicStorage or Microsoft.Storage)."
         },
         "identity": {
           "$ref": "#/definitions/ResourceIdentity",
-          "description": "The storage account identity."
+          "description": "A managed identity that Video Analyzer will use to access the storage account."
         },
         "status": {
           "type": "string",
@@ -362,7 +362,7 @@
         }
       },
       "type": "object",
-      "description": "The storage account details."
+      "description": "The details about the associated storage account."
     },
     "SyncStorageKeysInput": {
       "properties": {
@@ -388,7 +388,7 @@
           "items": {
             "$ref": "#/definitions/Endpoint"
           },
-          "description": "The endpoints associated with this resource.",
+          "description": "The list of endpoints associated with this resource.",
           "readOnly": true
         },
         "encryption": {
@@ -408,7 +408,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VideoAnalyzerProperties",
-          "description": "The resource properties.",
+          "description": "The properties of the Video Analyzer account.",
           "x-ms-client-flatten": true
         },
         "systemData": {
@@ -418,7 +418,7 @@
         },
         "identity": {
           "$ref": "#/definitions/VideoAnalyzerIdentity",
-          "description": "The identities associated to the Video Analyzer resource."
+          "description": "The set of managed identities associated with the Video Analyzer resource."
         }
       },
       "type": "object",
@@ -455,11 +455,11 @@
       "properties": {
         "endpointUrl": {
           "type": "string",
-          "description": "The endpoint URL."
+          "description": "The URL of the endpoint."
         },
         "type": {
           "type": "string",
-          "description": "The endpoint type.",
+          "description": "The type of the endpoint.",
           "enum": [
             "ClientApi"
           ],
@@ -518,13 +518,13 @@
       "required": [
         "type"
       ],
-      "description": "The identity for the Video Analyzer resource."
+      "description": "The managed identity for the Video Analyzer resource."
     },
     "ResourceIdentity": {
       "properties": {
         "userAssignedIdentity": {
           "type": "string",
-          "description": "The user assigned managed identity's ARM ID to use when accessing a resource."
+          "description": "The user assigned managed identity's resource identifier to use when accessing a resource."
         }
       },
       "type": "object",
@@ -691,7 +691,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}": {
       "get": {
         "summary": "Get a Video Analyzer account",
-        "description": "Get the details of a Video Analyzer account",
+        "description": "Get the details of the specified Video Analyzer account",
         "operationId": "VideoAnalyzers_Get",
         "responses": {
           "200": {
@@ -733,7 +733,7 @@
       },
       "put": {
         "summary": "Create or update a Video Analyzer account",
-        "description": "Creates or updates a Video Analyzer account",
+        "description": "Create or update an instance of a Video Analyzer account",
         "operationId": "VideoAnalyzers_CreateOrUpdate",
         "responses": {
           "200": {
@@ -790,7 +790,7 @@
       },
       "delete": {
         "summary": "Delete a Video Analyzer account.",
-        "description": "Deletes a Video Analyzer account",
+        "description": "Delete the specified Video Analyzer account",
         "operationId": "VideoAnalyzers_Delete",
         "responses": {
           "200": {
@@ -832,7 +832,7 @@
       },
       "patch": {
         "summary": "Update a Video Analyzer account",
-        "description": "Updates an existing Video Analyzer account",
+        "description": "Updates an existing instance of Video Analyzer account",
         "operationId": "VideoAnalyzers_Update",
         "responses": {
           "200": {

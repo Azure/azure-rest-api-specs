@@ -113,8 +113,8 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/edgeModules": {
       "get": {
-        "summary": "List all existing edge module resources.",
-        "description": "List all existing edge module resources.",
+        "summary": "List edge module resources.",
+        "description": "List all of the existing edge module resources for a given Video Analyzer account.",
         "operationId": "EdgeModules_List",
         "responses": {
           "200": {
@@ -179,7 +179,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/edgeModules/{edgeModuleName}": {
       "get": {
         "summary": "Retrieves an existing edge module resource.",
-        "description": "Retrieves an existing edge module resource.",
+        "description": "Retrieves a specific existing edge module resource in the given Video Analyzer account.",
         "operationId": "EdgeModules_Get",
         "responses": {
           "200": {
@@ -210,7 +210,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Edge Module name."
+            "description": "The name of the edge module to retrieve."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -261,7 +261,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Edge Module name."
+            "description": "The name of the edge module to create or update."
           },
           {
             "name": "parameters",
@@ -315,7 +315,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Edge Module name."
+            "description": "The name of the edge module to be deleted."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -362,7 +362,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Edge Module name."
+            "description": "The name of the edge module used to create a new provisioning token."
           },
           {
             "name": "parameters",

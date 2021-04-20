@@ -439,7 +439,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos": {
       "get": {
         "summary": "List all existing video resources.",
-        "description": "List all existing video resources.",
+        "description": "List all existing video resources in the specified account.",
         "operationId": "Videos_List",
         "responses": {
           "200": {
@@ -489,8 +489,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}": {
       "get": {
-        "summary": "Retrieves an existing video resource.",
-        "description": "Retrieves an existing video resource.",
+        "summary": "Retrieves a video resource.",
+        "description": "Retrieves an existing video resource within an account with a given name.",
         "operationId": "Videos_Get",
         "responses": {
           "200": {
@@ -521,7 +521,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Video name."
+            "description": "The name of the video to retrieve."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -534,8 +534,8 @@
         }
       },
       "put": {
-        "summary": "Creates a new video resource or updates an existing one.",
-        "description": "Creates a new video resource or updates an existing one.",
+        "summary": "Create or updates a video resource.",
+        "description": "Creates a new video resource or updates an existing one in an account.",
         "operationId": "Videos_CreateOrUpdate",
         "responses": {
           "200": {
@@ -572,7 +572,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Video name."
+            "description": "The name of the video to create or update."
           },
           {
             "name": "parameters",
@@ -594,7 +594,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes an existing video resource and its underlying data.",
+        "summary": "Deletes a video resource.",
         "description": "Deletes an existing video resource and its underlying data. This operation is irreversible.",
         "operationId": "Videos_Delete",
         "responses": {
@@ -626,7 +626,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Video name."
+            "description": "The name of the video to delete."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -639,7 +639,7 @@
         }
       },
       "patch": {
-        "summary": "Updates individual properties of an existing video resource.",
+        "summary": "Updates the properties of a video resource.",
         "description": "Updates individual properties of an existing video resource.",
         "operationId": "Videos_Update",
         "responses": {
@@ -671,7 +671,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Video name."
+            "description": "The name of the video to update."
           },
           {
             "name": "parameters",
@@ -695,8 +695,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/videos/{videoName}/listStreamingToken": {
       "post": {
-        "summary": "Generates a streaming token which can be used for video playback.",
-        "description": "Generates a streaming token which can be used for video playback.",
+        "summary": "Generates a streaming token for video playback.",
+        "description": "Generates a streaming token used for authenticating video playback.",
         "operationId": "Videos_ListStreamingToken",
         "responses": {
           "200": {
@@ -727,7 +727,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Video name."
+            "description": "The name of the video to generate a token for playback."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -742,8 +742,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies": {
       "get": {
-        "summary": "List all existing access policy resources.",
-        "description": "List all existing access policy resources.",
+        "summary": "List access policy resources.",
+        "description": "List all existing access policy resources for the specified account.",
         "operationId": "AccessPolicies_List",
         "responses": {
           "200": {
@@ -793,8 +793,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/videoAnalyzers/{accountName}/accessPolicies/{accessPolicyName}": {
       "get": {
-        "summary": "Retrieves an existing access policy resource.",
-        "description": "Retrieves an existing access policy resource.",
+        "summary": "Retrieves an access policy resource.",
+        "description": "Retrieves an existing access policy resource from an account by name.",
         "operationId": "AccessPolicies_Get",
         "responses": {
           "200": {
@@ -825,7 +825,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Access Policy name."
+            "description": "The name of the access policy to retrieve."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -838,7 +838,7 @@
         }
       },
       "put": {
-        "summary": "Creates a new access policy resource or updates an existing one.",
+        "summary": "Creates or updates an access policy.",
         "description": "Creates a new access policy resource or updates an existing one.",
         "operationId": "AccessPolicies_CreateOrUpdate",
         "responses": {
@@ -876,7 +876,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Access Policy name."
+            "description": "The name of the access policy to create or update."
           },
           {
             "name": "parameters",
@@ -898,7 +898,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes an existing access policy resource.",
+        "summary": "Deletes an access policy.",
         "description": "Deletes an existing access policy resource.",
         "operationId": "AccessPolicies_Delete",
         "responses": {
@@ -930,7 +930,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Access Policy name."
+            "description": "The name of the access policy to delete."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -943,7 +943,7 @@
         }
       },
       "patch": {
-        "summary": "Updates individual properties of an existing access policy resource.",
+        "summary": "Updates an existing access policy.",
         "description": "Updates individual properties of an existing access policy resource.",
         "operationId": "AccessPolicies_Update",
         "responses": {
@@ -975,7 +975,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Access Policy name."
+            "description": "The name of the access policy to update."
           },
           {
             "name": "parameters",
