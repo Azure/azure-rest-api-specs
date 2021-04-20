@@ -1349,7 +1349,8 @@
     },
     "TagList": {
       "required": [
-        "imageName"
+        "imageName",
+        "tags"
       ],
       "description": "List of tag details",
       "x-accessibility": "internal",
@@ -1444,8 +1445,11 @@
     },
     "TagAttributesBase": {
       "required": [
+        "name",
+        "digest",
         "createdTime",
-        "lastUpdateTime"
+        "lastUpdateTime",
+        "changeableAttributes"
       ],
       "description": "Tag attribute details",
       "x-accessibility": "internal",
@@ -2646,7 +2650,7 @@
     },
     "AccessToken": {
       "name": "access_token",
-      "x-ms-client-name": "aadAccesstoken",
+      "x-ms-client-name": "aadAccessToken",
       "in": "formData",
       "required": true,
       "description": "AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.",
