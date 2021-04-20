@@ -406,7 +406,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleListResult"
+              "$ref": "#/definitions/UserRuleListResult"
             }
           },
           "default": {
@@ -460,7 +460,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/BaseRule"
+              "$ref": "#/definitions/BaseUserRule"
             }
           },
           "default": {
@@ -473,6 +473,9 @@
         "x-ms-examples": {
           "Gets a user rule": {
             "$ref": "./examples/NetworkManagerUserRuleGet.json"
+          },
+          "Gets a default user rule": {
+            "$ref": "./examples/NetworkManagerDefaultUserRuleGet.json"
           }
         }
       },
@@ -488,7 +491,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/BaseRule"
+              "$ref": "#/definitions/BaseUserRule"
             },
             "description": "The user rule to create or update"
           }
@@ -497,13 +500,13 @@
           "200": {
             "description": "Updated rule",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/BaseRule"
+              "$ref": "#/definitions/BaseUserRule"
             }
           },
           "201": {
             "description": "Created rule",
             "schema": {
-              "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/BaseRule"
+              "$ref": "#/definitions/BaseUserRule"
             }
           },
           "default": {
@@ -516,6 +519,9 @@
         "x-ms-examples": {
           "Create a user rule": {
             "$ref": "./examples/NetworkManagerUserRulePut.json"
+          },
+          "Create a default user rule": {
+            "$ref": "./examples/NetworkManagerDefaultUserRulePut.json"
           }
         }
       },
@@ -548,12 +554,19 @@
     }
   },
   "definitions": {
-    "UserRule": {
+    "BaseUserRule": {
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/UserRulePropertiesFormat",
-          "x-ms-client-flatten": true,
-          "description": "Indicates the properties of the security user rule"
+        "kind": {
+          "type": "string",
+          "description": "Whether the rule collection is custom or default.",
+          "enum": [
+            "Custom",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "UserRuleKind",
+            "modelAsString": true
+          }
         },
         "systemData": {
           "readOnly": true,
@@ -563,11 +576,46 @@
       },
       "allOf": [
         {
-          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/BaseRule"
+          "$ref": "./network.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "kind"
+      ],
+      "discriminator": "kind",
+      "description": "Network base rule."
+    },
+    "UserRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseUserRule"
+          },
+          "description": "A list of user rules"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "security user rule list result."
+    },
+    "UserRule": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserRulePropertiesFormat",
+          "x-ms-client-flatten": true,
+          "description": "Indicates the properties of the security user rule"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseUserRule"
         }
       ],
       "description": "Network security user rule.",
-      "x-ms-discriminator-value": "UserRule"
+      "x-ms-discriminator-value": "Custom"
     },
     "UserRulePropertiesFormat": {
       "type": "object",
@@ -641,11 +689,11 @@
       },
       "allOf": [
         {
-          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/BaseRule"
+          "$ref": "#/definitions/BaseUserRule"
         }
       ],
       "description": "Network security default user rule.",
-      "x-ms-discriminator-value": "DefaultUserRule"
+      "x-ms-discriminator-value": "Default"
     },
     "DefaultUserRulePropertiesFormat": {
       "type": "object",

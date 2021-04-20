@@ -406,7 +406,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/RuleListResult"
+              "$ref": "#/definitions/AdminRuleListResult"
             }
           },
           "default": {
@@ -460,7 +460,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/BaseRule"
+              "$ref": "#/definitions/BaseAdminRule"
             }
           },
           "default": {
@@ -473,6 +473,9 @@
         "x-ms-examples": {
           "Gets security admin rule": {
             "$ref": "./examples/NetworkManagerAdminRuleGet.json"
+          },
+          "Gets security default admin rule": {
+            "$ref": "./examples/NetworkManagerDefaultAdminRuleGet.json"
           }
         }
       },
@@ -488,7 +491,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BaseRule"
+              "$ref": "#/definitions/BaseAdminRule"
             },
             "description": "The admin rule to create or update"
           }
@@ -497,13 +500,13 @@
           "200": {
             "description": "Updated rule",
             "schema": {
-              "$ref": "#/definitions/BaseRule"
+              "$ref": "#/definitions/BaseAdminRule"
             }
           },
           "201": {
             "description": "Created rule",
             "schema": {
-              "$ref": "#/definitions/BaseRule"
+              "$ref": "#/definitions/BaseAdminRule"
             }
           },
           "default": {
@@ -516,6 +519,9 @@
         "x-ms-examples": {
           "Create an admin rule": {
             "$ref": "./examples/NetworkManagerAdminRulePut.json"
+          },
+          "Create a default admin rule": {
+            "$ref": "./examples/NetworkManagerDefaultAdminRulePut.json"
           }
         }
       },
@@ -626,12 +632,12 @@
       },
       "description": "A list of network manager security configurations"
     },
-    "RuleListResult": {
+    "AdminRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BaseRule"
+            "$ref": "#/definitions/BaseAdminRule"
           },
           "description": "A list of rules"
         },
@@ -703,19 +709,17 @@
       },
       "description": "Defines the rule collection properties."
     },
-    "BaseRule": {
+    "BaseAdminRule": {
       "properties": {
         "kind": {
           "type": "string",
           "description": "Whether the rule collection is custom or default.",
           "enum": [
-            "AdminRule",
-            "UserRule",
-            "DefaultUserRule",
-            "DefaultAdminRule"
+            "Custom",
+            "Default"
           ],
           "x-ms-enum": {
-            "name": "Kind",
+            "name": "AdminRuleKind",
             "modelAsString": true
           }
         },
@@ -746,11 +750,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BaseRule"
+          "$ref": "#/definitions/BaseAdminRule"
         }
       ],
       "description": "Network admin rule.",
-      "x-ms-discriminator-value": "AdminRule"
+      "x-ms-discriminator-value": "Custom"
     },
     "AdminPropertiesFormat": {
       "properties": {
@@ -835,11 +839,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BaseRule"
+          "$ref": "#/definitions/BaseAdminRule"
         }
       ],
       "description": "Network default admin rule.",
-      "x-ms-discriminator-value": "DefaultAdminRule"
+      "x-ms-discriminator-value": "Default"
     },
     "DefaultAdminPropertiesFormat": {
       "type": "object",
