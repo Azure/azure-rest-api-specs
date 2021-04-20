@@ -118,6 +118,33 @@ input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
 ```
 
+``` yaml $(tag) == 'package-artifacts-2019-06-01-preview'
+input-file:
+- Microsoft.Synapse/stable/2020-12-01/artifacts.json
+- Microsoft.Synapse/stable/2020-12-01/bigDataPools.json
+- Microsoft.Synapse/stable/2020-12-01/checkAccessSynapseRbac.json
+- Microsoft.Synapse/stable/2020-12-01/gitintegration.json
+- Microsoft.Synapse/stable/2020-12-01/integrationRuntimes.json
+- Microsoft.Synapse/stable/2020-12-01/library.json
+- Microsoft.Synapse/stable/2020-12-01/managedPrivateEndpoints.json
+- Microsoft.Synapse/stable/2020-12-01/monitoring.json
+- Microsoft.Synapse/stable/2020-12-01/operations.json
+- Microsoft.Synapse/stable/2020-12-01/roleAssignments.json
+- Microsoft.Synapse/stable/2020-12-01/roleDefinitions.json
+- Microsoft.Synapse/stable/2020-12-01/roles.json
+- Microsoft.Synapse/stable/2020-12-01/sparkJob.json
+- Microsoft.Synapse/stable/2020-12-01/sqlPools.json
+- Microsoft.Synapse/stable/2020-12-01/workspace.json
+- Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
+- Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
+- Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
+- Microsoft.Synapse/stable/2020-12-01/entityTypes/Notebook.json
+- Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json
+- Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
+- Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
+- Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+```
+
 ## Suppression
 ``` yaml
 directive:
