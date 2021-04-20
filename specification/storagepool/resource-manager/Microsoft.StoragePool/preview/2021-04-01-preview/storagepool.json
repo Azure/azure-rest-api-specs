@@ -356,12 +356,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.StoragePool/locations/{location}/diskPoolSkus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StoragePool/locations/{location}/diskPoolZones": {
       "get": {
         "tags": [
-          "DiskPoolSkus"
+          "DiskPoolZones"
         ],
-        "operationId": "DiskPoolSkus_List",
+        "operationId": "DiskPoolZones_List",
         "description": "Lists available Disk Pool Skus in an Azure location.",
         "parameters": [
           {
@@ -378,7 +378,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DiskPoolSkuListResult"
+              "$ref": "#/definitions/DiskPoolZoneListResult"
             }
           },
           "default": {
@@ -393,7 +393,7 @@
         },
         "x-ms-examples": {
           "List Disk Pool Skus": {
-            "$ref": "./examples/DiskPoolSkus_List.json"
+            "$ref": "./examples/DiskPoolZones_List.json"
           }
         }
       }
@@ -1112,12 +1112,12 @@
         }
       }
     },
-    "DiskPoolSkuListResult": {
+    "DiskPoolZoneListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DiskPoolSkuInfo"
+            "$ref": "#/definitions/DiskPoolZoneInfo"
           },
           "description": "The list of Disk Pool Skus."
         },
@@ -1128,7 +1128,7 @@
       },
       "description": "List Disk Pool skus operation response."
     },
-    "DiskPoolSkuInfo": {
+    "DiskPoolZoneInfo": {
       "type": "object",
       "description": "Disk Pool Sku Details",
       "properties": {
@@ -1146,10 +1146,10 @@
             "$ref": "#/definitions/AdditionalCapability"
           }
         },
-        "tier": {
+        "sku": {
           "description": "Determines the SKU of VM deployed for Disk Pool",
           "type": "string",
-          "$ref": "#/definitions/DiskPoolTier"
+          "$ref": "#/definitions/Sku"
         }
       }
     },
