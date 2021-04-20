@@ -3,7 +3,7 @@
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res7687",
     "accountName": "sto9699",
-    "api-version": "2020-08-01-preview",
+    "api-version": "2020-04-01",
     "monitor": "true"
   },
   "responses": {
@@ -18,11 +18,11 @@
               "policy": {
                 "enabled": true,
                 "type": "Inventory",
-                "destination": "containerName",
                 "rules": [
                   {
                     "enabled": true,
                     "name": "inventoryPolicyRule1",
+                    "destination": "container1",
                     "definition": {
                       "filters": {
                         "blobTypes": [
@@ -36,7 +36,24 @@
                         ],
                         "includeSnapshots": true,
                         "includeBlobVersions": true
-                      }
+                      },
+                      "format": "Csv",
+                      "schedule": "Daily",
+                      "objectType": "Blob",
+                      "schemaFields": [
+                        "Name",
+                        "Creation-Time",
+                        "Last-Modified",
+                        "Content-Length",
+                        "Content-MD5",
+                        "BlobType",
+                        "AccessTier",
+                        "AccessTierChangeTime",
+                        "Snapshot",
+                        "VersionId",
+                        "IsCurrentVersion",
+                        "Metadata"
+                      ]
                     }
                   }
                 ]
