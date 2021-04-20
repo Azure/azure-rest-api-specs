@@ -75,7 +75,7 @@ directive:
     reason: for this case the result of the proposed change would resemble a boolean anyways
   - suppress: R4024
     reason: Preview versions still in use
-  - suppress: RequiredSystemDataInNewApiVersions
+  - suppress: RequiredReadOnlySystemData
     reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
   - suppress: RequiredReadOnlySystemData
     reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
