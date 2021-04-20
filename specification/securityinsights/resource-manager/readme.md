@@ -26,14 +26,14 @@ These are the global settings for the SecurityInsights API.
 
 ```yaml
 openapi-type: arm
-tag: package-composite-v1
+tag: package-2020-01-only
 ```
 
 ### Tag: package-composite-v1
 
-These settings apply only when `--tag=package-composite-v1` is specified on the command line.
+These settings apply only when `--tag=package-2020-01-only` is specified on the command line.
 
-```yaml $(tag) == 'package-composite-v1'
+```yaml $(tag) == 'package-2020-01-only'
 input-file:
 - Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
 directive:
