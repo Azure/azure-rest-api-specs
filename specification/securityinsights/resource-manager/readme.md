@@ -60,14 +60,14 @@ directive:
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
     where: $.definitions.Settings
     reason: The Setting does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
-    - suppress: R4017
+  - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueries.json
     where: $.definitions.EntityQuery
-    reason: The EntityQuery does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
-    - suppress: R4017
+    reason: The EntityQuery does not support list by subscription. It's not a top-level resource. To get the EntityQuery, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueryTemplates.json
     where: $.definitions.EntityQueryTemplate
-    reason: The EntityQueryTemplate does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
+    reason: The EntityQueryTemplate does not support list by subscription. It's not a top-level resource. To get the EntityQueryTemplate, we should have a subscription as well as a resource group and Log Analytics workspace.
 ```
 
 ---
