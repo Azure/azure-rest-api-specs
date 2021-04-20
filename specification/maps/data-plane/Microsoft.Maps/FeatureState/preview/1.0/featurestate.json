@@ -700,92 +700,110 @@
             "values": [
               {
                 "value": "number",
-                "description": "Number type of stateset style.",
-                "name": "NumberTypeStyleRule"
+                "description": "Number type of stateset style."
               },
               {
                 "value": "boolean",
-                "description": "Boolean type of stateset style.",
-                "name": "BooleanTypeStyleRule"
+                "description": "Boolean type of stateset style."
               },
               {
                 "value": "string",
-                "description": "String type of stateset style.",
-                "name": "StringTypeStyleRule"
+                "description": "String type of stateset style."
               }
             ]
           }
         }
       }
     },
-    "BooleanTypeStyleRule": {
+    "boolean": {
       "description": "the boolean type style rule object.",
+      "x-ms-client-name": "BooleanTypeStyleRule",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/StyleRuleBase"
         },
         {
-          "type": "object",
-          "properties": {
-            "rules": {
-              "description": "Boolean style rules.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BooleanRuleObject"
-              }
-            }
-          },
-          "required": [
-            "rules"
-          ]
+          "$ref": "#/definitions/BooleanTypeStyleRuleProperties"
         }
       ]
     },
-    "NumberTypeStyleRule": {
+    "BooleanTypeStyleRuleProperties": {
+      "description": "Boolean type style rule properties definition.",
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "rules": {
+          "description": "Boolean style rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BooleanRuleObject"
+          }
+        }
+      },
+      "required": [
+        "rules"
+      ]
+    },
+    "number": {
       "description": "The numeric type style rule object.",
+      "x-ms-client-name": "NumberTypeStyleRule",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/StyleRuleBase"
         },
         {
-          "type": "object",
-          "properties": {
-            "rules": {
-              "description": "Numeric style rules.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NumberRuleObject"
-              }
-            }
-          },
-          "required": [
-            "rules"
-          ]    
+          "$ref": "#/definitions/NumberTypeStyleRuleProperties"
         }
       ]
     },
-    "StringTypeStyleRule": {
+    "NumberTypeStyleRuleProperties": {
+      "description": "Number type style rule properties definition.",
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "rules": {
+          "description": "Numeric style rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NumberRuleObject"
+          }
+        }
+      },
+      "required": [
+        "rules"
+      ]    
+    },
+    "string": {
       "description": "The string type style rule object.",
+      "x-ms-client-name": "StringTypeStyleRule",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/StyleRuleBase"
         },
         {
-          "type": "object",
-          "properties": {
-            "rules": {
-              "description": "String style rules.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/StringRuleObject"
-              }
-            }
-          },
-          "required": [
-            "rules"
-          ]    
+          "$ref": "#/definitions/StringTypeStyleRuleProperties"
         }
       ]
-    }
+    },
+    "StringTypeStyleRuleProperties": {
+      "description": "String type style rule properties definition.",
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "rules": {
+          "description": "String style rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StringRuleObject"
+          }
+        }
+      },
+      "required": [
+        "rules"
+      ]
+}
   }
 }
