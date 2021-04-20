@@ -3,7 +3,7 @@
   "info": {
     "title": "ApplicationInsightsManagementClient",
     "description": "Azure Application Insights workbook type.",
-    "version": "2020-10-20"
+    "version": "2021-03-08"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -175,6 +175,9 @@
           "WorkbookGet": {
             "$ref": "./examples/WorkbookGet.json"
           },
+          "WorkbookGet1": {
+            "$ref": "./examples/WorkbookGet1.json"
+          },
           "WorkbookManagedGet": {
             "$ref": "./examples/WorkbookManagedGet.json"
           }
@@ -327,6 +330,90 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/workbooks/{resourceName}/revisions": {
+      "get": {
+        "description": "Get the revisions for the workbook defined by its resourceName.",
+        "operationId": "Workbooks_RevisionsList",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkbookResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more workbook definitions.",
+            "schema": {
+              "$ref": "#/definitions/WorkbooksListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WorkbookRevisionsList": {
+            "$ref": "./examples/WorkbookRevisionsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/workbooks/{resourceName}/revisions/{revisionId}": {
+      "get": {
+        "description": "Get a single workbook revision defined by its revisionId.",
+        "operationId": "Workbooks_RevisionGet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkbookResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkbookRevisionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A workbook definition.",
+            "schema": {
+              "$ref": "#/definitions/Workbook"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookRevisionGet": {
+            "$ref": "./examples/WorkbookRevisionGet.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -424,6 +511,10 @@
           "x-ms-client-flatten": true,
           "description": "Metadata describing a workbook for an Azure resource.",
           "$ref": "#/definitions/WorkbookProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       }
     },
@@ -477,6 +568,16 @@
           "type": "string",
           "x-nullable": true,
           "description": "BYOS Storage Account URI"
+        },
+        "description": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The description of the workbook."
+        },
+        "revision": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The unique revision id for this workbook definition"
         }
       }
     },
@@ -530,6 +631,16 @@
             "type": "string"
           },
           "description": "A list of 0 or more tags that are associated with this workbook definition"
+        },
+        "description": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The description of the workbook."
+        },
+        "revision": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The unique revision id for this workbook definition"
         }
       }
     },
@@ -667,6 +778,14 @@
       },
       "collectionFormat": "csv",
       "description": "Tags presents on each workbook returned.",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkbookRevisionIdParameter": {
+      "name": "revisionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of the workbook's revision.",
       "x-ms-parameter-location": "method"
     }
   }
