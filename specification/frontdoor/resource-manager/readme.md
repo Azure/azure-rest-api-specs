@@ -204,6 +204,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -234,6 +235,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## CLI
 
 See configuration in [readme.cli.md](./readme.cli.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 

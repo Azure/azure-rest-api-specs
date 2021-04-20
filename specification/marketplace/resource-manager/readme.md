@@ -95,6 +95,8 @@ csharp:
   namespace: Microsoft.Azure.Management.Marketplace
   output-folder: $(csharp-sdks-folder)/marketplace/Microsoft.Azure.Management.Marketplace/src/Generated
   clear-output-folder: true
+  modelerfour:
+    lenient-model-deduplication: true
 ```
 
 ## AzureResourceSchema

@@ -335,7 +335,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "AzureResource": {
       "properties": {
         "id": {
           "type": "string",
@@ -351,6 +351,16 @@
           "type": "string",
           "readOnly": true,
           "description": "Azure resource type"
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource kind"
+        },
+        "identity": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource identity"
         },
         "location": {
           "type": "string",
@@ -377,7 +387,7 @@
       "description": "An action group resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/AzureResource"
         }
       ],
       "properties": {

@@ -30,6 +30,19 @@ description: The Microsoft Azure management API provides create, read, update, a
 openapi-type: arm
 tag: package-2020-01-01
 ```
+### Tag: package-2021-03-31-privatepreview
+
+These settings apply only when `--tag=package-2021-03-31-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-31-privatepreview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
+- Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
+```
+
+
+
 ### Tag: package-2020-11-05-preview
 
 These settings apply only when `--tag=package-2020-11-05-preview` is specified on the command line.
@@ -112,6 +125,8 @@ input-file:
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforPostgreSQL/stable/2018-06-01/PerformanceRecommendations.json
+
 ```
 
 
@@ -156,7 +171,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -217,6 +232,7 @@ input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PerformanceRecommendations.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
