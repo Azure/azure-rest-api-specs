@@ -7390,6 +7390,7 @@
         },
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "Resource Id of the source resource used to create this restore point collection"
         }
       },
@@ -7412,6 +7413,7 @@
         },
         "restorePoints": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/RestorePoint"
           },
@@ -7459,7 +7461,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
+          "description": "The uri to fetch the next page of RestorePointCollections. Call ListNext() with this to fetch the next page of RestorePointCollections"
         }
       },
       "description": "The List restore point collection operation response."
@@ -7617,7 +7619,6 @@
           "items": {
             "$ref": "#/definitions/ApiEntityReference"
           },
-          "readOnly": false,
           "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
         }
       },
@@ -7664,7 +7665,6 @@
           "items": {
             "$ref": "#/definitions/ApiEntityReference"
           },
-          "readOnly": false,
           "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
         }
       },
