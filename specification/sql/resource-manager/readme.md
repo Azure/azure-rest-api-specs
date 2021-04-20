@@ -72,7 +72,7 @@ input-file:
  - ./Microsoft.Sql/preview/2021-02-01-preview/JobTargetExecutions.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/JobTargetGroups.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/JobVersions.json
- - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUpload.json
+ - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/LocationCapabilities.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/LongTermRetentionBackups.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/LongTermRetentionManagedInstanceBackups.json
@@ -137,10 +137,12 @@ input-file:
  - ./Microsoft.Sql/preview/2021-02-01-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/TransparentDataEncryptions.json
+ - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/WorkloadGroups.json
+
 ```
 ### Tag: package-composite-v5
 
