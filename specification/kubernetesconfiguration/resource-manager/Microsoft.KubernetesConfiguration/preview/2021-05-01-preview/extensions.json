@@ -270,7 +270,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/operations": {
       "get": {
         "tags": [
           "Operations in a Cluster"
@@ -297,9 +297,6 @@
           },
           {
             "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ExtensionNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -562,6 +559,7 @@
         },
         "identity": {
           "description": "Identity of the Extension resource",
+          "x-nullable": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
         },
         "systemData": {
