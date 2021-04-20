@@ -75,13 +75,28 @@ directive:
     reason: for this case the result of the proposed change would resemble a boolean anyways
   - suppress: R4024
     reason: Preview versions still in use
-  - suppress: RequiredSystemDataInNewApiVersions
+  - suppress: RequiredReadOnlySystemData
     reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
   - suppress: RequiredReadOnlySystemData
     reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
   - suppress: XmsPathsMustOverloadPaths
     from: authorization-RoleDefinitionsCalls.json
     reason: x-ms-paths extension was previously required. Suppressing so that we don't have to make changes to existing APIs.
+  - suppress: AddedPropertyInResponse
+    from: authorization-AccessReviewCalls.json
+    reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
+  - suppress: AddingOptionalProperty
+    from: authorization-AccessReviewCalls.json
+    reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
+```
+
+### Tag: package-2021-04-06-preview-only
+
+These settings apply only when `--tag=package-2021-04-06-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-06-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-04-06-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2021-03-01-preview-only
