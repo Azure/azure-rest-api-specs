@@ -51,10 +51,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
@@ -108,10 +108,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
@@ -151,10 +151,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
@@ -203,10 +203,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
@@ -248,10 +248,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
@@ -309,10 +309,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
@@ -355,10 +355,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
@@ -410,10 +410,10 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
@@ -443,6 +443,28 @@
     }
   },
   "definitions": {
+    "AttackTactic": {
+      "description": "The severity for alerts created by this alert rule.",
+      "enum": [
+        "InitialAccess",
+        "Execution",
+        "Persistence",
+        "PrivilegeEscalation",
+        "DefenseEvasion",
+        "CredentialAccess",
+        "Discovery",
+        "LateralMovement",
+        "Collection",
+        "Exfiltration",
+        "CommandAndControl",
+        "Impact"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AttackTactic"
+      }
+    },
     "ClientInfo": {
       "description": "Information on the client (user or application) that made some action",
       "properties": {
@@ -525,7 +547,7 @@
         "tactics": {
           "description": "The tactics associated with incident",
           "items": {
-            "$ref": "../../../common/1.0/types.json#/parameters/AttackTactic"
+            "$ref": "#/definitions/AttackTactic"
           },
           "readOnly": true,
           "type": "array"
@@ -955,6 +977,25 @@
       "required": false,
       "type": "integer",
       "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupName": {
+      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+      "in": "path",
+      "maxLength": 90,
+      "minLength": 1,
+      "name": "resourceGroupName",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionId": {
+      "description": "Azure subscription ID",
+      "in": "path",
+      "name": "subscriptionId",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "required": true,
+      "type": "string"
     }
   }
 }
