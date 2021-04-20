@@ -697,6 +697,13 @@
     "OfferDetail": {
       "description": "Confluent Offer detail",
       "type": "object",
+      "required": [
+        "publisherId",
+        "id",
+        "planId",
+        "planName",
+        "termUnit"
+      ],
       "properties": {
         "publisherId": {
           "description": "Publisher Id",
@@ -732,6 +739,11 @@
     "UserDetail": {
       "description": "Subscriber detail",
       "type": "object",
+      "required": [
+        "firstName",
+        "lastName",
+        "emailAddress"
+      ],
       "properties": {
         "firstName": {
           "description": "First name",
@@ -753,6 +765,10 @@
     "OrganizationResourceProperties": {
       "description": "Organization resource property",
       "type": "object",
+      "required": [
+        "offerDetail",
+        "userDetail"
+      ],
       "properties": {
         "createdTime": {
           "format": "date-time",
@@ -789,6 +805,9 @@
       "description": "Organization resource.",
       "type": "object",
       "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ],
       "properties": {
         "id": {
           "description": "The ARM id of the resource.",
