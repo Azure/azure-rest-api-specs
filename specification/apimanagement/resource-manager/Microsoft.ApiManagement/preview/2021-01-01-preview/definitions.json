@@ -231,14 +231,14 @@
           "readOnly": true
         }
       },
-      "description": "Paged Api list representation."
+      "description": "Paged API list representation."
     },
     "ApiContract": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiContractProperties",
-          "description": "Api entity contract properties."
+          "description": "API entity contract properties."
         }
       },
       "allOf": [
@@ -246,7 +246,7 @@
           "$ref": "./apimanagement.json#/definitions/Resource"
         }
       ],
-      "description": "Api details."
+      "description": "API details."
     },
     "ApiContractProperties": {
       "properties": {
@@ -302,14 +302,14 @@
       "required": [
         "path"
       ],
-      "description": "Api Entity Properties"
+      "description": "API Entity Properties"
     },
     "ApiCreateOrUpdateParameter": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiCreateOrUpdateProperties",
-          "description": "Api entity create of update properties."
+          "description": "API entity create of update properties."
         }
       },
       "description": "API Create or Update Parameters."
@@ -398,7 +398,7 @@
         },
         "apiType": {
           "type": "string",
-          "description": "Type of Api to create. \n * `http` creates a REST API \n * `soap` creates a SOAP pass-through API  \n * `websocket` creates websocket API.",
+          "description": "Type of API to create. \n * `http` creates a REST API \n * `soap` creates a SOAP pass-through API  \n * `websocket` creates websocket API.",
           "enum": [
             "http",
             "soap",
@@ -433,7 +433,7 @@
           "$ref": "#/definitions/ApiContractProperties"
         }
       ],
-      "description": "Api Create or Update Properties."
+      "description": "API Create or Update Properties."
     },
     "ApiEntityBaseContract": {
       "properties": {
@@ -465,13 +465,13 @@
         },
         "apiRevision": {
           "type": "string",
-          "description": "Describes the Revision of the Api. If no value is provided, default revision 1 is created",
+          "description": "Describes the revision of the API. If no value is provided, default revision 1 is created",
           "minLength": 1,
           "maxLength": 100
         },
         "apiVersion": {
           "type": "string",
-          "description": "Indicates the Version identifier of the API if the API is versioned",
+          "description": "Indicates the version identifier of the API if the API is versioned",
           "maxLength": 100
         },
         "isCurrent": {
@@ -485,12 +485,12 @@
         },
         "apiRevisionDescription": {
           "type": "string",
-          "description": "Description of the Api Revision.",
+          "description": "Description of the API Revision.",
           "maxLength": 256
         },
         "apiVersionDescription": {
           "type": "string",
-          "description": "Description of the Api Version.",
+          "description": "Description of the API Version.",
           "maxLength": 256
         },
         "apiVersionSetId": {
@@ -569,31 +569,31 @@
             "values": [
               {
                 "value": "swagger-link-json",
-                "description": "The Api Definition is exported in OpenApi Specification 2.0 format to the Storage Blob.",
+                "description": "The API Definition is exported in OpenAPI Specification 2.0 format to the Storage Blob.",
                 "name": "Swagger"
               },
               {
                 "value": "wsdl-link+xml",
-                "description": "The Api Definition is exported in WSDL Schema to Storage Blob. This is only supported for APIs of Type `soap`",
+                "description": "The API Definition is exported in WSDL Schema to Storage Blob. This is only supported for APIs of Type `soap`",
                 "name": "Wsdl"
               },
               {
                 "value": "wadl-link-json",
-                "description": "Export the Api Definition in WADL Schema to Storage Blob.",
+                "description": "Export the API Definition in WADL Schema to Storage Blob.",
                 "name": "Wadl"
               },
               {
                 "value": "openapi-link",
-                "description": "Export the Api Definition in OpenApi Specification 3.0 to Storage Blob.",
+                "description": "Export the API Definition in OpenAPI Specification 3.0 to Storage Blob.",
                 "name": "OpenApi"
               }
             ]
           },
-          "description": "Format in which the Api Details are exported to the Storage Blob with Sas Key valid for 5 minutes."
+          "description": "Format in which the API Details are exported to the Storage Blob with Sas Key valid for 5 minutes."
         },
         "value": {
           "type": "object",
-          "description": "The object defining the schema of the exported Api Detail",
+          "description": "The object defining the schema of the exported API Detail",
           "properties": {
             "link": {
               "type": "string",
@@ -688,7 +688,7 @@
           "readOnly": true
         }
       },
-      "description": "Paged Api Revision list representation."
+      "description": "Paged API Revision list representation."
     },
     "ApiRevisionContract": {
       "properties": {
@@ -886,14 +886,14 @@
           "description": "Next page link if any."
         }
       },
-      "description": "Paged Api Version Set list representation."
+      "description": "Paged API Version Set list representation."
     },
     "ApiVersionSetContract": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiVersionSetContractProperties",
-          "description": "Api VersionSet contract properties."
+          "description": "API VersionSet contract properties."
         }
       },
       "allOf": [
@@ -901,7 +901,7 @@
           "$ref": "./apimanagement.json#/definitions/Resource"
         }
       ],
-      "description": "Api Version Set Contract details."
+      "description": "API Version Set Contract details."
     },
     "ApiVersionSetContractDetails": {
       "description": "An API Version Set contains the common configuration for a set of API Versions relating ",
@@ -1003,17 +1003,17 @@
           "maxLength": 100
         }
       },
-      "description": "Api Version set base parameters"
+      "description": "API Version set base parameters"
     },
     "ApiVersionSetUpdateParameters": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApiVersionSetUpdateParametersProperties",
-          "description": "Parameters to update or create an Api Version Set Contract."
+          "description": "Parameters to update or create an API Version Set Contract."
         }
       },
-      "description": "Parameters to update or create an Api Version Set Contract."
+      "description": "Parameters to update or create an API Version Set Contract."
     },
     "ApiVersionSetUpdateParametersProperties": {
       "properties": {
@@ -1434,7 +1434,7 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "Management Uri of the Resource in External System. This url can be the Arm Resource Id of Logic Apps, Function Apps or Api Apps.",
+          "description": "Management Uri of the Resource in External System. This url can be the Arm Resource Id of Logic Apps, Function Apps or API Apps.",
           "minLength": 1,
           "maxLength": 2000
         },
@@ -2258,7 +2258,7 @@
         },
         "isDefault": {
           "type": "boolean",
-          "description": "Whether the template is the default template provided by Api Management or has been edited.",
+          "description": "Whether the template is the default template provided by API Management or has been edited.",
           "readOnly": true
         },
         "parameters": {
@@ -3020,7 +3020,7 @@
       "properties": {
         "secretIdentifier": {
           "type": "string",
-          "description": "Key vault secret identifier for fetching secret. Providing a versioned secret will prevent auto-refresh. This requires Api Management service to be configured with aka.ms/apimmsi"
+          "description": "Key vault secret identifier for fetching secret. Providing a versioned secret will prevent auto-refresh. This requires API Management service to be configured with aka.ms/apimmsi"
         },
         "identityClientId": {
           "type": "string",
@@ -3441,7 +3441,7 @@
           "$ref": "./apimanagement.json#/definitions/Resource"
         }
       ],
-      "description": "Api Operation details."
+      "description": "API Operation details."
     },
     "OperationContractProperties": {
       "properties": {
@@ -3508,7 +3508,7 @@
           "description": "Operation Policies"
         }
       },
-      "description": "Api Operation Entity Base Contract details."
+      "description": "API Operation Entity Base Contract details."
     },
     "OperationResultContract": {
       "properties": {
@@ -3604,17 +3604,17 @@
         },
         "apiName": {
           "type": "string",
-          "description": "Api Name.",
+          "description": "API Name.",
           "readOnly": true
         },
         "apiRevision": {
           "type": "string",
-          "description": "Api Revision.",
+          "description": "API Revision.",
           "readOnly": true
         },
         "apiVersion": {
           "type": "string",
-          "description": "Api Version.",
+          "description": "API Version.",
           "readOnly": true
         },
         "description": {
@@ -3647,7 +3647,7 @@
           "description": "Properties of the API Operation entity that can be updated."
         }
       },
-      "description": "Api Operation Update Contract details."
+      "description": "API Operation Update Contract details."
     },
     "OperationUpdateContractProperties": {
       "properties": {
@@ -4937,7 +4937,7 @@
           "items": {
             "$ref": "#/definitions/SchemaContract"
           },
-          "description": "Api Schema Contract value.",
+          "description": "API Schema Contract value.",
           "readOnly": true
         },
         "count": {
@@ -5456,7 +5456,7 @@
         },
         "api": {
           "$ref": "#/definitions/ApiTagResourceContractProperties",
-          "description": "Api associated with the tag."
+          "description": "API associated with the tag."
         },
         "operation": {
           "$ref": "#/definitions/OperationTagResourceContractProperties",
@@ -6353,19 +6353,19 @@
           "readOnly": true
         }
       },
-      "description": "Paged deleted Api Management Services List Representation."
+      "description": "Paged deleted API Management Services List Representation."
     },
     "DeletedServiceContract": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DeletedServiceContractProperties",
-          "description": "Deleted Api Management Service details."
+          "description": "Deleted API Management Service details."
         },
         "location": {
           "readOnly": true,
           "type": "string",
-          "description": "Api Management Service Master Location."
+          "description": "API Management Service Master Location."
         }
       },
       "allOf": [
@@ -6373,7 +6373,7 @@
           "$ref": "./apimanagement.json#/definitions/Resource"
         }
       ],
-      "description": "Deleted Api Management Service information."
+      "description": "Deleted API Management Service information."
     },
     "DeletedServiceContractProperties": {
       "properties": {
@@ -6424,7 +6424,7 @@
           "$ref": "./apimanagement.json#/definitions/Resource"
         }
       ],
-      "description": "Portal revisions contract details."
+      "description": "Portal Revision's contract details."
     },
     "PortalRevisionContractProperties": {
       "properties": {
@@ -6441,7 +6441,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Portal revision publishing status",
+          "description": "Status of the portal's revision.",
           "enum": [
             "pending",
             "publishing",
@@ -6454,19 +6454,19 @@
             "values": [
               {
                 "value": "pending",
-                "description": "Portal revision publishing is pending"
+                "description": "Portal's revision has been queued."
               },
               {
                 "value": "publishing",
-                "description": "Portal revision is publishing"
+                "description": "Portal's revision is being published."
               },
               {
                 "value": "completed",
-                "description": "Portal revision publishing completed"
+                "description": "Portal's revision publishing completed."
               },
               {
                 "value": "failed",
-                "description": "Portal revision publishing failed"
+                "description": "Portal's revision publishing failed."
               }
             ]
           },
@@ -6474,13 +6474,13 @@
         },
         "isCurrent": {
           "type": "boolean",
-          "description": "Indicates if the Portal Revision is public."
+          "description": "Indicates if the portal's revision is public."
         },
         "createdDateTime": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
-          "description": "Portal revision creation date and time."
+          "description": "Portal's revision creation date and time."
         },
         "updatedDateTime": {
           "type": "string",
