@@ -1,0 +1,261 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2021-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueryTemplates": {
+      "get": {
+        "x-ms-examples": {
+          "Get all entity query templates.": {
+            "$ref": "./examples/entityQueryTemplates/GetEntityQueryTemplates.json"
+          }
+        },
+        "tags": [
+          "EntityQuery Templates"
+        ],
+        "description": "Gets all entity query templates.",
+        "operationId": "entityQueryTemplates_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityQueryTemplatesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueryTemplates/{entityQueryTemplateId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get entity query template by Id.": {
+            "$ref": "./examples/entityQueryTemplates/GetActivityEntityQueryTemplateById.json"
+          }
+        },
+        "tags": [
+          "EntityQuery Templates"
+        ],
+        "description": "Gets an entity query template.",
+        "operationId": "entityQueryTemplates_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityQueryTemplateId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityQueryTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EntityQueryTemplatesList": {
+      "description": "List of all the entity query templates.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of entity queries templates.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of entity queries templates.",
+          "items": {
+            "$ref": "#/definitions/EntityQueryTemplate"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EntityQueryTemplate": {
+      "allOf": [
+        {
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+        },
+        {
+          "$ref": "EntitiesCommon.json#/definitions/EntityQueryKind"
+        }
+      ],
+      "description": "Specific entity query template.",
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "ActivityEntityQueryTemplate": {
+      "description": "Represents Activity entity query template.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryTemplate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActivityEntityQueryTemplatesProperties",
+          "description": "Activity entity query template properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Activity"
+    },
+    "ActivityEntityQueryTemplatesProperties": {
+      "description": "Describes activity entity query template properties",
+      "properties": {
+        "title": {
+          "description": "The entity query template title",
+          "type": "string"
+        },
+        "content": {
+          "description": "The entity query template content to display in timeline",
+          "type": "string"
+        },
+        "description": {
+          "description": "The entity query template description",
+          "type": "string"
+        },
+        "queryDefinitions": {
+          "description": "The Activity query definitions",
+          "properties": {
+            "query": {
+              "description": "The Activity query to run on a given entity",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "dataTypes": {
+          "description": "List of the data types that are required to run the query",
+          "items": {
+            "description": "data type",
+            "properties": {
+              "dataType": {
+                "description": "A specific data type",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "inputEntityType": {
+          "$ref": "EntitiesCommon.json#/definitions/EntityInnerType",
+          "description": "The type of the query's source entity"
+        },
+        "requiredInputFieldsSets": {
+          "description": "List of the fields of the source entity that are required to run the query",
+          "items": {
+            "description": "Sub sets of the field of the source entity that are required to run the query",
+            "items": {
+              "description": "Required input field name",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "entitiesFilter": {
+          "description": "The query applied only to entities matching to all filters",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "EntityQueryTemplateId": {
+      "description": "entity query template ID",
+      "in": "path",
+      "name": "entityQueryTemplateId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
