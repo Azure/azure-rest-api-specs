@@ -1162,8 +1162,8 @@
       "properties": {
         "sku": {
           "description": "Determines the SKU of the Disk pool",
-          "type": "object",
-          "$ref": "#/definitions/DiskPoolSku"
+          "$ref": "#/definitions/Sku",
+          "x-ms-client-flatten": true
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1194,7 +1194,7 @@
         "sku": {
           "description": "Determines the SKU of the Disk Pool",
           "type": "object",
-          "$ref": "#/definitions/DiskPoolSku"
+          "$ref": "#/definitions/Sku"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1249,7 +1249,7 @@
         "sku": {
           "description": "Determines the SKU of the Disk Pool",
           "type": "object",
-          "$ref": "#/definitions/DiskPoolSku"
+          "$ref": "#/definitions/Sku"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1273,23 +1273,6 @@
     "AvailabilityZone": {
       "type": "string",
       "description": "Availability zone."
-    },
-    "DiskPoolSku": {
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "description": "Sku for Disk Pools",
-      "properties": {
-        "name": {
-          "type": "string",
-          "name": "Name of the Sku"
-        },
-        "tier": {
-          "$ref": "#/definitions/DiskPoolTier",
-          "description": "Tier to use for the Disk Pool."
-        }
-      }
     },
     "DiskPoolProperties": {
       "type": "object",
