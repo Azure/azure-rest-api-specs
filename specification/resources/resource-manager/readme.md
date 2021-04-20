@@ -275,6 +275,15 @@ override-info:
   title: PolicyClient
 ```
 
+### Tag: package-templatespecs-2021-03
+
+These settings apply only when `--tag=package-templatespecs-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-templatespecs-2021-03'
+input-file:
+- Microsoft.Resources/stable/2021-03-01/templateSpecs.json
+```
+
 ### Tag: package-templatespecs-2021-03-preview
 
 These settings apply only when `--tag=package-templatespecs-2021-03-preview` is specified on the command line.
