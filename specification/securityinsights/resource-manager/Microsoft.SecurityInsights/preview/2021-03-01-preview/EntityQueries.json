@@ -236,13 +236,38 @@
     }
   },
   "definitions": {
+    "PutEntityQueryKinds": {
+      "description": "Describes an Entity query resource with kind which supports put request.",
+      "properties": {
+        "kind": {
+          "description": "The kind of the entity query",
+          "enum": [
+            "Activity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PutEntityQueryKind",
+            "values": [
+              {
+                "value": "Activity"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
     "EntityQuery": {
       "allOf": [
         {
           "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         },
         {
-          "$ref": "EntitiesCommon.json#/definitions/EntityQueryKind"
+          "$ref": "EntitiesCommon.json#/definitions/EntityQueryKinds"
         }
       ],
       "description": "Specific entity query.",
@@ -258,7 +283,7 @@
           "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         },
         {
-          "$ref": "EntitiesCommon.json#/definitions/EntityQueryKind"
+          "$ref": "#/definitions/PutEntityQueryKinds"
         }
       ],
       "description": "Specific entity query that supports put requests.",
