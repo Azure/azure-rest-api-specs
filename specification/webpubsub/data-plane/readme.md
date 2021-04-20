@@ -100,12 +100,15 @@ These settings apply only when `--typescript` is specified on the command line.
 Please also specify `--typescript-sdks-folder=<path to root folder of your azure-sdk-for-js clone>`.
 
 ``` yaml $(typescript)
-typescript:
-  azure-arm: false
-  package-name: "@azure/web-pubsub"
-  output-folder: "$(typescript-sdks-folder)/sdk/web-pubsub/web-pubsub"
-  clear-output-folder: true
-  generate-metadata: true
+azure-arm: false
+package-name: "@azure/web-pubsub"
+license-header: MICROSOFT_MIT_NO_VERSION
+output-folder: "$(typescript-sdks-folder)/sdk/web-pubsub/web-pubsub"
+clear-output-folder: true
+generate-metadata: true
+v3: true
+use-extension:
+  "@autorest/typescript": "6.0.0-dev.20201105.2"
 ```
 
 ## Python
