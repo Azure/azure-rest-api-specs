@@ -559,7 +559,7 @@
           "description": "Number of unused versions per application type to keep."
         }
       },
-      "description": "The policy used to clean up unused versions."
+      "description": "The policy used to clean up unused versions. When the policy is not specified explicitly, the default unused application versions to keep will be 3."
     },
     "AzureActiveDirectory": {
       "properties": {
@@ -779,13 +779,9 @@
       }
     },
     "ManagedClusterCodeVersionListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedClusterCodeVersionResult"
-          }
-        }
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ManagedClusterCodeVersionResult"
       },
       "description": "The list results of the Service Fabric runtime versions."
     },
@@ -974,7 +970,7 @@
     },
     "ManagedClusterVersionDetails": {
       "properties": {
-        "codeVersion": {
+        "clusterCodeVersion": {
           "type": "string",
           "description": "The Service Fabric runtime version of the cluster."
         },
@@ -1105,11 +1101,25 @@
     },
     "SkuName": {
       "type": "string",
-      "description": "Sku Name. Basic requires a minimum of 3 nodes and Standard a minimum of 5. Basic only allows 1 node type.",
+      "description": "Sku Name.",
       "enum": [
         "Basic",
         "Standard"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Basic",
+            "description": "Basic requires a minimum of 3 nodes and allows only 1 node type."
+          },
+          {
+            "value": "Standard",
+            "description": "Requires a minimum of 5 nodes and allows 1 or more node type."
+          }
+        ]
+      }
     },
     "AvailableOperationDisplay": {
       "properties": {
@@ -1168,7 +1178,11 @@
         "Deleting",
         "Deleted",
         "Other"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ManagedResourceProvisioningState",
+        "modelAsString": true
+      }
     },
     "OperationListResult": {
       "properties": {
