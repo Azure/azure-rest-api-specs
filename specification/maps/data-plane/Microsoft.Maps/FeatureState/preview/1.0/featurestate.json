@@ -700,15 +700,18 @@
             "values": [
               {
                 "value": "number",
-                "description": "Number type of stateset style."
+                "description": "Number type of stateset style.",
+                "name": "NumberTypeStyleRule"
               },
               {
                 "value": "boolean",
-                "description": "Boolean type of stateset style."
+                "description": "Boolean type of stateset style.",
+                "name": "BooleanTypeStyleRule"
               },
               {
                 "value": "string",
-                "description": "String type of stateset style."
+                "description": "String type of stateset style.",
+                "name": "StringTypeStyleRule"
               }
             ]
           }
@@ -717,57 +720,72 @@
     },
     "BooleanTypeStyleRule": {
       "description": "the boolean type style rule object.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/StyleRuleBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "rules": {
+              "description": "Boolean style rules.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BooleanRuleObject"
+              }
+            }
+          },
+          "required": [
+            "rules"
+          ]
         }
-      ],
-      "properties": {
-        "rules": {
-          "description": "Boolean style rules.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BooleanRuleObject"
-          }
-        }
-      }
+      ]
     },
     "NumberTypeStyleRule": {
       "description": "The numeric type style rule object.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/StyleRuleBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "rules": {
+              "description": "Numeric style rules.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NumberRuleObject"
+              }
+            }
+          },
+          "required": [
+            "rules"
+          ]    
         }
-      ],
-      "properties": {
-        "rules": {
-          "description": "Numeric style rules.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NumberRuleObject"
-          }
-        }
-      }
+      ]
     },
     "StringTypeStyleRule": {
       "description": "The string type style rule object.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/StyleRuleBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "rules": {
+              "description": "String style rules.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StringRuleObject"
+              }
+            }
+          },
+          "required": [
+            "rules"
+          ]    
         }
-      ],
-      "properties": {
-        "rules": {
-          "description": "String style rules.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StringRuleObject"
-          }
-        }
-      }
+      ]
     }
   }
 }
