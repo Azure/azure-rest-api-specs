@@ -11,7 +11,6 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-automanage
 package-version: 0.1.0-preview
 clear-output-folder: true 
-package-version: 1.0.0b1
 no-namespace-folders: true 
 ``` 
 
