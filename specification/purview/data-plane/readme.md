@@ -1,5 +1,5 @@
 # Azure Purview Catalog
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Purview Catalog.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Purview Catalog.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Purview, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -19,7 +19,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Azure Purview Catalog API.
 
 ``` yaml
@@ -34,14 +34,14 @@ These settings apply only when `--tag=package-2020-12-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-12-01-preview'
 input-file:
-- preview/2020-12-01-preview/purviewcatalog.json
+- Azure.Purview.Catalog/preview/2020-12-01-preview/purviewcatalog.json
 ```
 
 ---
 # Code Generation
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -69,12 +69,15 @@ java:
   clear-output-folder: true
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Suppression
 ``` yaml
 directive:
   - suppress: R3013
-where: 
+where:
   - $.paths[\"/atlas/v2/glossary/terms/{termGuid}/assignedEntities\"].delete.parameters[1]
   - $.paths[\"/atlas/v2/types/typedefs\"].delete.parameters[0]
 from: purviewcatalog.json

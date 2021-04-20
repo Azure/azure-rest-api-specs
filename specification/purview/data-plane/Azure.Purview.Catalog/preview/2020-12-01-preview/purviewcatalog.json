@@ -5,7 +5,15 @@
     "description": "Purview Catalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Catalog helps organizations get more value from their existing investments. This spec defines REST API of Purview Catalog Service.",
     "version": "2020-12-01-preview"
   },
-  "host": "catalog.purview.azure.com",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "basePath": "/api",
   "schemes": [
     "https"
@@ -6305,6 +6313,15 @@
     }
   },
   "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "The catalog endpoint of your Purview account. Example: https://{accountName}.catalog.purview.azure.com",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
     "guid": {
       "name": "guid",
       "description": "The globally unique identifier of the entity.",
