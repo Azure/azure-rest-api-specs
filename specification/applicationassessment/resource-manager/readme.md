@@ -26,6 +26,7 @@ These are the global settings for the applicationassessment.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2020-09-01-privatepreview
 ```
 
@@ -36,7 +37,7 @@ These settings apply only when `--tag=package-2020-09-01-privatepreview` is spec
 ```yaml $(tag) == 'package-2020-09-01-privatepreview'
 input-file:
   - Microsoft.AppAssessment/preview/2020-09-01-privatepreview/operations.json
-  - Microsoft.AppAssessment/preview/2020-09-01-privatepreview/configs.json
+  - Microsoft.AppAssessment/preview/2020-09-01-privatepreview/osVersions.json
   - Microsoft.AppAssessment/preview/2020-09-01-privatepreview/migrateProjects.json
   - Microsoft.AppAssessment/preview/2020-09-01-privatepreview/migrateProjectSite.json
   - Microsoft.AppAssessment/preview/2020-09-01-privatepreview/migrateAssessments.json
@@ -58,16 +59,11 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_applicationassessment']
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 

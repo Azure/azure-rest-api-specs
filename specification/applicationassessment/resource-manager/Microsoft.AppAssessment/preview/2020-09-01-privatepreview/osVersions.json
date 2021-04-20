@@ -1,0 +1,123 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-09-01-privatepreview",
+    "title": "ApplicationAssessment",
+    "description": "Application assessments when migrating to Azure or upgrading to new OS versions"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.AppAssessment/locations/{location}/osVersions": {
+      "get": {
+        "tags": [
+          "osVersions"
+        ],
+        "operationId": "osVersions_List",
+        "description": "List of os versions",
+        "x-ms-examples": {
+          "osVersions_List": {
+            "$ref": "./examples/osVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the resource",
+            "minLength": 1
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of os versions",
+            "schema": {
+              "$ref": "#/definitions/osVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "osDescription": {
+      "type": "object",
+      "description": "key value pair object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "The properties of the os versions",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "The name of the os"
+            },
+            "versionId": {
+              "type": "string",
+              "description": "The version of the os"
+            }
+          }
+        }
+      }
+    },
+    "osVersionList": {
+      "type": "object",
+      "description": "List of key values",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/osDescription"
+          },
+          "description": "Array of values"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to next page of results, null if at end of results"
+        }
+      }
+    }
+  }
+}

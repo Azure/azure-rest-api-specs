@@ -2,11 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-09-01-privatepreview",
-    "title": "applicationassessment",
-    "description": "Application assessments when migrating to Azure or upgrading to new OS versions",
-    "x-ms-code-generation-settings": {
-      "name": "appassessmentClient"
-    }
+    "title": "ApplicationAssessment",
+    "description": "Application assessments when migrating to Azure or upgrading to new OS versions"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -135,12 +132,6 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Site was added to the project",
-            "schema": {
-              "$ref": "#/definitions/migrateProjectSite"
-            }
-          },
           "200": {
             "description": "Site details were updated",
             "schema": {
@@ -213,7 +204,7 @@
         "operationId": "migrationProjectSite_delete",
         "description": "Deletes a site with name {siteName} in the migrate project {projectName}",
         "x-ms-examples": {
-          "assessment_create": {
+          "migrationProjectSite_delete": {
             "$ref": "./examples/migrateProjectSite_delete.json"
           }
         },
@@ -387,7 +378,7 @@
           "properties": {
             "offAzureSiteId": {
               "type": "string",
-              "description": "The ARM Id of the site something like: /subscriptions/a2bf324e-e6e8-4c95-b722-e2f75e11a2ab/resourceGroups/test/providers/Microsoft.OffAzure/HyperVSites/appliance2ce8csite "
+              "description": "The ARM Id of the site something like: /subscriptions/a2bf324e-e6e8-4c95-b722-e2f75e11a2ab/resourceGroups/test/providers/Microsoft.OffAzure/HyperVSites/appliance2ce8site "
             },
             "applianceName": {
               "type": "string",
@@ -396,6 +387,11 @@
             "servicePrincipalIdentityDetails": {
               "description": "Service principal associated with this site",
               "$ref": "#/definitions/servicePrincipalDetails"
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The provisioning state of the resource in Azure"
             }
           },
           "required": [
@@ -575,6 +571,11 @@
               "additionalProperties": {
                 "type": "string"
               }
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The provisioning state of the resource in Azure"
             }
           }
         }
@@ -598,8 +599,8 @@
         }
       }
     },
-    "applianceConfiguration":{
-      "type":"object",
+    "applianceConfiguration": {
+      "type": "object",
       "description": "Appliance configuration",
       "allOf": [
         {
@@ -607,13 +608,13 @@
         }
       ],
       "properties": {
-        "properties":{
-          "type":"object",
+        "properties": {
+          "type": "object",
           "description": "Properties of appliance configuration",
-          "x-ms-client-flatten":true,
+          "x-ms-client-flatten": true,
           "properties": {
             "dataApiUrl": {
-              "type":"string",
+              "type": "string",
               "description": "Url to the data plane API for uploading mara data",
               "readOnly": true
             }

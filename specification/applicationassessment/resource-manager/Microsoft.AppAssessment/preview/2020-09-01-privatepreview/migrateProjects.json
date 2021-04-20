@@ -2,11 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-09-01-privatepreview",
-    "title": "applicationassessment",
-    "description": "Application assessments when migrating to Azure or upgrading to new OS versions",
-    "x-ms-code-generation-settings": {
-      "name": "appassessmentClient"
-    }
+    "title": "ApplicationAssessment",
+    "description": "Application assessments when migrating to Azure or upgrading to new OS versions"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -42,7 +39,7 @@
         "tags": [
           "migrateProjects"
         ],
-        "operationId": "migrateprojects_listBySubscription",
+        "operationId": "migrateProjects_listBySubscription",
         "description": "Creates a new migrate project",
         "x-ms-examples": {
           "migrateProject_listBySubscription": {
@@ -82,7 +79,7 @@
         "tags": [
           "migrateProjects"
         ],
-        "operationId": "migrateprojects_listByResourceGroup",
+        "operationId": "migrateProjects_listByResourceGroup",
         "description": "Creates a new migrate project",
         "x-ms-examples": {
           "migrateProject_listByResourceGroup": {
@@ -160,12 +157,6 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "A new project was created.",
-            "schema": {
-              "$ref": "#/definitions/migrateProject"
-            }
-          },
           "200": {
             "description": "Project details updated.",
             "schema": {
@@ -337,11 +328,16 @@
               "type": "string",
               "description": "The ARM id of the Azure Migrate Hub project that this project is linked to. The name of the project to create MUST much that of the migrate hub project"
             },
-            "numberOfAssessments":{
-              "type":"number",
+            "numberOfAssessments": {
+              "type": "number",
               "format": "int32",
               "description": "The number of assessments in the project",
               "readOnly": true
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The provisioning state of the resource in Azure"
             }
           },
           "required": [
