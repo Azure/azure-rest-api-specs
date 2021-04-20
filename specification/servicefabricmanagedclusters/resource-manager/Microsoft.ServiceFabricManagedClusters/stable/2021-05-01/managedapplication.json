@@ -1459,7 +1459,8 @@
         "metricName",
         "lowerLoadThreshold",
         "upperLoadThreshold",
-        "scaleInterval"
+        "scaleInterval",
+        "useOnlyPrimaryLoad"
       ],
       "properties": {
         "metricName": {
@@ -1479,6 +1480,10 @@
         "scaleInterval": {
           "type": "string",
           "description": "The period in seconds on which a decision is made whether to scale or not. This property should come in ISO 8601 format \"hh:mm:ss\"."
+        },
+        "useOnlyPrimaryLoad": {
+          "type": "boolean",
+          "description": "Flag determines whether only the load of primary replica should be considered for scaling. If set to true, then trigger will only consider the load of primary replicas of stateful service. If set to false, trigger will consider load of all replicas. This parameter cannot be set to true for stateless service."
         }
       }
     },
@@ -2412,10 +2417,6 @@
         "servicePlacementTimeLimit": {
           "type": "string",
           "description": "The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format \"hh:mm:ss\"."
-        },
-        "dropSourceReplicaOnMove": {
-          "type": "boolean",
-          "description": "Indicates whether to drop source Secondary replica even if the target replica has not finished build. If desired behavior is to drop it as soon as possible the value of this property is true, if not it is false."
         }
       }
     },
