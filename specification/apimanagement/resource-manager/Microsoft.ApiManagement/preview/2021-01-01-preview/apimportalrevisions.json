@@ -40,7 +40,7 @@
           "PortalRevision"
         ],
         "operationId": "PortalRevision_ListByService",
-        "description": "Lists a collection of developer portal revision entities.",
+        "description": "Lists developer portal's revisions.",
         "x-ms-examples": {
           "ApiManagementListPortalRevisions": {
             "$ref": "./examples/ApiManagementListPortalRevisions.json"
@@ -75,7 +75,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists a collection of developer portal revision entities.",
+            "description": "Lists portal's revisions.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PortalRevisionCollection"
             }
@@ -98,7 +98,7 @@
           "PortalRevision"
         ],
         "operationId": "PortalRevision_GetEntityTag",
-        "description": "Gets developer portal revision specified by its identifier.",
+        "description": "Gets the developer portal revision specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementHeadPortalRevision": {
             "$ref": "./examples/ApiManagementHeadPortalRevision.json"
@@ -123,7 +123,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Specified Portal revision entity exists and current entity state version is present in the ETag header.",
+            "description": "The specified portal revision entity exists and current entity state version is present in the ETag header.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -144,7 +144,7 @@
           "PortalRevision"
         ],
         "operationId": "PortalRevision_Get",
-        "description": "Gets developer portal revision specified by its identifier.",
+        "description": "Gets the developer portal's revision specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementGetPortalRevision": {
             "$ref": "./examples/ApiManagementGetPortalRevision.json"
@@ -169,7 +169,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets the specified developer portal revision entity.",
+            "description": "Gets the specified portal's revision.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PortalRevisionContract"
             },
@@ -193,7 +193,7 @@
           "PortalRevision"
         ],
         "operationId": "PortalRevision_CreateOrUpdate",
-        "description": "Creates a new developer portal revision.",
+        "description": "Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible.",
         "x-ms-examples": {
           "ApiManagementCreatePortalRevision": {
             "$ref": "./examples/ApiManagementCreatePortalRevision.json"
@@ -226,10 +226,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Request to create developer portal revision was accepted."
+            "description": "Request to create a developer portal revision was accepted."
           },
           "201": {
-            "description": "Developer portal revision was successfully created.",
+            "description": "The developer portal revision was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PortalRevisionContract"
             },
