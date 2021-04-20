@@ -23,8 +23,7 @@ tag: package-2019-08
 These settings apply only when `--tag=package-2019-08` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2019-08'
-input-file:
-  - $(this-folder)/preview/2019-08-15-preview/containerregistry.json
+input-file: preview/2019-08-15-preview/containerregistry.json
 ```
 
 ---
@@ -65,6 +64,7 @@ These settings apply only when `--typescript` is specified on the command line.
 typescript: true
 v3: true
 package-name: "@azure/container-registry"
+title: GeneratedClient
 description: Container Registry Client
 generate-metadata: false
 license-header: MICROSOFT_MIT_NO_VERSION
@@ -74,6 +74,9 @@ add-credentials: false
 override-client-name: GeneratedClient
 disable-async-iterators: true
 hide-clients: true
+use-core-v2: true
+use-extension:
+  "@autorest/typescript": "C:/github/autorest.typescript"
 ```
 
 ## Python
