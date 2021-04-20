@@ -13,20 +13,20 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-7.2-preview
+  - tag: package-7.2
   - tag: package-7.1
   - tag: package-7.0
   - tag: package-2016-10
   - tag: package-2015-06
 ```
 
-### Tag: package-7.2-preview and go
+### Tag: package-7.2 and go
 
-These settings apply only when `--tag=package-7.2-preview --go` is specified on the command line.
+These settings apply only when `--tag=package-7.2 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-7.2-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/v7.2-preview/$(namespace)
+``` yaml $(tag) == 'package-7.2' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/v7.2/$(namespace)
 ```
 
 ### Tag: package-7.1 and go
