@@ -28,12 +28,32 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2021-04-preview
+tag: package-2021-05-preview
 generate-empty-classes: true
 modelerfour:
   lenient-model-deduplication: true
 ```
 
+### Tag: package-2021-05-preview
+
+These settings apply only when `--tag=package-2021-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05-preview'
+input-file:
+  - Microsoft.Synapse/preview/2021-04-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/checkNameAvailability.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/firewallRule.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/integrationRuntime.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/keys.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/operations.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/privateEndpointConnections.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/privateLinkResources.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/privatelinkhub.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/sqlPool.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/sqlServer.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/workspace.json
+```
 
 ### Tag: package-2021-04-preview
 
@@ -46,6 +66,7 @@ input-file:
   - Microsoft.Synapse/preview/2021-04-01-preview/firewallRule.json
   - Microsoft.Synapse/preview/2021-04-01-preview/integrationRuntime.json
   - Microsoft.Synapse/preview/2021-04-01-preview/keys.json
+  - Microsoft.Synapse/preview/2021-04-01-preview/kustoPool.json
   - Microsoft.Synapse/preview/2021-04-01-preview/library.json
   - Microsoft.Synapse/preview/2021-04-01-preview/operations.json
   - Microsoft.Synapse/preview/2021-04-01-preview/privateEndpointConnections.json
@@ -262,7 +283,7 @@ csharp:
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
   clear-output-folder: true
 batch:
- - tag: package-2021-04-preview
+ - tag: package-2021-05-preview
  - tag: package-sqlGen3-2020-04-01-preview
 ```
 
