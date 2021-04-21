@@ -64,6 +64,15 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2019-06-preview
 ```
 
+### Tag: package-policy-2020-05
+
+These settings apply only when `--tag=package-policy-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2020-05'
+input-file:
+- Microsoft.Authorization/stable/2020-05-01/privateLinks.json
+```
+
 ### Tag: package-resources-2020-10
 
 These settings apply only when `--tag=package-resources-2020-10` is specified on the command line.
