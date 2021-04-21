@@ -70,7 +70,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/repoList"
+              "$ref": "#/definitions/RepoList"
             }
           },
           "default": {
@@ -305,6 +305,48 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "RepoList": {
+      "description": "List all the source controls.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of repositories.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of repositories.",
+          "items": {
+            "$ref": "#/definitions/Repo"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Repo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a repository.",
+      "properties": {
+        "name": {
+          "description": "The name of the repository.",
+          "type": "string"
+        },
+        "branches": {
+          "description": "Array of branches.",
+          "items": {
+            "description": "name of branch.",
+            "type": "string"
+          },
+          "type": "array"
+        },
+      }
     },
     "SourceControlList": {
       "description": "List all the source controls.",
