@@ -4382,7 +4382,7 @@
           "items": {
             "type": "string"
           },
-          "description": "This is a required field. This field specifies the fields and properties of the object to be included in the inventory. Valid values for this field for the blob object type include Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType, AccessTier, AccessTierChangeTime, Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessedTime. Valid values for container object type include Name, Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold."
+          "description": "This is a required field. This field specifies the fields and properties of the object to be included in the inventory. Valid values for this field for the 'Blob' definition.objectType include Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType, AccessTier, AccessTierChangeTime, Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessedTime. Valid values for 'Container' definition.objectType include Name, Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold. Schema field values 'Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl' are valid only for Hns enabled accounts."
         }
       },
       "required": [
@@ -4391,7 +4391,7 @@
         "objectType",
         "schemaFields"
       ],
-      "description": "An object that defines the blob inventory rule. Each definition consists of a set of filters, if no filter is specified then the rule applies to all the blobs in the account."
+      "description": "An object that defines the blob inventory rule."
     },
     "BlobInventoryPolicyFilter": {
       "properties": {
@@ -4407,21 +4407,21 @@
           "items": {
             "type": "string"
           },
-          "description": "An array of predefined enum values. Valid values include blockBlob, appendBlob, pageBlob. Hns accounts does not support pageBlobs."
+          "description": "An array of predefined enum values. Valid values include blockBlob, appendBlob, pageBlob. Hns accounts does not support pageBlobs. This field is required when definition.objectType property is set to 'Blob'."
         },
         "includeBlobVersions": {
           "type": "boolean",
-          "description": "Includes blob versions in blob inventory when value set to true."
+          "description": "Includes blob versions in blob inventory when value is set to true. The definition.schemaFields values 'VersionId and IsCurrentVersion' are required if this property is set to true, else they must be excluded."
         },
         "includeSnapshots": {
           "type": "boolean",
-          "description": "Includes blob snapshots in blob inventory when value set to true."
+          "description": "Includes blob snapshots in blob inventory when value is set to true. The definition.schemaFields value 'Snapshot' is required if this property is set to true, else it must be excluded."
         }
       },
       "required": [
         "blobTypes"
       ],
-      "description": "An object that defines the blob inventory rule filter conditions."
+      "description": "An object that defines the blob inventory rule filter conditions. Filter option cannot be used when definition.objectType property is set to 'Container'."
     },
     "ErrorResponseBody": {
       "properties": {
