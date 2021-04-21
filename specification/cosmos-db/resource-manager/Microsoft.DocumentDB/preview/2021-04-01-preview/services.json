@@ -110,11 +110,11 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "servicesCreateUpdateParameter",
+            "name": "serviceResource",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServicesCreateUpdateParameters"
+              "$ref": "#/definitions/ServiceResource"
             },
             "description": "The Service configuration parameters."
           }
@@ -238,45 +238,7 @@
     }
   },
   "definitions": {
-    "ServicesCreateUpdateParameters": {
-      "description": "Service create or update parameters.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "description": "The properties for creating services.",
-          "$ref": "#/definitions/ServicesCreateUpdateProperties"
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "ServicesCreateUpdateProperties": {
-      "description": "Describes the service response property.",
-      "type": "object",
-      "properties": {
-        "instanceSize": {
-          "$ref": "#/definitions/ServiceResourceInstanceSize"
-        },
-        "instanceCount": {
-          "description": "Instance count for the service.",
-          "type": "integer",
-          "minimum": 1,
-          "format": "int32"
-        },
-        "serviceType": {
-          "$ref": "#/definitions/ServiceType"
-        }
-      },
-      "required": [
-        "instanceSize",
-        "instanceCount"
-      ]
-    },
-    "ServiceResourceGetProperties": {
+    "ServiceResourceProperties": {
       "description": "Services response resource.",
       "type": "object",
       "discriminator": "serviceType",
@@ -303,9 +265,6 @@
           "$ref": "#/definitions/ServiceResourceStatus"
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      },
       "required": [
         "serviceType"
       ],
@@ -322,7 +281,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ServiceResourceGetProperties"
+          "$ref": "#/definitions/ServiceResourceProperties"
         }
       }
     },
@@ -334,10 +293,10 @@
           "items": {
             "$ref": "#/definitions/ServiceResource"
           },
-          "description": "List of SQL databases and their properties."
+          "description": "List of Service Resource and their properties."
         }
       },
-      "description": "The List operation response, that contains the SQL databases and their properties."
+      "description": "The List operation response, that contains the Service Resource and their properties."
     },
     "DataTransferServiceResource": {
       "description": "Describes the service response property.",
@@ -345,11 +304,11 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DataTransferServiceResourceGetProperties"
+          "$ref": "#/definitions/DataTransferServiceResourceProperties"
         }
       }
     },
-    "DataTransferServiceResourceGetProperties": {
+    "DataTransferServiceResourceProperties": {
       "description": "Properties for DataTransferServiceResource.",
       "type": "object",
       "allOf": [
@@ -374,12 +333,12 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SqlDedicatedGatewayServiceResourceGetProperties"
+          "$ref": "#/definitions/SqlDedicatedGatewayServiceResourceProperties"
         }
       }
     },
-    "SqlDedicatedGatewayServiceResourceGetProperties": {
-      "description": "Properties for SqlDedicatedgatewayServiceResource.",
+    "SqlDedicatedGatewayServiceResourceProperties": {
+      "description": "Properties for SqlDedicatedGatewayServiceResource.",
       "type": "object",
       "allOf": [
         {
@@ -455,6 +414,7 @@
         "Error",
         "Stopped"
       ],
+      "readOnly": true,
       "description": "Describes the status of a service.",
       "x-ms-enum": {
         "modelAsString": true,
