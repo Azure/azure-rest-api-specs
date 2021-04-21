@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-03-01",
+    "version": "2021-04-01",
     "title": "RecoveryServicesBackupClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": false
@@ -639,7 +639,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BackupResourceEncryptionConfigResource"
+              "$ref": "#/definitions/BackupResourceEncryptionConfigExtendedResource"
             }
           },
           "default": {
@@ -683,7 +683,7 @@
             "description": "Vault encryption input config request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BackupResourceEncryptionConfigResource"
+              "$ref": "#/definitions/BackupResourceEncryptionConfigExtendedResource"
             }
           }
         ],
@@ -3950,7 +3950,9 @@
             "PartiallySucceeded",
             "PartiallyFailed",
             "Failed",
-            "Succeeded"
+            "Succeeded",
+            "Initialized",
+            "FirstInitialization"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3969,6 +3971,82 @@
             "name": "InfrastructureEncryptionState",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "BackupResourceEncryptionConfigExtended": {
+      "type": "object",
+      "properties": {
+        "userAssignedIdentity": {
+          "description": "User Assigned Identity Id",
+          "type": "string"
+        },
+        "useSystemAssignedIdentity": {
+          "description": "bool to indicate whether to use system Assigned Identity or not",
+          "type": "boolean"
+        },
+        "encryptionAtRestType": {
+          "description": "Encryption At Rest Type",
+          "enum": [
+            "Invalid",
+            "MicrosoftManaged",
+            "CustomerManaged"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionAtRestType",
+            "modelAsString": true
+          }
+        },
+        "keyUri": {
+          "description": "Key Vault Key URI",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Key Vault Subscription Id",
+          "type": "string"
+        },
+        "lastUpdateStatus": {
+          "enum": [
+            "Invalid",
+            "NotEnabled",
+            "PartiallySucceeded",
+            "PartiallyFailed",
+            "Failed",
+            "Succeeded",
+            "Initialized",
+            "FirstInitialization"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LastUpdateStatus",
+            "modelAsString": true
+          }
+        },
+        "infrastructureEncryptionState": {
+          "enum": [
+            "Invalid",
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InfrastructureEncryptionState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "BackupResourceEncryptionConfigExtendedResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupResourceEncryptionConfigExtended",
+          "description": "BackupResourceEncryptionConfigExtendedResource properties"
         }
       }
     },
