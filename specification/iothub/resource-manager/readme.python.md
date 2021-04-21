@@ -44,6 +44,7 @@ batch:
 ```
 
 ```yaml $(python) && $(multiapi) && $(track2)
+clear-output-folder: true
 batch:
   - tag: package-preview-2021-03
   - tag: package-2020-03
