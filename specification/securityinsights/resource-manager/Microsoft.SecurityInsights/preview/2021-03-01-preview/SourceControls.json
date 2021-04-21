@@ -48,7 +48,7 @@
         "operationId": "Repositories_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/RepoTypeParameter"
@@ -57,13 +57,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           }
         ],
         "responses": {
@@ -76,7 +76,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -96,19 +96,19 @@
         "operationId": "SourceControls_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           }
         ],
         "responses": {
@@ -121,7 +121,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         },
@@ -144,19 +144,19 @@
         "operationId": "SourceControls_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/SourceControlIdParameter"
@@ -172,7 +172,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -190,19 +190,19 @@
         "operationId": "SourceControls_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/SourceControlIdParameter"
@@ -218,7 +218,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -236,19 +236,19 @@
         "operationId": "SourceControls_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
           },
           {
             "$ref": "#/parameters/SourceControlIdParameter"
@@ -273,7 +273,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
         }
@@ -366,7 +366,7 @@
       "properties": {
         "properties": {
           "description": "source control properties",
-          "$ref": "#/definitions/SourceControlModel",
+          "$ref": "#/definitions/SourceControlProperties",
           "x-ms-client-flatten": true
         },
         "systemData": {
@@ -378,7 +378,7 @@
       },
       "type": "object"
     },
-    "SourceControlModel": {
+    "SourceControlProperties": {
       "description": "Describes source control properties",
       "properties": {
         "sourceControlId": {
@@ -493,48 +493,9 @@
           }
         ]
       }
-    },
-    "CloudError": {
-      "description": "Error response structure.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Error data",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-external": true
-    },
-    "CloudErrorBody": {
-      "description": "Error details.",
-      "properties": {
-        "code": {
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "message": {
-          "description": "A message describing the error, intended to be suitable for display in a user interface.",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "x-ms-external": true
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "description": "API version for the operation",
-      "enum": [
-        "2021-03-01-preview"
-      ],
-      "in": "query",
-      "name": "api-version",
-      "required": true,
-      "type": "string"
-    },
     "RepoTypeParameter": {
       "description": "The repo type.",
       "enum": [
@@ -543,35 +504,6 @@
       ],
       "in": "query",
       "name": "repo-type",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "WorkspaceNameParameter": {
-      "description": "The name of the workspace.",
-      "in": "path",
-      "maxLength": 90,
-      "minLength": 1,
-      "name": "workspaceName",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "OperationalInsightsResourceProvider": {
-      "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
-      "in": "path",
-      "name": "operationalInsightsResourceProvider",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupNameParameter": {
-      "description": "The name of the resource group. The name is case insensitive.",
-      "in": "path",
-      "maxLength": 90,
-      "minLength": 1,
-      "name": "resourceGroupName",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
