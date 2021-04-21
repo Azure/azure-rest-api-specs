@@ -84,6 +84,64 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/listNetworkManagerEffectiveConfigurations": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/VirtualNetworkNameParameter"
+        },
+        {
+          "name": "subnetName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the subnet."
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "./networkManager.json#/definitions/QueryRequestOptions"
+          },
+          "description": "Parameters supplied to list correct page."
+        }
+      ],
+      "post": {
+        "tags": [
+          "NetworkManagerEffectiveConfiguration"
+        ],
+        "operationId": "EffectiveConfigurations_ListBySubnet",
+        "description": "List all configurations in a subnet.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about all effective configurations in a subnet.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerEffectiveConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List effective configuration in a subnet": {
+            "$ref": "./examples/NetworkManagerEffectiveConfigurationsListBySubnet.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -97,7 +155,8 @@
           "type": "string",
           "enum": [
             "ConnectivityConfiguration",
-            "SecurityRuleCollection"
+            "SecurityUserRuleCollection",
+            "SecurityAdminRuleCollection"
           ],
           "x-ms-enum": {
             "name": "EffectiveConfigurationKind",
@@ -135,12 +194,12 @@
       "description": "The network manager connectivity configuration resource",
       "x-ms-discriminator-value": "ConnectivityConfiguration"
     },
-    "SecurityRuleCollection": {
+    "SecurityUserRuleCollection": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RuleCollectionProperties",
-          "description": "The security rule collection properties"
+          "$ref": "#/definitions/SecurityUserRuleCollectionProperties",
+          "description": "The security user rule collection properties"
         }
       },
       "allOf": [
@@ -148,11 +207,69 @@
           "$ref": "#/definitions/EffectiveConfiguration"
         }
       ],
-      "description": "The network manager effective security rule collection",
-      "x-ms-discriminator-value": "SecurityRuleCollection"
+      "description": "The network manager effective security user rule collection",
+      "x-ms-discriminator-value": "SecurityUserRuleCollection"
+    },
+    "SecurityAdminRuleCollection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityAdminRuleCollectionProperties",
+          "description": "The security admin rule collection properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveConfiguration"
+        }
+      ],
+      "description": "The network manager effective security admin rule collection",
+      "x-ms-discriminator-value": "SecurityAdminRuleCollection"
+    },
+    "SecurityUserRuleCollectionProperties": {
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserBaseRule"
+          },
+          "description": "Base user rule List"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleCollectionProperties"
+        }
+      ],
+      "description": "The network manager security user rule collection properties"
+    },
+    "SecurityAdminRuleCollectionProperties": {
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdminBaseRule"
+          },
+          "description": "Base admin rule List"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleCollectionProperties"
+        }
+      ],
+      "description": "The network manager security rule admin collection properties"
     },
     "RuleCollectionProperties": {
       "properties": {
+        "configurationDisplayName": {
+          "type": "string",
+          "description": "A display name of the rule collection."
+        },
+        "configurationDescription": {
+          "type": "string",
+          "description": "A description of the rule collection."
+        },
         "displayName": {
           "type": "string",
           "description": "A display name of the rule collection."
@@ -160,13 +277,6 @@
         "description": {
           "type": "string",
           "description": "A description of the rule collection."
-        },
-        "rules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BaseRule"
-          },
-          "description": "Base rule List"
         },
         "appliesToGroups": {
           "type": "array",
@@ -183,7 +293,7 @@
       },
       "description": "The network manager security rule collection properties"
     },
-    "BaseRule": {
+    "AdminBaseRule": {
       "properties": {
         "id": {
           "type": "string",
@@ -193,13 +303,11 @@
           "type": "string",
           "description": "Whether the rule collection is custom or default.",
           "enum": [
-            "AdminRule",
-            "UserRule",
-            "DefaultUserRule",
-            "DefaultAdminRule"
+            "Custom",
+            "Default"
           ],
           "x-ms-enum": {
-            "name": "EffectiveRuleKind",
+            "name": "EffectiveAdminRuleKind",
             "modelAsString": true
           }
         }
@@ -210,7 +318,7 @@
       "discriminator": "kind",
       "description": "Network base rule."
     },
-    "AdminRule": {
+    "EffectiveAdminRule": {
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat",
@@ -220,29 +328,54 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BaseRule"
+          "$ref": "#/definitions/AdminBaseRule"
         }
       ],
       "description": "Network admin rule.",
-      "x-ms-discriminator-value": "AdminRule"
+      "x-ms-discriminator-value": "Custom"
     },
-    "DefaultAdminRule": {
+    "EffectiveDefaultAdminRule": {
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat",
           "x-ms-client-flatten": true,
-          "description": "Indicates the properties of the security admin rule"
+          "description": "Indicates the properties of the default security admin rule"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BaseRule"
+          "$ref": "#/definitions/AdminBaseRule"
         }
       ],
       "description": "Network default admin rule.",
-      "x-ms-discriminator-value": "DefaultAdminRule"
+      "x-ms-discriminator-value": "Default"
     },
-    "UserRule": {
+    "UserBaseRule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Whether the rule collection is custom or default.",
+          "enum": [
+            "Custom",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveUserRuleKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "discriminator": "kind",
+      "description": "Network base rule."
+    },
+    "EffectiveUserRule": {
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/UserRulePropertiesFormat",
@@ -252,13 +385,13 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BaseRule"
+          "$ref": "#/definitions/UserBaseRule"
         }
       ],
       "description": "Network security user rule.",
-      "x-ms-discriminator-value": "UserRule"
+      "x-ms-discriminator-value": "Custom"
     },
-    "DefaultUserRule": {
+    "EffectiveDefaultUserRule": {
       "properties": {
         "properties": {
           "$ref": "./networkManagerSecurityUserConfiguration.json#/definitions/DefaultUserRulePropertiesFormat",
@@ -268,11 +401,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BaseRule"
+          "$ref": "#/definitions/UserBaseRule"
         }
       ],
       "description": "Network security default user rule.",
-      "x-ms-discriminator-value": "DefaultUserRule"
+      "x-ms-discriminator-value": "Default"
     },
     "ConfigurationGroup": {
       "properties": {
