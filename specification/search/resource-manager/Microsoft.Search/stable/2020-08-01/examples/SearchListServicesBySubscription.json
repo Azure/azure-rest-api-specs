@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+            "name": "mysearchservice",
+            "location": "westus",
+            "type": "Microsoft.Search/searchServices",
+            "tags": {
+              "app-name": "My e-commerce app"
+            },
+            "sku": {
+              "name": "standard"
+            },
+            "properties": {
+              "replicaCount": 3,
+              "partitionCount": 1,
+              "status": "running",
+              "statusDetails": "",
+              "hostingMode": "default",
+              "provisioningState": "succeeded",
+              "publicNetworkAccess": "enabled",
+              "networkRuleSet": {
+                "ipRules": []
+              },
+              "privateEndpointConnections": []
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Search/searchServices/mysearchservice2",
+            "name": "mysearchservice2",
+            "location": "eastus",
+            "type": "Microsoft.Search/searchServices",
+            "tags": {
+              "app-name": "My e-commerce app"
+            },
+            "sku": {
+              "name": "basic"
+            },
+            "properties": {
+              "replicaCount": 1,
+              "partitionCount": 1,
+              "status": "running",
+              "statusDetails": "",
+              "hostingMode": "default",
+              "provisioningState": "succeeded",
+              "publicNetworkAccess": "enabled",
+              "networkRuleSet": {
+                "ipRules": []
+              },
+              "privateEndpointConnections": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

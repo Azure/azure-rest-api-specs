@@ -9,24 +9,17 @@
     "parameters": {
       "properties": {
         "description": "Example job to illustrate update.",
-        "priority": "High",
         "input": {
-          "@odata.type": "#Microsoft.Media.JobInputs",
-          "inputs": [
-            {
-              "@odata.type": "#Microsoft.Media.JobInputAsset",
-              "files": [],
-              "assetName": "job1 input"
-            }
-          ]
+          "@odata.type": "#Microsoft.Media.JobInputAsset",
+          "assetName": "job1-InputAsset"
         },
         "outputs": [
           {
             "@odata.type": "#Microsoft.Media.JobOutputAsset",
-            "label": "example-custom-label",
-            "assetName": "job1 output"
+            "assetName": "job1-OutputAsset"
           }
-        ]
+        ],
+        "priority": "High"
       }
     }
   },
@@ -46,22 +39,31 @@
               {
                 "@odata.type": "#Microsoft.Media.JobInputAsset",
                 "files": [],
-                "assetName": "job1 input"
+                "inputDefinitions": [],
+                "assetName": "job1-InputAsset"
               }
             ]
           },
-          "lastModified": "2019-10-10T22:38:03.737608Z",
+          "lastModified": "2021-01-26T13:35:50.1029813Z",
           "outputs": [
             {
               "@odata.type": "#Microsoft.Media.JobOutputAsset",
               "state": "Queued",
               "progress": 0,
               "label": "example-custom-label",
-              "assetName": "job1 output"
+              "assetName": "job1-OutputAsset"
             }
           ],
           "priority": "High",
           "correlationData": {}
+        },
+        "systemData": {
+          "createdBy": "contoso@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "0001-01-01T00:00:00Z",
+          "lastModifiedBy": "contoso@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-26T05:35:50.1029813-08:00"
         }
       }
     }

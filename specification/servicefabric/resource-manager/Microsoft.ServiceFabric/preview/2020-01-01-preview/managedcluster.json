@@ -356,6 +356,11 @@
             "type": "string"
           }
         ],
+        "x-ms-examples": {
+          "List available operations": {
+            "$ref": "./examples/Operations_example.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -424,6 +429,15 @@
     }
   },
   "definitions": {
+    "ManagedClusterAddOnFeature": {
+      "type": "string",
+      "description": "Available cluster add-on features",
+      "enum": [
+        "DnsService",
+        "BackupRestoreService",
+        "ResourceMonitorService"
+      ]
+    },
     "AzureActiveDirectory": {
       "properties": {
         "tenantId": {
@@ -460,7 +474,7 @@
         },
         "issuerThumbprint": {
           "type": "string",
-          "description": "Issuer thumbprint for the certificate. Its only use ehn CommonName is used."
+          "description": "Issuer thumbprint for the certificate. Only used together with CommonName."
         }
       },
       "description": "Client Certificate definition."
@@ -490,23 +504,6 @@
         "AutoScale",
         "Ready"
       ]
-    },
-    "ManagedClusterVersionDetails": {
-      "properties": {
-        "msiVersion": {
-          "type": "string",
-          "description": "The Service Fabric runtime version of the cluster."
-        },
-        "supportExpiryUtc": {
-          "type": "string",
-          "description": "The date of expiry of support of the version."
-        },
-        "osType": {
-          "$ref": "#/definitions/ClusterOsType",
-          "description": "Indicates the operating system of the cluster."
-        }
-      },
-      "description": "The detail of the Service Fabric runtime version."
     },
     "LoadBalancingRule": {
       "required": [
@@ -567,9 +564,6 @@
       "description": "The manged cluster resource\n",
       "allOf": [
         {
-          "description": "The managed cluster resource properties"
-        },
-        {
           "$ref": "#/definitions/Resource"
         },
         {
@@ -626,7 +620,7 @@
         "clusterState": {
           "readOnly": true,
           "$ref": "#/definitions/ClusterState",
-          "description": "The current state of the cluster.\n\n  - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.\n  - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.\n  - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.\n  - UpdatingUserConfiguration - Indicates that the cluster is being upgraded with the user provided configuration.\n  - UpdatingUserCertificate - Indicates that the cluster is being upgraded with the user provided certificate.\n  - UpdatingInfrastructure - Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'.\n  - EnforcingClusterVersion - Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version.\n  - UpgradeServiceUnreachable - Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider.\n  - AutoScale - Indicates that the ReliabilityLevel of the cluster is being adjusted.\n  - Ready - Indicates that the cluster is in a stable state.\n"
+          "description": "The current state of the cluster."
         },
         "clusterCertificateThumbprint": {
           "type": "string",
@@ -650,8 +644,8 @@
           "description": "vm admin user name."
         },
         "adminPassword": {
-          "x-ms-secret": true,
           "type": "string",
+          "x-ms-secret": true,
           "format": "password",
           "description": "vm admin user password."
         },
@@ -680,31 +674,21 @@
           },
           "description": "The list of custom fabric settings to configure the cluster."
         },
-        "useTestExtension": {
-          "type": "boolean",
-          "description": "Use service fabric test vm extension, by default it's false."
-        },
         "provisioningState": {
           "$ref": "#/definitions/ManagedResourceProvisioningState",
-          "description": "The provisioning state of the managed cluster resource.",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The provisioning state of the managed cluster resource."
         },
         "clusterCodeVersion": {
           "type": "string",
           "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](./ClusterVersion.md). To get the list of available version for existing clusters use **availableClusterVersions**."
         },
-        "clusterUpgradeMode": {
-          "$ref": "#/definitions/UpgradeMode",
-          "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n\n  - Automatic - The cluster will be automatically upgraded to the latest Service Fabric runtime version as soon as it is available.\n  - Manual - The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource.\n"
-        },
-        "clusterUpgradeDescription": {
-          "$ref": "#/definitions/ClusterUpgradePolicy",
-          "description": "Describes the policy used when upgrading the cluster."
-        },
-        "reverseProxyEndpointPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The endpoint used by reverse proxy."
+        "addonFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedClusterAddOnFeature"
+          },
+          "description": "client certificates for the cluster."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -726,7 +710,7 @@
           "items": {
             "$ref": "#/definitions/LoadBalancingRule"
           },
-          "description": "Describes a load balancing rule."
+          "description": "Describes load balancing rules."
         },
         "clients": {
           "type": "array",
@@ -750,18 +734,12 @@
           "type": "string",
           "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](./ClusterVersion.md). To get the list of available version for existing clusters use **availableClusterVersions**."
         },
-        "clusterUpgradeMode": {
-          "$ref": "#/definitions/UpgradeMode",
-          "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n\n  - Automatic - The cluster will be automatically upgraded to the latest Service Fabric runtime version as soon as it is available.\n  - Manual - The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource.\n"
-        },
-        "clusterUpgradeDescription": {
-          "$ref": "#/definitions/ClusterUpgradePolicy",
-          "description": "Describes the policy used when upgrading the cluster."
-        },
-        "reverseProxyEndpointPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The endpoint used by reverse proxy."
+        "addonFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedClusterAddOnFeature"
+          },
+          "description": "client certificates for the cluster."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -770,8 +748,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ManagedClusterPropertiesUpdateParameters",
-          "description": "Describes the managed cluster resource properties."
+          "$ref": "#/definitions/ManagedClusterPropertiesUpdateParameters"
         },
         "tags": {
           "type": "object",
@@ -783,6 +760,23 @@
       },
       "description": "Managed cluster update request"
     },
+    "ManagedClusterVersionDetails": {
+      "properties": {
+        "msiVersion": {
+          "type": "string",
+          "description": "The Service Fabric runtime version of the cluster."
+        },
+        "supportExpiryUtc": {
+          "type": "string",
+          "description": "The date of expiry of support of the version."
+        },
+        "osType": {
+          "$ref": "#/definitions/ClusterOsType",
+          "description": "Indicates the operating system of the cluster."
+        }
+      },
+      "description": "The detail of the Service Fabric runtime version."
+    },
     "Sku": {
       "required": [
         "name"
@@ -790,14 +784,14 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
-          "description": "Sku Name. Basic will hav a minimum of 3 seed nodes and Standard a minimum of 5. Basic only allows 1 node type."
+          "description": "Sku Name."
         }
       },
       "description": "Sku definition"
     },
     "SkuName": {
       "type": "string",
-      "description": "Sku Name. Basic will hav a minimum of 3 seed nodes and Standard a minimum of 5. Basic only allows 1 node type.",
+      "description": "Sku Name. Basic will have a minimum of 3 seed nodes and Standard a minimum of 5. Basic only allows 1 node type.",
       "enum": [
         "Basic",
         "Standard"
@@ -1168,14 +1162,6 @@
         }
       },
       "description": "Describes a section in the fabric settings of the cluster."
-    },
-    "UpgradeMode": {
-      "type": "string",
-      "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n\n  - Automatic - The cluster will be automatically upgraded to the latest Service Fabric runtime version as soon as it is available.\n  - Manual - The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource.\n",
-      "enum": [
-        "Automatic",
-        "Manual"
-      ]
     }
   },
   "parameters": {

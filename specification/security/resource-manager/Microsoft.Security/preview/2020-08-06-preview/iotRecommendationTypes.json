@@ -1,0 +1,247 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2020-08-06-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotRecommendationTypes": {
+      "get": {
+        "x-ms-examples": {
+          "Get IoT Recommendation Types": {
+            "$ref": "./examples/IotRecommendationTypes/GetIoTRecommendationTypeList.json"
+          }
+        },
+        "tags": [
+          "IoT Security Recommendation Types"
+        ],
+        "description": "List IoT recommendation types",
+        "operationId": "IotRecommendationTypes_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotRecommendationTypeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotRecommendationTypes/{iotRecommendationTypeName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get IoT Recommendation Type": {
+            "$ref": "./examples/IotRecommendationTypes/GetIoTRecommendationType.json"
+          }
+        },
+        "tags": [
+          "IoT Security Recommendation Types"
+        ],
+        "operationId": "IotRecommendationTypes_Get",
+        "description": "Get IoT recommendation type",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "in": "path",
+            "name": "iotRecommendationTypeName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the recommendation type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IoT recommendation type",
+            "schema": {
+              "$ref": "#/definitions/IotRecommendationType"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IotRecommendationTypeList": {
+      "type": "object",
+      "description": "List of recommendation types",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List data",
+          "items": {
+            "$ref": "#/definitions/IotRecommendationType"
+          }
+        }
+      }
+    },
+    "IotRecommendationType": {
+      "type": "object",
+      "description": "IoT recommendation type.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Recommendation type properties",
+          "$ref": "#/definitions/IotRecommendationTypeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "IotRecommendationTypeProperties": {
+      "type": "object",
+      "description": "IoT recommendation type information.",
+      "properties": {
+        "recommendationDisplayName": {
+          "readOnly": true,
+          "type": "string",
+          "example": "TLS cipher suite upgrade needed",
+          "description": "The display name of the recommendation"
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Medium",
+          "description": "The severity of the recommendation",
+          "enum": [
+            "Unknown",
+            "NotApplicable",
+            "Healthy",
+            "OffByPolicy",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "recommendationSeverity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown"
+              },
+              {
+                "value": "NotApplicable"
+              },
+              {
+                "value": "Healthy"
+              },
+              {
+                "value": "OffByPolicy"
+              },
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Medium"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          }
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Description of the suspected vulnerability and meaning.",
+          "example": "Insecure TLS configurations detected. Immediate TLS cipher suite upgrade recommended."
+        },
+        "productName": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Azure Security Center for IoT",
+          "description": "The name of the product which published this recommendation"
+        },
+        "productComponentName": {
+          "readOnly": true,
+          "type": "string",
+          "example": "IoT Hub",
+          "description": "The name of a component inside the product which generated the recommendation"
+        },
+        "vendorName": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Microsoft",
+          "description": "The name of the vendor that raised the recommendation"
+        },
+        "control": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Communication between device and IoT Hub is not optimized",
+          "description": "The name of the recommendation's control category "
+        },
+        "remediationSteps": {
+          "readOnly": true,
+          "description": "Manual action items to take to resolve the recommendation",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "Upgrade your TLS cipher suite to a secure configuration. See the Guide to TLS Standards Compliance for more information."
+          }
+        },
+        "dataSource": {
+          "readOnly": true,
+          "description": "The alert's data source",
+          "type": "string",
+          "example": "IoT Hub"
+        }
+      }
+    }
+  }
+}

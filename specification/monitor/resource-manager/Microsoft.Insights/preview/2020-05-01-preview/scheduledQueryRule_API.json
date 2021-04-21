@@ -43,10 +43,10 @@
         "operationId": "ScheduledQueryRules_ListBySubscription",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -82,13 +82,13 @@
         "operationId": "ScheduledQueryRules_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -124,7 +124,7 @@
         "operationId": "ScheduledQueryRules_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -133,7 +133,7 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -164,7 +164,7 @@
         "operationId": "ScheduledQueryRules_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -173,7 +173,7 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -225,7 +225,7 @@
         "operationId": "ScheduledQueryRules_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -234,7 +234,7 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -274,7 +274,7 @@
         "operationId": "ScheduledQueryRules_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -283,7 +283,7 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -329,9 +329,23 @@
     },
     "ScheduledQueryRuleProperties": {
       "properties": {
+        "createdWithApiVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The api-version used when creating this alert rule"
+        },
+        "isLegacyLogAnalyticsRule": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "True if alert rule is legacy Log Analytic rule"
+        },
         "description": {
           "type": "string",
           "description": "The description of the scheduled query rule."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the alert rule"
         },
         "severity": {
           "type": "number",
@@ -369,6 +383,11 @@
           "format": "duration",
           "description": "The period of time (in ISO 8601 duration format) on which the Alert query will be executed (bin size)."
         },
+        "overrideQueryTimeRange": {
+          "type": "string",
+          "format": "duration",
+          "description": "If specified then overrides the query time range (default is WindowSize*NumberOfEvaluationPeriods)"
+        },
         "targetResourceTypes": {
           "type": "array",
           "items": {
@@ -405,6 +424,16 @@
         "properties"
       ],
       "properties": {
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. "
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScheduledQueryRuleProperties",
@@ -511,7 +540,7 @@
             "LessThanOrEqual"
           ],
           "x-ms-enum": {
-            "name": "Operator",
+            "name": "conditionOperator",
             "modelAsString": true
           },
           "description": "The criteria operator."
@@ -526,11 +555,15 @@
           "description": "The minimum number of violations required within the selected lookback time window required to raise an alert.",
           "properties": {
             "numberOfEvaluationPeriods": {
-              "type": "number",
+              "type": "integer",
+              "format": "int64",
+              "default": 1,
               "description": "The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points. Default value is 1"
             },
             "minFailingPeriodsToAlert": {
-              "type": "number",
+              "type": "integer",
+              "format": "int64",
+              "default": 1,
               "description": "The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods. Default value is 1"
             }
           }
@@ -558,7 +591,7 @@
             "Exclude"
           ],
           "x-ms-enum": {
-            "name": "operator",
+            "name": "dimensionOperator",
             "modelAsString": true
           }
         },
@@ -588,20 +621,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription Id."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",

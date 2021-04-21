@@ -1,0 +1,216 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2020-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/purge": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Purges data in an Log Analytics workspace by a set of user-defined filters.\n\nIn order to manage system resources, purge requests are throttled at 50 requests per hour. You should batch the execution of purge requests by sending a single command whose predicate includes all user identities that require purging. Use the in operator to specify multiple identities. You should run the query prior to using for a purge request to verify that the results are expected.",
+        "operationId": "WorkspacePurge_Purge",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePurgeParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted request for purging an Log Analytics workspace.",
+            "schema": {
+              "$ref": "#/definitions/WorkspacePurgeResponse"
+            },
+            "headers": {
+              "x-ms-status-location": {
+                "type": "string",
+                "description": "The location from which to request the operation status."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePurge": {
+            "$ref": "./examples/WorkspacesPurge.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/operations/{purgeId}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Gets status of an ongoing purge operation.",
+        "operationId": "WorkspacePurge_GetPurgeStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePurgeIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
+            "schema": {
+              "$ref": "#/definitions/WorkspacePurgeStatusResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePurgeOperation": {
+            "$ref": "./examples/WorkspacesPurgeOperation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkspacePurgeBody": {
+      "description": "Describes the body of a purge request for an App Insights Workspace",
+      "required": [
+        "table",
+        "filters"
+      ],
+      "properties": {
+        "table": {
+          "type": "string",
+          "description": "Table from which to purge data."
+        },
+        "filters": {
+          "type": "array",
+          "description": "The set of columns and filters (queries) to run over them to purge the resulting data.",
+          "items": {
+            "$ref": "#/definitions/WorkspacePurgeBodyFilters"
+          }
+        }
+      }
+    },
+    "WorkspacePurgeBodyFilters": {
+      "description": "User-defined filters to return data which will be purged from the table.",
+      "properties": {
+        "column": {
+          "description": "The column of the table over which the given query should run",
+          "type": "string"
+        },
+        "operator": {
+          "description": "A query operator to evaluate over the provided column and value(s). Supported operators are ==, =~, in, in~, >, >=, <, <=, between, and have the same behavior as they would in a KQL query.",
+          "type": "string"
+        },
+        "value": {
+          "description": "the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= '2017-09-01') or array of values."
+        },
+        "key": {
+          "description": "When filtering over custom dimensions, this key will be used as the name of the custom dimension.",
+          "type": "string"
+        }
+      }
+    },
+    "WorkspacePurgeResponse": {
+      "description": "Response containing operationId for a specific purge action.",
+      "properties": {
+        "operationId": {
+          "description": "Id to use when querying for status for a particular purge operation.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "WorkspacePurgeStatusResponse": {
+      "description": "Response containing status for a specific purge operation.",
+      "properties": {
+        "status": {
+          "description": "Status of the operation represented by the requested Id.",
+          "type": "string",
+          "enum": [
+            "pending",
+            "completed"
+          ],
+          "x-ms-enum": {
+            "name": "PurgeState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "status"
+      ]
+    }
+  },
+  "parameters": {
+    "WorkspacePurgeParameter": {
+      "name": "body",
+      "in": "body",
+      "description": "Describes the body of a request to purge data in a single table of an Log Analytics Workspace",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WorkspacePurgeBody"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspacePurgeIdParameter": {
+      "name": "purgeId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "In a purge status request, this is the Id of the operation the status of which is returned.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

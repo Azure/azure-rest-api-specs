@@ -1045,6 +1045,18 @@
         "encryption": {
           "$ref": "#/definitions/EncryptionProperties",
           "description": "The encryption settings of the configuration store."
+        },
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },
