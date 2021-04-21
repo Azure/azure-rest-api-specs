@@ -57,6 +57,12 @@ batch:
   - multiapiscript: true
 ```
 
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothub/azure/mgmt/iothub/
+clear-output-folder: false
+perform-load: false
+```
+
 ### Tag: package-preview-2021-03 and python
 
 These settings apply only when `--tag=package-preview-2021-03 --python` is specified on the command line.
