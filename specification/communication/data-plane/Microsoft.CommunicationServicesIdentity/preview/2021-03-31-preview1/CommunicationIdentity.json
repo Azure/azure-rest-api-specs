@@ -228,49 +228,6 @@
           }
         }
       }
-    },
-    "/turn/{id}/:issueCredentials": {
-      "post": {
-        "tags": [
-          "Turn"
-        ],
-        "summary": "Issue TURN credentials for an existing identity.",
-        "operationId": "CommunicationIdentity_IssueTurnCredentials",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Identifier of the existing identity to issue credentials for.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CommunicationTurnCredentialsResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Issue Turn Credentials": {
-            "$ref": "./examples/IssueTurnCredentials.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -368,54 +325,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentityTokenScope"
-          }
-        }
-      }
-    },
-    "CommunicationTurnServer": {
-      "description": "An instance of a TURN server with credentials.",
-      "required": [
-        "credential",
-        "urls",
-        "username"
-      ],
-      "type": "object",
-      "properties": {
-        "urls": {
-          "description": "List of TURN server URLs.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "username": {
-          "description": "User account name which uniquely identifies the credentials.",
-          "type": "string"
-        },
-        "credential": {
-          "description": "Credential for the server.",
-          "type": "string"
-        }
-      }
-    },
-    "CommunicationTurnCredentialsResponse": {
-      "description": "A TURN credentials response.",
-      "required": [
-        "expiresOn",
-        "turnServers"
-      ],
-      "type": "object",
-      "properties": {
-        "expiresOn": {
-          "format": "date-time",
-          "description": "The date for which the username and credentials are not longer valid.",
-          "type": "string"
-        },
-        "turnServers": {
-          "description": "An array representing the credentials and the TURN server URL.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationTurnServer"
           }
         }
       }
