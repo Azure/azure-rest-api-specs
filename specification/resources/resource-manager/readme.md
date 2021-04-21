@@ -41,11 +41,11 @@ tag: package-policy-2020-09
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2020-10
+tag: package-resources-2021-01
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2019-11
+tag: package-subscriptions-2021-01
 ```
 
 ``` yaml $(package-links)
@@ -61,8 +61,9 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2019-06-preview
+tag: package-templatespecs-2021-03-preview
 ```
+
 
 ### Tag: package-policy-2020-05
 
@@ -73,13 +74,13 @@ input-file:
 - Microsoft.Authorization/stable/2020-05-01/privateLinks.json
 ```
 
-### Tag: package-resources-2020-10
+### Tag: package-resources-2021-01
 
-These settings apply only when `--tag=package-resources-2020-10` is specified on the command line.
+These settings apply only when `--tag=package-resources-2021-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2020-10'
+``` yaml $(tag) == 'package-resources-2021-01'
 input-file:
-- Microsoft.Resources/stable/2020-10-01/resources.json
+- Microsoft.Resources/stable/2021-01-01/resources.json
 ```
 
 ### Tag: package-policy-2020-09
@@ -108,22 +109,15 @@ input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
 
-### Tag: package-resources-2020-08
 
-These settings apply only when `--tag=package-resources-2020-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2020-08'
+### Tag: package-subscriptions-2021-01
+
+These settings apply only when `--tag=package-subscriptions-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2021-01'
 input-file:
-  - Microsoft.Resources/stable/2020-08-01/resources.json
-```
-
-### Tag: package-subscriptions-2020-01
-
-These settings apply only when `--tag=package-subscriptions-2020-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-subscriptions-2020-01'
-input-file:
-  - Microsoft.Resources/stable/2020-01-01/subscriptions.json
+- Microsoft.Resources/stable/2021-01-01/subscriptions.json
 ```
 
 ### Tag: package-deploymentscripts-2020-10
@@ -291,6 +285,15 @@ override-info:
   title: PolicyClient
 ```
 
+### Tag: package-templatespecs-2021-03-preview
+
+These settings apply only when `--tag=package-templatespecs-2021-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-templatespecs-2021-03-preview'
+input-file:
+- Microsoft.Resources/preview/2021-03-01-preview/templateSpecs.json
+```
+
 ### Tag: package-templatespecs-2019-06-preview
 
 These settings apply only when `--tag=package-templatespecs-2019-06-preview` is specified on the command line.
@@ -330,6 +333,24 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2020-10
+
+These settings apply only when `--tag=package-resources-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-10'
+input-file:
+  - Microsoft.Resources/stable/2020-10-01/resources.json
+```
+
+### Tag: package-resources-2020-08
+
+These settings apply only when `--tag=package-resources-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-08'
+input-file:
+  - Microsoft.Resources/stable/2020-08-01/resources.json
 ```
 
 ### Tag: package-resources-2020-06
@@ -456,6 +477,15 @@ These settings apply only when `--tag=package-resources-2015-11` is specified on
 ``` yaml $(tag) == 'package-resources-2015-11'
 input-file:
 - Microsoft.Resources/stable/2015-11-01/resources.json
+```
+
+### Tag: package-subscriptions-2020-01
+
+These settings apply only when `--tag=package-subscriptions-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2020-01'
+input-file:
+  - Microsoft.Resources/stable/2020-01-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2019-11
@@ -731,16 +761,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#features
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#locks
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#policy
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#templatespecs
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#deploymentscripts
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -750,6 +770,9 @@ swagger-to-sdk:
     after_scripts:
       - node sdkauto_afterscript.js resources/resource-manager
 ```
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
