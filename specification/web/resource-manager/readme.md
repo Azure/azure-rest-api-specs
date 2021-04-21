@@ -79,6 +79,7 @@ input-file:
 - Microsoft.Web/stable/2020-12-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2020-12-01/AppServicePlans.json
 - Microsoft.Web/stable/2020-12-01/ResourceHealthMetadata.json
+- Microsoft.Web/stable/2020-12-01/KubeEnvironments.json
 directive:
   # suppress each RPC 3016 error
 - where: $.definitions.FunctionSecrets.properties.trigger_url
