@@ -73,7 +73,7 @@ input-file:
   - Microsoft.Sql/preview/2021-02-01-preview/JobTargetGroups.json
   - Microsoft.Sql/preview/2021-02-01-preview/JobVersions.json
   - Microsoft.Sql/preview/2021-02-01-preview/Jobs.json
-  - Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUpload.json
+  - Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
   - Microsoft.Sql/preview/2021-02-01-preview/LocationCapabilities.json
   - Microsoft.Sql/preview/2021-02-01-preview/LongTermRetentionBackups.json
   - Microsoft.Sql/preview/2021-02-01-preview/LongTermRetentionManagedInstanceBackups.json
