@@ -515,16 +515,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "AdminPolicy",
-              "UserPolicy",
-              "Routing",
-              "Connectivity"
-            ],
-            "x-ms-enum": {
-              "name": "ScopeAccesses",
-              "modelAsString": true
-            }
+            "$ref": "#/definitions/ConfigurationType"
           },
           "description": "Scope Access."
         },
@@ -559,16 +550,7 @@
         },
         "commitType": {
           "type": "string",
-          "enum": [
-            "AdminPolicy",
-            "UserPolicy",
-            "Routing",
-            "Connectivity"
-          ],
-          "x-ms-enum": {
-            "name": "CommitType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/ConfigurationType",
           "description": "Commit Type."
         }
       },
@@ -586,7 +568,7 @@
         "deploymentTypes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeploymentType"
+            "$ref": "#/definitions/ConfigurationType"
           },
           "description": "List of configurations' deployment types."
         },
@@ -662,7 +644,7 @@
         },
         "deploymentType": {
           "type": "string",
-          "$ref": "#/definitions/DeploymentType"
+          "$ref": "#/definitions/ConfigurationType"
         },
         "errorMessage": {
           "type": "string",
@@ -671,16 +653,15 @@
       },
       "description": "Network Manager Deployment Status."
     },
-    "DeploymentType": {
+    "ConfigurationType": {
       "type": "string",
       "enum": [
-        "AdminPolicy",
-        "UserPolicy",
-        "Routing",
+        "AdminSecurity",
+        "UserSecurity",
         "Connectivity"
       ],
       "x-ms-enum": {
-        "name": "DeploymentType",
+        "name": "ConfigurationType",
         "modelAsString": true
       },
       "description": "Configuration Deployment Type."
