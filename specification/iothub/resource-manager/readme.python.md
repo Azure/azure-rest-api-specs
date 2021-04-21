@@ -22,7 +22,6 @@ license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.iothub
 package-name: azure-mgmt-iothub
 package-version: 0.8.2
-clear-output-folder: true
 no-namespace-folders: true
 ```
 
