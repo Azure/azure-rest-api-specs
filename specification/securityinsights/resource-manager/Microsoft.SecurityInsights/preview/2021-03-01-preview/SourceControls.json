@@ -44,8 +44,8 @@
         "tags": [
           "Repositories"
         ],
-        "description": "Gets a .",
-        "operationId": "Repositories_Get",
+        "description": "Gets a list of repositories.",
+        "operationId": "Repositories_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -299,8 +299,7 @@
       },
       "required": [
         "value"
-      ],
-      "type": "object"
+      ]
     },
     "Repo": {
       "allOf": [
@@ -309,6 +308,17 @@
         }
       ],
       "description": "Represents a repository.",
+      "properties": {
+        "properties": {
+          "description": "repository properties",
+          "$ref": "#/definitions/RepoProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "RepoProperties": {
+      "description": "Repository properties",
       "properties": {
         "repoName": {
           "description": "The name of the repository.",
@@ -548,7 +558,7 @@
       "x-ms-parameter-location": "method"
     },
     "OperationalInsightsResourceProvider": {
-      "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
+      "description": "The namespace of workspaces resource provider - Microsoft.OperationalInsights.",
       "in": "path",
       "name": "operationalInsightsResourceProvider",
       "required": true,
@@ -556,7 +566,7 @@
       "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {
-      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+      "description": "The name of the resource group. The name is case insensitive.",
       "in": "path",
       "maxLength": 90,
       "minLength": 1,
