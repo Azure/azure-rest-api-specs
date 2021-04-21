@@ -535,48 +535,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StoragePool/{diskPoolName}/skus": {
-      "get": {
-        "tags": [
-          "DiskPools"
-        ],
-        "operationId": "DiskPools_ListSkus",
-        "description": "List of available skus to resize an existing Disk Pool.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DiskPoolName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ResourceSkuList"
-            }
-          },
-          "default": {
-            "description": "Error from the RP",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Deallocate Disk Pool": {
-            "$ref": "./examples/DiskPools_ListSkus.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StoragePool/diskPools/{diskPoolName}/iscsiTargets": {
       "get": {
         "tags": [
@@ -1698,42 +1656,6 @@
         "modelAsString": true
       },
       "description": "ACL mode for iSCSI Target."
-    },
-    "ResourceSkuList": {
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "description": "List of Skus for a Disk Pool",
-      "additionalProperties": false,
-      "properties": {
-        "value": {
-          "description": "List of Skus",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceSku"
-          }
-        },
-        "nextLink": {
-          "description": "URI to fetch the next section of the paginated response.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceSku": {
-      "type": "object",
-      "description": "Sku for an ARM resource",
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "Type of Arm Resource"
-        },
-        "sku": {
-          "description": "Sku for ARM resource",
-          "$ref": "#/definitions/Sku"
-        }
-      }
     },
     "Sku": {
       "type": "object",
