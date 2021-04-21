@@ -572,9 +572,9 @@
           },
           "description": "List of configurations' deployment types."
         },
-        "options": {
-          "description": "The query evaluation options",
-          "$ref": "#/definitions/QueryRequestOptions"
+        "$skipToken": {
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
+          "type": "string"
         }
       },
       "description": "Network Manager Deployment Status Parameter."
@@ -587,21 +587,6 @@
             "$ref": "#/definitions/NetworkManagerDeploymentStatus"
           },
           "description": "Gets a page of Network Manager Deployment Status"
-        },
-        "totalRecords": {
-          "description": "Total Records.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "firstIndex": {
-          "description": "First Index.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "pageSize": {
-          "description": "Page Size.",
-          "format": "int32",
-          "type": "integer"
         },
         "$skipToken": {
           "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
@@ -672,34 +657,12 @@
           "type": "string",
           "description": "Conditional Members."
         },
-        "options": {
-          "description": "The query evaluation options",
-          "$ref": "#/definitions/QueryRequestOptions"
-        }
-      },
-      "description": "Effective Virtual Networks Parameter."
-    },
-    "QueryRequestOptions": {
-      "description": "The options for query evaluation",
-      "properties": {
         "$skipToken": {
           "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
           "type": "string"
-        },
-        "$top": {
-          "description": "The maximum number of rows that the query should return. Overrides the page size when ```$skipToken``` property is present.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 1000
-        },
-        "$skip": {
-          "description": "The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0
         }
-      }
+      },
+      "description": "Effective Virtual Networks Parameter."
     }
   },
   "parameters": {

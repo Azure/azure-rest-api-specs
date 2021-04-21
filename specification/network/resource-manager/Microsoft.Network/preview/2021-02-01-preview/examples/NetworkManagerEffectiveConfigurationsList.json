@@ -6,8 +6,7 @@
     "resourceGroupName": "myResourceGroup",
     "virtualNetworkName": "testVirtualNetwork",
     "parameters": {
-      "$top": 10,
-      "$skip": 0
+      "$skipToken": "FakeSkipTokenCode"
     }
   },
   "responses": {
@@ -167,9 +166,7 @@
             ]
           }
         ],
-        "totalRecords": 3,
-        "firstIndex": 1,
-        "pageSize": 10
+        "$skipToken": "FakeSkipTokenCode"
       }
     }
   }
