@@ -802,13 +802,6 @@
           "type": "string",
           "description": "Specifies the Arc Machine's unique SMBIOS ID"
         },
-        "extensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MachineExtensionInstanceView"
-          },
-          "description": "Machine Extensions information"
-        },
         "osSku": {
           "readOnly": true,
           "type": "string",
@@ -833,6 +826,13 @@
           "type": "string",
           "description": "The resource id of the private link scope this machine is assigned to, if any."
         }
+      },
+      "resources": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/MachineExtension"
+        },
+        "description": "Machine Extensions information"
       },
       "description": "Describes the properties of a hybrid machine."
     },
