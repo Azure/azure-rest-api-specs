@@ -598,10 +598,6 @@
         }
       }
     },
-    "StyleObject": {
-      "description": "The stateset style model. The style rule could be a numeric type style rule or a boolean type style rule.  Refer to NumberRuleObject, StringRuleObject and BooleanRuleObject definitions [here](https://aka.ms/AzureMapsStatesetStylesObject). ",
-      "type": "object"
-    },
     "NumberRuleObject": {
       "description": "The numeric rule",
       "type": "object",
@@ -610,7 +606,7 @@
           "$ref": "#/definitions/RangeObject"
         },
         "color": {
-          "description": "Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
+          "description": "The color when value is within the range. Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
           "type": "string"
         }
       }
@@ -646,11 +642,11 @@
       "type": "object",
       "properties": {
         "true": {
-          "description": "The color when value is true.",
+          "description": "The color when value is true. Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
           "type": "string"
         },
         "false": {
-          "description": "The color when value is false.",
+          "description": "The color when value is false. Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
           "type": "string"
         }
       }
@@ -658,23 +654,13 @@
     "StringRuleObject": {
       "description": "The string rule. The string value matching is case sensitive. If a feature's state doesn't match any of the values defined here, that feature will not have any dynamic style. If duplicate string values are given, the first one takes precedence.",
       "type": "object",
-      "properties": {
-        "stateValue1": {
-          "description": "The color when value string is stateValue1.",
-          "type": "string"
-        },
-        "stateValue2": {
-          "description": "The color when value string is stateValue2.",
-          "type": "string"
-        },
-        "stateValueN": {
-          "description": "The color when value string is stateValueN.",
-          "type": "string"
-        }
+      "additionalProperties": {
+        "description": "The color when the keyName value string is equal to this property name. Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
+        "type": "string"
       }
     },
-    "StyleRuleBase": {
-      "description": "contains common properties for numeric, string and boolean style rules.",
+    "StyleObject": {
+      "description": "The stateset style model. The style rule could be a numeric type style rule or a boolean type style rule.  Refer to NumberRuleObject, StringRuleObject and BooleanRuleObject definitions [here](https://aka.ms/AzureMapsStatesetStylesObject). ",
       "discriminator": "type",
       "type": "object",
       "required": [
@@ -695,7 +681,7 @@
             "string"
           ],
           "x-ms-enum": {
-            "name": "StyleRuleBaseType",
+            "name": "StyleObjectType",
             "modelAsString": true,
             "values": [
               {
@@ -718,10 +704,11 @@
     "boolean": {
       "description": "the boolean type style rule object.",
       "x-ms-client-name": "BooleanTypeStyleRule",
+      "x-ms-discriminator-value": "boolean",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRuleBase"
+          "$ref": "#/definitions/StyleObject"
         },
         {
           "$ref": "#/definitions/BooleanTypeStyleRuleProperties"
@@ -748,10 +735,11 @@
     "number": {
       "description": "The numeric type style rule object.",
       "x-ms-client-name": "NumberTypeStyleRule",
+      "x-ms-discriminator-value": "number",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRuleBase"
+          "$ref": "#/definitions/StyleObject"
         },
         {
           "$ref": "#/definitions/NumberTypeStyleRuleProperties"
@@ -778,10 +766,11 @@
     "string": {
       "description": "The string type style rule object.",
       "x-ms-client-name": "StringTypeStyleRule",
+      "x-ms-discriminator-value": "string",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRuleBase"
+          "$ref": "#/definitions/StyleObject"
         },
         {
           "$ref": "#/definitions/StringTypeStyleRuleProperties"
@@ -804,6 +793,6 @@
       "required": [
         "rules"
       ]
-}
+    }
   }
 }

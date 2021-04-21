@@ -125,7 +125,22 @@
       "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) and should be a `GeoJSON` compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
       "type": "object"
     },
-    "GeoJSONGeometry": {
+    "GeoJsonPosition": {
+      "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
+      }
+    },
+    "GeoJsonLinearRing": {
+      "description": "Though a linear ring is not explicitly represented as a GeoJSON geometry type, it helps in defining the polygon as an array of linear rings. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GeoJsonPosition"
+      }
+    },
+    "GeoJsonGeometry": {
       "description": "A valid `GeoJSON` geometry object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
       "type": "object",
       "discriminator": "type",
@@ -146,7 +161,7 @@
             "GeometryCollection"
           ],
           "x-ms-enum": {
-            "name": "GeoJSONGeometryType",
+            "name": "GeoJsonGeometryType",
             "modelAsString": false,
             "values": [
               {
@@ -187,7 +202,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/GeoJSONGeometry"
+          "$ref": "#/definitions/GeoJsonGeometry"
         },
         {
           "$ref": "#/definitions/PointData"
@@ -199,7 +214,7 @@
       "type": "object",
       "properties": {
         "coordinates": {
-          "$ref": "#/definitions/GeoJSONPosition"
+          "$ref": "#/definitions/GeoJsonPosition"
         }
       },
       "required": [
@@ -211,7 +226,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/GeoJSONGeometry"
+          "$ref": "#/definitions/GeoJsonGeometry"
         },
         {
           "$ref": "#/definitions/MultiPointData"
@@ -226,7 +241,7 @@
           "description": "Coordinates for the `MultiPoint` geometry.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GeoJSONPosition"
+            "$ref": "#/definitions/GeoJsonPosition"
           }
         }
       },
@@ -239,7 +254,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/GeoJSONGeometry"
+          "$ref": "#/definitions/GeoJsonGeometry"
         },
         {
           "$ref": "#/definitions/LineStringData"
@@ -253,7 +268,7 @@
           "description": "Coordinates for the `LineString` geometry.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GeoJSONPosition"
+            "$ref": "#/definitions/GeoJsonPosition"
           }
         }
       },
@@ -261,27 +276,73 @@
         "coordinates"
       ]
     },
-    "GeoJSONLinearRing": {
-      "description": "Though a linear ring is not explicitly represented as a GeoJSON geometry type, it helps in defining the polygon as an array of linear rings. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/GeoJSONPosition"
-      }
+    "MultiLineString": {
+      "description": "A valid `GeoJSON MultiLineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.5) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "#/definitions/MultiLineStringData"
+        }
+      ]
     },
-    "GeoJSONPosition": {
-      "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
-      "type": "array",
-      "items": {
-        "type": "number",
-        "format": "double"
-      }
+    "MultiLineStringData": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Specifies the `type` for the geometry. Value should always be equal to \"MultiLineString\".",
+          "type": "string"
+        },
+        "coordinates": {
+          "description": "Coordinates for the `MultiLineString` geometry.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/GeoJsonPosition"
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "Polygon": {
+      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        },
+        {
+          "$ref": "#/definitions/PolygonData"
+        }
+      ]
+    },
+    "PolygonData": {
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "description": "Coordinates for the `Polygon` geometry type.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoJsonLinearRing"
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
     },
     "MultiPolygon": {
       "description": "A valid `GeoJSON MultiPolygon` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.7) for details.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/GeoJSONGeometry"
+          "$ref": "#/definitions/GeoJsonGeometry"
         },
         {
           "$ref": "#/definitions/MultiPolygonData"
@@ -297,69 +358,8 @@
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/GeoJSONLinearRing"
+              "$ref": "#/definitions/GeoJsonLinearRing"
             }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
-    },
-    "MultiLineString": {
-      "description": "A valid `GeoJSON MultiLineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.5) for details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJSONGeometry"
-        },
-        {
-          "$ref": "#/definitions/MultiPointStringData"
-        }
-      ]
-    },
-    "MultiPointStringData": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Specifies the `type` for the geometry. Value should always be equal to \"MultiLineString\".",
-          "type": "string"
-        },
-        "coordinates": {
-          "description": "Coordinates for the `MultiLineString` geometry.",
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/GeoJSONPosition"
-            }
-          }
-        }
-      },
-      "required": [
-        "coordinates"
-      ]
-    },
-    "Polygon": {
-      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJSONGeometry"
-        },
-        {
-          "$ref": "#/definitions/PolygonData"
-        }
-      ]
-    },
-    "PolygonData": {
-      "type": "object",
-      "properties": {
-        "coordinates": {
-          "description": "Coordinates for the `Polygon` geometry type.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GeoJSONLinearRing"
           }
         }
       },
@@ -372,7 +372,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/GeoJSONGeometry"
+          "$ref": "#/definitions/GeoJsonGeometry"
         },
         {
           "$ref": "#/definitions/GeometryCollectionData"
@@ -386,7 +386,7 @@
           "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GeoJSONGeometry"
+            "$ref": "#/definitions/GeoJsonGeometry"
           }
         }
       },
