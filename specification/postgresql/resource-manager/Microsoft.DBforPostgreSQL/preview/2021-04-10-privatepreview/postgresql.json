@@ -1017,7 +1017,7 @@
       "properties": {
         "availabilityZone": {
           "type": "string",
-          "description": "availabilityZone",
+          "description": "Availability zone of the server",
           "readOnly": true
         },
         "serverEdition": {
@@ -1793,16 +1793,22 @@
       "description": "REST API operation definition."
     },
     "OperationListResult": {
+      "description": "A list of resource provider operations.",
+      "type": "object",
       "properties": {
         "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          },
-          "description": "The list of resource provider operations."
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
         }
-      },
-      "description": "A list of resource provider operations."
+      }
     },
     "NameAvailabilityRequest": {
       "required": [
