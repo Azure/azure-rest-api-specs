@@ -61,7 +61,6 @@ input-file:
   - Microsoft.RecoveryServices/stable/2021-02-10/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2021-02-10/replicationusages.json
   - Microsoft.RecoveryServices/stable/2021-02-10/vaults.json
-  - Microsoft.RecoveryServices/stable/2021-02-10/vaultusages.json
 ```
 ### Tag: package-2016-06
 
