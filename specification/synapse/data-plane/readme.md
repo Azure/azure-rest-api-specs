@@ -118,7 +118,11 @@ input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
 ```
 
-``` yaml $(tag) == 'package-artifacts-2019-06-01-preview'
+### Tag: package-monitoring-2020-12-01
+
+These settings apply only when `--tag=package-monitoring-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-artifacts-2020-12-01'
 input-file:
 - Microsoft.Synapse/stable/2020-12-01/artifacts.json
 - Microsoft.Synapse/stable/2020-12-01/bigDataPools.json
