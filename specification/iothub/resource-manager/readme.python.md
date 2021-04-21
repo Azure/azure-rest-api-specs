@@ -54,6 +54,7 @@ batch:
   - tag: package-2017-07
   - tag: package-2017-01
   - tag: package-2016-02
+  - multiapiscript: true
 ```
 
 ### Tag: package-preview-2021-03 and python
