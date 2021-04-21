@@ -231,6 +231,96 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/alerts": {
+      "post": {
+        "x-ms-examples": {
+          "Get all incident alerts.": {
+            "$ref": "./examples/incidents/GetAllIncidentAlerts.json"
+          }
+        },
+        "tags": [
+          "IncidentAlerts"
+        ],
+        "description": "Gets all incident alerts.",
+        "operationId": "Incidents_ListOfAlerts",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentAlertList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/bookmarks": {
+      "post": {
+        "x-ms-examples": {
+          "Get all incident bookmarks.": {
+            "$ref": "./examples/incidents/GetAllIncidentBookmarks.json"
+          }
+        },
+        "tags": [
+          "IncidentBookmarks"
+        ],
+        "description": "Gets all incident bookmarks.",
+        "operationId": "Incidents_ListOfBookmarks",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentBookmarkList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments": {
       "get": {
         "x-ms-examples": {
@@ -440,9 +530,86 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/entities": {
+      "post": {
+        "x-ms-examples": {
+          "Gets all incident related entities": {
+            "$ref": "./examples/incidents/GetAllIncidentEntities.json"
+          }
+        },
+        "tags": [
+          "IncidentEntities"
+        ],
+        "description": "Gets all incident related entities.",
+        "operationId": "Incidents_ListOfEntities",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentEntitiesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "AlertSeverity": {
+      "description": "The severity of the alert",
+      "enum": [
+        "High",
+        "Medium",
+        "Low",
+        "Informational"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AlertSeverity",
+        "values": [
+          {
+            "description": "High severity",
+            "value": "High"
+          },
+          {
+            "description": "Medium severity",
+            "value": "Medium"
+          },
+          {
+            "description": "Low severity",
+            "value": "Low"
+          },
+          {
+            "description": "Informational severity",
+            "value": "Informational"
+          }
+        ]
+      }
+    },
     "AttackTactic": {
       "description": "The severity for alerts created by this alert rule.",
       "enum": [
@@ -497,6 +664,273 @@
         }
       },
       "description": "An error response for a resource management request."
+    },
+    "Entity": {
+      "allOf": [
+        {
+          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/EntityKind"
+        }
+      ],
+      "description": "Specific entity.",
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "EntityCommonProperties": {
+      "description": "Entity common property bag.",
+      "properties": {
+        "additionalData": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "A bag of custom fields that should be part of the entity and will be presented to the user.",
+          "readOnly": true,
+          "type": "object"
+        },
+        "friendlyName": {
+          "description": "The graph item display name which is a short humanly readable description of the graph item instance. This property is optional and might be system generated.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EntityEdges": {
+      "description": "The edge that connects the entity to the other entity.",
+      "properties": {
+        "targetEntityId": {
+          "description": "The target entity Id.",
+          "type": "string"
+        },
+        "additionalData": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "A bag of custom fields that should be part of the entity and will be presented to the user.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "EntityInnerKind": {
+      "description": "The kind of the entity",
+      "enum": [
+        "Account",
+        "Host",
+        "File",
+        "AzureResource",
+        "CloudApplication",
+        "DnsResolution",
+        "FileHash",
+        "Ip",
+        "Malware",
+        "Process",
+        "RegistryKey",
+        "RegistryValue",
+        "SecurityGroup",
+        "Url",
+        "IoTDevice",
+        "SecurityAlert",
+        "Bookmark",
+        "Mailbox",
+        "MailCluster",
+        "MailMessage",
+        "SubmissionMail"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityKind",
+        "values": [
+          {
+            "description": "Entity represents account in the system.",
+            "value": "Account"
+          },
+          {
+            "description": "Entity represents host in the system.",
+            "value": "Host"
+          },
+          {
+            "description": "Entity represents file in the system.",
+            "value": "File"
+          },
+          {
+            "description": "Entity represents azure resource in the system.",
+            "value": "AzureResource"
+          },
+          {
+            "description": "Entity represents cloud application in the system.",
+            "value": "CloudApplication"
+          },
+          {
+            "description": "Entity represents dns resolution in the system.",
+            "value": "DnsResolution"
+          },
+          {
+            "description": "Entity represents file hash in the system.",
+            "value": "FileHash"
+          },
+          {
+            "description": "Entity represents ip in the system.",
+            "value": "Ip"
+          },
+          {
+            "description": "Entity represents malware in the system.",
+            "value": "Malware"
+          },
+          {
+            "description": "Entity represents process in the system.",
+            "value": "Process"
+          },
+          {
+            "description": "Entity represents registry key in the system.",
+            "value": "RegistryKey"
+          },
+          {
+            "description": "Entity represents registry value in the system.",
+            "value": "RegistryValue"
+          },
+          {
+            "description": "Entity represents security group in the system.",
+            "value": "SecurityGroup"
+          },
+          {
+            "description": "Entity represents url in the system.",
+            "value": "Url"
+          },
+          {
+            "description": "Entity represents IoT device in the system.",
+            "value": "IoTDevice"
+          },
+          {
+            "description": "Entity represents security alert in the system.",
+            "value": "SecurityAlert"
+          },
+          {
+            "description": "Entity represents bookmark in the system.",
+            "value": "Bookmark"
+          },
+          {
+            "description": "Entity represents mail cluster in the system.",
+            "value": "MailCluster"
+          },
+          {
+            "description": "Entity represents mail message in the system.",
+            "value": "MailMessage"
+          },
+          {
+            "description": "Entity represents mailbox in the system.",
+            "value": "Mailbox"
+          },
+          {
+            "description": "Entity represents submission mail in the system.",
+            "value": "SubmissionMail"
+          }
+        ]
+      }
+    },
+    "EntityKind": {
+      "description": "Describes an entity with kind.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EntityInnerKind",
+          "description": "The kind of the entity."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
+    "HuntingBookmark": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a Hunting bookmark entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HuntingBookmarkProperties",
+          "description": "HuntingBookmark entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Bookmark"
+    },
+    "HuntingBookmarkProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Describes bookmark properties",
+      "properties": {
+        "created": {
+          "description": "The time the bookmark was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the bookmark",
+          "type": "object"
+        },
+        "displayName": {
+          "description": "The display name of the bookmark",
+          "type": "string"
+        },
+        "eventTime": {
+          "description": "The time of the event",
+          "format": "date-time",
+          "type": "string"
+        },
+        "labels": {
+          "description": "List of labels relevant to this bookmark",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "description": "The notes of the bookmark",
+          "type": "string"
+        },
+        "query": {
+          "description": "The query of the bookmark.",
+          "type": "string"
+        },
+        "queryResult": {
+          "description": "The query result of the bookmark.",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The last time the bookmark was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that updated the bookmark",
+          "type": "object"
+        },
+        "incidentInfo": {
+          "$ref": "#/definitions/IncidentInfo",
+          "description": "Describes an incident that relates to bookmark",
+          "type": "object"
+        }
+      },
+      "required": [
+        "displayName",
+        "query"
+      ],
+      "type": "object"
     },
     "Incident": {
       "allOf": [
@@ -554,6 +988,36 @@
         }
       },
       "type": "object"
+    },
+    "IncidentAlertList": {
+      "description": "List of incident alerts.",
+      "properties": {
+        "value": {
+          "description": "Array of incident alerts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityAlert"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IncidentBookmarkList": {
+      "description": "List of incident bookmarks.",
+      "properties": {
+        "value": {
+          "description": "Array of incident bookmarks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HuntingBookmark"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "IncidentComment": {
       "allOf": [
@@ -622,6 +1086,99 @@
       ],
       "type": "object"
     },
+    "IncidentEntitiesResponse": {
+      "description": "The incident related entities response.",
+      "properties": {
+        "entities": {
+          "description": "Array of the incident related entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        },
+        "metaData": {
+          "description": "The metadata from the incident related entities results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncidentEntitiesResultsMetadata"
+          }
+        }
+      }
+    },
+    "IncidentEntitiesResultsMetadata": {
+      "description": "Information of a specific aggregation in the incident related entities result.",
+      "properties": {
+        "count": {
+          "description": "Total number of aggregations of the given kind in the incident related entities result.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "entityKind": {
+          "$ref": "#/definitions/EntityInnerKind",
+          "description": "The kind of the aggregated entity."
+        }
+      },
+      "required": [
+        "entityKind",
+        "count"
+      ],
+      "type": "object"
+    },
+    "IncidentInfo": {
+      "description": "Describes related incident information for the bookmark",
+      "properties": {
+        "incidentId": {
+          "description": "Incident Id",
+          "type": "string"
+        },
+        "severity": {
+          "description": "The severity of the incident",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "Informational"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "CaseSeverity",
+            "values": [
+              {
+                "description": "Critical severity",
+                "value": "Critical"
+              },
+              {
+                "description": "High severity",
+                "value": "High"
+              },
+              {
+                "description": "Medium severity",
+                "value": "Medium"
+              },
+              {
+                "description": "Low severity",
+                "value": "Low"
+              },
+              {
+                "description": "Informational severity",
+                "value": "Informational"
+              }
+            ]
+          }
+        },
+        "title": {
+          "description": "The title of the incident",
+          "type": "string"
+        },
+        "relationName": {
+          "description": "Relation Name",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "IncidentLabel": {
       "description": "Represents an incident label",
       "properties": {
@@ -677,6 +1234,10 @@
       "required": [
         "value"
       ]
+    },
+    "Label": {
+      "description": "Label that will be used to tag and filter on.",
+      "type": "string"
     },
     "IncidentOwnerInfo": {
       "description": "Information on the user an incident is assigned to",
@@ -905,6 +1466,372 @@
         "severity",
         "status"
       ],
+      "type": "object"
+    },
+    "SecurityAlert": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a security alert entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityAlertProperties",
+          "description": "SecurityAlert entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "SecurityAlert"
+    },
+    "SecurityAlertProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "SecurityAlert entity property bag.",
+      "properties": {
+        "alertDisplayName": {
+          "description": "The display name of the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "alertType": {
+          "description": "The type name of the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "compromisedEntity": {
+          "description": "Display name of the main entity being reported on.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "confidenceLevel": {
+          "description": "The confidence level of this alert.",
+          "enum": [
+            "Unknown",
+            "Low",
+            "High"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ConfidenceLevel",
+            "values": [
+              {
+                "description": "Unknown confidence, the is the default value",
+                "value": "Unknown"
+              },
+              {
+                "description": "Low confidence, meaning we have some doubts this is indeed malicious or part of an attack",
+                "value": "Low"
+              },
+              {
+                "description": "High confidence that the alert is true positive malicious",
+                "value": "High"
+              }
+            ]
+          }
+        },
+        "confidenceReasons": {
+          "description": "The confidence reasons",
+          "items": {
+            "description": "confidence reason item",
+            "properties": {
+              "reason": {
+                "description": "The reason's description",
+                "readOnly": true,
+                "type": "string"
+              },
+              "reasonType": {
+                "description": "The type (category) of the reason",
+                "readOnly": true,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "confidenceScore": {
+          "description": "The confidence score of the alert.",
+          "format": "double",
+          "readOnly": true,
+          "type": "number"
+        },
+        "confidenceScoreStatus": {
+          "description": "The confidence score calculation status, i.e. indicating if score calculation is pending for this alert, not applicable or final.",
+          "enum": [
+            "NotApplicable",
+            "InProcess",
+            "NotFinal",
+            "Final"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ConfidenceScoreStatus",
+            "values": [
+              {
+                "description": "Score will not be calculated for this alert as it is not supported by virtual analyst",
+                "value": "NotApplicable"
+              },
+              {
+                "description": "No score was set yet and calculation is in progress",
+                "value": "InProcess"
+              },
+              {
+                "description": "Score is calculated and shown as part of the alert, but may be updated again at a later time following the processing of additional data",
+                "value": "NotFinal"
+              },
+              {
+                "description": "Final score was calculated and available",
+                "value": "Final"
+              }
+            ]
+          }
+        },
+        "description": {
+          "description": "Alert description.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "endTimeUtc": {
+          "description": "The impact end time of the alert (the time of the last event contributing to the alert).",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "intent": {
+          "description": "Holds the alert intent stage(s) mapping for this alert.",
+          "enum": [
+            "Unknown",
+            "Probing",
+            "Exploitation",
+            "Persistence",
+            "PrivilegeEscalation",
+            "DefenseEvasion",
+            "CredentialAccess",
+            "Discovery",
+            "LateralMovement",
+            "Execution",
+            "Collection",
+            "Exfiltration",
+            "CommandAndControl",
+            "Impact"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "KillChainIntent",
+            "values": [
+              {
+                "description": "The default value.",
+                "value": "Unknown"
+              },
+              {
+                "description": "Probing could be an attempt to access a certain resource regardless of a malicious intent or a failed attempt to gain access to a target system to gather information prior to exploitation. This step is usually detected as an attempt originating from outside the network in attempt to scan the target system and find a way in.",
+                "value": "Probing"
+              },
+              {
+                "description": "Exploitation is the stage where an attacker manage to get foothold on the attacked resource. This stage is applicable not only for compute hosts, but also for resources such as user accounts, certificates etc. Adversaries will often be able to control the resource after this stage.",
+                "value": "Exploitation"
+              },
+              {
+                "description": "Persistence is any access, action, or configuration change to a system that gives an adversary a persistent presence on that system. Adversaries will often need to maintain access to systems through interruptions such as system restarts, loss of credentials, or other failures that would require a remote access tool to restart or alternate backdoor for them to regain access.",
+                "value": "Persistence"
+              },
+              {
+                "description": "Privilege escalation is the result of actions that allow an adversary to obtain a higher level of permissions on a system or network. Certain tools or actions require a higher level of privilege to work and are likely necessary at many points throughout an operation. User accounts with permissions to access specific systems or perform specific functions necessary for adversaries to achieve their objective may also be considered an escalation of privilege.",
+                "value": "PrivilegeEscalation"
+              },
+              {
+                "description": "Defense evasion consists of techniques an adversary may use to evade detection or avoid other defenses. Sometimes these actions are the same as or variations of techniques in other categories that have the added benefit of subverting a particular defense or mitigation. ",
+                "value": "DefenseEvasion"
+              },
+              {
+                "description": "Credential access represents techniques resulting in access to or control over system, domain, or service credentials that are used within an enterprise environment. Adversaries will likely attempt to obtain legitimate credentials from users or administrator accounts (local system administrator or domain users with administrator access) to use within the network. With sufficient access within a network, an adversary can create accounts for later use within the environment.",
+                "value": "CredentialAccess"
+              },
+              {
+                "description": "Discovery consists of techniques that allow the adversary to gain knowledge about the system and internal network. When adversaries gain access to a new system, they must orient themselves to what they now have control of and what benefits operating from that system give to their current objective or overall goals during the intrusion. The operating system provides many native tools that aid in this post-compromise information-gathering phase.",
+                "value": "Discovery"
+              },
+              {
+                "description": "Lateral movement consists of techniques that enable an adversary to access and control remote systems on a network and could, but does not necessarily, include execution of tools on remote systems. The lateral movement techniques could allow an adversary to gather information from a system without needing additional tools, such as a remote access tool. An adversary can use lateral movement for many purposes, including remote Execution of tools, pivoting to additional systems, access to specific information or files, access to additional credentials, or to cause an effect.",
+                "value": "LateralMovement"
+              },
+              {
+                "description": "The execution tactic represents techniques that result in execution of adversary-controlled code on a local or remote system. This tactic is often used in conjunction with lateral movement to expand access to remote systems on a network.",
+                "value": "Execution"
+              },
+              {
+                "description": "Collection consists of techniques used to identify and gather information, such as sensitive files, from a target network prior to exfiltration. This category also covers locations on a system or network where the adversary may look for information to exfiltrate.",
+                "value": "Collection"
+              },
+              {
+                "description": "Exfiltration refers to techniques and attributes that result or aid in the adversary removing files and information from a target network. This category also covers locations on a system or network where the adversary may look for information to exfiltrate.",
+                "value": "Exfiltration"
+              },
+              {
+                "description": "The command and control tactic represents how adversaries communicate with systems under their control within a target network.",
+                "value": "CommandAndControl"
+              },
+              {
+                "description": "The impact intent primary objective is to directly reduce the availability or integrity of a system, service, or network; including manipulation of data to impact a business or operational process. This would often refer to techniques such as ransom-ware, defacement, data manipulation and others.",
+                "value": "Impact"
+              }
+            ]
+          }
+        },
+        "providerAlertId": {
+          "description": "The identifier of the alert inside the product which generated the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "processingEndTime": {
+          "description": "The time the alert was made available for consumption.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "productComponentName": {
+          "description": "The name of a component inside the product which generated the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "productName": {
+          "description": "The name of the product which published this alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "productVersion": {
+          "description": "The version of the product generating the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "remediationSteps": {
+          "description": "Manual action items to take to remediate the alert.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity of the alert"
+        },
+        "startTimeUtc": {
+          "description": "The impact start time of the alert (the time of the first event contributing to the alert).",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The lifecycle status of the alert.",
+          "enum": [
+            "Unknown",
+            "New",
+            "Resolved",
+            "Dismissed",
+            "InProgress"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AlertStatus",
+            "values": [
+              {
+                "description": "Unknown value",
+                "value": "Unknown"
+              },
+              {
+                "description": "New alert",
+                "value": "New"
+              },
+              {
+                "description": "Alert closed after handling",
+                "value": "Resolved"
+              },
+              {
+                "description": "Alert dismissed as false positive",
+                "value": "Dismissed"
+              },
+              {
+                "description": "Alert is being handled",
+                "value": "InProgress"
+              }
+            ]
+          }
+        },
+        "systemAlertId": {
+          "description": "Holds the product identifier of the alert for the product.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tactics": {
+          "description": "The tactics of the alert",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "timeGenerated": {
+          "description": "The time the alert was generated.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "vendorName": {
+          "description": "The name of the vendor that raise the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "alertLink": {
+          "description": "The uri link of the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "resourceIdentifiers": {
+          "description": "The list of resource identifiers of the alert.",
+          "items": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "UserInfo": {
+      "description": "User information that made some action",
+      "properties": {
+        "email": {
+          "description": "The email of the user.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the user.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the user.",
+          "format": "uuid",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
       "type": "object"
     }
   },
