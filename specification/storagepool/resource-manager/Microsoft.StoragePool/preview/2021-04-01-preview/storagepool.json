@@ -1204,11 +1204,6 @@
         "properties"
       ],
       "properties": {
-        "sku": {
-          "description": "Determines the SKU of the Disk Pool",
-          "type": "object",
-          "$ref": "#/definitions/Sku"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties for Disk Pool update request.",
@@ -1660,6 +1655,9 @@
     "Sku": {
       "type": "object",
       "description": "Sku for ARM resource",
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "type": "string",
