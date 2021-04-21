@@ -48,22 +48,22 @@
         "operationId": "Repositories_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RepoType"
+            "$ref": "#/parameters/RepoTypeParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -96,19 +96,19 @@
         "operationId": "SourceControls_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -144,22 +144,22 @@
         "operationId": "SourceControls_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/SourceControlId"
+            "$ref": "#/parameters/SourceControlIdParameter"
           }
         ],
         "responses": {
@@ -190,22 +190,22 @@
         "operationId": "SourceControls_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/SourceControlId"
+            "$ref": "#/parameters/SourceControlIdParameter"
           }
         ],
         "responses": {
@@ -236,22 +236,22 @@
         "operationId": "SourceControls_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/OperationalInsightsResourceProvider"
           },
           {
-            "$ref": "#/parameters/WorkspaceName"
+            "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/SourceControlId"
+            "$ref": "#/parameters/SourceControlIdParameter"
           },
           {
             "$ref": "#/parameters/SourceControl"
@@ -515,7 +515,7 @@
     }
   },
   "parameters": {
-    "ApiVersion": {
+    "ApiVersionParameter": {
       "description": "API version for the operation",
       "enum": [
         "2021-03-01-preview"
@@ -525,7 +525,7 @@
       "required": true,
       "type": "string"
     },
-    "RepoType": {
+    "RepoTypeParameter": {
       "description": "The repo type.",
       "enum": [
         "Github",
@@ -537,15 +537,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SubscriptionId": {
-      "description": "Azure subscription ID",
-      "in": "path",
-      "name": "subscriptionId",
-      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-      "required": true,
-      "type": "string"
-    },
-    "WorkspaceName": {
+    "WorkspaceNameParameter": {
       "description": "The name of the workspace.",
       "in": "path",
       "maxLength": 90,
@@ -563,7 +555,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ResourceGroupName": {
+    "ResourceGroupNameParameter": {
       "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
       "in": "path",
       "maxLength": 90,
@@ -574,7 +566,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SourceControlId": {
+    "SourceControlIdParameter": {
       "description": "Source control Id",
       "in": "path",
       "name": "sourceControlId",
