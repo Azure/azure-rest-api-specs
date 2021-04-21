@@ -281,32 +281,6 @@
     }
   },
   "definitions": {
-    "ResourceWithEtag": {
-      "description": "An azure resource object with an Etag property",
-      "properties": {
-        "id": {
-          "description": "Azure resource Id",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Azure resource name",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Azure resource type",
-          "readOnly": true,
-          "type": "string"
-        },
-        "etag": {
-          "description": "Etag of the azure resource",
-          "type": "string"
-        }
-      },
-      "x-ms-azure-resource": true,
-      "type": "object"
-    },
     "RepoList": {
       "description": "List all the source controls.",
       "properties": {
@@ -331,7 +305,7 @@
     "Repo": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents a repository.",
@@ -375,7 +349,7 @@
     "SourceControl": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceWithEtag"
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents a SourceControl in Azure Security Insights.",
