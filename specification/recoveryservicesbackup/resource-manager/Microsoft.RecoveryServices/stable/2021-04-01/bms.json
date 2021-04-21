@@ -3976,6 +3976,11 @@
     },
     "BackupResourceEncryptionConfigExtended": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupResourceEncryptionConfig"
+        }
+      ],
       "properties": {
         "userAssignedIdentity": {
           "description": "User Assigned Identity Id",
@@ -3984,56 +3989,6 @@
         "useSystemAssignedIdentity": {
           "description": "bool to indicate whether to use system Assigned Identity or not",
           "type": "boolean"
-        },
-        "encryptionAtRestType": {
-          "description": "Encryption At Rest Type",
-          "enum": [
-            "Invalid",
-            "MicrosoftManaged",
-            "CustomerManaged"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EncryptionAtRestType",
-            "modelAsString": true
-          }
-        },
-        "keyUri": {
-          "description": "Key Vault Key URI",
-          "type": "string"
-        },
-        "subscriptionId": {
-          "description": "Key Vault Subscription Id",
-          "type": "string"
-        },
-        "lastUpdateStatus": {
-          "enum": [
-            "Invalid",
-            "NotEnabled",
-            "PartiallySucceeded",
-            "PartiallyFailed",
-            "Failed",
-            "Succeeded",
-            "Initialized",
-            "FirstInitialization"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "LastUpdateStatus",
-            "modelAsString": true
-          }
-        },
-        "infrastructureEncryptionState": {
-          "enum": [
-            "Invalid",
-            "Disabled",
-            "Enabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "InfrastructureEncryptionState",
-            "modelAsString": true
-          }
         }
       }
     },
