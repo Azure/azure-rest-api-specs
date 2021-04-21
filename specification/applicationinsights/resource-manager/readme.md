@@ -28,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-preview-2020-10
+tag: package-2020-11-20
 ```
 
 ### Suppression
@@ -214,11 +214,11 @@ directive:
     reason: 'Secrets are OK to return in a POST response.'
 ```
 
-### Tag: package-2020-11-20
+### Tag: package-2020-11-only
 
-These settings apply only when `--tag=package-2020-11-20` is specified on the command line.
+These settings apply only when `--tag=package-2020-11-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-11-20'
+``` yaml $(tag) == 'package-2020-11-only'
 input-file:
   - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
 ```
@@ -231,11 +231,12 @@ These settings apply only when `--tag=package-preview-2021-03-only` is specified
 input-file:
   - Microsoft.Insights/preview/2021-03-03-preview/diagnosticServicesToken_API.json
 ```
-### Tag: package-2020-02-12
 
-These settings apply only when `--tag=package-2020-02-12` is specified on the command line.
+### Tag: package-2020-11-20
 
-``` yaml $(tag) == 'package-2020-02-12'
+These settings apply only when `--tag=package-2020-11-20` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11-20'
 input-file:
   - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -251,6 +252,7 @@ input-file:
   - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
   - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
   - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
 ```
 
 ### Tag: package-2020-10-20
