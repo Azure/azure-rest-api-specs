@@ -51,6 +51,7 @@ input-file:
   - Microsoft.RecoveryServices/stable/2021-03-01/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2021-03-01/replicationusages.json
   - Microsoft.RecoveryServices/stable/2021-03-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2021-03-01/vaultusages.json
 ```
 ### Tag: package-2021-02
 
@@ -61,7 +62,7 @@ input-file:
   - Microsoft.RecoveryServices/stable/2021-02-10/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2021-02-10/replicationusages.json
   - Microsoft.RecoveryServices/stable/2021-02-10/vaults.json
-  - Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
+  - Microsoft.RecoveryServices/stable/2021-02-10/vaultusages.json
 ```
 ### Tag: package-2016-06
 
