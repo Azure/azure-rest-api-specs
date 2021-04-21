@@ -65,7 +65,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/CheckNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/checkNameAvailability": {
       "post": {
         "tags": [
           "Redis"
@@ -2262,7 +2262,8 @@
         "ports": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           "description": "A list of redis instances to reboot, specified by per-instance SSL ports or non-SSL ports."
         }
