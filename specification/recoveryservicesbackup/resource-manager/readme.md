@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for RecoveryServicesBackup.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for RecoveryServicesBackup, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,13 +15,13 @@ To build the SDK for RecoveryServicesBackup, simply [Install AutoRest](https://a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the RecoveryServicesBackup API.
 
 ``` yaml
@@ -32,11 +32,11 @@ tag: package-2021-03
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
-
 license-header: MICROSOFT_MIT
 ```
 
 ### Validations
+
 Run validations when `--validate` is specified on command line
 
 ``` yaml $(validate)
@@ -45,6 +45,7 @@ model-validator: true
 semantic-validator: true
 message-format: json
 ```
+
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
@@ -52,6 +53,16 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
 - Microsoft.RecoveryServices/stable/2021-03-01/bms.json
+- Microsoft.RecoveryServices/stable/2018-12-20/bms.json
+```
+
+### Tag: package-2021-02-10
+
+These settings apply only when `--tag=package-2021-02-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-02-10'
+input-file:
+- Microsoft.RecoveryServices/stable/2021-02-10/bms.json
 - Microsoft.RecoveryServices/stable/2018-12-20/bms.json
 ```
 ### Tag: package-2021-02-preview
@@ -135,7 +146,6 @@ input-file:
 - Microsoft.RecoveryServices/stable/2016-08-10/operations.json
 ```
 
-
 ### Tag: package-2019-06
 
 These settings apply only when `--tag=package-2019-06` is specified on the command line.
@@ -209,8 +219,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -233,13 +243,12 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js recoveryservicesbackup/resource-manager
 ```
 
-
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-```yaml $(csharp)
+``` yaml $(csharp)
 csharp:
   azure-arm: true
   payload-flattening-threshold: 1
