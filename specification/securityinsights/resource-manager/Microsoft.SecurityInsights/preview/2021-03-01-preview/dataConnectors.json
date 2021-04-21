@@ -1151,12 +1151,12 @@
       "x-ms-discriminator-value": "GenericUI"
     },
     "CodelessParameters": {
-      "description": "",
+      "description": "Represents Codeless UI data connector",
       "type": "object",
       "properties": {
         "connectorUiConfig": {
           "$ref": "#/definitions/CodelessUiConnectorConfigProperties",
-          "description": ""
+          "description": "Config to describe the instructions blade"
         }
       }
     },
@@ -1321,7 +1321,11 @@
             "Microsoft.OperationalInsights/workspaces/sharedKeys",
             "Microsoft.Authorization/policyAssignments"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "provider"
+          }
         },
         "permissionsDisplayText": {
           "description": "Permission description text",
@@ -1338,7 +1342,11 @@
             "Subscription",
             "Workspace"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "scope"
+          }
         },
         "requiredPermissions": {
           "description": "Required permissions for the connector",
@@ -1377,7 +1385,7 @@
       "properties": {
         "parameters": {
           "type": "object",
-          "description": ""
+          "description": "The parameters for the setting"
         },
         "type": {
           "description": "The kind of the setting",
@@ -1402,19 +1410,19 @@
       "type": "object",
       "properties": {
         "action": {
-          "description": "",
+          "description": "action",
           "type": "boolean"
         },
         "write": {
-          "description": "",
+          "description": "write",
           "type": "boolean"
         },
         "read": {
-          "description": "",
+          "description": "read",
           "type": "boolean"
         },
         "delete": {
-          "description": "",
+          "description": "delete",
           "type": "boolean"
         }
       }
@@ -1424,13 +1432,11 @@
       "type": "object",
       "properties": {
         "status": {
-          "description": "",
+          "description": "The connector Availability Status",
           "format": "int32",
           "type": "integer",
           "enum": [
-            1,
-            2,
-            3
+            1
           ],
           "x-ms-enum": {
             "name": "Availability",
@@ -1438,14 +1444,6 @@
               {
                 "value": 1,
                 "description": "Available"
-              },
-              {
-                "value": 2,
-                "description": "FeatureFlag"
-              },
-              {
-                "value": 3,
-                "description": "Internal"
               }
             ]
           }
@@ -1463,14 +1461,13 @@
         "type": {
           "description": "type of connectivity",
           "enum": [
-            "IsConnectedQuery",
-            "OmsSolutions",
-            "SentinelKinds",
-            "SentinelKindsV2",
-            "AzureActiveDirectory",
-            "SecurityEvents"
+            "IsConnectedQuery"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "connectivityType"
+          }
         },
         "value": {
           "description": "Queries for checking connectivity",
@@ -1483,33 +1480,33 @@
       }
     },
     "SampleQueries": {
-      "description": "",
+      "description": "The sample queries for the connector",
       "type": "object",
       "properties": {
         "description": {
-          "description": "",
+          "description": "The sample query description",
           "type": "string"
         },
         "query": {
-          "description": "",
+          "description": "the sample query",
           "type": "string"
         }
       }
     },
     "GraphQueries": {
       "type": "object",
-      "description": "",
+      "description": "The graph query to show the current data status",
       "properties": {
         "metricName": {
-          "description": "",
+          "description": "the metric that the query is checking",
           "type": "string"
         },
         "legend": {
-          "description": "",
+          "description": "The legend for the graph",
           "type": "string"
         },
         "baseQuery": {
-          "description": "",
+          "description": "The base query for the graph",
           "type": "string"
         }
       }
