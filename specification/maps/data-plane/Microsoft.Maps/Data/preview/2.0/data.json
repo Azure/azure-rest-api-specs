@@ -87,7 +87,7 @@
         }
       }
     },
-    "202": {
+    "202Accepted": {
       "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
       "headers": {
         "Operation-Location": {
@@ -134,7 +134,7 @@
       ],
       "x-ms-enum": {
         "name": "JsonFormat",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "value": "json",
@@ -191,7 +191,7 @@
       "required": false,
       "x-ms-parameter-location": "method"
     },
-    "OperationId": {
+    "DataUploadOperationId": {
       "name": "operationId",
       "type": "string",
       "in": "path",
@@ -249,7 +249,7 @@
             }
           },
           "202": {
-            "$ref": "#/responses/202"
+            "$ref": "#/responses/202Accepted"
           },
           "400": {
             "$ref": "#/responses/400"
@@ -367,7 +367,7 @@
             }
           },
           "202": {
-            "$ref": "#/responses/202"
+            "$ref": "#/responses/202Accepted"
           },
           "400": {
             "$ref": "#/responses/400"
@@ -495,7 +495,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/OperationId"
+            "$ref": "#/parameters/DataUploadOperationId"
           }
         ],
         "responses": {
@@ -565,7 +565,7 @@
           ],
           "x-ms-enum": {
             "name": "type",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "value": "NotStarted",

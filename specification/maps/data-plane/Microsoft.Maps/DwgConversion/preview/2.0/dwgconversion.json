@@ -76,7 +76,7 @@
       }
     },
     "200Async": {
-      "description": "The operation is complete.  If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+      "description": "The operation is running or complete.  If the operation was successful, use the Resource-Location header to obtain the path to the result.",
       "schema": {
         "$ref": "#/definitions/LongRunningOperationResult"
       },
@@ -87,7 +87,7 @@
         }
       }
     },
-    "202": {
+    "202Accepted": {
       "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
       "headers": {
         "Operation-Location": {
@@ -155,7 +155,7 @@
       "required": false,
       "x-ms-parameter-location": "method"
     },
-    "OperationId": {
+    "ConversionOperationId": {
       "name": "operationId",
       "type": "string",
       "in": "path",
@@ -201,7 +201,7 @@
         ],
         "responses": {
           "202": {
-            "$ref": "#/responses/202"
+            "$ref": "#/responses/202Accepted"
           },
           "400": {
             "$ref": "#/responses/400"
@@ -364,7 +364,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/OperationId"
+            "$ref": "#/parameters/ConversionOperationId"
           }
         ],
         "responses": {
@@ -434,7 +434,7 @@
           ],
           "x-ms-enum": {
             "name": "type",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "value": "NotStarted",
