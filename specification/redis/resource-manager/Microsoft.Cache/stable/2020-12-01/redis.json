@@ -6,12 +6,20 @@
     "version": "2020-12-01"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -28,7 +36,9 @@
   "paths": {
     "/providers/Microsoft.Cache/operations": {
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "description": "Lists all of the available REST API operations of the Microsoft.Cache provider.",
         "operationId": "Operations_List",
         "parameters": [
@@ -57,7 +67,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/CheckNameAvailability": {
       "post": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_CheckNameAvailability",
         "x-ms-examples": {
           "RedisCacheCheckNameAvailability": {
@@ -97,7 +109,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/listUpgradeNotifications": {
       "get": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_ListUpgradeNotifications",
         "x-ms-examples": {
           "RedisCacheListUpgradeNotifications": {
@@ -156,7 +170,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}": {
       "put": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_Create",
         "x-ms-examples": {
           "RedisCacheCreate": {
@@ -218,7 +234,9 @@
         }
       },
       "patch": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_Update",
         "x-ms-examples": {
           "RedisCacheUpdate": {
@@ -273,7 +291,9 @@
         }
       },
       "delete": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_Delete",
         "x-ms-examples": {
           "RedisCacheDelete": {
@@ -323,7 +343,9 @@
         }
       },
       "get": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_Get",
         "x-ms-examples": {
           "RedisCacheGet": {
@@ -371,7 +393,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis": {
       "get": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_ListByResourceGroup",
         "x-ms-examples": {
           "RedisCacheListByResourceGroup": {
@@ -415,7 +439,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/redis": {
       "get": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_ListBySubscription",
         "x-ms-examples": {
           "RedisCacheList": {
@@ -452,7 +478,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/listKeys": {
       "post": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_ListKeys",
         "x-ms-examples": {
           "RedisCacheListKeys": {
@@ -500,7 +528,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/regenerateKey": {
       "post": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_RegenerateKey",
         "x-ms-examples": {
           "RedisCacheRegenerateKey": {
@@ -557,7 +587,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/forceReboot": {
       "post": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_ForceReboot",
         "x-ms-examples": {
           "RedisCacheForceReboot": {
@@ -614,7 +646,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/import": {
       "post": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_ImportData",
         "x-ms-examples": {
           "RedisCacheImport": {
@@ -675,7 +709,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/export": {
       "post": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "Redis_ExportData",
         "x-ms-examples": {
           "RedisCacheExport": {
@@ -736,7 +772,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/firewallRules": {
       "get": {
-        "tags": ["Redis", "FirewallRules"],
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
         "operationId": "FirewallRules_List",
         "description": "Gets all firewall rules in the specified redis cache.",
         "x-ms-examples": {
@@ -787,7 +826,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/firewallRules/{ruleName}": {
       "put": {
-        "tags": ["Redis", "FirewallRules"],
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
         "operationId": "FirewallRules_CreateOrUpdate",
         "description": "Create or update a redis cache firewall rule",
         "x-ms-examples": {
@@ -855,7 +897,10 @@
         }
       },
       "get": {
-        "tags": ["Redis", "FirewallRules"],
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
         "operationId": "FirewallRules_Get",
         "description": "Gets a single firewall rule in a specified redis cache.",
         "x-ms-examples": {
@@ -908,7 +953,10 @@
         }
       },
       "delete": {
-        "tags": ["Redis", "FirewallRules"],
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
         "operationId": "FirewallRules_Delete",
         "description": "Deletes a single firewall rule in a specified redis cache.",
         "x-ms-examples": {
@@ -963,7 +1011,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/patchSchedules": {
       "get": {
-        "tags": ["Redis", "PatchSchedules"],
+        "tags": [
+          "Redis",
+          "PatchSchedules"
+        ],
         "operationId": "PatchSchedules_ListByRedisResource",
         "description": "Gets all patch schedules in the specified redis cache (there is only one).",
         "x-ms-examples": {
@@ -1014,7 +1065,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/patchSchedules/{default}": {
       "put": {
-        "tags": ["Redis", "PatchSchedules"],
+        "tags": [
+          "Redis",
+          "PatchSchedules"
+        ],
         "operationId": "PatchSchedules_CreateOrUpdate",
         "x-ms-examples": {
           "RedisCachePatchSchedulesCreateOrUpdate": {
@@ -1043,7 +1097,9 @@
             "required": true,
             "type": "string",
             "description": "Default string modeled as parameter for auto generation to work correctly.",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "x-ms-enum": {
               "name": "defaultName",
               "modelAsString": true
@@ -1087,7 +1143,10 @@
         }
       },
       "delete": {
-        "tags": ["Redis", "PatchSchedules"],
+        "tags": [
+          "Redis",
+          "PatchSchedules"
+        ],
         "operationId": "PatchSchedules_Delete",
         "x-ms-examples": {
           "RedisCachePatchSchedulesDelete": {
@@ -1116,7 +1175,9 @@
             "required": true,
             "type": "string",
             "description": "Default string modeled as parameter for auto generation to work correctly.",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "x-ms-enum": {
               "name": "defaultName",
               "modelAsString": true
@@ -1145,7 +1206,10 @@
         }
       },
       "get": {
-        "tags": ["Redis", "PatchSchedules"],
+        "tags": [
+          "Redis",
+          "PatchSchedules"
+        ],
         "operationId": "PatchSchedules_Get",
         "x-ms-examples": {
           "RedisCachePatchSchedulesGet": {
@@ -1174,7 +1238,9 @@
             "required": true,
             "type": "string",
             "description": "Default string modeled as parameter for auto generation to work correctly.",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "x-ms-enum": {
               "name": "defaultName",
               "modelAsString": true
@@ -1205,7 +1271,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/linkedServers/{linkedServerName}": {
       "put": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "LinkedServer_Create",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -1274,7 +1342,9 @@
         }
       },
       "delete": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "LinkedServer_Delete",
         "x-ms-examples": {
           "LinkedServerDelete": {
@@ -1327,7 +1397,9 @@
         }
       },
       "get": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "LinkedServer_Get",
         "x-ms-examples": {
           "LinkedServer_Get": {
@@ -1382,7 +1454,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/linkedServers": {
       "get": {
-        "tags": ["Redis"],
+        "tags": [
+          "Redis"
+        ],
         "operationId": "LinkedServer_List",
         "x-ms-examples": {
           "LinkedServer_List": {
@@ -1433,7 +1507,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/privateEndpointConnections": {
       "get": {
-        "tags": ["PrivateEndpointConnections"],
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
         "operationId": "PrivateEndpointConnections_List",
         "description": "List all the private endpoint connections associated with the redis cache.",
         "x-ms-examples": {
@@ -1484,7 +1560,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "tags": ["PrivateEndpointConnections"],
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
         "operationId": "PrivateEndpointConnections_Get",
         "description": "Gets the specified private endpoint connection associated with the redis cache.",
         "x-ms-examples": {
@@ -1533,7 +1611,9 @@
         }
       },
       "put": {
-        "tags": ["PrivateEndpointConnections"],
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
         "operationId": "PrivateEndpointConnections_Put",
         "description": "Update the state of specified private endpoint connection associated with the redis cache.",
         "x-ms-examples": {
@@ -1592,7 +1672,9 @@
         }
       },
       "delete": {
-        "tags": ["PrivateEndpointConnections"],
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
         "operationId": "PrivateEndpointConnections_Delete",
         "description": "Deletes the specified private endpoint connection associated with the redis cache.",
         "x-ms-examples": {
@@ -1643,7 +1725,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/privateLinkResources": {
       "get": {
-        "tags": ["PrivateLinkResources"],
+        "tags": [
+          "PrivateLinkResources"
+        ],
         "operationId": "PrivateLinkResources_ListByRedisCache",
         "description": "Gets the private link resources that need to be created for a redis cache.",
         "x-ms-examples": {
@@ -1699,7 +1783,11 @@
         "name": {
           "type": "string",
           "description": "The type of Redis cache to deploy. Valid values: (Basic, Standard, Premium)",
-          "enum": ["Basic", "Standard", "Premium"],
+          "enum": [
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
           "x-ms-enum": {
             "name": "SkuName",
             "modelAsString": true
@@ -1708,7 +1796,10 @@
         "family": {
           "type": "string",
           "description": "The SKU family to use. Valid values: (C, P). (C = Basic/Standard, P = Premium).",
-          "enum": ["C", "P"],
+          "enum": [
+            "C",
+            "P"
+          ],
           "x-ms-enum": {
             "name": "SkuFamily",
             "modelAsString": true
@@ -1720,7 +1811,11 @@
           "description": "The size of the Redis cache to deploy. Valid values: for C (Basic/Standard) family (0, 1, 2, 3, 4, 5, 6), for P (Premium) family (1, 2, 3, 4)."
         }
       },
-      "required": ["name", "family", "capacity"],
+      "required": [
+        "name",
+        "family",
+        "capacity"
+      ],
       "description": "SKU parameters supplied to the create Redis operation."
     },
     "RedisCommonProperties": {
@@ -1765,7 +1860,11 @@
         "minimumTlsVersion": {
           "type": "string",
           "description": "Optional: requires clients to use a specified TLS version (or higher) to connect (e,g, '1.0', '1.1', '1.2')",
-          "enum": ["1.0", "1.1", "1.2"],
+          "enum": [
+            "1.0",
+            "1.1",
+            "1.2"
+          ],
           "x-ms-enum": {
             "name": "TlsVersion",
             "modelAsString": true
@@ -1773,7 +1872,10 @@
         },
         "publicNetworkAccess": {
           "description": "Whether or not public endpoint access is allowed for this cache.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'. If 'Disabled', private endpoints are the exclusive access method. Default value is 'Enabled'",
-          "enum": ["Enabled", "Disabled"],
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
@@ -1801,7 +1903,9 @@
           "description": "Static IP address. Required when deploying a Redis cache inside an existing Azure Virtual Network."
         }
       },
-      "required": ["sku"],
+      "required": [
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/RedisCommonProperties"
@@ -1921,7 +2025,10 @@
         },
         "location": {
           "type": "string",
-          "x-ms-mutability": ["read", "create"],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "description": "The geo-location where the resource lives"
         },
         "tags": {
@@ -1932,7 +2039,10 @@
           "description": "Resource tags."
         }
       },
-      "required": ["properties", "location"],
+      "required": [
+        "properties",
+        "location"
+      ],
       "description": "Parameters supplied to the Create Redis operation."
     },
     "RedisUpdateParameters": {
@@ -1976,7 +2086,9 @@
           "description": "redis cache firewall rule properties"
         }
       },
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
@@ -2003,7 +2115,10 @@
           "description": "highest IP address included in the range"
         }
       },
-      "required": ["startIP", "endIP"]
+      "required": [
+        "startIP",
+        "endIP"
+      ]
     },
     "RedisFirewallRuleListResult": {
       "properties": {
@@ -2037,7 +2152,9 @@
           "description": "A list of availability zones denoting where the resource needs to come from."
         }
       },
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
@@ -2105,14 +2222,19 @@
         "keyType": {
           "type": "string",
           "description": "The Redis access key to regenerate.",
-          "enum": ["Primary", "Secondary"],
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
           "x-ms-enum": {
             "name": "RedisKeyType",
             "modelAsString": false
           }
         }
       },
-      "required": ["keyType"],
+      "required": [
+        "keyType"
+      ],
       "description": "Specifies which Redis access keys to reset."
     },
     "RedisRebootParameters": {
@@ -2120,7 +2242,11 @@
         "rebootType": {
           "type": "string",
           "description": "Which Redis node(s) to reboot. Depending on this value data loss is possible.",
-          "enum": ["PrimaryNode", "SecondaryNode", "AllNodes"],
+          "enum": [
+            "PrimaryNode",
+            "SecondaryNode",
+            "AllNodes"
+          ],
           "x-ms-enum": {
             "name": "RebootType",
             "modelAsString": true
@@ -2157,7 +2283,10 @@
           "description": "Container name to export to."
         }
       },
-      "required": ["container", "prefix"],
+      "required": [
+        "container",
+        "prefix"
+      ],
       "description": "Parameters for Redis export operation."
     },
     "ImportRDBParameters": {
@@ -2174,7 +2303,9 @@
           }
         }
       },
-      "required": ["files"],
+      "required": [
+        "files"
+      ],
       "description": "Parameters for Redis import operation."
     },
     "ScheduleEntry": {
@@ -2209,7 +2340,10 @@
           "description": "ISO8601 timespan specifying how much time cache patching can take. "
         }
       },
-      "required": ["dayOfWeek", "startHourUtc"],
+      "required": [
+        "dayOfWeek",
+        "startHourUtc"
+      ],
       "description": "Patch schedule entry for a Premium Redis Cache."
     },
     "ScheduleEntries": {
@@ -2223,7 +2357,9 @@
           "description": "List of patch schedules for a Redis cache."
         }
       },
-      "required": ["scheduleEntries"],
+      "required": [
+        "scheduleEntries"
+      ],
       "description": "List of patch schedules for a Redis cache."
     },
     "RedisPatchSchedule": {
@@ -2234,7 +2370,9 @@
           "description": "List of patch schedules for a Redis cache."
         }
       },
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
@@ -2340,7 +2478,10 @@
         "serverRole": {
           "type": "string",
           "description": "Role of the linked server.",
-          "enum": ["Primary", "Secondary"],
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
           "x-ms-enum": {
             "name": "ReplicationRole",
             "modelAsString": false
@@ -2361,7 +2502,9 @@
           "description": "Properties required to create a linked server."
         }
       },
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "description": "Parameter required for creating a linked server to redis cache."
     },
     "CheckNameAvailabilityParameters": {
@@ -2376,7 +2519,10 @@
           "description": "Resource type. The only legal value of this property for checking redis cache name availability is 'Microsoft.Cache/redis'."
         }
       },
-      "required": ["name", "type"]
+      "required": [
+        "name",
+        "type"
+      ]
     },
     "UpgradeNotification": {
       "properties": {
