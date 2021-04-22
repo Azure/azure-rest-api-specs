@@ -29,7 +29,7 @@ This directory contains the Cli common model for the Billing service.
 
 > Metadata
 ``` yaml
-# Migrated from Powershell's readme
+# Migrated from PowerShell's readme
 
 extension-mode: stable
 
@@ -85,7 +85,7 @@ cli:
         alias:
           - name
           - n
-      # the three get API connot auto group for not
+      # the three get API cannot auto group for now
       - where:
           group: BillingRoleAssignments
           op: GetByInvoiceSection

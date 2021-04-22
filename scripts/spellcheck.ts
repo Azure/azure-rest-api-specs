@@ -16,7 +16,7 @@ runCheckOverChangedSpecFiles({
 
   onNotInCI: (context) => {
     logWarn("Not in CI environment. Run against all the spec json.");
-    return context.exec(`cspell "specification/**/*.json"`);
+    return context.exec(`cspell "**/*"`);
   },
 
   onFinalFailed: async () => {

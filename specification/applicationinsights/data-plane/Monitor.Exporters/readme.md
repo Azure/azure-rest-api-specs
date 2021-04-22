@@ -26,7 +26,7 @@ version: 1.0.1-20170402
 
 ### Basic Information
 
-These are the global settings for the schemaregistry.
+These are the global settings for the schema registry.
 
 ```yaml
 openapi-type: data-plane

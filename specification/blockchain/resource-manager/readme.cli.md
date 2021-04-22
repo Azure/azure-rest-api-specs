@@ -3,7 +3,7 @@
 These settings apply only when `--cli` is specified on the command line.
 
 ``` yaml
-# Migrated from Powershell's readme
+# Migrated from PowerShell's readme
 directive:
   - from: swagger-document
     where: $.paths..operationId

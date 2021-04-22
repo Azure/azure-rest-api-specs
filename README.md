@@ -17,9 +17,9 @@ Please check the [announcements page](https://github.com/Azure/azure-rest-api-sp
 
 The structure of the directory should strictly follow these rules:
 
-1. **Profile**: The profile holder contains the profiles' definition MD files. these files will contain information and references to the snapshots of the RPs' Resource types or Dataplane API versions that represent a specific profile.
+1. **Profile**: The profile holder contains the profiles' definition MD files. these files will contain information and references to the snapshots of the RPs' Resource types or Data Plane API versions that represent a specific profile.
 
-1. **Specification**: This folder is the root folder for all Specs (Management and Dataplane) related docs.
+1. **Specification**: This folder is the root folder for all Specs (Management and Data Plane) related docs.
 
 1. **{RP-Name} Folders** - each RP will have a separate folder
 
@@ -27,7 +27,7 @@ The structure of the directory should strictly follow these rules:
 
 1. **'preview' and 'stable' Folders**: Varying levels of stability exist in our repository. Each API Version folder should be categorized as either still accepting breaking changes, or no longer accepting breaking changes. This is not a direct analog for whether or not an API Version has the "-preview" suffix or not. SDKs that are generated from 'preview' folder items should indicate to their customers in the most idiomatic way that breaking changes may still be coming.
 
-1. **API versions**: this folder will be the direct child of the category folder. there will be one such folder per resource type or dataplane service version. This folder will contain the OpenAPI validation Specs (Swaggers previously) and the examples folder.
+1. **API versions**: this folder will be the direct child of the category folder. there will be one such folder per resource type or data plane service version. This folder will contain the OpenAPI validation Specs (Swaggers previously) and the examples folder.
 
 1. **Examples**: the example folder will contain the x-ms-examples files. it will reside under the APIs or Resources' version folders as different APIs or Resource types version can have different examples.
 

@@ -61,8 +61,8 @@ swagger-to-sdk:
 ``` yaml
 directive:
   - suppress: DeleteMustNotHaveRequestBody
-    reason: saas in a tenant level and its an exsisting API
-``` 
+    reason: saas in a tenant level and its an existing API
+```
 
 ## Go
 

@@ -37,7 +37,7 @@ The resource providers must return the \*code\* and \*message\* fields; however,
             "policyDefinitionDisplayName": "Allowed locations",
             "policyDefinitionId":"/subscriptions/00000-00000-0000-000/providers/Microsoft.Authorization/policyDefinitions/TestPolicy1",
             "policyAssignmentDisplayName": "Allow Central US and WEU only",
-            "policyAsssignmentId":"/subscriptions/00000-00000-0000-000/providers/Microsoft.Authorization/policyAssignments/TestAssignment1"
+            "policyAssignmentId":"/subscriptions/00000-00000-0000-000/providers/Microsoft.Authorization/policyAssignments/TestAssignment1"
           }
         }
       ]

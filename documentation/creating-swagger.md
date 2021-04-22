@@ -578,7 +578,7 @@ In a resource payload, the common properties are at the top-level and the resour
            "name" : "{fooA|fooB|fooC}",
            "capacity" : {number}
        },
-       "bar": "flim"
+       "bar": "film"
     }
 }
 ```

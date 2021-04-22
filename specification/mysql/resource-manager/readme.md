@@ -130,7 +130,7 @@ directive:
     reason: The name of the provider is Microsoft.DBforMySQL
   - suppress: OperationsApiResponseSchema
     from: mysql.json
-    reason: Property isDataAction is not included in get operation reponse body
+    reason: Property isDataAction is not included in get operation response body
 ```
 
 ---

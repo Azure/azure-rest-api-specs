@@ -156,7 +156,7 @@ output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguratio
 ~~~
 
 ## Multi-API
-Multi-API SDK is a package that support multiple REST api-versions. With Python multi-api SDK, the end user can assign api-version for REST calls explicitly; nevertheless, they can also use the default api-version which is choosed as the latest stable api-version.
+Multi-API SDK is a package that support multiple REST api-versions. With Python multi-api SDK, the end user can assign api-version for REST calls explicitly; nevertheless, they can also use the default api-version which is chosen as the latest stable api-version.
 
 If a multi-api package is need to be released, 'batch' should be used in the readme.python.md.
 Typical multi-api RPs are azure-mgmt-compute, azure-mgmt-network, azure-mgmt-storage, you cam find their readme files to have a reference for multi-api.
