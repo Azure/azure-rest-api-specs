@@ -49,6 +49,9 @@
             "$ref": "#/parameters/ResourceProviderNamespaceParameter"
           },
           {
+            "$ref": "#/parameters/TenantIdQueryParameter"
+          },
+          {
             "name": "parentResourcePath",
             "in": "path",
             "required": true,
@@ -119,6 +122,9 @@
         "description": "List role assignments for a resource group.",
         "parameters": [
           {
+            "$ref": "#/parameters/TenantIdQueryParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -168,6 +174,9 @@
         "operationId": "RoleAssignments_Delete",
         "description": "Delete a role assignment.",
         "parameters": [
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
+          },
           {
             "name": "scope",
             "in": "path",
@@ -273,6 +282,9 @@
         "description": "Get the specified role assignment.",
         "parameters": [
           {
+            "$ref": "#/parameters/TenantIdQueryParameter"
+          },
+          {
             "name": "scope",
             "in": "path",
             "required": true,
@@ -320,6 +332,9 @@
         "operationId": "RoleAssignments_DeleteById",
         "description": "Delete a role assignment.",
         "parameters": [
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
+          },
           {
             "name": "roleId",
             "in": "path",
@@ -411,6 +426,9 @@
         "description": "Gets a role assignment by ID.",
         "parameters": [
           {
+            "$ref": "#/parameters/TenantIdQueryParameter"
+          },
+          {
             "name": "roleId",
             "in": "path",
             "required": true,
@@ -451,6 +469,9 @@
         "operationId": "RoleAssignments_List",
         "description": "Gets all role assignments for the subscription.",
         "parameters": [
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
+          },
           {
             "name": "$filter",
             "in": "query",
@@ -498,6 +519,9 @@
         "operationId": "RoleAssignments_ListForScope",
         "description": "Gets role assignments for a scope.",
         "parameters": [
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
+          },
           {
             "name": "scope",
             "in": "path",
@@ -752,6 +776,14 @@
       "required": true,
       "type": "string",
       "description": "The namespace of the resource provider.",
+      "x-ms-parameter-location": "method"
+    },
+    "TenantIdQueryParameter": {
+      "name": "tenantId",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Tenant ID for cross-tenant request",
       "x-ms-parameter-location": "method"
     }
   }
