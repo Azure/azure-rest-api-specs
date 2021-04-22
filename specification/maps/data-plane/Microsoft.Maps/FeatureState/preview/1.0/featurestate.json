@@ -599,7 +599,7 @@
       }
     },
     "NumberRuleObject": {
-      "description": "The numeric rule",
+      "description": "The numeric rule. The color is selected from the first range it falls into.",
       "type": "object",
       "properties": {
         "range": {
@@ -612,7 +612,7 @@
       }
     },
     "RangeObject": {
-      "description": "The numeric value range for this style rule, If the value is in the range, all the conditions must hold true.",
+      "description": "The numeric value range for this style rule. If the value is in the range, all the conditions must hold true.",
       "type": "object",
       "properties": {
         "minimum": {
@@ -638,7 +638,7 @@
       }
     },
     "BooleanRuleObject": {
-      "description": "the boolean rule",
+      "description": "The boolean rule. The color is selected based on the logic value of the key.",
       "type": "object",
       "properties": {
         "true": {
@@ -676,8 +676,8 @@
           "description": "The type of stateset style.",
           "type": "string",
           "enum": [
-            "number",
             "boolean",
+            "number",
             "string"
           ],
           "x-ms-enum": {
@@ -685,40 +685,34 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "number",
-                "description": "Number type of stateset style."
+                "value": "boolean",
+                "description": "Boolean type of stateset style.",
+                "name": "BooleanTypeStyleRule"
               },
               {
-                "value": "boolean",
-                "description": "Boolean type of stateset style."
+                "value": "number",
+                "description": "Number type of stateset style.",
+                "name": "NumberTypeStyleRule"
               },
               {
                 "value": "string",
-                "description": "String type of stateset style."
+                "description": "String type of stateset style.",
+                "name": "StringTypeStyleRule"
               }
             ]
           }
         }
       }
     },
-    "boolean": {
-      "description": "the boolean type style rule object.",
-      "x-ms-client-name": "BooleanTypeStyleRule",
+    "BooleanTypeStyleRule": {
+      "description": "The boolean type style rule object.",
       "x-ms-discriminator-value": "boolean",
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/StyleObject"
-        },
-        {
-          "$ref": "#/definitions/BooleanTypeStyleRuleProperties"
         }
-      ]
-    },
-    "BooleanTypeStyleRuleProperties": {
-      "description": "Boolean type style rule properties definition.",
-      "x-ms-external": true,
-      "type": "object",
+      ],
       "properties": {
         "rules": {
           "description": "Boolean style rules.",
@@ -732,24 +726,15 @@
         "rules"
       ]
     },
-    "number": {
+    "NumberTypeStyleRule": {
       "description": "The numeric type style rule object.",
-      "x-ms-client-name": "NumberTypeStyleRule",
       "x-ms-discriminator-value": "number",
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/StyleObject"
-        },
-        {
-          "$ref": "#/definitions/NumberTypeStyleRuleProperties"
         }
-      ]
-    },
-    "NumberTypeStyleRuleProperties": {
-      "description": "Number type style rule properties definition.",
-      "x-ms-external": true,
-      "type": "object",
+      ],
       "properties": {
         "rules": {
           "description": "Numeric style rules.",
@@ -763,24 +748,15 @@
         "rules"
       ]
     },
-    "string": {
+    "StringTypeStyleRule": {
       "description": "The string type style rule object.",
-      "x-ms-client-name": "StringTypeStyleRule",
       "x-ms-discriminator-value": "string",
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/StyleObject"
-        },
-        {
-          "$ref": "#/definitions/StringTypeStyleRuleProperties"
         }
-      ]
-    },
-    "StringTypeStyleRuleProperties": {
-      "description": "String type style rule properties definition.",
-      "x-ms-external": true,
-      "type": "object",
+      ],
       "properties": {
         "rules": {
           "description": "String style rules.",
