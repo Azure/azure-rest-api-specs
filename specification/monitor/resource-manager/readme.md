@@ -45,7 +45,6 @@ These settings apply only when `--tag=package-2019-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2019-07'
 input-file:
-  - Microsoft.Insights/stable/2019-07-01/metricDefinitions_API.json
   - Microsoft.Insights/stable/2019-07-01/metrics_API.json
 ```
 ### Tag: package-2021-02-preview-only
