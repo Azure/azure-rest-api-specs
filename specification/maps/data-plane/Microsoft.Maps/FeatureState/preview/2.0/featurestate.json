@@ -108,14 +108,6 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "StatesetId": {
-      "name": "statesetId",
-      "description": "The stateset id that was created.",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
     "StatesetIdInPath": {
       "name": "statesetId",
       "description": "The stateset id that was created.",
@@ -128,7 +120,7 @@
       "name": "featureId",
       "description": "The id of a feature in the given dataset. If the featureId is not present in the dataset, Bad Request response will be returned.",
       "type": "string",
-      "in": "query",
+      "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
     },
@@ -136,7 +128,7 @@
       "name": "featureId",
       "description": "The id of a feature in the given stateset. If no state was set for the featureId in the stateset earlier, Bad Request response will be returned.",
       "type": "string",
-      "in": "query",
+      "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
     },
@@ -144,7 +136,7 @@
       "name": "featureId",
       "description": "The id of a feature in the given stateset. If no state was set for the featureId in the stateset earlier, Bad Request response will be returned.",
       "type": "string",
-      "in": "query",
+      "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
     },
@@ -162,7 +154,7 @@
       "post": {
         "x-publish": true,
         "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis POST API allows the user to create a new Stateset and define stateset style using request body.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Feature State API is part of Creator. \n\nThe Feature State service allows the user to update the states of a feature and query them to be used in other services. The dynamic properties of a feature that don't belong to the dataset are referred to as *states* here.\n\nThis Feature State service pivot on the Stateset. Like Tileset, Stateset encapsulates the storage mechanism for feature states for a dataset.\n\nOnce the stateset is created, users can use that statesetId to post feature state updates and retrieve the current feature states. A feature can have only one state at a given point in time. \n\nFeature state is defined by the key name, value and the timestamp. When a feature state update is posted to Azure Maps, the state value gets updated only if the provided state’s timestamp is later than the stored timestamp. \n\nAzure Maps MapControl provides a way to use these feature states to style the features. Please refer to the State Tile documentation for more information.",
-        "operationId": "FeatureState_CreateStatesetPreview",
+        "operationId": "FeatureState_CreateStateset",
         "x-ms-examples": {
           "Create a new stateset with a datasetId": {
             "$ref": "./examples/CreateStateset.json"
@@ -215,7 +207,7 @@
       "get": {
         "x-publish": true,
         "description": "**Applies to:** S1 pricing tier. <br> This API allows the caller to fetch a list of all previously successfully created statesets.",
-        "operationId": "FeatureState_ListStatesetPreview",
+        "operationId": "FeatureState_ListStateset",
         "x-ms-examples": {
           "List all the previously created statesets": {
             "$ref": "./examples/Stateset_List.json"
@@ -258,7 +250,7 @@
       "patch": {
         "x-publish": true,
         "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis PATCH API allows the user to update the stateset style rules.",
-        "operationId": "FeatureState_PutStatesetPreview",
+        "operationId": "FeatureState_PutStateset",
         "x-ms-examples": {
           "Update stateset style rules with a statesetId": {
             "$ref": "./examples/UpdateStateset.json"
@@ -308,7 +300,7 @@
       "delete": {
         "x-publish": true,
         "description": "**Applies to:** S1 pricing tier. <br> This DELETE API allows the user to delete the stateset and the associated data.",
-        "operationId": "FeatureState_DeleteStatesetPreview",
+        "operationId": "FeatureState_DeleteStateset",
         "x-ms-examples": {
           "Delete an existing stateset": {
             "$ref": "./examples/DeleteStateset.json"
@@ -349,7 +341,7 @@
       "get": {
         "x-publish": true,
         "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis GET API allows the user to get the stateset Information.\n\nThe stateset Information includes the datasetId associated to the stateset, and the styles of that stateset.",
-        "operationId": "FeatureState_GetStatesetPreview",
+        "operationId": "FeatureState_GetStateset",
         "x-ms-examples": {
           "Get stateset information with a statesetId": {
             "$ref": "./examples/GetStateset.json"
@@ -394,7 +386,7 @@
     "/featureStateSets/{statesetId}/featureStates/{featureId}": {
       "put": {
         "x-publish": true,
-        "operationId": "FeatureState_UpdateStatesPreview",
+        "operationId": "FeatureState_UpdateStates",
         "description": "**Applies to:** S1 pricing tier. <br>\nThis PUT API allows the user to update the state of the given feature in the given stateset.",
         "x-ms-examples": {
           "Update the states of a feature": {
@@ -409,7 +401,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/StatesetId"
+            "$ref": "#/parameters/StatesetIdInPath"
           },
           {
             "$ref": "#/parameters/FeatureIdSet"
@@ -447,7 +439,7 @@
       },
       "delete": {
         "x-publish": true,
-        "operationId": "FeatureState_DeleteStatePreview",
+        "operationId": "FeatureState_DeleteState",
         "description": "**Applies to:** S1 pricing tier. <br> This API deletes the state information identified by the StateKeyName parameter for the feature identified by the FeatureId parameter in the the stateset.",
         "x-ms-examples": {
           "Delete the given feature state": {
@@ -462,7 +454,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/StatesetId"
+            "$ref": "#/parameters/StatesetIdInPath"
           },
           {
             "$ref": "#/parameters/FeatureIdDelete"
@@ -497,7 +489,7 @@
       },
       "get": {
         "x-publish": true,
-        "operationId": "FeatureState_GetStatesPreview",
+        "operationId": "FeatureState_GetStates",
         "description": "**Applies to:** S1 pricing tier. <br> This API returns the current state information associated with the given feature in the given stateset.",
         "x-ms-examples": {
           "Get the current states of a feature": {
@@ -512,7 +504,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/StatesetId"
+            "$ref": "#/parameters/StatesetIdInPath"
           },
           {
             "$ref": "#/parameters/FeatureIdGet"
