@@ -262,6 +262,7 @@
           "$ref": "#/definitions/ServiceType"
         },
         "status": {
+          "readOnly": true,
           "$ref": "#/definitions/ServiceResourceStatus"
         }
       },
@@ -302,7 +303,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/DataTransferServiceResourceProperties"
         }
       }
@@ -331,7 +332,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/SqlDedicatedGatewayServiceResourceProperties"
         }
       }
@@ -362,6 +363,7 @@
     "RegionalServiceResource": {
       "description": "Resource for a regional service location.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "name": {
           "readOnly": true,
@@ -374,6 +376,7 @@
           "description": "The location name."
         },
         "status": {
+          "readOnly": true,
           "$ref": "#/definitions/ServiceResourceStatus"
         }
       }
