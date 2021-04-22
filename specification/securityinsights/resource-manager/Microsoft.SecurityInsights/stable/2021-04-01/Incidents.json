@@ -578,6 +578,95 @@
     }
   },
   "definitions": {
+    "AccountEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an account entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccountEntityProperties",
+          "description": "Account entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Account"
+    },
+    "AccountEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Account entity property bag.",
+      "properties": {
+        "aadTenantId": {
+          "description": "The Azure Active Directory tenant id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "aadUserId": {
+          "description": "The Azure Active Directory user id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "accountName": {
+          "description": "The name of the account. This field should hold only the name without any domain added to it, i.e. administrator.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the account.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostEntityId": {
+          "description": "The Host entity id that contains the account in case it is a local account (not domain joined)",
+          "readOnly": true,
+          "type": "string"
+        },
+        "isDomainJoined": {
+          "description": "Determines whether this is a domain account.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "ntDomain": {
+          "description": "The NetBIOS domain name as it appears in the alert format – domain\\username. Examples: NT AUTHORITY.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "objectGuid": {
+          "description": "The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by active directory.",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "puid": {
+          "description": "The Azure Active Directory Passport User ID.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "sid": {
+          "description": "The account security identifier, e.g. S-1-5-18.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "upnSuffix": {
+          "description": "The user principal name suffix for the account, in some cases it is also the domain name. Examples: contoso.com.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "dnsDomain": {
+          "description": "The fully qualified domain DNS name.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "AlertSeverity": {
       "description": "The severity of the alert",
       "enum": [
