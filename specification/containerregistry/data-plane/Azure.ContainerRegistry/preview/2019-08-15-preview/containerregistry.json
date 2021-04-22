@@ -37,10 +37,6 @@
       "description": "Registry Operations"
     },
     {
-      "name": "ContainerRegistryRepository",
-      "description": "Repository Operations"
-    },
-    {
       "name": "ContainerRegistryBlob",
       "description": "Blob Operations"
     }
@@ -88,7 +84,7 @@
             "$ref": "./examples/GetManifest.json"
           }
         },
-        "operationId": "ContainerRegistryRepository_GetManifest",
+        "operationId": "ContainerRegistry_GetManifest",
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
@@ -133,7 +129,7 @@
         "consumes": [
           "application/vnd.docker.distribution.manifest.v2+json"
         ],
-        "operationId": "ContainerRegistryRepository_CreateManifest",
+        "operationId": "ContainerRegistry_CreateManifest",
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
@@ -183,7 +179,7 @@
             "$ref": "./examples/DeleteManifest.json"
           }
         },
-        "operationId": "ContainerRegistryRepository_DeleteManifest",
+        "operationId": "ContainerRegistry_DeleteManifest",
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
@@ -637,7 +633,7 @@
           "Registry"
         ],
         "description": "Get repository attributes",
-        "operationId": "ContainerRegistryRepository_GetProperties",
+        "operationId": "ContainerRegistry_GetProperties",
         "x-ms-examples": {
           "Get details of repository": {
             "$ref": "./examples/GetRepositoryAttributes.json"
@@ -699,7 +695,7 @@
           "Registry"
         ],
         "description": "Update the attribute identified by `name` where `reference` is the name of the repository.",
-        "operationId": "ContainerRegistryRepository_SetProperties",
+    	"operationId": "ContainerRegistry_SetProperties",
         "x-ms-examples": {
           "Update repository attributes": {
             "$ref": "./examples/UpdateRepositoryAttributes.json"
@@ -744,7 +740,7 @@
           "Repository"
         ],
         "description": "List tags of a repository",
-        "operationId": "ContainerRegistryRepository_GetTags",
+        "operationId": "ContainerRegistry_GetTags",
         "x-ms-examples": {
           "Get tags of a repository": {
             "$ref": "./examples/GetTagList.json"
@@ -799,7 +795,7 @@
           "Repository"
         ],
         "description": "Get tag attributes by tag",
-        "operationId": "ContainerRegistryRepository_GetTagProperties",
+        "operationId": "ContainerRegistry_GetTagProperties",
         "x-ms-examples": {
           "Get tag attributes": {
             "$ref": "./examples/GetTagAttributes.json"
@@ -833,7 +829,7 @@
           "Repository"
         ],
         "description": "Update tag attributes",
-        "operationId": "ContainerRegistryRepository_UpdateTagAttributes",
+        "operationId": "ContainerRegistry_UpdateTagAttributes",
         "consumes": [
           "application/json"
         ],
@@ -873,7 +869,7 @@
           "Repository"
         ],
         "description": "Delete tag",
-        "operationId": "ContainerRegistryRepository_DeleteTag",
+        "operationId": "ContainerRegistry_DeleteTag",
         "consumes": [
           "application/json"
         ],
@@ -909,7 +905,7 @@
           "Repository"
         ],
         "description": "List manifests of a repository",
-        "operationId": "ContainerRegistryRepository_GetManifests",
+        "operationId": "ContainerRegistry_GetManifests",
         "x-ms-examples": {
           "Get list of available manifests": {
             "$ref": "./examples/GetManifestList.json"
@@ -961,7 +957,7 @@
           "Repository"
         ],
         "description": "Get manifest attributes",
-        "operationId": "ContainerRegistryRepository_GetRegistryArtifactProperties",
+        "operationId": "ContainerRegistry_GetRegistryArtifactProperties",
         "x-ms-examples": {
           "Get manifest attributes": {
             "$ref": "./examples/GetManifestAttributes.json"
@@ -995,7 +991,7 @@
           "Repository"
         ],
         "description": "Update attributes of a manifest",
-        "operationId": "ContainerRegistryRepository_UpdateManifestAttributes",
+        "operationId": "ContainerRegistry_UpdateManifestAttributes",
         "consumes": [
           "application/json"
         ],
@@ -1512,6 +1508,193 @@
             "value": "timeasc",
             "name": "LastUpdatedOnAscending",
             "description": "Order tags by LastUpdatedOn field, from least recently updated to most recently updated."
+            }
+        ]
+    },
+    "x-accessibility": "public"
+},
+"ArtifactArchitecture": {
+    "type": "string",
+    "enum": [
+        "386",
+        "amd64",
+        "arm",
+        "arm64",
+        "mips",
+        "mipsle",
+        "mips64",
+        "mips64le",
+        "ppc64",
+        "ppc641e",
+        "riscv64",
+        "s390x",
+        "wasm"
+    ],
+    "x-ms-enum": {
+        "name": "ArtifactArchitecture",
+        "modelAsString": true,
+        "values": [
+            {
+                "value": "386",
+                "name": "I386",
+                "description": ""
+            },
+            {
+                "value": "amd64",
+                "name": "Amd64",
+                "description": ""
+            },
+            {
+                "value": "arm",
+                "name": "Arm",
+                "description": ""
+            },
+            {
+                "value": "arm64",
+                "name": "Arm64",
+                "description": ""
+            },
+            {
+                "value": "mips",
+                "name": "Mips64",
+                "description": ""
+            },
+            {
+                "value": "mipsle",
+                "name": "Mips64",
+                "description": ""
+            },
+            {
+                "value": "mips64",
+                "name": "Mips64",
+                "description": ""
+            },
+            {
+                "value": "mips64le",
+                "name": "Mips64le",
+                "description": ""
+            },
+            {
+                "value": "ppc64",
+                "name": "Ppc64",
+                "description": ""
+            },
+            {
+                "value": "ppc641e",
+                "name": "Ppc641e",
+                "description": ""
+            },
+            {
+                "value": "riscv64",
+                "name": "Riscv64",
+                "description": ""
+            },
+            {
+                "value": "s390x",
+                "name": "S390x",
+                "description": ""
+            },
+            {
+                "value": "wasm",
+                "name": "Wasm",
+                "description": ""
+            }
+        ]
+    },
+    "default": "none",
+    "x-accessibility": "public"
+},
+"ArtifactOperatingSystem": {
+    "type": "string",
+    "enum": [
+        "aix",
+        "android",
+        "darwin",
+        "dragonfly",
+        "freebsd",
+        "illumos",
+        "ios",
+        "js",
+        "linux",
+        "netbsd",
+        "openbsd",
+        "plan9",
+        "solaris",
+        "windows"
+    ],
+    "x-ms-enum": {
+        "name": "ArtifactOperatingSystem",
+        "modelAsString": true,
+        "values": [
+            {
+                "value": "aix",
+                "name": "Aix",
+                "description": ""
+            },
+            {
+                "value": "android",
+                "name": "Android",
+                "description": ""
+            },
+            {
+                "value": "darwin",
+                "name": "Darwin",
+                "description": ""
+            },
+            {
+                "value": "dragonfly",
+                "name": "Dragonfly",
+                "description": ""
+            },
+            {
+                "value": "freebsd",
+                "name": "FreeBsd",
+                "description": ""
+            },
+            {
+                "value": "illumos",
+                "name": "Illumos",
+                "description": ""
+            },
+            {
+                "value": "ios",
+                "name": "IOs",
+                "description": ""
+            },
+            {
+                "value": "js",
+                "name": "Js",
+                "description": ""
+            },
+            {
+                "value": "linux",
+                "name": "Linux",
+                "description": ""
+            },
+            {
+                "value": "netbsd",
+                "name": "NetBsd",
+                "description": ""
+            },
+            {
+                "value": "openbsd",
+                "name": "OpenBsd",
+                "description": ""
+            },
+            {
+                "value": "plan9",
+                "name": "Plan9",
+                "description": ""
+            },
+            {
+                "value": "solaris",
+                "name": "Solaris",
+                "description": ""
+            },
+            {
+                "value": "windows",
+                "name": "Windows",
+                "description": ""
           }
         ]
       },
@@ -1590,7 +1773,7 @@
       }
     },
     "ManifestAttributes": {
-      "x-ms-client-name": "RegistryArtifactProperties",
+      "x-ms-client-name": "ManifestProperties",
       "description": "Manifest attributes details",
       "properties": {
         "imageName": {
@@ -1661,7 +1844,7 @@
         "architecture": {
           "type": "string",
           "description": "CPU architecture",
-          "x-ms-client-name": "cpuArchitecture"
+          "x-ms-client-name": "architecture"
         },
         "os": {
           "type": "string",
@@ -1730,7 +1913,7 @@
         "timeasc"
       ],
       "x-ms-enum": {
-        "name": "RegistryArtifactOrderBy",
+        "name": "ManifestOrderBy",
         "modelAsString": true,
         "values": [
           {
@@ -1913,7 +2096,7 @@
           "items": {
             "type": "string"
           },
-          "x-ms-client-name": "deletedRegistryArtifactDigests"
+           "x-ms-client-name": "deletedManifests"
         },
         "tagsDeleted": {
           "type": "array",
