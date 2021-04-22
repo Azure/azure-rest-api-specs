@@ -303,54 +303,58 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "Avoid": {
+    "RouteAvoidList": {
       "name": "avoid",
       "in": "query",
       "description": "Specifies something that the route calculation should try to avoid when determining the route. Can be specified multiple times in one request, for example, '&avoid=motorways&avoid=tollRoads&avoid=ferries'. In calculateReachableRange requests, the value alreadyUsedRoads must not be used.",
       "required": false,
-      "type": "string",
-      "enum": [
-        "tollRoads",
-        "motorways",
-        "ferries",
-        "unpavedRoads",
-        "carpools",
-        "alreadyUsedRoads",
-        "borderCrossings"
-      ],
-      "x-ms-enum": {
-        "name": "Avoid",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "tollRoads",
-            "description": "Avoids toll roads."
-          },
-          {
-            "value": "motorways",
-            "description": "Avoids motorways"
-          },
-          {
-            "value": "ferries",
-            "description": "Avoids ferries"
-          },
-          {
-            "value": "unpavedRoads",
-            "description": "Avoids unpaved roads"
-          },
-          {
-            "value": "carpools",
-            "description": "Avoids routes that require the use of carpool (HOV/High Occupancy Vehicle) lanes."
-          },
-          {
-            "value": "alreadyUsedRoads",
-            "description": "Avoids using the same road multiple times. Most useful in conjunction with `routeType`=thrilling."
-          },
-          {
-            "value": "borderCrossings",
-            "description": "Avoids border crossings in route calculation."
-          }
-        ]
+      "type": "array",
+      "collectionFormat": "multi",
+      "items": {
+        "type": "string",
+        "enum": [
+          "tollRoads",
+          "motorways",
+          "ferries",
+          "unpavedRoads",
+          "carpools",
+          "alreadyUsedRoads",
+          "borderCrossings"
+        ],
+        "x-ms-enum": {
+          "name": "RouteAvoidType",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "tollRoads",
+              "description": "Avoids toll roads."
+            },
+            {
+              "value": "motorways",
+              "description": "Avoids motorways"
+            },
+            {
+              "value": "ferries",
+              "description": "Avoids ferries"
+            },
+            {
+              "value": "unpavedRoads",
+              "description": "Avoids unpaved roads"
+            },
+            {
+              "value": "carpools",
+              "description": "Avoids routes that require the use of carpool (HOV/High Occupancy Vehicle) lanes."
+            },
+            {
+              "value": "alreadyUsedRoads",
+              "description": "Avoids using the same road multiple times. Most useful in conjunction with `routeType`=thrilling."
+            },
+            {
+              "value": "borderCrossings",
+              "description": "Avoids border crossings in route calculation."
+            }
+          ]
+        }
       },
       "x-ms-parameter-location": "method"
     },
@@ -875,7 +879,7 @@
             "$ref": "#/parameters/TravelMode"
           },
           {
-            "$ref": "#/parameters/Avoid"
+            "$ref": "#/parameters/RouteAvoidList"
           },
           {
             "$ref": "#/parameters/Traffic"
@@ -1051,7 +1055,7 @@
             "$ref": "#/parameters/TravelMode"
           },
           {
-            "$ref": "#/parameters/Avoid"
+            "$ref": "#/parameters/RouteAvoidList"
           },
           {
             "$ref": "#/parameters/Traffic"
@@ -1249,7 +1253,7 @@
             "$ref": "#/parameters/TravelMode"
           },
           {
-            "$ref": "#/parameters/Avoid"
+            "$ref": "#/parameters/RouteAvoidList"
           },
           {
             "$ref": "#/parameters/Traffic"
@@ -1406,7 +1410,7 @@
             "$ref": "#/parameters/Traffic"
           },
           {
-            "$ref": "#/parameters/Avoid"
+            "$ref": "#/parameters/RouteAvoidList"
           },
           {
             "$ref": "#/parameters/TravelMode"
