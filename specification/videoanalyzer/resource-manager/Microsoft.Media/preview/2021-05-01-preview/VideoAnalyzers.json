@@ -348,7 +348,7 @@
       "type": "object",
       "description": "The input to the sync storage keys request."
     },
-    "VideoAnalyzerPropertiesBase": {
+    "VideoAnalyzerPropertiesUpdate": {
       "properties": {
         "storageAccounts": {
           "type": "array",
@@ -376,18 +376,12 @@
     "VideoAnalyzerProperties": {
       "allOf": [
         {
-          "$ref": "#/definitions/VideoAnalyzerPropertiesBase"
+          "$ref": "#/definitions/VideoAnalyzerPropertiesUpdate"
         }
       ],
       "required": [
-        "encryption"
-      ]
-    },
-    "VideoAnalyzerPropertiesUpdate": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/VideoAnalyzerPropertiesBase"
-        }
+        "encryption",
+        "storageAccounts"
       ]
     },
     "VideoAnalyzer": {
