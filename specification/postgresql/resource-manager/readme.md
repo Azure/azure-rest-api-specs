@@ -237,7 +237,7 @@ input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-04-10-privatepreview/postgresql.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
