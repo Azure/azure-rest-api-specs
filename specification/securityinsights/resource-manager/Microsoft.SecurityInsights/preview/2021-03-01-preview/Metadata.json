@@ -39,13 +39,16 @@
         "x-ms-examples": {
           "Get all metadata.": {
             "$ref": "./examples/metadata/GetAllMetadata.json"
+          },
+          "Get all metadata with OData query parameters": {
+            "$ref": "./examples/metadata/GetAllMetadataOData.json"
           }
         },
         "tags": [
           "Metadata"
         ],
-        "description": "List of all the metadata",
-        "operationId": "ProductMetadata_List",
+        "description": "List of all metadata",
+        "operationId": "Metadata_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -61,13 +64,25 @@
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkip"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SettingList"
+              "$ref": "#/definitions/MetadataList"
             }
           },
           "default": {
@@ -76,21 +91,24 @@
               "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}": {
       "get": {
         "x-ms-examples": {
-          "Get EyesOn metadata.": {
-            "$ref": "./examples/metadata/GetEyesOnSetting.json"
+          "Get single metadata by name": {
+            "$ref": "./examples/metadata/GetMetadata.json"
           }
         },
         "tags": [
           "Metadata"
         ],
-        "description": "Gets a setting.",
-        "operationId": "ProductMetadata_Get",
+        "description": "Get a Metadata.",
+        "operationId": "Metadata_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -128,15 +146,15 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete EyesOn metadata.": {
-            "$ref": "./examples/metadata/DeleteEyesOnSetting.json"
+          "Delete metadata.": {
+            "$ref": "./examples/metadata/DeleteMetadata.json"
           }
         },
         "tags": [
           "Metadata"
         ],
-        "description": "Delete setting of the product.",
-        "operationId": "ProductMetadata_Delete",
+        "description": "Delete a Metadata.",
+        "operationId": "Metadata_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -174,15 +192,70 @@
       },
       "put": {
         "x-ms-examples": {
-          "Update EyesOn metadata.": {
-            "$ref": "./examples/metadata/UpdateEyesOnSetting.json"
+          "Update metadata.": {
+            "$ref": "./examples/metadata/PutMetadata.json"
           }
         },
         "tags": [
           "Metadata"
         ],
-        "description": "Updates setting.",
-        "operationId": "ProductMetadata_Update",
+        "description": "Create/replace a Metadata.",
+        "operationId": "Metadata_Put",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/MetadataName"
+          },
+          {
+            "$ref": "#/parameters/Metadata"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Operation successfully completed",
+            "schema": {
+              "$ref": "#/definitions/Metadata"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Metadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Update metadata.": {
+            "$ref": "./examples/metadata/PatchMetadata.json"
+          }
+        },
+        "tags": [
+          "Metadata"
+        ],
+        "description": "Partially update an existing Metadata.",
+        "operationId": "Metadata_Patch",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -221,100 +294,10 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/onboard": {
-      "post": {
-        "x-ms-examples": {
-          "Onboard workspace": {
-            "$ref": "./examples/metadata/Onboard.json"
-          }
-        },
-        "tags": [
-          "Metadata"
-        ],
-        "description": "Onboards workspace to sentinel.",
-        "operationId": "ProductMetadata_OnboardWorkspace",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/OnboardingRequest"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OnboardingRequest"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/offboard": {
-      "post": {
-        "x-ms-examples": {
-          "Onboard workspace": {
-            "$ref": "./examples/metadata/Offboard.json"
-          }
-        },
-        "tags": [
-          "Metadata"
-        ],
-        "description": "Offboards workspace from sentinel.",
-        "operationId": "ProductMetadata_OffboardWorkspace",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "SettingList": {
+    "MetadataList": {
       "description": "List of all the metadata.",
       "properties": {
         "value": {
@@ -335,191 +318,274 @@
           "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
-      "description": "The Setting.",
-      "properties": {
-        "kind": {
-          "description": "The kind of the setting",
-          "enum": [
-            "EyesOn",
-            "EntityAnalytics",
-            "Ueba"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "SettingKind"
-          }
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "discriminator": "kind",
-      "type": "object"
-    },
-    "EyesOn": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Metadata"
-        }
-      ],
-      "description": "Metadata with single toggle.",
+      "description": "Metadata.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EyesOnMetadataProperties",
-          "description": "EyesOn properties",
+          "$ref": "#/definitions/MetadataProperties",
+          "description": "Metadata properties",
           "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "EyesOn"
-    },
-    "EyesOnMetadataProperties": {
-      "description": "EyesOn property bag.",
-      "properties": {
-        "isEnabled": {
-          "description": "Determines whether the setting is enable or disabled.",
-          "readOnly": true,
-          "type": "boolean"
         }
       },
       "type": "object"
     },
-    "EntityAnalytics": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Metadata"
-        }
-      ],
-      "description": "Metadata with single toggle.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EntityAnalyticsProperties",
-          "description": "EntityAnalytics properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "EntityAnalytics"
-    },
-    "EntityAnalyticsProperties": {
-      "description": "EntityAnalytics property bag.",
-      "properties": {
-        "isEnabled": {
-          "description": "Determines whether the setting is enable or disabled.",
-          "readOnly": true,
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "Ueba": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Metadata"
-        }
-      ],
-      "description": "Metadata with single toggle.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/UebaProperties",
-          "description": "Ueba properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "Ueba"
-    },
-    "UebaProperties": {
-      "description": "Ueba property bag.",
-      "properties": {
-        "dataSources": {
-          "description": "The relevant data sources that enriched by ueba",
-          "items": {
-            "$ref": "#/definitions/UebaDataSources"
-          },
-          "type": "array"
-        }
-      }
-    },
-    "UebaDataSources": {
-      "description": "The data source that enriched by ueba.",
-      "enum": [
-        "AuditLogs",
-        "AzureActivity",
-        "SecurityEvent",
-        "SigninLogs"
-      ],
+    "MetadataId": {
+      "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name",
       "type": "string",
+      "minLength": 1
+    },
+    "MetadataParentId": {
+      "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)",
+      "type": "string",
+      "minLength": 1
+    },
+    "MetadataVersion": {
+      "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks",
+      "type": "string"
+    },
+    "MetadataKind": {
+      "type": "string",
+      "description": "The kind of content the metadata is for.",
+      "enum": [
+        "dataConnector",
+        "dataType",
+        "workbook",
+        "workbookTemplate",
+        "playbook",
+        "analyticRuleTemplate",
+        "analyticRule",
+        "huntingQuery",
+        "investigationQuery",
+        "parser"
+      ],
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "UebaDataSources"
+        "name": "kind",
+        "values": [
+          {"value": "dataConnector"},
+          {"value": "dataType"},
+          {"value": "workbook"},
+          {"value": "workbookTemplate"},
+          {"value": "playbook"},
+          {"value": "analyticRuleTemplate"},
+          {"value": "analyticRule"},
+          {"value": "huntingQuery"},
+          {"value": "investigationQuery"},
+          {"value": "parser"}
+        ]
       }
     },
-    "OnboardingRequest": {
-      "description": "Onboarding request properties",
+    "MetadataSource": {          
+      "description": "Source of the content.  This is where/how it was created",
+      "type": "object",
+      "required": ["kind"],
       "properties": {
-        "customerManagedKey": {
-          "description": "Flag that indicates if the user wants CMK",
-          "type": "boolean"
-        },
-        "eyesOn": {
-          "description": "Flag that indicates if the user wants EyesOn",
-          "type": "boolean"
-        },
-        "sku": {
-          "description": "The pricing tier of the solution",
-          "$ref": "#/definitions/Sku"
-        },
-        "entityAnalytics": {
-          "description": "flag that indicates if the user wants EntityAnalytics",
-          "$ref": "#/definitions/EntityAnalyticsOnboardingParameters",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "Sku": {
-      "description": "The pricing tier of the solution",
-      "properties": {
-        "name": {
-          "description": "The kind of the tier",
-          "enum": [
-            "PerGB",
-            "CapacityReservation"
-          ],
+        "kind": {
+          "description": "Source type of the content",
           "type": "string",
+          "enum": [
+            "localWorkspace",
+            "community",
+            "solution",
+            "sourceRepository"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "SkuKind"
+            "name": "kind",
+            "values": [
+              {"value": "localWorkspace"},
+              {"value": "community"},
+              {"value": "solution"},
+              {"value": "sourceRepository"}
+            ]
           }
         },
-        "capacityReservationLevel": {
-          "description": "The amount of reservation level",
-          "type": "integer",
-          "format": "int32"
+        "name": {
+          "description": "Name of the content source.  The repo name, solution name, LA workspace name etc.",
+          "type": "string"
         }
       }
     },
-    "EntityAnalyticsOnboardingParameters": {
-      "description": "The onboarding request entity analytics parameters",
+    "MetadataAuthor": {         
+      "type": "object",
+      "required": ["name"],
+      "description": "The creator of the content item.",
       "properties": {
-        "enabled": {
-          "description": "A flag indicates that the user wants entity analytics",
-          "type": "boolean"
-        },
-        "uebaDataSources": {
-          "description": "The data source be profiled by ueba engine",
-          "$ref": "#/definitions/UebaProperties",
-          "x-ms-client-flatten": true
+        "name": {
+          "description": "Name of the author.  For localWorkspace it is automatically the workspace user.",
+          "type": "string",
+          "minLength": 1
         }
-      },
-      "type": "object"
+      }
+    },
+    "MetadataSupport": {
+      "type": "object",
+      "description": "Support information for the metadata - type, name, contact information",
+      "required": ["name", "tier"],
+      "properties": {
+        "tier": {
+          "description": "Type of support for content item",
+          "type": "string",
+          "enum": ["microsoft", "developer", "community"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "tier",
+            "values": [
+              {"value": "microsoft"},
+              {"value": "developer"},
+              {"value": "community"}
+            ]
+          }
+        },
+        "name": {
+          "description": "Name of support contact or company",
+          "type": "string",
+          "examples": ["Microsoft", "Joe Contoso"]
+        },
+        "email": {
+          "description": "Email of support contact",
+          "type": "string",
+          "format": "email"
+        },
+        "link": {
+          "description": "Link for support help, like to support page to open a ticket etc",
+          "type": "string",
+          "format": "uri",
+          "examples": ["https://support.microsoft.com/"]
+        }
+      }
+    },
+    "MetadataDependencies": {
+      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR.",
+      "type": "object",
+      "required": ["operator", "criteria"],
+      "properties": {
+        "operator": {
+          "type": "string",
+          "enum": ["AND", "OR"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "tier",
+            "values": [
+              {"value": "AND"},
+              {"value": "OR"}
+            ]
+          }
+        },
+        "items": {
+          "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "description": "A content dependency is firstly an id and type, version is optional",
+                "type": "object",
+                "required": ["id", "kind"],
+                "properties": {
+                  "id": {
+                    "description": "Id of the content item we depend on",
+                    "$ref": "#/definitions/MetadataId"
+                  },
+                  "type": {
+                    "description": "Type of the content item we depend on",
+                    "$ref": "#/definitions/MetadataKind"
+                  },
+                  "version": {
+                    "description": "Version of the the content ite we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.",
+                    "$ref": "#/definitions/MetadataVersion"
+                  }
+                }
+              },
+              {
+                "$ref": "#/definitions/MetadataDependencies",
+                "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
+              }
+            ]
+          }
+        }
+      }},
+    "MetadataProperties": {
+      "description": "Metadata property bag.",
+      "required": [
+        "id", "parentId", "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/MetadataId",
+          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
+        },
+        "parentId": {
+          "$ref": "#/definitions/MetadataParentId",
+          "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)"
+        },
+        "version": {
+          "$ref": "#/definitions/MetadataVersion",
+          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "kind": {
+          "$ref": "#/definitions/MetadataKind",
+          "description": "The kind of content the metadata is for."
+        },
+        "source": {
+          "$ref": "#/definitions/MetadataSource",
+          "description": "Source of the content.  This is where/how it was created."
+        },
+        "author": {
+          "$ref": "#/definitions/MetadataAuthor",
+          "description": "The creator of the content item."
+        },
+        "support": {
+          "$ref": "#/definitions/MetadataSupport",
+          "description": "Support information for the metadata - type, name, contact information"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/MetadataDependencies",
+          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR."
+        }
+      }
+    },
+    "MetadataPropertiesPatch": {
+      "description": "Metadata property bag for patch requests.  This is the same as the MetadataProperties, but with nothing required",
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/MetadataId",
+          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
+        },
+        "parentId": {
+          "$ref": "#/definitions/MetadataParentId",
+          "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)"
+        },
+        "version": {
+          "$ref": "#/definitions/MetadataVersion",
+          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "kind": {
+          "$ref": "#/definitions/MetadataKind",
+          "description": "The kind of content the metadata is for."
+        },
+        "source": {
+          "$ref": "#/definitions/MetadataSource",
+          "description": "Source of the content.  This is where/how it was created."
+        },
+        "author": {
+          "$ref": "#/definitions/MetadataAuthor",
+          "description": "The creator of the content item."
+        },
+        "support": {
+          "$ref": "#/definitions/MetadataSupport",
+          "description": "Support information for the metadata - type, name, contact information"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/MetadataDependencies",
+          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR."
+        }
+      }
     }
   },
   "parameters": {
     "Metadata": {
-      "description": "The setting",
+      "description": "The Metadata",
       "in": "body",
       "name": "metadata",
       "required": true,
@@ -529,7 +595,7 @@
       "x-ms-parameter-location": "method"
     },
     "MetadataName": {
-      "description": "The setting name. Supports - EyesOn, EntityAnalytics, Ueba",
+      "description": "The Metadata name.",
       "in": "path",
       "name": "metadataName",
       "required": true,
@@ -573,14 +639,37 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "OnboardingRequest": {
-      "description": "The onboarding request parameters",
-      "in": "body",
-      "name": "onboardingRequest",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/OnboardingRequest"
-      },
+    "ODataFilter": {
+      "description": "Filters the results, based on a Boolean condition. Optional.",
+      "in": "query",
+      "name": "$filter",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataOrderBy": {
+      "description": "Sorts the results. Optional.",
+      "in": "query",
+      "name": "$orderby",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataSkip": {
+      "description": "Used to skip n elements in the OData query (offset). Returns a nextLink to the next page of results if there are any left.",
+      "in": "query",
+      "name": "$skip",
+      "required": false,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataTop": {
+      "description": "Returns only the first n results. Optional.",
+      "format": "int32",
+      "in": "query",
+      "name": "$top",
+      "required": false,
+      "type": "integer",
       "x-ms-parameter-location": "method"
     }
   }
