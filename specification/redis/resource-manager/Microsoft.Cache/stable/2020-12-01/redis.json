@@ -864,7 +864,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisFirewallRuleCreateParameters"
+              "$ref": "#/definitions/RedisFirewallRule"
             },
             "description": "Parameters supplied to the create or update redis firewall rule operation."
           },
@@ -2096,17 +2096,11 @@
       ]
     },
     "RedisFirewallRuleCreateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisFirewallRuleProperties",
-          "description": "Properties required to create a firewall rule ."
+      "allOf": [
+        {
+          "$ref": "#definitions/RedisFirewallRule"
         }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "Parameters required for creating a firewall rule on redis cache."
+      ]
     },
     "RedisFirewallRuleProperties": {
       "description": "Specifies a range of IP addresses permitted to connect to the cache",
