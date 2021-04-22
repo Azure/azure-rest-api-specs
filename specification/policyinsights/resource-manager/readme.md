@@ -287,8 +287,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-2021-04' && $(java)
 java:
-  namespace: com.microsoft.azure.management.policyinsights.v2021_01_04
-  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2021_01_04
+  namespace: com.microsoft.azure.management.policyinsights.v2021_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2021_04_01
 regenerate-manager: true
 generate-interface: true
 ```
