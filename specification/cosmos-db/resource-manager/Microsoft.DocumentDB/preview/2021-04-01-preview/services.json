@@ -266,6 +266,9 @@
           "$ref": "#/definitions/ServiceResourceStatus"
         }
       },
+      "additionalProperties": {
+        "type": "object"
+      },
       "required": [
         "serviceType"
       ]
@@ -281,10 +284,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ServiceResourceProperties",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "$ref": "#/definitions/ServiceResourceProperties"
         }
       }
     },
