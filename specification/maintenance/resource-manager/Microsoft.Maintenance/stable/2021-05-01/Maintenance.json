@@ -1216,6 +1216,149 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/maintenanceConfigurations": {
+      "get": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "summary": "Get Configuration records within a subscription and resource group",
+        "operationId": "MaintenanceConfigurationsForResourceGroup_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource Group Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListMaintenanceConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "MaintenanceConfigurationsResourceGroup_List": {
+            "$ref": "./examples/MaintenanceConfigurationsResourceGroup_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/applyUpdates": {
+      "get": {
+        "tags": [
+          "ApplyUpdate"
+        ],
+        "summary": "Get Configuration records within a subscription",
+        "operationId": "ApplyUpdates_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_List": {
+            "$ref": "./examples/ApplyUpdates_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/applyUpdates": {
+      "get": {
+        "tags": [
+          "ApplyUpdate"
+        ],
+        "summary": "Get Configuration records within a subscription and resource group",
+        "operationId": "ApplyUpdateForResourceGroup_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource Group Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ApplyUpdatesResourceGroup_List": {
+            "$ref": "./examples/ApplyUpdatesResourceGroup_List.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Maintenance/operations": {
       "get": {
         "tags": [
@@ -1433,7 +1576,29 @@
           "type": "string",
           "x-ms-enum": {
             "name": "UpdateStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Pending",
+                "description": "There are pending updates to be installed."
+              },
+              {
+                "value": "InProgress",
+                "description": "Updates installation are in progress."
+              },
+              {
+                "value": "Completed",
+                "description": "All updates are successfully applied."
+              },
+              {
+                "value": "RetryNow",
+                "description": "Updates installation failed but are ready to retry again."
+              },
+              {
+                "value": "RetryLater",
+                "description": "Updates installation failed and should be retried later."
+              }
+            ]
           }
         },
         "resourceId": {
@@ -1488,6 +1653,19 @@
           "$ref": "#/definitions/ApplyUpdateProperties",
           "description": "Properties of the apply update",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ListApplyUpdate": {
+      "description": "Response for ApplyUpdate list",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of apply updates",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplyUpdate"
+          }
         }
       }
     },
@@ -1582,10 +1760,7 @@
         "maintenanceScope": {
           "description": "Gets or sets maintenanceScope of the configuration",
           "enum": [
-            "All",
             "Host",
-            "Resource",
-            "InResource",
             "OSImage",
             "Extension",
             "InGuestPatch",
@@ -1595,7 +1770,33 @@
           "type": "string",
           "x-ms-enum": {
             "name": "MaintenanceScope",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Host",
+                "description": "This maintenance scope controls installation of azure platform updates i.e. services on physical nodes hosting customer VMs."
+              },
+              {
+                "value": "OSImage",
+                "description": "This maintenance scope controls os image installation on VM/VMSS"
+              },
+              {
+                "value": "Extension",
+                "description": "This maintenance scope controls extension installation on VM/VMSS"
+              },
+              {
+                "value": "InGuestPatch",
+                "description": "This maintenance scope controls installation of windows and linux packages on VM/VMSS"
+              },
+              {
+                "value": "SQLDB",
+                "description": "This maintenance scope controls installation of SQL server platform updates."
+              },
+              {
+                "value": "SQLManagedInstance",
+                "description": "This maintenance scope controls installation of SQL managed instance platform update."
+              }
+            ]
           }
         },
         "maintenanceWindow": {
@@ -1612,7 +1813,17 @@
           "type": "string",
           "x-ms-enum": {
             "name": "Visibility",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Custom",
+                "description": "Only visible to users with permissions."
+              },
+              {
+                "value": "Public",
+                "description": "Visible to all users."
+              }
+            ]
           }
         }
       }
@@ -1763,10 +1974,7 @@
         "maintenanceScope": {
           "description": "The impact area",
           "enum": [
-            "All",
             "Host",
-            "Resource",
-            "InResource",
             "OSImage",
             "Extension",
             "InGuestPatch",
@@ -1776,7 +1984,33 @@
           "type": "string",
           "x-ms-enum": {
             "name": "MaintenanceScope",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Host",
+                "description": "This maintenance scope controls installation of azure platform updates i.e. services on physical nodes hosting customer VMs."
+              },
+              {
+                "value": "OSImage",
+                "description": "This maintenance scope controls os image installation on VM/VMSS"
+              },
+              {
+                "value": "Extension",
+                "description": "This maintenance scope controls extension installation on VM/VMSS"
+              },
+              {
+                "value": "InGuestPatch",
+                "description": "This maintenance scope controls installation of windows and linux packages on VM/VMSS"
+              },
+              {
+                "value": "SQLDB",
+                "description": "This maintenance scope controls installation of SQL server platform updates."
+              },
+              {
+                "value": "SQLManagedInstance",
+                "description": "This maintenance scope controls installation of SQL managed instance platform update."
+              }
+            ]
           }
         },
         "impactType": {
@@ -1790,7 +2024,25 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ImpactType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Pending updates has no impact on resource."
+              },
+              {
+                "value": "Freeze",
+                "description": "Pending updates can freeze network or disk io operation on resource."
+              },
+              {
+                "value": "Restart",
+                "description": "Pending updates can cause resource to restart."
+              },
+              {
+                "value": "Redeploy",
+                "description": "Pending updates can redeploy resource."
+              }
+            ]
           }
         },
         "status": {
@@ -1805,7 +2057,29 @@
           "type": "string",
           "x-ms-enum": {
             "name": "UpdateStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Pending",
+                "description": "There are pending updates to be installed."
+              },
+              {
+                "value": "InProgress",
+                "description": "Updates installation are in progress."
+              },
+              {
+                "value": "Completed",
+                "description": "All updates are successfully applied."
+              },
+              {
+                "value": "RetryNow",
+                "description": "Updates installation failed but are ready to retry again."
+              },
+              {
+                "value": "RetryLater",
+                "description": "Updates installation failed and should be retried later."
+              }
+            ]
           }
         },
         "impactDurationInSec": {
