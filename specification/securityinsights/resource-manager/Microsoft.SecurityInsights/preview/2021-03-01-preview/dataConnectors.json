@@ -1176,6 +1176,10 @@
           "description": "Connector description",
           "type": "string"
         },
+        "customImage": {
+          "description": "An optional custom image to be used when displaying the connector within Azure Sentinel's connector's gallery",
+          "type": "string"
+        },
         "graphQueriesTableName": {
           "description": "Name of the table the connector will insert the data to",
           "type": "string"
@@ -1390,9 +1394,9 @@
         "type": {
           "description": "The kind of the setting",
           "enum": [
-            "OAuth2",
-            "BasicAuth",
-            "APIKey"
+            "CopyableLabel",
+            "InstructionStepsGroup",
+            "InfoMessage"
           ],
           "type": "string",
           "x-ms-enum": {
