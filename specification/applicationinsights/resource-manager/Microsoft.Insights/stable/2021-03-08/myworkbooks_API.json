@@ -322,7 +322,7 @@
       "properties": {
         "identity": {
           "description": "Identity used for BYOS",
-          "$ref": "#/definitions/ManagedIdentity"
+          "$ref": "#/definitions/MyManagedIdentity"
         },
         "id": {
           "type": "string",
@@ -476,12 +476,12 @@
       "description": "Error response.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
+          "$ref": "#/definitions/MyErrorDefinition",
           "description": "The error details."
         }
       }
     },
-    "ErrorDefinition": {
+    "MyErrorDefinition": {
       "description": "Error definition.",
       "properties": {
         "code": {
@@ -516,11 +516,11 @@
         }
       }
     },
-    "ManagedIdentity": {
+    "MyManagedIdentity": {
       "description": "Customer Managed Identity",
       "properties": {
         "userAssignedIdentities": {
-          "$ref": "#/definitions/UserAssignedIdentities"
+          "$ref": "#/definitions/MyUserAssignedIdentities"
         },
         "type": {
           "type": "string",
@@ -532,7 +532,7 @@
         }
       }
     },
-    "UserAssignedIdentities": {
+    "MyUserAssignedIdentities": {
       "description": "Customer Managed Identity",
       "properties": {
         "principalId": {
