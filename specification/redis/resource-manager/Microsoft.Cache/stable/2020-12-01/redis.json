@@ -72,7 +72,7 @@
         ],
         "operationId": "Redis_CheckNameAvailability",
         "x-ms-examples": {
-          "RedisCacheCheckNameAvailability": {
+          "RedisCacheList": {
             "$ref": "./examples/RedisCacheCheckNameAvailability.json"
           }
         },
@@ -162,9 +162,6 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -864,7 +861,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisFirewallRule"
+              "$ref": "#/definitions/RedisFirewallRuleCreateParameters"
             },
             "description": "Parameters supplied to the create or update redis firewall rule operation."
           },
@@ -1309,7 +1306,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisLinkedServer"
+              "$ref": "#/definitions/RedisLinkedServerCreateParameters"
             },
             "description": "Parameters supplied to the Create Linked server operation."
           },
@@ -1324,13 +1321,13 @@
           "200": {
             "description": "The linked server was successfully added.",
             "schema": {
-              "$ref": "#/definitions/RedisLinkedServer"
+              "$ref": "#/definitions/RedisLinkedServerWithProperties"
             }
           },
           "201": {
             "description": "The linked server was successfully added.",
             "schema": {
-              "$ref": "#/definitions/RedisLinkedServer"
+              "$ref": "#/definitions/RedisLinkedServerWithProperties"
             }
           },
           "default": {
@@ -1440,7 +1437,7 @@
           "200": {
             "description": "Response of get linked server.",
             "schema": {
-              "$ref": "#/definitions/RedisLinkedServer"
+              "$ref": "#/definitions/RedisLinkedServerWithProperties"
             }
           },
           "default": {
@@ -1490,7 +1487,7 @@
           "200": {
             "description": "Response of get linked servers.",
             "schema": {
-              "$ref": "#/definitions/RedisLinkedServerList"
+              "$ref": "#/definitions/RedisLinkedServerWithPropertiesList"
             }
           },
           "default": {
@@ -2078,7 +2075,7 @@
       "description": "Redis cache access keys."
     },
     "RedisFirewallRule": {
-      "description": "A named firewall rule on a redis cache. It has a range of IP addresses permitted to connect",
+      "description": "A firewall rule on a redis cache has a name, and describes a contiguous range of IP addresses permitted to connect",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2094,6 +2091,19 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "RedisFirewallRuleCreateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisFirewallRuleProperties",
+          "description": "Properties required to create a firewall rule ."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameters required for creating a firewall rule on redis cache."
     },
     "RedisFirewallRuleProperties": {
       "description": "Specifies a range of IP addresses permitted to connect to the cache",
@@ -2152,7 +2162,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "Details of a redis cache"
+      "description": "A single Redis item in List or Get Operation."
     },
     "RedisInstanceDetails": {
       "properties": {
@@ -2400,7 +2410,17 @@
       "description": "Response to force reboot for Redis cache."
     },
     "RedisLinkedServer": {
-      "description": "Details off a redis cache which is a linked server for georeplication",
+      "description": "Linked server Id",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Linked server Id."
+        }
+      }
+    },
+    "RedisLinkedServerWithProperties": {
+      "description": "Response to put/get linked server (with properties) for Redis cache.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2408,9 +2428,6 @@
           "description": "Properties of the linked server."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
@@ -2418,23 +2435,47 @@
       ]
     },
     "RedisLinkedServerProperties": {
-      "description": "Properties for a linked server",
+      "description": "Properties of a linked server to be returned in get/put response",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Terminal state of the link between primary and secondary redis cache."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisLinkedServerCreateProperties"
+        }
+      ]
+    },
+    "RedisLinkedServerWithPropertiesList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisLinkedServerWithProperties"
+          },
+          "description": "List of linked servers (with properties) of a Redis cache."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set."
+        }
+      },
+      "description": "List of linked servers (with properties) of a Redis cache."
+    },
+    "RedisLinkedServerCreateProperties": {
+      "description": "Create properties for a linked server",
       "properties": {
         "linkedRedisCacheId": {
           "type": "string",
-          "description": "Fully qualified resourceId of the linked redis cache.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Fully qualified resourceId of the linked redis cache."
         },
         "linkedRedisCacheLocation": {
           "type": "string",
-          "description": "Location of the linked redis cache.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Location of the linked redis cache."
         },
         "serverRole": {
           "type": "string",
@@ -2446,16 +2487,7 @@
           "x-ms-enum": {
             "name": "ReplicationRole",
             "modelAsString": false
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Terminal state of the link between primary and secondary redis cache."
+          }
         }
       },
       "required": [
@@ -2464,22 +2496,18 @@
         "serverRole"
       ]
     },
-    "RedisLinkedServerList": {
+    "RedisLinkedServerCreateParameters": {
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RedisLinkedServer"
-          },
-          "description": "List of linked servers (with properties) of a Redis cache."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Link for next set."
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisLinkedServerCreateProperties",
+          "description": "Properties required to create a linked server."
         }
       },
-      "description": "List of linked servers (with properties) of a Redis cache."
+      "required": [
+        "properties"
+      ],
+      "description": "Parameter required for creating a linked server to redis cache."
     },
     "CheckNameAvailabilityParameters": {
       "description": "Parameters body to pass for resource name availability check.",
