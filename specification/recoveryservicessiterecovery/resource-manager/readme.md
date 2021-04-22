@@ -28,7 +28,22 @@ directive:
 
   - from: service.json 
     suppress: R4010
-	reason: Testing purpose
+    reason: Testing purpose
+
+  - from: service.json
+    suppress:
+    - R4009
+    reason: suppressing system data for 2021-02-10
+
+  - from: service.json
+    suppress:
+      - R4010
+    reason: suppressing default error response as ASR is an old service and implements error response in a different format.
+
+  - from: service.json
+    suppress:
+      - R4011
+    reason: service implements 204 for delete and DeleteOperationResponses error was falsely raised.
 ```
 
 ## Configuration
@@ -56,6 +71,15 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 input-file:
   - Microsoft.RecoveryServices/stable/2021-03-01/service.json
 ```
+### Tag: package-2021-02
+
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2021-02-10/service.json
+```
+
 ### Tag: package-2018-07
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
