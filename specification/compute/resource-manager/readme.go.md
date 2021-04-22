@@ -29,7 +29,7 @@ directive:
 
 ### Go multi-api
 
-```yaml $(go) && $(multiapi)
+```yaml $(go) && $(multiapi) && !$(track2)
 batch:
   - tag: package-2021-03-01
   - tag: package-2020-12-01
@@ -53,6 +53,11 @@ batch:
   - tag: package-container-service-2016-09
   - tag: package-container-service-2016-03
   - tag: package-container-service-2015-11-preview
+```
+
+```yaml $(go) && $(multiapi) && $(track2)
+batch:
+  - tag: package-2020-12-01
 ```
 
 ### Tag: package-2021-03-01 and go
@@ -80,10 +85,10 @@ namespace: compute
 output-folder: $(go-sdk-folder)/sdk/arm/$(namespace)/2020-12-01/arm$(namespace)
 
 directive: 
-  - from: compute.json
+  - from: disk.json
     where: "$.definitions.PurchasePlan"
     transform: >
-      $["x-ms-client-name"] = "ComputePurchasePlan";
+      $["x-ms-client-name"] = "DiskPurchasePlan";
 ```
 
 ### Tag: package-2020-10-01-preview and go
