@@ -882,6 +882,214 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/principalAssignments": {
+      "get": {
+        "tags": [
+          "KustoPoolPrincipalAssignments"
+        ],
+        "operationId": "KustoPoolPrincipalAssignments_List",
+        "x-ms-examples": {
+          "KustoPrincipalAssignmentsList": {
+            "$ref": "./examples/KustoClusterPrincipalAssignmentsList.json"
+          }
+        },
+        "description": "Lists all Kusto pool principalAssignments.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/principalAssignments/{principalAssignmentName}": {
+      "get": {
+        "tags": [
+          "KustoPoolPrincipalAssignments"
+        ],
+        "operationId": "KustoPoolPrincipalAssignments_Get",
+        "x-ms-examples": {
+          "KustoClusterPrincipalAssignmentsGet": {
+            "$ref": "./examples/KustoClusterPrincipalAssignmentsGet.json"
+          }
+        },
+        "description": "Gets a Kusto pool principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Kusto cluster principal assignment object.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "KustoPoolPrincipalAssignments"
+        ],
+        "operationId": "KustoPoolPrincipalAssignments_CreateOrUpdate",
+        "x-ms-examples": {
+          "KustoClusterPrincipalAssignmentsCreateOrUpdate": {
+            "$ref": "./examples/KustoClusterPrincipalAssignmentsCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Create a Kusto pool principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            },
+            "description": "The Kusto pool principalAssignment's parameters supplied for the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the PrincipalAssignment.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            }
+          },
+          "201": {
+            "description": "Successfully created the principalAssignment.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPrincipalAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "KustoPoolPrincipalAssignments"
+        ],
+        "operationId": "KustoPoolPrincipalAssignments_Delete",
+        "x-ms-examples": {
+          "KustoClusterPrincipalAssignmentsDelete": {
+            "$ref": "./examples/KustoClusterPrincipalAssignmentsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes a Kusto pool principalAssignment.",
+        "parameters": [
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrincipalAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- principalAssignments deleted successfully."
+          },
+          "202": {
+            "description": "Accepted the delete principalAssignments request."
+          },
+          "204": {
+            "description": "NoContent -- principalAssignments does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1596,6 +1804,91 @@
         "name": "compression",
         "modelAsString": true
       }
+    },
+    "ClusterPrincipalAssignmentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterPrincipalAssignment"
+          },
+          "description": "The list of Kusto cluster principal assignments."
+        }
+      },
+      "description": "The list Kusto cluster principal assignments operation response."
+    },
+    "ClusterPrincipalAssignment": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterPrincipalProperties",
+          "description": "The cluster principal."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing a cluster principal assignment."
+    },
+    "ClusterPrincipalProperties": {
+      "type": "object",
+      "required": [
+        "principalId",
+        "role",
+        "principalType"
+      ],
+      "properties": {
+        "principalId": {
+          "description": "The principal ID assigned to the cluster principal. It can be a user email, application ID, or security group name.",
+          "type": "string"
+        },
+        "role": {
+          "description": "Cluster principal role.",
+          "type": "string",
+          "enum": [
+            "AllDatabasesAdmin",
+            "AllDatabasesViewer"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterPrincipalRole",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id of the principal"
+        },
+        "principalType": {
+          "description": "Principal type.",
+          "type": "string",
+          "enum": [
+            "App",
+            "Group",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          }
+        },
+        "tenantName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant name of the principal"
+        },
+        "principalName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal name"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "description": "A class representing cluster principal property."
     }
   },
   "parameters": {
@@ -1627,6 +1920,14 @@
       "name": "dataConnectionName",
       "in": "path",
       "description": "The name of the data connection.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PrincipalAssignmentNameParameter": {
+      "name": "principalAssignmentName",
+      "in": "path",
+      "description": "The name of the Kusto principalAssignment.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
