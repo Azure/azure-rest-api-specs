@@ -6,22 +6,21 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 ``` yaml $(python)
 python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.signalr
-  package-name: azure-mgmt-signalr
-  package-version: 0.2.0
-  clear-output-folder: true
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.signalr
+package-name: azure-mgmt-signalr
+package-version: 0.2.0
+clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/signalr/azure-mgmt-signalr/azure/mgmt/signalr
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/signalr/azure-mgmt-signalr/azure/mgmt/signalr
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/signalr/azure-mgmt-signalr
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/signalr/azure-mgmt-signalr
 ```
+
+

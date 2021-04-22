@@ -4,11 +4,11 @@
 
 Configuration for generating Computer Vision SDK.
 
-The current release is `release_3_0`.
+The current release is `release_3_2`.
 
 ``` yaml
 
-tag: release_3_0
+tag: release_3_2
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -47,6 +47,40 @@ These settings apply only when `--tag=release_3_0` is specified on the command l
 input-file:
   - stable/v3.0/ComputerVision.json
   - stable/v3.0/Ocr.json
+```
+
+### Release 3.1-preview.2
+These settings apply only when `--tag=release_3_1_preview_2` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_1_preview_2'
+input-file:
+  - preview/v3.1-preview.2/Ocr.json
+```
+
+### Release 3.1
+These settings apply only when `--tag=release_3_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_1'
+input-file:
+  - stable/v3.1/ComputerVision.json
+  - stable/v3.1/Ocr.json
+```
+
+### Release 3.2-preview.2
+These settings apply only when `--tag=release_3_2_preview_2` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_2_preview_2'
+input-file:
+  - preview/v3.2-preview.2/Ocr.json
+```
+
+### Release 3.2
+These settings apply only when `--tag=release_3_2` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_2'
+input-file:
+  - stable/v3.2/ComputerVision.json
+  - stable/v3.2/Ocr.json
 ```
 
 ## Swagger to SDK
@@ -94,13 +128,16 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 ``` yaml $(python)
 python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  add-credentials: true
-  payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.vision.computervision
-  package-name: azure-cognitiveservices-vision-computervision
-  clear-output-folder: true
+license-header: MICROSOFT_MIT_NO_VERSION
+add-credentials: true
+payload-flattening-threshold: 2
+namespace: azure.cognitiveservices.vision.computervision
+package-name: azure-cognitiveservices-vision-computervision
+clear-output-folder: true
+use: "@microsoft.azure/autorest.python@~4.0.71" 
+version: V2
+multiapi: true
+no-async: true
 
 directive:
   from: source-file-python
@@ -109,14 +146,12 @@ directive:
     $ = $.replace( /self, mode, url,/g, "self, url, mode," );
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision/azure/cognitiveservices/vision/computervision
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision/azure/cognitiveservices/vision/computervision
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision
 ```
 
 ## Go
@@ -166,6 +201,10 @@ input-file:
   - $(this-folder)/preview/v3.0-preview/Ocr.json
   - $(this-folder)/stable/v3.0/ComputerVision.json
   - $(this-folder)/stable/v3.0/Ocr.json
+  - $(this-folder)/preview/v3.1-preview.2/Ocr.json
+  - $(this-folder)/preview/v3.2-preview.2/Ocr.json
+  - $(this-folder)/stable/v3.2/ComputerVision.json
+  - $(this-folder)/stable/v3.2/Ocr.json
 
 ```
 

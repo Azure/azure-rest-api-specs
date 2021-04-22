@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2020-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "www-someDomain-net",
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net",
+            "type": "Microsoft.Cdn/profiles/endpoints/origins",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceState": "Active",
+              "hostName": "www.someDomain.net",
+              "httpPort": null,
+              "httpsPort": null,
+              "originHostHeader": "www.someDomain.net",
+              "priority": 1,
+              "weight": 50,
+              "enabled": true,
+              "privateEndpointStatus": "Pending",
+              "privateLinkApprovalMessage": "Please approve the connection request for this Private Link",
+              "privateLinkAlias": "APPSERVER.d84e61f0-0870-4d24-9746-7438fa0019d1.westus2.azure.privatelinkservice"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

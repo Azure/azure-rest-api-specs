@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "datasetid": "018fda98-e638-0edf-5ef7-28491ff3bed4",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "links": [
+          {
+            "href": "https://atlas.microsoft.com/wfs/datasets/018fda98-e638-0edf-5ef7-28491ff3bed4",
+            "rel": "self",
+            "title": "Azure Maps WFS"
+          },
+          {
+            "href": "https://atlas.microsoft.com/wfs/datasets/018fda98-e638-0edf-5ef7-28491ff3bed4/api",
+            "rel": "service",
+            "title": "The API definition"
+          },
+          {
+            "href": "https://atlas.microsoft.com/wfs/datasets/018fda98-e638-0edf-5ef7-28491ff3bed4/conformance",
+            "rel": "conformance",
+            "title": "WFS 3.0 conformance classes implemented by this server"
+          },
+          {
+            "href": "https://atlas.microsoft.com/wfs/datasets/018fda98-e638-0edf-5ef7-28491ff3bed4/version",
+            "rel": "data",
+            "title": "The version information"
+          },
+          {
+            "href": "https://atlas.microsoft.com/wfs/datasets/018fda98-e638-0edf-5ef7-28491ff3bed4/collections",
+            "rel": "data",
+            "title": "Metadata about the feature collections"
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

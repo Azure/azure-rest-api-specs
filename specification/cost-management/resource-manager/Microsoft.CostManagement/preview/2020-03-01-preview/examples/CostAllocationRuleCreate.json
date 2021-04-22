@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01-preview",
+    "billingAccountId": "100",
+    "ruleName": "testRule",
+    "costAllocationRule": {
+      "properties": {
+        "description": "This is a testRule",
+        "status": "Active",
+        "details": {
+          "sourceResources": [
+            {
+              "resourceType": "Dimension",
+              "name": "ResourceGroupName",
+              "values": [
+                "sampleRG",
+                "secondRG"
+              ]
+            }
+          ],
+          "targetResources": [
+            {
+              "resourceType": "Dimension",
+              "policyType": "FixedProportion",
+              "name": "ResourceGroupName",
+              "values": [
+                {
+                  "name": "destinationRG",
+                  "percentage": 45
+                },
+                {
+                  "name": "destinationRG2",
+                  "percentage": 54
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule",
+        "name": "testRule",
+        "type": "Microsoft.CostManagement/costAllocationRules",
+        "properties": {
+          "description": "This is a testRule",
+          "createdDate": "2020-06-18T22:21:51.1287144Z",
+          "updatedDate": "2020-06-18T22:21:51.1287144Z",
+          "status": "Creating",
+          "details": {
+            "sourceResources": [
+              {
+                "resourceType": "Dimension",
+                "name": "ResourceGroupName",
+                "values": [
+                  "sampleRG"
+                ]
+              }
+            ],
+            "targetResources": [
+              {
+                "resourceType": "Dimension",
+                "policyType": "FixedProportion",
+                "name": "ResourceGroupName",
+                "values": [
+                  {
+                    "name": "destinationRG",
+                    "percentage": 50
+                  },
+                  {
+                    "name": "destinationRG2",
+                    "percentage": 50
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

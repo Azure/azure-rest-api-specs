@@ -8,7 +8,7 @@
   "paths": {},
   "definitions": {
     "AppConfigurationKeyValueModifiedEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.AppConfiguration.KeyValueModified event.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event.",
       "type": "object",
       "properties": {
         "key": {
@@ -22,11 +22,15 @@
         "etag": {
           "description": "The etag representing the new state of the key-value.",
           "type": "string"
+        },
+        "syncToken": {
+          "description": "The sync token representing the server state after the event.",
+          "type": "string"
         }
       }
     },
     "AppConfigurationKeyValueDeletedEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.AppConfiguration.KeyValueDeleted event.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event.",
       "type": "object",
       "properties": {
         "key": {
@@ -39,6 +43,10 @@
         },
         "etag": {
           "description": "The etag representing the key-value that was deleted.",
+          "type": "string"
+        },
+        "syncToken": {
+          "description": "The sync token representing the server state after the event.",
           "type": "string"
         }
       }
