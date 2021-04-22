@@ -412,7 +412,7 @@
             "description": "The feature state JSON data. A feature can have only one state at a given point in time. The specified state keyname must have been defined during the stateset creation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FeatureStateObject"
+              "$ref": "#/definitions/FeatureStatesStructure"
             }
           }
         ],
@@ -514,7 +514,7 @@
           "200": {
             "description": "Get request completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FeatureStateObject"
+              "$ref": "#/definitions/FeatureStatesStructure"
             }
           },
           "400": {
@@ -642,8 +642,12 @@
       "description": "The feature states model for a feature.",
       "type": "object",
       "properties": {
-        "state": {
-          "$ref": "#/definitions/FeatureStateObject"
+        "states": {
+          "description": "The feature states array.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeatureStateObject"
+          }
         }
       }
     },
