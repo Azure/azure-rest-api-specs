@@ -27,6 +27,7 @@ These are the global settings for the MonitorClient API.
 ``` yaml !$(python) || !$(track2)
 title: MonitorClient
 ```
+
 ``` yaml $(python) && $(track2)
 title: MonitorManagementClient
 ```
@@ -34,9 +35,19 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2020-03
+tag: package-2016-06
 ```
 
+
+### Tag: package-2016-06
+
+These settings apply only when `--tag=package-2016-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2016-06'
+input-file:
+  - Microsoft.Insights/stable/2016-06-01/metrics_API.json
+  - Microsoft.Insights/stable/2016-06-01/serviceDiagnosticsSettings_API.json
+```
 ### Tag: package-2021-02-preview-only
 
 These settings apply only when `--tag=package-2021-02-preview-only` is specified on the command line.
