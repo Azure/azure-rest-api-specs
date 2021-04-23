@@ -217,17 +217,15 @@ input-file:
   - Microsoft.Insights/preview/2021-03-03-preview/diagnosticServicesToken_API.json
 ```
 
-### Tag: package-2021-03-08
+### Tag: package-2021-03-08-only
 
-These settings apply only when `--tag=package-2021-03-08` is specified on the command line.
+These settings apply only when `--tag=package-2021-03-08-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-03-08'
+``` yaml $(tag) == 'package-2021-03-08-only'
 input-file:
   - Microsoft.Insights/stable/2021-03-08/myworkbooks_API.json
   - Microsoft.Insights/stable/2021-03-08/workbooks_API.json
   - Microsoft.Insights/stable/2021-03-08/workbookOperations_API.json
-```
-
 ### Tag: package-2020-02-12
 
 These settings apply only when `--tag=package-2020-02-12` is specified on the command line.
