@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2021-01-01",
+    "version": "2021-04-01",
     "description": "Provides operations for working with resources and resource groups."
   },
   "host": "management.azure.com",
@@ -2085,6 +2085,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/providerPermissions": {
+      "get": {
+        "tags": [
+          "Providers"
+        ],
+        "operationId": "Providers_ProviderPermissions",
+        "description": "Get the provider permissions.",
+        "parameters": [
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information on the provider permissions.",
+            "schema": {
+              "$ref": "#/definitions/ProviderPermissionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get provider resource types.": {
+            "$ref": "./examples/GetProviderPermissions.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/register": {
       "post": {
         "tags": [
@@ -2105,6 +2148,15 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ProviderRegistrationRequest"
+            },
+            "description": "The third party consent for S2S."
           }
         ],
         "responses": {
@@ -5012,6 +5064,20 @@
             "$ref": "#/definitions/ProviderResourceType"
           },
           "description": "The collection of provider resource types."
+        },
+        "providerAuthorizationConsentState": {
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Required",
+            "NotRequired",
+            "Consented"
+          ],
+          "description": "The provider authorization consent state.",
+          "x-ms-enum": {
+            "name": "ProviderAuthorizationConsentState",
+            "modelAsString": true
+          }
         }
       },
       "description": "Resource provider information."
@@ -6327,6 +6393,146 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "Permission": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed actions."
+        },
+        "notActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Denied actions."
+        },
+        "dataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed Data actions."
+        },
+        "notDataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Denied Data actions."
+        }
+      },
+      "description": "Role definition permissions."
+    },
+    "RoleDefinition": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The role definition name."
+        },
+        "isServiceRole": {
+          "type": "boolean",
+          "description": "If this is a service role."
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          },
+          "description": "Role definition permissions."
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Role definition assignable scopes."
+        }
+      },
+      "description": "Role definition properties."
+    },
+    "ProviderPermission": {
+      "type": "object",
+      "description": "The provider permission",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "The application id."
+        },
+        "roleDefinition": {
+          "$ref": "#/definitions/RoleDefinition",
+          "description": "Role definition properties."
+        },
+        "managedByRoleDefinition": {
+          "$ref": "#/definitions/RoleDefinition",
+          "description": "Role definition properties."
+        },
+        "providerAuthorizationConsentState": {
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Required",
+            "NotRequired",
+            "Consented"
+          ],
+          "description": "The provider authorization consent state.",
+          "x-ms-enum": {
+            "name": "ProviderAuthorizationConsentState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProviderPermissionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderPermission"
+          },
+          "description": "An array of provider permissions."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of provider permissions."
+    },
+    "ProviderConsentDefinition": {
+      "type": "object",
+      "description": "The provider consent.",
+      "properties": {
+        "consentToAuthorization": {
+          "type": "boolean",
+          "description": "A value indicating whether authorization is consented or not."
+        },
+        "authorizationHeaderValue": {
+          "type": "string",
+          "description": "The authorization header value."
+        }
+      }
+    },
+    "ProviderRegistrationRequest": {
+      "type": "object",
+      "description": "The provider registration definition.",
+      "properties": {
+        "thirdPartyProviderConsent": {
+          "$ref": "#/definitions/ProviderConsentDefinition",
+          "description": "The provider consent."
+        }
+      }
     },
     "StatusMessage": {
       "type": "object",
