@@ -230,7 +230,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get successful. The operation returns all ruleCollections in the specified network manager, in a paginated format",
+            "description": "Get successful. The operation returns all ruleCollections in the specified security configuration, in a paginated format",
             "schema": {
               "$ref": "#/definitions/RuleCollectionListResult"
             }
@@ -246,7 +246,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List security admin configurations in a network manager": {
+          "List security admin rule collections": {
             "$ref": "./examples/NetworkManagerAdminRuleCollectionList.json"
           }
         }
@@ -454,7 +454,7 @@
         "tags": [
           "AdminRules"
         ],
-        "description": "Gets a network manager security configuration admin rule in a subscription.",
+        "description": "Gets a network manager security configuration admin rule.",
         "operationId": "AdminRules_Get",
         "responses": {
           "200": {
@@ -599,8 +599,8 @@
         "deleteExistingNSGs": {
           "type": "string",
           "enum": [
-            "True",
-            "False"
+            "False",
+            "True"
           ],
           "x-ms-enum": {
             "name": "DeleteExistingNSGs",
@@ -639,14 +639,14 @@
           "items": {
             "$ref": "#/definitions/BaseAdminRule"
           },
-          "description": "A list of rules"
+          "description": "A list of admin rules"
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "security configuration rule list result."
+      "description": "security configuration admin rule list result."
     },
     "RuleCollectionListResult": {
       "properties": {
@@ -713,7 +713,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "Whether the rule collection is custom or default.",
+          "description": "Whether the rule is custom or default.",
           "enum": [
             "Custom",
             "Default"
@@ -738,7 +738,7 @@
         "kind"
       ],
       "discriminator": "kind",
-      "description": "Network base rule."
+      "description": "Network base admin rule."
     },
     "AdminRule": {
       "properties": {
