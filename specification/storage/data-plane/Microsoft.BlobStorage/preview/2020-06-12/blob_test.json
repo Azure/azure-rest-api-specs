@@ -2532,6 +2532,19 @@
       "x-ms-parameter-location": "method",
       "description": "The blob name."
     },
+    "IfSequenceNumberEqualTo": {
+      "name": "x-ms-if-sequence-number-eq",
+      "x-ms-client-name": "ifSequenceNumberEqualTo",
+      "in": "header",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "sequence-number-access-conditions"
+      },
+      "description": "Specify this header value to operate only on a blob if it has the specified sequence number."
+    },
     "BlobCacheControl": {
       "name": "x-ms-blob-cache-control",
       "x-ms-client-name": "blobCacheControl",
