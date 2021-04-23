@@ -1,14 +1,31 @@
 {
   "parameters": {
-    "accountName": "sampleacct",
-    "resourceGroupName": "agfoodClient",
+    "farmerId": "FARMER123",
     "api-version": "2021-03-31-preview",
-    "subscriptionId": "subid"
+    "Farmers_CreateOrUpdate": {
+      "status": "Active",
+      "name": "John Smith",
+      "description": "Some description",
+      "properties": {
+        "Irrigated": "Yes",
+        "RetailerId": "Retailer123"
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "sampleProperty": "sampleProperty"
+        "id": "FARMER123",
+        "name": "John Smith",
+        "status": "Active",
+        "description": "Some description",
+        "properties": {
+          "Irrigated": "Yes",
+          "RetailerId": "Retailer123"
+        },
+        "createdDateTime": "2021-04-21T06:49:30.401Z",
+        "modifiedDateTime": "2021-04-21T06:49:30.401Z",
+        "eTag": "0f8fad5b-d9cb-469f-a165-70867728950e"
       }
     }
   }

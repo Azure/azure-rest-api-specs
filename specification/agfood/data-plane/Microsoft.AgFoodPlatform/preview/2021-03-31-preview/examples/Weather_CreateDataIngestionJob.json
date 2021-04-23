@@ -1,14 +1,39 @@
 {
   "parameters": {
-    "accountName": "sampleacct",
-    "resourceGroupName": "agfoodClient",
+    "jobId": "JOB123",
     "api-version": "2021-03-31-preview",
-    "subscriptionId": "subid"
+    "Weather_CreateDataIngestionJob": {
+      "farmerId": "test_farmer",
+      "boundaryId": "test_boundary",
+      "extensionId": "dtn.clearAg",
+      "extensionApiName": "dailyforecast",
+      "extensionApiInput": {
+        "start": 0,
+        "end": 5
+      },
+      "name": "TestWeatherJob",
+      "description": "Daily Forecast data for 5 days",
+      "properties": {
+        "region": "Asia"
+      }
+    }
   },
   "responses": {
-    "200": {
+    "202": {
       "body": {
-        "sampleProperty": "sampleProperty"
+        "durationInSeconds": "string",
+        "id": "weather-job",
+        "jobStatus": "Waiting",
+        "message": "Created job to fetch weather data for job name 'TestWeatherJob', farmer id 'test_farmer' and field id 'test_field'.",
+        "createdDateTime": "2021-04-16T11:33:45.580Z",
+        "lastActionDateTime": "2021-04-16T11:33:45.580Z",
+        "startTime": "2021-04-16T11:33:45.580Z",
+        "endTime": "2021-04-16T11:33:45.580Z",
+        "name": "TestWeatherJob",
+        "description": "Daily Forecast data for 5 days",
+        "properties": {
+          "region": "Asia"
+        }
       }
     }
   }

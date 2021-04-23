@@ -1,15 +1,38 @@
 {
   "parameters": {
-    "accountName": "sampleacct",
-    "resourceGroupName": "agfoodClient",
     "api-version": "2021-03-31-preview",
-    "subscriptionId": "subid"
+    "jobId": "JOB123"
   },
   "responses": {
     "200": {
       "body": {
-        "sampleProperty": "sampleProperty"
+        "id": "JOB123",
+        "jobStatus": "Succeeded",
+        "message": "Job completed successfully.",
+        "durationInSeconds": "14.7977857",
+        "createdDateTime": "2021-04-19T11:31:20Z",
+        "lastActionDateTime": "2021-04-19T11:31:34Z",
+        "startTime": "2021-04-19T11:31:19Z",
+        "endTime": "2021-04-19T11:31:34Z",
+        "name": "John Smith's Boundary",
+        "description": "Some description",
+        "properties": {
+          "Irrigated": "Yes",
+          "RetailerId": "Retailer123"
+        },
+        "requestBody": {
+          "farmerId": "FARMER123",
+          "resourceId": "BOUNDARY123",
+          "resourceType": "boundary",
+          "name": "John Smith's boundary",
+          "description": "Some description",
+          "properties": {
+            "Irrigated": "Yes",
+            "RetailerId": "Retailer123"
+          }
+        }
       }
-    }
+    },
+    "404": {}
   }
 }

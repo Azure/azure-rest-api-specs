@@ -1,14 +1,48 @@
 {
   "parameters": {
-    "accountName": "sampleacct",
-    "resourceGroupName": "agfoodClient",
-    "api-version": "2021-03-31-preview",
-    "subscriptionId": "subid"
+    "jobId": "JOB123",
+    "api-version": "2021-03-31-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "sampleProperty": "sampleProperty"
+        "durationInSeconds": "string",
+        "id": "satellite-job",
+        "jobStatus": "Succeeded",
+        "message": "Satellite data is available for 73 days from provider in the requested date range. Successfully fetched data for 73 days.",
+        "createdDateTime": "2021-04-16T08:24:50.029Z",
+        "lastActionDateTime": "2021-04-16T08:24:50.029Z",
+        "startTime": "2021-04-16T08:24:50.029Z",
+        "endTime": "2021-04-16T08:24:50.029Z",
+        "name": "North Farm 2019 satellite imagery",
+        "description": "Test job",
+        "properties": {
+          "Region": "Asia"
+        },
+        "requestBody": {
+          "boundaryId": "BOUNDARY123",
+          "farmerId": "FARMER123",
+          "startDateTime": "2020-04-16",
+          "endDateTime": "2021-04-16",
+          "provider": "Microsoft",
+          "source": "Sentinel_2_L2A",
+          "name": "North Farm 2019 satellite imagery",
+          "description": "Test job",
+          "data": {
+            "imageFormats": [
+              "Tif"
+            ],
+            "imageNames": [
+              "NDVI"
+            ],
+            "imageResolutions": [
+              "Ten"
+            ]
+          },
+          "properties": {
+            "Region": "Asia"
+          }
+        }
       }
     }
   }

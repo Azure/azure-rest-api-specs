@@ -1,14 +1,39 @@
 {
   "parameters": {
-    "accountName": "sampleacct",
-    "resourceGroupName": "agfoodClient",
-    "api-version": "2021-03-31-preview",
-    "subscriptionId": "subid"
+    "jobId": "JOB123",
+    "api-version": "2021-03-31-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "sampleProperty": "sampleProperty"
+        "durationInSeconds": "string",
+        "id": "weather-job",
+        "jobStatus": "Succeeded",
+        "message": "Weather data is available for startTime to endTime",
+        "createdDateTime": "2021-04-16T08:24:50.029Z",
+        "lastActionDateTime": "2021-04-16T08:24:50.029Z",
+        "startTime": "2021-04-16T08:24:50.029Z",
+        "endTime": "2021-04-16T08:24:50.029Z",
+        "name": "North Farm 2019 weather data",
+        "description": "Test job",
+        "properties": {
+          "Region": "Asia"
+        },
+        "requestBody": {
+          "farmerId": "test_farmer",
+          "boundaryId": "test_boundary",
+          "extensionId": "dtn.clearAg",
+          "extensionApiName": "dailyforecast",
+          "extensionApiInput": {
+            "start": 0,
+            "end": 5
+          },
+          "name": "TestWeatherJob",
+          "description": "Daily Forecast data for 5 days",
+          "properties": {
+            "region": "Asia"
+          }
+        }
       }
     }
   }
