@@ -957,7 +957,7 @@
           "Repository"
         ],
         "description": "Get manifest attributes",
-        "operationId": "ContainerRegistry_GetRegistryArtifactProperties",
+        "operationId": "ContainerRegistry_GetManifestProperties",
         "x-ms-examples": {
           "Get manifest attributes": {
             "$ref": "./examples/GetManifestAttributes.json"
@@ -990,8 +990,8 @@
         "tags": [
           "Repository"
         ],
-        "description": "Update attributes of a manifest",
-        "operationId": "ContainerRegistry_UpdateManifestAttributes",
+        "description": "Update properties of a manifest",
+        "operationId": "ContainerRegistry_UpdateManifestProperties",
         "consumes": [
           "application/json"
         ],
@@ -1314,8 +1314,7 @@
         },
         "manifestCount": {
           "type": "integer",
-          "description": "Number of the manifests",
-          "x-ms-client-name": "registryArtifactCount"
+          "description": "Number of the manifests"
         },
         "tagCount": {
           "type": "integer",
@@ -1406,7 +1405,7 @@
         "imageName",
         "tag"
       ],
-      "x-ms-client-name": "TagProperties",
+      "x-ms-client-name": "ArtifactTagProperties",
       "description": "Tag attributes",
       "properties": {
         "imageName": {
@@ -1492,13 +1491,18 @@
     "TagOrderBy": {
       "type": "string",
       "enum": [
+        "none",
         "timedesc",
         "timeasc"
       ],
       "x-ms-enum": {
         "name": "TagOrderBy",
-        "modelAsString": true,
         "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not provide an orderby value in the request."
+          },
           {
             "value": "timedesc",
             "name": "LastUpdatedOnDescending",
@@ -1773,13 +1777,13 @@
       }
     },
     "ManifestAttributes": {
-      "x-ms-client-name": "ManifestProperties",
+      "x-ms-client-name": "ArtifactManifestProperties",
       "description": "Manifest attributes details",
       "properties": {
         "imageName": {
-          "description": "Image name",
+          "description": "Repository name",
           "type": "string",
-          "x-ms-client-name": "repository"
+          "x-ms-client-name": "repositoryName"
         },
         "manifest": {
           "x-ms-client-flatten": true,
@@ -1909,27 +1913,32 @@
     "ManifestOrderBy": {
       "type": "string",
       "enum": [
+        "none",
         "timedesc",
         "timeasc"
       ],
       "x-ms-enum": {
         "name": "ManifestOrderBy",
-        "modelAsString": true,
         "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not provide an orderby value in the request."
+          },
           {
             "value": "timedesc",
             "name": "LastUpdatedOnDescending",
-            "description": "Order registry artifacts by LastUpdatedOn field, from most recently updated to least recently updated."
+            "description": "Order manifests by LastUpdatedOn field, from most recently updated to least recently updated."
           },
           {
             "value": "timeasc",
             "name": "LastUpdatedOnAscending",
-            "description": "Order  registry artifacts by LastUpdatedOn field, from least recently updated to most recently updated."
+            "description": "Order manifest by LastUpdatedOn field, from least recently updated to most recently updated."
           }
         ]
       },
       "default": "none",
-      "description": "Sort options for ordering registry artifacts in a collection.",
+      "description": "Sort options for ordering manifests in a collection.",
       "x-accessibility": "public"
     },
     "AccessToken": {
