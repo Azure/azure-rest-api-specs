@@ -7,9 +7,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.Logz
   payload-flattening-threshold: 1
+  output-folder: $(csharp-sdks-folder)/logz/Microsoft.Azure.Management.Logz/src/Generated
   clear-output-folder: true
-  client-side-validation: false
-  namespace: Microsoft.Logz
-  output-folder: $(csharp-sdks-folder)/logz/management/Microsoft.Logz/GeneratedProtocol
 ```

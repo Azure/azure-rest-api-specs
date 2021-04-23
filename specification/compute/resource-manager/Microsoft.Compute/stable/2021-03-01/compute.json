@@ -3051,6 +3051,9 @@
           "Create a vm in an availability set.": {
             "$ref": "./examples/CreateAVmInAnAvailabilitySet.json"
           },
+          "Create a vm with Scheduled Events Profile": {
+            "$ref": "./examples/CreateAVmWithScheduledEventsProfile.json"
+          },
           "Create a vm with boot diagnostics.": {
             "$ref": "./examples/CreateAVmWithBootDiagnostics.json"
           },
@@ -3090,20 +3093,26 @@
           "Create a Windows vm with a patch setting patchMode of AutomaticByOS.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByOS.json"
           },
-          "Create a Windows vm with a patch setting patchMode of AutomaticByPlatform.": {
-            "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByPlatform.json"
+          "Create a Windows vm with patch settings patchMode and assessmentMode set to AutomaticByPlatform.": {
+            "$ref": "./examples/CreateAWindowsVmWithPatchSettingModesOfAutomaticByPlatform.json"
           },
           "Create a Windows vm with a patch setting patchMode of Manual.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfManual.json"
           },
+          "Create a Windows vm with a patch setting assessmentMode of ImageDefault.": {
+            "$ref": "./examples/CreateAWindowsVmWithPatchSettingAssessmentModeOfImageDefault.json"
+          },
           "Create a Windows vm with a patch setting patchMode of AutomaticByPlatform and enableHotpatching set to true.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByPlatformAndEnableHotPatchingTrue.json"
           },
-          "Create a Linux vm with a patch setting patchMode of AutomaticByPlatform.": {
-            "$ref": "./examples/CreateALinuxVmWithPatchSettingModeOfAutomaticByPlatform.json"
+          "Create a Linux vm with a patch settings patchMode and assessmentMode set to AutomaticByPlatform.": {
+            "$ref": "./examples/CreateALinuxVmWithPatchSettingModesOfAutomaticByPlatform.json"
           },
           "Create a Linux vm with a patch setting patchMode of ImageDefault.": {
             "$ref": "./examples/CreateALinuxVmWithPatchSettingModeOfImageDefault.json"
+          },
+          "Create a Linux vm with a patch setting assessmentMode of ImageDefault.": {
+            "$ref": "./examples/CreateALinuxVmWithPatchSettingAssessmentModeOfImageDefault.json"
           },
           "Create a vm with an extensions time budget.": {
             "$ref": "./examples/CreateAVmWithExtensionsTimeBudget.json"
@@ -3111,8 +3120,11 @@
           "Create a VM with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/CreateAVmWithUefiSettings.json"
           },
+          "Create a VM with network interface configuration": {
+            "$ref": "./examples/CreateAVmWithNetworkInterfaceConfiguration.json"
+          },
           "Create a VM with UserData": {
-            "$ref": "./examples/CreateOrUpdateAVmWithUserData.json"
+            "$ref": "./examples/CreateOrUpdateAVmWithUserData.json",
           }
         }
       },
@@ -8969,6 +8981,18 @@
         "modelAsString": true
       }
     },
+    "DeleteOption": {
+      "type": "string",
+      "description": "Specifies the behavior of the managed disk when the VM gets deleted i.e whether the managed disk is deleted or detached. Supported values:<br><br> **Delete** If this value is used, the managed disk is deleted when VM gets deleted.<br><br> **Detach** If this value is used, the managed disk is retained after VM gets deleted.<br><br> Minimum api-version: 2021-03-01",
+      "enum": [
+        "Delete",
+        "Detach"
+      ],
+      "x-ms-enum": {
+        "name": "DiskDeleteOptionTypes",
+        "modelAsString": true
+      }
+    },
     "StorageAccountType": {
       "type": "string",
       "description": "Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. Premium_ZRS uses Premium SSD zone redundant storage. StandardSSD_ZRS uses Standard SSD zone redundant storage. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disks-types",
@@ -9093,6 +9117,10 @@
         "managedDisk": {
           "description": "The managed disk parameters.",
           "$ref": "#/definitions/ManagedDiskParameters"
+        },
+        "deleteOption": {
+          "$ref": "#/definitions/DeleteOption",
+          "description": "Specifies whether OS Disk should be deleted or detached upon VM deletion. <br><br> Possible values: <br><br> **Delete** If this value is used, the OS disk is deleted when VM is deleted.<br><br> **Detach** If this value is used, the os disk is retained after VM is deleted. <br><br> The default value is set to **detach**. For an ephemeral OS Disk, the default value is set to **Delete**. User cannot change the delete option for ephemeral OS Disk."
         }
       },
       "required": [
@@ -9159,6 +9187,10 @@
         "detachOption": {
           "$ref": "#/definitions/DetachOption",
           "description": "Specifies the detach behavior to be used while detaching a disk or which is already in the process of detachment from the virtual machine. Supported values: **ForceDetach**. <br><br> detachOption: **ForceDetach** is applicable only for managed data disks. If a previous detachment attempt of the data disk did not complete due to an unexpected failure from the virtual machine and the disk is still not released then use force-detach as a last resort option to detach the disk forcibly from the VM. All writes might not have been flushed when using this detach behavior. <br><br> This feature is still in preview mode and is not supported for VirtualMachineScaleSet. To force-detach a data disk update toBeDetached to 'true' along with setting detachOption: 'ForceDetach'."
+        },
+        "deleteOption": {
+          "$ref": "#/definitions/DeleteOption",
+          "description": "Specifies whether data disk should be deleted or detached upon VM deletion.<br><br> Possible values: <br><br> **Delete** If this value is used, the data disk is deleted when VM is deleted.<br><br> **Detach** If this value is used, the data disk is retained after VM is deleted.<br><br> The default value is set to **detach**"
         }
       },
       "required": [
@@ -9478,6 +9510,18 @@
         "primary": {
           "type": "boolean",
           "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the network interface when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a network interface reference properties."
@@ -9496,6 +9540,291 @@
       ],
       "description": "Describes a network interface reference."
     },
+    "VirtualMachineIpTag": {
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "IP tag type. Example: FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
+        }
+      },
+      "description": "Contains the IP tag associated with the public IP address."
+    },
+    "VirtualMachinePublicIPAddressDnsSettingsConfiguration": {
+      "properties": {
+        "domainNameLabel": {
+          "type": "string",
+          "description": "The Domain name label prefix of the PublicIPAddress resources that will be created. The generated name label is the concatenation of the domain name label and vm network profile unique ID."
+        }
+      },
+      "required": [
+        "domainNameLabel"
+      ],
+      "description": "Describes a virtual machines network configuration's DNS settings."
+    },
+    "VirtualMachinePublicIPAddressConfigurationProperties": {
+      "properties": {
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The idle timeout of the public IP address."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the public IP address when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/VirtualMachinePublicIPAddressDnsSettingsConfiguration",
+          "description": "The dns settings to be applied on the publicIP addresses ."
+        },
+        "ipTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineIpTag"
+          },
+          "description": "The list of IP tags associated with the public IP address."
+        },
+        "publicIPPrefix": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The PublicIPPrefix from which to allocate publicIP addresses."
+        },
+        "publicIPAddressVersion": {
+          "type": "string",
+          "description": "Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersions",
+            "modelAsString": true
+          }
+        },
+        "publicIPAllocationMethod": {
+          "type": "string",
+          "description": "Specify the public IP allocation type",
+          "enum": [
+            "Dynamic",
+            "Static"
+          ],
+          "x-ms-enum": {
+            "name": "PublicIPAllocationMethod",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes a virtual machines IP Configuration's PublicIPAddress configuration"
+    },
+    "PublicIPAddressSku": {
+      "properties": {
+        "publicIPAddressSkuName": {
+          "type": "string",
+          "description": "Specify public IP sku name",
+          "enum": [
+            "Basic",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "PublicIPAddressSkuName",
+            "modelAsString": true
+          }
+        },
+        "publicIPAddressSkuTier": {
+          "type": "string",
+          "description": "Specify public IP sku tier",
+          "enum": [
+            "Regional",
+            "Global"
+          ],
+          "x-ms-enum": {
+            "name": "PublicIPAddressSkuTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "publicIPAddressSkuName"
+      ],
+      "description": "Describes the public IP Sku"
+    },
+    "VirtualMachinePublicIPAddressConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The publicIP address configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachinePublicIPAddressConfigurationProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/PublicIPAddressSku"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Describes a virtual machines IP Configuration's PublicIPAddress configuration"
+    },
+    "VirtualMachineNetworkInterfaceIPConfigurationProperties": {
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies the identifier of the subnet."
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
+        },
+        "publicIPAddressConfiguration": {
+          "$ref": "#/definitions/VirtualMachinePublicIPAddressConfiguration",
+          "description": "The publicIPAddressConfiguration."
+        },
+        "privateIPAddressVersion": {
+          "type": "string",
+          "description": "Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersions",
+            "modelAsString": true
+          }
+        },
+        "applicationSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to application security group."
+        },
+        "applicationGatewayBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of application gateways. A virtual machine can reference backend address pools of multiple application gateways. Multiple virtual machines cannot use the same application gateway."
+        },
+        "loadBalancerBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of load balancers. A virtual machine can reference backend address pools of one public and one internal load balancer. [Multiple virtual machines cannot use the same basic sku load balancer]."
+        }
+      },
+      "description": "Describes a virtual machine network interface IP configuration properties."
+    },
+    "VirtualMachineNetworkInterfaceIPConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The IP configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineNetworkInterfaceIPConfigurationProperties"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Describes a virtual machine network profile's IP configuration."
+    },
+    "VirtualMachineNetworkInterfaceDnsSettingsConfiguration": {
+      "properties": {
+        "dnsServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of DNS servers IP addresses"
+        }
+      },
+      "description": "Describes a virtual machines network configuration's DNS settings."
+    },
+    "VirtualMachineNetworkInterfaceConfigurationProperties": {
+      "properties": {
+        "primary": {
+          "type": "boolean",
+          "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the network interface when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "enableFpga": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is FPGA networking-enabled."
+        },
+        "enableIPForwarding": {
+          "type": "boolean",
+          "description": "Whether IP forwarding enabled on this NIC."
+        },
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The network security group."
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/VirtualMachineNetworkInterfaceDnsSettingsConfiguration",
+          "description": "The dns settings to be applied on the network interfaces."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineNetworkInterfaceIPConfiguration"
+          },
+          "description": "Specifies the IP configurations of the network interface."
+        },
+        "dscpConfiguration": {
+          "$ref": "#/definitions/SubResource"
+        }
+      },
+      "required": [
+        "ipConfigurations"
+      ],
+      "description": "Describes a virtual machine network profile's IP configuration."
+    },
+    "VirtualMachineNetworkInterfaceConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The network interface configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineNetworkInterfaceConfigurationProperties"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Describes a virtual machine network interface configurations."
+    },
     "NetworkProfile": {
       "properties": {
         "networkInterfaces": {
@@ -9504,9 +9833,27 @@
             "$ref": "#/definitions/NetworkInterfaceReference"
           },
           "description": "Specifies the list of resource Ids for the network interfaces associated with the virtual machine."
+        },
+        "networkApiVersion": {
+          "type": "string",
+          "description": "specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations",
+          "enum": [
+            "2020-11-01"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkApiVersion",
+            "modelAsString": true
+          }
+        },
+        "networkInterfaceConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineNetworkInterfaceConfiguration"
+          },
+          "description": "Specifies the networking configurations that will be used to create the virtual machine networking resources."
         }
       },
-      "description": "Specifies the network interfaces of the virtual machine."
+      "description": "Specifies the network interfaces or the networking configuration of the virtual machine."
     },
     "BootDiagnostics": {
       "properties": {
@@ -9924,9 +10271,15 @@
           "format": "int32",
           "description": "Specifies the scale set logical fault domain into which the Virtual Machine will be created. By default, the Virtual Machine will by automatically assigned to a fault domain that best maintains balance across available fault domains.<br><li>This is applicable only if the 'virtualMachineScaleSet' property of this Virtual Machine is set.<li>The Virtual Machine Scale Set that is referenced, must have 'platformFaultDomainCount' &gt; 1.<li>This property cannot be updated once the Virtual Machine is created.<li>Fault domain assignment can be viewed in the Virtual Machine Instance View.<br><br>Minimum api‐version: 2020‐12‐01"
         },
+<<<<<<< HEAD
         "userData": {
           "type": "string",
           "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
+=======
+        "scheduledEventsProfile": {
+          "$ref": "#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
+>>>>>>> compute-2021-03
         }
       },
       "description": "Describes the properties of a Virtual Machine."
@@ -10848,6 +11201,18 @@
         "enableIPForwarding": {
           "type": "boolean",
           "description": "Whether IP forwarding enabled on this NIC."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the network interface when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -10887,6 +11252,18 @@
         "enableIPForwarding": {
           "type": "boolean",
           "description": "Whether IP forwarding enabled on this NIC."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the network interface when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machine scale set updatable network profile's IP configuration.Use this object for updating network profile's IP Configuration."
@@ -10976,6 +11353,9 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/PublicIPAddressSku"
         }
       },
       "required": [
@@ -11029,6 +11409,18 @@
             "name": "IPVersion",
             "modelAsString": true
           }
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the public IP when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
@@ -11043,6 +11435,18 @@
         "dnsSettings": {
           "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings",
           "description": "The dns settings to be applied on the publicIP addresses ."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the public IP when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
@@ -11059,6 +11463,17 @@
             "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
           },
           "description": "The list of network configurations."
+        },
+        "networkApiVersion": {
+          "type": "string",
+          "description": "specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'",
+          "enum": [
+            "2020-11-01"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkApiVersion",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machine scale set network profile."
@@ -11075,6 +11490,17 @@
             "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkConfiguration"
           },
           "description": "The list of network configurations."
+        },
+        "networkApiVersion": {
+          "type": "string",
+          "description": "specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'",
+          "enum": [
+            "2020-11-01"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkApiVersion",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machine scale set network profile."
@@ -12585,7 +13011,7 @@
       "properties": {
         "patchMode": {
           "type": "string",
-          "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> **AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ",
+          "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> **AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ",
           "enum": [
             "Manual",
             "AutomaticByOS",
@@ -12599,6 +13025,18 @@
         "enableHotpatching": {
           "type": "boolean",
           "description": "Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode' must be set to 'AutomaticByPlatform'."
+        },
+        "assessmentMode": {
+          "type": "string",
+          "description": "Specifies the mode of VM Guest patch assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine.<br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true. ",
+          "enum": [
+            "ImageDefault",
+            "AutomaticByPlatform"
+          ],
+          "x-ms-enum": {
+            "name": "WindowsPatchAssessmentMode",
+            "modelAsString": true
+          }
         }
       },
       "description": "Specifies settings related to VM Guest Patching on Windows."
@@ -12607,13 +13045,25 @@
       "properties": {
         "patchMode": {
           "type": "string",
-          "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - The virtual machine's default patching configuration is used. <br /><br /> **AutomaticByPlatform** - The virtual machine will be automatically updated by the platform. The property provisionVMAgent must be true",
+          "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - The virtual machine's default patching configuration is used. <br /><br /> **AutomaticByPlatform** - The virtual machine will be automatically updated by the platform. The property provisionVMAgent must be true",
           "enum": [
             "ImageDefault",
             "AutomaticByPlatform"
           ],
           "x-ms-enum": {
             "name": "LinuxVMGuestPatchMode",
+            "modelAsString": true
+          }
+        },
+        "assessmentMode": {
+          "type": "string",
+          "description": "Specifies the mode of VM Guest Patch Assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine. <br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.",
+          "enum": [
+            "ImageDefault",
+            "AutomaticByPlatform"
+          ],
+          "x-ms-enum": {
+            "name": "LinuxPatchAssessmentMode",
             "modelAsString": true
           }
         }
