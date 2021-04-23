@@ -75,7 +75,7 @@
         ],
         "summary": "Create or update an entity.",
         "description": "Create or update an entity in Atlas.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
-        "operationId": "Entity_CreateOrUpdate",
+        "operationId": "EntityREST_CreateOrUpdate",
         "x-ms-examples": {
           "EntityREST_Create": {
             "$ref": "./examples/EntityREST_Create.json"
@@ -152,9 +152,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasEntitiesWithExtInfo"
             }
-          },
-          "404": {
-            "description": "No entity is found."
           }
         }
       },
@@ -671,9 +668,6 @@
         "responses": {
           "204": {
             "description": "No Content."
-          },
-          "404": {
-            "description": "Not Found."
           }
         }
       }
@@ -939,12 +933,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossary"
             }
-          },
-          "400": {
-            "description": "If glossary definition has invalid or missing information."
-          },
-          "409": {
-            "description": "If glossary definition already exists (duplicate qualifiedName)."
           }
         }
       }
@@ -987,9 +975,6 @@
                 "$ref": "#/definitions/json_AtlasGlossaryCategory"
               }
             }
-          },
-          "400": {
-            "description": "If ANY glossary category definition has invalid or missing information."
           }
         }
       }
@@ -1024,12 +1009,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossaryCategory"
             }
-          },
-          "400": {
-            "description": "If glossary category definition has invalid or missing information."
-          },
-          "409": {
-            "description": "If glossary category already exists (duplicate qualifiedName)."
           }
         }
       }
@@ -1058,9 +1037,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossaryCategory"
             }
-          },
-          "404": {
-            "description": "If glossary category GUID is invalid."
           }
         }
       },
@@ -1096,12 +1072,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossaryCategory"
             }
-          },
-          "400": {
-            "description": "If glossary category definition has invalid or missing information."
-          },
-          "404": {
-            "description": "If glossary category GUID is invalid."
           }
         }
       },
@@ -1125,9 +1095,6 @@
         "responses": {
           "204": {
             "description": "OK. If glossary category delete was successful."
-          },
-          "404": {
-            "description": "If glossary category GUID is invalid."
           }
         }
       }
@@ -1169,12 +1136,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossaryCategory"
             }
-          },
-          "400": {
-            "description": "If category attributes are invalid."
-          },
-          "404": {
-            "description": "If glossary category GUID is invalid."
           }
         }
       }
@@ -1260,9 +1221,6 @@
                 "$ref": "#/definitions/json_AtlasRelatedTermHeader"
               }
             }
-          },
-          "404": {
-            "description": "If glossary category GUID is invalid."
           }
         }
       }
@@ -1300,12 +1258,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossaryTerm"
             }
-          },
-          "400": {
-            "description": "If glossary term definition has invalid or missing information."
-          },
-          "409": {
-            "description": "If glossary term already exists (duplicate qualifiedName)."
           }
         }
       }
@@ -1334,9 +1286,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossaryTerm"
             }
-          },
-          "404": {
-            "description": "If glossary term GUID is invalid."
           }
         }
       },
@@ -1372,12 +1321,15 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossaryTerm"
             }
+<<<<<<< HEAD
           },
           "400": {
             "description": "If glossary term definition has invalid or missing information."
           },
           "404": {
             "description": "If glossary term GUID is invalid."
+=======
+>>>>>>> parent of 3e934eb27 (remove REST suffix for operationID)
           }
         }
       },
@@ -1401,9 +1353,6 @@
         "responses": {
           "204": {
             "description": "OK. If glossary term delete was successful."
-          },
-          "404": {
-            "description": "If glossary term guid in invalid."
           }
         }
       }
@@ -1445,12 +1394,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossaryTerm"
             }
-          },
-          "400": {
-            "description": "If partial attributes are invalid."
-          },
-          "404": {
-            "description": "If glossary term guid in invalid."
           }
         }
       }
@@ -1493,9 +1436,6 @@
                 "$ref": "#/definitions/json_AtlasGlossaryTerm"
               }
             }
-          },
-          "400": {
-            "description": "If any glossary term definition has invalid or missing information."
           }
         }
       }
@@ -1537,9 +1477,6 @@
                 "$ref": "#/definitions/json_AtlasRelatedObjectId"
               }
             }
-          },
-          "404": {
-            "description": "If glossary term GUID is invalid."
           }
         }
       },
@@ -1576,12 +1513,6 @@
         "responses": {
           "204": {
             "description": "OK. If the term assignment was successful."
-          },
-          "400": {
-            "description": "If ANY of the related objects is invalid."
-          },
-          "404": {
-            "description": "If glossary term GUID is invalid."
           }
         }
       },
@@ -1618,12 +1549,6 @@
         "responses": {
           "204": {
             "description": "OK. If glossary term dissociation was successful."
-          },
-          "400": {
-            "description": "If ANY of the related objects is invalid."
-          },
-          "404": {
-            "description": "If glossary term GUID is invalid."
           }
         }
       },
@@ -1660,12 +1585,6 @@
         "responses": {
           "204": {
             "description": "OK. If glossary term dissociation was successful."
-          },
-          "400": {
-            "description": "If ANY of the related objects is invalid."
-          },
-          "404": {
-            "description": "If glossary term GUID is invalid."
           }
         }
       }
@@ -1710,9 +1629,6 @@
                 }
               }
             }
-          },
-          "404": {
-            "description": "If glossary term GUID is invalid."
           }
         }
       }
@@ -1741,9 +1657,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossary"
             }
-          },
-          "404": {
-            "description": "If glossary GUID is invalid."
           }
         }
       },
@@ -1779,12 +1692,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossary"
             }
-          },
-          "400": {
-            "description": "If glossary definition has invalid or missing information."
-          },
-          "404": {
-            "description": "If glossary GUID is invalid."
           }
         }
       },
@@ -1808,9 +1715,6 @@
         "responses": {
           "204": {
             "description": "OK. If glossary delete was successful."
-          },
-          "404": {
-            "description": "If glossary GUID in invalid."
           }
         }
       }
@@ -1852,9 +1756,6 @@
                 "$ref": "#/definitions/json_AtlasGlossaryCategory"
               }
             }
-          },
-          "404": {
-            "description": "If glossary guid is invalid."
           }
         }
       }
@@ -1896,9 +1797,6 @@
                 "$ref": "#/definitions/json_AtlasRelatedCategoryHeader"
               }
             }
-          },
-          "404": {
-            "description": "If glossary GUID is invalid."
           }
         }
       }
@@ -1927,9 +1825,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossaryExtInfo"
             }
-          },
-          "404": {
-            "description": "If glossary GUID is invalid."
           }
         }
       }
@@ -1971,12 +1866,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossary"
             }
-          },
-          "400": {
-            "description": "If partial update parameters are invalid."
-          },
-          "404": {
-            "description": "If glossary GUID is invalid."
           }
         }
       }
@@ -2018,9 +1907,6 @@
                 "$ref": "#/definitions/json_AtlasGlossaryTerm"
               }
             }
-          },
-          "404": {
-            "description": "If glossary GUID is invalid."
           }
         }
       }
@@ -2062,9 +1948,6 @@
                 "$ref": "#/definitions/json_AtlasRelatedTermHeader"
               }
             }
-          },
-          "404": {
-            "description": "If glossary GUID is invalid."
           }
         }
       }
@@ -2106,12 +1989,6 @@
             "schema": {
               "$ref": "#/definitions/json_ImportCSVOperation"
             }
-          },
-          "400": {
-            "description": "If csv file is not valid"
-          },
-          "404": {
-            "description": "If glossary GUID is invalid."
           }
         },
         "x-ms-long-running-operation": true,
@@ -2160,12 +2037,6 @@
             "schema": {
               "$ref": "#/definitions/json_ImportCSVOperation"
             }
-          },
-          "400": {
-            "description": "If csv file is not valid"
-          },
-          "404": {
-            "description": "If glossary GUID is invalid."
           }
         },
         "x-ms-long-running-operation": true,
@@ -2201,9 +2072,6 @@
             "schema": {
               "$ref": "#/definitions/json_ImportCSVOperation"
             }
-          },
-          "404": {
-            "description": "If operation GUID is invalid."
           }
         }
       }
@@ -2251,12 +2119,6 @@
             "schema": {
               "type": "file"
             }
-          },
-          "400": {
-            "description": "If term ids is not belong to the glossary guid"
-          },
-          "404": {
-            "description": "If glossary GUID is invalid."
           }
         }
       }
@@ -2374,9 +2236,6 @@
             "schema": {
               "$ref": "#/definitions/json_SearchResult"
             }
-          },
-          "400": {
-            "description": "Illegal argument exception thrown."
           }
         }
       }
@@ -2414,9 +2273,6 @@
             "schema": {
               "$ref": "#/definitions/json_SuggestResult"
             }
-          },
-          "400": {
-            "description": "Illegal argument exception thrown."
           }
         }
       }
@@ -2454,9 +2310,6 @@
             "schema": {
               "$ref": "#/definitions/json_AutocompleteResult"
             }
-          },
-          "400": {
-            "description": "Illegal argument: Keywords is required"
           }
         }
       }
@@ -2500,12 +2353,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasLineageInfo"
             }
-          },
-          "400": {
-            "description": "Bad query parameters."
-          },
-          "404": {
-            "description": "If no lineage is found for the given entity."
           }
         }
       }
@@ -2549,12 +2396,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasLineageInfo"
             }
-          },
-          "400": {
-            "description": "Bad query parameters."
-          },
-          "404": {
-            "description": "If no lineage is found for the given entity."
           }
         }
       }
@@ -2703,9 +2544,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasClassificationDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given GUID."
           }
         }
       }
@@ -2734,9 +2572,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasClassificationDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given name."
           }
         }
       }
@@ -2765,9 +2600,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasEntityDef"
             }
-          },
-          "404": {
-            "description": "On Failed lookup for the given GUID."
           }
         }
       }
@@ -2796,9 +2628,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasEntityDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given name."
           }
         }
       }
@@ -2827,9 +2656,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasEnumDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given GUID."
           }
         }
       }
@@ -2858,9 +2684,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasEnumDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given name."
           }
         }
       }
@@ -2889,9 +2712,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasRelationshipDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given GUID."
           }
         }
       }
@@ -2920,9 +2740,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasRelationshipDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given name."
           }
         }
       }
@@ -2951,9 +2768,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasStructDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given GUID."
           }
         }
       }
@@ -2982,9 +2796,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasStructDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given name."
           }
         }
       }
@@ -3013,9 +2824,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasTypeDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given GUID."
           }
         }
       }
@@ -3044,9 +2852,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasTypeDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given name."
           }
         }
       },
@@ -3070,9 +2875,6 @@
         "responses": {
           "204": {
             "description": "On successful deletion of the requested type definitions"
-          },
-          "400": {
-            "description": "On validation failure for any type definitions"
           }
         }
       }
@@ -3142,9 +2944,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasTypesDef"
             }
-          },
-          "400": {
-            "description": "On validation failure for any type definitions."
           }
         }
       },
@@ -3177,9 +2976,6 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasTypesDef"
             }
-          },
-          "400": {
-            "description": "On validation failure for any type definitions."
           }
         }
       },
@@ -3209,9 +3005,6 @@
         "responses": {
           "204": {
             "description": "OK. On successful deletion of the requested type definitions."
-          },
-          "400": {
-            "description": "On validation failure for any type definitions."
           }
         }
       }
@@ -3278,9 +3071,6 @@
             "schema": {
               "$ref": "#/definitions/json_TermTemplateDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given GUID."
           }
         }
       }
@@ -3312,9 +3102,6 @@
             "schema": {
               "$ref": "#/definitions/json_TermTemplateDef"
             }
-          },
-          "404": {
-            "description": "On failed lookup for the given name."
           }
         }
       }
