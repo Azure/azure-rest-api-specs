@@ -3124,7 +3124,7 @@
             "$ref": "./examples/CreateAVmWithNetworkInterfaceConfiguration.json"
           },
           "Create a VM with UserData": {
-            "$ref": "./examples/CreateOrUpdateAVmWithUserData.json",
+            "$ref": "./examples/CreateOrUpdateAVmWithUserData.json"
           }
         }
       },
@@ -10271,15 +10271,13 @@
           "format": "int32",
           "description": "Specifies the scale set logical fault domain into which the Virtual Machine will be created. By default, the Virtual Machine will by automatically assigned to a fault domain that best maintains balance across available fault domains.<br><li>This is applicable only if the 'virtualMachineScaleSet' property of this Virtual Machine is set.<li>The Virtual Machine Scale Set that is referenced, must have 'platformFaultDomainCount' &gt; 1.<li>This property cannot be updated once the Virtual Machine is created.<li>Fault domain assignment can be viewed in the Virtual Machine Instance View.<br><br>Minimum api‐version: 2020‐12‐01"
         },
-<<<<<<< HEAD
-        "userData": {
-          "type": "string",
-          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
-=======
         "scheduledEventsProfile": {
           "$ref": "#/definitions/ScheduledEventsProfile",
           "description": "Specifies Scheduled Event related configurations."
->>>>>>> compute-2021-03
+        },
+        "userData": {
+          "type": "string",
+          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
         }
       },
       "description": "Describes the properties of a Virtual Machine."
@@ -11684,7 +11682,7 @@
         },
         "userData": {
           "type": "string",
-          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
+          "description": "UserData for the virtual machines in the scale set, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
