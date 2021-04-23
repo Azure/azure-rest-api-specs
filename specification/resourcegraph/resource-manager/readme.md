@@ -46,7 +46,9 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
   - Microsoft.ResourceGraph/stable/2021-03-01/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
 ```
 
 ### Tag: package-preview-2020-09
