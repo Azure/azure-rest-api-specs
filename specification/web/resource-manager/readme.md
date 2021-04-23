@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2020-10
+tag: package-2020-12
 ```
 
 ### Suppression
@@ -1161,6 +1161,14 @@ directive:
   approved-by: "@ravbhatnagar"
 ```
 
+### Tag: package-2016-06-01
+
+These settings apply only when `--tag=package-2016-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-06-01'
+input-file:
+- Microsoft.Web/stable/2016-06-01/logicAppsManagementClient.json
+```
 
 ### Tag: package-2015-08-preview
 
@@ -1262,6 +1270,10 @@ swagger-to-sdk:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 
 ## Java
