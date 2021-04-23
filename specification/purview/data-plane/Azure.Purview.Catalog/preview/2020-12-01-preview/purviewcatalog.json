@@ -75,7 +75,7 @@
         ],
         "summary": "Create or update an entity.",
         "description": "Create or update an entity in Atlas.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
-        "operationId": "Entity_CreateOrUpdate",
+        "operationId": "EntityREST_CreateOrUpdate",
         "x-ms-examples": {
           "EntityREST_Create": {
             "$ref": "./examples/EntityREST_Create.json"
@@ -1321,6 +1321,15 @@
             "schema": {
               "$ref": "#/definitions/json_AtlasGlossaryTerm"
             }
+<<<<<<< HEAD
+          },
+          "400": {
+            "description": "If glossary term definition has invalid or missing information."
+          },
+          "404": {
+            "description": "If glossary term GUID is invalid."
+=======
+>>>>>>> parent of 3e934eb27 (remove REST suffix for operationID)
           }
         }
       },
