@@ -1846,14 +1846,16 @@
           "x-ms-client-name": "lastUpdatedOn"
         },
         "architecture": {
-          "type": "string",
+          "$ref": "#/definitions/ArtifactArchitecture",
           "description": "CPU architecture",
-          "x-ms-client-name": "architecture"
+          "x-ms-client-name": "architecture",
+          "x-nullable": true
         },
         "os": {
-          "type": "string",
+          "$ref": "#/definitions/ArtifactOperatingSystem",
           "description": "Operating system",
-          "x-ms-client-name": "operatingSystem"
+          "x-ms-client-name": "operatingSystem",
+          "x-nullable": true
         },
         "references": {
           "x-accessibility": "internal",
