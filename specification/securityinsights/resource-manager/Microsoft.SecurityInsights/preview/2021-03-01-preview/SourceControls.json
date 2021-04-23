@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/repositories": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/repositories/list": {
       "post": {
         "x-ms-examples": {
           "Get repository list.": {
@@ -45,7 +45,7 @@
           "Repositories"
         ],
         "description": "Gets a list of repositories metadata.",
-        "operationId": "Repositories_List",
+        "operationId": "repositories_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -305,24 +305,7 @@
       ]
     },
     "Repo": {
-      "allOf": [
-        {
-          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
-        }
-      ],
       "description": "Represents a repository.",
-      "properties": {
-        "properties": {
-          "description": "repository properties",
-          "$ref": "#/definitions/RepoProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-azure-resource": false,
-      "type": "object"
-    },
-    "RepoProperties": {
-      "description": "Repository properties",
       "properties": {
         "repoName": {
           "description": "The name of the repository.",
@@ -337,6 +320,7 @@
           "type": "array"
         }
       },
+      "x-ms-azure-resource": false,
       "type": "object"
     },
     "SourceControlList": {
