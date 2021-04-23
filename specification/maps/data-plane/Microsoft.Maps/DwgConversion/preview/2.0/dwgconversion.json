@@ -270,6 +270,11 @@
         "x-publish": true,
         "description": "**Conversion Get API**\n\n**Applies to:** S1 pricing tier.<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Conversion API is part of Creator.<br>\n\nThis API allows the caller to fetch a successful data conversion submitted previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/conversion/convertpreview).  ",
         "operationId": "Conversion_Get",
+        "x-ms-examples": {
+          "Get the details for one conversion operation": {
+            "$ref": "./examples/Get.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ClientId"
@@ -357,6 +362,14 @@
       "get": {
         "description": "This path will be obtained from a call to POST /conversions.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
         "operationId": "Conversion_GetOperation",
+        "x-ms-examples": {
+          "Get the status of an operation which is still running": {
+            "$ref": "./examples/GetOperationStillRunning.json"
+          },
+          "Get the status of an operation which has finished successfully, with non-fatal warnings": {
+            "$ref": "./examples/GetOperation.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionKey"

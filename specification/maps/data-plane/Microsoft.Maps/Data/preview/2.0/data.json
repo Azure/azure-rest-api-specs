@@ -488,6 +488,14 @@
       "get": {
         "description": "This path will be obtained from a call to POST /mapData.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once completed.",
         "operationId": "Data_GetOperation",
+        "x-ms-examples": {
+          "Get the status of an operation which is still running": {
+            "$ref": "./examples/GetOperationStillRunning.json"
+          },
+          "Get the status of an operation which has finished successfully": {
+            "$ref": "./examples/GetOperation.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionKey"

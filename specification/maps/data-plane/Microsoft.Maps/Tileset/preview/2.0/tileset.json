@@ -280,6 +280,11 @@
         "x-publish": true,
         "description": "**Tileset Get API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Tileset API is part of Creator.\nThis API allows the caller to fetch a tileset.",
         "operationId": "Tileset_Get",
+        "x-ms-examples": {
+          "Gets the details for a single tileset": {
+            "$ref": "./examples/Get.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ClientId"
@@ -367,6 +372,14 @@
       "get": {
         "description": "This path will be obtained from a call to /tilesets/create.  While in progress, an http200 will be returned with no extra headers -  followed by an http200 with Resource-Location header once successfully completed.",
         "operationId": "Tileset_GetOperation",
+        "x-ms-examples": {
+          "Get the status of an operation which is still running": {
+            "$ref": "./examples/GetOperationStillRunning.json"
+          },
+          "Get the status of an operation which has finished successfully": {
+            "$ref": "./examples/GetOperation.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionKey"
