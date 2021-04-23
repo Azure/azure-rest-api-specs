@@ -5229,6 +5229,62 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "OAuthProviders"
+        ],
+        "description": "Creates or updates an oauthProvider resource.",
+        "operationId": "OAuthProviders_CreateOrUpdate",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "oauthProviderId",
+            "description": "ID of oauthProvider resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "OauthProvider resource payload to create or update.",
+            "schema": {
+              "$ref": "#/definitions/OAuthProvider"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OAuthProvider"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OAuthProvider"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OAuthProviders_CreateOrUpdate": {
+            "$ref": "./examples/OAuthProviders_CreateOrUpdate.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "OAuthProviders"
