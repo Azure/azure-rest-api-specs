@@ -2258,6 +2258,330 @@
         }
       }
     },
+    "BlobTag": {
+      "xml": {
+        "name": "Tag"
+      },
+      "type": "object",
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      }
+    },
+    "BlobTags": {
+      "type": "object",
+      "xml": {
+        "name": "Tags"
+      },
+      "description": "Blob tags",
+      "required": [
+        "BlobTagSet"
+      ],
+      "properties": {
+        "BlobTagSet": {
+          "xml": {
+            "wrapped": true,
+            "name": "TagSet"
+          },
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobTag"
+          }
+        }
+      }
+    },
+    "ObjectReplicationMetadata": {
+      "type": "object",
+      "xml": {
+        "name": "OrMetadata"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "BlobMetadata": {
+      "type": "object",
+      "xml": {
+        "name": "Metadata"
+      },
+      "properties": {
+        "Encrypted": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "BlobItemInternal": {
+      "xml": {
+        "name": "Blob"
+      },
+      "description": "An Azure Storage blob",
+      "type": "object",
+      "required": [
+        "Name",
+        "Deleted",
+        "Snapshot",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Deleted": {
+          "type": "boolean"
+        },
+        "Snapshot": {
+          "type": "string"
+        },
+        "VersionId": {
+          "type": "string"
+        },
+        "IsCurrentVersion": {
+          "type": "boolean"
+        },
+        "Properties": {
+          "$ref": "#/definitions/BlobPropertiesInternal"
+        },
+        "Metadata": {
+          "$ref": "#/definitions/BlobMetadata"
+        },
+        "BlobTags": {
+          "$ref": "#/definitions/BlobTags"
+        },
+        "ObjectReplicationMetadata": {
+          "$ref": "#/definitions/ObjectReplicationMetadata"
+        }
+      }
+    },
+    "CopyId": {
+      "name": "copyid",
+      "x-ms-client-name": "copyId",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The copy identifier provided in the x-ms-copy-id header of the original Copy Blob operation."
+    },
+    "CopySource": {
+      "name": "x-ms-copy-source",
+      "x-ms-client-name": "copySource",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-parameter-location": "method",
+      "description": "Specifies the name of the source page blob snapshot. This value is a URL of up to 2 KB in length that specifies a page blob snapshot. The value should be URL-encoded as it would appear in a request URI. The source blob must either be public or must be authenticated via a shared access signature."
+    },
+    "ArchiveStatus": {
+      "type": "string",
+      "enum": [
+        "rehydrate-pending-to-hot",
+        "rehydrate-pending-to-cool"
+      ],
+      "x-ms-enum": {
+        "name": "ArchiveStatus",
+        "modelAsString": true
+      }
+    },
+    "RehydratePriority": {
+      "description": "If an object is in rehydrate pending state then this header is returned with priority of rehydrate. Valid values are High and Standard.",
+      "type": "string",
+      "enum": [
+        "High",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "RehydratePriority",
+        "modelAsString": true
+      },
+      "xml": {
+        "name": "RehydratePriority"
+      }
+    },
+    "BlobPropertiesInternal": {
+      "xml": {
+        "name": "Properties"
+      },
+      "description": "Properties of a blob",
+      "type": "object",
+      "required": [
+        "Etag",
+        "Last-Modified"
+      ],
+      "properties": {
+        "Creation-Time": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "Last-Modified": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "Etag": {
+          "type": "string",
+          "format": "etag"
+        },
+        "Content-Length": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size in bytes"
+        },
+        "Content-Type": {
+          "type": "string"
+        },
+        "Content-Encoding": {
+          "type": "string"
+        },
+        "Content-Language": {
+          "type": "string"
+        },
+        "Content-MD5": {
+          "type": "string",
+          "format": "byte"
+        },
+        "Content-Disposition": {
+          "type": "string"
+        },
+        "Cache-Control": {
+          "type": "string"
+        },
+        "x-ms-blob-sequence-number": {
+          "x-ms-client-name": "blobSequenceNumber",
+          "type": "integer",
+          "format": "int64"
+        },
+        "BlobType": {
+          "type": "string",
+          "enum": [
+            "BlockBlob",
+            "PageBlob",
+            "AppendBlob"
+          ],
+          "x-ms-enum": {
+            "name": "BlobType",
+            "modelAsString": false
+          }
+        },
+        "LeaseStatus": {
+          "$ref": "#/definitions/LeaseStatus"
+        },
+        "LeaseState": {
+          "$ref": "#/definitions/LeaseState"
+        },
+        "LeaseDuration": {
+          "$ref": "#/definitions/LeaseDuration"
+        },
+        "CopyId": {
+          "type": "string"
+        },
+        "CopyStatus": {
+          "$ref": "#/definitions/CopyStatus"
+        },
+        "CopySource": {
+          "type": "string"
+        },
+        "CopyProgress": {
+          "type": "string"
+        },
+        "CopyCompletionTime": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "CopyStatusDescription": {
+          "type": "string"
+        },
+        "ServerEncrypted": {
+          "type": "boolean"
+        },
+        "IncrementalCopy": {
+          "type": "boolean"
+        },
+        "DestinationSnapshot": {
+          "type": "string"
+        },
+        "DeletedTime": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "RemainingRetentionDays": {
+          "type": "integer"
+        },
+        "AccessTier": {
+          "$ref": "#/definitions/AccessTier"
+        },
+        "AccessTierInferred": {
+          "type": "boolean"
+        },
+        "ArchiveStatus": {
+          "$ref": "#/definitions/ArchiveStatus"
+        },
+        "CustomerProvidedKeySha256": {
+          "type": "string"
+        },
+        "EncryptionScope": {
+          "type": "string",
+          "description": "The name of the encryption scope under which the blob is encrypted."
+        },
+        "AccessTierChangeTime": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "TagCount": {
+          "type": "integer"
+        },
+        "Expiry-Time": {
+          "x-ms-client-name": "ExpiresOn",
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "Sealed": {
+          "x-ms-client-name": "IsSealed",
+          "type": "boolean"
+        },
+        "RehydratePriority": {
+          "$ref": "#/definitions/RehydratePriority"
+        },
+        "LastAccessTime": {
+          "x-ms-client-name": "LastAccessedOn",
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "ImmutabilityPolicyUntilDate": {
+          "x-ms-client-name": "ImmutabilityPolicyExpiresOn",
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "ImmutabilityPolicyMode": {
+          "type": "string",
+          "enum": [
+            "Unlocked",
+            "Locked",
+            "Mutable"
+          ],
+          "x-ms-enum": {
+             "name": "BlobImmutabilityPolicyMode",
+             "modelAsString": false
+          }
+        },
+        "LegalHold": {
+          "x-ms-client-name": "LegalHold",
+          "type": "boolean"
+        }
+      }
+    },
     "BlobFlatListSegment": {
       "xml": {
         "name": "Blobs"
