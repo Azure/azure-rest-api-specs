@@ -12,6 +12,29 @@ that describes the schemas for its events.
 This configuration enables packaging all of the above as one EventGrid data plane library.
 This enables customers to download one EventGrid data plane library instead of having to install separate packages to get the event schemas for each service.
 
+### Guidelines for defining a new event 
+
+In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your swagger:
+- The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
+- The description of the new event should include the event type. This is the `eventType` name in an `EventGridEvent` or `type` name in `CloudEvent`. For e.g. `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.` Here `Microsoft.Communication.ChatMessageReceived` is the event name.
+
+A sample valid event definition is shown below:
+```json
+"AcsChatMessageReceivedEventData": {
+  "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
+  "allOf": [
+    {
+      "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
+    }
+  ],
+  "properties": {
+    "messageBody": {
+      "description": "The body of the chat message",
+      "type": "string"
+    }
+  }
+}
+```
 
 ---
 ## Getting Started
