@@ -1,38 +1,37 @@
 {
   "parameters": {
-    "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
+    "timespan": "2021-04-21T02:08:45.416Z/2021-04-24T02:08:45.416Z",
     "metric": "BlobCapacity",
-    "$filter": "BlobType eq '*'",
-    "top": "3",
-    "orderby": "Average asc",
-    "aggregation": "Average,count",
-    "interval": "PT1M",
+    "metricNamespace": "microsoft.storage/storageaccounts/blobservices",
+    "$filter": "Tier eq '*'",
     "resulttype": "metadata",
-    "resourceUri": "subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default",
-    "api-version": "2017-09-01-preview"
+    "resourceUri": "subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default",
+    "api-version": "2017-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
+        "timespan": "2021-04-21T02:08:45Z/2021-04-24T02:08:45Z",
+        "interval": "PT1H",
         "value": [
           {
-            "id": "/subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default/providers/Microsoft.Insights/metrics/BlobCapacity",
+            "id": "/subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default/providers/Microsoft.Insights/metrics/BlobCapacity",
             "type": "Microsoft.Insights/metrics",
             "name": {
               "value": "BlobCapacity",
               "localizedValue": "Blob Capacity"
             },
+            "displayDescription": "The amount of storage used by the storage account’s Blob service in bytes.",
             "unit": "Bytes",
             "timeseries": [
               {
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "blobtype",
-                      "localizedValue": "blobtype"
+                      "value": "tier",
+                      "localizedValue": "tier"
                     },
-                    "value": "BlockBlob"
+                    "value": "Cool"
                   }
                 ]
               },
@@ -40,16 +39,55 @@
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "blobtype",
-                      "localizedValue": "blobtype"
+                      "value": "tier",
+                      "localizedValue": "tier"
                     },
-                    "value": "PageBlob"
+                    "value": "Archive"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Standard"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Untiered"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "tier",
+                      "localizedValue": "tier"
+                    },
+                    "value": "Hot"
                   }
                 ]
               }
             ]
           }
         ]
+      }
+    },
+    "default": {
+      "body": {
+        "code": "BadRequest",
+        "message": "Failed to find metric configuration for provider: Microsoft.Storage, resource Type: storageAccounts/blobServices, metric: BlobCsdapacity, Valid metrics: BlobCapacity,BlobCount,ContainerCount,IndexCapacity,Transactions,Ingress,Egress,SuccessServerLatency,SuccessE2ELatency,Availability"
       }
     }
   }
