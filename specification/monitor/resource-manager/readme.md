@@ -45,11 +45,8 @@ These settings apply only when `--tag=package-preview-2017-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2017-09'
 input-file:
-  - Microsoft.Insights/preview/2017-09-01-preview/diagnosticsSettingsCategories_API.json
-  - Microsoft.Insights/preview/2017-09-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-09-01-preview/metricDefinitions_API.json
   - Microsoft.Insights/preview/2017-09-01-preview/metrics_API.json
-  - Microsoft.Insights/preview/2017-09-01-preview/subscriptionDiagnosticsSettings_API.json
 ```
 ### Tag: package-2021-02-preview-only
 
