@@ -41,11 +41,11 @@ tag: package-policy-2020-09
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2021-01
+tag: package-resources-2021-04
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2021-01
+tag: package-subscriptions-2021-04
 ```
 
 ``` yaml $(package-links)
@@ -64,13 +64,13 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2021-03-preview
 ```
 
-### Tag: package-resources-2021-01
+### Tag: package-resources-2021-04
 
-These settings apply only when `--tag=package-resources-2021-01` is specified on the command line.
+These settings apply only when `--tag=package-resources-2021-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2021-01'
+``` yaml $(tag) == 'package-resources-2021-04'
 input-file:
-- Microsoft.Resources/stable/2021-01-01/resources.json
+- Microsoft.Resources/stable/2021-04-01/resources.json
 ```
 
 ### Tag: package-policy-2020-09
@@ -100,15 +100,15 @@ input-file:
 ```
 
 
+### Tag: package-subscriptions-2021-04
 
-### Tag: package-subscriptions-2021-01
+These settings apply only when `--tag=package-subscriptions-2021-04` is specified on the command line.
 
-These settings apply only when `--tag=package-subscriptions-2021-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-subscriptions-2021-01'
+``` yaml $(tag) == 'package-subscriptions-2021-04'
 input-file:
-- Microsoft.Resources/stable/2021-01-01/subscriptions.json
+- Microsoft.Resources/stable/2021-04-01/subscriptions.json
 ```
+
 
 ### Tag: package-deploymentscripts-2020-10
 
@@ -325,6 +325,15 @@ input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
 ```
 
+### Tag: package-resources-2021-01
+
+These settings apply only when `--tag=package-resources-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2021-01'
+input-file:
+- Microsoft.Resources/stable/2021-01-01/resources.json
+```
+
 ### Tag: package-resources-2020-10
 
 These settings apply only when `--tag=package-resources-2020-10` is specified on the command line.
@@ -467,6 +476,15 @@ These settings apply only when `--tag=package-resources-2015-11` is specified on
 ``` yaml $(tag) == 'package-resources-2015-11'
 input-file:
 - Microsoft.Resources/stable/2015-11-01/resources.json
+```
+
+### Tag: package-subscriptions-2021-01
+
+These settings apply only when `--tag=package-subscriptions-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2021-01'
+input-file:
+- Microsoft.Resources/stable/2021-01-01/subscriptions.json
 ```
 
 ### Tag: package-subscriptions-2020-01
