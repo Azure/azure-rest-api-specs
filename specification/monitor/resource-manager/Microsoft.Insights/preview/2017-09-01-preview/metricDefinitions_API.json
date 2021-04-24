@@ -214,6 +214,22 @@
         "modelAsString": false
       }
     },
+    "AggregationType": {
+      "type": "string",
+      "description": "the aggregation type of the metric.",
+      "enum": [
+        "None",
+        "Average",
+        "Count",
+        "Minimum",
+        "Maximum",
+        "Total"
+      ],
+      "x-ms-enum": {
+        "name": "AggregationType",
+        "modelAsString": false
+      }
+    },
     "MetricDefinition": {
       "properties": {
         "isDimensionRequired": {
@@ -228,25 +244,24 @@
           "$ref": "#/definitions/LocalizableString",
           "description": "the name and the display name of the metric, i.e. it is a localizable string."
         },
+        "displayDescription": {
+          "type": "string",
+          "description": "Detailed description of this metric."
+        },
         "unit": {
           "$ref": "#/definitions/Unit",
           "description": "the unit of the metric."
         },
         "primaryAggregationType": {
-          "type": "string",
-          "description": "the primary aggregation type value defining how to use the values for display.",
-          "enum": [
-            "None",
-            "Average",
-            "Count",
-            "Minimum",
-            "Maximum",
-            "Total"
-          ],
-          "x-ms-enum": {
-            "name": "AggregationType",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/AggregationType",
+          "description": "the primary aggregation type value defining how to use the values for display."
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AggregationType"
+          },
+          "description": "the collection of what aggregation types are supported."
         },
         "metricAvailabilities": {
           "type": "array",
