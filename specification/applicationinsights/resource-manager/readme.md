@@ -28,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2020-10-20
+tag: package-preview-2020-06
 ```
 
 ### Suppression
@@ -209,6 +209,14 @@ directive:
   - suppress: UNREFERENCED_JSON_FILE
     from: workbookOperations_API.json
     reason: 'Conflict with aiOperations_API.json and service is ready.'
+  - suppress: DefaultErrorResponseSchema
+    from: aiOperations_API
+    reason: 'consistent with existing default error response | owned by another team'
+  - suppress: OperationsApiResponseSchema
+    from: aiOperations_API
+    reason: 'consistent with existing response schema | owned by another team'
+  - suppress: RequiredReadOnlySystemData
+  
 ```
 
 ### Tag: package-preview-2021-03-only
@@ -226,6 +234,7 @@ These settings apply only when `--tag=package-2020-10-only` is specified on the 
 
 ```yaml $(tag) == 'package-2020-10-only'
 input-file:
+  - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
   - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
   - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
 ```
@@ -237,28 +246,6 @@ These settings apply only when `--tag=package-preview-2020-10-only` is specified
 ```yaml $(tag) == 'package-preview-2020-10-only'
 input-file:
   - Microsoft.Insights/preview/2020-10-05-preview/webTests_API.json
-```
-
-### Tag: package-2020-10-20
-
-These settings apply only when `--tag=package-2020-10-20` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-10-20'
-input-file:
-  - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
-  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
-  - Microsoft.Insights/stable/2015-05-01/components_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
-  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
-  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
-  - Microsoft.Insights/stable/2015-05-01/webTests_API.json
-  - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
-  - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
 ```
 
 ### Tag: package-preview-2020-06-only
