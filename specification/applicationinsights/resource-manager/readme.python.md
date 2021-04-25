@@ -35,7 +35,6 @@ batch:
   - tag: package-2020-02-02-preview
   - tag: package-2020-03-01-preview
   - tag: package-preview-2020-06-only
-  - tag: package-2020-10-only
 ```
 ``` yaml $(python) && $(multiapi) && $(track2)
 batch:
