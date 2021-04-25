@@ -70,7 +70,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09
+tag: package-2019-10
 ```
 
 ### Tag: package-2018-02
