@@ -168,17 +168,3 @@ python:
 namespace: azure.mgmt.applicationinsights.v2020_06_02_preview
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_06_02_preview
 ```
-
-### Tag: package-2020-10-only and python
-
-These settings apply only when `--tag=package-2020-10-only --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-10-only' && $(python) && !$(track2)
-python:
-  namespace: azure.mgmt.applicationinsights.v2020_10_20
-  output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_10_20
-```
-``` yaml $(tag) == 'package-2020-10-only' && $(python) && $(track2)
-namespace: azure.mgmt.applicationinsights.v2020_10_20
-output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_10_20
-```
