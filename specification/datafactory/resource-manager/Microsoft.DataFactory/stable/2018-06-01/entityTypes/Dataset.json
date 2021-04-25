@@ -695,7 +695,11 @@
         },
         "sheetName": {
           "type": "object",
-          "description": "The sheet of excel file. Type: string (or Expression with resultType string)."
+          "description": "The sheet name of excel file. Type: string (or Expression with resultType string)."
+        },
+        "sheetIndex": {
+          "type": "object",
+          "description": "The sheet index of excel file and default value is 0. Type: integer (or Expression with resultType integer)"
         },
         "range": {
           "type": "object",
@@ -715,8 +719,7 @@
         }
       },
       "required": [
-        "location",
-        "sheetName"
+        "location"
       ]
     },
     "ParquetDataset": {
