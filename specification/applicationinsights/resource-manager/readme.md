@@ -206,9 +206,6 @@ directive:
     where:
       - $.definitions.DiagnosticServicesTokenResponse.properties.token
     reason: 'Secrets are OK to return in a POST response.'
-  - suppress: UNREFERENCED_JSON_FILE
-    from: workbookOperations_API.json
-    reason: 'Conflict with aiOperations_API.json and service is ready.'
   - suppress: DefaultErrorResponseSchema
     from: aiOperations_API
     reason: 'consistent with existing default error response | owned by another team'
@@ -234,6 +231,7 @@ These settings apply only when `--tag=package-2020-10-only` is specified on the 
 
 ```yaml $(tag) == 'package-2020-10-only'
 input-file:
+  - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
   - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
   - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
 ```
