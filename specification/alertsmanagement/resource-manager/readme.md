@@ -46,12 +46,13 @@ tag: package-2019-06-preview
 
 
 
-### Tag: package-2021-04
+### Tag: package-2021-04-only
 
-These settings apply only when `--tag=package-2021-04` is specified on the command line.
+These settings apply only when `--tag=package-2021-04-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-04'
+```yaml $(tag) == 'package-2021-04-only'
 input-file:
+  - Microsoft.AlertsManagement/stable/2021-04-01/AlertsManagement.json
   - Microsoft.AlertsManagement/stable/2021-04-01/SmartDetectorAlertRulesApi.json
 ```
 ### Tag: package-preview-2021-01
