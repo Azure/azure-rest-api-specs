@@ -1,89 +1,92 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "Microsoft Marketplace Blueprint API",
-    "description": "Microsoft Marketplace Blueprint API",
-    "termsOfService": "None",
-    "version": "v1"
-  },
-  "paths": {
-    "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsnotification": {
-      "get": {
-        "tags": [
-          "Notification"
-        ],
-        "operationId": "Notification_GetWithAuthorization",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "subscription",
-            "in": "path",
-            "required": true,
-            "x-position": 1,
-            "nullable": true
-          },
-          {
-            "type": "string",
-            "name": "principalID",
-            "in": "query",
-            "x-position": 2,
-            "nullable": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/": {
-      "get": {
-        "tags": [
-          "Diagnostics"
-        ],
-        "operationId": "Diagnostics_GetDefault",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DiagnosticsInfoDto"
-                }
-              }
-            }
-          }
-        }
-      },
-      "options": {
-        "tags": [
-          "Diagnostics"
-        ],
-        "operationId": "Diagnostics_GetDefault2",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DiagnosticsInfoDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	"swagger": "2.0",
+	"info": {
+		"title": "Microsoft Marketplace Blueprint API",
+		"description": "Microsoft Marketplace Blueprint API",
+		"termsOfService": "None",
+		"version": "v1"
+	},
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+	"paths": {
+		"/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsnotification": {
+			"get": {
+				"tags": [
+					"Notification"
+				],
+				"operationId": "Notification_GetWithAuthorization",
+				"parameters": [{
+						"type": "string",
+						"name": "subscription",
+						"in": "path",
+						"required": true,
+						"x-position": 1,
+						"nullable": true
+					},
+					{
+						"type": "string",
+						"name": "principalID",
+						"in": "query",
+						"x-position": 2,
+						"nullable": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"204": {
+						"description": ""
+					}
+				}
+			}
+		},
+		"/": {
+			"get": {
+				"tags": [
+					"Diagnostics"
+				],
+				"operationId": "Diagnostics_GetDefault",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DiagnosticsInfoDto"
+								}
+							}
+						}
+					}
+				}
+			},
+			"options": {
+				"tags": [
+					"Diagnostics"
+				],
+				"operationId": "Diagnostics_GetDefault2",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DiagnosticsInfoDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
