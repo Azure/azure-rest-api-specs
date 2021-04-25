@@ -242,6 +242,7 @@ These settings apply only when `--tag=package-2020-10-20` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-10-20'
 input-file:
+  - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
   - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
   - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
@@ -255,7 +256,6 @@ input-file:
   - Microsoft.Insights/stable/2015-05-01/webTests_API.json
   - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
   - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
-  - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
 ```
 
 ### Tag: package-preview-2020-06-only
