@@ -1,0 +1,110 @@
+{
+  "swagger": "2.0.0",
+  "info": {
+    "title": "Microsoft Marketplace Blueprint API",
+    "description": "Microsoft Marketplace Blueprint API",
+    "termsOfService": "None",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:44337"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsnotification": {
+      "get": {
+        "tags": [
+          "Notification"
+        ],
+        "operationId": "Notification_GetWithAuthorization",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "nullable": true
+          },
+          {
+            "type": "string",
+            "name": "principalID",
+            "in": "query",
+            "x-position": 2,
+            "nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "operationId": "Diagnostics_GetDefault",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiagnosticsInfoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "operationId": "Diagnostics_GetDefault2",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiagnosticsInfoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DiagnosticsInfoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "MS-CV": {
+            "type": "string"
+          },
+          "buildNumber": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
