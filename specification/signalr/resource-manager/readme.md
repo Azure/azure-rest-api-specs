@@ -113,6 +113,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-node
@@ -126,6 +127,9 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js signalr/resource-manager
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
