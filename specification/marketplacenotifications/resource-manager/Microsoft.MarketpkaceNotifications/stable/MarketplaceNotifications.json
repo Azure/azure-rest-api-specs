@@ -1,92 +1,70 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"title": "Microsoft Marketplace Blueprint API",
-		"description": "Microsoft Marketplace Blueprint API",
-		"termsOfService": "None",
-		"version": "v1"
-	},
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-	"paths": {
-		"/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsnotification": {
-			"get": {
-				"tags": [
-					"Notification"
-				],
-				"operationId": "Notification_GetWithAuthorization",
-				"parameters": [{
-						"type": "string",
-						"name": "subscription",
-						"in": "path",
-						"required": true,
-						"x-position": 1,
-						"nullable": true
-					},
-					{
-						"type": "string",
-						"name": "principalID",
-						"in": "query",
-						"x-position": 2,
-						"nullable": true
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "string"
-								}
-							}
-						}
-					},
-					"204": {
-						"description": ""
-					}
-				}
-			}
-		},
-		"/": {
-			"get": {
-				"tags": [
-					"Diagnostics"
-				],
-				"operationId": "Diagnostics_GetDefault",
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/DiagnosticsInfoDto"
-								}
-							}
-						}
-					}
-				}
-			},
-			"options": {
-				"tags": [
-					"Diagnostics"
-				],
-				"operationId": "Diagnostics_GetDefault2",
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/DiagnosticsInfoDto"
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Marketplace Blueprint API",
+    "description": "Microsoft Marketplace Blueprint API",
+    "termsOfService": "None",
+    "version": "v1"
+  },
+  "paths": {
+    "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsnotification": {
+      "get": {
+        "tags": [
+          "Notification"
+        ],
+        "operationId": "Notification_GetWithAuthorization",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "x-position": 1
+          },
+          {
+            "type": "string",
+            "name": "principalID",
+            "in": "query",
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Notification"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Notification": {
+      "description": "Review notification",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "notification id",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "legacy offer id of the notification (publisher.offerid)",
+          "type": "string"
+        },
+        "date": {
+          "description": "date for creating the notification",
+          "type": "string"
+        },
+        "offerDisplayName": {
+          "description": "offer display name",
+          "type": "string"
+        },
+        "principalId": {
+          "description": "user's principal id",
+          "type": "string"
+        }
+      }
+    }
+  }
 }
