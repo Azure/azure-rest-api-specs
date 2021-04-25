@@ -6,11 +6,6 @@
     "termsOfService": "None",
     "version": "v1"
   },
-  "servers": [
-    {
-      "url": "https://localhost:44337"
-    }
-  ],
   "paths": {
     "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsnotification": {
       "get": {
@@ -35,9 +30,10 @@
             "nullable": true
           }
         ],
+        "description": "Get a list of all notifications for creating reviews for a certain user",
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -58,9 +54,10 @@
           "Diagnostics"
         ],
         "operationId": "Diagnostics_GetDefault",
+        "description": "Get details abput the current version that deployed to service",
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -78,7 +75,7 @@
         "operationId": "Diagnostics_GetDefault2",
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -86,22 +83,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "DiagnosticsInfoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "MS-CV": {
-            "type": "string"
-          },
-          "buildNumber": {
-            "type": "string"
           }
         }
       }
