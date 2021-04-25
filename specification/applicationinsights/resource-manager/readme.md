@@ -206,6 +206,9 @@ directive:
     where:
       - $.definitions.DiagnosticServicesTokenResponse.properties.token
     reason: 'Secrets are OK to return in a POST response.'
+  - suppress: UNREFERENCED_JSON_FILE
+    from: workbookOperations_API.json
+    reason: 'Conflict with aiOperations_API.json and service is ready.'
 ```
 
 ### Tag: package-preview-2021-03-only
