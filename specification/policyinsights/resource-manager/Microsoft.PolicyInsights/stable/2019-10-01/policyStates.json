@@ -88,7 +88,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "@odata.nextLink",
-          "operationName": "PolicyInsights_NextLink"
+          "operationName": "PolicyStates_NextLink"
         },
         "x-ms-examples": {
           "Query latest at management group scope": {
@@ -206,7 +206,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "@odata.nextLink",
-          "operationName": "PolicyInsights_NextLink"
+          "operationName": "PolicyStates_NextLink"
         },
         "x-ms-examples": {
           "Query latest at subscription scope": {
@@ -342,7 +342,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "@odata.nextLink",
-          "operationName": "PolicyInsights_NextLink"
+          "operationName": "PolicyStates_NextLink"
         },
         "x-ms-examples": {
           "Query latest at resource group scope": {
@@ -463,7 +463,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "@odata.nextLink",
-          "operationName": "PolicyInsights_NextLink"
+          "operationName": "PolicyStates_NextLink"
         },
         "x-ms-examples": {
           "Query all policy states at resource scope": {
@@ -679,7 +679,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "@odata.nextLink",
-          "operationName": "PolicyInsights_NextLink"
+          "operationName": "PolicyStates_NextLink"
         },
         "x-ms-examples": {
           "Query latest at subscription level policy set definition scope": {
@@ -806,7 +806,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "@odata.nextLink",
-          "operationName": "PolicyInsights_NextLink"
+          "operationName": "PolicyStates_NextLink"
         },
         "x-ms-examples": {
           "Query latest at subscription level policy definition scope": {
@@ -933,7 +933,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "@odata.nextLink",
-          "operationName": "PolicyInsights_NextLink"
+          "operationName": "PolicyStates_NextLink"
         },
         "x-ms-examples": {
           "Query latest at subscription level policy assignment scope": {
@@ -1063,7 +1063,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "@odata.nextLink",
-          "operationName": "PolicyInsights_NextLink"
+          "operationName": "PolicyStates_NextLink"
         },
         "x-ms-examples": {
           "Query latest at resource group level policy assignment scope": {
@@ -1161,22 +1161,19 @@
           }
         }
       }
-    },
-    "/{nextLink}": {
+    }
+  },
+  "x-ms-paths": {
+    "/{nextLink}?Next link op for policy states": {
       "post": {
-        "operationId": "PolicyInsights_NextLink",
+        "operationId": "PolicyStates_NextLink",
         "description": "Subsequent post calls to the next link",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$skiptoken",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "skipToken returned as a part of next link for paging",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/skipTokenParameter"
           },
           {
             "name": "nextLink",
