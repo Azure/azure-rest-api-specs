@@ -24,13 +24,13 @@
         "operationId": "Notification_GetWithAuthorization",
         "parameters": [
           {
-            "$ref": "#/definitions/Subscription"
+            "$ref": "#/parameters/Subscription"
           },
           {
-            "$ref": "#/definitions/PrincipalId"
+            "$ref": "#/parameters/PrincipalId"
           },
           {
-            "$ref": "#/definitions/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -56,10 +56,10 @@
         "operationId": "Diagnostics_GetOperations",
         "parameters":[
           {
-            "$ref": "#/definitions/Subscription"
+            "$ref": "#/parameters/Subscription"
           },
           {
-            "$ref": "#/definitions/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -76,6 +76,27 @@
           }
         }
       }
+    }
+  },
+  "parameters":{
+    "Subscription":{
+      "type": "string",
+      "name": "subscription",
+      "in": "path",
+      "description": "user's subscription id"
+    },
+    "PrincipalId":{
+      "description": "user's principal id",
+      "type": "string",
+      "name": "principalID",
+      "in": "query"
+    },
+    "ApiVersion":{
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request."
     }
   },
   "definitions": {
@@ -118,25 +139,6 @@
           "type": "string"
         }
       }
-    },
-    "Subscription":{
-      "type": "string",
-      "name": "subscription",
-      "in": "path",
-      "description": "user's subscription id"
-    },
-    "PrincipalId":{
-      "description": "user's principal id",
-      "type": "string",
-      "name": "principalID",
-      "in": "query"
-    },
-    "ApiVersion":{
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the request."
     }
   }
 }
