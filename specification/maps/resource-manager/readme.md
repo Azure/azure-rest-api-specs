@@ -25,8 +25,19 @@ To see additional help and options, run:
 These are the global settings for the Maps API.
 
 ``` yaml
+title: AzureMapsManagementClient
+description: Azure Maps
 openapi-type: arm
-tag: package-preview-2020-02
+tag: package-2021-02
+```
+
+### Tag: package-2021-02
+
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02'
+input-file:
+  - Microsoft.Maps/stable/2021-02-01/maps-management.json
 ```
 
 ### Tag: package-preview-2020-02
@@ -225,9 +236,26 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}"].put'
     from: maps-management.json
     reason: False positive. Structure is the same with addition of provisioningStatus property.
+  - suppress: DeleteOperationResponses
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}"].delete.responses'
+    from: maps-management.json
+    reason: Per ARM Specs addendum, async APIs must return 202 when a response is accepted.
+  - suppress: RequiredReadOnlySystemData
+    where: 
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}"].put'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}"].patch'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}"].get'
+    from: maps-management.json
+    reason: Per ARM Specs, only top level tracked resources return systemMetadata.
+  - suppress: EnumInsteadOfBoolean
+    where: 
+      - $.definitions.MapsAccountProperties.properties.disableLocalAuth
+      - $.definitions.OperationDetail.properties.isDataAction
+      - $.definitions.MetricSpecification.properties.fillGapWithZero
+    from: maps-management.json
+    reason: standard property being applied to all azure resources.
 ```
 
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
