@@ -487,7 +487,7 @@
     }
   },
   "definitions": {
-    "Country": {
+    "CountryRecord": {
       "type": "object",
       "description": "A country record.",
       "properties": {
@@ -694,11 +694,11 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Country"
+            "$ref": "#/definitions/CountryRecord"
           }
         },
         "Names": {
-          "$ref": "#/definitions/Names"
+          "$ref": "#/definitions/TimezoneNames"
         },
         "ReferenceTime": {
           "$ref": "#/definitions/ReferenceTimeById"
@@ -738,11 +738,11 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Country"
+            "$ref": "#/definitions/CountryRecord"
           }
         },
         "Names": {
-          "$ref": "#/definitions/Names"
+          "$ref": "#/definitions/TimezoneNames"
         },
         "ReferenceTime": {
           "$ref": "#/definitions/ReferenceTimeByCoordinates"
@@ -760,7 +760,7 @@
         }
       }
     },
-    "Names": {
+    "TimezoneNames": {
       "type": "object",
       "description": "Timezone names object.",
       "properties": {

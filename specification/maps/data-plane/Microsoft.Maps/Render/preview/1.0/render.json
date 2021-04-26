@@ -182,6 +182,20 @@
         "yes",
         "no"
       ],
+      "x-ms-enum":{
+        "name": "IncludeText",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "yes",
+            "description": "Include all textual data in response."
+          },
+          {
+            "value": "no",
+            "description": "Exclude textual data from response. Only images and country names will be in response."
+          }
+        ]
+      },
       "default": "yes",
       "x-ms-parameter-location": "method"
     }
@@ -937,12 +951,12 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Region"
+            "$ref": "#/definitions/RegionCopyrights"
           }
         }
       }
     },
-    "Region": {
+    "RegionCopyrights": {
       "type": "object",
       "properties": {
         "copyrights": {
@@ -1012,7 +1026,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Region"
+            "$ref": "#/definitions/RegionCopyrights"
           }
         }
       }
@@ -1040,7 +1054,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Region"
+            "$ref": "#/definitions/RegionCopyrights"
           }
         }
       }

@@ -1275,13 +1275,13 @@
         "agencies": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Agency"
+            "$ref": "#/definitions/AgencyDetails"
           }
         },
         "alerts": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Alert"
+            "$ref": "#/definitions/AlertInformation"
           }
         }
       }
@@ -1303,16 +1303,16 @@
       "type": "object",
       "properties": {
         "stop": {
-          "$ref": "#/definitions/Stop"
+          "$ref": "#/definitions/LegStop"
         },
         "lines": {
-          "$ref": "#/definitions/Lines"
+          "$ref": "#/definitions/ItineraryLines"
         },
         "lineGroups": {
-          "$ref": "#/definitions/LineGroups"
+          "$ref": "#/definitions/ItineraryLineGroups"
         },
         "alerts": {
-          "$ref": "#/definitions/Alerts"
+          "$ref": "#/definitions/ItineraryStopAlerts"
         }
       }
     },
@@ -1355,24 +1355,24 @@
       "properties": {
         "lineGroup": {
           "description": "Groups together all lines that are logically part of the same group. Typically contains 2 lines having the same agency and line, one going from A to B, and the other from B to A.",
-          "$ref": "#/definitions/LineGroup"
+          "$ref": "#/definitions/ItineraryLineGroup"
         },
         "lines": {
           "description": "The line group’s basic info and list of the lines.",
-          "$ref": "#/definitions/Lines"
+          "$ref": "#/definitions/ItineraryLines"
         },
         "stops": {
           "description": "List of stops the line group goes through.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Stop"
+            "$ref": "#/definitions/LegStop"
           }
         },
         "patterns": {
           "description": "List of patterns this group is comprised of. A pattern consists of a stop sequence and shape per a line in GeoJSON format.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Pattern"
+            "$ref": "#/definitions/ItineraryPattern"
           }
         },
         "schedule": {
@@ -1420,10 +1420,10 @@
       "type": "object",
       "properties": {
         "topLeftPoint": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Coordinate"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
         },
         "btmRightPoint": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Coordinate"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
         }
       }
     },
@@ -1444,14 +1444,14 @@
         },
         "position": {
           "description": "The transit object's position.",
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Coordinate"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
         },
         "viewport": {
           "$ref": "#/definitions/ResultViewport"
         }
       }
     },
-    "Stop": {
+    "LegStop": {
       "description": "The stop's basic info",
       "type": "object",
       "properties": {
@@ -1473,7 +1473,7 @@
         },
         "position": {
           "description": "The Stop's location, latitude and longitude.",
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Coordinate"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
         },
         "mainTransitType": {
           "description": "The transit type of most lines stopping at this stop. One of Tram, Subway, Rail, Bus, Ferry, CableCar, Gondola, Funicular",
@@ -1489,14 +1489,14 @@
         }
       }
     },
-    "Lines": {
+    "ItineraryLines": {
       "description": "A list of stop lines",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/Line"
+        "$ref": "#/definitions/ItineraryLine"
       }
     },
-    "Line": {
+    "ItineraryLine": {
       "description": "A stop line",
       "type": "object",
       "properties": {
@@ -1542,14 +1542,14 @@
         }
       }
     },
-    "LineGroups": {
+    "ItineraryLineGroups": {
       "description": "A list of line groups",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/LineGroup"
+        "$ref": "#/definitions/ItineraryLineGroup"
       }
     },
-    "LineGroup": {
+    "ItineraryLineGroup": {
       "description": "A line group",
       "type": "object",
       "properties": {
@@ -1587,14 +1587,14 @@
         }
       }
     },
-    "Alerts": {
+    "ItineraryStopAlerts": {
       "description": "A list of stop alerts",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/Alert"
+        "$ref": "#/definitions/AlertInformation"
       }
     },
-    "Alert": {
+    "AlertInformation": {
       "description": "Basic information associated with the active alert. Returned if specified in the request and there is an active alert in the metro area.",
       "type": "object",
       "properties": {
@@ -1733,10 +1733,10 @@
       "description": "An array summarizing the legs of this itinerary.",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/Leg"
+        "$ref": "#/definitions/ItineraryLeg"
       }
     },
-    "Leg": {
+    "ItineraryLeg": {
       "type": "object",
       "properties": {
         "legType": {
@@ -1755,7 +1755,7 @@
           "description": "In case of walk or bike leg, the directions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Step"
+            "$ref": "#/definitions/ItineraryStep"
           }
         },
         "origin": {
@@ -1771,19 +1771,19 @@
         },
         "lineGroup": {
           "description": "In case of a public transit leg, the line group serving this leg.",
-          "$ref": "#/definitions/LineGroup"
+          "$ref": "#/definitions/ItineraryLineGroup"
         },
         "line": {
           "description": "In case of a public transit leg, the line serving this leg.",
-          "$ref": "#/definitions/Line"
+          "$ref": "#/definitions/ItineraryLine"
         },
         "stops": {
           "description": "List of stops comprising the line’s route within the leg (e.g. the stops the leg passes through).",
-          "$ref": "#/definitions/Stops"
+          "$ref": "#/definitions/LegStops"
         },
         "departures": {
           "description": "Relevant for Public Transit and Wait legs only",
-          "$ref": "#/definitions/Departures"
+          "$ref": "#/definitions/LegDepartures"
         },
         "legFare": {
           "description": "Leg level public transit fare information. Returned only if fare information is available for the entire itinerary.",
@@ -1877,19 +1877,19 @@
       "properties": {
         "price": {
           "description": "The total price for all tickets a user is expected to purchase in order to complete this itinerary.",
-          "$ref": "#/definitions/Price"
+          "$ref": "#/definitions/FarePrice"
         },
         "tickets": {
           "description": "An array describing the individual prices of each of the tickets that the user is expected to purchase throughout this itinerary. The list isn’t ordered.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Tickets"
+            "$ref": "#/definitions/FareTicket"
           }
         }
       }
     },
-    "Tickets": {
-      "description": "An array describing the individual prices of each of the tickets that the user is expected to purchase throughout this itinerary. The list isn’t ordered.",
+    "FareTicket": {
+      "description": "The price of a ticket that the user is expected to purchase throughout this itinerary.",
       "type": "object",
       "properties": {
         "amount": {
@@ -1910,18 +1910,18 @@
         "fares": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Fares"
+            "$ref": "#/definitions/FareDetail"
           }
         }
       }
     },
-    "Fares": {
+    "FareDetail": {
       "description": "Detailed fare information for the leg.",
       "type": "object",
       "properties": {
         "price": {
           "description": "The price of the ticket when purchased for the individual leg, not for the entire route at once.",
-          "$ref": "#/definitions/Price"
+          "$ref": "#/definitions/FarePrice"
         },
         "usage": {
           "description": "Supported values are:\n\n  * pay – user is expected to pay for this ticket in order to consume the current leg\n  * transfer – user can use a ticket purchased in a previous leg in order to consume the current leg. In general, when transfer is specified, the number of transfers is counted, and has a limit.\n  * continue – user can use a ticket purchased in a previous leg in order to consume the current leg. In general, when continue is specified, the number of transfers isn’t incremented for this leg.\n  * upgrade – user is expected to upgrade a ticket purchased in a previous leg in order to consume the current leg.",
@@ -1929,7 +1929,7 @@
         }
       }
     },
-    "Price": {
+    "FarePrice": {
       "type": "object",
       "properties": {
         "amount": {
@@ -1947,22 +1947,22 @@
       "type": "object",
       "properties": {
         "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Coordinate"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
         }
       }
     },
-    "Stops": {
+    "LegStops": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/Stop"
+        "$ref": "#/definitions/LegStop"
       }
     },
-    "Step": {
+    "ItineraryStep": {
       "type": "object",
       "properties": {
         "direction": {
           "description": "The walking direction associated with this step.",
-          "$ref": "#/definitions/Direction"
+          "$ref": "#/definitions/WalkingDirection"
         },
         "streetName": {
           "description": "The name of the street in which this step takes place.",
@@ -1970,7 +1970,7 @@
         }
       }
     },
-    "Direction": {
+    "WalkingDirection": {
       "description": "The walking directions guidance.",
       "type": "object",
       "properties": {
@@ -2105,7 +2105,7 @@
         }
       }
     },
-    "Departures": {
+    "LegDepartures": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/LineArrival"
@@ -2133,7 +2133,7 @@
         }
       }
     },
-    "Pattern": {
+    "ItineraryPattern": {
       "type": "object",
       "description": "Stop-shape-segments of the trip pattern, which are an ordered list of the stops and the shapes connecting them.",
       "properties": {
@@ -2171,7 +2171,7 @@
         }
       }
     },
-    "Agency": {
+    "AgencyDetails": {
       "type": "object",
       "description": "Details of the agency. Returned if specified in the request.",
       "properties": {
@@ -2280,11 +2280,11 @@
         },
         "line": {
           "description": "The public transit type of the line.",
-          "$ref": "#/definitions/Line"
+          "$ref": "#/definitions/ItineraryLine"
         },
         "stop": {
           "description": "Object for the given stop.",
-          "$ref": "#/definitions/Stop"
+          "$ref": "#/definitions/LegStop"
         }
       }
     },

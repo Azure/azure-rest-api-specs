@@ -566,7 +566,21 @@
             "enum": [
               "EPSG900913",
               "EPSG4326"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "ProjectionStandard",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "EPSG900913",
+                  "description": "[EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html)"
+                },
+                {
+                  "value": "EPSG4326",
+                  "description": "[EPSG4326](http://spatialreference.org/ref/epsg/4326/)"
+                }
+              ]
+            }
           },
           {
             "name": "geometries",
@@ -786,7 +800,7 @@
                   "type": "array",
                   "readOnly": true,
                   "items": {
-                    "$ref": "../../../Common/preview/1.0/common.json#/definitions/Coordinate"
+                    "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
                   }
                 }
               }

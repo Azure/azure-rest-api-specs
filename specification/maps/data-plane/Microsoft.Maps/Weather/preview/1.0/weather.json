@@ -49,7 +49,7 @@
       "required": false,
       "x-ms-parameter-location": "method"
     },
-    "WeatherUnit": {
+    "WeatherDataUnit": {
       "name": "unit",
       "description": "Specifies to return the data in either metric units or imperial units. Default value is metric.",
       "default": "metric",
@@ -61,7 +61,7 @@
         "imperial"
       ],
       "x-ms-enum": {
-        "name": "Unit",
+        "name": "WeatherDataUnit",
         "modelAsString": true,
         "values": [
           {
@@ -108,7 +108,7 @@
             "required": true
           },
           {
-            "$ref": "#/parameters/WeatherUnit"
+            "$ref": "#/parameters/WeatherDataUnit"
           },
           {
             "name": "duration",
@@ -241,7 +241,7 @@
             "required": true
           },
           {
-            "$ref": "#/parameters/WeatherUnit"
+            "$ref": "#/parameters/WeatherDataUnit"
           },
           {
             "name": "duration",
@@ -309,7 +309,7 @@
             "required": true
           },
           {
-            "$ref": "#/parameters/WeatherUnit"
+            "$ref": "#/parameters/WeatherDataUnit"
           },
           {
             "name": "details",
@@ -384,7 +384,7 @@
             "required": true
           },
           {
-            "$ref": "#/parameters/WeatherUnit"
+            "$ref": "#/parameters/WeatherDataUnit"
           },
           {
             "name": "duration",
@@ -643,7 +643,7 @@
         }
       }
     },
-    "Wind": {
+    "WindDetails": {
       "type": "object",
       "description": "Wind details being returned including speed and direction.",
       "properties": {
@@ -757,11 +757,11 @@
           "description": "The dewpoint temperature in specified unit. The dewpoint temperature is the temperature that the air must be cooled to in order to reach saturation."
         },
         "wind": {
-          "$ref": "#/definitions/Wind",
+          "$ref": "#/definitions/WindDetails",
           "description": "Wind details being returned including speed and direction."
         },
         "windGust": {
-          "$ref": "#/definitions/Wind",
+          "$ref": "#/definitions/WindDetails",
           "description": "Wind gust. Wind gust is a sudden, brief increase in speed of the wind."
         },
         "relativeHumidity": {
@@ -903,7 +903,7 @@
         }
       }
     },
-    "Interval": {
+    "ForecastInterval": {
       "type": "object",
       "properties": {
         "startTime": {
@@ -929,11 +929,11 @@
           "description": "Key that specifies the threshold value. Along with precipitationType, can be used to determine the simplifiedColor. If dbz is zero, not present in the response."
         },
         "color": {
-          "$ref": "#/definitions/Color",
+          "$ref": "#/definitions/ColorValue",
           "description": "The full spectrum color that maps to the dBZ (decibel relative to Z). If dbz is zero, color is not present in the response."
         },
         "simplifiedColor": {
-          "$ref": "#/definitions/Color",
+          "$ref": "#/definitions/ColorValue",
           "description": "The band color that maps to the precipitation type and threshold. If dbz is zero, not present in the response."
         },
         "precipitationType": {
@@ -969,12 +969,12 @@
           "type": "array",
           "description": "Forecast data for each interval in the forecast.",
           "items": {
-            "$ref": "#/definitions/Interval"
+            "$ref": "#/definitions/ForecastInterval"
           }
         }
       }
     },
-    "Color": {
+    "ColorValue": {
       "type": "object",
       "properties": {
         "red": {
@@ -1020,7 +1020,7 @@
             3
           ],
           "x-ms-enum": {
-            "name": "Quarter",
+            "name": "DayQuarter",
             "modelAsString": true,
             "values": [
               {
@@ -1073,11 +1073,11 @@
           "description": "Relative humidity is the amount of water vapor present in air expressed as a percentage of the amount needed for saturation at the same temperature."
         },
         "wind": {
-          "$ref": "#/definitions/Wind",
+          "$ref": "#/definitions/WindDetails",
           "description": "Wind details being returned including speed and direction."
         },
         "windGust": {
-          "$ref": "#/definitions/Wind",
+          "$ref": "#/definitions/WindDetails",
           "description": "Wind gust. Wind gust is a sudden, brief increase in speed of the wind."
         },
         "visibility": {
@@ -1291,11 +1291,11 @@
           "description": "The dewpoint temperature in specified unit. The dewpoint temperature is the temperature that the air must be cooled to in order to reach saturation."
         },
         "wind": {
-          "$ref": "#/definitions/Wind",
+          "$ref": "#/definitions/WindDetails",
           "description": "Wind details being returned including speed and direction."
         },
         "windGust": {
-          "$ref": "#/definitions/Wind",
+          "$ref": "#/definitions/WindDetails",
           "description": "Wind gust. Wind gust is a sudden, brief increase in speed of the wind."
         },
         "uvIndex": {
@@ -1569,11 +1569,11 @@
           "description": "Percent representing the probability of ice. For example, '30'."
         },
         "wind": {
-          "$ref": "#/definitions/Wind",
+          "$ref": "#/definitions/WindDetails",
           "description": "Wind details being returned including speed and direction."
         },
         "windGust": {
-          "$ref": "#/definitions/Wind",
+          "$ref": "#/definitions/WindDetails",
           "description": "Wind gust. Wind gust is a sudden, brief increase in speed of the wind."
         },
         "totalLiquid": {
@@ -1628,7 +1628,7 @@
           "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
         },
         "hazards": {
-          "$ref": "#/definitions/Hazards"
+          "$ref": "#/definitions/WeatherHazards"
         }
       }
     },
@@ -1643,7 +1643,7 @@
           "type": "array",
           "description": "Data for each waypoint returned in the same order as specified in the request.",
           "items": {
-            "$ref": "#/definitions/Waypoint"
+            "$ref": "#/definitions/WeatherWaypoint"
           }
         }
       }
@@ -1678,7 +1678,7 @@
         }
       }
     },
-    "Waypoint": {
+    "WeatherWaypoint": {
       "type": "object",
       "properties": {
         "iconCode": {
@@ -1703,10 +1703,10 @@
           "$ref": "#/definitions/WeatherUnit"
         },
         "wind": {
-          "$ref": "#/definitions/Wind"
+          "$ref": "#/definitions/WindDetails"
         },
         "windGust": {
-          "$ref": "#/definitions/Wind"
+          "$ref": "#/definitions/WindDetails"
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherAlongRoutePrecipitation"
@@ -1721,17 +1721,17 @@
           "description": "A rating that indicates how blinding the sun is for the driver."
         },
         "hazards": {
-          "$ref": "#/definitions/Hazards"
+          "$ref": "#/definitions/WeatherHazards"
         },
         "notifications": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Notification"
+            "$ref": "#/definitions/WeatherNotification"
           }
         }
       }
     },
-    "Hazards": {
+    "WeatherHazards": {
       "type": "object",
       "properties": {
         "maxHazardIndex": {
@@ -1762,7 +1762,7 @@
         }
       }
     },
-    "Notification": {
+    "WeatherNotification": {
       "type": "object",
       "properties": {
         "type": {
@@ -1809,7 +1809,7 @@
           "description": "A unique numerical identifier for a weather alert."
         },
         "description": {
-          "$ref": "#/definitions/Description",
+          "$ref": "#/definitions/SevereWeatherAlertDescription",
           "description": "Description of the alert."
         },
         "category": {
@@ -1851,7 +1851,7 @@
         }
       }
     },
-    "Description": {
+    "SevereWeatherAlertDescription": {
       "type": "object",
       "description": "Description of a severe weather alert.",
       "properties": {

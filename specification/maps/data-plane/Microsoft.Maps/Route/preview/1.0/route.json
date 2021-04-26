@@ -182,7 +182,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "Windingness": {
+    "WindingnessLevel": {
       "name": "windingness",
       "in": "query",
       "description": "Level of turns for thrilling route. This parameter can only be used in conjunction with `routeType`=thrilling.",
@@ -195,7 +195,7 @@
         "high"
       ],
       "x-ms-enum": {
-        "name": "Windingness",
+        "name": "WindingnessLevel",
         "modelAsString": true,
         "values": [
           {
@@ -214,7 +214,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "Hilliness": {
+    "HillinessDegree": {
       "name": "hilliness",
       "in": "query",
       "description": "Degree of hilliness for thrilling route. This parameter can only be used in conjunction with `routeType`=thrilling.",
@@ -227,7 +227,7 @@
         "high"
       ],
       "x-ms-enum": {
-        "name": "Hilliness",
+        "name": "HillinessDegree",
         "modelAsString": true,
         "values": [
           {
@@ -870,10 +870,10 @@
             "$ref": "#/parameters/VehicleWeightMatrix"
           },
           {
-            "$ref": "#/parameters/Windingness"
+            "$ref": "#/parameters/WindingnessLevel"
           },
           {
-            "$ref": "#/parameters/Hilliness"
+            "$ref": "#/parameters/HillinessDegree"
           },
           {
             "$ref": "#/parameters/TravelMode"
@@ -1046,10 +1046,10 @@
             "$ref": "#/parameters/VehicleCommercial"
           },
           {
-            "$ref": "#/parameters/Windingness"
+            "$ref": "#/parameters/WindingnessLevel"
           },
           {
-            "$ref": "#/parameters/Hilliness"
+            "$ref": "#/parameters/HillinessDegree"
           },
           {
             "$ref": "#/parameters/TravelMode"
@@ -1244,10 +1244,10 @@
             "$ref": "#/parameters/VehicleCommercial"
           },
           {
-            "$ref": "#/parameters/Windingness"
+            "$ref": "#/parameters/WindingnessLevel"
           },
           {
-            "$ref": "#/parameters/Hilliness"
+            "$ref": "#/parameters/HillinessDegree"
           },
           {
             "$ref": "#/parameters/TravelMode"
@@ -1416,10 +1416,10 @@
             "$ref": "#/parameters/TravelMode"
           },
           {
-            "$ref": "#/parameters/Hilliness"
+            "$ref": "#/parameters/HillinessDegree"
           },
           {
-            "$ref": "#/parameters/Windingness"
+            "$ref": "#/parameters/WindingnessLevel"
           },
           {
             "$ref": "#/parameters/VehicleAxleWeight"
@@ -1750,7 +1750,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "../../../Common/preview/1.0/common.json#/definitions/Coordinate"
+            "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
           }
         }
       }
@@ -1944,7 +1944,7 @@
           "readOnly": true
         },
         "point": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Coordinate"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
         },
         "pointIndex": {
           "description": "The index of the point in the list of polyline \"points\" corresponding to the point of the instruction.",
@@ -2355,14 +2355,14 @@
       "properties": {
         "center": {
           "description": "Center point of the reachable range",
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Coordinate"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
         },
         "boundary": {
           "description": "Polygon boundary of the reachable range represented as a list of points.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "../../../Common/preview/1.0/common.json#/definitions/Coordinate"
+            "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
           }
         }
       }

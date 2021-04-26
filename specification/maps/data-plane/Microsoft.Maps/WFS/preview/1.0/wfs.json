@@ -156,7 +156,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/Root"
+              "$ref": "#/definitions/LandingPage"
             }
           },
           "400": {
@@ -254,7 +254,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/Content"
+              "$ref": "#/definitions/CollectionsResponse"
             }
           },
           "400": {
@@ -471,7 +471,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Feature"
+              "$ref": "#/definitions/FeatureResponse"
             }
           },
           "400": {
@@ -541,7 +541,7 @@
     }
   },
   "definitions": {
-    "Root": {
+    "LandingPage": {
       "type": "object",
       "required": [
         "links"
@@ -550,7 +550,7 @@
         "links": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Link"
+            "$ref": "#/definitions/WfsEndpointLink"
           }
         }
       }
@@ -575,7 +575,7 @@
         }
       }
     },
-    "Link": {
+    "WfsEndpointLink": {
       "description": "Links to other WFS endpoints",
       "type": "object",
       "required": [
@@ -602,7 +602,7 @@
         }
       }
     },
-    "Content": {
+    "CollectionsResponse": {
       "type": "object",
       "required": [
         "links",
@@ -612,7 +612,7 @@
         "links": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Link"
+            "$ref": "#/definitions/WfsEndpointLink"
           },
           "example": [
             {
@@ -664,7 +664,7 @@
         "links": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Link"
+            "$ref": "#/definitions/WfsEndpointLink"
           },
           "example": [
             {
@@ -714,7 +714,7 @@
         "links": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Link"
+            "$ref": "#/definitions/WfsEndpointLink"
           },
           "example": [
             {
@@ -796,7 +796,7 @@
         "links": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Link"
+            "$ref": "#/definitions/WfsEndpointLink"
           }
         }
       }
@@ -846,12 +846,12 @@
         "links": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Link"
+            "$ref": "#/definitions/WfsEndpointLink"
           }
         }
       }
     },
-    "Feature": {
+    "FeatureResponse": {
       "type": "object",
       "required": [
         "feature"
@@ -863,7 +863,7 @@
         "links": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Link"
+            "$ref": "#/definitions/WfsEndpointLink"
           }
         }
       }
