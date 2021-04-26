@@ -53,11 +53,16 @@ These settings apply only when `--tag=package-2021-03-preview-only` is specified
 input-file:
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
 directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
     where: $.definitions.Settings
-    reason: The Setting does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace. 
+    reason: The Setting does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
+    where: $.definitions.Watchlist
+    reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
 ```
 
 ---
@@ -82,7 +87,7 @@ directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
     where: $.definitions.AutomationRule
-    reason: The AutomationRule does not support list by subscription. It's not a top-level resource. To get the AutomationRule, we should have a subscription as well as a resource group and Log Analytics workspace. 
+    reason: The AutomationRule does not support list by subscription. It's not a top-level resource. To get the AutomationRule, we should have a subscription as well as a resource group and Log Analytics workspace.
 ```
 
 ---
