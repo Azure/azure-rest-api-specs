@@ -24,3 +24,9 @@ python-sdk-output-folder: "$(az-output-folder)/azext_loganalytics/vendored_sdks/
 # add additinal configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
+cli:
+  cli-directive:
+    ## rename a parameter 
+    - where:
+        param: query
+      name: input_query
