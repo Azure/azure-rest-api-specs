@@ -3120,6 +3120,12 @@
           "Create a VM with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/CreateAVmWithUefiSettings.json"
           },
+          "Create a vm from a generalized shared image.": {
+            "$ref": "./examples/CreateAVmFromAGeneralizedSharedImage.json"
+          },
+          "Create a vm from a specialized shared image.": {
+            "$ref": "./examples/CreateAVmFromASpecializedSharedImage.json"
+          },
           "Create a VM with network interface configuration": {
             "$ref": "./examples/CreateAVmWithNetworkInterfaceConfiguration.json"
           },
@@ -3532,6 +3538,487 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}": {
+      "put": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_CreateOrUpdate",
+        "description": "The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified.",
+        "x-ms-examples": {
+          "Create or update a restore point collection.": {
+            "$ref": "./examples/CreateOrUpdateARestorePointCollection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            },
+            "description": "Parameters supplied to the Create or Update restore point collection operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_Update",
+        "description": "The operation to update the restore point collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollectionUpdate"
+            },
+            "description": "Parameters supplied to the Update restore point collection operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_Delete",
+        "description": "The operation to delete the restore point collection. This operation will also delete all the contained restore points.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Restore Point Collection."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_Get",
+        "description": "The operation to get the restore point collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation. If expand=restorePoints, server will return all contained restore points in the restorePointCollection.",
+            "enum": [
+              "restorePoints"
+            ],
+            "x-ms-enum": {
+              "name": "RestorePointCollectionExpandOptions",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a restore point collection (but not the restore points contained in the restore point collection)": {
+            "$ref": "./examples/GetRestorePointCollection.json"
+          },
+          "Get a restore point collection, including the restore points contained in the restore point collection": {
+            "$ref": "./examples/GetRestorePointCollectionWithContainedRestorePoints.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections": {
+      "get": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_List",
+        "description": "Gets the list of restore point collections in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Gets the list of restore point collections in a resource group.": {
+            "$ref": "./examples/GetRestorePointCollectionsInAResourceGroup.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/restorePointCollections": {
+      "get": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_ListAll",
+        "description": "Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of restore point collections in a subscription": {
+            "$ref": "./examples/GetRestorePointCollectionsInASubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}": {
+      "put": {
+        "operationId": "RestorePoints_Create",
+        "description": "The operation to create the restore point. Updating properties of an existing restore point is not allowed",
+        "x-ms-examples": {
+          "Create a restore point": {
+            "$ref": "./examples/CreateARestorePoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            },
+            "description": "Parameters supplied to the Create restore point operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RestorePoints_Delete",
+        "description": "The operation to delete the restore point.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Restore Point Collection."
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "operationId": "RestorePoints_Get",
+        "description": "The operation to get the restore point.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a restore point": {
+            "$ref": "./examples/GetRestorePoint.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
         }
       }
     },
@@ -4238,6 +4725,12 @@
           },
           "Create a scale set with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/CreateAScaleSetWithUefiSettings.json"
+          },
+          "Create a scale set from a generalized shared image.": {
+            "$ref": "./examples/CreateAScaleSetFromAGeneralizedSharedImage.json"
+          },
+          "Create a scale set from a specialized shared image.": {
+            "$ref": "./examples/CreateAScaleSetFromASpecializedSharedImage.json"
           },
           "Create a scale set with userData.": {
             "$ref": "./examples/CreateOrUpdateAScaleSetWithUserData.json"
@@ -6932,6 +7425,282 @@
     }
   },
   "definitions": {
+    "RestorePointCollectionSourceProperties": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Location of the source resource used to create this restore point collection."
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id of the source resource used to create this restore point collection"
+        }
+      },
+      "description": "The properties of the source resource that this restore point collection is created from."
+    },
+    "RestorePointCollectionProperties": {
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/RestorePointCollectionSourceProperties"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the restore point collection."
+        },
+        "restorePointCollectionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unique id of the restore point collection."
+        },
+        "restorePoints": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RestorePoint"
+          },
+          "description": "A list containing all restore points created under this restore point collection."
+        }
+      },
+      "description": "The restore point collection properties."
+    },
+    "RestorePointCollection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestorePointCollectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Create or update Restore Point collection parameters."
+    },
+    "RestorePointCollectionUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestorePointCollectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Update Restore Point collection parameters."
+    },
+    "RestorePointCollectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorePointCollection"
+          },
+          "description": "Gets the list of restore point collections."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of RestorePointCollections. Call ListNext() with this to fetch the next page of RestorePointCollections"
+        }
+      },
+      "description": "The List restore point collection operation response."
+    },
+    "RestorePointSourceMetadata": {
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Gets the hardware profile."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/RestorePointSourceVMStorageProfile",
+          "description": "Gets the storage profile."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile",
+          "description": "Gets the OS profile."
+        },
+        "diagnosticsProfile": {
+          "$ref": "#/definitions/DiagnosticsProfile",
+          "description": "Gets the diagnostics profile."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Gets the license type, which is for bring your own license scenario."
+        },
+        "vmId": {
+          "type": "string",
+          "description": "Gets the virtual machine unique id."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Gets the security profile."
+        }
+      },
+      "description": "Describes the properties of the Virtual Machine for which the restore point was created. The properties provided are a subset and the snapshot of the overall Virtual Machine properties captured at the time of the restore point creation."
+    },
+    "RestorePointSourceVMStorageProfile": {
+      "properties": {
+        "osDisk": {
+          "$ref": "#/definitions/RestorePointSourceVMOSDisk",
+          "description": "Gets the OS disk of the VM captured at the time of the restore point creation."
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorePointSourceVMDataDisk"
+          },
+          "description": "Gets the data disks of the VM captured at the time of the restore point creation."
+        }
+      },
+      "description": "Describes the storage profile."
+    },
+    "RestorePointSourceVMOSDisk": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "Gets the Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemType",
+            "modelAsString": true
+          }
+        },
+        "encryptionSettings": {
+          "$ref": "#/definitions/DiskEncryptionSettings",
+          "description": "Gets the disk encryption settings."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets the disk name."
+        },
+        "caching": {
+          "$ref": "#/definitions/Caching",
+          "description": "Gets the caching type."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the disk size in GB."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDiskParameters",
+          "description": "Gets the managed disk details"
+        },
+        "diskRestorePoint": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Gets the disk restore point Id."
+        }
+      },
+      "description": "Describes an Operating System disk."
+    },
+    "RestorePointSourceVMDataDisk": {
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the logical unit number."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets the disk name."
+        },
+        "caching": {
+          "$ref": "#/definitions/Caching",
+          "description": "Gets the caching type."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDiskParameters",
+          "description": "Gets the managed disk details"
+        },
+        "diskRestorePoint": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Gets the disk restore point Id."
+        }
+      },
+      "description": "Describes a data disk."
+    },
+    "RestorePointProvisioningDetails": {
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the creation time of the restore point."
+        },
+        "totalUsedSizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the total size of the data in all the disks which are part of the restore point."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the status of the Create restore point operation."
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Gets the status message of the Create restore point operation."
+        }
+      },
+      "description": "Restore Point Provisioning details."
+    },
+    "RestorePoint": {
+      "properties": {
+        "sourceMetadata": {
+          "readOnly": true,
+          "$ref": "#/definitions/RestorePointSourceMetadata",
+          "description": "Gets the details of the VM captured at the time of the restore point creation."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the provisioning state of the restore point."
+        },
+        "consistencyMode": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "CrashConsistent",
+            "FileSystemConsistent",
+            "ApplicationConsistent"
+          ],
+          "x-ms-enum": {
+            "name": "ConsistencyModeTypes",
+            "modelAsString": true
+          },
+          "description": "Gets the consistency mode for the restore point. Please refer to https://aka.ms/RestorePoints for more details."
+        },
+        "provisioningDetails": {
+          "$ref": "#/definitions/RestorePointProvisioningDetails",
+          "readOnly": true,
+          "description": "Gets the provisioning details set by the server during Create restore point operation."
+        },
+        "excludeDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiEntityReference"
+          },
+          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Restore Point details."
+    },
     "ComputeOperationListResult": {
       "properties": {
         "value": {
@@ -7638,7 +8407,7 @@
         "numberOfCores": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of cores supported by the virtual machine size."
+          "description": "The number of cores supported by the virtual machine size. For Constrained vCPU capable VM sizes, this number represents the total vCPUs of quota that the VM uses. For accurate vCPU count, please refer to https://docs.microsoft.com/en-us/azure/virtual-machines/constrained-vcpu or https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list"
         },
         "osDiskSizeInMB": {
           "type": "integer",
@@ -9417,7 +10186,7 @@
           "description": "[Preview Feature] Specifies settings related to VM Guest Patching on Linux."
         }
       },
-      "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+      "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros)."
     },
     "VaultCertificate": {
       "properties": {
@@ -9452,7 +10221,7 @@
       "properties": {
         "computerName": {
           "type": "string",
-          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
+          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/azure-resource-manager/management/resource-name-rules)."
         },
         "adminUsername": {
           "type": "string",
@@ -9464,7 +10233,7 @@
         },
         "customData": {
           "type": "string",
-          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> **Note: Do not pass any secrets or passwords in customData property** <br><br> This property cannot be updated after the VM is created. <br><br> customData is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/en-us/blog/custom-data-and-cloud-init-on-windows-azure/) <br><br> For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> **Note: Do not pass any secrets or passwords in customData property** <br><br> This property cannot be updated after the VM is created. <br><br> customData is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/en-us/blog/custom-data-and-cloud-init-on-windows-azure/) <br><br> For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)"
         },
         "windowsConfiguration": {
           "$ref": "#/definitions/WindowsConfiguration",
@@ -9472,7 +10241,7 @@
         },
         "linuxConfiguration": {
           "$ref": "#/definitions/LinuxConfiguration",
-          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros)."
         },
         "secrets": {
           "type": "array",
@@ -10766,7 +11535,7 @@
         },
         "customData": {
           "type": "string",
-          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)"
         },
         "windowsConfiguration": {
           "$ref": "#/definitions/WindowsConfiguration",
@@ -10774,7 +11543,7 @@
         },
         "linuxConfiguration": {
           "$ref": "#/definitions/LinuxConfiguration",
-          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros)."
         },
         "secrets": {
           "type": "array",
@@ -12760,6 +13529,27 @@
         }
       },
       "description": "Api error."
+    },
+    "ProxyResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "description": "The resource model definition for an Azure Resource Manager proxy resource. It will not have tags and a location",
+      "x-ms-azure-resource": true
     },
     "Resource": {
       "description": "The Resource model definition.",
