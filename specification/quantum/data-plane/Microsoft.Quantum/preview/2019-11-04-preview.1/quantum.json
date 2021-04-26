@@ -172,6 +172,55 @@
             }
           }
         }
+      },
+      "patch": {
+        "operationId": "Jobs_Patch",
+        "description": "Patch a job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobIdParameter"
+          },
+          {
+            "name": "patchJob",
+            "description": "The json patch document containing the patch operations.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchRequest"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Patch an existing job to a Quantum Workspace": {
+            "$ref": "./examples/jobPatch.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          },
+          "204": {
+            "description": "No Content - the patch body was empty or had no operations."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/restError"
+            }
+          }
+        }
       }
     },
     "/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/providerStatus": {
@@ -416,6 +465,13 @@
           "$ref": "#/definitions/ErrorData",
           "readOnly": true,
           "description": "The error data for the job. This is expected only when Status 'Failed'."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of user-supplied tags associated with the job."
         }
       },
       "required": [
@@ -623,6 +679,45 @@
         }
       },
       "description": "An error response from Azure."
+    },
+    "PatchRequest": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PatchDocument"
+      }
+    },
+    "PatchDocument": {
+      "description": "A JSONPatch document as defined by RFC 6902",
+      "required": [
+        "op",
+        "path"
+      ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "description": "The operation to be performed.",
+          "enum": [
+            "add",
+            "remove",
+            "replace",
+            "move",
+            "copy",
+            "test"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "description": "A JSON-Pointer."
+        },
+        "value": {
+          "type": "object",
+          "description": "A value to be used in the operation on the path."
+        },
+        "from": {
+          "type": "string",
+          "description": "Optional field used in copy and move operations."
+        }
+      }
     }
   },
   "parameters": {
