@@ -732,4 +732,5 @@ input-file:
   - ./Microsoft.Sql/stable/2014-04-01/sql.core.json
   - ./Microsoft.Sql/stable/2014-04-01/tableAuditing.json
   - ./Microsoft.Sql/stable/2014-04-01/usages.json
+
 ```
