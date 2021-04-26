@@ -15,26 +15,13 @@
         "operationId": "Notification_GetWithAuthorization",
         "parameters": [
           {
-            "description": "user's subscription id",
-            "type": "string",
-            "name": "subscription",
-            "in": "path",
-            "required": true,
-            "x-position": 1
+            "$ref": "#/parameters/Subscription"
           },
           {
-            "description": "user's principal id",
-            "type": "string",
-            "name": "principalID",
-            "in": "query",
-            "x-position": 2
+            "$ref": "#/parameters/PrincipalId"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the request."
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -60,19 +47,12 @@
         "operationId": "Diagnostics_GetOperations",
         "parameters":[
           {
-          "type": "string",
-          "name": "subscription",
-          "in": "path",
-          "x-position": 1,
-          "description": "user's subscription id"
+            "$ref": "#/parameters/Subscription"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the request."
-          }],
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -129,6 +109,29 @@
           "type": "string"
         }
       }
+    }
+  },
+  "parameters":{
+    "Subscription":{
+      "type": "string",
+      "name": "subscription",
+      "in": "path",
+      "x-position": 1,
+      "description": "user's subscription id"
+    },
+    "PrincipalId":{
+      "description": "user's principal id",
+      "type": "string",
+      "name": "principalID",
+      "in": "query",
+      "x-position": 2
+    },
+    "ApiVersion":{
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request."
     }
   }
 }
