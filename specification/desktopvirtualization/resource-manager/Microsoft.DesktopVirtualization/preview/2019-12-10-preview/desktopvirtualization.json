@@ -320,58 +320,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/userApplicationGroupAssignments": {
-      "get": {
-        "tags": [
-          "ApplicationGroup"
-        ],
-        "operationId": "ApplicationGroupAssignments_WorkspaceLevelList",
-        "description": "List application group that user can use.",
-        "x-ms-examples": {
-          "ApplicationGroupAssignment_WorkspaceLevelList": {
-            "$ref": "./examples/ApplicationGroupAssignment_WorkspaceLevelList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are applicationGroupType."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved user application group assignments in workspace.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationGroupList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups/{applicationGroupName}": {
       "get": {
         "tags": [
@@ -1598,61 +1546,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/activeApplications": {
-      "get": {
-        "tags": [
-          "Application"
-        ],
-        "operationId": "ActiveApplications_ListBySessionHost",
-        "description": "List applications for the given session host.",
-        "x-ms-examples": {
-          "ActiveApplications_List": {
-            "$ref": "./examples/ActiveApplication_ListBySessionHost.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionHostNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are userprincipalname and sessionstate."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved active applications in session host.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions/{userSessionId}": {
       "get": {
         "tags": [
@@ -2198,8 +2091,8 @@
       "type": "object",
       "required": [
         "hostPoolType",
-        "personalDesktopAssignmentType",
-        "loadBalancerType"
+        "loadBalancerType",
+        "preferredAppGroupType"
       ],
       "properties": {
         "friendlyName": {
@@ -2285,6 +2178,20 @@
         "ssoContext": {
           "type": "string",
           "description": "Path to keyvault containing ssoContext secret."
+        },
+        "preferredAppGroupType": {
+          "enum": [
+            "None",
+            "Desktop",
+            "RailApplications"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredAppGroupType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of preferred application group type, default to Desktop Application Group",
+          "x-nullable": false
         }
       }
     },
@@ -2368,9 +2275,26 @@
           "$ref": "#/definitions/RegistrationInfoPatch",
           "description": "The registration info of HostPool."
         },
+        "vmTemplate": {
+          "type": "string",
+          "description": "VM template for sessionhosts configuration within hostpool."
+        },
         "ssoContext": {
           "type": "string",
           "description": "Path to keyvault containing ssoContext secret."
+        },
+        "preferredAppGroupType": {
+          "enum": [
+            "None",
+            "Desktop",
+            "RailApplications"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredAppGroupType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of preferred application group type, default to Desktop Application Group"
         }
       }
     },
@@ -2819,6 +2743,16 @@
         "allowNewSession": {
           "type": "boolean",
           "description": "Allow a new session."
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "description": "Virtual Machine Id of SessionHost's underlying virtual machine.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id of SessionHost's underlying virtual machine.",
+          "readOnly": true
         },
         "assignedUser": {
           "type": "string",

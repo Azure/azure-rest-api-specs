@@ -43,7 +43,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -95,7 +95,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -105,57 +105,6 @@
         "x-ms-examples": {
           "JobsList": {
             "$ref": "./examples/JobsList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listCredentials": {
-      "post": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "This method gets the unencrypted secrets related to the job.",
-        "operationId": "Jobs_ListCredentials",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/jobNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of unencrypted credentials of the job.",
-            "schema": {
-              "$ref": "#/definitions/UnencryptedCredentialsList"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "JobsListCredentials": {
-            "$ref": "./examples/JobsListCredentials.json"
           }
         }
       }
@@ -206,7 +155,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -214,119 +163,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-           "AvailableSkusPost": {
+          "AvailableSkusPost": {
             "$ref": "./examples/AvailableSkusPost.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
-      "post": {
-        "tags": [
-          "Service"
-        ],
-        "description": "This API provides configuration details specific to given region/location at Subscription level.",
-        "operationId": "Service_RegionConfiguration",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "regionConfigurationRequest",
-            "in": "body",
-            "description": "Request body to get the configuration for the region.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegionConfigurationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Region configuration response.",
-            "schema": {
-              "$ref": "#/definitions/RegionConfigurationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "RegionConfiguration": {
-            "$ref": "./examples/RegionConfiguration.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
-      "post": {
-        "tags": [
-          "Service"
-        ],
-        "description": "This API provides configuration details specific to given region/location at Resource group level.",
-        "operationId": "Service_RegionConfigurationByResourceGroup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "regionConfigurationRequest",
-            "in": "body",
-            "description": "Request body to get the configuration for the region at resource group level.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegionConfigurationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Region configuration response.",
-            "schema": {
-              "$ref": "#/definitions/RegionConfigurationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "RegionConfigurationByResourceGroup": {
-            "$ref": "./examples/RegionConfigurationByResourceGroup.json"
           }
         }
       }
@@ -374,7 +212,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -382,6 +220,63 @@
         "x-ms-examples": {
           "ValidateAddressPost": {
             "$ref": "./examples/ValidateAddressPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/validateInputs": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "This method does all necessary pre-job creation validation under resource group.",
+        "operationId": "Service_ValidateInputsByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "validationRequest",
+            "in": "body",
+            "description": "Inputs of the customer.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The validation status and responses of each validating parameter.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateInputsByResourceGroup": {
+            "$ref": "./examples/ValidateInputsByResourceGroup.json"
           }
         }
       }
@@ -429,7 +324,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -481,7 +376,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -539,13 +434,19 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
         "x-ms-examples": {
           "JobsGet": {
             "$ref": "./examples/JobsGet.json"
+          },
+          "JobsGetCmk": {
+            "$ref": "./examples/JobsGetCmk.json"
+          },
+          "JobsGetExport": {
+            "$ref": "./examples/JobsGetExport.json"
           }
         }
       },
@@ -597,7 +498,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -605,6 +506,12 @@
         "x-ms-examples": {
           "JobsCreate": {
             "$ref": "./examples/JobsCreate.json"
+          },
+          "JobsCreateDevicePassword": {
+            "$ref": "./examples/JobsCreateDevicePassword.json"
+          },
+          "JobsCreateExport": {
+            "$ref": "./examples/JobsCreateExport.json"
           }
         }
       },
@@ -635,6 +542,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Just for swagger we are adding this status code."
+          },
           "202": {
             "description": "Accepted request for delete Job."
           },
@@ -644,7 +554,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -709,7 +619,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -717,6 +627,9 @@
         "x-ms-examples": {
           "JobsPatch": {
             "$ref": "./examples/JobsPatch.json"
+          },
+          "JobsPatchCmk": {
+            "$ref": "./examples/JobsPatchCmk.json"
           }
         }
       }
@@ -767,7 +680,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -821,7 +734,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -832,13 +745,118 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/validateInputs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listCredentials": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "This method gets the unencrypted secrets related to the job.",
+        "operationId": "Jobs_ListCredentials",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of unencrypted credentials of the job.",
+            "schema": {
+              "$ref": "#/definitions/UnencryptedCredentialsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "JobsListCredentials": {
+            "$ref": "./examples/JobsListCredentials.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
       "post": {
         "tags": [
           "Service"
         ],
-        "description": "This method does all necessary pre-job creation validation under resource group.",
-        "operationId": "Service_ValidateInputsByResourceGroup",
+        "description": "This API provides configuration details specific to given region/location at Subscription level.",
+        "operationId": "Service_RegionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "regionConfigurationRequest",
+            "in": "body",
+            "description": "Request body to get the configuration for the region.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Region configuration response.",
+            "schema": {
+              "$ref": "#/definitions/RegionConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionConfiguration": {
+            "$ref": "./examples/RegionConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "This API provides configuration details specific to given region/location at Resource group level.",
+        "operationId": "Service_RegionConfigurationByResourceGroup",
         "consumes": [
           "application/json"
         ],
@@ -859,32 +877,32 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "validationRequest",
+            "name": "regionConfigurationRequest",
             "in": "body",
-            "description": "Inputs of the customer.",
+            "description": "Request body to get the configuration for the region at resource group level.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ValidationRequest"
+              "$ref": "#/definitions/RegionConfigurationRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The validation status and responses of each validating parameter.",
+            "description": "Region configuration response.",
             "schema": {
-              "$ref": "#/definitions/ValidationResponse"
+              "$ref": "#/definitions/RegionConfigurationResponse"
             }
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
         "x-ms-examples": {
-          "ValidateInputsByResourceGroup": {
-            "$ref": "./examples/ValidateInputsByResourceGroup.json"
+          "RegionConfigurationByResourceGroup": {
+            "$ref": "./examples/RegionConfigurationByResourceGroup.json"
           }
         }
       }
@@ -1014,6 +1032,17 @@
         }
       },
       "x-ms-discriminator-value": "ValidateAddress"
+    },
+    "ApiError": {
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
     },
     "ApplianceNetworkConfiguration": {
       "description": "The Network Adapter configuration of a DataBox.",
@@ -1579,8 +1608,12 @@
           }
         },
         "sharePassword": {
-          "description": "Password for all the shares to be created on the device. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have atleast one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
-          "type": "string"
+          "description": "Password for all the shares to be created on the device. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ]
         }
       },
       "discriminator": "dataAccountType"
@@ -1869,8 +1902,9 @@
           "readOnly": true
         },
         "devicePassword": {
-          "description": "Set Device password for unlocking Databox Heavy. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have atleast one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
-          "type": "string"
+          "description": "Set Device password for unlocking Databox Heavy. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "x-ms-discriminator-value": "DataBoxHeavy"
@@ -1954,8 +1988,9 @@
           "readOnly": true
         },
         "devicePassword": {
-          "description": "Set Device password for unlocking Databox. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have atleast one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
-          "type": "string"
+          "description": "Set Device password for unlocking Databox. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "x-ms-discriminator-value": "DataBox"
@@ -2063,7 +2098,8 @@
                 "description": "Verbose logging (includes Errors, CRC, size information and others)."
               }
             ]
-          }
+          },
+          "default": "Error"
         },
         "accountDetails": {
           "$ref": "#/definitions/DataAccountDetails",
@@ -2227,12 +2263,27 @@
       "description": "Dc access security code",
       "type": "object",
       "properties": {
-        "reverseDcAccessCode": {
+        "reverseDCAccessCode": {
           "description": "Reverse Dc access security code.",
           "type": "string"
         },
-        "forwardDcAccessCode": {
+        "forwardDCAccessCode": {
           "description": "Forward Dc access security code.",
+          "type": "string"
+        }
+      }
+    },
+    "Details": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
           "type": "string"
         }
       }
@@ -2242,7 +2293,7 @@
       "required": [
         "storageLocation",
         "skuName",
-        "expectedDataSizeInTerabytes"
+        "expectedDataSizeInTeraBytes"
       ],
       "type": "object",
       "allOf": [
@@ -2251,9 +2302,9 @@
         }
       ],
       "properties": {
-        "expectedDataSizeInTerabytes": {
+        "expectedDataSizeInTeraBytes": {
           "format": "int32",
-          "description": "The expected size of the data, which needs to be transferred in this job, in tera bytes.",
+          "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
         }
       },
@@ -2272,6 +2323,30 @@
           "description": "Bit Locker key of the disk which can be used to unlock the disk to copy data.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ErrorDetail": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Details"
+          }
+        },
+        "target": {
+          "type": "string"
         }
       }
     },
@@ -2296,7 +2371,7 @@
             "values": [
               {
                 "value": "AzureBlob",
-                "description": "Filter file is of the type Azureblobs."
+                "description": "Filter file is of the type AzureBlob."
               },
               {
                 "value": "AzureFile",
@@ -2439,9 +2514,9 @@
           "description": "Details about which key encryption type is being used.",
           "readOnly": true
         },
-        "expectedDataSizeInTerabytes": {
+        "expectedDataSizeInTeraBytes": {
           "format": "int32",
-          "description": "The expected size of the data, which needs to be transfered in this job, in tera bytes.",
+          "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
         }
       },
@@ -2629,7 +2704,8 @@
                 "description": "Scheduled job."
               }
             ]
-          }
+          },
+          "default": "NonScheduled"
         },
         "deliveryInfo": {
           "$ref": "#/definitions/JobDeliveryInfo",
@@ -2730,7 +2806,6 @@
             "DataBoxHeavy"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "ClassDiscriminator",
             "modelAsExtensible": false,
@@ -2963,7 +3038,8 @@
                 "description": "Key encryption key is managed by the Customer."
               }
             ]
-          }
+          },
+          "default": "MicrosoftManaged"
         },
         "kekUrl": {
           "description": "Key encryption key. It is required in case of Customer managed KekType.",
@@ -3052,7 +3128,8 @@
         },
         "sendNotification": {
           "description": "Notification is required or not.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -3080,6 +3157,10 @@
           "description": "Origin of the operation. Can be : user|system|user,system",
           "type": "string",
           "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         }
       }
     },
@@ -3154,7 +3235,7 @@
       "type": "object",
       "properties": {
         "preferredDataCenterRegion": {
-          "description": "Preferrred data center region.",
+          "description": "Preferred data center region.",
           "type": "array",
           "items": {
             "type": "string"
@@ -3258,9 +3339,6 @@
     },
     "RegionConfigurationRequest": {
       "description": "Request body to get the configuration for the region.",
-      "required": [
-        "scheduleAvailabilityRequest"
-      ],
       "type": "object",
       "properties": {
         "scheduleAvailabilityRequest": {
@@ -3279,7 +3357,7 @@
       "properties": {
         "scheduleAvailabilityResponse": {
           "$ref": "#/definitions/ScheduleAvailabilityResponse",
-          "description": "Schedule availability response",
+          "description": "Schedule availability for given sku in a region.",
           "readOnly": true
         },
         "transportAvailabilityResponse": {
@@ -3606,7 +3684,8 @@
                 "description": "Commercial Address."
               }
             ]
-          }
+          },
+          "default": "None"
         }
       }
     },
@@ -3874,8 +3953,7 @@
             "Region",
             "Feature",
             "OfferType",
-            "NoSubscriptionInfo",
-            "CustomerUnregistered"
+            "NoSubscriptionInfo"
           ],
           "type": "string",
           "readOnly": true,
@@ -3906,10 +3984,6 @@
               {
                 "value": "NoSubscriptionInfo",
                 "description": "Subscription has not registered to Microsoft.DataBox and Service does not have the subscription notification."
-              },
-              {
-                "value": "CustomerUnregistered",
-                "description": "Customer unregistered from the subscription."
               }
             ]
           }
@@ -4030,7 +4104,8 @@
                 "description": "Azure Managed disk storage."
               }
             ]
-          }
+          },
+          "default": "StorageAccount"
         },
         "transferAllBlobs": {
           "description": "To indicate if all Azure blobs have to be transferred",
@@ -4120,7 +4195,8 @@
                 "description": "Azure Managed disk storage."
               }
             ]
-          }
+          },
+          "default": "StorageAccount"
         },
         "blobFilterDetails": {
           "$ref": "#/definitions/BlobFilterDetails",
@@ -4399,7 +4475,7 @@
               },
               {
                 "value": "ValidateSkuAvailability",
-                "description": "Identify request and response of active job limit for sku availibility."
+                "description": "Identify request and response of active job limit for sku availability."
               },
               {
                 "value": "ValidateDataTransferDetails",
@@ -4451,7 +4527,7 @@
               },
               {
                 "value": "ValidateSkuAvailability",
-                "description": "Identify request and response of active job limit for sku availibility."
+                "description": "Identify request and response of active job limit for sku availability."
               },
               {
                 "value": "ValidateDataTransferDetails",

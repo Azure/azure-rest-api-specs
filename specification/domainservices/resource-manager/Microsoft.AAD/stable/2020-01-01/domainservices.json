@@ -431,6 +431,7 @@
         "version": {
           "readOnly": true,
           "type": "integer",
+          "format": "int32",
           "description": "Data Model Version"
         },
         "tenantId": {
@@ -464,9 +465,21 @@
           "$ref": "#/definitions/LdapsSettings",
           "description": "Secure LDAP Settings"
         },
+        "resourceForestSettings": {
+          "$ref": "#/definitions/ResourceForestSettings",
+          "description": "Resource Forest Settings"
+        },
         "domainSecuritySettings": {
           "$ref": "#/definitions/DomainSecuritySettings",
           "description": "DomainSecurity Settings"
+        },
+        "domainConfigurationType": {
+          "type": "string",
+          "description": "Domain Configuration Type"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Sku Type"
         },
         "filteredSync": {
           "type": "string",
@@ -483,6 +496,11 @@
         "notificationSettings": {
           "$ref": "#/definitions/NotificationSettings",
           "description": "Notification Settings"
+        },
+        "migrationProperties": {
+          "readOnly": true,
+          "$ref": "#/definitions/MigrationProperties",
+          "description": "Migration Properties"
         },
         "provisioningState": {
           "readOnly": true,
@@ -534,7 +552,7 @@
         "healthLastEvaluated": {
           "readOnly": true,
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "Last domain evaluation run DateTime"
         },
         "healthMonitors": {
@@ -566,6 +584,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "description": "A flag to determine whether or not Secure LDAP is enabled or disabled.",
           "x-ms-enum": {
             "name": "Ldaps",
@@ -602,6 +621,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "description": "A flag to determine whether or not Secure LDAP access over the internet is enabled or disabled.",
           "x-ms-enum": {
             "name": "ExternalAccess",
@@ -709,6 +729,82 @@
         }
       }
     },
+    "ResourceForestSettings": {
+      "description": "Settings for Resource Forest",
+      "properties": {
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForestTrust"
+          },
+          "description": "List of settings for Resource Forest"
+        },
+        "resourceForest": {
+          "type": "string",
+          "description": "Resource Forest"
+        }
+      }
+    },
+    "ForestTrust": {
+      "description": "Forest Trust Setting",
+      "properties": {
+        "trustedDomainFqdn": {
+          "type": "string",
+          "description": "Trusted Domain FQDN"
+        },
+        "trustDirection": {
+          "type": "string",
+          "description": "Trust Direction"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "remoteDnsIps": {
+          "type": "string",
+          "description": "Remote Dns ips"
+        },
+        "trustPassword": {
+          "type": "string",
+          "description": "Trust Password",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "MigrationProperties": {
+      "description": "Migration Properties",
+      "properties": {
+        "oldSubnetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Old Subnet Id"
+        },
+        "oldVnetSiteId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Old Vnet Site Id"
+        },
+        "migrationProgress": {
+          "readOnly": true,
+          "$ref": "#/definitions/MigrationProgress",
+          "description": "Migration Progress"
+        }
+      }
+    },
+    "MigrationProgress": {
+      "description": "Migration Progress",
+      "properties": {
+        "completionPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Completion Percentage"
+        },
+        "progressMessage": {
+          "type": "string",
+          "description": "Progress Message"
+        }
+      }
+    },
     "DomainSecuritySettings": {
       "description": "Domain Security Settings",
       "properties": {
@@ -718,6 +814,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not NtlmV1 is enabled or disabled.",
           "x-ms-enum": {
             "name": "NtlmV1",
@@ -730,6 +827,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not TlsV1 is enabled or disabled.",
           "x-ms-enum": {
             "name": "TlsV1",
@@ -742,9 +840,36 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "description": "A flag to determine whether or not SyncNtlmPasswords is enabled or disabled.",
           "x-ms-enum": {
             "name": "SyncNtlmPasswords",
+            "modelAsString": true
+          }
+        },
+        "syncKerberosPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Enabled",
+          "description": "A flag to determine whether or not SyncKerberosPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncKerberosPasswords",
+            "modelAsString": true
+          }
+        },
+        "syncOnPremPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Enabled",
+          "description": "A flag to determine whether or not SyncOnPremPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncOnPremPasswords",
             "modelAsString": true
           }
         }

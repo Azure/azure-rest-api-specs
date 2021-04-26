@@ -38,6 +38,7 @@
                 "type": "Microsoft.Billing/billingAccounts/billingProfiles",
                 "properties": {
                   "displayName": "BillingProfile1",
+                  "billingRelationshipType": "Direct",
                   "billTo": {
                     "companyName": "Contoso",
                     "firstName": "Test",
@@ -84,6 +85,7 @@
                             "pcCode": "A123456",
                             "costCategory": "Support"
                           },
+                          "state": "Active",
                           "systemId": "9XXX-11XX-XX1-XXXX-XXX"
                         }
                       }
@@ -97,6 +99,7 @@
                 "type": "Microsoft.Billing/billingAccounts/billingProfiles",
                 "properties": {
                   "displayName": "BillingProfile2",
+                  "billingRelationshipType": "IndirectCustomer",
                   "billTo": {
                     "companyName": "Contoso",
                     "firstName": "Test",
@@ -122,6 +125,11 @@
                       "skuDescription": "Microsoft Azure Plan for DevTest"
                     }
                   ],
+                  "indirectRelationshipInfo": {
+                    "billingAccountName": "30000000-0000-0000-0000-000000000001_00000000-0000-0000-0000-000000000000",
+                    "billingProfileName": "33000000-0000-0000-0000-000000000001",
+                    "displayName": "Partner1"
+                  },
                   "invoiceDay": 5,
                   "invoiceEmailOptIn": true,
                   "poNumber": "ABC12345",
@@ -142,6 +150,7 @@
                             "pcCode": "Z223456",
                             "costCategory": "Marketing"
                           },
+                          "state": "Active",
                           "systemId": "9XXX-22XX-XX1-XXXX-XXX"
                         }
                       }

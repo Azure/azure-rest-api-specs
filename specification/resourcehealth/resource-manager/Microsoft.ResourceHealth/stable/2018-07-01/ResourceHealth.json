@@ -46,6 +46,9 @@
             "$ref": "#/parameters/FilterParameter"
           },
           {
+            "$ref": "#/parameters/QueryStartTimeParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1356,7 +1359,15 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN",
+      "description": "A valid odata query to limit the events returned. The logical operators and, or, equal, not equal, and top are supported. For example, $filter=Properties/EventType eq 'ServiceIssue' or Properties/EventType eq 'PlannedMaintenance' OR %24filter=Properties%2FEventType%20eq%20%27ServiceIssue%27%20or%20Properties%2FEventType%20eq%20%27PlannedMaintenance%27",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryStartTimeParameter": {
+      "name": "queryStartTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Specifies from when to return events, based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020",
       "x-ms-parameter-location": "method"
     },
     "ExpandParameter": {
@@ -1372,14 +1383,16 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "EventId for the Service health event"
+      "description": "EventId for the Service health event",
+      "x-ms-parameter-location": "method"
     },
     "ViewParameter": {
       "name": "view",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "setting view=full expands the article parameters"
+      "description": "setting view=full expands the article parameters",
+      "x-ms-parameter-location": "method"
     }
   }
 }

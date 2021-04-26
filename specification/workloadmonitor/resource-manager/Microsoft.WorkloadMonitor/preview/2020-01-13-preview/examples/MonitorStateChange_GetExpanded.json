@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21",
+    "resourceGroupName": "tugamidiAlerts",
+    "providerName": "Microsoft.Compute",
+    "resourceCollectionName": "virtualMachines",
+    "resourceName": "linuxEUS",
+    "monitorId": "logical-disks|C@3A",
+    "timestampUnix": "1584316800",
+    "api-version": "2020-01-13-preview",
+    "$expand": "evidence"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A|free-space/history/1578514818",
+        "name": "1578514818",
+        "type": "Microsoft.WorkloadMonitor/monitors/history",
+        "properties": {
+          "monitorName": "logical-disks|C:|free-space",
+          "monitorType": "logical-disks|*|free-space",
+          "monitoredObject": "C:",
+          "evaluationTimestamp": "2020-01-07T20:20:18.5765757Z",
+          "currentStateFirstObservedTimestamp": "2020-01-07T20:20:18.5765757Z",
+          "previousMonitorState": "Critical",
+          "currentMonitorState": "Warning",
+          "evidence": {
+            "reason": {
+              "Message": "Collected samples met warning condition for this monitor.",
+              "Code": 2200
+            },
+            "samples": [
+              {
+                "timestamp": "2020-10-20T13:23:25.823Z",
+                "value": 87.1828
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

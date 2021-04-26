@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount33",
+    "configurationName": "ConfigName",
+    "api-version": "2019-06-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "text/powershell"
+      },
+      "body": "Configuration ConfigName {\r\n    Node localhost {\r\n                               WindowsFeature IIS {\r\n                               Name = \"Web-Server\";\r\n            Ensure = \"Present\"\r\n        }\r\n    }\r\n}"
+    }
+  }
+}

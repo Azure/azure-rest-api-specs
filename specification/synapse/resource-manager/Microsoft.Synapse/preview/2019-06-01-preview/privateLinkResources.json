@@ -56,6 +56,12 @@
               "$ref": "#/definitions/PrivateLinkResourceListResult"
             },
             "description": "List of private link resources"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "x-ms-examples": {
@@ -100,11 +106,117 @@
               "$ref": "#/definitions/PrivateLinkResource"
             },
             "description": "Private link resource details"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "x-ms-examples": {
           "Get private link resources for workspace": {
             "$ref": "./examples/GetPrivateLinkResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkHubPrivateLinkResources_List",
+        "summary": "Private Link Resources",
+        "description": "Get all private link resources for a private link hub",
+        "tags": [
+          "PrivateLinkHubPrivateLinkResources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateLinkHubNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            },
+            "description": "List of private link resources"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources for private link hub": {
+            "$ref": "./examples/ListPrivateLinkHubPrivateLinkResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkHubPrivateLinkResources_Get",
+        "summary": "Get Private Link Hub Private Link Resource",
+        "description": "Get private link resource in private link hub",
+        "tags": [
+          "PrivateLinkHubPrivateLinkResources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateLinkHubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateLinkResourceNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            },
+            "description": "Private link resource details"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources for private link hub": {
+            "$ref": "./examples/GetPrivateLinkHubPrivateLinkResource.json"
           }
         }
       }
@@ -181,6 +293,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the private link resource",
+      "x-ms-parameter-location": "method"
+    },
+    "privateLinkHubNameParameter": {
+      "name": "privateLinkHubName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private link hub",
       "x-ms-parameter-location": "method"
     }
   }

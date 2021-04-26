@@ -176,6 +176,7 @@
             "$ref": "./examples/deleteWorkspace.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -193,6 +194,9 @@
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was accepted; the request was well-formed and received properly."
           },
           "204": {
             "description": "The machine learning workspace does not exist in the subscription."
@@ -3543,18 +3547,22 @@
     "LinkedWorkspace": {
       "description": "Linked workspace.",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
-          "description": "ResourceId of the link of the linked workspace."
+          "description": "ResourceId of the link of the linked workspace.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Friendly name of the linked workspace."
+          "description": "Friendly name of the linked workspace.",
+          "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Resource type of linked workspace."
+          "description": "Resource type of linked workspace.",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/LinkedWorkspaceProps"
