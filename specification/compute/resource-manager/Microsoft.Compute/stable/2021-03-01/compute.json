@@ -787,9 +787,10 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group.",
+            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated hosts under the dedicated host group. 'UserData' is not supported for dedicated host group.",
             "enum": [
-              "instanceView"
+              "instanceView",
+              "userData"
             ],
             "x-ms-enum": {
               "name": "InstanceViewTypes",
@@ -1082,9 +1083,10 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation.",
+            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated host. 'UserData' is not supported for dedicated host.",
             "enum": [
-              "instanceView"
+              "instanceView",
+              "userData"
             ],
             "x-ms-enum": {
               "name": "InstanceViewTypes",
@@ -3126,6 +3128,9 @@
           },
           "Create a VM with network interface configuration": {
             "$ref": "./examples/CreateAVmWithNetworkInterfaceConfiguration.json"
+          },
+          "Create a VM with UserData": {
+            "$ref": "./examples/CreateOrUpdateAVmWithUserData.json"
           }
         }
       },
@@ -3263,9 +3268,10 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation.",
+            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the instance view of the virtual machine. 'UserData' will retrieve the UserData of the virtual machine.",
             "enum": [
-              "instanceView"
+              "instanceView",
+              "userData"
             ],
             "x-ms-enum": {
               "name": "InstanceViewTypes",
@@ -4725,6 +4731,9 @@
           },
           "Create a scale set from a specialized shared image.": {
             "$ref": "./examples/CreateAScaleSetFromASpecializedSharedImage.json"
+          },
+          "Create a scale set with userData.": {
+            "$ref": "./examples/CreateOrUpdateAScaleSetWithUserData.json"
           }
         }
       },
@@ -4854,6 +4863,20 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation. 'UserData' will retrieve the UserData of the virtual machine scale set.",
+            "enum": [
+              "userData"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandTypesForGetVMScaleSets",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -4867,6 +4890,9 @@
         "x-ms-examples": {
           "Get a virtual machine scale set placed on a dedicated host group through automatic placement.": {
             "$ref": "./examples/GetVirtualMachineScaleSetAutoPlacedOnDedicatedHostGroup.json"
+          },
+          "Get a virtual machine scale set with UserData": {
+            "$ref": "./examples/GetVirtualMachineScaleSetWithUserData.json"
           }
         }
       }
@@ -6784,9 +6810,10 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation.",
+            "description": "The expand expression to apply on the operation. 'InstanceView' will retrieve the instance view of the virtual machine. 'UserData' will retrieve the UserData of the virtual machine.",
             "enum": [
-              "instanceView"
+              "instanceView",
+              "userData"
             ],
             "x-ms-enum": {
               "name": "InstanceViewTypes",
@@ -6806,6 +6833,11 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVM"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get VM scale set VM with UserData": {
+            "$ref": "./examples/GetVirtualMachineScaleSetVMWithUserData.json"
           }
         }
       }
@@ -9863,7 +9895,7 @@
       "required": [
         "createOption"
       ],
-      "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+      "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
     },
     "DataDisk": {
       "properties": {
@@ -9944,14 +9976,14 @@
         },
         "osDisk": {
           "$ref": "#/definitions/OSDisk",
-          "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+          "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         },
         "dataDisks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataDisk"
           },
-          "description": "Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+          "description": "Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         }
       },
       "description": "Specifies the storage settings for the virtual machine disks."
@@ -11011,6 +11043,10 @@
         "scheduledEventsProfile": {
           "$ref": "#/definitions/ScheduledEventsProfile",
           "description": "Specifies Scheduled Event related configurations."
+        },
+        "userData": {
+          "type": "string",
+          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
         }
       },
       "description": "Describes the properties of a Virtual Machine."
@@ -11345,14 +11381,14 @@
       "properties": {
         "osDisk": {
           "$ref": "#/definitions/ImageOSDisk",
-          "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+          "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         },
         "dataDisks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageDataDisk"
           },
-          "description": "Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+          "description": "Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         },
         "zoneResilient": {
           "type": "boolean",
@@ -11706,14 +11742,14 @@
         },
         "osDisk": {
           "$ref": "#/definitions/VirtualMachineScaleSetOSDisk",
-          "description": "Specifies information about the operating system disk used by the virtual machines in the scale set. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+          "description": "Specifies information about the operating system disk used by the virtual machines in the scale set. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         },
         "dataDisks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetDataDisk"
           },
-          "description": "Specifies the parameters that are used to add data disks to the virtual machines in the scale set. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
+          "description": "Specifies the parameters that are used to add data disks to the virtual machines in the scale set. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         }
       },
       "description": "Describes a virtual machine scale set storage profile."
@@ -12412,6 +12448,10 @@
         "scheduledEventsProfile": {
           "$ref": "#/definitions/ScheduledEventsProfile",
           "description": "Specifies Scheduled Event related configurations."
+        },
+        "userData": {
+          "type": "string",
+          "description": "UserData for the virtual machines in the scale set, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -12453,6 +12493,10 @@
         "scheduledEventsProfile": {
           "$ref": "#/definitions/ScheduledEventsProfile",
           "description": "Specifies Scheduled Event related configurations."
+        },
+        "userData": {
+          "type": "string",
+          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -13112,6 +13156,10 @@
         "protectionPolicy": {
           "$ref": "#/definitions/VirtualMachineScaleSetVMProtectionPolicy",
           "description": "Specifies the protection policy of the virtual machine."
+        },
+        "userData": {
+          "type": "string",
+          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
         }
       },
       "description": "Describes the properties of a virtual machine scale set virtual machine."
