@@ -3712,12 +3712,6 @@
             "$ref": "#/definitions/Customer"
           }
         },
-        "totalCount": {
-          "description": "Total number of records.",
-          "type": "number",
-          "format": "int32",
-          "readOnly": true
-        },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
           "type": "string",
@@ -4011,10 +4005,6 @@
           "description": "Indicates whether user has read access to the billing account.",
           "type": "boolean",
           "readOnly": true
-        },
-        "notificationEmailAddress": {
-          "description": "Notification email address, only for legacy accounts",
-          "type": "string"
         }
       }
     },
@@ -4239,7 +4229,7 @@
           "type": "boolean",
           "readOnly": true
         },
-        "marketplaceEnabled": {
+        "marketplacesEnabled": {
           "description": "The policy that controls whether Azure marketplace purchases are allowed in the enrollment.",
           "type": "boolean",
           "readOnly": true
@@ -4320,10 +4310,6 @@
         },
         "accountOwner": {
           "description": "The owner of the enrollment account.",
-          "type": "string"
-        },
-        "accountOwnerEmail": {
-          "description": "The enrollment account owner email address.",
           "type": "string"
         },
         "status": {
@@ -4590,14 +4576,6 @@
           "items": {
             "$ref": "#/definitions/TargetCloud"
           }
-        },
-        "tags": {
-          "description": "Tags of billing profiles.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "maxItems": 1000
         }
       }
     },
@@ -4627,10 +4605,6 @@
       "properties": {
         "firstName": {
           "description": "First name.",
-          "type": "string"
-        },
-        "middleName": {
-          "description": "Middle name.",
           "type": "string"
         },
         "lastName": {
@@ -4719,12 +4693,6 @@
           "items": {
             "$ref": "#/definitions/InvoiceSection"
           }
-        },
-        "totalCount": {
-          "description": "Total number of records.",
-          "type": "number",
-          "format": "int32",
-          "readOnly": true
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
@@ -5564,12 +5532,6 @@
             "$ref": "#/definitions/BillingSubscription"
           }
         },
-        "totalCount": {
-          "description": "Total number of records.",
-          "type": "number",
-          "format": "int32",
-          "readOnly": true
-        },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
           "type": "string",
@@ -6095,11 +6057,6 @@
           "type": "string",
           "readOnly": true
         },
-        "isDataAction": {
-          "description": "Identifies if the operation is a data operation.",
-          "type": "boolean",
-          "readOnly": true
-        },
         "display": {
           "description": "The object that represents the operation.",
           "properties": {
@@ -6115,11 +6072,6 @@
             },
             "operation": {
               "description": "Operation type such as read, write and delete.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "description": "Description of operation.",
               "type": "string",
               "readOnly": true
             }

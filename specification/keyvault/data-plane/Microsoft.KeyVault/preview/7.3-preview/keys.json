@@ -1139,7 +1139,7 @@
       "properties": {
         "bytesLength": {
           "type": "integer",
-          "format": "uint32",
+          "format": "int32",
           "minimum": 1,
           "maximum": 128,
           "description": "The requested number of random bytes."
@@ -1165,7 +1165,7 @@
         "contentType": {
           "description": "Content type and version of key release policy",
           "type": "string",
-          "default": "application/json; charset=utf-8"
+          "default": "application/json; charset=utf-8; version=1.0"
         },
         "data": {
           "description": "Blob encoding the policy rules under which the key can be released.",
@@ -1421,7 +1421,6 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
-          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },
@@ -1632,7 +1631,6 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
-          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },
@@ -1665,7 +1663,6 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
-          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },
@@ -1676,13 +1673,9 @@
     },
     "KeyExportParameters": {
       "properties": {
-        "wrappingKey": {
+        "kek": {
           "$ref": "#/definitions/JsonWebKey",
           "description": "The export key encryption Json web key. This key MUST be a RSA key that supports encryption."
-        },
-        "wrappingKid": {
-          "type": "string",
-          "description": "The export key encryption key identifier. This key MUST be a RSA key that supports encryption."
         },
         "enc": {
           "type": "string",
@@ -1699,14 +1692,18 @@
           }
         }
       },
-      "description": "The export key parameters."
+      "description": "The export key parameters.",
+      "required": [
+        "kek"
+      ]
     },
     "KeyReleaseParameters": {
       "properties": {
-        "target": {
+        "env": {
+          "x-ms-client-name": "environment",
           "type": "string",
           "minLength": 1,
-          "description": "The attestation assertion for the target of the key release."
+          "description": "The target environment assertion."
         },
         "nonce": {
           "type": "string",
@@ -1729,7 +1726,7 @@
       },
       "description": "The release key parameters.",
       "required": [
-        "target"
+        "env"
       ]
     },
     "KeyOperationsParameters": {
@@ -1950,7 +1947,6 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
-          "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
       },

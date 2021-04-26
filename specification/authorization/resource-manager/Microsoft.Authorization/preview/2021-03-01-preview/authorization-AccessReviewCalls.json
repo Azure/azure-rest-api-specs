@@ -81,9 +81,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AccessReviewsFilterParameter"
           }
         ],
         "responses": {
@@ -304,9 +301,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AccessReviewsFilterParameter"
           }
         ],
         "responses": {
@@ -598,9 +592,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/AccessReviewsFilterParameter"
           }
         ],
         "responses": {
@@ -716,9 +707,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccessReviewsFilterParameter"
           }
         ],
         "responses": {
@@ -762,9 +750,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccessReviewsFilterParameter"
           }
         ],
         "responses": {
@@ -906,9 +891,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccessReviewsFilterParameter"
           }
         ],
         "responses": {
@@ -1404,24 +1386,6 @@
             "name": "AccessReviewScopePrincipalType",
             "modelAsString": true
           }
-        },
-        "assignmentState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The role assignment state eligible/active to review",
-          "enum": [
-            "eligible",
-            "active"
-          ],
-          "x-ms-enum": {
-            "name": "AccessReviewScopeAssignmentState",
-            "modelAsString": true
-          }
-        },
-        "inactiveDuration": {
-          "type": "string",
-          "format": "duration",
-          "description": "Duration users are inactive for. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimeSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, seconds))"
         }
       },
       "description": "Descriptor for what needs to be reviewed"
@@ -1860,15 +1824,6 @@
       "required": true,
       "type": "string",
       "description": "The API version to be used with the HTTP request."
-    },
-    "AccessReviewsFilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The filter to apply on the operation. Other than standard filters, one custom filter option is supported : 'assignedToMeToReview()'. When one specified $filter=assignedToMeToReview(), only items that are assigned to the calling user to review are returned",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "method"
     }
   }
 }

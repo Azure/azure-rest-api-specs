@@ -516,7 +516,6 @@
         },
         "useCommonAlertSchema": {
           "type": "boolean",
-          "default": false,
           "description": "Indicates whether to use common alert schema."
         },
         "status": {
@@ -527,7 +526,8 @@
       },
       "required": [
         "name",
-        "emailAddress"
+        "emailAddress",
+        "useCommonAlertSchema"
       ]
     },
     "SmsReceiver": {
@@ -570,7 +570,6 @@
         },
         "useCommonAlertSchema": {
           "type": "boolean",
-          "default": false,
           "description": "Indicates whether to use common alert schema."
         },
         "useAadAuth": {
@@ -593,7 +592,8 @@
       },
       "required": [
         "name",
-        "serviceUri"
+        "serviceUri",
+        "useCommonAlertSchema"
       ]
     },
     "ItsmReceiver": {
@@ -674,7 +674,6 @@
         },
         "useCommonAlertSchema": {
           "type": "boolean",
-          "default": false,
           "description": "Indicates whether to use common alert schema."
         }
       },
@@ -682,7 +681,8 @@
         "automationAccountId",
         "runbookName",
         "webhookResourceId",
-        "isGlobalRunbook"
+        "isGlobalRunbook",
+        "useCommonAlertSchema"
       ]
     },
     "VoiceReceiver": {
@@ -724,14 +724,14 @@
         },
         "useCommonAlertSchema": {
           "type": "boolean",
-          "default": false,
           "description": "Indicates whether to use common alert schema."
         }
       },
       "required": [
         "name",
         "resourceId",
-        "callbackUrl"
+        "callbackUrl",
+        "useCommonAlertSchema"
       ]
     },
     "AzureFunctionReceiver": {
@@ -755,7 +755,6 @@
         },
         "useCommonAlertSchema": {
           "type": "boolean",
-          "default": false,
           "description": "Indicates whether to use common alert schema."
         }
       },
@@ -763,7 +762,8 @@
         "name",
         "functionAppResourceId",
         "functionName",
-        "httpTriggerUrl"
+        "httpTriggerUrl",
+        "useCommonAlertSchema"
       ]
     },
     "ArmRoleReceiver": {
@@ -779,13 +779,13 @@
         },
         "useCommonAlertSchema": {
           "type": "boolean",
-          "default": false,
           "description": "Indicates whether to use common alert schema."
         }
       },
       "required": [
         "name",
-        "roleId"
+        "roleId",
+        "useCommonAlertSchema"
       ]
     },
     "ReceiverStatus": {

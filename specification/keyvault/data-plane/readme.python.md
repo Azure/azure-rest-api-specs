@@ -23,7 +23,7 @@ batch:
 - tag: package-2016-10
 - tag: package-7.0
 - tag: package-7.1
-- tag: package-7.2
+- tag: package-7.2-preview
 - multiapiscript: true
 ```
 
@@ -33,13 +33,13 @@ clear-output-folder: false
 perform-load: false
 ```
 
-### Tag: package-7.2
+### Tag: package-7.2-preview
 
-These settings apply only when `--tag=package-7.2` is specified on the command line.
+These settings apply only when `--tag=package-7.2-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.2'
+``` yaml $(tag) == 'package-7.2-preview'
 namespace: azure.keyvault.v7_2
-output-folder: $(python-sdks-folder)/keyvault/azure-keyvault/azure/keyvault/v7_2
+output-folder: $(python-sdks-folder)/keyvault/azure-keyvault/azure/keyvault/v7_2_preview
 ```
 
 ### Tag: package-7.1

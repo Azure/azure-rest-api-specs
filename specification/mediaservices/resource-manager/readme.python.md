@@ -12,7 +12,6 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.media
   package-name: azure-mgmt-media
-  package-version: 1.0.0b1
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(track2)
@@ -21,7 +20,6 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.media
 package-name: azure-mgmt-media
-package-version: 1.0.0b1
 clear-output-folder: true
 ```
 

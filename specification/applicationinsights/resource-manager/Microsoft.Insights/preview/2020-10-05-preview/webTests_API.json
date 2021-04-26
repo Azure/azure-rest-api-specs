@@ -175,12 +175,6 @@
           "webTestCreate": {
             "$ref": "./examples/WebTestCreate.json"
           },
-          "webTestCreateBasic": {
-            "$ref": "./examples/WebTestCreateBasic.json"
-          },
-          "webTestCreateStandard": {
-            "$ref": "./examples/WebTestCreateStandard.json"
-          },
           "webTestUpdate": {
             "$ref": "./examples/WebTestUpdate.json"
           }
@@ -535,47 +529,41 @@
             }
           }
         },
-        "ValidationRules": {
+        "ContentValidation": {
           "type": "object",
-          "description": "The collection of validation rule properties",
+          "description": "The collection of content validation properties",
           "properties": {
-            "ContentValidation": {
-              "type": "object",
-              "description": "The collection of content validation properties",
-              "properties": {
-                "ContentMatch": {
-                  "type": "string",
-                  "description": "Content to look for in the return of the WebTest.  Must not be null or empty."
-                },
-                "IgnoreCase": {
-                  "type": "boolean",
-                  "description": "When set, this value makes the ContentMatch validation case insensitive."
-                },
-                "PassIfTextFound": {
-                  "type": "boolean",
-                  "description": "When true, validation will pass if there is a match for the ContentMatch string.  If false, validation will fail if there is a match"
-                }
-              }
+            "ContentMatch": {
+              "type": "string",
+              "description": "Content to look for in the return of the WebTest."
             },
-            "SSLCheck": {
+            "IgnoreCase": {
               "type": "boolean",
-              "description": "Checks to see if the SSL cert is still valid."
+              "description": "When set, this value makes the ContentMatch validation case insensitive."
             },
-            "SSLCertRemainingLifetimeCheck": {
-              "type": "integer",
-              "format": "int32",
-              "description": "A number of days to check still remain before the the existing SSL cert expires.  Value must be positive and the SSLCheck must be set to true."
-            },
-            "ExpectedHttpStatusCode": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Validate that the WebTest returns the http status code provided."
-            },
-            "IgnoreHttpsStatusCode": {
+            "PassIfTextFound": {
               "type": "boolean",
-              "description": "When set, validation will ignore the status code."
+              "description": "When true, validation will pass if there is a match for the ContentMatch string.  If false, validation will fail if there is a match"
             }
           }
+        },
+        "SSLCheck": {
+          "type": "boolean",
+          "description": "Checks to see if the SSL cert is still valid."
+        },
+        "SSLCertRemainingLifetimeCheck": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A number of days to check still remain before the the existing SSL cert expires."
+        },
+        "ExpectedHttpStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Validate that the WebTest returns the http status code provided."
+        },
+        "IgnoreHttpsStatusCode": {
+          "type": "boolean",
+          "description": "When set, validation will ignore the status code."
         }
       }
     },

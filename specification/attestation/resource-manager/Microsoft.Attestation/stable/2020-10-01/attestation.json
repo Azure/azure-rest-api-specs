@@ -664,6 +664,9 @@
     },
     "AttestationProvider": {
       "description": "Attestation service response message.",
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
@@ -804,6 +807,15 @@
           "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet"
         }
       }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "Provisioning state of the private endpoint connection."
+        }
+      },
+      "description": "Properties of the private endpoint connection resource."
     }
   },
   "parameters": {
