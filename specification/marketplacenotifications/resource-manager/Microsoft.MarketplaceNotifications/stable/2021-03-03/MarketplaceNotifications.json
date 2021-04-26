@@ -43,39 +43,39 @@
             "$ref": "./examples/GetReviewsNotification.json"
           }
         }
-      },
-      "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsnotification/operations": {
-        "get": {
-          "tags": [
-            "Diagnostics"
-          ],
-          "operationId": "Diagnostics_GetOperations",
-          "parameters": [
-            {
-              "type": "string",
-              "name": "subscription",
-              "in": "path",
-              "required": true,
-              "x-position": 1,
-              "nullable": false
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The request has succeeded.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/definitions/DiagnosticsInfoDto"
-                  }
+      }
+    },
+    "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsnotification/operations": {
+      "get": {
+        "tags": [
+          "Diagnostics"
+        ],
+        "operationId": "Diagnostics_GetOperations",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "subscription",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/DiagnosticsInfoDto"
                 }
               }
             }
-          },
-          "x-ms-examples": {
-            "GetReviewsNotification": {
-              "$ref": "./examples/GetReviewsNotificationOperations.json"
-            }
+          }
+        },
+        "x-ms-examples": {
+          "GetReviewsNotification": {
+            "$ref": "./examples/GetReviewsNotificationOperations.json"
           }
         }
       }
