@@ -1580,39 +1580,13 @@
     }
   },
   "definitions": {
-    "PointArray": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Specifies the `GeoJSON` geometry type. Must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection.",
-          "type": "string"
-        },
-        "geometries": {
-          "type": "array",
-          "items": {
-            "$ref": "../../../Common/preview/1.0/common.json#/definitions/Point"
-          }
-        }
-      },
-      "required": [
-        "geometries"
-      ]
-    },
     "RouteDirectionsRequestBody": {
       "type": "object",
       "description": "Post body parameters for Route directions.",
       "properties": {
         "supportingPoints": {
-          "type": "object",
           "description": "A GeoJSON Geometry collection representing sequence of coordinates used as input for route reconstruction and for calculating zero or more alternative routes to this reference route.\n  - The provided sequence of supporting points is used as input for route reconstruction.\n  - The alternative routes are calculated between the origin and destination points specified in the base path parameter locations.\n  - If both _minDeviationDistance_ and _minDeviationTime_ are set to zero, then these origin and destination points are\n  expected to be at (or very near) the beginning and end of the reference route, respectively.\n  - Intermediate locations (_waypoints_) are not supported when using <_supportingPoints_>.\n  - The reference route may contain traffic incidents of type _ROAD_CLOSURE_, which are\n  ignored for the calculation of the reference route's travel time and traffic delay.",
-          "allOf": [
-            {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/Geometry"
-            },
-            {
-              "$ref": "#/definitions/PointArray"
-            }
-          ]
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometryCollection"
         },
         "avoidVignette": {
           "description": "This is a list of 3-character, ISO 3166-1, alpha-3 country codes of countries in which all toll roads with vignettes are to be avoided, e.g. \"AUS,CHE\". Toll roads with vignettes in countries not in the list are unaffected. Note: It is an error to specify both **avoidVignette** and **allowVignette**.",
@@ -1630,7 +1604,7 @@
         },
         "avoidAreas": {
           "description": "A GeoJSON MultiPolygon representing list of areas to avoid. Only rectangle polygons are supported. The maximum size of a rectangle is about 160x160 km. Maximum number of avoided areas is **10**. It cannot cross the 180th meridian. It must be between -80 and +80 degrees of latitude.",
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/MultiPolygon"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPolygon"
         }
       }
     },
@@ -1750,7 +1724,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
+            "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair"
           }
         }
       }
@@ -1944,7 +1918,7 @@
           "readOnly": true
         },
         "point": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair"
         },
         "pointIndex": {
           "description": "The index of the point in the list of polyline \"points\" corresponding to the point of the instruction.",
@@ -2355,14 +2329,14 @@
       "properties": {
         "center": {
           "description": "Center point of the reachable range",
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair"
         },
         "boundary": {
           "description": "Polygon boundary of the reachable range represented as a list of points.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatePair"
+            "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair"
           }
         }
       }
@@ -2470,10 +2444,10 @@
       "type": "object",
       "properties": {
         "origins": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/MultiPoint"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
         },
         "destinations": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/MultiPoint"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
         }
       }
     }

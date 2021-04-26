@@ -330,7 +330,7 @@
             "description": "The geofencing GeoJSON data.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GeoJsonFeatureCollection"
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
             }
           }
         ],
@@ -539,7 +539,7 @@
             "description": "The FeatureCollection of Point geometries from which closest point to source point should be determined. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GeoJsonFeatureCollection"
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
             }
           }
         ],
@@ -688,7 +688,7 @@
             "description": "A FeatureCollection with a set of Polygon/MultiPolygon geometries. The maximum number of vertices accepted to form a Polygon is 10,000. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GeoJsonFeatureCollection"
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
             }
           }
         ],
@@ -866,41 +866,6 @@
         }
       }
     },
-    "GeoJsonFeatureCollection": {
-      "description": "A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Specifies the `type` for the object. Value should always be equal to \"FeatureCollection\".",
-          "type": "string"
-        },
-        "features": {
-          "description": "Contains a list of valid `GeoJSON Feature` objects.",
-          "type": "array",
-          "items": {
-            "description": "",
-            "type": "object",
-            "properties": {
-              "type": {
-                "description": "Specifies the `type` for the object. Value should always be equal to \"Feature\".",
-                "type": "string"
-              },
-              "geometry": {
-                "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
-              },
-              "properties": {
-                "description": "Properties can contain any additional metadata about the `Feature`. Value can be any JSON object or a JSON null value",
-                "type": "object"
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "features",
-        "type"
-      ]
-    },
     "GeofenceGeometry": {
       "description": "The geofencing geometry.",
       "type": "object",
@@ -983,7 +948,7 @@
       "type": "object",
       "properties": {
         "geometries": {
-          "$ref": "#/definitions/GeoJsonFeatureCollection"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
         },
         "distances": {
           "description": "List of the distances to compute the buffer for, one-to-one per Feature in the collection, or one for all Features in the collection.",
@@ -1017,7 +982,7 @@
         },
         "result": {
           "description": "The FeatureCollection of buffers for the input.",
-          "$ref": "#/definitions/GeoJsonFeatureCollection"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
         }
       }
     },
