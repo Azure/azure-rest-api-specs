@@ -139,11 +139,6 @@
           "type": "integer",
           "readOnly": true
         },
-        "elasticPoolId": {
-          "description": "The resource name of the elastic pool containing this database.",
-          "type": "string",
-          "readOnly": true
-        },
         "creationDate": {
           "format": "date-time",
           "description": "The creation date of the database (ISO8601 format).",
@@ -159,6 +154,16 @@
         "earliestRestoreDate": {
           "format": "date-time",
           "description": "The earliest restore date of the database (ISO8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupStorageRedundancy": {
+          "description": "The storage account type used to store backups for this database.",
+          "enum": [
+            "Geo",
+            "Local",
+            "Zone"
+          ],
           "type": "string",
           "readOnly": true
         }
