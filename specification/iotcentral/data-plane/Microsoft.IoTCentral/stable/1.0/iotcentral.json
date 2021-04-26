@@ -31,28 +31,26 @@
       "allOf": [
         {
           "$ref": "#/definitions/Permission"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "description": "Unique ID of the API token.",
-              "type": "string",
-              "readOnly": true
-            },
-            "token": {
-              "description": "Value of the API token.",
-              "type": "string",
-              "readOnly": true
-            },
-            "expiry": {
-              "description": "String-formatted date representing the time when the token expires.",
-              "type": "string",
-              "format": "date-time"
-            }
-          }
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the API token.",
+          "type": "string",
+          "readOnly": true
+        },
+        "token": {
+          "description": "Value of the API token.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expiry": {
+          "description": "String-formatted date representing the time when the token expires.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
     },
     "ApiTokenCollection": {
       "type": "object",
@@ -315,20 +313,18 @@
       "allOf": [
         {
           "$ref": "#/definitions/User"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "email": {
-              "description": "Email address of the user.",
-              "type": "string",
-              "format": "email"
-            }
-          },
-          "required": [
-            "email"
-          ]
         }
+      ],
+      "type": "object",
+      "properties": {
+        "email": {
+          "description": "Email address of the user.",
+          "type": "string",
+          "format": "email"
+        }
+      },
+      "required": [
+        "email"
       ]
     },
     "Permission": {
@@ -397,24 +393,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/User"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "tenantId": {
-              "description": "The AAD tenant ID of the service principal.",
-              "type": "string"
-            },
-            "objectId": {
-              "description": "The AAD object ID of the service principal.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "tenantId",
-            "objectId"
-          ]
         }
+      ],
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The AAD tenant ID of the service principal.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The AAD object ID of the service principal.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tenantId",
+        "objectId"
       ]
     },
     "SymmetricKey": {
@@ -439,19 +433,17 @@
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "symmetricKey": {
-              "description": "The symmetric key credentials for this attestation.",
-              "$ref": "#/definitions/SymmetricKey"
-            }
-          },
-          "required": [
-            "symmetricKey"
-          ]
         }
+      ],
+      "type": "object",
+      "properties": {
+        "symmetricKey": {
+          "description": "The symmetric key credentials for this attestation.",
+          "$ref": "#/definitions/SymmetricKey"
+        }
+      },
+      "required": [
+        "symmetricKey"
       ]
     },
     "Tpm": {
@@ -471,45 +463,41 @@
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "tpm": {
-              "description": "The TPM credentials for this attestation.",
-              "$ref": "#/definitions/Tpm"
-            }
-          },
-          "required": [
-            "tpm"
-          ]
         }
+      ],
+      "type": "object",
+      "properties": {
+        "tpm": {
+          "description": "The TPM credentials for this attestation.",
+          "$ref": "#/definitions/Tpm"
+        }
+      },
+      "required": [
+        "tpm"
       ]
     },
     "User": {
       "allOf": [
         {
           "$ref": "#/definitions/Permission"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "description": "Unique ID of the user.",
-              "type": "string",
-              "readOnly": true
-            },
-            "type": {
-              "description": "Type of the user.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "type"
-          ],
-          "discriminator": "type"
         }
-      ]
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the user.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of the user.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
     },
     "UserCollection": {
       "type": "object",
@@ -544,19 +532,17 @@
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "x509": {
-              "description": "The X.509 credentials for this attestation.",
-              "$ref": "#/definitions/X509"
-            }
-          },
-          "required": [
-            "x509"
-          ]
         }
+      ],
+      "type": "object",
+      "properties": {
+        "x509": {
+          "description": "The X.509 credentials for this attestation.",
+          "$ref": "#/definitions/X509"
+        }
+      },
+      "required": [
+        "x509"
       ]
     },
     "X509Certificate": {
