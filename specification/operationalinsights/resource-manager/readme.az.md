@@ -13,6 +13,12 @@ az-output-folder: $(azure-cli-extension-folder)/src/loganalytics
 python-sdk-output-folder: "$(az-output-folder)/azext_loganalytics/vendored_sdks/loganalytics"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
+cli:
+  cli-directive:
+    ## rename a parameter 
+    - where:
+        param: query
+      name: input_query
 ```
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
@@ -23,10 +29,10 @@ az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/lo
 python-sdk-output-folder: "$(az-output-folder)/azext_loganalytics/vendored_sdks/loganalytics"
 # add additinal configuration here specific for Azure CLI
 # refer to the faq.md for more details
-```
 cli:
   cli-directive:
     ## rename a parameter 
     - where:
         param: query
       name: input_query
+```
