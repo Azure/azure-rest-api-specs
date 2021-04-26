@@ -281,6 +281,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "alwaysEncryptedSettings": {
+          "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
+          "description": "Sql always encrypted properties."
         }
       },
       "required": [
@@ -337,6 +341,10 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "alwaysEncryptedSettings": {
+          "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
+          "description": "Sql always encrypted properties."
         }
       },
       "required": [
@@ -393,10 +401,42 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "alwaysEncryptedSettings": {
+          "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
+          "description": "Sql always encrypted properties."
         }
       },
       "required": [
         "connectionString"
+      ]
+    },
+    "SqlAlwaysEncryptedProperties": {
+      "description": "Sql always encrypted properties.",
+      "properties": {
+        "alwaysEncryptedAkvAuthType": {
+          "x-ms-enum": {
+            "name": "SqlAlwaysEncryptedAkvAuthType",
+            "modelAsString": true
+          },
+          "enum": [
+            "ServicePrincipal",
+            "ManagedIdentity"
+          ],
+          "type": "string",
+          "description": "Sql always encrypted AKV authentication type. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The client ID of the application in Azure Active Directory used for Azure Key Vault authentication. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The key of the service principal used to authenticate against Azure Key Vault."
+        }
+      },
+      "required": [
+        "alwaysEncryptedAkvAuthType"
       ]
     },
     "AzureBatchLinkedService": {
