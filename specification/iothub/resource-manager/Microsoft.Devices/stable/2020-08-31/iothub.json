@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-08-31",
+    "version": "2021-03-31",
     "title": "iotHubClient",
     "description": "Use this API to manage the IoT hubs in your Azure subscription.",
     "x-ms-code-generation-settings": {
@@ -2483,6 +2483,10 @@
             "name": "AuthenticationType",
             "modelAsString": true
           }
+        },
+        "identity": {
+          "description": "Managed identity properties of storage endpoint for file upload.",
+          "$ref": "#/definitions/ManagedIdentity"
         }
       },
       "required": [
@@ -2904,6 +2908,10 @@
             "modelAsString": true
           }
         },
+        "identity": {
+          "description": "Managed identity properties of routing service bus queue endpoint.",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
         "name": {
           "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types. The name need not be the same as the actual queue name.",
           "type": "string",
@@ -2953,6 +2961,10 @@
             "name": "authenticationType",
             "modelAsString": true
           }
+        },
+        "identity": {
+          "description": "Managed identity properties of routing service bus topic endpoint.",
+          "$ref": "#/definitions/ManagedIdentity"
         },
         "name": {
           "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.  The name need not be the same as the actual topic name.",
@@ -3004,6 +3016,10 @@
             "modelAsString": true
           }
         },
+        "identity": {
+          "description": "Managed identity properties of routing event hub endpoint.",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
         "name": {
           "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.",
           "type": "string",
@@ -3049,6 +3065,10 @@
             "name": "authenticationType",
             "modelAsString": true
           }
+        },
+        "identity": {
+          "description": "Managed identity properties of routing storage endpoint.",
+          "$ref": "#/definitions/ManagedIdentity"
         },
         "name": {
           "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.",
@@ -3234,6 +3254,10 @@
         "sku": {
           "description": "IotHub SKU info",
           "$ref": "#/definitions/IotHubSkuInfo"
+        },
+        "identity": {
+          "description": "The managed identities for the IotHub.",
+          "$ref": "#/definitions/ArmIdentity"
         }
       },
       "allOf": [
@@ -3610,7 +3634,10 @@
           "description": "EventHub consumer group name",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "EventHubConsumerGroupInfo": {
       "description": "The properties of the EventHubConsumerGroupInfo object.",
@@ -3620,9 +3647,7 @@
         "properties": {
           "description": "The tags.",
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "id": {
           "description": "The Event Hub-compatible consumer group identifier.",
@@ -4123,6 +4148,10 @@
             "modelAsString": true
           }
         },
+        "identity": {
+          "description": "Managed identity properties of storage endpoint for export devices.",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
         "includeConfigurations": {
           "description": "The value indicating whether configurations should be exported.",
           "type": "boolean"
@@ -4168,6 +4197,10 @@
             "name": "AuthenticationType",
             "modelAsString": true
           }
+        },
+        "identity": {
+          "description": "Managed identity properties of storage endpoint for import devices.",
+          "$ref": "#/definitions/ManagedIdentity"
         },
         "includeConfigurations": {
           "description": "The value indicating whether configurations should be imported.",
@@ -4215,6 +4248,64 @@
             "name": "IotHubReplicaRoleType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "ArmIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
+          "type": "string",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ArmUserIdentity"
+          }
+        }
+      }
+    },
+    "ArmUserIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentity": {
+      "description": "The properties of the Managed identity.",
+      "type": "object",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned identity."
         }
       }
     }
