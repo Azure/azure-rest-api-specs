@@ -2353,7 +2353,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzureBackupRecoveryPoint",
-          "description": "AzureBackupRecoveryPointResource properties"
+          "description": "AzureBackupRecoveryPointResource properties",
+          "x-ms-client-flatten": true
         }
       },
       "title": "AzureBackupRecoveryPointResource"
@@ -2571,6 +2572,7 @@
     "BackupInstance": {
       "description": "Backup Instance",
       "required": [
+        "friendlyName",
         "dataSourceInfo",
         "policyInfo",
         "objectType"
@@ -2646,7 +2648,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupInstance",
-          "description": "BackupInstanceResource properties"
+          "description": "BackupInstanceResource properties",
+          "x-ms-client-flatten": true
         }
       },
       "title": "BackupInstanceResource"
@@ -2769,7 +2772,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupVault",
-          "description": "BackupVaultResource properties"
+          "description": "BackupVaultResource properties",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
@@ -2829,7 +2833,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BaseBackupPolicy",
-          "description": "BaseBackupPolicyResource properties"
+          "description": "BaseBackupPolicyResource properties",
+          "x-ms-client-flatten": true
         }
       },
       "title": "BaseBackupPolicyResource"
@@ -3011,7 +3016,8 @@
         },
         "properties": {
           "$ref": "#/definitions/ClientDiscoveryForProperties",
-          "description": "Properties for the given operation."
+          "description": "Properties for the given operation.",
+          "x-ms-client-flatten": true
         }
       },
       "title": "ClientDiscoveryValueForSingleApi",
@@ -3829,7 +3835,8 @@
         },
         "properties": {
           "$ref": "#/definitions/OperationExtendedInfo",
-          "description": "End time of the operation"
+          "description": "End time of the operation",
+          "x-ms-client-flatten": true
         },
         "startTime": {
           "description": "Start time of the operation",

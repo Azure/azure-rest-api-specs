@@ -199,8 +199,6 @@ namespace: com.microsoft.azure.management.deploymentmanager
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 2
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-deploymentmanager
-
-service-name: Deployment
 ```
 
 ### Java multi-api

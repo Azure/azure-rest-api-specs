@@ -451,8 +451,8 @@
           "type": "object",
           "description": "Settings concerning lockbox.",
           "properties": {
-            "state": {
-              "$ref": "#/definitions/state",
+            "status": {
+              "$ref": "#/definitions/status",
               "description": "lockbox configuration"
             }
           }
@@ -461,23 +461,9 @@
           "type": "object",
           "description": "The encryption settings for a configuration store.",
           "properties": {
-            "keyVault": {
+            "keyVaultProperties": {
               "$ref": "#/definitions/KeyVaultProperties",
               "description": "Key vault properties."
-            },
-            "state": {
-              "description": "The state of onboarding, which only appears in the response.",
-              "$ref": "#/definitions/state"
-            }
-          }
-        },
-        "networkInjection": {
-          "type": "object",
-          "description": "Settings concerning network injection.",
-          "properties": {
-            "virtualNetworks": {
-              "$ref": "#/definitions/VirtualNetworkPropertiesList",
-              "description": "Network injection configuration"
             }
           }
         }
@@ -511,11 +497,12 @@
         }
       }
     },
-    "state": {
+    "status": {
       "type": "string",
+      "readOnly": true,
       "description": "The state of onboarding, which only appears in the response.",
       "x-ms-enum": {
-        "name": "state",
+        "name": "status",
         "modelAsString": true
       },
       "enum": [
@@ -535,6 +522,10 @@
         "key": {
           "$ref": "#/definitions/keyProperties",
           "description": "Identity of the secret that includes name and version."
+        },
+        "status": {
+          "description": "The state of onboarding, which only appears in the response.",
+          "$ref": "#/definitions/status"
         }
       }
     },
@@ -550,42 +541,6 @@
         }
       },
       "description": "Url and version of the KeyVault Secret"
-    },
-    "VirtualNetworkPropertiesList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of virtual networks.",
-          "items": {
-            "$ref": "#/definitions/VirtualNetworkProperties"
-          }
-        }
-      },
-      "description": "A list of private link resources"
-    },
-    "VirtualNetworkProperties": {
-      "type": "object",
-      "description": "Settings concerning the virtual network.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Uri of the virtual network."
-        },
-        "subnet": {
-          "$ref": "#/definitions/SubnetProperties",
-          "description": "Properties of a subnet."
-        }
-      }
-    },
-    "SubnetProperties": {
-      "type": "object",
-      "description": "Properties of a subnet.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Subnet name."
-        }
-      }
     },
     "EnterprisePolicyList": {
       "properties": {

@@ -2104,21 +2104,6 @@
       ],
       "description": "KeyPolicy assigned to the storage account."
     },
-    "KeyCreationTime": {
-      "properties": {
-        "key1": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2021-02-03T05:57:30.917Z"
-        },
-        "key2": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2021-02-03T05:57:30.917Z"
-        }
-      },
-      "description": "Storage account keys creation time."
-    },
     "EncryptionService": {
       "properties": {
         "enabled": {
@@ -2992,8 +2977,16 @@
         },
         "keyCreationTime": {
           "readOnly": true,
-          "$ref": "#/definitions/KeyCreationTime",
-          "description": "Storage account keys creation time."
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "example": {
+            "key1": "2021-02-03T05:57:30.917Z",
+            "key2": "2021-02-03T05:55:30.917Z"
+          },
+          "description": "Gets the list of storage account keys creation time."
         },
         "secondaryEndpoints": {
           "$ref": "#/definitions/Endpoints",

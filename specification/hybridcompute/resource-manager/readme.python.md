@@ -20,7 +20,6 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.hybridcompute
 package-name: azure-mgmt-hybridcompute
-package-version: 1.0.0b1
 clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)

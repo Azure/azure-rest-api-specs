@@ -19,7 +19,7 @@ cli:
         removed: true
       - select: 'operation'
         where:
-            operationGroup: 'APIKeys'
+            operationGroup: 'APIkeys'
             operation: 'create|delete'
         removed: true
       - select: 'operation'
