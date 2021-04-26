@@ -56,20 +56,15 @@
             "type": "string",
             "name": "subscription",
             "in": "path",
-            "required": true,
             "x-position": 1,
-            "nullable": false
+            "description": "user's subscription id"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/DiagnosticsInfoDto"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/DiagnosticsInfoDto"
             }
           }
         },
@@ -109,6 +104,7 @@
       }
     },
     "DiagnosticsInfoDto": {
+      "description": "Diagnostics Info",
       "type": "object",
       "additionalProperties": false,
       "properties": {
