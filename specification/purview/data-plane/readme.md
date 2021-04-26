@@ -98,3 +98,9 @@ from: purviewcatalog.json
 reason: Should be compatible with Atlas swagger.
 ```
 
+``` yaml
+directive:
+  - suppress: OAV108
+from: purviewcatalog.json
+reason: It doesn't support file annotation in example file, the invalid type error can be ignored.
+```
