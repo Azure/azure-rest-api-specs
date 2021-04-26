@@ -251,7 +251,7 @@ directive:
       - $.definitions.RedisCommonProperties.properties.enableNonSslPort
     from: redis.json
     reason: this will result in breaking change
-  - suppress: 1R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isMaster."
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isMaster."
     where:
       - $.definitions.RedisInstanceDetails.properties.isMaster
     from: redis.json
