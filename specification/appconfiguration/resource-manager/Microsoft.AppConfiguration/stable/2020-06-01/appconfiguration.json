@@ -247,65 +247,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "tags": [
-          "ConfigurationStores"
-        ],
-        "description": "Updates a configuration store with the specified parameters.",
-        "operationId": "ConfigurationStores_Update",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfigStoreNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "configStoreUpdateParameters",
-            "in": "body",
-            "description": "The parameters for updating a configuration store.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationStoreUpdateParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationStore"
-            }
-          },
-          "201": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationStore"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ConfigurationStores_Update": {
-            "$ref": "./examples/ConfigurationStoresUpdate.json"
-          },
-          "ConfigurationStores_Update_WithIdentity": {
-            "$ref": "./examples/ConfigurationStoresUpdateWithIdentity.json"
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/checkNameAvailability": {
