@@ -24,7 +24,7 @@
         "operationId": "Notification_GetWithAuthorization",
         "parameters": [
           {
-            "$ref": "#/parameters/Subscription"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/PrincipalId"
@@ -56,7 +56,7 @@
         "operationId": "Diagnostics_GetOperations",
         "parameters":[
           {
-            "$ref": "#/parameters/Subscription"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -79,17 +79,19 @@
     }
   },
   "parameters":{
-    "Subscription":{
+    "SubscriptionId":{
+      "description": "user's subscription id",
       "type": "string",
       "name": "subscription",
       "in": "path",
-      "description": "user's subscription id"
+      "required": true
     },
     "PrincipalId":{
       "description": "user's principal id",
       "type": "string",
       "name": "principalID",
-      "in": "query"
+      "in": "query",
+      "required": true
     },
     "ApiVersion":{
       "name": "api-version",
