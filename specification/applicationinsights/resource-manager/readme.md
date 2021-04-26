@@ -480,5 +480,4 @@ input-file:
 ```
 
 ## AzureResourceSchema
-
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
