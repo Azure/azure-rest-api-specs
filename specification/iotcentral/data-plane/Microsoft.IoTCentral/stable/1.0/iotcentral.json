@@ -16,7 +16,7 @@
       }
     ]
   },
-  "basePath": "/api/1.0",
+  "basePath": "/api",
   "schemes": [
     "https"
   ],
@@ -612,6 +612,11 @@
             "$ref": "./examples/apitoken_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -635,6 +640,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "tokenId",
@@ -661,6 +669,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "tokenId",
@@ -697,6 +708,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "in": "path",
             "name": "tokenId",
             "description": "Unique ID for the API token.",
@@ -720,6 +734,11 @@
             "$ref": "./examples/devicetemplates_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -744,6 +763,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceTemplateId"
           }
         ],
@@ -765,6 +787,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceTemplateId"
           },
@@ -796,6 +821,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceTemplateId"
           },
@@ -829,6 +857,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceTemplateId"
           }
         ],
@@ -848,6 +879,11 @@
             "$ref": "./examples/devices_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -873,6 +909,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -895,6 +934,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -926,7 +968,14 @@
             "$ref": "./examples/devices_create.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -960,6 +1009,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -980,6 +1032,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           }
@@ -1008,6 +1063,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1044,7 +1102,14 @@
             "$ref": "./examples/devices_attestations_set_x509.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1077,6 +1142,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1097,6 +1165,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1126,6 +1197,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1163,6 +1237,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1186,6 +1263,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1218,6 +1298,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1258,6 +1341,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -1282,6 +1368,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1315,7 +1404,14 @@
             "$ref": "./examples/devices_properties_components_set.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1354,6 +1450,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -1384,6 +1483,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1408,6 +1510,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1431,6 +1536,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1463,6 +1571,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1503,6 +1614,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -1529,6 +1643,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1564,6 +1681,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1607,6 +1727,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -1634,6 +1757,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1670,7 +1796,14 @@
             "$ref": "./examples/modules_properties_components_set.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1712,6 +1845,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -1746,6 +1882,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -1771,6 +1910,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1805,7 +1947,14 @@
             "$ref": "./examples/modules_properties_update.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1844,6 +1993,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -1875,6 +2027,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1897,6 +2052,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1928,7 +2086,14 @@
             "$ref": "./examples/devices_properties_update.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1964,6 +2129,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -1989,6 +2157,11 @@
             "$ref": "./examples/roles_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -2012,6 +2185,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "roleId",
@@ -2039,6 +2215,11 @@
             "$ref": "./examples/users_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -2062,6 +2243,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "userId",
@@ -2091,6 +2275,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "userId",
@@ -2130,6 +2317,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "in": "path",
             "name": "userId",
             "description": "Unique ID of the user.",
@@ -2164,6 +2354,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "userId",
@@ -2245,6 +2438,15 @@
       "description": "Name of this device telemetry.",
       "x-ms-parameter-location": "method",
       "type": "string",
+      "required": true
+    },
+    "Version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The version of the API being called.",
+      "x-ms-parameter-location": "client",
+      "type": "string",
+      "default": "1.0",
       "required": true
     }
   },

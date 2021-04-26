@@ -72,7 +72,3 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

@@ -1,23 +1,22 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "preview",
     "title": "Azure IoT Central",
-    "description": "Azure IoT Central is a service that makes it easy to connect, monitor, and manage your IoT devices at scale."
+    "description": "Azure IoT Central is a service that makes it easy to connect, monitor, and manage your IoT devices at scale.",
+    "version": "preview"
   },
-  "host": "apps.azureiotcentral.com",
   "x-ms-parameterized-host": {
-    "hostTemplate": "{subdomain}.{centralDnsSuffixInPath}",
+    "hostTemplate": "{subdomain}.{baseDomain}",
     "parameters": [
       {
-        "$ref": "#/parameters/CentralDnsSuffixInPath"
+        "$ref": "#/parameters/BaseDomain"
       },
       {
         "$ref": "#/parameters/Subdomain"
       }
     ]
   },
-  "basePath": "/api/preview",
+  "basePath": "/api",
   "schemes": [
     "https"
   ],
@@ -28,6 +27,30 @@
     "application/json"
   ],
   "definitions": {
+    "ADGroupUser": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/User"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tenantId": {
+              "description": "The AAD tenant ID of the AD Group.",
+              "type": "string"
+            },
+            "objectId": {
+              "description": "The AAD object ID of the AD Group.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "tenantId",
+            "objectId"
+          ]
+        }
+      ]
+    },
     "ApiToken": {
       "allOf": [
         {
@@ -74,32 +97,6 @@
         "value"
       ]
     },
-    "Application": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Unique ID of the application.",
-          "type": "string",
-          "readOnly": true
-        },
-        "displayName": {
-          "description": "Display name of the application.",
-          "type": "string"
-        },
-        "subdomain": {
-          "description": "The URL subdomain of the application.",
-          "type": "string"
-        },
-        "host": {
-          "description": "The URL host of the application.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "subdomain",
-        "host"
-      ]
-    },
     "Attestation": {
       "type": "object",
       "properties": {
@@ -124,14 +121,14 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "The collection of objects.",
+          "description": "The collection of entities.",
           "type": "array",
           "items": {
             "type": "object"
           }
         },
         "nextLink": {
-          "description": "URL to get the next page of objects.",
+          "description": "URL to get the next page of entities.",
           "type": "string"
         }
       },
@@ -234,10 +231,6 @@
           "description": "The device template definition for the device.",
           "type": "string"
         },
-        "simulated": {
-          "description": "Whether the device is simulated.",
-          "type": "boolean"
-        },
         "approved": {
           "description": "Whether the device has been approved to connect to IoT Central.",
           "type": "boolean"
@@ -246,6 +239,10 @@
           "description": "Whether resources have been allocated for the device.",
           "type": "boolean",
           "readOnly": true
+        },
+        "simulated": {
+          "description": "Whether the device is simulated.",
+          "type": "boolean"
         }
       }
     },
@@ -282,12 +279,16 @@
           "readOnly": true
         },
         "connectionTimeout": {
-          "description": "Connection Timeout in seconds to wait for a disconnected device to come online. Acceptable timeout values are from 0 to 30 seconds. Defaults to 0 seconds.",
-          "type": "integer"
+          "description": "Connection timeout in seconds to wait for a disconnected device to come online. Defaults to 0 seconds.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
         },
         "responseTimeout": {
-          "description": "Response Timeout in seconds to wait for a command completion on a device. Acceptable timeout values are from 5 to 30 seconds. Defaults to 30 seconds.",
-          "type": "integer"
+          "description": "Response timeout in seconds to wait for a command completion on a device. Defaults to 30 seconds.",
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 30
         },
         "request": {
           "description": "The payload for the device command."
@@ -405,16 +406,16 @@
           "type": "string",
           "readOnly": true
         },
-        "etag": {
-          "description": "ETag used to prevent conflict in device template updates.",
-          "type": "string"
-        },
         "types": {
           "description": "The types of device to which this template applies.",
           "type": "array",
           "items": {
             "type": "string"
           }
+        },
+        "etag": {
+          "description": "ETag used to prevent conflict in device template updates.",
+          "type": "string"
         },
         "displayName": {
           "description": "Display name of the device template.",
@@ -425,10 +426,12 @@
           "type": "string"
         },
         "capabilityModel": {
-          "description": "The capability model utilized by this device template."
+          "description": "The capability model utilized by this device template.",
+          "type": "object"
         },
         "solutionModel": {
-          "description": "The solution model utilized by this device template."
+          "description": "The solution model utilized by this device template.",
+          "type": "object"
         }
       },
       "required": [
@@ -526,7 +529,7 @@
           "type": "string"
         },
         "data": {
-          "description": "The capabilities being updated by the job and the values with which they are being updated.",
+          "description": "The capabilites being updated by the job and the values with which they are being updated.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobData"
@@ -626,19 +629,10 @@
       "type": "object",
       "properties": {
         "roles": {
-          "description": "List of roles that specify the permissions to access the application.",
+          "description": "List of role assignments that specify the permissions to access the application.",
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "role": {
-                "description": "ID that specifies the role assignment for this role.",
-                "type": "string"
-              }
-            },
-            "required": [
-              "role"
-            ]
+            "$ref": "#/definitions/RoleAssignment"
           },
           "minItems": 1
         }
@@ -667,6 +661,18 @@
           "type": "string"
         }
       }
+    },
+    "RoleAssignment": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "description": "ID of the role for this role assignment.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role"
+      ]
     },
     "RoleCollection": {
       "type": "object",
@@ -924,6 +930,11 @@
             "$ref": "./examples/apitoken_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -947,6 +958,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "tokenId",
@@ -973,6 +987,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "tokenId",
@@ -1009,6 +1026,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "in": "path",
             "name": "tokenId",
             "description": "Unique ID for the API token.",
@@ -1032,6 +1052,11 @@
             "$ref": "./examples/continuousdataexports_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -1056,6 +1081,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "in": "path",
             "name": "exportId",
             "description": "Unique ID for the continuous data export.",
@@ -1074,13 +1102,16 @@
       },
       "put": {
         "operationId": "ContinuousDataExports_Create",
-        "summary": "Create a new continuous data export or update an existing one by ID.",
+        "summary": "Create a new continuous data export.",
         "x-ms-examples": {
           "Create or update export": {
             "$ref": "./examples/continuousdataexports_set.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "exportId",
@@ -1109,13 +1140,20 @@
       },
       "patch": {
         "operationId": "ContinuousDataExports_Update",
-        "summary": "Update an existing continuous data export via PATCH.",
+        "summary": "Update an existing continuous data export via patch.",
         "x-ms-examples": {
           "Update export": {
-            "$ref": "./examples/continuousdataexports_update.json"
+            "$ref": "./examples/continuousdataexports_set.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "exportId",
@@ -1127,7 +1165,9 @@
             "in": "body",
             "name": "body",
             "description": "Data export patch body.",
-            "schema": {},
+            "schema": {
+              "type": "object"
+            },
             "required": true
           }
         ],
@@ -1149,6 +1189,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "exportId",
@@ -1173,6 +1216,11 @@
             "$ref": "./examples/devicegroups_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -1195,6 +1243,11 @@
             "$ref": "./examples/devicetemplates_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -1219,6 +1272,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceTemplateId"
           }
         ],
@@ -1233,13 +1289,16 @@
       },
       "put": {
         "operationId": "DeviceTemplates_Create",
-        "summary": "Publish a new device template or update the cloud properties and overrides of an existing device template. Default views will be automatically generated for new device templates created this way.",
+        "summary": "Publish a new device template. Default views will be automatically generated for new device templates created this way.",
         "x-ms-examples": {
           "Create a device template": {
-            "$ref": "./examples/devicetemplates_set.json"
+            "$ref": "./examples/devicetemplates_create.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceTemplateId"
           },
@@ -1249,6 +1308,40 @@
             "description": "Device template body.",
             "schema": {
               "$ref": "#/definitions/DeviceTemplate"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceTemplate"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeviceTemplates_Update",
+        "summary": "Update the cloud properties and overrides of an existing device template via patch.",
+        "x-ms-examples": {
+          "Update a device template": {
+            "$ref": "./examples/devicetemplates_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceTemplateId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device template patch body.",
+            "schema": {
+              "type": "object"
             },
             "required": true
           }
@@ -1273,6 +1366,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceTemplateId"
           }
         ],
@@ -1293,6 +1389,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceTemplateId"
           }
@@ -1321,6 +1420,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceTemplateId"
           }
         ],
@@ -1343,6 +1445,11 @@
             "$ref": "./examples/devices_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -1368,6 +1475,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1383,13 +1493,16 @@
       "put": {
         "operationId": "Devices_Create",
         "summary": "Create or update a device",
-        "description": "Create a new device or update an existing one by device ID.",
+        "description": "Create a new device.",
         "x-ms-examples": {
           "Create device": {
-            "$ref": "./examples/devices_set.json"
+            "$ref": "./examples/devices_create.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1418,10 +1531,17 @@
         "description": "Update an existing device by ID.",
         "x-ms-examples": {
           "Update device": {
-            "$ref": "./examples/devices_update.json"
+            "$ref": "./examples/devices_create.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1429,7 +1549,9 @@
             "in": "body",
             "name": "body",
             "description": "Device patch body.",
-            "schema": {},
+            "schema": {
+              "type": "object"
+            },
             "required": true
           }
         ],
@@ -1453,6 +1575,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1474,6 +1599,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1488,7 +1616,7 @@
       },
       "put": {
         "operationId": "Devices_CreateAttestation",
-        "summary": "Create or update an individual device attestation",
+        "summary": "Create an individual device attestation",
         "x-ms-examples": {
           "Create or update device attestation - Symmetric Key": {
             "$ref": "./examples/devices_attestations_set_symmetricKey.json"
@@ -1502,6 +1630,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -1510,6 +1641,50 @@
             "description": "Individual device attestation body.",
             "schema": {
               "$ref": "#/definitions/Attestation"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Attestation"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Devices_UpdateAttestation",
+        "summary": "Update an individual device attestation via patch",
+        "x-ms-examples": {
+          "Update device attestation - Symmetric Key": {
+            "$ref": "./examples/devices_attestations_set_symmetricKey.json"
+          },
+          "Update device attestation - TPM": {
+            "$ref": "./examples/devices_attestations_set_tpm.json"
+          },
+          "Update device attestation - X509": {
+            "$ref": "./examples/devices_attestations_set_x509.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Individual device attestation patch body.",
+            "schema": {
+              "type": "object"
             },
             "required": true
           }
@@ -1533,6 +1708,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1555,6 +1733,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1568,15 +1749,18 @@
         }
       },
       "put": {
-        "operationId": "Devices_SetCloudProperties",
-        "summary": "Update device cloud properties",
+        "operationId": "Devices_ReplaceCloudProperties",
+        "summary": "Replace device cloud properties",
         "description": "Update all cloud property values of a device by device ID.",
         "x-ms-examples": {
           "Update cloud properties": {
-            "$ref": "./examples/devices_cloudproperties_set.json"
+            "$ref": "./examples/devices_cloudproperties_update.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1601,14 +1785,21 @@
       },
       "patch": {
         "operationId": "Devices_UpdateCloudProperties",
-        "summary": "Update device cloud properties via PATCH",
+        "summary": "Update device cloud properties via patch",
         "description": "Update cloud property values of a device by device ID.",
         "x-ms-examples": {
           "Update cloud properties": {
             "$ref": "./examples/devices_cloudproperties_update.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1616,7 +1807,9 @@
             "in": "body",
             "name": "body",
             "description": "Device properties patch.",
-            "schema": {},
+            "schema": {
+              "type": "object"
+            },
             "required": true
           }
         ],
@@ -1640,6 +1833,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1669,6 +1865,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1706,6 +1905,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1729,6 +1931,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1761,6 +1966,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1801,6 +2009,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -1817,14 +2028,17 @@
         }
       },
       "put": {
-        "operationId": "Devices_SetComponentProperties",
-        "summary": "Update device properties for a specific component",
+        "operationId": "Devices_ReplaceComponentProperties",
+        "summary": "Replace device properties for a specific component",
         "x-ms-examples": {
           "Update properties on components": {
             "$ref": "./examples/devices_properties_components_set.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1852,13 +2066,20 @@
       },
       "patch": {
         "operationId": "Devices_UpdateComponentProperties",
-        "summary": "Update device properties for a specific component via PATCH",
+        "summary": "Update device properties for a specific component via patch",
         "x-ms-examples": {
           "Update properties on components": {
-            "$ref": "./examples/devices_properties_components_update.json"
+            "$ref": "./examples/devices_properties_components_set.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1869,7 +2090,9 @@
             "in": "body",
             "name": "body",
             "description": "Device properties patch.",
-            "schema": {},
+            "schema": {
+              "type": "object"
+            },
             "required": true
           }
         ],
@@ -1894,6 +2117,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -1925,6 +2151,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1949,6 +2178,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -1972,6 +2204,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2004,6 +2239,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2044,6 +2282,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -2070,6 +2311,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2105,6 +2349,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2148,6 +2395,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -2167,14 +2417,17 @@
         }
       },
       "put": {
-        "operationId": "Devices_SetModuleComponentProperties",
-        "summary": "Update module properties for a specific component",
+        "operationId": "Devices_ReplaceModuleComponentProperties",
+        "summary": "Replace module properties for a specific component",
         "x-ms-examples": {
           "Update properties of a module within a component": {
             "$ref": "./examples/modules_properties_components_set.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2205,13 +2458,20 @@
       },
       "patch": {
         "operationId": "Devices_UpdateModuleComponentProperties",
-        "summary": "Update module properties for a specific component via PATCH",
+        "summary": "Update module properties for a specific component via patch",
         "x-ms-examples": {
           "Update properties of a module within a component": {
-            "$ref": "./examples/modules_properties_components_update.json"
+            "$ref": "./examples/modules_properties_components_set.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2225,7 +2485,9 @@
             "in": "body",
             "name": "body",
             "description": "Module properties patch.",
-            "schema": {},
+            "schema": {
+              "type": "object"
+            },
             "required": true
           }
         ],
@@ -2250,6 +2512,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2285,6 +2550,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           },
           {
@@ -2301,15 +2569,18 @@
         }
       },
       "put": {
-        "operationId": "Devices_SetModuleProperties",
-        "summary": "Update module properties",
-        "description": "Update all property values of a module.",
+        "operationId": "Devices_ReplaceModuleProperties",
+        "summary": "Replace module properties",
+        "description": "Replace all property values of a module.",
         "x-ms-examples": {
           "Update properties of a module": {
-            "$ref": "./examples/modules_properties_set.json"
+            "$ref": "./examples/modules_properties_update.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2337,14 +2608,21 @@
       },
       "patch": {
         "operationId": "Devices_UpdateModuleProperties",
-        "summary": "Update module properties via PATCH",
+        "summary": "Update module properties via patch",
         "description": "Update property values of a module.",
         "x-ms-examples": {
           "Update properties of a module": {
             "$ref": "./examples/modules_properties_update.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2355,7 +2633,9 @@
             "in": "body",
             "name": "body",
             "description": "Module properties patch.",
-            "schema": {},
+            "schema": {
+              "type": "object"
+            },
             "required": true
           }
         ],
@@ -2380,6 +2660,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2412,6 +2695,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/DeviceId"
           }
         ],
@@ -2425,15 +2711,18 @@
         }
       },
       "put": {
-        "operationId": "Devices_SetProperties",
-        "summary": "Update device properties",
-        "description": "Update all property values of a device by device ID.",
+        "operationId": "Devices_ReplaceProperties",
+        "summary": "Replace device properties",
+        "description": "Replace all property values of a device by device ID.",
         "x-ms-examples": {
           "Update properties": {
-            "$ref": "./examples/devices_properties_set.json"
+            "$ref": "./examples/devices_properties_update.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2458,14 +2747,21 @@
       },
       "patch": {
         "operationId": "Devices_UpdateProperties",
-        "summary": "Update device properties via PATCH",
+        "summary": "Update device properties via patch",
         "description": "Update property values of a device by device ID.",
         "x-ms-examples": {
           "Update properties": {
             "$ref": "./examples/devices_properties_update.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/json-patch+json"
+        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2473,7 +2769,9 @@
             "in": "body",
             "name": "body",
             "description": "Device properties patch.",
-            "schema": {},
+            "schema": {
+              "type": "object"
+            },
             "required": true
           }
         ],
@@ -2498,6 +2796,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/DeviceId"
           },
@@ -2524,6 +2825,11 @@
             "$ref": "./examples/jobs_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -2549,6 +2855,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/JobId"
           }
         ],
@@ -2571,6 +2880,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "$ref": "#/parameters/JobId"
           },
@@ -2606,6 +2918,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/JobId"
           }
         ],
@@ -2619,7 +2934,7 @@
         }
       }
     },
-    "/jobs/{jobId}/rerun/{rerunId}": {
+    "/jobs/{jobId}/rerun/{rerun_id}": {
       "put": {
         "operationId": "Jobs_Rerun",
         "summary": "Rerun a job on failed devices",
@@ -2631,11 +2946,14 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/JobId"
           },
           {
             "in": "path",
-            "name": "rerunId",
+            "name": "rerun_id",
             "description": "Unique ID of the job rerun.",
             "x-ms-parameter-location": "method",
             "type": "string",
@@ -2664,6 +2982,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/JobId"
           }
         ],
@@ -2686,6 +3007,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "$ref": "#/parameters/JobId"
           }
         ],
@@ -2705,6 +3029,11 @@
             "$ref": "./examples/roles_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -2728,6 +3057,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "roleId",
@@ -2755,6 +3087,11 @@
             "$ref": "./examples/users_list.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -2779,6 +3116,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "in": "path",
             "name": "userId",
             "description": "Unique ID of the user.",
@@ -2797,7 +3137,7 @@
       },
       "put": {
         "operationId": "Users_Create",
-        "summary": "Create or update a user in the application",
+        "summary": "Create a user in the application",
         "x-ms-examples": {
           "Add or update a service principal user": {
             "$ref": "./examples/users_set_serviceprincipal.json"
@@ -2807,6 +3147,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "userId",
@@ -2835,16 +3178,19 @@
       },
       "patch": {
         "operationId": "Users_Update",
-        "summary": "Update a user in the application via PATCH",
+        "summary": "Update a user in the application via patch",
         "x-ms-examples": {
           "Update a service principal user": {
             "$ref": "./examples/users_set_serviceprincipal.json"
           },
           "Update an email user": {
-            "$ref": "./examples/users_update.json"
+            "$ref": "./examples/users_set.json"
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          },
           {
             "in": "path",
             "name": "userId",
@@ -2856,7 +3202,9 @@
             "in": "body",
             "name": "body",
             "description": "User patch body.",
-            "schema": {},
+            "schema": {
+              "type": "object"
+            },
             "required": true
           }
         ],
@@ -2879,6 +3227,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/Version"
+          },
+          {
             "in": "path",
             "name": "userId",
             "description": "Unique ID of the user.",
@@ -2895,10 +3246,10 @@
     }
   },
   "parameters": {
-    "CentralDnsSuffixInPath": {
+    "BaseDomain": {
       "in": "path",
-      "name": "centralDnsSuffixInPath",
-      "description": "The DNS suffix used as the base for all Azure IoT Central service requests.",
+      "name": "baseDomain",
+      "description": "The base domain for all Azure IoT Central service requests.",
       "x-ms-parameter-location": "client",
       "type": "string",
       "x-ms-skip-url-encoding": true,
@@ -2916,7 +3267,7 @@
     "ComponentName": {
       "in": "path",
       "name": "componentName",
-      "description": "Name of the component. In the device template editor in your app, this is the interface instance name.",
+      "description": "Name of the device component.",
       "x-ms-parameter-location": "method",
       "type": "string",
       "required": true
@@ -2968,6 +3319,15 @@
       "x-ms-parameter-location": "method",
       "type": "string",
       "required": true
+    },
+    "Version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The version of the API being called.",
+      "x-ms-parameter-location": "client",
+      "type": "string",
+      "default": "preview",
+      "required": true
     }
   },
   "securityDefinitions": {
@@ -2980,6 +3340,5 @@
         "user_impersonation": "impersonate your user account"
       }
     }
-  },
-  "security": []
+  }
 }
