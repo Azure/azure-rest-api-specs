@@ -251,6 +251,21 @@ directive:
       - $.definitions.RedisCommonProperties.properties.enableNonSslPort
     from: redis.json
     reason: this will result in breaking change
+  - suppress: 1R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isMaster."
+    where:
+      - $.definitions.RedisInstanceDetails.properties.isMaster
+    from: redis.json
+    reason: this will result in breaking change
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isPrimary"
+    where:
+      - $.definitions.RedisInstanceDetails.properties.isPrimary
+    from: redis.json
+    reason: this will result in breaking change
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isDataAction"
+    where:
+      - $.definitions.Operation.properties.isDataAction
+    from: types.json
+    reason: its per the RPC specification
   - suppress: R2017  # PUT request and response should be of same type "
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/linkedServers/{linkedServerName}"].put
