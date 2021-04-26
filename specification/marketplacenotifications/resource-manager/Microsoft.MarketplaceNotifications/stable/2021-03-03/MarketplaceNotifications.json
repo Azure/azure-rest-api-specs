@@ -15,6 +15,7 @@
         "operationId": "Notification_GetWithAuthorization",
         "parameters": [
           {
+            "description": "user's subscription id",
             "type": "string",
             "name": "subscription",
             "in": "path",
@@ -22,6 +23,7 @@
             "x-position": 1
           },
           {
+            "description": "user's principal id",
             "type": "string",
             "name": "principalID",
             "in": "query",
@@ -39,6 +41,41 @@
         "x-ms-examples": {
           "GetReviewsNotification": {
             "$ref": "./examples/GetReviewsNotification.json"
+          }
+        }
+      },
+      "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsnotification/operations": {
+        "get": {
+          "tags": [
+            "Diagnostics"
+          ],
+          "operationId": "Diagnostics_GetOperations",
+          "parameters": [
+            {
+              "type": "string",
+              "name": "subscription",
+              "in": "path",
+              "required": true,
+              "x-position": 1,
+              "nullable": false
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK. The request has succeeded.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/definitions/DiagnosticsInfoDto"
+                  }
+                }
+              }
+            }
+          },
+          "x-ms-examples": {
+            "GetReviewsNotification": {
+              "$ref": "./examples/GetReviewsNotificationOperations.json"
+            }
           }
         }
       }
@@ -67,6 +104,20 @@
         },
         "principalId": {
           "description": "user's principal id",
+          "type": "string"
+        }
+      }
+    },
+    "DiagnosticsInfoDto": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MS-CV": {
+          "description": "MS-CV",
+          "type": "string"
+        },
+        "buildNumber": {
+          "description": "build number",
           "type": "string"
         }
       }
