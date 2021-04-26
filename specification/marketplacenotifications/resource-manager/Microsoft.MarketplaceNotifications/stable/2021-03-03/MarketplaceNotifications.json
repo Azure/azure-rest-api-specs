@@ -24,13 +24,13 @@
         "operationId": "Notification_GetWithAuthorization",
         "parameters": [
           {
-            "$ref": "#/parameters/Subscription"
+            "$ref": "#/definitions/Subscription"
           },
           {
-            "$ref": "#/parameters/PrincipalId"
+            "$ref": "#/definitions/PrincipalId"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "#/definitions/ApiVersion"
           }
         ],
         "responses": {
@@ -56,10 +56,10 @@
         "operationId": "Diagnostics_GetOperations",
         "parameters":[
           {
-            "$ref": "#/parameters/Subscription"
+            "$ref": "#/definitions/Subscription"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "#/definitions/ApiVersion"
           }
         ],
         "responses": {
@@ -118,9 +118,7 @@
           "type": "string"
         }
       }
-    }
-  },
-  "parameters":{
+    },
     "Subscription":{
       "type": "string",
       "name": "subscription",
