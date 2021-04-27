@@ -657,6 +657,149 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listVMHost": {
+      "post": {
+        "tags": [
+          "VMHHostList"
+        ],
+        "summary": "List the vm resources currently being monitored by the Elastic monitor resource.",
+        "operationId": "VMHost_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VMHostListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VMHost_List": {
+            "$ref": "./examples/VMHost_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/vmIngestionDetails": {
+      "post": {
+        "tags": [
+          "VMIngestionDetails"
+        ],
+        "summary": "List the vm ingestion details that will be monitored by the Elastic monitor resource.",
+        "operationId": "VMIngestion_Details",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VMIngestionDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VMIngestion_Details": {
+            "$ref": "./examples/VMIngestion_Details.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/vmCollectionUpdate": {
+      "post": {
+        "tags": [
+          "VMCollectionUpdate"
+        ],
+        "summary": "Update the vm details that will be monitored by the Elastic monitor resource.",
+        "operationId": "VMCollection_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "VM resource Id",
+            "schema": {
+              "$ref": "#/definitions/VMCollectionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VMCollection_Update": {
+            "$ref": "./examples/VMCollection_Update.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1306,6 +1449,76 @@
           "description": "Disk capacity of the elasticsearch in Elastic cloud deployment.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "VMHostListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMResources"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next Vm resource Id, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "VMResources": {
+      "description": "The vm resource properties that is currently being monitored by the Elastic monitor resource.",
+      "type": "object",
+      "properties": {
+        "vmResourceId": {
+          "description": "The ARM id of the VM resource.",
+          "type": "string"
+        }
+      }
+    },
+    "VMIngestionDetailsResponse": {
+      "description": "The vm ingestion details to install an agent.",
+      "type": "object",
+      "properties": {
+        "cloudId": {
+          "description": "The cloudId of given Elastic monitor resource.",
+          "type": "string"
+        },
+        "ingestionKey": {
+          "description": "Ingestion details to install agent on given VM.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "OperationName": {
+      "enum": [
+        "Add",
+        "Delete"
+      ],
+      "type": "string",
+      "description": "Operation to be performed on the given vm resource id.",
+      "title": "OperationName",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "OperationName"
+      }
+    },
+    "VMCollectionUpdate": {
+      "description": "Update VM resource collection.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "vmResourceId": {
+          "description": "ARM id of the VM resource.",
+          "type": "string"
+        },
+        "operationName": {
+          "description": "Operation to be performed for given VM.",
+          "$ref": "#/definitions/OperationName"
         }
       }
     }

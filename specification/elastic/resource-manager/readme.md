@@ -58,6 +58,17 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js elastic/resource-manager
   - repo: azure-cli-extensions
 ```
+## Suppression
+```
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.Elastic/preview/2020-07-01-preview/elastic.json
+    where:
+      - $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
+    reason: Secrets are OK to return in a POST response.
+```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
