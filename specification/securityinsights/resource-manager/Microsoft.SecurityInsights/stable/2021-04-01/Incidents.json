@@ -721,6 +721,44 @@
         "name": "AttackTactic"
       }
     },
+    "AzureResourceEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an azure resource entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureResourceEntityProperties",
+          "description": "AzureResource entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureResource"
+    },
+    "AzureResourceEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "AzureResource entity property bag.",
+      "properties": {
+        "resourceId": {
+          "description": "The azure resource id of the resource",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The subscription id of the resource",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ClientInfo": {
       "description": "Information on the client (user or application) that made some action",
       "properties": {
@@ -744,6 +782,49 @@
       },
       "type": "object"
     },
+    "CloudApplicationEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a cloud application entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudApplicationEntityProperties",
+          "description": "CloudApplication entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "CloudApplication"
+    },
+    "CloudApplicationEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "CloudApplication entity property bag.",
+      "properties": {
+        "appId": {
+          "description": "The technical identifier of the application.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "appName": {
+          "description": "The name of the related cloud application.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "instanceName": {
+          "description": "The user defined instance name of the cloud application. It is often used to distinguish between several applications of the same type that a customer has.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
@@ -753,6 +834,58 @@
         }
       },
       "description": "An error response for a resource management request."
+    },
+    "DnsEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a dns entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DnsEntityProperties",
+          "description": "Dns entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "DnsResolution"
+    },
+    "DnsEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Dns entity property bag.",
+      "properties": {
+        "dnsServerIpEntityId": {
+          "description": "An ip entity id for the dns server resolving the request",
+          "readOnly": true,
+          "type": "string"
+        },
+        "domainName": {
+          "description": "The name of the dns record associated with the alert",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostIpAddressEntityId": {
+          "description": "An ip entity id for the dns request client",
+          "readOnly": true,
+          "type": "string"
+        },
+        "ipAddressEntityIds": {
+          "description": "Ip entity identifiers for the resolved ip address.",
+          "items": {
+            "description": "Ip entity id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
     },
     "Entity": {
       "allOf": [
@@ -934,6 +1067,278 @@
       "required": [
         "kind"
       ],
+      "type": "object"
+    },
+    "FileEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a file entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileEntityProperties",
+          "description": "File entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "File"
+    },
+    "FileEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "File entity property bag.",
+      "properties": {
+        "directory": {
+          "description": "The full path to the file.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "fileHashEntityIds": {
+          "description": "The file hash entity identifiers associated with this file",
+          "items": {
+            "description": "file hash id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "fileName": {
+          "description": "The file name without path (some alerts might not include path).",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostEntityId": {
+          "description": "The Host entity id which the file belongs to",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "FileHashEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a file hash entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileHashEntityProperties",
+          "description": "FileHash entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "FileHash"
+    },
+    "FileHashEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "FileHash entity property bag.",
+      "properties": {
+        "algorithm": {
+          "description": "The hash algorithm type.",
+          "enum": [
+            "Unknown",
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "SHA256AC"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "FileHashAlgorithm",
+            "values": [
+              {
+                "description": "Unknown hash algorithm",
+                "value": "Unknown"
+              },
+              {
+                "description": "MD5 hash type",
+                "value": "MD5"
+              },
+              {
+                "description": "SHA1 hash type",
+                "value": "SHA1"
+              },
+              {
+                "description": "SHA256 hash type",
+                "value": "SHA256"
+              },
+              {
+                "description": "SHA256 Authenticode hash type",
+                "value": "SHA256AC"
+              }
+            ]
+          }
+        },
+        "hashValue": {
+          "description": "The file hash value.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GeoLocation": {
+      "description": "The geo-location context attached to the ip entity",
+      "properties": {
+        "asn": {
+          "description": "Autonomous System Number",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "city": {
+          "description": "City name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "countryCode": {
+          "description": "The country code according to ISO 3166 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "countryName": {
+          "description": "Country name according to ISO 3166 Alpha 2: the lowercase of the English Short Name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "latitude": {
+          "description": "The longitude of the identified location, expressed as a floating point number with range of -180 to 180, with positive numbers representing East and negative numbers representing West. Latitude and longitude are derived from the city or postal code.",
+          "format": "double",
+          "readOnly": true,
+          "type": "number"
+        },
+        "longitude": {
+          "description": "The latitude of the identified location, expressed as a floating point number with range of - 90 to 90, with positive numbers representing North and negative numbers representing South. Latitude and longitude are derived from the city or postal code.",
+          "format": "double",
+          "readOnly": true,
+          "type": "number"
+        },
+        "state": {
+          "description": "State name",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "readOnly": true,
+      "type": "object"
+    },
+    "HostEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a host entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HostEntityProperties",
+          "description": "Host entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Host"
+    },
+    "HostEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Host entity property bag.",
+      "properties": {
+        "azureID": {
+          "description": "The azure resource id of the VM.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "dnsDomain": {
+          "description": "The DNS domain that this host belongs to. Should contain the compete DNS suffix for the domain",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostName": {
+          "description": "The hostname without the domain suffix.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "isDomainJoined": {
+          "description": "Determines whether this host belongs to a domain.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "netBiosName": {
+          "description": "The host name (pre-windows2000).",
+          "readOnly": true,
+          "type": "string"
+        },
+        "ntDomain": {
+          "description": "The NT domain that this host belongs to.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "omsAgentID": {
+          "description": "The OMS agent id, if the host has OMS agent installed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "osFamily": {
+          "description": "The operating system type.",
+          "enum": [
+            "Linux",
+            "Windows",
+            "Android",
+            "IOS",
+            "Unknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "OSFamily",
+            "values": [
+              {
+                "description": "Host with Linux operating system.",
+                "value": "Linux"
+              },
+              {
+                "description": "Host with Windows operating system.",
+                "value": "Windows"
+              },
+              {
+                "description": "Host with Android operating system.",
+                "value": "Android"
+              },
+              {
+                "description": "Host with IOS operating system.",
+                "value": "IOS"
+              },
+              {
+                "description": "Host with Unknown operating system.",
+                "value": "Unknown"
+              }
+            ]
+          }
+        },
+        "osVersion": {
+          "description": "A free text representation of the operating system. This field is meant to hold specific versions the are more fine grained than OSFamily or future values not supported by OSFamily enumeration",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "HuntingBookmark": {
@@ -1324,10 +1729,6 @@
         "value"
       ]
     },
-    "Label": {
-      "description": "Label that will be used to tag and filter on.",
-      "type": "string"
-    },
     "IncidentOwnerInfo": {
       "description": "Information on the user an incident is assigned to",
       "properties": {
@@ -1555,6 +1956,964 @@
         "severity",
         "status"
       ],
+      "type": "object"
+    },
+    "IoTDeviceEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an IoT device entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IoTDeviceEntityProperties",
+          "description": "IoTDevice entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "IoTDevice"
+    },
+    "IoTDeviceEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "IoTDevice entity property bag.",
+      "properties": {
+        "deviceId": {
+          "description": "The ID of the IoT Device in the IoT Hub",
+          "readOnly": true,
+          "type": "string"
+        },
+        "deviceName": {
+          "description": "The friendly name of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "source": {
+          "description": "The source of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "iotSecurityAgentId": {
+          "description": "The ID of the security agent running on the device",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "deviceType": {
+          "description": "The type of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "vendor": {
+          "description": "The vendor of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "edgeId": {
+          "description": "The ID of the edge device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "macAddress": {
+          "description": "The MAC address of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "model": {
+          "description": "The model of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "The serial number of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "firmwareVersion": {
+          "description": "The firmware version of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "operatingSystem": {
+          "description": "The operating system of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "iotHubEntityId": {
+          "description": "The AzureResource entity id of the IoT Hub",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostEntityId": {
+          "description": "The Host entity id of this device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "ipAddressEntityId": {
+          "description": "The IP entity if of this device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatIntelligence": {
+          "description": "A list of TI contexts attached to the IoTDevice entity.",
+          "items": {
+            "$ref": "#/definitions/ThreatIntelligence"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "protocols": {
+          "description": "A list of protocols of the IoTDevice entity.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "IpEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an ip entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IpEntityProperties",
+          "description": "Ip entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Ip"
+    },
+    "IpEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Ip entity property bag.",
+      "properties": {
+        "address": {
+          "description": "The IP address as string, e.g. 127.0.0.1 (either in Ipv4 or Ipv6)",
+          "readOnly": true,
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/GeoLocation",
+          "description": "The geo-location context attached to the ip entity"
+        },
+        "threatIntelligence": {
+          "description": "A list of TI contexts attached to the ip entity.",
+          "items": {
+            "$ref": "#/definitions/ThreatIntelligence"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Label": {
+      "description": "Label that will be used to tag and filter on.",
+      "type": "string"
+    },
+    "MailboxEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mailbox entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailboxEntityProperties",
+          "description": "Mailbox entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Mailbox"
+    },
+    "MailboxEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mailbox entity property bag.",
+      "properties": {
+        "mailboxPrimaryAddress": {
+          "description": "The mailbox's primary address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The mailbox's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "upn": {
+          "description": "The mailbox's UPN",
+          "readOnly": true,
+          "type": "string"
+        },
+        "externalDirectoryObjectId": {
+          "description": "The AzureAD identifier of mailbox. Similar to AadUserId in account entity but this property is specific to mailbox object on office side",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MailClusterEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mail cluster entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailClusterEntityProperties",
+          "description": "Mail cluster entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MailCluster"
+    },
+    "MailClusterEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mail cluster entity property bag.",
+      "properties": {
+        "networkMessageIds": {
+          "description": "The mail message IDs that are part of the mail cluster",
+          "items": {
+            "description": "A mail message ID",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "countByDeliveryStatus": {
+          "description": "Count of mail messages by DeliveryStatus string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "countByThreatType": {
+          "description": "Count of mail messages by ThreatType string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "countByProtectionStatus": {
+          "description": "Count of mail messages by ProtectionStatus string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "threats": {
+          "description": "The threats of mail messages that are part of the mail cluster",
+          "items": {
+            "description": "A threat",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "query": {
+          "description": "The query that was used to identify the messages of the mail cluster",
+          "readOnly": true,
+          "type": "string"
+        },
+        "queryTime": {
+          "description": "The query time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "mailCount": {
+          "description": "The number of mail messages that are part of the mail cluster",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "isVolumeAnomaly": {
+          "description": "Is this a volume anomaly mail cluster",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "source": {
+          "description": "The source of the mail cluster (default is 'O365 ATP')",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterSourceIdentifier": {
+          "description": "The id of the cluster source",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterSourceType": {
+          "description": "The type of the cluster source",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterQueryStartTime": {
+          "description": "The cluster query start time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterQueryEndTime": {
+          "description": "The cluster query end time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterGroup": {
+          "description": "The cluster group",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MailMessageEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mail message entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailMessageEntityProperties",
+          "description": "Mail message entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MailMessage"
+    },
+    "MailMessageEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mail message entity property bag.",
+      "properties": {
+        "fileEntityIds": {
+          "description": "The File entity ids of this mail message's attachments",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "recipient": {
+          "description": "The recipient of this mail message. Note that in case of multiple recipients the mail message is forked and each copy has one recipient",
+          "readOnly": true,
+          "type": "string"
+        },
+        "urls": {
+          "description": "The Urls contained in this mail message",
+          "items": {
+            "description": "A Url contained in this mail message",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "threats": {
+          "description": "The threats of this mail message",
+          "items": {
+            "description": "A threat of the mail message",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "p1Sender": {
+          "description": "The p1 sender's email address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p1SenderDisplayName": {
+          "description": "The p1 sender's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p1SenderDomain": {
+          "description": "The p1 sender's domain",
+          "readOnly": true,
+          "type": "string"
+        },
+        "senderIP": {
+          "description": "The sender's IP address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2Sender": {
+          "description": "The p2 sender's email address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2SenderDisplayName": {
+          "description": "The p2 sender's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2SenderDomain": {
+          "description": "The p2 sender's domain",
+          "readOnly": true,
+          "type": "string"
+        },
+        "receiveDate": {
+          "description": "The receive date of this message",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "networkMessageId": {
+          "description": "The network message id of this mail message",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "internetMessageId": {
+          "description": "The internet message id of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subject": {
+          "description": "The subject of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "language": {
+          "description": "The language of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatDetectionMethods": {
+          "description": "The threat detection methods",
+          "items": {
+            "description": "A threat detection method",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "bodyFingerprintBin1": {
+          "description": "The bodyFingerprintBin1",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin2": {
+          "description": "The bodyFingerprintBin2",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin3": {
+          "description": "The bodyFingerprintBin3",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin4": {
+          "description": "The bodyFingerprintBin4",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin5": {
+          "description": "The bodyFingerprintBin5",
+          "type": "integer",
+          "format": "int32"
+        },
+        "antispamDirection": {
+          "description": "The directionality of this mail message",
+          "enum": [
+            "Unknown",
+            "Inbound",
+            "Outbound",
+            "Intraorg"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AntispamMailDirection",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "Inbound",
+                "value": "Inbound"
+              },
+              {
+                "description": "Outbound",
+                "value": "Outbound"
+              },
+              {
+                "description": "Intraorg",
+                "value": "Intraorg"
+              }
+            ]
+          }
+        },
+        "deliveryAction": {
+          "description": "The delivery action of this mail message like Delivered, Blocked, Replaced etc",
+          "enum": [
+            "Unknown",
+            "DeliveredAsSpam",
+            "Delivered",
+            "Blocked",
+            "Replaced"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DeliveryAction",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "DeliveredAsSpam",
+                "value": "DeliveredAsSpam"
+              },
+              {
+                "description": "Delivered",
+                "value": "Delivered"
+              },
+              {
+                "description": "Blocked",
+                "value": "Blocked"
+              },
+              {
+                "description": "Replaced",
+                "value": "Replaced"
+              }
+            ]
+          }
+        },
+        "deliveryLocation": {
+          "description": "The delivery location of this mail message like Inbox, JunkFolder etc",
+          "enum": [
+            "Unknown",
+            "Inbox",
+            "JunkFolder",
+            "DeletedFolder",
+            "Quarantine",
+            "External",
+            "Failed",
+            "Dropped",
+            "Forwarded"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DeliveryLocation",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "Inbox",
+                "value": "Inbox"
+              },
+              {
+                "description": "JunkFolder",
+                "value": "JunkFolder"
+              },
+              {
+                "description": "DeletedFolder",
+                "value": "DeletedFolder"
+              },
+              {
+                "description": "Quarantine",
+                "value": "Quarantine"
+              },
+              {
+                "description": "External",
+                "value": "External"
+              },
+              {
+                "description": "Failed",
+                "value": "Failed"
+              },
+              {
+                "description": "Dropped",
+                "value": "Dropped"
+              },
+              {
+                "description": "Forwarded",
+                "value": "Forwarded"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
+    },
+    "MalwareEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a malware entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MalwareEntityProperties",
+          "description": "File entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Malware"
+    },
+    "MalwareEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Malware entity property bag.",
+      "properties": {
+        "category": {
+          "description": "The malware category by the vendor, e.g. Trojan",
+          "readOnly": true,
+          "type": "string"
+        },
+        "fileEntityIds": {
+          "description": "List of linked file entity identifiers on which the malware was found",
+          "items": {
+            "description": "file entity id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "malwareName": {
+          "description": "The malware name by the vendor, e.g. Win32/Toga!rfn",
+          "readOnly": true,
+          "type": "string"
+        },
+        "processEntityIds": {
+          "description": "List of linked process entity identifiers on which the malware was found.",
+          "items": {
+            "description": "process entity id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ProcessEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a process entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProcessEntityProperties",
+          "description": "Process entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Process"
+    },
+    "ProcessEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Process entity property bag.",
+      "properties": {
+        "accountEntityId": {
+          "description": "The account entity id running the processes.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "commandLine": {
+          "description": "The command line used to create the process",
+          "readOnly": true,
+          "type": "string"
+        },
+        "creationTimeUtc": {
+          "description": "The time when the process started to run",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "elevationToken": {
+          "description": "The elevation token associated with the process.",
+          "enum": [
+            "Default",
+            "Full",
+            "Limited"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "ElevationToken",
+            "values": [
+              {
+                "description": "Default elevation token",
+                "value": "Default"
+              },
+              {
+                "description": "Full elevation token",
+                "value": "Full"
+              },
+              {
+                "description": "Limited elevation token",
+                "value": "Limited"
+              }
+            ]
+          }
+        },
+        "hostEntityId": {
+          "description": "The host entity id on which the process was running",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostLogonSessionEntityId": {
+          "description": "The session entity id in which the process was running",
+          "readOnly": true,
+          "type": "string"
+        },
+        "imageFileEntityId": {
+          "description": "Image file entity id",
+          "readOnly": true,
+          "type": "string"
+        },
+        "parentProcessEntityId": {
+          "description": "The parent process entity id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "processId": {
+          "description": "The process ID",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RegistryKeyEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a registry key entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegistryKeyEntityProperties",
+          "description": "RegistryKey entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "RegistryKey"
+    },
+    "RegistryKeyEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "RegistryKey entity property bag.",
+      "properties": {
+        "hive": {
+          "description": "the hive that holds the registry key.",
+          "enum": [
+            "HKEY_LOCAL_MACHINE",
+            "HKEY_CLASSES_ROOT",
+            "HKEY_CURRENT_CONFIG",
+            "HKEY_USERS",
+            "HKEY_CURRENT_USER_LOCAL_SETTINGS",
+            "HKEY_PERFORMANCE_DATA",
+            "HKEY_PERFORMANCE_NLSTEXT",
+            "HKEY_PERFORMANCE_TEXT",
+            "HKEY_A",
+            "HKEY_CURRENT_USER"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RegistryHive",
+            "values": [
+              {
+                "description": "HKEY_LOCAL_MACHINE",
+                "value": "HKEY_LOCAL_MACHINE"
+              },
+              {
+                "description": "HKEY_CLASSES_ROOT",
+                "value": "HKEY_CLASSES_ROOT"
+              },
+              {
+                "description": "HKEY_CURRENT_CONFIG",
+                "value": "HKEY_CURRENT_CONFIG"
+              },
+              {
+                "description": "HKEY_USERS",
+                "value": "HKEY_USERS"
+              },
+              {
+                "description": "HKEY_CURRENT_USER_LOCAL_SETTINGS",
+                "value": "HKEY_CURRENT_USER_LOCAL_SETTINGS"
+              },
+              {
+                "description": "HKEY_PERFORMANCE_DATA",
+                "value": "HKEY_PERFORMANCE_DATA"
+              },
+              {
+                "description": "HKEY_PERFORMANCE_NLSTEXT",
+                "value": "HKEY_PERFORMANCE_NLSTEXT"
+              },
+              {
+                "description": "HKEY_PERFORMANCE_TEXT",
+                "value": "HKEY_PERFORMANCE_TEXT"
+              },
+              {
+                "description": "HKEY_A",
+                "value": "HKEY_A"
+              },
+              {
+                "description": "HKEY_CURRENT_USER",
+                "value": "HKEY_CURRENT_USER"
+              }
+            ]
+          }
+        },
+        "key": {
+          "description": "The registry key path.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RegistryValueEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a registry value entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegistryValueEntityProperties",
+          "description": "RegistryKey entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "RegistryValue"
+    },
+    "RegistryValueEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "RegistryValue entity property bag.",
+      "properties": {
+        "keyEntityId": {
+          "description": "The registry key entity id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "valueData": {
+          "description": "String formatted representation of the value data.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "valueName": {
+          "description": "The registry value name.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "valueType": {
+          "description": "Specifies the data types to use when storing values in the registry, or identifies the data type of a value in the registry.",
+          "enum": [
+            "None",
+            "Unknown",
+            "String",
+            "ExpandString",
+            "Binary",
+            "DWord",
+            "MultiString",
+            "QWord"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RegistryValueKind",
+            "values": [
+              {
+                "description": "None",
+                "value": "None"
+              },
+              {
+                "description": "Unknown value type",
+                "value": "Unknown"
+              },
+              {
+                "description": "String value type",
+                "value": "String"
+              },
+              {
+                "description": "ExpandString value type",
+                "value": "ExpandString"
+              },
+              {
+                "description": "Binary value type",
+                "value": "Binary"
+              },
+              {
+                "description": "DWord value type",
+                "value": "DWord"
+              },
+              {
+                "description": "MultiString value type",
+                "value": "MultiString"
+              },
+              {
+                "description": "QWord value type",
+                "value": "QWord"
+              }
+            ]
+          }
+        }
+      },
       "type": "object"
     },
     "SecurityAlert": {
@@ -1897,6 +3256,202 @@
           },
           "readOnly": true,
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SecurityGroupEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a security group entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityGroupEntityProperties",
+          "description": "SecurityGroup entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "SecurityGroup"
+    },
+    "SecurityGroupEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "SecurityGroup entity property bag.",
+      "properties": {
+        "distinguishedName": {
+          "description": "The group distinguished name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "objectGuid": {
+          "description": "A single-value attribute that is the unique identifier for the object, assigned by active directory.",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "sid": {
+          "description": "The SID attribute is a single-value attribute that specifies the security identifier (SID) of the group",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SubmissionMailEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a submission mail entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubmissionMailEntityProperties",
+          "description": "Submission mail entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "SubmissionMail"
+    },
+    "SubmissionMailEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Submission mail entity property bag.",
+      "properties": {
+        "networkMessageId": {
+          "description": "The network message id of email to which submission belongs",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "submissionId": {
+          "description": "The submission id",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "submitter": {
+          "description": "The submitter",
+          "readOnly": true,
+          "type": "string"
+        },
+        "submissionDate": {
+          "description": "The submission date",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "The Time stamp when the message is received (Mail)",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "recipient": {
+          "description": "The recipient of the mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "sender": {
+          "description": "The sender of the mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "senderIp": {
+          "description": "The sender's IP",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subject": {
+          "description": "The subject of submission mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "reportType": {
+          "description": "The submission type for the given instance. This maps to Junk, Phish, Malware or NotJunk.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligence": {
+      "description": "ThreatIntelligence property bag.",
+      "properties": {
+        "confidence": {
+          "description": "Confidence (must be between 0 and 1)",
+          "format": "double",
+          "readOnly": true,
+          "type": "number"
+        },
+        "providerName": {
+          "description": "Name of the provider from whom this Threat Intelligence information was received",
+          "readOnly": true,
+          "type": "string"
+        },
+        "reportLink": {
+          "description": "Report link",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatDescription": {
+          "description": "Threat description (free text)",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatName": {
+          "description": "Threat name (e.g. \"Jedobot malware\")",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatType": {
+          "description": "Threat type (e.g. \"Botnet\")",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UrlEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a url entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UrlEntityProperties",
+          "description": "Url entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Url"
+    },
+    "UrlEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Url entity property bag.",
+      "properties": {
+        "url": {
+          "description": "A full URL the entity points to",
+          "readOnly": true,
+          "type": "string"
         }
       },
       "type": "object"
