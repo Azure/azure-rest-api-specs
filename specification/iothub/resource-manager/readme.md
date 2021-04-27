@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-preview-2021-03` is specified on t
 input-file:
   - Microsoft.Devices/preview/2021-03-03-preview/iothub.json
 ```
+
 ### Tag: package-preview-2021-02
 
 These settings apply only when `--tag=package-preview-2021-02` is specified on the command line.

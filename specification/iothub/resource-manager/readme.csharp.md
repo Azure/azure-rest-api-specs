@@ -22,6 +22,18 @@ csharp:
   clear-output-folder: true
 ```
 
+### Profile: hybrid_2020_08_31
+
+These settings apply only when `--csharp-profile=hybrid_2020_08_31` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2020_08_31'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).IotHub
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/IotHub/Management.IotHub/Generated
+
+batch:
+  - tag: profile-hybrid_2020_08_31
+```
+
 ### Profile: hybrid_2020_09_01
 
 These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
