@@ -9,6 +9,7 @@ python:
   package-name: azure-mgmt-resource
   payload-flattening-threshold: 2
   clear-output-folder: true
+  package-version: 1.0.0b1
   no-namespace-folders: true
   verbose: true
   debug: true
