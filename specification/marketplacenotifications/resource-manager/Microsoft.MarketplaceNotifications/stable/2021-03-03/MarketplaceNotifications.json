@@ -208,7 +208,13 @@
         "display": {
           "$ref": "#/definitions/OperationDisplay",
           "description": "Display of the operation"
-        }
+        },
+        "origin": {
+          "description": "operation origin",
+          "type": "string"
+        },
+        "properties": "operation properties",
+        "type": "object"
       }
     },
     "OperationDisplay": {
@@ -217,6 +223,14 @@
       "properties": {
         "resource": {
           "description": "Resource of the operation",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Name of the provider for display purposes",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation for display purposes",
           "type": "string"
         },
         "description": {
