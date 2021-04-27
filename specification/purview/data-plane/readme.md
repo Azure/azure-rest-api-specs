@@ -102,13 +102,13 @@ reason: Should be compatible with Atlas swagger.
 ``` yaml
 directive:
   - suppress: INVALID_TYPE
-from: purviewcatalog.json
-reason: It doesn't support file annotation in example file, the invalid type error can be ignored.
+    from: purviewcatalog.json
+    reason: It doesn't support file annotation in example file, the invalid type error can be ignored.
 ```
 
 ``` yaml
 directive:
   - suppress: INVALID_CONTENT_TYPE
-from: purviewcatalog.json
-reason: It doesn't support file annotation in example file, the invalid type error can be ignored.
+    from: purviewcatalog.json
+    reason: It doesn't support file annotation in example file, the invalid type error can be ignored.
 ```
