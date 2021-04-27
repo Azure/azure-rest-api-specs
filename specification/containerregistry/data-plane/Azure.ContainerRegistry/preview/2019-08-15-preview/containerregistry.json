@@ -1297,32 +1297,38 @@
       "properties": {
         "imageName": {
           "type": "string",
+          "readOnly": true,
           "description": "Image name",
           "x-ms-client-name": "name"
         },
         "createdTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "Image created time",
           "x-ms-client-name": "createdOn"
         },
         "lastUpdateTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "Image last update time",
           "x-ms-client-name": "lastUpdatedOn"
         },
         "manifestCount": {
           "type": "integer",
+          "readOnly": true,
           "description": "Number of the manifests"
         },
         "tagCount": {
           "type": "integer",
+          "readOnly": true,
           "description": "Number of the tags"
         },
         "changeableAttributes": {
           "description": "Writeable properties of the resource",
           "$ref": "#/definitions/ChangeableAttributes",
+          "readOnly": true,
           "x-ms-client-name": "writeableProperties"
         }
       },
@@ -1410,12 +1416,14 @@
       "properties": {
         "imageName": {
           "type": "string",
+          "readOnly": true,
           "description": "Image name",
           "x-ms-client-name": "repository"
         },
         "tag": {
           "x-ms-client-flatten": true,
           "description": "List of tag attribute details",
+          "readOnly": true,
           "$ref": "#/definitions/TagAttributesBase"
         }
       },
@@ -1450,20 +1458,24 @@
       "properties": {
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Tag name"
         },
         "digest": {
           "type": "string",
+          "readOnly": true,
           "description": "Tag digest"
         },
         "createdTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "Tag created time",
           "x-ms-client-name": "createdOn"
         },
         "lastUpdateTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "Tag last update time",
           "x-ms-client-name": "lastUpdatedOn"
@@ -1471,6 +1483,7 @@
         "changeableAttributes": {
           "$ref": "#/definitions/ChangeableAttributes",
           "description": "Writeable properties of the resource",
+          "readOnly": true,
           "x-ms-client-name": "writeableProperties"
         }
       },
@@ -1783,10 +1796,12 @@
         "imageName": {
           "description": "Repository name",
           "type": "string",
+          "readOnly": true,
           "x-ms-client-name": "repositoryName"
         },
         "manifest": {
           "x-ms-client-flatten": true,
+          "readOnly": true,
           "description": "Manifest attributes",
           "$ref": "#/definitions/ManifestAttributesBase"
         }
@@ -1825,22 +1840,26 @@
       "properties": {
         "digest": {
           "type": "string",
+          "readOnly": true,
           "description": "Manifest"
         },
         "imageSize": {
           "type": "integer",
+          "readOnly": true,
           "format": "int64",
           "description": "Image size",
           "x-ms-client-name": "size"
         },
         "createdTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "Created time",
           "x-ms-client-name": "createdOn"
         },
         "lastUpdateTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "Last update time",
           "x-ms-client-name": "lastUpdatedOn"
@@ -1849,17 +1868,20 @@
           "$ref": "#/definitions/ArtifactArchitecture",
           "description": "CPU architecture",
           "x-ms-client-name": "architecture",
+          "readOnly": true,
           "x-nullable": true
         },
         "os": {
           "$ref": "#/definitions/ArtifactOperatingSystem",
           "description": "Operating system",
           "x-ms-client-name": "operatingSystem",
+          "readOnly": true,
           "x-nullable": true
         },
         "references": {
           "x-accessibility": "internal",
           "type": "array",
+          "readOnly": true,
           "description": "List of manifest attributes details",
           "items": {
             "$ref": "#/definitions/ManifestAttributes_manifest_references",
@@ -1868,6 +1890,7 @@
         },
         "tags": {
           "type": "array",
+          "readOnly": true,
           "description": "List of tags",
           "items": {
             "type": "string",
@@ -1877,6 +1900,7 @@
         "changeableAttributes": {
           "$ref": "#/definitions/ChangeableAttributes",
           "description": "Writeable properties of the resource",
+          "readOnly": true,
           "x-ms-client-name": "writeableProperties"
         }
       },
@@ -2103,6 +2127,7 @@
       "properties": {
         "manifestsDeleted": {
           "type": "array",
+          "readOnly": true,
           "description": "SHA of the deleted image",
           "items": {
             "type": "string"
@@ -2111,6 +2136,7 @@
         },
         "tagsDeleted": {
           "type": "array",
+          "readOnly": true,
           "description": "Tag of the deleted image",
           "items": {
             "type": "string"
@@ -2234,6 +2260,7 @@
         "architecture",
         "os"
       ],
+      "x-accessibility": "internal",
       "description": "Manifest attributes details",
       "properties": {
         "digest": {
