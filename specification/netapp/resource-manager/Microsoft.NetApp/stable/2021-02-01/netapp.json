@@ -2010,7 +2010,7 @@
           "Backups"
         ],
         "summary": "Get Backup for a Netapp Account",
-        "description": "Get Backup for a Netapp Account",
+        "description": "Gets the specified backup for a Netapp Account",
         "operationId": "AccountBackups_Get",
         "parameters": [
           {
@@ -2051,7 +2051,7 @@
           "Backups"
         ],
         "summary": "Delete Backup for a Netapp Account",
-        "description": "Delete Backup for a Netapp Account",
+        "description": "Delete the specified Backup for a Netapp Account",
         "operationId": "AccountBackups_Delete",
         "parameters": [
           {
@@ -2150,7 +2150,7 @@
           "Backups"
         ],
         "summary": "Get a backup",
-        "description": "Get a particular backup of the volume",
+        "description": "Gets the specified backup of the volume",
         "operationId": "Backups_Get",
         "parameters": [
           {
@@ -2579,6 +2579,10 @@
             "description": "Error response describing why the operation failed."
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "BackupPolicies_Update": {
             "$ref": "examples/BackupPolicies_Update.json"
@@ -2962,10 +2966,6 @@
           "readOnly": true,
           "description": "The system meta data relating to this resource.",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
-        "identity": {
-          "description": "Resource Identity",
-          "$ref": "#/definitions/resourceIdentity"
         }
       }
     },
@@ -3001,10 +3001,6 @@
           "description": "NetApp Account properties",
           "$ref": "#/definitions/accountProperties",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "description": "Resource Identity",
-          "$ref": "#/definitions/resourceIdentity"
         }
       }
     },
@@ -3185,63 +3181,7 @@
       "properties": {
         "keySource": {
           "type": "string",
-          "description": "Encryption Key Source. Possible values are: Microsoft.KeyVault, Microsoft.NetApp."
-        },
-        "keyVaultProperties": {
-          "type": "object",
-          "description": "Key Vault Properties. Required if Encryption Key Source is Microsoft.KeyVault.",
-          "properties": {
-            "keyVaultId": {
-              "type": "string",
-              "description": "Id the of Azure Key Vault Configuration"
-            },
-            "keyVaultUri": {
-              "type": "string",
-              "description": "URI for the Azure Key Vault managing the keys"
-            },
-            "keyName": {
-              "type": "string",
-              "description": "Name of the Azure Key Vault key"
-            },
-            "status": {
-              "type": "string",
-              "readOnly": true,
-              "description": "Status of the Azure Key Vault configuration",
-              "enum": [
-                "Created",
-                "Updating",
-                "InUse",
-                "Deleted",
-                "Error"
-              ],
-              "x-ms-enum": {
-                "name": "AzureKeyVaultEncryptionStatus",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "Created",
-                    "description": "Azure Key Vault configuration created but not in use"
-                  },
-                  {
-                    "value": "InUse",
-                    "description": "Azure Key Vault configuration in use by Volume"
-                  },
-                  {
-                    "value": "Deleted",
-                    "description": "Azure Key Vault configuration Deleted"
-                  },
-                  {
-                    "value": "Error",
-                    "description": "Error with the Azure Key Vault configuration"
-                  },
-                  {
-                    "value": "Updating",
-                    "description": "Azure Key Vault configuration Updating"
-                  }
-                ]
-              }
-            }
-          }
+          "description": "Encryption Key Source. Possible values are: 'Microsoft.NetApp'."
         }
       }
     },
@@ -3542,6 +3482,7 @@
     },
     "resourceIdentity": {
       "type": "object",
+      "description": "Identity for the resource.",
       "properties": {
         "principalId": {
           "description": "Object id of the identity resource",
