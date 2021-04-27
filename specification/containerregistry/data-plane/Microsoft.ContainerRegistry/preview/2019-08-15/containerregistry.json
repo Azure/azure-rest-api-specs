@@ -1366,7 +1366,7 @@
         },
         "changeableAttributes": {
           "description": "Changeable attributes",
-          "$ref": "#/definitions/ChangeableAttributes"
+          "$ref": "#/definitions/RepositoryChangeableAttributes"
         }
       },
       "example": {
@@ -1375,7 +1375,8 @@
           "readEnabled": true,
           "listEnabled": true,
           "deleteEnabled": true,
-          "writeEnabled": true
+          "writeEnabled": true,
+          "teleportEnabled": false
         },
         "imageName": "imageName",
         "createdTime": "2018-09-07T16:30:46.6583219Z",
@@ -1672,7 +1673,7 @@
           }
         },
         "changeableAttributes": {
-          "$ref": "#/definitions/ChangeableAttributes",
+          "$ref": "#/definitions/ManifestChangeableAttributes",
           "description": "Changeable attributes"
         }
       },
@@ -2059,6 +2060,38 @@
         "listEnabled": true,
         "deleteEnabled": true,
         "writeEnabled": true
+      }
+    },
+    "RepositoryChangeableAttributes": {
+      "description": "Changeable attributes for Repository",
+      "properties": {
+        "deleteEnabled": {
+          "type": "boolean",
+          "description": "Delete enabled"
+        },
+        "writeEnabled": {
+          "type": "boolean",
+          "description": "Write enabled"
+        },
+        "listEnabled": {
+          "type": "boolean",
+          "description": "List enabled"
+        },
+        "readEnabled": {
+          "type": "boolean",
+          "description": "Read enabled"
+        },
+        "teleportEnabled": {
+          "type": "boolean",
+          "description": "Teleport enabled"
+        }
+      },
+      "example": {
+        "readEnabled": true,
+        "listEnabled": true,
+        "deleteEnabled": true,
+        "writeEnabled": true,
+        "teleportEnabled": true
       }
     },
     "Manifest": {
