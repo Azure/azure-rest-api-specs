@@ -22,8 +22,7 @@
           "Notification"
         ],
         "operationId": "Notification_GetWithAuthorization",
-        "parameters": [
-          {
+        "parameters": [{
             "$ref": "#/parameters/SubscriptionId"
           },
           {
@@ -60,11 +59,9 @@
           "Diagnostics"
         ],
         "operationId": "Diagnostics_GetOperations",
-        "parameters":[
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
+        "parameters": [{
+          "$ref": "#/parameters/ApiVersion"
+        }],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -87,8 +84,8 @@
       }
     }
   },
-  "parameters":{
-    "SubscriptionId":{
+  "parameters": {
+    "SubscriptionId": {
       "description": "user's subscription id",
       "type": "string",
       "name": "subscription",
@@ -96,7 +93,7 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "PrincipalId":{
+    "PrincipalId": {
       "description": "user's principal id",
       "type": "string",
       "name": "principalId",
@@ -104,7 +101,7 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "ApiVersion":{
+    "ApiVersion": {
       "name": "api-version",
       "in": "query",
       "required": true,
