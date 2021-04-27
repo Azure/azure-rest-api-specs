@@ -343,7 +343,7 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: rbac.json
     reason: The name of the provider is Microsoft.DocumentDB
-  - suppress: RequiredSystemDataInNewApiVersions
+  - suppress: RequiredReadOnlySystemData
     reason: We do not yet support system data
   - suppress: ListInOperationName
     from: managedCassandra.json
