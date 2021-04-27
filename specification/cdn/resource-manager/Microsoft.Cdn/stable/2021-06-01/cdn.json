@@ -3973,6 +3973,19 @@
           "description": "defines the OriginGroup that would override the DefaultOriginGroup.",
           "type": "object",
           "$ref": "#/definitions/ResourceReference"
+        },
+        "forwardingProtocol": {
+          "description": "Protocol this rule will use when forwarding traffic to backends.",
+          "type": "object",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "ForwardingProtocol",
+            "modelAsString": true
+          }
         }
       }
     },
