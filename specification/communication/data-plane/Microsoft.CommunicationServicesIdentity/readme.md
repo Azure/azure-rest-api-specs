@@ -59,6 +59,15 @@ input-file:
   - preview/2021-02-22-preview1/CommunicationIdentity.json
 ```
 
+### Tag: package-2021-03-31-preview1
+
+These settings apply only when `--tag=package-2021-03-31-preview1` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-31-preview1'
+input-file:
+  - preview/2021-03-31-preview1/CommunicationIdentity.json
+```
+
 ---
 
 # Code Generation
