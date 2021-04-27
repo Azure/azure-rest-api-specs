@@ -12,6 +12,17 @@ namespace: azure.mgmt.datafactory
 package-name: azure-mgmt-datafactory
 package-version: 1.0.0
 clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update'
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory/azure/mgmt/datafactory
+```
+``` yaml $(python) && $(python-mode) == 'create'
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory
+```
+
+``` yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 directive:
@@ -31,12 +42,4 @@ directive:
     where: $.definitions.ScriptAction.properties.roles
     transform: >
         $['type'] = 'string'; 
-```
-``` yaml $(python) && $(python-mode) == 'update'
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory/azure/mgmt/datafactory
-```
-``` yaml $(python) && $(python-mode) == 'create'
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory
 ```
