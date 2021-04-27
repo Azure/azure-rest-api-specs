@@ -14,6 +14,23 @@ package-version: 1.0.0
 clear-output-folder: true
 modelerfour:
   lenient-model-deduplication: true
+directive:
+  - from: swagger-document
+    where: $.definitions.JsonFormatFilePattern
+    transform: >
+        $['type'] = 'string';
+  - from: swagger-document
+    where: $.definitions.CompressionLevel
+    transform: >
+        $['type'] = 'string'; 
+  - from: swagger-document
+    where: $.definitions.DynamicsLinkedServiceTypeProperties.properties.servicePrincipalCredentialType
+    transform: >
+        $['type'] = 'string'; 
+  - from: swagger-document
+    where: $.definitions.ScriptAction.properties.roles
+    transform: >
+        $['type'] = 'string'; 
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 no-namespace-folders: true
