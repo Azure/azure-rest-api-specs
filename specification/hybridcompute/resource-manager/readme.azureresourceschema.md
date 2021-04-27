@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-hybridcompute-2021-03-25-preview
+  - tag: schema-hybridcompute-2021-01-28-preview
   - tag: schema-hybridcompute-2020-08-15-preview
   - tag: schema-hybridcompute-2020-08-02
   - tag: schema-hybridcompute-2020-07-30-preview
@@ -27,6 +28,18 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.HybridCompute/preview/2021-03-25-preview/HybridCompute.json
   - Microsoft.HybridCompute/preview/2021-03-25-preview/privateLinkScopes.json
+
+```
+
+### Tag: schema-hybridcompute-2021-01-28-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-hybridcompute-2021-01-28-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.HybridCompute/preview/2021-01-28-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2021-01-28-preview/privateLinkScopes.json
 
 ```
 
