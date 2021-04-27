@@ -104,5 +104,5 @@ directive:
   - suppress: D5001
 where:
   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/xxx.get
-reason: Tt doesn't support file annotation in example file.
+reason: It doesn't support file annotation in example file.
 ```
