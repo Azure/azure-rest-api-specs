@@ -1310,6 +1310,54 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/locations/{location}/kustoPoolCheckNameAvailability": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "KustoPools_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoClustersCheckNameAvailability": {
+            "$ref": "./examples/KustoClustersCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the kusto pool name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "kustoPoolName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KustoPoolCheckNameRequest"
+            },
+            "description": "The name of the cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2210,6 +2258,61 @@
         }
       },
       "description": "A class representing database principal property."
+    },
+    "KustoPoolCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Kusto Pool name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Synapse/workspaces/kustoPools"
+          ],
+          "x-ms-enum": {
+            "name": "KustoPoolType",
+            "modelAsString": false
+          },
+          "description": "The type of resource, Microsoft.Synapse/workspaces/kustoPools."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The object sent for a kusto pool check name availability request."
+    },
+    "CheckNameResult": {
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Specifies a Boolean value that indicates if the name is available."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name that was checked."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "reason",
+            "modelAsString": true
+          },
+          "description": "Message providing the reason why the given name is invalid."
+        }
+      },
+      "description": "The result returned from a check name availability request."
     }
   },
   "parameters": {
