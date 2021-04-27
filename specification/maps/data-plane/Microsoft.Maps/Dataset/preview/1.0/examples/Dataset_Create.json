@@ -7,6 +7,22 @@
     "type": "facility"
   },
   "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "operationId": "{operationId}",
+        "status": "Failed",
+        "created": "2020-01-02 1:02:03 AM +00:00",
+        "error": {
+          "code": "InvalidFeature",
+          "message": "The provided feature is invalid.",
+          "details": {
+            "code": "NoGeometry",
+            "message": "No geometry was provided with the feature."
+          }
+        }
+      }
+    },
     "201": {
       "headers": {
         "Location": "https://us.atlas.microsoft.com/dataset/{datasetId}?api-version=1.0",

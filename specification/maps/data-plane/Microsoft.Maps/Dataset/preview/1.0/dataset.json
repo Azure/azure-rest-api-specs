@@ -188,6 +188,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/200Async"
+          },
           "201": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/201Async"
           },
@@ -218,6 +221,9 @@
         "description": "**Dataset Import API**\n\n**Applies to**: see pricing [tiers](https://azure.microsoft.com/en-us/pricing/details/azure-maps/).\n<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API \nand SDK. The Dataset APIs are part of Creator. This API allows the caller to bulk import data into a dataset \nfrom data that was uploaded to the Azure Maps Data service.<br>\n\n### Submit Import Request\n\nTo import data into your dataset, you will use a `PATCH` request where the `datasetId` query parameter is the \ndataset you want to import your data into, the `udid` query parameter is the data you want to import, and the `type` \nparameter will describe the data type to use for the import data.<br>       \n\nThe Import API is a \n[long-running request](https://aka.ms/am-creator-lrt).",
         "operationId": "Dataset_ImportPreview",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Import data into previously created dataset": {
             "$ref": "./examples/Dataset_Import.json"
@@ -243,6 +249,9 @@
         "responses": {
           "200": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/200Async"
+          },
+          "201": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/201Async"
           },
           "202": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/202Async"

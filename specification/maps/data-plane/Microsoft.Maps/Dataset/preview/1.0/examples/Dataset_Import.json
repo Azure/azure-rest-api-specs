@@ -12,6 +12,25 @@
       "headers": {},
       "body": {
         "operationId": "{operationId}",
+        "status": "Failed",
+        "created": "2020-01-02 1:02:03 AM +00:00",
+        "error": {
+          "code": "InvalidFeature",
+          "message": "The provided feature is invalid.",
+          "details": {
+            "code": "NoGeometry",
+            "message": "No geometry was provided with the feature."
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Location": "https://atlas.microsoft.com/dataset/{datasetId}?api-version=1.0",
+        "Access-Control-Expose-Headers": "Location"
+      },
+      "body": {
+        "operationId": "{operationId}",
         "status": "Succeeded",
         "created": "2020-01-02 03:04:05 AM +00:00",
         "resourceLocation": "https://us.atlas.microsoft.com/dataset/{datasetId}?api-version=1.0"
