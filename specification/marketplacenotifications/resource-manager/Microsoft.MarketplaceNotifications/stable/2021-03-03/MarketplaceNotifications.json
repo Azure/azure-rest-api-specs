@@ -75,6 +75,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetReviewsNotification": {
+            "$ref": "./examples/GetReviewsNotificationOperations.json"
+          }
         }
       }
     }
@@ -200,14 +205,6 @@
         "display": {
           "$ref": "#/definitions/OperationDisplay",
           "description": "Display of the operation"
-        },
-        "origin": {
-          "description": "Origin of the operation",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Properties of the operation"
         }
       }
     },
@@ -215,16 +212,8 @@
       "description": "Operation display payload",
       "type": "object",
       "properties": {
-        "provider": {
-          "description": "Resource provider of the operation",
-          "type": "string"
-        },
         "resource": {
           "description": "Resource of the operation",
-          "type": "string"
-        },
-        "operation": {
-          "description": "Localized friendly name for the operation",
           "type": "string"
         },
         "description": {
