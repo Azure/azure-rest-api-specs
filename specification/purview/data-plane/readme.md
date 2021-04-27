@@ -76,6 +76,13 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Suppression
 ``` yaml
 directive:
+  - from: purviewcatalog.json
+    suppress: OAV108
+    reason: It doesn't support file annotation in example file, the invalid type error can be ignored.
+```
+
+``` yaml
+directive:
   - suppress: R3013
 where:
   - $.paths[\"/atlas/v2/glossary/terms/{termGuid}/assignedEntities\"].delete.parameters[1]
@@ -98,9 +105,3 @@ from: purviewcatalog.json
 reason: Should be compatible with Atlas swagger.
 ```
 
-``` yaml
-directive:
-  - suppress: OAV108
-from: purviewcatalog.json
-reason: It doesn't support file annotation in example file, the invalid type error can be ignored.
-```
