@@ -625,6 +625,7 @@
   },
   "definitions": {
     "WeatherUnit": {
+      "description": "Specific value of a given unit related to weather.",
       "type": "object",
       "properties": {
         "value": {
@@ -1145,6 +1146,7 @@
       "type": "object",
       "properties": {
         "results": {
+          "description": "Detailed current weather conditions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CurrentConditions"
@@ -1467,10 +1469,10 @@
           "description": "Night"
         },
         "sources": {
+          "description": "Source(s) of the forecast data.",
           "type": "array",
           "items": {
-            "type": "string",
-            "description": "Source(s) of the forecast data."
+            "type": "string"
           }
         }
       }
@@ -1491,6 +1493,7 @@
       }
     },
     "LocalSource": {
+      "description": "Local weather data provider information.",
       "type": "object",
       "properties": {
         "id": {
@@ -1620,6 +1623,7 @@
       }
     },
     "WeatherAlongRouteSummary": {
+      "description": "Short summary of the weather along the route.",
       "type": "object",
       "properties": {
         "iconCode": {
@@ -1649,6 +1653,7 @@
       }
     },
     "WeatherAlongRoutePrecipitation": {
+      "description": "Precipitation forecast of the weather along the route.",
       "type": "object",
       "properties": {
         "dbz": {
@@ -1724,6 +1729,7 @@
           "$ref": "#/definitions/WeatherHazards"
         },
         "notifications": {
+          "description": "List of weather hazard notifications.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WeatherNotification"
@@ -1732,6 +1738,7 @@
       }
     },
     "WeatherHazards": {
+      "description": "Description of the weather hazard affecting the trip.",
       "type": "object",
       "properties": {
         "maxHazardIndex": {

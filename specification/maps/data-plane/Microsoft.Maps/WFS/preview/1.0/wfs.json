@@ -521,6 +521,7 @@
       ],
       "properties": {
         "links": {
+          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WfsEndpointLink"
@@ -535,6 +536,7 @@
       ],
       "properties": {
         "conformsTo": {
+          "description": "List of requirements classes that the server conforms to.",
           "type": "array",
           "items": {
             "type": "string"
@@ -556,21 +558,26 @@
       ],
       "properties": {
         "href": {
+          "description": "The link target.",
           "type": "string"
         },
         "rel": {
+          "description": "The relation type.",
           "type": "string",
           "example": "prev"
         },
         "type": {
+          "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
           "type": "string",
           "example": "application/geo+json"
         },
         "hreflang": {
+          "description": "A hint indicating what the language of the result of dereferencing the link should be.",
           "type": "string",
           "example": "en"
         },
         "title": {
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier (e.g., a menu entry) in the language indicated by the Content-Language header field (if present).",
           "type": "string"
         }
       }
@@ -583,6 +590,7 @@
       ],
       "properties": {
         "links": {
+          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WfsEndpointLink"
@@ -609,6 +617,7 @@
           ]
         },
         "collections": {
+          "description": "All the collections in a given dataset.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CollectionInfo"
@@ -635,6 +644,7 @@
           "example": "2020-01-02T03:04:05"
         },
         "links": {
+          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WfsEndpointLink"
@@ -685,6 +695,7 @@
           "example": "Buildings in the city of Bonn."
         },
         "links": {
+          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WfsEndpointLink"
@@ -804,6 +815,7 @@
           }
         },
         "links": {
+          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WfsEndpointLink"
@@ -851,9 +863,11 @@
       "type": "object",
       "properties": {
         "numberReturned": {
+          "description": "Number of returned features.",
           "type": "integer"
         },
         "links": {
+          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WfsEndpointLink"
@@ -871,6 +885,7 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeature"
         },
         "links": {
+          "description": "Links to other WFS endpoints.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WfsEndpointLink"
