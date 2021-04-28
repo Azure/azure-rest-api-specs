@@ -5,9 +5,9 @@
 ## Configuration
 
 ```yaml
-tag: 2021-01-01-preview
 openapi-type: arm
 openapi-subtype: rpaas
+tag: 2021-02-01-preview
 ```
 
 ### Supported API Versions
@@ -24,6 +24,11 @@ input-file:
 ```yaml $(tag) == '2021-01-01-preview'
 input-file:
   - Wandisco.Fusion/preview/2021-01-01-preview/fusionGroups.json
+```
+
+```yaml $(tag) == '2021-02-01-preview'
+input-file:
+  - Wandisco.Fusion/preview/2021-02-01-preview/fusionGroups.json
 ```
 
 ## Language specific configurations
