@@ -34,8 +34,9 @@ npm install -g oav
 oav validate-example <swagger-spec-path>
 ```
 Please see [readme](https://github.com/Azure/oav/blob/master/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default)
+Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default).
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
+Refer to [Swagger-Example-Generation](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/393/Swagger-Example-Generation) for example automatic generation.
 
 ## Semantic Validation
 Run Semantic Validation locally:
