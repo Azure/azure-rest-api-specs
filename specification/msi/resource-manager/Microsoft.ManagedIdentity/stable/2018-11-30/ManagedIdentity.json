@@ -136,45 +136,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities": {
-      "get": {
-        "operationId": "UserAssignedIdentities_ListByResourceGroup",
-        "description": "Lists all the userAssignedIdentities available under the specified ResourceGroup.",
-        "x-ms-examples": {
-          "IdentityListByResourceGroup": {
-            "$ref": "./examples/IdentityListByResourceGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The list of userAssignedIdentities was retrieved and returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/UserAssignedIdentitiesListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}": {
       "put": {
         "operationId": "UserAssignedIdentities_CreateOrUpdate",
