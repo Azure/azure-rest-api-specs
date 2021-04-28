@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "host": "management.azure.com",
   "info": {
-    "version": "2020-05-01",
+    "version": "2021-04-01",
     "title": "Management Groups API",
     "description": "The Azure Management Groups API enables consolidation of multiple \nsubscriptions/resources into an organizational hierarchy and centrally \nmanage access control, policies, alerting and reporting for those resources.\n"
   },
@@ -134,6 +134,12 @@
         "x-ms-examples": {
           "GetManagementGroup": {
             "$ref": "./examples/GetManagementGroup.json"
+          },
+          "GetManagementGroupWithPath": {
+            "$ref": "./examples/GetManagementGroupWithPath.json"
+          },
+          "GetManagementGroupWithAncestors": {
+            "$ref": "./examples/GetManagementGroupWithAncestors.json"
           },
           "GetManagementGroupWithExpand": {
             "$ref": "./examples/GetManagementGroupWithExpand.json"
@@ -1252,6 +1258,22 @@
           "items": {
             "$ref": "#/definitions/ManagementGroupPathElement"
           }
+        },
+        "managementGroupAncestors": {
+          "description": "The ancestors of the management group.",
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "managementGroupAncestorsChain": {
+          "description": "The ancestors of the management group displayed in reversed order, from immediate parent to the root.",
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementGroupPathElement"
+          }
         }
       }
     },
@@ -1950,10 +1972,11 @@
       "type": "string",
       "enum": [
         "children",
-        "path"
+        "path",
+        "ancestors"
       ],
       "x-ms-parameter-location": "method",
-      "description": "The $expand=children query string parameter allows clients to request inclusion of children in the response payload.  $expand=path includes the path from the root group to the current group."
+      "description": "The $expand=children query string parameter allows clients to request inclusion of children in the response payload.  $expand=path includes the path from the root group to the current group.  $expand=ancestors includes the ancestor Ids of the current group."
     },
     "RecurseParameter": {
       "name": "$recurse",
@@ -2078,7 +2101,7 @@
       "name": "Cache-Control",
       "in": "header",
       "default": "no-cache",
-      "description": "Indicates that the request shouldn't utilize any caches.",
+      "description": "Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
