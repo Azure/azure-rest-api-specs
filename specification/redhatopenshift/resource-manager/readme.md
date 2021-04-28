@@ -54,8 +54,6 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-redhatopenshift
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js redhatopenshift/resource-manager
 ```
 
 ## Go

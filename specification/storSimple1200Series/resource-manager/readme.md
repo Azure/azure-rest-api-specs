@@ -62,8 +62,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_stor_simple1200_series']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js storSimple1200Series/resource-manager
 ```
 
 

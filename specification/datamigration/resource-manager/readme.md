@@ -194,8 +194,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js datamigration/resource-manager
 ```
 
 ## C#

@@ -61,8 +61,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js operationsmanagement/resource-manager
 ```
 
 

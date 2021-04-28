@@ -58,8 +58,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js addons/resource-manager
 ```
 
 ---

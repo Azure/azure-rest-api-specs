@@ -62,8 +62,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_postgresqlhsc']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js postgresqlhsc/resource-manager
 ```
 
 ## C#

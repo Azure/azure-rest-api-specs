@@ -128,8 +128,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services_site_recovery']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js recoveryservicessiterecovery/resource-manager
 ```
 
 ## C#

@@ -195,8 +195,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-trenton  
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js netapp/resource-manager
 ```
 
 

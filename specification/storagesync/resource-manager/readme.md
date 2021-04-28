@@ -139,8 +139,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js storagesync/resource-manager
 ```
 
 ## C#

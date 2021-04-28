@@ -54,8 +54,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js dfp/resource-manager
   - repo: azure-cli-extensions
 ```
 ## Az

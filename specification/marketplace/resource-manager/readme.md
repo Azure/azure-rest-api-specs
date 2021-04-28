@@ -79,8 +79,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js marketplace/resource-manager
 ```
 
 ## C#

@@ -56,7 +56,5 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js hardwaresecuritymodules/resource-manager
 ```
 

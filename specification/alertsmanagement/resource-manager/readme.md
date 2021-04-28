@@ -143,8 +143,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js alertsmanagement/resource-manager
 ```
 
 ## C#

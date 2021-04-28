@@ -56,8 +56,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
   - repo: azure-sdk-for-net
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js vmwarecloudsimple/resource-manager
 ```
 
 ## Go

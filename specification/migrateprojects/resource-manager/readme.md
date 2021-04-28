@@ -70,8 +70,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js migrateprojects/resource-manager
 ```
 
 ## Go

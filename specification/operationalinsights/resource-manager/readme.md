@@ -184,8 +184,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
-    after_scripts:
-      - node sdkauto_afterscript.js operationalinsights/resource-manager
 ```
 
 

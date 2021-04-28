@@ -57,8 +57,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js sqlvirtualmachine/resource-manager
 ```
 
 
