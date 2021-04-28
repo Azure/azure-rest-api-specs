@@ -25,17 +25,17 @@
         "operationId": "Certificates_List",
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "Return only information specified in the filter (using OData syntax). For example: $filter=KeyVaultId eq 'KeyVaultId'",
             "type": "string",
             "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -319,6 +319,13 @@
         "properties": {
           "description": "Certificate resource specific properties",
           "properties": {
+            "password": {
+              "description": "Certificate password.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
             "friendlyName": {
               "description": "Friendly name of the certificate.",
               "type": "string",
@@ -367,14 +374,6 @@
               "description": "Certificate expiration date.",
               "type": "string",
               "readOnly": true
-            },
-            "password": {
-              "description": "Certificate password.",
-              "type": "string",
-              "x-ms-secret": true,
-              "x-ms-mutability": [
-                "create"
-              ]
             },
             "thumbprint": {
               "description": "Certificate thumbprint.",
@@ -482,6 +481,13 @@
         "properties": {
           "description": "CertificatePatchResource resource specific properties",
           "properties": {
+            "password": {
+              "description": "Certificate password.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
             "friendlyName": {
               "description": "Friendly name of the certificate.",
               "type": "string",
@@ -530,14 +536,6 @@
               "description": "Certificate expiration date.",
               "type": "string",
               "readOnly": true
-            },
-            "password": {
-              "description": "Certificate password.",
-              "type": "string",
-              "x-ms-secret": true,
-              "x-ms-mutability": [
-                "create"
-              ]
             },
             "thumbprint": {
               "description": "Certificate thumbprint.",
