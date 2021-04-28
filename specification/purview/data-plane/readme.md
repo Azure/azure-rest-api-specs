@@ -1,9 +1,3 @@
-
-# Azure Purview Catalog
-
-> see https://aka.ms/autorest
-
-This is the AutoRest configuration file for Purview Catalog.
 # Purview
 
 > see https://aka.ms/autorest
@@ -41,6 +35,8 @@ These settings apply only when `--tag=package-2020-12-01-preview` is specified o
 ``` yaml $(tag) == 'package-2020-12-01-preview'
 input-file:
 - Azure.Purview.Catalog/preview/2020-12-01-preview/purviewcatalog.json
+```
+
 These are the global settings for the Purview API.
 
 ``` yaml
@@ -135,4 +131,4 @@ where:
   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/xxx.get
 reason: It doesn't support file annotation in example file.
 ```
-See configuration in [readme.python.md](./readme.python.md)
+
