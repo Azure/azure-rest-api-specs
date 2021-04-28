@@ -493,25 +493,6 @@
       "description": "TLS endpoint describes an endpoint that the pipeline can connect to over TLS transport (data is encrypted in transit).",
       "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.TlsEndpoint"
     },
-    "SymmetricKeyCredentials": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Symmetric key credential."
-        }
-      },
-      "required": [
-        "key"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CredentialsBase"
-        }
-      ],
-      "description": "Symmetric key credential.",
-      "x-ms-discriminator-value": "#Microsoft.VideoAnalyzer.SymmetricKeyCredentials"
-    },
     "CertificateSource": {
       "type": "object",
       "required": [
