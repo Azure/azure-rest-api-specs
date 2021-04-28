@@ -38,6 +38,16 @@ input-file:
   - Microsoft.StoragePool/preview/2021-04-01-preview/storagepool.json
 ```
 
+
+### Tag: package-2020-03-15-preview
+
+These settings apply only when 
+```yaml $(tag) == 'package-2020-03-15-preview'
+input-file:
+  - Microsoft.StoragePool/preview/2020-03-15-preview/storagepool.json
+```
+
+
 ---
 
 # Code Generation
