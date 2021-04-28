@@ -426,6 +426,16 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R4009
+    from: consumption.json
+    where: $.paths
+    reason: SystemData properties does not fit into the consumption RP APIs as they dont really create any actual resources.  
+```
+
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
