@@ -16,3 +16,14 @@ output-folder: $(python-sdks-folder)/purview/azure-purview-catalog/
 title: AzurePurviewCatalogClient
 credential-scopes: https://purview.azure.net/.default
 ```
+add-credential: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.purview.scanning
+package-name: azure-purview-scanning
+clear-output-folder: truefr
+package-version: 1.0.0b1
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/purview/azure-purview-scanning/
+credential-scopes: https://purview.azure.net/.default
+low-level-client: true
+```
