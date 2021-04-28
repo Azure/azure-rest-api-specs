@@ -82,6 +82,12 @@ directive:
   - suppress: XmsPathsMustOverloadPaths
     from: authorization-RoleDefinitionsCalls.json
     reason: x-ms-paths extension was previously required. Suppressing so that we don't have to make changes to existing APIs.
+  - suppress: AddedPropertyInResponse
+    from: authorization-AccessReviewCalls.json
+    reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
+  - suppress: AddingOptionalProperty
+    from: authorization-AccessReviewCalls.json
+    reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
 ```
 
 ### Tag: package-2021-03-01-preview-only
@@ -107,6 +113,7 @@ input-file:
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+- Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
 - Microsoft.Authorization/preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
