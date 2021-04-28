@@ -1551,7 +1551,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
+              "$ref": "#/definitions/RouteDirectionsBatchResponse"
             }
           },
           "202": {
@@ -2448,6 +2448,49 @@
         },
         "destinations": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
+        }
+      }
+    },
+    "RouteDirectionsBatchResponse": {
+      "description": "This object is returned from a successful Route Directions Batch service call.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
+        }
+      ],
+      "properties": {
+        "batchItems": {
+          "description": "Array containing the batch results.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RouteDirectionsBatchItem"
+          }
+        }
+      }
+    },
+    "RouteDirectionsBatchItem": {
+      "description": "An item returned from Route Directions Batch service call.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchItem"
+        }
+      ],
+      "properties": {
+        "response": {
+          "description": "The result of the query. RouteDirectionsResponse if the query completed successfully, ErrorResponse otherwise.",
+          "type": "object",
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RouteDirectionsResponse"
+            },
+            {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          ]
         }
       }
     }

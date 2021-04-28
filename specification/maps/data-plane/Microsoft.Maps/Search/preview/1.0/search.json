@@ -1628,7 +1628,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
+              "$ref": "#/definitions/SearchFuzzyBatchResponse"
             }
           },
           "202": {
@@ -1696,7 +1696,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
+              "$ref": "#/definitions/SearchAddressBatchResponse"
             }
           },
           "202": {
@@ -1764,7 +1764,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
+              "$ref": "#/definitions/SearchAddressReverseBatchResponse"
             }
           },
           "202": {
@@ -1874,652 +1874,8 @@
         }
       }
     },
-    "SearchFuzzyResponse": {
-      "description": "This object is returned from a successful Search Fuzzy call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/SearchFuzzySummary"
-        },
-        "results": {
-          "description": "Results array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchFuzzyResult"
-          }
-        }
-      }
-    },
-    "SearchFuzzySummary": {
-      "description": "Summary object for a Search Fuzzy response",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "query": {
-          "description": "Query property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryType": {
-          "description": "QueryType property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryTime": {
-          "description": "QueryTime property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "numResults": {
-          "description": "NumResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "offset": {
-          "description": "Offset property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "totalResults": {
-          "description": "TotalResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "fuzzyLevel": {
-          "description": "FuzzyLevel property",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "SearchFuzzyResult": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "One of:\n* POI\n* Street\n* Geography\n* Point Address\n* Address Range\n* Cross Street",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id property",
-          "type": "string",
-          "readOnly": true
-        },
-        "score": {
-          "$ref": "#/definitions/SearchResultScore"
-        },
-        "info": {
-          "description": "Info property",
-          "type": "string",
-          "readOnly": true
-        },
-        "entityType": {
-          "$ref": "#/definitions/EntityType"
-        },
-        "poi": {
-          "$ref": "#/definitions/SearchResultPoi"
-        },
-        "address": {
-          "$ref": "#/definitions/SearchResultAddress"
-        },
-        "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
-        },
-        "viewport": {
-          "$ref": "#/definitions/SearchResultViewport"
-        },
-        "entryPoints": {
-          "description": "Entry Points array",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SearchResultEntryPoint"
-          }
-        },
-        "addressRanges": {
-          "$ref": "#/definitions/SearchResultAddressRanges"
-        },
-        "dataSources": {
-          "$ref": "#/definitions/DataSources"
-        }
-      }
-    },
-    "SearchPoiResponse": {
-      "description": "This object is returned from a successful Search POI call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/SearchPoiSummary"
-        },
-        "results": {
-          "description": "Results array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchPoiResult"
-          }
-        }
-      }
-    },
-    "SearchPoiSummary": {
-      "description": "Summary object for a Search POI response",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "query": {
-          "description": "Query property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryType": {
-          "description": "QueryType property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryTime": {
-          "description": "QueryTime property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "numResults": {
-          "description": "NumResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "offset": {
-          "description": "Offset property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "totalResults": {
-          "description": "TotalResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "fuzzyLevel": {
-          "description": "FuzzyLevel property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "geoBias": {
-          "$ref": "#/definitions/SearchSummaryGeoBias"
-        }
-      }
-    },
-    "SearchPoiResult": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type property",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id property",
-          "type": "string",
-          "readOnly": true
-        },
-        "score": {
-          "$ref": "#/definitions/SearchResultScore"
-        },
-        "dist": {
-          "$ref": "#/definitions/SearchResultDistance"
-        },
-        "info": {
-          "description": "Info property",
-          "type": "string",
-          "readOnly": true
-        },
-        "entityType": {
-          "$ref": "#/definitions/EntityType"
-        },
-        "poi": {
-          "$ref": "#/definitions/SearchResultPoi"
-        },
-        "address": {
-          "$ref": "#/definitions/SearchResultAddress"
-        },
-        "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
-        },
-        "viewport": {
-          "$ref": "#/definitions/SearchResultViewport"
-        },
-        "entryPoints": {
-          "description": "Entry Points array",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SearchResultEntryPoint"
-          }
-        }
-      }
-    },
-    "SearchNearbyResponse": {
-      "description": "This object is returned from a successful Search Nearby call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/SearchNearbySummary"
-        },
-        "results": {
-          "description": "Results array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchNearbyResult"
-          }
-        }
-      }
-    },
-    "SearchNearbySummary": {
-      "description": "Summary object for a Search Nearby response",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "queryType": {
-          "description": "QueryType property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryTime": {
-          "description": "QueryTime property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "numResults": {
-          "description": "NumResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "offset": {
-          "description": "Offset property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "totalResults": {
-          "description": "TotalResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "fuzzyLevel": {
-          "description": "FuzzyLevel property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "geoBias": {
-          "$ref": "#/definitions/SearchSummaryGeoBias"
-        }
-      }
-    },
-    "SearchNearbyResult": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type property",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id property",
-          "type": "string",
-          "readOnly": true
-        },
-        "score": {
-          "$ref": "#/definitions/SearchResultScore"
-        },
-        "dist": {
-          "$ref": "#/definitions/SearchResultDistance"
-        },
-        "info": {
-          "description": "Info property",
-          "type": "string",
-          "readOnly": true
-        },
-        "poi": {
-          "$ref": "#/definitions/SearchResultPoi"
-        },
-        "address": {
-          "$ref": "#/definitions/SearchResultAddress"
-        },
-        "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
-        },
-        "viewport": {
-          "$ref": "#/definitions/SearchResultViewport"
-        },
-        "entryPoints": {
-          "description": "Entry Points array",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SearchResultEntryPoint"
-          }
-        }
-      }
-    },
-    "SearchPoiCategoryResponse": {
-      "description": "This object is returned from a successful Search POI Category call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/SearchPoiCategorySummary"
-        },
-        "results": {
-          "description": "Results array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchPoiCategoryResult"
-          }
-        }
-      }
-    },
-    "SearchPoiCategorySummary": {
-      "description": "Summary object for a Search POI Category response",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "query": {
-          "description": "Query property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryType": {
-          "description": "QueryType property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryTime": {
-          "description": "QueryTime property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "numResults": {
-          "description": "NumResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "offset": {
-          "description": "Offset property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "totalResults": {
-          "description": "TotalResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "fuzzyLevel": {
-          "description": "FuzzyLevel property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "geoBias": {
-          "$ref": "#/definitions/SearchSummaryGeoBias"
-        }
-      }
-    },
-    "SearchPoiCategoryResult": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type property",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id property",
-          "type": "string",
-          "readOnly": true
-        },
-        "score": {
-          "$ref": "#/definitions/SearchResultScore"
-        },
-        "dist": {
-          "$ref": "#/definitions/SearchResultDistance"
-        },
-        "info": {
-          "description": "Info property",
-          "type": "string",
-          "readOnly": true
-        },
-        "entityType": {
-          "$ref": "#/definitions/EntityType"
-        },
-        "poi": {
-          "$ref": "#/definitions/SearchResultPoi"
-        },
-        "address": {
-          "$ref": "#/definitions/SearchResultAddress"
-        },
-        "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
-        },
-        "viewport": {
-          "$ref": "#/definitions/SearchResultViewport"
-        },
-        "entryPoints": {
-          "description": "Entry Points array",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SearchResultEntryPoint"
-          }
-        }
-      }
-    },
-    "SearchAddressResponse": {
-      "description": "This object is returned from a successful Search Address call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/SearchAddressSummary"
-        },
-        "results": {
-          "description": "Results array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchAddressResult"
-          }
-        }
-      }
-    },
-    "SearchAddressSummary": {
-      "description": "Summary object for a Search Address response",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "query": {
-          "description": "Query property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryType": {
-          "description": "QueryType property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryTime": {
-          "description": "QueryTime property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "numResults": {
-          "description": "NumResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "offset": {
-          "description": "Offset property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "totalResults": {
-          "description": "TotalResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "fuzzyLevel": {
-          "description": "FuzzyLevel property",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "SearchAddressResult": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "One of:\n* POI\n* Street\n* Geography\n* Point Address\n* Address Range\n* Cross Street",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id property",
-          "type": "string",
-          "readOnly": true
-        },
-        "score": {
-          "$ref": "#/definitions/SearchResultScore"
-        },
-        "address": {
-          "$ref": "#/definitions/SearchResultAddress"
-        },
-        "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
-        },
-        "viewport": {
-          "$ref": "#/definitions/SearchResultViewport"
-        },
-        "entryPoints": {
-          "description": "Entry Points array",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SearchResultEntryPoint"
-          }
-        },
-        "dataSources": {
-          "$ref": "#/definitions/DataSources"
-        }
-      }
-    },
-    "SearchAddressReverseResponse": {
-      "description": "This object is returned from a successful Search Address Reverse call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/SearchAddressReverseSummary"
-        },
-        "addresses": {
-          "description": "Addresses array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchAddressReverseResult"
-          }
-        }
-      }
-    },
-    "SearchAddressReverseSummary": {
-      "description": "Summary object for a Search Address Reverse response",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "queryTime": {
-          "description": "QueryTime property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "numResults": {
-          "description": "NumResults property",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "SearchAddressReverseResult": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "$ref": "#/definitions/SearchResultAddress"
-        },
-        "position": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Position property in the form of \"{latitude},{longitude}\""
-        },
-        "matchType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Information on the type of match.\n\nOne of:\n  * AddressPoint\n  * HouseNumberRange\n  * Street"
-        }
-      }
-    },
-    "SearchAddressReverseCrossStreetResponse": {
-      "description": "This object is returned from a successful Search Address Reverse CrossStreet call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/SearchAddressReverseCrossStreetSummary"
-        },
-        "addresses": {
-          "description": "Addresses array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchAddressReverseCrossStreetResult"
-          }
-        }
-      }
-    },
-    "SearchAddressReverseCrossStreetSummary": {
-      "description": "Summary object for a Search Address Reverse Cross Street response",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "queryTime": {
-          "description": "QueryTime property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "numResults": {
-          "description": "NumResults property",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "SearchAddressReverseCrossStreetResult": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "$ref": "#/definitions/SearchResultAddress"
-        },
-        "position": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Position property in the form of \"{latitude},{longitude}\""
-        }
-      }
-    },
-    "SearchAddressStructuredResponse": {
-      "description": "This object is returned from a successful Search Address Structured call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/SearchAddressStructuredSummary"
-        },
-        "results": {
-          "description": "Results array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchAddressStructuredResult"
-          }
-        }
-      }
-    },
-    "SearchAddressStructuredSummary": {
-      "description": "Summary object for a Search Address Structured response",
+    "SearchCommonSummary": {
+      "description": "Summary object for all Search API responses.",
       "type": "object",
       "readOnly": true,
       "properties": {
@@ -2564,15 +1920,24 @@
           "readOnly": true
         },
         "geoBias": {
-          "$ref": "#/definitions/SearchSummaryGeoBias"
+          "description": "Indication when the internal search engine has applied a geospatial bias to improve the ranking of results.  In  some methods, this can be affected by setting the lat and lon parameters where available.  In other cases it is  purely internal.",
+          "type": "object",
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+            }
+          ]
         }
       }
     },
-    "SearchAddressStructuredResult": {
+    "SearchCommonResult": {
+      "description": "Result object for all Search API responses.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "type": {
-          "description": "Type property",
+          "description": "One of:\n* POI\n* Street\n* Geography\n* Point Address\n* Address Range\n* Cross Street",
           "type": "string",
           "readOnly": true
         },
@@ -2586,103 +1951,6 @@
         },
         "dist": {
           "$ref": "#/definitions/SearchResultDistance"
-        },
-        "address": {
-          "$ref": "#/definitions/SearchResultAddress"
-        },
-        "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
-        },
-        "viewport": {
-          "$ref": "#/definitions/SearchResultViewport"
-        },
-        "entryPoints": {
-          "description": "Entry Points array",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SearchResultEntryPoint"
-          }
-        },
-        "addressRanges": {
-          "$ref": "#/definitions/SearchResultAddressRanges"
-        }
-      }
-    },
-    "SearchGeometryResponse": {
-      "description": "This object is returned from a successful Search By Geometry call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/SearchGeometrySummary"
-        },
-        "results": {
-          "description": "A list of Search Inside Geometry results.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchGeometryResult"
-          }
-        }
-      }
-    },
-    "SearchGeometrySummary": {
-      "description": "Summary object for a Search Geometry response",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "query": {
-          "description": "Query property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryType": {
-          "description": "QueryType property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryTime": {
-          "description": "QueryTime property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "numResults": {
-          "description": "NumResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "offset": {
-          "description": "Offset property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "totalResults": {
-          "description": "TotalResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "fuzzyLevel": {
-          "description": "FuzzyLevel property",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "SearchGeometryResult": {
-      "description": "This type represents the Search Inside Geometry result object.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type property",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id property",
-          "type": "string",
-          "readOnly": true
-        },
-        "score": {
-          "$ref": "#/definitions/SearchResultScore"
         },
         "info": {
           "description": "Info property",
@@ -2707,8 +1975,243 @@
         "entryPoints": {
           "description": "Entry Points array",
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/SearchResultEntryPoint"
+          }
+        },
+        "addressRanges": {
+          "$ref": "#/definitions/SearchResultAddressRanges"
+        },
+        "dataSources": {
+          "$ref": "#/definitions/DataSources"
+        },
+        "matchType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Information on the type of match.\n\nOne of:\n  * AddressPoint\n  * HouseNumberRange\n  * Street"
+        },
+        "detourTime": {
+          "description": "Detour time in seconds",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "SearchFuzzyResponse": {
+      "description": "This object is returned from a successful Search Fuzzy call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object for a Search Fuzzy response",
+          "readOnly": true,
+          "$ref": "#/definitions/SearchCommonSummary"
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "Result object for a Search Fuzzy response",
+            "readOnly": true,
+            "$ref": "#/definitions/SearchCommonResult"
+          }
+        }
+      }
+    },
+    "SearchPoiResponse": {
+      "description": "This object is returned from a successful Search POI call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object for a Search POI response",
+          "readOnly": true,
+          "$ref": "#/definitions/SearchCommonSummary"
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "Result object for a Search POI response",
+            "readOnly": true,
+            "$ref": "#/definitions/SearchCommonResult"
+          }
+        }
+      }
+    },
+    "SearchNearbyResponse": {
+      "description": "This object is returned from a successful Search Nearby call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object for a Search Nearby response",
+          "readOnly": true,
+          "$ref": "#/definitions/SearchCommonSummary"
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "Result object for a Search Nearby response",
+            "readOnly": true,
+            "$ref": "#/definitions/SearchCommonResult"
+          }
+        }
+      }
+    },
+    "SearchPoiCategoryResponse": {
+      "description": "This object is returned from a successful Search POI Category call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object for a Search POI Category response",
+          "readOnly": true,
+          "$ref": "#/definitions/SearchCommonSummary"
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "Result object for a Search POI Category response",
+            "readOnly": true,
+            "$ref": "#/definitions/SearchCommonResult"
+          }
+        }
+      }
+    },
+    "SearchAddressResponse": {
+      "description": "This object is returned from a successful Search Address call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object for a Search Address response",
+          "readOnly": true,
+          "$ref": "#/definitions/SearchCommonSummary"
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "Result object for a Search Address response",
+            "readOnly": true,
+            "$ref": "#/definitions/SearchCommonResult"
+          }
+        }
+      }
+    },
+    "SearchAddressReverseResponse": {
+      "description": "This object is returned from a successful Search Address Reverse call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object for a Search Address Reverse response",
+          "readOnly": true,
+          "$ref": "#/definitions/SearchCommonSummary"
+        },
+        "addresses": {
+          "description": "Addresses array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAddressReverseResult"
+          }
+        }
+      }
+    },
+    "SearchAddressReverseResult": {
+      "description": "Result object for a Search Address Reverse response",
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Position property in the form of \"{latitude},{longitude}\""
+        },
+        "matchType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Information on the type of match.\n\nOne of:\n  * AddressPoint\n  * HouseNumberRange\n  * Street"
+        }
+      }
+    },
+    "SearchAddressReverseCrossStreetResponse": {
+      "description": "This object is returned from a successful Search Address Reverse CrossStreet call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object for a Search Address Reverse Cross Street response",
+          "readOnly": true,
+          "$ref": "#/definitions/SearchCommonSummary"
+        },
+        "addresses": {
+          "description": "Addresses array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAddressReverseCrossStreetResult"
+          }
+        }
+      }
+    },
+    "SearchAddressReverseCrossStreetResult": {
+      "description": "Result object for a Search Address Reverse Cross Street response",
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/SearchResultAddress"
+        },
+        "position": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Position property in the form of \"{latitude},{longitude}\""
+        }
+      }
+    },
+    "SearchAddressStructuredResponse": {
+      "description": "This object is returned from a successful Search Address Structured call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object for a Search Address Structured response",
+          "readOnly": true,
+          "$ref": "#/definitions/SearchCommonSummary"
+        },
+        "results": {
+          "description": "Results array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "Result object for a Search Address Structured response",
+            "readOnly": true,
+            "$ref": "#/definitions/SearchCommonResult"
+          }
+        }
+      }
+    },
+    "SearchGeometryResponse": {
+      "description": "This object is returned from a successful Search By Geometry call",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary object for a Search Geometry response",
+          "readOnly": true,
+          "$ref": "#/definitions/SearchCommonSummary"
+        },
+        "results": {
+          "description": "A list of Search Inside Geometry results.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "This type represents the Search Inside Geometry result object.",
+            "readOnly": true,
+            "$ref": "#/definitions/SearchCommonResult"
           }
         }
       }
@@ -2718,111 +2221,19 @@
       "type": "object",
       "properties": {
         "summary": {
-          "$ref": "#/definitions/SearchAlongRouteSummary"
+          "description": "Summary object for a Search Along Route response",
+          "readOnly": true,
+          "$ref": "#/definitions/SearchCommonSummary"
         },
         "results": {
           "description": "A list of Search Along Route results.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/SearchAlongRouteResult"
+            "description": "This type represents the Search Along Route result object.",
+            "readOnly": true,
+            "$ref": "#/definitions/SearchCommonResult"
           }
-        }
-      }
-    },
-    "SearchAlongRouteSummary": {
-      "description": "Summary object for a Search Along Route response",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "query": {
-          "description": "Query property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryType": {
-          "description": "QueryType property",
-          "type": "string",
-          "readOnly": true
-        },
-        "queryTime": {
-          "description": "QueryTime property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "numResults": {
-          "description": "NumResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "offset": {
-          "description": "Offset property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "totalResults": {
-          "description": "TotalResults property",
-          "type": "integer",
-          "readOnly": true
-        },
-        "fuzzyLevel": {
-          "description": "FuzzyLevel property",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "SearchAlongRouteResult": {
-      "description": "This type represents the Search Along Route result object.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type property",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id property",
-          "type": "string",
-          "readOnly": true
-        },
-        "score": {
-          "$ref": "#/definitions/SearchResultScore"
-        },
-        "info": {
-          "description": "Info property",
-          "type": "string",
-          "readOnly": true
-        },
-        "entityType": {
-          "$ref": "#/definitions/EntityType"
-        },
-        "poi": {
-          "$ref": "#/definitions/SearchResultPoi"
-        },
-        "address": {
-          "$ref": "#/definitions/SearchResultAddress"
-        },
-        "position": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
-        },
-        "viewport": {
-          "$ref": "#/definitions/SearchResultViewport"
-        },
-        "entryPoints": {
-          "description": "Entry Points array",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SearchResultEntryPoint"
-          }
-        },
-        "dist": {
-          "$ref": "#/definitions/SearchResultDistance"
-        },
-        "detourTime": {
-          "description": "Detour time in seconds",
-          "type": "number",
-          "readOnly": true
         }
       }
     },
@@ -2847,6 +2258,7 @@
     "SearchResultPoi": {
       "description": "Details of the returned POI including information such as the name, phone, url address, and classifications.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "name": {
           "description": "Name of the POI property",
@@ -3015,6 +2427,7 @@
     "SearchResultAddress": {
       "description": "The address of the result",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "buildingNumber": {
           "description": "Building Number property",
@@ -3119,12 +2532,18 @@
           "description": "An address component which represents the name of a geographic area or locality that groups a number of addressable objects for addressing purposes, without being an administrative unit. This field is used to build the `freeformAddress` property.",
           "type": "string",
           "readOnly": true
+        },
+        "boundingBox": {
+          "description": "Bounding box coordinates.",
+          "type": "object",
+          "readOnly": true
         }
       }
     },
     "SearchResultViewport": {
       "description": "The viewport that covers the result represented by the top-left and bottom-right coordinates of the  viewport.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "topLeftPoint": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
@@ -3137,6 +2556,7 @@
     "SearchResultEntryPoint": {
       "description": "The entry point for the POI being returned.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "type": {
           "description": "The type of entry point. Value can be either _main_ or _minor_.",
@@ -3159,6 +2579,7 @@
     "SearchResultAddressRanges": {
       "description": "Describes the address range on both sides of the street for a search result. Coordinates for the start and end locations of the address range are included.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "rangeLeft": {
           "description": "Address range on the left side of the street.",
@@ -3206,6 +2627,7 @@
     "DataSources": {
       "description": "Optional section. Reference ids for use with the [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "geometry": {
           "$ref": "#/definitions/DataSourcesGeometry"
@@ -3226,6 +2648,7 @@
     "EntityType": {
       "description": "Geography entity type. Present only when entityType was requested and is available.",
       "type": "string",
+      "readOnly": true,
       "enum": [
         "Country",
         "CountrySubdivision",
@@ -3273,6 +2696,135 @@
             "description": "Postal Code / Zip Code"
           }
         ]
+      }
+    },
+    "SearchFuzzyBatchResponse": {
+      "description": "This object is returned from a successful Search Fuzzy Batch service call.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
+        }
+      ],
+      "properties": {
+        "batchItems": {
+          "description": "Array containing the batch results.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchFuzzyBatchItem"
+          }
+        }
+      }
+    },
+    "SearchFuzzyBatchItem": {
+      "description": "An item returned from Search Fuzzy Batch service call.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchItem"
+        }
+      ],
+      "properties": {
+        "response": {
+          "description": "The result of the query. SearchFuzzyResponse if the query completed successfully, ErrorResponse otherwise.",
+          "type": "object",
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/SearchFuzzyResponse"
+            },
+            {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          ]
+        }
+      }
+    },
+    "SearchAddressBatchResponse": {
+      "description": "This object is returned from a successful Search Address Batch service call.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
+        }
+      ],
+      "properties": {
+        "batchItems": {
+          "description": "Array containing the batch results.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAddressBatchItem"
+          }
+        }
+      }
+    },
+    "SearchAddressBatchItem": {
+      "description": "An item returned from Search Address Batch service call.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchItem"
+        }
+      ],
+      "properties": {
+        "response": {
+          "description": "The result of the query. SearchAddressResponse if the query completed successfully, ErrorResponse otherwise.",
+          "type": "object",
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/SearchAddressResponse"
+            },
+            {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          ]
+        }
+      }
+    },
+    "SearchAddressReverseBatchResponse": {
+      "description": "This object is returned from a successful Search Address Reverse Batch service call.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchResponse"
+        }
+      ],
+      "properties": {
+        "batchItems": {
+          "description": "Array containing the batch results.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchAddressReverseBatchItem"
+          }
+        }
+      }
+    },
+    "SearchAddressReverseBatchItem": {
+      "description": "An item returned from Search Address Reverse Batch service call.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/BatchItem"
+        }
+      ],
+      "properties": {
+        "response": {
+          "description": "The result of the query. SearchAddressReverseResponse if the query completed successfully, ErrorResponse otherwise.",
+          "type": "object",
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/SearchAddressReverseResponse"
+            },
+            {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          ]
+        }
       }
     }
   }

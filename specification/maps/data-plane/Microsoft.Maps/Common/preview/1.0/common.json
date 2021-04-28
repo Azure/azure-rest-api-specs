@@ -79,15 +79,16 @@
       "type": "object",
       "properties": {
         "batchItems": {
-          "description": "The list of queries/requests to process",
+          "description": "The list of queries to process.",
           "type": "array",
           "items": {
             "description": "Batch Query object",
             "type": "object",
             "properties": {
               "query": {
-                "description": "Partial query string",
-                "type": "string"
+                "description": "Partial query string.",
+                "type": "string",
+                "example": "?query=One, Microsoft Way, Redmond, WA 98052&limit=3"
               }
             }
           }
@@ -95,7 +96,7 @@
       }
     },
     "BatchResponse": {
-      "description": "This object is returned from a successful Batch service call",
+      "description": "This object is returned from a successful Batch service call. Extend with 'batchItems' property.",
       "type": "object",
       "properties": {
         "summary": {
@@ -114,14 +115,18 @@
               "readOnly": true
             }
           }
-        },
-        "batchItems": {
-          "description": "Array containing the batch results",
-          "type": "array",
+        }
+      }
+    },
+    "BatchItem": {
+      "description": "An item returned from Batch API. Extend with 'response' property.",
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "description": "HTTP request status code.",
+          "type": "number",
           "readOnly": true,
-          "items": {
-            "type": "object"
-          }
+          "example": 200
         }
       }
     },
