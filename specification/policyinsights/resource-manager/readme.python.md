@@ -23,15 +23,6 @@ namespace: azure.mgmt.policyinsights
 package-name: azure-mgmt-policyinsights
 package-version: 1.0.0b1
 clear-output-folder: true
-
-directive:
-  - from: policyEvents.json
-    where: $.parameters.fromParameter
-    transform: $['x-ms-client-name'] = 'FromProperty'
-
-  - from: policyStates.json
-    where: $.parameters.fromParameter
-    transform: $['x-ms-client-name'] = 'FromProperty'
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -47,4 +38,17 @@ output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights
+```
+
+``` yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
+directive:
+  - from: policyEvents.json
+    where: $.parameters.fromParameter
+    transform: $['x-ms-client-name'] = 'FromProperty'
+
+  - from: policyStates.json
+    where: $.parameters.fromParameter
+    transform: $['x-ms-client-name'] = 'FromProperty'
 ```
