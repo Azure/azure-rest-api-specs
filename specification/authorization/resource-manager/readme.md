@@ -82,6 +82,12 @@ directive:
   - suppress: XmsPathsMustOverloadPaths
     from: authorization-RoleDefinitionsCalls.json
     reason: x-ms-paths extension was previously required. Suppressing so that we don't have to make changes to existing APIs.
+  - suppress: AddedPropertyInResponse
+    from: authorization-AccessReviewCalls.json
+    reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
+  - suppress: AddingOptionalProperty
+    from: authorization-AccessReviewCalls.json
+    reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
 ```
 
 ### Tag: package-2021-03-01-preview-only
