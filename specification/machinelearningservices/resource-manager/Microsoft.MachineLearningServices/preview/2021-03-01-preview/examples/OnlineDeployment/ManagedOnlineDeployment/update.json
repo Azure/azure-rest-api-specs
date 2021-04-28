@@ -32,6 +32,13 @@
       },
       "properties": {
         "endpointComputeType": "Managed",
+        "readinessProbe": {
+          "failureThreshold": 50,
+          "successThreshold": 50,
+          "timeout": "PT1M",
+          "period": "PT1M",
+          "initialDelay": "PT1M"
+        },
         "scaleSettings": {
           "pollingInterval": "PT1M",
           "scaleType": "Auto"
@@ -68,6 +75,13 @@
         "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments",
         "properties": {
           "endpointComputeType": "Managed",
+          "readinessProbe": {
+            "failureThreshold": 50,
+            "successThreshold": 50,
+            "timeout": "PT1M",
+            "period": "PT1M",
+            "initialDelay": "PT1M"
+          },
           "scaleSettings": {
             "pollingInterval": "PT1M",
             "scaleType": "Auto",

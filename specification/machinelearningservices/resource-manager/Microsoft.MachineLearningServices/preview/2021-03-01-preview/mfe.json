@@ -1660,8 +1660,23 @@
           }
         },
         "x-ms-examples": {
-          "Create or update datastore.": {
-            "$ref": "./examples/Datastore/createOrUpdate.json"
+          "Create or update datastore (AzureBlob w/ AccountKey).": {
+            "$ref": "./examples/Datastore/AzureBlobWAccountKey/createOrUpdate.json"
+          },
+          "Create or update datastore (Azure Data Lake Gen1 w/ ServicePrincipal).": {
+            "$ref": "./examples/Datastore/AzureDataLakeGen1WServicePrincipal/createOrUpdate.json"
+          },
+          "Create or update datastore (Azure Data Lake Gen2 w/ Service Principal).": {
+            "$ref": "./examples/Datastore/AzureDataLakeGen2WServicePrincipal/createOrUpdate.json"
+          },
+          "Create or update datastore (Azure File store w/ AccountKey).": {
+            "$ref": "./examples/Datastore/AzureFileWAccountKey/createOrUpdate.json"
+          },
+          "Create or update datastore (Azure Postgre SQL w/ SQL Admin).": {
+            "$ref": "./examples/Datastore/AzurePostgreSqlWSqlAdmin/createOrUpdate.json"
+          },
+          "Create or update datastore (Azure SQL Database w/ SQL Admin).": {
+            "$ref": "./examples/Datastore/AzureSqlDatabaseWSqlAdmin/createOrUpdate.json"
           }
         }
       }
@@ -2532,10 +2547,10 @@
         },
         "x-ms-examples": {
           "CreateOrUpdate Command Job.": {
-            "$ref": "./examples/CommandJob/createOrUpdate.json"
+            "$ref": "./examples/Job/CommandJob/createOrUpdate.json"
           },
           "CreateOrUpdate Sweep Job.": {
-            "$ref": "./examples/SweepJob/createOrUpdate.json"
+            "$ref": "./examples/Job/SweepJob/createOrUpdate.json"
           }
         }
       },
@@ -2585,10 +2600,10 @@
         },
         "x-ms-examples": {
           "Get Command Job.": {
-            "$ref": "./examples/CommandJob/get.json"
+            "$ref": "./examples/Job/CommandJob/get.json"
           },
           "Get Sweep Job.": {
-            "$ref": "./examples/SweepJob/get.json"
+            "$ref": "./examples/Job/SweepJob/get.json"
           }
         }
       },
@@ -2658,11 +2673,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Command Job.": {
-            "$ref": "./examples/CommandJob/delete.json"
-          },
-          "Delete Sweep Job.": {
-            "$ref": "./examples/SweepJob/delete.json"
+          "Delete Job.": {
+            "$ref": "./examples/Job/delete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -2732,10 +2744,10 @@
         },
         "x-ms-examples": {
           "List Command Job.": {
-            "$ref": "./examples/CommandJob/list.json"
+            "$ref": "./examples/Job/CommandJob/list.json"
           },
           "List Sweep Job.": {
-            "$ref": "./examples/SweepJob/list.json"
+            "$ref": "./examples/Job/SweepJob/list.json"
           }
         },
         "x-ms-pageable": {
@@ -2786,11 +2798,8 @@
           }
         },
         "x-ms-examples": {
-          "Cancel Command Job.": {
-            "$ref": "./examples/CommandJob/cancel.json"
-          },
-          "Cancel Sweep Job.": {
-            "$ref": "./examples/SweepJob/cancel.json"
+          "Cancel Job.": {
+            "$ref": "./examples/Job/cancel.json"
           }
         }
       }
@@ -3838,7 +3847,7 @@
           }
         },
         "x-ms-examples": {
-          "List Online Deployment.": {
+          "List Online Deployments.": {
             "$ref": "./examples/OnlineDeployment/list.json"
           }
         },
@@ -3921,7 +3930,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Online Deployment.": {
+          "Delete Online Deployments.": {
             "$ref": "./examples/OnlineDeployment/delete.json"
           }
         },
@@ -3982,8 +3991,11 @@
           }
         },
         "x-ms-examples": {
-          "Get Online Deployment.": {
-            "$ref": "./examples/OnlineDeployment/get.json"
+          "Get Managed Online Deployments.": {
+            "$ref": "./examples/OnlineDeployment/ManagedOnlineDeployment/get.json"
+          },
+          "Get K8S Online Deployments.": {
+            "$ref": "./examples/OnlineDeployment/K8SOnlineDeployment/get.json"
           }
         }
       },
@@ -4070,8 +4082,11 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Online Deployment.": {
-            "$ref": "./examples/OnlineDeployment/createOrUpdate.json"
+          "CreateOrUpdate Managed Online Deployments.": {
+            "$ref": "./examples/OnlineDeployment/ManagedOnlineDeployment/createOrUpdate.json"
+          },
+          "CreateOrUpdate K8S Online Deployments.": {
+            "$ref": "./examples/OnlineDeployment/K8SOnlineDeployment/createOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -4166,8 +4181,11 @@
           }
         },
         "x-ms-examples": {
-          "Update Online Deployment.": {
-            "$ref": "./examples/OnlineDeployment/update.json"
+          "Update Managed Online Deployments.": {
+            "$ref": "./examples/OnlineDeployment/ManagedOnlineDeployment/update.json"
+          },
+          "Update K8S Online Deployments.": {
+            "$ref": "./examples/OnlineDeployment/K8SOnlineDeployment/update.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -4241,7 +4259,7 @@
           }
         },
         "x-ms-examples": {
-          "GetLogs Online Deployment.": {
+          "Get Online Deployments Logs.": {
             "$ref": "./examples/OnlineDeployment/getLogs.json"
           }
         }
