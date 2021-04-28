@@ -24,7 +24,23 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05
+tag: package-2021-04
+```
+
+### Tag: package-2021-04
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.Management/stable/2021-04-01/management.json
+```
+
+### Tag: package-2020-10
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10'
+input-file:
+  - Microsoft.Management/stable/2020-10-01/management.json
 ```
 
 ### Tag: package-2020-05
@@ -176,6 +192,8 @@ batch:
   - tag: package-2019-11
   - tag: package-2020-02
   - tag: package-2020-05
+  - tag: package-2020-10
+  - tag: package-2021-04
 ```
 
 ### Tag: package-2017-08 and java
@@ -265,6 +283,32 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.managementgroups.v2020_05_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2020_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-10 and java
+
+These settings apply only when `--tag=package-2020-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managementgroups.v2020_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2020_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2021-04 and java
+
+These settings apply only when `--tag=package-2021-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managementgroups.v2021_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2021_04_01
 regenerate-manager: true
 generate-interface: true
 ```
