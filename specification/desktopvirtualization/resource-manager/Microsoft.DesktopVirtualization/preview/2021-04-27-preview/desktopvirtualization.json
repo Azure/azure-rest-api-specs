@@ -3396,9 +3396,13 @@
       "description": "Session host configurations of HostPool.",
       "type": "object",
       "properties": {
+        "oSDiskType": {
+          "type": "string",
+          "description": "The os disk type of the virtual machine connected to the hostpool."
+        },
         "vMSize": {
           "type": "string",
-          "description": "The size a virtual machine connected to a hostpool."
+          "description": "The size of a virtual machine connected to the hostpool."
         },
         "imageReference": {
           "$ref": "#/definitions/ImageReferenceProperties",
@@ -3406,11 +3410,11 @@
         },
         "domainToJoin": {
           "type": "string",
-          "description": "The domain a virtual machine connected to a hostpool will join."
+          "description": "The domain of a virtual machine connected to the hostpool will join."
         },
         "organizationalUnitPath": {
           "type": "string",
-          "description": "The organizational unit path a virtual machine connected to a hostpool will use."
+          "description": "The organizational unit path of a virtual machine connected to a hostpool will use."
         }
       }
     },
