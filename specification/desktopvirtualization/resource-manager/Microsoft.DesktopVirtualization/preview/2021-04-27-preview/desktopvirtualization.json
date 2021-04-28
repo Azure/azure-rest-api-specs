@@ -2444,6 +2444,282 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/initiateUpdate": {
+      "post": {
+        "tags": [
+          "HostPoolUpdate"
+        ],
+        "operationId": "HostPools_InitiateUpdate",
+        "description": "Initiate update of a hostpool.",
+        "x-ms-examples": {
+          "HostPools_InitiateUpdate_Post": {
+            "$ref": "./examples/HostPools_InitiateUpdate_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "hostPoolUpdateParameters",
+            "description": "Object containing HostPool update definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostPoolUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully initiated hostpool update."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/controlUpdate": {
+      "post": {
+        "tags": [
+          "HostPoolUpdate"
+        ],
+        "operationId": "HostPools_ControlUpdate",
+        "description": "Control update of a hostpool.",
+        "x-ms-examples": {
+          "HostPools_ControlUpdate_Post": {
+            "$ref": "./examples/HostPools_ControlUpdate_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "hostPoolUpdateAction",
+            "description": "Object containing control action for hostpool update.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostPoolUpdateAction"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully controlled hostpool update."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/getUpdateProgress": {
+      "post": {
+        "tags": [
+          "HostPoolUpdate"
+        ],
+        "operationId": "HostPools_GetUpdateProgress",
+        "description": "Get host pool update progress.",
+        "x-ms-examples": {
+          "HostPools_GetUpdateProgress_Post": {
+            "$ref": "./examples/HostPools_GetUpdateProgress_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully controlled hostpool update.",
+            "schema": {
+              "$ref": "#/definitions/HostPoolUpdateProgress"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/getUpdate": {
+      "post": {
+        "tags": [
+          "HostPoolUpdate"
+        ],
+        "operationId": "HostPools_GetUpdate",
+        "description": "Initiate update of a hostpool.",
+        "x-ms-examples": {
+          "HostPools_GetUpdate_Post": {
+            "$ref": "./examples/HostPools_GetUpdate_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully initiated hostpool update.",
+            "schema": {
+              "$ref": "#/definitions/HostPoolUpdateParameters"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/validateUpdate": {
+      "post": {
+        "tags": [
+          "HostPoolUpdate"
+        ],
+        "operationId": "HostPools_ValidateUpdate",
+        "description": "Validate update of a hostpool.",
+        "x-ms-examples": {
+          "HostPools_ValidateUpdate_Post": {
+            "$ref": "./examples/HostPools_ValidateUpdate_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "hostPoolUpdateParameters",
+            "description": "Object containing HostPool update definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostPoolUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted hostpool update validation request."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/validateUpdate/operationResult/{validationInstanceId}": {
+      "post": {
+        "tags": [
+          "HostPoolUpdate"
+        ],
+        "operationId": "HostPools_ValidateUpdate_OperationResult",
+        "description": "Operation status of a validate hostpool update.",
+        "x-ms-examples": {
+          "HostPools_ValidateUpdate_OperationResult_Post": {
+            "$ref": "./examples/HostPools_ValidateUpdate_OperationResult_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ValidationInstanceIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of errors if any.",
+            "schema": {
+              "$ref": "#/definitions/HostPoolUpdateValidationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted hostpool update validation request."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2976,6 +3252,10 @@
           "type": "boolean",
           "description": "Is cloud pc resource.",
           "readOnly": true
+        },
+        "sessionHostConfiguration": {
+          "$ref": "#/definitions/SessionHostConfigurationProperties",
+          "description": "The session host configurations of HostPool."
         }
       }
     },
@@ -3105,6 +3385,62 @@
         "startVMOnConnect": {
           "type": "boolean",
           "description": "The flag to turn on/off StartVMOnConnect feature."
+        },
+        "sessionHostConfiguration": {
+          "$ref": "#/definitions/SessionHostConfigurationProperties",
+          "description": "The session host configurations of HostPool."
+        }
+      }
+    },
+    "SessionHostConfigurationProperties": {
+      "description": "Session host configurations of HostPool.",
+      "type": "object",
+      "properties": {
+        "vMSize": {
+          "type": "string",
+          "description": "The size a virtual machine connected to a hostpool."
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageReferenceProperties",
+          "description": "Image configurations of HostPool."
+        },
+        "domainToJoin": {
+          "type": "string",
+          "description": "The domain a virtual machine connected to a hostpool will join."
+        },
+        "organizationalUnitPath": {
+          "type": "string",
+          "description": "The organizational unit path a virtual machine connected to a hostpool will use."
+        }
+      }
+    },
+    "ImageReferenceProperties": {
+      "description": "Image configurations of HostPool.",
+      "type": "object",
+      "properties": {
+        "offer": {
+          "type": "string",
+          "description": "The offer of the image."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the image."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The sku of the image."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the image."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "The exact version of the image."
+        },
+        "id": {
+          "type": "string",
+          "description": "The id of the image."
         }
       }
     },
@@ -4745,6 +5081,173 @@
           "description": "The path to the legacy object to migrate."
         }
       }
+    },
+    "HostPoolUpdateParameters": {
+      "description": "Represents properties for a hostpool update.",
+      "type": "object",
+      "properties": {
+        "saveOriginalDisk": {
+          "type": "boolean",
+          "description": "Whether to save original disk."
+        },
+        "maxVMsRemovedDuringUpdate": {
+          "type": "integer",
+          "description": "The maximum virtual machines to be removed during hostpool update."
+        },
+        "maintenanceAlerts": {
+          "$ref": "#/definitions/MaintenanceAlertsProperties",
+          "description": "The alerts given to customers for hostpool update."
+        },
+        "logOffDelaySeconds": {
+          "type": "integer",
+          "description": "Grace period before logging off users in seconds."
+        },
+        "logOffMessage": {
+          "type": "string",
+          "description": "Log off message sent to user for logoff."
+        }
+      }
+    },
+    "MaintenanceAlertsProperties": {
+      "type": "object",
+      "description": "Properties for host pool update maintenance alerts.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The path to the legacy object to migrate."
+        },
+        "duration": {
+          "type": "integer",
+          "description": "The duration of the hostpool update in seconds."
+        },
+        "beforeKickOff": {
+          "type": "boolean",
+          "description": "Whether to send maintenance alert after or before hostpool update."
+        }
+      }
+    },
+    "HostPoolUpdateAction": {
+      "description": "Represents properties for a hostpool update.",
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": [
+            "Start",
+            "Pause",
+            "Cancel",
+            "Retry",
+            "Resume"
+          ],
+          "x-ms-enum": {
+            "name": "HostPoolUpdateAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Start",
+                "description": "Start the hostpool update."
+              },
+              {
+                "value": "Pause",
+                "description": "Pause the hostpool update."
+              },
+              {
+                "value": "Cancel",
+                "description": "Cancel the hostpool update."
+              },
+              {
+                "value": "Retry",
+                "description": "Retry the hostpool update."
+              },
+              {
+                "value": "Resume",
+                "description": "Resume the hostpool update."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "Action types for controlling hostpool update.",
+          "x-nullable": false
+        }
+      }
+    },
+    "HostPoolUpdateProgress": {
+      "description": "Properties of host pool update progress.",
+      "type": "object",
+      "properties": {
+        "timeCreated": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The hostpool update create time."
+        },
+        "timeStarted": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The hostpool update start time."
+        },
+        "timeEnded": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The hostpool update end time."
+        },
+        "listOfErrors": {
+          "type": "array",
+          "description": "The alerts given to customers for hostpool update.",
+          "items": {
+            "$ref": "#/definitions/HostPoolUpdateFault"
+          }
+        },
+        "progressPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "The progress percentage."
+        },
+        "sessionHostsMigrating": {
+          "type": "integer",
+          "description": "The number of session hosts migrating by hostpool update."
+        },
+        "sessionHostsMigrated": {
+          "type": "integer",
+          "description": "The number of session hosts migrated by hostpool update."
+        }
+      }
+    },
+    "HostPoolUpdateValidationResponse": {
+      "description": "Errors and warnings returned by hostpool update validation.",
+      "type": "object",
+      "properties": {
+        "warnings": {
+          "type": "array",
+          "description": "Warnings from the hostpool update validation.",
+          "items": {
+            "$ref": "#/definitions/HostPoolUpdateFault"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors from the hostpool update validation.",
+          "items": {
+            "$ref": "#/definitions/HostPoolUpdateFault"
+          }
+        }
+      }
+    },
+    "HostPoolUpdateFault": {
+      "description": "Hostpool update fault information.",
+      "type": "object",
+      "properties": {
+        "faultCode": {
+          "type": "string",
+          "description": "Hostpool update fault code."
+        },
+        "faultText": {
+          "type": "string",
+          "description": "Hostpool update fault text."
+        },
+        "faultContext": {
+          "type": "string",
+          "description": "Hostpool update fault context."
+        }
+      }
     }
   },
   "parameters": {
@@ -4855,6 +5358,16 @@
       "type": "string",
       "description": "The name of the scaling plan.",
       "maxLength": 24,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "ValidationInstanceIdParameter": {
+      "name": "validationInstanceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique id for operation result.",
+      "maxLength": 64,
       "minLength": 3,
       "x-ms-parameter-location": "method"
     }
