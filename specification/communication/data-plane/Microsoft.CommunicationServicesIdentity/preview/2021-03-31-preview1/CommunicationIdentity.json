@@ -132,13 +132,13 @@
         }
       }
     },
-    "/teams/me/:issueAccessToken": {
+    "/teamsUsers/me/:issueAccessToken": {
       "post": {
         "tags": [
-          "TeamsToken"
+          "Teams"
         ],
-        "summary": "Issue a new token for a Teams user.",
-        "operationId": "CommunicationIdentity_IssueTeamsToken",
+        "summary": "Issue a new access token for a Teams user.",
+        "operationId": "CommunicationIdentity_IssueTeamsUserAccessToken",
         "consumes": [
           "application/json"
         ],
@@ -154,7 +154,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TeamsAccessTokenRequest"
+              "$ref": "#/definitions/TeamsUserAccessTokenRequest"
             }
           }
         ],
@@ -173,8 +173,8 @@
           }
         },
         "x-ms-examples": {
-          "Issue Teams token": {
-            "$ref": "./examples/IssueTeamsToken.json"
+          "Issue a Teams user access token": {
+            "$ref": "./examples/IssueTeamsUserAccessToken.json"
           }
         }
       }
@@ -307,7 +307,7 @@
         }
       }
     },
-    "TeamsAccessTokenRequest": {
+    "TeamsUserAccessTokenRequest": {
       "required": [
         "token"
       ],
