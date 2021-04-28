@@ -29,6 +29,7 @@ openapi-type: arm
 tag: package-2020-01
 ```
 
+
 ### Tag: package-2021-04-01-only
 
 These settings apply only when `--tag=package-2021-04-01-only` is specified on the command line.
@@ -49,6 +50,7 @@ directive:
 ### Tag: package-2020-01
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
 
 ```yaml $(tag) == 'package-2020-01'
 input-file:
