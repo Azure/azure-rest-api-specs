@@ -33,7 +33,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2021-03-31-privatepreview' && $(python)
 namespace: azure.mgmt.rdbms.postgresql
-output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql_flexibleservers
 ```
 
 ### Tag: package-2020-01-01 and python
