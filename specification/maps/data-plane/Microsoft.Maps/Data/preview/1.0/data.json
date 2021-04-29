@@ -52,6 +52,7 @@
 
     "UploadDataFormat": {
       "name": "dataFormat",
+      "x-ms-client-name": "UploadDataFormat",
       "description": "Data format of the content being uploaded.",
       "type": "string",
       "in": "query",
@@ -76,8 +77,9 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "Udid": {
+    "UploadDataId": {
       "name": "udid",
+      "x-ms-client-name": "UploadDataId",
       "description": "The unique data id for the content. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview) call.",
       "type": "string",
       "in": "path",
@@ -100,6 +102,9 @@
             "$ref": "./examples/Upload.json"
           }
         },
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
@@ -115,12 +120,10 @@
           },
           {
             "name": "UploadContent",
-            "in": "body",
             "description": "The content to upload.",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
+            "type": "file",
+            "in": "formData",
+            "required": true
           }
         ],
         "responses": {
@@ -168,6 +171,9 @@
             "$ref": "./examples/Update.json"
           }
         },
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
@@ -179,16 +185,14 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/Udid"
+            "$ref": "#/parameters/UploadDataId"
           },
           {
             "name": "UpdateContent",
-            "in": "body",
             "description": "The new content that will update/replace the previously uploaded content.",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
+            "type": "file",
+            "in": "formData",
+            "required": true
           }
         ],
         "responses": {
@@ -230,6 +234,11 @@
             "$ref": "./examples/Download.json"
           }
         },
+        "produces": [
+          "application/json",
+          "application/vnd.geo+json",
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
@@ -241,14 +250,14 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/Udid"
+            "$ref": "#/parameters/UploadDataId"
           }
         ],
         "responses": {
           "200": {
             "description": "Data download request completed successfully. The response body will contain the content for the passed in `udid`.",
             "schema": {
-              "$ref": "#/definitions/MapDataDownloadResponse"
+              "type": "file"
             },
             "headers": {
               "Content-Type": {
@@ -257,20 +266,12 @@
               }
             }
           },
-          "400": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
-          },
-          "401": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
-          },
-          "403": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
-          },
-          "404": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
-          },
-          "500": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
+          "default": {
+            "description": "An error occurred while processing the request. Please try again later.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         }
       },
@@ -294,15 +295,12 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/Udid"
+            "$ref": "#/parameters/UploadDataId"
           }
         ],
         "responses": {
           "204": {
-            "description": "Data delete request completed successfully. The content for `udid` was deleted on the server.",
-            "schema": {
-              "$ref": "#/definitions/MapDataDeleteResponse"
-            }
+            "description": "Data delete request completed successfully. The content for `udid` was deleted on the server."
           },
           "400": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
@@ -348,12 +346,6 @@
             "description": "List data request completed successfully. The response body contains a list of all the previously uploaded data.",
             "schema": {
               "$ref": "#/definitions/MapDataListResponse"
-            },
-            "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "The content-type for the Download API response."
-              }
             }
           },
           "400": {
@@ -376,14 +368,6 @@
     }
   },
   "definitions": {
-    "MapDataDownloadResponse": {
-      "description": "The response model for the Data Download API. The response body will contain the content for the passed in `udid`.",
-      "type": "object"
-    },
-    "MapDataDeleteResponse": {
-      "description": "The response model for the Data Delete API. The response body will be empty signifying there's no content available for the `udid` anymore.",
-      "type": "object"
-    },
     "MapDataListResponse": {
       "description": "The response model for the Data List API. Returns a list of all the previously uploaded data.",
       "type": "object",
