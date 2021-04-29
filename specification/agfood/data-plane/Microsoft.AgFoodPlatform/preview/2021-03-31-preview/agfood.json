@@ -161,7 +161,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -246,6 +246,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApplicationData_ListByFarmerId": {
+            "$ref": "./examples/ApplicationData_ListByFarmerId.json"
+          }
         }
       }
     },
@@ -397,7 +402,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -482,6 +487,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApplicationData_List": {
+            "$ref": "./examples/ApplicationData_List.json"
+          }
         }
       }
     },
@@ -525,14 +535,16 @@
               "$ref": "#/definitions/ApplicationData"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ApplicationData_Get": {
+            "$ref": "./examples/ApplicationData_Get.json"
           }
         }
       },
@@ -598,6 +610,11 @@
               "$ref": "#/definitions/ApplicationData"
             }
           }
+        },
+        "x-ms-examples": {
+          "ApplicationData_CreateOrUpdate": {
+            "$ref": "./examples/ApplicationData_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -641,6 +658,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ApplicationData_Delete": {
+            "$ref": "./examples/ApplicationData_Delete.json"
           }
         }
       }
@@ -706,7 +728,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -791,6 +813,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Attachments_ListByFarmerId": {
+            "$ref": "./examples/Attachments_ListByFarmerId.json"
+          }
         }
       }
     },
@@ -808,7 +835,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associted farmer.",
+            "description": "Id of the associated farmer.",
             "required": true,
             "type": "string"
           },
@@ -834,14 +861,16 @@
               "$ref": "#/definitions/Attachment"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Attachments_Get": {
+            "$ref": "./examples/Attachments_Get.json"
           }
         }
       },
@@ -980,6 +1009,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Attachments_CreateOrUpdate": {
+            "$ref": "./examples/Attachments_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -1023,6 +1057,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Attachments_Delete": {
+            "$ref": "./examples/Attachments_Delete.json"
           }
         }
       }
@@ -1074,6 +1113,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Attachments_Download": {
+            "$ref": "./examples/Attachments_Download.json"
           }
         }
       }
@@ -1155,7 +1199,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -1240,6 +1284,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Boundaries_ListByFarmerId": {
+            "$ref": "./examples/Boundaries_ListByFarmerId.json"
+          }
         }
       },
       "post": {
@@ -1294,6 +1343,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Boundaries_SearchByFarmerId": {
+            "$ref": "./examples/Boundaries_SearchByFarmerId.json"
+          }
         }
       }
     },
@@ -1367,7 +1421,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -1452,6 +1506,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Boundaries_List": {
+            "$ref": "./examples/Boundaries_List.json"
+          }
         }
       },
       "post": {
@@ -1499,6 +1558,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Boundaries_Search": {
+            "$ref": "./examples/Boundaries_Search.json"
+          }
         }
       }
     },
@@ -1507,7 +1571,7 @@
         "tags": [
           "Boundaries"
         ],
-        "description": "Get cascade delete job's details.",
+        "description": "Get cascade delete job for specified boundary.",
         "operationId": "Boundaries_GetCascadeDeleteJobDetails",
         "produces": [
           "application/json"
@@ -1532,11 +1596,8 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobDetails"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
-          },
-          "404": {
-            "description": "Not Found"
           },
           "default": {
             "description": "Error",
@@ -1544,13 +1605,18 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Boundaries_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/Boundaries_GetCascadeDeleteJobDetails.json"
+          }
         }
       },
       "put": {
         "tags": [
           "Boundaries"
         ],
-        "description": "Create a cascade delete job for specified field.",
+        "description": "Create a cascade delete job for specified boundary.",
         "operationId": "Boundaries_CreateCascadeDeleteJob",
         "produces": [
           "application/json"
@@ -1589,8 +1655,13 @@
           "202": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobResponse"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Boundaries_CreateCascadeDeleteJob": {
+            "$ref": "./examples/Boundaries_CreateCascadeDeleteJob.json"
           }
         }
       }
@@ -1609,7 +1680,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associted farmer.",
+            "description": "Id of the associated farmer.",
             "required": true,
             "type": "string"
           },
@@ -1635,14 +1706,16 @@
               "$ref": "#/definitions/Boundary"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Boundaries_Get": {
+            "$ref": "./examples/Boundaries_Get.json"
           }
         }
       },
@@ -1708,6 +1781,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Boundaries_CreateOrUpdate": {
+            "$ref": "./examples/Boundaries_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -1751,6 +1829,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Boundaries_Delete": {
+            "$ref": "./examples/Boundaries_Delete.json"
           }
         }
       }
@@ -1809,14 +1892,16 @@
               "$ref": "#/definitions/BoundaryOverlapResponse"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Boundaries_GetOverlap": {
+            "$ref": "./examples/Boundaries_GetOverlap.json"
           }
         }
       }
@@ -1865,7 +1950,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -1950,6 +2035,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Crops_List": {
+            "$ref": "./examples/Crops_List.json"
+          }
         }
       }
     },
@@ -1986,14 +2076,16 @@
               "$ref": "#/definitions/Crop"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Crops_Get": {
+            "$ref": "./examples/Crops_Get.json"
           }
         }
       },
@@ -2052,6 +2144,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Crops_CreateOrUpdate": {
+            "$ref": "./examples/Crops_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -2088,6 +2185,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Crops_Delete": {
+            "$ref": "./examples/Crops_Delete.json"
           }
         }
       }
@@ -2163,7 +2265,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -2248,6 +2350,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CropVarieties_ListByCropId": {
+            "$ref": "./examples/CropVarieties_ListByCropId.json"
+          }
         }
       }
     },
@@ -2315,7 +2422,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -2400,6 +2507,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CropVarieties_List": {
+            "$ref": "./examples/CropVarieties_List.json"
+          }
         }
       }
     },
@@ -2417,7 +2529,7 @@
           {
             "in": "path",
             "name": "cropId",
-            "description": "Id of the associted crop.",
+            "description": "Id of the associated crop.",
             "required": true,
             "type": "string"
           },
@@ -2443,14 +2555,16 @@
               "$ref": "#/definitions/CropVariety"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CropVarieties_Get": {
+            "$ref": "./examples/CropVarieties_Get.json"
           }
         }
       },
@@ -2516,6 +2630,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "CropVarieties_CreateOrUpdate": {
+            "$ref": "./examples/CropVarieties_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -2560,6 +2679,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "CropVarieties_Delete": {
+            "$ref": "./examples/CropVarieties_Delete.json"
+          }
         }
       }
     },
@@ -2597,7 +2721,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -2682,6 +2806,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Farmers_List": {
+            "$ref": "./examples/Farmers_List.json"
+          }
         }
       }
     },
@@ -2699,7 +2828,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "ID of the associted farmer.",
+            "description": "ID of the associated farmer.",
             "required": true,
             "type": "string"
           },
@@ -2718,14 +2847,16 @@
               "$ref": "#/definitions/Farmer"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Farmers_Get": {
+            "$ref": "./examples/Farmers_Get.json"
           }
         }
       },
@@ -2784,6 +2915,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Farmers_CreateOrUpdate": {
+            "$ref": "./examples/Farmers_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -2821,6 +2957,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Farmers_Delete": {
+            "$ref": "./examples/Farmers_Delete.json"
+          }
         }
       }
     },
@@ -2829,7 +2970,7 @@
         "tags": [
           "Farmers"
         ],
-        "description": "Get cascade delete job's details.",
+        "description": "Get a cascade delete job for specified farmer.",
         "operationId": "Farmers_GetCascadeDeleteJobDetails",
         "produces": [
           "application/json"
@@ -2854,17 +2995,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobDetails"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
-          },
-          "404": {
-            "description": "Not Found"
           },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Farmers_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/Farmers_GetCascadeDeleteJobDetails.json"
           }
         }
       },
@@ -2904,8 +3047,19 @@
           "202": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobResponse"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
+          }
+        },
+        "default": {
+          "description": "Error",
+          "schema": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        },
+        "x-ms-examples": {
+          "Farmers_CreateCascadeDeleteJob": {
+            "$ref": "./examples/Farmers_CreateCascadeDeleteJob.json"
           }
         }
       }
@@ -2943,7 +3097,7 @@
             "name": "body",
             "description": "Job parameters supplied by user.",
             "schema": {
-              "$ref": "#/definitions/FarmOperationDataIngestionJobRequest"
+              "$ref": "#/definitions/FarmOperationDataIngestionJob"
             }
           }
         ],
@@ -2951,44 +3105,63 @@
           "202": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/FarmOperationDataIngestionJobResponse"
+              "$ref": "#/definitions/FarmOperationDataIngestionJob"
             }
           },
           "default": {
-            "description": "Error"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "FarmOperations"
-        ],
-        "description": "Get farm operation data ingestion job's details.",
-        "operationId": "FarmOperations_GetDataIngestionJobDetails",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "jobId",
-            "description": "Id of the job.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/FarmOperationDataIngestionJobDetails"
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "x-ms-examples": {
+            "FarmOperations_CreateDataIngestionJob": {
+              "$ref": "./examples/FarmOperations_CreateDataIngestionJob.json"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "FarmOperations"
+          ],
+          "description": "Get a farm operation data ingestion job.",
+          "operationId": "FarmOperations_GetDataIngestionJobDetails",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "jobId",
+              "description": "Id of the job.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "query",
+              "name": "api-version",
+              "description": "The requested API version",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/FarmOperationDataIngestionJob"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "x-ms-examples": {
+            "FarmOperations_GetDataIngestionJobDetails": {
+              "$ref": "./examples/FarmOperations_GetDataIngestionJobDetails.json"
             }
           }
         }
@@ -3035,7 +3208,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -3120,6 +3293,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Farms_ListByFarmerId": {
+            "$ref": "./examples/Farms_ListByFarmerId.json"
+          }
         }
       }
     },
@@ -3157,7 +3335,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -3242,6 +3420,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Farms_List": {
+            "$ref": "./examples/Farms_List.json"
+          }
         }
       }
     },
@@ -3285,14 +3468,16 @@
               "$ref": "#/definitions/Farm"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Farms_Get": {
+            "$ref": "./examples/Farms_Get.json"
           }
         }
       },
@@ -3358,6 +3543,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Farms_CreateOrUpdate": {
+            "$ref": "./examples/Farms_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -3402,6 +3592,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Farms_Delete": {
+            "$ref": "./examples/Farms_Delete.json"
+          }
         }
       }
     },
@@ -3410,7 +3605,7 @@
         "tags": [
           "Farms"
         ],
-        "description": "Get cascade delete job's details.",
+        "description": "Get a cascade delete job for specified farm.",
         "operationId": "Farms_GetCascadeDeleteJobDetails",
         "produces": [
           "application/json"
@@ -3435,17 +3630,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobDetails"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
-          },
-          "404": {
-            "description": "Not Found"
           },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Farms_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/Farms_GetCascadeDeleteJobDetails.json"
           }
         }
       },
@@ -3492,8 +3689,19 @@
           "202": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobResponse"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
+          }
+        },
+        "default": {
+          "description": "Error",
+          "schema": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        },
+        "x-ms-examples": {
+          "Farms_CreateCascadeDeleteJob": {
+            "$ref": "./examples/Farms_CreateCascadeDeleteJob.json"
           }
         }
       }
@@ -3549,7 +3757,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -3634,6 +3842,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Fields_ListByFarmerId": {
+            "$ref": "./examples/Fields_ListByFarmerId.json"
+          }
         }
       }
     },
@@ -3681,7 +3894,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -3766,6 +3979,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Fields_List": {
+            "$ref": "./examples/Fields_List.json"
+          }
         }
       }
     },
@@ -3783,7 +4001,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associted farmer.",
+            "description": "Id of the associated farmer.",
             "required": true,
             "type": "string"
           },
@@ -3809,14 +4027,16 @@
               "$ref": "#/definitions/Field"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Fields_Get": {
+            "$ref": "./examples/Fields_Get.json"
           }
         }
       },
@@ -3882,6 +4102,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Fields_CreateOrUpdate": {
+            "$ref": "./examples/Fields_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -3926,6 +4151,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Fields_Delete": {
+            "$ref": "./examples/Fields_Delete.json"
+          }
         }
       }
     },
@@ -3934,7 +4164,7 @@
         "tags": [
           "Fields"
         ],
-        "description": "Get cascade delete job's details.",
+        "description": "Get a cascade delete job for specified field.",
         "operationId": "Fields_GetCascadeDeleteJobDetails",
         "produces": [
           "application/json"
@@ -3959,17 +4189,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobDetails"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
-          },
-          "404": {
-            "description": "Not Found"
           },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Fields_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/Fields_GetCascadeDeleteJobDetails.json"
           }
         }
       },
@@ -4016,8 +4248,19 @@
           "202": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobResponse"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
+          }
+        },
+        "default": {
+          "description": "Error",
+          "schema": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        },
+        "x-ms-examples": {
+          "Fields_CreateCascadeDeleteJob": {
+            "$ref": "./examples/Fields_CreateCascadeDeleteJob.json"
           }
         }
       }
@@ -4233,7 +4476,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -4318,6 +4561,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HarvestData_ListByFarmerId": {
+            "$ref": "./examples/HarvestData_ListByFarmerId.json"
+          }
         }
       }
     },
@@ -4525,7 +4773,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -4610,6 +4858,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HarvestData_List": {
+            "$ref": "./examples/HarvestData_List.json"
+          }
         }
       }
     },
@@ -4653,14 +4906,16 @@
               "$ref": "#/definitions/HarvestData"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HarvestData_Get": {
+            "$ref": "./examples/HarvestData_Get.json"
           }
         }
       },
@@ -4726,6 +4981,11 @@
               "$ref": "#/definitions/HarvestData"
             }
           }
+        },
+        "x-ms-examples": {
+          "HarvestData_CreateOrUpdate": {
+            "$ref": "./examples/HarvestData_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -4770,6 +5030,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "HarvestData_Delete": {
+            "$ref": "./examples/HarvestData_Delete.json"
+          }
         }
       }
     },
@@ -4807,7 +5072,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -4892,6 +5157,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OAuthProviders_List": {
+            "$ref": "./examples/OAuthProviders_List.json"
+          }
         }
       }
     },
@@ -4928,14 +5198,16 @@
               "$ref": "#/definitions/OAuthProvider"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OAuthProviders_Get": {
+            "$ref": "./examples/OAuthProviders_Get.json"
           }
         }
       },
@@ -4988,6 +5260,17 @@
               "$ref": "#/definitions/OAuthProvider"
             }
           }
+        },
+        "default": {
+          "description": "Error",
+          "schema": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        },
+        "x-ms-examples": {
+          "OAuthProviders_CreateOrUpdate": {
+            "$ref": "./examples/OAuthProviders_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -5024,6 +5307,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OAuthProviders_Delete": {
+            "$ref": "./examples/OAuthProviders_Delete.json"
           }
         }
       }
@@ -5133,6 +5421,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OAuthTokens_List": {
+            "$ref": "./examples/OAuthTokens_List.json"
+          }
         }
       }
     },
@@ -5170,11 +5463,19 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Success"
+          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OAuthTokens_Delete": {
+            "$ref": "./examples/OAuthTokens_Delete.json"
           }
         }
       }
@@ -5221,6 +5522,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OAuthTokens_GetOAuthConnectionLink": {
+            "$ref": "./examples/OAuthTokens_GetOAuthConnectionLink.json"
           }
         }
       }
@@ -5394,7 +5700,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -5479,6 +5785,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PlantingData_ListByFarmerId": {
+            "$ref": "./examples/PlantingData_ListByFarmerId.json"
+          }
         }
       }
     },
@@ -5644,7 +5955,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -5729,6 +6040,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PlantingData_List": {
+            "$ref": "./examples/PlantingData_List.json"
+          }
         }
       }
     },
@@ -5772,14 +6088,16 @@
               "$ref": "#/definitions/PlantingData"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PlantingData_Get": {
+            "$ref": "./examples/PlantingData_Get.json"
           }
         }
       },
@@ -5845,6 +6163,11 @@
               "$ref": "#/definitions/PlantingData"
             }
           }
+        },
+        "x-ms-examples": {
+          "PlantingData_CreateOrUpdate": {
+            "$ref": "./examples/PlantingData_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -5888,6 +6211,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PlantingData_Delete": {
+            "$ref": "./examples/PlantingData_Delete.json"
           }
         }
       }
@@ -6037,6 +6365,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Scenes_List": {
+            "$ref": "./examples/Scenes_List.json"
+          }
         }
       }
     },
@@ -6073,7 +6406,7 @@
             "name": "body",
             "description": "Job parameters supplied by user.",
             "schema": {
-              "$ref": "#/definitions/SatelliteIngestionJobRequest"
+              "$ref": "#/definitions/SatelliteDataIngestionJob"
             }
           }
         ],
@@ -6081,11 +6414,19 @@
           "202": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SatelliteIngestionJobResponse"
+              "$ref": "#/definitions/SatelliteDataIngestionJob"
             }
           },
           "default": {
-            "description": "Error"
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scenes_CreateSatelliteDataIngestionJob": {
+            "$ref": "./examples/Scenes_CreateSatelliteDataIngestionJob.json"
           }
         }
       },
@@ -6093,7 +6434,7 @@
         "tags": [
           "Scenes"
         ],
-        "description": "Get satellite data ingestion job's details.",
+        "description": "Get a satellite data ingestion job.",
         "operationId": "Scenes_GetSatelliteDataIngestionJobDetails",
         "produces": [
           "application/json"
@@ -6118,8 +6459,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SatelliteIngestionJobDetails"
+              "$ref": "#/definitions/SatelliteDataIngestionJob"
             }
+          }
+        },
+        "default": {
+          "description": "Error",
+          "schema": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        },
+        "x-ms-examples": {
+          "Scenes_GetSatelliteDataIngestionJobDetails": {
+            "$ref": "./examples/Scenes_GetSatelliteDataIngestionJobDetails.json"
           }
         }
       }
@@ -6129,7 +6481,7 @@
         "tags": [
           "Scenes"
         ],
-        "description": "Downloads and returns file content as response for the given input filePath.",
+        "description": "Downloads and returns file stream as response for the given input filePath.",
         "operationId": "Scenes_Download",
         "produces": [
           "application/octet-stream",
@@ -6155,8 +6507,8 @@
           "200": {
             "description": "Success",
             "schema": {
-              "format": "byte",
-              "type": "string"
+              "format": "binary",
+              "type": "file"
             }
           },
           "default": {
@@ -6164,6 +6516,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Scenes_Download": {
+            "$ref": "./examples/Scenes_Download.json"
           }
         }
       }
@@ -6175,11 +6532,6 @@
         ],
         "description": "Returns a paginated list of seasonal field resources under a particular farmer.",
         "operationId": "SeasonalFields_ListByFarmerId",
-        "x-ms-examples": {
-          "SeasonalFields_ListByFarmerId": {
-            "$ref": "examples/SeasonalFields/SeasonalFields_ListByFarmerId.json"
-          }
-        },
         "produces": [
           "application/json"
         ],
@@ -6318,7 +6670,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -6403,6 +6755,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SeasonalFields_ListByFarmerId": {
+            "$ref": "./examples/SeasonalFields_ListByFarmerId.json"
+          }
         }
       }
     },
@@ -6413,11 +6770,6 @@
         ],
         "description": "Returns a paginated list of seasonal field resources across all farmers.",
         "operationId": "SeasonalFields_List",
-        "x-ms-examples": {
-          "SeasonalFields_List": {
-            "$ref": "examples/SeasonalFields/SeasonalFields_List.json"
-          }
-        },
         "produces": [
           "application/json"
         ],
@@ -6549,7 +6901,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -6634,6 +6986,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SeasonalFields_List": {
+            "$ref": "./examples/SeasonalFields_List.json"
+          }
         }
       }
     },
@@ -6644,11 +7001,6 @@
         ],
         "description": "Gets a specified seasonal field resource under a particular farmer.",
         "operationId": "SeasonalFields_Get",
-        "x-ms-examples": {
-          "SeasonalFields_Get": {
-            "$ref": "examples/SeasonalFields/SeasonalFields_Get.json"
-          }
-        },
         "produces": [
           "application/json"
         ],
@@ -6656,7 +7008,7 @@
           {
             "in": "path",
             "name": "farmerId",
-            "description": "Id of the associted farmer.",
+            "description": "Id of the associated farmer.",
             "required": true,
             "type": "string"
           },
@@ -6682,14 +7034,16 @@
               "$ref": "#/definitions/SeasonalField"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SeasonalFields_Get": {
+            "$ref": "./examples/SeasonalFields_Get.json"
           }
         }
       },
@@ -6699,11 +7053,6 @@
         ],
         "description": "Creates or Updates a seasonal field resource under a particular farmer.",
         "operationId": "SeasonalFields_CreateOrUpdate",
-        "x-ms-examples": {
-          "SeasonalFields_CreateOrUpdate": {
-            "$ref": "examples/SeasonalFields/SeasonalFields_CreateOrUpdate.json"
-          }
-        },
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -6760,6 +7109,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SeasonalFields_CreateOrUpdate": {
+            "$ref": "./examples/SeasonalFields_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -6768,11 +7122,6 @@
         ],
         "description": "Deletes a specified seasonal-field resource under a particular farmer.",
         "operationId": "SeasonalFields_Delete",
-        "x-ms-examples": {
-          "SeasonalFields_Delete": {
-            "$ref": "examples/SeasonalFields/SeasonalFields_Delete.json"
-          }
-        },
         "produces": [
           "application/json"
         ],
@@ -6809,6 +7158,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SeasonalFields_Delete": {
+            "$ref": "./examples/SeasonalFields_Delete.json"
+          }
         }
       }
     },
@@ -6817,13 +7171,8 @@
         "tags": [
           "SeasonalFields"
         ],
-        "description": "Get cascade delete job's details.",
+        "description": "Get cascade delete job for specified seasonal field.",
         "operationId": "SeasonalFields_GetCascadeDeleteJobDetails",
-        "x-ms-examples": {
-          "SeasonalFields_GetCascadeDeleteJobDetails": {
-            "$ref": "examples/SeasonalFields/SeasonalFields_GetCascadeDeleteJobDetails.json"
-          }
-        },
         "produces": [
           "application/json"
         ],
@@ -6847,11 +7196,8 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobDetails"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
-          },
-          "404": {
-            "description": "Not Found"
           },
           "default": {
             "description": "Error",
@@ -6859,19 +7205,19 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SeasonalFields_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/SeasonalFields_GetCascadeDeleteJobDetails.json"
+          }
         }
       },
       "put": {
         "tags": [
           "SeasonalFields"
         ],
-        "description": "Create a cascade delete job for specified seasonalField.",
+        "description": "Create a cascade delete job for specified seasonal field.",
         "operationId": "SeasonalFields_CreateCascadeDeleteJob",
-        "x-ms-examples": {
-          "SeasonalFields_CreateCascadeDeleteJob": {
-            "$ref": "examples/SeasonalFields/SeasonalFields_CreateCascadeDeleteJob.json"
-          }
-        },
         "produces": [
           "application/json"
         ],
@@ -6909,8 +7255,19 @@
           "202": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobResponse"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
+          }
+        },
+        "default": {
+          "description": "Error",
+          "schema": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        },
+        "x-ms-examples": {
+          "SeasonalFields_CreateCascadeDeleteJob": {
+            "$ref": "./examples/SeasonalFields_CreateCascadeDeleteJob.json"
           }
         }
       }
@@ -6988,7 +7345,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -7073,6 +7430,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Seasons_List": {
+            "$ref": "./examples/Seasons_List.json"
+          }
         }
       }
     },
@@ -7109,14 +7471,16 @@
               "$ref": "#/definitions/Season"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Seasons_Get": {
+            "$ref": "./examples/Seasons_Get.json"
           }
         }
       },
@@ -7175,6 +7539,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Seasons_CreateOrUpdate": {
+            "$ref": "./examples/Seasons_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -7211,6 +7580,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Seasons_Delete": {
+            "$ref": "./examples/Seasons_Delete.json"
           }
         }
       }
@@ -7250,14 +7624,14 @@
           {
             "in": "query",
             "name": "minTillagePressure",
-            "description": "Minimum downforce applied to a tillage implement (inclusive).",
+            "description": "Minimum pressure applied by a tillage implement (inclusive).",
             "type": "number",
             "format": "double"
           },
           {
             "in": "query",
             "name": "maxTillagePressure",
-            "description": "Maximum downforce applied to a tillage implement (inclusive).",
+            "description": "Maximum pressure applied by a tillage implement (inclusive).",
             "type": "number",
             "format": "double"
           },
@@ -7370,7 +7744,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -7455,6 +7829,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TillageData_ListByFarmerId": {
+            "$ref": "./examples/TillageData_ListByFarmerId.json"
+          }
         }
       }
     },
@@ -7486,14 +7865,14 @@
           {
             "in": "query",
             "name": "minTillagePressure",
-            "description": "Minimum downforce applied to a tillage implement (inclusive).",
+            "description": "Minimum pressure applied by a tillage implement (inclusive).",
             "type": "number",
             "format": "double"
           },
           {
             "in": "query",
             "name": "maxTillagePressure",
-            "description": "Maximum downforce applied to a tillage implement (inclusive).",
+            "description": "Maximum pressure applied by a tillage implement (inclusive).",
             "type": "number",
             "format": "double"
           },
@@ -7606,7 +7985,7 @@
           {
             "in": "query",
             "name": "propertyFilters",
-            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -7691,6 +8070,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TillageData_List": {
+            "$ref": "./examples/TillageData_List.json"
+          }
         }
       }
     },
@@ -7734,14 +8118,16 @@
               "$ref": "#/definitions/TillageData"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TillageData_Get": {
+            "$ref": "./examples/TillageData_Get.json"
           }
         }
       },
@@ -7807,6 +8193,11 @@
               "$ref": "#/definitions/TillageData"
             }
           }
+        },
+        "x-ms-examples": {
+          "TillageData_CreateOrUpdate": {
+            "$ref": "./examples/TillageData_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -7850,6 +8241,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TillageData_Delete": {
+            "$ref": "./examples/TillageData_Delete.json"
           }
         }
       }
@@ -7959,10 +8355,60 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Weather_List": {
+            "$ref": "./examples/Weather_List.json"
+          }
         }
       }
     },
     "/weather/ingest-data/{jobId}": {
+      "get": {
+        "tags": [
+          "Weather"
+        ],
+        "description": "Get weather ingestion job.",
+        "operationId": "Weather_GetDataIngestionJobDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/WeatherDataIngestionJob"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Weather_GetDataIngestionJobDetails": {
+            "$ref": "./examples/Weather_GetDataIngestionJobDetails.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Weather"
@@ -7995,7 +8441,7 @@
             "name": "body",
             "description": "Job parameters supplied by user.",
             "schema": {
-              "$ref": "#/definitions/WeatherIngestionJobRequest"
+              "$ref": "#/definitions/WeatherDataIngestionJob"
             }
           }
         ],
@@ -8003,17 +8449,30 @@
           "202": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/WeatherIngestionJobResponse"
+              "$ref": "#/definitions/WeatherDataIngestionJob"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Weather_CreateDataIngestionJob": {
+            "$ref": "./examples/Weather_CreateDataIngestionJob.json"
+          }
         }
-      },
+      }
+    },
+    "/weather/delete-data/{jobId}": {
       "get": {
         "tags": [
           "Weather"
         ],
-        "description": "Get weather ingestion job's details.",
-        "operationId": "Weather_GetDataIngestionJobDetails",
+        "description": "Get weather data delete job.",
+        "operationId": "Weather_GetDataDeleteJobDetails",
         "produces": [
           "application/json"
         ],
@@ -8037,13 +8496,22 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/WeatherIngestionJobDetails"
+              "$ref": "#/definitions/WeatherDataDeleteJob"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Weather_GetDataDeleteJobDetails": {
+            "$ref": "./examples/Weather_GetDataDeleteJobDetails.json"
+          }
         }
-      }
-    },
-    "/weather/delete-data/{jobId}": {
+      },
       "put": {
         "tags": [
           "Weather"
@@ -8076,7 +8544,7 @@
             "name": "body",
             "description": "Job parameters supplied by user.",
             "schema": {
-              "$ref": "#/definitions/WeatherDataDeleteJobRequest"
+              "$ref": "#/definitions/WeatherDataDeleteJob"
             }
           }
         ],
@@ -8084,42 +8552,19 @@
           "202": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/WeatherDataDeleteJobResponse"
+              "$ref": "#/definitions/WeatherDataDeleteJob"
             }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Weather"
-        ],
-        "description": "Get weather data delete job's details.",
-        "operationId": "Weather_GetDataDeleteJobDetails",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "jobId",
-            "description": "Id of the job.",
-            "required": true,
-            "type": "string"
           },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
+          "default": {
+            "description": "Error",
             "schema": {
-              "$ref": "#/definitions/WeatherDataDeleteJobDetails"
+              "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Weather_CreateDataDeleteJob": {
+            "$ref": "./examples/Weather_CreateDataDeleteJob.json"
           }
         }
       }
@@ -8628,7 +9073,7 @@
           }
         },
         "propertyFilters": {
-          "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testkey} eq {testvalue}\".",
+          "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
           "type": "array",
           "items": {
             "type": "string"
@@ -8703,23 +9148,8 @@
         }
       }
     },
-    "JobStatus": {
-      "description": "Various states a job can be in.",
-      "enum": [
-        "Waiting",
-        "Running",
-        "Succeeded",
-        "Failed",
-        "Cancelled"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "JobStatus",
-        "modelAsString": true
-      }
-    },
-    "CascadeDeleteJobRequest": {
-      "description": "CascadeDelete job request object.",
+    "CascadeDeleteJob": {
+      "description": "Schema of cascade delete job.",
       "required": [
         "farmerId",
         "resourceId",
@@ -8739,120 +9169,25 @@
           "description": "The type of the resource.",
           "type": "string"
         },
-        "name": {
-          "description": "Name to identify resource.",
-          "maxLength": 100,
-          "minLength": 0,
-          "type": "string"
-        },
-        "description": {
-          "description": "Textual description of the resource.",
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        }
-      }
-    },
-    "CascadeDeleteJobDetails": {
-      "description": "Schema for GetCascadeDeleteJobDetails.",
-      "type": "object",
-      "properties": {
-        "durationInSeconds": {
-          "description": "Duration of the job in seconds.",
-          "type": "string"
-        },
         "id": {
           "description": "Unique job id.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "jobStatus": {
-          "$ref": "#/definitions/JobStatus"
+          "description": "Status of the job.\r\nPossible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.",
+          "type": "string",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "description": "Duration of the job in seconds.",
+          "type": "string",
+          "readOnly": true
         },
         "message": {
           "description": "Status message to capture more details of the job.",
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
           "type": "string",
           "readOnly": true
-        },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "Job was last acted upon at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Job start time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Job end time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name to identify resource.",
-          "maxLength": 100,
-          "minLength": 0,
-          "type": "string"
-        },
-        "description": {
-          "description": "Textual description of the resource.",
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        },
-        "requestBody": {
-          "$ref": "#/definitions/CascadeDeleteJobRequest"
-        }
-      }
-    },
-    "CascadeDeleteJobResponse": {
-      "description": "CascadeDelete job response.",
-      "type": "object",
-      "properties": {
-        "durationInSeconds": {
-          "description": "Duration of the job in seconds.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique job id.",
-          "type": "string"
-        },
-        "jobStatus": {
-          "$ref": "#/definitions/JobStatus"
-        },
-        "message": {
-          "description": "Status message to capture more details of the job.",
-          "type": "string"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -9181,8 +9516,8 @@
         }
       }
     },
-    "FarmOperationDataIngestionJobRequest": {
-      "description": "FarmOperationDataIngestionJobRequest.",
+    "FarmOperationDataIngestionJob": {
+      "description": "Schema of farm operation data ingestion job.",
       "required": [
         "authProviderId",
         "farmerId",
@@ -9195,7 +9530,7 @@
           "type": "string"
         },
         "authProviderId": {
-          "description": "Auth Provider Id.",
+          "description": "Authentication provider Id.",
           "type": "string"
         },
         "operations": {
@@ -9210,61 +9545,25 @@
           "description": "Start Year (Minimum = 2000, Maximum = CurrentYear).",
           "type": "integer"
         },
-        "name": {
-          "description": "Name to identify resource.",
-          "maxLength": 100,
-          "minLength": 0,
-          "type": "string"
+        "id": {
+          "description": "Unique job id.",
+          "type": "string",
+          "readOnly": true
         },
-        "description": {
-          "description": "Textual description of the resource.",
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        }
-      }
-    },
-    "FarmOperationDataIngestionJobResponse": {
-      "description": "FarmOperationDataIngestion job response.",
-      "type": "object",
-      "properties": {
-        "operations": {
-          "description": "List of operation types for which data will be downloaded.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "startYear": {
-          "format": "int32",
-          "description": "Start Year (Minimum = 2000, Maximum = CurrentYear).",
-          "type": "integer"
+        "jobStatus": {
+          "description": "Status of the job.\r\nPossible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.",
+          "type": "string",
+          "readOnly": true
         },
         "durationInSeconds": {
           "description": "Duration of the job in seconds.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique job id.",
-          "type": "string"
-        },
-        "jobStatus": {
-          "$ref": "#/definitions/JobStatus"
+          "type": "string",
+          "readOnly": true
         },
         "message": {
           "description": "Status message to capture more details of the job.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdDateTime": {
           "format": "date-time",
@@ -9312,77 +9611,6 @@
             "key1": "value1",
             "key2": 123.45
           }
-        }
-      }
-    },
-    "FarmOperationDataIngestionJobDetails": {
-      "description": "Schema for GetFarmOperationsDataIngestionJobDetails.",
-      "type": "object",
-      "properties": {
-        "durationInSeconds": {
-          "description": "Duration of the job in seconds.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique job id.",
-          "type": "string"
-        },
-        "jobStatus": {
-          "$ref": "#/definitions/JobStatus"
-        },
-        "message": {
-          "description": "Status message to capture more details of the job.",
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "Job was last acted upon at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Job start time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Job end time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name to identify resource.",
-          "maxLength": 100,
-          "minLength": 0,
-          "type": "string"
-        },
-        "description": {
-          "description": "Textual description of the resource.",
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        },
-        "requestBody": {
-          "$ref": "#/definitions/FarmOperationDataIngestionJobRequest"
         }
       }
     },
@@ -10240,7 +10468,7 @@
       }
     },
     "SatelliteData": {
-      "description": "Data Model for SatelliteInjestionJobRequest.",
+      "description": "Data Model for SatelliteIngestionJobRequest.",
       "type": "object",
       "properties": {
         "imageNames": {
@@ -10276,8 +10504,8 @@
         }
       }
     },
-    "SatelliteIngestionJobRequest": {
-      "description": "SatelliteIngestionJobRequest.",
+    "SatelliteDataIngestionJob": {
+      "description": "Schema of satellite data ingestion job.",
       "required": [
         "boundaryId",
         "endDateTime",
@@ -10313,49 +10541,25 @@
         "data": {
           "$ref": "#/definitions/SatelliteData"
         },
-        "name": {
-          "description": "Name to identify resource.",
-          "maxLength": 100,
-          "minLength": 0,
-          "type": "string"
-        },
-        "description": {
-          "description": "Textual description of the resource.",
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        }
-      }
-    },
-    "SatelliteIngestionJobResponse": {
-      "description": "SatelliteIngestion job response.",
-      "type": "object",
-      "properties": {
-        "durationInSeconds": {
-          "description": "Duration of the job in seconds.",
-          "type": "string"
-        },
         "id": {
           "description": "Unique job id.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "jobStatus": {
-          "$ref": "#/definitions/JobStatus"
+          "description": "Status of the job.\r\nPossible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.",
+          "type": "string",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "description": "Duration of the job in seconds.",
+          "type": "string",
+          "readOnly": true
         },
         "message": {
           "description": "Status message to capture more details of the job.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdDateTime": {
           "format": "date-time",
@@ -10403,77 +10607,6 @@
             "key1": "value1",
             "key2": 123.45
           }
-        }
-      }
-    },
-    "SatelliteIngestionJobDetails": {
-      "description": "Schema for GetSatelliteJobDetails.",
-      "type": "object",
-      "properties": {
-        "durationInSeconds": {
-          "description": "Duration of the job in seconds.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique job id.",
-          "type": "string"
-        },
-        "jobStatus": {
-          "$ref": "#/definitions/JobStatus"
-        },
-        "message": {
-          "description": "Status message to capture more details of the job.",
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "Job was last acted upon at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Job start time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Job end time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name to identify resource.",
-          "maxLength": 100,
-          "minLength": 0,
-          "type": "string"
-        },
-        "description": {
-          "description": "Textual description of the resource.",
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        },
-        "requestBody": {
-          "$ref": "#/definitions/SatelliteIngestionJobRequest"
         }
       }
     },
@@ -11018,8 +11151,8 @@
         }
       }
     },
-    "WeatherIngestionJobRequest": {
-      "description": "WeatherIngestionJobRequest.",
+    "WeatherDataIngestionJob": {
+      "description": "Schema of weather ingestion job.",
       "required": [
         "boundaryId",
         "extensionApiInput",
@@ -11041,6 +11174,7 @@
           "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",
           "maxLength": 100,
           "minLength": 2,
+          "pattern": "^[A-za-z]{3,50}[.][A-za-z]{3,100}$",
           "type": "string"
         },
         "extensionApiName": {
@@ -11068,49 +11202,25 @@
           "minLength": 2,
           "type": "string"
         },
-        "name": {
-          "description": "Name to identify resource.",
-          "maxLength": 100,
-          "minLength": 0,
-          "type": "string"
-        },
-        "description": {
-          "description": "Textual description of the resource.",
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        }
-      }
-    },
-    "WeatherIngestionJobResponse": {
-      "description": "WeatherIngestion job response.",
-      "type": "object",
-      "properties": {
-        "durationInSeconds": {
-          "description": "Duration of the job in seconds.",
-          "type": "string"
-        },
         "id": {
           "description": "Unique job id.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "jobStatus": {
-          "$ref": "#/definitions/JobStatus"
+          "description": "Status of the job.\r\nPossible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.",
+          "type": "string",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "description": "Duration of the job in seconds.",
+          "type": "string",
+          "readOnly": true
         },
         "message": {
           "description": "Status message to capture more details of the job.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdDateTime": {
           "format": "date-time",
@@ -11161,79 +11271,8 @@
         }
       }
     },
-    "WeatherIngestionJobDetails": {
-      "description": "Schema for GetWeatherIngestionJobDetails.",
-      "type": "object",
-      "properties": {
-        "durationInSeconds": {
-          "description": "Duration of the job in seconds.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique job id.",
-          "type": "string"
-        },
-        "jobStatus": {
-          "$ref": "#/definitions/JobStatus"
-        },
-        "message": {
-          "description": "Status message to capture more details of the job.",
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "Job was last acted upon at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Job start time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Job end time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name to identify resource.",
-          "maxLength": 100,
-          "minLength": 0,
-          "type": "string"
-        },
-        "description": {
-          "description": "Textual description of the resource.",
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        },
-        "requestBody": {
-          "$ref": "#/definitions/WeatherIngestionJobRequest"
-        }
-      }
-    },
-    "WeatherDataDeleteJobRequest": {
-      "description": "WeatherDataDeleteJobRequest.",
+    "WeatherDataDeleteJob": {
+      "description": "Schema of weather data delete job.",
       "required": [
         "boundaryId",
         "extensionId",
@@ -11245,6 +11284,7 @@
           "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",
           "maxLength": 100,
           "minLength": 2,
+          "pattern": "^[A-za-z]{3,50}[.][A-za-z]{3,100}$",
           "type": "string"
         },
         "farmerId": {
@@ -11265,57 +11305,33 @@
         },
         "startDateTime": {
           "format": "date-time",
-          "description": "Weather data start UTC datetime (inclusive), sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "description": "Weather data start UTC date-time (inclusive), sample format: yyyy-MM-ddTHH:mm:ssZ.",
           "type": "string"
         },
         "endDateTime": {
           "format": "date-time",
-          "description": "Weather data end UTC datetime (inclusive), sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name to identify resource.",
-          "maxLength": 100,
-          "minLength": 0,
-          "type": "string"
-        },
-        "description": {
-          "description": "Textual description of the resource.",
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        }
-      }
-    },
-    "WeatherDataDeleteJobResponse": {
-      "description": "Response object for (create) WeatherDataDelete job.",
-      "type": "object",
-      "properties": {
-        "durationInSeconds": {
-          "description": "Duration of the job in seconds.",
+          "description": "Weather data end UTC date-time (inclusive), sample format: yyyy-MM-ddTHH:mm:ssZ.",
           "type": "string"
         },
         "id": {
           "description": "Unique job id.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "jobStatus": {
-          "$ref": "#/definitions/JobStatus"
+          "description": "Status of the job.\r\nPossible values: 'Waiting', 'Running', 'Succeeded', 'Failed', 'Cancelled'.",
+          "type": "string",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "description": "Duration of the job in seconds.",
+          "type": "string",
+          "readOnly": true
         },
         "message": {
           "description": "Status message to capture more details of the job.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdDateTime": {
           "format": "date-time",
@@ -11363,77 +11379,6 @@
             "key1": "value1",
             "key2": 123.45
           }
-        }
-      }
-    },
-    "WeatherDataDeleteJobDetails": {
-      "description": "Schema for GetWeatherDataDeleteJobDetails.",
-      "type": "object",
-      "properties": {
-        "durationInSeconds": {
-          "description": "Duration of the job in seconds.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique job id.",
-          "type": "string"
-        },
-        "jobStatus": {
-          "$ref": "#/definitions/JobStatus"
-        },
-        "message": {
-          "description": "Status message to capture more details of the job.",
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastActionDateTime": {
-          "format": "date-time",
-          "description": "Job was last acted upon at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Job start time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Job end time when available. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name to identify resource.",
-          "maxLength": 100,
-          "minLength": 0,
-          "type": "string"
-        },
-        "description": {
-          "description": "Textual description of the resource.",
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        },
-        "requestBody": {
-          "$ref": "#/definitions/WeatherDataDeleteJobRequest"
         }
       }
     },
@@ -11445,33 +11390,37 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "required": [
-            "coordinates"
-          ],
-          "type": "object",
-          "properties": {
-            "coordinates": {
-              "description": "Gets or sets Coordinates of GeoJSON Object.\r\nIt must be an array of polygons, each polygon contains list of linear rings.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
-              "minLength": 1,
+          "$ref": "#/definitions/MultiPolygonCoordinates"
+        }
+      ],
+      "x-ms-discriminator-value": "MultiPolygon"
+    },
+    "MultiPolygonCoordinates": {
+      "description": "Schema of multi polygon coordinates.",
+      "required": [
+        "coordinates"
+      ],
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "description": "Gets or sets Coordinates of GeoJSON Object.\r\nIt must be an array of polygons, each polygon contains list of linear rings.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
               "type": "array",
               "items": {
                 "type": "array",
                 "items": {
-                  "type": "array",
-                  "items": {
-                    "type": "array",
-                    "items": {
-                      "format": "double",
-                      "type": "number"
-                    }
-                  }
+                  "format": "double",
+                  "type": "number"
                 }
               }
             }
           }
         }
-      ],
-      "x-ms-discriminator-value": "MultiPolygon"
+      }
     },
     "Point": {
       "description": "Point geometry.",
@@ -11481,25 +11430,29 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "required": [
-            "coordinates"
-          ],
-          "type": "object",
-          "properties": {
-            "coordinates": {
-              "description": "Gets or sets the coordinate of this point.\r\nIt must be an array of 2 or 3 elements for a 2D or 3D system.",
-              "maximum": 3,
-              "minimum": 2,
-              "type": "array",
-              "items": {
-                "format": "double",
-                "type": "number"
-              }
-            }
-          }
+          "$ref": "#/definitions/PointCoordinates"
         }
       ],
       "x-ms-discriminator-value": "Point"
+    },
+    "PointCoordinates": {
+      "description": "Schema of the coordinates of a point.",
+      "type": "object",
+      "required": [
+        "coordinates"
+      ],
+      "properties": {
+        "coordinates": {
+          "description": "Gets or sets the coordinate of this point.\r\nIt must be an array of 2 or 3 elements for a 2D or 3D system.",
+          "maximum": 3,
+          "minimum": 2,
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      }
     },
     "Polygon": {
       "description": "Polygon geometry.",
@@ -11509,30 +11462,34 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "required": [
-            "coordinates"
-          ],
-          "type": "object",
-          "properties": {
-            "coordinates": {
-              "description": "Gets or sets type of the GeoJSON Object.\r\nIt must be an array of linear ring coordinate arrays.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
-              "minLength": 1,
+          "$ref": "#/definitions/PolygonCoordinates"
+        }
+      ],
+      "x-ms-discriminator-value": "Polygon"
+    },
+    "PolygonCoordinates": {
+      "description": "Schema of polygon coordinates.",
+      "required": [
+        "coordinates"
+      ],
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "description": "Gets or sets type of the GeoJSON Object.\r\nIt must be an array of linear ring coordinate arrays.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
               "type": "array",
               "items": {
-                "type": "array",
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "format": "double",
-                    "type": "number"
-                  }
-                }
+                "format": "double",
+                "type": "number"
               }
             }
           }
         }
-      ],
-      "x-ms-discriminator-value": "Polygon"
+      }
     }
   },
   "securityDefinitions": {
@@ -11545,7 +11502,7 @@
   },
   "security": [
     {
-      "Bearer": [ ]
+      "Bearer": []
     }
   ]
 }
