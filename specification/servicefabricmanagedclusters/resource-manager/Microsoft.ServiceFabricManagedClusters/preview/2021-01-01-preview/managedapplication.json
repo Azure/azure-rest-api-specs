@@ -1372,7 +1372,7 @@
         "instanceCloseDelayDuration": {
           "type": "integer",
           "format": "int64",
-          "description": "Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade, only for those instances which have a non-zero delay duration configured in the service description. See InstanceCloseDelayDurationSeconds property in StatelessServiceDescription for details. Note, the default value of InstanceCloseDelayDurationInSeconds is 4294967295, which indicates that the behavior will entirely depend on the delay configured in the stateless service description."
+          "description": "Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade, only for those instances which have a non-zero delay duration configured in the service description."
         },
         "upgradeMode": {
           "$ref": "#/definitions/RollingUpgradeMode"
@@ -1459,7 +1459,8 @@
         "metricName",
         "lowerLoadThreshold",
         "upperLoadThreshold",
-        "scaleInterval"
+        "scaleInterval",
+        "useOnlyPrimaryLoad"
       ],
       "properties": {
         "metricName": {
@@ -1479,6 +1480,10 @@
         "scaleInterval": {
           "type": "string",
           "description": "The period in seconds on which a decision is made whether to scale or not. This property should come in ISO 8601 format \"hh:mm:ss\"."
+        },
+        "useOnlyPrimaryLoad": {
+          "type": "boolean",
+          "description": "Flag determines whether only the load of primary replica should be considered for scaling. If set to true, then trigger will only consider the load of primary replicas of stateful service. If set to false, trigger will consider load of all replicas. This parameter cannot be set to true for stateless service."
         }
       }
     },
@@ -2237,10 +2242,6 @@
               }
             ]
           }
-        },
-        "serviceDnsName": {
-          "type": "string",
-          "description": "The DNS name of the service. It requires the DNS system service to be enabled in Service Fabric cluster."
         }
       }
     },
@@ -2416,10 +2417,6 @@
         "servicePlacementTimeLimit": {
           "type": "string",
           "description": "The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format \"hh:mm:ss\"."
-        },
-        "dropSourceReplicaOnMove": {
-          "type": "boolean",
-          "description": "Indicates whether to drop source Secondary replica even if the target replica has not finished build. If desired behavior is to drop it as soon as possible the value of this property is true, if not it is false."
         }
       }
     },
@@ -2450,11 +2447,6 @@
           "type": "integer",
           "format": "int32",
           "description": "MinInstancePercentage is the minimum percentage of InstanceCount that must be up to meet the EnsureAvailability safety check during operations like upgrade or deactivate node. The actual number that is used is max( MinInstanceCount, ceil( MinInstancePercentage/100.0 * InstanceCount) ). Note, if InstanceCount is set to -1, during MinInstancePercentage computation, -1 is first converted into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service."
-        },
-        "instanceCloseDelayDuration": {
-          "type": "string",
-          "default": "0",
-          "description": "Duration represented in ISO 8601 format \"hh:mm:ss\", to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade and disabling node. The endpoint exposed on this instance is removed prior to starting the delay, which prevents new connections to this instance. In addition, clients that have subscribed to service endpoint change events(https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.servicemanagementclient.registerservicenotificationfilterasync), can do the following upon receiving the endpoint removal notification: - Stop sending new requests to this instance. - Close existing connections after in-flight requests have completed. - Connect to a different instance of the service partition for future requests. Note, the default value of InstanceCloseDelayDuration is 0, which indicates that there won't be any delay or removal of the endpoint prior to closing the instance."
         }
       }
     },
