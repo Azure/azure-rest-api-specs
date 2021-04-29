@@ -78,8 +78,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_confluent']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js confluent/resource-manager
 ```
 
 ## C#
@@ -110,6 +108,3 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

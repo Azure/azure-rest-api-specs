@@ -110,8 +110,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_appplatform']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js appplatform/resource-manager
 ```
 
 ## Go
@@ -141,6 +139,4 @@ csharp:
   clear-output-folder: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

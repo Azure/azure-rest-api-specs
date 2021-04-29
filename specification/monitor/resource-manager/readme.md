@@ -577,8 +577,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_monitor']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js monitor/resource-manager
 ```
 
 ## Python
@@ -666,6 +664,4 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

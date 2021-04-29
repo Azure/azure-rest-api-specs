@@ -57,8 +57,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js videoanalyzer/resource-manager
   - repo: azure-cli-extensions
 ```
 ## Az
@@ -85,6 +83,4 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
