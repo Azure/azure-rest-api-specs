@@ -163,7 +163,7 @@
             "$ref": "#/parameters/EntityQueryId"
           },
           {
-            "$ref": "#/parameters/PutEntityQuery"
+            "$ref": "#/parameters/EntityQueryPut"
           }
         ],
         "responses": {
@@ -236,7 +236,7 @@
     }
   },
   "definitions": {
-    "PutEntityQueryKinds": {
+    "EntityQueryPutKinds": {
       "description": "Describes an Entity query resource with kind which supports put request.",
       "properties": {
         "kind": {
@@ -247,7 +247,7 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "PutEntityQueryKind",
+            "name": "EntityQueryPutKind",
             "values": [
               {
                 "value": "Activity"
@@ -277,13 +277,13 @@
         "kind"
       ]
     },
-    "PutEntityQuery": {
+    "EntityQueryPut": {
       "allOf": [
         {
           "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         },
         {
-          "$ref": "#/definitions/PutEntityQueryKinds"
+          "$ref": "#/definitions/EntityQueryPutKinds"
         }
       ],
       "description": "Specific entity query that supports put requests.",
@@ -357,9 +357,23 @@
       "allOf": [
         {
           "$ref": "#/definitions/EntityQuery"
-        },
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActivityEntityQueriesProperties",
+          "description": "Activity entity query properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Activity"
+    },
+    "ActivityEntityQueryPut": {
+      "description": "Represents Activity entity query.",
+      "allOf": [
         {
-          "$ref": "#/definitions/PutEntityQuery"
+          "$ref": "#/definitions/EntityQueryPut"
         }
       ],
       "properties": {
@@ -470,13 +484,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "PutEntityQuery": {
+    "EntityQueryPut": {
       "description": "The entity query we want to create or update",
       "in": "body",
       "name": "entityQuery",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/PutEntityQuery"
+        "$ref": "#/definitions/EntityQueryPut"
       },
       "x-ms-parameter-location": "method"
     }
