@@ -50,14 +50,6 @@
   ],
   "responses": {},
   "parameters": {
-    "CreateResourceId": {
-      "name": "resourceId",
-      "description": "The unique id that references a resource to be aliased.",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
     "AssignResourceId": {
       "name": "resourceId",
       "description": "The unique id that references a resource to be aliased.",
@@ -99,12 +91,6 @@
             "description": "Content created successfully. The response body contains the newly created alias id `aliasId`.",
             "schema": {
               "$ref": "#/definitions/AliasCreateResponse"
-            },
-            "headers": {
-              "Access-Control-Expose-Headers": {
-                "type": "string",
-                "description": "The list of response headers that can be read by the client."
-              }
             }
           },
           "400": {
@@ -192,10 +178,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Alias was assigned successfully.",
-            "schema": {
-              "$ref": "#/definitions/AliasAssignResponse"
-            }
+            "description": "Alias was assigned successfully."
           },
           "400": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
@@ -238,10 +221,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Alias delete request completed successfully. The content for `aliasId` was deleted on the server.",
-            "schema": {
-              "$ref": "#/definitions/AliasDeleteResponse"
-            }
+            "description": "Alias delete request completed successfully. The content for `aliasId` was deleted on the server."
           },
           "400": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
@@ -273,14 +253,6 @@
           "readOnly": true
         }
       }
-    },
-    "AliasAssignResponse": {
-      "description": "The response model for the Assign API. The response body will be empty signifying the assign was successful.",
-      "type": "object"
-    },
-    "AliasDeleteResponse": {
-      "description": "The response model for the Delete API. The response body will be empty signifying there's alias available with the given `aliasId` anymore.",
-      "type": "object"
     },
     "AliasListResponse": {
       "description": "The response model for the List API. Returns a list of all the previously created aliases.",
