@@ -3,7 +3,7 @@
   "info": {
     "title": "Purview Catalog Service REST API Document",
     "description": "Purview Catalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Catalog helps organizations get more value from their existing investments. This spec defines REST API of Purview Catalog Service.",
-    "version": "2020-12-01-preview"
+    "version": "2021-05-01-preview"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}",
@@ -17,31 +17,6 @@
   "basePath": "/api",
   "schemes": [
     "https"
-  ],
-  "tags": [
-    {
-      "name": "DiscoveryREST",
-      "description": "REST interface for data discovery using dsl or full text search."
-    },
-    {
-      "name": "EntityREST",
-      "description": "REST for a single entity."
-    },
-    {
-      "name": "GlossaryREST"
-    },
-    {
-      "name": "LineageREST",
-      "description": "REST interface for an entity's lineage information."
-    },
-    {
-      "name": "RelationshipREST",
-      "description": "REST interface for entity relationships."
-    },
-    {
-      "name": "TypesREST",
-      "description": "REST interface for CRUD operations on type definitions."
-    }
   ],
   "consumes": [
     "application/json"
@@ -71,9 +46,8 @@
     "/atlas/v2/entity": {
       "post": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Create or update an entity.",
         "description": "Create or update an entity in Atlas.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
         "operationId": "Entity_CreateOrUpdate",
         "x-ms-examples": {
@@ -93,9 +67,6 @@
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
             }
-          },
-          {
-            "$ref": "#/parameters/apiVersionAtlas"
           }
         ],
         "responses": {
@@ -111,9 +82,8 @@
     "/atlas/v2/entity/bulk": {
       "get": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "List entities in bulk identified by its GUIDs.",
         "description": "List entities in bulk identified by its GUIDs.",
         "operationId": "Entity_GetByGuids",
         "x-ms-examples": {
@@ -141,9 +111,6 @@
           },
           {
             "$ref": "#/parameters/excludeRelationshipTypes"
-          },
-          {
-            "$ref": "#/parameters/apiVersionAtlas"
           }
         ],
         "responses": {
@@ -157,9 +124,8 @@
       },
       "post": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Create or update entities in bulk.",
         "description": "Create or update entities in Atlas in bulk.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
         "operationId": "Entity_CreateOrUpdateBulk",
         "x-ms-examples": {
@@ -176,9 +142,6 @@
             "schema": {
               "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
             }
-          },
-          {
-            "$ref": "#/parameters/apiVersionAtlas"
           }
         ],
         "responses": {
@@ -192,9 +155,8 @@
       },
       "delete": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Delete a list of entities in bulk identified by their GUIDs or unique attributes.",
         "description": "Delete a list of entities in bulk identified by their GUIDs or unique attributes.",
         "operationId": "Entity_DeleteByGuids",
         "x-ms-examples": {
@@ -213,9 +175,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "$ref": "#/parameters/apiVersionAtlas"
           }
         ],
         "responses": {
@@ -231,9 +190,8 @@
     "/atlas/v2/entity/bulk/classification": {
       "post": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Associate a classification to multiple entities in bulk.",
         "description": "Associate a classification to multiple entities in bulk.",
         "operationId": "Entity_AddClassification",
         "x-ms-examples": {
@@ -250,9 +208,6 @@
             "schema": {
               "$ref": "#/definitions/ClassificationAssociateRequest"
             }
-          },
-          {
-            "$ref": "#/parameters/apiVersionAtlas"
           }
         ],
         "responses": {
@@ -265,7 +220,7 @@
     "/atlas/v2/entity/guid/{guid}": {
       "get": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
         "operationId": "Entity_GetById",
         "x-ms-examples": {
@@ -273,7 +228,6 @@
             "$ref": "./examples/Entity_GetById.json"
           }
         },
-        "summary": "Get complete definition of an entity given its GUID.",
         "description": "Get complete definition of an entity given its GUID.",
         "parameters": [
           {
@@ -297,9 +251,8 @@
       },
       "put": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Update entity partially - Create/Update entity attribute identified by its GUID.",
         "description": "Update entity partially - create or update entity attribute identified by its GUID.\nSupports only primitive attribute type and entity references.\nIt does not support updating complex types like arrays, and maps.\nNull updates are not possible.",
         "operationId": "Entity_PartialUpdateEntityAttrByGuid",
         "x-ms-examples": {
@@ -339,9 +292,8 @@
       },
       "delete": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Delete an entity identified by its GUID.",
         "description": "Delete an entity identified by its GUID.",
         "operationId": "Entity_DeleteByGuid",
         "x-ms-examples": {
@@ -367,9 +319,8 @@
     "/atlas/v2/entity/guid/{guid}/classification/{classificationName}": {
       "get": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "List classifications for a given entity represented by a GUID.",
         "description": "List classifications for a given entity represented by a GUID.",
         "operationId": "Entity_GetClassification",
         "x-ms-examples": {
@@ -396,9 +347,8 @@
       },
       "delete": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Delete a given classification from an existing entity represented by a GUID.",
         "description": "Delete a given classification from an existing entity represented by a GUID.",
         "operationId": "Entity_DeleteClassification",
         "x-ms-examples": {
@@ -424,9 +374,8 @@
     "/atlas/v2/entity/guid/{guid}/classifications": {
       "get": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "List classifications for a given entity represented by a GUID.",
         "description": "List classifications for a given entity represented by a GUID.",
         "operationId": "Entity_GetClassifications",
         "x-ms-examples": {
@@ -450,9 +399,8 @@
       },
       "post": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Add classifications to an existing entity represented by a GUID.",
         "description": "Add classifications to an existing entity represented by a GUID.",
         "operationId": "Entity_AddClassifications",
         "x-ms-examples": {
@@ -486,9 +434,8 @@
       },
       "put": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Update classifications to an existing entity represented by a guid.",
         "description": "Update classifications to an existing entity represented by a guid.",
         "operationId": "Entity_UpdateClassifications",
         "x-ms-examples": {
@@ -524,9 +471,8 @@
     "/atlas/v2/entity/uniqueAttribute/type/{typeName}": {
       "get": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Get complete definition of an entity given its type and unique attribute.",
         "description": "Get complete definition of an entity given its type and unique attribute.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:\\<attrName>=<attrValue>. \nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nGET /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "operationId": "Entity_GetByUniqueAttributes",
         "x-ms-examples": {
@@ -563,9 +509,8 @@
       },
       "put": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Update entity partially - Allow a subset of attributes to be updated on",
         "description": "Update entity partially - Allow a subset of attributes to be updated on\nan entity which is identified by its type and unique attribute  eg: Referenceable.qualifiedName.\nNull updates are not possible.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:<attrName>=<attrValue>.\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nPUT /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "operationId": "Entity_PartialUpdateEntityByUniqueAttrs",
         "x-ms-examples": {
@@ -605,9 +550,8 @@
       },
       "delete": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Delete an entity identified by its type and unique attributes.",
         "description": "Delete an entity identified by its type and unique attributes.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:\\<attrName>=\\<attrValue>.\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nDELETE /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "operationId": "Entity_DeleteByUniqueAttribute",
         "x-ms-examples": {
@@ -640,9 +584,8 @@
     "/atlas/v2/entity/uniqueAttribute/type/{typeName}/classification/{classificationName}": {
       "delete": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Delete a given classification from an entity.",
         "description": "Delete a given classification from an entity identified by its type and unique attributes.",
         "operationId": "Entity_DeleteClassificationByUniqueAttribute",
         "x-ms-examples": {
@@ -675,9 +618,8 @@
     "/atlas/v2/entity/uniqueAttribute/type/{typeName}/classifications": {
       "post": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Add classification to the entity.",
         "description": "Add classification to the entity identified by its type and unique attributes.",
         "operationId": "Entity_AddClassificationsByUniqueAttribute",
         "x-ms-examples": {
@@ -718,9 +660,8 @@
       },
       "put": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Update classification on an entity identified by its type and unique attributes.",
         "description": "Update classification on an entity identified by its type and unique attributes.",
         "operationId": "Entity_UpdateClassificationsByUniqueAttribute",
         "x-ms-examples": {
@@ -763,9 +704,8 @@
     "/atlas/v2/entity/bulk/setClassifications": {
       "post": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Set classifications on entities in bulk.",
         "description": "Set classifications on entities in bulk.",
         "operationId": "Entity_SetClassifications",
         "x-ms-examples": {
@@ -801,9 +741,8 @@
     "/atlas/v2/entity/bulk/uniqueAttribute/type/{typeName}": {
       "get": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Bulk API to retrieve list of entities identified by its unique attributes.",
         "description": "Bulk API to retrieve list of entities identified by its unique attributes.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format\n\ntypeName=\\<typeName>&attr_1:\\<attrName>=\\<attrValue>&attr_2:\\<attrName>=\\<attrValue>&attr_3:\\<attrName>=\\<attrValue>\n\nNOTE: The attrName should be an unique attribute for the given entity-type\n\nThe REST request would look something like this\n\nGET /v2/entity/bulk/uniqueAttribute/type/hive_db?attr_0:qualifiedName=db1@cl1&attr_2:qualifiedName=db2@cl1",
         "operationId": "Entity_GetEntitiesByUniqueAttributes",
         "x-ms-examples": {
@@ -842,9 +781,8 @@
     "/atlas/v2/entity/guid/{guid}/header": {
       "get": {
         "tags": [
-          "EntityREST"
+          "Entity"
         ],
-        "summary": "Get entity header given its GUID.",
         "description": "Get entity header given its GUID.",
         "operationId": "Entity_GetHeaderById",
         "x-ms-examples": {
@@ -870,9 +808,8 @@
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get all glossaries registered with Atlas.",
         "description": "Get all glossaries registered with Atlas.",
         "operationId": "Glossary_GetGlossaries",
         "x-ms-examples": {
@@ -896,7 +833,6 @@
             "description": "An array of existing glossaries fitting the search criteria or empty list if nothing matches.",
             "schema": {
               "type": "array",
-              "description": "An array of existing glossaries fitting the search criteria or empty list if nothing matches.",
               "items": {
                 "$ref": "#/definitions/AtlasGlossary"
               }
@@ -906,9 +842,8 @@
       },
       "post": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Create a glossary.",
         "description": "Create a glossary.",
         "operationId": "Glossary_CreateGlossary",
         "x-ms-examples": {
@@ -940,9 +875,8 @@
     "/atlas/v2/glossary/categories": {
       "post": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Create glossary category in bulk.",
         "description": "Create glossary category in bulk.",
         "operationId": "Glossary_CreateGlossaryCategories",
         "x-ms-examples": {
@@ -982,9 +916,8 @@
     "/atlas/v2/glossary/category": {
       "post": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Create a glossary category.",
         "description": "Create a glossary category.",
         "operationId": "Glossary_CreateGlossaryCategory",
         "x-ms-examples": {
@@ -1016,9 +949,8 @@
     "/atlas/v2/glossary/category/{categoryGuid}": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get specific glossary category by its GUID.",
         "description": "Get specific glossary category by its GUID.",
         "operationId": "Glossary_GetGlossaryCategory",
         "x-ms-examples": {
@@ -1042,9 +974,8 @@
       },
       "put": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Update the given glossary category by its GUID.",
         "description": "Update the given glossary category by its GUID.",
         "operationId": "Glossary_UpdateGlossaryCategory",
         "x-ms-examples": {
@@ -1077,9 +1008,8 @@
       },
       "delete": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Delete a glossary category.",
         "description": "Delete a glossary category.",
         "operationId": "Glossary_DeleteGlossaryCategory",
         "x-ms-examples": {
@@ -1094,7 +1024,7 @@
         ],
         "responses": {
           "204": {
-            "description": "OK. If glossary category delete was successful."
+            "description": "OK. If glossary category deletion is successful."
           }
         }
       }
@@ -1102,9 +1032,8 @@
     "/atlas/v2/glossary/category/{categoryGuid}/partial": {
       "put": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Update the glossary category partially.",
         "description": "Update the glossary category partially.",
         "operationId": "Glossary_PartialUpdateGlossaryCategory",
         "x-ms-examples": {
@@ -1143,9 +1072,8 @@
     "/atlas/v2/glossary/category/{categoryGuid}/related": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get all related categories.",
         "description": "Get all related categories (parent and children). Limit, offset, and sort parameters are currently not being enabled and won't work even they are passed.",
         "operationId": "Glossary_GetRelatedCategories",
         "x-ms-examples": {
@@ -1187,9 +1115,8 @@
     "/atlas/v2/glossary/category/{categoryGuid}/terms": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get all terms associated with the specific category.",
         "description": "Get all terms associated with the specific category.",
         "operationId": "Glossary_GetCategoryTerms",
         "x-ms-examples": {
@@ -1228,9 +1155,8 @@
     "/atlas/v2/glossary/term": {
       "post": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Create a glossary term.",
         "description": "Create a glossary term.",
         "operationId": "Glossary_CreateGlossaryTerm",
         "x-ms-examples": {
@@ -1250,6 +1176,9 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
             }
+          },
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
           }
         ],
         "responses": {
@@ -1265,9 +1194,8 @@
     "/atlas/v2/glossary/term/{termGuid}": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get a specific glossary term by its GUID.",
         "description": "Get a specific glossary term by its GUID.",
         "operationId": "Glossary_GetGlossaryTerm",
         "x-ms-examples": {
@@ -1278,6 +1206,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/termGuid"
+          },
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
           }
         ],
         "responses": {
@@ -1291,9 +1222,8 @@
       },
       "put": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Update the given glossary term by its GUID.",
         "description": "Update the given glossary term by its GUID.",
         "operationId": "Glossary_UpdateGlossaryTerm",
         "x-ms-examples": {
@@ -1326,9 +1256,8 @@
       },
       "delete": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Delete a glossary term.",
         "description": "Delete a glossary term.",
         "operationId": "Glossary_DeleteGlossaryTerm",
         "x-ms-examples": {
@@ -1351,9 +1280,8 @@
     "/atlas/v2/glossary/term/{termGuid}/partial": {
       "put": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Update the glossary term partially.",
         "description": "Update the glossary term partially.",
         "operationId": "Glossary_PartialUpdateGlossaryTerm",
         "x-ms-examples": {
@@ -1364,6 +1292,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/termGuid"
+          },
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
           },
           {
             "in": "body",
@@ -1392,9 +1323,8 @@
     "/atlas/v2/glossary/terms": {
       "post": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Create glossary terms in bulk.",
         "description": "Create glossary terms in bulk.",
         "operationId": "Glossary_CreateGlossaryTerms",
         "x-ms-examples": {
@@ -1415,6 +1345,9 @@
                 "$ref": "#/definitions/AtlasGlossaryTerm"
               }
             }
+          },
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
           }
         ],
         "responses": {
@@ -1434,9 +1367,8 @@
     "/atlas/v2/glossary/terms/{termGuid}/assignedEntities": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get all related objects assigned with the specified term.",
         "description": "Get all related objects assigned with the specified term.",
         "operationId": "Glossary_GetEntitiesAssignedWithTerm",
         "x-ms-examples": {
@@ -1473,9 +1405,8 @@
       },
       "post": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Assign the given term to the provided list of related objects.",
         "description": "Assign the given term to the provided list of related objects.",
         "operationId": "Glossary_AssignTermToEntities",
         "x-ms-examples": {
@@ -1509,9 +1440,8 @@
       },
       "put": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Delete the term assignment for the given list of related objects.",
         "description": "Delete the term assignment for the given list of related objects.",
         "operationId": "Glossary_RemoveTermAssignmentFromEntities",
         "x-ms-examples": {
@@ -1545,9 +1475,8 @@
       },
       "delete": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Delete the term assignment for the given list of related objects.",
         "description": "Delete the term assignment for the given list of related objects.",
         "operationId": "Glossary_DeleteTermAssignmentFromEntities",
         "x-ms-examples": {
@@ -1583,9 +1512,8 @@
     "/atlas/v2/glossary/terms/{termGuid}/related": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get all related terms for a specific term by its GUID.",
         "description": "Get all related terms for a specific term by its GUID. Limit, offset, and sort parameters are currently not being enabled and won't work even they are passed.",
         "operationId": "Glossary_GetRelatedTerms",
         "x-ms-examples": {
@@ -1627,9 +1555,8 @@
     "/atlas/v2/glossary/{glossaryGuid}": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get a specific Glossary by its GUID.",
         "description": "Get a specific Glossary by its GUID.",
         "operationId": "Glossary_GetGlossary",
         "x-ms-examples": {
@@ -1653,9 +1580,8 @@
       },
       "put": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Update the given glossary.",
         "description": "Update the given glossary.",
         "operationId": "Glossary_UpdateGlossary",
         "x-ms-examples": {
@@ -1688,9 +1614,8 @@
       },
       "delete": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Delete a glossary.",
         "description": "Delete a glossary.",
         "operationId": "Glossary_DeleteGlossary",
         "x-ms-examples": {
@@ -1713,9 +1638,8 @@
     "/atlas/v2/glossary/{glossaryGuid}/categories": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get the categories belonging to a specific glossary.",
         "description": "Get the categories belonging to a specific glossary.",
         "operationId": "Glossary_GetGlossaryCategories",
         "x-ms-examples": {
@@ -1754,9 +1678,8 @@
     "/atlas/v2/glossary/{glossaryGuid}/categories/headers": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get the category headers belonging to a specific glossary.",
         "description": "Get the category headers belonging to a specific glossary.",
         "operationId": "Glossary_GetGlossaryCategoriesHeaders",
         "x-ms-examples": {
@@ -1795,9 +1718,8 @@
     "/atlas/v2/glossary/{glossaryGuid}/detailed": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get a specific glossary with detailed information.",
         "description": "Get a specific glossary with detailed information.",
         "operationId": "Glossary_GetDetailedGlossary",
         "x-ms-examples": {
@@ -1808,6 +1730,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/glossaryGuid"
+          },
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
           }
         ],
         "responses": {
@@ -1823,9 +1748,8 @@
     "/atlas/v2/glossary/{glossaryGuid}/partial": {
       "put": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Update the glossary partially.",
         "description": "Update the glossary partially. Some properties such as qualifiedName are not allowed to be updated.",
         "operationId": "Glossary_PartialUpdateGlossary",
         "x-ms-examples": {
@@ -1836,6 +1760,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/glossaryGuid"
+          },
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
           },
           {
             "in": "body",
@@ -1864,9 +1791,8 @@
     "/atlas/v2/glossary/{glossaryGuid}/terms": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get terms belonging to a specific glossary.",
         "description": "Get terms belonging to a specific glossary.",
         "operationId": "Glossary_GetGlossaryTerms",
         "x-ms-examples": {
@@ -1877,6 +1803,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/glossaryGuid"
+          },
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
           },
           {
             "$ref": "#/parameters/limit"
@@ -1905,9 +1834,8 @@
     "/atlas/v2/glossary/{glossaryGuid}/terms/headers": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get term headers belonging to a specific glossary.",
         "description": "Get term headers belonging to a specific glossary.",
         "operationId": "Glossary_GetGlossaryTermHeaders",
         "x-ms-examples": {
@@ -1946,12 +1874,11 @@
     "/glossary/{glossaryGuid}/terms/import": {
       "post": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
         "consumes": [
           "multipart/form-data"
         ],
-        "summary": "Import Glossary Terms from local csv file",
         "description": "Import Glossary Terms from local csv file",
         "operationId": "Glossary_ImportGlossaryTermsViaCSV",
         "x-ms-examples": {
@@ -1964,6 +1891,9 @@
             "$ref": "#/parameters/glossaryGuid"
           },
           {
+            "$ref": "#/parameters/includeTermHierarchy"
+          },
+          {
             "in": "formData",
             "name": "file",
             "description": "The csv file to import glossary terms from.",
@@ -1971,7 +1901,7 @@
             "type": "file"
           },
           {
-            "$ref": "#/parameters/apiVersionNonAtlas"
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -1991,12 +1921,11 @@
     "/glossary/name/{glossaryName}/terms/import": {
       "post": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
         "consumes": [
           "multipart/form-data"
         ],
-        "summary": "Import Glossary Terms from local csv file by glossaryName",
         "description": "Import Glossary Terms from local csv file by glossaryName",
         "operationId": "Glossary_ImportGlossaryTermsViaCSVByGlossaryName",
         "x-ms-examples": {
@@ -2019,7 +1948,7 @@
             "type": "file"
           },
           {
-            "$ref": "#/parameters/apiVersionNonAtlas"
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -2039,9 +1968,8 @@
     "/glossary/terms/import/{operationGuid}": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get the status of import csv operation",
         "description": "Get the status of import csv operation",
         "operationId": "Glossary_GetImportCSVOperationStatus",
         "x-ms-examples": {
@@ -2054,7 +1982,7 @@
             "$ref": "#/parameters/operationGuid"
           },
           {
-            "$ref": "#/parameters/apiVersionNonAtlas"
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -2070,9 +1998,8 @@
     "/glossary/{glossaryGuid}/terms/export": {
       "post": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Export Glossary Terms as csv file",
         "description": "Export Glossary Terms as csv file",
         "operationId": "Glossary_ExportGlossaryTermsAsCSV",
         "produces": [
@@ -2081,6 +2008,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/glossaryGuid"
+          },
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
           },
           {
             "in": "body",
@@ -2096,12 +2026,12 @@
             }
           },
           {
-            "$ref": "#/parameters/apiVersionNonAtlas"
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. A csv file contains terms with given term ids will be generated.",
+            "description": "OK. A csv file contains terms with given term guids will be generated.",
             "schema": {
               "type": "file"
             }
@@ -2112,9 +2042,8 @@
     "/glossary/name/{glossaryName}/terms": {
       "get": {
         "tags": [
-          "GlossaryREST"
+          "Glossary"
         ],
-        "summary": "Get terms by glossary name.",
         "description": "Get terms by glossary name.",
         "operationId": "Glossary_GetTermsByGlossaryName",
         "x-ms-examples": {
@@ -2133,7 +2062,10 @@
             "$ref": "#/parameters/offset"
           },
           {
-            "$ref": "#/parameters/apiVersionNonAtlas"
+            "$ref": "#/parameters/includeTermHierarchy"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -2153,53 +2085,52 @@
     "/search/query": {
       "post": {
         "tags": [
-          "DiscoveryREST"
+          "Discovery"
         ],
-        "summary": "Gets data using search.",
         "description": "Gets data using search.",
-        "operationId": "Discovery_SearchAdvanced",
+        "operationId": "Discovery_Query",
         "x-ms-examples": {
-          "Discovery_SearchAdvanced": {
-            "$ref": "./examples/Discovery_SearchAdvanced.json"
+          "Discovery_Query": {
+            "$ref": "./examples/Discovery_Query.json"
           },
-          "Discovery_SearchAdvanced_And": {
-            "$ref": "./examples/Discovery_SearchAdvanced_And.json"
+          "Discovery_Query_And": {
+            "$ref": "./examples/Discovery_Query_And.json"
           },
-          "Discovery_SearchAdvanced_Not": {
-            "$ref": "./examples/Discovery_SearchAdvanced_Not.json"
+          "Discovery_Query_Not": {
+            "$ref": "./examples/Discovery_Query_Not.json"
           },
-          "Discovery_SearchAdvanced_AndOrNested": {
-            "$ref": "./examples/Discovery_SearchAdvanced_AndOrNested.json"
+          "Discovery_Query_AndOrNested": {
+            "$ref": "./examples/Discovery_Query_AndOrNested.json"
           },
-          "Discovery_SearchAdvanced_Attribute": {
-            "$ref": "./examples/Discovery_SearchAdvanced_Attribute.json"
+          "Discovery_Query_Attribute": {
+            "$ref": "./examples/Discovery_Query_Attribute.json"
           },
-          "Discovery_SearchAdvanced_Classification": {
-            "$ref": "./examples/Discovery_SearchAdvanced_Classification.json"
+          "Discovery_Query_Classification": {
+            "$ref": "./examples/Discovery_Query_Classification.json"
           },
-          "Discovery_SearchAdvanced_FileExtension": {
-            "$ref": "./examples/Discovery_SearchAdvanced_FileExtension.json"
+          "Discovery_Query_FileExtension": {
+            "$ref": "./examples/Discovery_Query_FileExtension.json"
           },
-          "Discovery_SearchAdvanced_Id": {
-            "$ref": "./examples/Discovery_SearchAdvanced_Id.json"
+          "Discovery_Query_Id": {
+            "$ref": "./examples/Discovery_Query_Id.json"
           },
-          "Discovery_SearchAdvanced_Type": {
-            "$ref": "./examples/Discovery_SearchAdvanced_Type.json"
+          "Discovery_Query_Type": {
+            "$ref": "./examples/Discovery_Query_Type.json"
           },
-          "Discovery_SearchAdvanced_AssetType": {
-            "$ref": "./examples/Discovery_SearchAdvanced_AssetType.json"
+          "Discovery_Query_AssetType": {
+            "$ref": "./examples/Discovery_Query_AssetType.json"
           },
-          "Discovery_SearchAdvanced_Term": {
-            "$ref": "./examples/Discovery_SearchAdvanced_Term.json"
+          "Discovery_Query_Term": {
+            "$ref": "./examples/Discovery_Query_Term.json"
           },
-          "Discovery_SearchAdvanced_TermOfGlossary": {
-            "$ref": "./examples/Discovery_SearchAdvanced_TermOfGlossary.json"
+          "Discovery_Query_TermOfGlossary": {
+            "$ref": "./examples/Discovery_Query_TermOfGlossary.json"
           },
-          "Discovery_SearchAdvanced_Facet": {
-            "$ref": "./examples/Discovery_SearchAdvanced_Facet.json"
+          "Discovery_Query_Facet": {
+            "$ref": "./examples/Discovery_Query_Facet.json"
           },
-          "Discovery_SearchAdvanced_Taxonomy": {
-            "$ref": "./examples/Discovery_SearchAdvanced_Taxonomy.json"
+          "Discovery_Query_Taxonomy": {
+            "$ref": "./examples/Discovery_Query_Taxonomy.json"
           }
         },
         "parameters": [
@@ -2213,7 +2144,7 @@
             }
           },
           {
-            "$ref": "#/parameters/apiVersionNonAtlas"
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -2229,9 +2160,8 @@
     "/search/suggest": {
       "post": {
         "tags": [
-          "DiscoveryREST"
+          "Discovery"
         ],
-        "summary": "Get search suggestions by query criteria.",
         "description": "Get search suggestions by query criteria.",
         "operationId": "Discovery_Suggest",
         "x-ms-examples": {
@@ -2250,7 +2180,7 @@
             }
           },
           {
-            "$ref": "#/parameters/apiVersionNonAtlas"
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -2266,9 +2196,8 @@
     "/search/autocomplete": {
       "post": {
         "tags": [
-          "DiscoveryREST"
+          "Discovery"
         ],
-        "summary": "Get auto complete options.",
         "description": "Get auto complete options.",
         "operationId": "Discovery_AutoComplete",
         "x-ms-examples": {
@@ -2287,7 +2216,7 @@
             }
           },
           {
-            "$ref": "#/parameters/apiVersionNonAtlas"
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -2303,10 +2232,9 @@
     "/atlas/v2/lineage/{guid}": {
       "get": {
         "tags": [
-          "LineageREST"
+          "Lineage"
         ],
-        "summary": "Get lineage info about the specified entity by GUID.",
-        "description": "Get lineage info about the specified entity by GUID.",
+        "description": "Get lineage info of the entity specified by GUID.",
         "operationId": "Lineage_GetLineageGraph",
         "x-ms-examples": {
           "Lineage_GetLineageGraph": {
@@ -2335,7 +2263,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. If Lineage exists for the given entity.",
+            "description": "OK. If the request is valid.",
             "schema": {
               "$ref": "#/definitions/AtlasLineageInfo"
             }
@@ -2346,14 +2274,13 @@
     "/lineage/{guid}/next/": {
       "get": {
         "tags": [
-          "LineageREST"
+          "Lineage"
         ],
-        "summary": "Return immediate next level lineage info about entity with pagination",
-        "description": "Return immediate next level lineage info about entity with pagination",
-        "operationId": "Lineage_NextLevelLineage",
+        "description": "Return immediate next page lineage info about entity with pagination",
+        "operationId": "Lineage_NextPageLineage",
         "x-ms-examples": {
-          "Lineage_NextLevelLineage": {
-            "$ref": "./examples/Lineage_NextLevelLineage.json"
+          "Lineage_NextPageLineage": {
+            "$ref": "./examples/Lineage_NextPageLineage.json"
           }
         },
         "parameters": [
@@ -2373,12 +2300,12 @@
             "$ref": "#/parameters/limit"
           },
           {
-            "$ref": "#/parameters/apiVersionNonAtlas"
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. If Lineage exists for the given entity.",
+            "description": "OK. If the input is valid.",
             "schema": {
               "$ref": "#/definitions/AtlasLineageInfo"
             }
@@ -2389,9 +2316,8 @@
     "/atlas/v2/relationship": {
       "post": {
         "tags": [
-          "RelationshipREST"
+          "Relationship"
         ],
-        "summary": "Create a new relationship between entities.",
         "description": "Create a new relationship between entities.",
         "operationId": "Relationship_Create",
         "x-ms-examples": {
@@ -2421,9 +2347,8 @@
       },
       "put": {
         "tags": [
-          "RelationshipREST"
+          "Relationship"
         ],
-        "summary": "Update an existing relationship between entities.",
         "description": "Update an existing relationship between entities.",
         "operationId": "Relationship_Update",
         "x-ms-examples": {
@@ -2455,9 +2380,8 @@
     "/atlas/v2/relationship/guid/{guid}": {
       "get": {
         "tags": [
-          "RelationshipREST"
+          "Relationship"
         ],
-        "summary": "Get relationship information between entities by its GUID.",
         "description": "Get relationship information between entities by its GUID.",
         "operationId": "Relationship_GetById",
         "x-ms-examples": {
@@ -2467,7 +2391,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/relationshipRestRelationshipGuid"
+            "$ref": "#/parameters/relationshipGuid"
           },
           {
             "$ref": "#/parameters/extendedInfo"
@@ -2484,9 +2408,8 @@
       },
       "delete": {
         "tags": [
-          "RelationshipREST"
+          "Relationship"
         ],
-        "summary": "Delete a relationship between entities by its GUID.",
         "description": "Delete a relationship between entities by its GUID.",
         "operationId": "Relationship_DeleteById",
         "x-ms-examples": {
@@ -2496,7 +2419,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/relationshipRestRelationshipGuid"
+            "$ref": "#/parameters/relationshipGuid"
           }
         ],
         "responses": {
@@ -2509,9 +2432,8 @@
     "/atlas/v2/types/classificationdef/guid/{guid}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the classification definition for the given GUID.",
         "description": "Get the classification definition for the given GUID.",
         "operationId": "Types_GetClassificationDefByGuid",
         "x-ms-examples": {
@@ -2521,7 +2443,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestClassificationGuid"
+            "$ref": "#/parameters/classificationDefGuid"
           }
         ],
         "responses": {
@@ -2537,9 +2459,8 @@
     "/atlas/v2/types/classificationdef/name/{name}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the classification definition by its name.",
         "description": "Get the classification definition by its name (unique).",
         "operationId": "Types_GetClassificationDefByName",
         "x-ms-examples": {
@@ -2549,7 +2470,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestClassificationName"
+            "$ref": "#/parameters/classificationDefName"
           }
         ],
         "responses": {
@@ -2565,9 +2486,8 @@
     "/atlas/v2/types/entitydef/guid/{guid}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the Entity definition for the given GUID.",
         "description": "Get the Entity definition for the given GUID.",
         "operationId": "Types_GetEntityDefByGuid",
         "x-ms-examples": {
@@ -2577,7 +2497,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestEntityGuid"
+            "$ref": "#/parameters/entityDefGuid"
           }
         ],
         "responses": {
@@ -2593,9 +2513,8 @@
     "/atlas/v2/types/entitydef/name/{name}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the entity definition by its name.",
         "description": "Get the entity definition by its name (unique).",
         "operationId": "Types_GetEntityDefByName",
         "x-ms-examples": {
@@ -2605,7 +2524,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestEntityName"
+            "$ref": "#/parameters/entityDefName"
           }
         ],
         "responses": {
@@ -2621,9 +2540,8 @@
     "/atlas/v2/types/enumdef/guid/{guid}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the enum definition for the given GUID.",
         "description": "Get the enum definition for the given GUID.",
         "operationId": "Types_GetEnumDefByGuid",
         "x-ms-examples": {
@@ -2633,7 +2551,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestEnumGuid"
+            "$ref": "#/parameters/enumDefGuid"
           }
         ],
         "responses": {
@@ -2649,9 +2567,8 @@
     "/atlas/v2/types/enumdef/name/{name}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the enum definition by its name.",
         "description": "Get the enum definition by its name (unique).",
         "operationId": "Types_GetEnumDefByName",
         "x-ms-examples": {
@@ -2661,7 +2578,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestEnumName"
+            "$ref": "#/parameters/enumDefName"
           }
         ],
         "responses": {
@@ -2677,9 +2594,8 @@
     "/atlas/v2/types/relationshipdef/guid/{guid}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the relationship definition for the given GUID.",
         "description": "Get the relationship definition for the given GUID.",
         "operationId": "Types_GetRelationshipDefByGuid",
         "x-ms-examples": {
@@ -2689,7 +2605,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestRelationshipGuid"
+            "$ref": "#/parameters/relationshipDefGuid"
           }
         ],
         "responses": {
@@ -2705,9 +2621,8 @@
     "/atlas/v2/types/relationshipdef/name/{name}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the relationship definition by its name.",
         "description": "Get the relationship definition by its name (unique).",
         "operationId": "Types_GetRelationshipDefByName",
         "x-ms-examples": {
@@ -2717,7 +2632,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestRelationshipName"
+            "$ref": "#/parameters/relationshipDefName"
           }
         ],
         "responses": {
@@ -2733,9 +2648,8 @@
     "/atlas/v2/types/structdef/guid/{guid}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the struct definition for the given GUID.",
         "description": "Get the struct definition for the given GUID.",
         "operationId": "Types_GetStructDefByGuid",
         "x-ms-examples": {
@@ -2745,7 +2659,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestStructGuid"
+            "$ref": "#/parameters/structDefGuid"
           }
         ],
         "responses": {
@@ -2761,9 +2675,8 @@
     "/atlas/v2/types/structdef/name/{name}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the struct definition by its name.",
         "description": "Get the struct definition by its name (unique).",
         "operationId": "Types_GetStructDefByName",
         "x-ms-examples": {
@@ -2773,7 +2686,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestStructName"
+            "$ref": "#/parameters/structDefName"
           }
         ],
         "responses": {
@@ -2789,9 +2702,8 @@
     "/atlas/v2/types/typedef/guid/{guid}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the type definition for the given GUID.",
         "description": "Get the type definition for the given GUID.",
         "operationId": "Types_GetTypeDefByGuid",
         "x-ms-examples": {
@@ -2801,7 +2713,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestTypeGuid"
+            "$ref": "#/parameters/typeDefGuid"
           }
         ],
         "responses": {
@@ -2817,9 +2729,8 @@
     "/atlas/v2/types/typedef/name/{name}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the type definition by its name.",
         "description": "Get the type definition by its name (unique).",
         "operationId": "Types_GetTypeDefByName",
         "x-ms-examples": {
@@ -2829,7 +2740,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestTypeName"
+            "$ref": "#/parameters/typeDefName"
           }
         ],
         "responses": {
@@ -2843,9 +2754,8 @@
       },
       "delete": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Delete API for type identified by its name.",
         "description": "Delete API for type identified by its name.",
         "operationId": "Types_DeleteTypeByName",
         "x-ms-examples": {
@@ -2855,7 +2765,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestTypeName"
+            "$ref": "#/parameters/typeDefName"
           }
         ],
         "responses": {
@@ -2868,9 +2778,8 @@
     "/atlas/v2/types/typedefs": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get all type definitions in bulk.",
         "description": "Get all type definitions in Atlas in bulk.",
         "operationId": "Types_GetAllTypeDefs",
         "x-ms-examples": {
@@ -2903,9 +2812,8 @@
       },
       "post": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Create all atlas type definitions in bulk.",
         "description": "Create all atlas type definitions in bulk, only new definitions will be created.\nAny changes to the existing definitions will be discarded.",
         "operationId": "Types_CreateTypeDefs",
         "x-ms-examples": {
@@ -2935,9 +2843,8 @@
       },
       "put": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Update all types in bulk.",
         "description": "Update all types in bulk, changes detected in the type definitions would be persisted.",
         "operationId": "Types_UpdateAtlasTypeDefs",
         "x-ms-examples": {
@@ -2967,9 +2874,8 @@
       },
       "delete": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Delete API for all types in bulk.",
         "description": "Delete API for all types in bulk.",
         "operationId": "Types_DeleteTypeDefs",
         "x-ms-examples": {
@@ -2998,9 +2904,8 @@
     "/atlas/v2/types/typedefs/headers": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "List all type definitions returned as a list of minimal information header.",
         "description": "List all type definitions returned as a list of minimal information header.",
         "operationId": "Types_GetTypeDefHeaders",
         "x-ms-examples": {
@@ -3033,9 +2938,8 @@
     "/types/termtemplatedef/guid/{guid}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the term template definition for the given GUID.",
         "description": "Get the term template definition for the given GUID.",
         "operationId": "Types_GetTermTemplateDefByGuid",
         "x-ms-examples": {
@@ -3045,10 +2949,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestTermTemplateGuid"
+            "$ref": "#/parameters/termTemplateDefGuid"
           },
           {
-            "$ref": "#/parameters/apiVersionNonAtlas"
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -3064,9 +2968,8 @@
     "/types/termtemplatedef/name/{name}": {
       "get": {
         "tags": [
-          "TypesREST"
+          "Types"
         ],
-        "summary": "Get the term template definition by its name.",
         "description": "Get the term template definition by its name (unique).",
         "operationId": "Types_GetTermTemplateDefByName",
         "x-ms-examples": {
@@ -3076,10 +2979,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/typesRestTermTemplateName"
+            "$ref": "#/parameters/termTemplateDefName"
           },
           {
-            "$ref": "#/parameters/apiVersionNonAtlas"
+            "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
         "responses": {
@@ -3250,10 +3153,6 @@
             },
             "entityStatus": {
               "$ref": "#/definitions/Status"
-            },
-            "propagate": {
-              "type": "boolean",
-              "description": "Determines if the classification will be propagated."
             },
             "removePropagationsOnEntityDelete": {
               "type": "boolean",
@@ -4030,7 +3929,11 @@
         "Approved",
         "Alert",
         "Expired"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "TermStatus",
+        "modelAsString": true
+      }
     },
     "TermCustomAttributes": {
       "title": "attributes",
@@ -4248,13 +4151,6 @@
         },
         {
           "properties": {
-            "blockedPropagatedClassifications": {
-              "type": "array",
-              "description": "An array of blocked propagated classifications.",
-              "items": {
-                "$ref": "#/definitions/AtlasClassification"
-              }
-            },
             "createTime": {
               "type": "number",
               "description": "The created time of the record."
@@ -4280,16 +4176,6 @@
             "label": {
               "type": "string",
               "description": "The label of the relationship."
-            },
-            "propagateTags": {
-              "$ref": "#/definitions/PropagateTags"
-            },
-            "propagatedClassifications": {
-              "type": "array",
-              "description": "An array of propagated classifications.",
-              "items": {
-                "$ref": "#/definitions/AtlasClassification"
-              }
             },
             "provenanceType": {
               "readOnly": false,
@@ -4331,9 +4217,6 @@
             "endDef2": {
               "$ref": "#/definitions/AtlasRelationshipEndDef"
             },
-            "propagateTags": {
-              "$ref": "#/definitions/PropagateTags"
-            },
             "relationshipCategory": {
               "$ref": "#/definitions/RelationshipCategory"
             },
@@ -4344,7 +4227,7 @@
           }
         }
       ],
-      "description": "AtlasRelationshipDef is a TypeDef that defines a relationship.\n<p>\nAs with other typeDefs the AtlasRelationshipDef has a name. Once created the RelationshipDef has a guid.\nThe name and the guid are the 2 ways that the RelationshipDef is identified.\n<p>\nRelationshipDefs have 2 ends, each of which specify cardinality, an EntityDef type name and name and optionally\nwhether the end is a container.\n<p>\nRelationshipDefs can have AttributeDefs - though only primitive types are allowed. <br>\nRelationshipDefs have a relationshipCategory specifying the UML type of relationship required <br>\nRelationshipDefs also have a PropagateTag - indicating which way tags could flow over the relationships.\n<p>\nThe way EntityDefs and RelationshipDefs are intended to be used is that EntityDefs will define AttributeDefs these AttributeDefs\nwill not specify an EntityDef type name as their types.\n<p>\nRelationshipDefs introduce new attributes to the entity instances. For example\n<p>\nEntityDef A might have attributes attr1,attr2,attr3 <br>\nEntityDef B might have attributes attr4,attr5,attr6 <br>\nRelationshipDef AtoB might define 2 ends <br>\n\n<pre>\n   end1:  type A, name attr7\n   end2:  type B, name attr8  </pre>\n\n<p>\nWhen an instance of EntityDef A is created, it will have attributes attr1,attr2,attr3,attr7 <br>\nWhen an instance of EntityDef B is created, it will have attributes attr4,attr5,attr6,attr8\n<p>\nIn this way relationshipDefs can be authored separately from entityDefs and can inject relationship attributes into\nthe entity instances"
+      "description": "AtlasRelationshipDef is a TypeDef that defines a relationship.\n<p>\nAs with other typeDefs the AtlasRelationshipDef has a name. Once created the RelationshipDef has a guid.\nThe name and the guid are the 2 ways that the RelationshipDef is identified.\n<p>\nRelationshipDefs have 2 ends, each of which specify cardinality, an EntityDef type name and name and optionally\nwhether the end is a container.\n<p>\nRelationshipDefs can have AttributeDefs - though only primitive types are allowed. <br>\nRelationshipDefs have a relationshipCategory specifying the UML type of relationship required <br>\nThe way EntityDefs and RelationshipDefs are intended to be used is that EntityDefs will define AttributeDefs these AttributeDefs\nwill not specify an EntityDef type name as their types.\n<p>\nRelationshipDefs introduce new attributes to the entity instances. For example\n<p>\nEntityDef A might have attributes attr1,attr2,attr3 <br>\nEntityDef B might have attributes attr4,attr5,attr6 <br>\nRelationshipDef AtoB might define 2 ends <br>\n\n<pre>\n   end1:  type A, name attr7\n   end2:  type B, name attr8  </pre>\n\n<p>\nWhen an instance of EntityDef A is created, it will have attributes attr1,attr2,attr3,attr7 <br>\nWhen an instance of EntityDef B is created, it will have attributes attr4,attr5,attr6,attr8\n<p>\nIn this way relationshipDefs can be authored separately from entityDefs and can inject relationship attributes into\nthe entity instances"
     },
     "AtlasRelationshipEndDef": {
       "type": "object",
@@ -4517,7 +4400,11 @@
         "DEPRECATED",
         "OBSOLETE",
         "OTHER"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "AtlasTermAssignmentStatus",
+        "modelAsString": true
+      }
     },
     "AtlasTermCategorizationHeader": {
       "type": "object",
@@ -4555,7 +4442,11 @@
         "DEPRECATED",
         "OBSOLETE",
         "OTHER"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "AtlasTermRelationshipStatus",
+        "modelAsString": true
+      }
     },
     "AtlasTypeDefHeader": {
       "type": "object",
@@ -4672,9 +4563,6 @@
         "endDef2": {
           "$ref": "#/definitions/AtlasRelationshipEndDef"
         },
-        "propagateTags": {
-          "$ref": "#/definitions/PropagateTags"
-        },
         "relationshipCategory": {
           "$ref": "#/definitions/RelationshipCategory"
         },
@@ -4772,7 +4660,11 @@
         "SINGLE",
         "LIST",
         "SET"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "Cardinality",
+        "modelAsString": true
+      }
     },
     "ClassificationAssociateRequest": {
       "type": "object",
@@ -4798,7 +4690,11 @@
       "enum": [
         "AND",
         "OR"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "Condition",
+        "modelAsString": true
+      }
     },
     "DateFormat": {
       "type": "object",
@@ -4879,7 +4775,11 @@
         "UPDATE",
         "PARTIAL_UPDATE",
         "DELETE"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "EntityOperation",
+        "modelAsString": true
+      }
     },
     "FilterCriteria": {
       "type": "object",
@@ -4922,7 +4822,11 @@
         "INPUT",
         "OUTPUT",
         "BOTH"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "LineageDirection",
+        "modelAsString": true
+      }
     },
     "LineageRelation": {
       "type": "object",
@@ -5051,7 +4955,11 @@
         "CONTAINS_ALL",
         "IS_NULL",
         "NOT_NULL"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "Operator",
+        "modelAsString": true
+      }
     },
     "PList": {
       "type": "object",
@@ -5090,17 +4998,6 @@
       "title": "PList",
       "description": "Paginated-list, for returning search results."
     },
-    "PropagateTags": {
-      "type": "string",
-      "title": "PropagateTags",
-      "description": "PropagateTags indicates whether tags should propagate across the relationship instance.\n<p>\nTags can propagate:\n<p>\nNONE - not at all <br>\nONE_TO_TWO - from end 1 to 2 <br>\nTWO_TO_ONE - from end 2 to 1  <br>\nBOTH - both ways\n<p>\nCare needs to be taken when specifying. The use cases we are aware of where this flag is useful:\n<p>\n- propagating confidentiality classifications from a table to columns - ONE_TO_TWO could be used here <br>\n- propagating classifications around Glossary synonyms - BOTH could be used here.\n<p>\nThere is an expectation that further enhancements will allow more granular control of tag propagation and will\naddress how to resolve conflicts.",
-      "enum": [
-        "NONE",
-        "ONE_TO_TWO",
-        "TWO_TO_ONE",
-        "BOTH"
-      ]
-    },
     "Relation": {
       "type": "string",
       "title": "Relation",
@@ -5119,7 +5016,11 @@
         "CLASSIFIES",
         "VALID_VALUES",
         "VALID_VALUES_FOR"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "Relation",
+        "modelAsString": true
+      }
     },
     "RelationshipCategory": {
       "type": "string",
@@ -5129,7 +5030,11 @@
         "ASSOCIATION",
         "AGGREGATION",
         "COMPOSITION"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "RelationshipCategory",
+        "modelAsString": true
+      }
     },
     "RoundingMode": {
       "type": "string",
@@ -5144,7 +5049,11 @@
         "HALF_DOWN",
         "HALF_EVEN",
         "UNNECESSARY"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "RoundingMode",
+        "modelAsString": true
+      }
     },
     "SavedSearchType": {
       "type": "string",
@@ -5153,7 +5062,11 @@
       "enum": [
         "BASIC",
         "ADVANCED"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "SavedSearchType",
+        "modelAsString": true
+      }
     },
     "SearchFilter": {
       "type": "object",
@@ -5263,7 +5176,11 @@
         "NONE",
         "ASC",
         "DESC"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "SortType",
+        "modelAsString": true
+      }
     },
     "Status": {
       "type": "string",
@@ -5272,7 +5189,11 @@
       "enum": [
         "ACTIVE",
         "DELETED"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      }
     },
     "Status_AtlasRelationship": {
       "type": "string",
@@ -5281,7 +5202,11 @@
       "enum": [
         "ACTIVE",
         "DELETED"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "Status_AtlasRelationship",
+        "modelAsString": true
+      }
     },
     "TimeBoundary": {
       "type": "object",
@@ -5352,7 +5277,11 @@
         "MAP",
         "RELATIONSHIP",
         "TERM_TEMPLATE"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "TypeCategory",
+        "modelAsString": true
+      }
     },
     "AzureCatalogUser": {
       "type": "object",
@@ -5935,6 +5864,10 @@
         "ENTITY_FULL_UPDATE_V2",
         "ENTITY_DELETE_V2"
       ],
+      "x-ms-enum": {
+        "name": "HookNotificationType",
+        "modelAsString": true
+      },
       "title": "HookNotificationType",
       "description": "Enum of hook notification type. Different behavior will be invoked by the value."
     },
@@ -6136,6 +6069,10 @@
         "Failed",
         "Running"
       ],
+      "x-ms-enum": {
+        "name": "ImportCSVOperationStatus",
+        "modelAsString": true
+      },
       "title": "ImportCSVOperationStatus",
       "description": "Enum of the status of import csv operation."
     },
@@ -6268,7 +6205,11 @@
         "NONE",
         "ASC",
         "DESC"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "xml_ns0_sortType",
+        "modelAsString": true
+      }
     },
     "xml_ns0_timeBoundary": {
       "type": "object",
@@ -6472,6 +6413,10 @@
         "INPUT",
         "OUTPUT"
       ],
+      "x-ms-enum": {
+        "name": "direction",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     },
     "includeParent": {
@@ -6498,7 +6443,7 @@
       "type": "boolean",
       "x-ms-parameter-location": "method"
     },
-    "relationshipRestRelationshipGuid": {
+    "relationshipGuid": {
       "name": "guid",
       "description": "The globally unique identifier of the relationship.",
       "in": "path",
@@ -6508,7 +6453,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestClassificationGuid": {
+    "classificationDefGuid": {
       "name": "guid",
       "description": "The globally unique identifier of the classification.",
       "in": "path",
@@ -6518,7 +6463,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestClassificationName": {
+    "classificationDefName": {
       "name": "name",
       "description": "The name of the classification.",
       "in": "path",
@@ -6528,7 +6473,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestEntityGuid": {
+    "entityDefGuid": {
       "name": "guid",
       "description": "The globally unique identifier of the entity.",
       "in": "path",
@@ -6538,7 +6483,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestEntityName": {
+    "entityDefName": {
       "name": "name",
       "description": "The name of the entity.",
       "in": "path",
@@ -6548,7 +6493,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestTermTemplateGuid": {
+    "termTemplateDefGuid": {
       "name": "guid",
       "description": "The globally unique identifier of the term template.",
       "in": "path",
@@ -6558,7 +6503,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestTermTemplateName": {
+    "termTemplateDefName": {
       "name": "name",
       "description": "The name of the term template.",
       "in": "path",
@@ -6568,7 +6513,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestEnumGuid": {
+    "enumDefGuid": {
       "name": "guid",
       "description": "The globally unique identifier of the enum.",
       "in": "path",
@@ -6578,7 +6523,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestEnumName": {
+    "enumDefName": {
       "name": "name",
       "description": "The name of the enum.",
       "in": "path",
@@ -6588,7 +6533,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestRelationshipGuid": {
+    "relationshipDefGuid": {
       "name": "guid",
       "description": "The globally unique identifier of the relationship.",
       "in": "path",
@@ -6598,7 +6543,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestRelationshipName": {
+    "relationshipDefName": {
       "name": "name",
       "description": "The name of the relationship.",
       "in": "path",
@@ -6608,7 +6553,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestStructGuid": {
+    "structDefGuid": {
       "name": "guid",
       "description": "The globally unique identifier of the struct.",
       "in": "path",
@@ -6618,7 +6563,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestStructName": {
+    "structDefName": {
       "name": "name",
       "description": "The name of the struct.",
       "in": "path",
@@ -6628,7 +6573,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestTypeGuid": {
+    "typeDefGuid": {
       "name": "guid",
       "description": "The globally unique identifier of the type.",
       "in": "path",
@@ -6638,7 +6583,7 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "typesRestTypeName": {
+    "typeDefName": {
       "name": "name",
       "description": "The name of the type.",
       "in": "path",
@@ -6712,17 +6657,17 @@
       "default": false,
       "x-ms-parameter-location": "method"
     },
-    "apiVersionNonAtlas": {
+    "purviewAPIVersion": {
       "name": "api-version",
-      "description": "Version of the api",
+      "description": "Version of Purview APIs",
       "in": "query",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "apiVersionAtlas": {
+    "atlasAPIVersion": {
       "name": "api-version",
-      "description": "Version of the api",
+      "description": "Version of Atlas APIs",
       "in": "query",
       "required": false,
       "type": "string",
@@ -6742,6 +6687,10 @@
         "struct",
         "term_template"
       ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     }
   }
