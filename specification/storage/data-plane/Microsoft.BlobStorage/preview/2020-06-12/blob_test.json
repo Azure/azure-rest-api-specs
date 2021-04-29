@@ -42,7 +42,7 @@
           "containers"
         ],
         "operationId": "Container_ListBlobFlatSegment",
-        "description": "[Update] The List Blobs operation returns a list of the blobs under the specified container",
+        "description": "The List Blobs operation returns a list of the blobs under the specified container",
         "parameters": [
           {
             "$ref": "#/parameters/Prefix"
@@ -113,6 +113,7 @@
           }
         },
         "x-ms-pageable": {
+          "itemName": "Segment",
           "nextLinkName": "NextMarker"
         }
       },
@@ -143,7 +144,7 @@
           "containers"
         ],
         "operationId": "Container_ListBlobHierarchySegment",
-        "description": "[Update] The List Blobs operation returns a list of the blobs under the specified container",
+        "description": "The List Blobs operation returns a list of the blobs under the specified container",
         "parameters": [
           {
             "$ref": "#/parameters/Prefix"
@@ -217,6 +218,7 @@
           }
         },
         "x-ms-pageable": {
+          "itemName": "Segment",
           "nextLinkName": "NextMarker"
         }
       },
@@ -2365,25 +2367,6 @@
           "$ref": "#/definitions/ObjectReplicationMetadata"
         }
       }
-    },
-    "CopyId": {
-      "name": "copyid",
-      "x-ms-client-name": "copyId",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The copy identifier provided in the x-ms-copy-id header of the original Copy Blob operation."
-    },
-    "CopySource": {
-      "name": "x-ms-copy-source",
-      "x-ms-client-name": "copySource",
-      "in": "header",
-      "required": true,
-      "type": "string",
-      "format": "url",
-      "x-ms-parameter-location": "method",
-      "description": "Specifies the name of the source page blob snapshot. This value is a URL of up to 2 KB in length that specifies a page blob snapshot. The value should be URL-encoded as it would appear in a request URI. The source blob must either be public or must be authenticated via a shared access signature."
     },
     "ArchiveStatus": {
       "type": "string",
