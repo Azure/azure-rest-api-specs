@@ -6,43 +6,21 @@
     "networkManagerName": "testNetworkManager",
     "configurationName": "myTestSecurityConfig",
     "ruleCollectionName": "testRuleCollection",
-    "ruleName": "SampleAdminRule",
+    "ruleName": "SampleDefaultAdminRule",
     "adminRule": {
-      "kind": "Custom",
+      "kind": "Default",
       "properties": {
-        "description": "This is Sample Admin Rule",
-        "protocol": "Tcp",
-        "sources": [
-          {
-            "addressPrefixType": "ServiceTag",
-            "addressPrefix": "Internet"
-          }
-        ],
-        "destinations": [
-          {
-            "addressPrefixType": "IPPrefix",
-            "addressPrefix": "*"
-          }
-        ],
-        "sourcePortRanges": [
-          "0-65535"
-        ],
-        "destinationPortRanges": [
-          "22"
-        ],
-        "access": "Deny",
-        "priority": 1,
-        "direction": "Inbound"
+        "flag": "AllowVnetInbound"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleAdminRule",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleDefaultAdminRule",
         "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections/rules",
-        "name": "SampleAdminRule",
-        "kind": "Custom",
+        "name": "SampleDefaultAdminRule",
+        "kind": "Default",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -52,7 +30,8 @@
           "lastModifiedAt": "2021-01-11T18:52:27Z"
         },
         "properties": {
-          "description": "This is Sample Admin Rule",
+          "flag": "AllowVnetInbound",
+          "description": "This is Sample Default Admin Rule",
           "protocol": "Tcp",
           "sources": [
             {
@@ -81,10 +60,10 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/rules/SampleAdminRule",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/rules/SampleDefaultAdminRule",
         "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections/rules",
-        "name": "SampleAdminRule",
-        "kind": "Custom",
+        "name": "SampleDefaultAdminRule",
+        "kind": "Default",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -94,7 +73,8 @@
           "lastModifiedAt": "2021-01-11T18:52:27Z"
         },
         "properties": {
-          "description": "This is Sample Admin Rule",
+          "flag": "AllowVnetInbound",
+          "description": "This is Sample Default Admin Rule",
           "protocol": "Tcp",
           "sources": [
             {

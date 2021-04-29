@@ -1,10 +1,11 @@
 {
-  "title": "List Azure Virtual Network Manager Effective Configuration",
+  "title": "List Azure Virtual Network Manager Effective Configuration by Subnet",
   "parameters": {
     "api-version": "2021-02-01-preview",
     "subscriptionId": "subscriptionA",
     "resourceGroupName": "myResourceGroup",
     "virtualNetworkName": "testVirtualNetwork",
+    "subnetName": "testSubnet",
     "parameters": {
       "$skipToken": "FakeSkipTokenCode"
     }
@@ -55,8 +56,6 @@
             "kind": "SecurityUserRuleCollection",
             "id": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection",
             "properties": {
-              "configurationDisplayName": "SampleUserConfig",
-              "configurationDescription": "Sample User Config",
               "displayName": "testRuleCollection",
               "description": "A sample rule collection",
               "provisioningState": "Succeeded",
@@ -183,7 +182,7 @@
             ]
           }
         ],
-        "$skipToken": "FakeSkipTokenCode"
+        "$skipToken": "NextFakeSkipTokenCode"
       }
     }
   }

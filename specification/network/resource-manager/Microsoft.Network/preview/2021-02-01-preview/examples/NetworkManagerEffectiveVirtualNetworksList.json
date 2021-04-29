@@ -5,7 +5,10 @@
     "subscriptionId": "subscriptionC",
     "resourceGroupName": "rg1",
     "networkManagerName": "testNetworkManager",
-    "networkGroupName": "TestNetworkGroup"
+    "networkGroupName": "TestNetworkGroup",
+    "parameters": {
+      "$skipToken": "FakeSkipTokenCode"
+    }
   },
   "responses": {
     "200": {
@@ -17,10 +20,7 @@
             "membershipType": "Static"
           }
         ],
-        "totalRecords": 2,
-        "firstIndex": 1,
-        "pageSize": 10,
-        "nextLink": "{baseurl}/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/TestNetworkGroup/effectiveVirtualNetworks?api-version=2021-02-01-preview&$skipToken=10"
+        "$skipToken": "NextFakeSkipTokenCode"
       }
     }
   }
