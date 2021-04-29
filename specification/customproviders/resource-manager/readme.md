@@ -63,8 +63,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_customproviders']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js customproviders/resource-manager
 ```
 
 ## Go
@@ -95,9 +93,7 @@ See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
 See configuration in [readme.terraform.md](./readme.terraform.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## cli
 

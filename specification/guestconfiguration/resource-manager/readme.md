@@ -124,8 +124,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js guestconfiguration/resource-manager
 ```
 
 
@@ -143,7 +141,5 @@ csharp:
   clear-output-folder: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

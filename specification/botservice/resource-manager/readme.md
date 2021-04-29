@@ -121,8 +121,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js botservice/resource-manager
   - repo: azure-sdk-for-js
 ```
 
@@ -163,6 +161,4 @@ See configuration in [readme.java.md](./readme.java.md)
 
 See readme.python.md file.
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

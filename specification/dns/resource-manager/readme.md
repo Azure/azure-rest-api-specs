@@ -171,8 +171,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_dns']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js dns/resource-manager
 ```
 
 ## Go
@@ -241,7 +239,5 @@ input-file:
 - Microsoft.Network/stable/2016-04-01/dns.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
