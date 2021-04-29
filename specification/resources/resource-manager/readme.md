@@ -275,6 +275,15 @@ override-info:
   title: PolicyClient
 ```
 
+### Tag: package-templatespecs-2021-05
+
+These settings apply only when `--tag=package-templatespecs-2021-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-templatespecs-2021-05'
+input-file:
+- Microsoft.Resources/stable/2021-05-01/templateSpecs.json
+```
+
 ### Tag: package-templatespecs-2021-03-preview
 
 These settings apply only when `--tag=package-templatespecs-2021-03-preview` is specified on the command line.
@@ -751,14 +760,22 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#features
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#locks
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#policy
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#templatespecs
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#deploymentscripts
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js resources/resource-manager
 ```
 ## Python
 
@@ -806,6 +823,4 @@ override-info:
   title: PolicyClient
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
