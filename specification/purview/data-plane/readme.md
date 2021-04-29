@@ -112,13 +112,6 @@ reason:  This property is the discriminator for polymorph, but it can not be in 
 
 ``` yaml
 directive:
-  - suppress: R2023
-from: purviewcatalog.json
-reason: This warning is of low priority. For now, we can let the summary to be the same as the discription.
-```
-
-``` yaml
-directive:
   - suppress: R2026
 from: purviewcatalog.json
 reason: Should be compatible with Atlas swagger.
