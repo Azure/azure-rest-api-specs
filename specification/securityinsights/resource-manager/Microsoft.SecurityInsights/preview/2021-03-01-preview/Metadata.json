@@ -40,8 +40,11 @@
           "Get all metadata.": {
             "$ref": "./examples/metadata/GetAllMetadata.json"
           },
-          "Get all metadata with OData query parameters": {
+          "Get all metadata with OData query": {
             "$ref": "./examples/metadata/GetAllMetadataOData.json"
+          },
+          "Get all metadata in pages using OData": {
+            "$ref": "./examples/metadata/GetAllMetadataODataPages.json"
           }
         },
         "tags": [
@@ -328,15 +331,29 @@
       },
       "type": "object"
     },
+    "MetadataPatch": {
+      "allOf": [
+        {
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Metadata patch request body.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MetadataPropertiesPatch",
+          "description": "Metadata patch request body",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
     "MetadataId": {
       "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name",
-      "type": "string",
-      "minLength": 1
+      "type": "string"
     },
     "MetadataParentId": {
       "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)",
-      "type": "string",
-      "minLength": 1
+      "type": "string"
     },
     "MetadataVersion": {
       "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks",
@@ -355,7 +372,10 @@
         "analyticRule",
         "huntingQuery",
         "investigationQuery",
-        "parser"
+        "parser",
+        "watchlist",
+        "watchlistTemplate",
+        "solution"
       ],
       "x-ms-enum": {
         "modelAsString": true,
@@ -366,11 +386,15 @@
           {"value": "workbook"},
           {"value": "workbookTemplate"},
           {"value": "playbook"},
+          {"value": "playbookTemplate"},
           {"value": "analyticRuleTemplate"},
           {"value": "analyticRule"},
           {"value": "huntingQuery"},
           {"value": "investigationQuery"},
-          {"value": "parser"}
+          {"value": "parser"},
+          {"value": "watchlist"},
+          {"value": "watchlistTemplate"},
+          {"value": "solution"}
         ]
       }
     },
@@ -402,25 +426,39 @@
         "name": {
           "description": "Name of the content source.  The repo name, solution name, LA workspace name etc.",
           "type": "string"
+        },
+        "id": {
+          "description": "ID of the content source.  The solution ID, workspace ID, etc",
+          "type": "string"
         }
       }
     },
     "MetadataAuthor": {         
       "type": "object",
-      "required": ["name"],
-      "description": "The creator of the content item.",
+      "description": "Author information for the metadata - type, name, contact information",
       "properties": {
         "name": {
-          "description": "Name of the author.  For localWorkspace it is automatically the workspace user.",
+          "description": "Name of author contact or company",
           "type": "string",
-          "minLength": 1
+          "examples": ["Microsoft", "Joe Contoso"]
+        },
+        "email": {
+          "description": "Email of author contact",
+          "type": "string",
+          "format": "email"
+        },
+        "link": {
+          "description": "Link for author/vendor page",
+          "type": "string",
+          "format": "uri",
+          "examples": ["https://support.microsoft.com/"]
         }
       }
     },
     "MetadataSupport": {
       "type": "object",
       "description": "Support information for the metadata - type, name, contact information",
-      "required": ["name", "tier"],
+      "required": ["tier"],
       "properties": {
         "tier": {
           "description": "Type of support for content item",
@@ -447,29 +485,43 @@
           "format": "email"
         },
         "link": {
-          "description": "Link for support help, like to support page to open a ticket etc",
+          "description": "Link for support help, like to support page to open a ticket etc.",
           "type": "string",
           "format": "uri",
           "examples": ["https://support.microsoft.com/"]
         }
       }
     },
-    "MetadataDependencies": {
+    "Dependency": {
+      "description": "A content dependency is firstly an id and type, version is optional",
+      "type": "object",
+      "required": [
+        "id",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "description": "Id of the content item we depend on",
+          "$ref": "#/definitions/MetadataId"
+        },
+        "kind": {
+          "description": "Type of the content item we depend on",
+          "$ref": "#/definitions/MetadataKind"
+        },
+        "version": {
+          "description": "Version of the the content ite we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.",
+          "$ref": "#/definitions/MetadataVersion"
+        }
+      }
+    },
+    "DependencyList": {
       "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR.",
       "type": "object",
       "required": ["operator", "criteria"],
       "properties": {
         "operator": {
           "type": "string",
-          "enum": ["AND", "OR"],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "tier",
-            "values": [
-              {"value": "AND"},
-              {"value": "OR"}
-            ]
-          }
+          "enum": ["AND", "OR"]
         },
         "items": {
           "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
@@ -477,32 +529,32 @@
           "items": {
             "anyOf": [
               {
-                "description": "A content dependency is firstly an id and type, version is optional",
-                "type": "object",
-                "required": ["id", "kind"],
-                "properties": {
-                  "id": {
-                    "description": "Id of the content item we depend on",
-                    "$ref": "#/definitions/MetadataId"
-                  },
-                  "type": {
-                    "description": "Type of the content item we depend on",
-                    "$ref": "#/definitions/MetadataKind"
-                  },
-                  "version": {
-                    "description": "Version of the the content ite we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.",
-                    "$ref": "#/definitions/MetadataVersion"
-                  }
-                }
+                "$ref": "#/definitions/Dependency",
+                "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
               },
               {
-                "$ref": "#/definitions/MetadataDependencies",
+                "$ref": "#/definitions/DependencyList",
                 "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
               }
             ]
           }
         }
-      }},
+      }
+    },
+    "MetadataDependencies": {
+      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR.",
+      "type": "object",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/Dependency",
+          "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
+        },
+        {
+          "$ref": "#/definitions/DependencyList",
+          "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
+        }
+      ]
+    },
     "MetadataProperties": {
       "description": "Metadata property bag.",
       "required": [

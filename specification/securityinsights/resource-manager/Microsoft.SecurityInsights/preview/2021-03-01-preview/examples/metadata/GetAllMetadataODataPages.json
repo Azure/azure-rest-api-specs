@@ -4,7 +4,10 @@
     "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
     "resourceGroupName": "myRg",
     "workspaceName": "myWorkspace",
-    "operationalInsightsResourceProvider": "Microsoft.OperationalInsights"
+    "operationalInsightsResourceProvider": "Microsoft.OperationalInsights",
+    "ODataOrderBy": "properties/parentId desc",
+    "ODataSkip": "5",
+    "ODataTop": "5",
   },
   "responses": {
     "200": {
@@ -15,17 +18,12 @@
             "name": "metadata1",
             "type": "Microsoft.SecurityInsights/metadata",
             "properties": {
-            }
-          },
-          {
-            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/metadata/metadata1",
-            "name": "metadata1",
-            "type": "Microsoft.SecurityInsights/metadata",
-            "properties": {
+              // TODO
             }
           }
         ]
-      }
+      },
+      "nextLink": ""
     }
   }
 }

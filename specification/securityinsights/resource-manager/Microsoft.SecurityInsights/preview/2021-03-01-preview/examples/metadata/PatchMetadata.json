@@ -5,24 +5,31 @@
     "resourceGroupName": "myRg",
     "workspaceName": "myWorkspace",
     "operationalInsightsResourceProvider": "Microsoft.OperationalInsights",
-    "settingsName": "EyesOn",
-    "settings": {
-      "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
-      "kind": "EyesOn",
-      "properties": {}
+    "onboardingRequest": {
+      "sku": {
+        "name": "CapacityReservation",
+        "capacityReservationLevel": 700
+      },
+      "customerManagedKey": false,
+      "eyesOn": true,
+      "entityAnalytics": {
+        "enabled": true,
+        "uebaDataSources": [
+          "AuditLogs",
+          "SecurityEvent"
+        ]
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/mms-eus/providers/Microsoft.OperationalInsights/workspaces/avdvirInt/providers/Microsoft.SecurityInsights/settings/EyesOn",
-        "name": "EyesOn",
-        "type": "Microsoft.SecurityInsights/settings",
-        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
-        "kind": "EyesOn",
-        "properties": {
-          "isEnabled": true
-        }
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/metadata/metadataName",
+            "name": "metadataName",
+            "type": "Microsoft.SecurityInsights/metadata",
+            "properties": {
+              "isEnabled": true
+            }
       }
     }
   }
