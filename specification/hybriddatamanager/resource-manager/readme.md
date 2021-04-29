@@ -77,8 +77,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_hybriddatamanager']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js hybriddatamanager/resource-manager
 ```
 
 
@@ -147,7 +145,5 @@ python:
   output-folder: $(python-sdks-folder)/azure-mgmt-hybriddatamanager
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
