@@ -181,7 +181,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "get": {
         "tags": [
@@ -264,7 +267,7 @@
               "$ref": "#/definitions/PlatformAccount"
             }
           },
-          "202": {
+          "201": {
             "description": "Accepted. The specified platform account will be updated asynchronously.",
             "schema": {
               "$ref": "#/definitions/PlatformAccount"
@@ -277,7 +280,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVehicle/platformAccounts": {
@@ -315,7 +321,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -357,7 +363,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -388,7 +394,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     }
@@ -446,59 +452,6 @@
       },
       "description": "Specifies the response indicating whether the platform account name is valid and available."
     },
-    "MqttEndpoint": {
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates whether the endpoint is enabled or not."
-        }
-      },
-      "required": [
-        "enabled"
-      ],
-      "description": "Specifies the MQTT endpoint."
-    },
-    "IoTHubEndpoint": {
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates whether the endpoint is enabled or not."
-        }
-      },
-      "required": [
-        "enabled"
-      ],
-      "description": "Specifies the IoT Hub endpoint."
-    },
-    "Endpoints": {
-      "properties": {
-        "mqtt": {
-          "$ref": "#/definitions/MqttEndpoint",
-          "description": "Specifies the MQTT endpoint."
-        },
-        "iotHub": {
-          "$ref": "#/definitions/IoTHubEndpoint",
-          "description": "Specifies the IoT Hub endpoint."
-        }
-      },
-      "required": [
-        "mqtt",
-        "iotHub"
-      ],
-      "description": "Specifies the endpoint configuration."
-    },
-    "Networking": {
-      "properties": {
-        "endpoints": {
-          "$ref": "#/definitions/Endpoints",
-          "description": "Specifies the endpoints."
-        }
-      },
-      "required": [
-        "endpoints"
-      ],
-      "description": "Specifies the networking configuration."
-    },
     "Extension": {
       "properties": {
         "resourceId": {
@@ -523,18 +476,6 @@
       ],
       "description": "Specifies the analytics configuration."
     },
-    "StampLocation": {
-      "properties": {
-        "locationName": {
-          "type": "string",
-          "description": "Specifies the location name of the stamp location."
-        }
-      },
-      "required": [
-        "locationName"
-      ],
-      "description": "Specifies the stamp location."
-    },
     "ClaimsProvider": {
       "properties": {
         "baseUrl": {
@@ -555,17 +496,6 @@
             "$ref": "#/definitions/Extension"
           },
           "description": "Specifies the list of extensions."
-        },
-        "networking": {
-          "$ref": "#/definitions/Networking",
-          "description": "Specifies the networking configuration."
-        },
-        "stampLocations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StampLocation"
-          },
-          "description": "Specifies the list of stamp locations."
         },
         "claimsProvider": {
           "$ref": "#/definitions/ClaimsProvider",
@@ -612,10 +542,6 @@
           },
           "description": "Specifies the list of extensions."
         },
-        "networking": {
-          "$ref": "#/definitions/Networking",
-          "description": "Specifies the networking configuration."
-        },
         "provisioningState": {
           "type": "string",
           "enum": [
@@ -634,13 +560,6 @@
           "readOnly": true,
           "description": "Specifies the current provisioning state of the platform account."
         },
-        "stampLocations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StampLocation"
-          },
-          "description": "Specifies the list of stamp locations."
-        },
         "claimsProvider": {
           "$ref": "#/definitions/ClaimsProvider",
           "description": "Specifies Claims Provider endpoint."
@@ -652,7 +571,6 @@
         }
       },
       "required": [
-        "networking",
         "claimsProvider"
       ],
       "description": "Specifies the properties of the platform account."
