@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-insights-2020-11-20
   - tag: schema-insights-2020-10-20
   - tag: schema-insights-2020-10-05-preview
   - tag: schema-insights-2020-06-02-preview
@@ -21,6 +22,17 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-insights-2020-11-20 and azureresourceschema
+
+``` yaml $(tag) == 'schema-insights-2020-11-20' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
+
+```
 
 ### Tag: schema-insights-2020-10-20 and azureresourceschema
 
