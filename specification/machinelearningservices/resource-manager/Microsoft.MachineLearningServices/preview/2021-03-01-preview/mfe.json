@@ -4926,7 +4926,7 @@
       "type": "object",
       "properties": {
         "target": {
-          "description": "ARM resource ID of the compute resource. Not used for Batch jobs.",
+          "description": "ARM resource ID of the compute resource.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -4994,7 +4994,7 @@
       "additionalProperties": false
     },
     "BatchLoggingLevel": {
-      "description": "Log verbosity for batch inferencing.\r\nIncreasing verbosity order for logging is : Warning, Info and Debug\r\nDefault value is Info.",
+      "description": "Log verbosity for batch inferencing.\r\nIncreasing verbosity order for logging is : Warning, Info and Debug.\r\nThe default value is Info.",
       "enum": [
         "Info",
         "Warning",
@@ -5065,7 +5065,7 @@
       "additionalProperties": false
     },
     "IdAssetReference": {
-      "description": "Reference to an asset via it's ARM resource ID.",
+      "description": "Reference to an asset via its ARM resource ID.",
       "required": [
         "assetId"
       ],
@@ -5086,7 +5086,7 @@
       "additionalProperties": false
     },
     "DataPathAssetReference": {
-      "description": "Reference to an asset via it's path in a Datastore.",
+      "description": "Reference to an asset via its path in a datastore.",
       "type": "object",
       "allOf": [
         {
@@ -5107,7 +5107,7 @@
       "additionalProperties": false
     },
     "OutputPathAssetReference": {
-      "description": "Reference to an asset via it's path in a job output.",
+      "description": "Reference to an asset via its path in a job output.",
       "type": "object",
       "allOf": [
         {
@@ -5165,7 +5165,7 @@
         },
         "errorThreshold": {
           "format": "int32",
-          "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue]\r\n-1 value indicates, ignore all failures during batch inference\r\nFor FileDataset count of file failures\r\nFor TabularDataset, this is the count of record failures",
+          "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue].\r\nFor FileDataset, this value is the count of file failures.\r\nFor TabularDataset, this value is the count of record failures.\r\nIf set to -1 (the lower bound), all failures during batch inference will be ignored.",
           "type": "integer"
         },
         "retrySettings": {
@@ -5505,18 +5505,21 @@
       "type": "object",
       "properties": {
         "properties": {
+          "description": "The asset description text.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "description": {
+          "description": "The asset property dictionary.",
           "type": "string"
         }
       },
@@ -5660,18 +5663,21 @@
       "type": "object",
       "properties": {
         "properties": {
+          "description": "The asset description text.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "description": {
+          "description": "The asset property dictionary.",
           "type": "string"
         }
       },
@@ -6106,6 +6112,7 @@
       "additionalProperties": false
     },
     "AzureBlobContents": {
+      "description": "Azure Blob datastore configuration.",
       "required": [
         "accountName",
         "containerName",
@@ -6513,6 +6520,7 @@
       "additionalProperties": false
     },
     "DatastoreProperties": {
+      "description": "Datastore definition.",
       "required": [
         "contents"
       ],
@@ -6713,18 +6721,21 @@
       "type": "object",
       "properties": {
         "properties": {
+          "description": "The asset description text.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "description": {
+          "description": "The asset property dictionary.",
           "type": "string"
         }
       },
@@ -6788,7 +6799,7 @@
       "additionalProperties": false
     },
     "DockerSpecificationType": {
-      "description": "Docker specification must be either Build or Image",
+      "description": "Enum to determine docker specification type. Must be either Build or Image.",
       "enum": [
         "Build",
         "Image"
@@ -6824,7 +6835,7 @@
       "additionalProperties": false
     },
     "DockerSpecification": {
-      "description": "Class to represent configuration settings for Docker",
+      "description": "Configuration settings for Docker",
       "required": [
         "dockerSpecificationType"
       ],
@@ -6963,7 +6974,7 @@
           "$ref": "#/definitions/DockerSpecification"
         },
         "condaFile": {
-          "description": "Standard configuration file used by conda that lets you install any kind of package, including Python, R, and C/C++ packages.\r\n<see href=\"https://repo2docker.readthedocs.io/en/latest/config_files.html#environment-yml-install-a-conda-environment\" />",
+          "description": "Standard configuration file used by Conda that lets you install any kind of package, including Python, R, and C/C++ packages.\r\n<see href=\"https://repo2docker.readthedocs.io/en/latest/config_files.html#environment-yml-install-a-conda-environment\" />",
           "type": "string"
         },
         "inferenceContainerProperties": {
@@ -7479,7 +7490,7 @@
       "additionalProperties": false
     },
     "CommandJob": {
-      "description": "Command Job definition.",
+      "description": "Command job definition.",
       "required": [
         "command",
         "compute"
@@ -7615,7 +7626,7 @@
         "parameters": {
           "description": "Input parameters.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "readOnly": true,
           "x-ms-mutability": [
             "read"
@@ -7837,7 +7848,7 @@
       "additionalProperties": false
     },
     "SweepJob": {
-      "description": "Sweep Job definition.",
+      "description": "Sweep job definition.",
       "required": [
         "algorithm",
         "compute",
