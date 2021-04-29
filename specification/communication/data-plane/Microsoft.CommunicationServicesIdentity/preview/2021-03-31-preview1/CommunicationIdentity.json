@@ -132,13 +132,13 @@
         }
       }
     },
-    "/teamsUsers/me/:issueAccessToken": {
+    "/teamsUser/:exchangeAccessToken": {
       "post": {
         "tags": [
-          "TeamsUsers"
+          "TeamsUser"
         ],
-        "summary": "Issue a new access token for a Teams user.",
-        "operationId": "CommunicationIdentity_IssueTeamsUserAccessToken",
+        "summary": "Exchange an AAD access token of a Teams user for a new ACS access token.",
+        "operationId": "CommunicationIdentity_ExchangeTeamsUserAccessToken",
         "consumes": [
           "application/json"
         ],
@@ -174,7 +174,7 @@
         },
         "x-ms-examples": {
           "Issue a Teams user access token": {
-            "$ref": "./examples/IssueTeamsUserAccessToken.json"
+            "$ref": "./examples/ExchangeTeamsUserAccessToken.json"
           }
         }
       }
@@ -314,7 +314,7 @@
       "type": "object",
       "properties": {
         "token": {
-          "description": "Azure Active Directory access token to acquire a new M365 access token.",
+          "description": "Azure Active Directory access token to acquire a new ACS access token.",
           "type": "string"
         }
       }
