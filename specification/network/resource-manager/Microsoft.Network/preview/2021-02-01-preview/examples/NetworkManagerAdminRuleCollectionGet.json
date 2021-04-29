@@ -4,14 +4,15 @@
     "subscriptionId": "subId",
     "resourceGroupName": "rg1",
     "networkManagerName": "testNetworkManager",
+    "ruleCollectionName": "testRuleCollection",
     "configurationName": "myTestSecurityConfig"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityConfigurations/myTestSecurityConfig",
-        "name": "myTestSecurityConfig",
-        "type": "Microsoft.Network/networkManagers/securityConfigurations",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection",
+        "name": "testRuleCollection",
+        "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/RuleCollections",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -21,11 +22,9 @@
           "lastModifiedAt": "2021-01-11T18:52:27Z"
         },
         "properties": {
-          "displayName": "myTestSecurityConfig",
-          "description": "A sample policy",
+          "displayName": "testRuleCollection",
+          "description": "A sample rule collection",
           "provisioningState": "Succeeded",
-          "securityType": "AdminPolicy",
-          "deleteExistingNSGs": true,
           "appliesToGroups": [
             {
               "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"

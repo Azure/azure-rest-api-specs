@@ -5,11 +5,10 @@
     "resourceGroupName": "rg1",
     "configurationName": "myTestSecurityConfig",
     "networkManagerName": "testNetworkManager",
-    "securityConfiguration": {
+    "ruleCollectionName": "testRuleCollection",
+    "userRuleCollection": {
       "properties": {
         "description": "A sample policy",
-        "securityType": "UserPolicy",
-        "deleteExistingNSGs": true,
         "appliesToGroups": [
           {
             "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
@@ -21,9 +20,9 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManager/testNetworkManager/securityConfigurations/myTestSecurityConfig",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManager/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection",
         "name": "myTestSecurityConfig",
-        "type": "Microsoft.Network/networkManagers/securityConfigurations",
+        "type": "Microsoft.Network/networkManagers/securityUserConfigurations/ruleCollections",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -36,8 +35,6 @@
           "displayName": "myTestSecurityConfig",
           "description": "A sample policy",
           "provisioningState": "Succeeded",
-          "securityType": "UserPolicy",
-          "deleteExistingNSGs": true,
           "appliesToGroups": [
             {
               "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
@@ -48,9 +45,9 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManager/testNetworkManager/securityConfigurations/myTestSecurityConfig",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManager/testNetworkManager/securityUserConfigurations/myTestSecurityConfig",
         "name": "myTestSecurityConfig",
-        "type": "Microsoft.Network/networkManagers/securityConfigurations",
+        "type": "Microsoft.Network/networkManagers/securityUserConfigurations/ruleCollections",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -63,8 +60,6 @@
           "displayName": "myTestSecurityConfig",
           "description": "A sample policy",
           "provisioningState": "Succeeded",
-          "securityType": "UserPolicy",
-          "deleteExistingNSGs": true,
           "appliesToGroups": [
             {
               "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
