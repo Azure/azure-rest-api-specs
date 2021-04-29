@@ -200,8 +200,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js machinelearningservices/resource-manager
 ```
 
 ## C#
@@ -234,6 +232,8 @@ namespace: com.microsoft.azure.management.machinelearning.services
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning/services
+
+service-name: MachineLearningServices
 ```
 
 ### Java multi-api
@@ -452,6 +452,4 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

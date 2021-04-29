@@ -224,6 +224,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-iothub
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -232,8 +233,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js iothub/resource-manager
 ```
 
 ## C#
@@ -250,6 +249,10 @@ csharp:
   clear-output-folder: true
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -258,6 +261,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.go.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
