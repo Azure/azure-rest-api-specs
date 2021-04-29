@@ -222,6 +222,16 @@ namespace: policy
 output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2015-10-01-preview/policy
 ```
 
+### Tag: package-resources-2021-01 and go
+
+These settings apply only when `--tag=package-resources-2021-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-resources-2021-01' && $(go)
+namespace: resources
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2021-01-01/resources
+```
+
 ### Tag: package-resources-2020-10 and go
 
 These settings apply only when `--tag=package-resources-2020-10 --go` is specified on the command line.
