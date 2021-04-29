@@ -5517,7 +5517,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "readOnly": true
         },
         "provisioningState": {
           "description": "Provisioning state of the domain.",
@@ -5592,6 +5593,7 @@
       "properties": {
         "name": {
           "description": "The Sku name of the resource. The possible values are: Basic or Premium.",
+          "default": "Basic",
           "enum": [
             "Basic",
             "Premium"
@@ -5922,8 +5924,7 @@
         },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
-          "description": "The Sku pricing tier for the domain.",
-          "default": "Basic"
+          "description": "The Sku pricing tier for the domain."
         },
         "identity": {
           "$ref": "#/definitions/IdentityInfo",
@@ -8124,7 +8125,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "readOnly": true
         },
         "provisioningState": {
           "description": "Provisioning state of the topic.",
@@ -8223,8 +8225,7 @@
         },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
-          "description": "The Sku pricing tier for the topic.",
-          "default": "Basic"
+          "description": "The Sku pricing tier for the topic."
         },
         "identity": {
           "$ref": "#/definitions/IdentityInfo",

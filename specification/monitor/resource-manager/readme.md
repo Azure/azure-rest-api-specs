@@ -34,32 +34,32 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2020-10
+tag: package-2020-03
 ```
 
-### Tag: package-2021-02-preview
+### Tag: package-2021-02-preview-only
 
-These settings apply only when `--tag=package-2021-02-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-02-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-02-preview'
+``` yaml $(tag) == 'package-2021-02-preview-only'
 input-file:
 - Microsoft.Insights/preview/2021-02-01-preview/scheduledQueryRule_API.json
 ```
 
-### Tag: package-2020-10
+### Tag: package-2020-10-only
 
-These settings apply only when `--tag=package-2020-10` is specified on the command line.
+These settings apply only when `--tag=package-2020-10-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10'
+``` yaml $(tag) == 'package-2020-10-only'
 input-file:
   - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
 ```
 
-### Tag: package-2020-05-preview
+### Tag: package-2020-05-preview-only
 
-These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-05-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-05-preview'
+``` yaml $(tag) == 'package-2020-05-preview-only'
 input-file:
 - Microsoft.Insights/preview/2020-05-01-preview/scheduledQueryRule_API.json
 ```
@@ -577,8 +577,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_monitor']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js monitor/resource-manager
 ```
 
 ## Python
@@ -666,6 +664,4 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
