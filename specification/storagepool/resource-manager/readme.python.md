@@ -17,5 +17,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/storagepool/azure-mgmt-storagepool/azure/mgmt/storagepool/v2020_03_15_preview
+  output-folder: $(python-sdks-folder)/storagepool/azure-mgmt-storagepool/azure/mgmt/storagepool/v2021_04_01_preview
 ```
