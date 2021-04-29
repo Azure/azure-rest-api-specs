@@ -736,7 +736,7 @@
             "description": "Repository attribute value",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/ChangeableAttributes"
+              "$ref": "#/definitions/RepositoryChangeableAttributes"
             }
           }
         ],
@@ -858,7 +858,7 @@
             "$ref": "#/parameters/TagReference"
           },
           {
-            "$ref": "#/parameters/RepoValue"
+            "$ref": "#/parameters/TagAttributeValue"
           }
         ],
         "responses": {
@@ -1011,7 +1011,7 @@
             "$ref": "#/parameters/ImageReference"
           },
           {
-            "$ref": "#/parameters/RepoValue"
+            "$ref": "#/parameters/ManifestAttributeValue"
           }
         ],
         "responses": {
@@ -1496,8 +1496,8 @@
           "description": "Is signed"
         },
         "changeableAttributes": {
-          "$ref": "#/definitions/ChangeableAttributes",
-          "description": "Changeable attributes"
+          "$ref": "#/definitions/TagChangeableAttributes",
+          "description": "Tag Changeable attributes"
         }
       },
       "example": {
@@ -1933,7 +1933,7 @@
         "digest": "sha256:5d20c808ce198565ff70b3ed23a991dd49afac45dece63474b27ce6ed036adc6"
       }
     },
-    "ChangeableAttributes": {
+    "TagChangeableAttributes": {
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
@@ -2504,13 +2504,23 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "RepoValue": {
+    "TagAttributeValue": {
       "name": "value",
       "in": "body",
-      "description": "Repository attribute value",
+      "description": "Tag attribute value",
       "required": false,
       "schema": {
-        "$ref": "#/definitions/ChangeableAttributes"
+        "$ref": "#/definitions/TagChangeableAttributes"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ManifestAttributeValue": {
+      "name": "value",
+      "in": "body",
+      "description": "Manifest attribute value",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/ManifestChangeableAttributes"
       },
       "x-ms-parameter-location": "method"
     },
