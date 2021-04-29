@@ -237,6 +237,10 @@
           "items": {
             "$ref": "#/definitions/PackageStore"
           }
+        },
+        "managedCredential": {
+          "description": "The user-assigned managed identity reference.",
+          "$ref": "#/definitions/EntityReference"
         }
       },
       "additionalProperties": {
@@ -504,7 +508,8 @@
           "type": "string",
           "enum": [
             "IntegrationRuntimeReference",
-            "LinkedServiceReference"
+            "LinkedServiceReference",
+            "CredentialReference"
           ],
           "x-ms-enum": {
             "name": "IntegrationRuntimeEntityReferenceType",

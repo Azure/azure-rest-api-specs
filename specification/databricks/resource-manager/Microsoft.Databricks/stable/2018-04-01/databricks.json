@@ -855,6 +855,22 @@
           "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
           "description": "Should the Public IP be Disabled?"
         },
+        "loadBalancerBackendPoolName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Name of the outbound Load Balancer Backend Pool for Secure Cluster Connectivity (No Public IP)."
+        },
+        "loadBalancerId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Resource URI of Outbound Load balancer for Secure Cluster Connectivity (No Public IP) workspace."
+        },
+        "natGatewayName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets."
+        },
+        "publicIpName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Name of the Public IP for No Public IP workspace with managed vNet."
+        },
         "prepareEncryption": {
           "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
           "description": "Prepare the workspace for encryption. Enables the Managed Identity for managed storage account."
@@ -866,6 +882,23 @@
         "requireInfrastructureEncryption": {
           "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
           "description": "A boolean indicating whether or not the DBFS root file system will be enabled with secondary layer of encryption with platform managed keys for data at rest."
+        },
+        "storageAccountName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Default DBFS storage account name."
+        },
+        "storageAccountSkuName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Storage account SKU name, ex: Standard_GRS, Standard_LRS. Refer https://aka.ms/storageskus for valid inputs."
+        },
+        "vnetAddressPrefix": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "Address prefix for Managed virtual network. Default value for this input is 10.139."
+        },
+        "resourceTags": {
+          "$ref": "#/definitions/WorkspaceCustomObjectParameter",
+          "readOnly": true,
+          "description": "Tags applied to resources under Managed resource group. These can be updated by updating tags at workspace level."
         }
       },
       "description": "Custom Parameters used for Cluster Creation."

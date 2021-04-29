@@ -206,7 +206,7 @@ cli:
           groupExtensionMode: preview
 
 # -------- Invoice --------
-      # customize for download command by manual for ungraceful implmentation by default
+      # customize for download command by manual for ungraceful implementation by default
       - where:
           group: Invoices
           op: DownloadInvoice
@@ -223,7 +223,7 @@ cli:
           group: Invoices
           op: DownloadMultipleBillingSubscriptionInvoices
         hidden: true
-      # customize for series of get commands by manual for ungraceful implmentation by default
+      # customize for series of get commands by manual for ungraceful implementation by default
       - where:
           group: Invoices
           op: GetById

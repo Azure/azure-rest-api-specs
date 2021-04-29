@@ -40,7 +40,7 @@
           "ContentType"
         ],
         "operationId": "ContentType_ListByService",
-        "description": "Returns list of content types",
+        "description": "Lists the developer portal's content types. Content types describe content items' properties, validation rules, and constraints.",
         "x-ms-examples": {
           "ApiManagementListContentTypes": {
             "$ref": "./examples/ApiManagementListContentTypes.json"
@@ -62,7 +62,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists a collection of content type entities.",
+            "description": "Returns a collection of the Content Type entities.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ContentTypeCollection"
             }
@@ -85,7 +85,7 @@
           "ContentType"
         ],
         "operationId": "ContentType_Get",
-        "description": "Gets API Management content type details.",
+        "description": "Gets the details of the developer portal's content type. Content types describe content items' properties, validation rules, and constraints.",
         "x-ms-examples": {
           "ApiManagementGetContentType": {
             "$ref": "./examples/ApiManagementGetContentType.json"
@@ -110,7 +110,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get the details of the content type.",
+            "description": "Returns the details of the specified content type.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ContentTypeContract"
             },
@@ -134,7 +134,7 @@
           "ContentType"
         ],
         "operationId": "ContentType_CreateOrUpdate",
-        "description": "Creates or updates an Content Type.",
+        "description": "Creates or updates the developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Custom content types' identifiers need to start with the `c-` prefix. Built-in content types can't be modified.",
         "x-ms-examples": {
           "ApiManagementCreateContentType": {
             "$ref": "./examples/ApiManagementCreateContentType.json"
@@ -162,7 +162,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Content type was successfully created.",
+            "description": "The content type was successfully created.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -198,7 +198,7 @@
           "ContentType"
         ],
         "operationId": "ContentType_Delete",
-        "description": "Removes specified content type.",
+        "description": "Removes the specified developer portal's content type. Content types describe content items' properties, validation rules, and constraints. Built-in content types (with identifiers starting with the `c-` prefix) can't be removed.",
         "x-ms-examples": {
           "ApiManagementDeleteContentType": {
             "$ref": "./examples/ApiManagementDeleteContentType.json"
@@ -246,7 +246,7 @@
           "ContentTypeContentItem"
         ],
         "operationId": "ContentItem_ListByService",
-        "description": "Returns list of content items",
+        "description": "Lists developer portal's content items specified by the provided content type.",
         "x-ms-examples": {
           "ApiManagementListContentTypeContentItems": {
             "$ref": "./examples/ApiManagementListContentTypeContentItems.json"
@@ -271,7 +271,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists a collection of Content Type entities.",
+            "description": "Returns a collection of Content Type entities.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ContentItemCollection"
             }
@@ -294,7 +294,7 @@
           "ContentTypeContentItem"
         ],
         "operationId": "ContentItem_GetEntityTag",
-        "description": "Returns content item metadata",
+        "description": "Returns the entity state (ETag) version of the developer portal's content item specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementHeadContentTypeContentItem": {
             "$ref": "./examples/ApiManagementHeadContentTypeContentItem.json"
@@ -343,7 +343,7 @@
           "ContentTypeContentItem"
         ],
         "operationId": "ContentItem_Get",
-        "description": "Returns content item details",
+        "description": "Returns the developer portal's content item specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementGetContentTypeContentItem": {
             "$ref": "./examples/ApiManagementGetContentTypeContentItem.json"
@@ -371,7 +371,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get the details of the content item.",
+            "description": "Returns the content item.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ContentItemContract"
             },
@@ -395,7 +395,7 @@
           "ContentTypeContentItem"
         ],
         "operationId": "ContentItem_CreateOrUpdate",
-        "description": "Creates new content item",
+        "description": "Creates a new developer portal's content item specified by the provided content type.",
         "x-ms-examples": {
           "ApiManagementCreateContentTypeContentItem": {
             "$ref": "./examples/ApiManagementCreateContentTypeContentItem.json"
@@ -426,7 +426,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Content item was successfully created.",
+            "description": "The content item was successfully created.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -462,7 +462,7 @@
           "ContentTypeContentItem"
         ],
         "operationId": "ContentItem_Delete",
-        "description": "Removes specified content item.",
+        "description": "Removes the specified developer portal's content item.",
         "x-ms-examples": {
           "ApiManagementDeleteContentTypeContentItem": {
             "$ref": "./examples/ApiManagementDeleteContentTypeContentItem.json"

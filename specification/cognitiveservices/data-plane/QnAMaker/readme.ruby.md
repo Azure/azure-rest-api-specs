@@ -14,6 +14,7 @@ azure-arm: true
 batch:
   - tag: release_4_0
   - tag: release_5_0_preview.1
+  - tag: release_5_0_preview.2
 ```
 
 ### Tag: release_4_0 and ruby
@@ -34,5 +35,15 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'release_5_0_preview.1' && $(ruby)
 namespace: "Azure::CognitiveServices::Qnamaker::V5_0_preview_1"
+output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_qnamaker/lib
+```
+
+### Tag: release_5_0_preview.2 and ruby
+
+These settings apply only when `--tag=release_5_0_preview.2 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'release_5_0_preview.2' && $(ruby)
+namespace: "Azure::CognitiveServices::Qnamaker::V5_0_preview_2"
 output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_qnamaker/lib
 ```

@@ -1,0 +1,139 @@
+{
+  "operationId": "MeshApplication_CreateOrUpdate",
+  "description": "This example shows how to create or update a application resource.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "applicationResourceName": "sampleApplication",
+    "applicationResourceDescription": {
+      "name": "sampleApplication",
+      "properties": {
+        "description": "Service Fabric Mesh sample application.",
+        "services": [
+          {
+            "name": "helloWorldService",
+            "properties": {
+              "description": "SeaBreeze Hello World Service.",
+              "identityRefs": [
+                {
+                  "name": "ServiceIdentity1",
+                  "identityRef": "/subscriptions/c1089427-83d3-4286-9f35-5af546a6eb67/resourcegroups/myGroup/providers/Microsoft.Identity/Identities/identity1"
+                },
+                {
+                  "name": "ServiceIdentity2",
+                  "identityRef": "SystemAssigned"
+                }
+              ],
+              "osType": "Linux",
+              "codePackages": [
+                {
+                  "name": "helloWorldCode",
+                  "image": "seabreeze/sbz-helloworld:1.0-alpine",
+                  "endpoints": [
+                    {
+                      "name": "helloWorldListener",
+                      "port": 80
+                    }
+                  ],
+                  "resources": {
+                    "requests": {
+                      "memoryInGB": 1,
+                      "cpu": 1
+                    }
+                  }
+                }
+              ],
+              "replicaCount": 1,
+              "networkRefs": [
+                {
+                  "name": "sampleNetwork",
+                  "endpointRefs": [
+                    {
+                      "name": "helloWorldListener"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "identity": {
+      "type": "SystemAssigned,UserAssigned",
+      "tokenServiceEndpoint": "http://tokenservice",
+      "tenantId": "D47A6CD5-E870-4ADF-8C00-1C0B758BC567",
+      "principalId": "84DFA616-1F44-4D63-BC08-43B5F758D16C",
+      "userAssignedIdentities": {
+        "/subscriptions/c1089427-83d3-4286-9f35-5af546a6eb67/resourcegroups/myGroup/providers/Microsoft.Identity/Identities/identity1": {
+          "clientId": "5287A675-78D2-4E49-BF09-D3BFE02493D4",
+          "principalId": "7D6F0B1C-AF9F-4E21-9B3C-AE22F4D926F8"
+        },
+        "/subscriptions/c1089427-83d3-4286-9f35-5af546a6eb67/resourcegroups/myGroup/providers/Microsoft.Identity/Identities/identity2": {
+          "clientId": "AF1509EC-9B5F-43CC-8A6F-FA7CC84AEBE1",
+          "principalId": "31144ACF-46F4-4639-A711-A257229EE0C0"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleApplication",
+        "properties": {
+          "description": "Service Fabric Mesh sample application.",
+          "serviceNames": [
+            "helloWorldService"
+          ],
+          "healthState": "Ok",
+          "status": "Ready"
+        },
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "tokenServiceEndpoint": "http://tokenservice",
+          "tenantId": "D47A6CD5-E870-4ADF-8C00-1C0B758BC567",
+          "principalId": "84DFA616-1F44-4D63-BC08-43B5F758D16C",
+          "userAssignedIdentities": {
+            "/subscriptions/c1089427-83d3-4286-9f35-5af546a6eb67/resourcegroups/myGroup/providers/Microsoft.Identity/Identities/identity1": {
+              "clientId": "5287A675-78D2-4E49-BF09-D3BFE02493D4",
+              "principalId": "7D6F0B1C-AF9F-4E21-9B3C-AE22F4D926F8"
+            },
+            "/subscriptions/c1089427-83d3-4286-9f35-5af546a6eb67/resourcegroups/myGroup/providers/Microsoft.Identity/Identities/identity2": {
+              "clientId": "AF1509EC-9B5F-43CC-8A6F-FA7CC84AEBE1",
+              "principalId": "31144ACF-46F4-4639-A711-A257229EE0C0"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sampleApplication",
+        "properties": {
+          "description": "Service Fabric Mesh sample application.",
+          "serviceNames": [
+            "helloWorldService"
+          ],
+          "healthState": "Unknown",
+          "status": "Creating"
+        },
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "tokenServiceEndpoint": "http://tokenservice",
+          "tenantId": "D47A6CD5-E870-4ADF-8C00-1C0B758BC567",
+          "principalId": "84DFA616-1F44-4D63-BC08-43B5F758D16C",
+          "userAssignedIdentities": {
+            "/subscriptions/c1089427-83d3-4286-9f35-5af546a6eb67/resourcegroups/myGroup/providers/Microsoft.Identity/Identities/identity1": {
+              "clientId": "5287A675-78D2-4E49-BF09-D3BFE02493D4",
+              "principalId": "7D6F0B1C-AF9F-4E21-9B3C-AE22F4D926F8"
+            },
+            "/subscriptions/c1089427-83d3-4286-9f35-5af546a6eb67/resourcegroups/myGroup/providers/Microsoft.Identity/Identities/identity2": {
+              "clientId": "AF1509EC-9B5F-43CC-8A6F-FA7CC84AEBE1",
+              "principalId": "31144ACF-46F4-4639-A711-A257229EE0C0"
+            }
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}

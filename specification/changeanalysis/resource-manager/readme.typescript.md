@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "changeanalysis"
-  output-folder: "$(typescript-sdks-folder)/packages/changeanalysis"
+  package-name: "@azure/arm-changeanalysis"
+  output-folder: "$(typescript-sdks-folder)/sdk/changeanalysis/arm-changeanalysis"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

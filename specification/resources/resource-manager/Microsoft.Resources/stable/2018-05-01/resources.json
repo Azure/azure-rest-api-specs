@@ -1470,7 +1470,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1537,7 +1538,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1608,7 +1610,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -1694,7 +1697,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -1774,7 +1778,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1811,7 +1816,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -1843,7 +1849,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -1879,7 +1886,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -1930,7 +1938,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -1975,7 +1984,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -2651,6 +2661,12 @@
             "type": "string"
           },
           "description": "The API version."
+        },
+        "zoneMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneMapping"
+          }
         },
         "properties": {
           "type": "object",
@@ -3556,6 +3572,20 @@
         "templateHash": {
           "type": "string",
           "description": "The template hash."
+        }
+      }
+    },
+    "ZoneMapping": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the zone mapping."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

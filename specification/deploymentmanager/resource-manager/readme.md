@@ -116,8 +116,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_deploymentmanager']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js deploymentmanager/resource-manager
 ```
 
 ## C#
@@ -199,6 +197,8 @@ namespace: com.microsoft.azure.management.deploymentmanager
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 2
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-deploymentmanager
+
+service-name: Deployment
 ```
 
 ### Java multi-api
@@ -221,7 +221,5 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

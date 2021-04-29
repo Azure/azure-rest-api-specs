@@ -461,6 +461,27 @@
           "type": "string",
           "description": "Zone of the IoT sensor",
           "example": "A12"
+        },
+        "sensorType": {
+          "description": "Type of sensor",
+          "example": "Ot",
+          "type": "string",
+          "enum": [
+            "Ot",
+            "Enterprise"
+          ],
+          "x-ms-enum": {
+            "name": "sensorType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Ot"
+              },
+              {
+                "value": "Enterprise"
+              }
+            ]
+          }
         }
       }
     },

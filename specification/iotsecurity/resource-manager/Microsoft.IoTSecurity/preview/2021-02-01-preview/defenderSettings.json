@@ -307,11 +307,24 @@
           "items": {
             "type": "string"
           }
+        },
+        "onboardingKind": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "MigratedToAzure"
+          ],
+          "description": "The kind of onboarding for the subscription",
+          "x-ms-enum": {
+            "name": "OnboardingKind",
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "deviceQuota",
-        "sentinelWorkspaceResourceIds"
+        "sentinelWorkspaceResourceIds",
+        "onboardingKind"
       ]
     },
     "DownloadLink": {

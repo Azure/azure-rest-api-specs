@@ -4,7 +4,7 @@
 
 This is the AutoRest configuration file for powerplatform.
 
-## Getting Started rapatank
+## Getting Started
 
 To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
@@ -38,7 +38,6 @@ input-file:
   - Microsoft.PowerPlatform/preview/2020-10-30-preview/enterprisePolicy.json
   - Microsoft.PowerPlatform/preview/2020-10-30-preview/privateEndpointConnection.json
   - Microsoft.PowerPlatform/preview/2020-10-30-preview/privateLinkResources.json
-  - Microsoft.PowerPlatform/preview/2020-10-30-preview/subnetResources.json
 ```
 
 ---

@@ -1,0 +1,19 @@
+{
+  "operationId": "BackupPartition",
+  "description": "This example shows how to trigger backup of a partition now, and save the backup to a specific Azure blob storage account using managed identity.",
+  "parameters": {
+    "api-version": "6.4",
+    "partitionId": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d",
+    "BackupPartitionDescription": {
+      "BackupStorage": {
+        "StorageKind": "ManagedIdentityAzureBlobStore",
+        "BlobServiceUri": "https://managedidentitytest.blob.core.windows.net/",
+        "ContainerName": "BackupContainer",
+        "ManagedIdentityType": "Cluster"
+      }
+    }
+  },
+  "responses": {
+    "202": {}
+  }
+}

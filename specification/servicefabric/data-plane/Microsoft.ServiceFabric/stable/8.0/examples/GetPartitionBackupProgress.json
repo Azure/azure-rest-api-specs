@@ -1,0 +1,25 @@
+{
+  "operationId": "GetPartitionBackupProgress",
+  "description": "This shows an example of possible output when GetPartitionBackupProgress has reached a BackupState of Success.  If the BackupState has a value of BackupInProgress, only the BackupState field will have a value.",
+  "parameters": {
+    "partitionId": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d",
+    "api-version": "6.4"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "BackupState": "Success",
+        "TimeStampUtc": "2018-01-01T09:00:55Z",
+        "BackupId": "3a056ac9-7206-43c3-8424-6f6103003eba",
+        "BackupLocation": "CalcApp\\CalcService\\1daae3f5-7fd6-42e9-b1ba-8c05f873994d\\2018-01-01 09.00.55.zip",
+        "EpochOfLastBackupRecord": {
+          "DataLossVersion": "131462452931584510",
+          "ConfigurationVersion": "8589934592"
+        },
+        "LsnOfLastBackupRecord": "261",
+        "FailureError": null
+      }
+    }
+  }
+}

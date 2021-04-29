@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "prebuiltGenerateAnswerPayload": {
+      "question": "qna maker and luis",
+      "documents": [
+        {
+          "text": "Graphics  Surprise, surprise -- our 4K Envy 13 came with a discrete graphics card. While the Nvidia GeForce MX250 GPU isn't meant for demanding gaming",
+          "id": "1"
+        },
+        {
+          "text": "Graphics  Surprise, surprise -- our 4K Envy 13 came with a discrete graphics card. While the Nvidia GeForce MX250 GPU isn't meant for demanding gaming",
+          "id": "2"
+        }
+      ],
+      "language": "en"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "answers": [
+          {
+            "answer": "Graphics  Surprise, surprise -- our 4K Envy 13 came with a discrete graphics card. While the Nvidia GeForce MX250 GPU isn't meant for demanding gaming, it is a step up from integrated graphics as proven by comparing it to the UHD 620 GPU in the FHD model.",
+            "answerSpan": {
+              "endIndex": 82,
+              "startIndex": 60,
+              "text": "discrete graphics card",
+              "score": 0.0
+            },
+            "answerEndIndex": 655,
+            "answerStartIndex": 0,
+            "id": 1,
+            "score": 100.0
+          }
+        ]
+      }
+    }
+  }
+}

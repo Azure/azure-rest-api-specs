@@ -1,0 +1,49 @@
+{
+  "operationId": "GetDeployedApplicationInfoList",
+  "description": "This example shows how to include the health state of each deployed application when getting information about applications deployed on a specific node.",
+  "parameters": {
+    "api-version": "6.1",
+    "nodeName": "_Node_0",
+    "IncludeHealthState": true
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "ContinuationToken": "",
+        "Items": [
+          {
+            "Id": "samples~CalculatorApp",
+            "Name": "fabric:/samples/CalculatorApp",
+            "TypeName": "CalculatorApp",
+            "Status": "Active",
+            "WorkDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\CalculatorApp_App0\\work",
+            "LogDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\CalculatorApp_App0\\log",
+            "TempDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\CalculatorApp_App0\\temp",
+            "HealthState": "Ok"
+          },
+          {
+            "Id": "samples~PQueueApp1",
+            "Name": "fabric:/samples/PQueueApp1",
+            "TypeName": "PersistentQueueApp",
+            "Status": "Active",
+            "WorkDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\PersistentQueueApp_App1\\work",
+            "LogDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\PersistentQueueApp_App1\\log",
+            "TempDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\PersistentQueueApp_App1\\temp",
+            "HealthState": "Ok"
+          },
+          {
+            "Id": "samples~VQueueApp1",
+            "Name": "fabric:/samples/VQueueApp1",
+            "TypeName": "VolatileQueueApp",
+            "Status": "Active",
+            "WorkDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\VolatileQueueApp_App2\\work",
+            "LogDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\VolatileQueueApp_App2\\log",
+            "TempDirectory": "C:\\SfDevCluster\\Data\\_App\\_Node_0\\VolatileQueueApp_App2\\temp",
+            "HealthState": "Ok"
+          }
+        ]
+      }
+    }
+  }
+}

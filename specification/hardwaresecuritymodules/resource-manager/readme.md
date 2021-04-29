@@ -41,9 +41,7 @@ input-file:
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 
 # Code Generation
@@ -58,7 +56,5 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js hardwaresecuritymodules/resource-manager
 ```
 

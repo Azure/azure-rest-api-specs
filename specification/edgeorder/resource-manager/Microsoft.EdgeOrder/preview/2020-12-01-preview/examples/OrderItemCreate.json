@@ -1,0 +1,156 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "TestRG",
+    "orderItemName": "TestOrderItemName01",
+    "api-version": "2020-12-01-preview",
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "Referer": [
+      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName01?api-version=2020-12-01-preview"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "1388"
+    ],
+    "orderItemResource": {
+      "properties": {
+        "orderItemDetails": {
+          "orderItemType": "Purchase",
+          "productDetails": {
+            "hierarchyInformation": {
+              "productFamilyName": "azurestackedge",
+              "productLineName": "Azure Stack Edge_Pl",
+              "productName": "Azure Stack Edge Pro - FPGA",
+              "configurationName": "Azure Stack Edge Pro - FPGA 1 GPU"
+            }
+          },
+          "preferences": {
+            "transportPreferences": {
+              "preferredShipmentType": "MicrosoftManaged"
+            }
+          }
+        },
+        "addressDetails": {
+          "forwardAddress": {
+            "shippingAddress": {
+              "streetAddress1": "16 townsend st",
+              "streetAddress2": "unit 1",
+              "city": "san francisco",
+              "stateOrProvince": "ca",
+              "country": "us",
+              "postalCode": "94107",
+              "companyName": "microsoft",
+              "zipExtendedCode": "1",
+              "addressType": "Residential"
+            },
+            "contactDetails": {
+              "contactName": "164 TOWNSEND ST",
+              "phone": "32131311",
+              "emailList": [
+                "ssemmail@microsoft.com",
+                "vishwamdir@microsoft.com"
+              ]
+            }
+          }
+        },
+        "orderId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/locations/westus/orders/TestOrderItemName01"
+      },
+      "tags": {
+        "mango": "fruit",
+        "carrot": "vegetable"
+      },
+      "location": "westus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "orderItemDetails": {
+            "productDetails": {
+              "hierarchyInformation": {
+                "productFamilyName": "azurestackedge",
+                "productLineName": "azure stack edge_pl",
+                "productName": "azure stack edge pro - fpga",
+                "configurationName": "azure stack edge pro - fpga 1 gpu"
+              },
+              "count": 0,
+              "deviceDetails": []
+            },
+            "orderItemType": "Purchase",
+            "currentStage": {
+              "stageStatus": "InProgress",
+              "stageName": "InReview",
+              "startTime": "2021-03-24T15:17:13.1376775+05:30"
+            },
+            "orderItemStageHistory": [
+              {
+                "stageStatus": "None",
+                "stageName": "InReview"
+              },
+              {
+                "stageStatus": "None",
+                "stageName": "Placed"
+              },
+              {
+                "stageStatus": "None",
+                "stageName": "Confirmed"
+              },
+              {
+                "stageStatus": "None",
+                "stageName": "ReadyForDispatch"
+              }
+            ],
+            "preferences": {
+              "transportPreferences": {
+                "preferredShipmentType": "MicrosoftManaged"
+              }
+            },
+            "notificationEmailList": [],
+            "cancellationStatus": "Cancellable",
+            "deletionStatus": "Allowed",
+            "returnStatus": "Returnable"
+          },
+          "addressDetails": {
+            "forwardAddress": {
+              "shippingAddress": {
+                "streetAddress1": "16 TOWNSEND ST",
+                "streetAddress2": "UNIT 1",
+                "city": "San Francisco",
+                "stateOrProvince": "CA",
+                "country": "US",
+                "postalCode": "94107",
+                "zipExtendedCode": "1",
+                "companyName": "Microsoft",
+                "addressType": "Residential"
+              },
+              "contactDetails": {
+                "contactName": "164 TOWNSEND ST",
+                "phone": "32131311",
+                "emailList": [
+                  "ssemmail@microsoft.com",
+                  "vishwamdir@microsoft.com"
+                ]
+              }
+            }
+          },
+          "startTime": "2021-03-24T15:17:13.1376775+05:30",
+          "orderId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/locations/westus/orders/TestOrderItemName01"
+        },
+        "location": "westus",
+        "tags": {
+          "mango": "fruit",
+          "carrot": "vegetable"
+        },
+        "name": "TestOrderItemName01",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName01",
+        "type": "Microsoft.EdgeOrder/orderItems"
+      }
+    },
+    "202": {}
+  }
+}

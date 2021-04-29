@@ -4,7 +4,7 @@ These settings apply only when `--go` is specified on the command line.
 
 ``` yaml $(go)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: purview
   clear-output-folder: true
 ```
@@ -17,10 +17,7 @@ directive:
       - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
       - $.definitions.DimensionProperties.properties.toBeExportedForCustomer
     reason:
-      - Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests  
-  - suppress: R4009  # RequiredSystemDataInNewApiVersions
-    reason:
-      - We do not yet support systemdata
+      - Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests
 ```
 
 ### Go multi-api

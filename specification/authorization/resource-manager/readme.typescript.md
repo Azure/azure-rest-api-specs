@@ -44,3 +44,16 @@ typescript:
   batch:
     - tag: profile-hybrid-2020-09-01
 ```
+
+### Profile: package-2020-10-01-preview
+
+These settings apply only when `--profile=package-2020-10-01-preview` is specified on the command line.
+
+``` yaml $(profile)=='package-2020-10-01-preview'
+typescript:
+  package-name: "@azure/arm-authorization-package-2020-10-01-preview"
+  output-folder: "$(typescript-sdks-folder)/sdk/authorization/arm-authorization-package-2020-10-01-preview"
+  clear-output-folder: true
+  batch:
+    - tag: package-2020-10-01-preview
+```

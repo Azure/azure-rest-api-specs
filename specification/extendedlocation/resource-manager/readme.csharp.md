@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.Azure.Management.ExtendedLocation
-  output-folder: $(csharp-sdks-folder)/ExtendedLocation/management/Microsoft.Azure.Management.ExtendedLocation/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/extendedlocation/Microsoft.Azure.Management.ExtendedLocation/src/Generated
 ```

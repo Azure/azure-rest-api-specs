@@ -173,6 +173,44 @@
         }
       ]
     },
+    "AmazonS3CompatibleLocation": {
+      "description": "The location of Amazon S3 Compatible dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "bucketName": {
+          "type": "object",
+          "description": "Specify the bucketName of Amazon S3 Compatible. Type: string (or Expression with resultType string)"
+        },
+        "version": {
+          "type": "object",
+          "description": "Specify the version of Amazon S3 Compatible. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OracleCloudStorageLocation": {
+      "description": "The location of Oracle Cloud Storage dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "bucketName": {
+          "type": "object",
+          "description": "Specify the bucketName of Oracle Cloud Storage. Type: string (or Expression with resultType string)"
+        },
+        "version": {
+          "type": "object",
+          "description": "Specify the version of Oracle Cloud Storage. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "GoogleCloudStorageLocation": {
       "description": "The location of Google Cloud Storage dataset.",
       "type": "object",
@@ -657,7 +695,11 @@
         },
         "sheetName": {
           "type": "object",
-          "description": "The sheet of excel file. Type: string (or Expression with resultType string)."
+          "description": "The sheet name of excel file. Type: string (or Expression with resultType string)."
+        },
+        "sheetIndex": {
+          "type": "object",
+          "description": "The sheet index of excel file and default value is 0. Type: integer (or Expression with resultType integer)"
         },
         "range": {
           "type": "object",
@@ -677,8 +719,7 @@
         }
       },
       "required": [
-        "location",
-        "sheetName"
+        "location"
       ]
     },
     "ParquetDataset": {

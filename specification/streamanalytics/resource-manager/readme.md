@@ -114,8 +114,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_stream_analytics']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js streamanalytics/resource-manager
 ```
 
 ## C#
@@ -229,7 +227,5 @@ directive:
     reason:  Operations API under 2017-04-01-preview is the super-set of all RPs operations (across all API-versions).
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

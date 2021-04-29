@@ -27,7 +27,7 @@ These are the global settings for the ResourceGraph API.
 ``` yaml
 title: ResourceGraphClient
 openapi-type: arm
-tag: package-preview-2020-09
+tag: package-preview-2021-03
 ```
 
 ### Validations
@@ -40,6 +40,26 @@ semantic-validator: true
 model-validator: true
 message-format: json
 ```
+### Tag: package-preview-2021-03
+
+These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-03'
+input-file:
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+  - Microsoft.ResourceGraph/stable/2021-03-01/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
+```
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.ResourceGraph/stable/2021-03-01/resourcegraph.json
+```
+
 ### Tag: package-preview-2020-09
 
 These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
@@ -91,14 +111,12 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js resourcegraph/resource-manager
 ```
 
 ## C#
@@ -114,6 +132,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/resourcegraph/Microsoft.Azure.Management.ResourceGraph/src/Generated
   clear-output-folder: true
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -144,9 +166,7 @@ directive:
     reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## cli
 
@@ -163,17 +183,17 @@ cli:
   clear-output-folder: false
 ```
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
-  cli_name: ResourceGraph
+``` yaml $(terraform)
+terraform:
+  cli-name: ResourceGraph
   azure_arm: true
   license_header: MICROSOFT_MIT_NO_VERSION
   payload_flattening_threshold: 2
   namespace: azure.mgmt.ResourceGraph
   package_name: azure-mgmt-ResourceGraph
-  clear_output_folder: false
+  clear-output-folder: false
 ```

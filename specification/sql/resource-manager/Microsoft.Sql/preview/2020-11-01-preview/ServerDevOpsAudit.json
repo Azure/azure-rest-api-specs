@@ -105,7 +105,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerDevOpsAuditSettingsCreateRequest - The create server DevOps audit policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 DevOpsAuditInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ServerDevOpsAuditSettingsInProgress - Set server DevOps audit is already in progress."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerDevOpsAuditSettingsCreateRequest - The create server DevOps audit policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 InvalidServerDevOpsAuditSettingsName - Invalid server DevOps policy name.\n\n * 400 DevOpsAuditInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ServerDevOpsAuditSettingsInProgress - Set server DevOps audit is already in progress."
           },
           "202": {
             "description": "Updating the audit DevOps settings is in progress."
@@ -222,7 +222,7 @@
       ],
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../common/v1/types.json#/definitions/systemData",
           "description": "SystemData of ServerDevOpsAuditSettingsResource.",
           "readOnly": true
         },

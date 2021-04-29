@@ -72,8 +72,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_softwareplan']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js softwareplan/resource-manager
 ```
 
 ## Go
@@ -106,7 +104,5 @@ directive:
     reason: This is an issue with the common resource definition. The properties in the resource definition actually has a title and description.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

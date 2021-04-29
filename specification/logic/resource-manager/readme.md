@@ -137,8 +137,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_logic']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js logic/resource-manager
 ```
 
 ## C#
@@ -248,21 +246,19 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
+``` yaml $(terraform)
+terraform:
     cli-name: logic
     azure_arm: true
     license_header: MICROSOFT_MIT_NO_VERSION
     payload_flattening_threshold: 2
     namespace: logic
     package-name: logic
-    clear_output_folder: false
+    clear-output-folder: false
 ```

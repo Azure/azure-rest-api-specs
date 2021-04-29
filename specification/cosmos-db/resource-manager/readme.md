@@ -27,30 +27,94 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2021-03-preview
+tag: package-2021-04
 ```
+
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.DocumentDB/stable/2021-04-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2021-04-15/notebook.json
+  - Microsoft.DocumentDB/stable/2021-04-15/rbac.json
+  - Microsoft.DocumentDB/stable/2021-04-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2021-04-15/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2021-04-preview
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-preview'
+input-file:
+- Microsoft.DocumentDB/preview/2021-04-01-preview/cosmos-db.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/notebook.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/rbac.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/restorable.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/managedCassandra.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/privateEndpointConnection.json
+- Microsoft.DocumentDB/preview/2021-04-01-preview/services.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.DocumentDB/stable/2021-03-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2021-03-15/notebook.json
+  - Microsoft.DocumentDB/stable/2021-03-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2021-03-15/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2021-03-preview
 
 These settings apply only when `--tag=package-2021-03-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-03-preview'
 input-file:
-- Microsoft.DocumentDB/preview/2021-03-01-preview/cosmos-db.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/notebook.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/rbac.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/restorable.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/managedCassandra.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/privateLinkResources.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/privateEndpointConnection.json
 modelerfour:
   lenient-model-deduplication: true
+tag: package-preview-2021-04
 ```
 
 
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2021-04-01-preview/restorable.json
+```
 ### Tag: package-2021-01
 
 These settings apply only when `--tag=package-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-01'
+``` yaml $(tag) == 'package-2021-01'
 input-file:
   - Microsoft.DocumentDB/stable/2021-01-15/cosmos-db.json
   - Microsoft.DocumentDB/stable/2021-01-15/notebook.json
@@ -59,6 +123,7 @@ input-file:
 modelerfour:
   lenient-model-deduplication: true
 ```
+
 ### Tag: package-2020-09
 
 These settings apply only when `--tag=package-2020-09` is specified on the command line.
@@ -278,7 +343,7 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: rbac.json
     reason: The name of the provider is Microsoft.DocumentDB
-  - suppress: RequiredSystemDataInNewApiVersions
+  - suppress: RequiredReadOnlySystemData
     reason: We do not yet support system data
   - suppress: ListInOperationName
     from: managedCassandra.json
@@ -302,15 +367,12 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js cosmos-db/resource-manager
 ```
 
 ## C#
@@ -339,9 +401,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 

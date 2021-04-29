@@ -195,7 +195,7 @@
               "$ref": "#/definitions/DiskPool"
             }
           },
-          "202": {
+          "201": {
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/DiskPool"
@@ -209,6 +209,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create or Update Disk pool": {
             "$ref": "./examples/DiskPools_Put.json"
@@ -263,7 +266,10 @@
             "$ref": "./examples/DiskPools_Patch.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -303,6 +309,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Delete Disk pool": {
             "$ref": "./examples/DiskPools_Delete.json"
@@ -429,7 +438,7 @@
               "$ref": "#/definitions/IscsiTarget"
             }
           },
-          "202": {
+          "201": {
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/IscsiTarget"
@@ -443,6 +452,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create or Update iSCSI target": {
             "$ref": "./examples/IscsiTargets_Put.json"
@@ -496,6 +508,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Update iSCSI target": {
             "$ref": "./examples/IscsiTargets_Patch.json"
@@ -543,6 +558,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Delete iSCSI target": {
             "$ref": "./examples/IscsiTargets_Delete.json"

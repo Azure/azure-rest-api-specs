@@ -332,7 +332,7 @@
           "Budgets"
         ],
         "operationId": "Budgets_CreateOrUpdate",
-        "description": "The operation to create or update a budget. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "description": "The operation to create or update a budget. You can optionally provide an eTag if desired as a form of concurrency control. To obtain the latest eTag for a given budget, perform a get operation prior to your put operation.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1151,7 +1151,7 @@
         ],
         "x-ms-odata": "#/definitions/Forecast",
         "operationId": "Forecasts_List",
-        "description": "Lists the forecast charges by subscriptionId.",
+        "description": "Lists the forecast charges for scope defined. Please note that this API is no longer actively under development. We recommend using our new Forecast API moving forward: https://docs.microsoft.com/en-us/rest/api/cost-management/forecast/usage.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -2360,10 +2360,10 @@
           "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain period. There are no restrictions on the end date.",
           "$ref": "#/definitions/BudgetTimePeriod"
         },
-        "filters": {
-          "description": "May be used to filter budgets by resource group, resource, or meter.",
+        "filter": {
+          "description": "May be used to filter budgets by user-specified dimensions and/or tags.",
           "type": "object",
-          "$ref": "#/definitions/Filters"
+          "$ref": "#/definitions/Filter"
         },
         "currentSpend": {
           "description": "The current amount of cost which is being tracked for a budget.",
@@ -2405,8 +2405,8 @@
         "startDate"
       ]
     },
-    "Filters": {
-      "description": "May be used to filter budgets by resource group, resource, or meter.",
+    "Filter": {
+      "description": "May be used to filter budgets by user-specified dimensions and/or tags.",
       "properties": {
         "resourceGroups": {
           "description": "The list of filters on resource groups, allowed at subscription level only.",
@@ -2492,12 +2492,12 @@
           "format": "decimal"
         },
         "contactEmails": {
-          "description": "Email addresses to send the budget notification to when the threshold is exceeded.",
+          "description": "Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.",
           "type": "array",
           "items": {
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 0,
           "maxItems": 50
         },
         "contactRoles": {
@@ -2508,13 +2508,25 @@
           }
         },
         "contactGroups": {
-          "description": "Action groups to send the budget notification to when the threshold is exceeded.",
+          "description": "Action groups to send the budget notification to when the threshold is exceeded. Must be provided as a fully qualified Azure resource id. Only supported at Subscription or Resource Group scopes.",
           "type": "array",
           "items": {
             "type": "string"
           },
           "minItems": 0,
           "maxItems": 50
+        },
+        "thresholdType": {
+          "description": "The type of threshold",
+          "type": "string",
+          "enum": [
+            "Actual"
+          ],
+          "x-ms-enum": {
+            "name": "ThresholdType",
+            "modelAsString": true
+          },
+          "default": "Actual"
         }
       },
       "required": [
@@ -2651,7 +2663,7 @@
           "readOnly": true
         },
         "grain": {
-          "description": "The granularity of forecast.",
+          "description": "The granularity of forecast. Please note that Yearly is not currently supported in this API. The API will provide responses in the Monthly grain if Yearly is selected. To get yearly grain data, please use our newer Forecast API.",
           "type": "string",
           "enum": [
             "Daily",

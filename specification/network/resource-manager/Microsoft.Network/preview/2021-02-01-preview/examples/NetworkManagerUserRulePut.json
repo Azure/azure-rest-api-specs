@@ -5,18 +5,20 @@
     "resourceGroupName": "rg1",
     "networkManagerName": "testNetworkManager",
     "configurationName": "myTestSecurityConfig",
+    "ruleCollectionName": "testRuleCollection",
     "ruleName": "SampleUserRule",
     "userRule": {
+      "kind": "Custom",
       "properties": {
         "description": "Sample User Rule",
         "protocol": "Tcp",
-        "source": [
+        "sources": [
           {
             "addressPrefixType": "IPPrefix",
             "addressPrefix": "*"
           }
         ],
-        "destination": [
+        "destinations": [
           {
             "addressPrefixType": "IPPrefix",
             "addressPrefix": "*"
@@ -35,9 +37,10 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/SecurityConfigurations/Policy1/userRules/SampleUserRule",
-        "type": "Microsoft.Network/networkManagers/securityConfigurations/userRules",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/SecurityUserConfigurations/Policy1/ruleCollections/testRuleCollection/rules/SampleUserRule",
+        "type": "Microsoft.Network/networkManagers/SecurityUserConfigurations/ruleCollections/rules",
         "name": "SampleUserRule",
+        "kind": "Custom",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -49,13 +52,13 @@
         "properties": {
           "description": "Sample User Rule",
           "protocol": "Tcp",
-          "source": [
+          "sources": [
             {
               "addressPrefixType": "IPPrefix",
               "addressPrefix": "*"
             }
           ],
-          "destination": [
+          "destinations": [
             {
               "addressPrefixType": "IPPrefix",
               "addressPrefix": "*"
@@ -74,9 +77,10 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityConfigurations/myTestSecurityConfig/userRules/SampleUserRule",
-        "type": "Microsoft.Network/networkManagers/SecurityConfigurations/UserRules",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleUserRule",
+        "type": "Microsoft.Network/networkManagers/SecurityUserConfigurations/ruleCollections/rules",
         "name": "SampleUserRule",
+        "kind": "Custom",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -88,13 +92,13 @@
         "properties": {
           "description": "Sample User Rule",
           "protocol": "Tcp",
-          "source": [
+          "sources": [
             {
               "addressPrefixType": "IPPrefix",
               "addressPrefix": "*"
             }
           ],
-          "destination": [
+          "destinations": [
             {
               "addressPrefixType": "IPPrefix",
               "addressPrefix": "*"

@@ -182,8 +182,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js operationalinsights/resource-manager
+  - repo: azure-cli-extensions
+  - repo: azure-powershell
 ```
 
 
@@ -225,7 +225,5 @@ directive:
     reason: properties etag defined as eTag in model
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

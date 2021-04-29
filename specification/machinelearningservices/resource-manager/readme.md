@@ -26,7 +26,15 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-01-01
+tag: package-2021-04-01
+```
+### Tag: package-2021-04-01
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2021-04-01/machineLearningServices.json
 ```
 
 ### Tag: package-2021-01-01
@@ -192,8 +200,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js machinelearningservices/resource-manager
 ```
 
 ## C#
@@ -226,12 +232,15 @@ namespace: com.microsoft.azure.management.machinelearning.services
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning/services
+
+service-name: MachineLearningServices
 ```
 
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-04-01
   - tag: package-2021-01-01
   - tag: package-2020-08-01
   - tag: package-2020-06-01
@@ -248,6 +257,19 @@ batch:
   - tag: package-2020-02-18-preview
   - tag: package-2018-03-preview
 ```
+### Tag: package-2021-04-01 and java
+
+These settings apply only when `--tag=package-2021-04-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-04-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2021_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2021_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
 ### Tag: package-2021-01-01 and java
 
 These settings apply only when `--tag=package-2021-01-01 --java` is specified on the command line.
@@ -430,6 +452,4 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

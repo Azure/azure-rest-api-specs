@@ -89,7 +89,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "produces": [
           "application/json"
         ],
@@ -193,7 +192,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "produces": [
           "application/json"
         ],
@@ -432,7 +430,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "produces": [
           "application/json"
         ],
@@ -536,7 +533,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "produces": [
           "application/json"
         ],
@@ -861,16 +857,8 @@
           ]
         },
         "allowModuleOverwrite": {
-          "type": "string",
-          "description": "If true - new configurations downloaded from the pull service are allowed to overwrite the old ones on the target node. Otherwise, false",
-          "x-ms-enum": {
-            "name": "allowModuleOverwrite",
-            "modelAsString": true
-          },
-          "enum": [
-            "True",
-            "False"
-          ]
+          "type": "boolean",
+          "description": "If true - new configurations downloaded from the pull service are allowed to overwrite the old ones on the target node. Otherwise, false"
         },
         "actionAfterReboot": {
           "type": "string",
@@ -892,18 +880,9 @@
           "description": "The time interval, in minutes, at which the LCM checks a pull service to get updated configurations. This value is ignored if the LCM is not configured in pull mode. The default value is 30."
         },
         "rebootIfNeeded": {
-          "type": "string",
+          "type": "boolean",
           "readOnly": false,
-          "default": "False",
-          "description": "Set this to true to automatically reboot the node after a configuration that requires reboot is applied. Otherwise, you will have to manually reboot the node for any configuration that requires it. The default value is false. To use this setting when a reboot condition is enacted by something other than DSC (such as Windows Installer), combine this setting with the xPendingReboot module.",
-          "x-ms-enum": {
-            "name": "rebootIfNeeded",
-            "modelAsString": true
-          },
-          "enum": [
-            "True",
-            "False"
-          ]
+          "description": "Set this to true to automatically reboot the node after a configuration that requires reboot is applied. Otherwise, you will have to manually reboot the node for any configuration that requires it. The default value is false. To use this setting when a reboot condition is enacted by something other than DSC (such as Windows Installer), combine this setting with the xPendingReboot module."
         },
         "configurationModeFrequencyMins": {
           "type": "number",

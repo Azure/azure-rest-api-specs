@@ -37,6 +37,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -53,6 +60,7 @@
             }
           }
         },
+        "x-ms-odata": "#/definitions/BMSAADPropertiesQueryObject",
         "x-ms-examples": {
           "Get AAD Properties for authentication in the third region": {
             "$ref": "./examples/AzureIaasVm/BackupAadProperties_Get.json"
@@ -1905,6 +1913,10 @@
             "name": "RecoveryMode",
             "modelAsString": true
           }
+        },
+        "targetVirtualMachineId": {
+          "description": "This is the complete ARM Id of the target VM\r\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
@@ -3063,6 +3075,31 @@
         }
       },
       "discriminator": "jobType"
+    },
+    "BMSAADPropertiesQueryObject": {
+      "description": "Filters to list backup items.",
+      "type": "object",
+      "properties": {
+        "backupManagementType": {
+          "description": "Backup management type for the backed up item.",
+          "enum": [
+            "Invalid",
+            "AzureIaasVM",
+            "MAB",
+            "DPM",
+            "AzureBackupServer",
+            "AzureSql",
+            "AzureStorage",
+            "AzureWorkload",
+            "DefaultBackup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupManagementType",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "JobQueryObject": {
       "description": "Filters to list the jobs.",

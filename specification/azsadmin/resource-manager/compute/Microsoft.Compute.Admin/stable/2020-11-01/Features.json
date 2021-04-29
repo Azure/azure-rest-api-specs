@@ -1,0 +1,473 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-11-01",
+    "title": "Compute Admin Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/features/{featureName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an existing feature.": {
+            "$ref": "examples/Features/Get.json"
+          }
+        },
+        "tags": [
+          "Features"
+        ],
+        "summary": "Returns the requested feature.",
+        "description": "Get an existing feature.",
+        "operationId": "Features_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Features.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/FeatureParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "Features.json#/definitions/Feature"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/features": {
+      "get": {
+        "x-ms-examples": {
+          "Get a list of existing features.": {
+            "$ref": "examples/Features/List.json"
+          }
+        },
+        "tags": [
+          "Features"
+        ],
+        "summary": "Lists all features.",
+        "description": "Get a list of existing features.",
+        "operationId": "Features_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Features.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "Features.json#/definitions/FeatureList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/features/{featureName}/updateGlobalFeatureSettings": {
+      "post": {
+        "x-ms-examples": {
+          "Update the feature settings.": {
+            "$ref": "examples/Features/Update.json"
+          }
+        },
+        "tags": [
+          "Features"
+        ],
+        "summary": "Updates the global feature settings.",
+        "description": "Update the feature settings.",
+        "operationId": "UpdateGlobalFeatureSettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Features.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/FeatureParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/GlobalFeatureSettingsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/features/{featureName}/enableTenantSubscriptionFeature": {
+      "post": {
+        "x-ms-examples": {
+          "Enable the tenant subscription feature.": {
+            "$ref": "examples/Features/Enable.json"
+          }
+        },
+        "tags": [
+          "Features"
+        ],
+        "summary": "Enables the requested feature in the tenant subscription.",
+        "description": "Enable the tenant subscription feature.",
+        "operationId": "EnableTenantSubscriptionFeature",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Features.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/FeatureParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/TenantSubscriptionFeatureSettingsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/features/{featureName}/disableTenantSubscriptionFeature": {
+      "post": {
+        "x-ms-examples": {
+          "Disable the tenant subscription feature.": {
+            "$ref": "examples/Features/Disable.json"
+          }
+        },
+        "tags": [
+          "Features"
+        ],
+        "summary": "Disables the requested feature in the tenant subscription.",
+        "description": "Disable the tenant subscription feature.",
+        "operationId": "DisableTenantSubscriptionFeature",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Features.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/FeatureParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Features.json#/parameters/TenantSubscriptionFeatureSettingsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Feature": {
+      "description": "Subscription features that can be toggled.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Feature properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FeatureProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "FeatureProperties": {
+      "description": "Properties of features.",
+      "type": "object",
+      "properties": {
+        "featureName": {
+          "description": "The name of the feature.",
+          "type": "string"
+        },
+        "globalFeatureSettings": {
+          "description": "Higher-priority global feature flags.",
+          "$ref": "#/definitions/GlobalFeatureSettings"
+        },
+        "enabledTenantSubscriptionIds": {
+          "description": "List of subscription identifiers which have the feature enabled.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GlobalFeatureSettings": {
+      "description": "Higher-priority global feature flags.",
+      "type": "object",
+      "properties": {
+        "globalFeatureState": {
+          "description": "The state of the global feature.",
+          "$ref": "#/definitions/GlobalFeatureState"
+        }
+      }
+    },
+    "GlobalFeatureState": {
+      "description": "The state of the global feature.",
+      "enum": [
+        "TenantSubscriptionLevel",
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "GlobalFeatureState"
+      }
+    },
+    "FeatureList": {
+      "type": "object",
+      "description": "List features.",
+      "properties": {
+        "value": {
+          "description": "List of features.",
+          "type": "array",
+          "items": {
+            "$ref": "Features.json#/definitions/Feature"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "TenantSubscriptionFeatureSettings": {
+      "type": "object",
+      "description": "The feature settings for the tenant subscription.",
+      "properties": {
+        "tenantSubscriptionId": {
+          "description": "The tenant subscription identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Object containing error details.",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetailsInternal": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "Base resource object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "ID of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "readOnly": true,
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "description": "Type of Resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string"
+    },
+    "LocationParameter": {
+      "description": "Location of the resource.",
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "FeatureParameter": {
+      "description": "Name of the feature.",
+      "name": "featureName",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    },
+    "GlobalFeatureSettingsParameter": {
+      "description": "The global feature state to update.",
+      "name": "globalFeatureSettings",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/GlobalFeatureSettings"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TenantSubscriptionFeatureSettingsParameter": {
+      "description": "The tenant subscription feature settings to enable or disable.",
+      "name": "tenantSubscriptionFeatureSettings",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/TenantSubscriptionFeatureSettings"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

@@ -64,6 +64,9 @@ input-file:
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/sites.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/sensors.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/onPremiseSensors.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/locations.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/deviceGroups.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/devices.json
 ```
 
 ---
