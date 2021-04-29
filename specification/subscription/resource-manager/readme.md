@@ -134,8 +134,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js subscription/resource-manager
 ```
 
 
@@ -203,7 +201,5 @@ description: The subscription client
 ```
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

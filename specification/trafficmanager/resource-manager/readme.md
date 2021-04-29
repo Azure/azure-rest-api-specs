@@ -191,8 +191,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_traffic_manager']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js trafficmanager/resource-manager
 ```
 
 
@@ -258,7 +256,5 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-trafficmanager
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

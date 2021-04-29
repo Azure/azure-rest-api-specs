@@ -113,8 +113,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_redis']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js redis/resource-manager
 ```
 
 ## C#
@@ -258,7 +256,5 @@ directive:
     reason: This is false positive, 'linkedServers' is not a tracked resource.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
