@@ -215,8 +215,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Commit Succeed"
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerCommit"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -252,7 +255,7 @@
           "NetworkManagers"
         ],
         "operationId": "NetworkManagerDeploymentStatus_List",
-        "description": "Post List of Network Manager Deployment Status.",
+        "description": "Post to List of Network Manager Deployment Status.",
         "parameters": [
           {
             "name": "parameters",
@@ -262,12 +265,6 @@
               "$ref": "#/definitions/NetworkManagerDeploymentStatusParameter"
             },
             "description": "Parameters supplied to specify which Managed Network deployment status is."
-          },
-          {
-            "$ref": "#/parameters/ListTopParameter"
-          },
-          {
-            "$ref": "#/parameters/ListSkipTokenParameter"
           }
         ],
         "responses": {
@@ -283,9 +280,6 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "NetworkManagerDeploymentStatusList": {
@@ -394,9 +388,6 @@
         ],
         "operationId": "EffectiveVirtualNetworks_ListByNetworkManager",
         "description": "List effective virtual networks in a network manager.",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -428,7 +419,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns a list of effective Virtual Networks.",
+            "description": "OK - Returns a list of effective virtual networks.",
             "schema": {
               "$ref": "./networkManagerGroup.json#/definitions/EffectiveVirtualNetworksListResult"
             }
@@ -441,7 +432,7 @@
           }
         },
         "x-ms-examples": {
-          "List Network Manager": {
+          "List Effective Virtual Networks By Network Manager": {
             "$ref": "./examples/NetworkManagerEffectiveVirtualNetworksListByNetworkManager.json"
           }
         }
@@ -524,15 +515,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "Security",
-              "Routing",
-              "Connectivity"
-            ],
-            "x-ms-enum": {
-              "name": "ScopeAccesses",
-              "modelAsString": true
-            }
+            "$ref": "#/definitions/ConfigurationType"
           },
           "description": "Scope Access."
         },
@@ -546,6 +529,11 @@
     },
     "NetworkManagerCommit": {
       "properties": {
+        "commitId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Commit Id."
+        },
         "targetLocations": {
           "type": "array",
           "items": {
@@ -562,16 +550,7 @@
         },
         "commitType": {
           "type": "string",
-          "enum": [
-            "AdminPolicy",
-            "UserPolicy",
-            "Routing",
-            "Connectivity"
-          ],
-          "x-ms-enum": {
-            "name": "CommitType",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/ConfigurationType",
           "description": "Commit Type."
         }
       },
@@ -589,9 +568,13 @@
         "deploymentTypes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeploymentType"
+            "$ref": "#/definitions/ConfigurationType"
           },
-          "description": "List of configurations' deployment types."
+          "description": "List of deployment types."
+        },
+        "$skipToken": {
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
+          "type": "string"
         }
       },
       "description": "Network Manager Deployment Status Parameter."
@@ -605,9 +588,9 @@
           },
           "description": "Gets a page of Network Manager Deployment Status"
         },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next page of results."
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "type": "string"
         }
       },
       "description": "A list of Network Manager Deployment Status"
@@ -646,7 +629,7 @@
         },
         "deploymentType": {
           "type": "string",
-          "$ref": "#/definitions/DeploymentType"
+          "$ref": "#/definitions/ConfigurationType"
         },
         "errorMessage": {
           "type": "string",
@@ -655,16 +638,15 @@
       },
       "description": "Network Manager Deployment Status."
     },
-    "DeploymentType": {
+    "ConfigurationType": {
       "type": "string",
       "enum": [
-        "AdminPolicy",
-        "UserPolicy",
-        "Routing",
+        "AdminSecurity",
+        "UserSecurity",
         "Connectivity"
       ],
       "x-ms-enum": {
-        "name": "DeploymentType",
+        "name": "ConfigurationType",
         "modelAsString": true
       },
       "description": "Configuration Deployment Type."
@@ -674,6 +656,10 @@
         "conditionalMembers": {
           "type": "string",
           "description": "Conditional Members."
+        },
+        "$skipToken": {
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
+          "type": "string"
         }
       },
       "description": "Effective Virtual Networks Parameter."

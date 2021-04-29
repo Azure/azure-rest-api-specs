@@ -6,15 +6,15 @@
     "ruleCollectionName": "testRuleCollection",
     "configurationName": "myTestSecurityConfig",
     "networkManagerName": "testNetworkManager",
-    "ruleName": "SampleUserRule"
+    "ruleName": "SampleDefaultUserRule"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/SecurityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleUserRule",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/SecurityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleDefaultUserRule",
         "type": "Microsoft.Network/networkManagers/SecurityUserConfigurations/ruleCollections/rules",
-        "name": "SampleUserRule",
-        "kind": "Custom",
+        "name": "SampleDefaultUserRule",
+        "kind": "Default",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -24,8 +24,9 @@
           "lastModifiedAt": "2021-01-11T18:52:27Z"
         },
         "properties": {
-          "displayName": "SampleUserRule",
-          "description": "Sample User Rule",
+          "flag": "AllowVnetInbound",
+          "displayName": "SampleDefaultUserRule",
+          "description": "Sample Default User Rule",
           "protocol": "Tcp",
           "sources": [
             {

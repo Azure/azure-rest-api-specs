@@ -3,18 +3,18 @@
     "api-version": "2021-02-01-preview",
     "subscriptionId": "subId",
     "resourceGroupName": "rg1",
-    "ruleCollectionName": "testRuleCollection",
     "configurationName": "myTestSecurityConfig",
     "networkManagerName": "testNetworkManager",
-    "ruleName": "SampleUserRule"
+    "ruleCollectionName": "testRuleCollection",
+    "ruleName": "SampleDefaultAdminRule"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/SecurityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleUserRule",
-        "type": "Microsoft.Network/networkManagers/SecurityUserConfigurations/ruleCollections/rules",
-        "name": "SampleUserRule",
-        "kind": "Custom",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleDefaultAdminRule",
+        "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections/rules",
+        "name": "SampleDefaultAdminRule",
+        "kind": "Default",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -24,8 +24,9 @@
           "lastModifiedAt": "2021-01-11T18:52:27Z"
         },
         "properties": {
-          "displayName": "SampleUserRule",
-          "description": "Sample User Rule",
+          "flag": "AllowVnetInbound",
+          "displayName": "SampleDefaultAdminRule",
+          "description": "This is Sample Default Admin Rule",
           "protocol": "Tcp",
           "sources": [
             {
@@ -45,6 +46,8 @@
           "destinationPortRanges": [
             "22"
           ],
+          "access": "Deny",
+          "priority": 1,
           "direction": "Inbound",
           "provisioningState": "Succeeded"
         }
