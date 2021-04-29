@@ -32,7 +32,7 @@ These settings apply only when `--tag=package-2021-03-31-privatepreview --python
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2021-03-31-privatepreview' && $(python)
-namespace: azure.mgmt.rdbms.postgresql
+namespace: azure.mgmt.rdbms.postgresql_flexibleservers
 output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql_flexibleservers
 ```
 
