@@ -2264,14 +2264,17 @@
       "properties": {
         "digest": {
           "type": "string",
+          "readOnly": true,
           "description": "Manifest digest"
         },
         "architecture": {
-          "type": "string",
+          "$ref": "#/definitions/ArtifactArchitecture",
+          "readOnly": true,
           "description": "CPU architecture"
         },
         "os": {
-          "type": "string",
+          "$ref": "#/definitions/ArtifactOperatingSystem",
+          "readOnly": true,
           "description": "Operating system",
           "x-ms-client-name": "operatingSystem"
         }
