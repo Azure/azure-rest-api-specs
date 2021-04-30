@@ -26,3 +26,5 @@ cli:
     - name: /QuotaRequestStatus/get/QuotaRequestInProgress
       disabled: true
     - name: /QuotaRequestStatus/get/QuotaRequestStatus  
+    - split: quotaProviders
+    -name /quotaProviders/metadata/getQuotaRPMetadata.json

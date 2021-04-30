@@ -6,23 +6,10 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: schema-quota-2021-03-15
-  - tag: schema-quota-2021-03-15-preview
- 
+  - tag: schema-quota-2021-03-15 
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-### Tag: schema-quota-2020-11-15-preview and azureresourceschema
-
-``` yaml $(tag) == 'schema-quota-2021-03-15-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-
-# all the input files in this apiVersion
-input-file:
-  - Microsoft.Quota/preview/2021-03-15/quota.json
-
-```
 
 ### Tag: schema-quota-2021-03-15 and azureresourceschema
 
