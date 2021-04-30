@@ -82,7 +82,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MetadataList"
+              "$ref": "#/definitions/metadataList"
             }
           },
           "default": {
@@ -133,7 +133,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Metadata"
+              "$ref": "#/definitions/metadata"
             }
           },
           "default": {
@@ -228,13 +228,13 @@
           "200": {
             "description": "OK, Operation successfully completed",
             "schema": {
-              "$ref": "#/definitions/Metadata"
+              "$ref": "#/definitions/metadata"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Metadata"
+              "$ref": "#/definitions/metadata"
             }
           },
           "default": {
@@ -276,14 +276,14 @@
             "$ref": "#/parameters/MetadataName"
           },
           {
-            "$ref": "#/parameters/Metadata"
+            "$ref": "#/parameters/MetadataPatch"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Metadata"
+              "$ref": "#/definitions/metadata"
             }
           },
           "default": {
@@ -297,13 +297,13 @@
     }
   },
   "definitions": {
-    "MetadataList": {
+    "metadataList": {
       "description": "List of all the metadata.",
       "properties": {
         "value": {
           "description": "Array of metadata.",
           "items": {
-            "$ref": "#/definitions/Metadata"
+            "$ref": "#/definitions/metadata"
           },
           "type": "array"
         }
@@ -312,7 +312,7 @@
         "value"
       ]
     },
-    "Metadata": {
+    "metadata": {
       "allOf": [
         {
           "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
@@ -321,14 +321,14 @@
       "description": "Metadata.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MetadataProperties",
+          "$ref": "#/definitions/metadataProperties",
           "description": "Metadata properties",
           "x-ms-client-flatten": true
         }
       },
       "type": "object"
     },
-    "MetadataPatch": {
+    "metadataPatch": {
       "allOf": [
         {
           "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
@@ -337,26 +337,26 @@
       "description": "Metadata patch request body.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MetadataPropertiesPatch",
+          "$ref": "#/definitions/metadataPropertiesPatch",
           "description": "Metadata patch request body",
           "x-ms-client-flatten": true
         }
       },
       "type": "object"
     },
-    "MetadataId": {
+    "metadataId": {
       "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name",
       "type": "string"
     },
-    "MetadataParentId": {
+    "metadataParentId": {
       "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)",
       "type": "string"
     },
-    "MetadataVersion": {
+    "metadataVersion": {
       "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks",
       "type": "string"
     },
-    "MetadataKind": {
+    "metadataKind": {
       "type": "string",
       "description": "The kind of content the metadata is for.",
       "enum": [
@@ -395,7 +395,7 @@
         ]
       }
     },
-    "MetadataSource": {          
+    "metadataSource": {          
       "description": "The original source of the content item, where it comes from.",
       "type": "object",
       "required": ["kind"],
@@ -430,7 +430,7 @@
         }
       }
     },
-    "MetadataAuthor": {         
+    "metadataAuthor": {         
       "type": "object",
       "description": "Publisher or creator of the content item.",
       "properties": {
@@ -452,7 +452,7 @@
         }
       }
     },
-    "MetadataSupport": {
+    "metadataSupport": {
       "type": "object",
       "description": "Support information for the content item.",
       "required": ["tier"],
@@ -489,7 +489,7 @@
         }
       }
     },
-    "Dependency": {
+    "dependency": {
       "description": "A single content dependency defined by a kind and id.  Version can be optionally included.",
       "type": "object",
       "required": [
@@ -499,19 +499,19 @@
       "properties": {
         "id": {
           "description": "Id of the content item we depend on",
-          "$ref": "#/definitions/MetadataId"
+          "$ref": "#/definitions/metadataId"
         },
         "kind": {
           "description": "Type of the content item we depend on",
-          "$ref": "#/definitions/MetadataKind"
+          "$ref": "#/definitions/metadataKind"
         },
         "version": {
           "description": "Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.",
-          "$ref": "#/definitions/MetadataVersion"
+          "$ref": "#/definitions/metadataVersion"
         }
       }
     },
-    "DependencyList": {
+    "dependencyList": {
       "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR.",
       "type": "object",
       "required": ["operator", "criteria"],
@@ -528,17 +528,17 @@
             ]
           }
         },
-        "items": {
+        "criteria": {
           "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
           "type": "array",
           "items": {
-            "anyOf": [
+            "oneOf": [
               {
-                "$ref": "#/definitions/Dependency",
+                "$ref": "#/definitions/dependency",
                 "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
               },
               {
-                "$ref": "#/definitions/DependencyList",
+                "$ref": "#/definitions/dependencyList",
                 "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
               }
             ]
@@ -546,21 +546,21 @@
         }
       }
     },
-    "MetadataDependencies": {
+    "metadataDependencies": {
       "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR.",
       "type": "object",
-      "anyOf": [
+      "oneOf": [
         {
-          "$ref": "#/definitions/Dependency",
+          "$ref": "#/definitions/dependency",
           "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
         },
         {
-          "$ref": "#/definitions/DependencyList",
+          "$ref": "#/definitions/dependencyList",
           "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
         }
       ]
     },
-    "MetadataProperties": {
+    "metadataProperties": {
       "description": "Metadata property bag.",
       "required": [
         "id", "parentId", "kind"
@@ -568,73 +568,73 @@
       "type": "object",
       "properties": {
         "id": {
-          "$ref": "#/definitions/MetadataId",
+          "$ref": "#/definitions/metadataId",
           "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
         },
         "parentId": {
-          "$ref": "#/definitions/MetadataParentId",
+          "$ref": "#/definitions/metadataParentId",
           "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)"
         },
         "version": {
-          "$ref": "#/definitions/MetadataVersion",
+          "$ref": "#/definitions/metadataVersion",
           "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks"
         },
         "kind": {
-          "$ref": "#/definitions/MetadataKind",
+          "$ref": "#/definitions/metadataKind",
           "description": "The kind of content the metadata is for."
         },
         "source": {
-          "$ref": "#/definitions/MetadataSource",
+          "$ref": "#/definitions/metadataSource",
           "description": "Source of the content.  This is where/how it was created."
         },
         "author": {
-          "$ref": "#/definitions/MetadataAuthor",
+          "$ref": "#/definitions/metadataAuthor",
           "description": "The creator of the content item."
         },
         "support": {
-          "$ref": "#/definitions/MetadataSupport",
+          "$ref": "#/definitions/metadataSupport",
           "description": "Support information for the metadata - type, name, contact information"
         },
         "dependencies": {
-          "$ref": "#/definitions/MetadataDependencies",
+          "$ref": "#/definitions/metadataDependencies",
           "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR."
         }
       }
     },
-    "MetadataPropertiesPatch": {
+    "metadataPropertiesPatch": {
       "description": "Metadata property bag for patch requests.  This is the same as the MetadataProperties, but with nothing required",
       "type": "object",
       "properties": {
         "id": {
-          "$ref": "#/definitions/MetadataId",
+          "$ref": "#/definitions/metadataId",
           "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
         },
         "parentId": {
-          "$ref": "#/definitions/MetadataParentId",
+          "$ref": "#/definitions/metadataParentId",
           "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)"
         },
         "version": {
-          "$ref": "#/definitions/MetadataVersion",
+          "$ref": "#/definitions/metadataVersion",
           "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks"
         },
         "kind": {
-          "$ref": "#/definitions/MetadataKind",
+          "$ref": "#/definitions/metadataKind",
           "description": "The kind of content the metadata is for."
         },
         "source": {
-          "$ref": "#/definitions/MetadataSource",
+          "$ref": "#/definitions/metadataSource",
           "description": "Source of the content.  This is where/how it was created."
         },
         "author": {
-          "$ref": "#/definitions/MetadataAuthor",
+          "$ref": "#/definitions/metadataAuthor",
           "description": "The creator of the content item."
         },
         "support": {
-          "$ref": "#/definitions/MetadataSupport",
+          "$ref": "#/definitions/metadataSupport",
           "description": "Support information for the metadata - type, name, contact information"
         },
         "dependencies": {
-          "$ref": "#/definitions/MetadataDependencies",
+          "$ref": "#/definitions/metadataDependencies",
           "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR."
         }
       }
@@ -642,12 +642,22 @@
   },
   "parameters": {
     "Metadata": {
-      "description": "The Metadata",
+      "description": "Metadata resource.",
       "in": "body",
       "name": "metadata",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/Metadata"
+        "$ref": "#/definitions/metadata"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "MetadataPatch": {
+      "description": "Partial metadata request.",
+      "in": "body",
+      "name": "metadataPatch",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/metadataPatch"
       },
       "x-ms-parameter-location": "method"
     },
