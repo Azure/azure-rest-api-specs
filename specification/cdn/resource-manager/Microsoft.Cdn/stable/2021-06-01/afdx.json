@@ -5062,25 +5062,14 @@
             "description": "A route pattern of the rule. Must not have any * except possibly after the final / at the end of the path."
           }
         },
-        "compressionSettings": {
-          "description": "compression settings.",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/CompressionSettings"
-          }
+        "enableCache": {
+          "description": "A boolean field for enable or disable cache. If enableCache is true, cacheConfiguration cannot be null.",
+          "type": "boolean"
         },
-        "queryStringCachingBehavior": {
-          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
-          "enum": [
-            "IgnoreQueryString",
-            "UseQueryString",
-            "NotSet"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "afdQueryStringCachingBehavior",
-            "modelAsString": false
-          }
+        "cacheConfiguration": {
+          "description": "The caching configuration for this route.",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/CacheConfiguration"
         },
         "forwardingProtocol": {
           "description": "Protocol this rule will use when forwarding traffic to backends.",
