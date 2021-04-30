@@ -41,11 +41,11 @@ tag: package-policy-2020-09
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2021-01
+tag: package-resources-2021-04
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2021-01
+tag: package-subscriptions-2021-04
 ```
 
 ``` yaml $(package-links)
@@ -60,8 +60,23 @@ tag: package-managedapplications-2018-06
 tag: package-deploymentscripts-2020-10
 ```
 
-``` yaml $(package-templatespecs)
-tag: package-templatespecs-2021-03-preview
+
+### Tag: package-resources-2021-04
+
+These settings apply only when `--tag=package-resources-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-resources-2021-04'
+input-file:
+  - Microsoft.Resources/stable/2021-04-01/resources.json
+```
+
+### Tag: package-subscriptions-2021-04
+
+These settings apply only when `--tag=package-subscriptions-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-subscriptions-2021-04'
+input-file:
+  - Microsoft.Resources/stable/2021-04-01/subscriptions.json
 ```
 
 ### Tag: package-resources-2021-01
@@ -98,8 +113,6 @@ These settings apply only when `--tag=package-preview-2020-08` is specified on t
 input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
-
-
 
 ### Tag: package-subscriptions-2021-01
 
@@ -777,6 +790,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
 ```
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
