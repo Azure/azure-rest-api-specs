@@ -244,9 +244,6 @@ directive:
 - suppress: R4009
   from: ResourceHealthMetadata.json
   reason: SystemData will implement in next version.
-- suppress: R4018
-  from: CertificateRegistrationProvider.json
-  reason: OperationDetails will implement in next version.
 ```
 
 ### Tag: package-2020-10
