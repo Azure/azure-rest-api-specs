@@ -69,16 +69,13 @@
           {
             "name": "points",
             "in": "query",
-            "description": "The string representation of a list of points. A point is defined in lat/lon WGS84 coordinate reference system format.  If multiple points are requested, each of the points in a list should be separated by the pipe ('|') character.  The maximum number of points that can be requested in a single request is 2,000. The resolution of the elevation  data will be the highest for a single point and will decrease if multiple points are spread further apart. ",
+            "description": "The string representation of a list of points. A point is defined in lon/lat WGS84 coordinate reference system format.  If multiple points are requested, each of the points in a list should be separated by the pipe ('|') character.  The maximum number of points that can be requested in a single request is 2,000. The resolution of the elevation  data will be the highest for a single point and will decrease if multiple points are spread further apart. ",
             "required": true,
             "type": "array",
             "collectionFormat": "pipes",
             "items": {
-              "type": "array",
-              "collectionFormat": "csv",
-              "items": {
-                "type": "string"
-              }
+              "type": "string",
+              "pattern": "\\s*[-]?\\d+[.]\\d+\\s*[,]\\s*[-]?\\d+[.]\\d+\\s*"
             }
           }
         ],
@@ -89,7 +86,8 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PointsResult"
+              "description": "The response from a successful Elevation Points request.",
+              "$ref": "#/definitions/ElevationResult"
             }
           },
           "400": {
@@ -111,7 +109,7 @@
       },
       "post": {
         "summary": "Query Elevation Data for Multiple Points",
-        "description": "**Applies to**: S1 pricing tier.\n\nThe Post Data for Points API provides elevation data for multiple points.  A point is defined in lat/lon coordinate format. Use the POST endpoint only  if you intend to pass multiple points in the request. If you intend to pass  a single coordinate into the API, use the [GET Data For Points API](https://docs.microsoft.com/en-us/rest/api/maps/elevation/getdataforpoints).",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Post Data for Points API provides elevation data for multiple points.  A point is defined lon/lat coordinate format. Use the POST endpoint only  if you intend to pass multiple points in the request. If you intend to pass  a single coordinate into the API, use the [GET Data For Points API](https://docs.microsoft.com/en-us/rest/api/maps/elevation/getdataforpoints).",
         "operationId": "Elevation_PostDataForPoints",
         "x-ms-examples": {
           "PostDataForPoints": {
@@ -134,10 +132,14 @@
           {
             "name": "pointsRequestBody",
             "in": "body",
-            "description": "The string representation of a list of points. A point is defined in lat/lon WGS84 coordinate reference system format.  Each points in a list should be separated by the pipe ('|') character. The number of points that can be requested in  a POST request ranges from 2 to 2,000. The resolution of the elevation data will be the highest for a single point  and will decrease if multiple points are spread further apart. ",
+            "description": "The string representation of a list of points. A point is defined in lon/lat WGS84 coordinate reference system format.  Each points in a list should be separated by the pipe ('|') character. The number of points that can be requested in  a POST request ranges from 2 to 2,000. The resolution of the elevation data will be the highest for a single point  and will decrease if multiple points are spread further apart. ",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PointsInRequestBody"
+              "description": "The post elevation points array request body. The length of the array ranges from 2 to 2000.",
+              "type": "array",
+              "items": {
+                "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+              }
             }
           }
         ],
@@ -148,7 +150,8 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PointsResult"
+              "description": "The response from a successful Elevation Points request.",
+              "$ref": "#/definitions/ElevationResult"
             }
           },
           "400": {
@@ -203,7 +206,8 @@
               "type": "array",
               "collectionFormat": "csv",
               "items": {
-                "type": "string"
+                "type": "string",
+                "pattern": "\\s*[-]?\\d+[.]\\d+\\s*[,]\\s*[-]?\\d+[.]\\d+\\s*"
               }
             }
           },
@@ -225,7 +229,8 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LinesResult"
+              "description": "The response from a successful Elevation Polyline request.",
+              "$ref": "#/definitions/ElevationResult"
             }
           },
           "400": {
@@ -273,7 +278,11 @@
             "description": "The string representation of a polyline path. A polyline is defined by endpoint coordinates,  with each endpoint separated by a pipe ('|') character. The polyline should be defined in the  following format: `[longitude_point1, latitude_point1 | longitude_point2, latitude_point2, ...,  longitude_pointN, latitude_pointN]`. The longitude and latitude values refer to the World Geodetic  System (WGS84) coordinate reference system. The resolution of the data used to compute the  elevation will depend on the distance between the endpoints.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LinesInRequestBody"
+              "description": "The post elevation lines request body.",
+              "type": "array",
+              "items": {
+                "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
+              }
             }
           },
           {
@@ -294,7 +303,8 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LinesResult"
+              "description": "The response from a successful Elevation Polyline request.",
+              "$ref": "#/definitions/ElevationResult"
             }
           },
           "400": {
@@ -375,7 +385,8 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BoundingBoxResult"
+              "description": "The response from a successful Get Data for Bounding Box API.",
+              "$ref": "#/definitions/ElevationResult"
             }
           },
           "400": {
@@ -398,17 +409,10 @@
     }
   },
   "definitions": {
-    "ElevationPointResponse": {
-      "description": "The response for point/points elevation API. The result will be in same sequence of points listed in request.",
-      "type": "array",
-      "readOnly": true,
-      "items": {
-        "$ref": "#/definitions/PointElevationResult"
-      }
-    },
     "PointElevationResult": {
-      "type": "object",
       "description": "The elevation data.",
+      "type": "object",
+      "readOnly": true,
       "properties": {
         "coordinate": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPair"
@@ -416,65 +420,24 @@
         "elevationInMeter": {
           "description": "The elevation value in meters.",
           "type": "number",
+          "format": "double",
           "readOnly": true
         }
       }
     },
-    "ElevationLineResponse": {
-      "description": "The response from the Get Data for Polyline API. The results will be listed in the direction from the first endpoint towards the last endpoint.",
-      "type": "array",
-      "readOnly": true,
-      "items": {
-        "$ref": "#/definitions/PointElevationResult"
-      }
-    },
-    "ElevationLatticeResponse": {
-      "description": "The response from the Get Data for Bounding Box API. The results are ordered starting with the southwest corner, and then proceed west to east and south to north.",
-      "type": "array",
-      "readOnly": true,
-      "items": {
-        "$ref": "#/definitions/PointElevationResult"
-      }
-    },
-    "PointsResult": {
-      "type": "object",
+    "ElevationResult": {
       "description": "The response from a successful Elevation Points request.",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/ElevationPointResponse"
-        }
-      }
-    },
-    "LinesResult": {
       "type": "object",
-      "description": "The response from a successful Elevation Polyline request.",
+      "readOnly": true,
       "properties": {
         "data": {
-          "$ref": "#/definitions/ElevationLineResponse"
+          "description": "The response for point/points elevation API. The result will be in same sequence of points listed in request.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PointElevationResult"
+          }
         }
-      }
-    },
-    "BoundingBoxResult": {
-      "type": "object",
-      "description": "The response from a successful Get Data for Bounding Box API.",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/ElevationLatticeResponse"
-        }
-      }
-    },
-    "PointsInRequestBody": {
-      "type": "array",
-      "description": "The post elevation points array request body. The length of the array ranges from 2 to 2000.",
-      "items": {
-        "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
-      }
-    },
-    "LinesInRequestBody": {
-      "type": "array",
-      "description": "The post elevation lines request body.",
-      "items": {
-        "$ref": "../../../Common/preview/1.0/common.json#/definitions/CoordinatesPairAbbreviated"
       }
     }
   }
