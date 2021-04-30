@@ -81,6 +81,74 @@ input-file:
   - Microsoft.Web/stable/2021-01-01/ResourceProvider.json
   - Microsoft.Web/stable/2021-01-01/StaticSites.json
   - Microsoft.Web/stable/2021-01-01/WebApps.json
+  directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+- where: $.definitions.VnetInfo
+  suppress: R4015
+  reason: Does not have list operation
+- suppress: R4009
+  from: AppServiceCertificateOrders.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateOrdersDiagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CertificateRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Domains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: TopLevelDomains.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DomainRegistrationProvider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: CommonDefinitions.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: DeletedWebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Diagnostics.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Global.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Provider.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: Recommendations.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: WebApps.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: StaticSites.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServiceEnvironments.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: AppServicePlans.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: ResourceHealthMetadata.json
+  reason: SystemData will implement in next version.
 ```
 ### Tag: package-2020-12
 
