@@ -365,42 +365,6 @@
         }
       }
     },
-    "/providers/Microsoft.Quota/quotaMetadata": {
-      "get": {
-        "tags": [
-          "QuotaMetadata"
-        ],
-        "description": "Gets details of each dimension for the resource provider and resourceDimension.",
-        "operationId": "QuotaTemplateDimensionTypes_List",
-        "x-ms-examples": {
-          "Quotas_listMetadataForCompute": {
-            "$ref": "./examples/metadata/getComputeMetadata.json"
-          },
-          "Quotas_listMetadataForBatch": {
-            "$ref": "./examples/metadata/getBatchAccountsNamesMetadata.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Quota limits type information",
-            "schema": {
-              "$ref": "#/definitions/QuotaTemplatesDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ExceptionResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Quota/operations": {
       "get": {
         "summary": "Get operations.",
