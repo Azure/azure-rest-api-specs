@@ -40,11 +40,8 @@
           "Get all metadata.": {
             "$ref": "./examples/metadata/GetAllMetadata.json"
           },
-          "Get all metadata with OData query": {
+          "Get all metadata with OData filter/orderby/skip/top": {
             "$ref": "./examples/metadata/GetAllMetadataOData.json"
-          },
-          "Get all metadata in pages using OData": {
-            "$ref": "./examples/metadata/GetAllMetadataODataPages.json"
           }
         },
         "tags": [
@@ -399,7 +396,7 @@
       }
     },
     "MetadataSource": {          
-      "description": "Source of the content.  This is where/how it was created",
+      "description": "The original source of the content item, where it comes from.",
       "type": "object",
       "required": ["kind"],
       "properties": {
@@ -435,10 +432,10 @@
     },
     "MetadataAuthor": {         
       "type": "object",
-      "description": "Author information for the metadata - type, name, contact information",
+      "description": "Publisher or creator of the content item.",
       "properties": {
         "name": {
-          "description": "Name of author contact or company",
+          "description": "Name of the author. Company or person.",
           "type": "string",
           "examples": ["Microsoft", "Joe Contoso"]
         },
@@ -457,7 +454,7 @@
     },
     "MetadataSupport": {
       "type": "object",
-      "description": "Support information for the metadata - type, name, contact information",
+      "description": "Support information for the content item.",
       "required": ["tier"],
       "properties": {
         "tier": {
@@ -475,7 +472,7 @@
           }
         },
         "name": {
-          "description": "Name of support contact or company",
+          "description": "Name of the support contact. Company or person.",
           "type": "string",
           "examples": ["Microsoft", "Joe Contoso"]
         },
@@ -493,7 +490,7 @@
       }
     },
     "Dependency": {
-      "description": "A content dependency is firstly an id and type, version is optional",
+      "description": "A single content dependency defined by a kind and id.  Version can be optionally included.",
       "type": "object",
       "required": [
         "id",
@@ -509,7 +506,7 @@
           "$ref": "#/definitions/MetadataKind"
         },
         "version": {
-          "description": "Version of the the content ite we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.",
+          "description": "Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.",
           "$ref": "#/definitions/MetadataVersion"
         }
       }
@@ -521,7 +518,15 @@
       "properties": {
         "operator": {
           "type": "string",
-          "enum": ["AND", "OR"]
+          "enum": ["AND", "OR"],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "operator",
+            "values": [
+              {"value": "AND"},
+              {"value": "OR"}
+            ]
+          }
         },
         "items": {
           "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
