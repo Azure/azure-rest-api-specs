@@ -52,6 +52,7 @@
   "parameters": {
     "ConversionIdQuery": {
       "name": "conversionId",
+      "x-ms-client-name": "ConversionId",
       "description": "The unique ID used to create the dataset. The `conversionId` must have been obtained from a successful call to the Conversion Service Convert API and must be provided with multiple query parameters with same name (if more than one is provided). May not be provided in conjunction with the `udid` query parameter.",
       "type": "string",
       "in": "query",
@@ -60,6 +61,7 @@
     },
     "UdidDataset": {
       "name": "udid",
+      "x-ms-client-name": "UdidDataset",
       "description": "The unique data ID used to create the dataset. The `udid` must have been obtained from a successful call to the Data Service Upload API and must be provided with multiple query parameters with the same name (if more than one is provided). May not be provided in conjunction with `conversionId` query parameter.",
       "type": "string",
       "in": "query",
@@ -68,6 +70,7 @@
     },
     "DescriptionDataset": {
       "name": "description",
+      "x-ms-client-name": "DescriptionDataset",
       "description": "The description to be given to the dataset.",
       "type": "string",
       "in": "query",
@@ -76,6 +79,7 @@
     },
     "DatasetId": {
       "name": "datasetId",
+      "x-ms-client-name": "DatasetId",
       "type": "string",
       "in": "path",
       "description": "The identifier for the dataset to query from.",
@@ -84,6 +88,7 @@
     },
     "DataType": {
       "name": "type",
+      "x-ms-client-name": "DatasetType",
       "type": "string",
       "in": "query",
       "description": "The type of data to create the dataset with.",
@@ -105,6 +110,7 @@
     },
     "ImportUdid": {
       "name": "udid",
+      "x-ms-client-name": "ImportUdid",
       "description": "The unique data ID used to import data into the dataset. The `udid` must have been obtained from a successful call to the Data Service Upload API.",
       "type": "string",
       "in": "query",
@@ -113,6 +119,7 @@
     },
     "ImportType": {
       "name": "type",
+      "x-ms-client-name": "ImportDataType",
       "type": "string",
       "in": "query",
       "description": "The type of data to import into the dataset with.",
@@ -134,18 +141,11 @@
     },
     "AppendDatasetId": {
       "name": "datasetId",
+      "x-ms-client-name": "AppendDatasetId",
       "type": "string",
       "in": "query",
       "description": "The ID for the dataset to append to.",
       "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "StatusId": {
-      "name": "statusId",
-      "type": "string",
-      "in": "path",
-      "description": "The ID to query the status for the dataset create/import request.",
-      "required": true,
       "x-ms-parameter-location": "method"
     }
   },
@@ -297,10 +297,7 @@
         ],
         "responses": {
           "204": {
-            "description": "The dataset delete request completed successfully. The resource referenced by the `datasetId` was deleted from the server.",
-            "schema": {
-              "$ref": "#/definitions/DatasetDeleteResponse"
-            }
+            "description": "The dataset delete request completed successfully. The resource referenced by the `datasetId` was deleted from the server."
           },
           "400": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
@@ -365,10 +362,6 @@
     }
   },
   "definitions": {
-    "DatasetDeleteResponse": {
-      "description": "The response model for the Dataset Delete API. The response body will be empty signifying there's no content available for the `datasetId` anymore.",
-      "type": "object"
-    },
     "DatasetListResponse": {
       "description": "The response model for the Dataset List API. The response body will contain a list of all the previously created datasets.",
       "type": "object",
@@ -386,6 +379,7 @@
     "DatasetDetailInfo": {
       "description": "Detail information for the dataset.",
       "type": "object",
+      "readOnly": true,
       "properties": {
         "created": {
           "description": "The created timestamp for the dataset.",
