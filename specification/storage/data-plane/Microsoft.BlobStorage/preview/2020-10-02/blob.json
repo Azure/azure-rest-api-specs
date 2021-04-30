@@ -5202,6 +5202,9 @@
           },
           {
             "$ref": "#/parameters/CopySourceBlobProperties"
+          },
+          {
+            "$ref": "#/parameters/CopySourceAuthorization"
           }
         ],
         "responses": {
@@ -6892,6 +6895,9 @@
           },
           {
             "$ref": "#/parameters/LegalHoldOptional"
+          },
+          {
+            "$ref": "#/parameters/CopySourceAuthorization"
           }
         ],
         "responses": {
@@ -7472,6 +7478,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/CopySourceAuthorization"
           }
         ],
         "responses": {
@@ -8265,6 +8274,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/CopySourceAuthorization"
           }
         ],
         "responses": {
@@ -9198,6 +9210,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/CopySourceAuthorization"
           }
         ],
         "responses": {
@@ -12096,6 +12111,15 @@
       "format": "url",
       "x-ms-parameter-location": "method",
       "description": "Specifies the name of the source page blob snapshot. This value is a URL of up to 2 KB in length that specifies a page blob snapshot. The value should be URL-encoded as it would appear in a request URI. The source blob must either be public or must be authenticated via a shared access signature."
+    },
+    "CopySourceAuthorization": {
+      "name": "x-ms-copy-source-authorization",
+      "x-ms-client-name": "copySourceAuthorization",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source."
     },
     "CopySourceBlobProperties": {
       "name": "x-ms-copy-source-blob-properties",
