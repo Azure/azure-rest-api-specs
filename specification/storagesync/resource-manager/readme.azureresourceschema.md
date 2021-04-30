@@ -28,7 +28,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.StorageSync/preview/2020-09-01/storagesync.json
+  - Microsoft.StorageSync/stable/2020-09-01/storagesync.json
 
 ```
 
