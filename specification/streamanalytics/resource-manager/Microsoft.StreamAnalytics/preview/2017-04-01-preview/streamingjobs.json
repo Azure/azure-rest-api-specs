@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StreamAnalyticsManagementClient",
-    "version": "2017-04-01-preview"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -441,20 +441,6 @@
     }
   },
   "definitions": {
-    "External": {
-      "description": "The storage account where the custom code artifacts are located.",
-      "properties": {
-        "storageAccount": {
-          "$ref": "./inputs.json#/definitions/StorageAccount"
-        },
-        "container": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        }
-      }
-    },
     "OperationListResult": {
       "description": "Result of the request to list Stream Analytics operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
@@ -656,10 +642,6 @@
             "modelAsString": true
           }
         },
-        "externals": {
-          "$ref": "#/definitions/External",
-          "description": "The storage account where the custom code artifacts are located."
-        },
         "cluster": {
           "$ref": "#/definitions/ClusterInfo",
           "description": "The cluster which streaming jobs will run on."
@@ -764,7 +746,8 @@
       "type": "string",
       "description": "Controls certain runtime behaviors of the streaming job.",
       "enum": [
-        "1.0"
+        "1.0",
+        "1.2"
       ],
       "x-ms-enum": {
         "name": "CompatibilityLevel",
