@@ -565,11 +565,42 @@
               "$ref": "#/definitions/LeaseShareRequest"
             },
             "description": "Lease Share request body."
+          },
+          {
+            "name": "x-ms-snapshot",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Optional. Specify the snapshot time to lease a snapshot."
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- Lease Share operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LeaseShareResponse"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "Created -- Acqurire Lease operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LeaseShareResponse"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted -- Break Lease operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LeaseShareResponse"
             },
