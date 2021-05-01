@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StreamAnalyticsManagementClient",
-    "version": "2016-03-01"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -468,6 +468,49 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobName}/scale": {
+      "post": {
+        "tags": [
+          "StreamingJobs"
+        ],
+        "operationId": "StreamingJobs_Scale",
+        "description": "Scales a streaming job when the job is running.",
+        "x-ms-examples": {
+          "Start a streaming job with CustomTime output start mode": {
+            "$ref": "./examples/StreamingJob_Scale.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "scaleJobParameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScaleStreamingJobParameters"
+            },
+            "description": "Parameters applicable to a scale streaming job operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StreamingJobNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The scale streaming job request was successfully initiated."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -701,6 +744,16 @@
       "x-ms-enum": {
         "name": "OutputStartMode",
         "modelAsString": true
+      }
+    },
+    "ScaleStreamingJobParameters": {
+      "description": "Parameters supplied to the Scale Streaming Job operation.",
+      "properties": {
+        "streamingUnits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of streaming units that the streaming job will scale to."
+        }
       }
     },
     "EventsOutOfOrderPolicy": {
