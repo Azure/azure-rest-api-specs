@@ -414,13 +414,6 @@
             "$ref": "#/definitions/StatusCodesBasedTrigger"
           }
         },
-        "statusCodesRange": {
-          "description": "A rule based on status codes ranges.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StatusCodesRangeBasedTrigger"
-          }
-        },
         "slowRequests": {
           "$ref": "#/definitions/SlowRequestsBasedTrigger",
           "description": "A rule based on request execution time."
@@ -430,6 +423,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SlowRequestsBasedTrigger"
+          }
+        },
+        "statusCodesRange": {
+          "description": "A rule based on status codes ranges.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatusCodesRangeBasedTrigger"
           }
         }
       }
@@ -2326,10 +2326,6 @@
               "description": "Status of the last deployment slot swap operation.",
               "readOnly": true
             },
-            "keyVaultReferenceIdentity": {
-              "description": "Identity to use for Key Vault Reference authentication.",
-              "type": "string"
-            },
             "httpsOnly": {
               "description": "HttpsOnly: configures a web site to accept only https requests. Issues redirect for\nhttp requests",
               "type": "boolean"
@@ -2359,6 +2355,14 @@
             "storageAccountRequired": {
               "description": "Checks if Customer provided storage account is required",
               "type": "boolean"
+            },
+            "keyVaultReferenceIdentity": {
+              "description": "Identity to use for Key Vault Reference authentication.",
+              "type": "string"
+            },
+            "virtualNetworkSubnetId": {
+              "description": "Azure Resource Manager ID of the Virtual network and subnet to be joined by Regional VNET Integration.\nThis must be of the form /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
@@ -2452,13 +2456,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          }
-        },
-        "azureStorageAccounts": {
-          "description": "List of Azure Storage Accounts.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/AzureStorageInfoValue"
           }
         },
         "connectionStrings": {
@@ -2740,6 +2737,17 @@
           "maximum": 20,
           "minimum": 0,
           "type": "integer"
+        },
+        "azureStorageAccounts": {
+          "description": "List of Azure Storage Accounts.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AzureStorageInfoValue"
+          }
+        },
+        "publicNetworkAccess": {
+          "description": "Property to allow or block all public traffic.",
+          "type": "string"
         }
       }
     },
@@ -2972,10 +2980,6 @@
           "description": "Win32 error code.",
           "type": "integer"
         },
-        "path": {
-          "description": "Request Path",
-          "type": "string"
-        },
         "count": {
           "format": "int32",
           "description": "Request Count.",
@@ -2983,6 +2987,10 @@
         },
         "timeInterval": {
           "description": "Time interval.",
+          "type": "string"
+        },
+        "path": {
+          "description": "Request Path",
           "type": "string"
         }
       }
