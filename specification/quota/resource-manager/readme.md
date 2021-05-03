@@ -26,7 +26,7 @@ These are the global settings for the Quota API.
 
 ``` yaml
 openapi-type: arm
-tag: package-021-03-15-preview
+tag: package-2021-03-15-preview
 ```
 
 ### Tag: package-2021-03-15
@@ -40,11 +40,11 @@ input-file:
 
 ### Tag: package-021-03-15-preview
 
-These settings apply only when `--tag=package-021-03-15-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-03-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-021-03-15-preview'
+```yaml $(tag) == 'package-2021-03-15-preview'
 input-file:
-  - Microsoft.Quota/preview/021-03-15-preview/quota.json
+  - Microsoft.Quota/preview/2021-03-15-preview/quota.json
 ```
 
 ### Supressions

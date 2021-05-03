@@ -34,11 +34,11 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Quota/review/review-2021-03-15/quota.json
+  - Microsoft.Quota/review/2021-03-15-preview/quota.json
 
 ```
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Quota/review/review-2021-03-15/quota.json
+  - Microsoft.Quota/review/2021-03-15-preview/quota.json
 ```
