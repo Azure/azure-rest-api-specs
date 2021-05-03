@@ -10,7 +10,7 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: azure.maps.service
   package-name: azure-maps-service
-  package-version: 2021-05-03-preview
+  package-version: preview-2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(track2)
@@ -18,7 +18,7 @@ python-mode: create
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.maps.service
 package-name: azure-maps-service
-package-version: 2021-05-03-preview
+package-version: preview-2.0
 clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'asdf' && !$(track2)
