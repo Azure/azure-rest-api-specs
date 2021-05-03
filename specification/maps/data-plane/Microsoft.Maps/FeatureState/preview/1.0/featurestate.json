@@ -51,7 +51,7 @@
   "parameters": {
     "DatasetIdForCreate": {
       "name": "datasetId",
-      "description": "The datasetId must have been obtained from a successful [Dataset Create API](https://review.docs.microsoft.com/en-us/rest-staging/api/maps-master/dataset/createpreview?branch=lbs) call.",
+      "description": "The datasetId must have been obtained from a successful [Dataset Create API](/rest/api/maps/dataset/createpreview) call.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -73,7 +73,7 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "FeatureIdSet": {
+    "FeatureIdInDataset": {
       "name": "featureId",
       "description": "The id of a feature in the given dataset. If the featureId is not present in the dataset, Bad Request response will be returned.",
       "type": "string",
@@ -81,15 +81,7 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "FeatureIdGet": {
-      "name": "featureId",
-      "description": "The id of a feature in the given stateset. If no state was set for the featureId in the stateset earlier, Bad Request response will be returned.",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "FeatureIdDelete": {
+    "FeatureIdInStateset": {
       "name": "featureId",
       "description": "The id of a feature in the given stateset. If no state was set for the featureId in the stateset earlier, Bad Request response will be returned.",
       "type": "string",
@@ -361,7 +353,7 @@
             "$ref": "#/parameters/StatesetId"
           },
           {
-            "$ref": "#/parameters/FeatureIdGet"
+            "$ref": "#/parameters/FeatureIdInStateset"
           }
         ],
         "responses": {
@@ -408,7 +400,7 @@
             "$ref": "#/parameters/StatesetId"
           },
           {
-            "$ref": "#/parameters/FeatureIdSet"
+            "$ref": "#/parameters/FeatureIdInDataset"
           },
           {
             "name": "featureStateUpdateRequestBody",
@@ -461,7 +453,7 @@
             "$ref": "#/parameters/StatesetId"
           },
           {
-            "$ref": "#/parameters/FeatureIdDelete"
+            "$ref": "#/parameters/FeatureIdInStateset"
           },
           {
             "$ref": "#/parameters/StateKeyNameDelete"
