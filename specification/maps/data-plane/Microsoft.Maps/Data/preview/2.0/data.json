@@ -47,65 +47,7 @@
       "apiKeyQuery": []
     }
   ],
-  "responses": {
-    "400": {
-      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "401": {
-      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "headers": {
-        "WWW-Authenticate": {
-          "type": "string",
-          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
-        }
-      }
-    },
-    "403": {
-      "description": "Permission, capacity, or authentication issues.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "404": {
-      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "500": {
-      "description": "An error occurred while processing the request. Please try again later.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "200Async": {
-      "description": "The operation is running or complete.  If the operation was successful, use the Resource-Location header to obtain the path to the result.",
-      "schema": {
-        "$ref": "#/definitions/LongRunningOperationResult"
-      },
-      "headers": {
-        "Resource-Location": {
-          "type": "string",
-          "description": "If successful, a URI where details on the newly created resource can be found."
-        }
-      }
-    },
-    "202Accepted": {
-      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
-      "headers": {
-        "Operation-Location": {
-          "type": "string",
-          "description": "New URL to check for the results of the long running process."
-        }
-      }
-    }
-  },
+  "responses": {},
   "parameters": {
     "GeographicResourceLocation": {
       "name": "geography",
@@ -134,54 +76,9 @@
       },
       "x-ms-parameter-location": "client"
     },
-    "ClientId": {
-      "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
-      "type": "string",
-      "in": "header",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "SubscriptionKey": {
-      "name": "subscription-key",
-      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 2.0",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "default": "2.0",
-      "x-ms-parameter-location": "client"
-    },
-    "JsonFormat": {
-      "name": "format",
-      "description": "Desired format of the response. Only `json` format is supported.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "enum": [
-        "json"
-      ],
-      "x-ms-enum": {
-        "name": "JsonFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "json",
-            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
     "UploadDataFormat": {
       "name": "dataFormat",
+      "x-ms-client-name": "UploadDataFormat",
       "description": "Data format of the content being uploaded.",
       "type": "string",
       "in": "query",
@@ -205,22 +102,24 @@
           },
           {
             "value": "dwgzippackage",
-            "description": ""
+            "description": "ZIP package containing DWG file."
           }
         ]
       },
       "x-ms-parameter-location": "method"
     },
-    "Udid": {
+    "UniqueDataId": {
       "name": "udid",
+      "x-ms-client-name": "UniqueDataId",
       "description": "The unique data id for the content. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data%20v2/uploadpreview) call.",
       "type": "string",
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "Description": {
+    "UploadDataDescription": {
       "name": "description",
+      "x-ms-client-name": "UploadDataDescription",
       "description": "The description to be given to the upload.",
       "type": "string",
       "in": "query",
@@ -251,56 +150,61 @@
             "$ref": "./examples/Upload.json"
           }
         },
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
-            "$ref": "#/parameters/Description"
+            "$ref": "#/parameters/UploadDataDescription"
           },
           {
             "$ref": "#/parameters/UploadDataFormat"
           },
           {
             "name": "UploadContent",
-            "in": "body",
             "description": "The content to upload.",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
+            "type": "file",
+            "in": "formData",
+            "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "Data upload failed. The uploaded content did not satisfy all the validation checks. The response body contains all the errors that were encountered.",
             "schema": {
-              "$ref": "#/definitions/ODataErrorResponse"
-            }
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           },
           "202": {
-            "$ref": "#/responses/202Accepted"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
+          },
+          "409": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/409StorageLimit"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -315,13 +219,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           }
         ],
         "responses": {
@@ -338,19 +242,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       }
@@ -369,56 +273,61 @@
             "$ref": "./examples/Update.json"
           }
         },
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
-            "$ref": "#/parameters/Udid"
+            "$ref": "#/parameters/UniqueDataId"
           },
           {
-            "$ref": "#/parameters/Description"
+            "$ref": "#/parameters/UploadDataDescription"
           },
           {
             "name": "UpdateContent",
-            "in": "body",
             "description": "The new content that will update/replace the previously uploaded content.",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
+            "type": "file",
+            "in": "formData",
+            "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "Data update failed. The uploaded content did not satisfy all the validation checks. The response body contains all the errors that were encountered.",
             "schema": {
-              "$ref": "#/definitions/ODataErrorResponse"
-            }
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           },
           "202": {
-            "$ref": "#/responses/202Accepted"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
+          },
+          "409": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/409StorageLimit"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -431,25 +340,30 @@
             "$ref": "./examples/Download.json"
           }
         },
+        "produces": [
+          "application/json",
+          "application/vnd.geo+json",
+          "application/octet-stream"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
-            "$ref": "#/parameters/Udid"
+            "$ref": "#/parameters/UniqueDataId"
           }
         ],
         "responses": {
           "200": {
             "description": "Data download request completed successfully. The response body will contain the content for the passed in `udid`.",
             "schema": {
-              "$ref": "#/definitions/MapDataDownloadResponse"
+              "type": "file"
             },
             "headers": {
               "Content-Type": {
@@ -458,20 +372,12 @@
               }
             }
           },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
+          "default": {
+            "description": "An error occurred while processing the request. Please try again later.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         }
       },
@@ -486,16 +392,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
-            "$ref": "#/parameters/Udid"
+            "$ref": "#/parameters/UniqueDataId"
           }
         ],
         "responses": {
@@ -503,19 +409,19 @@
             "description": "Data delete request completed successfully. The content for `udid` was deleted on the server."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       }
@@ -534,10 +440,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/DataUploadOperationId"
@@ -545,106 +451,16 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/responses/200Async"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           }
         }
       }
     }
   },
   "definitions": {
-    "ODataErrorResponse": {
-      "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
-    "ODataError": {
-      "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The ODataError code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, a human readable description of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ODataError"
-          }
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, the target causing the error."
-        }
-      }
-    },
-    "LongRunningOperationResult": {
-      "description": "The response model for a Long-Running Operations API.",
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "The Id for this long-running operation.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The status state of the request.",
-          "type": "string",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Failed",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "type",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "NotStarted",
-                "description": "The request has not started processing yet."
-              },
-              {
-                "value": "Running",
-                "description": "The request has started processing."
-              },
-              {
-                "value": "Failed",
-                "description": "The request has one or more failures."
-              },
-              {
-                "value": "Succeeded",
-                "description": "The request has successfully completed."
-              }
-            ]
-          },
-          "readOnly": true
-        },
-        "created": {
-          "description": "The created timestamp.",
-          "type": "string",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "#/definitions/ODataError"
-        },
-        "warning": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
     "MapDataDownloadResponse": {
       "description": "The response model for the Data Download API. The response body will contain the content for the passed in `udid`.",
       "type": "object"

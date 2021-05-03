@@ -47,50 +47,7 @@
       "apiKeyQuery": []
     }
   ],
-  "responses": {
-    "400": {
-      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "401": {
-      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "headers": {
-        "WWW-Authenticate": {
-          "type": "string",
-          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
-        }
-      }
-    },
-    "403": {
-      "description": "Permission, capacity, or authentication issues.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "404": {
-      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "409": {
-      "description": "The request could not be completed due to a conflict with the current state of the resource. Likely caused by a parallel update to the same resource.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "500": {
-      "description": "An error occurred while processing the request. Please try again later.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    }
-  },
+  "responses": {},
   "parameters": {
     "GeographicResourceLocation": {
       "name": "geography",
@@ -117,23 +74,6 @@
           }
         ]
       },
-      "x-ms-parameter-location": "client"
-    },
-    "SubscriptionKey": {
-      "name": "subscription-key",
-      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 2.0",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "default": "2.0",
       "x-ms-parameter-location": "client"
     },
     "FeatureStateSetDescription": {
@@ -206,10 +146,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/DatasetIdForCreate"
@@ -235,19 +175,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -262,10 +202,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           }
         ],
         "responses": {
@@ -276,19 +216,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       }
@@ -305,10 +245,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/StatesetIdInPath"
@@ -328,19 +268,19 @@
             "description": "Stateset styles are updated successfully."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -355,10 +295,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/StatesetIdInPath"
@@ -369,19 +309,19 @@
             "description": "Stateset Deleted."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -396,10 +336,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/StatesetIdInPath"
@@ -413,19 +353,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       }
@@ -442,10 +382,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/StatesetIdInPath"
@@ -468,19 +408,19 @@
             "description": "Feature states are updated successfully."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -495,10 +435,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/StatesetIdInPath"
@@ -515,22 +455,22 @@
             "description": "Feature states deleted successfully."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "409": {
-            "$ref": "#/responses/409"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/409"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -545,10 +485,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/StatesetIdInPath"
@@ -565,61 +505,25 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       }
     }
   },
   "definitions": {
-    "ODataErrorResponse": {
-      "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
-    "ODataError": {
-      "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The ODataError code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, a human readable description of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ODataError"
-          }
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, the target causing the error."
-        }
-      }
-    },
     "StatesetGetResponse": {
       "description": "The response model for the successful Stateset Get API.",
       "type": "object",
@@ -739,25 +643,21 @@
         }
       }
     },
-    "StyleObject": {
-      "description": "The stateset style model. The style rule could be a numeric type style rule or a boolean type style rule.  Refer to NumberRuleObject, StringRuleObject and BooleanRuleObject definitions [here](https://aka.ms/AzureMapsStatesetStylesObject). ",
-      "type": "object"
-    },
     "NumberRuleObject": {
-      "description": "The numeric rule",
+      "description": "The numeric rule. The color is selected from the first range it falls into.",
       "type": "object",
       "properties": {
         "range": {
           "$ref": "#/definitions/RangeObject"
         },
         "color": {
-          "description": "Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
+          "description": "The color when value is within the range. Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
           "type": "string"
         }
       }
     },
     "RangeObject": {
-      "description": "The numeric value range for this style rule, If the value is in the range, all the conditions must hold true.",
+      "description": "The numeric value range for this style rule. If the value is in the range, all the conditions must hold true.",
       "type": "object",
       "properties": {
         "minimum": {
@@ -783,15 +683,15 @@
       }
     },
     "BooleanRuleObject": {
-      "description": "the boolean rule",
+      "description": "The boolean rule. The color is selected based on the logic value of the key.",
       "type": "object",
       "properties": {
         "true": {
-          "description": "The color when value is true.",
+          "description": "The color when value is true. Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
           "type": "string"
         },
         "false": {
-          "description": "The color when value is false.",
+          "description": "The color when value is false. Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
           "type": "string"
         }
       }
@@ -799,50 +699,63 @@
     "StringRuleObject": {
       "description": "The string rule. The string value matching is case sensitive. If a feature's state doesn't match any of the values defined here, that feature will not have any dynamic style. If duplicate string values are given, the first one takes precedence.",
       "type": "object",
-      "properties": {
-        "stateValue1": {
-          "description": "The color when value string is stateValue1.",
-          "type": "string"
-        },
-        "stateValue2": {
-          "description": "The color when value string is stateValue2.",
-          "type": "string"
-        },
-        "stateValueN": {
-          "description": "The color when value string is stateValueN.",
-          "type": "string"
-        }
+      "additionalProperties": {
+        "description": "The color when the keyName value string is equal to this property name. Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
+        "type": "string"
       }
     },
-    "StyleRuleBase": {
-      "description": "contains common properties for numeric, string and boolean style rules.",
+    "StyleObject": {
+      "description": "The stateset style model. The style rule could be a numeric type style rule or a boolean type style rule.  Refer to NumberRuleObject, StringRuleObject and BooleanRuleObject definitions [here](https://aka.ms/AzureMapsStatesetStylesObject). ",
       "discriminator": "type",
+      "type": "object",
       "required": [
         "keyName",
         "type"
       ],
       "properties": {
         "keyName": {
-          "description": "Stateset style key name. Key names are random strings but they should be unique inside style array. Maximum length allowed is 1000.",
+          "description": "Stateset style key name. Key names are random strings but they should be unique inside style array.",
           "type": "string"
         },
         "type": {
           "description": "The type of stateset style.",
           "type": "string",
           "enum": [
-            "number",
             "boolean",
+            "number",
             "string"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "StyleObjectType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "boolean",
+                "description": "Boolean type of stateset style.",
+                "name": "BooleanTypeStyleRule"
+              },
+              {
+                "value": "number",
+                "description": "Number type of stateset style.",
+                "name": "NumberTypeStyleRule"
+              },
+              {
+                "value": "string",
+                "description": "String type of stateset style.",
+                "name": "StringTypeStyleRule"
+              }
+            ]
+          }
         }
       }
     },
     "BooleanTypeStyleRule": {
-      "description": "the boolean type style rule object.",
+      "description": "The boolean type style rule object.",
+      "x-ms-discriminator-value": "boolean",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRuleBase"
+          "$ref": "#/definitions/StyleObject"
         }
       ],
       "properties": {
@@ -853,14 +766,18 @@
             "$ref": "#/definitions/BooleanRuleObject"
           }
         }
-      }
+      },
+      "required": [
+        "rules"
+      ]
     },
     "NumberTypeStyleRule": {
       "description": "The numeric type style rule object.",
+      "x-ms-discriminator-value": "number",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRuleBase"
+          "$ref": "#/definitions/StyleObject"
         }
       ],
       "properties": {
@@ -871,14 +788,18 @@
             "$ref": "#/definitions/NumberRuleObject"
           }
         }
-      }
+      },
+      "required": [
+        "rules"
+      ]
     },
     "StringTypeStyleRule": {
       "description": "The string type style rule object.",
+      "x-ms-discriminator-value": "string",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StyleRuleBase"
+          "$ref": "#/definitions/StyleObject"
         }
       ],
       "properties": {
@@ -889,7 +810,10 @@
             "$ref": "#/definitions/StringRuleObject"
           }
         }
-      }
+      },
+      "required": [
+        "rules"
+      ]
     }
   }
 }

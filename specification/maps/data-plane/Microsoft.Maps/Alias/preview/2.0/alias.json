@@ -48,47 +48,7 @@
       "apiKeyQuery": []
     }
   ],
-  "responses": {
-    "201": {
-      "description": "Resource Created: The alias resource has been created."
-    },
-    "400": {
-      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "401": {
-      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      },
-      "headers": {
-        "WWW-Authenticate": {
-          "type": "string",
-          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
-        }
-      }
-    },
-    "403": {
-      "description": "Permission, capacity, or authentication issues.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "404": {
-      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    },
-    "500": {
-      "description": "An error occurred while processing the request. Please try again later.",
-      "schema": {
-        "$ref": "#/definitions/ODataErrorResponse"
-      }
-    }
-  },
+  "responses": {},
   "parameters": {
     "GeographicResourceLocation": {
       "name": "geography",
@@ -115,23 +75,6 @@
           }
         ]
       },
-      "x-ms-parameter-location": "client"
-    },
-    "SubscriptionKey": {
-      "name": "subscription-key",
-      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 2.0",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "default": "2.0",
       "x-ms-parameter-location": "client"
     },
     "CreateCreatorDataItemId": {
@@ -172,10 +115,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/CreateCreatorDataItemId"
@@ -195,19 +138,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -222,10 +165,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           }
         ],
         "responses": {
@@ -236,19 +179,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       }
@@ -268,10 +211,10 @@
             "$ref": "#/parameters/AliasId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           },
           {
             "$ref": "#/parameters/AssignCreatorDataItemId"
@@ -285,19 +228,19 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -315,10 +258,10 @@
             "$ref": "#/parameters/AliasId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           }
         ],
         "responses": {
@@ -326,19 +269,19 @@
             "description": "Alias delete request completed successfully. The content for `aliasId` was deleted on the server."
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       },
@@ -356,10 +299,10 @@
             "$ref": "#/parameters/AliasId"
           },
           {
-            "$ref": "#/parameters/SubscriptionKey"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/SubscriptionKey"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ApiVersionV2"
           }
         ],
         "responses": {
@@ -370,61 +313,25 @@
             }
           },
           "400": {
-            "$ref": "#/responses/400"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/400"
           },
           "401": {
-            "$ref": "#/responses/401"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/401"
           },
           "403": {
-            "$ref": "#/responses/403"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/403"
           },
           "404": {
-            "$ref": "#/responses/404"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/404"
           },
           "500": {
-            "$ref": "#/responses/500"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
         }
       }
     }
   },
   "definitions": {
-    "ODataErrorResponse": {
-      "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ODataError"
-        }
-      }
-    },
-    "ODataError": {
-      "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The ODataError code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, a human readable description of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ODataError"
-          }
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, the target causing the error."
-        }
-      }
-    },
     "AliasCreateResponse": {
       "description": "The response model for the Alias Create API for the case when the alias was successfully created.",
       "type": "object",

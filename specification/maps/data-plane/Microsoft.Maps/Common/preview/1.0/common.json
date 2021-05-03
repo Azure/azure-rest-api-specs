@@ -586,8 +586,19 @@
       "description": "The operation's status response.",
       "schema": {
         "$ref": "#/definitions/LongRunningOperationResult"
+      }
+    },
+    "200AsyncV2": {
+      "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+      "schema": {
+        "$ref": "#/definitions/LongRunningOperationResult"
       },
-      "x-ms-error-response": true
+      "headers": {
+        "Resource-Location": {
+          "type": "string",
+          "description": "If successful, a URI where details on the newly created resource can be found."
+        }
+      }
     },
     "201Async": {
       "description": "The resource has been created successfully.",
@@ -605,6 +616,15 @@
       "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
       "headers": {
         "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
+        }
+      }
+    },
+    "202AsyncV2": {
+      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",
+      "headers": {
+        "Operation-Location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
         }
