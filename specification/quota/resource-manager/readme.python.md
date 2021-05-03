@@ -30,6 +30,7 @@ python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/quota/azure-mgmt-quota/azure/mgmt/quota
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
@@ -40,6 +41,7 @@ python:
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/quota/azure-mgmt-quota/azure/mgmt/quota
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/quota/azure-mgmt-quota

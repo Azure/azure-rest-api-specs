@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "resourceUrl": "management.azure.com/",
+    "api-version": "preview-2021-03-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceProviderName": "Microsoft.Compute",
+            "properties": {
+              "value": [
+                {
+                  "resourceType": "virtualMachines",
+                  "dimensions": [
+                    {
+                      "name": "subscriptionId",
+                      "displayName": "SubscriptionId",
+                      "resourceQuery": ""
+                    },
+                    {
+                      "name": "location",
+                      "displayName": "Location",
+                      "resourceQuery": ""
+                    }
+                  ],
+                  "quotaBuckets": [
+                    {
+                      "name": "virtualMachines",
+                      "displayName": "vCPUs Skus"
+                    },
+                    {
+                      "name": "lowPriorityCores",
+                      "displayName": "Total Regional Low-priority vCPUs"
+                    },
+                    {
+                      "name": "cores",
+                      "displayName": "Total Regional vCPUs"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "resourceProviderName": "Microsoft.Batch",
+            "properties": {
+              "value": [
+                {
+                  "resourceType": "batchAccounts/pool",
+                  "dimensions": [
+                    {
+                      "name": "subscriptionId",
+                      "displayName": "SubscriptionId",
+                      "resourceQuery": ""
+                    },
+                    {
+                      "name": "location",
+                      "displayName": "Location",
+                      "resourceQuery": ""
+                    },
+                    {
+                      "name": "batchAccounts",
+                      "displayName": "BatchAccount Name",
+                      "resourceQuery": ""
+                    }
+                  ],
+                  "quotaBuckets": [
+                    {
+                      "name": "PoolQuota",
+                      "displayName": "PoolQuota"
+                    },
+                    {
+                      "name": "JobQuota",
+                      "displayName": "JobQuota"
+                    },
+                    {
+                      "name": "LowPriorityCoreQuota",
+                      "displayName": "Low Priority Cores"
+                    },
+                    {
+                      "name": "virtualMachines",
+                      "displayName": "vCPUs Skus"
+                    }
+                  ]
+                },
+                {
+                  "resourceType": "batchAccounts",
+                  "dimensions": [
+                    {
+                      "name": "subscriptionId",
+                      "displayName": "SubscriptionId",
+                      "resourceQuery": ""
+                    },
+                    {
+                      "name": "location",
+                      "displayName": "Location",
+                      "resourceQuery": ""
+                    }
+                  ],
+                  "quotaBuckets": [
+                    {
+                      "name": "BatchAccountQuota",
+                      "displayName": "BatchAccountQuota"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "resourceProviderName": "Microsoft.Network",
+            "properties": {
+              "value": [
+                {
+                  "resourceType": "PublicIpAddresses",
+                  "dimensions": [
+                    {
+                      "name": "subscriptions",
+                      "displayName": "Subscription",
+                      "resourceQuery": ""
+                    },
+                    {
+                      "name": "locations",
+                      "displayName": "Location",
+                      "resourceQuery": ""
+                    },
+                    {
+                      "name": "quotaBucket",
+                      "displayName": "Public IP Address Types"
+                    }
+                  ],
+                  "quotaBuckets": [
+                    {
+                      "name": "PublicIPAddresses",
+                      "displayName": "PublicIPAddresses"
+                    },
+                    {
+                      "name": "StandardSkuPublicIpAddresses",
+                      "displayName": "Public IP Addresses - Standard"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
