@@ -3118,6 +3118,12 @@
           "Create a VM with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/CreateAVmWithUefiSettings.json"
           },
+          "Create a vm from a generalized shared image.": {
+            "$ref": "./examples/CreateAVmFromAGeneralizedSharedImage.json"
+          },
+          "Create a vm from a specialized shared image.": {
+            "$ref": "./examples/CreateAVmFromASpecializedSharedImage.json"
+          },
           "Create a VM with network interface configuration": {
             "$ref": "./examples/CreateAVmWithNetworkInterfaceConfiguration.json"
           }
@@ -3491,6 +3497,487 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}": {
+      "put": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_CreateOrUpdate",
+        "description": "The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified.",
+        "x-ms-examples": {
+          "Create or update a restore point collection.": {
+            "$ref": "./examples/CreateOrUpdateARestorePointCollection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            },
+            "description": "Parameters supplied to the Create or Update restore point collection operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_Update",
+        "description": "The operation to update the restore point collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollectionUpdate"
+            },
+            "description": "Parameters supplied to the Update restore point collection operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_Delete",
+        "description": "The operation to delete the restore point collection. This operation will also delete all the contained restore points.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Restore Point Collection."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_Get",
+        "description": "The operation to get the restore point collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation. If expand=restorePoints, server will return all contained restore points in the restorePointCollection.",
+            "enum": [
+              "restorePoints"
+            ],
+            "x-ms-enum": {
+              "name": "RestorePointCollectionExpandOptions",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a restore point collection (but not the restore points contained in the restore point collection)": {
+            "$ref": "./examples/GetRestorePointCollection.json"
+          },
+          "Get a restore point collection, including the restore points contained in the restore point collection": {
+            "$ref": "./examples/GetRestorePointCollectionWithContainedRestorePoints.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections": {
+      "get": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_List",
+        "description": "Gets the list of restore point collections in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Gets the list of restore point collections in a resource group.": {
+            "$ref": "./examples/GetRestorePointCollectionsInAResourceGroup.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/restorePointCollections": {
+      "get": {
+        "tags": [
+          "RestorePointCollections"
+        ],
+        "operationId": "RestorePointCollections_ListAll",
+        "description": "Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePointCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of restore point collections in a subscription": {
+            "$ref": "./examples/GetRestorePointCollectionsInASubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}": {
+      "put": {
+        "operationId": "RestorePoints_Create",
+        "description": "The operation to create the restore point. Updating properties of an existing restore point is not allowed",
+        "x-ms-examples": {
+          "Create a restore point": {
+            "$ref": "./examples/CreateARestorePoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            },
+            "description": "Parameters supplied to the Create restore point operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RestorePoints_Delete",
+        "description": "The operation to delete the restore point.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Restore Point Collection."
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "operationId": "RestorePoints_Get",
+        "description": "The operation to get the restore point.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "restorePointCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point collection."
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the restore point."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a restore point": {
+            "$ref": "./examples/GetRestorePoint.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
         }
       }
     },
@@ -4232,6 +4719,12 @@
           },
           "Create a scale set with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/CreateAScaleSetWithUefiSettings.json"
+          },
+          "Create a scale set from a generalized shared image.": {
+            "$ref": "./examples/CreateAScaleSetFromAGeneralizedSharedImage.json"
+          },
+          "Create a scale set from a specialized shared image.": {
+            "$ref": "./examples/CreateAScaleSetFromASpecializedSharedImage.json"
           }
         }
       },
@@ -6900,6 +7393,282 @@
     }
   },
   "definitions": {
+    "RestorePointCollectionSourceProperties": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Location of the source resource used to create this restore point collection."
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id of the source resource used to create this restore point collection"
+        }
+      },
+      "description": "The properties of the source resource that this restore point collection is created from."
+    },
+    "RestorePointCollectionProperties": {
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/RestorePointCollectionSourceProperties"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the restore point collection."
+        },
+        "restorePointCollectionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unique id of the restore point collection."
+        },
+        "restorePoints": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RestorePoint"
+          },
+          "description": "A list containing all restore points created under this restore point collection."
+        }
+      },
+      "description": "The restore point collection properties."
+    },
+    "RestorePointCollection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestorePointCollectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Create or update Restore Point collection parameters."
+    },
+    "RestorePointCollectionUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestorePointCollectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Update Restore Point collection parameters."
+    },
+    "RestorePointCollectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorePointCollection"
+          },
+          "description": "Gets the list of restore point collections."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of RestorePointCollections. Call ListNext() with this to fetch the next page of RestorePointCollections"
+        }
+      },
+      "description": "The List restore point collection operation response."
+    },
+    "RestorePointSourceMetadata": {
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Gets the hardware profile."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/RestorePointSourceVMStorageProfile",
+          "description": "Gets the storage profile."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile",
+          "description": "Gets the OS profile."
+        },
+        "diagnosticsProfile": {
+          "$ref": "#/definitions/DiagnosticsProfile",
+          "description": "Gets the diagnostics profile."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Gets the license type, which is for bring your own license scenario."
+        },
+        "vmId": {
+          "type": "string",
+          "description": "Gets the virtual machine unique id."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Gets the security profile."
+        }
+      },
+      "description": "Describes the properties of the Virtual Machine for which the restore point was created. The properties provided are a subset and the snapshot of the overall Virtual Machine properties captured at the time of the restore point creation."
+    },
+    "RestorePointSourceVMStorageProfile": {
+      "properties": {
+        "osDisk": {
+          "$ref": "#/definitions/RestorePointSourceVMOSDisk",
+          "description": "Gets the OS disk of the VM captured at the time of the restore point creation."
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorePointSourceVMDataDisk"
+          },
+          "description": "Gets the data disks of the VM captured at the time of the restore point creation."
+        }
+      },
+      "description": "Describes the storage profile."
+    },
+    "RestorePointSourceVMOSDisk": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "Gets the Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemType",
+            "modelAsString": true
+          }
+        },
+        "encryptionSettings": {
+          "$ref": "#/definitions/DiskEncryptionSettings",
+          "description": "Gets the disk encryption settings."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets the disk name."
+        },
+        "caching": {
+          "$ref": "#/definitions/Caching",
+          "description": "Gets the caching type."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the disk size in GB."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDiskParameters",
+          "description": "Gets the managed disk details"
+        },
+        "diskRestorePoint": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Gets the disk restore point Id."
+        }
+      },
+      "description": "Describes an Operating System disk."
+    },
+    "RestorePointSourceVMDataDisk": {
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the logical unit number."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets the disk name."
+        },
+        "caching": {
+          "$ref": "#/definitions/Caching",
+          "description": "Gets the caching type."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDiskParameters",
+          "description": "Gets the managed disk details"
+        },
+        "diskRestorePoint": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Gets the disk restore point Id."
+        }
+      },
+      "description": "Describes a data disk."
+    },
+    "RestorePointProvisioningDetails": {
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the creation time of the restore point."
+        },
+        "totalUsedSizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the total size of the data in all the disks which are part of the restore point."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the status of the Create restore point operation."
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Gets the status message of the Create restore point operation."
+        }
+      },
+      "description": "Restore Point Provisioning details."
+    },
+    "RestorePoint": {
+      "properties": {
+        "sourceMetadata": {
+          "readOnly": true,
+          "$ref": "#/definitions/RestorePointSourceMetadata",
+          "description": "Gets the details of the VM captured at the time of the restore point creation."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the provisioning state of the restore point."
+        },
+        "consistencyMode": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "CrashConsistent",
+            "FileSystemConsistent",
+            "ApplicationConsistent"
+          ],
+          "x-ms-enum": {
+            "name": "ConsistencyModeTypes",
+            "modelAsString": true
+          },
+          "description": "Gets the consistency mode for the restore point. Please refer to https://aka.ms/RestorePoints for more details."
+        },
+        "provisioningDetails": {
+          "$ref": "#/definitions/RestorePointProvisioningDetails",
+          "readOnly": true,
+          "description": "Gets the provisioning details set by the server during Create restore point operation."
+        },
+        "excludeDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiEntityReference"
+          },
+          "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Restore Point details."
+    },
     "ComputeOperationListResult": {
       "properties": {
         "value": {
@@ -7606,7 +8375,7 @@
         "numberOfCores": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of cores supported by the virtual machine size."
+          "description": "The number of cores supported by the virtual machine size. For Constrained vCPU capable VM sizes, this number represents the total vCPUs of quota that the VM uses. For accurate vCPU count, please refer to https://docs.microsoft.com/en-us/azure/virtual-machines/constrained-vcpu or https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list"
         },
         "osDiskSizeInMB": {
           "type": "integer",
@@ -9385,7 +10154,7 @@
           "description": "[Preview Feature] Specifies settings related to VM Guest Patching on Linux."
         }
       },
-      "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+      "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros)."
     },
     "VaultCertificate": {
       "properties": {
@@ -9420,7 +10189,7 @@
       "properties": {
         "computerName": {
           "type": "string",
-          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
+          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/azure-resource-manager/management/resource-name-rules)."
         },
         "adminUsername": {
           "type": "string",
@@ -9432,7 +10201,7 @@
         },
         "customData": {
           "type": "string",
-          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> **Note: Do not pass any secrets or passwords in customData property** <br><br> This property cannot be updated after the VM is created. <br><br> customData is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/en-us/blog/custom-data-and-cloud-init-on-windows-azure/) <br><br> For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> **Note: Do not pass any secrets or passwords in customData property** <br><br> This property cannot be updated after the VM is created. <br><br> customData is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/en-us/blog/custom-data-and-cloud-init-on-windows-azure/) <br><br> For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)"
         },
         "windowsConfiguration": {
           "$ref": "#/definitions/WindowsConfiguration",
@@ -9440,7 +10209,7 @@
         },
         "linuxConfiguration": {
           "$ref": "#/definitions/LinuxConfiguration",
-          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros)."
         },
         "secrets": {
           "type": "array",
@@ -10730,7 +11499,7 @@
         },
         "customData": {
           "type": "string",
-          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)"
         },
         "windowsConfiguration": {
           "$ref": "#/definitions/WindowsConfiguration",
@@ -10738,7 +11507,7 @@
         },
         "linuxConfiguration": {
           "$ref": "#/definitions/LinuxConfiguration",
-          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros)."
         },
         "secrets": {
           "type": "array",
@@ -11229,1956 +11998,1977 @@
         },
         "description": "Describes a virtual machine scale set updatable network profile's IP configuration.Use this object for updating network profile's IP Configuration."
       },
-    "VirtualMachineScaleSetNetworkConfiguration": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The network configuration name."
-        },
+      "VirtualMachineScaleSetNetworkConfiguration": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "description": "Describes a virtual machine scale set network profile's network configurations."
-    },
-    "VirtualMachineScaleSetUpdateNetworkConfiguration": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The network configuration name."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkConfigurationProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "description": "Describes a virtual machine scale set network profile's network configurations."
-    },
-    "VirtualMachineScaleSetNetworkConfigurationDnsSettings": {
-      "properties": {
-        "dnsServers": {
-          "type": "array",
-          "items": {
-            "type": "string"
+          "name": {
+            "type": "string",
+            "description": "The network configuration name."
           },
-          "description": "List of DNS servers IP addresses"
-        }
-      },
-      "description": "Describes a virtual machines scale sets network configuration's DNS settings."
-    },
-    "VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings": {
-      "properties": {
-        "domainNameLabel": {
-          "type": "string",
-          "description": "The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created"
-        }
-      },
-      "required": [
-        "domainNameLabel"
-      ],
-      "description": "Describes a virtual machines scale sets network configuration's DNS settings."
-    },
-    "VirtualMachineScaleSetIpTag": {
-      "properties": {
-        "ipTagType": {
-          "type": "string",
-          "description": "IP tag type. Example: FirstPartyUsage."
-        },
-        "tag": {
-          "type": "string",
-          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
-        }
-      },
-      "description": "Contains the IP tag associated with the public IP address."
-    },
-    "VirtualMachineScaleSetPublicIPAddressConfiguration": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The publicIP address configuration name."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationProperties"
-        },
-        "sku": {
-          "$ref": "#/definitions/PublicIPAddressSku"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
-    },
-    "VirtualMachineScaleSetUpdatePublicIPAddressConfiguration": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The publicIP address configuration name."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties"
-        }
-      },
-      "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
-    },
-    "VirtualMachineScaleSetPublicIPAddressConfigurationProperties": {
-      "properties": {
-        "idleTimeoutInMinutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The idle timeout of the public IP address."
-        },
-        "dnsSettings": {
-          "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings",
-          "description": "The dns settings to be applied on the publicIP addresses ."
-        },
-        "ipTags": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetIpTag"
-          },
-          "description": "The list of IP tags associated with the public IP address."
-        },
-        "publicIPPrefix": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The PublicIPPrefix from which to allocate publicIP addresses."
-        },
-        "publicIPAddressVersion": {
-          "type": "string",
-          "description": "Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.",
-          "enum": [
-            "IPv4",
-            "IPv6"
-          ],
-          "x-ms-enum": {
-            "name": "IPVersion",
-            "modelAsString": true
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties"
           }
         },
-        "deleteOption": {
-          "type": "string",
-          "description": "Specify what happens to the public IP when the VM is deleted",
-          "enum": [
-            "Delete",
-            "Detach"
-          ],
-          "x-ms-enum": {
-            "name": "DeleteOptions",
-            "modelAsString": true
+        "required": [
+          "name"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/SubResource"
           }
-        }
+        ],
+        "description": "Describes a virtual machine scale set network profile's network configurations."
       },
-      "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
-    },
-    "VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties": {
-      "properties": {
-        "idleTimeoutInMinutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The idle timeout of the public IP address."
-        },
-        "dnsSettings": {
-          "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings",
-          "description": "The dns settings to be applied on the publicIP addresses ."
-        },
-        "deleteOption": {
-          "type": "string",
-          "description": "Specify what happens to the public IP when the VM is deleted",
-          "enum": [
-            "Delete",
-            "Detach"
-          ],
-          "x-ms-enum": {
-            "name": "DeleteOptions",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
-    },
-    "VirtualMachineScaleSetNetworkProfile": {
-      "properties": {
-        "healthProbe": {
-          "$ref": "#/definitions/ApiEntityReference",
-          "description": "A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'."
-        },
-        "networkInterfaceConfigurations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
-          },
-          "description": "The list of network configurations."
-        },
-        "networkApiVersion": {
-          "type": "string",
-          "description": "specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'",
-          "enum": [
-            "2020-11-01"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkApiVersion",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Describes a virtual machine scale set network profile."
-    },
-    "VirtualMachineScaleSetUpdateNetworkProfile": {
-      "properties": {
-        "healthProbe": {
-          "$ref": "#/definitions/ApiEntityReference",
-          "description": "A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'."
-        },
-        "networkInterfaceConfigurations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkConfiguration"
-          },
-          "description": "The list of network configurations."
-        },
-        "networkApiVersion": {
-          "type": "string",
-          "description": "specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'",
-          "enum": [
-            "2020-11-01"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkApiVersion",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Describes a virtual machine scale set network profile."
-    },
-    "VirtualMachineScaleSetExtensionProperties": {
-      "properties": {
-        "forceUpdateTag": {
-          "type": "string",
-          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
-        },
-        "publisher": {
-          "type": "string",
-          "description": "The name of the extension handler publisher."
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler."
-        },
-        "autoUpgradeMinorVersion": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
-        },
-        "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
-        },
-        "settings": {
-          "type": "object",
-          "description": "Json formatted public settings for the extension."
-        },
-        "protectedSettings": {
-          "type": "object",
-          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response."
-        },
-        "provisionAfterExtensions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Collection of extension names after which this extension needs to be provisioned."
-        }
-      },
-      "description": "Describes the properties of a Virtual Machine Scale Set Extension."
-    },
-    "VirtualMachineScaleSetExtension": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the extension."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
+      "VirtualMachineScaleSetUpdateNetworkConfiguration": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResourceReadOnly"
-        }
-      ],
-      "description": "Describes a Virtual Machine Scale Set Extension."
-    },
-    "VirtualMachineScaleSetExtensionUpdate": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the extension."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResourceReadOnly"
-        }
-      ],
-      "description": "Describes a Virtual Machine Scale Set Extension."
-    },
-    "VirtualMachineScaleSetExtensionListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+          "name": {
+            "type": "string",
+            "description": "The network configuration name."
           },
-          "description": "The list of VM scale set extensions."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List VM scale set extension operation response."
-    },
-    "VirtualMachineScaleSetExtensionProfile": {
-      "properties": {
-        "extensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetExtension"
-          },
-          "description": "The virtual machine scale set child extension resources."
-        },
-        "extensionsTimeBudget": {
-          "type": "string",
-          "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). <br><br> Minimum api-version: 2020-06-01"
-        }
-      },
-      "description": "Describes a virtual machine scale set extension profile."
-    },
-    "VirtualMachineScaleSetVMProfile": {
-      "properties": {
-        "osProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetOSProfile",
-          "description": "Specifies the operating system settings for the virtual machines in the scale set."
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
-          "description": "Specifies the storage settings for the virtual machine disks."
-        },
-        "networkProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
-          "description": "Specifies properties of the network interfaces of the virtual machines in the scale set."
-        },
-        "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
-          "description": "Specifies the Security related profile settings for the virtual machines in the scale set."
-        },
-        "diagnosticsProfile": {
-          "$ref": "#/definitions/DiagnosticsProfile",
-          "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
-        },
-        "extensionProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile",
-          "description": "Specifies a collection of settings for extensions installed on virtual machines in the scale set."
-        },
-        "licenseType": {
-          "type": "string",
-          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
-        },
-        "priority": {
-          "$ref": "#/definitions/priority",
-          "description": "Specifies the priority for the virtual machines in the scale set. <br><br>Minimum api-version: 2017-10-30-preview"
-        },
-        "evictionPolicy": {
-          "$ref": "#/definitions/evictionPolicy",
-          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
-        },
-        "billingProfile": {
-          "$ref": "#/definitions/BillingProfile",
-          "description": "Specifies the billing related details of a Azure Spot VMSS. <br><br>Minimum api-version: 2019-03-01."
-        },
-        "scheduledEventsProfile": {
-          "$ref": "#/definitions/ScheduledEventsProfile",
-          "description": "Specifies Scheduled Event related configurations."
-        }
-      },
-      "description": "Describes a virtual machine scale set virtual machine profile."
-    },
-    "VirtualMachineScaleSetUpdateVMProfile": {
-      "properties": {
-        "osProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetUpdateOSProfile",
-          "description": "The virtual machine scale set OS profile."
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetUpdateStorageProfile",
-          "description": "The virtual machine scale set storage profile."
-        },
-        "networkProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkProfile",
-          "description": "The virtual machine scale set network profile."
-        },
-        "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
-          "description": "The virtual machine scale set Security profile"
-        },
-        "diagnosticsProfile": {
-          "$ref": "#/definitions/DiagnosticsProfile",
-          "description": "The virtual machine scale set diagnostics profile."
-        },
-        "extensionProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile",
-          "description": "The virtual machine scale set extension profile."
-        },
-        "licenseType": {
-          "type": "string",
-          "description": "The license type, which is for bring your own license scenario."
-        },
-        "billingProfile": {
-          "$ref": "#/definitions/BillingProfile",
-          "description": "Specifies the billing related details of a Azure Spot VMSS. <br><br>Minimum api-version: 2019-03-01."
-        },
-        "scheduledEventsProfile": {
-          "$ref": "#/definitions/ScheduledEventsProfile",
-          "description": "Specifies Scheduled Event related configurations."
-        }
-      },
-      "description": "Describes a virtual machine scale set virtual machine profile."
-    },
-    "VirtualMachineScaleSetProperties": {
-      "properties": {
-        "upgradePolicy": {
-          "$ref": "#/definitions/UpgradePolicy",
-          "description": "The upgrade policy."
-        },
-        "automaticRepairsPolicy": {
-          "$ref": "#/definitions/AutomaticRepairsPolicy",
-          "description": "Policy for automatic repairs."
-        },
-        "virtualMachineProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
-          "description": "The virtual machine profile."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response."
-        },
-        "overprovision": {
-          "type": "boolean",
-          "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
-        },
-        "doNotRunExtensionsOnOverprovisionedVMs": {
-          "type": "boolean",
-          "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
-        },
-        "uniqueId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Specifies the ID which uniquely identifies a Virtual Machine Scale Set."
-        },
-        "singlePlacementGroup": {
-          "type": "boolean",
-          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true."
-        },
-        "zoneBalance": {
-          "type": "boolean",
-          "description": "Whether to force strictly even Virtual Machine distribution cross x-zones in case there is zone outage."
-        },
-        "platformFaultDomainCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Fault Domain count for each placement group."
-        },
-        "proximityPlacementGroup": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
-        },
-        "hostGroup": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the dedicated host group that the virtual machine scale set resides in. <br><br>Minimum api-version: 2020-06-01."
-        },
-        "additionalCapabilities": {
-          "$ref": "#/definitions/AdditionalCapabilities",
-          "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
-        },
-        "scaleInPolicy": {
-          "$ref": "#/definitions/ScaleInPolicy",
-          "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
-        },
-        "orchestrationMode": {
-          "$ref": "#/definitions/OrchestrationMode",
-          "description": "Specifies the orchestration mode for the virtual machine scale set."
-        }
-      },
-      "description": "Describes the properties of a Virtual Machine Scale Set."
-    },
-    "VirtualMachineScaleSetUpdateProperties": {
-      "properties": {
-        "upgradePolicy": {
-          "$ref": "#/definitions/UpgradePolicy",
-          "description": "The upgrade policy."
-        },
-        "automaticRepairsPolicy": {
-          "$ref": "#/definitions/AutomaticRepairsPolicy",
-          "description": "Policy for automatic repairs."
-        },
-        "virtualMachineProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetUpdateVMProfile",
-          "description": "The virtual machine profile."
-        },
-        "overprovision": {
-          "type": "boolean",
-          "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
-        },
-        "doNotRunExtensionsOnOverprovisionedVMs": {
-          "type": "boolean",
-          "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
-        },
-        "singlePlacementGroup": {
-          "type": "boolean",
-          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true."
-        },
-        "additionalCapabilities": {
-          "$ref": "#/definitions/AdditionalCapabilities",
-          "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
-        },
-        "scaleInPolicy": {
-          "$ref": "#/definitions/ScaleInPolicy",
-          "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
-        },
-        "proximityPlacementGroup": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
-        }
-      },
-      "description": "Describes the properties of a Virtual Machine Scale Set."
-    },
-    "VirtualMachineScaleSet": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The virtual machine scale set sku."
-        },
-        "plan": {
-          "$ref": "#/definitions/Plan",
-          "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineScaleSetProperties"
-        },
-        "identity": {
-          "$ref": "#/definitions/VirtualMachineScaleSetIdentity",
-          "description": "The identity of the virtual machine scale set, if configured."
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set"
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location of the Virtual Machine Scale Set."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Describes a Virtual Machine Scale Set."
-    },
-    "VirtualMachineScaleSetVMReimageParameters": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/VirtualMachineReimageParameters"
-        }
-      ],
-      "description": "Describes a Virtual Machine Scale Set VM Reimage Parameters."
-    },
-    "VirtualMachineScaleSetReimageParameters": {
-      "properties": {
-        "instanceIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/VirtualMachineScaleSetVMReimageParameters"
-        }
-      ],
-      "description": "Describes a Virtual Machine Scale Set VM Reimage Parameters."
-    },
-    "VirtualMachineScaleSetUpdate": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The virtual machine scale set sku."
-        },
-        "plan": {
-          "$ref": "#/definitions/Plan",
-          "description": "The purchase plan when deploying a virtual machine scale set from VM Marketplace images."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineScaleSetUpdateProperties"
-        },
-        "identity": {
-          "$ref": "#/definitions/VirtualMachineScaleSetIdentity",
-          "description": "The identity of the virtual machine scale set, if configured."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UpdateResource"
-        }
-      ],
-      "description": "Describes a Virtual Machine Scale Set."
-    },
-    "VirtualMachineScaleSetVMInstanceIDs": {
-      "properties": {
-        "instanceIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set."
-        }
-      },
-      "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
-    },
-    "VirtualMachineScaleSetVMInstanceRequiredIDs": {
-      "properties": {
-        "instanceIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The virtual machine scale set instance ids."
-        }
-      },
-      "required": [
-        "instanceIds"
-      ],
-      "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
-    },
-    "VirtualMachineStatusCodeCount": {
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The instance view status code."
-        },
-        "count": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of instances having a particular status code."
-        }
-      },
-      "description": "The status code and count of the virtual machine scale set instance view status summary."
-    },
-    "VirtualMachineScaleSetInstanceViewStatusesSummary": {
-      "properties": {
-        "statusesSummary": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineStatusCodeCount"
-          },
-          "description": "The extensions information."
-        }
-      },
-      "description": "Instance view statuses summary for virtual machines of a virtual machine scale set."
-    },
-    "VirtualMachineScaleSetVMExtensionsSummary": {
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The extension name."
-        },
-        "statusesSummary": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineStatusCodeCount"
-          },
-          "description": "The extensions information."
-        }
-      },
-      "description": "Extensions summary for virtual machines of a virtual machine scale set."
-    },
-    "OrchestrationServiceSummary": {
-      "properties": {
-        "serviceName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the service.",
-          "enum": [
-            "AutomaticRepairs"
-          ],
-          "x-ms-enum": {
-            "name": "OrchestrationServiceNames",
-            "modelAsString": true
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkConfigurationProperties"
           }
         },
-        "serviceState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The current state of the service.",
-          "enum": [
-            "NotRunning",
-            "Running",
-            "Suspended"
-          ],
-          "x-ms-enum": {
-            "name": "OrchestrationServiceState",
-            "modelAsString": true
+        "allOf": [
+          {
+            "$ref": "#/definitions/SubResource"
           }
-        }
+        ],
+        "description": "Describes a virtual machine scale set network profile's network configurations."
       },
-      "description": "Summary for an orchestration service of a virtual machine scale set."
-    },
-    "VirtualMachineScaleSetInstanceView": {
-      "properties": {
-        "virtualMachine": {
-          "$ref": "#/definitions/VirtualMachineScaleSetInstanceViewStatusesSummary",
-          "readOnly": true,
-          "description": "The instance view status summary for the virtual machine scale set."
-        },
-        "extensions": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetVMExtensionsSummary"
-          },
-          "description": "The extensions information."
-        },
-        "statuses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
-          },
-          "description": "The resource status information."
-        },
-        "orchestrationServices": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OrchestrationServiceSummary"
-          },
-          "description": "The orchestration services information."
-        }
-      },
-      "description": "The instance view of a virtual machine scale set."
-    },
-    "VirtualMachineScaleSetListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSet"
-          },
-          "description": "The list of virtual machine scale sets."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List Virtual Machine operation response."
-    },
-    "VirtualMachineScaleSetListWithLinkResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSet"
-          },
-          "description": "The list of virtual machine scale sets."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List Virtual Machine operation response."
-    },
-    "VirtualMachineScaleSetSkuCapacity": {
-      "properties": {
-        "minimum": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int64",
-          "description": "The minimum capacity."
-        },
-        "maximum": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int64",
-          "description": "The maximum capacity that can be set."
-        },
-        "defaultCapacity": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int64",
-          "description": "The default capacity."
-        },
-        "scaleType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The scale type applicable to the sku.",
-          "enum": [
-            "Automatic",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualMachineScaleSetSkuScaleType",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "Describes scaling information of a sku."
-    },
-    "VirtualMachineScaleSetSku": {
-      "properties": {
-        "resourceType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of resource the sku applies to."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "readOnly": true,
-          "description": "The Sku."
-        },
-        "capacity": {
-          "$ref": "#/definitions/VirtualMachineScaleSetSkuCapacity",
-          "readOnly": true,
-          "description": "Specifies the number of virtual machines in the scale set."
-        }
-      },
-      "description": "Describes an available virtual machine scale set sku."
-    },
-    "VirtualMachineScaleSetListSkusResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetSku"
-          },
-          "description": "The list of skus available for the virtual machine scale set."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The Virtual Machine Scale Set List Skus operation response."
-    },
-    "RollbackStatusInfo": {
-      "properties": {
-        "successfullyRolledbackInstanceCount": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of instances which have been successfully rolled back."
-        },
-        "failedRolledbackInstanceCount": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of instances which failed to rollback."
-        },
-        "rollbackError": {
-          "$ref": "#/definitions/ApiError",
-          "readOnly": true,
-          "description": "Error details if OS rollback failed."
-        }
-      },
-      "description": "Information about rollback on failed VM instances after a OS Upgrade operation."
-    },
-    "UpgradeOperationHistoryStatus": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Code indicating the current status of the upgrade.",
-          "enum": [
-            "RollingForward",
-            "Cancelled",
-            "Completed",
-            "Faulted"
-          ],
-          "x-ms-enum": {
-            "name": "UpgradeState",
-            "modelAsString": false
-          }
-        },
-        "startTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the upgrade."
-        },
-        "endTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the upgrade."
-        }
-      },
-      "description": "Information about the current running state of the overall upgrade."
-    },
-    "UpgradeOperationHistoricalStatusInfoProperties": {
-      "properties": {
-        "runningStatus": {
-          "$ref": "#/definitions/UpgradeOperationHistoryStatus",
-          "readOnly": true,
-          "description": "Information about the overall status of the upgrade operation."
-        },
-        "progress": {
-          "$ref": "#/definitions/RollingUpgradeProgressInfo",
-          "readOnly": true,
-          "description": "Counts of the VMs in each state."
-        },
-        "error": {
-          "$ref": "#/definitions/ApiError",
-          "readOnly": true,
-          "description": "Error Details for this upgrade if there are any."
-        },
-        "startedBy": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Invoker of the Upgrade Operation",
-          "enum": [
-            "Unknown",
-            "User",
-            "Platform"
-          ],
-          "x-ms-enum": {
-            "name": "UpgradeOperationInvoker",
-            "modelAsString": false
-          }
-        },
-        "targetImageReference": {
-          "$ref": "#/definitions/ImageReference",
-          "readOnly": true,
-          "description": "Image Reference details"
-        },
-        "rollbackInfo": {
-          "$ref": "#/definitions/RollbackStatusInfo",
-          "readOnly": true,
-          "description": "Information about OS rollback if performed"
-        }
-      },
-      "description": "Describes each OS upgrade on the Virtual Machine Scale Set."
-    },
-    "UpgradeOperationHistoricalStatusInfo": {
-      "properties": {
+      "VirtualMachineScaleSetNetworkConfigurationDnsSettings": {
         "properties": {
-          "$ref": "#/definitions/UpgradeOperationHistoricalStatusInfoProperties",
-          "readOnly": true,
-          "description": "Information about the properties of the upgrade operation."
+          "dnsServers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of DNS servers IP addresses"
+          }
         },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource location"
-        }
+        "description": "Describes a virtual machines scale sets network configuration's DNS settings."
       },
-      "description": "Virtual Machine Scale Set OS Upgrade History operation response."
-    },
-    "VirtualMachineScaleSetListOSUpgradeHistory": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UpgradeOperationHistoricalStatusInfo"
-          },
-          "description": "The list of OS upgrades performed on the virtual machine scale set."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "List of Virtual Machine Scale Set OS Upgrade History operation response."
-    },
-    "VirtualMachineScaleSetVMProperties": {
-      "properties": {
-        "latestModelApplied": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Specifies whether the latest model has been applied to the virtual machine."
-        },
-        "vmId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Azure VM unique ID."
-        },
-        "instanceView": {
-          "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceView",
-          "readOnly": true,
-          "description": "The virtual machine instance view."
-        },
-        "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
-          "description": "Specifies the hardware settings for the virtual machine."
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
-          "description": "Specifies the storage settings for the virtual machine disks."
-        },
-        "additionalCapabilities": {
-          "$ref": "#/definitions/AdditionalCapabilities",
-          "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
-        },
-        "osProfile": {
-          "$ref": "#/definitions/OSProfile",
-          "description": "Specifies the operating system settings for the virtual machine."
-        },
-        "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
-          "description": "Specifies the Security related profile settings for the virtual machine."
-        },
-        "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile",
-          "description": "Specifies the network interfaces of the virtual machine."
-        },
-        "networkProfileConfiguration": {
-          "$ref": "#/definitions/VirtualMachineScaleSetVMNetworkProfileConfiguration",
-          "description": "Specifies the network profile configuration of the virtual machine."
-        },
-        "diagnosticsProfile": {
-          "$ref": "#/definitions/DiagnosticsProfile",
-          "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
-        },
-        "availabilitySet": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response."
-        },
-        "licenseType": {
-          "type": "string",
-          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
-        },
-        "modelDefinitionApplied": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Specifies whether the model applied to the virtual machine is the model of the virtual machine scale set or the customized model for the virtual machine."
-        },
-        "protectionPolicy": {
-          "$ref": "#/definitions/VirtualMachineScaleSetVMProtectionPolicy",
-          "description": "Specifies the protection policy of the virtual machine."
-        }
-      },
-      "description": "Describes the properties of a virtual machine scale set virtual machine."
-    },
-    "VirtualMachineScaleSetVM": {
-      "properties": {
-        "instanceId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The virtual machine instance ID."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "readOnly": true,
-          "description": "The virtual machine SKU."
-        },
+      "VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineScaleSetVMProperties"
+          "domainNameLabel": {
+            "type": "string",
+            "description": "The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created"
+          }
         },
-        "plan": {
-          "$ref": "#/definitions/Plan",
-          "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
-        },
-        "resources": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineExtension"
+        "required": [
+          "domainNameLabel"
+        ],
+        "description": "Describes a virtual machines scale sets network configuration's DNS settings."
+      },
+      "VirtualMachineScaleSetIpTag": {
+        "properties": {
+          "ipTagType": {
+            "type": "string",
+            "description": "IP tag type. Example: FirstPartyUsage."
           },
-          "description": "The virtual machine child extension resources."
+          "tag": {
+            "type": "string",
+            "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
+          }
         },
-        "zones": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
+        "description": "Contains the IP tag associated with the public IP address."
+      },
+      "VirtualMachineScaleSetPublicIPAddressConfiguration": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The publicIP address configuration name."
           },
-          "description": "The virtual machine zones."
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationProperties"
+          },
+          "sku": {
+            "$ref": "#/definitions/PublicIPAddressSku"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
+      },
+      "VirtualMachineScaleSetUpdatePublicIPAddressConfiguration": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The publicIP address configuration name."
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties"
+          }
+        },
+        "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
+      },
+      "VirtualMachineScaleSetPublicIPAddressConfigurationProperties": {
+        "properties": {
+          "idleTimeoutInMinutes": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The idle timeout of the public IP address."
+          },
+          "dnsSettings": {
+            "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings",
+            "description": "The dns settings to be applied on the publicIP addresses ."
+          },
+          "ipTags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineScaleSetIpTag"
+            },
+            "description": "The list of IP tags associated with the public IP address."
+          },
+          "publicIPPrefix": {
+            "$ref": "#/definitions/SubResource",
+            "description": "The PublicIPPrefix from which to allocate publicIP addresses."
+          },
+          "publicIPAddressVersion": {
+            "type": "string",
+            "description": "Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.",
+            "enum": [
+              "IPv4",
+              "IPv6"
+            ],
+            "x-ms-enum": {
+              "name": "IPVersion",
+              "modelAsString": true
+            }
+          },
+          "deleteOption": {
+            "type": "string",
+            "description": "Specify what happens to the public IP when the VM is deleted",
+            "enum": [
+              "Delete",
+              "Detach"
+            ],
+            "x-ms-enum": {
+              "name": "DeleteOptions",
+              "modelAsString": true
+            }
+          }
+        },
+        "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
+      },
+      "VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties": {
+        "properties": {
+          "idleTimeoutInMinutes": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The idle timeout of the public IP address."
+          },
+          "dnsSettings": {
+            "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings",
+            "description": "The dns settings to be applied on the publicIP addresses ."
+          },
+          "deleteOption": {
+            "type": "string",
+            "description": "Specify what happens to the public IP when the VM is deleted",
+            "enum": [
+              "Delete",
+              "Detach"
+            ],
+            "x-ms-enum": {
+              "name": "DeleteOptions",
+              "modelAsString": true
+            }
+          }
+        },
+        "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
+      },
+      "VirtualMachineScaleSetNetworkProfile": {
+        "properties": {
+          "healthProbe": {
+            "$ref": "#/definitions/ApiEntityReference",
+            "description": "A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'."
+          },
+          "networkInterfaceConfigurations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
+            },
+            "description": "The list of network configurations."
+          },
+          "networkApiVersion": {
+            "type": "string",
+            "description": "specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'",
+            "enum": [
+              "2020-11-01"
+            ],
+            "x-ms-enum": {
+              "name": "NetworkApiVersion",
+              "modelAsString": true
+            }
+          }
+        },
+        "description": "Describes a virtual machine scale set network profile."
+      },
+      "VirtualMachineScaleSetUpdateNetworkProfile": {
+        "properties": {
+          "healthProbe": {
+            "$ref": "#/definitions/ApiEntityReference",
+            "description": "A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'."
+          },
+          "networkInterfaceConfigurations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkConfiguration"
+            },
+            "description": "The list of network configurations."
+          },
+          "networkApiVersion": {
+            "type": "string",
+            "description": "specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'",
+            "enum": [
+              "2020-11-01"
+            ],
+            "x-ms-enum": {
+              "name": "NetworkApiVersion",
+              "modelAsString": true
+            }
+          }
+        },
+        "description": "Describes a virtual machine scale set network profile."
+      },
+      "VirtualMachineScaleSetExtensionProperties": {
+        "properties": {
+          "forceUpdateTag": {
+            "type": "string",
+            "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
+          },
+          "publisher": {
+            "type": "string",
+            "description": "The name of the extension handler publisher."
+          },
+          "type": {
+            "type": "string",
+            "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+          },
+          "typeHandlerVersion": {
+            "type": "string",
+            "description": "Specifies the version of the script handler."
+          },
+          "autoUpgradeMinorVersion": {
+            "type": "boolean",
+            "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+          },
+          "enableAutomaticUpgrade": {
+            "type": "boolean",
+            "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
+          },
+          "settings": {
+            "type": "object",
+            "description": "Json formatted public settings for the extension."
+          },
+          "protectedSettings": {
+            "type": "object",
+            "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+          },
+          "provisioningState": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The provisioning state, which only appears in the response."
+          },
+          "provisionAfterExtensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Collection of extension names after which this extension needs to be provisioned."
+          }
+        },
+        "description": "Describes the properties of a Virtual Machine Scale Set Extension."
+      },
+      "VirtualMachineScaleSetExtension": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the extension."
+          },
+          "type": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource type"
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/SubResourceReadOnly"
+          }
+        ],
+        "description": "Describes a Virtual Machine Scale Set Extension."
+      },
+      "VirtualMachineScaleSetExtensionUpdate": {
+        "properties": {
+          "name": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The name of the extension."
+          },
+          "type": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource type"
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/SubResourceReadOnly"
+          }
+        ],
+        "description": "Describes a Virtual Machine Scale Set Extension."
+      },
+      "VirtualMachineScaleSetExtensionListResult": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+            },
+            "description": "The list of VM scale set extensions."
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions."
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "description": "The List VM scale set extension operation response."
+      },
+      "VirtualMachineScaleSetExtensionProfile": {
+        "properties": {
+          "extensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+            },
+            "description": "The virtual machine scale set child extension resources."
+          },
+          "extensionsTimeBudget": {
+            "type": "string",
+            "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). <br><br> Minimum api-version: 2020-06-01"
+          }
+        },
+        "description": "Describes a virtual machine scale set extension profile."
+      },
+      "VirtualMachineScaleSetVMProfile": {
+        "properties": {
+          "osProfile": {
+            "$ref": "#/definitions/VirtualMachineScaleSetOSProfile",
+            "description": "Specifies the operating system settings for the virtual machines in the scale set."
+          },
+          "storageProfile": {
+            "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
+            "description": "Specifies the storage settings for the virtual machine disks."
+          },
+          "networkProfile": {
+            "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
+            "description": "Specifies properties of the network interfaces of the virtual machines in the scale set."
+          },
+          "securityProfile": {
+            "$ref": "#/definitions/SecurityProfile",
+            "description": "Specifies the Security related profile settings for the virtual machines in the scale set."
+          },
+          "diagnosticsProfile": {
+            "$ref": "#/definitions/DiagnosticsProfile",
+            "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
+          },
+          "extensionProfile": {
+            "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile",
+            "description": "Specifies a collection of settings for extensions installed on virtual machines in the scale set."
+          },
+          "licenseType": {
+            "type": "string",
+            "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
+          },
+          "priority": {
+            "$ref": "#/definitions/priority",
+            "description": "Specifies the priority for the virtual machines in the scale set. <br><br>Minimum api-version: 2017-10-30-preview"
+          },
+          "evictionPolicy": {
+            "$ref": "#/definitions/evictionPolicy",
+            "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
+          },
+          "billingProfile": {
+            "$ref": "#/definitions/BillingProfile",
+            "description": "Specifies the billing related details of a Azure Spot VMSS. <br><br>Minimum api-version: 2019-03-01."
+          },
+          "scheduledEventsProfile": {
+            "$ref": "#/definitions/ScheduledEventsProfile",
+            "description": "Specifies Scheduled Event related configurations."
+          }
+        },
+        "description": "Describes a virtual machine scale set virtual machine profile."
+      },
+      "VirtualMachineScaleSetUpdateVMProfile": {
+        "properties": {
+          "osProfile": {
+            "$ref": "#/definitions/VirtualMachineScaleSetUpdateOSProfile",
+            "description": "The virtual machine scale set OS profile."
+          },
+          "storageProfile": {
+            "$ref": "#/definitions/VirtualMachineScaleSetUpdateStorageProfile",
+            "description": "The virtual machine scale set storage profile."
+          },
+          "networkProfile": {
+            "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkProfile",
+            "description": "The virtual machine scale set network profile."
+          },
+          "securityProfile": {
+            "$ref": "#/definitions/SecurityProfile",
+            "description": "The virtual machine scale set Security profile"
+          },
+          "diagnosticsProfile": {
+            "$ref": "#/definitions/DiagnosticsProfile",
+            "description": "The virtual machine scale set diagnostics profile."
+          },
+          "extensionProfile": {
+            "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile",
+            "description": "The virtual machine scale set extension profile."
+          },
+          "licenseType": {
+            "type": "string",
+            "description": "The license type, which is for bring your own license scenario."
+          },
+          "billingProfile": {
+            "$ref": "#/definitions/BillingProfile",
+            "description": "Specifies the billing related details of a Azure Spot VMSS. <br><br>Minimum api-version: 2019-03-01."
+          },
+          "scheduledEventsProfile": {
+            "$ref": "#/definitions/ScheduledEventsProfile",
+            "description": "Specifies Scheduled Event related configurations."
+          }
+        },
+        "description": "Describes a virtual machine scale set virtual machine profile."
+      },
+      "VirtualMachineScaleSetProperties": {
+        "properties": {
+          "upgradePolicy": {
+            "$ref": "#/definitions/UpgradePolicy",
+            "description": "The upgrade policy."
+          },
+          "automaticRepairsPolicy": {
+            "$ref": "#/definitions/AutomaticRepairsPolicy",
+            "description": "Policy for automatic repairs."
+          },
+          "virtualMachineProfile": {
+            "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
+            "description": "The virtual machine profile."
+          },
+          "provisioningState": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The provisioning state, which only appears in the response."
+          },
+          "overprovision": {
+            "type": "boolean",
+            "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
+          },
+          "doNotRunExtensionsOnOverprovisionedVMs": {
+            "type": "boolean",
+            "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
+          },
+          "uniqueId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Specifies the ID which uniquely identifies a Virtual Machine Scale Set."
+          },
+          "singlePlacementGroup": {
+            "type": "boolean",
+            "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true."
+          },
+          "zoneBalance": {
+            "type": "boolean",
+            "description": "Whether to force strictly even Virtual Machine distribution cross x-zones in case there is zone outage."
+          },
+          "platformFaultDomainCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Fault Domain count for each placement group."
+          },
+          "proximityPlacementGroup": {
+            "$ref": "#/definitions/SubResource",
+            "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+          },
+          "hostGroup": {
+            "$ref": "#/definitions/SubResource",
+            "description": "Specifies information about the dedicated host group that the virtual machine scale set resides in. <br><br>Minimum api-version: 2020-06-01."
+          },
+          "additionalCapabilities": {
+            "$ref": "#/definitions/AdditionalCapabilities",
+            "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+          },
+          "scaleInPolicy": {
+            "$ref": "#/definitions/ScaleInPolicy",
+            "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
+          },
+          "orchestrationMode": {
+            "$ref": "#/definitions/OrchestrationMode",
+            "description": "Specifies the orchestration mode for the virtual machine scale set."
+          }
+        },
+        "description": "Describes the properties of a Virtual Machine Scale Set."
+      },
+      "VirtualMachineScaleSetUpdateProperties": {
+        "properties": {
+          "upgradePolicy": {
+            "$ref": "#/definitions/UpgradePolicy",
+            "description": "The upgrade policy."
+          },
+          "automaticRepairsPolicy": {
+            "$ref": "#/definitions/AutomaticRepairsPolicy",
+            "description": "Policy for automatic repairs."
+          },
+          "virtualMachineProfile": {
+            "$ref": "#/definitions/VirtualMachineScaleSetUpdateVMProfile",
+            "description": "The virtual machine profile."
+          },
+          "overprovision": {
+            "type": "boolean",
+            "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
+          },
+          "doNotRunExtensionsOnOverprovisionedVMs": {
+            "type": "boolean",
+            "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
+          },
+          "singlePlacementGroup": {
+            "type": "boolean",
+            "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true."
+          },
+          "additionalCapabilities": {
+            "$ref": "#/definitions/AdditionalCapabilities",
+            "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+          },
+          "scaleInPolicy": {
+            "$ref": "#/definitions/ScaleInPolicy",
+            "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
+          },
+          "proximityPlacementGroup": {
+            "$ref": "#/definitions/SubResource",
+            "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+          }
+        },
+        "description": "Describes the properties of a Virtual Machine Scale Set."
+      },
+      "VirtualMachineScaleSet": {
+        "properties": {
+          "sku": {
+            "$ref": "#/definitions/Sku",
+            "description": "The virtual machine scale set sku."
+          },
+          "plan": {
+            "$ref": "#/definitions/Plan",
+            "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineScaleSetProperties"
+          },
+          "identity": {
+            "$ref": "#/definitions/VirtualMachineScaleSetIdentity",
+            "description": "The identity of the virtual machine scale set, if configured."
+          },
+          "zones": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set"
+          },
+          "extendedLocation": {
+            "$ref": "#/definitions/ExtendedLocation",
+            "description": "The extended location of the Virtual Machine Scale Set."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          }
+        ],
+        "description": "Describes a Virtual Machine Scale Set."
+      },
+      "VirtualMachineScaleSetVMReimageParameters": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/VirtualMachineReimageParameters"
+          }
+        ],
+        "description": "Describes a Virtual Machine Scale Set VM Reimage Parameters."
+      },
+      "VirtualMachineScaleSetReimageParameters": {
+        "properties": {
+          "instanceIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/VirtualMachineScaleSetVMReimageParameters"
+          }
+        ],
+        "description": "Describes a Virtual Machine Scale Set VM Reimage Parameters."
+      },
+      "VirtualMachineScaleSetUpdate": {
+        "properties": {
+          "sku": {
+            "$ref": "#/definitions/Sku",
+            "description": "The virtual machine scale set sku."
+          },
+          "plan": {
+            "$ref": "#/definitions/Plan",
+            "description": "The purchase plan when deploying a virtual machine scale set from VM Marketplace images."
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineScaleSetUpdateProperties"
+          },
+          "identity": {
+            "$ref": "#/definitions/VirtualMachineScaleSetIdentity",
+            "description": "The identity of the virtual machine scale set, if configured."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/UpdateResource"
+          }
+        ],
+        "description": "Describes a Virtual Machine Scale Set."
+      },
+      "VirtualMachineScaleSetVMInstanceIDs": {
+        "properties": {
+          "instanceIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set."
+          }
+        },
+        "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
+      },
+      "VirtualMachineScaleSetVMInstanceRequiredIDs": {
+        "properties": {
+          "instanceIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The virtual machine scale set instance ids."
+          }
+        },
+        "required": [
+          "instanceIds"
+        ],
+        "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
+      },
+      "VirtualMachineStatusCodeCount": {
+        "properties": {
+          "code": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The instance view status code."
+          },
+          "count": {
+            "readOnly": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of instances having a particular status code."
+          }
+        },
+        "description": "The status code and count of the virtual machine scale set instance view status summary."
+      },
+      "VirtualMachineScaleSetInstanceViewStatusesSummary": {
+        "properties": {
+          "statusesSummary": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineStatusCodeCount"
+            },
+            "description": "The extensions information."
+          }
+        },
+        "description": "Instance view statuses summary for virtual machines of a virtual machine scale set."
+      },
+      "VirtualMachineScaleSetVMExtensionsSummary": {
+        "properties": {
+          "name": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The extension name."
+          },
+          "statusesSummary": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineStatusCodeCount"
+            },
+            "description": "The extensions information."
+          }
+        },
+        "description": "Extensions summary for virtual machines of a virtual machine scale set."
+      },
+      "OrchestrationServiceSummary": {
+        "properties": {
+          "serviceName": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The name of the service.",
+            "enum": [
+              "AutomaticRepairs"
+            ],
+            "x-ms-enum": {
+              "name": "OrchestrationServiceNames",
+              "modelAsString": true
+            }
+          },
+          "serviceState": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The current state of the service.",
+            "enum": [
+              "NotRunning",
+              "Running",
+              "Suspended"
+            ],
+            "x-ms-enum": {
+              "name": "OrchestrationServiceState",
+              "modelAsString": true
+            }
+          }
+        },
+        "description": "Summary for an orchestration service of a virtual machine scale set."
+      },
+      "VirtualMachineScaleSetInstanceView": {
+        "properties": {
+          "virtualMachine": {
+            "$ref": "#/definitions/VirtualMachineScaleSetInstanceViewStatusesSummary",
+            "readOnly": true,
+            "description": "The instance view status summary for the virtual machine scale set."
+          },
+          "extensions": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMExtensionsSummary"
+            },
+            "description": "The extensions information."
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/InstanceViewStatus"
+            },
+            "description": "The resource status information."
+          },
+          "orchestrationServices": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/OrchestrationServiceSummary"
+            },
+            "description": "The orchestration services information."
+          }
+        },
+        "description": "The instance view of a virtual machine scale set."
+      },
+      "VirtualMachineScaleSetListResult": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineScaleSet"
+            },
+            "description": "The list of virtual machine scale sets."
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "description": "The List Virtual Machine operation response."
+      },
+      "VirtualMachineScaleSetListWithLinkResult": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineScaleSet"
+            },
+            "description": "The list of virtual machine scale sets."
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "description": "The List Virtual Machine operation response."
+      },
+      "VirtualMachineScaleSetSkuCapacity": {
+        "properties": {
+          "minimum": {
+            "readOnly": true,
+            "type": "integer",
+            "format": "int64",
+            "description": "The minimum capacity."
+          },
+          "maximum": {
+            "readOnly": true,
+            "type": "integer",
+            "format": "int64",
+            "description": "The maximum capacity that can be set."
+          },
+          "defaultCapacity": {
+            "readOnly": true,
+            "type": "integer",
+            "format": "int64",
+            "description": "The default capacity."
+          },
+          "scaleType": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The scale type applicable to the sku.",
+            "enum": [
+              "Automatic",
+              "None"
+            ],
+            "x-ms-enum": {
+              "name": "VirtualMachineScaleSetSkuScaleType",
+              "modelAsString": false
+            }
+          }
+        },
+        "description": "Describes scaling information of a sku."
+      },
+      "VirtualMachineScaleSetSku": {
+        "properties": {
+          "resourceType": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The type of resource the sku applies to."
+          },
+          "sku": {
+            "$ref": "#/definitions/Sku",
+            "readOnly": true,
+            "description": "The Sku."
+          },
+          "capacity": {
+            "$ref": "#/definitions/VirtualMachineScaleSetSkuCapacity",
+            "readOnly": true,
+            "description": "Specifies the number of virtual machines in the scale set."
+          }
+        },
+        "description": "Describes an available virtual machine scale set sku."
+      },
+      "VirtualMachineScaleSetListSkusResult": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineScaleSetSku"
+            },
+            "description": "The list of skus available for the virtual machine scale set."
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "description": "The Virtual Machine Scale Set List Skus operation response."
+      },
+      "RollbackStatusInfo": {
+        "properties": {
+          "successfullyRolledbackInstanceCount": {
+            "readOnly": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of instances which have been successfully rolled back."
+          },
+          "failedRolledbackInstanceCount": {
+            "readOnly": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of instances which failed to rollback."
+          },
+          "rollbackError": {
+            "$ref": "#/definitions/ApiError",
+            "readOnly": true,
+            "description": "Error details if OS rollback failed."
+          }
+        },
+        "description": "Information about rollback on failed VM instances after a OS Upgrade operation."
+      },
+      "UpgradeOperationHistoryStatus": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Code indicating the current status of the upgrade.",
+            "enum": [
+              "RollingForward",
+              "Cancelled",
+              "Completed",
+              "Faulted"
+            ],
+            "x-ms-enum": {
+              "name": "UpgradeState",
+              "modelAsString": false
+            }
+          },
+          "startTime": {
+            "readOnly": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "Start time of the upgrade."
+          },
+          "endTime": {
+            "readOnly": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "End time of the upgrade."
+          }
+        },
+        "description": "Information about the current running state of the overall upgrade."
+      },
+      "UpgradeOperationHistoricalStatusInfoProperties": {
+        "properties": {
+          "runningStatus": {
+            "$ref": "#/definitions/UpgradeOperationHistoryStatus",
+            "readOnly": true,
+            "description": "Information about the overall status of the upgrade operation."
+          },
+          "progress": {
+            "$ref": "#/definitions/RollingUpgradeProgressInfo",
+            "readOnly": true,
+            "description": "Counts of the VMs in each state."
+          },
+          "error": {
+            "$ref": "#/definitions/ApiError",
+            "readOnly": true,
+            "description": "Error Details for this upgrade if there are any."
+          },
+          "startedBy": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Invoker of the Upgrade Operation",
+            "enum": [
+              "Unknown",
+              "User",
+              "Platform"
+            ],
+            "x-ms-enum": {
+              "name": "UpgradeOperationInvoker",
+              "modelAsString": false
+            }
+          },
+          "targetImageReference": {
+            "$ref": "#/definitions/ImageReference",
+            "readOnly": true,
+            "description": "Image Reference details"
+          },
+          "rollbackInfo": {
+            "$ref": "#/definitions/RollbackStatusInfo",
+            "readOnly": true,
+            "description": "Information about OS rollback if performed"
+          }
+        },
+        "description": "Describes each OS upgrade on the Virtual Machine Scale Set."
+      },
+      "UpgradeOperationHistoricalStatusInfo": {
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/UpgradeOperationHistoricalStatusInfoProperties",
+            "readOnly": true,
+            "description": "Information about the properties of the upgrade operation."
+          },
+          "type": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource type"
+          },
+          "location": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource location"
+          }
+        },
+        "description": "Virtual Machine Scale Set OS Upgrade History operation response."
+      },
+      "VirtualMachineScaleSetListOSUpgradeHistory": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/UpgradeOperationHistoricalStatusInfo"
+            },
+            "description": "The list of OS upgrades performed on the virtual machine scale set."
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "description": "List of Virtual Machine Scale Set OS Upgrade History operation response."
+      },
+      "VirtualMachineScaleSetVMProperties": {
+        "properties": {
+          "latestModelApplied": {
+            "readOnly": true,
+            "type": "boolean",
+            "description": "Specifies whether the latest model has been applied to the virtual machine."
+          },
+          "vmId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Azure VM unique ID."
+          },
+          "instanceView": {
+            "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceView",
+            "readOnly": true,
+            "description": "The virtual machine instance view."
+          },
+          "hardwareProfile": {
+            "$ref": "#/definitions/HardwareProfile",
+            "description": "Specifies the hardware settings for the virtual machine."
+          },
+          "storageProfile": {
+            "$ref": "#/definitions/StorageProfile",
+            "description": "Specifies the storage settings for the virtual machine disks."
+          },
+          "additionalCapabilities": {
+            "$ref": "#/definitions/AdditionalCapabilities",
+            "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+          },
+          "osProfile": {
+            "$ref": "#/definitions/OSProfile",
+            "description": "Specifies the operating system settings for the virtual machine."
+          },
+          "securityProfile": {
+            "$ref": "#/definitions/SecurityProfile",
+            "description": "Specifies the Security related profile settings for the virtual machine."
+          },
+          "networkProfile": {
+            "$ref": "#/definitions/NetworkProfile",
+            "description": "Specifies the network interfaces of the virtual machine."
+          },
+          "networkProfileConfiguration": {
+            "$ref": "#/definitions/VirtualMachineScaleSetVMNetworkProfileConfiguration",
+            "description": "Specifies the network profile configuration of the virtual machine."
+          },
+          "diagnosticsProfile": {
+            "$ref": "#/definitions/DiagnosticsProfile",
+            "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
+          },
+          "availabilitySet": {
+            "$ref": "#/definitions/SubResource",
+            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+          },
+          "provisioningState": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The provisioning state, which only appears in the response."
+          },
+          "licenseType": {
+            "type": "string",
+            "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
+          },
+          "modelDefinitionApplied": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Specifies whether the model applied to the virtual machine is the model of the virtual machine scale set or the customized model for the virtual machine."
+          },
+          "protectionPolicy": {
+            "$ref": "#/definitions/VirtualMachineScaleSetVMProtectionPolicy",
+            "description": "Specifies the protection policy of the virtual machine."
+          }
+        },
+        "description": "Describes the properties of a virtual machine scale set virtual machine."
+      },
+      "VirtualMachineScaleSetVM": {
+        "properties": {
+          "instanceId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The virtual machine instance ID."
+          },
+          "sku": {
+            "$ref": "#/definitions/Sku",
+            "readOnly": true,
+            "description": "The virtual machine SKU."
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineScaleSetVMProperties"
+          },
+          "plan": {
+            "$ref": "#/definitions/Plan",
+            "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
+          },
+          "resources": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineExtension"
+            },
+            "description": "The virtual machine child extension resources."
+          },
+          "zones": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The virtual machine zones."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          }
+        ],
+        "description": "Describes a virtual machine scale set virtual machine."
+      },
+      "VirtualMachineScaleSetVMInstanceView": {
+        "properties": {
+          "platformUpdateDomain": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The Update Domain count."
+          },
+          "platformFaultDomain": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The Fault Domain count."
+          },
+          "rdpThumbPrint": {
+            "type": "string",
+            "description": "The Remote desktop certificate thumbprint."
+          },
+          "vmAgent": {
+            "$ref": "#/definitions/VirtualMachineAgentInstanceView",
+            "description": "The VM Agent running on the virtual machine."
+          },
+          "maintenanceRedeployStatus": {
+            "$ref": "#/definitions/MaintenanceRedeployStatus",
+            "description": "The Maintenance Operation status on the virtual machine."
+          },
+          "disks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DiskInstanceView"
+            },
+            "description": "The disks information."
+          },
+          "extensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
+            },
+            "description": "The extensions information."
+          },
+          "vmHealth": {
+            "readOnly": true,
+            "$ref": "#/definitions/VirtualMachineHealthStatus",
+            "description": "The health status for the VM."
+          },
+          "bootDiagnostics": {
+            "$ref": "#/definitions/BootDiagnosticsInstanceView",
+            "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/InstanceViewStatus"
+            },
+            "description": "The resource status information."
+          },
+          "assignedHost": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. <br><br>Minimum api-version: 2020-06-01."
+          },
+          "placementGroupId": {
+            "type": "string",
+            "description": "The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId."
+          }
+        },
+        "description": "The instance view of a virtual machine scale set VM."
+      },
+      "VirtualMachineScaleSetVMNetworkProfileConfiguration": {
+        "properties": {
+          "networkInterfaceConfigurations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
+            },
+            "description": "The list of network configurations."
+          }
+        },
+        "description": "Describes a virtual machine scale set VM network profile."
+      },
+      "VirtualMachineScaleSetVMProtectionPolicy": {
+        "properties": {
+          "protectFromScaleIn": {
+            "type": "boolean",
+            "description": "Indicates that the virtual machine scale set VM shouldn't be considered for deletion during a scale-in operation."
+          },
+          "protectFromScaleSetActions": {
+            "type": "boolean",
+            "description": "Indicates that model updates or actions (including scale-in) initiated on the virtual machine scale set should not be applied to the virtual machine scale set VM."
+          }
+        },
+        "description": "The protection policy of a virtual machine scale set VM."
+      },
+      "ScheduledEventsProfile": {
+        "type": "object",
+        "properties": {
+          "terminateNotificationProfile": {
+            "$ref": "#/definitions/TerminateNotificationProfile",
+            "description": "Specifies Terminate Scheduled Event related configurations."
+          }
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Describes a virtual machine scale set virtual machine."
-    },
-    "VirtualMachineScaleSetVMInstanceView": {
-      "properties": {
-        "platformUpdateDomain": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The Update Domain count."
-        },
-        "platformFaultDomain": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The Fault Domain count."
-        },
-        "rdpThumbPrint": {
-          "type": "string",
-          "description": "The Remote desktop certificate thumbprint."
-        },
-        "vmAgent": {
-          "$ref": "#/definitions/VirtualMachineAgentInstanceView",
-          "description": "The VM Agent running on the virtual machine."
-        },
-        "maintenanceRedeployStatus": {
-          "$ref": "#/definitions/MaintenanceRedeployStatus",
-          "description": "The Maintenance Operation status on the virtual machine."
-        },
-        "disks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiskInstanceView"
+      "TerminateNotificationProfile": {
+        "type": "object",
+        "properties": {
+          "notBeforeTimeout": {
+            "type": "string",
+            "description": "Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)"
           },
-          "description": "The disks information."
-        },
-        "extensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
-          },
-          "description": "The extensions information."
-        },
-        "vmHealth": {
-          "readOnly": true,
-          "$ref": "#/definitions/VirtualMachineHealthStatus",
-          "description": "The health status for the VM."
-        },
-        "bootDiagnostics": {
-          "$ref": "#/definitions/BootDiagnosticsInstanceView",
-          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
-        },
-        "statuses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
-          },
-          "description": "The resource status information."
-        },
-        "assignedHost": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. <br><br>Minimum api-version: 2020-06-01."
-        },
-        "placementGroupId": {
-          "type": "string",
-          "description": "The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId."
+          "enable": {
+            "type": "boolean",
+            "description": "Specifies whether the Terminate Scheduled event is enabled or disabled."
+          }
         }
       },
-      "description": "The instance view of a virtual machine scale set VM."
-    },
-    "VirtualMachineScaleSetVMNetworkProfileConfiguration": {
-      "properties": {
-        "networkInterfaceConfigurations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
-          },
-          "description": "The list of network configurations."
-        }
-      },
-      "description": "Describes a virtual machine scale set VM network profile."
-    },
-    "VirtualMachineScaleSetVMProtectionPolicy": {
-      "properties": {
-        "protectFromScaleIn": {
-          "type": "boolean",
-          "description": "Indicates that the virtual machine scale set VM shouldn't be considered for deletion during a scale-in operation."
+      "VirtualMachineHealthStatus": {
+        "properties": {
+          "status": {
+            "readOnly": true,
+            "$ref": "#/definitions/InstanceViewStatus",
+            "description": "The health status information for the VM."
+          }
         },
-        "protectFromScaleSetActions": {
-          "type": "boolean",
-          "description": "Indicates that model updates or actions (including scale-in) initiated on the virtual machine scale set should not be applied to the virtual machine scale set VM."
+        "description": "The health status of the VM."
+      },
+      "VirtualMachineScaleSetVMListResult": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVM"
+            },
+            "description": "The list of virtual machine scale sets VMs."
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs"
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "description": "The List Virtual Machine Scale Set VMs operation response."
+      },
+      "RollingUpgradeStatusInfo": {
+        "properties": {
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/RollingUpgradeStatusInfoProperties"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          }
+        ],
+        "description": "The status of the latest virtual machine scale set rolling upgrade."
+      },
+      "RollingUpgradeStatusInfoProperties": {
+        "properties": {
+          "policy": {
+            "readOnly": true,
+            "$ref": "#/definitions/RollingUpgradePolicy",
+            "description": "The rolling upgrade policies applied for this upgrade."
+          },
+          "runningStatus": {
+            "readOnly": true,
+            "$ref": "#/definitions/RollingUpgradeRunningStatus",
+            "description": "Information about the current running state of the overall upgrade."
+          },
+          "progress": {
+            "readOnly": true,
+            "$ref": "#/definitions/RollingUpgradeProgressInfo",
+            "description": "Information about the number of virtual machine instances in each upgrade state."
+          },
+          "error": {
+            "readOnly": true,
+            "$ref": "#/definitions/ApiError",
+            "description": "Error details for this upgrade, if there are any."
+          }
+        },
+        "description": "The status of the latest virtual machine scale set rolling upgrade."
+      },
+      "RollingUpgradeRunningStatus": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Code indicating the current status of the upgrade.",
+            "enum": [
+              "RollingForward",
+              "Cancelled",
+              "Completed",
+              "Faulted"
+            ],
+            "x-ms-enum": {
+              "name": "RollingUpgradeStatusCode",
+              "modelAsString": false
+            }
+          },
+          "startTime": {
+            "readOnly": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "Start time of the upgrade."
+          },
+          "lastAction": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The last action performed on the rolling upgrade.",
+            "enum": [
+              "Start",
+              "Cancel"
+            ],
+            "x-ms-enum": {
+              "name": "RollingUpgradeActionType",
+              "modelAsString": false
+            }
+          },
+          "lastActionTime": {
+            "readOnly": true,
+            "type": "string",
+            "format": "date-time",
+            "description": "Last action time of the upgrade."
+          }
+        },
+        "description": "Information about the current running state of the overall upgrade."
+      },
+      "RollingUpgradeProgressInfo": {
+        "properties": {
+          "successfulInstanceCount": {
+            "readOnly": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of instances that have been successfully upgraded."
+          },
+          "failedInstanceCount": {
+            "readOnly": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of instances that have failed to be upgraded successfully."
+          },
+          "inProgressInstanceCount": {
+            "readOnly": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of instances that are currently being upgraded."
+          },
+          "pendingInstanceCount": {
+            "readOnly": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of instances that have not yet begun to be upgraded."
+          }
+        },
+        "description": "Information about the number of virtual machine instances in each upgrade state."
+      },
+      "ApiErrorBase": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The error code."
+          },
+          "target": {
+            "type": "string",
+            "description": "The target of the particular error."
+          },
+          "message": {
+            "type": "string",
+            "description": "The error message."
+          }
+        },
+        "description": "Api error base."
+      },
+      "InnerError": {
+        "properties": {
+          "exceptiontype": {
+            "type": "string",
+            "description": "The exception type."
+          },
+          "errordetail": {
+            "type": "string",
+            "description": "The internal error message or exception dump."
+          }
+        },
+        "description": "Inner error details."
+      },
+      "CloudError": {
+        "x-ms-external": true,
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/ApiError"
+          }
+        },
+        "description": "An error response from the Compute service."
+      },
+      "ApiError": {
+        "properties": {
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ApiErrorBase"
+            },
+            "description": "The Api error details"
+          },
+          "innererror": {
+            "$ref": "#/definitions/InnerError",
+            "description": "The Api inner error"
+          },
+          "code": {
+            "type": "string",
+            "description": "The error code."
+          },
+          "target": {
+            "type": "string",
+            "description": "The target of the particular error."
+          },
+          "message": {
+            "type": "string",
+            "description": "The error message."
+          }
+        },
+        "description": "Api error."
+      },
+      "ProxyResource": {
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource Id"
+          },
+          "name": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource name"
+          },
+          "type": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource type"
+          }
+        },
+        "description": "The resource model definition for an Azure Resource Manager proxy resource. It will not have tags and a location",
+        "x-ms-azure-resource": true
+      },
+      "Resource": {
+        "description": "The Resource model definition.",
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource Id"
+          },
+          "name": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource name"
+          },
+          "type": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource type"
+          },
+          "location": {
+            "type": "string",
+            "description": "Resource location"
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Resource tags"
+          }
+        },
+        "required": [
+          "location"
+        ],
+        "x-ms-azure-resource": true
+      },
+      "UpdateResource": {
+        "description": "The Update Resource model definition.",
+        "properties": {
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Resource tags"
+          }
         }
       },
-      "description": "The protection policy of a virtual machine scale set VM."
-    },
-    "ScheduledEventsProfile": {
-      "type": "object",
-      "properties": {
-        "terminateNotificationProfile": {
-          "$ref": "#/definitions/TerminateNotificationProfile",
-          "description": "Specifies Terminate Scheduled Event related configurations."
+      "SubResource": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Resource Id"
+          }
+        },
+        "x-ms-azure-resource": true
+      },
+      "SubResourceReadOnly": {
+        "properties": {
+          "id": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource Id"
+          }
+        },
+        "x-ms-azure-resource": true
+      },
+      "ExtendedLocationType": {
+        "type": "string",
+        "description": "The type of extendedLocation.",
+        "enum": [
+          "EdgeZone"
+        ],
+        "x-ms-enum": {
+          "name": "ExtendedLocationTypes",
+          "modelAsString": true
         }
+      },
+      "ExtendedLocation": {
+        "description": "The complex type of the extended location.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the extended location."
+          },
+          "type": {
+            "$ref": "#/definitions/ExtendedLocationType",
+            "description": "The type of the extended location."
+          }
+        }
+      },
+      "RecoveryWalkResponse": {
+        "properties": {
+          "walkPerformed": {
+            "type": "boolean",
+            "readOnly": true,
+            "description": "Whether the recovery walk was performed"
+          },
+          "nextPlatformUpdateDomain": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "The next update domain that needs to be walked. Null means walk spanning all update domains has been completed"
+          }
+        },
+        "description": "Response after calling a manual recovery walk"
+      },
+      "RequestRateByIntervalInput": {
+        "properties": {
+          "intervalLength": {
+            "type": "string",
+            "description": "Interval value in minutes used to create LogAnalytics call rate logs.",
+            "enum": [
+              "ThreeMins",
+              "FiveMins",
+              "ThirtyMins",
+              "SixtyMins"
+            ],
+            "x-ms-enum": {
+              "name": "IntervalInMins",
+              "modelAsString": false
+            }
+          }
+        },
+        "required": [
+          "intervalLength"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/LogAnalyticsInputBase"
+          }
+        ],
+        "description": "Api request input for LogAnalytics getRequestRateByInterval Api."
+      },
+      "ThrottledRequestsInput": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/LogAnalyticsInputBase"
+          }
+        ],
+        "description": "Api request input for LogAnalytics getThrottledRequests Api."
+      },
+      "LogAnalyticsInputBase": {
+        "properties": {
+          "blobContainerSasUri": {
+            "type": "string",
+            "description": "SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to."
+          },
+          "fromTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "From time of the query"
+          },
+          "toTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "To time of the query"
+          },
+          "groupByThrottlePolicy": {
+            "type": "boolean",
+            "description": "Group query result by Throttle Policy applied."
+          },
+          "groupByOperationName": {
+            "type": "boolean",
+            "description": "Group query result by Operation Name."
+          },
+          "groupByResourceName": {
+            "type": "boolean",
+            "description": "Group query result by Resource Name."
+          },
+          "groupByClientApplicationId": {
+            "type": "boolean",
+            "description": "Group query result by Client Application ID."
+          },
+          "groupByUserAgent": {
+            "type": "boolean",
+            "description": "Group query result by User Agent."
+          }
+        },
+        "required": [
+          "blobContainerSasUri",
+          "fromTime",
+          "toTime"
+        ],
+        "description": "Api input base class for LogAnalytics Api."
+      },
+      "LogAnalyticsOperationResult": {
+        "properties": {
+          "properties": {
+            "readOnly": true,
+            "$ref": "#/definitions/LogAnalyticsOutput",
+            "description": "LogAnalyticsOutput"
+          }
+        },
+        "description": "LogAnalytics operation status response"
+      },
+      "LogAnalyticsOutput": {
+        "properties": {
+          "output": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Output file Uri path to blob container."
+          }
+        },
+        "description": "LogAnalytics output properties"
+      },
+      "VMScaleSetConvertToSinglePlacementGroupInput": {
+        "properties": {
+          "activePlacementGroupId": {
+            "type": "string",
+            "description": "Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances."
+          }
+        }
+      },
+      "OrchestrationServiceStateInput": {
+        "properties": {
+          "serviceName": {
+            "type": "string",
+            "description": "The name of the service.",
+            "enum": [
+              "AutomaticRepairs"
+            ],
+            "x-ms-enum": {
+              "name": "OrchestrationServiceNames",
+              "modelAsString": true
+            }
+          },
+          "action": {
+            "type": "string",
+            "description": "The action to be performed.",
+            "enum": [
+              "Resume",
+              "Suspend"
+            ],
+            "x-ms-enum": {
+              "name": "OrchestrationServiceStateAction",
+              "modelAsString": true
+            }
+          }
+        },
+        "description": "The input for OrchestrationServiceState",
+        "required": [
+          "serviceName",
+          "action"
+        ]
+      },
+      "PatchSettings": {
+        "properties": {
+          "patchMode": {
+            "type": "string",
+            "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> **AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ",
+            "enum": [
+              "Manual",
+              "AutomaticByOS",
+              "AutomaticByPlatform"
+            ],
+            "x-ms-enum": {
+              "name": "WindowsVMGuestPatchMode",
+              "modelAsString": true
+            }
+          },
+          "enableHotpatching": {
+            "type": "boolean",
+            "description": "Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode' must be set to 'AutomaticByPlatform'."
+          },
+          "assessmentMode": {
+            "type": "string",
+            "description": "Specifies the mode of VM Guest patch assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine.<br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true. ",
+            "enum": [
+              "ImageDefault",
+              "AutomaticByPlatform"
+            ],
+            "x-ms-enum": {
+              "name": "WindowsPatchAssessmentMode",
+              "modelAsString": true
+            }
+          }
+        },
+        "description": "Specifies settings related to VM Guest Patching on Windows."
+      },
+      "LinuxPatchSettings": {
+        "properties": {
+          "patchMode": {
+            "type": "string",
+            "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - The virtual machine's default patching configuration is used. <br /><br /> **AutomaticByPlatform** - The virtual machine will be automatically updated by the platform. The property provisionVMAgent must be true",
+            "enum": [
+              "ImageDefault",
+              "AutomaticByPlatform"
+            ],
+            "x-ms-enum": {
+              "name": "LinuxVMGuestPatchMode",
+              "modelAsString": true
+            }
+          },
+          "assessmentMode": {
+            "type": "string",
+            "description": "Specifies the mode of VM Guest Patch Assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine. <br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.",
+            "enum": [
+              "ImageDefault",
+              "AutomaticByPlatform"
+            ],
+            "x-ms-enum": {
+              "name": "LinuxPatchAssessmentMode",
+              "modelAsString": true
+            }
+          }
+        },
+        "description": "Specifies settings related to VM Guest Patching on Linux."
+      },
+      "VirtualMachinePatchStatus": {
+        "properties": {
+          "availablePatchSummary": {
+            "$ref": "#/definitions/AvailablePatchSummary",
+            "description": "The available patch summary of the latest assessment operation for the virtual machine."
+          },
+          "lastPatchInstallationSummary": {
+            "$ref": "#/definitions/LastPatchInstallationSummary",
+            "description": "The installation summary of the latest installation operation for the virtual machine."
+          },
+          "configurationStatuses": {
+            "description": "The enablement status of the specified patchMode",
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/InstanceViewStatus"
+            }
+          }
+        },
+        "description": "The status of virtual machine patch operations."
+      },
+      "AvailablePatchSummary": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+            "enum": [
+              "Unknown",
+              "InProgress",
+              "Failed",
+              "Succeeded",
+              "CompletedWithWarnings"
+            ],
+            "x-ms-enum": {
+              "name": "PatchOperationStatus",
+              "modelAsString": true
+            }
+          },
+          "assessmentActivityId": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+          },
+          "rebootPending": {
+            "type": "boolean",
+            "readOnly": true,
+            "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred."
+          },
+          "criticalAndSecurityPatchCount": {
+            "type": "integer",
+            "readOnly": true,
+            "format": "int32",
+            "description": "The number of critical or security patches that have been detected as available and not yet installed."
+          },
+          "otherPatchCount": {
+            "type": "integer",
+            "readOnly": true,
+            "format": "int32",
+            "description": "The number of all available patches excluding critical and security."
+          },
+          "startTime": {
+            "type": "string",
+            "readOnly": true,
+            "format": "date-time",
+            "description": "The UTC timestamp when the operation began."
+          },
+          "lastModifiedTime": {
+            "type": "string",
+            "readOnly": true,
+            "format": "date-time",
+            "description": "The UTC timestamp when the operation began."
+          },
+          "error": {
+            "$ref": "#/definitions/ApiError",
+            "readOnly": true,
+            "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+          }
+        },
+        "description": "Describes the properties of an virtual machine instance view for available patch summary."
+      },
+      "LastPatchInstallationSummary": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+            "enum": [
+              "Unknown",
+              "InProgress",
+              "Failed",
+              "Succeeded",
+              "CompletedWithWarnings"
+            ],
+            "x-ms-enum": {
+              "name": "PatchOperationStatus",
+              "modelAsString": true
+            }
+          },
+          "installationActivityId": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+          },
+          "maintenanceWindowExceeded": {
+            "type": "boolean",
+            "readOnly": true,
+            "description": "Describes whether the operation ran out of time before it completed all its intended actions"
+          },
+          "notSelectedPatchCount": {
+            "type": "integer",
+            "readOnly": true,
+            "format": "int32",
+            "description": "The number of all available patches but not going to be installed because it didn't match a classification or inclusion list entry."
+          },
+          "excludedPatchCount": {
+            "type": "integer",
+            "readOnly": true,
+            "format": "int32",
+            "description": "The number of all available patches but excluded explicitly by a customer-specified exclusion list match."
+          },
+          "pendingPatchCount": {
+            "type": "integer",
+            "readOnly": true,
+            "format": "int32",
+            "description": "The number of all available patches expected to be installed over the course of the patch installation operation."
+          },
+          "installedPatchCount": {
+            "type": "integer",
+            "readOnly": true,
+            "format": "int32",
+            "description": "The count of patches that successfully installed."
+          },
+          "failedPatchCount": {
+            "type": "integer",
+            "readOnly": true,
+            "format": "int32",
+            "description": "The count of patches that failed installation."
+          },
+          "startTime": {
+            "type": "string",
+            "readOnly": true,
+            "format": "date-time",
+            "description": "The UTC timestamp when the operation began."
+          },
+          "lastModifiedTime": {
+            "type": "string",
+            "readOnly": true,
+            "format": "date-time",
+            "description": "The UTC timestamp when the operation began."
+          },
+          "error": {
+            "$ref": "#/definitions/ApiError",
+            "readOnly": true,
+            "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+          }
+        },
+        "description": "Describes the properties of the last installed patch summary."
       }
     },
-    "TerminateNotificationProfile": {
-      "type": "object",
-      "properties": {
-        "notBeforeTimeout": {
-          "type": "string",
-          "description": "Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)"
-        },
-        "enable": {
-          "type": "boolean",
-          "description": "Specifies whether the Terminate Scheduled event is enabled or disabled."
-        }
-      }
-    },
-    "VirtualMachineHealthStatus": {
-      "properties": {
-        "status": {
-          "readOnly": true,
-          "$ref": "#/definitions/InstanceViewStatus",
-          "description": "The health status information for the VM."
-        }
-      },
-      "description": "The health status of the VM."
-    },
-    "VirtualMachineScaleSetVMListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetVM"
-          },
-          "description": "The list of virtual machine scale sets VMs."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs"
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List Virtual Machine Scale Set VMs operation response."
-    },
-    "RollingUpgradeStatusInfo": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RollingUpgradeStatusInfoProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "The status of the latest virtual machine scale set rolling upgrade."
-    },
-    "RollingUpgradeStatusInfoProperties": {
-      "properties": {
-        "policy": {
-          "readOnly": true,
-          "$ref": "#/definitions/RollingUpgradePolicy",
-          "description": "The rolling upgrade policies applied for this upgrade."
-        },
-        "runningStatus": {
-          "readOnly": true,
-          "$ref": "#/definitions/RollingUpgradeRunningStatus",
-          "description": "Information about the current running state of the overall upgrade."
-        },
-        "progress": {
-          "readOnly": true,
-          "$ref": "#/definitions/RollingUpgradeProgressInfo",
-          "description": "Information about the number of virtual machine instances in each upgrade state."
-        },
-        "error": {
-          "readOnly": true,
-          "$ref": "#/definitions/ApiError",
-          "description": "Error details for this upgrade, if there are any."
-        }
-      },
-      "description": "The status of the latest virtual machine scale set rolling upgrade."
-    },
-    "RollingUpgradeRunningStatus": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Code indicating the current status of the upgrade.",
-          "enum": [
-            "RollingForward",
-            "Cancelled",
-            "Completed",
-            "Faulted"
-          ],
-          "x-ms-enum": {
-            "name": "RollingUpgradeStatusCode",
-            "modelAsString": false
-          }
-        },
-        "startTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the upgrade."
-        },
-        "lastAction": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The last action performed on the rolling upgrade.",
-          "enum": [
-            "Start",
-            "Cancel"
-          ],
-          "x-ms-enum": {
-            "name": "RollingUpgradeActionType",
-            "modelAsString": false
-          }
-        },
-        "lastActionTime": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "Last action time of the upgrade."
-        }
-      },
-      "description": "Information about the current running state of the overall upgrade."
-    },
-    "RollingUpgradeProgressInfo": {
-      "properties": {
-        "successfulInstanceCount": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of instances that have been successfully upgraded."
-        },
-        "failedInstanceCount": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of instances that have failed to be upgraded successfully."
-        },
-        "inProgressInstanceCount": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of instances that are currently being upgraded."
-        },
-        "pendingInstanceCount": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of instances that have not yet begun to be upgraded."
-        }
-      },
-      "description": "Information about the number of virtual machine instances in each upgrade state."
-    },
-    "ApiErrorBase": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error base."
-    },
-    "InnerError": {
-      "properties": {
-        "exceptiontype": {
-          "type": "string",
-          "description": "The exception type."
-        },
-        "errordetail": {
-          "type": "string",
-          "description": "The internal error message or exception dump."
-        }
-      },
-      "description": "Inner error details."
-    },
-    "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ApiError"
-        }
-      },
-      "description": "An error response from the Compute service."
-    },
-    "ApiError": {
-      "properties": {
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiErrorBase"
-          },
-          "description": "The Api error details"
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "The Api inner error"
-        },
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Api error."
-    },
-    "Resource": {
-      "description": "The Resource model definition.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "UpdateResource": {
-      "description": "The Update Resource model definition.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      }
-    },
-    "SubResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SubResourceReadOnly": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ExtendedLocationType": {
-      "type": "string",
-      "description": "The type of extendedLocation.",
-      "enum": [
-        "EdgeZone"
-      ],
-      "x-ms-enum": {
-        "name": "ExtendedLocationTypes",
-        "modelAsString": true
-      }
-    },
-    "ExtendedLocation": {
-      "description": "The complex type of the extended location.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the extended location."
-        },
-        "type": {
-          "$ref": "#/definitions/ExtendedLocationType",
-          "description": "The type of the extended location."
-        }
-      }
-    },
-    "RecoveryWalkResponse": {
-      "properties": {
-        "walkPerformed": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "Whether the recovery walk was performed"
-        },
-        "nextPlatformUpdateDomain": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "The next update domain that needs to be walked. Null means walk spanning all update domains has been completed"
-        }
-      },
-      "description": "Response after calling a manual recovery walk"
-    },
-    "RequestRateByIntervalInput": {
-      "properties": {
-        "intervalLength": {
-          "type": "string",
-          "description": "Interval value in minutes used to create LogAnalytics call rate logs.",
-          "enum": [
-            "ThreeMins",
-            "FiveMins",
-            "ThirtyMins",
-            "SixtyMins"
-          ],
-          "x-ms-enum": {
-            "name": "IntervalInMins",
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "intervalLength"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/LogAnalyticsInputBase"
-        }
-      ],
-      "description": "Api request input for LogAnalytics getRequestRateByInterval Api."
-    },
-    "ThrottledRequestsInput": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/LogAnalyticsInputBase"
-        }
-      ],
-      "description": "Api request input for LogAnalytics getThrottledRequests Api."
-    },
-    "LogAnalyticsInputBase": {
-      "properties": {
-        "blobContainerSasUri": {
-          "type": "string",
-          "description": "SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to."
-        },
-        "fromTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "From time of the query"
-        },
-        "toTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "To time of the query"
-        },
-        "groupByThrottlePolicy": {
-          "type": "boolean",
-          "description": "Group query result by Throttle Policy applied."
-        },
-        "groupByOperationName": {
-          "type": "boolean",
-          "description": "Group query result by Operation Name."
-        },
-        "groupByResourceName": {
-          "type": "boolean",
-          "description": "Group query result by Resource Name."
-        },
-        "groupByClientApplicationId": {
-          "type": "boolean",
-          "description": "Group query result by Client Application ID."
-        },
-        "groupByUserAgent": {
-          "type": "boolean",
-          "description": "Group query result by User Agent."
-        }
-      },
-      "required": [
-        "blobContainerSasUri",
-        "fromTime",
-        "toTime"
-      ],
-      "description": "Api input base class for LogAnalytics Api."
-    },
-    "LogAnalyticsOperationResult": {
-      "properties": {
-        "properties": {
-          "readOnly": true,
-          "$ref": "#/definitions/LogAnalyticsOutput",
-          "description": "LogAnalyticsOutput"
-        }
-      },
-      "description": "LogAnalytics operation status response"
-    },
-    "LogAnalyticsOutput": {
-      "properties": {
-        "output": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Output file Uri path to blob container."
-        }
-      },
-      "description": "LogAnalytics output properties"
-    },
-    "VMScaleSetConvertToSinglePlacementGroupInput": {
-      "properties": {
-        "activePlacementGroupId": {
-          "type": "string",
-          "description": "Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances."
-        }
-      }
-    },
-    "OrchestrationServiceStateInput": {
-      "properties": {
-        "serviceName": {
-          "type": "string",
-          "description": "The name of the service.",
-          "enum": [
-            "AutomaticRepairs"
-          ],
-          "x-ms-enum": {
-            "name": "OrchestrationServiceNames",
-            "modelAsString": true
-          }
-        },
-        "action": {
-          "type": "string",
-          "description": "The action to be performed.",
-          "enum": [
-            "Resume",
-            "Suspend"
-          ],
-          "x-ms-enum": {
-            "name": "OrchestrationServiceStateAction",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "The input for OrchestrationServiceState",
-      "required": [
-        "serviceName",
-        "action"
-      ]
-    },
-    "PatchSettings": {
-      "properties": {
-        "patchMode": {
-          "type": "string",
-          "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> **AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ",
-          "enum": [
-            "Manual",
-            "AutomaticByOS",
-            "AutomaticByPlatform"
-          ],
-          "x-ms-enum": {
-            "name": "WindowsVMGuestPatchMode",
-            "modelAsString": true
-          }
-        },
-        "enableHotpatching": {
-          "type": "boolean",
-          "description": "Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode' must be set to 'AutomaticByPlatform'."
-        },
-        "assessmentMode": {
-          "type": "string",
-          "description": "Specifies the mode of VM Guest patch assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine.<br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true. ",
-          "enum": [
-            "ImageDefault",
-            "AutomaticByPlatform"
-          ],
-          "x-ms-enum": {
-            "name": "WindowsPatchAssessmentMode",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Specifies settings related to VM Guest Patching on Windows."
-    },
-    "LinuxPatchSettings": {
-      "properties": {
-        "patchMode": {
-          "type": "string",
-          "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - The virtual machine's default patching configuration is used. <br /><br /> **AutomaticByPlatform** - The virtual machine will be automatically updated by the platform. The property provisionVMAgent must be true",
-          "enum": [
-            "ImageDefault",
-            "AutomaticByPlatform"
-          ],
-          "x-ms-enum": {
-            "name": "LinuxVMGuestPatchMode",
-            "modelAsString": true
-          }
-        },
-        "assessmentMode": {
-          "type": "string",
-          "description": "Specifies the mode of VM Guest Patch Assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine. <br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.",
-          "enum": [
-            "ImageDefault",
-            "AutomaticByPlatform"
-          ],
-          "x-ms-enum": {
-            "name": "LinuxPatchAssessmentMode",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Specifies settings related to VM Guest Patching on Linux."
-    },
-    "VirtualMachinePatchStatus": {
-      "properties": {
-        "availablePatchSummary": {
-          "$ref": "#/definitions/AvailablePatchSummary",
-          "description": "The available patch summary of the latest assessment operation for the virtual machine."
-        },
-        "lastPatchInstallationSummary": {
-          "$ref": "#/definitions/LastPatchInstallationSummary",
-          "description": "The installation summary of the latest installation operation for the virtual machine."
-        },
-        "configurationStatuses": {
-          "description": "The enablement status of the specified patchMode",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
-          }
-        }
-      },
-      "description": "The status of virtual machine patch operations."
-    },
-    "AvailablePatchSummary": {
-      "properties": {
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
-          "enum": [
-            "Unknown",
-            "InProgress",
-            "Failed",
-            "Succeeded",
-            "CompletedWithWarnings"
-          ],
-          "x-ms-enum": {
-            "name": "PatchOperationStatus",
-            "modelAsString": true
-          }
-        },
-        "assessmentActivityId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
-        },
-        "rebootPending": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred."
-        },
-        "criticalAndSecurityPatchCount": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int32",
-          "description": "The number of critical or security patches that have been detected as available and not yet installed."
-        },
-        "otherPatchCount": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int32",
-          "description": "The number of all available patches excluding critical and security."
-        },
-        "startTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The UTC timestamp when the operation began."
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The UTC timestamp when the operation began."
-        },
-        "error": {
-          "$ref": "#/definitions/ApiError",
-          "readOnly": true,
-          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
-        }
-      },
-      "description": "Describes the properties of an virtual machine instance view for available patch summary."
-    },
-    "LastPatchInstallationSummary": {
-      "properties": {
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
-          "enum": [
-            "Unknown",
-            "InProgress",
-            "Failed",
-            "Succeeded",
-            "CompletedWithWarnings"
-          ],
-          "x-ms-enum": {
-            "name": "PatchOperationStatus",
-            "modelAsString": true
-          }
-        },
-        "installationActivityId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
-        },
-        "maintenanceWindowExceeded": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "Describes whether the operation ran out of time before it completed all its intended actions"
-        },
-        "notSelectedPatchCount": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int32",
-          "description": "The number of all available patches but not going to be installed because it didn't match a classification or inclusion list entry."
-        },
-        "excludedPatchCount": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int32",
-          "description": "The number of all available patches but excluded explicitly by a customer-specified exclusion list match."
-        },
-        "pendingPatchCount": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int32",
-          "description": "The number of all available patches expected to be installed over the course of the patch installation operation."
-        },
-        "installedPatchCount": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int32",
-          "description": "The count of patches that successfully installed."
-        },
-        "failedPatchCount": {
-          "type": "integer",
-          "readOnly": true,
-          "format": "int32",
-          "description": "The count of patches that failed installation."
-        },
-        "startTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The UTC timestamp when the operation began."
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The UTC timestamp when the operation began."
-        },
-        "error": {
-          "$ref": "#/definitions/ApiError",
-          "readOnly": true,
-          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
-        }
-      },
-      "description": "Describes the properties of the last installed patch summary."
-    }
-  },
     "parameters": {
       "SubscriptionIdParameter": {
         "name": "subscriptionId",
