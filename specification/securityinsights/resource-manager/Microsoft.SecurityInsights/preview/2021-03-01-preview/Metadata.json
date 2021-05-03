@@ -299,6 +299,7 @@
   "definitions": {
     "metadataList": {
       "description": "List of all the metadata.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "Array of metadata.",
@@ -306,6 +307,11 @@
             "$ref": "#/definitions/metadata"
           },
           "type": "array"
+        },
+        "nextLink": {
+          "description": "URL to fetch the next page of metadata.",
+          "readOnly": true,
+          "type": "string"
         }
       },
       "required": [
@@ -313,6 +319,7 @@
       ]
     },
     "metadata": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
@@ -325,8 +332,7 @@
           "description": "Metadata properties",
           "x-ms-client-flatten": true
         }
-      },
-      "type": "object"
+      }
     },
     "metadataPatch": {
       "allOf": [
@@ -335,14 +341,14 @@
         }
       ],
       "description": "Metadata patch request body.",
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/metadataPropertiesPatch",
           "description": "Metadata patch request body",
           "x-ms-client-flatten": true
         }
-      },
-      "type": "object"
+      }
     },
     "metadataId": {
       "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name",
@@ -474,11 +480,7 @@
       "properties": {
         "name": {
           "description": "Name of the author. Company or person.",
-          "type": "string",
-          "examples": [
-            "Microsoft",
-            "Joe Contoso"
-          ]
+          "type": "string"
         },
         "email": {
           "description": "Email of author contact",
@@ -488,10 +490,7 @@
         "link": {
           "description": "Link for author/vendor page",
           "type": "string",
-          "format": "uri",
-          "examples": [
-            "https://support.microsoft.com/"
-          ]
+          "format": "uri"
         }
       }
     },
@@ -528,11 +527,7 @@
         },
         "name": {
           "description": "Name of the support contact. Company or person.",
-          "type": "string",
-          "examples": [
-            "Microsoft",
-            "Joe Contoso"
-          ]
+          "type": "string"
         },
         "email": {
           "description": "Email of support contact",
@@ -542,20 +537,13 @@
         "link": {
           "description": "Link for support help, like to support page to open a ticket etc.",
           "type": "string",
-          "format": "uri",
-          "examples": [
-            "https://support.microsoft.com/"
-          ]
+          "format": "uri"
         }
       }
     },
-    "dependency": {
-      "description": "A single content dependency defined by a kind and id.  Version can be optionally included.",
+    "metadataDependencies": {
+      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats.",
       "type": "object",
-      "required": [
-        "id",
-        "kind"
-      ],
       "properties": {
         "id": {
           "description": "Id of the content item we depend on",
@@ -568,17 +556,7 @@
         "version": {
           "description": "Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.",
           "$ref": "#/definitions/metadataVersion"
-        }
-      }
-    },
-    "dependencyList": {
-      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR.",
-      "type": "object",
-      "required": [
-        "operator",
-        "criteria"
-      ],
-      "properties": {
+        },
         "operator": {
           "type": "string",
           "enum": [
@@ -602,33 +580,11 @@
           "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
           "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/dependency",
-                "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
-              },
-              {
-                "$ref": "#/definitions/dependencyList",
-                "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
-              }
-            ]
+            "$ref": "#/definitions/metadataDependencies",
+            "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
           }
         }
       }
-    },
-    "metadataDependencies": {
-      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR.",
-      "type": "object",
-      "oneOf": [
-        {
-          "$ref": "#/definitions/dependency",
-          "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
-        },
-        {
-          "$ref": "#/definitions/dependencyList",
-          "description": "A nested dependency, this helps for scenarios of requiring combinations of AND/OR.  Example: we need one of 5 data connectors AND a specific playbook AND a specific parser."
-        }
-      ]
     },
     "metadataProperties": {
       "description": "Metadata property bag.",
@@ -669,7 +625,7 @@
         },
         "dependencies": {
           "$ref": "#/definitions/metadataDependencies",
-          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR."
+          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
         }
       }
     },
@@ -707,7 +663,7 @@
         },
         "dependencies": {
           "$ref": "#/definitions/metadataDependencies",
-          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR."
+          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
         }
       }
     }
@@ -715,6 +671,7 @@
   "parameters": {
     "Metadata": {
       "description": "Metadata resource.",
+      "type": "object",
       "in": "body",
       "name": "metadata",
       "required": true,
@@ -725,6 +682,7 @@
     },
     "MetadataPatch": {
       "description": "Partial metadata request.",
+      "type": "object",
       "in": "body",
       "name": "metadataPatch",
       "required": true,
