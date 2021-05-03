@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Common Types",
-    "version": "2.0"
+    "version": "1.0"
   },
   "host": "atlas.microsoft.com",
   "schemes": [
@@ -67,10 +67,10 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
         },
         "warning": {
-          "$ref": "../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
         }
       }
     },
@@ -633,14 +633,14 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -653,35 +653,35 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     },
     "409": {
       "description": "The request could not be completed due to a conflict with the current state of the resource. Likely caused by a parallel update to the same resource.",
       "schema": {
-        "$ref": "../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     },
     "409StorageLimit": {
       "description": "The [data storage limit](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-maps-limits) is reached on the Azure Maps account. You can always use the [Data Delete API](https://docs.microsoft.com/en-us/rest/api/maps/data/deletepreview) to delete old/unused content and create space for new uploads.",
       "schema": {
-        "$ref": "../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+        "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     }
