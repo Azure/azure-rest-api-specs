@@ -26,14 +26,14 @@ These are the global settings for the SecurityInsights API.
 
 ```yaml
 openapi-type: arm
-tag: package-composite-v1
+tag: package-2020-01
 ```
 
-### Tag: package-composite-v1
+### Tag: package-2020-01
 
-These settings apply only when `--tag=package-composite-v1` is specified on the command line.
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-```yaml $(tag) == 'package-composite-v1'
+```yaml $(tag) == 'package-2020-01'
 input-file:
 - Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
 directive:
@@ -55,6 +55,7 @@ input-file:
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueryTemplates.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueries.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/dataConnectors.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
 directive:
   - suppress: R4017
@@ -70,6 +71,10 @@ directive:
     where: $.definitions.EntityQueryTemplate
     reason: The EntityQueryTemplate does not support list by subscription. It's not a top-level resource. To get the EntityQueryTemplate, we should have a subscription as well as a resource group and Log Analytics workspace.
   - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/dataConnectors.json
+    where: $.definitions.DataConnector
+    reason: The DataConnector does not support list by subscription. It's not a top-level resource.
+  - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
     where: $.definitions.Watchlist
     reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
@@ -77,11 +82,11 @@ directive:
 
 ---
 
-### Tag: package-2019-01-preview-only
+### Tag: package-2019-01-preview
 
-These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-01-preview-only'
+```yaml $(tag) == 'package-2019-01-preview'
 input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
 directive:
@@ -118,8 +123,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js securityinsights/resource-manager
 ```
 
 ## C#
@@ -153,7 +156,5 @@ See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
