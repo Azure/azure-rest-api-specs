@@ -202,8 +202,8 @@
         "tags": [
           "Metadata"
         ],
-        "description": "Create/replace a Metadata.",
-        "operationId": "Metadata_Put",
+        "description": "Create a Metadata.",
+        "operationId": "Metadata_Create",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -257,8 +257,8 @@
         "tags": [
           "Metadata"
         ],
-        "description": "Partially update an existing Metadata.",
-        "operationId": "Metadata_Patch",
+        "description": "Update an existing Metadata.",
+        "operationId": "Metadata_Update",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -759,15 +759,16 @@
       "name": "$skip",
       "required": false,
       "type": "integer",
+      "format": "int32",
       "x-ms-parameter-location": "method"
     },
     "ODataTop": {
       "description": "Returns only the first n results. Optional.",
-      "format": "int32",
       "in": "query",
       "name": "$top",
       "required": false,
       "type": "integer",
+      "format": "int32",
       "x-ms-parameter-location": "method"
     }
   }
