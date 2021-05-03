@@ -23,6 +23,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
   - Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2021-03-01-preview/Metadata.json
 
 ```
 
