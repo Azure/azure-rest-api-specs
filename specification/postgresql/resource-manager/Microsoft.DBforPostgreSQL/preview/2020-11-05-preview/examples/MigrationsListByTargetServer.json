@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "targetDBServerSubscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "targetDBServerResourceGroupName": "testrg",
+    "targetDBServerName": "pgflextarget",
+    "parameters": {
+      "migrationListFilter": "all"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "migrationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+              "migrationDetailsLevel": "Default",
+              "currentStatus": {
+                "state": "WaitingForUserAction",
+                "error": "Example error.",
+                "currentSubStateDetails": {
+                  "currentSubState": "WaitingForDBsToMigrateSpecification"
+                }
+              },
+              "sourceDBServerMetadata": {
+                "location": "westus",
+                "version": "10",
+                "storageMD": "1024",
+                "sku": {
+                  "name": "B_Gen4_1",
+                  "tier": "Basic"
+                }
+              },
+              "targetDBServerMetadata": {
+                "location": "westus",
+                "version": "12",
+                "storageMD": "1024",
+                "sku": {
+                  "name": "Standard_D4s_v3",
+                  "tier": "GeneralPurpose"
+                }
+              }
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4/migrations/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+            "name": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
+          },
+          {
+            "properties": {
+              "migrationId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+              "migrationDetailsLevel": "Default",
+              "currentStatus": {
+                "state": "WaitingForUserAction",
+                "error": "Example error.",
+                "currentSubStateDetails": {
+                  "currentSubState": "WaitingForDBsToMigrateSpecification"
+                }
+              },
+              "sourceDBServerMetadata": {
+                "location": "westus",
+                "version": "10",
+                "storageMD": "2048",
+                "sku": {
+                  "name": "B_Gen4_1",
+                  "tier": "Basic"
+                }
+              },
+              "targetDBServerMetadata": {
+                "location": "westus",
+                "version": "11",
+                "storageMD": "2048",
+                "sku": {
+                  "name": "Standard_D4s_v3",
+                  "tier": "GeneralPurpose"
+                }
+              }
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4/migrations/dddddddd-dddd-dddd-dddd-dddddddddddd",
+            "name": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
+          }
+        ]
+      }
+    }
+  }
+}

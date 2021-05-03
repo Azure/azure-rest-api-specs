@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "targetDBServerSubscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "targetDBServerResourceGroupName": "testrg",
+    "targetDBServerName": "pgflextarget",
+    "migrationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sourceDBServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/testpgsource",
+          "targetDBServerSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
+          "dBsToMigrate": [ "testdb1", "testdb2" ],
+          "migrationResourceGroup": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg",
+          "secretParameters": {
+            "aadApp": {
+              "tenantId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "clientId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "aadSecret": "aadAppPassword1234$#"
+            },
+            "adminCredentials": {
+              "sourceServerPassword": "sourcePwd123$#",
+              "targetServerPassword": "targetPwd123$#"
+            }
+          }
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4/migrations/ffffffff-ffff-ffff-ffff-ffffffffffff",
+        "name": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
+      }
+    }
+  }
+}

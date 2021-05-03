@@ -42,7 +42,7 @@
         "operationId": "Migrations_Create",
         "x-ms-examples": {
           "CreateMigration": {
-            "$ref": "./examples/CreateMigration.json"
+            "$ref": "./examples/MigrationCreate.json"
           }
         },
         "description": "Creates a new migration.",
@@ -112,7 +112,7 @@
         "operationId": "Migrations_Get",
         "x-ms-examples": {
           "GetMigration": {
-            "$ref": "./examples/GetMigration.json"
+            "$ref": "./examples/MigrationGet.json"
           }
         },
         "description": "Gets details of a migration.",
@@ -164,7 +164,7 @@
         "operationId": "Migrations_Update",
         "x-ms-examples": {
           "UpdateMigration": {
-            "$ref": "./examples/UpdateMigration.json"
+            "$ref": "./examples/MigrationUpdate.json"
           }
         },
         "description": "Updates an existing migration. The request body can contain one to many of the mutable properties present in the migration definition. Certain property updates initiate migration state transitions.",
@@ -186,7 +186,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MigrationForUpdate"
+              "$ref": "#/definitions/MigrationResource"
             },
             "description": "The required parameters for updating a migration."
           }
@@ -228,7 +228,7 @@
         "operationId": "Migrations_Delete",
         "x-ms-examples": {
           "DeleteMigration": {
-            "$ref": "./examples/DeleteMigration.json"
+            "$ref": "./examples/MigrationDelete.json"
           }
         },
         "description": "Deletes a migration.",
@@ -276,7 +276,7 @@
         "operationId": "Migrations_ListByTargetServer",
         "x-ms-examples": {
           "ListMigrationsByTargetServer": {
-            "$ref": "./examples/ListMigrationsByTargetServer.json"
+            "$ref": "./examples/MigrationsListByTargetServer.json"
           }
         },
         "description": "List all the migrations on a given target server.",
@@ -301,10 +301,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/MigrationSummaryResource"
-              }
+              "$ref": "#/definitions/MigrationSummaryResourceListResult"
             }
           },
           "400": {
@@ -536,6 +533,18 @@
         ]
       },
       "description": "Represents a migration summary resource."
+    },
+    "MigrationSummaryResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrationSummaryResource"
+          },
+          "description": "The list of migration summary resources"
+        }
+      },
+      "description": "A list of migration summary resources."
     },
     "MigrationSummary": {
       "type": "object",
@@ -877,14 +886,6 @@
       "type": "string",
       "format": "uuid",
       "description": "The name of the migration.",
-      "x-ms-parameter-location": "method"
-    },
-    "MigrationListFilterParameter": {
-      "name": "migrationListFilter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "Optional filter applied to the list of migrations.",
       "x-ms-parameter-location": "method"
     }
   }
