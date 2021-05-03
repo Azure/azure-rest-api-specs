@@ -378,27 +378,57 @@
         "modelAsString": true,
         "name": "kind",
         "values": [
-          {"value": "dataConnector"},
-          {"value": "dataType"},
-          {"value": "workbook"},
-          {"value": "workbookTemplate"},
-          {"value": "playbook"},
-          {"value": "playbookTemplate"},
-          {"value": "analyticRuleTemplate"},
-          {"value": "analyticRule"},
-          {"value": "huntingQuery"},
-          {"value": "investigationQuery"},
-          {"value": "parser"},
-          {"value": "watchlist"},
-          {"value": "watchlistTemplate"},
-          {"value": "solution"}
+          {
+            "value": "dataConnector"
+          },
+          {
+            "value": "dataType"
+          },
+          {
+            "value": "workbook"
+          },
+          {
+            "value": "workbookTemplate"
+          },
+          {
+            "value": "playbook"
+          },
+          {
+            "value": "playbookTemplate"
+          },
+          {
+            "value": "analyticRuleTemplate"
+          },
+          {
+            "value": "analyticRule"
+          },
+          {
+            "value": "huntingQuery"
+          },
+          {
+            "value": "investigationQuery"
+          },
+          {
+            "value": "parser"
+          },
+          {
+            "value": "watchlist"
+          },
+          {
+            "value": "watchlistTemplate"
+          },
+          {
+            "value": "solution"
+          }
         ]
       }
     },
-    "metadataSource": {          
+    "metadataSource": {
       "description": "The original source of the content item, where it comes from.",
       "type": "object",
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "properties": {
         "kind": {
           "description": "Source type of the content",
@@ -413,10 +443,18 @@
             "modelAsString": true,
             "name": "kind",
             "values": [
-              {"value": "localWorkspace"},
-              {"value": "community"},
-              {"value": "solution"},
-              {"value": "sourceRepository"}
+              {
+                "value": "localWorkspace"
+              },
+              {
+                "value": "community"
+              },
+              {
+                "value": "solution"
+              },
+              {
+                "value": "sourceRepository"
+              }
             ]
           }
         },
@@ -430,14 +468,17 @@
         }
       }
     },
-    "metadataAuthor": {         
+    "metadataAuthor": {
       "type": "object",
       "description": "Publisher or creator of the content item.",
       "properties": {
         "name": {
           "description": "Name of the author. Company or person.",
           "type": "string",
-          "examples": ["Microsoft", "Joe Contoso"]
+          "examples": [
+            "Microsoft",
+            "Joe Contoso"
+          ]
         },
         "email": {
           "description": "Email of author contact",
@@ -448,33 +489,50 @@
           "description": "Link for author/vendor page",
           "type": "string",
           "format": "uri",
-          "examples": ["https://support.microsoft.com/"]
+          "examples": [
+            "https://support.microsoft.com/"
+          ]
         }
       }
     },
     "metadataSupport": {
       "type": "object",
       "description": "Support information for the content item.",
-      "required": ["tier"],
+      "required": [
+        "tier"
+      ],
       "properties": {
         "tier": {
           "description": "Type of support for content item",
           "type": "string",
-          "enum": ["microsoft", "developer", "community"],
+          "enum": [
+            "microsoft",
+            "developer",
+            "community"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "tier",
             "values": [
-              {"value": "microsoft"},
-              {"value": "developer"},
-              {"value": "community"}
+              {
+                "value": "microsoft"
+              },
+              {
+                "value": "developer"
+              },
+              {
+                "value": "community"
+              }
             ]
           }
         },
         "name": {
           "description": "Name of the support contact. Company or person.",
           "type": "string",
-          "examples": ["Microsoft", "Joe Contoso"]
+          "examples": [
+            "Microsoft",
+            "Joe Contoso"
+          ]
         },
         "email": {
           "description": "Email of support contact",
@@ -485,7 +543,9 @@
           "description": "Link for support help, like to support page to open a ticket etc.",
           "type": "string",
           "format": "uri",
-          "examples": ["https://support.microsoft.com/"]
+          "examples": [
+            "https://support.microsoft.com/"
+          ]
         }
       }
     },
@@ -514,17 +574,27 @@
     "dependencyList": {
       "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure.  We allow the operators AND/OR.",
       "type": "object",
-      "required": ["operator", "criteria"],
+      "required": [
+        "operator",
+        "criteria"
+      ],
       "properties": {
         "operator": {
           "type": "string",
-          "enum": ["AND", "OR"],
+          "enum": [
+            "AND",
+            "OR"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "operator",
             "values": [
-              {"value": "AND"},
-              {"value": "OR"}
+              {
+                "value": "AND"
+              },
+              {
+                "value": "OR"
+              }
             ]
           }
         },
@@ -563,7 +633,9 @@
     "metadataProperties": {
       "description": "Metadata property bag.",
       "required": [
-        "id", "parentId", "kind"
+        "id",
+        "parentId",
+        "kind"
       ],
       "type": "object",
       "properties": {
