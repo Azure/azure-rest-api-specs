@@ -1,22 +1,23 @@
 {
   "parameters": {
-    "resourceUrl": "management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Compute/locations/eastus",
-    "resourceName": "standardFSv2Family",
-    "api-version": "preview-2021-03-15",
+    "resourceUrl": "management.azure.com/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.MachineLearningServices/locations/eastus",
+    "resourceName": "TotalLowPriorityCores",
+    "api-version": "2021-03-15-preview",
     "createQuotaRequest": {
       "properties": {
         "limit": 200,
         "unit": "Count",
         "name": {
-          "value": "standardFSv2Family"
-        }
+          "value": "TotalLowPriorityCores"
+        },
+        "resourceType": "lowPriority"
       }
     }
   },
   "responses": {
     "201": {
       "body": {
-        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Quota/resourceProviders/Microsoft.Compute/locations/eastus/serviceLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Quota/resourceProviders/Microsoft.MachineLearningServices/locations/eastus/serviceLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
         "name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
         "type": "Microsoft.Quota/ServiceLimits",
         "properties": {
@@ -27,7 +28,7 @@
     },
     "200": {
       "body": {
-        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Quota/resourceProviders/Microsoft.Compute/locations/eastus/serviceLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Quota/resourceProviders/Microsoft.MachineLearningServices/locations/eastus/serviceLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
         "name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
         "type": "Microsoft.Quota/serviceLimits",
         "properties": {
@@ -39,9 +40,10 @@
               "unit": "Count",
               "currentValue": 160,
               "name": {
-                "value": "standardFSv2Family",
-                "localizedValue": "Standard FSv2 Family vCPUs"
+                "value": "TotalLowPriorityCores",
+                "localizedValue": "Total Cluster Low Priority Regional vCPUs"
               },
+              "resourceType": "lowPriority",
               "quotaPeriod": "",
               "properties": {}
             }
