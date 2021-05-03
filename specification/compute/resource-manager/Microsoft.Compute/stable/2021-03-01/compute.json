@@ -8937,6 +8937,18 @@
         "modelAsString": true
       }
     },
+    "DeleteOption": {
+      "type": "string",
+      "description": "Specifies the behavior of the managed disk when the VM gets deleted i.e whether the managed disk is deleted or detached. Supported values:<br><br> **Delete** If this value is used, the managed disk is deleted when VM gets deleted.<br><br> **Detach** If this value is used, the managed disk is retained after VM gets deleted.<br><br> Minimum api-version: 2021-03-01",
+      "enum": [
+        "Delete",
+        "Detach"
+      ],
+      "x-ms-enum": {
+        "name": "DiskDeleteOptionTypes",
+        "modelAsString": true
+      }
+    },
     "StorageAccountType": {
       "type": "string",
       "description": "Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. Premium_ZRS uses Premium SSD zone redundant storage. StandardSSD_ZRS uses Standard SSD zone redundant storage. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disks-types",
@@ -9061,6 +9073,10 @@
         "managedDisk": {
           "description": "The managed disk parameters.",
           "$ref": "#/definitions/ManagedDiskParameters"
+        },
+        "deleteOption": {
+          "$ref": "#/definitions/DeleteOption",
+          "description": "Specifies whether OS Disk should be deleted or detached upon VM deletion. <br><br> Possible values: <br><br> **Delete** If this value is used, the OS disk is deleted when VM is deleted.<br><br> **Detach** If this value is used, the os disk is retained after VM is deleted. <br><br> The default value is set to **detach**. For an ephemeral OS Disk, the default value is set to **Delete**. User cannot change the delete option for ephemeral OS Disk."
         }
       },
       "required": [
@@ -9127,6 +9143,10 @@
         "detachOption": {
           "$ref": "#/definitions/DetachOption",
           "description": "Specifies the detach behavior to be used while detaching a disk or which is already in the process of detachment from the virtual machine. Supported values: **ForceDetach**. <br><br> detachOption: **ForceDetach** is applicable only for managed data disks. If a previous detachment attempt of the data disk did not complete due to an unexpected failure from the virtual machine and the disk is still not released then use force-detach as a last resort option to detach the disk forcibly from the VM. All writes might not have been flushed when using this detach behavior. <br><br> This feature is still in preview mode and is not supported for VirtualMachineScaleSet. To force-detach a data disk update toBeDetached to 'true' along with setting detachOption: 'ForceDetach'."
+        },
+        "deleteOption": {
+          "$ref": "#/definitions/DeleteOption",
+          "description": "Specifies whether data disk should be deleted or detached upon VM deletion.<br><br> Possible values: <br><br> **Delete** If this value is used, the data disk is deleted when VM is deleted.<br><br> **Detach** If this value is used, the data disk is retained after VM is deleted.<br><br> The default value is set to **detach**"
         }
       },
       "required": [
@@ -12732,20 +12752,20 @@
       "description": "Describes the properties of the last installed patch summary."
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client Api Version."
+      }
     }
   }
-}
