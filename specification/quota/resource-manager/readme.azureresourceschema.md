@@ -25,5 +25,20 @@ input-file:
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Quota/stable/2021-03-15/quota.json
+```
 
+### Tag: schema-quota-preview-2021-03-15 and azureresourceschema
+
+``` yaml $(tag) == 'schema-quota-preview-2021-03-15' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Quota/review/review-2021-03-15/quota.json
+
+```
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Quota/review/review-2021-03-15/quota.json
 ```
