@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "group1",
+    "privateCloudName": "{privateCloudName}",
+    "scriptPackageName": "{scriptPackageName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Set-AvsStoragePolicy",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/scriptPackages/{scriptPackageName}/scriptCmdlets/Set-AvsStoragePolicy",
+            "properties": {
+              "cmdletDescription": "Allow user to set the storage policy of the specified VM",
+              "timeout": "P0Y0M0DT0H60M0S",
+              "parameters": [
+                {
+                  "name": "VM",
+                  "description": "VM to set the storage policy on",
+                  "type": "String",
+                  "visibility": "Visible"
+                },
+                {
+                  "name": "StoragePolicyName",
+                  "description": "Name of the storage policy to set",
+                  "type": "String",
+                  "visibility": "Visible"
+                }
+              ]
+            },
+            "type": "Microsoft.AVS/privateClouds/scriptPackages/scriptCmdlets"
+          },
+          {
+            "name": "New-ExternalSsoDomain",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/scriptPackages/{scriptPackageName}/scriptCmdlets/New-ExternalSsoDomain",
+            "properties": {
+              "cmdletDescription": "Add an external Sso domain to their vCenter",
+              "timeout": "P0Y0M0DT0H60M0S",
+              "parameters": [
+                {
+                  "name": "DomainName",
+                  "description": "Domain name of the Server",
+                  "type": "String",
+                  "visibility": "Visible"
+                },
+                {
+                  "name": "BaseUserDN",
+                  "description": "Base User DN of the Server",
+                  "type": "String",
+                  "visibility": "Visible"
+                },
+                {
+                  "name": "Password",
+                  "description": "Password for authenticating to the server",
+                  "type": "SecureString",
+                  "visibility": "Hidden"
+                }
+              ]
+            },
+            "type": "Microsoft.AVS/privateClouds/scriptPackages/scriptCmdlets"
+          }
+        ]
+      }
+    }
+  }
+}
