@@ -6,6 +6,21 @@
     "datasetId": "[dataset-Id]"
   },
   "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InvalidFeature",
+          "message": "The provided feature is invalid.",
+          "details": [
+            {
+              "code": "NoGeometry",
+              "message": "No geometry was provided with the feature."
+            }
+          ]
+        }
+      }
+    },
     "202": {
       "headers": {
         "Operation-Location": "https://us.atlas.microsoft.com/tilesets/operations/{operationId}?api-version=2.0",
