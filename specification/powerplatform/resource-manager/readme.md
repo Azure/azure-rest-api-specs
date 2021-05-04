@@ -38,7 +38,6 @@ input-file:
   - Microsoft.PowerPlatform/preview/2020-10-30-preview/enterprisePolicy.json
   - Microsoft.PowerPlatform/preview/2020-10-30-preview/privateEndpointConnection.json
   - Microsoft.PowerPlatform/preview/2020-10-30-preview/privateLinkResources.json
-  - Microsoft.PowerPlatform/preview/2020-10-30-preview/subnetResources.json
 ```
 
 ---
