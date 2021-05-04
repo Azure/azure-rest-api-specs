@@ -1,0 +1,55 @@
+Adopting Common Types:
+Account -> adopt TrackedResource, AzureEntityResource
+Sku -> copy but change tier to string
+Identity -> copy but support user assigned identity
+PrivateLinkResource -> adopt PrivateLinkResource but with properties.displayName
+PrivateEndpointConnection -> adopt PrivateEndpointConnection but with properties.groupIds
+Operations -> fully adopt
+
+Name change:
+
+Unify naming prefix: Remove `CognitiveServices*` prefix, change `*Result`, `*Entity` to resource.
+CognitiveServicesAccount -> Account
+CognitiveServicesAccountKind -> Kind
+CognitiveServicesAccountApiProperties -> ApiProperties
+CognitiveServicesAccountProperties -> AccountProperties
+CognitiveServicesAccountKeys -> Apikeys
+CognitiveServicesAccountSkuChangeInfo -> SkuChangeInfo
+CognitiveServicesResourceAndSku -> AccountSku (maybe change to ResourceSku in next version?)
+CheckDomainAvailabilityResult -> DomainAvailability
+CheckSkuAvailabilityResult -> SkuAvailability
+OperationEntity -> Operation
+
+Unify list operations result names: unify to `*ListResult`.
+CheckSkuAvailabilityResultList -> SkuAvailabilityListResult
+CognitiveServicesAccountEnumerateSkusResult -> AccountSkuListResult
+CognitiveServicesAccountListResult -> AccountListResult
+OperationEntityListResult -> OperationListResult
+PrivateEndpointConnectionListResult -> PrivateEndpointConnectionListResult
+PrivateLinkResourceListResult -> PrivateLinkResourceListResult
+ResourceSkusResult -> ResourceSkuListResult
+UsagesResult -> UsageListResult
+
+
+Contract Change
+Add systemData
+Remove properties.internalId
+add properties.callRateLimit
+add properties.quotaLimit
+add properties.restrictOutboundNetworkAccess
+add properties.allowedFqdnList
+add properties.disableLocalAuth
+add properties.endpoints
+add properties.encryption.keyVaultProperties.identityClientId
+add properties.encryption.keyVaultProperties.identityClientId
+
+provisioningState add "Accepted"
+
+
+Not sure:
+LastTerminalProvisioningState?
+internalResourceState?
+
+Are these public visible
+virtualNetworkTags
+virtualNetworkSubnets
