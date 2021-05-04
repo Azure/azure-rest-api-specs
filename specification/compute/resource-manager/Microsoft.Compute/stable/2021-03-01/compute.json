@@ -3088,20 +3088,26 @@
           "Create a Windows vm with a patch setting patchMode of AutomaticByOS.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByOS.json"
           },
-          "Create a Windows vm with a patch setting patchMode of AutomaticByPlatform.": {
-            "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByPlatform.json"
+          "Create a Windows vm with patch settings patchMode and assessmentMode set to AutomaticByPlatform.": {
+            "$ref": "./examples/CreateAWindowsVmWithPatchSettingModesOfAutomaticByPlatform.json"
           },
           "Create a Windows vm with a patch setting patchMode of Manual.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfManual.json"
           },
+          "Create a Windows vm with a patch setting assessmentMode of ImageDefault.": {
+            "$ref": "./examples/CreateAWindowsVmWithPatchSettingAssessmentModeOfImageDefault.json"
+          },
           "Create a Windows vm with a patch setting patchMode of AutomaticByPlatform and enableHotpatching set to true.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByPlatformAndEnableHotPatchingTrue.json"
           },
-          "Create a Linux vm with a patch setting patchMode of AutomaticByPlatform.": {
-            "$ref": "./examples/CreateALinuxVmWithPatchSettingModeOfAutomaticByPlatform.json"
+          "Create a Linux vm with a patch settings patchMode and assessmentMode set to AutomaticByPlatform.": {
+            "$ref": "./examples/CreateALinuxVmWithPatchSettingModesOfAutomaticByPlatform.json"
           },
           "Create a Linux vm with a patch setting patchMode of ImageDefault.": {
             "$ref": "./examples/CreateALinuxVmWithPatchSettingModeOfImageDefault.json"
+          },
+          "Create a Linux vm with a patch setting assessmentMode of ImageDefault.": {
+            "$ref": "./examples/CreateALinuxVmWithPatchSettingAssessmentModeOfImageDefault.json"
           },
           "Create a vm with an extensions time budget.": {
             "$ref": "./examples/CreateAVmWithExtensionsTimeBudget.json"
@@ -10258,7 +10264,7 @@
         },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGenerationType",
-          "description": "Specifies the HyperVGenerationType of the VirtualMachine created from the image. From API Version 2019-03-01 if the image source is a blob, then we need the user to specify the value, if the source is managed resource like disk or snapshot, we may require the user to specify the property if we cannot deduce it from the source managed resource."
+          "description": "Gets the HyperVGenerationType of the VirtualMachine created from the image"
         }
       },
       "description": "Describes the properties of an Image."
@@ -12551,6 +12557,18 @@
         "enableHotpatching": {
           "type": "boolean",
           "description": "Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode' must be set to 'AutomaticByPlatform'."
+        },
+        "assessmentMode": {
+          "type": "string",
+          "description": "Specifies the mode of VM Guest patch assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine.<br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true. ",
+          "enum": [
+            "ImageDefault",
+            "AutomaticByPlatform"
+          ],
+          "x-ms-enum": {
+            "name": "WindowsPatchAssessmentMode",
+            "modelAsString": true
+          }
         }
       },
       "description": "Specifies settings related to VM Guest Patching on Windows."
@@ -12566,6 +12584,18 @@
           ],
           "x-ms-enum": {
             "name": "LinuxVMGuestPatchMode",
+            "modelAsString": true
+          }
+        },
+        "assessmentMode": {
+          "type": "string",
+          "description": "Specifies the mode of VM Guest Patch Assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine. <br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.",
+          "enum": [
+            "ImageDefault",
+            "AutomaticByPlatform"
+          ],
+          "x-ms-enum": {
+            "name": "LinuxPatchAssessmentMode",
             "modelAsString": true
           }
         }
