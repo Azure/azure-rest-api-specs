@@ -331,11 +331,9 @@
       "type": "object",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationCreateRequest"
-            }
-          ]
+          "$ref": "#/definitions/MigrationCreateRequest",
+          "description": "Migration resource properties.",
+          "x-ms-client-flatten": true
         },
         "allOf": [
           {
@@ -458,11 +456,11 @@
       "type": "object",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationDetails"
-            }
-          ]
+          "properties": {
+            "$ref": "#/definitions/MigrationDetails",
+            "description": "Migration details resource properties.",
+            "x-ms-client-flatten": true
+          }
         },
         "allOf": [
           {
@@ -520,11 +518,9 @@
       "type": "object",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationSummary"
-            }
-          ]
+          "$ref": "#/definitions/MigrationSummary",
+          "description": "Migration summary resource properties.",
+          "x-ms-client-flatten": true
         },
         "allOf": [
           {
