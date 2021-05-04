@@ -4213,6 +4213,11 @@
           "description": "Resource reference to the Azure DNS zone",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "preValidatedCustomDomainResourceId": {
+          "description": "Resource reference to the Azure resource where custom domain ownership was prevalidated",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
         }
       }
     },
@@ -4241,7 +4246,8 @@
           "description": "Defines the source of the SSL certificate.",
           "enum": [
             "CustomerCertificate",
-            "ManagedCertificate"
+            "ManagedCertificate",
+			"AzureFirstPartyManagedCertificate"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4794,6 +4800,10 @@
             "name": "EnabledState",
             "modelAsString": true
           }
+        },
+        "enforceCertificateNameCheck": {
+          "description": "Whether to enable certificate name check at origin level",
+          "type": "boolean"
         }
       }
     },
