@@ -59,6 +59,17 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_logz']
 ```
 
+## Suppression
+```
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.Logz/preview/2020-10-01-preview/logz.json
+    where:
+      - $.definitions.VMExtensionPayload.properties.apiKey
+    reason: Secrets are OK to return in a POST response.
+```
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
