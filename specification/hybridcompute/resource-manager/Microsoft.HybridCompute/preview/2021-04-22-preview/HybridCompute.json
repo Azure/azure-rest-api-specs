@@ -622,7 +622,7 @@
         "tags": [
           "MachineExtensions Upgrade"
         ],
-        "operationId": "MachineExtensions_Upgrade",
+        "operationId": "UpgradeExtensions",
         "description": "The operation to Upgrade Machine Extensions.",
         "parameters": [
           {
@@ -1171,13 +1171,15 @@
           "$ref": "#/definitions/TargetVersion",
           "description": "Properties for the specified Extension to Upgrade."
         }
-      }
+      },
+      "description": "Describes the Machine Extension Target Version Properties"
     },
     "ExtensionTarget": {
       "additionalProperties": {
         "type": "object",
         "$ref": "#/definitions/ExtensionTargetProperties"
-      }
+      },
+      "description": "Describes the Machine Extension Target Properties"
     },
     "MachineExtensionUpgrade": {
       "description": "Properties to be supplied during Extension Upgrade.",
@@ -1186,7 +1188,8 @@
           "$ref": "#/definitions/ExtensionTarget"
         }
       }
-    }
+    },
+    "description": "Describes the Machine Extension Upgrade Properties"
   },
   "parameters": {}
 }
