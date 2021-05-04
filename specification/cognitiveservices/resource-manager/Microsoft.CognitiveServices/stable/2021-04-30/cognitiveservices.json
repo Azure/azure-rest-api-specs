@@ -914,57 +914,28 @@
           "$ref": "#/definitions/Identity"
         },
         "systemData": {
-          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+		"tags": {
           "type": "object",
-          "readOnly": true,
-          "properties": {
-            "createdBy": {
-              "type": "string",
-              "description": "The identity that created the resource."
-            },
-            "createdByType": {
-              "type": "string",
-              "description": "The type of identity that created the resource.",
-              "enum": [
-                "User",
-                "Application",
-                "ManagedIdentity",
-                "Key"
-              ],
-              "x-ms-enum": {
-                "name": "createdByType",
-                "modelAsString": true
-              }
-            },
-            "createdAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The timestamp of resource creation (UTC)."
-            },
-            "lastModifiedBy": {
-              "type": "string",
-              "description": "The identity that last modified the resource."
-            },
-            "lastModifiedByType": {
-              "type": "string",
-              "description": "The type of identity that last modified the resource.",
-              "enum": [
-                "User",
-                "Application",
-                "ManagedIdentity",
-                "Key"
-              ],
-              "x-ms-enum": {
-                "name": "createdByType",
-                "modelAsString": true
-              }
-            },
-            "lastModifiedAt": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The timestamp of resource last modification (UTC)"
-            }
-          }
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         },
         "properties": {
           "$ref": "#/definitions/AccountProperties",
@@ -972,9 +943,6 @@
         }
       },
       "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-        },
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/AzureEntityResource"
         }
@@ -1883,6 +1851,10 @@
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Resource properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly" : true
         },
         "location": {
           "type": "string",
