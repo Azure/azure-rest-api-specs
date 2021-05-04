@@ -40,5 +40,5 @@ input-file:
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Quota/review/2021-03-15-preview/quota.json
+  - Microsoft.Quota/preview/2021-03-15-preview/quota.json
 ```
