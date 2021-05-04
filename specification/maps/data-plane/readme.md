@@ -142,7 +142,12 @@ input-file:
   - $(this-folder)/Microsoft.Maps/Alias/preview/1.0/alias.json
   - $(this-folder)/Microsoft.Maps/Data/preview/1.0/data.json
   - $(this-folder)/Microsoft.Maps/Dataset/preview/1.0/dataset.json
+  - $(this-folder)/Microsoft.Maps/Alias/preview/2.0/alias.json
+  - $(this-folder)/Microsoft.Maps/Data/preview/2.0/data.json
+  - $(this-folder)/Microsoft.Maps/Dataset/preview/2.0/dataset.json
   - $(this-folder)/Microsoft.Maps/DEM/preview/1.0/elevation.json
+  - $(this-folder)/Microsoft.Maps/DwgConversion/preview/2.0/dwgconversion.json
+  - $(this-folder)/Microsoft.Maps/FeatureState/preview/2.0/featurestate.json
   - $(this-folder)/Microsoft.Maps/DwgConversion/preview/1.0/dwgconversion.json
   - $(this-folder)/Microsoft.Maps/FeatureState/preview/1.0/featurestate.json
   - $(this-folder)/Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
@@ -153,10 +158,12 @@ input-file:
   - $(this-folder)/Microsoft.Maps/Search/preview/1.0/search.json
   - $(this-folder)/Microsoft.Maps/Spatial/preview/1.0/spatial.json
   - $(this-folder)/Microsoft.Maps/Tileset/preview/1.0/tileset.json
+  - $(this-folder)/Microsoft.Maps/Tileset/preview/2.0/tileset.json
   - $(this-folder)/Microsoft.Maps/Timezone/preview/1.0/timezone.json
   - $(this-folder)/Microsoft.Maps/Traffic/preview/1.0/traffic.json
   - $(this-folder)/Microsoft.Maps/Weather/preview/1.0/weather.json
   - $(this-folder)/Microsoft.Maps/WFS/preview/1.0/wfs.json
+  - $(this-folder)/Microsoft.Maps/WFS/preview/2.0/wfs.json
 
 ```
 

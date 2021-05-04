@@ -117,6 +117,14 @@
       "description": "Local identifier of a specific feature",
       "required": true,
       "x-ms-parameter-location": "method"
+    },
+    "DatasetId": {
+      "name": "datasetId",
+      "type": "string",
+      "in": "path",
+      "description": "The identifier for the dataset to query from.",
+      "required": true,
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -450,7 +458,7 @@
             "$ref": "../../../Common/preview/2.0/common.json#/parameters/ApiVersionV2"
           },
           {
-            "$ref": "../../../Dataset/preview/2.0/dataset.json#/parameters/DatasetId"
+            "$ref": "#/parameters/DatasetId"
           },
           {
             "$ref": "#/parameters/CollectionId"
