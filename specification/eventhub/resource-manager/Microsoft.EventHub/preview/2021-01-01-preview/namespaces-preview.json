@@ -689,7 +689,8 @@
           "description": "Name of this SKU.",
           "enum": [
             "Basic",
-            "Standard"
+            "Standard",
+            "Premium"
           ],
           "x-ms-enum": {
             "name": "SkuName",
@@ -701,7 +702,8 @@
           "description": "The billing tier of this particular SKU.",
           "enum": [
             "Basic",
-            "Standard"
+            "Standard",
+            "Premium"
           ],
           "x-ms-enum": {
             "name": "SkuTier",
@@ -713,7 +715,7 @@
           "maximum": 20,
           "minimum": 0,
           "type": "integer",
-          "description": "The Event Hubs throughput units, value should be 0 to 20 throughput units."
+          "description": "The Event Hubs throughput units for Basic or Standard tiers, where value should be 0 to 20 throughput units. The Event Hubs premium units for Premium tier, where value should be 0 to 10 premium units."
         }
       },
       "required": [
