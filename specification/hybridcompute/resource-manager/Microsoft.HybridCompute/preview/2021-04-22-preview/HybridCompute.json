@@ -1153,14 +1153,14 @@
     },
     "TargetVersion": {
       "type": "string",
-      "description": "Detected properties from the machine."
+      "description": "Extension Upgrade Target Version."
     },
    "ExtensionTargetProperties": {
       "properties": {
         "targetVersion": {
           "type": "object",
           "$ref": "#/definitions/TargetVersion",
-          "description": "The list of extensions"
+          "description": "Properties for the specified Extension to Upgrade."
         },
       },
     },
@@ -1171,7 +1171,7 @@
       },
     },
     "MachineExtensionUpgrade": {
-      "description": "a (key, MapItem) map. `default`is an example key",
+      "description": "Properties to be supplied during Extension Upgrade.",
       "properties": {
         "extensionTargets": {
           "$ref": "#/definitions/ExtensionTarget"
