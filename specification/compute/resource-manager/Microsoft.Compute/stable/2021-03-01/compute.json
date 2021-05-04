@@ -3049,6 +3049,9 @@
           "Create a vm in an availability set.": {
             "$ref": "./examples/CreateAVmInAnAvailabilitySet.json"
           },
+          "Create a vm with Scheduled Events Profile": {
+            "$ref": "./examples/CreateAVmWithScheduledEventsProfile.json"
+          },
           "Create a vm with boot diagnostics.": {
             "$ref": "./examples/CreateAVmWithBootDiagnostics.json"
           },
@@ -9911,6 +9914,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Specifies the scale set logical fault domain into which the Virtual Machine will be created. By default, the Virtual Machine will by automatically assigned to a fault domain that best maintains balance across available fault domains.<br><li>This is applicable only if the 'virtualMachineScaleSet' property of this Virtual Machine is set.<li>The Virtual Machine Scale Set that is referenced, must have 'platformFaultDomainCount' &gt; 1.<li>This property cannot be updated once the Virtual Machine is created.<li>Fault domain assignment can be viewed in the Virtual Machine Instance View.<br><br>Minimum api‐version: 2020‐12‐01"
+        },
+        "scheduledEventsProfile": {
+          "$ref": "#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
         }
       },
       "description": "Describes the properties of a Virtual Machine."
