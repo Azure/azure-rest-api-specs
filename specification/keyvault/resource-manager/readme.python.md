@@ -4,10 +4,13 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml
+``` yaml $(python) && $(track2)
+python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.keyvault
 package-name: azure-mgmt-keyvault
+package-version: 1.0.0b1
 no-namespace-folders: true
 ```
 
@@ -21,7 +24,8 @@ batch:
   - tag: package-2019-09
   - tag: package-2018-02
   - tag: package-2016-10
-  - tag: package-preview-2020-04
+  - tag: package-preview-2020-04-full
+  - tag: package-preview-2021-04
   - multiapiscript: true
 ```
 
@@ -30,12 +34,20 @@ output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/key
 clear-output-folder: false
 perform-load: false
 ```
+### Tag: package-preview-2021-04 and python
 
-### Tag: package-preview-2020-04 and python
+These settings apply only when `--tag=package-preview-2021-04 --python` is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2020-04 --python` is specified on the command line.
+``` yaml $(tag) == 'package-preview-2021-04'
+namespace: azure.mgmt.keyvault.v2021_04_01_preview
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2021_04_01_preview
+```
 
-``` yaml $(tag) == 'package-preview-2020-04'
+### Tag: package-preview-2020-04-full and python
+
+These settings apply only when `--tag=package-preview-2020-04-full --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-04-full'
 namespace: azure.mgmt.keyvault.v2020_04_01_preview
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2020_04_01_preview
 ```
