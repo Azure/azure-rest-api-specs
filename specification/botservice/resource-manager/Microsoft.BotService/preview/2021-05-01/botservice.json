@@ -1141,6 +1141,55 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/operationresults/{operationResultId}": {
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "description": "Get the operation result for a long running operation.",
+        "operationId": "OperationResults_Get",
+        "x-ms-examples": {
+          "Get operation result": {
+            "$ref": "./examples/OperationResultsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/operationResultIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all of the properties of the operation result.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultsDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted - Get request accepted; the operation will complete asynchronously."
+          },
+          "404": {
+            "description": "No operation result was found matching operationResultId.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "deprecated": false
+      }
     }
   },
   "definitions": {
@@ -2470,37 +2519,78 @@
       "description": "The response body returned for a request to Bot Service Management to check per subscription hostSettings",
       "type": "object",
       "properties": {
-        "OAuthUrl": {
+        "oAuthUrl": {
           "description": "For in-conversation bot user authentication",
           "type": "string"
         },
-        "ToBotFromChannelOpenIdMetadataUrl": {
+        "toBotFromChannelOpenIdMetadataUrl": {
           "description": "For verifying incoming tokens from the channels",
           "type": "string"
         },
-        "ToBotFromChannelTokenIssuer": {
+        "toBotFromChannelTokenIssuer": {
           "description": "For verifying incoming tokens from the channels",
           "type": "string"
         },
-        "ToBotFromEmulatorOpenIdMetadataUrl": {
+        "toBotFromEmulatorOpenIdMetadataUrl": {
           "description": "For verifying incoming tokens from bot emulator",
           "type": "string"
         },
-        "ToChannelFromBotLoginUrl": {
+        "toChannelFromBotLoginUrl": {
           "description": "For getting access token to channels from bot host",
           "type": "string"
         },
-        "ToChannelFromBotOAuthScope": {
+        "toChannelFromBotOAuthScope": {
           "description": "For getting access token to channels from bot host",
           "type": "string"
         },
-        "ValidateAuthority": {
+        "validateAuthority": {
           "description": "Per cloud OAuth setting on whether authority is validated",
           "type": "boolean"
         },
-        "BotOpenIdMetadata": {
-          "description": "Same as ToBotFromChannelOpenIdMetadataUrl, used by SDK < v4.12",
+        "botOpenIdMetadata": {
+          "description": "Same as toBotFromChannelOpenIdMetadataUrl, used by SDK < v4.12",
           "type": "string"
+        }
+      }
+    },
+    "OperationResultsDescription": {
+      "description": "The properties indicating the operation result of an operation on a service.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the operation returned.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the operation result.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the operation being performed.",
+          "enum": [
+            "Canceled",
+            "Succeeded",
+            "Failed",
+            "Requested",
+            "Running"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "The time that the operation was started.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Additional properties of the operation result."
         }
       }
     }
@@ -2541,6 +2631,14 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request."
+    },
+    "operationResultIdParameter": {
+      "name": "operationResultId",
+      "in": "path",
+      "description": "The ID of the operation result to get.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
     },
     "connectionNameParameter": {
       "name": "connectionName",
