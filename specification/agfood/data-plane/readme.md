@@ -27,6 +27,10 @@ These are the global settings for the agfood.
 ```yaml
 openapi-type: data-plane
 tag: package-2021-03-31-preview
+
+directive:
+  - suppress: LongRunningResponseStatusCode
+    reason: The validation tools do not properly recognize 202 as a supported response code.
 ```
 
 ### Tag: package-2021-03-31-preview
