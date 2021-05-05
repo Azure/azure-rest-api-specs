@@ -18,20 +18,16 @@
     ]
   },
   "paths": {
-    "/azureKeyVaults/{azureKeyVaultName}": {
+    "/azureKeyVaults/{keyVaultName}": {
       "get": {
-        "tags": [
-          "AzureKeyVaults"
-        ],
-        "description": "Gets azureKeyVault information",
+        "tags": ["AzureKeyVaults"],
+        "description": "Gets key vault information",
         "operationId": "KeyVaultConnections_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
-            "name": "azureKeyVaultName",
+            "name": "keyVaultName",
             "required": true,
             "type": "string"
           },
@@ -60,21 +56,15 @@
         }
       },
       "put": {
-        "tags": [
-          "AzureKeyVaults"
-        ],
-        "description": "Creates an instance of a azureKeyVault",
+        "tags": ["AzureKeyVaults"],
+        "description": "Creates an instance of a key vault connection",
         "operationId": "KeyVaultConnections_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
-            "name": "azureKeyVaultName",
+            "name": "keyVaultName",
             "required": true,
             "type": "string"
           },
@@ -111,18 +101,14 @@
         }
       },
       "delete": {
-        "tags": [
-          "AzureKeyVaults"
-        ],
-        "description": "Deletes the azureKeyVault associated with the account",
+        "tags": ["AzureKeyVaults"],
+        "description": "Deletes the key vault connection associated with the account",
         "operationId": "KeyVaultConnections_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
-            "name": "azureKeyVaultName",
+            "name": "keyVaultName",
             "required": true,
             "type": "string"
           },
@@ -156,14 +142,10 @@
     },
     "/azureKeyVaults": {
       "get": {
-        "tags": [
-          "AzureKeyVaults"
-        ],
-        "description": "List azureKeyVaults in account",
+        "tags": ["AzureKeyVaults"],
+        "description": "List key vault connections in account",
         "operationId": "KeyVaultConnections_ListAll",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -195,14 +177,10 @@
     },
     "/classificationrules/{classificationRuleName}": {
       "get": {
-        "tags": [
-          "ClassificationRules"
-        ],
+        "tags": ["ClassificationRules"],
         "description": "Get a classification rule",
         "operationId": "ClassificationRules_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -235,17 +213,11 @@
         }
       },
       "put": {
-        "tags": [
-          "ClassificationRules"
-        ],
+        "tags": ["ClassificationRules"],
         "description": "Creates or Updates a classification rule",
         "operationId": "ClassificationRules_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -291,14 +263,10 @@
         }
       },
       "delete": {
-        "tags": [
-          "ClassificationRules"
-        ],
+        "tags": ["ClassificationRules"],
         "description": "Deletes a classification rule",
         "operationId": "ClassificationRules_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -336,14 +304,10 @@
     },
     "/classificationrules": {
       "get": {
-        "tags": [
-          "ClassificationRules"
-        ],
+        "tags": ["ClassificationRules"],
         "description": "List classification rules in Account",
         "operationId": "ClassificationRules_ListAll",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -375,14 +339,10 @@
     },
     "/classificationrules/{classificationRuleName}/versions": {
       "get": {
-        "tags": [
-          "ClassificationRules"
-        ],
+        "tags": ["ClassificationRules"],
         "description": "Lists the rule versions of a classification rule",
         "operationId": "ClassificationRules_ListVersionsByClassificationRuleName",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -420,14 +380,10 @@
     },
     "/classificationrules/{classificationRuleName}/versions/{classificationRuleVersion}/:tag": {
       "post": {
-        "tags": [
-          "ClassificationRules"
-        ],
+        "tags": ["ClassificationRules"],
         "description": "Sets Classification Action on a specific classification rule version.",
         "operationId": "ClassificationRules_TagClassificationVersion",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -447,10 +403,7 @@
             "name": "action",
             "required": true,
             "type": "string",
-            "enum": [
-              "Keep",
-              "Delete"
-            ],
+            "enum": ["Keep", "Delete"],
             "x-ms-enum": {
               "name": "ClassificationAction",
               "modelAsString": true
@@ -483,17 +436,11 @@
     },
     "/datasources/{dataSourceName}": {
       "put": {
-        "tags": [
-          "DataSources"
-        ],
+        "tags": ["DataSources"],
         "description": "Creates or Updates a data source",
         "operationId": "DataSources_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -539,14 +486,10 @@
         }
       },
       "get": {
-        "tags": [
-          "DataSources"
-        ],
+        "tags": ["DataSources"],
         "description": "Get a data source",
         "operationId": "DataSources_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -579,14 +522,10 @@
         }
       },
       "delete": {
-        "tags": [
-          "DataSources"
-        ],
+        "tags": ["DataSources"],
         "description": "Deletes a data source",
         "operationId": "DataSources_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -624,14 +563,10 @@
     },
     "/datasources": {
       "get": {
-        "tags": [
-          "DataSources"
-        ],
+        "tags": ["DataSources"],
         "description": "List data sources in Data catalog",
         "operationId": "DataSources_ListAll",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -663,14 +598,10 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}/filters/custom": {
       "get": {
-        "tags": [
-          "Filters"
-        ],
+        "tags": ["Filters"],
         "description": "Get a filter",
         "operationId": "Filters_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -709,17 +640,11 @@
         }
       },
       "put": {
-        "tags": [
-          "Filters"
-        ],
+        "tags": ["Filters"],
         "description": "Creates or updates a filter",
         "operationId": "Filters_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -773,17 +698,11 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}": {
       "put": {
-        "tags": [
-          "Scan"
-        ],
+        "tags": ["Scan"],
         "description": "Creates an instance of a scan",
         "operationId": "Scans_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -836,14 +755,10 @@
         }
       },
       "get": {
-        "tags": [
-          "Scan"
-        ],
+        "tags": ["Scan"],
         "description": "Gets a scan information",
         "operationId": "Scans_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -882,14 +797,10 @@
         }
       },
       "delete": {
-        "tags": [
-          "Scan"
-        ],
+        "tags": ["Scan"],
         "description": "Deletes the scan associated with the data source",
         "operationId": "Scans_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -933,14 +844,10 @@
     },
     "/datasources/{dataSourceName}/scans": {
       "get": {
-        "tags": [
-          "Scan"
-        ],
+        "tags": ["Scan"],
         "description": "List scans in data source",
         "operationId": "Scans_ListByDataSource",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -978,14 +885,10 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}/runs/{runId}": {
       "put": {
-        "tags": [
-          "ScanResult"
-        ],
+        "tags": ["ScanResult"],
         "description": "Runs the scan",
         "operationId": "ScanResult_RunScan",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -1009,10 +912,7 @@
             "in": "query",
             "name": "scanLevel",
             "type": "string",
-            "enum": [
-              "Full",
-              "Incremental"
-            ],
+            "enum": ["Full", "Incremental"],
             "x-ms-enum": {
               "name": "ScanLevelType",
               "modelAsString": true
@@ -1045,14 +945,10 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}/runs/{runId}/:cancel": {
       "post": {
-        "tags": [
-          "ScanResult"
-        ],
+        "tags": ["ScanResult"],
         "description": "Cancels a scan",
         "operationId": "ScanResult_CancelScan",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -1099,14 +995,10 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}/runs": {
       "get": {
-        "tags": [
-          "ScanResult"
-        ],
+        "tags": ["ScanResult"],
         "description": "Lists the scan history of a scan",
         "operationId": "ScanResult_ListScanHistory",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -1150,14 +1042,10 @@
     },
     "/scanrulesets/{scanRulesetName}": {
       "get": {
-        "tags": [
-          "ScanRulesets"
-        ],
+        "tags": ["ScanRulesets"],
         "description": "Get a scan ruleset",
         "operationId": "ScanRulesets_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -1190,17 +1078,11 @@
         }
       },
       "put": {
-        "tags": [
-          "ScanRulesets"
-        ],
+        "tags": ["ScanRulesets"],
         "description": "Creates or Updates a scan ruleset",
         "operationId": "ScanRulesets_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -1246,14 +1128,10 @@
         }
       },
       "delete": {
-        "tags": [
-          "ScanRulesets"
-        ],
+        "tags": ["ScanRulesets"],
         "description": "Deletes a scan ruleset",
         "operationId": "ScanRulesets_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -1291,14 +1169,10 @@
     },
     "/scanrulesets": {
       "get": {
-        "tags": [
-          "ScanRulesets"
-        ],
+        "tags": ["ScanRulesets"],
         "description": "List scan rulesets in Data catalog",
         "operationId": "ScanRulesets_ListAll",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -1330,14 +1204,10 @@
     },
     "/systemScanRulesets": {
       "get": {
-        "tags": [
-          "SystemScanRulesets"
-        ],
+        "tags": ["SystemScanRulesets"],
         "description": "List all system scan rulesets for an account",
         "operationId": "SystemScanRulesets_ListAll",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -1369,14 +1239,10 @@
     },
     "/systemScanRulesets/datasources/{dataSourceType}": {
       "get": {
-        "tags": [
-          "SystemScanRulesets"
-        ],
+        "tags": ["SystemScanRulesets"],
         "description": "Get a system scan ruleset for a data source",
         "operationId": "SystemScanRulesets_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -1443,14 +1309,10 @@
     },
     "/systemScanRulesets/versions/{version}": {
       "get": {
-        "tags": [
-          "SystemScanRulesets"
-        ],
+        "tags": ["SystemScanRulesets"],
         "description": "Get a scan ruleset by version",
         "operationId": "SystemScanRulesets_GetByVersion",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "query",
@@ -1523,14 +1385,10 @@
     },
     "/systemScanRulesets/versions/latest": {
       "get": {
-        "tags": [
-          "SystemScanRulesets"
-        ],
+        "tags": ["SystemScanRulesets"],
         "description": "Get the latest version of a system scan ruleset",
         "operationId": "SystemScanRulesets_GetLatest",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "query",
@@ -1596,14 +1454,10 @@
     },
     "/systemScanRulesets/versions": {
       "get": {
-        "tags": [
-          "SystemScanRulesets"
-        ],
+        "tags": ["SystemScanRulesets"],
         "description": "List system scan ruleset versions in Data catalog",
         "operationId": "SystemScanRulesets_ListVersionsByDataSource",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "query",
@@ -1672,14 +1526,10 @@
     },
     "/datasources/{dataSourceName}/scans/{scanName}/triggers/default": {
       "get": {
-        "tags": [
-          "Triggers"
-        ],
+        "tags": ["Triggers"],
         "description": "Gets trigger information",
         "operationId": "Triggers_GetTrigger",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -1718,17 +1568,11 @@
         }
       },
       "put": {
-        "tags": [
-          "Triggers"
-        ],
+        "tags": ["Triggers"],
         "description": "Creates an instance of a trigger",
         "operationId": "Triggers_CreateTrigger",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -1781,14 +1625,10 @@
         }
       },
       "delete": {
-        "tags": [
-          "Triggers"
-        ],
+        "tags": ["Triggers"],
         "description": "Deletes the trigger associated with the scan",
         "operationId": "Triggers_DeleteTrigger",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
@@ -1924,9 +1764,7 @@
       }
     },
     "ClassificationRule": {
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -1935,10 +1773,7 @@
       ],
       "properties": {
         "kind": {
-          "enum": [
-            "System",
-            "Custom"
-          ],
+          "enum": ["System", "Custom"],
           "type": "string",
           "x-ms-enum": {
             "name": "ClassificationRuleType",
@@ -2119,10 +1954,7 @@
           "readOnly": true
         },
         "scanRulesetType": {
-          "enum": [
-            "Custom",
-            "System"
-          ],
+          "enum": ["Custom", "System"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2131,10 +1963,7 @@
           }
         },
         "scanLevelType": {
-          "enum": [
-            "Full",
-            "Incremental"
-          ],
+          "enum": ["Full", "Incremental"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2197,9 +2026,7 @@
       }
     },
     "Scan": {
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -2270,9 +2097,7 @@
       "discriminator": "kind"
     },
     "DataSource": {
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -2424,10 +2249,7 @@
       ],
       "properties": {
         "scanRulesetType": {
-          "enum": [
-            "Custom",
-            "System"
-          ],
+          "enum": ["Custom", "System"],
           "type": "string",
           "x-ms-enum": {
             "name": "ScanRulesetType",
@@ -2435,10 +2257,7 @@
           }
         },
         "status": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Enabled", "Disabled"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2454,9 +2273,7 @@
       }
     },
     "ScanRuleset": {
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -2521,9 +2338,7 @@
       }
     },
     "SystemScanRuleset": {
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "allOf": [
         {
@@ -2679,10 +2494,7 @@
       "type": "object",
       "properties": {
         "frequency": {
-          "enum": [
-            "Week",
-            "Month"
-          ],
+          "enum": ["Week", "Month"],
           "type": "string",
           "x-ms-enum": {
             "name": "TriggerFrequency",
@@ -2742,10 +2554,7 @@
           "readOnly": true
         },
         "scanLevel": {
-          "enum": [
-            "Full",
-            "Incremental"
-          ],
+          "enum": ["Full", "Incremental"],
           "type": "string",
           "x-ms-enum": {
             "name": "ScanLevelType",
@@ -2790,10 +2599,7 @@
           "type": "string"
         },
         "ruleStatus": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Enabled", "Disabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "ClassificationRuleStatus",
@@ -2831,15 +2637,11 @@
       "x-ms-discriminator-value": "System"
     },
     "ClassificationRulePattern": {
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "type": "object",
       "properties": {
         "kind": {
-          "enum": [
-            "Regex"
-          ],
+          "enum": ["Regex"],
           "type": "string",
           "x-ms-enum": {
             "name": "ClassificationRulePatternType",
@@ -2857,10 +2659,7 @@
           "type": "number"
         },
         "classificationAction": {
-          "enum": [
-            "Keep",
-            "Delete"
-          ],
+          "enum": ["Keep", "Delete"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2892,10 +2691,7 @@
           "type": "string"
         },
         "ruleStatus": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
+          "enum": ["Enabled", "Disabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "ClassificationRuleStatus",
@@ -4676,10 +4472,7 @@
           "type": "string"
         },
         "scanRulesetType": {
-          "enum": [
-            "Custom",
-            "System"
-          ],
+          "enum": ["Custom", "System"],
           "type": "string",
           "x-ms-enum": {
             "name": "ScanRulesetType",
@@ -4717,10 +4510,7 @@
           "type": "string"
         },
         "scanRulesetType": {
-          "enum": [
-            "Custom",
-            "System"
-          ],
+          "enum": ["Custom", "System"],
           "type": "string",
           "x-ms-enum": {
             "name": "ScanRulesetType",
