@@ -1177,8 +1177,10 @@
           }
         },
         "apiProperties": {
-          "$ref": "#/definitions/ApiProperties",
-          "description": "The api properties for special APIs."
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "dateCreated": {
           "readOnly": true,
@@ -1216,60 +1218,6 @@
         }
       },
       "description": "Properties of Cognitive Services account."
-    },
-    "ApiProperties": {
-      "type": "object",
-      "properties": {
-        "qnaRuntimeEndpoint": {
-          "type": "string",
-          "description": "(QnAMaker Only) The runtime endpoint of QnAMaker."
-        },
-        "qnaAzureSearchEndpointKey": {
-          "type": "string",
-          "description": "(QnAMaker Only) The Azure Search endpoint key of QnAMaker."
-        },
-        "qnaAzureSearchEndpointId": {
-          "type": "string",
-          "description": "(QnAMaker Only) The Azure Search endpoint id of QnAMaker."
-        },
-        "statisticsEnabled": {
-          "type": "boolean",
-          "description": "(Bing Search Only) The flag to enable statistics of Bing Search."
-        },
-        "eventHubConnectionString": {
-          "type": "string",
-          "description": "(Personalization Only) The flag to enable statistics of Bing Search.",
-          "pattern": "^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$",
-          "maxLength": 1000
-        },
-        "storageAccountConnectionString": {
-          "type": "string",
-          "description": "(Personalization Only) The storage account connection string.",
-          "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$",
-          "maxLength": 1000
-        },
-        "aadClientId": {
-          "type": "string",
-          "description": "(Metrics Advisor Only) The Azure AD Client Id (Application Id).",
-          "maxLength": 500
-        },
-        "aadTenantId": {
-          "type": "string",
-          "description": "(Metrics Advisor Only) The Azure AD Tenant Id.",
-          "maxLength": 500
-        },
-        "superUser": {
-          "type": "string",
-          "description": "(Metrics Advisor Only) The super user of Metrics Advisor.",
-          "maxLength": 500
-        },
-        "websiteName": {
-          "type": "string",
-          "description": "(Metrics Advisor Only) The website name of Metrics Advisor.",
-          "maxLength": 500
-        }
-      },
-      "description": "The api properties for special APIs."
     },
     "CallRateLimit": {
       "type": "object",
