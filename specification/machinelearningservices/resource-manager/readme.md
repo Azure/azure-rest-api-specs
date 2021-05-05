@@ -8,7 +8,7 @@ This is the AutoRest configuration file for Machine Learning Services.
 
 ## Getting Started
 
-To build the SDK for EventHub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Azure Machine Learning, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
