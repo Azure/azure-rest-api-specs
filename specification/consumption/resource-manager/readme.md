@@ -432,7 +432,6 @@ generate-interface: true
 directive:
   - suppress: R4009
     from: consumption.json
-    where: $.paths
     reason: SystemData properties does not fit into the consumption RP APIs as they dont really create any actual resources.  
 ```
 
