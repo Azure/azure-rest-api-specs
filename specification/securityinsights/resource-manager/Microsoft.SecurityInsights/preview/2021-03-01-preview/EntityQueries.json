@@ -166,7 +166,7 @@
             "$ref": "#/parameters/EntityQueryId"
           },
           {
-            "$ref": "#/parameters/EntityQueryPut"
+            "$ref": "#/parameters/CustomEntityQuery"
           }
         ],
         "responses": {
@@ -239,7 +239,7 @@
     }
   },
   "definitions": {
-    "EntityQueryPutKinds": {
+    "CustomEntityQueryKinds": {
       "description": "Describes an Entity query resource with kind which supports put request.",
       "properties": {
         "kind": {
@@ -250,7 +250,7 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "EntityQueryPutKind",
+            "name": "CustomEntityQueryKind",
             "values": [
               {
                 "value": "Activity"
@@ -280,13 +280,13 @@
         "kind"
       ]
     },
-    "EntityQueryPut": {
+    "CustomEntityQuery": {
       "allOf": [
         {
           "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
         },
         {
-          "$ref": "#/definitions/EntityQueryPutKinds"
+          "$ref": "#/definitions/CustomEntityQueryKinds"
         }
       ],
       "description": "Specific entity query that supports put requests.",
@@ -372,11 +372,11 @@
       "type": "object",
       "x-ms-discriminator-value": "Activity"
     },
-    "ActivityEntityQueryPut": {
+    "ActivityCustomEntityQuery": {
       "description": "Represents Activity entity query.",
       "allOf": [
         {
-          "$ref": "#/definitions/EntityQueryPut"
+          "$ref": "#/definitions/CustomEntityQuery"
         }
       ],
       "properties": {
@@ -487,13 +487,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "EntityQueryPut": {
+    "CustomEntityQuery": {
       "description": "The entity query we want to create or update",
       "in": "body",
       "name": "entityQuery",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/EntityQueryPut"
+        "$ref": "#/definitions/CustomEntityQuery"
       },
       "x-ms-parameter-location": "method"
     },
