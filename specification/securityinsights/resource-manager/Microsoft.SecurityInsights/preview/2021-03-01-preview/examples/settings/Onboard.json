@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2021-03-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "operationalInsightsResourceProvider": "Microsoft.OperationalInsights",
+    "onboardingRequest": {
+      "sku": {
+        "name": "CapacityReservation",
+        "capacityReservationLevel": 700
+      },
+      "customerManagedKey": false,
+      "eyesOn": true,
+      "entityAnalytics": {
+        "enabled": true,
+        "uebaDataSources": [
+          "AuditLogs",
+          "SecurityEvent"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "CapacityReservation",
+          "capacityReservationLevel": 700
+        },
+        "customerManagedKey": false,
+        "eyesOn": true,
+        "entityAnalytics": {
+          "enabled": true,
+          "uebaDataSources": [
+            "AuditLogs",
+            "SecurityEvent"
+          ]
+        }
+      }
+    }
+  }
+}

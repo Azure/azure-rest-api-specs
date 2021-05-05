@@ -20,7 +20,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
@@ -73,7 +73,7 @@ openapi-type: arm
 tag: package-composite-v3
 ```
 
-## Composite packages
+### Composite packages
 
 The following packages may be composed from multiple api-versions.
 
@@ -450,8 +450,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js security/resource-manager
 ```
 
 ## C#
@@ -478,6 +476,4 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

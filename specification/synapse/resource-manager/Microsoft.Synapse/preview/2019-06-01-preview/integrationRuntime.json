@@ -1334,6 +1334,10 @@
           "description": "Managed integration runtime properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
+        },
+        "managedVirtualNetwork": {
+          "description": "Managed Virtual Network reference.",
+          "$ref": "#/definitions/ManagedVirtualNetworkReference"
         }
       },
       "required": [
@@ -2939,6 +2943,26 @@
           "description": "The operation error message."
         }
       }
+    },
+    "ManagedVirtualNetworkReference": {
+      "description": "Managed Virtual Network reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Managed Virtual Network reference type.",
+          "enum": [
+            "ManagedVirtualNetworkReference"
+          ]
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference ManagedVirtualNetwork name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
     }
   },
   "parameters": {
