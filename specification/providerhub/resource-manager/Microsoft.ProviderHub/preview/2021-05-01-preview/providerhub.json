@@ -4096,6 +4096,33 @@
         }
       }
     },
+    "ResourceConcurrencyControlOption": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "enum": [
+            "NotSpecified",
+            "SynchronizeBeginExtension"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Policy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ResourceGraphConfiguration": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "apiVersion": {
+          "type": "string"
+        }
+      }
+    },
     "ResourceTypeRegistrationProperties": {
       "type": "object",
       "properties": {
@@ -4311,6 +4338,19 @@
             "name": "ResourceDeletionPolicy",
             "modelAsString": true
           }
+        },
+        "resourceConcurrencyControlOptions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceConcurrencyControlOption"
+          }
+        },
+        "resourceGraphConfiguration": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceGraphConfiguration"
+            }
+          ]
         }
       }
     },
