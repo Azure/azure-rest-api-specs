@@ -1177,6 +1177,7 @@
           },
           "404": {
             "description": "No operation result was found matching operationResultId.",
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1223,6 +1224,12 @@
             "description": "OK -- Successfully retrieved private endpoint connections.",
             "schema": {
               "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -1402,6 +1409,12 @@
             "description": "Successfully retrieved private link resources.",
             "schema": {
               "$ref": "./privatelinks.json#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         }
