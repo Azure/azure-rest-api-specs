@@ -41,8 +41,11 @@
         ],
         "operationId": "Migrations_Create",
         "x-ms-examples": {
-          "Create a migration": {
-            "$ref": "./examples/MigrationCreate.json"
+          "Migrations_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Migrations_Create_MaximumSet_Gen.json"
+          },
+          "Migrations_Create_MinimumSet_Gen": {
+            "$ref": "./examples/Migrations_Create_MinimumSet_Gen.json"
           }
         },
         "description": "Creates a new migration.",
@@ -111,8 +114,11 @@
         ],
         "operationId": "Migrations_Read",
         "x-ms-examples": {
-          "Get a Migration": {
-            "$ref": "./examples/MigrationGet.json"
+          "Migrations_Read_MaximumSet_Gen": {
+            "$ref": "./examples/Migrations_Read_MaximumSet_Gen.json"
+          },
+          "Migrations_Read_MinimumSet_Gen": {
+            "$ref": "./examples/Migrations_Read_MinimumSet_Gen.json"
           }
         },
         "description": "Gets details of a migration.",
@@ -151,8 +157,11 @@
         ],
         "operationId": "Migrations_Update",
         "x-ms-examples": {
-          "Update a migration": {
-            "$ref": "./examples/MigrationUpdate.json"
+          "Migrations_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Migrations_Update_MaximumSet_Gen.json"
+          },
+          "Migrations_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Migrations_Update_MinimumSet_Gen.json"
           }
         },
         "description": "Updates an existing migration. The request body can contain one to many of the mutable properties present in the migration definition. Certain property updates initiate migration state transitions.",
@@ -215,8 +224,11 @@
         ],
         "operationId": "Migrations_Delete",
         "x-ms-examples": {
-          "Delete a migration": {
-            "$ref": "./examples/MigrationDelete.json"
+          "Migrations_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Migrations_Delete_MaximumSet_Gen.json"
+          },
+          "Migrations_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Migrations_Delete_MinimumSet_Gen.json"
           }
         },
         "description": "Deletes a migration.",
@@ -241,6 +253,12 @@
               "$ref": "#/definitions/MigrationResource"
             }
           },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -257,8 +275,11 @@
         ],
         "operationId": "Migrations_ListByTargetServer",
         "x-ms-examples": {
-          "List migrations by the target server": {
-            "$ref": "./examples/MigrationsListByTargetServer.json"
+          "Migrations_ListByTargetServer_MaximumSet_Gen": {
+            "$ref": "./examples/Migrations_ListByTargetServer_MaximumSet_Gen.json"
+          },
+          "Migrations_ListByTargetServer_MinimumSet_Gen": {
+            "$ref": "./examples/Migrations_ListByTargetServer_MinimumSet_Gen.json"
           }
         },
         "description": "List all the migrations on a given target server.",
@@ -513,7 +534,7 @@
           "type": "string"
         }
       },
-      "description":  "Migration resource group."
+      "description": "Migration resource group."
     },
     "MigrationSecretParameters": {
       "required": [
@@ -748,7 +769,7 @@
           "$ref": "#/definitions/UnknownError"
         }
       },
-      "description":  "Internal server error."
+      "description": "Internal server error."
     },
     "UnknownError": {
       "type": "object",

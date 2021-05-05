@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "targetDBServerSubscriptionId": "aaaaaaaaaaaaaaaaa",
+    "targetDBServerResourceGroupName": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "targetDBServerName": "aaaaaaaaaaaaaaaaaa",
+    "migrationId": "aaaaaaaaaaaaaaaaaaa",
+    "parameters": {
+      "properties": {
+        "sourceDBServerResourceId": "aaaaaaaaaaaaa",
+        "targetDBServerSubnetResourceId": "aaaaaaaaaaaaaaaaaaaaaa",
+        "dBsToMigrate": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "migrationResourceGroup": {
+          "resourceId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "location": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "secretParameters": {
+          "adminCredentials": {
+            "sourceServerPassword": "aaaaaaaaaaaaaaaa",
+            "targetServerPassword": "aaaaaaaa"
+          },
+          "aadApp": {
+            "aadSecret": "aaaaaaaaaaaaaaaaa",
+            "clientId": "a",
+            "tenantId": "aaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "setupLogicalReplicationOnSourceDBIfNeeded": true,
+        "overwriteDBsInTarget": true,
+        "migrationWindowStartTimeInUtc": "2021-05-05T05:56:45.737Z",
+        "startDataMigration": true,
+        "triggerCutover": true,
+        "cancel": true
+      },
+      "tags": {
+        "key5712": "aaaaaaaaaaaaa"
+      },
+      "location": "aaaaaaaaaaaaaaa"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sourceDBServerResourceId": "aaaaaaaaaaaaa",
+          "targetDBServerSubnetResourceId": "aaaaaaaaaaaaaaaaaaaaaa",
+          "dBsToMigrate": [
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "migrationResourceGroup": {
+            "resourceId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "location": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "secretParameters": {
+            "adminCredentials": {},
+            "aadApp": {
+              "clientId": "a",
+              "tenantId": "aaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          "setupLogicalReplicationOnSourceDBIfNeeded": true,
+          "overwriteDBsInTarget": true,
+          "migrationWindowStartTimeInUtc": "2021-05-05T05:56:45.737Z",
+          "startDataMigration": true,
+          "triggerCutover": true,
+          "cancel": true
+        },
+        "tags": {
+          "key5712": "aaaaaaaaaaaaa"
+        },
+        "location": "aaaaaaaaaaaaaaa",
+        "id": "aaaaaaaaaaaaa",
+        "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "type": "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    "202": {},
+    "400": {
+      "body": {
+        "details": [
+          {
+            "code": "a",
+            "message": "aaaaaaaaaaaaaaa",
+            "target": "aaaaaaaaa"
+          }
+        ],
+        "code": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "message": "aaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "aaaaaaaaaaaaaaaaaaa",
+          "message": "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    }
+  }
+}
