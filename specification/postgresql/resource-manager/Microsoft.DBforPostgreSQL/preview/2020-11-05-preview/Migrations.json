@@ -137,18 +137,6 @@
               "$ref": "#/definitions/MigrationDetailsResource"
             }
           },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/InvalidInput"
-            }
-          },
-          "500": {
-            "description": "Server Error",
-            "schema": {
-              "$ref": "#/definitions/InternalServerError"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -253,12 +241,6 @@
               "$ref": "#/definitions/MigrationResource"
             }
           },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -304,18 +286,6 @@
               "$ref": "#/definitions/MigrationSummaryResourceListResult"
             }
           },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/InvalidInput"
-            }
-          },
-          "500": {
-            "description": "Server Error",
-            "schema": {
-              "$ref": "#/definitions/InternalServerError"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -347,7 +317,6 @@
       "type": "object",
       "properties": {
         "sourceDBServerResourceId": {
-          "pattern": "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{Microsoft.DBforPostgreSQL|Microsoft.DBforMySQL}/{serverType}/{serverName}",
           "type": "string"
         },
         "targetDBServerSubnetResourceId": {
@@ -537,7 +506,6 @@
       "type": "object",
       "properties": {
         "resourceId": {
-          "pattern": "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}",
           "type": "string"
         },
         "location": {

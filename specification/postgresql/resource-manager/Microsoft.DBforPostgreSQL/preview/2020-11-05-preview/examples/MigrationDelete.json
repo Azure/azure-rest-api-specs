@@ -15,22 +15,22 @@
             "testdb1",
             "testdb2"
           ],
-          "migrationResourceGroup": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg",
+          "migrationResourceGroup": {
+            "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg",
+             "location": "westus"
+          },
           "secretParameters": {
             "aadApp": {
               "tenantId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-              "clientId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-              "aadSecret": null
+              "clientId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
             },
-            "adminCredentials": {
-              "sourceServerPassword": null,
-              "targetServerPassword": null
-            }
+            "adminCredentials": {}
           }
         },
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4/migrations/ffffffff-ffff-ffff-ffff-ffffffffffff",
         "name": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations",
+        "location": "westus"
       }
     }
   }

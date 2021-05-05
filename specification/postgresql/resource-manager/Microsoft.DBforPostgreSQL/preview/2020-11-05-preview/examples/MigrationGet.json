@@ -21,7 +21,7 @@
           "sourceDBServerMetadata": {
             "location": "westus",
             "version": "10",
-            "storageMD": "1024",
+            "storageMB": 1024,
             "sku": {
               "name": "B_Gen4_1",
               "tier": "Basic"
@@ -30,7 +30,7 @@
           "targetDBServerMetadata": {
             "location": "westus",
             "version": "12",
-            "storageMD": "1024",
+            "storageMB": 1024,
             "sku": {
               "name": "Standard_D4s_v3",
               "tier": "GeneralPurpose"
@@ -44,23 +44,24 @@
               "testdb1",
               "testdb2"
             ],
-            "migrationResourceGroup": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg",
+            "migrationResourceGroup": {
+              "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg",
+              "location": "westus"
+            },
             "secretParameters": {
               "aadApp": {
                 "tenantId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-                "clientId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-                "aadSecret": null
+                "clientId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
               },
               "adminCredentials": {
-                "sourceServerPassword": null,
-                "targetServerPassword": null
               }
             }
           }
         },
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4/migrations/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
         "name": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations",
+        "location": "westus"
       }
     }
   }
