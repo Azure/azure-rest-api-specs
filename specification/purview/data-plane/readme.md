@@ -25,7 +25,7 @@ These are the global settings for the Purview API.
 ``` yaml
 openapi-type: data-plane
 tag: package-2018-12-01-preview
-title: AzurePurviewScanningClient
+title: PurviewScanningClient
 ```
 
 
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2018-12-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2018-12-01-preview'
 input-file:
-- Azure.Data.Purview.Scanning/preview/2018-12-01-preview/scanningService.json
+- Azure.Analytics.Purview.Scanning/preview/2018-12-01-preview/scanningService.json
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -53,7 +53,7 @@ output-folder: $(csharp-sdks-folder)/Purview/ScanningClient/Generated
 add-credentials: true
 sync-methods: all
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: Microsoft.Azure.Purview.ScanningClient
+namespace: Azure.Analytics.Purview.Scanning
 clear-output-folder: true
 ```
 

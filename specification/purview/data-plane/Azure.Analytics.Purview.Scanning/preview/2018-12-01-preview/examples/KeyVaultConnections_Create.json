@@ -1,8 +1,14 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
+    "keyVaultName": "KeyVault1",
     "api-version": "2018-12-01-preview",
-    "azureKeyVaultName": "AzureKeyVault1"
+    "body": {
+      "properties": {
+        "baseUrl": "https://babylon-sample-kv.vault.azure.net/",
+        "description": "This is a Key Vault"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -15,7 +21,7 @@
           "description": "This is a Key Vault"
         },
         "id": "/subscriptions/34fb3b81-27ab-4690-9d0b-668896fd288c/resourceGroups/scanning-df-westus2/providers/Microsoft.ProjectBabylon/accounts/babylon-128abf8c-ecea-4be6-8010-36d73cfad6e5/linkedservices/AzureKeyVault1",
-        "name": "AzureKeyVault1"
+        "name": "KeyVault1"
       }
     }
   }
