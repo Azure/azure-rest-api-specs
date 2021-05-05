@@ -18,20 +18,20 @@
     ]
   },
   "paths": {
-    "/azureKeyVaults/{azureKeyVaultName}": {
+    "/azureKeyVaults/{keyVaultName}": {
       "get": {
         "tags": [
           "AzureKeyVaults"
         ],
-        "description": "Gets azureKeyVault information",
-        "operationId": "AzureKeyVaults_GetAzureKeyVault",
+        "description": "Gets key vault information",
+        "operationId": "KeyVaultConnections_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "azureKeyVaultName",
+            "name": "keyVaultName",
             "required": true,
             "type": "string"
           },
@@ -54,8 +54,8 @@
           }
         },
         "x-ms-examples": {
-          "AzureKeyVaults_GetAzureKeyVault": {
-            "$ref": "./examples/AzureKeyVaults_GetAzureKeyVault.json"
+          "KeyVaultConnections_Get": {
+            "$ref": "./examples/KeyVaultConnections_Get.json"
           }
         }
       },
@@ -63,8 +63,8 @@
         "tags": [
           "AzureKeyVaults"
         ],
-        "description": "Creates an instance of a azureKeyVault",
-        "operationId": "AzureKeyVaults_CreateAzureKeyVault",
+        "description": "Creates an instance of a key vault connection",
+        "operationId": "KeyVaultConnections_Create",
         "consumes": [
           "application/json"
         ],
@@ -74,7 +74,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "azureKeyVaultName",
+            "name": "keyVaultName",
             "required": true,
             "type": "string"
           },
@@ -105,8 +105,8 @@
           }
         },
         "x-ms-examples": {
-          "AzureKeyVaults_CreateAzureKeyVault": {
-            "$ref": "./examples/AzureKeyVaults_CreateAzureKeyVault.json"
+          "KeyVaultConnections_Create": {
+            "$ref": "./examples/KeyVaultConnections_Create.json"
           }
         }
       },
@@ -114,15 +114,15 @@
         "tags": [
           "AzureKeyVaults"
         ],
-        "description": "Deletes the azureKeyVault associated with the account",
-        "operationId": "AzureKeyVaults_DeleteAzureKeyVault",
+        "description": "Deletes the key vault connection associated with the account",
+        "operationId": "KeyVaultConnections_Delete",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "azureKeyVaultName",
+            "name": "keyVaultName",
             "required": true,
             "type": "string"
           },
@@ -148,8 +148,8 @@
           }
         },
         "x-ms-examples": {
-          "AzureKeyVaults_DeleteAzureKeyVault": {
-            "$ref": "./examples/AzureKeyVaults_DeleteAzureKeyVault.json"
+          "KeyVaultConnections_Delete": {
+            "$ref": "./examples/KeyVaultConnections_Delete.json"
           }
         }
       }
@@ -159,8 +159,8 @@
         "tags": [
           "AzureKeyVaults"
         ],
-        "description": "List azureKeyVaults in account",
-        "operationId": "AzureKeyVaults_ListByAccount",
+        "description": "List key vault connections in account",
+        "operationId": "KeyVaultConnections_ListAll",
         "produces": [
           "application/json"
         ],
@@ -184,8 +184,8 @@
           }
         },
         "x-ms-examples": {
-          "AzureKeyVaults_ListByAccount": {
-            "$ref": "./examples/AzureKeyVaults_ListByAccount.json"
+          "KeyVaultConnections_ListAll": {
+            "$ref": "./examples/KeyVaultConnections_ListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -628,7 +628,7 @@
           "DataSources"
         ],
         "description": "List data sources in Data catalog",
-        "operationId": "DataSources_ListByAccount",
+        "operationId": "DataSources_ListAll",
         "produces": [
           "application/json"
         ],
@@ -652,92 +652,8 @@
           }
         },
         "x-ms-examples": {
-          "DataSources_ListByAccount": {
-            "$ref": "./examples/DataSources_ListByAccount.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/datasources/{dataSourceName}/listChildren": {
-      "get": {
-        "tags": [
-          "DataSources"
-        ],
-        "description": "Lists the children of the collection.",
-        "operationId": "DataSources_ListChildrenByCollection",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DataSourceList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Scanning Service",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataSources_ListChildrenByCollection": {
-            "$ref": "./examples/DataSources_ListChildrenByCollection.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/listUnparentedDataSources": {
-      "get": {
-        "tags": [
-          "DataSources"
-        ],
-        "description": "Lists the data sources in the account that do not belong to any collection.",
-        "operationId": "DataSource_ListUnparentedDataSourcesByAccount",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DataSourceList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Scanning Service",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataSource_ListUnparentedDataSourcesByAccount": {
-            "$ref": "./examples/DataSource_ListUnparentedDataSourcesByAccount.json"
+          "DataSources_ListAll": {
+            "$ref": "./examples/DataSources_ListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -1066,7 +982,7 @@
           "ScanResult"
         ],
         "description": "Runs the scan",
-        "operationId": "Scans_RunScan",
+        "operationId": "ScanResult_RunScan",
         "produces": [
           "application/json"
         ],
@@ -1121,8 +1037,8 @@
           }
         },
         "x-ms-examples": {
-          "Scans_RunScan": {
-            "$ref": "./examples/Scans_RunScan.json"
+          "ScanResult_RunScan": {
+            "$ref": "./examples/ScanResult_RunScan.json"
           }
         }
       }
@@ -1133,7 +1049,7 @@
           "ScanResult"
         ],
         "description": "Cancels a scan",
-        "operationId": "Scans_CancelScan",
+        "operationId": "ScanResult_CancelScan",
         "produces": [
           "application/json"
         ],
@@ -1175,8 +1091,8 @@
           }
         },
         "x-ms-examples": {
-          "Scans_CancelScan": {
-            "$ref": "./examples/Scans_CancelScan.json"
+          "ScanResult_CancelScan": {
+            "$ref": "./examples/ScanResult_CancelScan.json"
           }
         }
       }
@@ -1187,7 +1103,7 @@
           "ScanResult"
         ],
         "description": "Lists the scan history of a scan",
-        "operationId": "Scans_ListScanHistory",
+        "operationId": "ScanResult_ListScanHistory",
         "produces": [
           "application/json"
         ],
@@ -1223,8 +1139,8 @@
           }
         },
         "x-ms-examples": {
-          "Scans_ListScanHistory": {
-            "$ref": "./examples/Scans_ListScanHistory.json"
+          "ScanResult_ListScanHistory": {
+            "$ref": "./examples/ScanResult_ListScanHistory.json"
           }
         },
         "x-ms-pageable": {
@@ -1469,7 +1385,6 @@
             "type": "string",
             "enum": [
               "None",
-              "Collection",
               "AzureSubscription",
               "AzureResourceGroup",
               "AzureSynapseWorkspace",
@@ -1543,7 +1458,6 @@
             "type": "string",
             "enum": [
               "None",
-              "Collection",
               "AzureSubscription",
               "AzureResourceGroup",
               "AzureSynapseWorkspace",
@@ -1624,7 +1538,6 @@
             "type": "string",
             "enum": [
               "None",
-              "Collection",
               "AzureSubscription",
               "AzureResourceGroup",
               "AzureSynapseWorkspace",
@@ -1698,7 +1611,6 @@
             "type": "string",
             "enum": [
               "None",
-              "Collection",
               "AzureSubscription",
               "AzureResourceGroup",
               "AzureSynapseWorkspace",
@@ -2249,7 +2161,6 @@
         "dataSourceType": {
           "enum": [
             "None",
-            "Collection",
             "AzureSubscription",
             "AzureResourceGroup",
             "AzureSynapseWorkspace",
@@ -2372,7 +2283,6 @@
         "kind": {
           "enum": [
             "None",
-            "Collection",
             "AzureSubscription",
             "AzureResourceGroup",
             "AzureSynapseWorkspace",
@@ -2557,7 +2467,6 @@
         "kind": {
           "enum": [
             "None",
-            "Collection",
             "AzureSubscription",
             "AzureResourceGroup",
             "AzureSynapseWorkspace",
@@ -2625,7 +2534,6 @@
         "kind": {
           "enum": [
             "None",
-            "Collection",
             "AzureSubscription",
             "AzureResourceGroup",
             "AzureSynapseWorkspace",
@@ -3038,17 +2946,6 @@
       },
       "x-ms-discriminator-value": "Regex"
     },
-    "DataSourceReference": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "referenceName": {
-          "type": "string"
-        }
-      }
-    },
     "DataSourceProperties": {
       "type": "object",
       "properties": {
@@ -3061,41 +2958,8 @@
           "format": "date-time",
           "type": "string",
           "readOnly": true
-        },
-        "parentCollection": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataSourceReference"
-            }
-          ]
         }
       }
-    },
-    "CollectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataSourceProperties"
-        }
-      ]
-    },
-    "CollectionDataSource": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataSource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CollectionProperties"
-            }
-          ]
-        }
-      },
-      "x-ms-discriminator-value": "Collection"
     },
     "AzureSubscriptionProperties": {
       "type": "object",
@@ -4898,9 +4762,6 @@
           "type": "object",
           "properties": {
             "None": {
-              "$ref": "#/definitions/ResourceTypeFilter"
-            },
-            "Collection": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
             "AzureSubscription": {
