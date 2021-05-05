@@ -3,7 +3,7 @@
   "info": {
     "title": "ProviderHub",
     "description": "Microsoft ProviderHub",
-    "version": "2020-11-20",
+    "version": "2021-05-01-preview",
     "x-ms-code-generation-settings": {
       "name": "ProviderHubClient"
     }
@@ -2419,9 +2419,26 @@
         }
       }
     },
+    "ExpeditedRolloutDefinition": {
+      "description": "Expedited rollout configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Indicates whether expedited rollout is enabled/disabled",
+          "type": "boolean"
+        }
+      }
+    },
     "DefaultRolloutSpecification": {
       "type": "object",
       "properties": {
+        "expeditedRollout" : {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ExpeditedRolloutDefinition"
+            }
+          ]
+        },
         "canary": {
           "allOf": [
             {
