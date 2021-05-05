@@ -2475,7 +2475,7 @@
           "200": {
             "description": "Successfully retrieved connection list.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionList"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -2516,14 +2516,14 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully retrieved the connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -2559,7 +2559,7 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -2602,7 +2602,7 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "connection",
@@ -2610,7 +2610,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionPut"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -2618,7 +2618,7 @@
           "200": {
             "description": "Successfully updated.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -2660,7 +2660,7 @@
           "200": {
             "description": "Successfully retrieved the list of resources.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResources"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -2702,7 +2702,7 @@
           "200": {
             "description": "Successfully retrieved connection list.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionList"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -2743,14 +2743,14 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully retrieved the connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -2786,7 +2786,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -2829,7 +2829,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "connection",
@@ -2837,7 +2837,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionPut"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -2845,7 +2845,7 @@
           "200": {
             "description": "Successfully updated.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -2887,7 +2887,7 @@
           "200": {
             "description": "Successfully retrieved the list of resources.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResources"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -5237,225 +5237,6 @@
           "description": "The path to the legacy object to migrate."
         }
       }
-    },
-    "PrivateEndpointConnectionList": {
-      "type": "object",
-      "title": "PrivateEndpointConnectionList",
-      "description": "List of private endpoint connections.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of private endpoint connections.",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Link to the next page of results."
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "title": "PrivateEndpointConnection",
-      "description": "Represents a private endpoint connection.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Detailed properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
-        }
-      }
-    },
-    "PrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "Private endpoint connection properties.",
-      "properties": {
-        "provisioningState": {
-          "enum": [
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Succeeded",
-                "description": "Succeeded"
-              }
-            ]
-          },
-          "type": "string",
-          "description": "Provisioning state for the connection.",
-          "x-nullable": false
-        },
-        "privateEndpoint": {
-          "description": "Connections reference to the endpoint.",
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Arm path of referenced private endpoint."
-            }
-          }
-        },
-        "privateLinkServiceConnectionState": {
-          "description": "Connection state.",
-          "type": "object",
-          "properties": {
-            "status": {
-              "enum": [
-                "Approved",
-                "Rejected",
-                "Pending",
-                "Disconnected"
-              ],
-              "x-ms-enum": {
-                "name": "GetConnectionStatus",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "Approved",
-                    "description": "Approved"
-                  },
-                  {
-                    "value": "Rejected",
-                    "description": "Rejected"
-                  },
-                  {
-                    "value": "Pending",
-                    "description": "Not yet approved or rejected"
-                  },
-                  {
-                    "value": "Disconnected",
-                    "description": "The connection was deleted and disconnected from the endpoint"
-                  }
-                ]
-              },
-              "type": "string",
-              "description": "Approval status for the connection.",
-              "x-nullable": false
-            },
-            "description": {
-              "type": "string",
-              "description": "An admin provided description."
-            },
-            "actionRequired": {
-              "type": "string",
-              "description": "An admin provided optional action required."
-            }
-          }
-        }
-      }
-    },
-    "PrivateEndpointConnectionPut": {
-      "type": "object",
-      "description": "Connection properties that can be updated.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "tags to be updated"
-        },
-        "properties": {
-          "description": "Detailed properties for scaling plan",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PrivateEndpointConnectionPutProperties"
-        }
-      }
-    },
-    "PrivateEndpointConnectionPutProperties": {
-      "type": "object",
-      "description": "Connection properties.",
-      "properties": {
-        "privateLinkServiceConnectionState": {
-          "description": "Connection state.",
-          "type": "object",
-          "properties": {
-            "status": {
-              "enum": [
-                "Approved",
-                "Rejected"
-              ],
-              "x-ms-enum": {
-                "name": "PutConnectionStatus",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "Approved",
-                    "description": "Approved"
-                  },
-                  {
-                    "value": "Rejected",
-                    "description": "Rejected"
-                  }
-                ]
-              },
-              "type": "string",
-              "description": "Approval status for the connection.",
-              "x-nullable": false
-            },
-            "description": {
-              "type": "string",
-              "description": "An admin provided description."
-            },
-            "actionRequired": {
-              "type": "string",
-              "description": "An admin provided optional action required."
-            }
-          }
-        }
-      }
-    },
-    "PrivateLinkResources": {
-      "type": "object",
-      "title": "PrivateLinkResources",
-      "description": "Represents a private link resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Detailed properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PrivateLinkResourcesProperties"
-        }
-      }
-    },
-    "PrivateLinkResourcesProperties": {
-      "type": "object",
-      "description": "Private link resource properties.",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "List of applicationGroup links."
-        },
-        "requiredMembers": {
-          "type": "array",
-          "description": "List of members needed for this resource.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "description": "List of dns zones needed for this resource.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     }
   },
   "parameters": {
@@ -5567,16 +5348,6 @@
       "description": "The name of the scaling plan.",
       "maxLength": 24,
       "minLength": 3,
-      "x-ms-parameter-location": "method"
-    },
-    "PrivateEndpointConnectionNameParameter": {
-      "name": "connectionName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the private endpoint connection within the specified resource",
-      "maxLength": 101,
-      "minLength": 40,
       "x-ms-parameter-location": "method"
     }
   }
