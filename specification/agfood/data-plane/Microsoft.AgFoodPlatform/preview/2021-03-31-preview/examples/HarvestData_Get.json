@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "api-version": "2021-03-31-preview",
+    "farmerId": "FARMER123",
+    "harvestDataId": "HARVESTOP123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "farmerId": "FARMER123",
+        "id": "HARVESTOP123",
+        "source": "Manual",
+        "name": "Harvest data for North Farm",
+        "description": "some description",
+        "status": "Active",
+        "operationStartDateTime": "2021-02-25T16:57:04Z",
+        "operationEndDateTime": "2021-02-27T10:13:06Z",
+        "operationModifiedDateTime": "2021-02-28T10:12:12Z",
+        "operationBoundaryId": "HARVESTOPBOUNDARY1",
+        "associatedBoundaryId": "NORTHFARM2021CORNBOUNDARY",
+        "area": {
+          "unit": "acre",
+          "value": 50
+        },
+        "totalYield": {
+          "unit": "kilos",
+          "value": 1400
+        },
+        "avgYield": {
+          "unit": "kilosperacre",
+          "value": 28
+        },
+        "totalWetMass": {
+          "unit": "kilos",
+          "value": 500
+        },
+        "avgWetMass": {
+          "unit": "kilosperacre",
+          "value": 10
+        },
+        "avgMoisture": {
+          "unit": "percent",
+          "value": 14.61
+        },
+        "avgSpeed": {
+          "unit": "kmsperhour",
+          "value": 7.2
+        },
+        "harvestProductDetails": [
+          {
+            "productName": "VAR1",
+            "area": {
+              "unit": "acre",
+              "value": 30
+            },
+            "totalYield": {
+              "unit": "kilos",
+              "value": 900
+            },
+            "avgYield": {
+              "unit": "kilosperacre",
+              "value": 30
+            },
+            "totalWetMass": {
+              "unit": "kilos",
+              "value": 300
+            },
+            "avgWetMass": {
+              "unit": "kilosperacre",
+              "value": 10
+            },
+            "avgMoisture": {
+              "unit": "percent",
+              "value": 16.4
+            }
+          }
+        ],
+        "properties": {
+          "Region": "Europe",
+          "CountyCode": 123
+        },
+        "attachmentsLink": "https://<resource-name>.farmbeats.azure.net/farmer/{{farmerId}}/attachments?api-version={{apiVersion}}&resourceIds={{harvestDataId}}&resourceTypes=HarvestData",
+        "createdDateTime": "2021-02-29T04:57:04Z",
+        "modifiedDateTime": "2021-03-08T18:22:07Z",
+        "eTag": "cb00a3ac-0000-0100-0000-601d21ec0000"
+      }
+    }
+  }
+}
