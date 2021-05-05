@@ -6111,6 +6111,11 @@
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
         },
+        "analyticalStorageConfiguration": {
+          "description": "Analytical storage specific properties.",
+          "type": "object",
+          "$ref": "#/definitions/AnalyticalStorageConfiguration"
+        },
         "backupPolicy": {
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
@@ -6221,6 +6226,11 @@
         "enableAnalyticalStorage": {
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
+        },
+        "analyticalStorageConfiguration": {
+          "description": "Analytical storage specific properties.",
+          "type": "object",
+          "$ref": "#/definitions/AnalyticalStorageConfiguration"
         },
         "backupPolicy": {
           "description": "The object representing the policy for taking backups on an account.",
@@ -6367,6 +6377,11 @@
         "enableAnalyticalStorage": {
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
+        },
+        "analyticalStorageConfiguration": {
+          "description": "Analytical storage specific properties.",
+          "type": "object",
+          "$ref": "#/definitions/AnalyticalStorageConfiguration"
         },
         "backupPolicy": {
           "description": "The object representing the policy for taking backups on an account.",
@@ -8350,6 +8365,28 @@
             "name": "ServerVersion"
           }
         }
+      }
+    },
+    "AnalyticalStorageConfiguration": {
+      "type": "object",
+      "description": "Analytical storage specific properties.",
+      "properties": {
+        "schemaType": {
+          "type": "string",
+          "$ref": "#/definitions/AnalyticalStorageSchemaType"
+        }
+      }
+    },
+    "AnalyticalStorageSchemaType": {
+      "type": "string",
+      "description": "Describes the types of schema for analytical storage.",
+      "enum": [
+        "WellDefined",
+        "FullFidelity"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AnalyticalStorageSchemaType"
       }
     },
     "BackupPolicy": {
