@@ -400,14 +400,55 @@
       ],
       "type": "object",
       "properties": {
+        "sourceDBServerResourceId": {
+          "type": "string"
+        },
+        "secretParameters": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MigrationSecretParameters"
+            }
+          ]
+        },
         "targetDBServerResourceId": {
           "type": "string"
         },
-        "allOf": [
-          {
-            "$ref": "#/definitions/MigrationCreateRequest"
+        "targetDBServerSubnetResourceId": {
+          "type": "string"
+        },
+        "dBsToMigrate": {
+          "maxItems": 8,
+          "type": "array",
+          "items": {
+            "type": "string"
           }
-        ]
+        },
+        "migrationResourceGroup": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MigrationResourceGroup"
+            }
+          ]
+        },
+        "setupLogicalReplicationOnSourceDBIfNeeded": {
+          "type": "boolean"
+        },
+        "overwriteDBsInTarget": {
+          "type": "boolean"
+        },
+        "migrationWindowStartTimeInUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "startDataMigration": {
+          "type": "boolean"
+        },
+        "triggerCutover": {
+          "type": "boolean"
+        },
+        "cancel": {
+          "type": "boolean"
+        }
       },
       "description": "Full migration create request."
     },
