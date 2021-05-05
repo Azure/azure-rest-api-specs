@@ -52,17 +52,27 @@ These settings apply only when `--tag=package-2021-03-preview-only` is specified
 ```yaml $(tag) == 'package-2021-03-preview-only'
 input-file:
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/OnboardingStates.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/dataConnectors.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
 directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
     where: $.definitions.Settings
-    reason: The Setting does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
+    reason: The Setting does not support list by subscription. It's not a top-level resource. To get the Setting, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/dataConnectors.json
+    where: $.definitions.DataConnector
+    reason: The DataConnector does not support list by subscription. It's not a top-level resource.
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
     where: $.definitions.Watchlist
     reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/OnboardingStates.json
+    where: $.definitions.SentinelOnboardingState
+    reason: The SentinelOnboardingState does not support list by subscription. It's not a top-level resource. To get the SentinelOnboardingState, we should have a subscription as well as a resource group and Log Analytics workspace.
 ```
 
 ---
@@ -108,8 +118,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js securityinsights/resource-manager
 ```
 
 ## C#
@@ -143,7 +151,5 @@ See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

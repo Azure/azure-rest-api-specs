@@ -409,8 +409,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js applicationinsights/resource-manager
 ```
 
 ## Go
@@ -479,6 +477,4 @@ input-file:
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
