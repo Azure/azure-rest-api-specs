@@ -522,6 +522,14 @@
           "description": "The ID of the device group on which to execute the job.",
           "type": "string"
         },
+        "batch": {
+          "description": "The batching configuration for the job.",
+          "$ref": "#/definitions/JobBatch"
+        },
+        "cancellationThreshold": {
+          "description": "The cancellation threshold for the job.",
+          "$ref": "#/definitions/JobCancellationThreshold"
+        },
         "data": {
           "description": "The capabilities being updated by the job and the values with which they are being updated.",
           "type": "array",
@@ -539,6 +547,52 @@
       "required": [
         "group",
         "data"
+      ]
+    },
+    "JobBatch": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Whether batching is done on a specified number of devices or a percentage of the total devices.",
+          "type": "string",
+          "enum": [
+            "number",
+            "percentage"
+          ]
+        },
+        "value": {
+          "description": "The number or percentage of devices on which batching is done.",
+          "type": "number"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "JobCancellationThreshold": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Whether the cancellation threshold is per a specified number of devices or a percentage of the total devices.",
+          "type": "string",
+          "enum": [
+            "number",
+            "percentage"
+          ]
+        },
+        "value": {
+          "description": "The number or percentage of devices on which the cancellation threshold is applied.",
+          "type": "number"
+        },
+        "batch": {
+          "description": "Whether the cancellation threshold applies per-batch or to the overall job.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "type",
+        "value"
       ]
     },
     "JobCollection": {
