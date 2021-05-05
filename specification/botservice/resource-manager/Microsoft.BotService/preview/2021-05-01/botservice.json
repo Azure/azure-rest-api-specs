@@ -1188,7 +1188,8 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/privateEndpointConnections": {
@@ -1197,7 +1198,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_List",
-        "description": "List all the private endpoint connections associated with the storage account.",
+        "description": "List all the private endpoint connections associated with the Bot.",
         "x-ms-examples": {
           "List Private Endpoint Connections": {
             "$ref": "./examples/ListPrivateEndpointConnections.json"
@@ -1236,7 +1237,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Get",
-        "description": "Gets the specified private endpoint connection associated with the storage account.",
+        "description": "Gets the specified private endpoint connection associated with the Bot.",
         "x-ms-examples": {
           "Get Private Endpoint Connection": {
             "$ref": "./examples/GetPrivateEndpointConnection.json"
@@ -1278,8 +1279,8 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "operationId": "PrivateEndpointConnections_Put",
-        "description": "Update the state of specified private endpoint connection associated with the storage account.",
+        "operationId": "PrivateEndpointConnections_Create",
+        "description": "Update the state of specified private endpoint connection associated with the Bot.",
         "x-ms-examples": {
           "Put Private Endpoint Connection": {
             "$ref": "./examples/PutPrivateEndpointConnection.json"
@@ -1331,7 +1332,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Delete",
-        "description": "Deletes the specified private endpoint connection associated with the storage account.",
+        "description": "Deletes the specified private endpoint connection associated with the Bot.",
         "x-ms-examples": {
           "Delete Private Endpoint Connection": {
             "$ref": "./examples/DeletePrivateEndpointConnection.json"
@@ -1365,6 +1366,42 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_ListByBotResource",
+        "description": "Gets the private link resources that need to be created for a Bot.",
+        "x-ms-examples": {
+          "List Private Link Resources": {
+            "$ref": "./examples/ListPrivateLinkResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "./privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           }
         }
