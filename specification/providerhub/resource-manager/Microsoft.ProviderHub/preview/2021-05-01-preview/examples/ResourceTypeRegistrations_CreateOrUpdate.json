@@ -23,6 +23,17 @@
             ]
           }
         ],
+        "resourceConcurrencyControlOptions": {
+          "put": {
+            "policy": "SynchronizeBeginExtension"
+          },
+          "patch": {
+            "policy": "SynchronizeBeginExtension"
+          },
+          "post": {
+            "policy": "SynchronizeBeginExtension"
+          }
+        },
         "swaggerSpecifications": [
           {
             "apiVersions": [
@@ -78,7 +89,18 @@
           "enableAsyncOperation": false,
           "provisioningState": "Succeeded",
           "enableThirdPartyS2S": false,
-          "resourceDeletionPolicy": "CascadeDeleteProxyOnlyChildren"
+          "resourceDeletionPolicy": "CascadeDeleteProxyOnlyChildren",
+          "resourceConcurrencyControlOptions": {
+            "put": {
+              "policy": "SynchronizeBeginExtension"
+            },
+            "patch": {
+              "policy": "SynchronizeBeginExtension"
+            },
+            "post": {
+              "policy": "SynchronizeBeginExtension"
+            }
+          }
         },
         "name": "employees"
       }
@@ -125,7 +147,18 @@
           ],
           "enableAsyncOperation": false,
           "provisioningState": "Succeeded",
-          "enableThirdPartyS2S": false
+          "enableThirdPartyS2S": false,
+          "resourceConcurrencyControlOptions": {
+            "put": {
+              "policy": "SynchronizeBeginExtension"
+            },
+            "patch": {
+              "policy": "SynchronizeBeginExtension"
+            },
+            "post": {
+              "policy": "SynchronizeBeginExtension"
+            }
+          }
         },
         "name": "employees"
       }

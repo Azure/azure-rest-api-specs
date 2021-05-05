@@ -48,7 +48,18 @@
           ],
           "enableAsyncOperation": false,
           "provisioningState": "Succeeded",
-          "enableThirdPartyS2S": false
+          "enableThirdPartyS2S": false,
+          "resourceConcurrencyControlOptions": {
+            "put": {
+              "policy": "SynchronizeBeginExtension"
+            },
+            "patch": {
+              "policy": "SynchronizeBeginExtension"
+            },
+            "post": {
+              "policy": "SynchronizeBeginExtension"
+            }
+          }
         },
         "name": "employees"
       }

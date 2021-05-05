@@ -4096,6 +4096,22 @@
         }
       }
     },
+    "ResourceConcurrencyControlOption": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "enum": [
+            "NotSpecified",
+            "SynchronizeBeginExtension"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Policy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ResourceTypeRegistrationProperties": {
       "type": "object",
       "properties": {
@@ -4310,6 +4326,12 @@
           "x-ms-enum": {
             "name": "ResourceDeletionPolicy",
             "modelAsString": true
+          }
+        },
+        "resourceConcurrencyControlOptions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceConcurrencyControlOption"
           }
         }
       }
