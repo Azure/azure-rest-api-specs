@@ -59,6 +59,7 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2021-03-01-preview/mfe.json
   - Microsoft.MachineLearningServices/preview/2021-03-01-preview/services.json
   - Microsoft.MachineLearningServices/preview/2021-03-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2021-03-01-preview/workspaceSkus.json
 ```
 ### Tag: package-2020-08-01
 
