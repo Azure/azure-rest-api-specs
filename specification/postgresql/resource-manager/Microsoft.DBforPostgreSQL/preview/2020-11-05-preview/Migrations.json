@@ -43,9 +43,6 @@
         "x-ms-examples": {
           "Migrations_Create_MaximumSet_Gen": {
             "$ref": "./examples/Migrations_Create_MaximumSet_Gen.json"
-          },
-          "Migrations_Create_MinimumSet_Gen": {
-            "$ref": "./examples/Migrations_Create_MinimumSet_Gen.json"
           }
         },
         "description": "Creates a new migration.",
@@ -77,27 +74,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MigrationResource"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/MigrationResource"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/InvalidInput"
-            }
-          },
-          "500": {
-            "description": "Server Error",
-            "schema": {
-              "$ref": "#/definitions/InternalServerError"
             }
           },
           "default": {
@@ -159,9 +135,6 @@
         "x-ms-examples": {
           "Migrations_Update_MaximumSet_Gen": {
             "$ref": "./examples/Migrations_Update_MaximumSet_Gen.json"
-          },
-          "Migrations_Update_MinimumSet_Gen": {
-            "$ref": "./examples/Migrations_Update_MinimumSet_Gen.json"
           }
         },
         "description": "Updates an existing migration. The request body can contain one to many of the mutable properties present in the migration definition. Certain property updates initiate migration state transitions.",
@@ -193,21 +166,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MigrationResource"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/InvalidInput"
-            }
-          },
-          "500": {
-            "description": "Server Error",
-            "schema": {
-              "$ref": "#/definitions/InternalServerError"
             }
           },
           "default": {
@@ -252,9 +210,6 @@
             "schema": {
               "$ref": "#/definitions/MigrationResource"
             }
-          },
-          "202": {
-            "description": "Accepted"
           },
           "204": {
             "description": "NoContent"
@@ -728,60 +683,6 @@
         "tier"
       ],
       "description": "Sku information related properties of a server."
-    },
-    "InvalidInput": {
-      "type": "object",
-      "properties": {
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InvalidInputDetails"
-          }
-        },
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      },
-      "description": "Invalid input error message."
-    },
-    "InvalidInputDetails": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        }
-      },
-      "description": "Invalid input error message details."
-    },
-    "InternalServerError": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/UnknownError"
-        }
-      },
-      "description": "Internal server error."
-    },
-    "UnknownError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      },
-      "description": "Unknown error."
     },
     "CloudError": {
       "x-ms-external": true,
