@@ -359,18 +359,10 @@
           }
         },
         "migrationResourceGroup": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationResourceGroup"
-            }
-          ]
+          "$ref": "#/definitions/MigrationResourceGroup"
         },
         "secretParameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationSecretParameters"
-            }
-          ]
+          "$ref": "#/definitions/MigrationSecretParameters"
         },
         "setupLogicalReplicationOnSourceDBIfNeeded": {
           "type": "boolean"
@@ -404,11 +396,7 @@
           "type": "string"
         },
         "secretParameters": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationSecretParameters"
-            }
-          ]
+          "$ref": "#/definitions/MigrationSecretParameters"
         },
         "targetDBServerResourceId": {
           "type": "string"
@@ -424,11 +412,7 @@
           }
         },
         "migrationResourceGroup": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationResourceGroup"
-            }
-          ]
+          "$ref": "#/definitions/MigrationResourceGroup"
         },
         "setupLogicalReplicationOnSourceDBIfNeeded": {
           "type": "boolean"
@@ -474,39 +458,19 @@
           "type": "string"
         },
         "migrationDetailsLevel": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationDetailsLevel"
-            }
-          ]
+          "$ref": "#/definitions/MigrationDetailsLevel"
         },
         "currentStatus": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationStatus"
-            }
-          ]
+          "$ref": "#/definitions/MigrationStatus"
         },
         "sourceDBServerMetadata": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DBServerMetadata"
-            }
-          ]
+          "$ref": "#/definitions/DBServerMetadata"
         },
         "targetDBServerMetadata": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DBServerMetadata"
-            }
-          ]
+          "$ref": "#/definitions/DBServerMetadata"
         },
         "migrationCreateFullRequest": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationCreateFullRequest"
-            }
-          ]
+          "$ref": "#/definitions/MigrationCreateFullRequest"
         }
       },
       "description": "Migration details."
@@ -546,32 +510,16 @@
           "type": "string"
         },
         "migrationDetailsLevel": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationDetailsLevel"
-            }
-          ]
+          "$ref": "#/definitions/MigrationDetailsLevel"
         },
         "currentStatus": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationStatus"
-            }
-          ]
+          "$ref": "#/definitions/MigrationStatus"
         },
         "sourceDBServerMetadata": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DBServerMetadata"
-            }
-          ]
+          "$ref": "#/definitions/DBServerMetadata"
         },
         "targetDBServerMetadata": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DBServerMetadata"
-            }
-          ]
+          "$ref": "#/definitions/DBServerMetadata"
         }
       },
       "description": "Migration summary."
@@ -603,23 +551,15 @@
         "adminCredentials": {
           "x-ms-secret": true,
           "x-ms-external": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdminCredentials"
-            }
-          ]
+          "$ref": "#/definitions/AdminCredentials"
         },
         "aadApp": {
           "x-ms-secret": true,
           "x-ms-external": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/AADApp"
-            }
-          ]
+          "$ref": "#/definitions/AADApp"
         }
       },
-      "description": "Migration secret parameters." 
+      "description": "Migration secret parameters."
     },
     "AADApp": {
       "type": "object",
@@ -679,11 +619,7 @@
           "type": "integer"
         },
         "sku": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/Sku"
-            }
-          ]
+          "$ref": "#/definitions/Sku"
         }
       },
       "description": "Database server metadata."
@@ -732,21 +668,13 @@
       "type": "object",
       "properties": {
         "state": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationState"
-            }
-          ]
+          "$ref": "#/definitions/MigrationState"
         },
         "error": {
           "type": "string"
         },
         "currentSubStateDetails": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationSubStateDetails"
-            }
-          ]
+          "$ref": "#/definitions/MigrationSubStateDetails"
         }
       },
       "description": "Migration status."
@@ -775,11 +703,7 @@
       "type": "object",
       "properties": {
         "currentSubState": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MigrationSubState"
-            }
-          ]
+          "$ref": "#/definitions/MigrationSubState"
         }
       },
       "description": "Migration sub state details."
@@ -847,11 +771,7 @@
       "type": "object",
       "properties": {
         "error": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/UnknownError"
-            }
-          ]
+          "$ref": "#/definitions/UnknownError"
         }
       },
       "description":  "Internal server error."
