@@ -74,7 +74,7 @@
         "operationId": "Workspaces_Get",
         "x-ms-examples": {
           "Get Workspace": {
-            "$ref": "./examples/getWorkspace.json"
+            "$ref": "./examples/Workspace/get.json"
           }
         },
         "parameters": [
@@ -115,7 +115,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create Workspace": {
-            "$ref": "./examples/createWorkspace.json"
+            "$ref": "./examples/Workspace/create.json"
           }
         },
         "parameters": [
@@ -173,7 +173,7 @@
         "operationId": "Workspaces_Delete",
         "x-ms-examples": {
           "Delete Workspace": {
-            "$ref": "./examples/deleteWorkspace.json"
+            "$ref": "./examples/Workspace/delete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -217,7 +217,7 @@
         "operationId": "Workspaces_Update",
         "x-ms-examples": {
           "Update Workspace": {
-            "$ref": "./examples/updateWorkspace.json"
+            "$ref": "./examples/Workspace/update.json"
           }
         },
         "parameters": [
@@ -268,7 +268,7 @@
         "operationId": "Workspaces_ListByResourceGroup",
         "x-ms-examples": {
           "Get Workspaces by Resource Group": {
-            "$ref": "./examples/getWorkspacesByResourceGroup.json"
+            "$ref": "./examples/Workspace/listByResourceGroup.json"
           }
         },
         "parameters": [
@@ -313,7 +313,7 @@
         "operationId": "Workspaces_ListKeys",
         "x-ms-examples": {
           "List Workspace Keys": {
-            "$ref": "./examples/listWorkspaceKeys.json"
+            "$ref": "./examples/Workspace/listKeys.json"
           }
         },
         "parameters": [
@@ -356,7 +356,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Resync Workspace Keys": {
-            "$ref": "./examples/resyncWorkspaceKeys.json"
+            "$ref": "./examples/Workspace/resyncKeys.json"
           }
         },
         "parameters": [
@@ -425,7 +425,7 @@
         },
         "x-ms-examples": {
           "List Usages": {
-            "$ref": "./examples/ListUsages.json"
+            "$ref": "./examples/Usage/list.json"
           }
         }
       }
@@ -463,7 +463,7 @@
         },
         "x-ms-examples": {
           "List VM Sizes": {
-            "$ref": "./examples/ListVMSizesResult.json"
+            "$ref": "./examples/VirtualMachineSize/list.json"
           }
         }
       }
@@ -516,7 +516,7 @@
         },
         "x-ms-examples": {
           "update quotas": {
-            "$ref": "./examples/updateQuota.json"
+            "$ref": "./examples/Quota/update.json"
           }
         }
       }
@@ -563,7 +563,7 @@
         },
         "x-ms-examples": {
           "List workspace quotas by VMFamily": {
-            "$ref": "./examples/ListWorkspaceQuotasByVMFamily.json"
+            "$ref": "./examples/Quota/list.json"
           }
         }
       }
@@ -577,7 +577,7 @@
         "operationId": "Workspaces_ListBySubscription",
         "x-ms-examples": {
           "Get Workspaces by subscription": {
-            "$ref": "./examples/getWorkspacesBySubscription.json"
+            "$ref": "./examples/Workspace/listBySubscription.json"
           }
         },
         "parameters": [
@@ -623,7 +623,7 @@
         "description": "Gets computes in specified workspace.",
         "x-ms-examples": {
           "Get Computes": {
-            "$ref": "./examples/getComputes.json"
+            "$ref": "./examples/Compute/list.json"
           }
         },
         "parameters": [
@@ -669,13 +669,13 @@
         "description": "Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.",
         "x-ms-examples": {
           "Get a AKS Compute": {
-            "$ref": "./examples/getAKSCompute.json"
+            "$ref": "./examples/Compute/getAKSCompute.json"
           },
           "Get a AML Compute": {
-            "$ref": "./examples/getAmlCompute.json"
+            "$ref": "./examples/Compute/getAmlCompute.json"
           },
           "Get an ComputeInstance": {
-            "$ref": "./examples/getComputeInstance.json"
+            "$ref": "./examples/Compute/getComputeInstance.json"
           }
         },
         "parameters": [
@@ -720,25 +720,25 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create a AML Compute": {
-            "$ref": "./examples/createBasicAmlCompute.json"
+            "$ref": "./examples/Compute/createBasicAmlCompute.json"
           },
           "Create an ComputeInstance Compute with minimal inputs": {
-            "$ref": "./examples/createComputeInstanceMinimal.json"
+            "$ref": "./examples/Compute/createComputeInstanceMinimal.json"
           },
           "Create an ComputeInstance Compute": {
-            "$ref": "./examples/createComputeInstance.json"
+            "$ref": "./examples/Compute/createComputeInstance.json"
           },
           "Create AKS Compute": {
-            "$ref": "./examples/createBasicAKSCompute.json"
+            "$ref": "./examples/Compute/createBasicAKSCompute.json"
           },
           "Create a DataFactory Compute": {
-            "$ref": "./examples/createBasicDataFactoryCompute.json"
+            "$ref": "./examples/Compute/createBasicDataFactoryCompute.json"
           },
           "Update a AML Compute": {
-            "$ref": "./examples/updateAmlCompute.json"
+            "$ref": "./examples/Compute/updateAmlCompute.json"
           },
           "Update a AKS Compute": {
-            "$ref": "./examples/updateAKSCompute.json"
+            "$ref": "./examples/Compute/updateAKSCompute.json"
           }
         },
         "parameters": [
@@ -798,7 +798,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update a AmlCompute Compute": {
-            "$ref": "./examples/patchAmlCompute.json"
+            "$ref": "./examples/Compute/patch.json"
           }
         },
         "parameters": [
@@ -852,7 +852,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Compute": {
-            "$ref": "./examples/deleteCompute.json"
+            "$ref": "./examples/Compute/delete.json"
           }
         },
         "parameters": [
@@ -945,7 +945,7 @@
         },
         "x-ms-examples": {
           "Get compute nodes information for a compute": {
-            "$ref": "./examples/amlComputeListNodes.json"
+            "$ref": "./examples/Compute/listNodes.json"
           }
         }
       }
@@ -959,7 +959,7 @@
         "operationId": "Workspaces_ListNotebookAccessToken",
         "x-ms-examples": {
           "List Workspace Keys": {
-            "$ref": "./examples/listNotebookAccessToken.json"
+            "$ref": "./examples/Workspace/listNotebookAccessToken.json"
           }
         },
         "parameters": [
@@ -1002,7 +1002,7 @@
         "description": "Gets secrets related to Machine Learning compute (storage keys, service credentials, etc).",
         "x-ms-examples": {
           "List AKS Compute Keys": {
-            "$ref": "./examples/listKeysAKSCompute.json"
+            "$ref": "./examples/Compute/listKeys.json"
           }
         },
         "parameters": [
@@ -1048,7 +1048,7 @@
         "description": "Posts a start action to a compute instance",
         "x-ms-examples": {
           "Start ComputeInstance Compute": {
-            "$ref": "./examples/startComputeInstance.json"
+            "$ref": "./examples/Compute/start.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1092,7 +1092,7 @@
         "description": "Posts a stop action to a compute instance",
         "x-ms-examples": {
           "Stop ComputeInstance Compute": {
-            "$ref": "./examples/stopComputeInstance.json"
+            "$ref": "./examples/Compute/stop.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1136,7 +1136,7 @@
         "description": "Posts a restart action to a compute instance",
         "x-ms-examples": {
           "Restart ComputeInstance Compute": {
-            "$ref": "./examples/restartComputeInstance.json"
+            "$ref": "./examples/Compute/restart.json"
           }
         },
         "parameters": [
@@ -1178,7 +1178,7 @@
         "description": "List all the private endpoint connections associated with the workspace.",
         "x-ms-examples": {
           "StorageAccountListPrivateEndpointConnections": {
-            "$ref": "./examples/workspaceListPrivateEndpointConnections.json"
+            "$ref": "./examples/PrivateEndpointConnection/list.json"
           }
         },
         "parameters": [
@@ -1223,7 +1223,7 @@
         "description": "Gets the specified private endpoint connection associated with the workspace.",
         "x-ms-examples": {
           "WorkspaceGetPrivateEndpointConnection": {
-            "$ref": "./examples/workspaceGetPrivateEndpointConnection.json"
+            "$ref": "./examples/PrivateEndpointConnection/get.json"
           }
         },
         "parameters": [
@@ -1266,7 +1266,7 @@
         "description": "Update the state of specified private endpoint connection associated with the workspace.",
         "x-ms-examples": {
           "WorkspacePutPrivateEndpointConnection": {
-            "$ref": "./examples/workspacePutPrivateEndpointConnection.json"
+            "$ref": "./examples/PrivateEndpointConnection/createOrUpdate.json"
           }
         },
         "parameters": [
@@ -1318,7 +1318,7 @@
         "description": "Deletes the specified private endpoint connection associated with the workspace.",
         "x-ms-examples": {
           "WorkspaceDeletePrivateEndpointConnection": {
-            "$ref": "./examples/workspaceDeletePrivateEndpointConnection.json"
+            "$ref": "./examples/PrivateEndpointConnection/delete.json"
           }
         },
         "parameters": [
@@ -1363,7 +1363,7 @@
         "description": "Gets the private link resources that need to be created for a workspace.",
         "x-ms-examples": {
           "WorkspaceListPrivateLinkResources": {
-            "$ref": "./examples/workspaceListPrivateLinkResources.json"
+            "$ref": "./examples/PrivateLinkResource/list.json"
           }
         },
         "parameters": [
@@ -1402,7 +1402,7 @@
         },
         "x-ms-examples": {
           "Prepare Notebook": {
-            "$ref": "./examples/workspacePrepareNotebook.json"
+            "$ref": "./examples/Notebook/prepare.json"
           }
         },
         "parameters": [
@@ -1446,7 +1446,7 @@
         "operationId": "Workspaces_ListStorageAccountKeys",
         "x-ms-examples": {
           "List Workspace Keys": {
-            "$ref": "./examples/listStorageAccountKeys.json"
+            "$ref": "./examples/Workspace/listStorageAccountKeys.json"
           }
         },
         "parameters": [
@@ -1487,7 +1487,7 @@
         "operationId": "Notebooks_ListKeys",
         "x-ms-examples": {
           "List Workspace Keys": {
-            "$ref": "./examples/listNotebookKeys.json"
+            "$ref": "./examples/Notebook/listKeys.json"
           }
         },
         "parameters": [
@@ -1530,7 +1530,7 @@
         },
         "x-ms-examples": {
           "ListWorkspaceConnections": {
-            "$ref": "./examples/listWorkspaceConnections.json"
+            "$ref": "./examples/WorkspaceConnection/list.json"
           }
         },
         "operationId": "WorkspaceConnections_List",
@@ -1580,7 +1580,7 @@
         "description": "Add a new workspace connection.",
         "x-ms-examples": {
           "CreateWorkspaceConnection": {
-            "$ref": "./examples/createWorkspaceConnection.json"
+            "$ref": "./examples/WorkspaceConnection/create.json"
           }
         },
         "parameters": [
@@ -1632,7 +1632,7 @@
         "description": "Get the detail of a workspace connection.",
         "x-ms-examples": {
           "GetWorkspaceConnection": {
-            "$ref": "./examples/getWorkspaceConnection.json"
+            "$ref": "./examples/WorkspaceConnection/get.json"
           }
         },
         "parameters": [
@@ -1675,7 +1675,7 @@
         "description": "Delete a workspace connection.",
         "x-ms-examples": {
           "DeleteWorkspaceConnection": {
-            "$ref": "./examples/deleteWorkspaceConnection.json"
+            "$ref": "./examples/WorkspaceConnection/delete.json"
           }
         },
         "parameters": [
