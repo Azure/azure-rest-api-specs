@@ -2450,11 +2450,11 @@
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateEndpointConnections_HostPool_List",
+        "operationId": "PrivateEndpointConnections_ListByHostPool",
         "description": "List private endpoint connections associated with hostpool.",
         "x-ms-examples": {
-          "PrivateEndpointConnection_HostPool_List": {
-            "$ref": "./examples/PrivateEndpointConnection_HostPool_List.json"
+          "PrivateEndpointConnection_ListByHostPool": {
+            "$ref": "./examples/PrivateEndpointConnection_ListByHostPool.json"
           }
         },
         "parameters": [
@@ -2495,11 +2495,11 @@
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateEndpointConnections_HostPool_Get",
+        "operationId": "PrivateEndpointConnections_GetByHostPool",
         "description": "Get a private endpoint connection.",
         "x-ms-examples": {
-          "PrivateEndpointConnection_HostPool_Get": {
-            "$ref": "./examples/PrivateEndpointConnection_HostPool_Get.json"
+          "PrivateEndpointConnection_GetByHostPool": {
+            "$ref": "./examples/PrivateEndpointConnection_GetByHostPool.json"
           }
         },
         "parameters": [
@@ -2538,11 +2538,11 @@
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateEndpointConnections_HostPool_Delete",
+        "operationId": "PrivateEndpointConnections_DeleteByHostPool",
         "description": "Remove a connection.",
         "x-ms-examples": {
-          "PrivateEndpointConnection_HostPool_Delete": {
-            "$ref": "./examples/PrivateEndpointConnection_HostPool_Delete.json"
+          "PrivateEndpointConnection_DeleteByHostPool": {
+            "$ref": "./examples/PrivateEndpointConnection_DeleteByHostPool.json"
           }
         },
         "parameters": [
@@ -2581,11 +2581,11 @@
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateEndpointConnections_HostPool_Update",
+        "operationId": "PrivateEndpointConnections_UpdateByHostPool",
         "description": "Approve or reject a private endpoint connection.",
         "x-ms-examples": {
-          "PrivateEndpointConnection_HostPool_Update": {
-            "$ref": "./examples/PrivateEndpointConnection_HostPool_Update.json"
+          "PrivateEndpointConnection_UpdateByHostPool": {
+            "$ref": "./examples/PrivateEndpointConnection_UpdateByHostPool.json"
           }
         },
         "parameters": [
@@ -2628,18 +2628,18 @@
             }
           }
         }
-      }      
+      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateLinkResources": {
       "get": {
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateLinkResources_Hostpool_Get",
+        "operationId": "PrivateLinkResources_GetByHostPool",
         "description": "List the private link resources available for this hostpool.",
         "x-ms-examples": {
-          "PrivateLinkResources_Hostpool_Get": {
-            "$ref": "./examples/PrivateLinkResources_Hostpool_Get.json"
+          "PrivateLinkResources_GetByHostPool": {
+            "$ref": "./examples/PrivateLinkResources_GetByHostPool.json"
           }
         },
         "parameters": [
@@ -2677,11 +2677,11 @@
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateEndpointConnections_Workspace_List",
+        "operationId": "PrivateEndpointConnections_ListByWorkspace",
         "description": "List private endpoint connections.",
         "x-ms-examples": {
-          "PrivateEndpointConnection_Workspace_List": {
-            "$ref": "./examples/PrivateEndpointConnection_Workspace_List.json"
+          "PrivateEndpointConnection_ListByWorkspace": {
+            "$ref": "./examples/PrivateEndpointConnection_ListByWorkspace.json"
           }
         },
         "parameters": [
@@ -2722,11 +2722,11 @@
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateEndpointConnections_Workspace_Get",
+        "operationId": "PrivateEndpointConnections_GetByWorkspace",
         "description": "Get a private endpoint connection.",
         "x-ms-examples": {
-          "PrivateEndpointConnection_Workspace_Get": {
-            "$ref": "./examples/PrivateEndpointConnection_Workspace_Get.json"
+          "PrivateEndpointConnection_GetByWorkspace": {
+            "$ref": "./examples/PrivateEndpointConnection_GetByWorkspace.json"
           }
         },
         "parameters": [
@@ -2765,11 +2765,11 @@
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateEndpointConnections_Workspace_Delete",
+        "operationId": "PrivateEndpointConnections_DeleteByWorkspace",
         "description": "Remove a connection.",
         "x-ms-examples": {
-          "PrivateEndpointConnection_Workspace_Delete": {
-            "$ref": "./examples/PrivateEndpointConnection_Workspace_Delete.json"
+          "PrivateEndpointConnection_DeleteByWorkspace": {
+            "$ref": "./examples/PrivateEndpointConnection_DeleteByWorkspace.json"
           }
         },
         "parameters": [
@@ -2808,11 +2808,11 @@
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateEndpointConnections_Workspace_Update",
+        "operationId": "PrivateEndpointConnections_UpdateByWorkspace",
         "description": "Approve or reject a private endpoint connection.",
         "x-ms-examples": {
-          "PrivateEndpointConnection_Workspace_Update": {
-            "$ref": "./examples/PrivateEndpointConnection_Workspace_Update.json"
+          "PrivateEndpointConnection_UpdateByWorkspace": {
+            "$ref": "./examples/PrivateEndpointConnection_UpdateByWorkspace.json"
           }
         },
         "parameters": [
@@ -2832,7 +2832,7 @@
             "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           },
           {
-            "name": "workspace",
+            "name": "connection",
             "description": "Object containing the updated connection.",
             "in": "body",
             "required": true,
@@ -2855,18 +2855,18 @@
             }
           }
         }
-      }      
+      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateLinkResources": {
       "get": {
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateLinkResources_Workspace_Get",
+        "operationId": "PrivateLinkResources_GetByWorkspace",
         "description": "List the private link resources available for this workspace.",
         "x-ms-examples": {
-          "PrivateLinkResources_Workspace_Get": {
-            "$ref": "./examples/PrivateLinkResources_Workspace_Get.json"
+          "PrivateLinkResources_GetByWorkspace": {
+            "$ref": "./examples/PrivateLinkResources_GetByWorkspace.json"
           }
         },
         "parameters": [
@@ -2898,7 +2898,7 @@
           }
         }
       }
-    }    
+    }
   },
   "definitions": {
     "CloudError": {
@@ -5318,7 +5318,7 @@
                 "Disconnected"
               ],
               "x-ms-enum": {
-                "name": "Status",
+                "name": "GetConnectionStatus",
                 "modelAsString": true,
                 "values": [
                   {
@@ -5387,7 +5387,7 @@
                 "Rejected"
               ],
               "x-ms-enum": {
-                "name": "Status",
+                "name": "PutConnectionStatus",
                 "modelAsString": true,
                 "values": [
                   {
@@ -5456,7 +5456,7 @@
           }
         }
       }
-    }    
+    }
   },
   "parameters": {
     "HostPoolNameParameter": {
