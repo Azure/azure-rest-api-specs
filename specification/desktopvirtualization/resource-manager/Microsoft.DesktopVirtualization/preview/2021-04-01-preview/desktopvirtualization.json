@@ -2450,11 +2450,11 @@
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateEndpoingConnections_Hostpool_List",
+        "operationId": "PrivateEndpointConnections_Hostpool_List",
         "description": "List private endpoint connections associated with hostpool.",
         "x-ms-examples": {
-          "PrivateEndpoingConnections_List": {
-            "$ref": "./examples/PrivateEndpoingConnections_Hostpool_List.json"
+          "PrivateEndpointConnections_List": {
+            "$ref": "./examples/PrivateEndpointConnections_Hostpool_List.json"
           }
         },
         "parameters": [
@@ -2490,7 +2490,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{connectionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{connectionName}": {
       "get": {
         "tags": [
           "PrivateLink"
@@ -2516,7 +2516,7 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpoingConnectionIdParameter"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           }
         ],
         "responses": {
@@ -2559,7 +2559,7 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionIdParameter"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           }
         ],
         "responses": {
@@ -2602,10 +2602,10 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionIdParameter"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           },
           {
-            "name": "workspace",
+            "name": "connection",
             "description": "Object containing the updated connection.",
             "in": "body",
             "required": true,
@@ -2677,11 +2677,11 @@
         "tags": [
           "PrivateLink"
         ],
-        "operationId": "PrivateEndpoingConnections_Workspace_List",
+        "operationId": "PrivateEndpointConnections_Workspace_List",
         "description": "List private endpoint connections.",
         "x-ms-examples": {
-          "PrivateEndpoingConnections_List": {
-            "$ref": "./examples/PrivateEndpoingConnections_Workspace_List.json"
+          "PrivateEndpointConnections_List": {
+            "$ref": "./examples/PrivateEndpointConnections_Workspace_List.json"
           }
         },
         "parameters": [
@@ -2717,7 +2717,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{connectionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{connectionName}": {
       "get": {
         "tags": [
           "PrivateLink"
@@ -2743,7 +2743,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpoingConnectionIdParameter"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           }
         ],
         "responses": {
@@ -2786,7 +2786,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionIdParameter"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           }
         ],
         "responses": {
@@ -2829,7 +2829,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionIdParameter"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           },
           {
             "name": "workspace",
@@ -5238,9 +5238,9 @@
         }
       }
     },
-    "PrivateEndpoingConnectionList": {
+    "PrivateEndpointConnectionList": {
       "type": "object",
-      "title": "PrivateEndpoingConnectionList",
+      "title": "PrivateEndpointConnectionList",
       "description": "List of private endpoint connections.",
       "properties": {
         "value": {
@@ -5569,14 +5569,14 @@
       "minLength": 3,
       "x-ms-parameter-location": "method"
     },
-    "PrivateEndpoingConnectionIdParameter": {
-      "name": "connectionId",
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "connectionName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The id of the private endpoint connection within the specified resource",
-      "maxLength": 24,
-      "minLength": 1,
+      "description": "The name of the private endpoint connection within the specified resource",
+      "maxLength": 101,
+      "minLength": 40,
       "x-ms-parameter-location": "method"
     }
   }
