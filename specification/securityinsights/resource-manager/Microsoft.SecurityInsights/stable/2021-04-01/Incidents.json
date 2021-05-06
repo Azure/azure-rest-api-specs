@@ -575,6 +575,216 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/relations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all incident relations.": {
+            "$ref": "./examples/incidents/relations/GetAllIncidentRelations.json"
+          }
+        },
+        "tags": [
+          "IncidentRelations"
+        ],
+        "description": "Gets all incident relations.",
+        "operationId": "IncidentRelations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RelationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/Relation",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/relations/{relationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an incident relation.": {
+            "$ref": "./examples/incidents/relations/GetIncidentRelationByName.json"
+          }
+        },
+        "tags": [
+          "IncidentRelations"
+        ],
+        "description": "Gets an incident relation.",
+        "operationId": "IncidentRelations_GetRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Relation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates an incident relation.": {
+            "$ref": "./examples/incidents/relations/CreateIncidentRelation.json"
+          }
+        },
+        "tags": [
+          "IncidentRelations"
+        ],
+        "description": "Creates or updates the incident relation.",
+        "operationId": "IncidentRelations_CreateOrUpdateRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          },
+          {
+            "$ref": "#/parameters/Relation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Relation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Relation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the incident relation.": {
+            "$ref": "./examples/incidents/relations/DeleteIncidentRelation.json"
+          }
+        },
+        "tags": [
+          "IncidentRelations"
+        ],
+        "description": "Delete the incident relation.",
+        "operationId": "IncidentRelations_DeleteRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2916,6 +3126,70 @@
           }
         }
       },
+      "type": "object"
+    },
+    "Relation": {
+      "type": "object",
+      "description": "Represents a relation between two resources",
+      "allOf": [
+        {
+          "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RelationProperties",
+          "description": "Relation properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RelationList": {
+      "description": "List of relations.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of relations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of relations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Relation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RelationProperties": {
+      "description": "Relation property bag.",
+      "properties": {
+        "relatedResourceId": {
+          "description": "The resource ID of the related resource",
+          "type": "string"
+        },
+        "relatedResourceName": {
+          "description": "The name of the related resource",
+          "readOnly": true,
+          "type": "string"
+        },
+        "relatedResourceType": {
+          "description": "The resource type of the related resource",
+          "readOnly": true,
+          "type": "string"
+        },
+        "relatedResourceKind": {
+          "description": "The resource kind of the related resource",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "relatedResourceId"
+      ],
       "type": "object"
     },
     "SecurityAlert": {
