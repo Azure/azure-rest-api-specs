@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}": {
       "get": {
         "tags": [
           "LedgerDigestUploads"
@@ -34,7 +34,7 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "ledgerName",
+            "name": "ledgerDigestUploads",
             "in": "path",
             "required": true,
             "type": "string",
@@ -87,7 +87,7 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "ledgerName",
+            "name": "ledgerDigestUploads",
             "in": "path",
             "required": true,
             "type": "string",
@@ -180,7 +180,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerName}/disable": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}/disable": {
       "post": {
         "tags": [
           "LedgerDigestUploads"
@@ -198,7 +198,7 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "ledgerName",
+            "name": "ledgerDigestUploads",
             "in": "path",
             "required": true,
             "type": "string",
@@ -242,9 +242,6 @@
   "definitions": {
     "LedgerDigestUploadsProperties": {
       "description": "The properties of a database ledger digest upload settings.",
-      "required": [
-        "digestStorageEndpoint"
-      ],
       "type": "object",
       "properties": {
         "digestStorageEndpoint": {

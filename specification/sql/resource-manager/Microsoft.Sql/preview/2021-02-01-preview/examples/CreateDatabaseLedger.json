@@ -7,9 +7,8 @@
     "api-version": "2021-02-01-preview",
     "parameters": {
       "location": "southeastasia",
-      "sku": {
-        "name": "BC_Gen4",
-        "capacity": 2
+      "properties": {
+        "isLedgerOn": true
       }
     }
   },
@@ -17,35 +16,32 @@
     "200": {
       "body": {
         "sku": {
-          "name": "BC_Gen4",
-          "tier": "BusinessCritical",
-          "family": "Gen4",
-          "capacity": 2
+          "name": "Standard",
+          "tier": "Standard",
+          "capacity": 10
         },
         "kind": "v12.0,user",
         "properties": {
           "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "earliestRestoreDate": "2017-06-07T04:51:33.937Z",
-          "maxSizeBytes": 1073741824,
+          "maxSizeBytes": 268435456000,
           "status": "Online",
           "databaseId": "6c764297-577b-470f-9af4-96d3d41e2ba3",
-          "creationDate": "2017-06-07T04:41:33.937Z",
-          "currentServiceObjectiveName": "BC_Gen4_2",
-          "defaultSecondaryLocation": "North Europe",
-          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
-          "licenseType": "LicenseIncluded",
-          "maxLogSizeBytes": 104857600,
-          "readScale": "Enabled",
-          "currentBackupStorageRedundancy": "Geo",
-          "requestedBackupStorageRedundancy": "Geo",
-          "isLedgerOn": false,
-          "isInfraEncryptionEnabled": false,
-          "zoneRedundant": false,
           "currentSku": {
-            "name": "BC_Gen4",
-            "tier": "BusinessCritical",
-            "capacity": 2
-          }
+            "name": "Standard",
+            "tier": "Standard",
+            "capacity": 10
+          },
+          "creationDate": "2017-06-07T04:41:33.937Z",
+          "currentServiceObjectiveName": "S0",
+          "currentBackupStorageRedundancy": "Geo",
+          "defaultSecondaryLocation": "North Europe",
+          "earliestRestoreDate": "2017-06-07T04:51:33.937Z",
+          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "readScale": "Disabled",
+          "requestedBackupStorageRedundancy": "Geo",
+          "requestedServiceObjectiveName": "S0",
+          "zoneRedundant": false,
+          "isLedgerOn": true
         },
         "location": "southeastasia",
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb",
@@ -56,35 +52,32 @@
     "201": {
       "body": {
         "sku": {
-          "name": "BC_Gen4",
-          "tier": "BusinessCritical",
-          "family": "Gen4",
-          "capacity": 2
+          "name": "Standard",
+          "tier": "Standard",
+          "capacity": 10
         },
         "kind": "v12.0,user",
         "properties": {
           "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "earliestRestoreDate": "2017-06-07T04:51:33.937Z",
-          "maxSizeBytes": 1073741824,
+          "maxSizeBytes": 268435456000,
           "status": "Online",
           "databaseId": "6c764297-577b-470f-9af4-96d3d41e2ba3",
-          "creationDate": "2017-06-07T04:41:33.937Z",
-          "currentServiceObjectiveName": "BC_Gen4_2",
-          "defaultSecondaryLocation": "North Europe",
-          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
-          "licenseType": "LicenseIncluded",
-          "maxLogSizeBytes": 104857600,
-          "readScale": "Enabled",
-          "currentBackupStorageRedundancy": "Geo",
-          "requestedBackupStorageRedundancy": "Geo",
-          "isLedgerOn": false,
-          "isInfraEncryptionEnabled": false,
-          "zoneRedundant": false,
           "currentSku": {
-            "name": "BC_Gen4",
-            "tier": "BusinessCritical",
-            "capacity": 2
-          }
+            "name": "Standard",
+            "tier": "Standard",
+            "capacity": 10
+          },
+          "creationDate": "2017-06-07T04:41:33.937Z",
+          "currentBackupStorageRedundancy": "Zone",
+          "currentServiceObjectiveName": "S0",
+          "defaultSecondaryLocation": "North Europe",
+          "earliestRestoreDate": "2017-06-07T04:51:33.937Z",
+          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "readScale": "Disabled",
+          "requestedBackupStorageRedundancy": "Zone",
+          "requestedServiceObjectiveName": "S0",
+          "zoneRedundant": false,
+          "isLedgerOn": false
         },
         "location": "southeastasia",
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb",
