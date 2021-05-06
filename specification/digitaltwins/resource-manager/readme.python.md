@@ -8,9 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.digitaltwins
 package-name: azure-mgmt-digitaltwins
-package-version: 1.0.0
-clear-output-folder: true
-no-namespace-folders: true
+package-version: 1.0.0b1
 ```
 
 ### Python multi-api
@@ -18,6 +16,7 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi) && $(track2)
+clear-output-folder: true
 batch:
   - tag: package-2020-12
   - tag: package-2020-10
