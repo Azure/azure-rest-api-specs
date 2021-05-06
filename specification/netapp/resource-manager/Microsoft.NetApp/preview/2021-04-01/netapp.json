@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2020-12-01",
+    "version": "2021-04-01-preview",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -2869,6 +2869,47 @@
         }
       }
     },
+    "regionInfo": {
+      "description": "Provides region specific information.",
+      "type": "object",
+      "properties" :{
+        "storageToNetworkProximity":{
+          "title": "Storage to Network Proximity",
+          "description": "Provides storage to network proximity information in the region.",
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "x-ms-enum": {
+            "name": "StorageToNetworkProximity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": 0,
+                "description": "Network connectivity mode 0."
+              },
+              {
+                "value": 1,
+                "description": "Network connectivity mode 1."
+              },
+              {
+                "value": 2,
+                "description": "Network connectivity mode 2."
+              },
+              {
+                "value": 3,
+                "description": "Network connectivity mode 3."
+              }
+            ]
+          },
+          "example": 2
+        }
+      }
+    },    
     "ResourceNameAvailabilityRequest": {
       "description": "Resource name availability request content.",
       "required": [
@@ -3663,6 +3704,72 @@
         "subnetId": {
           "type": "string",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
+        },
+        "networkFeatures": {
+          "title": "Network features",
+          "description": "Basic network, or Standard features available to the volume.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkFeatures",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Basic",
+                "description": "Basic network feature."
+              },
+              {
+                "value": "Standard",
+                "description": "Standard network feature."
+              }
+            ]
+          },
+          "example": "Standard",
+          "default": "Basic"
+        },
+        "networkSiblingSetId": {
+          "title": "Network Sibling Set ID",
+          "description": "Network Sibling Set ID for the the group of volumes sharing networking resources.",
+          "type": "string",
+          "readOnly": true,
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "storageToNetworkProximity": {
+          "title": "Storage to Network Proximity",
+          "description": "Provides storage to network proximity information for the volume.",
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StorageToNetworkProximity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": 0,
+                "description": "Storage to network connectivity mode 0."
+              },
+              {
+                "value": 1,
+                "description": "Storage to network connectivity mode 1."
+              },
+              {
+                "value": 2,
+                "description": "Storage to network connectivity mode 2."
+              }
+            ]
+          },
+          "example": 1
         },
         "mountTargets": {
           "title": "mountTargets",
@@ -5168,7 +5275,7 @@
       "in": "query",
       "type": "string",
       "required": true,
-      "default": "2020-12-01"
+      "default": "2021-04-01-preview"
     }
   }
 }
