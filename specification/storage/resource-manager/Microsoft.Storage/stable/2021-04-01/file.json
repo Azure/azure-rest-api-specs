@@ -541,6 +541,7 @@
             "$ref": "./examples/FileSharesLease_Break.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
         "parameters": [
           {
@@ -948,6 +949,10 @@
             "Release",
             "Break"
           ],
+          "x-ms-enum": {
+            "name": "LeaseShareAction",
+            "modelAsString": true
+          },
           "description": "Specifies the lease action. Can be one of the available actions."
         },
         "leaseId": {
