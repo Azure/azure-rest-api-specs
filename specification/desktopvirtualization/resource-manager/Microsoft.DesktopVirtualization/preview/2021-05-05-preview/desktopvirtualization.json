@@ -2976,6 +2976,10 @@
           "type": "boolean",
           "description": "Is cloud pc resource.",
           "readOnly": true
+        },
+        "sessionHostConfiguration": {
+          "$ref": "#/definitions/SessionHostConfigurationProperties",
+          "description": "The session host configurations of HostPool."
         }
       }
     },
@@ -3105,6 +3109,201 @@
         "startVMOnConnect": {
           "type": "boolean",
           "description": "The flag to turn on/off StartVMOnConnect feature."
+        },
+        "sessionHostConfiguration": {
+          "$ref": "#/definitions/SessionHostConfigurationProperties",
+          "description": "The session host configurations of HostPool."
+        }
+      }
+    },
+    "SessionHostConfigurationProperties": {
+      "description": "Session host configurations of HostPool.",
+      "type": "object",
+      "properties": {
+        "vMSizeId": {
+          "type": "string",
+          "description": "The id of the size of a virtual machine connected to a hostpool."
+        },
+        "diskType": {
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS",
+            "UltraSSD_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineDiskType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard_LRS",
+                "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
+              },
+              {
+                "value": "Premium_LRS",
+                "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
+              },
+              {
+                "value": "StandardSSD_LRS",
+                "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+              },
+              {
+                "value": "UltraSSD_LRS",
+                "description": "Ultra SSD locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads."
+              }
+            ]
+          },
+          "description": "The disk type used by virtual machine in hostpool session host."
+        },
+        "imageInfo": {
+          "$ref": "#/definitions/ImageInfoProperties",
+          "description": "Image configurations of HostPool."
+        },
+        "domainInfo": {
+          "$ref": "#/definitions/DomainInfoProperties",
+          "description": "Domain configurations of HostPool."
+        }
+      }
+    },
+    "ImageInfoProperties": {
+      "description": "Image configurations of session host in a HostPool.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "Gallery",
+            "StorageBlob",
+            "CustomImage"
+          ],
+          "x-ms-enum": {
+            "name": "ImageType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Gallery",
+                "description": "Using default gallery images offered by azure market place."
+              },
+              {
+                "value": "StorageBlob",
+                "description": "Using a VHD stored in a storage blob."
+              },
+              {
+                "value": "CustomImage",
+                "description": "Using custom image or custom shared image."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The type of resetting the token.",
+          "x-nullable": false
+        },
+        "marketPlaceInfo": {
+          "$ref": "#/definitions/MarketPlaceInfoProperties",
+          "description": "The values to uniquely identify a gallery image."
+        },
+        "storageBlobUri": {
+          "type": "string",
+          "description": "The uri to the storage blob which contains the VHD. Image type must be StorageBlob."
+        },
+        "customId": {
+          "type": "string",
+          "description": "The resource id of the custom image or shared image. Image type must be custom."
+        }
+      }
+    },
+    "MarketPlaceInfoProperties": {
+      "description": "Image configurations of HostPool.",
+      "type": "object",
+      "properties": {
+        "offer": {
+          "type": "string",
+          "description": "The offer of the image."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the image."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The sku of the image."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "The exact version of the image."
+        }
+      }
+    },
+    "DomainInfoProperties": {
+      "description": "Domain configurations of HostPool.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The domain a virtual machine connected to a hostpool will join."
+        },
+        "joinType": {
+          "enum": [
+            "ActiveDirectory",
+            "AzureActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "DomainJoinType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ActiveDirectory",
+                "description": "Using microsoft active directory."
+              },
+              {
+                "value": "AzureActiveDirectory",
+                "description": "Using microsoft azure active directory."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The type of resetting the token.",
+          "x-nullable": false
+        },
+        "mdmProviderGuid": {
+          "type": "string",
+          "description": "The MDM Provider GUID used during MDM enrollment for Azure AD joined virtual machines."
+        },
+        "credentials": {
+          "$ref": "#/definitions/CredentialsProperties",
+          "description": "The local admin credentials."
+        }
+      }
+    },
+    "CredentialsProperties": {
+      "description": "Credentials needed to create the virtual machine.",
+      "type": "object",
+      "properties": {
+        "localAdmin": {
+          "$ref": "#/definitions/KeyvaultCredentialProperties",
+          "description": "The local admin credentials."
+        },
+        "domainAdmin": {
+          "$ref": "#/definitions/KeyvaultCredentialProperties",
+          "description": "The domain admin credentials."
+        }
+      }
+    },
+    "KeyvaultCredentialProperties": {
+      "description": "Credentials kept in the keyvault.",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The user name to the account."
+        },
+        "passwordKeyVaultResourceId": {
+          "type": "string",
+          "description": "The keyvault resource id to the keyvault secrets."
+        },
+        "passwordSecretUri": {
+          "type": "string",
+          "description": "The keyvault secret uri to the exact password version."
         }
       }
     },

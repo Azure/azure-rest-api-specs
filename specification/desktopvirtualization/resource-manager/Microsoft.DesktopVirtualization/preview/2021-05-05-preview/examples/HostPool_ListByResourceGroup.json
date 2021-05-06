@@ -40,7 +40,38 @@
               "ssoSecretType": "SharedKey",
               "preferredAppGroupType": "Desktop",
               "startVMOnConnect": false,
-              "cloudPcResource": false
+              "cloudPcResource": false,
+              "sessionHostConfiguration": {
+                "vMSizeId": "Standard_D2s_v3",
+                "diskType": "Standard_LRS",
+                "imageInfo": {
+                  "type": "Gallery",
+                  "marketPlaceInfo": {
+                    "offer": "Windows-10",
+                    "publisher": "MicrosoftWindowsDesktop",
+                    "sku": "19h2-ent",
+                    "exactVersion": "2019.0.20190115"
+                  },
+                  "storageBlobUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/image.vhd",
+                  "customId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.Compute/images/imageName"
+                },
+                "domainInfo": {
+                  "joinType": "ActiveDirectory",
+                  "mdmProviderGuid": "",
+                  "credentials": {
+                    "localAdmin": {
+                      "userName": "localAdminUserName",
+                      "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+                      "passwordSecretUri": "https://test-kv.vault.azure.net/secrets/localAdminPassword/baefabc0-95b4-48b3-b645-8a753a63c4fb"
+                    },
+                    "domainAdmin": {
+                      "userName": "domainAdminUserName",
+                      "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+                      "passwordSecretUri": "https://test-kv.vault.azure.net/secrets/localAdminPassword/baefabc0-95b4-48b3-b645-8a753a63c4fb"
+                    }
+                  }
+                }
+              }
             }
           },
           {
@@ -75,7 +106,38 @@
               "ssoSecretType": "SharedKey",
               "preferredAppGroupType": "Desktop",
               "startVMOnConnect": false,
-              "cloudPcResource": false
+              "cloudPcResource": false,
+              "sessionHostConfiguration": {
+                "vMSizeId": "Standard_D2s_v3",
+                "diskType": "Standard_LRS",
+                "imageInfo": {
+                  "type": "Gallery",
+                  "marketPlaceInfo": {
+                    "offer": "Windows-10",
+                    "publisher": "MicrosoftWindowsDesktop",
+                    "sku": "19h2-ent",
+                    "exactVersion": "2019.0.20190115"
+                  },
+                  "storageBlobUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/image.vhd",
+                  "customId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.Compute/images/imageName"
+                },
+                "domainInfo": {
+                  "joinType": "ActiveDirectory",
+                  "mdmProviderGuid": "",
+                  "credentials": {
+                    "localAdmin": {
+                      "userName": "localAdminUserName",
+                      "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+                      "passwordSecretUri": "https://test-kv.vault.azure.net/secrets/localAdminPassword/baefabc0-95b4-48b3-b645-8a753a63c4fb"
+                    },
+                    "domainAdmin": {
+                      "userName": "domainAdminUserName",
+                      "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+                      "passwordSecretUri": "https://test-kv.vault.azure.net/secrets/localAdminPassword/baefabc0-95b4-48b3-b645-8a753a63c4fb"
+                    }
+                  }
+                }
+              }
             }
           }
         ]
