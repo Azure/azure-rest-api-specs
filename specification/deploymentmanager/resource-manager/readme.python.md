@@ -25,7 +25,6 @@ namespace: azure.mgmt.deploymentmanager
 package-name: azure-mgmt-deploymentmanager
 package-version: 0.9.1
 clear-output-folder: true
-override-client-name: DeploymentManagerClient
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
