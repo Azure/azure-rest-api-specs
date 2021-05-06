@@ -1084,22 +1084,6 @@
         ],
         "parameters": [
           {
-            "name": "grant_type",
-            "in": "formData",
-            "description": "Grant type is expected to be refresh_token",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "refresh_token",
-              "password"
-            ],
-            "x-ms-enum": {
-              "name": "TokenGrantType"
-            },
-            "x-accessibility" : "internal",
-            "x-ms-client-default": "refresh_token"
-          },
-          {
             "$ref": "#/parameters/Service"
           },
           {
@@ -1116,6 +1100,22 @@
             "required": true,
             "description": "Must be a valid ACR refresh token",
             "type": "string"
+          },
+          {
+            "name": "grant_type",
+            "in": "formData",
+            "description": "Grant type is expected to be refresh_token",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "refresh_token",
+              "password"
+            ],
+            "x-ms-enum": {
+              "name": "TokenGrantType"
+            },
+            "x-accessibility" : "internal",
+            "x-ms-client-default": "refresh_token"
           }
         ],
         "responses": {
