@@ -6,9 +6,9 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ```yaml $(python) && $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.digitaltwins
 package-name: azure-mgmt-digitaltwins
 package-version: 1.0.0b1
+no-namespace-folders: true
 ```
 
 ### Python multi-api
