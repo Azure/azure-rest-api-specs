@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-netapp-2021-04-01-preview` is spec
 
 ``` yaml $(tag) == 'package-netapp-2021-04-01-preview'
 input-file:
-- Microsoft.NetApp/preview/2021-04-01/netapp.json
+- Microsoft.NetApp/preview/2021-04-01-preview/netapp.json
 ```
 
 ### Tag: package-netapp-2020-12-01
