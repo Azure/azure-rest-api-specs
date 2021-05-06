@@ -25,8 +25,6 @@ To see additional help and options, run:
 These are the global settings for the Azure Maintenance API.
 
 ``` yaml
-title: MaintenanceClient
-description: Maintenance Client
 openapi-type: arm
 tag: package-2021-05
 ```
@@ -106,7 +104,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Maintenance
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/Maintenance/Management.Maintenance/Generated
+  output-folder: $(csharp-sdks-folder)/maintenance/Microsoft.Azure.Management.Maintenance/src/Generated/
   clear-output-folder: true
 ```
 
