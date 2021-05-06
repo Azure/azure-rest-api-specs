@@ -39,6 +39,8 @@ input-file:
     - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/quotas.json"
     - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/registries.json"
     - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/setConfiguration.json"
+    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/setupStatus.json"
+    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/startSetup.json"
 ```
 
 ---
@@ -77,6 +79,8 @@ input-file:
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/quotas.json
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/registries.json
   - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/setConfiguration.json
+  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/setupStatus.json
+  - $(this-folder)/Microsoft.ContainerRegistry.Admin/preview/2019-11-01/startSetup.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
