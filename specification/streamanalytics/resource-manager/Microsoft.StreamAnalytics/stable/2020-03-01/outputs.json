@@ -742,47 +742,6 @@
         }
       }
     },
-    "AzureFunctionOutputDataSource": {
-      "description": "Defines the metadata of AzureFunctionOutputDataSource",
-      "x-ms-discriminator-value": "Microsoft.AzureFunction",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OutputDataSource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AzureFunctionOutputDataSourceProperties",
-          "description": "The properties that are associated with a Azure Function output. Required on PUT (CreateOrReplace) requests.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AzureFunctionOutputDataSourceProperties": {
-      "description": "The properties that are associated with a DocumentDB output.",
-      "properties": {
-        "functionAppName": {
-          "description": "The name of your Azure Functions app.",
-          "type": "string"
-        },
-        "functionName": {
-          "description": "The name of the function in your Azure Functions app.",
-          "type": "string"
-        },
-        "apiKey": {
-          "description": "If you want to use an Azure Function from another subscription, you can do so by providing the key to access your function.",
-          "type": "string"
-        },
-        "maxBatchSize": {
-          "description": "A property that lets you set the maximum size for each output batch that's sent to your Azure function. The input unit is in bytes. By default, this value is 262,144 bytes (256 KB).",
-          "type": "number"
-        },
-        "maxBatchCount": {
-          "description": "A property that lets you specify the maximum number of events in each batch that's sent to Azure Functions. The default value is 100.",
-          "type": "number"
-        }
-      }
-    },
     "ServiceBusQueueOutputDataSource": {
       "description": "Describes a Service Bus Queue output data source.",
       "x-ms-discriminator-value": "Microsoft.ServiceBus/Queue",

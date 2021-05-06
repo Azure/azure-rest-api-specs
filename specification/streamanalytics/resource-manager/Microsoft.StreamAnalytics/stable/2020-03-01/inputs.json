@@ -946,12 +946,25 @@
       "description": "Describes how input data is compressed",
       "properties": {
         "type": {
-          "type": "string"
+          "$ref": "#/definitions/CompressionType"
         }
       },
       "required": [
         "type"
       ]
+    },
+    "CompressionType": {
+      "type": "string",
+      "description": "Indicates the type of compression that the input uses. Required on PUT (CreateOrReplace) requests.",
+      "enum": [
+        "None",
+        "GZip",
+        "Deflate"
+      ],
+      "x-ms-enum": {
+        "name": "CompressionType",
+        "modelAsString": true
+      }
     },
     "Identity": {
       "description": "Describes how identity is verified",
@@ -1028,7 +1041,6 @@
         "Csv",
         "Avro",
         "Json",
-        "CustomClr",
         "Parquet"
       ],
       "x-ms-enum": {
