@@ -111,6 +111,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -169,6 +175,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -206,6 +218,12 @@
           },
           "204": {
             "description": "The streaming job does not exist."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -257,6 +275,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -300,6 +324,12 @@
             "schema": {
               "$ref": "#/definitions/StreamingJobListResult"
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -342,6 +372,12 @@
             "description": "Successfully listed the streaming jobs under the given subscription.",
             "schema": {
               "$ref": "#/definitions/StreamingJobListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
             }
           }
         },
@@ -397,6 +433,12 @@
           },
           "202": {
             "description": "The start streaming job request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -434,6 +476,12 @@
           },
           "202": {
             "description": "The stop streaming job request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -477,6 +525,12 @@
         "responses": {
           "202": {
             "description": "The scale streaming job request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -553,7 +607,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "./inputs.json#/definitions/Identity",
+          "$ref": "#/definitions/Identity",
           "description": "Describes the system-assigned managed identity assigned to this job that can be used to authenticate with inputs and outputs."
         }
       }
@@ -818,6 +872,20 @@
         "authenticationMode": {
           "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
           "description": "Authentication Mode."
+        }
+      }
+    },
+    "Identity": {
+      "description": "Describes how identity is verified",
+      "properties": {
+        "tenantId": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
         }
       }
     }

@@ -120,6 +120,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -189,6 +195,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -226,6 +238,12 @@
           },
           "204": {
             "description": "The input does not exist."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -278,6 +296,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -323,6 +347,12 @@
             "description": "Successfully listed the inputs under the specified streaming job.",
             "schema": {
               "$ref": "#/definitions/InputListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
             }
           }
         },
@@ -378,6 +408,12 @@
           },
           "202": {
             "description": "The test request was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -964,20 +1000,6 @@
       "x-ms-enum": {
         "name": "CompressionType",
         "modelAsString": true
-      }
-    },
-    "Identity": {
-      "description": "Describes how identity is verified",
-      "properties": {
-        "tenantId": {
-          "type": "string"
-        },
-        "principalId": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
       }
     },
     "AzureSqlReferenceInputDataSource": {
