@@ -16,18 +16,60 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/checkCapacity": {
-      "post": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/capacity/{capacityName}": {
+      "get": {
         "x-ms-examples": {
-          "Returns container registry overall capacity properties.": {
-            "$ref": "./examples/Configuration/CheckCapacity.json"
+          "Returns container registry capacity properties.": {
+            "$ref": "./examples/Configuration/GetCapacity.json"
           }
         },
         "tags": [
           "ContainerRegistryCapacity"
         ],
-        "description": "Returns container registry overall capacity properties.",
-        "operationId": "ContainerRegistryCapacity_Post",
+        "description": "Returns container registry capacity property.",
+        "operationId": "ContainerRegistryCapacity_Get",
+        "parameters": [
+          {
+            "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "quotas.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "quotas.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CapacityNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Container registry capacity property is being returned.",
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistryCapacity"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "quotas.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/capacity": {
+      "get": {
+        "x-ms-examples": {
+          "Returns container registry capacity properties.": {
+            "$ref": "./examples/Configuration/ListCapacity.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistryCapacities"
+        ],
+        "description": "Returns a list of container registry capacity properties.",
+        "operationId": "ContainerRegistryCapacity_Get",
         "parameters": [
           {
             "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
@@ -41,9 +83,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Container registry overall capacity properties is being returned.",
+            "description": "OK -- Container registry capacity properties are being returned.",
             "schema": {
-              "$ref": "#/definitions/ContainerRegistryCapacity"
+              "$ref": "#/definitions/ContainerRegistryCapacityList"
             }
           },
           "default": {
@@ -92,6 +134,29 @@
           "format": "float"
         }
       }
+    },
+    "ContainerRegistryCapacityList": {
+      "description": "List of capacity property.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of capacity property.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerRegistryCapacity"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CapacityNameParameter": {
+      "description": "The name of the capacity parameter.",
+      "name": "capacityName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
