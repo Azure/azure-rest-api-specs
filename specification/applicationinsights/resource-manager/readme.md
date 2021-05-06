@@ -216,6 +216,17 @@ directive:
   
 ```
 
+### Tag: package-2021-03-only
+
+These settings apply only when `--tag=package-2021-03-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-only'
+input-file:
+  - Microsoft.Insights/stable/2021-03-08/myworkbooks_API.json
+  - Microsoft.Insights/stable/2021-03-08/workbooks_API.json
+  - Microsoft.Insights/stable/2021-03-08/workbookOperations_API.json
+```
+
 ### Tag: package-preview-2021-03-only
 
 These settings apply only when `--tag=package-preview-2021-03-only` is specified on the command line.
