@@ -6,12 +6,12 @@
     "version": "2020-11-05-preview"
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [ "user_impersonation" ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -28,7 +28,7 @@
   "paths": {
     "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationId}": {
       "put": {
-        "tags": [ "Migrations" ],
+        "tags": ["Migrations"],
         "operationId": "Migrations_Create",
         "x-ms-examples": {
           "Migrations_Create_MaximumSet_Gen": {
@@ -84,7 +84,7 @@
         }
       },
       "get": {
-        "tags": [ "Migrations" ],
+        "tags": ["Migrations"],
         "operationId": "Migrations_Get",
         "x-ms-examples": {
           "Migrations_Get_MaximumSet_Gen": {
@@ -125,7 +125,7 @@
         }
       },
       "patch": {
-        "tags": [ "Migrations" ],
+        "tags": ["Migrations"],
         "operationId": "Migrations_Update",
         "x-ms-examples": {
           "Migrations_Update_MaximumSet_Gen": {
@@ -175,7 +175,7 @@
         }
       },
       "delete": {
-        "tags": [ "Migrations" ],
+        "tags": ["Migrations"],
         "operationId": "Migrations_Delete",
         "x-ms-examples": {
           "Migrations_Delete_MaximumSet_Gen": {
@@ -221,7 +221,7 @@
     },
     "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations": {
       "get": {
-        "tags": [ "Migrations" ],
+        "tags": ["Migrations"],
         "operationId": "Migrations_ListByTargetServer",
         "x-ms-examples": {
           "Migrations_ListByTargetServer_MaximumSet_Gen": {
@@ -396,7 +396,7 @@
       "description": "Migration resource properties for patch."
     },
     "MigrationResourceGroup": {
-      "required": [ "resourceId" ],
+      "required": ["resourceId"],
       "type": "object",
       "properties": {
         "resourceId": {
@@ -410,7 +410,7 @@
       "description": "Migration resource group."
     },
     "MigrationSecretParameters": {
-      "required": [ "aadApp", "adminCredentials" ],
+      "required": ["aadApp", "adminCredentials"],
       "type": "object",
       "properties": {
         "adminCredentials": {
@@ -428,7 +428,7 @@
     },
     "AADApp": {
       "type": "object",
-      "required": [ "aadSecret", "clientId", "tenantId" ],
+      "required": ["aadSecret", "clientId", "tenantId"],
       "properties": {
         "aadSecret": {
           "type": "string",
@@ -448,7 +448,7 @@
     },
     "AdminCredentials": {
       "type": "object",
-      "required": [ "sourceServerPassword", "targetServerPassword" ],
+      "required": ["sourceServerPassword", "targetServerPassword"],
       "properties": {
         "sourceServerPassword": {
           "type": "string",
@@ -483,7 +483,7 @@
       "description": "Database server metadata."
     },
     "MigrationDetailsLevel": {
-      "enum": [ "Default", "Summary", "Full" ],
+      "enum": ["Default", "Summary", "Full"],
       "type": "string",
       "description": "Migration details level.",
       "x-ms-enum": {
@@ -492,7 +492,7 @@
       }
     },
     "MigrationListFilter": {
-      "enum": [ "Active", "All" ],
+      "enum": ["Active", "All"],
       "type": "string",
       "description": "Migration list filter.",
       "x-ms-enum": {
@@ -568,14 +568,14 @@
         "tier": {
           "type": "string",
           "description": "The tier of the particular SKU, e.g. Burstable.",
-          "enum": [ "Burstable", "GeneralPurpose", "MemoryOptimized" ],
+          "enum": ["Burstable", "GeneralPurpose", "MemoryOptimized"],
           "x-ms-enum": {
             "name": "SkuTier",
             "modelAsString": true
           }
         }
       },
-      "required": [ "name", "tier" ],
+      "required": ["name", "tier"],
       "description": "Sku information related properties of a server."
     },
     "CloudError": {
