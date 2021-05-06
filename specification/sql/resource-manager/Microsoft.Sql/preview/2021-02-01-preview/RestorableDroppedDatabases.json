@@ -140,7 +140,7 @@
           "readOnly": true
         },
         "elasticPoolId": {
-          "description": "The resource name of the elastic pool containing this database.",
+          "description": "DEPRECATED: The resource name of the elastic pool containing this database. This property is deprecated and the value will always be null.",
           "type": "string",
           "readOnly": true
         },
@@ -159,6 +159,16 @@
         "earliestRestoreDate": {
           "format": "date-time",
           "description": "The earliest restore date of the database (ISO8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupStorageRedundancy": {
+          "description": "The storage account type used to store backups for this database.",
+          "enum": [
+            "Geo",
+            "Local",
+            "Zone"
+          ],
           "type": "string",
           "readOnly": true
         }
