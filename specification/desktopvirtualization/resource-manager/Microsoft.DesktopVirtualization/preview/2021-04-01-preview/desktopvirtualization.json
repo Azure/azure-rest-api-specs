@@ -2521,7 +2521,7 @@
           "200": {
             "description": "Successfully retrieved the connection.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
             }
           },
           "default": {
@@ -5241,6 +5241,18 @@
           "description": "The path to the legacy object to migrate."
         }
       }
+    },
+    "PrivateEndpointConnectionWithSystemData": {
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/SystemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+        }
+      ]
     }
   },
   "parameters": {
