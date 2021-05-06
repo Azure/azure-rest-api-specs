@@ -28,7 +28,7 @@ These are the global settings for the Azure NetApp Files API.
 title: NetAppManagementClient
 description: Microsoft NetApp Files Azure Resource Provider specification
 openapi-type: arm
-tag: package-netapp-2020-12-01
+tag: package-netapp-2021-04-01-preview
 ```
 
 ### Tag: package-netapp-2021-04-01-preview
