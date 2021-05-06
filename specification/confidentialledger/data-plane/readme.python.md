@@ -42,7 +42,7 @@ batch:
 
 ```yaml $(multiapiscriptidentity)
 multiapiscript: true
-output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger/azure/confidentialledger/_generated_identity
+output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger/azure/confidentialledger/_generated/_generated_identity
 clear-output-folder: false
 keep-version-file: true
 perform-load: false
@@ -50,7 +50,7 @@ perform-load: false
 
 ```yaml $(multiapiscriptledger)
 multiapiscript: true
-output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger/azure/confidentialledger/_generated_ledger
+output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger/azure/confidentialledger/_generated/_generated_ledger
 clear-output-folder: false
 keep-version-file: true
 perform-load: false
@@ -60,14 +60,14 @@ perform-load: false
 
 These settings apply only when `--tag=package-0.1-preview-identity --python` is specified on the command line.
 ```yaml $(tag) == 'package-0.1-preview-identity'
-namespace: azure.confidentialledger._generated_identity.v0_1_preview
-output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger/azure/confidentialledger/_generated_identity/v0_1_preview
+namespace: azure.confidentialledger._generated/_generated_identity.v0_1_preview
+output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger/azure/confidentialledger/_generated/_generated_identity/v0_1_preview
 ```
 
 ### Tag: package-0.1-preview-ledger and python
 
 These settings apply only when `--tag=package-0.1-preview-ledger --python` is specified on the command line.
 ```yaml $(tag) == 'package-0.1-preview-ledger'
-namespace: azure.confidentialledger._generated_ledger.v0_1_preview
-output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger/azure/confidentialledger/_generated_ledger/v0_1_preview
+namespace: azure.confidentialledger._generated/_generated_ledger.v0_1_preview
+output-folder: $(python-sdks-folder)/confidentialledger/azure-confidentialledger/azure/confidentialledger/_generated/_generated_ledger/v0_1_preview
 ```
