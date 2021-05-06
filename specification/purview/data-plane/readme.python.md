@@ -5,6 +5,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml
+license-header: MICROSOFT_MIT_NO_VERSION
+add-credential: true
+package-name: azure-purview-catalog
+namespace: azure.purview.catalog
+package-version: 1.0.0b1
+clear-output-folder: true
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/purview/azure-purview-catalog/
+title: AzurePurviewCatalogClient
+credential-scopes: https://purview.azure.net/.default
+```
 add-credential: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.purview.scanning
