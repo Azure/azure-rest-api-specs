@@ -85,15 +85,15 @@
           "Entity"
         ],
         "description": "List entities in bulk identified by its GUIDs.",
-        "operationId": "Entity_GetByGuids",
+        "operationId": "Entity_ListByGuids",
         "x-ms-examples": {
-          "Entity_GetByGuids": {
-            "$ref": "./examples/Entity_GetByGuids.json"
+          "Entity_ListByGuids": {
+            "$ref": "./examples/Entity_ListByGuids.json"
           }
         },
         "parameters": [
           {
-            "name": "guid",
+            "name": "guids",
             "in": "query",
             "description": "An array of GUIDs of entities to create.",
             "required": true,
@@ -127,10 +127,10 @@
           "Entity"
         ],
         "description": "Create or update entities in Atlas in bulk.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
-        "operationId": "Entity_CreateOrUpdateBulk",
+        "operationId": "Entity_CreateOrUpdateEntities",
         "x-ms-examples": {
-          "Entity_CreateOrUpdateBulk": {
-            "$ref": "./examples/Entity_CreateOrUpdateBulk.json"
+          "Entity_CreateOrUpdateEntities": {
+            "$ref": "./examples/Entity_CreateOrUpdateEntities.json"
           }
         },
         "parameters": [
@@ -166,7 +166,7 @@
         },
         "parameters": [
           {
-            "name": "guid",
+            "name": "guids",
             "in": "query",
             "description": "An array of GUIDs of entities to delete.",
             "required": true,
@@ -222,10 +222,10 @@
         "tags": [
           "Entity"
         ],
-        "operationId": "Entity_GetById",
+        "operationId": "Entity_GetByGuid",
         "x-ms-examples": {
-          "Entity_GetById": {
-            "$ref": "./examples/Entity_GetById.json"
+          "Entity_GetByGuid": {
+            "$ref": "./examples/Entity_GetByGuid.json"
           }
         },
         "description": "Get complete definition of an entity given its GUID.",
@@ -254,10 +254,10 @@
           "Entity"
         ],
         "description": "Update entity partially - create or update entity attribute identified by its GUID.\nSupports only primitive attribute type and entity references.\nIt does not support updating complex types like arrays, and maps.\nNull updates are not possible.",
-        "operationId": "Entity_PartialUpdateEntityAttrByGuid",
+        "operationId": "Entity_CreateOrUpdateByGuid",
         "x-ms-examples": {
-          "Entity_PartialUpdateEntityAttrByGuid": {
-            "$ref": "./examples/Entity_PartialUpdateEntityAttrByGuid.json"
+          "Entity_CreateOrUpdateByGuid": {
+            "$ref": "./examples/Entity_CreateOrUpdateByGuid.json"
           }
         },
         "parameters": [
@@ -512,10 +512,10 @@
           "Entity"
         ],
         "description": "Update entity partially - Allow a subset of attributes to be updated on\nan entity which is identified by its type and unique attribute  eg: Referenceable.qualifiedName.\nNull updates are not possible.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:<attrName>=<attrValue>.\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nPUT /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
-        "operationId": "Entity_PartialUpdateEntityByUniqueAttrs",
+        "operationId": "Entity_CreateOrUpdateByUniqueAttribute",
         "x-ms-examples": {
-          "Entity_PartialUpdateEntityByUniqueAttrs": {
-            "$ref": "./examples/Entity_PartialUpdateEntityByUniqueAttrs.json"
+          "Entity_CreateOrUpdateByUniqueAttribute": {
+            "$ref": "./examples/Entity_CreateOrUpdateByUniqueAttribute.json"
           }
         },
         "parameters": [
@@ -784,10 +784,10 @@
           "Entity"
         ],
         "description": "Get entity header given its GUID.",
-        "operationId": "Entity_GetHeaderById",
+        "operationId": "Entity_GetHeader",
         "x-ms-examples": {
-          "Entity_GetHeaderById": {
-            "$ref": "./examples/Entity_GetHeaderById.json"
+          "Entity_GetHeader": {
+            "$ref": "./examples/Entity_GetHeader.json"
           }
         },
         "parameters": [
@@ -811,10 +811,10 @@
           "Glossary"
         ],
         "description": "Get all glossaries registered with Atlas.",
-        "operationId": "Glossary_GetGlossaries",
+        "operationId": "Glossary_ListGlossaries",
         "x-ms-examples": {
-          "Glossary_GetGlossaries": {
-            "$ref": "./examples/Glossary_GetGlossaries.json"
+          "Glossary_ListGlossaries": {
+            "$ref": "./examples/Glossary_ListGlossaries.json"
           }
         },
         "parameters": [
@@ -1075,10 +1075,10 @@
           "Glossary"
         ],
         "description": "Get all related categories (parent and children). Limit, offset, and sort parameters are currently not being enabled and won't work even they are passed.",
-        "operationId": "Glossary_GetRelatedCategories",
+        "operationId": "Glossary_ListRelatedCategories",
         "x-ms-examples": {
-          "Glossary_GetRelatedCategories": {
-            "$ref": "./examples/Glossary_GetRelatedCategories.json"
+          "Glossary_ListRelatedCategories": {
+            "$ref": "./examples/Glossary_ListRelatedCategories.json"
           }
         },
         "parameters": [
@@ -1118,10 +1118,10 @@
           "Glossary"
         ],
         "description": "Get all terms associated with the specific category.",
-        "operationId": "Glossary_GetCategoryTerms",
+        "operationId": "Glossary_ListCategoryTerms",
         "x-ms-examples": {
-          "Glossary_GetCategoryTerms": {
-            "$ref": "./examples/Glossary_GetCategoryTerms.json"
+          "Glossary_ListCategoryTerms": {
+            "$ref": "./examples/Glossary_ListCategoryTerms.json"
           }
         },
         "parameters": [
@@ -1373,7 +1373,7 @@
         "operationId": "Glossary_GetEntitiesAssignedWithTerm",
         "x-ms-examples": {
           "Glossary_GetEntitiesAssignedWithTerm": {
-            "$ref": "./examples/Glossary_GetEntitiesAssignedWithTerm.json"
+            "$ref": "./examples/Glossary_ListEntitiesAssignedWithTerm.json"
           }
         },
         "parameters": [
@@ -1515,10 +1515,10 @@
           "Glossary"
         ],
         "description": "Get all related terms for a specific term by its GUID. Limit, offset, and sort parameters are currently not being enabled and won't work even they are passed.",
-        "operationId": "Glossary_GetRelatedTerms",
+        "operationId": "Glossary_ListRelatedTerms",
         "x-ms-examples": {
-          "Glossary_GetRelatedTerms": {
-            "$ref": "./examples/Glossary_GetRelatedTerms.json"
+          "Glossary_ListRelatedTerms": {
+            "$ref": "./examples/Glossary_ListRelatedTerms.json"
           }
         },
         "parameters": [
@@ -1641,10 +1641,10 @@
           "Glossary"
         ],
         "description": "Get the categories belonging to a specific glossary.",
-        "operationId": "Glossary_GetGlossaryCategories",
+        "operationId": "Glossary_ListGlossaryCategories",
         "x-ms-examples": {
-          "Glossary_GetGlossaryCategories": {
-            "$ref": "./examples/Glossary_GetGlossaryCategories.json"
+          "Glossary_ListGlossaryCategories": {
+            "$ref": "./examples/Glossary_ListGlossaryCategories.json"
           }
         },
         "parameters": [
@@ -1681,10 +1681,10 @@
           "Glossary"
         ],
         "description": "Get the category headers belonging to a specific glossary.",
-        "operationId": "Glossary_GetGlossaryCategoriesHeaders",
+        "operationId": "Glossary_ListGlossaryCategoriesHeaders",
         "x-ms-examples": {
-          "Glossary_GetGlossaryCategoriesHeaders": {
-            "$ref": "./examples/Glossary_GetGlossaryCategoriesHeaders.json"
+          "Glossary_ListGlossaryCategoriesHeaders": {
+            "$ref": "./examples/Glossary_ListGlossaryCategoriesHeaders.json"
           }
         },
         "parameters": [
@@ -1794,10 +1794,10 @@
           "Glossary"
         ],
         "description": "Get terms belonging to a specific glossary.",
-        "operationId": "Glossary_GetGlossaryTerms",
+        "operationId": "Glossary_ListGlossaryTerms",
         "x-ms-examples": {
-          "Glossary_GetGlossaryTerms": {
-            "$ref": "./examples/Glossary_GetGlossaryTerms.json"
+          "Glossary_ListGlossaryTerms": {
+            "$ref": "./examples/Glossary_ListGlossaryTerms.json"
           }
         },
         "parameters": [
@@ -1837,10 +1837,10 @@
           "Glossary"
         ],
         "description": "Get term headers belonging to a specific glossary.",
-        "operationId": "Glossary_GetGlossaryTermHeaders",
+        "operationId": "Glossary_ListGlossaryTermHeaders",
         "x-ms-examples": {
-          "Glossary_GetGlossaryTermHeaders": {
-            "$ref": "./examples/Glossary_GetGlossaryTermHeaders.json"
+          "Glossary_ListGlossaryTermHeaders": {
+            "$ref": "./examples/Glossary_ListGlossaryTermHeaders.json"
           }
         },
         "parameters": [
@@ -1880,9 +1880,9 @@
           "multipart/form-data"
         ],
         "description": "Import Glossary Terms from local csv file",
-        "operationId": "Glossary_ImportGlossaryTermsViaCSV",
+        "operationId": "Glossary_ImportGlossaryTermsViaCsv",
         "x-ms-examples": {
-          "Glossary_ImportGlossaryTermsViaCSV": {
+          "Glossary_ImportGlossaryTermsViaCsv": {
             "$ref": "./examples/Glossary_GetImportCSVOperationStatus.json"
           }
         },
@@ -1927,9 +1927,9 @@
           "multipart/form-data"
         ],
         "description": "Import Glossary Terms from local csv file by glossaryName",
-        "operationId": "Glossary_ImportGlossaryTermsViaCSVByGlossaryName",
+        "operationId": "Glossary_ImportGlossaryTermsViaCsvByGlossaryName",
         "x-ms-examples": {
-          "Glossary_ImportGlossaryTermsViaCSVByGlossaryName": {
+          "Glossary_ImportGlossaryTermsViaCsvByGlossaryName": {
             "$ref": "./examples/Glossary_GetImportCSVOperationStatusByGloassaryName.json"
           }
         },
@@ -1971,9 +1971,9 @@
           "Glossary"
         ],
         "description": "Get the status of import csv operation",
-        "operationId": "Glossary_GetImportCSVOperationStatus",
+        "operationId": "Glossary_GetImportCsvOperationStatus",
         "x-ms-examples": {
-          "Glossary_GetImportCSVOperationStatus": {
+          "Glossary_GetImportCsvOperationStatus": {
             "$ref": "./examples/Glossary_GetImportCSVOperationStatusByOperationguid.json"
           }
         },
@@ -2001,7 +2001,7 @@
           "Glossary"
         ],
         "description": "Export Glossary Terms as csv file",
-        "operationId": "Glossary_ExportGlossaryTermsAsCSV",
+        "operationId": "Glossary_ExportGlossaryTermsAsCsv",
         "produces": [
           "text/csv"
         ],
@@ -2045,10 +2045,10 @@
           "Glossary"
         ],
         "description": "Get terms by glossary name.",
-        "operationId": "Glossary_GetTermsByGlossaryName",
+        "operationId": "Glossary_ListTermsByGlossaryName",
         "x-ms-examples": {
-          "Glossary_GetTermsByGlossaryName": {
-            "$ref": "./examples/Glossary_GetTermsByGlossaryName.json"
+          "Glossary_ListTermsByGlossaryName": {
+            "$ref": "./examples/Glossary_ListTermsByGlossaryName.json"
           }
         },
         "parameters": [
@@ -2088,49 +2088,49 @@
           "Discovery"
         ],
         "description": "Gets data using search.",
-        "operationId": "Discovery_Query",
+        "operationId": "Search",
         "x-ms-examples": {
-          "Discovery_Query": {
-            "$ref": "./examples/Discovery_Query.json"
+          "Search": {
+            "$ref": "./examples/Search.json"
           },
-          "Discovery_Query_And": {
-            "$ref": "./examples/Discovery_Query_And.json"
+          "Search_And": {
+            "$ref": "./examples/Search_And.json"
           },
-          "Discovery_Query_Not": {
-            "$ref": "./examples/Discovery_Query_Not.json"
+          "Search_Not": {
+            "$ref": "./examples/Search_Not.json"
           },
-          "Discovery_Query_AndOrNested": {
-            "$ref": "./examples/Discovery_Query_AndOrNested.json"
+          "Search_AndOrNested": {
+            "$ref": "./examples/Search_AndOrNested.json"
           },
-          "Discovery_Query_Attribute": {
-            "$ref": "./examples/Discovery_Query_Attribute.json"
+          "Search_Attribute": {
+            "$ref": "./examples/Search_Attribute.json"
           },
-          "Discovery_Query_Classification": {
-            "$ref": "./examples/Discovery_Query_Classification.json"
+          "Search_Classification": {
+            "$ref": "./examples/Search_Classification.json"
           },
-          "Discovery_Query_FileExtension": {
-            "$ref": "./examples/Discovery_Query_FileExtension.json"
+          "Search_FileExtension": {
+            "$ref": "./examples/Search_FileExtension.json"
           },
-          "Discovery_Query_Id": {
-            "$ref": "./examples/Discovery_Query_Id.json"
+          "Search_Id": {
+            "$ref": "./examples/Search_Id.json"
           },
-          "Discovery_Query_Type": {
-            "$ref": "./examples/Discovery_Query_Type.json"
+          "Search_Type": {
+            "$ref": "./examples/Search_Type.json"
           },
-          "Discovery_Query_AssetType": {
-            "$ref": "./examples/Discovery_Query_AssetType.json"
+          "Search_AssetType": {
+            "$ref": "./examples/Search_AssetType.json"
           },
-          "Discovery_Query_Term": {
-            "$ref": "./examples/Discovery_Query_Term.json"
+          "Search_Term": {
+            "$ref": "./examples/Search_Term.json"
           },
-          "Discovery_Query_TermOfGlossary": {
-            "$ref": "./examples/Discovery_Query_TermOfGlossary.json"
+          "Search_TermOfGlossary": {
+            "$ref": "./examples/Search_TermOfGlossary.json"
           },
-          "Discovery_Query_Facet": {
-            "$ref": "./examples/Discovery_Query_Facet.json"
+          "Search_Facet": {
+            "$ref": "./examples/Search_Facet.json"
           },
-          "Discovery_Query_Taxonomy": {
-            "$ref": "./examples/Discovery_Query_Taxonomy.json"
+          "Search_Taxonomy": {
+            "$ref": "./examples/Search_Taxonomy.json"
           }
         },
         "parameters": [
@@ -2163,10 +2163,10 @@
           "Discovery"
         ],
         "description": "Get search suggestions by query criteria.",
-        "operationId": "Discovery_Suggest",
+        "operationId": "Suggest",
         "x-ms-examples": {
-          "Discovery_Suggest": {
-            "$ref": "./examples/Discovery_Suggest.json"
+          "Suggest": {
+            "$ref": "./examples/Suggest.json"
           }
         },
         "parameters": [
@@ -2199,10 +2199,10 @@
           "Discovery"
         ],
         "description": "Get auto complete options.",
-        "operationId": "Discovery_AutoComplete",
+        "operationId": "AutoComplete",
         "x-ms-examples": {
-          "Discovery_AutoComplete": {
-            "$ref": "./examples/Discovery_AutoComplete.json"
+          "AutoComplete": {
+            "$ref": "./examples/AutoComplete.json"
           }
         },
         "parameters": [
@@ -2235,10 +2235,10 @@
           "Lineage"
         ],
         "description": "Get lineage info of the entity specified by GUID.",
-        "operationId": "Lineage_GetLineageGraph",
+        "operationId": "GetLineageGraph",
         "x-ms-examples": {
-          "Lineage_GetLineageGraph": {
-            "$ref": "./examples/Lineage_GetLineageGraph.json"
+          "GetLineageGraph": {
+            "$ref": "./examples/GetLineageGraph.json"
           }
         },
         "parameters": [
@@ -2277,10 +2277,10 @@
           "Lineage"
         ],
         "description": "Return immediate next page lineage info about entity with pagination",
-        "operationId": "Lineage_NextPageLineage",
+        "operationId": "NextPageLineage",
         "x-ms-examples": {
-          "Lineage_NextPageLineage": {
-            "$ref": "./examples/Lineage_NextPageLineage.json"
+          "NextPageLineage": {
+            "$ref": "./examples/NextPageLineage.json"
           }
         },
         "parameters": [
@@ -2383,10 +2383,10 @@
           "Relationship"
         ],
         "description": "Get relationship information between entities by its GUID.",
-        "operationId": "Relationship_GetById",
+        "operationId": "Relationship_Get",
         "x-ms-examples": {
-          "Relationship_GetById": {
-            "$ref": "./examples/Relationship_GetById.json"
+          "Relationship_Get": {
+            "$ref": "./examples/Relationship_Get.json"
           }
         },
         "parameters": [
@@ -2411,10 +2411,10 @@
           "Relationship"
         ],
         "description": "Delete a relationship between entities by its GUID.",
-        "operationId": "Relationship_DeleteById",
+        "operationId": "Relationship_Delete",
         "x-ms-examples": {
-          "Relationship_DeleteById": {
-            "$ref": "./examples/Relationship_DeleteById.json"
+          "Relationship_Delete": {
+            "$ref": "./examples/Relationship_Delete.json"
           }
         },
         "parameters": [
@@ -2489,10 +2489,10 @@
           "Types"
         ],
         "description": "Get the Entity definition for the given GUID.",
-        "operationId": "Types_GetEntityDefByGuid",
+        "operationId": "Types_GetEntityDefinitionByGuid",
         "x-ms-examples": {
-          "Types_GetEntityDefByGuid": {
-            "$ref": "./examples/Types_GetEntityDefByGuid.json"
+          "Types_GetEntityDefinitionByGuid": {
+            "$ref": "./examples/Types_GetEntityDefinitionByGuid.json"
           }
         },
         "parameters": [
@@ -2516,10 +2516,10 @@
           "Types"
         ],
         "description": "Get the entity definition by its name (unique).",
-        "operationId": "Types_GetEntityDefByName",
+        "operationId": "Types_GetEntityDefinitionByName",
         "x-ms-examples": {
-          "Types_GetEntityDefByName": {
-            "$ref": "./examples/Types_GetEntityDefByName.json"
+          "Types_GetEntityDefinitionByName": {
+            "$ref": "./examples/Types_GetEntityDefinitionByName.json"
           }
         },
         "parameters": [
@@ -2705,10 +2705,10 @@
           "Types"
         ],
         "description": "Get the type definition for the given GUID.",
-        "operationId": "Types_GetTypeDefByGuid",
+        "operationId": "Types_GetTypeDefinitionByGuid",
         "x-ms-examples": {
-          "Types_GetTypeDefByGuid": {
-            "$ref": "./examples/Types_GetTypeDefByGuid.json"
+          "Types_GetTypeDefinitionByGuid": {
+            "$ref": "./examples/Types_GetTypeDefinitionByGuid.json"
           }
         },
         "parameters": [
@@ -2732,10 +2732,10 @@
           "Types"
         ],
         "description": "Get the type definition by its name (unique).",
-        "operationId": "Types_GetTypeDefByName",
+        "operationId": "Types_GetTypeDefinitionByName",
         "x-ms-examples": {
-          "Types_GetTypeDefByName": {
-            "$ref": "./examples/Types_GetTypeDefByName.json"
+          "Types_GetTypeDefinitionByName": {
+            "$ref": "./examples/Types_GetTypeDefinitionByName.json"
           }
         },
         "parameters": [
@@ -2781,10 +2781,10 @@
           "Types"
         ],
         "description": "Get all type definitions in Atlas in bulk.",
-        "operationId": "Types_GetAllTypeDefs",
+        "operationId": "Types_GetAllTypeDefinitions",
         "x-ms-examples": {
-          "Types_GetAllTypeDefs": {
-            "$ref": "./examples/Types_GetAllTypeDefs.json"
+          "Types_GetAllTypeDefinitions": {
+            "$ref": "./examples/Types_GetAllTypeDefinitions.json"
           },
           "Types_GetAllTermTemplateDef": {
             "$ref": "./examples/Types_GetAllTermTemplateDef.json"
@@ -2815,10 +2815,10 @@
           "Types"
         ],
         "description": "Create all atlas type definitions in bulk, only new definitions will be created.\nAny changes to the existing definitions will be discarded.",
-        "operationId": "Types_CreateTypeDefs",
+        "operationId": "Types_CreateTypeDefinitions",
         "x-ms-examples": {
-          "Types_CreateTypeDefs": {
-            "$ref": "./examples/Types_CreateTypeDefs.json"
+          "Types_CreateTypeDefinitions": {
+            "$ref": "./examples/Types_CreateTypeDefinitions.json"
           }
         },
         "parameters": [
@@ -2846,10 +2846,10 @@
           "Types"
         ],
         "description": "Update all types in bulk, changes detected in the type definitions would be persisted.",
-        "operationId": "Types_UpdateAtlasTypeDefs",
+        "operationId": "Types_UpdateAtlasTypeDefinitions",
         "x-ms-examples": {
-          "Types_UpdateAtlasTypeDefs": {
-            "$ref": "./examples/Types_UpdateAtlasTypeDefs.json"
+          "Types_UpdateAtlasTypeDefinitions": {
+            "$ref": "./examples/Types_UpdateAtlasTypeDefinitions.json"
           }
         },
         "parameters": [
@@ -2877,10 +2877,10 @@
           "Types"
         ],
         "description": "Delete API for all types in bulk.",
-        "operationId": "Types_DeleteTypeDefs",
+        "operationId": "Types_DeleteTypeDefinitions",
         "x-ms-examples": {
-          "Types_DeleteTypeDefs": {
-            "$ref": "./examples/Types_DeleteTypeDefs.json"
+          "Types_DeleteTypeDefinitions": {
+            "$ref": "./examples/Types_DeleteTypeDefinitions.json"
           }
         },
         "parameters": [
@@ -2907,10 +2907,10 @@
           "Types"
         ],
         "description": "List all type definitions returned as a list of minimal information header.",
-        "operationId": "Types_GetTypeDefHeaders",
+        "operationId": "Types_ListTypeDefinitionHeaders",
         "x-ms-examples": {
-          "Types_GetTypeDefHeaders": {
-            "$ref": "./examples/Types_GetTypeDefHeaders.json"
+          "Types_ListTypeDefinitionHeaders": {
+            "$ref": "./examples/Types_ListTypeDefinitionHeaders.json"
           }
         },
         "parameters": [
