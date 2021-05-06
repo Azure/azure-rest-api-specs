@@ -135,6 +135,17 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
 ```
 
+### Tag: package-2020-10-only
+These settings apply only when `--tag=package-2020-10-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-only'
+input-file:
+- Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
+- Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
+- Microsoft.OperationalInsights/stable/2020-10-01/Tables.json
+- Microsoft.OperationalInsights/stable/2020-10-01/Workspaces.json
+```
+
 ### Tag: package-2020-10
 
 These settings apply only when `--tag=package-2020-10` is specified on the command line.
@@ -157,9 +168,9 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
 - Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
-- Microsoft.OperationalInsights/stable/2020-10-01/Tables.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Workspaces.json
 ```
 
