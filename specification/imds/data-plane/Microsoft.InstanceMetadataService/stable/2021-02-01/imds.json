@@ -314,6 +314,16 @@
           "type": "string",
           "description": "This is the publisher of the VM image."
         },
+        "resourceDisk": {
+          "type": "object",
+          "description": "This contains data for the size of local temp disk of the VM, if it exists.", 
+          "properties": {
+            "size": {
+              "type": "string",
+              "description": "The size of the local temp disk of the VM if it exists, in kilobytes. If the VM has no local temp disk, this value is 0."
+            }
+          }
+        },
         "resourceGroupName": {
           "type": "string",
           "description": "This is the resource group for the VM."
