@@ -8,6 +8,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-extendedlocation
 package-version: 1.0.0b1
 no-namespace-folders: true
+clear-output-folder: true
 ```
 
 ### Python multi-api
