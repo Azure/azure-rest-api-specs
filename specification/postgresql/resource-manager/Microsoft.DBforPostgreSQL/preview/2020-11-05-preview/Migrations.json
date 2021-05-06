@@ -125,7 +125,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MigrationDetailsResource"
+              "$ref": "#/definitions/MigrationResource"
             }
           },
           "default": {
@@ -168,7 +168,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MigrationResource"
+              "$ref": "#/definitions/MigrationResourceForPatch"
             },
             "description": "The required parameters for updating a migration."
           }
@@ -271,7 +271,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MigrationSummaryResourceListResult"
+              "$ref": "#/definitions/MigrationResourceListResult"
             }
           },
           "default": {
@@ -289,7 +289,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MigrationCreateRequest",
+          "$ref": "#/definitions/MigrationResourceProperties",
           "description": "Migration resource properties.",
           "x-ms-client-flatten": true
         }
@@ -301,56 +301,25 @@
       ],
       "description": "Represents a migration resource."
     },
-    "MigrationCreateRequest": {
+    "MigrationResourceProperties": {
       "type": "object",
       "properties": {
-        "sourceDBServerResourceId": {
+        "migrationId": {
+          "format": "uuid",
           "type": "string"
         },
-        "targetDBServerSubnetResourceId": {
-          "type": "string"
+        "migrationDetailsLevel": {
+          "$ref": "#/definitions/MigrationDetailsLevel"
         },
-        "dBsToMigrate": {
-          "maxItems": 8,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "currentStatus": {
+          "$ref": "#/definitions/MigrationStatus"
         },
-        "migrationResourceGroup": {
-          "$ref": "#/definitions/MigrationResourceGroup"
+        "sourceDBServerMetadata": {
+          "$ref": "#/definitions/DBServerMetadata"
         },
-        "secretParameters": {
-          "$ref": "#/definitions/MigrationSecretParameters"
+        "targetDBServerMetadata": {
+          "$ref": "#/definitions/DBServerMetadata"
         },
-        "setupLogicalReplicationOnSourceDBIfNeeded": {
-          "type": "boolean"
-        },
-        "overwriteDBsInTarget": {
-          "type": "boolean"
-        },
-        "migrationWindowStartTimeInUtc": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "startDataMigration": {
-          "type": "boolean"
-        },
-        "triggerCutover": {
-          "type": "boolean"
-        },
-        "cancel": {
-          "type": "boolean"
-        }
-      },
-      "description": "Migration create request."
-    },
-    "MigrationCreateFullRequest": {
-      "required": [
-        "targetDBServerResourceId"
-      ],
-      "type": "object",
-      "properties": {
         "sourceDBServerResourceId": {
           "type": "string"
         },
@@ -393,99 +362,56 @@
           "type": "boolean"
         }
       },
-      "description": "Full migration create request."
+      "description": "Migration resource properties."
     },
-    "MigrationDetailsResource": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MigrationDetails",
-          "description": "Migration details resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Represents a migration details resource."
-    },
-    "MigrationDetails": {
-      "type": "object",
-      "properties": {
-        "migrationId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "migrationDetailsLevel": {
-          "$ref": "#/definitions/MigrationDetailsLevel"
-        },
-        "currentStatus": {
-          "$ref": "#/definitions/MigrationStatus"
-        },
-        "sourceDBServerMetadata": {
-          "$ref": "#/definitions/DBServerMetadata"
-        },
-        "targetDBServerMetadata": {
-          "$ref": "#/definitions/DBServerMetadata"
-        },
-        "migrationCreateFullRequest": {
-          "$ref": "#/definitions/MigrationCreateFullRequest"
-        }
-      },
-      "description": "Migration details."
-    },
-    "MigrationSummaryResource": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MigrationSummary",
-          "description": "Migration details resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Represents a migration summary resource."
-    },
-    "MigrationSummaryResourceListResult": {
+    "MigrationResourceListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MigrationSummaryResource"
+            "$ref": "#/definitions/MigrationResource"
           },
-          "description": "The list of migration summary resources"
+          "description": "The list of migration resources"
         }
       },
-      "description": "A list of migration summary resources."
+      "description": "A list of migration resources."
     },
-    "MigrationSummary": {
+    "MigrationResourceForPatch": {
       "type": "object",
       "properties": {
-        "migrationId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "migrationDetailsLevel": {
-          "$ref": "#/definitions/MigrationDetailsLevel"
-        },
-        "currentStatus": {
-          "$ref": "#/definitions/MigrationStatus"
-        },
-        "sourceDBServerMetadata": {
-          "$ref": "#/definitions/DBServerMetadata"
-        },
-        "targetDBServerMetadata": {
-          "$ref": "#/definitions/DBServerMetadata"
+        "properties": {
+          "$ref": "#/definitions/MigrationResourcePropertiesForPatch",
+          "description": "Migration resource properties.",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "Migration summary."
+      "description": "Represents a migration resource for patch."
+    },
+    "MigrationResourcePropertiesForPatch": {
+      "type": "object",
+      "properties": {
+        "setupLogicalReplicationOnSourceDBIfNeeded": {
+          "type": "boolean"
+        },
+        "overwriteDBsInTarget": {
+          "type": "boolean"
+        },
+        "migrationWindowStartTimeInUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "startDataMigration": {
+          "type": "boolean"
+        },
+        "triggerCutover": {
+          "type": "boolean"
+        },
+        "cancel": {
+          "type": "boolean"
+        }
+      },
+      "description": "Migration resource properties for patch."
     },
     "MigrationResourceGroup": {
       "required": [
