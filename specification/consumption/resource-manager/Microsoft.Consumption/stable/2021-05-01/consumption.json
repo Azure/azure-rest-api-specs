@@ -5162,7 +5162,11 @@
             "Complete",
             "Canceled"
           ],
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+            }
         }
       }
     },
@@ -5231,6 +5235,11 @@
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
+        "estimatedBalanceInBillingCurrency": {
+          "description": "Estimated balance in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
         "currentBalance": {
           "description": "Current balance.",
           "readOnly": true,
@@ -5256,16 +5265,17 @@
     },
     "AmountWithExchangeRate": {
       "description": "The amount with exchange rate.",
-      "type": "object",
       "properties": {
         "exchangeRate": {
           "description": "The exchange rate.",
-          "type": "decimal",
+          "type": "number",
+          "format": "decimal",
           "readOnly": true
         },
         "exchangeRateMonth": {
           "description": "The exchange rate month.",
-          "type": "int",
+          "type": "integer",
+          "format": "int32",
           "readOnly": true
         }
       }
