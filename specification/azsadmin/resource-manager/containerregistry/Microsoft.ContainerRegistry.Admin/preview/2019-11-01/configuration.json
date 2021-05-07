@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-11-01-preview",
+    "version": "2019-11-01",
     "title": "ContainerRegistryManagementClient",
     "description": "Admin Container Registry Management Client."
   },
@@ -19,14 +19,14 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/configuration/{configurationName}": {
       "put": {
         "x-ms-examples": {
-          "Returns container registry overall capacity properties.": {
+          "Returns container registry overall configuration properties.": {
             "$ref": "./examples/Configuration/PutConfiguration.json"
           }
         },
         "tags": [
           "ContainerRegistryConfiguration"
         ],
-        "description": "Configure container registry overall capacity properties.",
+        "description": "Configure container registry overall configuration properties.",
         "operationId": "ContainerRegistrySetConfiguration_Post",
         "parameters": [
           {
@@ -47,9 +47,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Container registry overall capacity properties is being returned.",
+            "description": "OK -- Container registry overall configuration properties is being returned.",
             "schema": {
-              "$ref": "#/definitions/ContainerRegistryCapacity"
+              "$ref": "#/definitions/ContainerRegistryConfiguration"
             }
           },
           "default": {
@@ -126,7 +126,7 @@
           "200": {
             "description": "OK -- The configuration has been returned.",
             "schema": {
-              "$ref": "#/definitions/ContainerRegistryCapacity"
+              "$ref": "#/definitions/ContainerRegistryConfiguration"
             }
           },
           "default": {
@@ -165,7 +165,7 @@
           "200": {
             "description": "OK -- The list of configuration has been returned.",
             "schema": {
-              "$ref": "#/definitions/ContainerRegistryCapacityList"
+              "$ref": "#/definitions/ContainerRegistryConfigurationList"
             }
           },
           "default": {
@@ -179,14 +179,14 @@
     }
   },
   "definitions": {
-    "ContainerRegistryCapacity": {
-      "description": "Container registry capacity property.",
+    "ContainerRegistryConfiguration": {
+      "description": "Container registry configuration property.",
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Container registry capacity property.",
+          "description": "Container registry configuration property.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ContainerRegistryCapacityProperty"
+          "$ref": "#/definitions/ContainerRegistryConfigurationProperty"
         }
       },
       "allOf": [
@@ -195,8 +195,8 @@
         }
       ]
     },
-    "ContainerRegistryCapacityProperty": {
-      "description": "Container registry capacity property.",
+    "ContainerRegistryConfigurationProperty": {
+      "description": "Container registry configuration property.",
       "type": "object",
       "properties": {
         "maximumCapacityInGb": {
@@ -206,7 +206,7 @@
         }
       }
     },
-    "ContainerRegistryCapacityList": {
+    "ContainerRegistryConfigurationList": {
       "description": "List of configuration.",
       "type": "object",
       "properties": {
@@ -214,7 +214,7 @@
           "description": "List of configuration.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ContainerRegistryCapacity"
+            "$ref": "#/definitions/ContainerRegistryConfiguration"
           }
         }
       }
@@ -235,7 +235,7 @@
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ContainerRegistryCapacity"
+        "$ref": "#/definitions/ContainerRegistryConfiguration"
       },
       "x-ms-parameter-location": "method"
     }
