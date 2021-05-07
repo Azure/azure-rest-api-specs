@@ -15,7 +15,6 @@ batch:
   - tag: package-2015-08
   - tag: package-2020-03
   - tag: package-2020-08
-  - tag: package-2021-04-preview
 ```
 
 ### Tag: package-2015-08 and ruby
@@ -45,15 +44,5 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2020-08' && $(ruby)
 namespace: "Azure::Search::Mgmt::V2020_08_01"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_search/lib
-```
-
-### Tag: package-2021-04-01-preview and ruby
-
-These settings apply only when `--tag=2021-04-01-preview --ruby` is specified on the command line.
-Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
-
-``` yaml $(tag) == '2021-04-01-preview' && $(ruby)
-namespace: "Azure::Search::Mgmt::V2021_04_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_search/lib
 ```

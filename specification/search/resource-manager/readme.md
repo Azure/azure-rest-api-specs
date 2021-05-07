@@ -155,7 +155,6 @@ batch:
   - tag: package-2015-08
   - tag: package-2020-03
   - tag: package-2020-08
-  - tag: package-2021-04-preview
 ```
 
 ### Tag: package-2015-02 and java
@@ -206,19 +205,6 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.search.v2020_08_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/search/mgmt-resource-manager/v2020_08_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2021-04-preview and java
-
-These settings apply only when `--tag=package-2021-04-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2021-04-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.search.v2021_04_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/search/mgmt-resource-manager/v2021_04_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
