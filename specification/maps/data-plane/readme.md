@@ -162,8 +162,7 @@ input-file:
   - $(this-folder)/Microsoft.Maps/Timezone/preview/1.0/timezone.json	
   - $(this-folder)/Microsoft.Maps/Traffic/preview/1.0/traffic.json	
   - $(this-folder)/Microsoft.Maps/Weather/preview/1.0/weather.json	
-  - $(this-folder)/Microsoft.Maps/WFS/preview/1.0/wfs.json	
-  - $(this-folder)/Microsoft.Maps/WFS/preview/2.0/wfs.json	
+  - $(this-folder)/Microsoft.Maps/WFS/preview/1.0/wfs.json
 
 ```
 
