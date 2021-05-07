@@ -148,7 +148,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/SyncMembers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/TdeCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/TimeZones.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/TransparentDataEncryptions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualNetworkRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadClassifiers.json
