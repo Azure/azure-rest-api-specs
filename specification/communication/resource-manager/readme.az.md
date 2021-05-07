@@ -7,6 +7,7 @@ az:
     extensions: communication
     namespace: azure.mgmt.communication
     package-name: azure-mgmt-communication
+    randomize-names: true
 az-output-folder: $(azure-cli-extension-folder)/src/communication
 python-sdk-output-folder: "$(az-output-folder)/azext_communication/vendored_sdks/communication"
 # add additional configuration here specific for Azure CLI
@@ -18,14 +19,18 @@ python-sdk-output-folder: "$(az-output-folder)/azext_communication/vendored_sdks
 ``` yaml
 extension-mode: preview
 
+directive:
+    - where:
+          group: communication communication-service
+      set:
+          group: communication
+    - where:
+          command: communication operation-statuses show
+      set:
+          command: communication show-status
+
 cli:
     cli-directive:
-
-# -------- CommunicationService --------
-        - where:
-            group: CommunicationService
-          set:
-            name: service
         - where:
             group: CommunicationService
             param: CommunicationServiceName
@@ -33,10 +38,4 @@ cli:
           alias:
             - name
             - n
-
-# -------- OperationStatuses --------
-        - where:
-            group: OperationStatuses
-          set:
-            name: status
 ```

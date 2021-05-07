@@ -1,0 +1,102 @@
+{
+  "operationId": "MeshApplication_CreateOrUpdate",
+  "description": "This example shows how to create or update a application resource with services that autoscale based on the policies.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "applicationResourceName": "sampleApplication",
+    "applicationResourceDescription": {
+      "name": "sampleApplication",
+      "properties": {
+        "description": "Service Fabric Mesh sample application.",
+        "services": [
+          {
+            "name": "helloWorldService",
+            "properties": {
+              "description": "SeaBreeze Hello World Service.",
+              "osType": "Linux",
+              "codePackages": [
+                {
+                  "name": "helloWorldCode",
+                  "image": "seabreeze/sbz-helloworld:1.0-alpine",
+                  "endpoints": [
+                    {
+                      "name": "helloWorldListener",
+                      "port": 80
+                    }
+                  ],
+                  "resources": {
+                    "requests": {
+                      "memoryInGB": 1,
+                      "cpu": 1
+                    }
+                  }
+                }
+              ],
+              "replicaCount": 1,
+              "autoScalingPolicies": [
+                {
+                  "name": "MyAutoScaleRule",
+                  "trigger": {
+                    "kind": "AverageLoad",
+                    "metric": {
+                      "kind": "Resource",
+                      "name": "cpu"
+                    },
+                    "lowerLoadThreshold": 0.3,
+                    "upperLoadThreshold": 0.8,
+                    "scaleIntervalInSeconds": 3600
+                  },
+                  "mechanism": {
+                    "kind": "AddRemoveReplica",
+                    "minCount": 1,
+                    "maxCount": 4,
+                    "scaleIncrement": 1
+                  }
+                }
+              ],
+              "networkRefs": [
+                {
+                  "name": "sampleNetwork",
+                  "endpointRefs": [
+                    {
+                      "name": "helloWorldListener"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleApplication",
+        "properties": {
+          "description": "Service Fabric Mesh sample application.",
+          "serviceNames": [
+            "helloWorldService"
+          ],
+          "healthState": "Ok",
+          "status": "Ready"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sampleApplication",
+        "properties": {
+          "description": "Service Fabric Mesh sample application.",
+          "serviceNames": [
+            "helloWorldService"
+          ],
+          "healthState": "Unknown",
+          "status": "Creating"
+        }
+      }
+    },
+    "202": {}
+  }
+}
