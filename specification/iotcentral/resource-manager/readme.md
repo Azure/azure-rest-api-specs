@@ -37,6 +37,13 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 ```yaml $(tag) == 'package-2021-06'
 input-file:
   - Microsoft.IoTCentral/stable/2021-06-01/iotcentral.json
+directive:
+  - suppress: R4009
+    from: iotcentral.json
+    reason: We do not yet support systemdata.
+  - suppress: R3018
+    from: iotcentral.json
+    reason: resource name availability needs to be boolean (available or not)
 ```
 ### Tag: package-2018-09-01
 
