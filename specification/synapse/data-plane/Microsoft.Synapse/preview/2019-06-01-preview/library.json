@@ -295,6 +295,7 @@
           },
           {
             "name": "x-ms-blob-condition-appendpos",
+            "x-ms-client-name": "blobConditionAppendPosition",
             "in": "header",
             "description": "Set this header to a byte offset at which the block is expected to be appended. The request succeeds only if the current offset matches this value. Otherwise, the request fails with the AppendPositionConditionNotMet error (HTTP status code 412 – Precondition Failed)",
             "required": false,
@@ -313,7 +314,18 @@
             }
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "name": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "appendblock"
+          ]
+        }
+      ]
     }
   },
   "definitions": {
@@ -332,14 +344,6 @@
           "$ref": "./artifacts.json#/definitions/CloudErrorBody"
         }
       }
-    },
-    "SubResource": {
-      "description": "Azure Synapse nested resource, which belongs to a workspace.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
-        }
-      ]
     },
     "LibraryListResponse": {
       "description": "A list of Library resources.",
@@ -414,9 +418,10 @@
     },
     "LibraryResource": {
       "description": "Library response details",
+      "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "./artifacts.json#/definitions/SubResource"
         }
       ],
       "properties": {
