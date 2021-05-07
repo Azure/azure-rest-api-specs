@@ -1510,6 +1510,24 @@
           "items": {
             "$ref": "#/definitions/IpRule"
           }
+        },
+        "byPass": {
+          "type": "string",
+          "enum": [
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "SearchByPass",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "name": "None",
+                "description": "Indicates that no origin can bypass the rules defined in the 'ipRules' section. This is the default."
+              }
+            ]
+          },
+          "description": "A specific data exfiltration scenario that is disabled for the service."
         }
       },
       "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
@@ -1886,14 +1904,15 @@
         "status": {
           "readOnly": true,
           "type": "string",
-          "description": "The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. If your service is in the degraded, disabled, or error states, it means the Azure Cognitive Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
+          "description": "The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. 'stopped': The search service is in a subscription that's disabled. If your service is in the degraded, disabled, or error states, it means the Azure Cognitive Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
           "enum": [
             "running",
             "provisioning",
             "deleting",
             "degraded",
             "disabled",
-            "error"
+            "error",
+            "stopped"
           ],
           "x-ms-enum": {
             "name": "SearchServiceStatus",
@@ -1958,6 +1977,11 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of shared private link resources managed by the Azure Cognitive Search service."
+        },
+        "eTag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A system generated property representing the service's etag that can be for optimistic concurrency control during updates."
         }
       },
       "description": "Properties of the search service."
@@ -2006,6 +2030,10 @@
         "error": {
           "$ref": "#/definitions/CloudErrorBody",
           "description": "Describes a particular API error with an error code and a message."
+        },
+        "message": {
+          "type": "string",
+          "description": "A brief description of the error that hints at what went wrong (for details/debugging information refer to the 'error.message' property)."
         }
       },
       "description": "Contains information about an API error.",
@@ -2077,6 +2105,147 @@
           "x-nullable": true,
           "readOnly": true,
           "description": "Describes if the specified operation is a data plane API operation. Operations where this value is not true are supported directly by the resource provider."
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes which originating entities are allowed to invoke this operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Describes additional properties for this operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Describes additional properties for this operation.",
+      "properties": {
+        "serviceSpecification":{
+          "$ref": "#/definitions/OperationServiceSpecification",
+          "description": "Specifications of the service for this operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationServiceSpecification": {
+      "description": "Specifications of the service for this operation.",
+      "properties": {
+        "metricsSpecifications": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationMetricsSpecification"
+          },
+          "description": "Specifications of metrics for this operation."
+        },
+        "logSpecifications": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationLogsSpecification"
+          },
+          "description": "Specifications of logs for this operation."
+        }
+      }
+    },
+    "OperationMetricsSpecification": {
+      "description": "Specifications of one type of metric for this operation.",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display description of the metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unit for the metric specification."
+        },
+        "aggregationType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of aggregation for the metric specification."
+        },
+        "dimensions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationMetricDimension"
+          },
+          "description": "Dimensions for the metric specification."
+        },
+        "availabilities": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationAvailability"
+          },
+          "description": "Availabilities for the metric specification."
+        }
+      }
+    },
+    "OperationMetricDimension": {
+      "description": "Describes a particular dimension for the metric specification.",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the dimension."
+        }
+      }
+    },
+    "OperationAvailability": {
+      "description": "Describes a particular availability for the metric specification.",
+      "readOnly": true,
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The time grain for the dimension."
+        },
+        "blobDuration": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The blob duration for the dimension."
+        }
+      }
+    },
+    "OperationLogsSpecification": {
+      "description": "Specifications of one type of log for this operation.",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the log specification."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the log specification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The blob duration for the log specification."
         }
       }
     },
