@@ -27,7 +27,7 @@
           "ContainerRegistryConfiguration"
         ],
         "description": "Configure container registry overall configuration properties.",
-        "operationId": "ContainerRegistrySetConfiguration_Post",
+        "operationId": "ContainerRegistryConfiguration_Put",
         "parameters": [
           {
             "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
@@ -88,6 +88,9 @@
         "responses": {
           "200": {
             "description": "OK -- The container registry configuration has been deleted."
+          },
+          "204": {
+            "description": "NotFound -- The container registry configuration not found."
           },
           "default": {
             "description": "Error Response.",
