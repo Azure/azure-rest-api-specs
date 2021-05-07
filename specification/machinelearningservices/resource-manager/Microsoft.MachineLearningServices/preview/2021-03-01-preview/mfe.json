@@ -1733,6 +1733,83 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions": {
+      "get": {
+        "tags": [
+          "DataVersion"
+        ],
+        "summary": "List data versions.",
+        "operationId": "DataVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Data name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$orderBy",
+            "description": "Ordering of list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Maximum number of records to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "$tags",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataVersionResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Data Version.": {
+            "$ref": "./examples/DataVersion/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}": {
       "put": {
         "tags": [
@@ -1922,77 +1999,6 @@
           "Delete Data Version.": {
             "$ref": "./examples/DataVersion/delete.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions": {
-      "get": {
-        "tags": [
-          "DataVersion"
-        ],
-        "summary": "List versions.",
-        "operationId": "DataVersions_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "query",
-            "name": "$orderBy",
-            "description": "Ordering of list.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "description": "Maximum number of records to return.",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DataVersionResourceArmPaginatedResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Data Version.": {
-            "$ref": "./examples/DataVersion/list.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
