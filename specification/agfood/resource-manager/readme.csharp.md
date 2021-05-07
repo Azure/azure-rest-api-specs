@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.AgFoodPlatform
-  output-folder: $(csharp-sdks-folder)/agfood/management/Microsoft.AgFoodPlatform/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/agfood/management/Microsoft.AgFoodPlatform/Generated
 ```

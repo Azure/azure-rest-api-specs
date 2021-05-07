@@ -50,18 +50,9 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js agfood/resource-manager
-  - repo: azure-cli-extensions
 ```
-## Az
-
-See configuration in [readme.az.md](./readme.az.md)
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -77,10 +68,6 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Suppression
 
