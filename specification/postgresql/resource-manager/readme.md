@@ -76,6 +76,16 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
 ```
 
+### Tag: package-2021-06-01-preview
+
+These settings apply only when `--tag=package-2021-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01-preview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
+- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
+```
 
 ### Tag: package-2020-02-14-privatepreview
 
@@ -232,6 +242,9 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
