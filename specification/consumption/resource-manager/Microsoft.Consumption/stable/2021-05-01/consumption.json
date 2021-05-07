@@ -4933,15 +4933,40 @@
           "type": "string",
           "readOnly": true
         },
+        "creditCurrency": {
+          "description": "The credit currency of the event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "The billing currency of the event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reseller": {
+          "description": "The reseller of the event.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
+        },
         "newCredit": {
           "description": "The amount of new credit or commitment for NewCredit or SettleCharges event.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
+        "newCreditInBillingCurrency": {
+          "description": "The amount of new credit or commitment for NewCredit or SettleCharges event in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
         "adjustments": {
           "description": "The amount of balance adjustment. The property is not available for ConsumptionCommitment lots.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "adjustmentsInBillingCurrency": {
+          "description": "The amount of balance adjustment in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
         },
         "creditExpired": {
           "description": "The amount of expired credit or commitment for NewCredit or SettleCharges event.",
@@ -4953,10 +4978,20 @@
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
+        "chargesInBillingCurrency": {
+          "description": "The amount of charges for events of type SettleCharges and PendingEligibleCharges in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
         "closedBalance": {
           "description": "The balance after the event. ",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "closedBalanceInBillingCurrency": {
+          "description": "The balance in billing currency after the event.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
         },
         "eventType": {
           "description": "Identifies the type of the event.",
@@ -4999,6 +5034,11 @@
           "description": "Identifies the source of the lot for which the event happened. ",
           "type": "string",
           "readOnly": true
+        },
+        "canceledCredit": {
+          "description": "Amount of canceled credit.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
         }
       }
     },
@@ -5039,15 +5079,40 @@
     "LotProperties": {
       "description": "The lot properties.",
       "properties": {
+        "creditCurrency": {
+          "description": "The currency of the lot.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "The billing currency of the lot.",
+          "type": "string",
+          "readOnly": true
+        },
         "originalAmount": {
           "description": "The original amount of a lot.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
+        "originalAmountInBillingCurrency": {
+          "description": "The original amount of a lot in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
         "closedBalance": {
           "description": "The balance as of the last invoice.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "closedBalanceInBillingCurrency": {
+          "description": "The balance as of the last invoice in billing currency.",
+          "readOnly": true,
+          "$ref": "#/definitions/AmountWithExchangeRate"
+        },
+        "reseller": {
+          "description": "The reseller of the lot.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
         },
         "source": {
           "description": "The source of the lot.",
@@ -5089,6 +5154,14 @@
         "status": {
           "description": "The status of the lot.",
           "type": "string",
+          "enum": [
+            "None",
+            "Active",
+            "Inactive",
+            "Expired",
+            "Complete",
+            "Canceled"
+          ],
           "readOnly": true
         }
       }
@@ -5113,6 +5186,16 @@
       "description": "The properties of the credit summary.",
       "type": "object",
       "properties": {
+        "creditCurrency": {
+          "description": "The credit currency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "The billing currency.",
+          "type": "string",
+          "readOnly": true
+        },
         "balanceSummary": {
           "description": "Summary of balances associated with this credit summary.",
           "readOnly": true,
@@ -5132,6 +5215,11 @@
           "description": "Pending eligible charges.",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "reseller": {
+          "description": "Reseller.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
         }
       }
     },
@@ -5163,6 +5251,38 @@
           "type": "number",
           "format": "decimal",
           "description": "Amount."
+        }
+      }
+    },
+    "AmountWithExchangeRate": {
+      "description": "The amount with exchange rate.",
+      "type": "object",
+      "properties": {
+        "exchangeRate": {
+          "description": "The exchange rate.",
+          "type": "decimal",
+          "readOnly": true
+        },
+        "exchangeRateMonth": {
+          "description": "The exchange rate month.",
+          "type": "int",
+          "readOnly": true
+        }
+      }
+    },
+    "Reseller": {
+      "description": "The reseller properties.",
+      "type": "object",
+      "properties": {
+        "resellerId": {
+          "description": "The reseller property ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resellerDescription": {
+          "description": "The reseller property description.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
