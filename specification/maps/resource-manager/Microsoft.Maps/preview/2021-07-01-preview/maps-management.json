@@ -47,6 +47,9 @@
           },
           "Create Gen2 Account": {
             "$ref": "./examples/CreateAccountGen2.json"
+          },
+          "Create Account with Managed Identities": {
+            "$ref": "./examples/CreateAccountManagedIdentity.json"
           }
         },
         "parameters": [
@@ -108,6 +111,9 @@
           },
           "Update to Gen1 Account": {
             "$ref": "./examples/UpdateAccountGen1.json"
+          },
+          "Update Account Managed Identities": {
+            "$ref": "./examples/UpdateAccountManagedIdentity.json"
           }
         },
         "parameters": [
@@ -746,6 +752,11 @@
           "description": "The system meta data relating to this resource.",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
+        "identity": {
+          "type": "object",
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "Sets the identity property for maps account."
+        },
         "properties": {
           "description": "The map account properties.",
           "$ref": "#/definitions/MapsAccountProperties"
@@ -779,6 +790,11 @@
         "sku": {
           "description": "The SKU of this account.",
           "$ref": "#/definitions/Sku"
+        },
+        "identity": {
+          "type": "object",
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "Sets the identity property for maps account."
         },
         "properties": {
           "description": "The map account properties.",
@@ -925,6 +941,54 @@
           "type": "string",
           "readOnly": true,
           "description": "The last updated date and time of the secondary key."
+        }
+      }
+    },
+    "ManagedServiceIdentity": {
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          }
         }
       }
     },
@@ -1090,10 +1154,23 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "the state of the provisioning.",
+          "description": "The provisioning state of the Map account resource.",
           "readOnly": true
+        },
+        "linkedResources": {
+          "type": "object",
+          "$ref": "#/definitions/LinkedResources",
+          "description": "Sets the resources to be used for Managed Identities based operations for the Map account resource."
         }
       }
+    },
+    "LinkedResources": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "description": "ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}'."
+      },
+      "description": "The list of user associated resources to the Map account. The dictionary key references will be string names and the values will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}'."
     },
     "CreatorProperties": {
       "description": "Creator resource properties",
