@@ -737,7 +737,15 @@
       "description": "Dynamics CRM linked service properties.",
       "properties": {
         "deploymentType": {
-          "type": "object",
+          "x-ms-enum": {
+            "name": "DynamicsDeploymentType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Online",
+            "OnPremisesWithIfd"
+          ],
+          "type": "string",
           "description": "The deployment type of the Dynamics CRM instance. 'Online' for Dynamics CRM Online and 'OnPremisesWithIfd' for Dynamics CRM on-premises with Ifd. Type: string (or Expression with resultType string)."
         },
         "hostName": {
@@ -757,7 +765,16 @@
           "description": "The organization name of the Dynamics CRM instance. The property is required for on-prem and required for online when there are more than one Dynamics CRM instances associated with the user. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
-          "type": "object",
+          "x-ms-enum": {
+            "name": "DynamicsAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Office365",
+            "Ifd",
+            "AADServicePrincipal"
+          ],
+          "type": "string",
           "description": "The authentication type to connect to Dynamics CRM server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
         },
         "username": {
@@ -826,7 +843,15 @@
       "description": "Common Data Service for Apps linked service properties.",
       "properties": {
         "deploymentType": {
-          "type": "object",
+          "x-ms-enum": {
+            "name": "DynamicsDeploymentType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Online",
+            "OnPremisesWithIfd"
+          ],
+          "type": "string",
           "description": "The deployment type of the Common Data Service for Apps instance. 'Online' for Common Data Service for Apps Online and 'OnPremisesWithIfd' for Common Data Service for Apps on-premises with Ifd. Type: string (or Expression with resultType string)."
         },
         "hostName": {
@@ -846,7 +871,16 @@
           "description": "The organization name of the Common Data Service for Apps instance. The property is required for on-prem and required for online when there are more than one Common Data Service for Apps instances associated with the user. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
-          "type": "object",
+          "x-ms-enum": {
+            "name": "DynamicsAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Office365",
+            "Ifd",
+            "AADServicePrincipal"
+          ],
+          "type": "string",
           "description": "The authentication type to connect to Common Data Service for Apps server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
         },
         "username": {
