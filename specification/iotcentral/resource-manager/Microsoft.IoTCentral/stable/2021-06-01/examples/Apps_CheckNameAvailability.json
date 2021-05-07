@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2018-09-01",
+    "operationInputs": {
+      "name": "myiotcentralapp",
+      "type": "IoTApps"
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns information about resource name availability",
+      "headers": {
+        "code": "200"
+      },
+      "body": {
+        "nameAvailable": true
+      }
+    },
+    "default": {
+      "description": "Error message returned for an unexpected response",
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message",
+          "target": "Error target"
+        }
+      }
+    }
+  }
+}
