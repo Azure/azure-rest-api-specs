@@ -195,6 +195,40 @@
           }
         }
       },
+      "head": {
+        "description": "Checks whether account exists.",
+        "operationId": "Accounts_Head",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account exists."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Checks whether account exists": {
+            "$ref": "./examples/Accounts/Accounts_Head.json"
+          }
+        }
+      },
       "put": {
         "description": "Creates or updates Account.",
         "operationId": "Accounts_Create",
@@ -317,13 +351,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Account was updated successfully.",
+            "description": "Account updated successfully.",
             "schema": {
               "$ref": "#/definitions/Account"
             }
           },
           "201": {
-            "description": "Account was updated successfully.",
+            "description": "Async operation to update accounts was created.",
             "schema": {
               "$ref": "#/definitions/Account"
             }
@@ -390,7 +424,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts/{accountName}/instances/{instanceName}": {
       "get": {
-        "description": "Returns instances for the given account and instance name.",
+        "description": "Returns instance details for the given instance and account name.",
         "operationId": "Instances_Get",
         "parameters": [
           {
@@ -426,6 +460,43 @@
         "x-ms-examples": {
           "Gets list of Accounts": {
             "$ref": "./examples/Instances/Instances_Get.json"
+          }
+        }
+      },
+      "head": {
+        "description": "Checks whether instance exists.",
+        "operationId": "Instances_Head",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instance exists."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Checks whether instance exists.": {
+            "$ref": "./examples/Instances/Instances_Head.json"
           }
         }
       },
@@ -560,7 +631,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Instance was updated successfully.",
+            "description": "Instance updated successfully.",
             "schema": {
               "$ref": "#/definitions/Instance"
             }
