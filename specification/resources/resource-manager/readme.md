@@ -785,6 +785,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
+  - repo: azure-cli-extensions
 ```
 ## Python
 
@@ -797,6 +798,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 # Validation
 
