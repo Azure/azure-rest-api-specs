@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Personalizer Client v1.1-preview.1",
-    "description": "Personalizer is an Azure Cognitive Service that makes it easy to target products and content in websites, apps and email campaigns. To use Personalizer, call Rank with some actions and a context. The response rewardActionId indicates which action to use in your application. Then call Reward with the same eventId with a score - for example, '1' if the user clicked on the item. With the Rank and Reward the reinforcement learning agent in Personalizer will improve the model and improve performance of future rank calls.",
+    "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns which content item to show to users in rewardActionId. As rewards are sent in response to the use of rewardActionId, the reinforcement learning algorithm will improve the model and improve performance of future rank calls.",
     "version": "v1.1-preview.1"
   },
   "host": "localhost:5001",
@@ -1247,8 +1247,7 @@
         "nonZeroProbability": {
           "format": "float",
           "description": "Probability of non-zero values for the Policy evaluation.",
-          "type": "number",
-          "readOnly": true
+          "type": "number"
         },
         "sumOfSquares": {
           "format": "float",
@@ -1553,7 +1552,6 @@
         "id": {
           "description": "Id of the action.",
           "maxLength": 256,
-          "minLength": 1,
           "type": "string"
         },
         "features": {
@@ -1795,7 +1793,7 @@
     }
   },
   "security": [
-    {}
+  {}
   ],
   "tags": [
     {
