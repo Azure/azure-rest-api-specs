@@ -541,7 +541,6 @@
             "$ref": "./examples/FileSharesLease_Break.json"
           }
         },
-        "x-ms-long-running-operation": true,
         "description": "The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.",
         "parameters": [
           {
@@ -578,30 +577,6 @@
         "responses": {
           "200": {
             "description": "OK -- Lease Share operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LeaseShareResponse"
-            },
-            "headers": {
-              "ETag": {
-                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
-                "type": "string"
-              }
-            }
-          },
-          "201": {
-            "description": "Created -- Acquire Lease operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LeaseShareResponse"
-            },
-            "headers": {
-              "ETag": {
-                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
-                "type": "string"
-              }
-            }
-          },
-          "202": {
-            "description": "Accepted -- Break Lease operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LeaseShareResponse"
             },
