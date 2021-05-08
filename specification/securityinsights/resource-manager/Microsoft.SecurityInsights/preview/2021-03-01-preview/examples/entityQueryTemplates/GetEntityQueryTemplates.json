@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "operationalInsightsResourceProvider": "Microsoft.OperationalIinsights"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entityQueriesTemplates/37ca3555-c135-4a73-a65e-9c1d00323f5d",
+            "name": "37ca3555-c135-4a73-a65e-9c1d00323f5d",
+            "type": "Microsoft.SecurityInsights/entityQueriesTemplates",
+            "kind": "Activity",
+            "properties": {
+              "title": "An account was deleted on this host",
+              "content": "On '{{Computer}}' the account '{{TargetAccount}}' was deleted by '{{AddedBy}}'",
+              "description": "Account deleted on host",
+              "queryDefinitions": {
+                "query": "let GetAccountActions = (v_Host_Name:string, v_Host_NTDomain:string, v_Host_DnsDomain:string, v_Host_AzureID:string, v_Host_OMSAgentID:string){\nSecurityEvent\n| where EventID in (4725, 4726, 4767, 4720, 4722, 4723, 4724)\n// parsing for Host to handle variety of conventions coming from data\n| extend Host_HostName = case(\nComputer has '@', tostring(split(Computer, '@')[0]),\nComputer has '\\\\', tostring(split(Computer, '\\\\')[1]),\nComputer has '.', tostring(split(Computer, '.')[0]),\nComputer\n)\n| extend Host_NTDomain = case(\nComputer has '\\\\', tostring(split(Computer, '\\\\')[0]), \nComputer has '.', tostring(split(Computer, '.')[-2]), \nComputer\n)\n| extend Host_DnsDomain = case(\nComputer has '\\\\', tostring(split(Computer, '\\\\')[0]), \nComputer has '.', strcat_array(array_slice(split(Computer,'.'),-2,-1),'.'), \nComputer\n)\n| where (Host_HostName =~ v_Host_Name and Host_NTDomain =~ v_Host_NTDomain) \nor (Host_HostName =~ v_Host_Name and Host_DnsDomain =~ v_Host_DnsDomain) \nor v_Host_AzureID =~ _ResourceId \nor v_Host_OMSAgentID == SourceComputerId\n| project TimeGenerated, EventID, Activity, Computer, TargetAccount, TargetUserName, TargetDomainName, TargetSid, SubjectUserName, SubjectUserSid, _ResourceId, SourceComputerId\n| extend AddedBy = SubjectUserName\n// Future support for Activities\n| extend timestamp = TimeGenerated, HostCustomEntity = Computer, AccountCustomEntity = TargetAccount\n};\nGetAccountActions('{{Host_HostName}}', '{{Host_NTDomain}}', '{{Host_DnsDomain}}', '{{Host_AzureID}}', '{{Host_OMSAgentID}}')\n \n| where EventID == 4726 "
+              },
+              "dataTypes": [
+                {
+                  "dataType": "SecurityEvent"
+                }
+              ],
+              "inputEntityType": "Host",
+              "requiredInputFieldsSets": [
+                [
+                  "Host_HostName",
+                  "Host_NTDomain"
+                ],
+                [
+                  "Host_HostName",
+                  "Host_DnsDomain"
+                ],
+                [
+                  "Host_AzureID"
+                ],
+                [
+                  "Host_OMSAgentID"
+                ]
+              ],
+              "entitiesFilter": {
+                "Host_OsFamily": [
+                  "Windows"
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entityQueriesTemplates/97a1d515-abf2-4231-9a35-985f9de0bb91",
+            "name": "97a1d515-abf2-4231-9a35-985f9de0bb91",
+            "type": "Microsoft.SecurityInsights/entityQueriesTemplates",
+            "kind": "Activity",
+            "properties": {
+              "title": "The user has deleted an account",
+              "content": "The user {{InitiatedByAccount}} has deleted the account {{TargetAccount}} {{Count}} time(s)",
+              "description": "This activity displays account deletion events performed by the user",
+              "queryDefinitions": {
+                "query": "let GetAccountActions = (Account_Name:string, Account_NTDomain:string, Account_UPNSuffix:string, Account_AADUserId:string, Account_Sid:string){\nlet Account_UPN = strcat(Account_Name, '@', Account_UPNSuffix);\nlet Account_Win = strcat(Account_NTDomain,'\\\\', Account_Name);\nunion isfuzzy=true\n(AuditLogs\n  | where  tostring(bag_keys(InitiatedBy)[0]) == \"user\"\n  | where OperationName in~ ('Add user', 'Update user', 'Delete user', 'Change user password', 'Reset user password',  'Reset password (by admin)', 'Change password (self-service)', 'Reset password (self-service)')\n  | where Account_UPN =~ tostring(parse_json(tostring(InitiatedBy.user)).userPrincipalName) or Account_AADUserId =~ tostring(parse_json(tostring(InitiatedBy.user)).id)\n  | extend InitiatedByAccount = tostring(parse_json(tostring(InitiatedBy.user)).userPrincipalName)\n  | parse InitiatedByAccount with userName:string '@' userUpnSuffix:string\n  | extend InitiatedByAADUserId = tostring(parse_json(tostring(InitiatedBy.user)).id)\n  | extend TargetAccount = tostring(TargetResources[0].userPrincipalName)\n  | parse TargetAccount with TargetAccountName:string '@' TargetAccountUPNSuffix:string\n  | extend TargetAADUserId = tostring(TargetResources[0].id)\n  | extend Action = tostring(parse_json(tostring(parse_json(tostring(TargetResources[0].modifiedProperties))[0])))\n  | extend ModifiedProperty = tostring(parse_json(Action).displayName), ModifiedValue = tostring(parse_json(Action).newValue)\n  | extend DisableUser = iif(ModifiedProperty =~ 'AccountEnabled' and ModifiedValue =~ '[false]', 'True', 'False')\n),\n(SecurityEvent\n  | where AccountType =~ \"user\" or isempty(AccountType)\n  | where EventID in (4720, 4722, 4723, 4724, 4725, 4726, 4740)\n  | where Account_Win =~ SubjectAccount or Account_Sid =~ SubjectUserSid\n  | parse TargetAccount with TargetAccountNTDomain '\\\\' TargetAccountName\n  | extend InitiatedByAccount = SubjectAccount, InitiatedByUserSid = SubjectUserSid, OperationName = tostring(EventID), ModifiedProperty = Activity\n)\n};\nGetAccountActions('{{Account_Name}}', '{{Account_NTDomain}}', '{{Account_UPNSuffix}}', '{{Account_AADUserId}}', '{{Account_Sid}}')\n \n| where OperationName in~ ('Delete user', '4726') "
+              },
+              "dataTypes": [
+                {
+                  "dataType": "AuditLogs"
+                },
+                {
+                  "dataType": "SecurityEvent"
+                }
+              ],
+              "inputEntityType": "Account",
+              "requiredInputFieldsSets": [
+                [
+                  "Account_Name",
+                  "Account_NTDomain"
+                ],
+                [
+                  "Account_Name",
+                  "Account_UPNSuffix"
+                ],
+                [
+                  "Account_AADUserId"
+                ],
+                [
+                  "Account_Sid"
+                ]
+              ],
+              "entitiesFilter": {}
+            }
+          }
+        ]
+      }
+    }
+  }
+}
