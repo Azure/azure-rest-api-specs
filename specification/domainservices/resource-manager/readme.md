@@ -28,6 +28,15 @@ These are the global settings for the DomainServices API.
 openapi-type: arm
 tag: package-2020-01
 ```
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05'
+input-file:
+- Microsoft.AAD/stable/2021-05-01/domainservices.json
+- Microsoft.AAD/stable/2021-05-01/oucontainer.json
+```
 
 ### Tag: package-2021-03
 
