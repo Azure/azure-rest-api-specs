@@ -44,6 +44,9 @@ directive:
   - suppress: R3018
     from: iotcentral.json
     reason: resource name availability needs to be boolean (available or not)
+  - suppress: R4018
+    from: iotcentral.json
+    reason: We do not yet support isDataAction, display.description and display.resource.
 ```
 ### Tag: package-2018-09-01
 
