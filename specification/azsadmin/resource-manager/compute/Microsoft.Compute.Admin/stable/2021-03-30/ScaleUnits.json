@@ -1,0 +1,289 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-03-30",
+    "title": "Compute Admin Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/providers/Microsoft.Compute.Admin/locations/{location}/computeScaleUnits/{scaleUnitName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an existing scale set.": {
+            "$ref": "./examples/ScaleUnits/Get.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "summary": "Returns the scale unit view.",
+        "description": "Get the scale unit view.",
+        "operationId": "ScaleUnits_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "ScaleUnits.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "ScaleUnits.json#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "ScaleUnits.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "ScaleUnits.json#/definitions/ScaleUnit"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ScaleUnit": {
+      "description": "The scale unit operator view.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "The scale unit operator view properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScaleUnitProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ScaleUnitProperties": {
+      "description": "Properties for a scale unit",
+      "type": "object",
+      "properties": {
+        "scaleUnitName": {
+          "description": "The name of the scale unit.",
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "description": "The scale unit last update time (UTC).",
+          "type": "string"
+        },
+        "nodes": {
+          "description": "The nodes of the scale unit.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeView"
+          }
+        }
+      }
+    },
+    "NodeView": {
+      "description": "Properties for a node",
+      "type": "object",
+      "properties": {
+        "nodeName": {
+          "description": "The name of the node.",
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "description": "The node last update time (UTC).",
+          "type": "string"
+        },
+        "nodeHealthState": {
+          "description": "The node health state.",
+          "enum": [
+            "Unknown",
+            "Up",
+            "Down",
+            "MaintenanceMode"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NodeHealthState"
+          }
+        },
+        "virtualMachines": {
+          "description": "The virtual machines on the node.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineView"
+          }
+        }
+      }
+    },
+    "VirtualMachineView": {
+      "description": "Properties for a virtual machine",
+      "type": "object",
+      "properties": {
+        "vmName": {
+          "description": "The name of the virtual machine.",
+          "type": "string"
+        },
+        "vmId": {
+          "description": "The identifier of the virtual machine.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The identifier of the subscription.",
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "description": "The resource group name.",
+          "type": "string"
+        },
+        "vmSize": {
+          "description": "The virtual machine size.",
+          "type": "string"
+        },
+        "vmScaleSetName": {
+          "description": "The virtual machine scale set name.",
+          "type": "string"
+        },
+        "lastProvisioningErrorMessage": {
+          "description": "The virtual machine last provisioning error message.",
+          "type": "string"
+        },
+        "timeOfLastConfigurationChange": {
+          "description": "The time of last configuration change (UTC).",
+          "type": "string"
+        },
+        "powerState": {
+          "description": "The fabric VM power state.",
+          "enum": [
+            "Unknown",
+            "Stopped",
+            "Running",
+            "Paused",
+            "SavedState",
+            "Stopping",
+            "Starting",
+            "Pausing",
+            "Resuming",
+            "Saving"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "VmPowerState"
+          }
+        }
+      }
+    },
+    "Resource": {
+      "description": "Base resource object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "ID of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "readOnly": true,
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "description": "Type of Resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Object containing error details.",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetailsInternal": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string"
+    },
+    "LocationParameter": {
+      "description": "Location of the resource.",
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ScaleUnitParameter": {
+      "description": "Name of the scale unit.",
+      "name": "scaleUnitName",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
