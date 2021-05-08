@@ -30,6 +30,14 @@ description: Automanage Client
 openapi-type: arm
 tag: package-2020-06-30-preview
 ```
+### Tag: package-2021-03-30-preview
+
+These settings apply only when `--tag=package-2021-03-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-30-preview'
+input-file:
+- Microsoft.Automanage/preview/2021-03-30-preview/automanage.json
+```
 
 ### Tag: package-2020-06-30-preview
 
