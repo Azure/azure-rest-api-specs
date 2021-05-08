@@ -16,9 +16,23 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-appplatform
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-preview-2021-03
   - tag: package-preview-2020-11
   - tag: package-2020-07
   - tag: package-2019-05-01-preview
+```
+
+### Tag: package-preview-2021-03 and java
+
+These settings apply only when `--tag=package-preview-2021-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2021-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.appplatform.v2021_03_03_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/appplatform/mgmt-v2021_03_03_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-preview-2020-11 and java
