@@ -50,6 +50,9 @@
           },
           {
             "$ref": "#/parameters/RoleAssignmentFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -96,6 +99,9 @@
           },
           {
             "$ref": "#/parameters/RoleAssignmentFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -151,6 +157,9 @@
           },
           {
             "$ref": "#/parameters/RoleAssignmentFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -194,6 +203,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -283,6 +295,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -370,6 +385,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -410,6 +428,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -487,6 +508,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TenantIdQueryParameter"
           }
         ],
         "responses": {
@@ -770,6 +794,14 @@
         "$ref": "#/definitions/RoleAssignmentCreateParameters"
       },
       "description": "Parameters for the role assignment.",
+      "x-ms-parameter-location": "method"
+    },
+    "TenantIdQueryParameter": {
+      "name": "tenantId",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Tenant ID for cross-tenant request",
       "x-ms-parameter-location": "method"
     }
   }
