@@ -896,6 +896,7 @@
       "description": "Required. Indicates the type of cognitive service account."
     },
     "Sku": {
+      "type": "object",
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
@@ -981,6 +982,7 @@
       "x-ms-azure-resource": true
     },
     "CognitiveServicesAccountListResult": {
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "The link used to get the next page of accounts.",
@@ -998,6 +1000,7 @@
       "description": "The list of cognitive services accounts operation response."
     },
     "CognitiveServicesAccountProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -1095,6 +1098,7 @@
       "description": "Properties of Cognitive Services account."
     },
     "CognitiveServicesAccountApiProperties": {
+      "type": "object",
       "properties": {
         "qnaRuntimeEndpoint": {
           "type": "string",
@@ -1148,6 +1152,7 @@
       "description": "The api properties for special APIs."
     },
     "CognitiveServicesAccountKeys": {
+      "type": "object",
       "properties": {
         "key1": {
           "type": "string",
@@ -1161,6 +1166,7 @@
       "description": "The access keys for the cognitive services account."
     },
     "CognitiveServicesAccountSkuChangeInfo": {
+      "type": "object",
       "properties": {
         "countOfDowngrades": {
           "type": "number",
@@ -1181,6 +1187,7 @@
       "description": "Sku change info of account."
     },
     "RegenerateKeyParameters": {
+      "type": "object",
       "properties": {
         "keyName": {
           "type": "string",
@@ -1201,6 +1208,7 @@
       "description": "Regenerate key parameters."
     },
     "CognitiveServicesAccountEnumerateSkusResult": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -1214,6 +1222,7 @@
       "description": "The list of cognitive services accounts operation response."
     },
     "CognitiveServicesResourceAndSku": {
+      "type": "object",
       "properties": {
         "resourceType": {
           "type": "string",
@@ -1227,6 +1236,7 @@
       "description": "Cognitive Services resource type and SKU."
     },
     "UsagesResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1240,6 +1250,7 @@
       "description": "The response to a list usage request."
     },
     "Usage": {
+      "type": "object",
       "properties": {
         "unit": {
           "description": "The unit of the metric.",
@@ -1290,6 +1301,7 @@
       "description": "The usage data for a usage request."
     },
     "MetricName": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -1323,6 +1335,7 @@
       }
     },
     "Error": {
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorBody",
@@ -1332,6 +1345,7 @@
       "description": "Cognitive Services error object."
     },
     "ErrorBody": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -1410,6 +1424,7 @@
       }
     },
     "CheckSkuAvailabilityParameter": {
+      "type": "object",
       "description": "Check SKU availability parameter.",
       "properties": {
         "skus": {
@@ -1435,6 +1450,7 @@
       ]
     },
     "CheckSkuAvailabilityResultList": {
+      "type": "object",
       "description": "Check SKU availability result list.",
       "properties": {
         "value": {
@@ -1447,6 +1463,7 @@
       }
     },
     "CheckSkuAvailabilityResult": {
+      "type": "object",
       "description": "Check SKU availability result.",
       "properties": {
         "kind": {
@@ -1476,6 +1493,7 @@
       }
     },
     "SkuCapability": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1489,6 +1507,7 @@
       "description": "SkuCapability indicates the capability of a certain feature."
     },
     "CheckDomainAvailabilityParameter": {
+      "type": "object",
       "description": "Check Domain availability parameter.",
       "properties": {
         "subdomainName": {
@@ -1506,6 +1525,7 @@
       ]
     },
     "CheckDomainAvailabilityResult": {
+      "type": "object",
       "description": "Check Domain availability result.",
       "properties": {
         "isSubdomainAvailable": {
@@ -1527,6 +1547,7 @@
       }
     },
     "ResourceSkuRestrictions": {
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -1571,6 +1592,7 @@
       "description": "Describes restrictions of a SKU."
     },
     "ResourceSku": {
+      "type": "object",
       "properties": {
         "resourceType": {
           "readOnly": true,
@@ -1612,6 +1634,7 @@
       "description": "Describes an available Cognitive Services SKU."
     },
     "ResourceSkuRestrictionInfo": {
+      "type": "object",
       "properties": {
         "locations": {
           "readOnly": true,
@@ -1632,6 +1655,7 @@
       }
     },
     "ResourceSkusResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1651,6 +1675,7 @@
       "description": "The Get Skus operation response."
     },
     "NetworkRuleSet": {
+      "type": "object",
       "properties": {
         "defaultAction": {
           "type": "string",
@@ -1682,6 +1707,7 @@
       "description": "A set of rules governing the network accessibility."
     },
     "IpRule": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "string",
@@ -1694,6 +1720,7 @@
       "description": "A rule governing the accessibility from a specific ip address or ip range."
     },
     "VirtualNetworkRule": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1765,6 +1792,7 @@
       }
     },
     "Encryption": {
+      "type": "object",
       "properties": {
         "keyVaultProperties": {
           "$ref": "#/definitions/KeyVaultProperties",
@@ -1787,6 +1815,7 @@
       "description": "Properties to configure Encryption"
     },
     "KeyVaultProperties": {
+      "type": "object",
       "properties": {
         "keyName": {
           "type": "string",
@@ -1804,6 +1833,7 @@
       "description": "Properties to configure keyVault Properties"
     },
     "UserOwnedStorage": {
+      "type": "object",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -1813,6 +1843,7 @@
       "description": "The user owned storage for Cognitive Services account."
     },
     "PrivateEndpointConnectionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1825,6 +1856,7 @@
       "description": "A list of private endpoint connections"
     },
     "PrivateEndpointConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
@@ -1848,6 +1880,7 @@
       "description": "The Private Endpoint Connection resource."
     },
     "PrivateEndpointConnectionProperties": {
+      "type": "object",
       "properties": {
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
@@ -1871,6 +1904,7 @@
       "description": "Properties of the PrivateEndpointConnectProperties."
     },
     "PrivateEndpoint": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1881,6 +1915,7 @@
       "description": "The Private Endpoint resource."
     },
     "PrivateLinkServiceConnectionState": {
+      "type": "object",
       "properties": {
         "status": {
           "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
@@ -1912,6 +1947,7 @@
       }
     },
     "PrivateLinkResourceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1924,6 +1960,7 @@
       "description": "A list of private link resources"
     },
     "PrivateLinkResource": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
@@ -1938,6 +1975,7 @@
       "description": "A private link resource"
     },
     "PrivateLinkResourceProperties": {
+      "type": "object",
       "properties": {
         "groupId": {
           "description": "The private link resource group id.",
