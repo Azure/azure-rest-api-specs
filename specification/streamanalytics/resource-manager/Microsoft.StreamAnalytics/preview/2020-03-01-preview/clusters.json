@@ -47,15 +47,6 @@
         },
         "parameters": [
           {
-            "name": "cluster",
-            "description": "The definition of the cluster that will be used to create a new cluster or replace the existing one.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -72,6 +63,15 @@
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/IfNoneMatchHeader"
+          },
+          {
+            "name": "cluster",
+            "description": "The definition of the cluster that will be used to create a new cluster or replace the existing one.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
           }
         ],
         "responses": {
@@ -109,15 +109,6 @@
         },
         "parameters": [
           {
-            "name": "cluster",
-            "description": "The properties specified here will overwrite the corresponding properties in the existing cluster (ie. Those properties will be updated).",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -131,6 +122,15 @@
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/IfMatchHeader"
+          },
+          {
+            "name": "cluster",
+            "description": "The properties specified here will overwrite the corresponding properties in the existing cluster (ie. Those properties will be updated).",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
           }
         ],
         "responses": {
