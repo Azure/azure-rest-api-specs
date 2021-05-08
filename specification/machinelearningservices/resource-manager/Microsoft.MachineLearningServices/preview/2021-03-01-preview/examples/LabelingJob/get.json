@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "workspace-1234",
+    "workspaceName": "testworkspace",
+    "api-version": "2021-03-01-preview",
+    "id": "testLabelingJob",
+    "includeJobInstructions": true,
+    "includeLabelCategories": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/labelingJobs/testLabelingJob",
+        "name": "testLabelingJob",
+        "type": "Microsoft.MachineLearningServices/workspaces/labelingJobs",
+        "properties": {
+          "jobType": "Labeling",
+          "description": "string",
+          "tags": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "labelCategories": {
+            "myCategory1": {
+              "displayName": "myCategory1Title",
+              "allowMultiSelect": true,
+              "classes": {
+                "myLabelClass1": {
+                  "displayName": "myLabelClass1",
+                  "subclasses": {}
+                },
+                "myLabelClass2": {
+                  "displayName": "myLabelClass2",
+                  "subclasses": {}
+                }
+              }
+            },
+            "myCategory2": {
+              "displayName": "myCategory2Title",
+              "allowMultiSelect": true,
+              "classes": {
+                "myLabelClass1": {
+                  "displayName": "myLabelClass1",
+                  "subclasses": {}
+                },
+                "myLabelClass2": {
+                  "displayName": "myLabelClass2",
+                  "subclasses": {}
+                }
+              }
+            }
+          },
+          "jobInstructions": {
+            "uri": "link/to/instructions"
+          },
+          "datasetConfiguration": {
+            "assetName": "myAsset",
+            "incrementalDatasetRefreshEnabled": true,
+            "datasetVersion": "1"
+          },
+          "mlAssistConfiguration": {
+            "inferencingComputeBinding": {
+              "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/myscoringcompute",
+              "instanceCount": 1
+            },
+            "trainingComputeBinding": {
+              "target": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/computes/mytrainingcompute",
+              "instanceCount": 1
+            },
+            "mlAssistEnabled": true
+          },
+          "labelingJobMediaProperties": {
+            "mediaType": "Image"
+          },
+          "projectId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "status": "NotStarted",
+          "progressMetrics": {
+            "totalDatapointCount": 0,
+            "completedDatapointCount": 0,
+            "skippedDatapointCount": 0,
+            "incrementalDatasetLastRefreshTime": "2020-12-08T01:23:37.234Z"
+          },
+          "statusMessages": [
+            {
+              "level": "Error",
+              "code": "string",
+              "message": "string",
+              "createdTimeUtc": "2020-12-08T01:23:37.234Z"
+            }
+          ],
+          "createdTimeUtc": "2020-12-08T01:23:37.234Z"
+        },
+        "systemData": {
+          "createdAt": "2020-12-08T01:23:37.235Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-12-08T01:23:37.235Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}
