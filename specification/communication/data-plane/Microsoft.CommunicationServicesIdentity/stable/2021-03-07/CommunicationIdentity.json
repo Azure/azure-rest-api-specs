@@ -190,7 +190,7 @@
   },
   "definitions": {
     "CommunicationIdentityTokenScope": {
-      "description": "List of scopes for an access token.",
+      "description": "List of scopes for an access token to use. Valid values are: chat and voip.",
       "enum": [
         "chat",
         "voip"
@@ -205,7 +205,7 @@
       "type": "object",
       "properties": {
         "createTokenWithScopes": {
-          "description": "Also create access token for the created identity.",
+          "description": "Optionally, also create an access token for the created identity.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentityTokenScope"
@@ -246,7 +246,7 @@
       }
     },
     "CommunicationIdentityAccessTokenResult": {
-      "description": "A communication identity with access token.",
+      "description": "A communication identity with access token. The access token, is only included if `createTokenWithScopes` is specified in the request.",
       "required": [
         "identity"
       ],
@@ -267,7 +267,7 @@
       "type": "object",
       "properties": {
         "scopes": {
-          "description": "List of scopes attached to the token.",
+          "description": "List of scopes attached to the token. Valid scopes are: voip and chat.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentityTokenScope"
