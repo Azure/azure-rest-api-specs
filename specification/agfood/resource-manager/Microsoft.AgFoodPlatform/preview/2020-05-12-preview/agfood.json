@@ -217,17 +217,23 @@
           },
           {
             "in": "query",
-            "name": "extensionId",
-            "description": "Id of extension resource.",
-            "type": "string"
+            "name": "extensionIds",
+            "description": "Installed extension ids.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "in": "query",
-            "name": "extensionCategory",
-            "description": "Category of extension (weather/sensor/satellite etc.).",
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 0
+            "name": "extensionCategories",
+            "description": "Installed extension categories.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "in": "query",
@@ -266,6 +272,139 @@
         "x-ms-examples": {
           "Extensions_ListByFarmBeats": {
             "$ref": "./examples/Extensions_ListByFarmBeats.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions": {
+      "get": {
+        "tags": [
+          "FarmBeatsExtensions"
+        ],
+        "description": "Get list of farmBeats extension.",
+        "operationId": "FarmBeatsExtensions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "farmBeatsExtensionIds",
+            "description": "FarmBeatsExtension ids.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "farmBeatsExtensionNames",
+            "description": "FarmBeats extension names.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "extensionCategories",
+            "description": "Extension categories.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "publisherIds",
+            "description": "Publisher ids.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "$maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FarmBeatsExtensionListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "FarmBeatsExtensions_List": {
+            "$ref": "./examples/FarmBeatsExtensions_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions/{farmBeatsExtensionId}": {
+      "get": {
+        "tags": [
+          "FarmBeatsExtensions"
+        ],
+        "description": "Get farmBeats extension.",
+        "operationId": "FarmBeatsExtensions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "farmBeatsExtensionId",
+            "description": "farmBeatsExtensionId to be queried.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-za-z]{3,50}[.][A-za-z]{3,100}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FarmBeatsExtension"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FarmBeatsExtensions_Get": {
+            "$ref": "./examples/FarmBeatsExtensions_Get.json"
           }
         }
       }
@@ -763,6 +902,174 @@
         }
       }
     },
+    "UnitSystemsInfo": {
+      "description": "Unit systems info for the data provider.",
+      "required": [
+        "key",
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "UnitSystem key sent as part of ProviderInput.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string"
+        },
+        "values": {
+          "description": "List of unit systems supported by this data provider.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DetailedInformation": {
+      "description": "Model to capture detailed information for farmBeatsExtensions.",
+      "type": "object",
+      "properties": {
+        "apiName": {
+          "description": "ApiName available for the farmBeatsExtension.",
+          "type": "string",
+          "example": "dailyforecast, dailyhistorical."
+        },
+        "customParameters": {
+          "description": "List of customParameters.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "platformParameters": {
+          "description": "List of platformParameters.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unitsSupported": {
+          "$ref": "#/definitions/UnitSystemsInfo"
+        },
+        "apiInputParameters": {
+          "description": "List of apiInputParameters.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FarmBeatsExtensionProperties": {
+      "description": "FarmBeatsExtension properties.",
+      "type": "object",
+      "properties": {
+        "targetResourceType": {
+          "description": "Target ResourceType of the farmBeatsExtension.",
+          "type": "string",
+          "readOnly": true
+        },
+        "farmBeatsExtensionId": {
+          "description": "FarmBeatsExtension ID.",
+          "maxLength": 100,
+          "minLength": 2,
+          "pattern": "^[A-za-z]{3,50}[.][A-za-z]{3,100}$",
+          "type": "string",
+          "readOnly": true
+        },
+        "farmBeatsExtensionName": {
+          "description": "FarmBeatsExtension name.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string",
+          "readOnly": true
+        },
+        "farmBeatsExtensionVersion": {
+          "description": "FarmBeatsExtension version.",
+          "maxLength": 100,
+          "minLength": 2,
+          "pattern": "^([1-9]|10).\\d$",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherId": {
+          "description": "Publisher ID.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Textual description.",
+          "maxLength": 500,
+          "minLength": 2,
+          "type": "string",
+          "readOnly": true
+        },
+        "extensionCategory": {
+          "description": "Category of the extension. e.g. weather/sensor/satellite.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string",
+          "readOnly": true
+        },
+        "extensionAuthLink": {
+          "description": "FarmBeatsExtension auth link.",
+          "type": "string",
+          "readOnly": true
+        },
+        "extensionApiDocsLink": {
+          "description": "FarmBeatsExtension api docs link.",
+          "type": "string",
+          "readOnly": true
+        },
+        "detailedInformation": {
+          "description": "Detailed information which shows summary of requested data.\r\nUsed in descriptive get extension metadata call.\r\nInformation for weather category per api included are apisSupported,\r\ncustomParameters, PlatformParameters and Units supported.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetailedInformation"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "FarmBeatsExtension": {
+      "description": "FarmBeats extension resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/FarmBeatsExtensionProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "FarmBeatsExtensionListResponse": {
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FarmBeatsExtension"
+          }
+        },
+        "nextLink": {
+          "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "FarmBeatsProperties": {
       "description": "FarmBeats ARM Resource properties.",
       "type": "object",
@@ -811,6 +1118,10 @@
       "description": "FarmBeats update request.",
       "type": "object",
       "properties": {
+        "location": {
+          "description": "Geo-location where the resource lives.",
+          "type": "string"
+        },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
