@@ -1089,12 +1089,12 @@
         }
       }
     },
-    "/randomnumbers": {
+    "/rng": {
       "post": {
         "tags": [
-          "RandomNumbers"
+          "RNG"
         ],
-        "operationId": "getRandomNumbers",
+        "operationId": "GetRandomBytes",
         "summary": "Get the requested number of bytes containing random values.",
         "description": "Get the requested number of bytes containing random values from a managed HSM.",
         "parameters": [
@@ -1104,9 +1104,9 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/GetRandomNumbersRequest"
+              "$ref": "#/definitions/GetRandomBytesRequest"
             },
-            "description": "The request object to get random numbers."
+            "description": "The request object to get random bytes."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1116,7 +1116,7 @@
           "200": {
             "description": "The bytes encoded as a base64url string.",
             "schema": {
-              "$ref": "#/definitions/GetRandomNumbersResponse"
+              "$ref": "#/definitions/RandomBytes"
             }
           },
           "default": {
@@ -1127,30 +1127,30 @@
           }
         },
         "x-ms-examples": {
-          "GetRandomNumbers": {
-            "$ref": "./examples/RandomNumbers-example.json"
+          "GetRandomBytes": {
+            "$ref": "./examples/GetRandomBytes-example.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "GetRandomNumbersRequest": {
+    "GetRandomBytesRequest": {
       "properties": {
-        "bytesLength": {
+        "count": {
           "type": "integer",
-          "format": "uint32",
+          "format": "int32",
           "minimum": 1,
           "maximum": 128,
           "description": "The requested number of random bytes."
         }
       },
-      "description": "The get random numbers request object.",
+      "description": "The get random bytes request object.",
       "required": [
-        "bytesLength"
+        "count"
       ]
     },
-    "GetRandomNumbersResponse": {
+    "RandomBytes": {
       "properties": {
         "value": {
           "type": "string",
@@ -1158,7 +1158,7 @@
           "description": "The bytes encoded as a base64url string."
         }
       },
-      "description": "The get random numbers response object containing the bytes."
+      "description": "The get random bytes response object containing the bytes."
     },
     "KeyReleasePolicy": {
       "properties": {
