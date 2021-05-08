@@ -38,9 +38,9 @@ tag: package-preview-2021-01
 directive:
   - suppress: R3020
     from:
-      - arcSettings.json 
-      - azurestackhci.json
-      - extension.json
+      - arcSettings.json
+      - clusters.json
+      - extensions.json
       - galleryImages.json
       - networkInterfaces.json
       - operations.json
@@ -58,16 +58,16 @@ These settings apply only when `--tag=package-preview-2021-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-01'
 input-file:
+  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/extensions.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/galleryImages.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/networkInterfaces.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/storageContainers.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/virtualHardDisks.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/virtualMachines.json
   - Microsoft.AzureStackHCI/preview/2021-01-01-preview/virtualNetworks.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/storageContainers.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/azurestackhci.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/extension.json
 ```
 
 ### Tag: package-2020-11-01-preview
