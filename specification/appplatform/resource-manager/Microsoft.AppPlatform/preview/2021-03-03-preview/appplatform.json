@@ -2034,6 +2034,9 @@
         "x-ms-examples": {
           "Deployments_Get": {
             "$ref": "./examples/Deployments_Get.json"
+          },
+          "Deployments_Get_CustomContainer": {
+            "$ref": "./examples/Deployments_Get_CustomContainer.json"
           }
         }
       },
@@ -2105,6 +2108,9 @@
         "x-ms-examples": {
           "Deployments_CreateOrUpdate": {
             "$ref": "./examples/Deployments_CreateOrUpdate.json"
+          },
+          "Deployments_CreateOrUpdate_CustomContainer": {
+            "$ref": "./examples/Deployments_CreateOrUpdate_CustomContainer.json"
           }
         }
       },
@@ -2223,6 +2229,9 @@
         "x-ms-examples": {
           "Deployments_Update": {
             "$ref": "./examples/Deployments_Update.json"
+          },
+          "Deployments_Update_CustomContainer": {
+            "$ref": "./examples/Deployments_Update_CustomContainer.json"
           }
         }
       }
@@ -3897,7 +3906,8 @@
           "enum": [
             "Jar",
             "NetCoreZip",
-            "Source"
+            "Source",
+            "Container"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3916,6 +3926,58 @@
         "artifactSelector": {
           "description": "Selector for the artifact to be used for the deployment for multi-module projects. This should be\r\nthe relative path to the target module/project.",
           "type": "string"
+        },
+        "customContainer": {
+          "$ref": "#/definitions/CustomContainer",
+          "description": "Custom container payload"
+        }
+      }
+    },
+    "CustomContainer": {
+      "description": "Custom container payload",
+      "type": "object",
+      "properties": {
+        "server": {
+          "type": "string",
+          "description": "The name of the registry that contains the container image"
+        },
+        "containerImage": {
+          "type": "string",
+          "description": "Container image of the custom container. This should be in the form of <repository>:<tag> without the server name of the registry"
+        },
+        "command": {
+          "description": "Entrypoint array. Not executed within a shell. The docker image's ENTRYPOINT is used if this is not provided.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "args": {
+          "description": "Arguments to the entrypoint. The docker image's CMD is used if this is not provided.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "imageRegistryCredential": {
+          "$ref": "#/definitions/ImageRegistryCredential",
+          "description": "Credential of the image registry"
+        }
+      }
+    },
+    "ImageRegistryCredential": {
+      "description": "Credential of the image registry",
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The username of the image registry credential"
+        },
+        "password": {
+          "type": "string",
+          "description": "The password of the image registry credential"
         }
       }
     },
