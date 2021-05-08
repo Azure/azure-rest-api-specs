@@ -455,7 +455,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Lists all of the available IoT Central application REST API operations.",
+        "description": "Lists all of the available IoT Central Resource Provider operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
           "Operations_List": {
@@ -513,7 +513,24 @@
             "create",
             "read"
           ]
+        },
+        "state": {
+          "description": "The current state of the application.",
+          "$ref": "#/definitions/AppState"
         }
+      }
+    },
+    "AppState": {
+      "description": "The current state of the application.",
+      "type": "string",
+      "enum": [
+        "created",
+        "deleted",
+        "suspended"
+      ],
+      "x-ms-enum": {
+        "name": "AppState",
+        "modelAsString": true
       }
     },
     "AppSkuInfo": {
