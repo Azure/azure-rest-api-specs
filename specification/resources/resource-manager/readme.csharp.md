@@ -8,12 +8,12 @@ This is the AutoRest configuration file for DNS.
 ``` yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION  
+  license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
-namespace: Microsoft.Azure.Management.ResourceManager  
+namespace: Microsoft.Azure.Management.ResourceManager
 output-folder: $(csharp-sdks-folder)/resources/Microsoft.Azure.Management.ResourceManager/src/Generated
 
 batch:
@@ -164,6 +164,19 @@ batch:
     ApiVersionName: Api2020_10_01
   - policyD-2016-12-01: true
     ApiVersionName: Api2020_10_01
+
+  - resources-2021-04-01: true
+    ApiVersionName: Api2021_04_01
+  - links-2016-09-01: true
+    ApiVersionName: Api2021_04_01
+  - subscription-2016-06-01: true
+    ApiVersionName: Api2021_04_01
+  - locks-2016-09-01: true
+    ApiVersionName: Api2021_04_01
+  - policyA-2016-12-01: true
+    ApiVersionName: Api2021_04_01
+  - policyD-2016-12-01: true
+    ApiVersionName: Api2021_04_01
 ```
 
 
@@ -285,6 +298,7 @@ input-file:
 input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
 ```
+
 ``` yaml $(Separator)
 ###########################################################################
 ###########################################################################
@@ -414,6 +428,73 @@ input-file:
 
 ### 6) pkg-2020-10-AzStk-polD
 ``` yaml $(tag) == 'pkg-2020-10-Az-polD'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+```
+
+``` yaml $(Separator)
+###########################################################################
+###########################################################################
+```
+
+
+``` yaml $(resources-2021-04-01)
+tag: pkg-2021-04-Az-res
+```
+
+``` yaml $(links-2016-09-01)
+tag: pkg-2021-04-Az-lnk
+```
+
+``` yaml $(subscription-2016-06-01)
+tag: pkg-2021-04-Az-sub
+```
+
+``` yaml $(locks-2016-09-01)
+tag: pkg-2021-04-Az-loc
+```
+
+``` yaml $(policyA-2016-12-01)
+tag: pkg-2021-04-Az-polA
+```
+
+``` yaml $(policyD-2016-12-01)
+tag: pkg-2021-04-Az-polD
+```
+
+## Tag: Packages for Azure Stack
+### 1) pkg-2021-04-AzStk-res
+``` yaml $(tag) == 'pkg-2021-04-Az-res'
+input-file:
+- Microsoft.Resources/stable/2021-04-01/resources.json
+```
+
+### 2) pkg-2021-04-AzStk-lnk
+``` yaml $(tag) == 'pkg-2021-04-Az-lnk'
+input-file:
+- Microsoft.Resources/stable/2016-09-01/links.json
+```
+
+### 3) pkg-2021-04-AzStk-sub
+``` yaml $(tag) == 'pkg-2021-04-Az-sub'
+input-file:
+- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+```
+
+### 4) pkg-2021-04-AzStk-loc
+``` yaml $(tag) == 'pkg-2021-04-Az-loc'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+```
+
+### 5) pkg-2021-04-AzStk-polA
+``` yaml $(tag) == 'pkg-2021-04-Az-polA'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+```
+
+### 6) pkg-2021-04-AzStk-polD
+``` yaml $(tag) == 'pkg-2021-04-Az-polD'
 input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
 ```
@@ -831,7 +912,7 @@ input-file:
 These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
 
 ```yaml $(csharp-profile)=='hybrid_2018_03_01'
-namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager  
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager
 output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
 
 batch:
@@ -849,7 +930,7 @@ batch:
 These settings apply only when `--profile=profile_2017_03_09` is specified on the command line.
 
 ``` yaml $(csharp-profile)=='profile_2017_03_09'
-namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager  
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager
 output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
 
 batch:
@@ -863,7 +944,7 @@ batch:
 These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
 
 ``` yaml $(csharp-profile)=='hybrid_2019_03_01'
-namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager  
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager
 output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
 
 batch:
@@ -877,7 +958,7 @@ batch:
 These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
 
 ``` yaml $(csharp-profile)=='hybrid_2020_09_01'
-namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager  
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager
 output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
 
 batch:
