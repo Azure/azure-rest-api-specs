@@ -4,9 +4,28 @@ Here are guides to fix some of the CI failure.
 
 ## Spell check
 
-Please add your words to `./custom-words.txt` if you think you have the correct spell.
+Please add your words to `./custom-words.txt` if you think you have the correct spelling. These words shouldn't be camelCase, as cSpell will already split the word to "camel case" while checking.
 
-If your problem is some existing error name that is not a word and need to supress the error in that file (and don't want to add to custom-words.txt), you can add it to `./cSpell.txt`.
+If your problem is some existing error name that is not a word and need to suppress the error in that file (and don't want to add to custom-words.txt), you can add it to `./cSpell.json`.
+
+```json
+    "overrides": [
+        // A suppression for a single version to be fixed in the next, or suppressed in each version till it is fixed
+        {
+            "filename": "**/specification/databox/resource-manager/Microsoft.DataBox/stable/2018-01-01/databox.json",
+            "words": [
+                "temp"
+            ]
+        },
+        // A suppression in one file that can never be fixed due to a external broken reference
+        {
+            "filename": "**/specification/network/resource-manager/Microsoft.Network/stable/**/webapplicationfirewall.json",
+            "words": [
+                "broken"
+            ]
+        },
+        // ...
+```
 
 ## Prettier check
 

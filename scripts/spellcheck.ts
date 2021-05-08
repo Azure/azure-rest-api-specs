@@ -20,6 +20,6 @@ runCheckOverChangedSpecFiles({
   },
 
   onFinalFailed: async () => {
-    logError('Please fix the error or add words to ./custom-words.txt');
+    logError('Please fix the error, add correct words to ./custom-words.txt, or typos that need a new version to be fixed to cSpell.json "overrides"');
   }
 })
