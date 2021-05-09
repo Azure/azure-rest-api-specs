@@ -47,11 +47,7 @@
         },
         "parameters": [
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The region in which to retrieve the subscription's quota information. You can find out which regions Azure Stream Analytics is supported in here: https://azure.microsoft.com/en-us/regions/"
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -65,6 +61,61 @@
             "description": "Successfully retrieved the subscription's quota information in the specified region.",
             "schema": {
               "$ref": "#/definitions/SubscriptionQuotasListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/testQuery": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_TestQuery",
+        "description": "Test the Stream Analytics query on a sample input.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Test the Stream Analytics query": {
+            "$ref": "./examples/Subscription_TestQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "streamingJob",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./streamingjobs.json#/definitions/StreamingJob"
+            },
+            "description": "A streaming job object. This object defines the input, output, and transformation for the query testing."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request to test the Stream Analytics query was successful.",
+            "schema": {
+              "$ref": "#/definitions/QueryTestingResult"
+            }
+          },
+          "202": {
+            "description": "The request to test the Stream Analytics query was successfully initiated."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/Error"
             }
           }
         }
@@ -113,6 +164,68 @@
           },
           "x-ms-client-flatten": true
         }
+      }
+    },
+    "QueryTestingResult": {
+      "description": "The result of the query testing request.",
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/Error"
+        }
+      ],
+      "properties": {
+        "status": {
+          "description": "The status of the query testing request.",
+          "$ref": "#/definitions/QueryTestingResultStatus"
+        },
+        "outputUri": {
+          "description": "The SAS URL to the outputs payload.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "QueryTestingResultStatus": {
+      "description": "The status of the query testing request.",
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "Started",
+        "Success",
+        "CompilerError",
+        "RuntimeError",
+        "Timeout",
+        "UnknownError"
+      ],
+      "x-ms-enum": {
+        "name": "QueryTestingResultStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Started",
+            "description": "The query testing operation was initiated."
+          },
+          {
+            "value": "Success",
+            "description": "The query testing operation succeeded."
+          },
+          {
+            "value": "CompilerError",
+            "description": "The query testing operation failed due to a compiler error."
+          },
+          {
+            "value": "RuntimeError",
+            "description": "The query testing operation failed due to a runtime error."
+          },
+          {
+            "value": "Timeout",
+            "description": "The query testing operation failed due to a timeout."
+          },
+          {
+            "value": "UnknownError",
+            "description": "The query testing operation failed due to an unknown error ."
+          }
+        ]
       }
     },
     "SubResource": {
