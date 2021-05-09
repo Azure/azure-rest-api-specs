@@ -2346,7 +2346,7 @@
       "properties": {
         "error": {
           "title": "Error",
-          "$ref": "./network.json#/definitions/ErrorDetails",
+          "$ref": "./network.json#/definitions/Error",
           "description": "The error details object."
         }
       }
@@ -2377,6 +2377,14 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the network watcher resource."
+        },
+        "runningOperationIds": {
+          "type": "array",
+          "description": "List of running operation IDs.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
         }
       },
       "description": "The network watcher properties."
@@ -2854,6 +2862,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PacketCaptureResultProperties",
           "description": "Properties of the packet capture result."
+        },
+        "type":{
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the packet capture session."
         }
       },
       "description": "Information about packet capture session."
@@ -4693,6 +4706,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The monitoring status of the connection monitor."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource GUID of the connection monitor."
         },
         "connectionMonitorType": {
           "readOnly": true,
