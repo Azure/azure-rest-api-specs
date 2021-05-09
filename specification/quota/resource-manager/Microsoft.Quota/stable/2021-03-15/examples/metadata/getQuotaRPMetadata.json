@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "resourceUrl": "management.azure.com/",
+    "api-version": "2021-03-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceProviderName": "Microsoft.Compute",
+            "properties": {
+              "value": [
+                {
+                  "resourceType": "virtualMachines",
+                  "resourceUsagesApiTemplate": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/locations/{{location}}/usages?api-version=2020-12-01",
+                  "dimensions": [
+                    {
+                      "name": "subscriptionId",
+                      "displayName": "SubscriptionId",
+                      "resourceQuery": "resourceQuery placeholder"
+                    },
+                    {
+                      "name": "location",
+                      "displayName": "Location",
+                      "resourceQuery": "resourceQuery placeholder"
+                    }
+                  ],
+                  "quotaBuckets": [
+                    {
+                      "name": "virtualMachines",
+                      "displayName": "vCPUs Skus"
+                    },
+                    {
+                      "name": "lowPriorityCores",
+                      "displayName": "Total Regional Low-priority vCPUs"
+                    },
+                    {
+                      "name": "cores",
+                      "displayName": "Total Regional vCPUs"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "resourceProviderName": "Microsoft.Batch",
+            "properties": {
+              "value": [
+                {
+                  "resourceType": "batchAccounts/pool",
+                  "resourceUsagesApiTemplate": "",
+                  "dimensions": [
+                    {
+                      "name": "subscriptionId",
+                      "displayName": "SubscriptionId",
+                      "resourceQuery": ""
+                    },
+                    {
+                      "name": "location",
+                      "displayName": "Location",
+                      "resourceQuery": ""
+                    },
+                    {
+                      "name": "batchAccounts",
+                      "displayName": "BatchAccount Name",
+                      "resourceQuery": ""
+                    }
+                  ],
+                  "quotaBuckets": [
+                    {
+                      "name": "PoolQuota",
+                      "displayName": "PoolQuota"
+                    },
+                    {
+                      "name": "JobQuota",
+                      "displayName": "JobQuota"
+                    },
+                    {
+                      "name": "LowPriorityCoreQuota",
+                      "displayName": "Low Priority Cores"
+                    },
+                    {
+                      "name": "virtualMachines",
+                      "displayName": "vCPUs Skus"
+                    }
+                  ]
+                },
+                {
+                  "resourceType": "batchAccounts",
+                  "resourceUsagesApiTemplate": "",
+                  "dimensions": [
+                    {
+                      "name": "subscriptionId",
+                      "displayName": "SubscriptionId",
+                      "resourceQuery": ""
+                    },
+                    {
+                      "name": "location",
+                      "displayName": "Location",
+                      "resourceQuery": ""
+                    }
+                  ],
+                  "quotaBuckets": [
+                    {
+                      "name": "BatchAccountQuota",
+                      "displayName": "BatchAccountQuota"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "resourceProviderName": "Microsoft.Network",
+            "properties": {
+              "value": [
+                {
+                  "resourceType": "PublicIpAddresses",
+                  "resourceUsagesApiTemplate": "/subscriptions/{{subscriptionId}}/providers/Microsoft.Network/locations/{{location}}/usages?api-version=2020-07-01",
+                  "dimensions": [
+                    {
+                      "name": "subscriptions",
+                      "displayName": "Subscription",
+                      "resourceQuery": "resourceQuery placeholder"
+                    },
+                    {
+                      "name": "locations",
+                      "displayName": "Location",
+                      "resourceQuery": "resourceQuery placeholder"
+                    }
+                  ],
+                  "quotaBuckets": [
+                    {
+                      "name": "PublicIPAddresses",
+                      "displayName": "PublicIPAddresses"
+                    },
+                    {
+                      "name": "StandardSkuPublicIpAddresses",
+                      "displayName": "Public IP Addresses - Standard"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
