@@ -1,0 +1,1668 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v3.0",
+    "title": "Speech Services - Custom Voice API v3.0.",
+    "description": "Speech Services - Custom Voice API v3.0.",
+    "contact": {
+      "name": "Cognitive Services - Speech Services",
+      "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/texttospeech/v3.0",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/api/texttospeech/v3.0/longaudiosynthesis/{id}": {
+      "get": {
+        "tags": [
+          "Long Audio Synthesis:"
+        ],
+        "summary": "Gets the long audio synthesis identified by the given ID.",
+        "operationId": "GetVoiceSynthesis",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier of the synthesis.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LongAudioSynthesis"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
+                "type": "integer"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "models": [
+                  {
+                    "id": "9513d34b-6aca-4d0f-801f-ea12ebe6343e"
+                  },
+                  {
+                    "id": "37ab1921-dc2f-4e52-8765-ed44d1d9a6c3",
+                    "voiceName": "en-US-GuyNeural"
+                  }
+                ],
+                "properties": {
+                  "outputFormat": "audio-16khz-32kbitrate-mono-mp3",
+                  "concatenateResult": false,
+                  "totalDuration": "PT5M14S",
+                  "billableCharacterCount": 3142,
+                  "destinationContainerUrl": "https://contoso.com/"
+                },
+                "id": "a63700ca-bad2-49c1-90bd-46086fcc0e1f",
+                "lastActionDateTime": "2019-01-07T11:36:07Z",
+                "status": "Succeeded",
+                "createdDateTime": "2019-01-07T11:34:12Z",
+                "locale": "en-US",
+                "displayName": "Another Long Audio Synthesis",
+                "description": "Using public available voice en-us-guy",
+                "customProperties": {
+                  "key": "value"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "In case the user isn't authorized.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "In case authorized user isn't known or doesn't have the required permissions.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "In case the specified entity doesn't exist",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "In case the rate limit has been exceeded.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait before not getting this response anymore.",
+                "type": "integer"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Long Audio Synthesis:"
+        ],
+        "summary": "Deletes the long audio synthesis task identified by the given ID.",
+        "operationId": "DeleteVoiceSynthesis",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier of the synthesis.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The long audio synthesis task was successfully deleted.",
+            "headers": {}
+          },
+          "401": {
+            "description": "In case the user isn't authorized.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "In case authorized user isn't known or doesn't have the required permissions.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "In case the rate limit has been exceeded.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait before not getting this response anymore.",
+                "type": "integer"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Long Audio Synthesis:"
+        ],
+        "summary": "Updates the mutable details of the long audio synthesis identified by the given ID.",
+        "operationId": "UpdateVoiceSynthesis",
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier of the synthesis.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "longAudioSynthesisUpdate",
+            "in": "body",
+            "description": "The updated values for the long audio synthesis.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LongAudioSynthesisUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LongAudioSynthesis"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "models": [
+                  {
+                    "id": "bf04ed20-8de5-4249-b472-33ffa3f4b8f7"
+                  },
+                  {
+                    "id": "50d87078-3309-41c2-ace5-fec35ac65a2c",
+                    "voiceName": "en-US-GuyNeural"
+                  }
+                ],
+                "properties": {
+                  "outputFormat": "audio-16khz-32kbitrate-mono-mp3",
+                  "concatenateResult": false,
+                  "totalDuration": "PT5M14S",
+                  "billableCharacterCount": 3142,
+                  "destinationContainerUrl": "https://contoso.com/"
+                },
+                "id": "a63700ca-bad2-49c1-90bd-46086fcc0e1f",
+                "lastActionDateTime": "2019-01-07T11:36:07Z",
+                "status": "Succeeded",
+                "createdDateTime": "2019-01-07T11:34:12Z",
+                "locale": "en-US",
+                "displayName": "Another Long Audio Synthesis",
+                "description": "Using public available voice en-us-guy",
+                "customProperties": {
+                  "key": "value"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "In case the operation cannot be performed successfully with the specified values.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The specified model does not exist or is not accessible."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "In case the user isn't authorized.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "In case authorized user isn't known or doesn't have the required permissions.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "In case the specified entity doesn't exist",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "In case the rate limit has been exceeded.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait before not getting this response anymore.",
+                "type": "integer"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ]
+      }
+    },
+    "/api/texttospeech/v3.0/longaudiosynthesis": {
+      "get": {
+        "tags": [
+          "Long Audio Synthesis:"
+        ],
+        "summary": "Gets a list of long audio syntheses for the authenticated subscription.",
+        "operationId": "GetVoiceSyntheses",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of syntheses that will be skipped.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Number of syntheses that will be included after skipping.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaginatedLongAudioSynthesis"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "values": [
+                  {
+                    "models": [
+                      {
+                        "id": "0c837923-4137-4811-8d14-c8ffe697fcf3"
+                      },
+                      {
+                        "id": "7b9915c8-fa44-43ed-9198-199ca898d71a",
+                        "voiceName": "zh-CN-XiaoxiaoNeural"
+                      }
+                    ],
+                    "properties": {
+                      "outputFormat": "riff-16khz-16bit-mono-pcm",
+                      "concatenateResult": true,
+                      "totalDuration": "PT42S",
+                      "billableCharacterCount": 420,
+                      "destinationContainerUrl": "https://contoso.com/"
+                    },
+                    "id": "a0ee69d5-f91a-4b21-a7f3-7d083643546d",
+                    "lastActionDateTime": "2019-01-07T11:36:07Z",
+                    "status": "Succeeded",
+                    "createdDateTime": "2019-01-07T11:34:12Z",
+                    "locale": "zh-CN",
+                    "displayName": "Long Audio Synthesis",
+                    "description": "Using public available voice zh-cn-xiaoxiao",
+                    "customProperties": {
+                      "key": "value"
+                    }
+                  },
+                  {
+                    "models": [
+                      {
+                        "id": "c1895a78-2ab9-49a8-b605-dc2c837440bb"
+                      },
+                      {
+                        "id": "2efcb982-8838-4c45-a9a3-422fe84e14ee",
+                        "voiceName": "en-US-GuyNeural"
+                      }
+                    ],
+                    "properties": {
+                      "outputFormat": "audio-16khz-32kbitrate-mono-mp3",
+                      "concatenateResult": false,
+                      "totalDuration": "PT5M14S",
+                      "billableCharacterCount": 3142,
+                      "destinationContainerUrl": "https://contoso.com/"
+                    },
+                    "id": "a63700ca-bad2-49c1-90bd-46086fcc0e1f",
+                    "lastActionDateTime": "2019-01-07T11:36:07Z",
+                    "status": "Succeeded",
+                    "createdDateTime": "2019-01-07T11:34:12Z",
+                    "locale": "en-US",
+                    "displayName": "Another Long Audio Synthesis",
+                    "description": "Using public available voice en-us-guy",
+                    "customProperties": {
+                      "key": "value"
+                    }
+                  }
+                ],
+                "@nextLink": "https://westus.api.cognitive.microsoft.com/texttospeech/v3.0/longaudiosynthesis?skip=2&top=2"
+              }
+            }
+          },
+          "400": {
+            "description": "In case the operation cannot be performed successfully with the specified values.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The skip query parameter must have a non-negative value"
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "In case the user isn't authorized.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "In case authorized user isn't known or doesn't have the required permissions.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "In case the rate limit has been exceeded.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait before not getting this response anymore.",
+                "type": "integer"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ],
+        "x-ms-pageable": {
+          "itemName": "values",
+          "nextLinkName": "@nextLink"
+        }
+      },
+      "post": {
+        "tags": [
+          "Long Audio Synthesis:"
+        ],
+        "summary": "Creates a new synthesis.",
+        "operationId": "CreateLongAudioSynthesis",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "displayName",
+            "in": "formData",
+            "description": "The name of this long audio synthesis (required).",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "description": "Optional description of this long audio synthesis",
+            "type": "string"
+          },
+          {
+            "name": "locale",
+            "in": "formData",
+            "description": "The locale of this long audio synthesis (required).",
+            "type": "string"
+          },
+          {
+            "name": "models",
+            "in": "formData",
+            "description": "The string representation of the list of models to be used in this long audio synthesis. Available models can be fetched through /voices API. e.g. [{\"id\": \"Guid1\"},{\"id\": \"GUID2\"}] If a voice is public available, it can also be referenced by voiceName. e.g. [{\"voiceName\": \"en-US-GuyNeural\"}] The input script should be an SSML file if mutilple models are set. (required)",
+            "type": "string"
+          },
+          {
+            "name": "outputFormat",
+            "in": "formData",
+            "description": "Optional audio output format information (Default value: riff-16khz-16bit-mono-pcm. Supported output format: https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/long-audio-api#audio-output-formats).",
+            "type": "string"
+          },
+          {
+            "name": "concatenateResult",
+            "in": "formData",
+            "description": "An optional bool value indicating if synthesis result is concatenated. If it isn't set, the audio outputs will be generated per paragraph. If set to true, synthesis results will be concatenated into one output file. (Default value: false)",
+            "type": "string"
+          },
+          {
+            "name": "destinationContainerUrl",
+            "in": "formData",
+            "description": "An optional URL with Service adhoc SAS to a writeable container in Azure Blob storage. If set, results of this long audio synthesis will be pushed to the provided blob container.",
+            "type": "string"
+          },
+          {
+            "name": "customProperties",
+            "in": "formData",
+            "description": "Optional properties of this long audio synthesis. The maximum allowed key length is 64 characters, the maximum allowed value length is 256 characters and the count of allowed entries is 10.",
+            "type": "string"
+          },
+          {
+            "name": "script",
+            "in": "formData",
+            "description": "The script text file of the long audio synthesis.",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The response contains the location of the entity as header.",
+            "schema": {
+              "$ref": "#/definitions/LongAudioSynthesis"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the created resource.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "400": {
+            "description": "In case the operation cannot be performed successfully with the specified values.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The specified model does not exist or is not accessible."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "In case the user isn't authorized.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "In case authorized user isn't known or doesn't have the required permissions.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "415": {
+            "description": "In case the media type of a file part is not supported.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "UnsupportedMediaType",
+                "message": "The request entity's media type 'application/xml' is not supported for this resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "In case the rate limit has been exceeded.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait before not getting this response anymore.",
+                "type": "integer"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ]
+      }
+    },
+    "/api/texttospeech/v3.0/longaudiosynthesis/voices": {
+      "get": {
+        "tags": [
+          "Long Audio Synthesis:"
+        ],
+        "summary": "Gets a list of supported voices for long audio synthesis.",
+        "operationId": "GetLongAudioSynthesisSupportedVoices",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of voices that will be skipped.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Number of voices that will be included after skipping.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaginatedLongAudioSynthesisVoices"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "values": [
+                  {
+                    "id": "b512f5cb-e482-4182-8a57-22ca3696d486",
+                    "locale": "en-US",
+                    "voiceName": "en-US-AriaNeural",
+                    "gender": "Male",
+                    "createdDateTime": "2019-01-07T11:34:12Z",
+                    "properties": {
+                      "publicAvailable": true,
+                      "styles": [
+                        {
+                          "name": "chat"
+                        },
+                        {
+                          "name": "customerservice"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "6cee593c-ccd8-45fe-8928-6e035c275042",
+                    "locale": "zh-CN",
+                    "voiceName": "en-US-XiaoxiaoNeural",
+                    "gender": "Female",
+                    "createdDateTime": "2019-01-07T11:34:12Z",
+                    "properties": {
+                      "publicAvailable": true,
+                      "roles": [
+                        {
+                          "name": "YoungAdultFemale"
+                        },
+                        {
+                          "name": "Girl"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "2d16b6ab-5cfb-42da-893b-d583ec17caa6",
+                    "locale": "en-US",
+                    "voiceName": "Custom Model",
+                    "description": "Custom model description",
+                    "gender": "Female",
+                    "createdDateTime": "2019-01-07T11:34:12Z",
+                    "properties": {
+                      "publicAvailable": true,
+                      "speakers": [
+                        {
+                          "id": 1
+                        },
+                        {
+                          "id": 2
+                        },
+                        {
+                          "id": 3
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "@nextLink": "https://westus.api.cognitive.microsoft.com/texttospeech/v3.0/longaudiosynthesis/voices?skip=2&top=2"
+              }
+            }
+          },
+          "400": {
+            "description": "In case the operation cannot be performed successfully with the specified values.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "InvalidRequest",
+                "message": "The skip query parameter must have a non-negative value"
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "In case the user isn't authorized.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "In case authorized user isn't known or doesn't have the required permissions.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "In case the rate limit has been exceeded.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait before not getting this response anymore.",
+                "type": "integer"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ],
+        "x-ms-pageable": {
+          "itemName": "values",
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/api/texttospeech/v3.0/longaudiosynthesis/{id}/files": {
+      "get": {
+        "tags": [
+          "Long Audio Synthesis:"
+        ],
+        "summary": "Gets the files of the long audio synthesis identified by the given ID.",
+        "operationId": "GetLongAudioSynthesisFiles",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier of the synthesis.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "sasValidityInSeconds",
+            "in": "query",
+            "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of files that will be skipped.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Number of files that will be included after skipping.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaginatedFiles"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
+                "type": "integer"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "values": [
+                  {
+                    "name": "Name",
+                    "kind": "LongAudioSynthesisScript",
+                    "properties": {
+                      "size": 200
+                    },
+                    "createdDateTime": "2020-01-13T08:00:00Z",
+                    "links": {
+                      "contentUrl": "https://customvoice-usw.blob.core.windows.net/artifacts/input.txt?st=2018-02-09T18%3A07%3A00Z&se=2018-02-10T18%3A07%3A00Z&sp=rl&sv=2017-04-17&sr=b&sig=e05d8d56-9675-448b-820c-4318ae64c8d5"
+                    }
+                  },
+                  {
+                    "name": "Name",
+                    "kind": "LongAudioSynthesisResult",
+                    "properties": {
+                      "size": 200
+                    },
+                    "createdDateTime": "2020-01-13T08:00:00Z",
+                    "links": {
+                      "contentUrl": "https://customvoice-usw.blob.core.windows.net/artifacts/voicesynthesis_waves.zip?st=2018-02-09T18%3A07%3A00Z&se=2018-02-10T18%3A07%3A00Z&sp=rl&sv=2017-04-17&sr=b&sig=e05d8d56-9675-448b-820c-4318ae64c8d5"
+                    }
+                  }
+                ],
+                "@nextLink": "https://westus.api.cognitive.microsoft.com/texttospeech/v3.0/longaudiosynthesis/a63700ca-bad2-49c1-90bd-46086fcc0e1f/files?skip=2&top=2"
+              }
+            }
+          },
+          "400": {
+            "description": "In case the operation cannot be performed successfully with the specified values.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "In case the user isn't authorized.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Unauthorized",
+                "message": "Authentication is required to access the resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "In case authorized user isn't known or doesn't have the required permissions.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "Forbidden",
+                "message": "No permission to access this resource."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "In case the specified entity doesn't exist",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": {
+                "code": "NotFound",
+                "message": "The specified entity cannot be found."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "In case the rate limit has been exceeded.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait before not getting this response anymore.",
+                "type": "integer"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "code": "TooManyRequests",
+                "message": "The rate limit has been reached. The timeout in seconds can be found in the Retry-After header."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "security": [
+          {
+            "subscription_key": [],
+            "token": []
+          }
+        ],
+        "x-ms-pageable": {
+          "itemName": "values",
+          "nextLinkName": "@nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LongAudioSynthesis": {
+      "title": "LongAudioSynthesis",
+      "required": [
+        "displayName",
+        "locale"
+      ],
+      "type": "object",
+      "properties": {
+        "models": {
+          "description": "Models used for the synthesis.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LongAudioSynthesisVoiceIdentity"
+          },
+          "readOnly": false
+        },
+        "properties": {
+          "$ref": "#/definitions/LongAudioSynthesisProperties",
+          "description": "Additional configuration options when creating a new synthesis and additional metadata provided by the service.",
+          "readOnly": false
+        },
+        "id": {
+          "format": "uuid",
+          "description": "The identifier of this entity.",
+          "type": "string",
+          "readOnly": true,
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "displayName": {
+          "description": "The display name of the object.",
+          "type": "string",
+          "readOnly": false
+        },
+        "description": {
+          "description": "The description of the object.",
+          "type": "string",
+          "readOnly": false
+        },
+        "locale": {
+          "description": "The locale of the contained data.",
+          "type": "string",
+          "readOnly": false
+        },
+        "customProperties": {
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the object.",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": false
+          }
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LongAudioSynthesisVoiceIdentity": {
+      "title": "LongAudioSynthesisVoiceIdentity",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": false,
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "voiceName": {
+          "type": "string",
+          "readOnly": false
+        }
+      }
+    },
+    "LongAudioSynthesisProperties": {
+      "title": "LongAudioSynthesisProperties",
+      "type": "object",
+      "properties": {
+        "outputFormat": {
+          "description": "The requested audio output format.",
+          "type": "string",
+          "readOnly": false
+        },
+        "concatenateResult": {
+          "description": "A value indicating whether synthesis result is concatenated.",
+          "type": "boolean",
+          "readOnly": false
+        },
+        "totalDuration": {
+          "description": "The duration of all synthesized audio. The duration is encoded as ISO 8601 duration.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billableCharacterCount": {
+          "format": "int32",
+          "description": "Number of billable characters in the input file.",
+          "type": "integer",
+          "readOnly": false
+        },
+        "destinationContainerUrl": {
+          "description": "The requested destination container. It is an URL with Service adhoc SAS to a writeable container in Azure Blob storage.",
+          "type": "string",
+          "readOnly": false
+        },
+        "error": {
+          "$ref": "#/definitions/EntityError",
+          "description": "The details of the error in case the entity is in a failed state.",
+          "readOnly": true
+        }
+      }
+    },
+    "EntityError": {
+      "title": "EntityError",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The code of this error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The message for this error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Error": {
+      "title": "Error",
+      "type": "object",
+      "properties": {
+        "code": {
+          "enum": [
+            "InvalidRequest",
+            "InvalidArgument",
+            "InternalServerError",
+            "ServiceUnavailable",
+            "NotFound",
+            "PipelineError",
+            "Conflict",
+            "InternalCommunicationFailed",
+            "Forbidden",
+            "NotAllowed",
+            "Unauthorized",
+            "UnsupportedMediaType",
+            "TooManyRequests"
+          ],
+          "type": "string",
+          "readOnly": false
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "readOnly": false
+        },
+        "message": {
+          "type": "string",
+          "readOnly": false
+        },
+        "target": {
+          "type": "string",
+          "readOnly": false
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerError",
+          "readOnly": false
+        }
+      }
+    },
+    "InnerError": {
+      "title": "InnerError",
+      "type": "object",
+      "properties": {
+        "code": {
+          "enum": [
+            "InvalidParameterValue",
+            "InvalidRequestBodyFormat",
+            "EmptyRequest",
+            "MissingInputRecords",
+            "InvalidDocument",
+            "ModelVersionIncorrect",
+            "InvalidDocumentBatch",
+            "UnsupportedLanguageCode",
+            "DataImportFailed",
+            "InUseViolation",
+            "InvalidLocale",
+            "InvalidBaseModel",
+            "InvalidAdaptationMapping",
+            "InvalidDataset",
+            "InvalidTest",
+            "FailedDataset",
+            "InvalidModel",
+            "InvalidTranscription",
+            "InvalidVoiceSynthesis",
+            "InvalidPayload",
+            "InvalidParameter",
+            "EndpointWithoutLogging",
+            "InvalidPermissions",
+            "InvalidPrerequisite",
+            "InvalidProductId",
+            "InvalidSubscription",
+            "InvalidProject",
+            "InvalidProjectKind",
+            "InvalidRecordingsUri",
+            "OnlyOneOfUrlsOrContainerOrDataset",
+            "ExceededNumberOfRecordingsUris",
+            "ModelMismatch",
+            "ProjectGenderMismatch",
+            "ModelDeprecated",
+            "ModelExists",
+            "ModelNotDeployable",
+            "EndpointNotUpdatable",
+            "SingleDefaultEndpoint",
+            "EndpointCannotBeDefault",
+            "InvalidModelUri",
+            "SubscriptionNotFound",
+            "QuotaViolation",
+            "UnsupportedDelta",
+            "UnsupportedFilter",
+            "UnsupportedPagination",
+            "UnsupportedDynamicConfiguration",
+            "UnsupportedOrderBy",
+            "NoUtf8WithBom",
+            "ModelDeploymentNotCompleteState",
+            "SkuLimitsExist",
+            "DeployingFailedModel",
+            "UnsupportedTimeRange",
+            "InvalidLogDate",
+            "InvalidLogId",
+            "InvalidLogStartTime",
+            "InvalidLogEndTime",
+            "InvalidTopForLogs",
+            "DeleteNotAllowed",
+            "Forbidden",
+            "DeployNotAllowed",
+            "UnexpectedError",
+            "InvalidCollection",
+            "InvalidCallbackUri",
+            "InvalidSasValidityDuration",
+            "InaccessibleCustomerStorage",
+            "InvalidSpeakerAuthorization"
+          ],
+          "type": "string",
+          "readOnly": false
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false
+        },
+        "message": {
+          "type": "string",
+          "readOnly": false
+        },
+        "target": {
+          "type": "string",
+          "readOnly": false
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerError",
+          "readOnly": false
+        }
+      }
+    },
+    "LongAudioSynthesisUpdate": {
+      "title": "LongAudioSynthesisUpdate",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The name of the object.",
+          "type": "string",
+          "readOnly": false
+        },
+        "description": {
+          "description": "The description of the object.",
+          "type": "string",
+          "readOnly": false
+        },
+        "customProperties": {
+          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false
+        }
+      },
+      "example": {
+        "displayName": "Updated long audio synthesis name",
+        "description": "Updated long audio synthesis description",
+        "customProperties": {
+          "key": "value"
+        }
+      }
+    },
+    "PaginatedLongAudioSynthesis": {
+      "title": "PaginatedLongAudioSynthesis",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LongAudioSynthesis"
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "description": "A link to the next set of paginated results if there are more entities available; otherwise null.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PaginatedLongAudioSynthesisVoices": {
+      "title": "PaginatedLongAudioSynthesisVoices",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LongAudioSynthesisVoice"
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "description": "A link to the next set of paginated results if there are more entities available; otherwise null.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LongAudioSynthesisVoice": {
+      "title": "LongAudioSynthesisVoice",
+      "required": [
+        "locale"
+      ],
+      "type": "object",
+      "properties": {
+        "voiceName": {
+          "description": "The name of the voice.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/LongAudioSynthesisVoiceProperties",
+          "description": "Additional metadata available for the voice.",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the object.",
+          "type": "string",
+          "readOnly": false
+        },
+        "id": {
+          "format": "uuid",
+          "description": "The identifier of this entity.",
+          "type": "string",
+          "readOnly": true,
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "gender": {
+          "description": "The gender of the voice.",
+          "enum": [
+            "Male",
+            "Female"
+          ],
+          "type": "string",
+          "readOnly": false
+        },
+        "locale": {
+          "description": "The locale of the contained data.",
+          "type": "string",
+          "readOnly": false
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LongAudioSynthesisVoiceProperties": {
+      "title": "LongAudioSynthesisVoiceProperties",
+      "type": "object",
+      "properties": {
+        "publicAvailable": {
+          "description": "A value indicating whether the voice is public available.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "speakers": {
+          "description": "A collection of speakers in the voice.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VoiceSpeaker"
+          },
+          "readOnly": true
+        },
+        "roles": {
+          "description": "A collection of supported roles in this voice.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VoiceRole"
+          },
+          "readOnly": true
+        },
+        "styles": {
+          "description": "A collection of supported styles in this voice.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VoiceStyle"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "VoiceSpeaker": {
+      "title": "VoiceSpeaker",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "description": "The ID of the speaker.",
+          "type": "integer",
+          "readOnly": false
+        }
+      }
+    },
+    "VoiceRole": {
+      "title": "VoiceRole",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the role.",
+          "type": "string",
+          "readOnly": false
+        }
+      }
+    },
+    "VoiceStyle": {
+      "title": "VoiceStyle",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the style.",
+          "type": "string",
+          "readOnly": false
+        }
+      }
+    },
+    "PaginatedFiles": {
+      "title": "PaginatedFiles",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/File"
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "description": "A link to the next set of paginated results if there are more entities available; otherwise null.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "File": {
+      "title": "File",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The kind of this file.",
+          "enum": [
+            "LongAudioSynthesisScript",
+            "LongAudioSynthesisResult"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "FileKind",
+            "modelAsString": true
+          }
+        },
+        "links": {
+          "$ref": "#/definitions/FileLinks",
+          "description": "The links for additional actions or content related to this file.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The creation time of this file.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperties",
+          "description": "Additional metadata provided by the service.",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of this file.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FileLinks": {
+      "title": "FileLinks",
+      "type": "object",
+      "properties": {
+        "contentUrl": {
+          "description": "The url to retrieve the content of this file.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FileProperties": {
+      "title": "FileProperties",
+      "type": "object",
+      "properties": {
+        "size": {
+          "format": "int64",
+          "description": "The size of the data in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "duration": {
+          "description": "The duration in case this file is an audio file. The duration is encoded as ISO 8601\r\nduration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "subscription_key": {
+      "type": "apiKey",
+      "description": "Provide your cognitive services subscription key here.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "token": {
+      "type": "apiKey",
+      "description": "Provide an access token from the JWT returned by the STS of this region. Make sure to add the management scope to the token by adding the following query string to the STS URL: ?scope=speechservicesmanagement",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
