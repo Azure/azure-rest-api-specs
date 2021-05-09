@@ -28,15 +28,15 @@ These are the global settings for the Kusto API.
 title: KustoManagementClient
 description: 'The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.'
 openapi-type: arm
-tag: package-2021-01
+tag: package-2021-01-01
 ```
 
 
-### Tag: package-2021-01
+### Tag: package-2021-01-01
 
-These settings apply only when `--tag=package-2021-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-01-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-01'
+```yaml $(tag) == 'package-2021-01-01'
 input-file:
   - Microsoft.Kusto/stable/2021-01-01/kusto.json
 ```
