@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2018-10-01
 ```
 
+### Tag: package-2020-04-01-preview
+
+These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-04-01-preview'
+input-file:
+  - Microsoft.Portal/preview/2020-04-01-preview/CloudShell.json
+```
+
 ### Tag: package-2018-10-01
 
 These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
@@ -62,6 +71,7 @@ swagger-to-sdk:
 ## Go
 
 These settings apply only when `--go` is specified on the command line.
+Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(go)
 go:
@@ -108,12 +118,12 @@ namespace: Microsoft.Portal
 output-folder: $(ruby-sdks-folder)/CloudShell
 ```
 
-### Tag: package-2020-04-01 and ruby
+### Tag: package-2020-04-01-preview and ruby
 
-These settings apply only when `--tag=package-2018-04-01 --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2020-04-01-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2018-04-01' && $(ruby)
+```yaml $(tag) == 'package-2020-04-01-preview' && $(ruby)
 namespace: Microsoft.Portal
 output-folder: $(ruby-sdks-folder)/CloudShell
 ```
