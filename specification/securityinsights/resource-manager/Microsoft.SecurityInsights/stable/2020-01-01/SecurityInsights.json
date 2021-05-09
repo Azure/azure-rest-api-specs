@@ -805,6 +805,9 @@
           },
           "Get a MDATP data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
+          },
+          "Get a Dynamics365 data connector": {
+            "$ref": "./examples/dataConnectors/GetDynamics365DataConnectorById.json"
           }
         },
         "tags": [
@@ -851,6 +854,9 @@
           },
           "Creates or updates an Threat Intelligence Platform data connector.": {
             "$ref": "./examples/dataConnectors/CreateThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a Dynamics365 data connector.": {
+            "$ref": "./examples/dataConnectors/CreateDynamics365DataConnetor.json"
           }
         },
         "tags": [
@@ -1972,7 +1978,8 @@
         "Office365",
         "AmazonWebServicesCloudTrail",
         "AzureAdvancedThreatProtection",
-        "MicrosoftDefenderAdvancedThreatProtection"
+        "MicrosoftDefenderAdvancedThreatProtection",
+        "Dynamics365"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2002,6 +2009,9 @@
           },
           {
             "value": "MicrosoftDefenderAdvancedThreatProtection"
+          },
+          {
+            "value": "Dynamics365"
           }
         ]
       }
@@ -2044,6 +2054,59 @@
           "description": "The available data types for the connector."
         }
       },
+      "type": "object"
+    },
+    "Dynamics365DataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Dynamics365 data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Dynamics365DataConnectorProperties",
+          "description": "Dynamics365 data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Dynamics365"
+    },
+    "Dynamics365DataConnectorDataTypes": {
+      "description": "The available data types for Dynamics365 data connector.",
+      "properties": {
+        "dynamics365CdsActivities": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Common Data Service data type connection.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "dynamics365CdsActivities"
+      ]
+    },
+    "Dynamics365DataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Dynamics365 data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/Dynamics365DataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "FusionAlertRule": {
