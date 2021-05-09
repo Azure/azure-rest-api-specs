@@ -419,11 +419,13 @@
         "Kind": {
           "x-ms-client-name": "WebTestKind",
           "type": "string",
-          "description": "The kind of web test this is, valid choices are ping and multistep.",
+          "description": "The kind of web test this is, valid choices are ping, multistep, basic, and standard.",
           "default": "ping",
           "enum": [
             "ping",
-            "multistep"
+            "multistep",
+            "basic",
+            "standard"
           ],
           "x-ms-enum": {
             "name": "WebTestKind",
@@ -455,6 +457,75 @@
           "type": "string",
           "description": "Current state of this component, whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
           "readOnly": true
+        },
+        "Request": {
+          "type": "object",
+          "description": "the collection of request properties",
+          "properties": {
+            "RequestUrl": {
+              "type": "string",
+              "description": "Url location to test."
+            },
+            "Headers": {
+              "type": "array",
+              "description": "List of headers and their values to add to the webtest call.",
+              "items": {
+                "$ref": "#/definitions/HeaderField"
+              }
+            },
+            "HttpVerb": {
+              "type": "string",
+              "description": "Http verb to use for this web test."
+            },
+            "RequestBody": {
+              "type": "string",
+              "description": "Base64 encoded string body to send with this web test."
+            },
+            "ParseDependentRequests": {
+              "type": "boolean",
+              "description": "Parse Dependent request for this webtest."
+            },
+            "FollowRedirects": {
+              "type": "boolean",
+              "description": "Follow redirects for this web test."
+            }
+          }
+        },
+        "ContentValidation": {
+          "type": "object",
+          "description": "the collection of content validation properties",
+          "properties": {
+            "ContentMatch": {
+              "type": "string",
+              "description": "content to look for in the return of the webtest."
+            },
+            "IgnoreCase": {
+              "type": "boolean",
+              "description": "When set, this value makes the ContentMatch validation case insensitive."
+            },
+            "PassIfTextFound": {
+              "type": "boolean",
+              "description": "When true, validation will pass if there is a match for the ContentMatch string.  If false, validation will fail if there is a match"
+            }
+          }
+        },
+        "SSLCheck": {
+          "type": "boolean",
+          "description": "Checks to see if the SSL cert is still valid."
+        },
+        "SSLCertRemainingLifetimeCheck": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A number of days to check still remain before the the existing SSL cert expires."
+        },
+        "ExpectedHttpStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Validate that the webtest returns the http status code provided."
+        },
+        "IgnoreHttpsStatusCode": {
+          "type": "boolean",
+          "description": "When set, validation will ignore the status code."
         }
       }
     },
@@ -467,6 +538,23 @@
           "type": "string",
           "description": "Location ID for the webtest to run from."
         }
+      }
+    },
+    "HeaderField": {
+      "description": "Geo-physical location to run a web test from. You must specify one or more locations for the test to run from.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "x-ms-client-name": "headerFieldName",
+          "type": "string",
+          "description": "the name of the header."
+        },
+        "value": {
+          "x-ms-client-name": "headerFieldValue",
+          "type": "string",
+          "description": "the value of the header."
+        }
+
       }
     }
   },
