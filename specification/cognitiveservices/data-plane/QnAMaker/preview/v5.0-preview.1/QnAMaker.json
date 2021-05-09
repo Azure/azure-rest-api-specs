@@ -764,6 +764,45 @@
           }
         }
       }
+    },
+    "/prebuilt/generateAnswer": {
+      "post": {
+        "tags": [
+          "Prebuilt"
+        ],
+        "summary": "GenerateAnswer call to query text in documents.",
+        "operationId": "Prebuilt_GenerateAnswer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PrebuiltGenerateAnswerPayload"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Prebuilt GenerateAnswer call response.",
+            "schema": {
+              "$ref": "#/definitions/GenerateAnswerBatchResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulPreBuiltGenAns.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1786,6 +1825,96 @@
           "format": "int32"
         }
       }
+    },
+    "PrebuiltQuery": {
+      "type": "object",
+      "description": "POST body schema to query the documents via Prebuilt Question Answering.",
+      "required": [
+        "question",
+        "documents"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "question": {
+          "type": "string",
+          "description": "User question to query against the given documents."
+        },
+        "documents": {
+          "type": "array",
+          "description": "Documents to be searched for given question.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "text"
+            ],
+            "properties": {
+
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the document."
+              },
+              "text": {
+                "type": "string",
+                "description": "Text contents of the document"
+              }
+            }
+          }
+        },
+        "language": {
+          "type": "string",
+          "description": "(Optional) Language of the documents. This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default.",
+          "maxLength": 100,
+          "minLength": 2
+        }
+      }
+    },
+    "GenerateAnswerBatchResult": {
+      "type": "array",
+      "description": "Represents List of Answer Results.",
+      "maxLength": 5,
+      "items": {
+        "$ref": "#/definitions/GenerateAnswerBatchResultItem"
+      }
+    },
+    "GenerateAnswerBatchResultItem": {
+      "type": "object",
+      "description": "Represents Prebuilt Answer Result.",
+      "additionalProperties": false,
+      "properties": {
+        "answer": {
+          "type": "string",
+          "description": "Answer."
+        },
+        "score": {
+          "type": "number",
+          "description": "Search result score."
+        },
+        "id": {
+          "type": "string",
+          "description": "Document Id."
+        },
+        "answerSpan": {
+          "type": "object",
+          "description": "Answer span object with respect to user's question.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AnswerSpanResponseDTO"
+            }
+          ]
+        },
+        "answerStartIndex": {
+          "type": "integer",
+          "description": "Start index of answer in document text.",
+          "format": "int32"
+        },
+        "answerEndIndex": {
+          "type": "integer",
+          "description": "End index of answer in document text.",
+          "format": "int32"
+        }
+      }
     }
   },
   "parameters": {
@@ -1914,6 +2043,17 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/EndpointSettingsDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrebuiltGenerateAnswerPayload": {
+      "name": "prebuiltGenerateAnswerPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/PrebuiltQuery"
       },
       "x-nullable": true,
       "description": "Post body of the request.",
