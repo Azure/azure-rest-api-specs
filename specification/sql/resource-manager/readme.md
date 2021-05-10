@@ -39,20 +39,17 @@ This section contains the "composite-v5" set of APIs, which is composed from a s
 
 APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
 
-
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
 - Microsoft.Sql/stable/2014-04-01/backups_legacy.json
-- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
-- Microsoft.Sql/stable/2014-04-01/replicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/replicationLinks_legacy.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core_legacy.json
 - Microsoft.Sql/stable/2014-04-01/usages_legacy.json
-- Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/BackupShortTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/BlobAuditing.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseAdvisors.json
@@ -122,11 +119,11 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedServerSecurityAlertPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/Operations.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/OperationsHealth.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateLinkResources.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RecoverableManagedDatabases.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/RestorableDroppedDatabases.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/RestorableDroppedManagedDatabases.json
+- ./Microsoft.Sql/preview/2020-11-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RestorePoints.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/SensitivityLabels.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAdvisors.json
@@ -148,10 +145,13 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/SyncMembers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/TdeCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/TimeZones.json
+- ./Microsoft.Sql/preview/2020-11-01-preview/TransparentDataEncryptions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualNetworkRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadClassifiers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedDatabases.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
 
 
 # Needed when there is more than one input file
@@ -822,10 +822,6 @@ input-file:
  - ./Microsoft.Sql/preview/2021-02-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/WorkloadClassifiers.json
  - ./Microsoft.Sql/preview/2021-02-01-preview/WorkloadGroups.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SqlManagementClient
 ```
 
 ### Tag: package-preview-2020-11
@@ -1431,6 +1427,8 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_sql']
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js sql/resource-manager
 ```
 
 ### C#
@@ -1496,3 +1494,7 @@ directive:
   - suppress: EnumInsteadOfBoolean
     reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
