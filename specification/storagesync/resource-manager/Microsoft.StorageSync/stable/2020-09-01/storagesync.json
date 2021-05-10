@@ -3414,14 +3414,13 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
-          "format": "int32",
           "minimum": 0,
           "maximum": 100,
-          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
+          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled.",
+          "default": 20
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
-          "format": "int32",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days."
@@ -3444,15 +3443,18 @@
         },
         "initialDownloadPolicy": {
           "$ref": "#/definitions/InitialDownloadPolicy",
-          "description": "Policy for how namespace and files are recalled during FastDr."
+          "description": "Policy for how namespace and files are recalled during FastDr.",
+          "default": "NamespaceThenModifiedFiles"
         },
         "localCacheMode": {
           "$ref": "#/definitions/LocalCacheMode",
-          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access."
+          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access.",
+          "default": "UpdateLocallyCachedFiles"
         },
         "initialUploadPolicy": {
           "$ref": "#/definitions/InitialUploadPolicy",
-          "description": "Policy for how the initial upload sync session is performed."
+          "description": "Policy for how the initial upload sync session is performed.",
+          "default": "Merge"
         }
       }
     },
@@ -3895,7 +3897,6 @@
         },
         "pauseWaitForSyncDrainTimePeriodInSeconds": {
           "type": "integer",
-          "format": "int32",
           "description": "Pre Restore pause wait for sync drain time period in seconds."
         }
       }
@@ -4065,7 +4066,6 @@
         },
         "storageSyncServiceStatus": {
           "type": "integer",
-          "format": "int32",
           "description": "Storage Sync service status.",
           "readOnly": true
         },
@@ -4105,28 +4105,23 @@
       "properties": {
         "lastStepName": {
           "type": "string",
-          "description": "last step name",
-          "readOnly": true
+          "description": "last step name"
         },
         "status": {
           "$ref": "#/definitions/WorkflowStatus",
-          "description": "workflow status.",
-          "readOnly": true
+          "description": "workflow status."
         },
         "operation": {
           "$ref": "#/definitions/OperationDirection",
-          "description": "operation direction.",
-          "readOnly": true
+          "description": "operation direction."
         },
         "steps": {
           "type": "string",
-          "description": "workflow steps",
-          "readOnly": true
+          "description": "workflow steps"
         },
         "lastOperationId": {
           "type": "string",
-          "description": "workflow last operation identifier.",
-          "readOnly": true
+          "description": "workflow last operation identifier."
         },
         "commandName": {
           "type": "string",
@@ -4192,20 +4187,15 @@
         },
         "serverManagementErrorCode": {
           "type": "integer",
-          "format": "int32",
-          "description": "Registered Server Management Error Code",
-          "readOnly": true
+          "description": "Registered Server Management Error Code"
         },
         "lastHeartBeat": {
           "type": "string",
-          "format": "date-time",
-          "description": "Registered Server last heart beat",
-          "readOnly": true
+          "description": "Registered Server last heart beat"
         },
         "provisioningState": {
           "type": "string",
-          "description": "Registered Server Provisioning State",
-          "readOnly": true
+          "description": "Registered Server Provisioning State"
         },
         "serverRole": {
           "type": "string",
@@ -4225,33 +4215,27 @@
         },
         "storageSyncServiceUid": {
           "type": "string",
-          "description": "Registered Server storageSyncServiceUid",
-          "readOnly": true
+          "description": "Registered Server storageSyncServiceUid"
         },
         "lastWorkflowId": {
           "type": "string",
-          "description": "Registered Server lastWorkflowId",
-          "readOnly": true
+          "description": "Registered Server lastWorkflowId"
         },
         "lastOperationName": {
           "type": "string",
-          "description": "Resource Last Operation Name",
-          "readOnly": true
+          "description": "Resource Last Operation Name"
         },
         "discoveryEndpointUri": {
           "type": "string",
-          "description": "Resource discoveryEndpointUri",
-          "readOnly": true
+          "description": "Resource discoveryEndpointUri"
         },
         "resourceLocation": {
           "type": "string",
-          "description": "Resource Location",
-          "readOnly": true
+          "description": "Resource Location"
         },
         "serviceLocation": {
           "type": "string",
-          "description": "Service Location",
-          "readOnly": true
+          "description": "Service Location"
         },
         "friendlyName": {
           "type": "string",
@@ -4259,18 +4243,15 @@
         },
         "managementEndpointUri": {
           "type": "string",
-          "description": "Management Endpoint Uri",
-          "readOnly": true
+          "description": "Management Endpoint Uri"
         },
         "monitoringEndpointUri": {
           "type": "string",
-          "description": "Telemetry Endpoint Uri",
-          "readOnly": true
+          "description": "Telemetry Endpoint Uri"
         },
         "monitoringConfiguration": {
           "type": "string",
-          "description": "Monitoring Configuration",
-          "readOnly": true
+          "description": "Monitoring Configuration"
         },
         "serverName": {
           "type": "string",
@@ -4338,14 +4319,12 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
-          "format": "int32",
           "minimum": 0,
           "maximum": 100,
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
-          "format": "int32",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days."
@@ -4378,14 +4357,12 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
-          "format": "int32",
           "minimum": 0,
           "maximum": 100,
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
-          "format": "int32",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days."
