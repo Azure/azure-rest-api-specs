@@ -43,6 +43,7 @@ APIs must only be added to this section when the API is publicly available in at
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
 - Microsoft.Sql/stable/2014-04-01/backups_legacy.json
+- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
@@ -147,7 +148,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/SyncMembers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/TdeCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/TimeZones.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/TransparentDataEncryptions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualNetworkRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadClassifiers.json
@@ -1315,8 +1315,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_sql']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js sql/resource-manager
 ```
 
 ### C#
@@ -1383,6 +1381,4 @@ directive:
     reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
