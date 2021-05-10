@@ -429,21 +429,23 @@
           "$ref": "common.json#/definitions/Attributes"
         }
       ],
-      "recoveryLevel": {
-        "type": "string",
-        "description": "The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.",
-        "enum": [
-          "Purgeable",
-          "Recoverable+Purgeable",
-          "Recoverable",
-          "Recoverable+ProtectedSubscription"
-        ],
-        "x-ms-enum": {
-          "name": "DeletionRecoveryLevel",
-          "modelAsString": true
-        },
-        "readOnly": true,
-        "x-nullable": false
+      "properties": {
+        "recoveryLevel": {
+          "type": "string",
+          "description": "The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.",
+          "enum": [
+            "Purgeable",
+            "Recoverable+Purgeable",
+            "Recoverable",
+            "Recoverable+ProtectedSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
+        }
       },
       "description": "The object attributes managed by the Azure Key Vault service."
     },
