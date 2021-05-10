@@ -540,7 +540,6 @@ These settings apply only when `--tag=package-2015-07-01-only` is specified on t
 input-file:
 - Microsoft.Insights/stable/2015-07-01/serviceDiagnosticsSettings_API.json
 - Microsoft.Insights/stable/2014-04-01/alertRules_API.json
-- Microsoft.Insights/stable/2014-04-01/autoscale_API.json
 ```
 
 ### Tag: package-2015-04-01-only
