@@ -3309,77 +3309,83 @@
           "type": "string",
           "description": "The keyvault resource id to the keyvault secrets."
         },
-        "passwordSecretUri": {
+        "passwordSecretName": {
           "type": "string",
-          "description": "The keyvault secret uri to the exact password version."
+          "description": "The keyvault secret name the password is stored in."
         }
       }
     },
     "SessionHostComponentUpdateConfigurationProperties": {
       "description": "The session host configuration for updating agent, monitoring agent, and stack component.",
-      "type": {
-        "type": "string",
-        "enum": [
-          "Default",
-          "TenantAdminControlled"
-        ],
-        "x-ms-enum": {
-          "name": "SessionHostComponentUpdateType",
-          "modelAsString": true,
-          "values": [
-            {
-              "value": "Default",
-              "description": "Agent and other agent side components are deliverly scedule is controlled by WVD Infra."
-            },
-            {
-              "value": "TenantAdminControlled",
-              "description": "TenantAdmin have opted in for Scheduled Agent Update feature."
-            }
-          ]
-        }
-      },
-      "useLocalTime": {
-        "type": "boolean",
-        "description": "Whether to use localTime of the virtual machine."
-      },
-      "maintenanceWindowTimeZone": {
-        "type": "string",
-        "description": "Time zone for maintenance."
-      },
-      "primaryWindow": {
-        "$ref": "#/definitions/MaintenanceWindowProperties",
-        "description": "Primary Window of the maintenance. We try to push agent update in this window first."
-      },
-      "secondaryWindows": {
-        "type": "array",
-        "readOnly": true,
-        "description": "List of secondary maintenance windows. We try to excersize this only when the primary window update fails.",
-        "items": {
-          "$ref": "#/definitions/MaintenanceWindowProperties"
+      "type": "object",
+      "properties": {
+        "maintenanceType": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "TenantAdminControlled"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostComponentUpdateType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Agent and other agent side components are delivery schedule is controlled by WVD Infra."
+              },
+              {
+                "value": "TenantAdminControlled",
+                "description": "TenantAdmin have opted in for Scheduled Agent Update feature."
+              }
+            ]
+          }
+        },
+        "useLocalTime": {
+          "type": "boolean",
+          "description": "Whether to use localTime of the virtual machine."
+        },
+        "maintenanceWindowTimeZone": {
+          "type": "string",
+          "description": "Time zone for maintenance."
+        },
+        "primaryWindow": {
+          "$ref": "#/definitions/MaintenanceWindowProperties",
+          "description": "Primary Window of the maintenance. Maintenance windows are 2 hours long. We try to push agent update in this window first."
+        },
+        "secondaryWindows": {
+          "type": "array",
+          "description": "List of secondary maintenance windows. Maintenance windows are 2 hours long. We try to exercise this only when the primary window update fails.",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowProperties"
+          }
         }
       }
     },
     "MaintenanceWindowProperties": {
-      "hour": {
-        "format": "int32",
-        "type": "integer",
-        "description": "The update start hour of the day. (0 - 23)"
-      },
-      "dayOfWeek": {
-        "type": "string",
-        "description": "Day of the week.",
-        "enum": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "x-ms-enum": {
-          "name": "DayOfWeek",
-          "modelAsString": false
+      "description": "Maintenance window starting hour and day of week.",
+      "type": "object",
+      "properties": {
+        "hour": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The update start hour of the day. (0 - 23)"
+        },
+        "dayOfWeek": {
+          "type": "string",
+          "description": "Day of the week.",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": false
+          }
         }
       }
     },
