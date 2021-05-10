@@ -43,7 +43,7 @@
             }
           },
           {
-            "name": "Microsoft.ContainerRegistry.Admin/locations/checkCapacity/action",
+            "name": "Microsoft.ContainerRegistry.Admin/locations/capacity/read",
             "display": {
               "provider": "Microsoft.ContainerRegistry.Admin",
               "resource": "Registry Capacity Action",
@@ -52,7 +52,7 @@
             }
           },
           {
-            "name": "Microsoft.ContainerRegistry.Admin/locations/getConfiguration/action",
+            "name": "Microsoft.ContainerRegistry.Admin/locations/configuration/read",
             "display": {
               "provider": "Microsoft.ContainerRegistry.Admin",
               "resource": "Registry configuration",
@@ -61,7 +61,7 @@
             }
           },
           {
-            "name": "Microsoft.ContainerRegistry.Admin/locations/setConfiguration/action",
+            "name": "Microsoft.ContainerRegistry.Admin/locations/configuration/write",
             "display": {
               "provider": "Microsoft.ContainerRegistry.Admin",
               "resource": "Registry configuration",
@@ -77,7 +77,25 @@
               "operation": "List Registries",
               "description": "Returns properties for the registries."
             }
-          }
+          },
+          {
+            "name": "Microsoft.ContainerRegistry.Admin/startSetup/action",
+            "display": {
+              "provider": "Microsoft.ContainerRegistry.Setup",
+              "resource": "Start setup",
+              "operation": "Start container registry certificate upload and service deployment",
+              "description": "Update registry stamp configuration."
+            }
+          },
+          {
+            "name": "Microsoft.ContainerRegistry.Admin/setupStatus/read",
+            "display": {
+              "provider": "Microsoft.ContainerRegistry.Setup",
+              "resource": "Setup status",
+              "operation": "Get status of container registry certificate upload and service deployment",
+              "description": "Get status of container registry certificate upload and service deployment."
+            }
+          }		  
         ]
       }
     }
