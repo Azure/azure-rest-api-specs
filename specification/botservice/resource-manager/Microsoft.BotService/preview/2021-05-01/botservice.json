@@ -1175,21 +1175,14 @@
           "202": {
             "description": "Accepted - Get request accepted; the operation will complete asynchronously."
           },
-          "404": {
-            "description": "No operation result was found matching operationResultId.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
           "default": {
             "description": "Default error response",
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/Error"
             }
           }
         },
-        "deprecated": false,
         "x-ms-long-running-operation": true
       }
     },
@@ -1228,6 +1221,7 @@
           },
           "default": {
             "description": "Default error response",
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1276,6 +1270,7 @@
           },
           "default": {
             "description": "Error response describing why the operation failed.",
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1328,6 +1323,7 @@
           },
           "default": {
             "description": "Error response describing why the operation failed.",
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1371,6 +1367,7 @@
           },
           "default": {
             "description": "Error response describing why the operation failed.",
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1413,6 +1410,7 @@
           },
           "default": {
             "description": "Default error response",
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -2813,6 +2811,7 @@
           }
         },
         "startTime": {
+          "format": "date-time",
           "description": "The time that the operation was started.",
           "readOnly": true,
           "type": "string"
