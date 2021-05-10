@@ -3030,6 +3030,124 @@
           }
         }
       }
+    },
+    "/collections/{collection}/entity": {
+      "post": {
+        "tags": [
+          "CatalogCollection"
+        ],
+        "description": "Creates or updates an entity to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
+        "operationId": "CatalogCollection_createOrUpdate",
+        "x-ms-examples": {
+          "CatalogCollection_createOrUpdate": {
+            "$ref": "./examples/CatalogCollection_createOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "entity",
+            "description": "Atlas entity with extended information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AtlasEntityWithExtInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection}/entity/bulk": {
+      "post": {
+        "tags": [
+          "CatalogCollection"
+        ],
+        "description": "Creates or updates entities in bulk to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
+        "operationId": "CatalogCollection_createOrUpdateBulk",
+        "x-ms-examples": {
+          "CatalogCollection_createOrUpdateBulk": {
+            "$ref": "./examples/CatalogCollection_createOrUpdateBulk.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "entities",
+            "description": "Atlas entities with extended information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection}/entity/moveEntities": {
+      "post": {
+        "tags": [
+          "CatalogCollection"
+        ],
+        "description": "Move existing entities to a collection",
+        "operationId": "CatalogCollection_moveEntitiesToCollection",
+        "x-ms-examples": {
+          "CatalogCollection_moveEntitiesToCollection": {
+            "$ref": "./examples/CatalogCollection_moveEntitiesToCollection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "entityObjectIds",
+            "description": "An array of entity object IDs to be moved.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "description": "An array of entity object IDs to be moved.",
+              "items": {
+                "$ref": "#/definitions/AtlasObjectId"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK. If the entities are move successfully."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6831,6 +6949,14 @@
         "name": "type",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "collection": {
+      "name": "collection",
+      "description": "the collection unique name",
+      "in": "path",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
