@@ -445,6 +445,33 @@
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the public IP address resource."
         },
+        "servicePublicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddress",
+          "description": "The service public IP address of the public IP address resource."
+        },
+        "natGateway": {
+          "$ref": "./natGateway.json#/definitions/NatGateway",
+          "description": "The NatGateway for the Public IP address."
+        },
+        "migrationPhase": {
+          "type": "string",
+          "description": "Migration phase of Public IP Address.",
+          "enum": [
+            "None",
+            "Prepare",
+            "Commit",
+            "Abort",
+            "Committed"
+          ],
+          "x-ms-enum": {
+            "name": "PublicIPAddressMigrationPhase",
+            "modelAsString": true
+          }
+        },
+        "linkedPublicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddress",
+          "description": "The linked public IP address of the public IP address resource."
+        }
         "deleteOption": {
           "type": "string",
           "description": "Specify what happens to the public IP address when the VM using it is deleted",
@@ -455,8 +482,7 @@
           "x-ms-enum": {
             "name": "DeleteOptions",
             "modelAsString": true
-          }
-        }
+          },
       },
       "description": "Public IP address properties."
     },
