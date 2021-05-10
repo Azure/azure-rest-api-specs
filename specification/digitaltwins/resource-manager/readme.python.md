@@ -6,10 +6,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ```yaml $(python) && $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.digitaltwins
 package-name: azure-mgmt-digitaltwins
-package-version: 1.0.0
-clear-output-folder: true
+package-version: 1.0.0b1
 no-namespace-folders: true
 ```
 
@@ -18,6 +16,7 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi) && $(track2)
+clear-output-folder: true
 batch:
   - tag: package-2020-12
   - tag: package-2020-10
@@ -60,4 +59,10 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2020-03-01-preview' && $(python)
 namespace: azure.mgmt.digitaltwins.v2020_03_01_preview
 output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins/v2020_03_01_preview
+```
+
+
+```yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
 ```
