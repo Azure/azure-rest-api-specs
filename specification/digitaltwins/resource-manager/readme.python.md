@@ -60,3 +60,9 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 namespace: azure.mgmt.digitaltwins.v2020_03_01_preview
 output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins/v2020_03_01_preview
 ```
+
+
+```yaml $(python) && $(track2)
+modelerfour:
+  lenient-model-deduplication: true
+```
