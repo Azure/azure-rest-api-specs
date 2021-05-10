@@ -4556,7 +4556,7 @@
       "description": "The OS option profile."
     },
     "EndpointDependency": {
-      "description": "A domain name that AKS agent nodes are reached at.",
+      "description": "A domain name that AKS agent nodes are reaching at.",
       "type": "object",
       "properties": {
         "domainName": {
@@ -4564,7 +4564,7 @@
           "type": "string"
         },
         "endpointDetails": {
-          "description": "The Ports and Protocols used when connecting to DomainName.",
+          "description": "The Ports and Protocols used when connecting to domainName.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointDetail"
@@ -4573,7 +4573,7 @@
       }
     },
     "EndpointDetail": {
-      "description": "Current connect information from the AKS agent node to a single endpoint.",
+      "description": "connect information from the AKS agent nodes to a single endpoint.",
       "type": "object",
       "properties": {
         "ipAddress": {
@@ -4590,21 +4590,21 @@
           "type": "string"
         },
         "description": {
-          "description": "Description",
+          "description": "Description of the detail",
           "type": "string"
         }
       }
     },
     "OutboundEnvironmentEndpoint": {
-      "description": "Egress endpoints that AKS agent nodes access for common purpose.",
+      "description": "Egress endpoints which AKS agent nodes connect to for common purpose.",
       "type": "object",
       "properties": {
         "category": {
-          "description": "The type of service accessed by the AKS agent node, e.g., azure-resource-management, apiserver.",
+          "description": "The category of endpoints accessed by the AKS agent node, e.g. azure-resource-management, apiserver, etc.",
           "type": "string"
         },
         "endpoints": {
-          "description": "The endpoints that the AKS agent nodes reach the service at.",
+          "description": "The endpoints that AKS agent nodes connect to",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointDependency"
@@ -4613,7 +4613,7 @@
       }
     },
     "OutboundEnvironmentEndpointCollection": {
-      "description": "Collection of Outbound Environment Endpoints",
+      "description": "Collection of OutboundEnvironmentEndpoint",
       "required": [
         "value"
       ],
