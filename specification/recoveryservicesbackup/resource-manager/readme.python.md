@@ -23,6 +23,8 @@ namespace: azure.mgmt.recoveryservicesbackup
 package-name: azure-mgmt-recoveryservicesbackup
 package-version: 1.0.0b1
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
