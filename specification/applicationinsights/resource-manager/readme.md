@@ -345,7 +345,7 @@ These settings apply only when `--tag=package-2020-02-02` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-02-02'
 input-file:
-- Microsoft.Insights/preview/2020-02-02/components_API.json
+- Microsoft.Insights/stable/2020-02-02/components_API.json
 ```
 
 ### Tag: package-2019-10-17-preview
