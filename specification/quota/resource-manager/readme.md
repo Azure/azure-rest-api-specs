@@ -110,7 +110,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.quota
   package-name: azure-mgmt-quota
-  package-version: 0.3.2
+  package-version: 0.1.0
   clear-output-folder: true
 ```
 

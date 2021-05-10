@@ -15,6 +15,7 @@ python:
   package-version: 0.1.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(track2)
 python-mode: create
 azure-arm: true
