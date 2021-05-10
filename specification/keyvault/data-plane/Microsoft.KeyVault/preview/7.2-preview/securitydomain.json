@@ -97,12 +97,6 @@
               }
             }
           },
-          "200": {
-            "description": "The response contains the confirmed Security Domain.",
-            "schema": {
-              "$ref": "#/definitions/SecurityDomainObject"
-            }
-          },
           "default": {
             "description": "Key Vault error response describing why the operation failed.",
             "schema": {
@@ -117,7 +111,7 @@
         }
       }
     },
-    "/securitydomain/transferkey": {
+    "/securitydomain/upload": {
       "get": {
         "tags": [
           "HSMSecurityDomain"
@@ -148,9 +142,7 @@
             "$ref": "./examples/securitydomaintransferkey-example.json"
           }
         }
-      }
-    },
-    "/securitydomain/upload": {
+      },
       "post": {
         "tags": [
           "HSMSecurityDomain"
@@ -291,8 +283,7 @@
       "properties": {
         "value": {
           "type": "string",
-          "format": "base64url",
-          "description": "A blob containing the Security Domain."
+          "description": "The Security Domain."
         }
       },
       "description": "The Security Domain.",

@@ -9,6 +9,7 @@ python:
   package-name: azure-mgmt-resource
   payload-flattening-threshold: 2
   clear-output-folder: true
+  package-version: 1.0.0b1
   no-namespace-folders: true
   verbose: true
   debug: true
@@ -18,12 +19,14 @@ python:
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resource
+package-version: 1.0.0b1
 no-namespace-folders: true
 ```
 
 ### Python multi-api
 
 Generate all API versions currently shipped for this package
+
 
 ```yaml $(multiapi) && !$(track2)
 batch:
@@ -35,13 +38,14 @@ batch:
   - tag: package-policy-2020-09
   - tag: package-policy-2019-09
   - tag: package-policy-2019-06
-  - tag: package-policy-2019-01  
+  - tag: package-policy-2019-01
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2017-06
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
+  - tag: package-resources-2021-01
   - tag: package-resources-2020-10
   - tag: package-resources-2020-06
   - tag: package-resources-2019-10
@@ -60,8 +64,10 @@ batch:
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
   - tag: package-deploymentscripts-2020-10
-  - tag: package-deploymentscripts-2019-10-preview  
-  - tag: package-templatespecs-2019-06-preview 
+  - tag: package-deploymentscripts-2019-10-preview
+  - tag: package-templatespecs-2021-05
+  - tag: package-templatespecs-2021-03-preview
+  - tag: package-templatespecs-2019-06-preview
 ```
 
 ```yaml $(multiapi) && $(track2)
@@ -78,7 +84,7 @@ batch:
   - tag: package-policy-2020-09
   - tag: package-policy-2019-09
   - tag: package-policy-2019-06
-  - tag: package-policy-2019-01  
+  - tag: package-policy-2019-01
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2017-06
@@ -86,6 +92,8 @@ batch:
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
   - multiapiscript-policy: true
+  - tag: package-resources-2021-04
+  - tag: package-resources-2021-01
   - tag: package-resources-2020-10
   - tag: package-resources-2020-06
   - tag: package-resources-2019-10
@@ -106,13 +114,16 @@ batch:
   - tag: package-subscriptions-2016-06
   - multiapiscript-subscriptions: true
   - tag: package-deploymentscripts-2020-10
-  - tag: package-deploymentscripts-2019-10-preview  
+  - tag: package-deploymentscripts-2019-10-preview
   - multiapiscript-deploymentscripts: true
-  - tag: package-templatespecs-2019-06-preview 
+  - tag: package-templatespecs-2021-05
+  - tag: package-templatespecs-2021-03-preview
+  - tag: package-templatespecs-2019-06-preview
   - multiapiscript-templatespecs: true
 ```
 
 ```yaml $(multiapiscript-features)
+package-name: azure-mgmt-resource#features
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features
 clear-output-folder: false
@@ -120,6 +131,7 @@ perform-load: false
 ```
 
 ```yaml $(multiapiscript-policy)
+package-name: azure-mgmt-resource#policy
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy
 clear-output-folder: false
@@ -127,6 +139,7 @@ perform-load: false
 ```
 
 ```yaml $(multiapiscript-resources)
+package-name: azure-mgmt-resource#resources
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources
 clear-output-folder: false
@@ -134,6 +147,7 @@ perform-load: false
 ```
 
 ```yaml $(multiapiscript-subscriptions)
+package-name: azure-mgmt-resource#subscriptions
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions
 clear-output-folder: false
@@ -141,6 +155,7 @@ perform-load: false
 ```
 
 ```yaml $(multiapiscript-deploymentscripts)
+package-name: azure-mgmt-resource#deploymentscripts
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentscripts
 clear-output-folder: false
@@ -149,6 +164,7 @@ perform-load: false
 
 
 ```yaml $(multiapiscript-templatespecs)
+package-name: azure-mgmt-resource#templatespecs
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs
 clear-output-folder: false
@@ -157,6 +173,7 @@ perform-load: false
 
 
 ```yaml $(multiapiscript-locks)
+package-name: azure-mgmt-resource#locks
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/locks
 clear-output-folder: false
@@ -164,6 +181,7 @@ perform-load: false
 ```
 
 ```yaml $(multiapiscript-links)
+package-name: azure-mgmt-resource#links
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/links
 clear-output-folder: false
@@ -364,6 +382,33 @@ python:
   namespace: azure.mgmt.resource.policy.v2015_10_01_preview
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
 ```
+
+### Tag: package-resources-2021-04 and python
+
+These settings apply only when `--tag=package-resources-2021-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2021-04'
+namespace: azure.mgmt.resource.resources.v2021_04_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2021_04_01
+python:
+  namespace: azure.mgmt.resource.resources.v2021_04_01
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2021_04_01
+```
+
+### Tag: package-resources-2021-01 and python
+
+These settings apply only when `--tag=package-resources-2021-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2021-01'
+namespace: azure.mgmt.resource.resources.v2021_01_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2021_01_01
+python:
+  namespace: azure.mgmt.resource.resources.v2021_01_01
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2021_01_01
+```
+
 ### Tag: package-resources-2020-10 and python
 
 These settings apply only when `--tag=package-resources-2020-10 --python` is specified on the command line.
@@ -622,4 +667,30 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 python:
   namespace: azure.mgmt.resource.templatespecs.v2019_06_01_preview
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2019_06_01_preview
+```
+
+### Tag: package-templatespecs-2021-03-preview and python
+
+These settings apply only when `--tag=package-templatespecs-2021-03-preview` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-templatespecs-2021-03-preview'
+namespace: azure.mgmt.resource.templatespecs.v2021_03_01_preview
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_03_01_preview
+python:
+  namespace: azure.mgmt.resource.templatespecs.v2021_03_01_preview
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_03_01_preview
+```
+
+### Tag: package-templatespecs-2021-05 and python
+
+These settings apply only when `--tag=package-templatespecs-2021-05` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-templatespecs-2021-05'
+namespace: azure.mgmt.resource.templatespecs.v2021_05_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_05_01
+python:
+  namespace: azure.mgmt.resource.templatespecs.v2021_05_01
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_05_01
 ```

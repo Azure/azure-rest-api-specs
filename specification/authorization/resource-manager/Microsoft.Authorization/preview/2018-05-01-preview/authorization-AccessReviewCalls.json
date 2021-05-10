@@ -1343,13 +1343,13 @@
           "type": "string",
           "format": "date-time",
           "description": "The DateTime when the review is scheduled to be start. This could be a date in the future. Required on create.",
-          "x-nullable": false
+          "x-nullable": true
         },
         "endDate": {
           "type": "string",
           "format": "date-time",
           "description": "The DateTime when the review is scheduled to end. Required if type is endDate",
-          "x-nullable": false
+          "x-nullable": true
         }
       },
       "description": "Recurrence Range of an Access Review Schedule Definition."
@@ -1476,13 +1476,14 @@
           "readOnly": true,
           "format": "date-time",
           "description": "Date Time when a decision was taken.",
-          "x-nullable": false
+          "x-nullable": true
         },
         "reviewedBy": {
           "readOnly": true,
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AccessReviewActorIdentity",
-          "description": "Details of the approver."
+          "description": "Details of the approver.",
+          "x-nullable": true
         },
         "applyResult": {
           "type": "string",
@@ -1506,13 +1507,14 @@
           "readOnly": true,
           "format": "date-time",
           "description": "The date and time when the review decision was applied.",
-          "x-nullable": false
+          "x-nullable": true
         },
         "appliedBy": {
           "readOnly": true,
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AccessReviewActorIdentity",
-          "description": "Details of the approver."
+          "description": "Details of the applier.",
+          "x-nullable": true
         }
       },
       "description": "Approval Step."

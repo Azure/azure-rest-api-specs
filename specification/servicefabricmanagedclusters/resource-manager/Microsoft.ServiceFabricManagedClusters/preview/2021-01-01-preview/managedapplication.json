@@ -34,42 +34,6 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.ServiceFabric/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Lists all of the available Service Fabric resource provider API operations.",
-        "description": "Get the list of available Service Fabric resource provider API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the Service Fabric resource provider API",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedclusters/{clusterName}/applicationTypes/{applicationTypeName}": {
       "get": {
         "tags": [
@@ -119,7 +83,7 @@
         "tags": [
           "ApplicationType"
         ],
-        "operationId": "ApplicationTypes_Create",
+        "operationId": "ApplicationTypes_CreateOrUpdate",
         "summary": "Creates or updates a Service Fabric managed application type name resource.",
         "description": "Create or update a Service Fabric managed application type name resource with the specified name.",
         "parameters": [
@@ -372,7 +336,7 @@
         "tags": [
           "ApplicationTypeVersion"
         ],
-        "operationId": "ApplicationTypeVersions_Create",
+        "operationId": "ApplicationTypeVersions_CreateOrUpdate",
         "summary": "Creates or updates a Service Fabric managed application type version resource.",
         "description": "Create or update a Service Fabric managed application type version resource with the specified name.",
         "parameters": [
@@ -644,7 +608,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Applications_Create",
+        "operationId": "Applications_CreateOrUpdate",
         "summary": "Creates or updates a Service Fabric managed application resource.",
         "description": "Create or update a Service Fabric managed application resource with the specified name.",
         "parameters": [
@@ -910,7 +874,7 @@
         "tags": [
           "Service"
         ],
-        "operationId": "Services_Create",
+        "operationId": "Services_CreateOrUpdate",
         "summary": "Creates or updates a Service Fabric managed service resource.",
         "description": "Create or update a Service Fabric managed service resource with the specified name.",
         "parameters": [
@@ -1408,7 +1372,7 @@
         "instanceCloseDelayDuration": {
           "type": "integer",
           "format": "int64",
-          "description": "Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade, only for those instances which have a non-zero delay duration configured in the service description. See InstanceCloseDelayDurationSeconds property in StatelessServiceDescription for details. Note, the default value of InstanceCloseDelayDurationInSeconds is 4294967295, which indicates that the behavior will entirely depend on the delay configured in the stateless service description."
+          "description": "Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade, only for those instances which have a non-zero delay duration configured in the service description."
         },
         "upgradeMode": {
           "$ref": "#/definitions/RollingUpgradeMode"
@@ -1495,7 +1459,8 @@
         "metricName",
         "lowerLoadThreshold",
         "upperLoadThreshold",
-        "scaleInterval"
+        "scaleInterval",
+        "useOnlyPrimaryLoad"
       ],
       "properties": {
         "metricName": {
@@ -1515,6 +1480,10 @@
         "scaleInterval": {
           "type": "string",
           "description": "The period in seconds on which a decision is made whether to scale or not. This property should come in ISO 8601 format \"hh:mm:ss\"."
+        },
+        "useOnlyPrimaryLoad": {
+          "type": "boolean",
+          "description": "Flag determines whether only the load of primary replica should be considered for scaling. If set to true, then trigger will only consider the load of primary replicas of stateful service. If set to false, trigger will consider load of all replicas. This parameter cannot be set to true for stateless service."
         }
       }
     },
@@ -2198,7 +2167,6 @@
       "description": "The service resource.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServiceResourceProperties"
         }
       },
@@ -2274,10 +2242,6 @@
               }
             ]
           }
-        },
-        "serviceDnsName": {
-          "type": "string",
-          "description": "The DNS name of the service. It requires the DNS system service to be enabled in Service Fabric cluster."
         }
       }
     },
@@ -2453,10 +2417,6 @@
         "servicePlacementTimeLimit": {
           "type": "string",
           "description": "The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format \"hh:mm:ss\"."
-        },
-        "dropSourceReplicaOnMove": {
-          "type": "boolean",
-          "description": "Indicates whether to drop source Secondary replica even if the target replica has not finished build. If desired behavior is to drop it as soon as possible the value of this property is true, if not it is false."
         }
       }
     },
@@ -2487,11 +2447,6 @@
           "type": "integer",
           "format": "int32",
           "description": "MinInstancePercentage is the minimum percentage of InstanceCount that must be up to meet the EnsureAvailability safety check during operations like upgrade or deactivate node. The actual number that is used is max( MinInstanceCount, ceil( MinInstancePercentage/100.0 * InstanceCount) ). Note, if InstanceCount is set to -1, during MinInstancePercentage computation, -1 is first converted into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service."
-        },
-        "instanceCloseDelayDuration": {
-          "type": "string",
-          "default": "0",
-          "description": "Duration represented in ISO 8601 format \"hh:mm:ss\", to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade and disabling node. The endpoint exposed on this instance is removed prior to starting the delay, which prevents new connections to this instance. In addition, clients that have subscribed to service endpoint change events(https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.servicemanagementclient.registerservicenotificationfilterasync), can do the following upon receiving the endpoint removal notification: - Stop sending new requests to this instance. - Close existing connections after in-flight requests have completed. - Connect to a different instance of the service partition for future requests. Note, the default value of InstanceCloseDelayDuration is 0, which indicates that there won't be any delay or removal of the endpoint prior to closing the instance."
         }
       }
     },
@@ -2602,23 +2557,6 @@
       },
       "description": "The error details."
     },
-    "OperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of operations supported by the Service Fabric resource provider.",
-          "items": {
-            "$ref": "#/definitions/OperationResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any.",
-          "readOnly": true
-        }
-      },
-      "description": "Describes the result of the request to list Service Fabric resource provider operations."
-    },
     "OperationResult": {
       "properties": {
         "name": {
@@ -2655,17 +2593,7 @@
         },
         "createdByType": {
           "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
+          "description": "The type of identity that created the resource."
         },
         "createdAt": {
           "type": "string",
@@ -2678,17 +2606,7 @@
         },
         "lastModifiedByType": {
           "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
+          "description": "The type of identity that last modified the resource."
         },
         "lastModifiedAt": {
           "type": "string",

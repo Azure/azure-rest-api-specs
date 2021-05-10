@@ -79,8 +79,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js marketplace/resource-manager
 ```
 
 ## C#
@@ -95,9 +93,9 @@ csharp:
   namespace: Microsoft.Azure.Management.Marketplace
   output-folder: $(csharp-sdks-folder)/marketplace/Microsoft.Azure.Management.Marketplace/src/Generated
   clear-output-folder: true
+  modelerfour:
+    lenient-model-deduplication: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -1614,7 +1614,8 @@
                 "description": "Azure Managed disk storage."
               }
             ]
-          }
+          },
+          "default": "StorageAccount"
         },
         "sharePassword": {
           "description": "Password for all the shares to be created on the device. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
@@ -2105,7 +2106,8 @@
                 "description": "Verbose logging (includes Errors, CRC, size information and others)."
               }
             ]
-          }
+          },
+          "default": "Error"
         },
         "accountDetails": {
           "$ref": "#/definitions/DataAccountDetails",
@@ -2356,7 +2358,8 @@
                 "description": "Software-based encryption is disabled."
               }
             ]
-          }
+          },
+          "default": "Disabled"
         }
       }
     },
@@ -2751,7 +2754,8 @@
                 "description": "Scheduled job."
               }
             ]
-          }
+          },
+          "default": "NonScheduled"
         },
         "deliveryInfo": {
           "$ref": "#/definitions/JobDeliveryInfo",
@@ -2794,6 +2798,11 @@
         "type": {
           "description": "Type of the object.",
           "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
           "readOnly": true
         }
       }
@@ -3084,7 +3093,8 @@
                 "description": "Key encryption key is managed by the Customer."
               }
             ]
-          }
+          },
+          "default": "MicrosoftManaged"
         },
         "identityProperties": {
           "$ref": "#/definitions/IdentityProperties",
@@ -3177,7 +3187,8 @@
         },
         "sendNotification": {
           "description": "Notification is required or not.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -3459,7 +3470,8 @@
       "properties": {
         "type": {
           "description": "Identity type",
-          "type": "string"
+          "type": "string",
+          "default": "None"
         },
         "principalId": {
           "description": "Service Principal Id backing the Msi",
@@ -3742,7 +3754,8 @@
                 "description": "Commercial Address."
               }
             ]
-          }
+          },
+          "default": "None"
         }
       }
     },
@@ -4134,6 +4147,44 @@
       },
       "x-ms-discriminator-value": "ValidateSubscriptionIsAllowedToCreateJob"
     },
+    "systemData": {
+      "description": "Provides details about resource creation and update time",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "A string identifier for the identity that created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource: user, application, managedIdentity",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "A string identifier for the identity that last modified the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource: user, application, managedIdentity",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "TransferAllDetails": {
       "description": "Details to transfer all data.",
       "required": [
@@ -4161,7 +4212,8 @@
                 "description": "Azure Managed disk storage."
               }
             ]
-          }
+          },
+          "default": "StorageAccount"
         },
         "transferAllBlobs": {
           "description": "To indicate if all Azure blobs have to be transferred",
@@ -4251,7 +4303,8 @@
                 "description": "Azure Managed disk storage."
               }
             ]
-          }
+          },
+          "default": "StorageAccount"
         },
         "blobFilterDetails": {
           "$ref": "#/definitions/BlobFilterDetails",
