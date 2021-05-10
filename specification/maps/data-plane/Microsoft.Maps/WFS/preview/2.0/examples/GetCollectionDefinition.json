@@ -39,7 +39,44 @@
             "type": "boolean"
           },
           {
+            "name": "navigableBy",
+            "required": false,
+            "type": {
+              "array": {
+                "enum": [
+                  "pedestrian",
+                  "wheelchair",
+                  "machine",
+                  "bicycle",
+                  "automobile",
+                  "hiredAuto",
+                  "bus",
+                  "railcar",
+                  "emergency",
+                  "ferry",
+                  "boat"
+                ]
+              }
+            }
+          },
+          {
             "name": "isRoutable",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "routeThroughBehavior",
+            "required": false,
+            "type": {
+              "enum": [
+                "disallowed",
+                "allowed",
+                "preferred"
+              ]
+            }
+          },
+          {
+            "name": "nonPublic",
             "required": false,
             "type": "boolean"
           },

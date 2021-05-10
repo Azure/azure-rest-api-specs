@@ -64,7 +64,7 @@ input-file:
   - Microsoft.Maps/Timezone/preview/1.0/timezone.json
   - Microsoft.Maps/Traffic/preview/1.0/traffic.json
   - Microsoft.Maps/Weather/preview/1.0/weather.json
-  - Microsoft.Maps/WFS/preview/1.0/wfs.json
+  - Microsoft.Maps/WFS/preview/2.0/wfs.json
 ```
 ### Tag: package-1.0-preview
 
@@ -162,7 +162,8 @@ input-file:
   - $(this-folder)/Microsoft.Maps/Timezone/preview/1.0/timezone.json	
   - $(this-folder)/Microsoft.Maps/Traffic/preview/1.0/traffic.json	
   - $(this-folder)/Microsoft.Maps/Weather/preview/1.0/weather.json	
-  - $(this-folder)/Microsoft.Maps/WFS/preview/1.0/wfs.json
+  - $(this-folder)/Microsoft.Maps/WFS/preview/1.0/wfs.json	
+  - $(this-folder)/Microsoft.Maps/WFS/preview/2.0/wfs.json	
 
 ```
 
