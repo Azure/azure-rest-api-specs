@@ -147,7 +147,7 @@ These settings apply only when `--tag=package-2020-02-02 --python` is specified 
 
 ``` yaml $(tag) == 'package-2020-02-02' && $(python) && !$(track2)
 python:
-  namespace: azure.mgmt.applicationinsights.v2020_02_02_preview
+  namespace: azure.mgmt.applicationinsights.v2020_02_02
   output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2020_02_02
 ```
 ``` yaml $(tag) == 'package-2020-02-02' && $(python) && $(track2)
