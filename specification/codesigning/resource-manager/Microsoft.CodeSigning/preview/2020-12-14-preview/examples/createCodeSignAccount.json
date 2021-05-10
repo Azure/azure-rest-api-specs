@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "MyResourceGroup",
+    "api-version": "2020-12-14-preview",
+    "accountName": "MyAccount",
+    "properties": {
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSignAccounts/MyAccount",
+        "name": "MyAccount",
+        "type": "Microsoft.CodeSigning/codeSignAccounts",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "verificationStatus": "NotCompleted"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSignAccounts/MyAccount",
+        "name": "MyAccount",
+        "type": "Microsoft.CodeSigning/codeSignAccounts",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Accepted",
+          "verificationStatus": "NotCompleted"
+        }
+      }
+    }
+  }
+}

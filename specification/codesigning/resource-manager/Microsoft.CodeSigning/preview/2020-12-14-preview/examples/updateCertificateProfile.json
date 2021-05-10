@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "MyResourceGroup",
+    "api-version": "2020-12-14-preview",
+    "accountName": "MyAccount",
+    "profileName": "profileA",
+    "certificateProfilePatch": {
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSignAccounts/MyAccount/certificateProfiles/profileA",
+        "name": "profileA",
+        "type": "Microsoft.CodeSigning/codeSignAccounts/certificateProfiles",
+        "properties": {
+          "profileType": "Test",
+          "rotationPolicy": "Monthly",
+          "authority": "Microsoft Enterprise",
+          "commonName": "Contoso Inc",
+          "organization": "Contoso Inc",
+          "streetAddress": "123 Bluebonnet",
+          "country": "US",
+          "state": "Texas",
+          "city": "Dallas",
+          "provisioningState": "Succeeded",
+          "certificates": []
+        }
+      }
+    }
+  }
+}
