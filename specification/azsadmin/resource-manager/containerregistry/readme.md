@@ -38,8 +38,7 @@ input-file:
     - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/operations.json"
     - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/quotas.json"
     - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/registries.json"
-    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/setupStatus.json"
-    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/startSetup.json"
+    - "Microsoft.ContainerRegistry.Admin/preview/2019-11-01/setup.json"
 ```
 
 ---
