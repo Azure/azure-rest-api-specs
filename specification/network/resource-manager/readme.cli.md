@@ -59,6 +59,9 @@ cli:
     - name: /LoadBalancers/put/Create load balancer with Frontend IP in Zone 1
     - name: /LoadBalancers/put/Create load balancer with outbound rules
     - name: /LoadBalancers/put/Create load balancer with Standard SKU
+    - name: /LoadBalancers/put/Create load balancer with Gateway Load Balancer Provider configured with one Backend Pool
+    - name: /LoadBalancers/put/Create load balancer with Gateway Load Balancer Provider configured with two Backend Pool
+    - name: /LoadBalancers/put/Create load balancer with Gateway Load Balancer Consumer configured
     - name: /LoadBalancers/put/Create load balancer
     - name: /LoadBalancers/put/Create load balancer with inbound nat pool
     - name: /LoadBalancers/get/Get load balancer
@@ -71,6 +74,7 @@ cli:
     - name: /Subnets/put/Create subnet
     - name: /PublicIPAddresses/put/Create public IP address defaults
     - name: /NetworkInterfaces/put/Create network interface
+    - name: /NetworkInterfaces/put/Create network interface with Gateway Load Balancer Consumer configured
     - name: /NetworkInterfaces/get/Get virtual machine scale set network interface
     - name: /NetworkInterfaces/get/List virtual machine scale set network interface ip configurations
     - name: /NetworkInterfaces/get/Get virtual machine scale set network interface
