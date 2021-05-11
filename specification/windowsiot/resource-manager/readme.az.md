@@ -42,4 +42,9 @@ cli:
             param: tags|If-Match|etag
           hidden: true
 
+        - where:
+            group: Services
+            op: Update
+            param: location
+          hidden: true
 ```
