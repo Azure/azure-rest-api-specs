@@ -52,7 +52,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core_legacy.json
 - Microsoft.Sql/stable/2014-04-01/usages_legacy.json
-- Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/BackupShortTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/BlobAuditing.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseAdvisors.json
@@ -147,14 +146,15 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualNetworkRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadClassifiers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedDatabases.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Databases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseExtensions.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseOperations.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedDatabases.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
 
 
 # Needed when there is more than one input file
