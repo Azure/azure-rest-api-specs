@@ -423,6 +423,50 @@
         }
       }
     },
+    "CheckNameAvailabilityRequest": {
+      "description": "Name availability request payload which is exposed in the request of the resource provider.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name to check.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource to check.",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "description": "Name availability payload which is exposed in the response of the resource provider.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "Gets the value indicating whether the name is available.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Gets the message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "Gets the reason.",
+          "enum": [
+            "NotSpecified",
+            "AlreadyExists",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NameAvailabilityReason",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
     "Tags": {
       "description": "Tags for Confidential Ledger Resource",
       "type": "object",
