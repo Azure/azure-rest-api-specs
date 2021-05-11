@@ -254,10 +254,10 @@
           "Entity"
         ],
         "description": "Update entity partially - create or update entity attribute identified by its GUID.\nSupports only primitive attribute type and entity references.\nIt does not support updating complex types like arrays, and maps.\nNull updates are not possible.",
-        "operationId": "Entity_CreateOrUpdateByGuid",
+        "operationId": "Entity_PartialUpdateEntityAttributeByGuid",
         "x-ms-examples": {
-          "Entity_CreateOrUpdateByGuid": {
-            "$ref": "./examples/Entity_CreateOrUpdateByGuid.json"
+          "Entity_PartialUpdateEntityAttributeByGuid": {
+            "$ref": "./examples/Entity_PartialUpdateEntityAttributeByGuid.json"
           }
         },
         "parameters": [
@@ -512,10 +512,10 @@
           "Entity"
         ],
         "description": "Update entity partially - Allow a subset of attributes to be updated on\nan entity which is identified by its type and unique attribute  eg: Referenceable.qualifiedName.\nNull updates are not possible.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:<attrName>=<attrValue>.\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nPUT /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
-        "operationId": "Entity_CreateOrUpdateByUniqueAttribute",
+        "operationId": "Entity_PartialUpdateEntityByUniqueAttributes",
         "x-ms-examples": {
-          "Entity_CreateOrUpdateByUniqueAttribute": {
-            "$ref": "./examples/Entity_CreateOrUpdateByUniqueAttribute.json"
+          "Entity_PartialUpdateEntityByUniqueAttributes": {
+            "$ref": "./examples/Entity_PartialUpdateEntityByUniqueAttributes.json"
           }
         },
         "parameters": [
@@ -2088,49 +2088,49 @@
           "Discovery"
         ],
         "description": "Gets data using search.",
-        "operationId": "Search",
+        "operationId": "Discovery_Query",
         "x-ms-examples": {
-          "Search": {
-            "$ref": "./examples/Search.json"
+          "Discovery_Query": {
+            "$ref": "./examples/Discovery_Query.json"
           },
-          "Search_And": {
-            "$ref": "./examples/Search_And.json"
+          "Discovery_Query_And": {
+            "$ref": "./examples/Discovery_Query_And.json"
           },
-          "Search_Not": {
-            "$ref": "./examples/Search_Not.json"
+          "Discovery_Query_Not": {
+            "$ref": "./examples/Discovery_Query_Not.json"
           },
-          "Search_AndOrNested": {
-            "$ref": "./examples/Search_AndOrNested.json"
+          "Discovery_Query_AndOrNested": {
+            "$ref": "./examples/Discovery_Query_AndOrNested.json"
           },
-          "Search_Attribute": {
-            "$ref": "./examples/Search_Attribute.json"
+          "Discovery_Query_Attribute": {
+            "$ref": "./examples/Discovery_Query_Attribute.json"
           },
-          "Search_Classification": {
-            "$ref": "./examples/Search_Classification.json"
+          "Discovery_Query_Classification": {
+            "$ref": "./examples/Discovery_Query_Classification.json"
           },
-          "Search_FileExtension": {
-            "$ref": "./examples/Search_FileExtension.json"
+          "Discovery_Query_FileExtension": {
+            "$ref": "./examples/Discovery_Query_FileExtension.json"
           },
-          "Search_Id": {
-            "$ref": "./examples/Search_Id.json"
+          "Discovery_Query_Id": {
+            "$ref": "./examples/Discovery_Query_Id.json"
           },
-          "Search_Type": {
-            "$ref": "./examples/Search_Type.json"
+          "Discovery_Query_Type": {
+            "$ref": "./examples/Discovery_Query_Type.json"
           },
-          "Search_AssetType": {
-            "$ref": "./examples/Search_AssetType.json"
+          "Discovery_Query_AssetType": {
+            "$ref": "./examples/Discovery_Query_AssetType.json"
           },
-          "Search_Term": {
-            "$ref": "./examples/Search_Term.json"
+          "Discovery_Query_Term": {
+            "$ref": "./examples/Discovery_Query_Term.json"
           },
-          "Search_TermOfGlossary": {
-            "$ref": "./examples/Search_TermOfGlossary.json"
+          "Discovery_Query_TermOfGlossary": {
+            "$ref": "./examples/Discovery_Query_TermOfGlossary.json"
           },
-          "Search_Facet": {
-            "$ref": "./examples/Search_Facet.json"
+          "Discovery_Query_Facet": {
+            "$ref": "./examples/Discovery_Query_Facet.json"
           },
-          "Search_Taxonomy": {
-            "$ref": "./examples/Search_Taxonomy.json"
+          "Discovery_Query_Taxonomy": {
+            "$ref": "./examples/Discovery_Query_Taxonomy.json"
           }
         },
         "parameters": [
@@ -2163,10 +2163,10 @@
           "Discovery"
         ],
         "description": "Get search suggestions by query criteria.",
-        "operationId": "Suggest",
+        "operationId": "Discovery_Suggest",
         "x-ms-examples": {
-          "Suggest": {
-            "$ref": "./examples/Suggest.json"
+          "Discovery_Suggest": {
+            "$ref": "./examples/Discovery_Suggest.json"
           }
         },
         "parameters": [
@@ -2199,10 +2199,10 @@
           "Discovery"
         ],
         "description": "Get auto complete options.",
-        "operationId": "AutoComplete",
+        "operationId": "Discovery_AutoComplete",
         "x-ms-examples": {
-          "AutoComplete": {
-            "$ref": "./examples/AutoComplete.json"
+          "Discovery_AutoComplete": {
+            "$ref": "./examples/Discovery_AutoComplete.json"
           }
         },
         "parameters": [
