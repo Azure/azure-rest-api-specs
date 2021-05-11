@@ -58,14 +58,10 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseAdvisors.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseAutomaticTuning.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseColumns.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseExtensions.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseOperations.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseRecommendedActions.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/Databases.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseSchemas.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseSecurityAlertPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseTables.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseUsages.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseVulnerabilityAssesmentRuleBaselines.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseVulnerabilityAssessments.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/DatabaseVulnerabilityAssessmentScans.json
@@ -155,6 +151,10 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedDatabases.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/Databases.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseExtensions.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseOperations.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
 
 
 # Needed when there is more than one input file
