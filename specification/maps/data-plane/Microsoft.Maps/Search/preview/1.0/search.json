@@ -73,9 +73,7 @@
       "name": "limit",
       "in": "query",
       "description": "Maximum number of responses that will be returned. Default: 10, minimum: 1 and maximum: 100",
-      "required": false,
       "type": "integer",
-      "default": 10,
       "minimum": 1,
       "maximum": 100,
       "x-ms-parameter-location": "method"
@@ -84,9 +82,7 @@
       "name": "ofs",
       "in": "query",
       "description": "Starting offset of the returned results within the full result set. Default: 0, minimum: 0 and maximum: 1900",
-      "required": false,
       "type": "integer",
-      "default": 0,
       "minimum": 0,
       "maximum": 1900,
       "x-ms-parameter-location": "method"
@@ -95,7 +91,6 @@
       "name": "lat",
       "in": "query",
       "description": "Latitude where results should be biased. E.g. 37.337",
-      "required": false,
       "type": "number",
       "x-ms-parameter-location": "method"
     },
@@ -103,7 +98,6 @@
       "name": "lon",
       "in": "query",
       "description": "Longitude where results should be biased. E.g. -121.89",
-      "required": false,
       "type": "number",
       "x-ms-parameter-location": "method"
     },
@@ -112,7 +106,6 @@
       "name": "topLeft",
       "in": "query",
       "description": "Top left position of the bounding box. E.g. 37.553,-122.453",
-      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -121,7 +114,6 @@
       "name": "btmRight",
       "in": "query",
       "description": "Bottom right position of the bounding box. E.g. 37.553,-122.453",
-      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -145,7 +137,6 @@
       "name": "language",
       "in": "query",
       "description": "Language in which search results should be returned. Should be one of supported IETF language tags, case insensitive. When data in specified language is not available for a specific field, default language is used.\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details.",
-      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -169,7 +160,6 @@
       "name": "view",
       "in": "query",
       "description": "The View parameter specifies which set of geopolitically disputed content is returned via Azure Maps services, including  borders and labels displayed on the map. The View parameter (also referred to as “user region parameter”) will show the  correct maps for that country/region. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly  for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
-      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -177,7 +167,6 @@
       "name": "idxSet",
       "in": "query",
       "description": "A comma separated list of indexes which should be utilized for the search. Item order does not matter. Available indexes are: Addr = Address range interpolation, Geo = Geographies, PAD = Point Addresses, POI = Points of interest, Str = Streets, Xstr = Cross Streets (intersections)",
-      "required": false,
       "type": "array",
       "items": {
         "type": "string",
@@ -227,7 +216,6 @@
       "name": "extendedPostalCodesFor",
       "in": "query",
       "description": "Indexes for which extended postal codes should be included in the results.\n\nAvailable indexes are: \n\n **Addr** = Address ranges \n\n **Geo** = Geographies \n\n **PAD** = Point Addresses \n\n **POI** = Points of Interest \n\n **Str** = Streets \n\n **XStr** = Cross Streets (intersections)\n\nValue should be a comma separated list of index types (in any order) or **None** for no indexes.\n\nBy default extended postal codes are included for all indexes except Geo. Extended postal code lists for geographies can be quite long so they have to be explicitly requested when needed.\n\nUsage examples:\n\n extendedPostalCodesFor=POI \n\n extendedPostalCodesFor=PAD,Addr,POI \n\n extendedPostalCodesFor=None\n\nExtended postal code is returned as an **extendedPostalCode** property of an address. Availability is region-dependent.",
-      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -235,7 +223,6 @@
       "name": "extendedPostalCodesFor",
       "in": "query",
       "description": "Indexes for which extended postal codes should be included in the results.\n\nAvailable indexes are: \n\n **POI** = Points of Interest \n\nValue should be **POI** or **None** to disable extended postal codes.\n\nBy default extended postal codes are included.\n\nUsage examples:\n\n extendedPostalCodesFor=POI \n\n extendedPostalCodesFor=None\n\nExtended postal code is returned as an **extendedPostalCode** property of an address. Availability is region-dependent.",
-      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -243,16 +230,13 @@
       "name": "typeahead",
       "in": "query",
       "description": "Boolean. If the typeahead flag is set, the query will be interpreted as a partial input and the search will enter predictive mode",
-      "required": false,
       "type": "boolean",
-      "default": false,
       "x-ms-parameter-location": "method"
     },
     "CategorySet": {
       "name": "categorySet",
       "in": "query",
       "description": "A comma-separated list of category set IDs which could be used to restrict the result to specific Points of Interest categories. ID order does not matter. When multiple category identifiers are provided, only POIs that belong to (at least) one of the categories from the provided list will be returned. The list of supported categories can be discovered using  [POI Categories API](https://aka.ms/AzureMapsPOICategoryTree). Usage examples: \n\n* **categorySet=7315** (Search Points of Interest from category Restaurant)\n\n* **categorySet=7315025,7315017** (Search Points of Interest of category either Italian or French Restaurant) ",
-      "required": false,
       "type": "array",
       "items": {
         "type": "integer"
@@ -264,7 +248,6 @@
       "name": "countrySet",
       "in": "query",
       "description": "Comma separated string of country codes, e.g. FR,ES. This will limit the search to the specified countries",
-      "required": false,
       "type": "array",
       "items": {
         "type": "string"
@@ -276,7 +259,6 @@
       "name": "radius",
       "in": "query",
       "description": "The radius in meters to for the results to be constrained to the defined area",
-      "required": false,
       "type": "number",
       "x-ms-parameter-location": "method"
     },
@@ -292,7 +274,6 @@
       "name": "brandSet",
       "in": "query",
       "description": "A comma-separated list of brand names which could be used to restrict the result to specific brands. Item order does not matter. When multiple brands are provided, only results that belong to (at least) one of the provided list will be returned. Brands that contain a \",\" in their name should be put into quotes.\n\nUsage examples:\n\n brandSet=Foo\n\n brandSet=Foo,Bar\n\n brandSet=\"A,B,C Comma\",Bar",
-      "required": false,
       "type": "array",
       "items": {
         "type": "string"
@@ -304,7 +285,6 @@
       "name": "connectorSet",
       "in": "query",
       "description": "A comma-separated list of connector types which could be used to restrict the result to Electric Vehicle Station supporting specific connector types. Item order does not matter. When multiple connector types are provided, only results that belong to (at least) one of the provided list will be returned.\n\nAvailable connector types are:\n  * `StandardHouseholdCountrySpecific` - These are the standard household connectors for a certain region. They are all AC single phase and the standard Voltage and standard Amperage. See also: [Plug & socket types - World Standards](https://www.worldstandards.eu/electricity/plugs-and-sockets).\n  * `IEC62196Type1` - Type 1 connector as defined in the IEC 62196-2 standard. Also called Yazaki after the original manufacturer or SAE J1772 after the standard that first published it. Mostly used in combination with 120V single phase or up to 240V single phase infrastructure.\n  * `IEC62196Type1CCS` - Type 1 based combo connector as defined in the IEC 62196-3 standard. The connector is based on the Type 1 connector – as defined in the IEC 62196-2 standard – with two additional direct current (DC) contacts to allow DC fast charging.\n  * `IEC62196Type2CableAttached` - Type 2 connector as defined in the IEC 62196-2 standard. Provided as a cable and plug attached to the charging point.\n  * `IEC62196Type2Outlet` - Type 2 connector as defined in the IEC 62196-2 standard. Provided as a socket set into the charging point.\n  * `IEC62196Type2CCS` - Type 2 based combo connector as defined in the IEC 62196-3 standard. The connector is based on the Type 2 connector – as defined in the IEC 62196-2 standard – with two additional direct current (DC) contacts to allow DC fast charging.\n  * `IEC62196Type3` - Type 3 connector as defined in the IEC 62196-2 standard. Also called Scame after the original manufacturer. Mostly used in combination with up to 240V single phase or up to 420V three phase infrastructure.\n  * `Chademo` - CHAdeMO connector named after an association formed by the Tokyo Electric Power Company and industrial partners. Because of this is is also known as the TEPCO's connector. It supports fast DC charging.\n  * `IEC60309AC1PhaseBlue` - Industrial Blue connector is a connector defined in the IEC 60309 standard. It is sometime referred to as by some combination of the standard, the color and the fact that is a single phase connector. The connector usually has the \"P+N+E, 6h\" configuration.\n  * `IEC60309DCWhite` - Industrial White connector is a DC connector defined in the IEC 60309 standard.\n  * `Tesla` - The Tesla connector is the regionally specific Tesla Supercharger connector. I.e. it refers to either Tesla's proprietary connector, sometimes referred to as Tesla Port mostly limited to North America or the modified Type 2 (DC over Type 2) in Europe.\n\nUsage examples:\n\n connectorSet=IEC62196Type2CableAttached\n connectorSet=IEC62196Type2Outlet,IEC62196Type2CableAttached",
-      "required": false,
       "type": "array",
       "items": {
         "type": "string",
@@ -380,7 +360,6 @@
       "description": "Hours of operation for a POI (Points of Interest). The availability of hours of operation will vary based on the data available.\nSupported value: nextSevenDays",
       "type": "string",
       "in": "query",
-      "required": false,
       "enum": [
         "nextSevenDays"
       ],
@@ -525,9 +504,7 @@
             "name": "minFuzzyLevel",
             "in": "query",
             "description": "Minimum fuzziness level to be used. Default: 1, minimum: 1 and maximum: 4\n\n* Level 1 has no spell checking.\n\n* Level 2 uses normal n-gram spell checking. For example, query \"restrant\" can be matched to \"restaurant.\"\n\n* Level 3 uses sound-like spell checking, and shingle spell checking. Sound-like spell checking is for \"rstrnt\" to \"restaurant\" matching. Shingle spell checking is for \"mountainview\" to \"mountain view\" matching.\n\n* Level 4 doesn’t add any more spell checking functions.\n\n\n\nThe search engine will start looking for a match on the level defined by minFuzzyLevel, and will stop searching at the level specified by maxFuzzyLevel.",
-            "required": false,
             "type": "integer",
-            "default": 1,
             "minimum": 1,
             "maximum": 4
           },
@@ -535,9 +512,7 @@
             "name": "maxFuzzyLevel",
             "in": "query",
             "description": "Maximum fuzziness level to be used. Default: 2, minimum: 1 and maximum: 4\n\n* Level 1 has no spell checking.\n\n* Level 2 uses normal n-gram spell checking. For example, query \"restrant\" can be matched to \"restaurant.\"\n\n* Level 3 uses sound-like spell checking, and shingle spell checking. Sound-like spell checking is for \"rstrnt\" to \"restaurant\" matching. Shingle spell checking is for \"mountainview\" to \"mountain view\" matching.\n\n* Level 4 doesn’t add any more spell checking functions.\n\n\n\nThe search engine will start looking for a match on the level defined by minFuzzyLevel, and will stop searching at the level specified by maxFuzzyLevel.",
-            "required": false,
             "type": "integer",
-            "default": 2,
             "minimum": 1,
             "maximum": 4
           },
@@ -729,7 +704,6 @@
             "name": "radius",
             "in": "query",
             "description": "The radius in meters to for the results to be constrained to the defined area, Min value is 1, Max Value is 50000.",
-            "required": false,
             "type": "number"
           },
           {
@@ -902,7 +876,6 @@
             "name": "language",
             "in": "query",
             "description": "Language in which search results should be returned. Should be one of supported IETF language tags, except NGT and NGT-Latn. Language tag is case insensitive. When data in specified language is not available for a specific field, default language is used (English).\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details.",
-            "required": false,
             "type": "string"
           }
         ],
@@ -1054,15 +1027,12 @@
             "name": "returnSpeedLimit",
             "in": "query",
             "description": "Boolean. To enable return of the posted speed limit",
-            "required": false,
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           },
           {
             "name": "heading",
             "in": "query",
             "description": "The directional heading of the vehicle in degrees, for travel along a segment of roadway. 0 is North, 90 is East and so on, values range from -360 to 360. The precision can include upto one decimal place",
-            "required": false,
             "type": "number",
             "minimum": -360,
             "maximum": 360
@@ -1074,43 +1044,36 @@
             "name": "number",
             "in": "query",
             "description": "If a number is sent in along with the request, the response may include the side of the street (Left/Right) and also an offset position for that number",
-            "required": false,
             "type": "string"
           },
           {
             "name": "returnRoadUse",
             "in": "query",
             "description": "Boolean. To enable return of the road use array for reverse geocodes at street level",
-            "required": false,
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           },
           {
             "name": "roadUse",
             "in": "query",
             "description": "To restrict reverse geocodes to a certain type of road use. The road use array for reverse geocodes can be one or more of LimitedAccess, Arterial, Terminal, Ramp, Rotary, LocalStreet",
-            "required": false,
             "type": "string"
           },
           {
             "name": "allowFreeformNewline",
             "in": "query",
             "description": "Format of newlines in the formatted address.\n\nIf true, the address will contain newlines.\nIf false, newlines will be converted to commas.",
-            "required": false,
             "type": "boolean"
           },
           {
             "name": "returnMatchType",
             "in": "query",
             "description": "Include information on the type of match the geocoder achieved in the response.",
-            "required": false,
             "type": "boolean"
           },
           {
             "name": "entityType",
             "in": "query",
             "description": "Specifies the level of filtering performed on geographies. Narrows the search for specified geography entity types, e.g. return only municipality. The resulting response will contain the geography ID as well as the entity type matched. If you provide more than one entity as a comma separated list, endpoint will return the 'smallest entity available'. Returned Geometry ID can be used to get the geometry of that geography via [Get Search Polygon](https://docs.microsoft.com/rest/api/maps/search/getsearchpolygon) API. The following parameters are ignored when entityType is set:\n\n* heading\n* number\n* returnRoadUse\n* returnSpeedLimit\n* roadUse\n* returnMatchType",
-            "required": false,
             "type": "string",
             "enum": [
               "Country",
@@ -1222,7 +1185,6 @@
             "name": "heading",
             "in": "query",
             "description": "The directional heading of the vehicle in degrees, for travel along a segment of roadway. 0 is North, 90 is East and so on, values range from -360 to 360. The precision can include upto one decimal place",
-            "required": false,
             "type": "number",
             "minimum": -360,
             "maximum": 360
@@ -1305,63 +1267,54 @@
             "name": "streetNumber",
             "in": "query",
             "description": "The street number portion of an address",
-            "required": false,
             "type": "string"
           },
           {
             "name": "streetName",
             "in": "query",
             "description": "The street name portion of an address",
-            "required": false,
             "type": "string"
           },
           {
             "name": "crossStreet",
             "in": "query",
             "description": "The cross street name for the structured address",
-            "required": false,
             "type": "string"
           },
           {
             "name": "municipality",
             "in": "query",
             "description": "The municipality portion of an address",
-            "required": false,
             "type": "string"
           },
           {
             "name": "municipalitySubdivision",
             "in": "query",
             "description": "The municipality subdivision (sub/super city) for the structured address",
-            "required": false,
             "type": "string"
           },
           {
             "name": "countryTertiarySubdivision",
             "in": "query",
             "description": "The named area for the structured address",
-            "required": false,
             "type": "string"
           },
           {
             "name": "countrySecondarySubdivision",
             "in": "query",
             "description": "The county for the structured address",
-            "required": false,
             "type": "string"
           },
           {
             "name": "countrySubdivision",
             "in": "query",
             "description": "The country subdivision portion of an address",
-            "required": false,
             "type": "string"
           },
           {
             "name": "postalCode",
             "in": "query",
             "description": "The postal code portion of an address",
-            "required": false,
             "type": "string"
           },
           {
@@ -1522,10 +1475,8 @@
           {
             "name": "limit",
             "description": "Maximum number of responses that will be returned. Default value is 10. Max value is 20",
-            "required": false,
             "type": "integer",
             "in": "query",
-            "default": 10,
             "maximum": 20
           },
           {

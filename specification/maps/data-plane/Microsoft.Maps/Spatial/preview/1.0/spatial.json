@@ -73,7 +73,6 @@
       "name": "mode",
       "in": "query",
       "description": "Mode of the geofencing async event mechanism.",
-      "required": false,
       "type": "string",
       "enum": [
         "All",
@@ -180,33 +179,27 @@
             "name": "z",
             "in": "query",
             "description": "The sea level in meter of the location being passed. If this parameter is presented, 2D extrusion is used. Example: 200.",
-            "required": false,
             "type": "number"
           },
           {
             "name": "userTime",
             "in": "query",
             "description": "The user request time. If not presented in the request, the default value is DateTime.Now.",
-            "required": false,
             "type": "string"
           },
           {
             "name": "searchBuffer",
             "in": "query",
             "description": "The radius of the buffer around the geofence in meters that defines how far to search inside and outside the border of the fence against the coordinate that was provided when calculating the result.  The minimum value is 0, and the maximum is 500.  The default value is 50.",
-            "required": false,
             "type": "number",
             "minimum": 0,
-            "maximum": 500,
-            "default": 50
+            "maximum": 500
           },
           {
             "name": "isAsync",
             "in": "query",
             "description": "If true, the request will use async event mechanism; if false, the request will be synchronized and do not trigger any event. The default value is false.",
-            "required": false,
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           },
           {
             "$ref": "#/parameters/Mode"
@@ -291,33 +284,27 @@
             "name": "z",
             "in": "query",
             "description": "The sea level in meter of the location being passed. If this parameter is presented, 2D extrusion geofencing is applied. Example: 200.",
-            "required": false,
             "type": "number"
           },
           {
             "name": "userTime",
             "in": "query",
             "description": "The user request time. If not presented in the request, the default value is DateTime.UtcNow.",
-            "required": false,
             "type": "string"
           },
           {
             "name": "searchBuffer",
             "in": "query",
             "description": "The radius of the buffer around the geofence in meters that defines how far to search inside and outside the border of the fence against the coordinate that was provided when calculating the result.  The minimum value is 0, and the maximum is 500.  The default value is 50.",
-            "required": false,
             "type": "number",
             "minimum": 0,
-            "maximum": 500,
-            "default": 50
+            "maximum": 500
           },
           {
             "name": "isAsync",
             "in": "query",
             "description": "If true, the request will use async event mechanism; if false, the request will be synchronized and do not trigger any event. The default value is false.",
-            "required": false,
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           },
           {
             "$ref": "#/parameters/Mode"
@@ -525,7 +512,6 @@
             "name": "numberOfClosestPoints",
             "in": "query",
             "description": "The number of closest points expected from response. Default: 1, minimum: 1 and maximum: 50",
-            "required": false,
             "type": "integer"
           },
           {
@@ -607,7 +593,6 @@
             "name": "numberOfClosestPoints",
             "in": "query",
             "description": "The number of closest points expected from response. Default: 1, minimum: 1 and maximum: 50",
-            "required": false,
             "type": "integer"
           }
         ],

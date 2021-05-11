@@ -56,7 +56,6 @@
       "type": "number",
       "minimum": 1,
       "maximum": 50,
-      "default": 10,
       "description": "The optional limit parameter limits the number of features that are presented in the response document.\nOnly features that are on the first level of the collection in the response document are counted. Nested objects contained within the explicitly requested features shall not be counted.\n* Minimum = 1 * Maximum = 50 * Default = 10",
       "x-ms-parameter-location": "method"
     },
@@ -72,7 +71,6 @@
       "in": "query",
       "type": "string",
       "description": "Only features that have a geometry that intersects the supplied bounding box are selected.\n* Lower left corner, coordinate axis 1 * Lower left corner, coordinate axis 2 * Upper right corner, coordinate axis 1 * Upper right corner, coordinate axis 2\nThe coordinate reference system of the values is WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in the parameter `bbox-crs`.\nFor WGS84 longitude/latitude the values are in most cases the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude. However, in cases where the box spans the antimeridian the first value (west-most box edge) is larger than the third value (east-most box edge).",
-      "required": false,
       "x-ms-parameter-location": "method"
     },
     "CollectionId": {

@@ -47,7 +47,6 @@
       "type": "integer",
       "format": "int32",
       "in": "query",
-      "required": false,
       "x-ms-parameter-location": "method"
     },
     "MobilityLanguage": {
@@ -55,7 +54,6 @@
       "description": "Language in which search results will be returned.  Only NGT is supported. Please refer to [Supported languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details.",
       "type": "string",
       "in": "query",
-      "required": false,
       "x-ms-parameter-location": "method"
     }
   },
@@ -93,9 +91,7 @@
             "name": "queryType",
             "description": "The type of the query. By default originType=position, specified as a comma separated string composed by latitude followed by longitude, e.g. \"47.641268,-122.125679”.",
             "in": "query",
-            "required": false,
             "type": "string",
-            "default": "position",
             "enum": [
               "position",
               "countryCode"
@@ -277,7 +273,6 @@
             "name": "limit",
             "description": "Maximum number of responses that will be returned. Default is 3, minimum 1 and maximum 100. Sort order is based on distance from input location.",
             "in": "query",
-            "required": false,
             "type": "integer",
             "format": "int32"
           },
@@ -285,7 +280,6 @@
             "name": "radius",
             "description": "Specifies the search area to constrain a search. The radius in meters  to for the results to be constrained to the defined area. Default value is 30 meters, minimum 1 meter and maximum 5000 meters (5km).",
             "in": "query",
-            "required": false,
             "type": "integer",
             "format": "int32"
           },
@@ -293,8 +287,6 @@
             "name": "objectType",
             "description": "The transit object type. By default, objectType is set to `stop`",
             "in": "query",
-            "required": false,
-            "default": "stop",
             "type": "string"
           },
           {
@@ -362,7 +354,6 @@
             "name": "detailType",
             "description": "Specify additional details requested respective to the line group as a comma separated list. As a default service returns line basic info. Supported values are:\n  * `alerts` - Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert.\n  * `alertDetails` - Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts.\n  * `lines` - Return transit lines that stops at the specified stop.\n  * `stops` - Return list of stops the line group goes through.\n  * `schedule` - Return a 24h static schedule for the specified line group from the current time of the day to the end of the current day.\n  * `patterns` - Return list of patterns this group is comprised of. A pattern consists of a stop sequence and shape per line.",
             "in": "query",
-            "required": false,
             "type": "array",
             "items": {
               "type": "string",
@@ -471,13 +462,11 @@
             "name": "queryType",
             "description": "The type of the unique query parameter of the stop. By default queryType=stopId.",
             "in": "query",
-            "required": false,
             "type": "string",
             "enum": [
               "stopId",
               "stopKey"
             ],
-            "default": "stopId",
             "x-ms-enum": {
               "name": "TransitStopQueryType",
               "modelAsString": true,
@@ -497,7 +486,6 @@
             "name": "detailType",
             "description": "Specify additional details requested respective to the transit stop as a comma separated list. Supported values are:\n  * `alerts` - Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert.\n  * `alertDetails` - Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts.\n  * `lines` - Return transit lines that stops at the specified stop.\n  * `lineGroups` - Return line groups that stops at the specified stop.",
             "in": "query",
-            "required": false,
             "type": "array",
             "items": {
               "type": "string",
@@ -596,14 +584,12 @@
             "name": "originType",
             "description": "The type of the origin. By default originType=position, specified as a comma separated string composed by latitude followed by longitude, e.g., \"47.641268,-122.125679”.",
             "in": "query",
-            "required": false,
             "type": "string",
             "enum": [
               "position",
               "stopId",
               "stopKey"
             ],
-            "default": "position",
             "x-ms-enum": {
               "name": "OriginType",
               "modelAsString": true,
@@ -634,9 +620,7 @@
             "name": "destinationType",
             "description": "The type of the destination.",
             "in": "query",
-            "required": false,
             "type": "string",
-            "default": "position",
             "enum": [
               "position",
               "stopId",
@@ -664,7 +648,6 @@
           {
             "name": "modeType",
             "description": "The mode of travel for the requested route; as comma separated list. If not specified, all modes will be allowed. All modes might not be available in all metro areas. If valid trip is not found, empty result will be returned. Supported values are:\n  * `walk` - Walk (pedestrian)\n  * `bike` - Bike\n  * `publicTransit` - Public transit",
-            "required": false,
             "in": "query",
             "type": "array",
             "items": {
@@ -698,7 +681,6 @@
             "name": "transitType",
             "description": "Applicable only with modeType = publicTransit. Allow only a specific set of public transit types (as a comma separated list) to be returned for the route.  Note that the requested transitType may not be available for the entire route. If not specified, all modes will be allowed. Supported values are:\n  * `bus` - Bus\n  * `cableCar` - Cable car\n  * `ferry` - Ferry\n  * `funicular` - Funicular\n  * `gondola` - Gondola\n  * `rail` - Rail\n  * `tram` - Tram\n  * `subway` - Subway/Metro",
             "in": "query",
-            "required": false,
             "type": "array",
             "items": {
               "type": "string",
@@ -756,7 +738,6 @@
             "name": "agency",
             "description": "Specifies whether to prefer routes from a specific set of agencies if possible; as a comma separated list. If valid trip isn’t found with the preferred agency, or only one with very long trips or with large number of transfers, itineraries with other agencies will be returned.",
             "in": "query",
-            "required": false,
             "type": "array",
             "items": {
               "type": "string"
@@ -766,9 +747,7 @@
             "name": "agencyType",
             "description": "Specifies the agency identifier to request routes from preferred agencies. By default the agencyType=agencyId.",
             "in": "query",
-            "required": false,
             "type": "string",
-            "default": "agencyId",
             "enum": [
               "agencyId",
               "agencyKey",
@@ -797,16 +776,13 @@
             "name": "time",
             "description": "The time of departure or arrival in the local time in ISO format (2019-04-05T14:24:18-04:00). If timeType is not specified, it will be assumed to be 'departure' and time is the current local time at the origin point.",
             "in": "query",
-            "required": false,
             "type": "string"
           },
           {
             "name": "timeType",
             "description": "Specifies whether the time signifies departure time or arrival time. If not defined, default value is 'departure'.",
             "in": "query",
-            "required": false,
             "type": "string",
-            "default": "departure",
             "enum": [
               "arrival",
               "departure",
@@ -835,9 +811,7 @@
             "name": "routeType",
             "description": "The type of route requested. If not specified, 'optimal' will be used.",
             "in": "query",
-            "required": false,
             "type": "string",
-            "default": "optimal",
             "enum": [
               "optimal",
               "leastWalk",
@@ -866,9 +840,7 @@
             "name": "bikeType",
             "description": "Bike type of the bike. Specifies which type of bikes will be used. Only private bikes are supported.",
             "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "privateBike"
+            "type": "string"
           },
           {
             "$ref": "#/parameters/MobilityLanguage"
@@ -931,7 +903,6 @@
           {
             "name": "detailType",
             "description": "Specify additional details returned in the transit route itinerary response, as a comma separated list. Supported values are:\n  * `geometry` - Shape of an in GeoJSON format. For public transit legs will return also the stops that the leg passes through. For walk and bike legs, will return also the turn-by-turn navigation data. \n  * `schedule` - Static schedule data as to all departures of Public Transit legs from the current time of the day to the end of the current day.",
-            "required": false,
             "in": "query",
             "type": "array",
             "items": {
@@ -1021,7 +992,6 @@
             "name": "queryType",
             "description": "The type of the query parameter. Defines the mode of the request. Only one mode per request is supported. By default queryType is set to be ‘stops’ returning the requested number of Live Arrivals for all lines arriving at the specified stop.",
             "in": "query",
-            "required": false,
             "type": "string",
             "enum": [
               "stops",
@@ -1029,7 +999,6 @@
               "lineAndStop",
               "position"
             ],
-            "default": "stops",
             "x-ms-enum": {
               "name": "RealTimeArrivalsQueryType",
               "modelAsString": true,
@@ -1057,13 +1026,11 @@
             "name": "stopQueryType",
             "description": "The type of the unique query parameter of the stop. By default stopQueryType=stopId. This parameter can only be used in conjunction with queryType=stops or queryType=lineAndStop.",
             "in": "query",
-            "required": false,
             "type": "string",
             "enum": [
               "stopId",
               "stopKey"
             ],
-            "default": "stopId",
             "x-ms-enum": {
               "name": "StopQueryType",
               "modelAsString": true,
@@ -1083,14 +1050,12 @@
             "name": "limit",
             "description": "The maximum arrivals to return. If not specified, the system default will be used. For stops max number of arrivals per stop. For lines max arrivals per stop on the line. For everything else max arrivals overall.",
             "in": "query",
-            "required": false,
             "type": "integer",
             "format": "int32"
           },
           {
             "name": "maxMinutesInFuture",
             "description": "The maximum time (in minutes) in the future to return arrivals for. If not specified, the system default (30 minutes) will be used.  The minimum value is 0 and maximum value is 60 minutes.",
-            "required": false,
             "type": "integer",
             "format": "int32",
             "in": "query"
@@ -1099,7 +1064,6 @@
             "name": "transitType",
             "description": "Type of public transit user is requesting respective transit stop, as a comma separated list. For example, transitType=Bus,Subway. If not specified, all will be allowed. This parameter can only be used in conjunction with queryType=stops. Supported values are:\n  * `bus` - Bus\n  * `cableCar` - Cable car\n  * `ferry` - Ferry\n  * `funicular` - Funicular\n  * `gondola` - Gondola\n  * `rail` - Rail\n  * `tram` - Tram\n  * `subway` - Subway/Metro",
             "in": "query",
-            "required": false,
             "type": "array",
             "items": {
               "type": "string",
@@ -1157,7 +1121,6 @@
             "name": "agency",
             "description": "In case you prefer routes from a specific set of agencies to be returned. Specified as a comma separated string.",
             "in": "query",
-            "required": false,
             "type": "array",
             "items": {
               "type": "string"
@@ -1167,9 +1130,7 @@
             "name": "agencyType",
             "description": "Specifies the agency identifier to request routes from a specific set of agencies to be returned. By default the agencyType=agencyId.",
             "in": "query",
-            "required": false,
             "type": "string",
-            "default": "agencyId",
             "enum": [
               "agencyId",
               "agencyKey",
@@ -1198,7 +1159,6 @@
             "name": "timeoutInSeconds",
             "description": "Time in seconds within which if the provider doesn’t respond, end point will return static data.",
             "in": "query",
-            "required": false,
             "type": "integer",
             "format": "int32"
           },

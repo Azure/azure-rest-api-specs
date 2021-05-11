@@ -47,7 +47,6 @@
       "name": "Accept-Language",
       "in": "header",
       "description": "Specifies the language code in which the timezone names should be returned. If no language code is provided, the response will be in \"EN\". Please refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details.",
-      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -55,7 +54,6 @@
       "name": "options",
       "in": "query",
       "description": "Alternatively, use alias \"o\". Options available for types of information returned in the result.",
-      "required": false,
       "type": "string",
       "enum": [
         "none",
@@ -91,7 +89,6 @@
       "name": "timeStamp",
       "in": "query",
       "description": "Alternatively, use alias \"stamp\", or \"s\". Reference time, if omitted, the API will use the machine time serving the request.",
-      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
       "format": "date-time"
@@ -100,7 +97,6 @@
       "name": "transitionsFrom",
       "in": "query",
       "description": "Alternatively, use alias \"tf\". The start date from which daylight savings time (DST) transitions are requested, only applies when \"options\" = all or \"options\" = transitions.",
-      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
       "format": "date-time"
@@ -109,7 +105,6 @@
       "name": "transitionsYears",
       "in": "query",
       "description": "Alternatively, use alias \"ty\". The number of years from \"transitionsFrom\" for which DST transitions are requested, only applies when \"options\" = all or \"options\" = transitions.",
-      "required": false,
       "type": "integer",
       "x-ms-parameter-location": "method"
     }
@@ -447,7 +442,6 @@
             "name": "territory",
             "in": "query",
             "description": "Windows Time Zone territory code.",
-            "required": false,
             "type": "string"
           }
         ],

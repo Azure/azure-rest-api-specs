@@ -206,12 +206,10 @@
             "name": "thickness",
             "in": "query",
             "description": "The value of the width of the line representing traffic. This value is a multiplier and the accepted values range from 1 - 20. The default value is 10. This parameter is not valid when format is pbf.",
-            "required": false,
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "maximum": 20,
-            "default": 10
+            "maximum": 20
           }
         ],
         "responses": {
@@ -294,9 +292,7 @@
             "name": "unit",
             "in": "query",
             "description": "Unit of speed in KMPH or MPH",
-            "required": false,
             "type": "string",
-            "default": "KMPH",
             "enum": [
               "KMPH",
               "MPH"
@@ -320,10 +316,8 @@
             "name": "thickness",
             "in": "query",
             "description": "The value of the width of the line representing traffic. This value is a multiplier and the accepted values range from 1 - 20. The default value is 10.",
-            "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 10,
             "minimum": 1,
             "maximum": 20
           },
@@ -331,9 +325,7 @@
             "name": "openLr",
             "in": "query",
             "description": "Boolean on whether the response should include OpenLR code",
-            "required": false,
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -432,9 +424,7 @@
             "x-ms-client-name": "trafficState",
             "in": "query",
             "description": "Reference value for the state of traffic at a particular time, obtained from the Viewport API call, trafficModelId attribute in trafficState field. It is updated every minute, and is valid for two minutes before it times out. Use -1 to  get the most recent traffic information. Default: most recent traffic information.",
-            "required": false,
-            "type": "string",
-            "default": "-1"
+            "type": "string"
           }
         ],
         "responses": {
@@ -550,14 +540,12 @@
             "name": "language",
             "in": "query",
             "description": "[ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the output language. Supported languages are ar, ca, cs, da, de, el, en, en-GB, en-US, es, et, fi, fr, he, hu, id, in*, it, lt, lv, nb, nl, no, pl, pt, ro, ru, sk, sv, th, tr, zh.\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details. When invalid language code is provided response is returned in English. When incident cause or description does not have translation, English description is returned.",
-            "required": false,
             "type": "string"
           },
           {
             "name": "projection",
             "in": "query",
             "description": "The projection used to specify the coordinates in the request and response. [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) (default) or [EPSG4326](http://spatialreference.org/ref/epsg/4326/)",
-            "required": false,
             "type": "string",
             "enum": [
               "EPSG900913",
@@ -582,7 +570,6 @@
             "name": "geometries",
             "in": "query",
             "description": "The type of vector geometry added to incidents (returned in the <v> element of the response).",
-            "required": false,
             "type": "string",
             "enum": [
               "original",
@@ -607,17 +594,13 @@
             "name": "expandCluster",
             "in": "query",
             "description": "Boolean to indicate whether to list all traffic incidents in a cluster separately",
-            "required": false,
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           },
           {
             "name": "originalPosition",
             "in": "query",
             "description": "Boolean on whether to return the original position of the incident (<op>) as well as the one shifted to the beginning of the traffic tube (<op>)",
-            "required": false,
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           }
         ],
         "responses": {
