@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-04-01-preview-only
+tag: package-preview-2021-04
 ```
 
 ### Suppression
@@ -90,6 +90,15 @@ directive:
     reason: API documentation is not exposed yet. We're making some small changes before publishing documentation.
 ```
 
+
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.Authorization/preview/2021-04-01-preview/authorization-UsageMetricsCalls.json
+```
 ### Tag: package-2021-03-01-preview-only
 
 These settings apply only when `--tag=package-2021-03-01-preview-only` is specified on the command line.
@@ -361,6 +370,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
-
