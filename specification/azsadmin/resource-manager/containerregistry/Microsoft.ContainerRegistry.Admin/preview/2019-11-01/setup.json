@@ -16,18 +16,18 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/startSetup": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/setup/start": {
       "post": {
         "x-ms-examples": {
           "Invokes container registry certificate uploading and ACR service deployment.": {
-            "$ref": "./examples/Setup/startSetup.json"
+            "$ref": "./examples/Setup/Start.json"
           }
         },
         "tags": [
-          "ContainerRegistryStartSetup"
+          "ContainerRegistrySetupStart"
         ],
         "description": "Invokes container registry certificate uploading and service deployment.",
-        "operationId": "ContainerRegistryStartSetup",
+        "operationId": "ContainerRegistrySetup_Start",
         "parameters": [
           {
             "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
@@ -50,6 +50,42 @@
             "description": "Created -- Container registry certificate was uploaded successfully and deployment started.",
             "schema": {
               "$ref": "#/definitions/ContainerRegistrySetup"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "quotas.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/setup": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the status of the container registry setup.": {
+            "$ref": "./examples/Setup/Get.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistrySetupStatus"
+        ],
+        "description": "Returns the status of the container registry setup.",
+        "operationId": "ContainerRegistrySetup_Get",
+        "parameters": [
+          {
+            "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "quotas.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The status of the container registry setup has been returned.",
+            "schema": {
+              "$ref": "#/definitions/SetupResult"
             }
           },
           "default": {
@@ -117,6 +153,48 @@
           "description": "The uri to poll status of the container registry setup.",
           "type": "string"
         }
+      }
+    },
+    "SetupResult": {
+      "description": "Container registry setup result.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Container registry setup result properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SetupResultProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "quotas.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SetupResultProperties": {
+      "description": "Container registry setup result properties.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the container registry setup.",
+          "$ref": "#/definitions/SetupStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "SetupStatus": {
+      "description": "The status of the container registry setup.",
+      "type": "string",
+      "enum": [
+        "ReadyToSetup",
+        "Running",
+        "Failed",
+        "Cancelled",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "SetupStatus",
+        "modelAsString": true
       }
     }
   },
