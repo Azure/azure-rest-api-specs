@@ -60,7 +60,8 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-pageable": {
@@ -99,7 +100,8 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-pageable": {
@@ -141,7 +143,8 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-pageable": {
@@ -186,7 +189,8 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -235,7 +239,8 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -284,7 +289,8 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -324,12 +330,65 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
           "Delete a catalog.": {
             "$ref": "./examples/DeleteCatalog.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/cert": {
+      "post": {
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Action to retrieve an Azure Sphere Catalog Cert.",
+        "operationId": "Catalogs_Cert",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "CertRequest",
+            "description": "Cert request parameters.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CertRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure Sphere Catalog Cert details.",
+            "schema": {
+              "$ref": "#/definitions/CertResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get the details of an Azure Sphere Catalog Cert.": {
+            "$ref": "./examples/GetCatalogCert.json"
           }
         }
       }
@@ -366,7 +425,8 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-pageable": {
@@ -414,7 +474,8 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -427,7 +488,7 @@
         "tags": [
           "Products"
         ],
-        "description": "Create or update a  product.",
+        "description": "Create or update a product.",
         "operationId": "Products_CreateOrUpdate",
         "parameters": [
           {
@@ -466,7 +527,8 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -518,7 +580,8 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -561,12 +624,270 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
           "Delete a product.": {
             "$ref": "./examples/DeleteProduct.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/devicegroups": {
+      "get": {
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Returns the associated device groups of a given product by name.",
+        "operationId": "DeviceGroups_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DeviceGroups for the product in the catalog.",
+            "schema": {
+              "$ref": "#/definitions/GetDeviceGroupsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get device groups in a product.": {
+            "$ref": "./examples/GetDeviceGroups.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/devicegroups/{deviceGroupName}": {
+      "get": {
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Gets the associated device group from a given product in a catalog by name.",
+        "operationId": "DeviceGroups_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device Group details.",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get the details of a device group.": {
+            "$ref": "./examples/GetDeviceGroup.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Create or update a device group.",
+        "operationId": "DeviceGroups_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "DeviceGroup",
+            "description": "Device Group details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Put a product.": {
+            "$ref": "./examples/PutDeviceGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Patch a device group.",
+        "operationId": "DeviceGroups_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "DeviceGroup",
+            "description": "DeviceGroup details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceGroupPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Patch a product.": {
+            "$ref": "./examples/PatchDeviceGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Delete a device group from a catalog.",
+        "operationId": "DeviceGroups_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful."
+          },
+          "204": {
+            "description": "Successful. Device group does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Delete a product.": {
+            "$ref": "./examples/DeleteDeviceGroup.json"
           }
         }
       }
@@ -588,18 +909,53 @@
         "properties": {
           "description": "Catalog properties.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CatalogProperty"
+          "$ref": "#/definitions/CatalogProperties"
         }
       }
     },
-    "CatalogProperty": {
+    "CatalogProperties": {
       "description": "Catalog properties.",
       "type": "object",
       "properties": {
         "provisioningState": {
           "description": "Current provisioning state.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CertRequest": {
+      "type": "object",
+      "description": "Catalog Certificate request.",
+      "properties": {
+        "serialNumber": {
+          "$ref": "#/definitions/SerialNumber"
+        }
+      }
+    },
+    "SerialNumber": {
+      "description": "In this optional parameter, specify the serial number of the public tenant CA certificate to be returned.",
+      "type": "string"
+    },
+    "CertResponse": {
+      "type": "object",
+      "description": "Catalog Certificate retrieval response.",
+      "properties": {
+        "certificate": {
+          "description": "Bytes representation of the requested catalog certificate",
+          "type": "string"
         }
       }
     },
@@ -610,11 +966,11 @@
         "properties": {
           "description": "Catalog properties.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CatalogPatchProperty"
+          "$ref": "#/definitions/CatalogPatchProperties"
         }
       }
     },
-    "CatalogPatchProperty": {
+    "CatalogPatchProperties": {
       "description": "Catalog patch properties.",
       "type": "object",
       "properties": {
@@ -725,11 +1081,11 @@
         "properties": {
           "description": "Product properties.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ProductProperty"
+          "$ref": "#/definitions/ProductProperties"
         }
       }
     },
-    "ProductProperty": {
+    "ProductProperties": {
       "description": "Product properties.",
       "type": "object",
       "properties": {
@@ -743,7 +1099,19 @@
         "provisioningState": {
           "description": "Current provisioning state.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -754,11 +1122,11 @@
         "properties": {
           "description": "Product properties.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ProductPatchProperty"
+          "$ref": "#/definitions/ProductPatchProperties"
         }
       }
     },
-    "ProductPatchProperty": {
+    "ProductPatchProperties": {
       "description": "Product patch properties.",
       "type": "object",
       "properties": {
@@ -796,6 +1164,133 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Product"
+          }
+        }
+      }
+    },
+    "DeviceGroup": {
+      "type": "object",
+      "description": "DeviceGroup details",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "description": "DeviceGroup properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeviceGroupProperties"
+        }
+      }
+    },
+    "DeviceGroupProperties": {
+      "description": "Device Group properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Device Group description.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[A-Za-z0-9-._ ]+$"
+        },
+        "osFeedType": {
+          "description": "The OSFeedType that this device group uses for OS updates.",
+          "type": "string",
+          "enum": [
+            "Retail",
+            "RetailEval"
+          ],
+          "x-ms-enum": {
+            "name": "osFeedType",
+            "modelAsString": true
+          }
+        },
+        "updatePolicy": {
+          "description": "The update policy for this device group. 'UpdateAll': Indicates that all software, OS and customer applications should be updated via OTA. 'No3rdPartyAppUpdates': This option is intended to be used by developers of customer application to allow side-loaded applications to not be overwritten by OTA. 'NoUpdates': The devices in this group should not OTA update ANY software.",
+          "type": "string",
+          "enum": [
+            "UpdateAll",
+            "No3rdPartyAppUpdates",
+            "NoUpdates"
+          ],
+          "x-ms-enum": {
+            "name": "updatePolicy",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Current provisioning state.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DeviceGroupPatch": {
+      "type": "object",
+      "description": "Device Group details",
+      "properties": {
+        "properties": {
+          "description": "Device Group properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeviceGroupPatchProperties"
+        }
+      }
+    },
+    "DeviceGroupPatchProperties": {
+      "description": "DeviceGroup patch properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the device group."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "description": {
+          "type": "string",
+          "description": "Device group description.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[A-Za-z0-9-._ ]+$"
+        }
+      }
+    },
+    "GetDeviceGroupsResponse": {
+      "description": "The collection of device groups.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of the device groups collection.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The collection of device groups.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceGroup"
           }
         }
       }
@@ -837,7 +1332,15 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of associated product.",
+      "description": "The name of the associated product.",
+      "x-ms-parameter-location": "method"
+    },
+    "DeviceGroupNameParameter": {
+      "name": "deviceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the associated device group.",
       "x-ms-parameter-location": "method"
     }
   }
