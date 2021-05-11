@@ -1201,14 +1201,14 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-              "name": "parameters",
-              "in": "body",
-              "description": "The object for updating schedules of specified ComputeInstance.",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/SchedulesList"
-              }
+            "name": "parameters",
+            "in": "body",
+            "description": "The object for updating schedules of specified ComputeInstance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComputeSchedules"
             }
+          }
         ],
         "responses": {
           "200": {
@@ -3210,8 +3210,8 @@
                   "$ref": "#/definitions/ComputeInstanceLastOperation",
                   "readOnly": true
                 },
-                "ComputeSchedules": {
-                    "$ref": "#/definitions/SchedulesList"
+                "computeSchedules": {
+                    "$ref": "#/definitions/ComputeSchedules"
                 }
               }
             }
@@ -4646,26 +4646,41 @@
       "type": "object",
       "description": "Compute start stop schedule properties",
       "properties": {
-          "ScheduleType": {
-              "required": true,
-              "$ref": "#/definitions/ScheduleType"
+        "Id": {
+            "description": "Schedule id.",
+            "readOnly": true,
+            "type": "string"
           },
-          "Status": {
+          "provisioningStatus": {
+              "type": "string",
+              "enum": [
+                "Completed",
+                "Provisioning",
+                "Failed"
+              ],
+              "x-ms-enum": {
+                "name": "provisioningStatus",
+                "modelAsString": true
+              },
+              "readOnly": true,
+              "description": "The current deployment state of schedule."
+          },
+          "status": {
             "required": true,
             "$ref": "#/definitions/ScheduleStatus"
-        },
-          "TriggerType": {
+          },
+          "triggerType": {
               "required": true,
               "$ref": "#/definitions/TriggerType"
           },
-          "ComputeAction": {
+          "action": {
               "required": true,
-              "$ref": "#/definitions/ComputeAction"
+              "$ref": "#/definitions/ComputePowerAction"
           },
-          "Recurrence": {
+          "recurrence": {
               "$ref": "#/definitions/Recurrence"
           },
-          "Cron": {
+          "cron": {
               "$ref": "#/definitions/Cron"
           }
       } 
@@ -4693,7 +4708,7 @@
           "modelAsString": true
       }
   },
-    "ComputeAction": {
+    "ComputePowerAction": {
       "type": "string",
       "description": "The compute power action.",
       "enum": [
@@ -4701,7 +4716,7 @@
           "Stop"
       ],
       "x-ms-enum": {
-          "name": "ComputeAction",
+          "name": "ComputePowerAction",
           "modelAsString": true
       }
   },
@@ -4820,11 +4835,11 @@
           }
       }
   },
-  "SchedulesList": {
+  "ComputeSchedules": {
       "type": "object",
       "description": "The list of schedules to be applied on the Compute Instance",
       "properties": {
-          "ComputeStartStop": {
+          "computeStartStop": {
               "type": "array",
               "items": {
                   "$ref": "#/definitions/ComputeStartStopSchedule"
