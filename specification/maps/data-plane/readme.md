@@ -45,7 +45,7 @@ directive:
 
 These settings apply only when `--tag=package-preview-2.0` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2.0'
+``` yaml $(tag) == 'package-preview-2.0'
 input-file:
   - Microsoft.Maps/Alias/preview/2.0/alias.json
   - Microsoft.Maps/Data/preview/2.0/data.json
@@ -129,7 +129,7 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -140,32 +140,32 @@ This block is updated by an automatic script. Edits may be lost!
 require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
-input-file:	
-  - $(this-folder)/Microsoft.Maps/Alias/preview/1.0/alias.json	
-  - $(this-folder)/Microsoft.Maps/Data/preview/1.0/data.json	
-  - $(this-folder)/Microsoft.Maps/Dataset/preview/1.0/dataset.json	
-  - $(this-folder)/Microsoft.Maps/Alias/preview/2.0/alias.json	
-  - $(this-folder)/Microsoft.Maps/Data/preview/2.0/data.json	
-  - $(this-folder)/Microsoft.Maps/Dataset/preview/2.0/dataset.json	
-  - $(this-folder)/Microsoft.Maps/DEM/preview/1.0/elevation.json	
-  - $(this-folder)/Microsoft.Maps/DwgConversion/preview/2.0/dwgconversion.json	
-  - $(this-folder)/Microsoft.Maps/FeatureState/preview/2.0/featurestate.json	
-  - $(this-folder)/Microsoft.Maps/DwgConversion/preview/1.0/dwgconversion.json	
-  - $(this-folder)/Microsoft.Maps/FeatureState/preview/1.0/featurestate.json	
-  - $(this-folder)/Microsoft.Maps/Geolocation/preview/1.0/geolocation.json	
-  - $(this-folder)/Microsoft.Maps/Mobility/preview/1.0/mobility.json	
-  - $(this-folder)/Microsoft.Maps/Render/preview/1.0/render.json	
-  - $(this-folder)/Microsoft.Maps/Render/preview/2.0/render.json	
-  - $(this-folder)/Microsoft.Maps/Route/preview/1.0/route.json	
-  - $(this-folder)/Microsoft.Maps/Search/preview/1.0/search.json	
-  - $(this-folder)/Microsoft.Maps/Spatial/preview/1.0/spatial.json	
-  - $(this-folder)/Microsoft.Maps/Tileset/preview/1.0/tileset.json	
-  - $(this-folder)/Microsoft.Maps/Tileset/preview/2.0/tileset.json	
-  - $(this-folder)/Microsoft.Maps/Timezone/preview/1.0/timezone.json	
-  - $(this-folder)/Microsoft.Maps/Traffic/preview/1.0/traffic.json	
-  - $(this-folder)/Microsoft.Maps/Weather/preview/1.0/weather.json	
-  - $(this-folder)/Microsoft.Maps/WFS/preview/1.0/wfs.json	
-  - $(this-folder)/Microsoft.Maps/WFS/preview/2.0/wfs.json	
+input-file:
+  - $(this-folder)/Microsoft.Maps/Alias/preview/1.0/alias.json
+  - $(this-folder)/Microsoft.Maps/Alias/preview/2.0/alias.json
+  - $(this-folder)/Microsoft.Maps/Data/preview/1.0/data.json
+  - $(this-folder)/Microsoft.Maps/Data/preview/2.0/data.json
+  - $(this-folder)/Microsoft.Maps/Dataset/preview/1.0/dataset.json
+  - $(this-folder)/Microsoft.Maps/Dataset/preview/2.0/dataset.json
+  - $(this-folder)/Microsoft.Maps/DEM/preview/1.0/elevation.json
+  - $(this-folder)/Microsoft.Maps/DwgConversion/preview/1.0/dwgconversion.json
+  - $(this-folder)/Microsoft.Maps/DwgConversion/preview/2.0/dwgconversion.json
+  - $(this-folder)/Microsoft.Maps/FeatureState/preview/1.0/featurestate.json
+  - $(this-folder)/Microsoft.Maps/FeatureState/preview/2.0/featurestate.json
+  - $(this-folder)/Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
+  - $(this-folder)/Microsoft.Maps/Mobility/preview/1.0/mobility.json
+  - $(this-folder)/Microsoft.Maps/Render/preview/1.0/render.json
+  - $(this-folder)/Microsoft.Maps/Render/preview/2.0/render.json
+  - $(this-folder)/Microsoft.Maps/Route/preview/1.0/route.json
+  - $(this-folder)/Microsoft.Maps/Search/preview/1.0/search.json
+  - $(this-folder)/Microsoft.Maps/Spatial/preview/1.0/spatial.json
+  - $(this-folder)/Microsoft.Maps/Tileset/preview/1.0/tileset.json
+  - $(this-folder)/Microsoft.Maps/Tileset/preview/2.0/tileset.json
+  - $(this-folder)/Microsoft.Maps/Timezone/preview/1.0/timezone.json
+  - $(this-folder)/Microsoft.Maps/Traffic/preview/1.0/traffic.json
+  - $(this-folder)/Microsoft.Maps/Weather/preview/1.0/weather.json
+  - $(this-folder)/Microsoft.Maps/WFS/preview/1.0/wfs.json
+  - $(this-folder)/Microsoft.Maps/WFS/preview/2.0/wfs.json
 
 ```
 
