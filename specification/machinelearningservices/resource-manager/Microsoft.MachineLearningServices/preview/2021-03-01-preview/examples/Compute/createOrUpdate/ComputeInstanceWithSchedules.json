@@ -26,23 +26,13 @@
           "computeSchedules": {
             "computeStartStop": [{
               "status":  "Enabled",
-              "triggerType": "Recurrence",
-              "recurrence": {
-                  "frequency": "Day",
-                  "interval": 1,
-                  "startTime": "2021-04-23T1:30:00",
-                  "timeZone": "Pacific Standard Time",
-                  "schedule": {
-                      "hours": [
-                          18
-                      ],
-                      "minutes": [
-                          30
-                      ],
-                      "weekDays": null
-                  }
+              "triggerType": "Cron",
+              "cron": {
+                "expression": "0 0 12 * * *",
+                "startTime": "2021-04-23T1:30:00",
+                "timeZone": "Pacific Standard Time"
               }
-              }]
+            }]
           }
         }
       }
