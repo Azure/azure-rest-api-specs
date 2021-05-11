@@ -47,7 +47,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
-- Microsoft.Sql/stable/2014-04-01/replicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/replicationLinks_legacy.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core_legacy.json
@@ -125,8 +125,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateLinkResources.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RecoverableManagedDatabases.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/RestorableDroppedDatabases.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/RestorableDroppedManagedDatabases.json
+- ./Microsoft.Sql/preview/2020-11-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RestorePoints.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/SensitivityLabels.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAdvisors.json
@@ -152,6 +151,10 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualNetworkRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadClassifiers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedDatabases.json
+- ./Microsoft.Sql/preview/2021-02-01-preview/RestorableDroppedManagedDatabases.json
 
 
 # Needed when there is more than one input file
