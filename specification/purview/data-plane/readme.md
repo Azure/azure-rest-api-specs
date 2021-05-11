@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2021-05-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-05-01-preview'
 input-file:
-- Azure.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json
+- Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json
 ```
 
 These are the global settings for the Purview API.
@@ -70,7 +70,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Purview.CatalogClient
   add-credentials: true
-  output-folder: $(csharp-sdks-folder)/purview/Microsoft.Azure.Purview.Catalog/src/Generated
+  output-folder: $(csharp-sdks-folder)/purview/Microsoft.Azure.Analytics.Purview.Catalog/src/Generated
   clear-output-folder: true
 ```
 
@@ -84,7 +84,7 @@ java:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Purview.CatalogClient
   add-credentials: true
-  output-folder: $(azure-libraries-for-java-folder)/purview/Microsoft.Azure.Purview.Catalog/src/Generated
+  output-folder: $(azure-libraries-for-java-folder)/purview/Microsoft.Azure.Analytics.Purview.Catalog/src/Generated
   clear-output-folder: true
 output-folder: $(csharp-sdks-folder)/Purview/ScanningClient/Generated
 add-credentials: true
