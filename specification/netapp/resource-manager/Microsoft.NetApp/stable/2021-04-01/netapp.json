@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2021-02-01",
+    "version": "2021-04-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -128,7 +128,7 @@
             "description": "File path availability request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourceNameAvailabilityRequest"
+              "$ref": "#/definitions/FilePathAvailabilityRequest"
             },
             "x-ms-client-flatten": true
           },
@@ -203,6 +203,40 @@
         "x-ms-examples": {
           "CheckQuotaAvailability": {
             "$ref": "examples/CheckQuotaAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/getQuotaLimits": {
+      "post": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Get quota limits",
+        "description": "Get the default and current limits for quotas",
+        "operationId": "NetAppResource_GetQuotaLimits",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotaLimitsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "GetQuotaLimits": {
+            "$ref": "examples/GetQuotaLimits.json"
           }
         }
       }
@@ -1961,6 +1995,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/restoreStatus": {
+      "get": {
+        "tags": [
+          "Restore"
+        ],
+        "summary": "Get volume's restore status",
+        "description": "Get the status of the restore for a volume",
+        "operationId": "VolumeRestoreStatus_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/restoreStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_RestoreStatus": {
+            "$ref": "examples/Volumes_RestoreStatus.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/accountBackups": {
       "get": {
         "tags": [
@@ -2872,6 +2952,24 @@
         }
       }
     },
+    "FilePathAvailabilityRequest": {
+      "description": "File path availability request content - availability is based on the name and the subnetId.",
+      "required": [
+        "name",
+        "subnetId"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "File path to verify.",
+          "type": "string"
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
+        }
+      }
+    },
     "QuotaAvailabilityRequest": {
       "description": "Quota availability request content.",
       "required": [
@@ -2902,6 +3000,81 @@
         "resourceGroup": {
           "description": "Resource group name.",
           "type": "string"
+        }
+      }
+    },
+    "SubscriptionQuotaItem": {
+      "description": "Information regarding quota on subscription",
+      "type": "object",
+      "properties": {
+        "current": {
+          "description": "The current quota value.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "default": {
+          "description": "The default quota value.",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "QuotaLimitsResponse": {
+      "description": "Information regarding quota limits on subscription",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "Subscription identifier.",
+          "type": "string"
+        },
+        "accountsPerSubscription": {
+          "description": "The quota for maximum number of accounts per subscription.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaItem"
+          }
+        },
+        "poolsPerAccount": {
+          "description": "The quota for maximum number of capacity pools per account.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaItem"
+          }
+        },
+        "volumesPerPool": {
+          "description": "The quota for maximum number of volumes per capacity pool.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaItem"
+          }
+        },
+        "snapshotsPerVolume": {
+          "description": "The quota for maximum number of snapshots per volume",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaItem"
+          }
+        },
+        "totalTiBsPerSubscription": {
+          "description": "The quota for maximum number of Tebibytes per subscription",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaItem"
+          }
+        },
+        "totalDPVolumesPerSubscription": {
+          "description": "The quota for maximum number of data protection volumes per subscription.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaItem"
+          }
+        },
+        "totalVolumesPerSubscription": {
+          "description": "The quota for maximum number of volumes per subscription.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaItem"
+          }
         }
       }
     },
@@ -3112,6 +3285,19 @@
         },
         "backupOperators": {
           "description": "Users to be added to the Built-in Backup Operator active directory group. A list of unique usernames without domain specifier",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "example": [
+            "user1",
+            "user2"
+          ]
+        },
+        "administrators": {
+          "description": "Users to be added to the Built-in Administrators active directory group. A list of unique usernames without domain specifier",
           "type": "array",
           "items": {
             "type": "string",
@@ -3342,6 +3528,12 @@
           },
           "example": "Manual",
           "default": "Auto"
+        },
+        "coolAccess": {
+          "type": "boolean",
+          "default": false,
+          "example": false,
+          "description": "If enabled (true) the pool can contain cool Access enabled volumes."
         }
       }
     },
@@ -3729,6 +3921,29 @@
           "description": "Specifies whether LDAP is enabled or not for a given NFS volume.",
           "example": false,
           "default": false
+        },
+        "coolAccess": {
+          "type": "boolean",
+          "description": "Specifies whether Cool Access(tiering) is enabled for the volume.",
+          "example": false,
+          "default": false
+        },
+        "coolnessPeriod": {
+          "type": "integer",
+          "description": "Specifies the number of days after which data that is not accessed by clients will be tiered.",
+          "example": 7,
+          "minimum": 7,
+          "maximum": 63,
+          "format": "int32"
+        },
+        "unixPermissions": {
+          "type": "string",
+          "description": "UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.",
+          "minLength": 4,
+          "maxLength": 4,
+          "x-nullable": true,
+          "example": "0770",
+          "default": "0770"
         }
       }
     },
@@ -3806,6 +4021,19 @@
           "description": "Has root access to volume",
           "example": true,
           "default": true
+        },
+        "chownMode": {
+          "type": "string",
+          "description": "This parameter specifies who is authorized to change the ownership of a file. restricted - Only root user can change the ownership of the file. unrestricted - Non-root users can change ownership of files that they own.",
+          "default": "Restricted",
+          "enum": [
+            "Restricted",
+            "Unrestricted"
+          ],
+          "x-ms-enum": {
+            "name": "ChownMode",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5019,6 +5247,77 @@
           "type": "string",
           "readOnly": true,
           "description": "Displays error message if the backup is in an error state"
+        },
+        "lastTransferSize": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Displays the last transfer size"
+        },
+        "lastTransferType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Displays the last transfer type"
+        },
+        "totalTransferBytes": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Displays the total bytes transferred"
+        }
+      }
+    },
+    "restoreStatus": {
+      "description": "Restore status",
+      "type": "object",
+      "properties": {
+        "healthy": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Restore health status"
+        },
+        "relationshipStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Status of the restore SnapMirror relationship",
+          "enum": [
+            "Idle",
+            "Transferring"
+          ],
+          "x-ms-enum": {
+            "name": "RelationshipStatus",
+            "modelAsString": true
+          }
+        },
+        "mirrorState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of the restore",
+          "enum": [
+            "Uninitialized",
+            "Mirrored",
+            "Broken"
+          ],
+          "x-ms-enum": {
+            "name": "MirrorState",
+            "modelAsString": true
+          }
+        },
+        "unhealthyReason": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Reason for the unhealthy restore relationship"
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Displays error message if the restore is in an error state"
+        },
+        "totalTransferBytes": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Displays the total bytes transferred"
         }
       }
     },
@@ -5150,7 +5449,7 @@
       "in": "query",
       "type": "string",
       "required": true,
-      "default": "2021-02-01"
+      "default": "2021-04-01"
     }
   }
 }
