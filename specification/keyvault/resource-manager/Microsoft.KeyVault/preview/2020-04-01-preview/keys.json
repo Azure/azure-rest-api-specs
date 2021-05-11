@@ -350,55 +350,6 @@
     }
   },
   "definitions": {
-    "Attributes": {
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Determines whether or not the object is enabled."
-        },
-        "nbf": {
-          "x-ms-client-name": "NotBefore",
-          "type": "integer",
-          "format": "int64",
-          "description": "Not before date in seconds since 1970-01-01T00:00:00Z."
-        },
-        "exp": {
-          "x-ms-client-name": "Expires",
-          "type": "integer",
-          "format": "int64",
-          "description": "Expiry date in seconds since 1970-01-01T00:00:00Z."
-        },
-        "created": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true,
-          "description": "Creation time in seconds since 1970-01-01T00:00:00Z."
-        },
-        "updated": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true,
-          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z."
-        },
-        "recoveryLevel": {
-          "type": "string",
-          "description": "The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.",
-          "enum": [
-            "Purgeable",
-            "Recoverable+Purgeable",
-            "Recoverable",
-            "Recoverable+ProtectedSubscription"
-          ],
-          "x-ms-enum": {
-            "name": "DeletionRecoveryLevel",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "x-nullable": false
-        }
-      },
-      "description": "The object attributes managed by the Azure Key Vault service."
-    },
     "KeyProperties": {
       "properties": {
         "attributes": {
@@ -473,11 +424,52 @@
       "description": "The properties of the key."
     },
     "KeyAttributes": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Attributes"
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether or not the object is enabled."
+        },
+        "nbf": {
+          "x-ms-client-name": "NotBefore",
+          "type": "integer",
+          "format": "int64",
+          "description": "Not before date in seconds since 1970-01-01T00:00:00Z."
+        },
+        "exp": {
+          "x-ms-client-name": "Expires",
+          "type": "integer",
+          "format": "int64",
+          "description": "Expiry date in seconds since 1970-01-01T00:00:00Z."
+        },
+        "created": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Creation time in seconds since 1970-01-01T00:00:00Z."
+        },
+        "updated": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z."
+        },
+        "recoveryLevel": {
+          "type": "string",
+          "description": "The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.",
+          "enum": [
+            "Purgeable",
+            "Recoverable+Purgeable",
+            "Recoverable",
+            "Recoverable+ProtectedSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "DeletionRecoveryLevel",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-nullable": false
         }
-      ],
+      },
       "description": "The attributes of the key."
     },
     "KeyCreateParameters": {
