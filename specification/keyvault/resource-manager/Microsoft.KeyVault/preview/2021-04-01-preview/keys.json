@@ -425,7 +425,7 @@
           "required": false,
           "description": "The parameters to set rotation policy for the key."
         },
-        "rotationPolicy":{
+        "rotationPolicy": {
           "$ref": "#/definitions/RotationPolicy",
           "description": "Key rotation policy in response. It will be omitted in input."
         }
@@ -567,19 +567,19 @@
       },
       "description": "The parameters only used for setting key rotation policy. It will be omitted in output."
     },
-    "RotationPolicy":{
+    "RotationPolicy": {
       "properties": {
-        "attributes":{
+        "attributes": {
           "$ref": "#/definitions/KeyRotationPolicyAttributes",
           "description": "The attributes of key rotation policy."
-         },
-        "lifetimeActions":{
+        },
+        "lifetimeActions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LifetimeAction"
           },
           "description": "The lifetimeActions for key rotation action."
-         }
+        }
       }
     },
     "KeyRotationPolicyAttributes": {
@@ -604,11 +604,11 @@
     },
     "LifetimeAction": {
       "properties": {
-        "trigger":{
+        "trigger": {
           "$ref": "#/definitions/Trigger",
           "description": "The trigger of key rotation policy lifetimeAction."
         },
-        "action":{
+        "action": {
           "$ref": "#/definitions/Action",
           "description": "The action of key rotation policy lifetimeAction."
         }
@@ -616,19 +616,19 @@
     },
     "Trigger": {
       "properties": {
-        "timeAfterCreate":{
+        "timeAfterCreate": {
           "type": "string",
           "description": "The time duration after key creation to rotate the key. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'."
         },
-        "timeBeforeExpiry":{
+        "timeBeforeExpiry": {
           "type": "string",
           "description": "The time duration before key expiring to rotate the key. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'."
         }
       }
     },
     "Action": {
-      "properties":{
-        "type":{
+      "properties": {
+        "type": {
           "type": "string",
           "description": "The type of action.",
           "enum": [
