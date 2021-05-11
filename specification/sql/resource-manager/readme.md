@@ -373,6 +373,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 - Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
+- Microsoft.Sql/preview/2021-02-01-preview/ManagedDatabases.json
 
 
 # Needed when there is more than one input file
