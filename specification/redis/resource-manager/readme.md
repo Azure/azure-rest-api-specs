@@ -26,10 +26,18 @@ These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06
+tag: package-2020-12
 ```
 
 
+### Tag: package-2020-12
+
+These settings apply only when `--tag=package-2020-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-12'
+input-file:
+  - Microsoft.Cache/stable/2020-12-01/redis.json
+```
 ### Tag: package-2020-06
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
@@ -38,6 +46,7 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 input-file:
   - Microsoft.Cache/stable/2020-06-01/redis.json
 ```
+
 ### Tag: package-2019-07-preview
 
 These settings apply only when `--tag=package-2019-07-preview` is specified on the command line.
@@ -242,6 +251,21 @@ directive:
       - $.definitions.RedisCommonProperties.properties.enableNonSslPort
     from: redis.json
     reason: this will result in breaking change
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isMaster."
+    where:
+      - $.definitions.RedisInstanceDetails.properties.isMaster
+    from: redis.json
+    reason: this will result in breaking change
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isPrimary"
+    where:
+      - $.definitions.RedisInstanceDetails.properties.isPrimary
+    from: redis.json
+    reason: this will result in breaking change
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isDataAction"
+    where:
+      - $.definitions.Operation.properties.isDataAction
+    from: types.json
+    reason: its per the RPC specification
   - suppress: R2017  # PUT request and response should be of same type "
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/linkedServers/{linkedServerName}"].put
