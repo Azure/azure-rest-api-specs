@@ -635,14 +635,6 @@
       "description": "Dynamics linked service properties.",
       "properties": {
         "deploymentType": {
-          "x-ms-enum": {
-            "name": "DynamicsDeploymentType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Online",
-            "OnPremisesWithIfd"
-          ],
           "type": "object",
           "description": "The deployment type of the Dynamics instance. 'Online' for Dynamics Online and 'OnPremisesWithIfd' for Dynamics on-premises with Ifd. Type: string (or Expression with resultType string)."
         },
@@ -663,15 +655,6 @@
           "description": "The organization name of the Dynamics instance. The property is required for on-prem and required for online when there are more than one Dynamics instances associated with the user. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
-          "x-ms-enum": {
-            "name": "DynamicsAuthenticationType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Office365",
-            "Ifd",
-            "AADServicePrincipal"
-          ],
           "type": "object",
           "description": "The authentication type to connect to Dynamics server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
         },
@@ -688,14 +671,6 @@
           "description": "The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalCredentialType": {
-          "x-ms-enum": {
-            "name": "DynamicsServicePrincipalCredentialType",
-            "modelAsString": true
-          },
-          "enum": [
-            "ServicePrincipalKey",
-            "ServicePrincipalCert"
-          ],
           "type": "object",
           "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
         },
@@ -712,6 +687,31 @@
         "deploymentType",
         "authenticationType"
       ]
+    },
+    "DynamicsDeploymentType": {
+      "description": "All available dynamicsDeploymentType values.",
+      "type": "string",
+      "enum": [
+        "Online",
+        "OnPremisesWithIfd"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicsDeploymentType",
+        "modelAsString": true
+      }
+    },
+    "DynamicsAuthenticationType": {
+      "description": "All available dynamicsAuthenticationType values.",
+      "type": "string",
+      "enum": [
+        "Office365",
+        "Ifd",
+        "AADServicePrincipal"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicsAuthenticationType",
+        "modelAsString": true
+      }
     },
     "DynamicsCrmLinkedService": {
       "x-ms-discriminator-value": "DynamicsCrm",
@@ -737,15 +737,7 @@
       "description": "Dynamics CRM linked service properties.",
       "properties": {
         "deploymentType": {
-          "x-ms-enum": {
-            "name": "DynamicsDeploymentType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Online",
-            "OnPremisesWithIfd"
-          ],
-          "type": "string",
+          "type": "object",
           "description": "The deployment type of the Dynamics CRM instance. 'Online' for Dynamics CRM Online and 'OnPremisesWithIfd' for Dynamics CRM on-premises with Ifd. Type: string (or Expression with resultType string)."
         },
         "hostName": {
@@ -765,16 +757,7 @@
           "description": "The organization name of the Dynamics CRM instance. The property is required for on-prem and required for online when there are more than one Dynamics CRM instances associated with the user. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
-          "x-ms-enum": {
-            "name": "DynamicsAuthenticationType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Office365",
-            "Ifd",
-            "AADServicePrincipal"
-          ],
-          "type": "string",
+          "type": "object",
           "description": "The authentication type to connect to Dynamics CRM server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
         },
         "username": {
@@ -790,14 +773,6 @@
           "description": "The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalCredentialType": {
-          "x-ms-enum": {
-            "name": "DynamicsServicePrincipalCredentialType",
-            "modelAsString": true
-          },
-          "enum": [
-            "ServicePrincipalKey",
-            "ServicePrincipalCert"
-          ],
           "type": "object",
           "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
         },
@@ -814,6 +789,18 @@
         "deploymentType",
         "authenticationType"
       ]
+    },
+    "ServicePrincipalCredentialType": {
+      "description": "All available servicePrincipalCredentialType values.",
+      "type": "string",
+      "enum": [
+        "ServicePrincipalKey",
+        "ServicePrincipalCert"
+      ],
+      "x-ms-enum": {
+        "name": "ServicePrincipalCredentialType",
+        "modelAsString": true
+      }
     },
     "CommonDataServiceForAppsLinkedService": {
       "x-ms-discriminator-value": "CommonDataServiceForApps",
@@ -839,15 +826,7 @@
       "description": "Common Data Service for Apps linked service properties.",
       "properties": {
         "deploymentType": {
-          "x-ms-enum": {
-            "name": "DynamicsDeploymentType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Online",
-            "OnPremisesWithIfd"
-          ],
-          "type": "string",
+          "type": "object",
           "description": "The deployment type of the Common Data Service for Apps instance. 'Online' for Common Data Service for Apps Online and 'OnPremisesWithIfd' for Common Data Service for Apps on-premises with Ifd. Type: string (or Expression with resultType string)."
         },
         "hostName": {
@@ -867,16 +846,7 @@
           "description": "The organization name of the Common Data Service for Apps instance. The property is required for on-prem and required for online when there are more than one Common Data Service for Apps instances associated with the user. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
-          "x-ms-enum": {
-            "name": "DynamicsAuthenticationType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Office365",
-            "Ifd",
-            "AADServicePrincipal"
-          ],
-          "type": "string",
+          "type": "object",
           "description": "The authentication type to connect to Common Data Service for Apps server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
         },
         "username": {
@@ -892,14 +862,6 @@
           "description": "The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalCredentialType": {
-          "x-ms-enum": {
-            "name": "DynamicsServicePrincipalCredentialType",
-            "modelAsString": true
-          },
-          "enum": [
-            "ServicePrincipalKey",
-            "ServicePrincipalCert"
-          ],
           "type": "object",
           "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
         },
@@ -5380,15 +5342,6 @@
           "description": "The URI for the script action."
         },
         "roles": {
-          "x-ms-enum": {
-            "name": "HdiNodeTypes",
-            "modelAsString": true
-          },
-          "enum": [
-            "Headnode",
-            "Workernode",
-            "Zookeeper"
-          ],
           "type": "object",
           "description": "The node types on which the script action should be executed."
         },
@@ -5402,6 +5355,19 @@
         "uri",
         "roles"
       ]
+    },
+    "HdiNodeTypes": {
+      "description": "All available HdiNodeTypes values.",
+      "type": "string",
+      "enum": [
+        "Headnode",
+        "Workernode",
+        "Zookeeper"
+      ],
+      "x-ms-enum": {
+        "name": "HdiNodeTypes",
+        "modelAsString": true
+      }
     },
     "AzureDataLakeAnalyticsLinkedService": {
       "x-ms-discriminator-value": "AzureDataLakeAnalytics",
