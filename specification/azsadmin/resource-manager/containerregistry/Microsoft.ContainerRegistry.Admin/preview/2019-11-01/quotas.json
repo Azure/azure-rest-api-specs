@@ -30,13 +30,13 @@
         "operationId": "ContainerRegistryQuotas_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "containerregistry.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "containerregistry.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/QuotaNameParameter"
@@ -55,7 +55,7 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "containerregistry.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -73,13 +73,13 @@
         "operationId": "ContainerRegistryQuotas_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "containerregistry.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "containerregistry.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/QuotaNameParameter"
@@ -95,7 +95,7 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "containerregistry.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -113,13 +113,13 @@
         "operationId": "ContainerRegistryQuotas_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "containerregistry.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "containerregistry.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/QuotaNameParameter"
@@ -135,7 +135,7 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "containerregistry.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -155,13 +155,13 @@
         "operationId": "ContainerRegistryQuotas_List",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "containerregistry.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "containerregistry.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -174,7 +174,7 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "containerregistry.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -182,28 +182,6 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "Base resource object.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource Name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource Type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "ContainerRegistryQuota": {
       "description": "Container registry quota.",
       "type": "object",
@@ -216,7 +194,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "containerregistry.json#/definitions/Resource"
         }
       ]
     },
@@ -250,67 +228,9 @@
           }
         }
       }
-    },
-    "ErrorResponse": {
-      "description": "The error response for request which failed.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "description": "The error description code.",
-              "type": "string",
-              "readOnly": true
-            },
-            "message": {
-              "description": "The error description message.",
-              "type": "string",
-              "readOnly": true
-            },
-            "target": {
-              "description": "The error target description.",
-              "type": "string",
-              "readOnly": true
-            },
-            "details": {
-              "description": "The error details information.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            }
-          }
-        }
-      }
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "description": "REST Api Version.",
-      "name": "api-version",
-      "type": "string",
-      "in": "query",
-      "required": true
-    },
-    "LocationParameter": {
-      "description": "Resource location.",
-      "name": "location",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "SubscriptionIdParameter": {
-      "description": "Subscription Id.",
-      "name": "subscriptionId",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
     "QuotaNameParameter": {
       "description": "The name of the container registry quota.",
       "name": "quotaName",

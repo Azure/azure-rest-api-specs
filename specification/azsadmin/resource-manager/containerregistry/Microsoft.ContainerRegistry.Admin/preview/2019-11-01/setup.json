@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/setup/start": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/setup": {
       "post": {
         "x-ms-examples": {
           "Invokes container registry certificate uploading and ACR service deployment.": {
@@ -30,10 +30,13 @@
         "operationId": "ContainerRegistrySetup_Start",
         "parameters": [
           {
-            "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
+            "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/ApiVersionParameter"
+            "$ref": "containerregistry.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "containerregistry.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "startSetupRequest",
@@ -55,13 +58,11 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "quotas.json#/definitions/ErrorResponse"
+              "$ref": "containerregistry.json#/definitions/ErrorResponse"
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/setup": {
+      },
       "get": {
         "x-ms-examples": {
           "Returns the status of the container registry setup.": {
@@ -75,10 +76,10 @@
         "operationId": "ContainerRegistrySetup_Get",
         "parameters": [
           {
-            "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
+            "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/ApiVersionParameter"
+            "$ref": "containerregistry.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -91,7 +92,7 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "quotas.json#/definitions/ErrorResponse"
+              "$ref": "containerregistry.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -111,7 +112,7 @@
       },
       "allOf": [
         {
-          "$ref": "quotas.json#/definitions/Resource"
+          "$ref": "containerregistry.json#/definitions/Resource"
         }
       ]
     },
@@ -141,7 +142,7 @@
       },
       "allOf": [
         {
-          "$ref": "quotas.json#/definitions/Resource"
+          "$ref": "containerregistry.json#/definitions/Resource"
         }
       ]
     },
@@ -167,7 +168,7 @@
       },
       "allOf": [
         {
-          "$ref": "quotas.json#/definitions/Resource"
+          "$ref": "containerregistry.json#/definitions/Resource"
         }
       ]
     },
