@@ -250,33 +250,24 @@
       }
     },
     "EntityQueryKind": {
-      "description": "Describes an Entity query resource with kind.",
-      "properties": {
-        "kind": {
-          "description": "The kind of the entity query",
-          "enum": [
-            "Expansion",
-            "Insight"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "EntityQueryKind",
-            "values": [
-              {
-                "value": "Expansion"
-              },
-              {
-                "value": "Insight"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "kind"
+      "description": "The kind of the entity query",
+      "enum": [
+        "Expansion",
+        "Insight"
       ],
-      "type": "object"
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityQueryKind",
+        "values": [
+          {
+            "value": "Expansion"
+          },
+          {
+            "value": "Insight"
+          }
+        ]
+      }
     },
     "EntityQueryList": {
       "description": "List of all the entity queries.",
@@ -302,13 +293,16 @@
       "allOf": [
         {
           "$ref": "../../../common/1.0/types.json#/definitions/ResourceWithEtag"
-        },
-        {
-          "$ref": "#/definitions/EntityQueryKind"
         }
       ],
       "description": "Specific entity query.",
       "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EntityQueryKind",
+          "description": "the entity query kind"
+        }
+      },
       "type": "object",
       "required": [
         "kind"
