@@ -756,8 +756,8 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "MatrixRoute": {
-            "$ref": "./examples/PostMatrixRouteCalculate.json"
+          "PostRouteMatrix": {
+            "$ref": "./examples/PostRouteMatrix.json"
           }
         },
         "parameters": [
@@ -831,12 +831,12 @@
             "$ref": "#/parameters/VehicleLoadType"
           },
           {
-            "name": "routeMatrixBody",
+            "name": "postRouteMatrixRequestBody",
             "description": "The matrix of origin and destination coordinates to compute the route distance, travel time and other summary for each cell of the matrix based on the input parameters. The minimum and the maximum cell count supported are 1 and **700** for async and **100** for sync respectively. For example, it can be 35 origins and 20 destinations or 25 origins and 25 destinations for async API.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RouteMatrixRequestBody"
+              "$ref": "#/definitions/PostRouteMatrixRequestBody"
             }
           }
         ],
@@ -844,7 +844,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RouteMatrixResponse"
+              "$ref": "#/definitions/PostRouteMatrixResponse"
             }
           },
           "202": {
@@ -865,10 +865,7 @@
           "500": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/route/directions/{format}": {
@@ -1228,12 +1225,12 @@
             "$ref": "#/parameters/AuxiliaryPowerInkW"
           },
           {
-            "name": "routeDirectionsRequestBody",
+            "name": "postRouteDirectionsRequestBody",
             "description": "Used for reconstructing a route and for calculating zero or more alternative routes to this reference route.  The provided sequence of coordinates is used as input for route reconstruction. The alternative routes  are calculated between the origin and destination points specified in the base path parameter locations.  If both minDeviationDistance and minDeviationTime are set to zero, then these origin and destination points  are expected to be at (or very near) the beginning and end of the reference route, respectively. Intermediate  locations (waypoints) are not supported when using supportingPoints.\n\nSetting at least one of minDeviationDistance or minDeviationTime to a value greater than zero has the  following consequences:\n\n*  The origin point of the calculateRoute request must be on (or very near) the input reference route. If  this is not the case, an error is returned. However, the origin point does not need to be at the beginning of  the input reference route (it can be thought of as the current vehicle position on the reference route).\n*  The reference route, returned as the first route in the calculateRoute response, will start at the origin  point specified in the calculateRoute request. The initial part of the input reference route up until the  origin point will be excluded from the response.\n*  The values of minDeviationDistance and minDeviationTime determine how far alternative routes will be  guaranteed to follow the reference route from the origin point onwards.\n*  The route must use departAt.\n*  The vehicleHeading is ignored.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RouteDirectionsRequestBody"
+              "$ref": "#/definitions/PostRouteDirectionsRequestBody"
             }
           }
         ],
@@ -1408,7 +1405,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RouteRangeResponse"
+              "$ref": "#/definitions/GetRouteRangeResponse"
             }
           },
           "400": {
@@ -1456,7 +1453,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
           },
           {
-            "name": "routeDirectionsBatchRequestBody",
+            "name": "postRouteDirectionsBatchRequestBody",
             "in": "body",
             "description": "The list of route directions queries/requests to process. The list can contain  a max of 700 queries for async and 100 queries for sync version and must contain at least 1 query.",
             "required": true,
@@ -1469,7 +1466,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RouteDirectionsBatchResponse"
+              "$ref": "#/definitions/PostRouteDirectionsBatchResponse"
             }
           },
           "202": {
@@ -1490,15 +1487,12 @@
           "500": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     }
   },
   "definitions": {
-    "RouteDirectionsRequestBody": {
+    "PostRouteDirectionsRequestBody": {
       "type": "object",
       "description": "Post body parameters for Route directions.",
       "properties": {
@@ -2224,7 +2218,7 @@
         }
       }
     },
-    "RouteRangeResponse": {
+    "GetRouteRangeResponse": {
       "description": "This object is returned from a successful Route Reachable Range call",
       "type": "object",
       "properties": {
@@ -2289,7 +2283,7 @@
         }
       }
     },
-    "RouteMatrixResponse": {
+    "PostRouteMatrixResponse": {
       "description": "This object is returned from a successful Route Matrix call. For ex, if 2 origins and 3 destinations are provided, there are going to 2 arrays with 3 elements in each. Each element's content depends on the options provided in the query.",
       "type": "object",
       "properties": {
@@ -2357,7 +2351,7 @@
         }
       }
     },
-    "RouteMatrixRequestBody": {
+    "PostRouteMatrixRequestBody": {
       "description": "An object with a matrix of coordinates.",
       "type": "object",
       "properties": {
@@ -2369,7 +2363,7 @@
         }
       }
     },
-    "RouteDirectionsBatchResponse": {
+    "PostRouteDirectionsBatchResponse": {
       "description": "This object is returned from a successful Route Directions Batch service call.",
       "type": "object",
       "allOf": [
