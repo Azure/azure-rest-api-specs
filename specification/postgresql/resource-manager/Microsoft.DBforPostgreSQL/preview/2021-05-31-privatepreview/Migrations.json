@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLServerManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
-    "version": "2020-11-05-preview"
+    "version": "2021-05-31-privatepreview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationId}": {
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationName}": {
       "put": {
         "tags": [
           "Migrations"
@@ -57,7 +57,7 @@
             "$ref": "#/parameters/TargetDBServerNameParameter"
           },
           {
-            "$ref": "#/parameters/MigrationIdParameter"
+            "$ref": "#/parameters/migrationNameParameter"
           },
           {
             "name": "parameters",
@@ -112,7 +112,7 @@
             "$ref": "#/parameters/TargetDBServerNameParameter"
           },
           {
-            "$ref": "#/parameters/MigrationIdParameter"
+            "$ref": "#/parameters/migrationNameParameter"
           }
         ],
         "responses": {
@@ -152,7 +152,7 @@
             "$ref": "#/parameters/TargetDBServerNameParameter"
           },
           {
-            "$ref": "#/parameters/MigrationIdParameter"
+            "$ref": "#/parameters/migrationNameParameter"
           },
           {
             "name": "parameters",
@@ -201,7 +201,7 @@
             "$ref": "#/parameters/TargetDBServerNameParameter"
           },
           {
-            "$ref": "#/parameters/MigrationIdParameter"
+            "$ref": "#/parameters/migrationNameParameter"
           }
         ],
         "responses": {
@@ -296,12 +296,9 @@
       "type": "object",
       "properties": {
         "migrationId": {
-          "format": "uuid",
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "format": "uuid",
+          "readOnly": true
         },
         "migrationDetailsLevel": {
           "$ref": "#/definitions/MigrationDetailsLevel",
@@ -679,12 +676,11 @@
       "description": "The name of the target database server.",
       "x-ms-parameter-location": "method"
     },
-    "MigrationIdParameter": {
-      "name": "migrationId",
+    "migrationNameParameter": {
+      "name": "migrationName",
       "in": "path",
       "required": true,
       "type": "string",
-      "format": "uuid",
       "description": "The name of the migration.",
       "x-ms-parameter-location": "method"
     }
