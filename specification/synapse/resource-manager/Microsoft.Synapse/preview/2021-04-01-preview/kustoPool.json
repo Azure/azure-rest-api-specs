@@ -2750,6 +2750,41 @@
         }
       },
       "description": "Tables that will be included and excluded in the follower database"
+    },
+    "FollowerDatabaseListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FollowerDatabaseDefinition"
+          },
+          "description": "The list of follower database result."
+        }
+      },
+      "description": "The list Kusto database principals operation response."
+    },
+    "FollowerDatabaseDefinition": {
+      "type": "object",
+      "required": [
+        "clusterResourceId",
+        "attachedDatabaseConfigurationName"
+      ],
+      "properties": {
+        "clusterResourceId": {
+          "type": "string",
+          "description": "Resource id of the cluster that follows a database owned by this cluster."
+        },
+        "attachedDatabaseConfigurationName": {
+          "type": "string",
+          "description": "Resource name of the attached database configuration in the follower cluster."
+        },
+        "databaseName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The database name owned by this cluster that was followed. * in case following all databases."
+        }
+      },
+      "description": "A class representing follower database request."
     }
   },
   "parameters": {
@@ -2792,6 +2827,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "AttachedDatabaseConfigurationNameParameter": {
+      "name": "attachedDatabaseConfigurationName",
+      "in": "path",
+      "description": "The name of the attached database configuration.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
@@ -2804,48 +2847,5 @@
         "user_impersonation": "impersonate your user account"
       }
     }
-  },
-  "AttachedDatabaseConfigurationNameParameter": {
-    "name": "attachedDatabaseConfigurationName",
-    "in": "path",
-    "description": "The name of the attached database configuration.",
-    "required": true,
-    "type": "string",
-    "x-ms-parameter-location": "method"
-  },
-  "FollowerDatabaseListResult": {
-    "properties": {
-      "value": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/FollowerDatabaseDefinition"
-        },
-        "description": "The list of follower database result."
-      }
-    },
-    "description": "The list Kusto database principals operation response."
-  },
-  "FollowerDatabaseDefinition": {
-    "type": "object",
-    "required": [
-      "clusterResourceId",
-      "attachedDatabaseConfigurationName"
-    ],
-    "properties": {
-      "clusterResourceId": {
-        "type": "string",
-        "description": "Resource id of the cluster that follows a database owned by this cluster."
-      },
-      "attachedDatabaseConfigurationName": {
-        "type": "string",
-        "description": "Resource name of the attached database configuration in the follower cluster."
-      },
-      "databaseName": {
-        "type": "string",
-        "readOnly": true,
-        "description": "The database name owned by this cluster that was followed. * in case following all databases."
-      }
-    },
-    "description": "A class representing follower database request."
   }
 }
