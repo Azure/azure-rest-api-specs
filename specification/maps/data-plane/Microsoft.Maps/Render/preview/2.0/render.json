@@ -127,31 +127,6 @@
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
-    },
-    "Text": {
-      "name": "text",
-      "in": "query",
-      "description": "Yes/no value to exclude textual data from response. Only images and country names will be in response.",
-      "type": "string",
-      "enum": [
-        "yes",
-        "no"
-      ],
-      "x-ms-enum": {
-        "name": "IncludeText",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "yes",
-            "description": "Include all textual data in response."
-          },
-          {
-            "value": "no",
-            "description": "Exclude textual data from response. Only images and country names will be in response."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -224,13 +199,25 @@
           }
         ],
         "produces": [
-          "application/json"
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/pbf",
+          "application/vnd.mapbox-vector-tile"
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The tile returned from a successful API call.",
             "schema": {
-              "$ref": "#/definitions/MapTileResultv2"
+              "type": "object",
+              "format": "file",
+              "readOnly": true
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the response."
+              }
             }
           },
           "400": {
@@ -250,14 +237,6 @@
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "MapTileResultv2": {
-      "description": "The tile returned from a successful API call.",
-      "type": "string",
-      "format": "binary",
-      "readOnly": true
     }
   }
 }

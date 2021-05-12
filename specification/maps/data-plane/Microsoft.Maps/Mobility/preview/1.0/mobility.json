@@ -818,7 +818,7 @@
               "leastTransfers"
             ],
             "x-ms-enum": {
-              "name": "TransitRouteType",
+              "name": "RouteType",
               "modelAsString": true,
               "values": [
                 {
@@ -1254,6 +1254,38 @@
         }
       }
     },
+    "TransitLineInfoResponse": {
+      "description": "This object is returned from a successful Transit Line Info call.",
+      "type": "object",
+      "properties": {
+        "lineGroup": {
+          "description": "Groups together all lines that are logically part of the same group. Typically contains 2 lines having the same agency and line, one going from A to B, and the other from B to A.",
+          "$ref": "#/definitions/ItineraryLineGroup"
+        },
+        "lines": {
+          "description": "The line group’s basic info and list of the lines.",
+          "$ref": "#/definitions/ItineraryLines"
+        },
+        "stops": {
+          "description": "List of stops the line group goes through.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LegStop"
+          }
+        },
+        "patterns": {
+          "description": "List of patterns this group is comprised of. A pattern consists of a stop sequence and shape per a line in GeoJSON format.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItineraryPattern"
+          }
+        },
+        "schedule": {
+          "description": "Line schedule for the current 24h. May be null in case no schedule exists for the current time.",
+          "$ref": "#/definitions/LineArrival"
+        }
+      }
+    },
     "TransitStopInfoResponse": {
       "description": "This object is returned from a successful Get Transit Stop Info call",
       "type": "object",
@@ -1303,38 +1335,6 @@
         "itineraryFare": {
           "description": "Itinerary level transit fare information. Returned only if fare information is available for the entire itinerary. [Get Metro Area Info API](https://aka.ms/AzureMapsMobilityMetroAreaInfo) can be requested to confirm if fare information is available in the metro area.",
           "$ref": "#/definitions/ItineraryFare"
-        }
-      }
-    },
-    "TransitLineInfoResponse": {
-      "description": "This object is returned from a successful Transit Line Info call.",
-      "type": "object",
-      "properties": {
-        "lineGroup": {
-          "description": "Groups together all lines that are logically part of the same group. Typically contains 2 lines having the same agency and line, one going from A to B, and the other from B to A.",
-          "$ref": "#/definitions/ItineraryLineGroup"
-        },
-        "lines": {
-          "description": "The line group’s basic info and list of the lines.",
-          "$ref": "#/definitions/ItineraryLines"
-        },
-        "stops": {
-          "description": "List of stops the line group goes through.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LegStop"
-          }
-        },
-        "patterns": {
-          "description": "List of patterns this group is comprised of. A pattern consists of a stop sequence and shape per a line in GeoJSON format.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ItineraryPattern"
-          }
-        },
-        "schedule": {
-          "description": "Line schedule for the current 24h. May be null in case no schedule exists for the current time.",
-          "$ref": "#/definitions/LineArrival"
         }
       }
     },
