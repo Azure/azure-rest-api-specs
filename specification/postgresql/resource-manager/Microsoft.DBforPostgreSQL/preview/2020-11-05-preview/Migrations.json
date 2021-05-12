@@ -265,6 +265,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -342,9 +345,6 @@
         },
         "triggerCutover": {
           "type": "boolean"
-        },
-        "cancel": {
-          "type": "boolean"
         }
       },
       "description": "Migration resource properties."
@@ -369,6 +369,13 @@
           "$ref": "#/definitions/MigrationResourcePropertiesForPatch",
           "description": "Migration resource properties.",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
         }
       },
       "description": "Represents a migration resource for patch."
@@ -390,9 +397,6 @@
           "type": "boolean"
         },
         "triggerCutover": {
-          "type": "boolean"
-        },
-        "cancel": {
           "type": "boolean"
         }
       },
