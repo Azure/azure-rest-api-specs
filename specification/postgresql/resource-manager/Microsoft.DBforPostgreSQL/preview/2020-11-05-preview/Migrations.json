@@ -297,19 +297,27 @@
       "properties": {
         "migrationId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "migrationDetailsLevel": {
-          "$ref": "#/definitions/MigrationDetailsLevel"
+          "$ref": "#/definitions/MigrationDetailsLevel",
+          "readOnly": true
         },
         "currentStatus": {
-          "$ref": "#/definitions/MigrationStatus"
+          "$ref": "#/definitions/MigrationStatus",
+          "readOnly": true
         },
         "sourceDBServerMetadata": {
-          "$ref": "#/definitions/DBServerMetadata"
+          "$ref": "#/definitions/DBServerMetadata",
+          "readOnly": true
         },
         "targetDBServerMetadata": {
-          "$ref": "#/definitions/DBServerMetadata"
+          "$ref": "#/definitions/DBServerMetadata",
+          "readOnly": true
         },
         "sourceDBServerResourceId": {
           "type": "string"
@@ -318,7 +326,8 @@
           "$ref": "#/definitions/MigrationSecretParameters"
         },
         "targetDBServerResourceId": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "targetDBServerSubnetResourceId": {
           "type": "string"
@@ -360,11 +369,12 @@
           "items": {
             "$ref": "#/definitions/MigrationResource"
           },
-          "description": "The list of migration resources"
+          "readOnly": true
         },
         "nextLink": {
           "description": "The link used to get the next page of migrations.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       },
       "description": "A list of migration resources."
@@ -456,7 +466,11 @@
         "aadSecret": {
           "type": "string",
           "x-ms-secret": true,
-          "x-ms-external": true
+          "x-ms-external": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "clientId": {
           "type": "string",
@@ -479,12 +493,20 @@
         "sourceServerPassword": {
           "type": "string",
           "x-ms-secret": true,
-          "x-ms-external": true
+          "x-ms-external": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "targetServerPassword": {
           "type": "string",
           "x-ms-secret": true,
-          "x-ms-external": true
+          "x-ms-external": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       },
       "description": "Server admin credentials."
@@ -552,13 +574,16 @@
       "type": "object",
       "properties": {
         "state": {
-          "$ref": "#/definitions/MigrationState"
+          "$ref": "#/definitions/MigrationState",
+          "readOnly": true
         },
         "error": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "currentSubStateDetails": {
-          "$ref": "#/definitions/MigrationSubStateDetails"
+          "$ref": "#/definitions/MigrationSubStateDetails",
+          "readOnly": true
         }
       },
       "description": "Migration status."
@@ -587,7 +612,8 @@
       "type": "object",
       "properties": {
         "currentSubState": {
-          "$ref": "#/definitions/MigrationSubState"
+          "$ref": "#/definitions/MigrationSubState",
+          "readOnly": true
         }
       },
       "description": "Migration sub state details."
