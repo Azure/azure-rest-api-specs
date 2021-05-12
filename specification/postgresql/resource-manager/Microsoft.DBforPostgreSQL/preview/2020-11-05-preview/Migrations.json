@@ -246,10 +246,13 @@
             "$ref": "#/parameters/TargetDBServerNameParameter"
           },
           {
-            "name": "migrationListFilter",
-            "in": "query",
+            "name": "parameters",
+            "in": "body",
             "required": false,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/MigrationListFilter"
+            },
+            "description": "The parameter to filter the list of migrations returned."
           }
         ],
         "responses": {
@@ -358,6 +361,10 @@
             "$ref": "#/definitions/MigrationResource"
           },
           "description": "The list of migration resources"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of migrations.",
+          "type": "string"
         }
       },
       "description": "A list of migration resources."
@@ -520,7 +527,7 @@
         "All"
       ],
       "type": "string",
-      "description": "Migration list filter.",
+      "description": "Migration list filter. Retrieves either active migrations or all migrations.",
       "x-ms-enum": {
         "name": "MigrationListFilter",
         "modelAsString": true
