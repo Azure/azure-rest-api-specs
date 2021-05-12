@@ -1,0 +1,76 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Feature management schemas",
+    "description": "Describes schemas for Azure App Configuration feature management types."
+  },
+  "paths": {},
+  "definitions": {
+    "FeatureFlag": {
+      "description": "A feature flag used to enable/disable features.",
+      "type": "object",
+      "required": [
+        "id",
+        "enabled",
+        "conditions"
+      ],
+      "properties": {
+        "id": {
+          "description": "An ID used to uniquely identify and reference the feature.",
+          "type": "string",
+          "pattern": "^(.*)$"
+        },
+        "description": {
+          "description": "A description of the feature.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "A display name for the feature to use for display rather than the ID.",
+          "type": "string",
+          "pattern": "^(.*)$"
+        },
+        "enabled": {
+          "description": "If enabled is false the feature is off. If enabled is true and there are no conditions (null or empty) then the feature is on. Otherwise, if enabled is true and there are conditions, the state of the feature is dependent upon the evaluation of the configured conditions. ",
+          "type": "boolean"
+        },
+        "conditions": {
+          "description": "The declaration of conditions used to dynamically enable features.",
+          "$ref": "#/definitions/FeatureFlagConditions"
+        }
+      }
+    },
+    "FeatureFlagConditions": {
+      "description": "The declaration of conditions used to dynamically enable features.",
+      "type": "object",
+      "properties": {
+        "client_filters": {
+          "description": "Filters that must run on the client and be evaluated as true for the feature to be considered enabled.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientFilter"
+          }
+        }
+      }
+    },
+    "ClientFilter": {
+      "description": "A filter that must run on the client and be evaluated as true for the feature to be considered enabled.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "The name used to refer to and require a client filter.",
+          "type": "string",
+          "pattern": "^(.*)$"
+        },
+        "parameters": {
+          "description": "Custom parameters for a given client filter. A client filter can require any set of parameters of any type.",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    }
+  }
+}
