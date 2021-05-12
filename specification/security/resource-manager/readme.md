@@ -70,7 +70,7 @@ directive:
     reason: There is no consistent implementation of operations api across existing versions
   - suppress: SECRET_PROPERTY
     from: ingestionSettings.json
-    where: $.definitions.IngestionSettingProperties.properties.token
+    where: $.definitions.IngestionSettingPropertiesWithToken.properties.token
     reason: Secrets are OK to return in a POST response.
   - suppress: SECRET_PROPERTY
     from: ingestionSettings.json

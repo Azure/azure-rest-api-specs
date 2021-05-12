@@ -131,6 +131,9 @@
           },
           {
             "$ref": "#/parameters/IngestionSettingName"
+          },
+          {
+            "$ref": "#/parameters/IngestionSetting"
           }
         ],
         "responses": {
@@ -213,7 +216,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IngestionSetting"
+              "$ref": "#/definitions/IngestionSettingWithToken"
             }
           },
           "default": {
@@ -270,6 +273,7 @@
       "description": "List of ingestion settings",
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "description": "List of ingestion settings",
           "items": {
@@ -299,7 +303,27 @@
         }
       ]
     },
+    "IngestionSettingWithToken": {
+      "type": "object",
+      "description": "Configures how to correlate scan data and logs with resources associated with the subscription.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Ingestion setting data",
+          "$ref": "#/definitions/IngestionSettingPropertiesWithToken"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "IngestionSettingProperties": {
+      "type": "object",
+      "description": "Ingestion setting data"
+    },
+    "IngestionSettingPropertiesWithToken": {
       "type": "object",
       "description": "Ingestion setting data",
       "properties": {
