@@ -18,7 +18,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-netapp
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-netapp-2021-04-01-preview
+  - tag: package-netapp-2021-02-01
   - tag: package-netapp-2020-12-01
   - tag: package-netapp-2020-11-01
   - tag: package-netapp-2020-09-01  
@@ -37,15 +37,15 @@ batch:
   - tag: package-2017-08-15
 ```
 
-### Tag: package-netapp-2021-04-01-preview and java
+### Tag: package-netapp-2021-02-01 and java
 
-These settings apply only when `--tag=package-netapp-2021-04-01-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-netapp-2021-02-01 --java` is specified on the command line.
 Please also specify the `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-netapp-2021-04-01' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-netapp-2021-02-01' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.netapp.v2024_04_01-preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2021_04_01_preview
+  namespace: com.microsoft.azure.management.netapp.v2021_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2021_02_01
 regenerate-manager: true
 generate-interface: true
 ```
