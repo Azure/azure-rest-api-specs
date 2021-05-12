@@ -1,0 +1,1392 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-01-01-preview",
+    "title": "SubscriptionClient",
+    "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountName}/providers/Microsoft.Subscription/createSubscription": {
+      "post": {
+        "description": "Creates an Azure subscription",
+        "operationId": "Subscriptions_CreateSubscriptionInEnrollmentAccount",
+        "x-ms-examples": {
+          "createLegacySubscription": {
+            "$ref": "./examples/createLegacySubscription.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Subscription creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "enrollmentAccountName",
+            "in": "path",
+            "description": "The name of the enrollment account to which the subscription will be billed.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The subscription creation parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationParameters"
+            }
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {
+      "post": {
+        "operationId": "Subscription_Cancel",
+        "x-ms-examples": {
+          "cancelSubscription": {
+            "$ref": "./examples/cancelSubscription.json"
+          }
+        },
+        "description": "The operation to cancel a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CanceledSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/rename": {
+      "post": {
+        "operationId": "Subscription_Rename",
+        "x-ms-examples": {
+          "renameSubscription": {
+            "$ref": "./examples/renameSubscription.json"
+          }
+        },
+        "description": "The operation to rename a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RenamedSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/enable": {
+      "post": {
+        "operationId": "Subscription_Enable",
+        "x-ms-examples": {
+          "enableSubscription": {
+            "$ref": "./examples/enableSubscription.json"
+          }
+        },
+        "description": "The operation to enable a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnabledSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/subscriptionOperations/{operationId}": {
+      "get": {
+        "description": "Get the status of the pending Microsoft.Subscription API operations.",
+        "operationId": "SubscriptionOperation_Get",
+        "x-ms-examples": {
+          "getPendingSubscriptionOperations": {
+            "$ref": "./examples/getSubscriptionOperation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Successful completion of the asynchronous operation",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Subscription update is in progress.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the asynchronous operation can be checked.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/operations": {
+      "get": {
+        "description": "Lists all of the available Microsoft.Subscription API operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "getOperations": {
+            "$ref": "./examples/getOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Subscription/createSubscription": {
+      "post": {
+        "description": "The operation to create a new WebDirect or EA Azure subscription.",
+        "operationId": "Subscriptions_CreateSubscription",
+        "x-ms-examples": {
+          "createSubscription": {
+            "$ref": "./examples/createSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Subscription creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "billingAccountName",
+            "in": "path",
+            "description": "The name of the Microsoft Customer Agreement billing account for which you want to create the subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "billingProfileName",
+            "in": "path",
+            "description": "The name of the billing profile in the billing account for which you want to create the subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invoiceSectionName",
+            "in": "path",
+            "description": "The name of the invoice section in the billing account for which you want to create the subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The subscription creation parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModernSubscriptionCreationParameters"
+            }
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/providers/Microsoft.Subscription/createSubscription": {
+      "post": {
+        "description": "The operation to create a new CSP subscription.",
+        "operationId": "Subscriptions_CreateCspSubscription",
+        "x-ms-examples": {
+          "createCspSubscription": {
+            "$ref": "./examples/createCspSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Subscription creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "billingAccountName",
+            "in": "path",
+            "description": "The name of the Microsoft Customer Agreement billing account for which you want to create the subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerName",
+            "in": "path",
+            "description": "The name of the customer.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The subscription creation parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModernCspSubscriptionCreationParameters"
+            }
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/aliases/{aliasName}": {
+      "put": {
+        "description": "Create Alias Subscription.",
+        "operationId": "Subscriptions_CreateAlias",
+        "x-ms-examples": {
+          "CreateAlias": {
+            "$ref": "./examples/createAlias.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionAliasResponse"
+            }
+          },
+          "201": {
+            "description": "Accepted. Subscription creation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionAliasResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutAliasRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "get": {
+        "description": "Get Alias Subscription.",
+        "operationId": "Subscriptions_GetAlias",
+        "x-ms-examples": {
+          "GetAlias": {
+            "$ref": "./examples/getAlias.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionAliasResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "delete": {
+        "description": "Delete Alias.",
+        "operationId": "Subscriptions_DeleteAlias",
+        "x-ms-examples": {
+          "DeleteAlias": {
+            "$ref": "./examples/deleteAlias.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deleted the alias"
+          },
+          "204": {
+            "description": "Alias does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/aliases": {
+      "get": {
+        "description": "List Alias Subscription.",
+        "operationId": "Subscriptions_ListAlias",
+        "x-ms-examples": {
+          "ListAlias": {
+            "$ref": "./examples/listAlias.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionAliasListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/policies/default": {
+      "put": {
+        "description": "Create or Update Subscription tenant policy for user's tenant.",
+        "operationId": "SubscriptionPolicy_AddUpdatePolicyForTenant",
+        "x-ms-examples": {
+          "TenantPolicy": {
+            "$ref": "./examples/changeTenantPolicy.json"
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Subscription tenant policy has been successfully created/updated.",
+            "schema": {
+              "$ref": "#/definitions/GetTenantPolicyResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutTenantPolicyRequestProperties"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "get": {
+        "description": "Get the subscription tenant policy for the user's tenant.",
+        "operationId": "SubscriptionPolicy_GetPolicyForTenant",
+        "x-ms-examples": {
+          "getTenantPolicy": {
+            "$ref": "./examples/getTenantPolicy.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription tenant policy details for user's tenant.",
+            "schema": {
+              "$ref": "#/definitions/GetTenantPolicyResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/policies": {
+      "get": {
+        "description": "Get the subscription tenant policy for the user's tenant.",
+        "operationId": "SubscriptionPolicy_ListPolicyForTenant",
+        "x-ms-examples": {
+          "getTenantPolicyList": {
+            "$ref": "./examples/getTenantPolicyList.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription tenant policy details for user's tenant.",
+            "schema": {
+              "$ref": "#/definitions/GetTenantPolicyListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Subscription/policies/default": {
+      "get": {
+        "description": "Get Billing Account Policy.",
+        "operationId": "BillingAccount_GetPolicy",
+        "x-ms-examples": {
+          "GetBillingAccountPolicy": {
+            "$ref": "./examples/getBillingAccountPolicy.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountPoliciesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/{subscriptionId}/acceptOwnership": {
+      "post": {
+        "description": "Redeem subscription.",
+        "operationId": "Subscriptions_Redeem",
+        "x-ms-examples": {
+          "RedeemSubscription": {
+            "$ref": "./examples/redeemSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "202": {
+            "description": "Accepted. Subscription redeem is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/{subscriptionId}/acceptOwnershipStatus": {
+      "get": {
+        "description": "Redeem subscription status.",
+        "operationId": "Subscriptions_RedeemStatus",
+        "x-ms-examples": {
+          "RedeemSubscriptionStatus": {
+            "$ref": "./examples/redeemSubscriptionStatus.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionAliasRedeemResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "CanceledSubscriptionId": {
+      "description": "The ID of the canceled subscription",
+      "properties": {
+        "value": {
+          "description": "The ID of the canceled subscription",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RenamedSubscriptionId": {
+      "description": "The ID of the subscriptions that is being renamed",
+      "properties": {
+        "value": {
+          "description": "The ID of the subscriptions that is being renamed",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnabledSubscriptionId": {
+      "description": "The ID of the subscriptions that is being enabled",
+      "properties": {
+        "value": {
+          "description": "The ID of the subscriptions that is being enabled",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionName": {
+      "type": "object",
+      "description": "The new name of the subscription.",
+      "properties": {
+        "subscriptionName": {
+          "type": "string",
+          "description": "New subscription name"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Subscription",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "AdPrincipal": {
+      "description": "Active Directory Principal who’ll get owner access on the new subscription.",
+      "properties": {
+        "objectId": {
+          "description": "Object id of the Principal",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objectId"
+      ]
+    },
+    "SubscriptionCreationResult": {
+      "description": "The created subscription object.",
+      "properties": {
+        "subscriptionLink": {
+          "description": "The link to the new subscription. Use this link to check the status of subscription creation operation.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionCreationParameters": {
+      "description": "Subscription Creation Parameters required to create a new Azure subscription.",
+      "properties": {
+        "displayName": {
+          "description": "The display name of the subscription.",
+          "type": "string"
+        },
+        "managementGroupId": {
+          "description": "The Management Group Id.",
+          "type": "string"
+        },
+        "owners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdPrincipal"
+          },
+          "description": "The list of principals that should be granted Owner access on the subscription. Principals should be of type User, Service Principal or Security Group."
+        },
+        "offerType": {
+          "description": "The offer type of the subscription. For example, MS-AZR-0017P (EnterpriseAgreement) and MS-AZR-0148P (EnterpriseAgreement devTest) are available. Only valid when creating a subscription in a enrollment account scope.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "offerType",
+            "modelAsString": true
+          },
+          "enum": [
+            "MS-AZR-0017P",
+            "MS-AZR-0148P"
+          ]
+        },
+        "additionalParameters": {
+          "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ModernSubscriptionCreationParameters": {
+      "description": "The parameters required to create a new subscription.",
+      "required": [
+        "displayName",
+        "skuId"
+      ],
+      "properties": {
+        "displayName": {
+          "description": "The friendly name of the subscription.",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The SKU ID of the Azure plan. Azure plan determines the pricing and service-level agreement of the subscription.  Use 001 for Microsoft Azure Plan and 002 for Microsoft Azure Plan for DevTest.",
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "If set, the cost center will show up on the Azure usage and charges file.",
+          "type": "string"
+        },
+        "owner": {
+          "description": "If specified, the AD principal will get owner access to the subscription, along with the user who is performing the create subscription operation",
+          "$ref": "#/definitions/AdPrincipal"
+        },
+        "managementGroupId": {
+          "description": "The identifier of the management group to which this subscription will be associated.",
+          "type": "string"
+        },
+        "additionalParameters": {
+          "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ModernCspSubscriptionCreationParameters": {
+      "description": "The parameters required to create a new CSP subscription.",
+      "required": [
+        "displayName",
+        "skuId"
+      ],
+      "properties": {
+        "displayName": {
+          "description": "The friendly name of the subscription.",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The SKU ID of the Azure plan. Azure plan determines the pricing and service-level agreement of the subscription.  Use 001 for Microsoft Azure Plan and 002 for Microsoft Azure Plan for DevTest.",
+          "type": "string"
+        },
+        "resellerId": {
+          "description": "Reseller ID, basically MPN Id.",
+          "type": "string"
+        }
+      }
+    },
+    "PutAliasRequest": {
+      "description": "The parameters required to create a new subscription.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PutAliasRequestProperties",
+          "description": "Put alias request properties."
+        }
+      }
+    },
+    "PutAliasRequestProperties": {
+      "description": "Put subscription properties.",
+      "required": [
+        "displayName",
+        "workload",
+        "billingScope"
+      ],
+      "properties": {
+        "displayName": {
+          "description": "The friendly name of the subscription.",
+          "type": "string"
+        },
+        "workload": {
+          "description": "The workload type of the subscription. It can be either Production or DevTest.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "workload",
+            "modelAsString": true
+          },
+          "enum": [
+            "Production",
+            "DevTest"
+          ]
+        },
+        "billingScope": {
+          "description": "Determines whether subscription is fieldLed, partnerLed or LegacyEA",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "This parameter can be used to create alias for existing subscription Id",
+          "type": "string"
+        },
+        "resellerId": {
+          "description": "Reseller Id",
+          "type": "string"
+        },
+        "additionalProperties": {
+          "$ref": "#/definitions/PutAliasRequestAdditionalProperties",
+          "description": "Put alias request additional properties."
+        }
+      }
+    },
+    "PutAliasRequestAdditionalProperties": {
+      "description": "Put subscription additional properties.",
+      "properties": {
+        "managementGroupId": {
+          "description": "Management group Id for the subscription.",
+          "type": "string"
+        },
+        "subscriptionTenantId": {
+          "description": "Tenant Id of the subscription",
+          "type": "string"
+        },
+        "subscriptionOwnerId": {
+          "description": "Owner Id of the subscription",
+          "type": "string"
+        },
+        "tags": {
+          "description": "tags for the subscription",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SubscriptionAliasResponse": {
+      "description": "Subscription Information with the alias.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the alias resource.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Alias ID.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type, Microsoft.Subscription/aliases.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SubscriptionAliasResponseProperties",
+          "description": "Subscription Alias response properties."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SubscriptionAliasResponseProperties": {
+      "description": "Put subscription creation result properties.",
+      "properties": {
+        "subscriptionId": {
+          "description": "Newly created subscription Id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "redeemUrl": {
+          "description": "Redeem url.",
+          "type": "string",
+          "readOnly": true
+        },
+        "redeemState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The redeem state of the resource.",
+          "enum": [
+            "Pending",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "RedeemState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SubscriptionAliasListResult": {
+      "description": "The list of aliases.",
+      "properties": {
+        "value": {
+          "description": "The list of alias.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SubscriptionAliasResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PutTenantPolicyRequestProperties": {
+      "description": "Put tenant policy request properties.",
+      "properties": {
+        "blockSubscriptionsLeavingTenant": {
+          "description": "Blocks the leaving of subscriptions from user's tenant.",
+          "type": "boolean"
+        },
+        "blockSubscriptionsIntoTenant": {
+          "description": "Blocks the entering of subscriptions into user's tenant.",
+          "type": "boolean"
+        },
+        "exemptedPrincipals": {
+          "description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      }
+    },
+    "TenantPolicy": {
+      "description": "Tenant policy.",
+      "properties": {
+        "policyId": {
+          "description": "Policy Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blockSubscriptionsLeavingTenant": {
+          "description": "Blocks the leaving of subscriptions from user's tenant.",
+          "type": "boolean"
+        },
+        "blockSubscriptionsIntoTenant": {
+          "description": "Blocks the entering of subscriptions into user's tenant.",
+          "type": "boolean"
+        },
+        "exemptedPrincipals": {
+          "description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      }
+    },
+    "GetTenantPolicyResponse": {
+      "description": "Tenant policy Information.",
+      "properties": {
+        "id": {
+          "description": "Policy Id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Policy name.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/TenantPolicy",
+          "description": "Tenant policy properties."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "GetTenantPolicyListResponse": {
+      "description": "Tenant policy information list.",
+      "properties": {
+        "value": {
+          "description": "The list of tenant policies.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/GetTenantPolicyResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingAccountPoliciesResponse": {
+      "description": "Billing account policies information.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the policy.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Policy name.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/BillingAccountPoliciesResponseProperties",
+          "description": "Billing account policies response properties."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BillingAccountPoliciesResponseProperties": {
+      "description": "Put billing account policies response properties.",
+      "properties": {
+        "serviceTenants": {
+          "description": "Service tenant for the billing account.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ServiceTenantResponse",
+            "description": "Billing account service tenant."
+          }
+        },
+        "allowTransfers": {
+          "description": "Determine if the transfers are allowed for the billing account",
+          "type": "boolean"
+        }
+      }
+    },
+    "ServiceTenantResponse": {
+      "description": "Billing account service tenant.",
+      "properties": {
+        "tenantId": {
+          "description": "Service tenant id.",
+          "type": "string"
+        },
+        "tenantName": {
+          "description": "Service tenant name.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionAliasRedeemResponse": {
+      "description": "Put subscription redeem result.",
+      "properties": {
+        "subscriptionId": {
+          "description": "Newly created subscription Id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "redeemState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The redeem state of the resource.",
+          "enum": [
+            "Pending",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "RedeemState",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2021-01-01-preview"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription Id."
+    },
+    "subscriptionNameParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Subscription Name",
+      "schema": {
+        "$ref": "#/definitions/SubscriptionName"
+      }
+    },
+    "aliasNameParameter": {
+      "name": "aliasName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Alias Name"
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Billing Account Id."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
