@@ -30,19 +30,19 @@
         "operationId": "ContainerRegistryConfiguration_Put",
         "parameters": [
           {
-            "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
+            "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/LocationParameter"
+            "$ref": "containerregistry.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/ApiVersionParameter"
+            "$ref": "containerregistry.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ConfigurationNameParameter"
           },
           {
-            "$ref": "#/parameters/ConfigurationParameters"
+            "$ref": "#/parameters/ConfigurationParameter"
           }
         ],
         "responses": {
@@ -55,7 +55,7 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "quotas.json#/definitions/ErrorResponse"
+              "$ref": "containerregistry.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -73,13 +73,13 @@
         "operationId": "ContainerRegistryConfiguration_Delete",
         "parameters": [
           {
-            "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
+            "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/ApiVersionParameter"
+            "$ref": "containerregistry.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/LocationParameter"
+            "$ref": "containerregistry.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ConfigurationNameParameter"
@@ -95,7 +95,7 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "quotas.json#/definitions/ErrorResponse"
+              "$ref": "containerregistry.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -113,13 +113,13 @@
         "operationId": "ContainerRegistryConfiguration_Get",
         "parameters": [
           {
-            "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
+            "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/ApiVersionParameter"
+            "$ref": "containerregistry.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/LocationParameter"
+            "$ref": "containerregistry.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ConfigurationNameParameter"
@@ -135,7 +135,7 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "quotas.json#/definitions/ErrorResponse"
+              "$ref": "containerregistry.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -155,13 +155,13 @@
         "operationId": "ContainerRegistryConfiguration_List",
         "parameters": [
           {
-            "$ref": "quotas.json#/parameters/SubscriptionIdParameter"
+            "$ref": "containerregistry.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/LocationParameter"
+            "$ref": "containerregistry.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/ApiVersionParameter"
+            "$ref": "containerregistry.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -174,7 +174,7 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "quotas.json#/definitions/ErrorResponse"
+              "$ref": "containerregistry.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -194,7 +194,7 @@
       },
       "allOf": [
         {
-          "$ref": "quotas.json#/definitions/Resource"
+          "$ref": "containerregistry.json#/definitions/Resource"
         }
       ]
     },
@@ -232,7 +232,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ConfigurationParameters": {
+    "ConfigurationParameter": {
       "description": "The properties of configuration being created or updated.",
       "name": "configurationObject",
       "in": "body",
