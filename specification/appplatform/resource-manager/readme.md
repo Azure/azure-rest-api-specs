@@ -50,6 +50,15 @@ directive:
 ```
 
 
+### Tag: package-preview-2021-03
+
+These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-03'
+input-file:
+  - Microsoft.AppPlatform/preview/2021-03-01-preview/appplatform.json
+```
+
 ### Tag: package-preview-2021-06
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
