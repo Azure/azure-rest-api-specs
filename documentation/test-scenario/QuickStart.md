@@ -29,7 +29,8 @@ First, create a folder `test-scenarios` under the api version folder. All test s
 
 ![](./folder-structure.png)
 
-Now write your basic test scenario.
+Now write your basic test scenario. For more detail about test scenario file format, please refer to
+[Test Scenario Definition Reference](./TestDefinitionReference.md)
 
 ```yaml
 scope: ResourceGroup
@@ -61,3 +62,33 @@ The `env.json` file contains required test scenario variables such as, subscript
 ```sh
 oav run-test-scenario /home/user/<xxx>/azure-rest-api-specs/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2020-07-01-preview/test-scenarios/signalR.yaml -e env.json
 ```
+
+#### 4. Debug with postman
+
+Sometimes the command `oav run-test-scenario` failed due to non 2xx status. Now you need to debug the test scenario with postman.
+
+When run `run-test-scenario`, it automatically generate postman collection and postman env in `generated/<providerNamespace>/<testScenarioFile>/<runId>/<testScenario>`. Here is the generated file folder structure.
+
+```
+generated
+└── Microsoft.SignalRService
+    └── 2020-07-01-preview
+        └── signalR
+            └── 202105120922-5c3x5
+                ├── signalR_0
+                │   ├── collection.json
+                │   └── env.json
+                └── signalR_0.json
+```
+
+Postman is a widely used GUI API testing tool. And you could use Postman import the generated postman collection and env for your local debug.
+
+![](./import-postman-collection.png)
+
+After you import postman collection, you will get such requests. Now you could debug api test happily.
+
+![](./postman-collection-signalr.PNG)
+
+#### 5. manual update example value
+
+After debug with postman, you need to rewrite back the update value and make sure `oav run-test-scenario <test-scenario-file> -e <env.json>` should pass.
