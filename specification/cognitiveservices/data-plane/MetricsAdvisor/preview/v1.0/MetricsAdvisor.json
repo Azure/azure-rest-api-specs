@@ -1233,9 +1233,8 @@
               "AzureDataExplorer",
               "AzureDataLakeStorageGen2",
               "AzureEventHubs",
+              "AzureLogAnalytics",
               "AzureTable",
-              "Elasticsearch",
-              "HttpRequest",
               "InfluxDB",
               "MongoDB",
               "MySql",
@@ -4265,9 +4264,8 @@
             "AzureDataExplorer",
             "AzureDataLakeStorageGen2",
             "AzureEventHubs",
+            "AzureLogAnalytics",
             "AzureTable",
-            "Elasticsearch",
-            "HttpRequest",
             "InfluxDB",
             "MongoDB",
             "MySql",
@@ -4442,9 +4440,8 @@
             "AzureDataExplorer",
             "AzureDataLakeStorageGen2",
             "AzureEventHubs",
+            "AzureLogAnalytics",
             "AzureTable",
-            "Elasticsearch",
-            "HttpRequest",
             "InfluxDB",
             "MongoDB",
             "MySql",
@@ -4953,6 +4950,55 @@
       },
       "x-ms-discriminator-value": "AzureEventHubs"
     },
+    "AzureLogAnalyticsParameter": {
+      "required": [
+        "clientId",
+        "clientSecret",
+        "query",
+        "tenantId",
+        "workspaceId"
+      ],
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id of this Log Analytics",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The client id of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The client secret of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "workspaceId": {
+          "description": "The workspace id of this Log Analytics",
+          "type": "string"
+        },
+        "query": {
+          "description": "The KQL query to fetch data from this Log Analytics",
+          "type": "string"
+        }
+      }
+    },
+    "AzureLogAnalyticsDatafeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureLogAnalyticsParameter"
+        }
+      },
+      "x-ms-discriminator-value": "AzureLogAnalytics"
+    },
     "AzureTableParameter": {
       "required": [
         "connectionString",
@@ -4991,94 +5037,6 @@
         }
       },
       "x-ms-discriminator-value": "AzureTable"
-    },
-    "ElasticsearchParameter": {
-      "required": [
-        "authHeader",
-        "host",
-        "port",
-        "query"
-      ],
-      "type": "object",
-      "properties": {
-        "host": {
-          "description": "Host",
-          "type": "string"
-        },
-        "port": {
-          "description": "Port",
-          "type": "string"
-        },
-        "authHeader": {
-          "description": "Authorization header",
-          "type": "string"
-        },
-        "query": {
-          "description": "Query",
-          "type": "string"
-        }
-      }
-    },
-    "ElasticsearchDataFeed": {
-      "required": [
-        "dataSourceParameter"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataFeedDetail"
-        }
-      ],
-      "properties": {
-        "dataSourceParameter": {
-          "$ref": "#/definitions/ElasticsearchParameter"
-        }
-      },
-      "x-ms-discriminator-value": "Elasticsearch"
-    },
-    "HttpRequestParameter": {
-      "required": [
-        "httpHeader",
-        "httpMethod",
-        "payload",
-        "url"
-      ],
-      "type": "object",
-      "properties": {
-        "url": {
-          "description": "HTTP URL",
-          "type": "string"
-        },
-        "httpHeader": {
-          "description": "HTTP header",
-          "type": "string"
-        },
-        "httpMethod": {
-          "description": "HTTP method",
-          "type": "string"
-        },
-        "payload": {
-          "description": "HTTP request body",
-          "type": "string"
-        }
-      }
-    },
-    "HttpRequestDataFeed": {
-      "required": [
-        "dataSourceParameter"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataFeedDetail"
-        }
-      ],
-      "properties": {
-        "dataSourceParameter": {
-          "$ref": "#/definitions/HttpRequestParameter"
-        }
-      },
-      "x-ms-discriminator-value": "HttpRequest"
     },
     "InfluxDBParameter": {
       "required": [
@@ -5250,9 +5208,8 @@
             "AzureDataExplorer",
             "AzureDataLakeStorageGen2",
             "AzureEventHubs",
+            "AzureLogAnalytics",
             "AzureTable",
-            "Elasticsearch",
-            "HttpRequest",
             "InfluxDB",
             "MongoDB",
             "MySql",
@@ -5513,6 +5470,20 @@
       },
       "x-ms-discriminator-value": "AzureEventHubs"
     },
+    "AzureLogAnalyticsDatafeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureLogAnalyticsParameter"
+        }
+      },
+      "x-ms-discriminator-value": "AzureLogAnalytics"
+    },
     "AzureTableDataFeedPatch": {
       "type": "object",
       "allOf": [
@@ -5526,34 +5497,6 @@
         }
       },
       "x-ms-discriminator-value": "AzureTable"
-    },
-    "ElasticsearchDataFeedPatch": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataFeedDetailPatch"
-        }
-      ],
-      "properties": {
-        "dataSourceParameter": {
-          "$ref": "#/definitions/ElasticsearchParameter"
-        }
-      },
-      "x-ms-discriminator-value": "Elasticsearch"
-    },
-    "HttpRequestDataFeedPatch": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataFeedDetailPatch"
-        }
-      ],
-      "properties": {
-        "dataSourceParameter": {
-          "$ref": "#/definitions/HttpRequestParameter"
-        }
-      },
-      "x-ms-discriminator-value": "HttpRequest"
     },
     "InfluxDBDataFeedPatch": {
       "type": "object",
