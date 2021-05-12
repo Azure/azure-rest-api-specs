@@ -4418,10 +4418,7 @@
           "description": "Includes blob snapshots in blob inventory when value is set to true. The definition.schemaFields value 'Snapshot' is required if this property is set to true, else it must be excluded."
         }
       },
-      "required": [
-        "blobTypes"
-      ],
-      "description": "An object that defines the blob inventory rule filter conditions. Filter option cannot be used when definition.objectType property is set to 'Container'."
+      "description": "An object that defines the blob inventory rule filter conditions. For 'Blob' definition.objectType all filter properties are applicable, 'blobTypes' is required and others are optional. For 'Container' definition.objectType only prefixMatch is applicable and is optional."
     },
     "ErrorResponseBody": {
       "properties": {
