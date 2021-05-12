@@ -17,6 +17,23 @@ To see additional help and options, run:
 
 ## Configuration
 
+## Suppression
+``` yaml
+directive:
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where: $.definitions.Resource.properties.id
+    from: Compute.json
+    reason: The conflicting property is not at the root level and being incorrectly matched.
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where: $.definitions.Resource.properties.name
+    from: Compute.json
+    reason: The conflicting property is not at the root level and being incorrectly matched.
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where: $.definitions.Resource.properties.type
+    from: Compute.json
+    reason: The conflicting property is not at the root level and being incorrectly matched.
+```
+
 ### Basic Information
 These are the global settings for the Compute API.
 
