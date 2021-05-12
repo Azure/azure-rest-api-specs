@@ -1323,6 +1323,62 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses": {
+      "post": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancers_SwapPublicIpAddresses",
+        "description": "Swaps VIPs between two load balancers.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region where load balancers are located at."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerVipSwapRequest"
+            },
+            "description": "Parameters that define which VIPs should be swapped."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Swap VIPs between two load balancers.": {
+            "$ref": "./examples/LoadBalancersSwapPublicIpAddresses.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}": {
       "get": {
         "tags": [
@@ -2336,6 +2392,41 @@
         "name": "TransportProtocol",
         "modelAsString": true
       }
+    },
+    "LoadBalancerVipSwapRequest": {
+      "properties": {
+        "frontendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerVipSwapRequestFrontendIPConfiguration"
+          },
+          "description": "A list of frontend IP configuration resources that should swap VIPs."
+        }
+      },
+      "description": "The request for a VIP swap."
+    },
+    "LoadBalancerVipSwapRequestFrontendIPConfiguration": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of frontend IP configuration resource."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LoadBalancerVipSwapRequestFrontendIPConfigurationProperties",
+          "description": "The properties of VIP swap request's frontend IP configuration object."
+        }
+      },
+      "description": "VIP swap request's frontend IP configuration object."
+    },
+    "LoadBalancerVipSwapRequestFrontendIPConfigurationProperties": {
+      "properties": {
+        "publicIPAddress": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "A reference to public IP address resource."
+        }
+      },
+      "description": "The properties of VIP swap request's frontend IP configuration object."
     }
   }
 }

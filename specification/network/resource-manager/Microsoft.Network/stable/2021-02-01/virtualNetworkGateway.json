@@ -2331,6 +2331,240 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules/{natRuleName}": {
+      "get": {
+        "operationId": "VirtualNetworkGatewayNatRules_Get",
+        "x-ms-examples": {
+          "VirtualNetworkGatewayNatRuleGet": {
+            "$ref": "./examples/VirtualNetworkGatewayNatRuleGet.json"
+          }
+        },
+        "description": "Retrieves the details of a nat rule.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the Virtual Network Gateway."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the nat rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the nat rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualNetworkGatewayNatRules_CreateOrUpdate",
+        "x-ms-examples": {
+          "VirtualNetworkGatewayNatRulePut": {
+            "$ref": "./examples/VirtualNetworkGatewayNatRulePut.json"
+          }
+        },
+        "description": "Creates a nat rule to a scalable virtual network gateway if it doesn't exist else updates the existing nat rules.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the Virtual Network Gateway."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the nat rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "NatRuleParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
+            },
+            "description": "Parameters supplied to create or Update a Nat Rule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the nat rule created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
+            }
+          },
+          "201": {
+            "description": "Request successful. Returns the details of the nat rule created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "VirtualNetworkGatewayNatRules_Delete",
+        "x-ms-examples": {
+          "VirtualNetworkGatewayNatRuleDelete": {
+            "$ref": "./examples/VirtualNetworkGatewayNatRuleDelete.json"
+          }
+        },
+        "description": "Deletes a nat rule.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the Virtual Network Gateway."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the nat rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Nat Rule deleted."
+          },
+          "202": {
+            "description": "Request received successfully. Nat Rule deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No nat rules exist by the name provided."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules": {
+      "get": {
+        "operationId": "VirtualNetworkGatewayNatRules_ListByVirtualNetworkGateway",
+        "x-ms-examples": {
+          "VirtualNetworkGatewayNatRuleList": {
+            "$ref": "./examples/VirtualNetworkGatewayNatRuleList.json"
+          }
+        },
+        "description": "Retrieves all nat rules for a particular virtual network gateway.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the virtual network gateway."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns all Nat rules for a virtual network gateway.",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualNetworkGatewayNatRulesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -2384,6 +2618,87 @@
         }
       ],
       "description": "IP configuration for virtual network gateway."
+    },
+    "VirtualNetworkGatewayNatRuleProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the NAT Rule resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of NAT rule for VPN NAT.",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "VpnNatRuleType",
+            "modelAsString": true
+          }
+        },
+        "mode": {
+          "type": "string",
+          "description": "The Source NAT direction of a VPN NAT.",
+          "enum": [
+            "EgressSnat",
+            "IngressSnat"
+          ],
+          "x-ms-enum": {
+            "name": "VpnNatRuleMode",
+            "modelAsString": true
+          }
+        },
+        "internalMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualWan.json#/definitions/VpnNatRuleMapping"
+          },
+          "description": "The private IP address internal mapping for NAT."
+        },
+        "externalMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualWan.json#/definitions/VpnNatRuleMapping"
+          },
+          "description": "The private IP address external mapping for NAT."
+        },
+        "ipConfigurationId": {
+          "type": "string",
+          "description": "The IP Configuration ID this NAT rule applies to."
+        }
+      },
+      "description": "Parameters for VirtualNetworkGatewayNatRule."
+    },
+    "VirtualNetworkGatewayNatRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkGatewayNatRuleProperties",
+          "description": "Properties of the Virtual Network Gateway NAT rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "VirtualNetworkGatewayNatRule Resource."
     },
     "VirtualNetworkGatewayPropertiesFormat": {
       "properties": {
@@ -2485,11 +2800,18 @@
         },
         "vNetExtendedLocationResourceId": {
           "type": "string",
-          "description": "MAS FIJI customer vnet resource id. VirtualNetworkGateway of type local gateway is associated with the customer vnet."
+          "description": "Customer vnet resource id. VirtualNetworkGateway of type local gateway is associated with the customer vnet."
         },
-        "virtualNetworkExtendedLocation": {
-          "description": "The extended location of type local virtual network gateway.",
-          "$ref": "./network.json#/definitions/ExtendedLocation"
+        "natRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
+          },
+          "description": "NatRules for virtual network gateway."
+        },
+        "enableBgpRouteTranslationForNat": {
+          "type": "boolean",
+          "description": "EnableBgpRouteTranslationForNat flag."
         }
       },
       "description": "VirtualNetworkGateway properties."
@@ -2891,6 +3213,10 @@
           "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat",
           "description": "Properties of the virtual network gateway."
         },
+        "extendedLocation": {
+          "$ref": "./network.json#/definitions/ExtendedLocation",
+          "description": "The extended location of type local virtual network gateway."
+        },
         "etag": {
           "readOnly": true,
           "type": "string",
@@ -2955,6 +3281,22 @@
         }
       },
       "description": "Response for the ListVirtualNetworkGateways API service call."
+    },
+    "ListVirtualNetworkGatewayNatRulesResult": {
+      "description": "Result of the request to list all nat rules to a virtual network gateway. It contains a list of Nat rules and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
+          },
+          "description": "List of Nat Rules."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
     },
     "BgpPeerStatusListResult": {
       "properties": {
@@ -3029,6 +3371,20 @@
         "localNetworkGateway2": {
           "$ref": "#/definitions/LocalNetworkGateway",
           "description": "The reference to local network gateway resource."
+        },
+        "ingressNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of ingress NatRules."
+        },
+        "egressNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of egress NatRules."
         },
         "connectionType": {
           "$ref": "#/definitions/VirtualNetworkGatewayConnectionType",

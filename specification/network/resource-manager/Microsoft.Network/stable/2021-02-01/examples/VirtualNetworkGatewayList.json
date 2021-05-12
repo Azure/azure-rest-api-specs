@@ -34,6 +34,49 @@
                   }
                 }
               ],
+              "natRules": [
+                {
+                  "name": "natRule1",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw1/natRules/natRule1",
+                  "etag": "W/\"00ae2b69-88e7-4b3a-b66a-cfa2244e0801\"",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "type": "Static",
+                    "mode": "EgressSnat",
+                    "internalMappings": [
+                      {
+                        "addressSpace": "10.10.0.0/24"
+                      }
+                    ],
+                    "externalMappings": [
+                      {
+                        "addressSpace": "50.0.0.0/24"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "natRule2",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw1/natRules/natRule2",
+                  "etag": "W/\"00ae2b69-88e7-4b3a-b66a-cfa2244e0801\"",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "type": "Static",
+                    "mode": "IngressSnat",
+                    "internalMappings": [
+                      {
+                        "addressSpace": "20.10.0.0/24"
+                      }
+                    ],
+                    "externalMappings": [
+                      {
+                        "addressSpace": "30.0.0.0/24"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "enableBgpRouteTranslationForNat": false,
               "sku": {
                 "name": "VpnGw1",
                 "tier": "VpnGw1",
@@ -89,6 +132,49 @@
                   }
                 }
               ],
+              "natRules": [
+                {
+                  "name": "natRule1",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw2/natRules/natRule1",
+                  "etag": "W/\"00ae2b69-88e7-4b3a-b66a-cfa2244e0801\"",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "type": "Static",
+                    "mode": "EgressSnat",
+                    "internalMappings": [
+                      {
+                        "addressSpace": "10.10.0.0/24"
+                      }
+                    ],
+                    "externalMappings": [
+                      {
+                        "addressSpace": "50.0.0.0/24"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "natRule2",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw2/natRules/natRule2",
+                  "etag": "W/\"00ae2b69-88e7-4b3a-b66a-cfa2244e0801\"",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "type": "Static",
+                    "mode": "IngressSnat",
+                    "internalMappings": [
+                      {
+                        "addressSpace": "20.10.0.0/24"
+                      }
+                    ],
+                    "externalMappings": [
+                      {
+                        "addressSpace": "30.0.0.0/24"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "enableBgpRouteTranslationForNat": false,
               "sku": {
                 "name": "VpnGw1",
                 "tier": "VpnGw1",

@@ -19,6 +19,7 @@
               "commissionedState": "Commissioned",
               "signedMessage": "signedMessage",
               "authorizationMessage": "authorizationMessage",
+              "failedReason": "",
               "publicIpPrefixes": [],
               "childCustomIpPrefixes": []
             },
@@ -36,6 +37,7 @@
               "commissionedState": "Commissioned",
               "signedMessage": "signedMessage",
               "authorizationMessage": "authorizationMessage",
+              "failedReason": "",
               "publicIpPrefixes": [],
               "childCustomIpPrefixes": []
             },
@@ -53,6 +55,7 @@
               "commissionedState": "Provisioning",
               "signedMessage": "signedMessage",
               "authorizationMessage": "authorizationMessage",
+              "failedReason": "",
               "publicIpPrefixes": [],
               "childCustomIpPrefixes": []
             },
@@ -70,6 +73,7 @@
               "commissionedState": "Commissioned",
               "signedMessage": "signedMessage",
               "authorizationMessage": "authorizationMessage",
+              "failedReason": "",
               "publicIpPrefixes": [],
               "childCustomIpPrefixes": [],
               "customIpPrefixParent": {
@@ -90,12 +94,31 @@
               "commissionedState": "Provisioned",
               "signedMessage": "signedMessage",
               "authorizationMessage": "authorizationMessage",
+              "failedReason": "",
               "publicIpPrefixes": [],
               "childCustomIpPrefixes": [
                 {
                   "id": "/subscriptions/subid/resourceGroups/rg3/providers/Microsoft.Network/customIpPrefixes/test-customipprefix4"
                 }
               ]
+            },
+            "type": "Microsoft.Network/customIpPrefixes"
+          },
+          {
+            "name": "test-customipprefix6",
+            "id": "/subscriptions/subid/resourceGroups/rg3/providers/Microsoft.Network/customIpPrefixes/test-customipprefix6",
+            "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+            "location": "eastus",
+            "properties": {
+              "provisioningState": "Failed",
+              "resourceGuid": "00000000-0000-0000-0000-00000000",
+              "cidr": "0.0.5.0/22",
+              "commissionedState": "ProvisionFailed",
+              "signedMessage": "signedMessage",
+              "authorizationMessage": "authorizationMessage",
+              "failedReason": "CustomerSignatureNotVerified",
+              "publicIpPrefixes": [],
+              "childCustomIpPrefixes": []
             },
             "type": "Microsoft.Network/customIpPrefixes"
           }

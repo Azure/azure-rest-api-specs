@@ -1042,6 +1042,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1160,6 +1164,41 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the network interface resource."
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "WorkloadType of the NetworkInterface for BareMetal resources"
+        },
+        "nicType": {
+          "type": "string",
+          "description": "Type of Network Interface resource.",
+          "enum": [
+            "Standard",
+            "Elastic"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkInterfaceNicType",
+            "modelAsString": true
+          }
+        },
+        "privateLinkService": {
+          "$ref": "./privateLinkService.json#/definitions/PrivateLinkService",
+          "description": "Privatelinkservice of the network interface resource."
+        },
+        "migrationPhase": {
+          "type": "string",
+          "description": "Migration phase of Network Interface resource.",
+          "enum": [
+            "None",
+            "Prepare",
+            "Commit",
+            "Abort",
+            "Committed"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkInterfaceMigrationPhase",
+            "modelAsString": true
+          }
         }
       },
       "description": "NetworkInterface properties."
@@ -1289,6 +1328,10 @@
     },
     "EffectiveNetworkSecurityGroupAssociation": {
       "properties": {
+        "networkManager": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The ID of the Azure network manager if assigned."
+        },
         "subnet": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The ID of the subnet if assigned."
@@ -1492,7 +1535,8 @@
         },
         "privateIPAllocationMethod": {
           "$ref": "./network.json#/definitions/IPAllocationMethod",
-          "description": "The private IP address allocation method."
+          "description": "The private IP address allocation method.",
+          "default": "Dynamic"
         },
         "subnet": {
           "$ref": "./virtualNetwork.json#/definitions/Subnet",

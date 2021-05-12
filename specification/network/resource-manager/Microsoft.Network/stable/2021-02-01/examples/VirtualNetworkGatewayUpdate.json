@@ -25,6 +25,47 @@
         "enableBgp": false,
         "activeActive": false,
         "enableDnsForwarding": true,
+        "natRules": [
+          {
+            "name": "natRule1",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule1",
+            "properties": {
+              "type": "Static",
+              "mode": "EgressSnat",
+              "ipConfigurationId": "",
+              "internalMappings": [
+                {
+                  "addressSpace": "10.10.0.0/24"
+                }
+              ],
+              "externalMappings": [
+                {
+                  "addressSpace": "50.0.0.0/24"
+                }
+              ]
+            }
+          },
+          {
+            "name": "natRule2",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule2",
+            "properties": {
+              "type": "Static",
+              "mode": "IngressSnat",
+              "ipConfigurationId": "",
+              "internalMappings": [
+                {
+                  "addressSpace": "20.10.0.0/24"
+                }
+              ],
+              "externalMappings": [
+                {
+                  "addressSpace": "30.0.0.0/24"
+                }
+              ]
+            }
+          }
+        ],
+        "enableBgpRouteTranslationForNat": false,
         "sku": {
           "name": "VpnGw1",
           "tier": "VpnGw1"
@@ -85,6 +126,47 @@
               }
             }
           ],
+          "natRules": [
+            {
+              "name": "natRule1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule1",
+              "properties": {
+                "type": "Static",
+                "mode": "EgressSnat",
+                "ipConfigurationId": "",
+                "internalMappings": [
+                  {
+                    "addressSpace": "10.10.0.0/24"
+                  }
+                ],
+                "externalMappings": [
+                  {
+                    "addressSpace": "50.0.0.0/24"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "natRule2",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule2",
+              "properties": {
+                "type": "Static",
+                "mode": "IngressSnat",
+                "ipConfigurationId": "",
+                "internalMappings": [
+                  {
+                    "addressSpace": "20.10.0.0/24"
+                  }
+                ],
+                "externalMappings": [
+                  {
+                    "addressSpace": "30.0.0.0/24"
+                  }
+                ]
+              }
+            }
+          ],
+          "enableBgpRouteTranslationForNat": false,
           "sku": {
             "name": "VpnGw1",
             "tier": "VpnGw1",
@@ -164,6 +246,47 @@
               }
             }
           ],
+          "natRules": [
+            {
+              "name": "natRule1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule1",
+              "properties": {
+                "type": "Static",
+                "mode": "EgressSnat",
+                "ipConfigurationId": "",
+                "internalMappings": [
+                  {
+                    "addressSpace": "10.10.0.0/24"
+                  }
+                ],
+                "externalMappings": [
+                  {
+                    "addressSpace": "50.0.0.0/24"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "natRule2",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/natRules/natRule2",
+              "properties": {
+                "type": "Static",
+                "mode": "IngressSnat",
+                "ipConfigurationId": "",
+                "internalMappings": [
+                  {
+                    "addressSpace": "20.10.0.0/24"
+                  }
+                ],
+                "externalMappings": [
+                  {
+                    "addressSpace": "30.0.0.0/24"
+                  }
+                ]
+              }
+            }
+          ],
+          "enableBgpRouteTranslationForNat": false,
           "sku": {
             "name": "VpnGw1",
             "tier": "VpnGw1",
