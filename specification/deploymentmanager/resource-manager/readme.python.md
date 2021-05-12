@@ -25,6 +25,8 @@ namespace: azure.mgmt.deploymentmanager
 package-name: azure-mgmt-deploymentmanager
 package-version: 0.9.1
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
