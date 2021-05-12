@@ -62,6 +62,16 @@ directive:
     suppress:
       - BodyTopLevelProperties
   - where:
+      - $.definitions.RestorePointCreate.properties
+    suppress:
+      - BodyTopLevelProperties
+    reason:
+      - CRP has already been using existing ‘RestorePoint’ model definition with these properties as top level properties for many years now.
+  - where:
+      - $.definitions.RestorePoint.properties
+    suppress:
+      - BodyTopLevelProperties
+  - where:
       - $.definitions.VirtualMachineScaleSetExtension
     suppress:
       - RequiredPropertiesMissingInResourceModel
@@ -212,7 +222,12 @@ directive:
     suppress:
       - D5001
     reason: The API response has binary format and file type which is valid Swagger format. However, the example must be a JSON file which does not support specifying this response format.
-
+  - where:
+      - $.definitions.RestorePoint
+    suppress:
+      - NestedResourcesMustHaveListOperation
+    reason:
+      - CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
 ```
 ### Tag: package-2021-03-01
 
@@ -220,8 +235,8 @@ These settings apply only when `--tag=package-2021-03-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-03-01'
 input-file:
-- Microsoft.Compute/stable/2020-12-01/compute.json
-- Microsoft.Compute/stable/2020-12-01/runCommands.json
+- Microsoft.Compute/stable/2021-03-01/compute.json
+- Microsoft.Compute/stable/2021-03-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
 - Microsoft.Compute/stable/2020-12-01/disk.json
 - Microsoft.Compute/stable/2020-09-30/gallery.json
@@ -236,6 +251,8 @@ These settings apply only when `--tag=package-2021-03-01-only` is specified on t
 ``` yaml $(tag) == 'package-2021-03-01-only'
 input-file:
 - Microsoft.Compute/stable/2021-03-01/cloudService.json
+- Microsoft.Compute/stable/2021-03-01/compute.json
+- Microsoft.Compute/stable/2021-03-01/runCommands.json
 ```
 
 ### Tag: package-2020-12-01
