@@ -26,7 +26,7 @@ These settings apply only when `--tag=package-7.2 --go` is specified on the comm
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-7.2' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/v7.2/$(namespace)
+output-folder: $(go-sdk-folder)/services/$(namespace)/v7.2/$(namespace)
 ```
 
 ### Tag: package-7.1 and go
