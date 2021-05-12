@@ -1008,15 +1008,7 @@
           "$ref": "#/definitions/JobDescriptor"
         },
         {
-          "type": "object",
-          "required": [
-            "analysisInput"
-          ],
-          "properties": {
-            "analysisInput": {
-              "$ref": "#/definitions/MultiLanguageBatchInput"
-            }
-          }
+          "$ref": "#/definitions/AnalysisInput"
         },
         {
           "$ref": "#/definitions/JobManifest"
@@ -1032,18 +1024,7 @@
           "$ref": "#/definitions/TasksState"
         },
         {
-          "properties": {
-            "errors": {
-              "items": {
-                "$ref": "#/definitions/TextAnalyticsError"
-              },
-              "type": "array"
-            },
-            "statistics": {
-              "$ref": "#/definitions/RequestStatistics"
-            }
-          },
-          "type": "object"
+          "$ref": "#/definitions/AnalyzeJobErrorsAndStatistics"
         },
         {
           "$ref": "#/definitions/Pagination"
@@ -1145,13 +1126,8 @@
                     "$ref": "#/definitions/TaskState"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "results": {
-                        "$ref": "#/definitions/EntitiesResult"
-                      }
-                    }
-                  }
+                    "$ref": "#/definitions/EntitiesTaskResult"
+                  },
                 ]
               }
             },
@@ -1164,13 +1140,8 @@
                     "$ref": "#/definitions/TaskState"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "results": {
-                        "$ref": "#/definitions/PiiResult"
-                      }
-                    }
-                  }
+                    "$ref": "#/definitions/PiiTaskResult"
+                  },
                 ]
               }
             },
@@ -1183,12 +1154,7 @@
                     "$ref": "#/definitions/TaskState"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "results": {
-                        "$ref": "#/definitions/KeyPhraseResult"
-                      }
-                    }
+                    "$ref": "#/definitions/KeyPhraseTaskResult"
                   }
                 ]
               }
@@ -1202,12 +1168,7 @@
                     "$ref": "#/definitions/TaskState"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "results": {
-                        "$ref": "#/definitions/EntityLinkingResult"
-                      }
-                    }
+                    "$ref": "#/definitions/EntityLinkingTaskResult"
                   }
                 ]
               }
@@ -1221,12 +1182,7 @@
                     "$ref": "#/definitions/TaskState"
                   },
                   {
-                    "type": "object",
-                    "properties": {
-                      "results": {
-                        "$ref": "#/definitions/SentimentResponse"
-                      }
-                    }
+                    "$ref": "#/definitions/SentimentTaskResult"
                   }
                 ]
               }
@@ -1779,18 +1735,7 @@
           "$ref": "#/definitions/JobMetadata"
         },
         {
-          "properties": {
-            "results": {
-              "$ref": "#/definitions/HealthcareResult"
-            },
-            "errors": {
-              "items": {
-                "$ref": "#/definitions/TextAnalyticsError"
-              },
-              "type": "array"
-            }
-          },
-          "type": "object"
+          "$ref": "#/definitions/HealthcareTaskResult"
         },
         {
           "$ref": "#/definitions/Pagination"
@@ -1875,23 +1820,7 @@
           "$ref": "#/definitions/Entity"
         },
         {
-          "properties": {
-            "assertion": {
-              "type": "object",
-              "$ref": "#/definitions/HealthcareAssertion"
-            },
-            "name": {
-              "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
-              "type": "string"
-            },
-            "links": {
-              "description": "Entity references in known data sources.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/HealthcareEntityLink"
-              }
-            }
-          }
+          "$ref": "#/definitions/HealthcareLinkingProperties"
         }
       ]
     },
@@ -2021,6 +1950,25 @@
         }
       }
     },
+    "HealthcareLinkingProperties": {
+      "properties": {
+        "assertion": {
+          "type": "object",
+          "$ref": "#/definitions/HealthcareAssertion"
+        },
+        "name": {
+          "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
+          "type": "string"
+        },
+        "links": {
+          "description": "Entity references in known data sources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthcareEntityLink"
+          }
+        }
+      }
+    },
     "LinkedEntity": {
       "type": "object",
       "required": [
@@ -2094,6 +2042,71 @@
         }
       }
     },
+    "AnalysisInput": {
+      "type": "object",
+      "required": [
+        "analysisInput"
+      ],
+      "properties": {
+        "analysisInput": {
+          "$ref": "#/definitions/MultiLanguageBatchInput"
+        }
+      }
+    },
+    "EntitiesTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/EntitiesResult"
+        }
+      }
+    },
+    "PiiTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/PiiResult"
+        }
+      }
+    },
+    "KeyPhraseTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/KeyPhraseResult"
+        }
+      }
+    },
+    "EntityLinkingTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/EntityLinkingResult"
+        }
+      }
+    },
+    "SentimentTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/SentimentResponse"
+        }
+      }
+    },
+    "HealthcareTaskResult": {
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/HealthcareResult"
+        },
+        "errors": {
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsError"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "JobDescriptor": {
       "properties": {
         "displayName": {
@@ -2146,6 +2159,13 @@
       ],
       "type": "object"
     },
+    "AnalyzeJobDisplayName": {
+      "properties": {
+        "displayName": {
+          "type": "string"
+        }
+      }
+    },
     "AnalyzeJobMetadata": {
       "type": "object",
       "allOf": [
@@ -2153,13 +2173,23 @@
           "$ref": "#/definitions/JobMetadata"
         },
         {
-          "properties": {
-            "displayName": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/AnalyzeJobDisplayName"
         }
       ]
+    },
+    "AnalyzeJobErrorsAndStatistics": {
+      "properties": {
+        "errors": {
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsError"
+          },
+          "type": "array"
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        }
+      },
+      "type": "object"
     },
     "KeyPhraseResult": {
       "type": "object",
