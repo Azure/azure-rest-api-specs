@@ -34,7 +34,7 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2020-03
+tag: package-2021-02-preview-only
 ```
 
 ### Tag: package-2021-02-preview-only
