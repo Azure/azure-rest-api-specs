@@ -100,6 +100,14 @@
       "default": "2.0",
       "x-ms-parameter-location": "client"
     },
+    "Description": {
+      "name": "description",
+      "description": "Description for the stateset. Max length allowed is 1000.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
     "DatasetIdForCreate": {
       "name": "datasetId",
       "description": "The datasetId must have been obtained from a successful [Dataset Create API](https://review.docs.microsoft.com/en-us/rest-staging/api/maps-master/dataset/createpreview?branch=lbs) call.",
@@ -169,6 +177,9 @@
           },
           {
             "$ref": "#/parameters/DatasetIdForCreate"
+          },
+          {
+            "$ref": "#/parameters/Description"
           },
           {
             "name": "statesetCreateRequestBody",
@@ -577,6 +588,11 @@
       "description": "The response model for the successful Stateset Get API.",
       "type": "object",
       "properties": {
+        "description": {
+          "description": "Description associated with the stateset.",
+          "type": "string",
+          "readOnly": true
+        },
         "datasetIds": {
           "description": "Dataset ID associated with the stateset.",
           "type": "array",
@@ -614,6 +630,11 @@
         "statesetId": {
           "description": "The stateset ID of this stateset.",
           "type": "string"
+        },
+        "description": {
+          "description": "Description associated with the stateset.",
+          "type": "string",
+          "readOnly": true
         },
         "datasetIds": {
           "description": "Dataset ID associated with the stateset.",
