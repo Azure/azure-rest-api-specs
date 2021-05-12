@@ -1866,6 +1866,52 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ListOutboundNetworkDependenciesEndpoints",
+        "summary": "Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified managed cluster.",
+        "description": "Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified managed cluster. The operation returns properties of each egress endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List OutboundNetworkDependenciesEndpoints by Managed Cluster": {
+            "$ref": "./examples/OutboundNetworkDependenciesEndpointsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -4508,6 +4554,84 @@
         "properties"
       ],
       "description": "The OS option profile."
+    },
+    "EndpointDependency": {
+      "description": "A domain name that AKS agent nodes are reaching at.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "The domain name of the dependency.",
+          "type": "string"
+        },
+        "endpointDetails": {
+          "description": "The Ports and Protocols used when connecting to domainName.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          }
+        }
+      }
+    },
+    "EndpointDetail": {
+      "description": "connect information from the AKS agent nodes to a single endpoint.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "An IP Address that Domain Name currently resolves to.",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "description": "The port an endpoint is connected to.",
+          "type": "integer"
+        },
+        "protocol": {
+          "description": "The protocol used for connection",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the detail",
+          "type": "string"
+        }
+      }
+    },
+    "OutboundEnvironmentEndpoint": {
+      "description": "Egress endpoints which AKS agent nodes connect to for common purpose.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The category of endpoints accessed by the AKS agent node, e.g. azure-resource-management, apiserver, etc.",
+          "type": "string"
+        },
+        "endpoints": {
+          "description": "The endpoints that AKS agent nodes connect to",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          }
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "description": "Collection of OutboundEnvironmentEndpoint",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
