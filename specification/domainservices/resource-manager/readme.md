@@ -26,7 +26,7 @@ These are the global settings for the DomainServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-01
+tag: package-2021-05
 ```
 ### Tag: package-2021-05
 
@@ -132,10 +132,24 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-domainservices
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-05
   - tag: package-2021-03
   - tag: package-2020-01
   - tag: package-2017-06
   - tag: package-2017-01
+```
+
+### Tag: package-2021-05 and java
+
+These settings apply only when `--tag=package-2021-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.domainservices.v2021_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2021_05_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2021-03 and java
