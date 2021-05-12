@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLServerManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
-    "version": "2020-02-14-preview"
+    "version": "2021-05-12-privatepreview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -331,6 +331,9 @@
         "x-ms-examples": {
           "ServerRestart": {
             "$ref": "./examples/ServerRestart.json"
+          },
+          "ServerRestartWithFailover": {
+            "$ref": "./examples/ServerRestartWithFailover.json"
           }
         },
         "description": "Restarts a server.",
@@ -346,6 +349,14 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RestartParameter"
+            },
+            "description": "The parameters for restarting a server."
           }
         ],
         "responses": {
@@ -1748,6 +1759,20 @@
         }
       },
       "description": "Represents a resource name availability."
+    },
+    "RestartParameter": {
+      "type": "object",
+      "properties": {
+        "restartWithFailover": {
+          "type": "boolean",
+          "description": "Indicates whether to restart the server with failover."
+        },
+        "failoverMode": {
+          "type": "string",
+          "description": "Failover mode."
+        }
+      },
+      "description": "Represents server restart parameters."
     },
     "CloudError": {
       "x-ms-external": true,
