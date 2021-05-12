@@ -24,6 +24,8 @@ namespace: azure.mgmt.sql
 package-name: azure-mgmt-sql
 package-version: 0.9.0
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
