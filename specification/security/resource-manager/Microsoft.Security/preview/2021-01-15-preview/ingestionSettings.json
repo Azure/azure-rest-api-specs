@@ -45,7 +45,7 @@
           "Ingestion Settings"
         ],
         "description": "Settings for ingesting security data and logs to correlate with resources associated with the subscription.",
-        "operationId": "ingestionSettings_List",
+        "operationId": "IngestionSettings_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -84,7 +84,7 @@
           "Ingestion Settings"
         ],
         "description": "Settings for ingesting security data and logs to correlate with resources associated with the subscription.",
-        "operationId": "ingestionSettings_Get",
+        "operationId": "IngestionSettings_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -121,7 +121,7 @@
           "Ingestion Settings"
         ],
         "description": "Create setting for ingesting security data and logs to correlate with resources associated with the subscription.",
-        "operationId": "ingestionSettings_Create",
+        "operationId": "IngestionSettings_Create",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -158,7 +158,7 @@
           "Ingestion Settings"
         ],
         "description": "Deletes the ingestion settings for this subscription.",
-        "operationId": "ingestionSettings_Delete",
+        "operationId": "IngestionSettings_Delete",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -172,13 +172,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/IngestionSetting"
-            }
+            "description": "The resource was deleted successfully"
           },
           "204": {
-            "description": "No Content"
+            "description": "The resource was not found"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -199,8 +196,8 @@
         "tags": [
           "Ingestion Settings"
         ],
-        "description": "Settings for ingesting security data and logs to correlate with resources associated with the subscription.",
-        "operationId": "getToken",
+        "description": "Returns the token that is used for correlating ingested telemetry with the resources in the subscription.",
+        "operationId": "IngestionSettings_GetToken",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -238,8 +235,8 @@
         "tags": [
           "Connection Strings"
         ],
-        "description": "Connection strings for ingesting security scan logs and data",
-        "operationId": "listConnectionStrings",
+        "description": "Connection strings for ingesting security scan logs and data.",
+        "operationId": "IngestionSettings_ListConnectionStrings",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -271,9 +268,6 @@
   "definitions": {
     "IngestionSettingList": {
       "description": "List of ingestion settings",
-      "required": [
-        "value"
-      ],
       "properties": {
         "value": {
           "type": "array",
@@ -313,7 +307,7 @@
           "type": "string",
           "x-ms-secret": true,
           "readOnly": true,
-          "description": "The token used for correlating security data and logs with the resources in the subscription."
+          "description": "The token is used for correlating security data and logs with the resources in the subscription."
         }
       }
     },
