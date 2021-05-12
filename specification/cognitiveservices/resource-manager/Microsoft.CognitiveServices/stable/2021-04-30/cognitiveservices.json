@@ -198,7 +198,7 @@
           "CognitiveServicesAccounts"
         ],
         "description": "Returns a Cognitive Services account specified by the parameters.",
-        "operationId": "Accounts_GetProperties",
+        "operationId": "Accounts_Get",
         "x-ms-examples": {
           "Get Account": {
             "$ref": "./examples/GetAccount.json"
@@ -248,6 +248,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -258,9 +261,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
           }
         ],
         "responses": {
@@ -291,6 +291,9 @@
         },
         "parameters": [
           {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -301,9 +304,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
           }
         ],
         "responses": {
@@ -929,13 +929,20 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -969,6 +976,9 @@
           "200": {
             "description": "OK -- Delete the private endpoint connection successfully."
           },
+          "202": {
+            "description": "Accepted -- the operation was successfully started and will complete asynchronously."
+          },
           "204": {
             "description": "No Content -- The private endpoint connection does not exist."
           },
@@ -978,7 +988,8 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateLinkResources": {
@@ -1029,6 +1040,46 @@
       "type": "string",
       "description": "The kind (type) of cognitive service account."
     },
+    "Sku": {
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Free",
+            "Basic",
+            "Standard",
+            "Premium",
+            "Enterprise"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          },
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "SkuName": {
       "type": "string",
       "description": "The name of SKU."
@@ -1042,7 +1093,7 @@
           "description": "The Kind of the resource."
         },
         "sku": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
+          "$ref": "#/definitions/Sku"
         },
         "identity": {
           "$ref": "#/definitions/Identity"
@@ -1124,6 +1175,11 @@
         "endpoint": {
           "type": "string",
           "description": "Endpoint of the created account.",
+          "readOnly": true
+        },
+        "internalId": {
+          "type": "string",
+          "description": "The internal identifier (deprecated, do not use this property).",
           "readOnly": true
         },
         "capabilities": {
@@ -1232,7 +1288,7 @@
     "ApiProperties": {
       "type": "object",
       "additionalProperties": {
-        "type": "string"
+        "type": "object"
       },
       "properties": {
         "qnaRuntimeEndpoint": {
@@ -1325,11 +1381,6 @@
     },
     "ThrottlingRule": {
       "type": "object",
-      "required": [
-        "renewalPeriod",
-        "count",
-        "key"
-      ],
       "properties": {
         "key": {
           "type": "string"
@@ -1384,18 +1435,15 @@
       "properties": {
         "countOfDowngrades": {
           "type": "number",
-          "description": "Gets the count of downgrades.",
-          "readOnly": true
+          "description": "Gets the count of downgrades."
         },
         "countOfUpgradesAfterDowngrades": {
           "type": "number",
-          "description": "Gets the count of upgrades after downgrades.",
-          "readOnly": true
+          "description": "Gets the count of upgrades after downgrades."
         },
         "lastChangeDate": {
           "type": "string",
-          "description": "Gets the last change date.",
-          "readOnly": true
+          "description": "Gets the last change date."
         }
       },
       "description": "Sku change info of account."
@@ -1425,7 +1473,6 @@
       "type": "object",
       "properties": {
         "value": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccountSku"
@@ -1443,7 +1490,7 @@
           "description": "Resource Namespace and Type"
         },
         "sku": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "The SKU of Cognitive Services account."
         }
       },
@@ -1454,7 +1501,6 @@
       "properties": {
         "value": {
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Usage"
           },
@@ -1472,29 +1518,24 @@
         },
         "name": {
           "$ref": "#/definitions/MetricName",
-          "readOnly": true,
           "description": "The name information for the metric."
         },
         "quotaPeriod": {
           "type": "string",
-          "readOnly": true,
           "description": "The quota period used to summarize the usage values."
         },
         "limit": {
           "type": "number",
           "format": "double",
-          "readOnly": true,
           "description": "Maximum value for this metric."
         },
         "currentValue": {
           "type": "number",
           "format": "double",
-          "readOnly": true,
           "description": "Current value for this metric."
         },
         "nextResetTime": {
           "type": "string",
-          "readOnly": true,
           "description": "Next reset time for current quota."
         },
         "status": {
@@ -1518,12 +1559,10 @@
       "type": "object",
       "properties": {
         "value": {
-          "readOnly": true,
           "type": "string",
           "description": "The name of the metric."
         },
         "localizedValue": {
-          "readOnly": true,
           "type": "string",
           "description": "The friendly name of the metric."
         }
@@ -1532,7 +1571,6 @@
     },
     "UnitType": {
       "type": "string",
-      "readOnly": true,
       "description": "The unit of the metric.",
       "enum": [
         "Count",
@@ -1676,7 +1714,6 @@
       "properties": {
         "type": {
           "type": "string",
-          "readOnly": true,
           "description": "The type of restrictions.",
           "enum": [
             "Location",
@@ -1689,7 +1726,6 @@
         },
         "values": {
           "type": "array",
-          "readOnly": true,
           "items": {
             "type": "string"
           },
@@ -1697,12 +1733,10 @@
         },
         "restrictionInfo": {
           "$ref": "#/definitions/ResourceSkuRestrictionInfo",
-          "readOnly": true,
           "description": "The information about the restriction where the SKU cannot be used."
         },
         "reasonCode": {
           "type": "string",
-          "readOnly": true,
           "description": "The reason for restriction.",
           "enum": [
             "QuotaId",
@@ -1720,28 +1754,23 @@
       "type": "object",
       "properties": {
         "resourceType": {
-          "readOnly": true,
           "type": "string",
           "description": "The type of resource the SKU applies to."
         },
         "name": {
-          "readOnly": true,
           "type": "string",
           "description": "The name of SKU."
         },
         "tier": {
-          "readOnly": true,
           "type": "string",
           "description": "Specifies the tier of Cognitive Services account."
         },
         "kind": {
-          "readOnly": true,
           "type": "string",
           "description": "The Kind of resources that are supported in this SKU."
         },
         "locations": {
           "type": "array",
-          "readOnly": true,
           "items": {
             "type": "string"
           },
@@ -1749,7 +1778,6 @@
         },
         "restrictions": {
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ResourceSkuRestrictions"
           },
@@ -1762,7 +1790,6 @@
       "type": "object",
       "properties": {
         "locations": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "type": "string"
@@ -1770,7 +1797,6 @@
           "description": "Locations where the SKU is restricted"
         },
         "zones": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "type": "string"
@@ -1869,16 +1895,6 @@
       "type": "object",
       "description": "Identity for the resource.",
       "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
         "type": {
           "type": "string",
           "description": "The identity type.",
@@ -1892,6 +1908,16 @@
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
         },
         "userAssignedIdentities": {
           "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
@@ -1908,10 +1934,12 @@
       "description": "User-assigned managed identity.",
       "properties": {
         "principalId": {
+          "readOnly": true,
           "type": "string",
           "description": "Azure Active Directory principal ID associated with this Identity."
         },
         "clientId": {
+          "readOnly": true,
           "type": "string",
           "description": "Client App Id associated with this identity."
         }
