@@ -48,6 +48,9 @@
         "operationId": "EntityQueries_List",
         "parameters": [
           {
+            "$ref": "#/parameters/EntityQueryKind"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -374,6 +377,18 @@
       "in": "path",
       "name": "entityQueryId",
       "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EntityQueryKind": {
+      "description": "The entity query kind we want to fetch",
+      "in": "query",
+      "name": "kind",
+      "required": false,
+      "enum": [
+        "Expansion",
+        "Activity"
+      ],
       "type": "string",
       "x-ms-parameter-location": "method"
     }
