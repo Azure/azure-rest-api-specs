@@ -24,6 +24,8 @@ namespace: azure.mgmt.sql
 package-name: azure-mgmt-sql
 package-version: 0.9.0
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
@@ -46,4 +48,8 @@ output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql/azure/mgmt/sql
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> azure/master
