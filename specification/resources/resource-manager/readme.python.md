@@ -45,6 +45,7 @@ batch:
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
+  - tag: package-resources-2021-04
   - tag: package-resources-2021-01
   - tag: package-resources-2020-10
   - tag: package-resources-2020-06
