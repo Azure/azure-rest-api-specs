@@ -65,8 +65,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js attestation/resource-manager
 ```
 
 ## Python
@@ -96,7 +94,5 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.terraform.md](./readme.terraform.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
