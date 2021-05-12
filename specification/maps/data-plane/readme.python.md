@@ -7,7 +7,6 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python) && !$(track2)
 python-mode: create
 python:
-  azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.maps.service
@@ -17,7 +16,6 @@ python:
 ```
 ``` yaml $(python) && $(track2)
 python-mode: create
-azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.maps.service
 package-name: azure-maps-service
