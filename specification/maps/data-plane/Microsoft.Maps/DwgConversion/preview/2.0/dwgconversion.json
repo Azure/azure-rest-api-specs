@@ -5,7 +5,14 @@
     "version": "2.0",
     "description": "APIs for converting DWG Packages in Azure Maps."
   },
-  "host": "atlas.microsoft.com",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -98,6 +105,33 @@
     }
   },
   "parameters": {
+    "GeographicResourceLocation": {
+      "name": "geography",
+      "description": "This parameter specifies where the Azure Maps Creator resource is located.  Valid values are us and eu.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "us",
+      "enum": [
+        "us",
+        "eu"
+      ],
+      "x-ms-enum": {
+        "name": "GeographicResourceLocation",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "us",
+            "description": "Used to access an Azure Maps Creator resource in the United States"
+          },
+          {
+            "value": "eu",
+            "description": "Used to access an Azure Maps Creator resource in Europe"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "client"
+    },
     "ClientId": {
       "name": "x-ms-client-id",
       "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
@@ -125,7 +159,7 @@
     },
     "UdidQuery": {
       "name": "udid",
-      "description": "The unique data id for the content. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview) call.",
+      "description": "The unique data id for the content. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data%20v2/uploadpreview) call.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -133,7 +167,7 @@
     },
     "ConversionId": {
       "name": "conversionId",
-      "description": "The conversion id for the content. The `conversionId` must have been obtained from a successful [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/conversion/convertpreview) call.",
+      "description": "The conversion id for the content. The `conversionId` must have been obtained from a successful [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion/convert) call.",
       "type": "string",
       "in": "path",
       "required": true,
@@ -141,7 +175,7 @@
     },
     "OutputOntology": {
       "name": "outputOntology",
-      "description": "Output ontology version.",
+      "description": "Output ontology version. \"facility-2.0\" is the only supported value at this time. Please refer to this [article](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) for more information about Azure Maps Creator ontologies.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -168,7 +202,7 @@
     "/conversions": {
       "post": {
         "x-publish": true,
-        "description": "**Conversion Create API**\n\n**Applies to:** S1 pricing tier.<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and \nSDK. The Conversion API is part of Creator.<br>\n\nThe Conversion API lets the caller import a set of DWG design files as a zipped [Drawing Package](https://aka.ms/am-drawing-package) into Azure Maps. The [Drawing Package](https://aka.ms/am-drawing-package) should first be \nuploaded using the [Azure Maps Data Service](https://docs.microsoft.com/rest/api/maps/data). Once uploaded, use the \n`udid` returned by the [Data Upload API](https://docs.microsoft.com/rest/api/maps/data/uploadpreview) to call \nthis Conversion API.\n\n## Convert DWG package\n\nThe Conversion API performs a \n[long-running request](https://aka.ms/am-creator-lrt).\n\n## Debug DWG package issues\n\n\nDuring the Conversion process, if there are any issues with the DWG package [errors and warnings](https://aka.ms/am-conversion-errors) are provided in the response along with a *diagnostic package* to visualize \nand diagnose these issues. In case any issues are encountered with your DWG package, the Conversion operation status process as detailed \n[here](https://aka.ms/am-creator-lrt) returns the location of the *diagnostic\npackage* that can be downloaded by the caller to help them visualize and diagnose these issues. The *diagnostic package* location\ncan be found in the properties section of the conversion operation status response and looks like the following:\n\n```json\n{\n    \"properties\": {\n        \"diagnosticPackageLocation\": \"https://atlas.microsoft.com/mapdata/{DiagnosticPackageId}?api-version=1.0\"                \n    }            \n}\n```\n\nThe *diagnostic package* can be downloaded by executing a `HTTP GET` request on the `diagnosticPackageLocation`.\nFor more details on how to use the tool to visualize and diagnose all the errors and warnings see [Drawing Error Visualizer](https://aka.ms/am-drawing-errors-visualizer). <br>\n\nA conversion operation will be marked as *success* if there are zero or more warnings but will be marked as *failed* if any errors are encountered. ",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Conversion API lets the caller import a set of DWG design files as a zipped [Drawing Package](https://aka.ms/am-drawing-package) into Azure Maps. The [Drawing Package](https://aka.ms/am-drawing-package) should first be uploaded using the [Azure Maps Data Service](https://docs.microsoft.com/rest/api/maps/data). Once uploaded, use the `udid` returned by the [Data Upload API](https://docs.microsoft.com/rest/api/maps/data/uploadpreview) to call this Conversion API.\n\n## Convert DWG package\n\nThe Conversion API performs a [long-running request](https://aka.ms/am-creator-lrt).\n\n## Debug DWG package issues\n\n\nDuring the Conversion process, if there are any issues with the DWG package [errors and warnings](https://aka.ms/am-conversion-errors) are provided in the response along with a *diagnostic package* to visualize and diagnose these issues. In case any issues are encountered with your DWG package, the Conversion operation status process as detailed [here](https://aka.ms/am-creator-lrt) returns the location of the *diagnostic package* that can be downloaded by the caller to help them visualize and diagnose these issues. The *diagnostic package* location can be found in the properties section of the conversion operation status response and looks like the following:\n\n```json\n{\n    \"properties\": {\n        \"diagnosticPackageLocation\": \"https://us.atlas.microsoft.com/mapdata/{DiagnosticPackageId}?api-version=1.0\"                \n    }            \n}\n```\n\nThe *diagnostic package* can be downloaded by executing a `HTTP GET` request on the `diagnosticPackageLocation`.\nFor more details on how to use the tool to visualize and diagnose all the errors and warnings see [Drawing Error Visualizer](https://aka.ms/am-drawing-errors-visualizer). <br>\n\nA conversion operation will be marked as *success* if there are zero or more warnings but will be marked as *failed* if any errors are encountered. ",
         "operationId": "Conversion_Convert",
         "x-ms-examples": {
           "Convert previously uploaded DWG Package": {
@@ -218,7 +252,7 @@
       },
       "get": {
         "x-publish": true,
-        "description": "**Conversion List API**\n\n**Applies to:** S1 pricing tier.<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Conversion API is part of Creator.<br>\n\nThis API allows the caller to fetch a list of all successful data conversions submitted previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/conversion/convertpreview).   \n\n### Submit List Request\n\nTo list all successful conversions you will issue a `GET` request with no additional parameters.\n\n### List Data Response\n\nThe Conversion List API returns the complete list of all conversion details in `json` format.<br>\n\nHere is a sample response returning the details of two successful conversion requests:  \n\n<br>\n\n```json\n{\n    \"conversions\": \n    [\n        {\n            \"conversionId\": \"54398242-ea6c-1f31-4fa6-79b1ae0fc24d\",\n            \"udid\": \"31838736-8b84-11ea-bc55-0242ac130003\",\n            \"created\": \"5/19/2020 9:00:00 AM +00:00\",\n            \"description\": \"User provided description.\",\n            \"featureCounts\": {\n                \"DIR\": 1,\n                \"LVL\": 3,\n                \"FCL\": 1,\n                \"UNIT\": 150,\n                \"CTG\": 8,\n                \"AEL\": 0,\n                \"OPN\": 10\n            }\n        },\n        {\n            \"conversionId\": \"2acf7d32-8b84-11ea-bc55-0242ac130003\",\n            \"udid\": \"1214bc58-8b84-11ea-bc55-0242ac1300039\",\n            \"created\": \"5/19/2020 9:00:00 AM +00:00\",\n            \"description\": \"User provided description.\",\n            \"featureCounts\": {\n                \"DIR\": 1,\n                \"LVL\": 3,\n                \"FCL\": 1,\n                \"UNIT\": 150,\n                \"CTG\": 8,\n                \"AEL\": 0,\n                \"OPN\": 10\n            }\n        }\n    ]\n}\n```\n\n<br>",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all successful data conversions submitted previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/conversion/convertpreview).   \n\n### Submit List Request\n\nTo list all successful conversions you will issue a `GET` request with no additional parameters.\n\n### List Data Response\n\nThe Conversion List API returns the complete list of all conversion details in `json` format.<br>\n\nHere is a sample response returning the details of two successful conversion requests:  \n\n<br>\n\n```json\n{\n    \"conversions\": \n    [\n        {\n            \"conversionId\": \"54398242-ea6c-1f31-4fa6-79b1ae0fc24d\",\n            \"udid\": \"31838736-8b84-11ea-bc55-0242ac130003\",\n            \"created\": \"5/19/2020 9:00:00 AM +00:00\",\n            \"description\": \"User provided description.\",\n            \"featureCounts\": {\n                \"DIR\": 1,\n                \"LVL\": 3,\n                \"FCL\": 1,\n                \"UNIT\": 150,\n                \"CTG\": 8,\n                \"AEL\": 0,\n                \"OPN\": 10\n            }\n        },\n        {\n            \"conversionId\": \"2acf7d32-8b84-11ea-bc55-0242ac130003\",\n            \"udid\": \"1214bc58-8b84-11ea-bc55-0242ac1300039\",\n            \"created\": \"5/19/2020 9:00:00 AM +00:00\",\n            \"description\": \"User provided description.\",\n            \"featureCounts\": {\n                \"DIR\": 1,\n                \"LVL\": 3,\n                \"FCL\": 1,\n                \"UNIT\": 150,\n                \"CTG\": 8,\n                \"AEL\": 0,\n                \"OPN\": 10\n            }\n        }\n    ]\n}\n```\n\n<br>",
         "operationId": "Conversion_List",
         "x-ms-examples": {
           "Returns a list of all the data processed by the Conversion Service for the account": {
@@ -264,7 +298,7 @@
     "/conversions/{conversionId}": {
       "get": {
         "x-publish": true,
-        "description": "**Conversion Get API**\n\n**Applies to:** S1 pricing tier.<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Conversion API is part of Creator.<br>\n\nThis API allows the caller to fetch a successful data conversion submitted previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/conversion/convertpreview).  ",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a successful data conversion submitted previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/conversion/convertpreview).  ",
         "operationId": "Conversion_Get",
         "x-ms-examples": {
           "Get the details for one conversion operation": {
@@ -311,7 +345,7 @@
       },
       "delete": {
         "x-publish": true,
-        "description": "**Conversion Delete API**\n\n**Applies to:** S1 pricing tier.<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Delete API is part of Creator.<br>\n\nThis API allows the caller to delete any data conversions created previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/conversion/convertpreview).\n\n### Submit Delete Request\n\nTo delete your conversion data you will issue a `DELETE` request where the path will contain the `conversionId` of the data to delete.\n\n### Conversion Delete Response\n\nThe Conversion Delete API returns a HTTP `204 No Content` response with an empty body, if the converted data resources were deleted successfully.<br>    \nA HTTP `400 Bad Request` error response will be returned if no resource associated with the passed-in `conversionId` is found.    ",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete any data conversions created previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/conversion/convertpreview).\n\n### Submit Delete Request\n\nTo delete your conversion data you will issue a `DELETE` request where the path will contain the `conversionId` of the data to delete.\n\n### Conversion Delete Response\n\nThe Conversion Delete API returns a HTTP `204 No Content` response with an empty body, if the converted data resources were deleted successfully.<br>    \nA HTTP `400 Bad Request` error response will be returned if no resource associated with the passed-in `conversionId` is found.    ",
         "operationId": "Conversion_Delete",
         "x-ms-examples": {
           "Delete previously converted content": {
@@ -468,11 +502,6 @@
         },
         "created": {
           "description": "The created timestamp.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceLocation": {
-          "description": "The location URI for details about the created resource. This is only provided when the request was successfully completed.",
           "type": "string",
           "readOnly": true
         },
