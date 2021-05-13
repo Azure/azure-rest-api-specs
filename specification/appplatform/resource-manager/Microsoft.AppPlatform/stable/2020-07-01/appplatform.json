@@ -3033,23 +3033,43 @@
       "properties": {
         "serviceRuntimeSubnetId": {
           "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Service Runtime",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "appSubnetId": {
           "description": "Fully qualified resource Id of the subnet to host Azure Spring Cloud Apps",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "serviceCidr": {
           "description": "Azure Spring Cloud service reserved CIDR",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "serviceRuntimeNetworkResourceGroup": {
           "description": "Name of the resource group containing network resources of Azure Spring Cloud Service Runtime",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "appNetworkResourceGroup": {
           "description": "Name of the resource group containing network resources of Azure Spring Cloud Apps",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "outboundIPs": {
           "description": "Desired outbound IP resources for Azure Spring Cloud instance.",
@@ -3380,11 +3400,16 @@
         },
         "fqdn": {
           "description": "Fully qualified dns Name.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "httpsOnly": {
           "description": "Indicate if only https is allowed.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "createdTime": {
           "format": "date-time",
@@ -3394,7 +3419,8 @@
         },
         "temporaryDisk": {
           "$ref": "#/definitions/TemporaryDisk",
-          "description": "Temporary disk settings"
+          "description": "Temporary disk settings",
+          "default": "/tmp"
         },
         "persistentDisk": {
           "$ref": "#/definitions/PersistentDisk",
@@ -3924,6 +3950,7 @@
         },
         "runtimeVersion": {
           "description": "Runtime version",
+          "default": "Java_8",
           "enum": [
             "Java_8",
             "Java_11",
