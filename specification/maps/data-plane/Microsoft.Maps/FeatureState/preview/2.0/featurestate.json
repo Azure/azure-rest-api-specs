@@ -5,7 +5,14 @@
     "version": "2.0",
     "description": "APIs for managing the dynamic feature states in Azure Maps."
   },
-  "host": "atlas.microsoft.com",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -83,6 +90,33 @@
     }
   },
   "parameters": {
+    "GeographicResourceLocation": {
+      "name": "geography",
+      "description": "This parameter specifies where the Azure Maps Creator resource is located.  Valid values are us and eu.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "us",
+      "enum": [
+        "us",
+        "eu"
+      ],
+      "x-ms-enum": {
+        "name": "GeographicResourceLocation",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "us",
+            "description": "Used to access an Azure Maps Creator resource in the United States"
+          },
+          {
+            "value": "eu",
+            "description": "Used to access an Azure Maps Creator resource in Europe"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "client"
+    },
     "SubscriptionKey": {
       "name": "subscription-key",
       "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
@@ -100,9 +134,17 @@
       "default": "2.0",
       "x-ms-parameter-location": "client"
     },
+    "FeatureStateSetDescription": {
+      "name": "description",
+      "description": "Description for the stateset. Max length allowed is 1000.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
     "DatasetIdForCreate": {
       "name": "datasetId",
-      "description": "The datasetId must have been obtained from a successful [Dataset Create API](https://review.docs.microsoft.com/en-us/rest-staging/api/maps-master/dataset/createpreview?branch=lbs) call.",
+      "description": "The datasetId must have been obtained from a successful [Dataset Create API](https://docs.microsoft.com/en-us/rest/api/maps/v2/dataset/create) call.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -153,7 +195,7 @@
     "/featureStateSets": {
       "post": {
         "x-publish": true,
-        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis POST API allows the user to create a new Stateset and define stateset style using request body.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Feature State API is part of Creator. \n\nThe Feature State service allows the user to update the states of a feature and query them to be used in other services. The dynamic properties of a feature that don't belong to the dataset are referred to as *states* here.\n\nThis Feature State service pivot on the Stateset. Like Tileset, Stateset encapsulates the storage mechanism for feature states for a dataset.\n\nOnce the stateset is created, users can use that statesetId to post feature state updates and retrieve the current feature states. A feature can have only one state at a given point in time. \n\nFeature state is defined by the key name, value and the timestamp. When a feature state update is posted to Azure Maps, the state value gets updated only if the provided state’s timestamp is later than the stored timestamp. \n\nAzure Maps MapControl provides a way to use these feature states to style the features. Please refer to the State Tile documentation for more information.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis POST API allows the user to create a new Stateset and define stateset style using request body.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Feature State API is part of Creator. \n\nThe Feature State service allows the user to update the states of a feature and query them to be used in other services. The dynamic properties of a feature that don't belong to the dataset are referred to as *states* here.\n\nThis Feature State service pivot on the Stateset. Like Tileset, Stateset encapsulates the storage mechanism for feature states for a dataset.\n\nOnce the stateset is created, users can use that statesetId to post feature state updates and retrieve the current feature states. A feature can have only one state at a given point in time. \n\nFeature state is defined by the key name, value and the timestamp. When a feature state update is posted to Azure Maps, the state value gets updated only if the provided state’s timestamp is later than the stored timestamp. \n\nAzure Maps MapControl provides a way to use these feature states to style the features. Please refer to the State Tile documentation for more information.",
         "operationId": "FeatureState_CreateStateset",
         "x-ms-examples": {
           "Create a new stateset with a datasetId": {
@@ -169,6 +211,9 @@
           },
           {
             "$ref": "#/parameters/DatasetIdForCreate"
+          },
+          {
+            "$ref": "#/parameters/FeatureStateSetDescription"
           },
           {
             "name": "statesetCreateRequestBody",
@@ -206,7 +251,7 @@
       },
       "get": {
         "x-publish": true,
-        "description": "**Applies to:** S1 pricing tier. <br> This API allows the caller to fetch a list of all previously successfully created statesets.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n This API allows the caller to fetch a list of all previously successfully created statesets.",
         "operationId": "FeatureState_ListStateset",
         "x-ms-examples": {
           "List all the previously created statesets": {
@@ -249,7 +294,7 @@
     "/featureStateSets/{statesetId}": {
       "put": {
         "x-publish": true,
-        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis PUT API allows the user to update the stateset style rules.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis PUT API allows the user to update the stateset style rules.",
         "operationId": "FeatureState_PutStateset",
         "x-ms-examples": {
           "Update stateset style rules with a statesetId": {
@@ -299,7 +344,7 @@
       },
       "delete": {
         "x-publish": true,
-        "description": "**Applies to:** S1 pricing tier. <br> This DELETE API allows the user to delete the stateset and the associated data.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n This DELETE API allows the user to delete the stateset and the associated data.",
         "operationId": "FeatureState_DeleteStateset",
         "x-ms-examples": {
           "Delete an existing stateset": {
@@ -340,7 +385,7 @@
       },
       "get": {
         "x-publish": true,
-        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis GET API allows the user to get the stateset Information.\n\nThe stateset Information includes the datasetId associated to the stateset, and the styles of that stateset.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis GET API allows the user to get the stateset Information.\n\nThe stateset Information includes the datasetId associated to the stateset, and the styles of that stateset.",
         "operationId": "FeatureState_GetStateset",
         "x-ms-examples": {
           "Get stateset information with a statesetId": {
@@ -387,7 +432,7 @@
       "put": {
         "x-publish": true,
         "operationId": "FeatureState_UpdateStates",
-        "description": "**Applies to:** S1 pricing tier. <br>\nThis PUT API allows the user to update the state of the given feature in the given stateset.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis PUT API allows the user to update the state of the given feature in the given stateset.",
         "x-ms-examples": {
           "Update the states of a feature": {
             "$ref": "./examples/UpdateStates.json"
@@ -440,7 +485,7 @@
       "delete": {
         "x-publish": true,
         "operationId": "FeatureState_DeleteState",
-        "description": "**Applies to:** S1 pricing tier. <br> This API deletes the state information identified by the StateKeyName parameter for the feature identified by the FeatureId parameter in the the stateset.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n This API deletes the state information identified by the StateKeyName parameter for the feature identified by the FeatureId parameter in the the stateset.",
         "x-ms-examples": {
           "Delete the given feature state": {
             "$ref": "./examples/DeleteFeatureState.json"
@@ -490,7 +535,7 @@
       "get": {
         "x-publish": true,
         "operationId": "FeatureState_GetStates",
-        "description": "**Applies to:** S1 pricing tier. <br> This API returns the current state information associated with the given feature in the given stateset.",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\n This API returns the current state information associated with the given feature in the given stateset.",
         "x-ms-examples": {
           "Get the current states of a feature": {
             "$ref": "./examples/GetStates.json"
@@ -577,7 +622,12 @@
       "description": "The response model for the successful Stateset Get API.",
       "type": "object",
       "properties": {
-        "datasetIdList": {
+        "description": {
+          "description": "Description associated with the stateset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "datasetIds": {
           "description": "Dataset ID associated with the stateset.",
           "type": "array",
           "items": {
@@ -593,7 +643,7 @@
       "description": "The response model for the successful Stateset List API.",
       "type": "object",
       "properties": {
-        "statesetDetailList": {
+        "statesets": {
           "description": "A list of statesets information.",
           "type": "array",
           "items": {
@@ -615,7 +665,12 @@
           "description": "The stateset ID of this stateset.",
           "type": "string"
         },
-        "datasetIdList": {
+        "description": {
+          "description": "Description associated with the stateset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "datasetIds": {
           "description": "Dataset ID associated with the stateset.",
           "type": "array",
           "items": {
