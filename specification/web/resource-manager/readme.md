@@ -1161,6 +1161,14 @@ directive:
   approved-by: "@ravbhatnagar"
 ```
 
+### Tag: package-2016-06-01
+
+These settings apply only when `--tag=package-2016-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-06-01'
+input-file:
+- Microsoft.Web/stable/2016-06-01/logicAppsManagementClient.json
+```
 
 ### Tag: package-2015-08-preview
 
@@ -1255,8 +1263,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_web']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js web/resource-manager
 ```
 
 ## Go
@@ -1322,7 +1328,5 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/Recommendations.json
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
