@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsnotification": {
+    "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsNotifications": {
       "get": {
         "tags": [
           "Notification"
@@ -25,6 +25,47 @@
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/PrincipalId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NotificationList"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceNotifications error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetReviewsNotifications": {
+            "$ref": "./examples/GetReviewsNotifications.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscription}/providers/Microsoft.MarketplaceNotifications/reviewsNotification/{notificationId}": {
+      "get": {
+        "tags": [
+          "Notification"
+        ],
+        "operationId": "Notification_GetWithAuthorization",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/NotificationId"
           },
           {
             "$ref": "#/parameters/PrincipalId"
@@ -48,7 +89,7 @@
           }
         },
         "x-ms-examples": {
-          "GetReviewsNotification": {
+          "GetReviewsNotifications": {
             "$ref": "./examples/GetReviewsNotification.json"
           }
         }
@@ -79,15 +120,26 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "GetReviewsNotificationOperations": {
-            "$ref": "./examples/GetReviewsNotificationOperations.json"
+          "GetReviewsNotificationsOperations": {
+            "$ref": "./examples/GetReviewsNotificationsOperations.json"
           }
         }
       }
     }
   },
   "parameters": {
+    "NotificationId": {
+      "description": "the notification id",
+      "type": "string",
+      "name": "notification",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
     "SubscriptionId": {
       "description": "user's subscription id",
       "type": "string",
@@ -114,6 +166,18 @@
     }
   },
   "definitions": {
+    "NotificationList": {
+      "description": "Notifications List",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Notification"
+          }
+        }
+      }
+    },
     "Notification": {
       "description": "Review notification",
       "type": "object",
