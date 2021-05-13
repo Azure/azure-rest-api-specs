@@ -416,6 +416,25 @@
     "MigrationResourcePropertiesForPatch": {
       "type": "object",
       "properties": {
+        "sourceDBServerResourceId": {
+          "type": "string"
+        },
+        "secretParameters": {
+          "$ref": "#/definitions/MigrationSecretParameters"
+        },
+        "targetDBServerSubnetResourceId": {
+          "type": "string"
+        },
+        "dBsToMigrate": {
+          "maxItems": 8,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "migrationResourceGroup": {
+          "$ref": "#/definitions/MigrationResourceGroup"
+        },
         "setupLogicalReplicationOnSourceDBIfNeeded": {
           "type": "boolean"
         },
