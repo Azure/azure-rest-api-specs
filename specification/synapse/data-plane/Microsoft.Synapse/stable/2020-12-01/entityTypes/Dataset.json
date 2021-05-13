@@ -56,7 +56,10 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type", "linkedServiceName"]
+      "required": [
+        "type",
+        "linkedServiceName"
+      ]
     },
     "DatasetLocation": {
       "description": "Dataset location.",
@@ -79,7 +82,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "AzureBlobStorageLocation": {
       "description": "The location of azure blob dataset.",
@@ -270,7 +275,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "TextFormat": {
       "description": "The data stored in text format.",
@@ -353,7 +360,10 @@
     "JsonFormatFilePattern": {
       "description": "JSON format file pattern. A property of JsonFormat.",
       "type": "string",
-      "enum": ["setOfObjects", "arrayOfObjects"],
+      "enum": [
+        "setOfObjects",
+        "arrayOfObjects"
+      ],
       "x-ms-enum": {
         "name": "JsonFormatFilePattern",
         "modelAsString": true
@@ -399,7 +409,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "DatasetBZip2Compression": {
       "x-ms-discriminator-value": "BZip2",
@@ -494,7 +506,10 @@
     },
     "DatasetCompressionLevelEnum": {
       "type": "string",
-      "enum": ["Optimal", "Fastest"],
+      "enum": [
+        "Optimal",
+        "Fastest"
+      ],
       "x-ms-enum": {
         "name": "DatasetCompressionLevel",
         "modelAsString": true
@@ -516,7 +531,9 @@
           "$ref": "#/definitions/AmazonS3DatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "AmazonS3DatasetTypeProperties": {
       "description": "Amazon S3 dataset properties.",
@@ -555,7 +572,9 @@
           "$ref": "#/definitions/DatasetCompression"
         }
       },
-      "required": ["bucketName"]
+      "required": [
+        "bucketName"
+      ]
     },
     "AvroDataset": {
       "x-ms-discriminator-value": "Avro",
@@ -592,11 +611,19 @@
           "maximum": 9
         }
       },
-      "required": ["location"]
+      "required": [
+        "location"
+      ]
     },
     "AvroCompressionCodecEnum": {
       "type": "string",
-      "enum": ["none", "deflate", "snappy", "xz", "bzip2"],
+      "enum": [
+        "none",
+        "deflate",
+        "snappy",
+        "xz",
+        "bzip2"
+      ],
       "x-ms-enum": {
         "name": "AvroCompressionCodec",
         "modelAsString": true
@@ -648,7 +675,10 @@
           "description": "The null value string. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["location", "sheetName"]
+      "required": [
+        "location",
+        "sheetName"
+      ]
     },
     "ParquetDataset": {
       "x-ms-discriminator-value": "Parquet",
@@ -680,11 +710,18 @@
           "description": "A string from ParquetCompressionCodecEnum or an expression"
         }
       },
-      "required": ["location"]
+      "required": [
+        "location"
+      ]
     },
     "ParquetCompressionCodecEnum": {
       "type": "string",
-      "enum": ["none", "gzip", "snappy", "lzo"],
+      "enum": [
+        "none",
+        "gzip",
+        "snappy",
+        "lzo"
+      ],
       "x-ms-enum": {
         "name": "ParquetCompressionCodecEnum",
         "modelAsString": true
@@ -765,7 +802,9 @@
           "description": "The null value string. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["location"]
+      "required": [
+        "location"
+      ]
     },
     "JsonDataset": {
       "x-ms-discriminator-value": "Json",
@@ -801,7 +840,9 @@
           "$ref": "#/definitions/DatasetCompression"
         }
       },
-      "required": ["location"]
+      "required": [
+        "location"
+      ]
     },
     "XmlDataset": {
       "x-ms-discriminator-value": "Xml",
@@ -841,7 +882,9 @@
           "$ref": "#/definitions/DatasetCompression"
         }
       },
-      "required": ["location"]
+      "required": [
+        "location"
+      ]
     },
     "OrcDataset": {
       "x-ms-discriminator-value": "Orc",
@@ -870,14 +913,21 @@
         },
         "orcCompressionCodec": {
           "type": "string",
-          "enum": ["none", "zlib", "snappy", "lzo"],
+          "enum": [
+            "none",
+            "zlib",
+            "snappy",
+            "lzo"
+          ],
           "x-ms-enum": {
             "name": "orcCompressionCodec",
             "modelAsString": true
           }
         }
       },
-      "required": ["location"]
+      "required": [
+        "location"
+      ]
     },
     "BinaryDataset": {
       "x-ms-discriminator-value": "Binary",
@@ -909,7 +959,9 @@
           "$ref": "#/definitions/DatasetCompression"
         }
       },
-      "required": ["location"]
+      "required": [
+        "location"
+      ]
     },
     "AzureBlobDataset": {
       "x-ms-discriminator-value": "AzureBlob",
@@ -978,7 +1030,9 @@
           "$ref": "#/definitions/AzureTableDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "AzureTableDatasetTypeProperties": {
       "description": "Azure Table dataset properties.",
@@ -989,7 +1043,9 @@
           "description": "The table name of the Azure Table storage. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["tableName"]
+      "required": [
+        "tableName"
+      ]
     },
     "AzureSqlTableDataset": {
       "x-ms-discriminator-value": "AzureSqlTable",
@@ -1159,7 +1215,9 @@
           "$ref": "#/definitions/CosmosDbSqlApiCollectionDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "CosmosDbSqlApiCollectionDatasetTypeProperties": {
       "description": "CosmosDB (SQL API) Collection dataset properties.",
@@ -1170,7 +1228,9 @@
           "description": "CosmosDB (SQL API) collection name. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["collectionName"]
+      "required": [
+        "collectionName"
+      ]
     },
     "DocumentDbCollectionDataset": {
       "x-ms-discriminator-value": "DocumentDbCollection",
@@ -1188,7 +1248,9 @@
           "$ref": "#/definitions/DocumentDbCollectionDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "DocumentDbCollectionDatasetTypeProperties": {
       "description": "DocumentDB Collection dataset properties.",
@@ -1199,7 +1261,9 @@
           "description": "Document Database collection name. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["collectionName"]
+      "required": [
+        "collectionName"
+      ]
     },
     "DynamicsEntityDataset": {
       "x-ms-discriminator-value": "DynamicsEntity",
@@ -1376,7 +1440,9 @@
           "$ref": "#/definitions/Office365DatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "Office365DatasetTypeProperties": {
       "description": "Office365 dataset properties.",
@@ -1391,7 +1457,9 @@
           "description": "A predicate expression that can be used to filter the specific rows to extract from Office 365. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["tableName"]
+      "required": [
+        "tableName"
+      ]
     },
     "FileShareDataset": {
       "x-ms-discriminator-value": "FileShare",
@@ -1460,7 +1528,9 @@
           "$ref": "#/definitions/MongoDbCollectionDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "MongoDbCollectionDatasetTypeProperties": {
       "description": "MongoDB database dataset properties.",
@@ -1471,7 +1541,9 @@
           "description": "The table name of the MongoDB database. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["collectionName"]
+      "required": [
+        "collectionName"
+      ]
     },
     "MongoDbAtlasCollectionDataset": {
       "x-ms-discriminator-value": "MongoDbAtlasCollection",
@@ -1489,7 +1561,9 @@
           "$ref": "#/definitions/MongoDbAtlasCollectionDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "MongoDbAtlasCollectionDatasetTypeProperties": {
       "description": "MongoDB Atlas database dataset properties.",
@@ -1500,7 +1574,9 @@
           "description": "The collection name of the MongoDB Atlas database. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["collection"]
+      "required": [
+        "collection"
+      ]
     },
     "MongoDbV2CollectionDataset": {
       "x-ms-discriminator-value": "MongoDbV2Collection",
@@ -1518,7 +1594,9 @@
           "$ref": "#/definitions/MongoDbV2CollectionDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "MongoDbV2CollectionDatasetTypeProperties": {
       "description": "MongoDB database dataset properties.",
@@ -1529,7 +1607,9 @@
           "description": "The collection name of the MongoDB database. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["collection"]
+      "required": [
+        "collection"
+      ]
     },
     "CosmosDbMongoDbApiCollectionDataset": {
       "x-ms-discriminator-value": "CosmosDbMongoDbApiCollection",
@@ -1547,7 +1627,9 @@
           "$ref": "#/definitions/CosmosDbMongoDbApiCollectionDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "CosmosDbMongoDbApiCollectionDatasetTypeProperties": {
       "description": "CosmosDB (MongoDB API) database dataset properties.",
@@ -1558,7 +1640,9 @@
           "description": "The collection name of the CosmosDB (MongoDB API) database. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["collection"]
+      "required": [
+        "collection"
+      ]
     },
     "ODataResourceDataset": {
       "x-ms-discriminator-value": "ODataResource",
@@ -1669,7 +1753,9 @@
           "$ref": "#/definitions/AzureMySqlTableDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "AzureMySqlTableDatasetTypeProperties": {
       "description": "Azure MySQL database dataset properties.",
@@ -2033,7 +2119,9 @@
           "$ref": "#/definitions/SapCloudForCustomerResourceDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "SapCloudForCustomerResourceDatasetTypeProperties": {
       "description": "Sap Cloud For Customer OData resource dataset properties.",
@@ -2044,7 +2132,9 @@
           "description": "The path of the SAP Cloud for Customer OData entity. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["path"]
+      "required": [
+        "path"
+      ]
     },
     "SapEccResourceDataset": {
       "x-ms-discriminator-value": "SapEccResource",
@@ -2062,7 +2152,9 @@
           "$ref": "#/definitions/SapEccResourceDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "SapEccResourceDatasetTypeProperties": {
       "description": "Sap ECC OData resource dataset properties.",
@@ -2073,7 +2165,9 @@
           "description": "The path of the SAP ECC OData entity. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["path"]
+      "required": [
+        "path"
+      ]
     },
     "SapHanaTableDataset": {
       "x-ms-discriminator-value": "SapHanaTable",
@@ -2122,7 +2216,9 @@
           "$ref": "#/definitions/SapOpenHubTableDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "SapOpenHubTableDatasetTypeProperties": {
       "description": "Sap Business Warehouse Open Hub Destination Table properties.",
@@ -2141,7 +2237,9 @@
           "description": "The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer )."
         }
       },
-      "required": ["openHubDestinationName"]
+      "required": [
+        "openHubDestinationName"
+      ]
     },
     "SqlServerTableDataset": {
       "x-ms-discriminator-value": "SqlServerTable",
@@ -2237,7 +2335,9 @@
           "$ref": "#/definitions/SapTableResourceDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "SapTableResourceDatasetTypeProperties": {
       "description": "SAP Table Resource properties.",
@@ -2248,7 +2348,9 @@
           "description": "The name of the SAP Table. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["tableName"]
+      "required": [
+        "tableName"
+      ]
     },
     "WebTableDataset": {
       "x-ms-discriminator-value": "WebTable",
@@ -2266,7 +2368,9 @@
           "$ref": "#/definitions/WebTableDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "WebTableDatasetTypeProperties": {
       "description": "Web table dataset properties.",
@@ -2281,7 +2385,9 @@
           "description": "The relative URL to the web page from the linked service URL. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["index"]
+      "required": [
+        "index"
+      ]
     },
     "AzureSearchIndexDataset": {
       "x-ms-discriminator-value": "AzureSearchIndex",
@@ -2299,7 +2405,9 @@
           "$ref": "#/definitions/AzureSearchIndexDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "AzureSearchIndexDatasetTypeProperties": {
       "description": "Properties specific to this dataset type.",
@@ -2310,7 +2418,9 @@
           "description": "The name of the Azure Search Index. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["indexName"]
+      "required": [
+        "indexName"
+      ]
     },
     "HttpDataset": {
       "x-ms-discriminator-value": "HttpFile",
@@ -3110,7 +3220,9 @@
           "$ref": "#/definitions/DynamicsAXResourceDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "DynamicsAXResourceDatasetTypeProperties": {
       "description": "Dynamics AX OData resource dataset properties.",
@@ -3121,7 +3233,9 @@
           "description": "The path of the Dynamics AX OData entity. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["path"]
+      "required": [
+        "path"
+      ]
     },
     "OracleServiceCloudObjectDataset": {
       "x-ms-discriminator-value": "OracleServiceCloudObject",
@@ -3156,7 +3270,9 @@
           "$ref": "#/definitions/AzureDataExplorerDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "AzureDataExplorerDatasetTypeProperties": {
       "description": "Azure Data Explorer (Kusto) dataset properties.",
@@ -3201,7 +3317,9 @@
           "$ref": "#/definitions/SnowflakeDatasetTypeProperties"
         }
       },
-      "required": ["typeProperties"]
+      "required": [
+        "typeProperties"
+      ]
     },
     "SnowflakeDatasetTypeProperties": {
       "description": "Snowflake dataset properties.",
