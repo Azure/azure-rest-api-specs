@@ -3460,6 +3460,14 @@
           "type": "string",
           "description": "Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints",
           "x-nullable": false
+        },
+        "sessionHostConfiguration": {
+          "$ref": "#/definitions/SessionHostConfigurationProperties",
+          "description": "The session host configurations of HostPool."
+        },
+        "sessionHostComponentUpdateConfiguration": {
+          "$ref": "#/definitions/SessionHostComponentUpdateConfigurationProperties",
+          "description": "The session host configuration for updating agent, monitoring agent, and stack component."
         }
       }
     },
@@ -3601,6 +3609,283 @@
           },
           "type": "string",
           "description": "Enabled to allow this resource to be access from the public network"
+        },
+        "sessionHostConfiguration": {
+          "$ref": "#/definitions/SessionHostConfigurationProperties",
+          "description": "The session host configurations of HostPool."
+        },
+        "sessionHostComponentUpdateConfiguration": {
+          "$ref": "#/definitions/SessionHostComponentUpdateConfigurationProperties",
+          "description": "The session host configuration for updating agent, monitoring agent, and stack component."
+        }
+      }
+    },
+    "SessionHostConfigurationProperties": {
+      "description": "Session host configurations of HostPool.",
+      "type": "object",
+      "properties": {
+        "vMSizeId": {
+          "type": "string",
+          "description": "The id of the size of a virtual machine connected to a hostpool."
+        },
+        "diskType": {
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "StandardSSD_LRS",
+            "UltraSSD_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineDiskType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard_LRS",
+                "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
+              },
+              {
+                "value": "Premium_LRS",
+                "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
+              },
+              {
+                "value": "StandardSSD_LRS",
+                "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+              },
+              {
+                "value": "UltraSSD_LRS",
+                "description": "Ultra SSD locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads."
+              }
+            ]
+          },
+          "description": "The disk type used by virtual machine in hostpool session host."
+        },
+        "vmCustomConfigurationUri": {
+          "type": "string",
+          "description": "The uri to the storage blob containing scripts to be run on the virtual machine after provisioning."
+        },
+        "imageInfo": {
+          "$ref": "#/definitions/ImageInfoProperties",
+          "description": "Image configurations of HostPool."
+        },
+        "domainInfo": {
+          "$ref": "#/definitions/DomainInfoProperties",
+          "description": "Domain configurations of HostPool."
+        }
+      }
+    },
+    "ImageInfoProperties": {
+      "description": "Image configurations of session host in a HostPool.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "Gallery",
+            "StorageBlob",
+            "CustomImage"
+          ],
+          "x-ms-enum": {
+            "name": "ImageType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Gallery",
+                "description": "Using default gallery images offered by azure market place."
+              },
+              {
+                "value": "StorageBlob",
+                "description": "Using a VHD stored in a storage blob."
+              },
+              {
+                "value": "CustomImage",
+                "description": "Using custom image or custom shared image."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The type of image session hosts use in the hostpool.",
+          "x-nullable": false
+        },
+        "marketPlaceInfo": {
+          "$ref": "#/definitions/MarketPlaceInfoProperties",
+          "description": "The values to uniquely identify a gallery image."
+        },
+        "storageBlobUri": {
+          "type": "string",
+          "description": "The uri to the storage blob which contains the VHD. Image type must be StorageBlob."
+        },
+        "customId": {
+          "type": "string",
+          "description": "The resource id of the custom image or shared image. Image type must be custom."
+        }
+      }
+    },
+    "MarketPlaceInfoProperties": {
+      "description": "Image configurations of HostPool.",
+      "type": "object",
+      "properties": {
+        "offer": {
+          "type": "string",
+          "description": "The offer of the image."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the image."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The sku of the image."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "The exact version of the image."
+        }
+      }
+    },
+    "DomainInfoProperties": {
+      "description": "Domain configurations of HostPool.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The domain a virtual machine connected to a hostpool will join."
+        },
+        "joinType": {
+          "enum": [
+            "ActiveDirectory",
+            "AzureActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "DomainJoinType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ActiveDirectory",
+                "description": "Using microsoft active directory."
+              },
+              {
+                "value": "AzureActiveDirectory",
+                "description": "Using microsoft azure active directory."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The type of domain join done by the virtual machine.",
+          "x-nullable": false
+        },
+        "mdmProviderGuid": {
+          "type": "string",
+          "description": "The MDM Provider GUID used during MDM enrollment for Azure AD joined virtual machines."
+        },
+        "credentials": {
+          "$ref": "#/definitions/CredentialsProperties",
+          "description": "Credentials needed to create the virtual machine."
+        }
+      }
+    },
+    "CredentialsProperties": {
+      "description": "Credentials needed to create the virtual machine.",
+      "type": "object",
+      "properties": {
+        "localAdmin": {
+          "$ref": "#/definitions/KeyvaultCredentialProperties",
+          "description": "The local admin credentials."
+        },
+        "domainAdmin": {
+          "$ref": "#/definitions/KeyvaultCredentialProperties",
+          "description": "The domain admin credentials."
+        }
+      }
+    },
+    "KeyvaultCredentialProperties": {
+      "description": "Credentials kept in the keyvault.",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The user name to the account."
+        },
+        "passwordKeyVaultResourceId": {
+          "type": "string",
+          "description": "The keyvault resource id to the keyvault secrets."
+        },
+        "passwordSecretName": {
+          "type": "string",
+          "description": "The keyvault secret name the password is stored in."
+        }
+      }
+    },
+    "SessionHostComponentUpdateConfigurationProperties": {
+      "description": "The session host configuration for updating agent, monitoring agent, and stack component.",
+      "type": "object",
+      "properties": {
+        "maintenanceType": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "TenantAdminControlled"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostComponentUpdateType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Agent and other agent side components are delivery schedule is controlled by WVD Infra."
+              },
+              {
+                "value": "TenantAdminControlled",
+                "description": "TenantAdmin have opted in for Scheduled Agent Update feature."
+              }
+            ]
+          }
+        },
+        "useLocalTime": {
+          "type": "boolean",
+          "description": "Whether to use localTime of the virtual machine."
+        },
+        "maintenanceWindowTimeZone": {
+          "type": "string",
+          "description": "Time zone for maintenance as defined in https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.findsystemtimezonebyid?view=net-5.0. Must be set if useLocalTime is true."
+        },
+        "primaryWindow": {
+          "$ref": "#/definitions/MaintenanceWindowProperties",
+          "description": "Primary Window of the maintenance. Maintenance windows are 2 hours long. We try to push agent update in this window first."
+        },
+        "secondaryWindows": {
+          "type": "array",
+          "description": "List of secondary maintenance windows. Maintenance windows are 2 hours long. We try to exercise this only when the primary window update fails.",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowProperties"
+          }
+        }
+      }
+    },
+    "MaintenanceWindowProperties": {
+      "description": "Maintenance window starting hour and day of week.",
+      "type": "object",
+      "properties": {
+        "hour": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The update start hour of the day. (0 - 23)"
+        },
+        "dayOfWeek": {
+          "type": "string",
+          "description": "Day of the week.",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": false
+          }
         }
       }
     },

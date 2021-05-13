@@ -33,7 +33,59 @@
           "migrationPath": "TenantGroups/{defaultV1TenantGroup.Name}/Tenants/{defaultV1Tenant.Name}/HostPools/{sessionHostPool.Name}",
           "operation": "Start"
         },
-        "publicNetworkAccess": "Enabled"
+        "publicNetworkAccess": "Enabled",
+        "sessionHostConfiguration": {
+          "vMSizeId": "Standard_D2s_v3",
+          "diskType": "Standard_LRS",
+          "vmCustomConfigurationUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
+          "imageInfo": {
+            "type": "Gallery",
+            "marketPlaceInfo": {
+              "offer": "Windows-10",
+              "publisher": "MicrosoftWindowsDesktop",
+              "sku": "19h2-ent",
+              "exactVersion": "2019.0.20190115"
+            },
+            "storageBlobUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/image.vhd",
+            "customId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.Compute/images/imageName"
+          },
+          "domainInfo": {
+            "name": "wvdarmtest1.net",
+            "joinType": "ActiveDirectory",
+            "mdmProviderGuid": "",
+            "credentials": {
+              "localAdmin": {
+                "userName": "localAdminUserName",
+                "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+                "passwordSecretName": "localAdminPasswordName"
+              },
+              "domainAdmin": {
+                "userName": "domainAdminUserName",
+                "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+                "passwordSecretName": "domainAdminPasswordName"
+              }
+            }
+          }
+        },
+        "sessionHostComponentUpdateConfiguration": {
+          "maintenanceType": "TenantAdminControlled",
+          "useLocalTime": false,
+          "maintenanceWindowTimeZone": "Alaskan Standard Time",
+          "primaryWindow": {
+            "hour": 7,
+            "dayOfWeek": "Friday"
+          },
+          "secondaryWindows": [
+            {
+              "hour": 8,
+              "dayOfWeek": "Sunday"
+            },
+            {
+              "hour": 9,
+              "dayOfWeek": "Monday"
+            }
+          ]
+        }
       }
     }
   },
@@ -76,7 +128,59 @@
             "migrationPath": "TenantGroups/{defaultV1TenantGroup.Name}/Tenants/{defaultV1Tenant.Name}/HostPools/{sessionHostPool.Name}",
             "operation": "Start"
           },
-          "publicNetworkAccess": "Enabled"
+          "publicNetworkAccess": "Enabled",
+          "sessionHostConfiguration": {
+            "vMSizeId": "Standard_D2s_v3",
+            "diskType": "Standard_LRS",
+            "vmCustomConfigurationUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
+            "imageInfo": {
+              "type": "Gallery",
+              "marketPlaceInfo": {
+                "offer": "Windows-10",
+                "publisher": "MicrosoftWindowsDesktop",
+                "sku": "19h2-ent",
+                "exactVersion": "2019.0.20190115"
+              },
+              "storageBlobUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/image.vhd",
+              "customId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.Compute/images/imageName"
+            },
+            "domainInfo": {
+              "name": "wvdarmtest1.net",
+              "joinType": "ActiveDirectory",
+              "mdmProviderGuid": "",
+              "credentials": {
+                "localAdmin": {
+                  "userName": "localAdminUserName",
+                  "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+                  "passwordSecretName": "localAdminPasswordName"
+                },
+                "domainAdmin": {
+                  "userName": "domainAdminUserName",
+                  "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+                  "passwordSecretName": "domainAdminPasswordName"
+                }
+              }
+            }
+          },
+          "sessionHostComponentUpdateConfiguration": {
+            "maintenanceType": "TenantAdminControlled",
+            "useLocalTime": false,
+            "maintenanceWindowTimeZone": "Alaskan Standard Time",
+            "primaryWindow": {
+              "hour": 7,
+              "dayOfWeek": "Friday"
+            },
+            "secondaryWindows": [
+              {
+                "hour": 8,
+                "dayOfWeek": "Sunday"
+              },
+              {
+                "hour": 9,
+                "dayOfWeek": "Monday"
+              }
+            ]
+          }
         }
       }
     },
@@ -118,7 +222,59 @@
             "migrationPath": "TenantGroups/{defaultV1TenantGroup.Name}/Tenants/{defaultV1Tenant.Name}/HostPools/{sessionHostPool.Name}",
             "operation": "Start"
           },
-          "publicNetworkAccess": "Enabled"
+          "publicNetworkAccess": "Enabled",
+          "sessionHostConfiguration": {
+            "vMSizeId": "Standard_D2s_v3",
+            "diskType": "Standard_LRS",
+            "vmCustomConfigurationUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/file",
+            "imageInfo": {
+              "type": "Gallery",
+              "marketPlaceInfo": {
+                "offer": "Windows-10",
+                "publisher": "MicrosoftWindowsDesktop",
+                "sku": "19h2-ent",
+                "exactVersion": "2019.0.20190115"
+              },
+              "storageBlobUri": "https://storageaccountname.blob.core.windows.net/blobcontainer/image.vhd",
+              "customId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.Compute/images/imageName"
+            },
+            "domainInfo": {
+              "name": "wvdarmtest1.net",
+              "joinType": "ActiveDirectory",
+              "mdmProviderGuid": "",
+              "credentials": {
+                "localAdmin": {
+                  "userName": "localAdminUserName",
+                  "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+                  "passwordSecretName": "localAdminPasswordName"
+                },
+                "domainAdmin": {
+                  "userName": "domainAdminUserName",
+                  "passwordKeyVaultResourceId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.KeyVault/vaults/test-kv/secrets",
+                  "passwordSecretName": "domainAdminPasswordName"
+                }
+              }
+            }
+          },
+          "sessionHostComponentUpdateConfiguration": {
+            "maintenanceType": "TenantAdminControlled",
+            "useLocalTime": false,
+            "maintenanceWindowTimeZone": "Alaskan Standard Time",
+            "primaryWindow": {
+              "hour": 7,
+              "dayOfWeek": "Friday"
+            },
+            "secondaryWindows": [
+              {
+                "hour": 8,
+                "dayOfWeek": "Sunday"
+              },
+              {
+                "hour": 9,
+                "dayOfWeek": "Monday"
+              }
+            ]
+          }
         }
       }
     }
