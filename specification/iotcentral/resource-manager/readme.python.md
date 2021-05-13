@@ -10,6 +10,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.iotcentral
 package-name: azure-mgmt-iotcentral
+package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
