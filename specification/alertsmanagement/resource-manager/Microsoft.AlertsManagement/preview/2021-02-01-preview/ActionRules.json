@@ -254,7 +254,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Returns the created/updated action rule",
+            "description": "OK. Returns the updated action rule",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ActionRule"
+            }
+          },
+          "201":{
+            "description": "Created. Returns the created action rule",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
@@ -317,6 +329,15 @@
         "responses": {
           "200": {
             "description": "Successful request to delete an action rule",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            }
+          },
+          "204": {
+            "description": "No content: the request was successful, but the response is empty",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
@@ -750,9 +771,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Recurrence"
-        },
-        {
-          "type": "object"
         }
       ]
     },
@@ -922,9 +940,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/Action"
-        },
-        {
-          "type": "object"
         }
       ]
     },
