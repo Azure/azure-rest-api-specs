@@ -37,3 +37,16 @@ overrides:
       set:
         - GoFieldName: "Ssl"
 ```
+
+
+``` yaml $(tag) == 'package-2021-01-01-preview' && $(terraform)
+gosdk-folder: services/preview/avs/mgmt/2021-01-01-preview/avs
+```
+
+``` yaml $(tag) == 'package-2020-07-17-preview' && $(terraform)
+gosdk-folder: services/preview/avs/mgmt/2020-07-17-preview/avs
+```
+
+``` yaml $(tag) == 'package-2020-03-20' && $(terraform)
+gosdk-folder: services/avs/mgmt/2020-03-20/avs
+```

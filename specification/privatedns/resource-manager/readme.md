@@ -83,8 +83,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js privatedns/resource-manager
 ```
 
 ## C#
@@ -105,6 +103,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -205,7 +207,5 @@ directive:
     reason: Common types warning.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

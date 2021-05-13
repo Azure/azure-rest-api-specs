@@ -945,6 +945,7 @@
         "tags": [
           "BackupInstances"
         ],
+        "description": "Create or update a backup instance in a backup vault",
         "operationId": "BackupInstances_CreateOrUpdate",
         "produces": [
           "application/json"
@@ -1010,6 +1011,7 @@
         "tags": [
           "BackupInstances"
         ],
+        "description": "Delete a backup instance in a backup vault",
         "operationId": "BackupInstances_Delete",
         "produces": [
           "application/json"
@@ -1518,6 +1520,350 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/resumeBackups": {
+      "post": {
+        "tags": [
+          "BackupInstances"
+        ],
+        "description": "This operation will resume backups for backup instance",
+        "operationId": "BackupInstances_ResumeBackups",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ResumeBackups": {
+            "$ref": "./examples/BackupInstanceOperations/ResumeBackups.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/resumeProtection": {
+      "post": {
+        "tags": [
+          "BackupInstances"
+        ],
+        "description": "This operation will resume protection for a stopped backup instance",
+        "operationId": "BackupInstances_ResumeProtection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ResumeProtection": {
+            "$ref": "./examples/BackupInstanceOperations/ResumeProtection.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/stopProtection": {
+      "post": {
+        "tags": [
+          "BackupInstances"
+        ],
+        "description": "This operation will stop protection of a backup instance and data will be held forever",
+        "operationId": "BackupInstances_StopProtection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StopProtection": {
+            "$ref": "./examples/BackupInstanceOperations/StopProtection.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/suspendBackups": {
+      "post": {
+        "tags": [
+          "BackupInstances"
+        ],
+        "description": "This operation will stop backups for backup instance",
+        "operationId": "BackupInstances_SuspendBackups",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SuspendBackups": {
+            "$ref": "./examples/BackupInstanceOperations/SuspendBackups.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/sync": {
+      "post": {
+        "tags": [
+          "BackupInstances"
+        ],
+        "description": "Sync backup instance again in case of failure\r\nThis action will retry last failed operation and will bring backup instance to valid state",
+        "operationId": "BackupInstances_SyncBackupInstance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "backupInstanceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncBackupInstanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Sync BackupInstance": {
+            "$ref": "./examples/BackupInstanceOperations/SyncBackupInstance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/validateRestore": {
       "post": {
         "tags": [
@@ -1769,6 +2115,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
             "$ref": "#/parameters/SubscriptionId"
           },
           {
@@ -1825,6 +2174,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
           {
             "$ref": "#/parameters/SubscriptionId"
           },
@@ -2345,8 +2697,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzureBackupRecoveryPoint",
-          "description": "AzureBackupRecoveryPointResource properties",
-          "x-ms-client-flatten": true
+          "description": "AzureBackupRecoveryPointResource properties"
         }
       },
       "title": "AzureBackupRecoveryPointResource"
@@ -2513,7 +2864,7 @@
       ],
       "properties": {
         "resourceGroupId": {
-          "description": "Gets or sets the Resource Group Uri.",
+          "description": "Gets or sets the Snapshot Resource Group Uri.",
           "type": "string"
         }
       },
@@ -2564,7 +2915,6 @@
     "BackupInstance": {
       "description": "Backup Instance",
       "required": [
-        "friendlyName",
         "dataSourceInfo",
         "policyInfo",
         "objectType"
@@ -2640,8 +2990,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupInstance",
-          "description": "BackupInstanceResource properties",
-          "x-ms-client-flatten": true
+          "description": "BackupInstanceResource properties"
         }
       },
       "title": "BackupInstanceResource"
@@ -2748,6 +3097,9 @@
           "type": "array"
         }
       },
+      "required": [
+        "storageSettings"
+      ],
       "title": "BackupVault",
       "type": "object"
     },
@@ -2761,10 +3113,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BackupVault",
-          "description": "BackupVaultResource properties",
-          "x-ms-client-flatten": true
+          "description": "BackupVaultResource properties"
         }
       },
+      "required": [
+        "location",
+        "properties"
+      ],
       "title": "BackupVault Resource"
     },
     "BackupVaultResourceList": {
@@ -2818,8 +3173,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BaseBackupPolicy",
-          "description": "BaseBackupPolicyResource properties",
-          "x-ms-client-flatten": true
+          "description": "BaseBackupPolicyResource properties"
         }
       },
       "title": "BaseBackupPolicyResource"
@@ -3001,8 +3355,7 @@
         },
         "properties": {
           "$ref": "#/definitions/ClientDiscoveryForProperties",
-          "description": "Properties for the given operation.",
-          "x-ms-client-flatten": true
+          "description": "Properties for the given operation."
         }
       },
       "title": "ClientDiscoveryValueForSingleApi",
@@ -3641,6 +3994,52 @@
       "title": "InnerError",
       "type": "object"
     },
+    "ItemLevelRestoreCriteria": {
+      "description": "Class to contain criteria for item level restore",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string"
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "ItemLevelRestoreTargetInfo": {
+      "description": "Restore target info for Item level restore operation",
+      "required": [
+        "restoreCriteria",
+        "datasourceInfo",
+        "recoveryOption"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestoreTargetInfoBase"
+        }
+      ],
+      "properties": {
+        "restoreCriteria": {
+          "description": "Restore Criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemLevelRestoreCriteria"
+          }
+        },
+        "datasourceInfo": {
+          "$ref": "#/definitions/Datasource",
+          "description": "Information of target DS"
+        },
+        "datasourceSetInfo": {
+          "$ref": "#/definitions/DatasourceSet",
+          "description": "Information of target DS Set"
+        }
+      },
+      "x-ms-discriminator-value": "ItemLevelRestoreTargetInfo"
+    },
     "JobExtendedInfo": {
       "description": "Extended Information about the job",
       "properties": {
@@ -3774,8 +4173,7 @@
         },
         "properties": {
           "$ref": "#/definitions/OperationExtendedInfo",
-          "description": "End time of the operation",
-          "x-ms-client-flatten": true
+          "description": "End time of the operation"
         },
         "startTime": {
           "description": "Start time of the operation",
@@ -3867,6 +4265,26 @@
       },
       "title": "ProtectionStatusDetails",
       "type": "object"
+    },
+    "RangeBasedItemLevelRestoreCriteria": {
+      "description": "Item Level target info for restore operation",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "properties": {
+        "minMatchingValue": {
+          "description": "minimum value for range prefix match",
+          "type": "string"
+        },
+        "maxMatchingValue": {
+          "description": "maximum value for range prefix match",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "RangeBasedItemLevelRestoreCriteria"
     },
     "RecoveryPointDataStoreDetails": {
       "description": "RecoveryPoint datastore details",
@@ -4286,6 +4704,24 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "SyncBackupInstanceRequest": {
+      "description": "Sync BackupInstance Request",
+      "type": "object",
+      "properties": {
+        "syncType": {
+          "description": "Field indicating sync type e.g. to sync only in case of failure or in all cases",
+          "enum": [
+            "Default",
+            "ForceResync"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SyncType",
+            "modelAsString": true
           }
         }
       }
