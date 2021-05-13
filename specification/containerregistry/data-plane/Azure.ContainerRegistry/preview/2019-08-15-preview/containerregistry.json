@@ -709,13 +709,7 @@
             "$ref": "#/parameters/ImageName"
           },
           {
-            "name": "value",
-            "in": "body",
-            "description": "Repository attribute value",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ChangeableAttributes"
-            }
+     	    "$ref": "#/parameters/RepositoryAttributeValue"
           }
         ],
         "responses": {
@@ -846,7 +840,7 @@
             "$ref": "#/parameters/TagReference"
           },
           {
-            "$ref": "#/parameters/RepoValue"
+            "$ref": "#/parameters/TagAttributeValue"
           }
         ],
         "responses": {
@@ -1008,7 +1002,7 @@
             "$ref": "#/parameters/Digest"
           },
           {
-            "$ref": "#/parameters/RepoValue"
+            "$ref": "#/parameters/ManifestAttributeValue"
           }
         ],
         "responses": {
@@ -1333,7 +1327,7 @@
         },
         "changeableAttributes": {
           "description": "Writeable properties of the resource",
-          "$ref": "#/definitions/ChangeableAttributes",
+          "$ref": "#/definitions/RepositoryChangeableAttributes",
           "readOnly": true,
           "x-ms-client-name": "writeableProperties"
         }
@@ -1487,7 +1481,7 @@
           "x-ms-client-name": "lastUpdatedOn"
         },
         "changeableAttributes": {
-          "$ref": "#/definitions/ChangeableAttributes",
+          "$ref": "#/definitions/TagChangeableAttributes",
           "description": "Writeable properties of the resource",
           "readOnly": true,
           "x-ms-client-name": "writeableProperties"
@@ -1796,6 +1790,9 @@
       }
     },
     "ManifestAttributes": {
+      "required": [
+        "manifest"
+      ],
       "x-ms-client-name": "ArtifactManifestProperties",
       "description": "Manifest attributes details",
       "properties": {
@@ -1903,7 +1900,7 @@
           }
         },
         "changeableAttributes": {
-          "$ref": "#/definitions/ChangeableAttributes",
+          "$ref": "#/definitions/ManifestChangeableAttributes",
           "description": "Writeable properties of the resource",
           "readOnly": true,
           "x-ms-client-name": "writeableProperties"
@@ -2215,9 +2212,9 @@
         "digest": "sha256:5d20c808ce198565ff70b3ed23a991dd49afac45dece63474b27ce6ed036adc6"
       }
     },
-    "ChangeableAttributes": {
+    "TagChangeableAttributes": {
       "description": "Changeable attributes",
-      "x-ms-client-name": "ContentProperties",
+      "x-ms-client-name": "TagWriteableProperties",
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
@@ -2325,31 +2322,37 @@
     },
     "ManifestChangeableAttributes": {
       "description": "Changeable attributes",
-      "x-accessibility": "internal",
+      "x-ms-client-name": "ManifestWriteableProperties",
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
-          "description": "Delete enabled"
+          "description": "Delete enabled",
+          "x-ms-client-name": "canDelete"
         },
         "writeEnabled": {
           "type": "boolean",
-          "description": "Write enabled"
+          "description": "Write enabled",
+          "x-ms-client-name": "canWrite"
         },
         "listEnabled": {
           "type": "boolean",
-          "description": "List enabled"
+          "description": "List enabled",
+          "x-ms-client-name": "canList"
         },
         "readEnabled": {
           "type": "boolean",
-          "description": "Read enabled"
+          "description": "Read enabled",
+          "x-ms-client-name": "canRead"
         },
         "quarantineState": {
           "type": "string",
-          "description": "Quarantine state"
+          "description": "Quarantine state",
+          "x-accessibility": "internal"
         },
         "quarantineDetails": {
           "type": "string",
-          "description": "Quarantine details"
+          "description": "Quarantine details",
+          "x-accessibility": "internal"
         }
       },
       "example": {
@@ -2359,6 +2362,43 @@
         "listEnabled": true,
         "deleteEnabled": true,
         "writeEnabled": true
+      }
+    },
+    "RepositoryChangeableAttributes": {
+      "description": "Changeable attributes for Repository",
+      "x-ms-client-name": "RepositoryWriteableProperties",
+      "properties": {
+        "deleteEnabled": {
+          "type": "boolean",
+          "description": "Delete enabled",
+          "x-ms-client-name": "canDelete"
+        },
+        "writeEnabled": {
+          "type": "boolean",
+          "description": "Write enabled",
+          "x-ms-client-name": "canWrite"
+        },
+        "listEnabled": {
+          "type": "boolean",
+          "description": "List enabled",
+          "x-ms-client-name": "canList"
+        },
+        "readEnabled": {
+          "type": "boolean",
+          "description": "Read enabled",
+          "x-ms-client-name": "canRead"
+        },
+        "teleportEnabled": {
+          "type": "boolean",
+          "description": "Enables Teleport functionality on new images in the repository improving Container startup performance"
+        }
+      },
+      "example": {
+        "readEnabled": true,
+        "listEnabled": true,
+        "deleteEnabled": true,
+        "writeEnabled": true,
+        "teleportEnabled": true
       }
     },
     "Manifest": {
@@ -2789,13 +2829,33 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "RepoValue": {
+    "RepositoryAttributeValue": {
       "name": "value",
       "in": "body",
       "description": "Repository attribute value",
       "required": false,
       "schema": {
-        "$ref": "#/definitions/ChangeableAttributes"
+        "$ref": "#/definitions/RepositoryChangeableAttributes"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TagAttributeValue": {
+      "name": "value",
+      "in": "body",
+      "description": "Tag attribute value",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/TagChangeableAttributes"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ManifestAttributeValue": {
+      "name": "value",
+      "in": "body",
+      "description": "Manifest attribute value",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/ManifestChangeableAttributes"
       },
       "x-ms-parameter-location": "method"
     },
