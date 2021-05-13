@@ -531,9 +531,13 @@
         }
       }
     },
-    "ErrorResponse": {
-      "schema": {
-        "$ref": "https://github.com/Azure/azure-rest-api-specs/blob/c42a52a701e498a6981f2f44eee75d61c3fa50b9/specification/common-types/resource-management/v2/types.json#L313"
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "description": "An error response from the Domain Services.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
       },
       "description": "An error response from the Domain Services."
     },
