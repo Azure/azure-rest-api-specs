@@ -15,6 +15,41 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/kubeEnvironments": {
+      "get": {
+        "tags": [
+          "KubeEnvironments"
+        ],
+        "summary": "Get all Kubernetes Environments for a subscription.",
+        "description": "Description for Get all Kubernetes Environments for a subscription.",
+        "operationId": "KubeEnvironments_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubeEnvironmentCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/kubeEnvironments": {
       "get": {
         "tags": [
@@ -98,8 +133,8 @@
         "tags": [
           "KubeEnvironments"
         ],
-        "summary": "Create a Kubernetes Environment.",
-        "description": "Description for Create a Kubernetes Environment.",
+        "summary": "Creates or updates a Kubernetes Environment.",
+        "description": "Description for Creates or updates a Kubernetes Environment.",
         "operationId": "KubeEnvironments_CreateOrUpdate",
         "parameters": [
           {
@@ -195,8 +230,8 @@
         "tags": [
           "KubeEnvironments"
         ],
-        "summary": "Create a Kubernetes Environment.",
-        "description": "Description for Create a Kubernetes Environment.",
+        "summary": "Creates or updates a Kubernetes Environment.",
+        "description": "Description for Creates or updates a Kubernetes Environment.",
         "operationId": "KubeEnvironments_Update",
         "parameters": [
           {
@@ -405,14 +440,6 @@
         "properties": {
           "description": "KubeEnvironment resource specific properties",
           "properties": {
-            "type": {
-              "description": "Type of the Kubernetes Environment.\nOnly Set for WorkerApps as Managed",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
             "extendedLocation": {
               "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation",
               "x-ms-mutability": [
@@ -432,8 +459,7 @@
                 "InfrastructureSetupComplete",
                 "ScheduledForDelete",
                 "UpgradeRequested",
-                "UpgradeFailed",
-                "AKSProvisionComplete"
+                "UpgradeFailed"
               ],
               "type": "string",
               "readOnly": true,
@@ -475,10 +501,6 @@
             "appLogsConfiguration": {
               "$ref": "#/definitions/AppLogsConfiguration",
               "description": "Cluster configuration which enables the log daemon to export\napp logs to a destination. Currently only \"log-analytics\" is\nsupported"
-            },
-            "workerAppsConfiguration": {
-              "$ref": "#/definitions/WorkerAppsConfiguration",
-              "description": "Cluster configuration which enables users to create Worker Apps\nenabled dedicated Kube Environments"
             },
             "aksResourceID": {
               "type": "string",
@@ -528,14 +550,6 @@
         "properties": {
           "description": "KubeEnvironmentPatchResource resource specific properties",
           "properties": {
-            "type": {
-              "description": "Type of the Kubernetes Environment.\nOnly Set for WorkerApps as Managed",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
             "extendedLocation": {
               "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation",
               "x-ms-mutability": [
@@ -555,8 +569,7 @@
                 "InfrastructureSetupComplete",
                 "ScheduledForDelete",
                 "UpgradeRequested",
-                "UpgradeFailed",
-                "AKSProvisionComplete"
+                "UpgradeFailed"
               ],
               "type": "string",
               "readOnly": true,
@@ -599,10 +612,6 @@
               "$ref": "#/definitions/AppLogsConfiguration",
               "description": "Cluster configuration which enables the log daemon to export\napp logs to a destination. Currently only \"log-analytics\" is\nsupported"
             },
-            "workerAppsConfiguration": {
-              "$ref": "#/definitions/WorkerAppsConfiguration",
-              "description": "Cluster configuration which enables users to create Worker Apps\nenabled dedicated Kube Environments"
-            },
             "aksResourceID": {
               "type": "string",
               "x-ms-mutability": [
@@ -628,20 +637,6 @@
             "update"
           ],
           "x-ms-secret": true
-        }
-      }
-    },
-    "WorkerAppsConfiguration": {
-      "description": "Configuration required deploy Kube Environment Dedicated\nto Worker Apps.\n \nCreate request is not accepted, if ArcConfiguration or AksResourceId is provided\nwith WorkerAppsConfiguration",
-      "type": "object",
-      "properties": {
-        "subnetResourceId": {
-          "description": "Service Principle Secret used to provision WorkerApps Kube Environment\nVnetResource",
-          "type": "string"
-        },
-        "workerAppApiIP": {
-          "description": "Static IP Address used for Workerapps API Service",
-          "type": "string"
         }
       }
     }
