@@ -48,8 +48,4 @@ output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql/azure/mgmt/sql
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql
-<<<<<<< HEAD
 ```
-=======
-```
->>>>>>> azure/master
