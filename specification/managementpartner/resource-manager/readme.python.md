@@ -23,11 +23,3 @@ output-folder: $(python-sdks-folder)/managementpartner/azure-mgmt-managementpart
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/managementpartner/azure-mgmt-managementpartner
 ```
-``` yaml $(python) && $(python-mode) == 'update' && $(track2)
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/managementpartner/azure-mgmt-managementpartner/azure/mgmt/managementpartner
-```
-``` yaml $(python) && $(python-mode) == 'create' && $(track2)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/managementpartner/azure-mgmt-managementpartner
-```

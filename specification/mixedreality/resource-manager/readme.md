@@ -188,16 +188,6 @@ csharp:
 
 See configuration in [readme.pyhton.md](./readme.python.md)
 
-``` yaml $(python) && $(python-mode) == 'update' && $(track2)
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality/azure/mgmt/mixedreality
-```
-
-``` yaml $(python) && $(python-mode) == 'create' && $(track2)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality
-```
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)

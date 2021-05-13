@@ -62,22 +62,6 @@ input-file:
 - Microsoft.KeyVault/stable/7.2/securitydomain.json
 ```
 
-
-### Tag: package-preview-7.3-preview
-
-These settings apply only when `--tag=package-preview-7.3-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-7.3-preview'
-input-file:
-  - Microsoft.KeyVault/preview/7.3-preview/backuprestore.json
-  - Microsoft.KeyVault/preview/7.3-preview/certificates.json
-  - Microsoft.KeyVault/preview/7.3-preview/common.json
-  - Microsoft.KeyVault/preview/7.3-preview/keys.json
-  - Microsoft.KeyVault/preview/7.3-preview/rbac.json
-  - Microsoft.KeyVault/preview/7.3-preview/secrets.json
-  - Microsoft.KeyVault/preview/7.3-preview/securitydomain.json
-  - Microsoft.KeyVault/preview/7.3-preview/storage.json
-```
 ### Tag: package-7.2-preview
 
 These settings apply only when `--tag=package-7.2-preview` is specified on the command line.

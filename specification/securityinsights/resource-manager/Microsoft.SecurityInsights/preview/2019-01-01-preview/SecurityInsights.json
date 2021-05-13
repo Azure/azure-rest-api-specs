@@ -2661,168 +2661,6 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/EntityTimelineResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/queries": {
-      "get": {
-        "x-ms-examples": {
-          "Get Entity Query": {
-            "$ref": "./examples/entities/GetQueries.json"
-          }
-        },
-        "tags": [
-          "Entities"
-        ],
-        "description": "Get Insights and Activities for an entity.",
-        "operationId": "Entities_Queries",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/EntityId"
-          },
-          {
-            "$ref": "#/parameters/EntityQueryKindParam"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GetQueriesResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/getInsights": {
-      "post": {
-        "x-ms-examples": {
-          "Entity Insight": {
-            "$ref": "./examples/entities/insights/PostGetInsights.json"
-          }
-        },
-        "tags": [
-          "Entities"
-        ],
-        "description": "Execute Insights for an entity.",
-        "operationId": "Entities_GetInsights",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/EntityId"
-          },
-          {
-            "$ref": "#/parameters/GetInsightsEntityQueriesRequestBody"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/EntityGetInsightsResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/relations": {
-      "get": {
-        "x-ms-examples": {
-          "Get all relations of an entity.": {
-            "$ref": "./examples/entities/relations/GetAllEntityRelations.json"
-          }
-        },
-        "tags": [
-          "EntityRelations"
-        ],
-        "description": "Gets all relations of an entity.",
-        "operationId": "EntitiesRelations_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/EntityId"
-          },
-          {
-            "$ref": "#/parameters/ODataFilter"
-          },
-          {
-            "$ref": "#/parameters/ODataOrderBy"
-          },
-          {
-            "$ref": "#/parameters/ODataTop"
-          },
-          {
-            "$ref": "#/parameters/ODataSkipToken"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
               "$ref": "#/definitions/RelationList"
             }
           },
@@ -4212,8 +4050,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}": {
       "get": {
         "x-ms-examples": {
-          "Delete a watchlist.": {
-            "$ref": "./examples/watchlists/DeleteWatchlist.json"
+          "Get a watchlist.": {
+            "$ref": "./examples/watchlists/GetWatchlistByAlias.json"
           }
         },
         "tags": [
@@ -4221,6 +4059,52 @@
         ],
         "description": "Gets a watchlist, without its watchlist items.",
         "operationId": "Watchlists_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a watchlist.": {
+            "$ref": "./examples/watchlists/DeleteWatchlist.json"
+          }
+        },
+        "tags": [
+          "Watchlists"
+        ],
+        "description": "Delete a watchlist.",
+        "operationId": "Watchlists_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4471,215 +4355,6 @@
         "tags": [
           "WatchlistItems"
         ],
-        "description": "Creates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint twice : the first call will create an empty Watchlist, and the second one will create its Items.",
-        "operationId": "Watchlists_Create",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/WatchlistAlias"
-          },
-          {
-            "$ref": "#/parameters/WatchlistItemId"
-          },
-          {
-            "$ref": "#/parameters/WatchlistItem"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WatchlistItem"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/WatchlistItem"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
-      "get": {
-        "x-ms-examples": {
-          "Get all watchlist Items.": {
-            "$ref": "./examples/watchlists/GetWatchlistItems.json"
-          }
-        },
-        "tags": [
-          "WatchlistItems"
-        ],
-        "description": "Gets all watchlist Items.",
-        "operationId": "WatchlistItems_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/WatchlistAlias"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WatchlistItemList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed to create indicators.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
-      "get": {
-        "x-ms-examples": {
-          "Get a watchlist item.": {
-            "$ref": "./examples/watchlists/GetWatchlistItemById.json"
-          }
-        },
-        "tags": [
-          "WatchlistItems"
-        ],
-        "description": "Gets a watchlist, without its watchlist items.",
-        "operationId": "WatchlistItems_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/WatchlistAlias"
-          },
-          {
-            "$ref": "#/parameters/WatchlistItemId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WatchlistItem"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "x-ms-examples": {
-          "Delete a watchlist Item.": {
-            "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
-          }
-        },
-        "tags": [
-          "WatchlistItems"
-        ],
-        "description": "Delete a watchlist item.",
-        "operationId": "WatchlistItems_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/WatchlistAlias"
-          },
-          {
-            "$ref": "#/parameters/WatchlistItemId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "x-ms-examples": {
-          "Creates or updates a watchlist item.": {
-            "$ref": "./examples/watchlists/CreateWatchlistItem.json"
-          }
-        },
-        "tags": [
-          "WatchlistItems"
-        ],
         "description": "Creates or updates a watchlist item.",
         "operationId": "WatchlistItems_CreateOrUpdate",
         "parameters": [
@@ -4722,7 +4397,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed to get indicators.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -5258,76 +4933,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/AlertRuleTemplate"
-        }
-      ],
-      "description": "Represents MLBehaviorAnalytics alert rule template.",
-      "properties": {
-        "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            }
-          ],
-          "description": "MLBehaviorAnalytics alert rule template properties.",
-          "properties": {
-            "severity": {
-              "$ref": "#/definitions/AlertSeverity",
-              "description": "The severity for alerts created by this alert rule."
-            },
-            "tactics": {
-              "description": "The tactics of the alert rule template.",
-              "items": {
-                "$ref": "#/definitions/AttackTactic"
-              },
-              "type": "array"
-            }
-          },
-          "required": [
-            "displayName",
-            "description",
-            "status",
-            "severity",
-            "alertRulesCreatedByTemplateCount"
-          ],
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "MLBehaviorAnalytics"
-    },
-    "AADDataConnector": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnector"
-        }
-      ],
-      "description": "Represents AAD (Azure Active Directory) data connector.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AADDataConnectorProperties",
-          "description": "AAD (Azure Active Directory) data connector properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "AzureActiveDirectory"
-    },
-    "AADDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        },
-        {
-          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
-        }
-      ],
-      "description": "AAD (Azure Active Directory) data connector properties.",
-      "type": "object"
-    },
-    "AADCheckRequirements": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
       "description": "Represents MLBehaviorAnalytics alert rule template.",
@@ -6773,297 +6378,6 @@
     },
     "AutomationRuleProperties": {
       "description": "Describes automation rule properties",
-      "properties": {
-        "displayName": {
-          "description": "The display name of the automation  rule",
-          "type": "string"
-        },
-        "order": {
-          "description": "The order of execution of the automation rule",
-          "type": "integer",
-          "format": "int32"
-        },
-        "triggeringLogic": {
-          "$ref": "#/definitions/AutomationRuleTriggeringLogic",
-          "description": "The triggering logic of the automation rule",
-          "type": "object"
-        },
-        "actions": {
-          "description": "The actions to execute when the automation rule is triggered",
-          "items": {
-            "$ref": "#/definitions/AutomationRuleAction"
-          },
-          "type": "array"
-        },
-        "createdTimeUtc": {
-          "description": "The time the automation rule was created",
-          "format": "date-time",
-          "readOnly": true,
-          "type": "string"
-        },
-        "lastModifiedTimeUtc": {
-          "description": "The last time the automation rule was updated",
-          "format": "date-time",
-          "readOnly": true,
-          "type": "string"
-        },
-        "createdBy": {
-          "$ref": "#/definitions/ClientInfo",
-          "description": "Describes the client that created the automation rule",
-          "readOnly": true,
-          "type": "object"
-        },
-        "lastModifiedBy": {
-          "$ref": "#/definitions/ClientInfo",
-          "description": "Describes the client that last updated the automation rule",
-          "readOnly": true,
-          "type": "object"
-        }
-      },
-      "required": [
-        "displayName",
-        "order",
-        "triggeringLogic",
-        "actions"
-      ],
-      "type": "object"
-    },
-    "AutomationRuleTriggeringLogic": {
-      "description": "Describes automation rule triggering logic",
-      "properties": {
-        "isEnabled": {
-          "description": "Determines whether the automation rule is enabled or disabled.",
-          "type": "boolean"
-        },
-        "expirationTimeUtc": {
-          "description": "Determines when the automation rule should automatically expire and be disabled.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "triggersOn": {
-          "description": "The type of object the automation rule triggers on",
-          "enum": [
-            "Incidents"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "TriggersOn",
-            "values": [
-              {
-                "description": "Trigger on Incidents",
-                "value": "Incidents"
-              }
-            ]
-          }
-        },
-        "triggersWhen": {
-          "description": "The type of event the automation rule triggers on",
-          "enum": [
-            "Created"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "TriggersWhen",
-            "values": [
-              {
-                "description": "Trigger on created objects",
-                "value": "Created"
-              }
-            ]
-          }
-        },
-        "conditions": {
-          "description": "The conditions to evaluate to determine if the automation rule should be triggered on a given object",
-          "items": {
-            "$ref": "#/definitions/AutomationRuleCondition"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "isEnabled",
-        "triggersOn",
-        "triggersWhen"
-      ],
-      "type": "object"
-    },
-    "AwsCloudTrailDataConnector": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnector"
-        }
-      ],
-      "description": "Represents Amazon Web Services CloudTrail data connector.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AwsCloudTrailDataConnectorProperties",
-          "description": "Amazon Web Services CloudTrail data connector properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "AmazonWebServicesCloudTrail"
-    },
-    "AwsCloudTrailDataConnectorDataTypes": {
-      "description": "The available data types for Amazon Web Services CloudTrail data connector.",
-      "properties": {
-        "logs": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataConnectorDataTypeCommon"
-            }
-          ],
-          "description": "Logs data type.",
-          "type": "object"
-        }
-      },
-      "type": "object",
-      "required": [
-        "logs"
-      ]
-    },
-    "AwsCloudTrailDataConnectorProperties": {
-      "description": "Amazon Web Services CloudTrail data connector properties.",
-      "properties": {
-        "awsRoleArn": {
-          "description": "The Aws Role Arn (with CloudTrailReadOnly policy) that is used to access the Aws account.",
-          "type": "string"
-        },
-        "dataTypes": {
-          "$ref": "#/definitions/AwsCloudTrailDataConnectorDataTypes",
-          "description": "The available data types for the connector."
-        }
-      },
-      "required": [
-        "dataTypes"
-      ],
-      "type": "object"
-    },
-    "AwsCloudTrailCheckRequirements": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        }
-      ],
-      "description": "Amazon Web Services CloudTrail requirements check request.",
-      "type": "object",
-      "x-ms-discriminator-value": "AmazonWebServicesCloudTrail"
-    },
-    "AzureResourceEntity": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "description": "Represents an azure resource entity.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AzureResourceEntityProperties",
-          "description": "AzureResource entity properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "AzureResource"
-    },
-    "AzureResourceEntityProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityCommonProperties"
-        }
-      ],
-      "description": "AzureResource entity property bag.",
-      "properties": {
-        "resourceId": {
-          "description": "The azure resource id of the resource",
-          "readOnly": true,
-          "type": "string"
-        },
-        "subscriptionId": {
-          "description": "The subscription id of the resource",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "RelationBase": {
-      "type": "object",
-      "description": "Represents a relation",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "kind": {
-              "type": "string",
-              "description": "The type of relation node",
-              "readOnly": true,
-              "enum": [
-                "CasesToBookmarks"
-              ],
-              "x-ms-enum": {
-                "name": "RelationTypes",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "CasesToBookmarks",
-                    "description": "Relations between cases and bookmarks"
-                  }
-                ]
-              }
-            },
-            "etag": {
-              "type": "string",
-              "description": "ETag for relation"
-            }
-          }
-        }
-      ]
-    },
-    "CaseRelationList": {
-      "description": "List of case relations.",
-      "properties": {
-        "nextLink": {
-          "readOnly": true,
-          "description": "URL to fetch the next set of relations.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of relations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CaseRelation"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "CaseRelation": {
-      "type": "object",
-      "description": "Represents a case relation",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RelationBase"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Case relation properties",
-          "$ref": "#/definitions/CaseRelationProperties"
-        }
-      }
-    },
-    "CaseRelationProperties": {
-      "type": "object",
-      "description": "Case relation properties",
       "properties": {
         "displayName": {
           "description": "The display name of the automation  rule",
@@ -9433,108 +8747,6 @@
       ],
       "description": "Represents a file entity.",
       "properties": {
-        "targetEntityId": {
-          "description": "Entity Id of the connected entity",
-          "type": "string"
-        },
-        "additionalData": {
-          "description": "key-value pairs for a connected entity mapping",
-          "type": "object"
-        }
-      }
-    },
-    "TimelineResultsMetadata": {
-      "description": "Expansion result metadata.",
-      "properties": {
-        "totalCount": {
-          "description": "the total items found for the timeline request",
-          "type": "integer",
-          "format": "int32"
-        },
-        "aggregations": {
-          "description": "timeline aggregation per kind",
-          "items": {
-            "$ref": "#/definitions/TimelineAggregation"
-          },
-          "type": "array"
-        },
-        "errors": {
-          "description": "information about the failure queries",
-          "items": {
-            "$ref": "#/definitions/TimelineError"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "totalCount",
-        "aggregations"
-      ],
-      "type": "object"
-    },
-    "TimelineError": {
-      "description": "Timeline Query Errors.",
-      "properties": {
-        "kind": {
-          "description": "the query kind",
-          "$ref": "#/definitions/EntityTimelineKind"
-        },
-        "queryId": {
-          "description": "the query id",
-          "type": "string"
-        },
-        "errorMessage": {
-          "description": "the error message",
-          "type": "string"
-        }
-      },
-      "required": [
-        "kind",
-        "errorMessage"
-      ],
-      "type": "object"
-    },
-    "TimelineAggregation": {
-      "description": "timeline aggregation information per kind",
-      "properties": {
-        "count": {
-          "description": "the total items found for a kind",
-          "type": "integer",
-          "format": "int32"
-        },
-        "kind": {
-          "description": "the query kind",
-          "$ref": "#/definitions/EntityTimelineKind"
-        }
-      },
-      "required": [
-        "kind",
-        "count"
-      ],
-      "type": "object"
-    },
-    "EntityTimelineItem": {
-      "description": "Entity timeline Item.",
-      "discriminator": "kind",
-      "type": "object",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/EntityTimelineKind",
-          "description": "The entity query kind type."
-        }
-      },
-      "required": [
-        "kind"
-      ]
-    },
-    "FileEntity": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "description": "Represents a file entity.",
-      "properties": {
         "properties": {
           "$ref": "#/definitions/FileEntityProperties",
           "description": "File entity properties",
@@ -11161,7 +10373,7 @@
         "recipient": {
           "description": "The recipient of this mail message. Note that in case of multiple recipients the mail message is forked and each copy has one recipient",
           "readOnly": true,
-          "type": "array"
+          "type": "string"
         },
         "urls": {
           "description": "The Urls contained in this mail message",
@@ -14207,14 +13419,6 @@
         },
         "createdByRef": {
           "description": "Created by reference of threat intelligence entity",
-          "type": "string"
-        },
-        "defanged": {
-          "description": "Is threat intelligence entity defanged",
-          "type": "boolean"
-        },
-        "externalLastUpdatedTimeUtc": {
-          "description": "External last updated time in UTC",
           "type": "string"
         },
         "defanged": {

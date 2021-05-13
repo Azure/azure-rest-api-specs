@@ -98,36 +98,6 @@ namespace: azure.mgmt.network.v2020_07_01
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2020_07_01
 ```
 
-### Tag: package-2020-11 and python
-
-These settings apply only when `--tag=package-2020-11 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2020-11'
-namespace: azure.mgmt.network.v2020_11_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2020_11_01
-```
-
-### Tag: package-2020-08 and python
-
-These settings apply only when `--tag=package-2020-08 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2020-08'
-namespace: azure.mgmt.network.v2020_08_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2020_08_01
-```
-
-### Tag: package-2020-07 and python
-
-These settings apply only when `--tag=package-2020-07 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2020-07'
-namespace: azure.mgmt.network.v2020_07_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2020_07_01
-```
-
 ### Tag: package-2020-06 and python
 
 These settings apply only when `--tag=package-2020-06 --python` is specified on the command line.

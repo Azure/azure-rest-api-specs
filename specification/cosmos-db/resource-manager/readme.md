@@ -124,49 +124,6 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-These settings apply only when `--tag=package-2021-03` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-03'
-input-file:
-  - Microsoft.DocumentDB/stable/2021-03-15/cosmos-db.json
-  - Microsoft.DocumentDB/stable/2021-03-15/notebook.json
-  - Microsoft.DocumentDB/stable/2021-03-15/privateLinkResources.json
-  - Microsoft.DocumentDB/stable/2021-03-15/privateEndpointConnection.json
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Tag: package-2021-03-preview
-
-These settings apply only when `--tag=package-2021-03-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-03-preview'
-input-file:
-- Microsoft.DocumentDB/preview/2021-03-01-preview/cosmos-db.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/notebook.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/rbac.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/restorable.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/managedCassandra.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/privateLinkResources.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/privateEndpointConnection.json
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-
-### Tag: package-2021-01
-
-These settings apply only when `--tag=package-2021-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-01'
-input-file:
-  - Microsoft.DocumentDB/stable/2021-01-15/cosmos-db.json
-  - Microsoft.DocumentDB/stable/2021-01-15/notebook.json
-  - Microsoft.DocumentDB/stable/2021-01-15/privateLinkResources.json
-  - Microsoft.DocumentDB/stable/2021-01-15/privateEndpointConnection.json
-modelerfour:
-  lenient-model-deduplication: true
-```
 ### Tag: package-2020-09
 
 These settings apply only when `--tag=package-2020-09` is specified on the command line.
