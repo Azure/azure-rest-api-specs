@@ -60,7 +60,7 @@
             "$ref": "#/parameters/TargetDBServerNameParameter"
           },
           {
-            "$ref": "#/parameters/migrationNameParameter"
+            "$ref": "#/parameters/MigrationNameParameter"
           },
           {
             "name": "parameters",
@@ -118,7 +118,7 @@
             "$ref": "#/parameters/TargetDBServerNameParameter"
           },
           {
-            "$ref": "#/parameters/migrationNameParameter"
+            "$ref": "#/parameters/MigrationNameParameter"
           }
         ],
         "responses": {
@@ -161,7 +161,7 @@
             "$ref": "#/parameters/TargetDBServerNameParameter"
           },
           {
-            "$ref": "#/parameters/migrationNameParameter"
+            "$ref": "#/parameters/MigrationNameParameter"
           },
           {
             "name": "parameters",
@@ -213,15 +213,12 @@
             "$ref": "#/parameters/TargetDBServerNameParameter"
           },
           {
-            "$ref": "#/parameters/migrationNameParameter"
+            "$ref": "#/parameters/MigrationNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MigrationResource"
-            }
+            "description": "OK"
           },
           "204": {
             "description": "NoContent"
@@ -261,13 +258,7 @@
             "$ref": "#/parameters/TargetDBServerNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MigrationListFilter"
-            },
-            "description": "The parameter to filter the list of migrations returned."
+            "$ref": "#/parameters/MigrationListFilter"
           }
         ],
         "responses": {
@@ -286,6 +277,59 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{targetDBServerName}/checkNameAvailability": {
+      "post": {
+        "summary": "Check migration name validity and availability",
+        "description": "This method checks whether a proposed migration name is valid and available.",
+        "tags": [
+          "Custom operation",
+          "POST"
+        ],
+        "operationId": "Migrations_CheckNameAvailability",
+        "x-ms-examples": {
+          "Migrations_CheckNameAvailability": {
+            "$ref": "./examples/Migrations_CheckNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDBServerNameParameter"
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            },
+            "description": "The required parameters for checking if resource name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
         }
       }
     }
@@ -578,18 +622,6 @@
         "modelAsString": true
       }
     },
-    "MigrationListFilter": {
-      "enum": [
-        "Active",
-        "All"
-      ],
-      "type": "string",
-      "description": "Migration list filter. Retrieves either active migrations or all migrations.",
-      "x-ms-enum": {
-        "name": "MigrationListFilter",
-        "modelAsString": true
-      }
-    },
     "MigrationState": {
       "enum": [
         "InProgress",
@@ -679,6 +711,43 @@
       ],
       "description": "Sku information related properties of a server."
     },
+    "CheckNameAvailabilityRequest": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name to verify."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type used for verification."
+        }
+      },
+      "description": "Request to check a resource name's availability."
+    },
+    "CheckNameAvailabilityResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error Message."
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates whether the resource name is available."
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name to verify."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource."
+        }
+      },
+      "description": "Represents a resource name's availability."
+    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
@@ -714,12 +783,28 @@
       "description": "The name of the target database server.",
       "x-ms-parameter-location": "method"
     },
-    "migrationNameParameter": {
+    "MigrationNameParameter": {
       "name": "migrationName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The name of the migration.",
+      "x-ms-parameter-location": "method"
+    },
+    "MigrationListFilter": {
+      "name": "migrationListFilter",
+      "in": "query",
+      "required": false,
+      "enum": [
+        "Active",
+        "All"
+      ],
+      "type": "string",
+      "description": "Migration list filter. Retrieves either active migrations or all migrations.",
+      "x-ms-enum": {
+        "name": "MigrationListFilter",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     }
   }
