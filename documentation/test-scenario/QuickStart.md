@@ -9,7 +9,7 @@
 
 ## Install
 
-`oav` is an open source powerful tool for swagger validation, example generation, and api testing. GitHub: https://github.com/Azure/oav.
+`oav` is an open-source powerful tool for swagger validation, example generation, and API testing. GitHub: https://github.com/Azure/oav.
 
 ```sh
 npm install -g oav@latest
@@ -17,7 +17,7 @@ npm install -g oav@latest
 
 ## Create AAD app
 
-To run api test, first please prepare an AAD app which is used for provisioning Azure resource. Please grant subscription contributor permission to this AAD app.
+To run API test, first please prepare an AAD app which is used for provisioning Azure resource. Please grant subscription contributor permission to this AAD app.
 
 For how to create AAD app, please follow this doc https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal
 
@@ -69,7 +69,7 @@ oav run-test-scenario /home/user/<xxx>/azure-rest-api-specs/specification/signal
 
 Sometimes the command `oav run-test-scenario` failed due to non 2xx status. Now you need to debug the test scenario with postman.
 
-When run `run-test-scenario`, it automatically generate postman collection and postman env in `generated/<providerNamespace>/<testScenarioFile>/<runId>/<testScenario>`. Here is the generated file folder structure. The `collection.json` and `env.json` is generated postman collection file and environment file.
+When run `run-test-scenario`, it automatically generate postman collection and postman env in `generated/<providerNamespace>/<testScenarioFile>/<runId>/<testScenario>` folder. Here is the generated file folder structure. The `collection.json` and `env.json` is generated postman collection file and environment file. `202105120922-5c3x5` is current runId. For each run command it will generated unique runId.
 
 ```
 generated
@@ -88,10 +88,14 @@ Postman is a widely used GUI API testing tool. And you could use Postman import 
 
 ![](./import-postman-collection.png)
 
-After you import postman collection, you will get such requests. Now you could debug api test with postman locally.
+After you import postman collection, you will get such requests. Now you could debug API test with postman locally.
 
 ![](./postman-collection-signalr.PNG)
 
 #### 5. manual update example value
 
 After debug with postman, you need to rewrite back all the updated values and run `oav run-test-scenario <test-scenario-file> -e <env.json>` again. The result should be successful.
+
+## Feedback
+
+If you have any question, feel free to send email to vscswagger@microsoft.com
