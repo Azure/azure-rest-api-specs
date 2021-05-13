@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationName}": {
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{targetDBServerName}/migrations/{migrationName}": {
       "put": {
         "tags": [
           "Migrations"
@@ -47,6 +47,9 @@
         },
         "description": "Creates a new migration.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
           },
@@ -103,6 +106,9 @@
         "description": "Gets details of a migration.",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
           },
           {
@@ -142,6 +148,9 @@
         },
         "description": "Updates an existing migration. The request body can contain one to many of the mutable properties present in the migration definition. Certain property updates initiate migration state transitions.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
           },
@@ -192,6 +201,9 @@
         "description": "Deletes a migration.",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
           },
           {
@@ -223,7 +235,7 @@
         }
       }
     },
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations": {
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{targetDBServerName}/migrations": {
       "get": {
         "tags": [
           "Migrations"
@@ -236,6 +248,9 @@
         },
         "description": "List all the migrations on a given target server.",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/TargetDBServerSubscriptionIdParameter"
           },
@@ -690,3 +705,4 @@
     }
   }
 }
+    
