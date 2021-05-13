@@ -16,9 +16,7 @@
   "schemes": [
     "https"
   ],
-  "consumes": [
-    "application/json"
-  ],
+  "consumes": [],
   "produces": [
     "application/json"
   ],
@@ -103,9 +101,6 @@
             "$ref": "./examples/Upload.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
@@ -121,10 +116,12 @@
           },
           {
             "name": "UploadContent",
+            "in": "body",
             "description": "The content to upload.",
-            "type": "file",
-            "in": "formData",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
@@ -171,9 +168,6 @@
             "$ref": "./examples/Update.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
@@ -189,10 +183,12 @@
           },
           {
             "name": "UpdateContent",
+            "in": "body",
             "description": "The new content that will update/replace the previously uploaded content.",
-            "type": "file",
-            "in": "formData",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
