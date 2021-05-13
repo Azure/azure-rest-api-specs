@@ -593,7 +593,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "applicationData",
             "description": "Application data resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/ApplicationData"
@@ -1329,7 +1329,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "query",
             "description": "Query filters.",
             "schema": {
               "$ref": "#/definitions/SearchBoundaryQuery"
@@ -1544,7 +1544,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "query",
             "description": "Query filters.",
             "schema": {
               "$ref": "#/definitions/SearchBoundaryQuery"
@@ -1674,14 +1674,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Boundaries_CreateCascadeDeleteJob": {
             "$ref": "./examples/Boundaries_CreateCascadeDeleteJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -1774,7 +1774,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "boundary",
             "description": "Boundary resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Boundary"
@@ -2137,7 +2137,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "crop",
             "description": "Crop resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Crop"
@@ -2623,7 +2623,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "cropVariety",
             "description": "Crop variety resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/CropVariety"
@@ -2908,7 +2908,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "farmer",
             "description": "Farmer resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Farmer"
@@ -3076,14 +3076,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Farmers_CreateCascadeDeleteJob": {
             "$ref": "./examples/Farmers_CreateCascadeDeleteJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -3117,7 +3117,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "job",
             "description": "Job parameters supplied by user.",
             "schema": {
               "$ref": "#/definitions/FarmOperationDataIngestionJob"
@@ -3138,14 +3138,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "FarmOperations_CreateDataIngestionJob": {
             "$ref": "./examples/FarmOperations_CreateDataIngestionJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "get": {
@@ -3544,7 +3544,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "farm",
             "description": "Farm resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Farm"
@@ -3725,6 +3725,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Farms_CreateCascadeDeleteJob": {
@@ -4103,7 +4107,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "field",
             "description": "Field resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Field"
@@ -4285,14 +4289,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Fields_CreateCascadeDeleteJob": {
             "$ref": "./examples/Fields_CreateCascadeDeleteJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -4986,7 +4990,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "harvestData",
             "description": "Harvest data resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/HarvestData"
@@ -5072,7 +5076,7 @@
     "/image-processing/rasterize/{jobId}": {
       "put": {
         "tags": [
-          "ImageProcessingJob"
+          "ImageProcessing"
         ],
         "description": "Create a ImageProcessing Rasterize job.",
         "operationId": "ImageProcessing_CreateRasterizeJob",
@@ -5099,7 +5103,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "job",
             "description": "Job parameters supplied by user.",
             "schema": {
               "$ref": "#/definitions/ImageProcessingRasterizeJob"
@@ -5117,19 +5121,19 @@
             "description": "Error"
           }
         },
-        "x-ms-examples": {
-          "OAuthProviders_List": {
-            "$ref": "./examples/ImageProcessing_CreateRasterizeJob.json"
-          }
-        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ImageProcessing_CreateRasterizeJob": {
+            "$ref": "./examples/ImageProcessing_CreateRasterizeJob.json"
+          }
         }
       },
       "get": {
         "tags": [
-          "ImageProcessingJob"
+          "ImageProcessing"
         ],
         "description": "Get ImageProcessing Rasterize job's details.",
         "operationId": "ImageProcessing_GetRasterizeJob",
@@ -5161,7 +5165,7 @@
           }
         },
         "x-ms-examples": {
-          "OAuthProviders_List": {
+          "ImageProcessing_GetRasterizeJob": {
             "$ref": "./examples/ImageProcessing_GetRasterizeJob.json"
           }
         }
@@ -5369,7 +5373,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "oauthProvider",
             "description": "OauthProvider resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/OAuthProvider"
@@ -5558,57 +5562,6 @@
         }
       }
     },
-    "/oauth/tokens/:remove": {
-      "post": {
-        "tags": [
-          "OAuthTokens"
-        ],
-        "description": "Deletes OAuth Token for given oauth provider Id and farmer Id.",
-        "operationId": "OAuthTokens_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "farmerId",
-            "description": "Id of the associated farmer.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "oauthProviderId",
-            "description": "Id of the associated oauth provider.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "OAuthTokens_Delete": {
-            "$ref": "./examples/OAuthTokens_Delete.json"
-          }
-        }
-      }
-    },
     "/oauth/tokens/:connect": {
       "post": {
         "tags": [
@@ -5632,7 +5585,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "connectRequest",
             "description": "OAuth Connect Request.",
             "schema": {
               "$ref": "#/definitions/OAuthConnectRequest"
@@ -5656,6 +5609,116 @@
         "x-ms-examples": {
           "OAuthTokens_GetOAuthConnectionLink": {
             "$ref": "./examples/OAuthTokens_GetOAuthConnectionLink.json"
+          }
+        }
+      }
+    },
+    "/oauth/tokens/remove/{jobId}": {
+      "get": {
+        "tags": [
+          "OAuthTokens"
+        ],
+        "description": "Get remove job for OAuth token.",
+        "operationId": "OAuthTokens_GetCascadeDeleteJobDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CascadeDeleteJob"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OAuthTokens_GetCascadeDeleteJobDetails": {
+            "$ref": "./examples/OAuthTokens_GetCascadeDeleteJobDetails.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OAuthTokens"
+        ],
+        "description": "Create remove job for OAuth token.",
+        "operationId": "OAuthTokens_CreateCascadeDeleteJob",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Job Id supplied by end user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "farmerId",
+            "description": "Id of the farmer.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "oauthProviderId",
+            "description": "Id of the OAuthProvider.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CascadeDeleteJob"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "OAuthTokens_CreateCascadeDeleteJob": {
+            "$ref": "./examples/OAuthTokens_CreateCascadeDeleteJob.json"
           }
         }
       }
@@ -6266,7 +6329,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "plantingData",
             "description": "Planting data resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/PlantingData"
@@ -6532,7 +6595,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "job",
             "description": "Job parameters supplied by user.",
             "schema": {
               "$ref": "#/definitions/SatelliteDataIngestionJob"
@@ -6553,14 +6616,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Scenes_CreateSatelliteDataIngestionJob": {
             "$ref": "./examples/Scenes_CreateSatelliteDataIngestionJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "get": {
@@ -7216,7 +7279,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "seasonalField",
             "description": "Seasonal field resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/SeasonalField"
@@ -7398,14 +7461,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SeasonalFields_CreateCascadeDeleteJob": {
             "$ref": "./examples/SeasonalFields_CreateCascadeDeleteJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -7650,7 +7713,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "season",
             "description": "Season resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/Season"
@@ -8304,7 +8367,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "tillageData",
             "description": "Tillage data resource payload to create or update.",
             "schema": {
               "$ref": "#/definitions/TillageData"
@@ -8575,7 +8638,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "job",
             "description": "Job parameters supplied by user.",
             "schema": {
               "$ref": "#/definitions/WeatherDataIngestionJob"
@@ -8596,14 +8659,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Weather_CreateDataIngestionJob": {
             "$ref": "./examples/Weather_CreateDataIngestionJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -8682,7 +8745,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "job",
             "description": "Job parameters supplied by user.",
             "schema": {
               "$ref": "#/definitions/WeatherDataDeleteJob"
@@ -8703,14 +8766,14 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Weather_CreateDataDeleteJob": {
             "$ref": "./examples/Weather_CreateDataDeleteJob.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     }
@@ -9336,8 +9399,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
@@ -9712,8 +9776,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
@@ -10164,8 +10229,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
@@ -10801,8 +10867,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
@@ -11462,8 +11529,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
@@ -11573,8 +11641,9 @@
           "readOnly": true
         },
         "durationInSeconds": {
+          "format": "double",
           "description": "Duration of the job in seconds.",
-          "type": "string",
+          "type": "number",
           "readOnly": true
         },
         "message": {
