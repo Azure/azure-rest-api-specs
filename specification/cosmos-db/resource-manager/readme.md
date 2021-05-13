@@ -27,7 +27,22 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2021-04-preview
+tag: package-2021-04
+```
+
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04'
+input-file:
+  - Microsoft.DocumentDB/stable/2021-04-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2021-04-15/notebook.json
+  - Microsoft.DocumentDB/stable/2021-04-15/rbac.json
+  - Microsoft.DocumentDB/stable/2021-04-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2021-04-15/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Tag: package-2021-04-preview
@@ -328,7 +343,7 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: rbac.json
     reason: The name of the provider is Microsoft.DocumentDB
-  - suppress: RequiredSystemDataInNewApiVersions
+  - suppress: RequiredReadOnlySystemData
     reason: We do not yet support system data
   - suppress: ListInOperationName
     from: managedCassandra.json
@@ -358,8 +373,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js cosmos-db/resource-manager
 ```
 
 ## C#
@@ -388,9 +401,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
