@@ -1982,9 +1982,14 @@
     },
     "DirectLineSpeechChannelProperties": {
       "properties": {
-        "cognitiveServicesSubscriptionId": {
+        "cognitiveServiceRegion": {
           "type": "string",
-          "description": "The cognitive service subscription ID to use with this channel registration."
+          "description": "The cognitive service region with this channel registration."
+        },
+        "cognitiveServiceSubscriptionKey": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "The cognitive service subscription key to use with this channel registration."
         },
         "isEnabled": {
           "type": "boolean",
@@ -2005,7 +2010,8 @@
       },
       "description": "The parameters to provide for the DirectLine Speech channel.",
       "required": [
-        "cognitiveServicesSubscriptionId"
+        "cognitiveServiceRegion",
+        "cognitiveServiceSubscriptionKey"
       ]
     },
     "ChannelResponseList": {
