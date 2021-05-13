@@ -11,8 +11,7 @@
   ],
   "consumes": [],
   "produces": [
-    "application/json",
-    "application/xml"
+    "application/json"
   ],
   "securityDefinitions": {
     "azure_auth": {
@@ -43,33 +42,7 @@
   ],
   "responses": {},
   "parameters": {
-    "TextFormat": {
-      "name": "format",
-      "description": "Desired format of the response. Value can be either _json_ or _xml_.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "enum": [
-        "json",
-        "xml"
-      ],
-      "x-ms-enum": {
-        "name": "TextFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "json",
-            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
-          },
-          {
-            "value": "xml",
-            "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "Mode": {
+    "GeofenceMode": {
       "name": "mode",
       "in": "query",
       "description": "Mode of the geofencing async event mechanism.",
@@ -94,7 +67,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "UdidSpatial": {
+    "SpatialUploadUdid": {
       "name": "udid",
       "in": "query",
       "description": "The unique id returned from [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) after uploading a valid GeoJSON FeatureCollection object.  Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
@@ -102,7 +75,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SpatialDataUploadFormat": {
+    "SpatialUploadDataFormat": {
       "name": "dataFormat",
       "description": "Data format of the content being uploaded. Currently, only `geojson` format is supported.",
       "type": "string",
@@ -112,7 +85,7 @@
         "geojson"
       ],
       "x-ms-enum": {
-        "name": "SpatialDataUploadFormat",
+        "name": "SpatialUploadDataFormat",
         "modelAsString": true,
         "values": [
           {
@@ -122,6 +95,24 @@
         ]
       },
       "x-ms-parameter-location": "method"
+    },
+    "SpatialLatitude": {
+      "name": "lat",
+      "x-ms-client-name": "Latitude",
+      "description": "The latitude of the location being passed.  Example: 48.36.",
+      "type": "number",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "SpatialLongitude": {
+      "name": "lon",
+      "x-ms-client-name": "Longitude",
+      "description": "The longitude of the location being passed.  Example: -124.63.",
+      "type": "number",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -130,7 +121,7 @@
         "description": "**Search Geofence Get API**\n\n**Applies to:** S1 Pricing tier.\n\nThe Geofence Get API allows you to retrieve the proximity of a coordinate to a \ngeofence that has been uploaded to the Data service. You can use the \n[Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadPreview) to upload \na geofence or set of fences. See [Geofencing GeoJSON data](https://docs.microsoft.com/en-us/azure/azure-maps/geofence-geojson) \nfor more details on the geofence data format. To query the proximity of a coordinate, you supply the location of the object you are tracking as well\nas the ID for the fence or set of fences, and the response will contain information about\nthe distance from the outer edge of the geofence. A negative value signifies that the \ncoordinate is inside of the fence while a positive value means that it is outside of the\nfence.<br><br>This API can be used for a variety of scenarios that include things like asset \ntracking, fleet management, or setting up alerts for moving objects.\n\nThe API supports [integration with Event Grid](https://docs.microsoft.com/azure/azure-maps/azure-maps-event-grid-integration). The isAsync parameter is used to enable integration with Event Grid (disabled by default).\nTo test this API, you can upload the sample data from Post Geofence API examples(Request Body) via Data Upload API and replace the [udid] from the sample request below with the udid returned by Data Upload API.\n\n\n### Geofencing InnerError code\n\nIn geofencing response error contract, `innererror` is  an object containing service specific information about the error. `code` is a property in `innererror` which can map to a specific geofencing error type. The table belows shows the code mapping between all the known client error type to the corresponding geofencing error `message`.\n\ninnererror.code | error.message\n---------------------------- | -------------------------------------- \nNullDeviceId  | Device Id should not be null.\nNullUdid\t  | Udid should not be null.\nUdidWrongFormat| Udid should be acquired from user data ingestion API.\nInvalidUserTime| Usertime is invalid.\nInvalidSearchBuffer| Searchbuffer is invalid.\nInvalidSearchRange| The value range of searchbuffer should be from 0 to 500 meters.\nInvalidLatLon| Lat and/or lon parameters are invalid.\nInvalidIsAsyncValue| The IsAsync parameter is invalid.\nInvalidModeValue| The mode parameter invalid.\nInvalidJson| Geofencing data is not a valid json file.\nNotSupportedGeoJson| Geofencing data can't be read as a Feature or FeatureCollections.\nInvalidGeoJson| Geofencing data is invalid.\nNoUserDataWithAccountOrSubscription| Can't find user geofencing data with provided account-id and/or subscription-id.\nNoUserDataWithUdid|\tCan't find user geofencing data with provided udId.",
         "operationId": "Spatial_GetGeofence",
         "x-ms-examples": {
-          "Geofence": {
+          "GetGeofence": {
             "$ref": "./examples/GetGeofence.json"
           }
         },
@@ -162,18 +153,10 @@
             "type": "string"
           },
           {
-            "name": "lat",
-            "in": "query",
-            "description": "The latitude of the location being passed.  Example: 48.36.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLatitude"
           },
           {
-            "name": "lon",
-            "in": "query",
-            "description": "The longitude of the location being passed.  Example: -124.63.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLongitude"
           },
           {
             "name": "z",
@@ -202,11 +185,8 @@
             "type": "boolean"
           },
           {
-            "$ref": "#/parameters/Mode"
+            "$ref": "#/parameters/GeofenceMode"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -242,7 +222,7 @@
         "description": "**Search Geofence Post API**\n**Applies to:** S1 Pricing tier.\nThe Geofence Post API allows you to retrieve the proximity of a coordinate to a  provided geofence or set of fences. With POST call, you do not have to upload the fence data in advance, instead you supply the location of the object you are tracking in query parameters as well as the fence or set of fences data in post request body. See [Geofencing GeoJSON data](https://docs.microsoft.com/en-us/azure/azure-maps/geofence-geojson) for more details on the geofence data format. The response will contain information about the distance from the outer edge of the geofence. A negative value signifies that the  coordinate is inside of the fence while a positive value means that it is outside of the fence.<br><br>This API can be used for a variety of scenarios that include things like asset  tracking, fleet management, or setting up alerts for moving objects.\n\nThe API supports [integration with Event Grid](https://docs.microsoft.com/azure/azure-maps/azure-maps-event-grid-integration).  The isAsync parameter is used to enable integration with Event Grid (disabled by default).",
         "operationId": "Spatial_PostGeofence",
         "x-ms-examples": {
-          "Geofence": {
+          "PostGeofence": {
             "$ref": "./examples/PostGeofence.json"
           }
         },
@@ -267,18 +247,10 @@
             "type": "string"
           },
           {
-            "name": "lat",
-            "in": "query",
-            "description": "The latitude of the location being passed.  Example: 48.36.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLatitude"
           },
           {
-            "name": "lon",
-            "in": "query",
-            "description": "The longitude of the location being passed.  Example: -124.63.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLongitude"
           },
           {
             "name": "z",
@@ -307,7 +279,7 @@
             "type": "boolean"
           },
           {
-            "$ref": "#/parameters/Mode"
+            "$ref": "#/parameters/GeofenceMode"
           },
           {
             "name": "searchGeofenceRequestBody",
@@ -318,9 +290,6 @@
               "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonFeatureCollection"
             }
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -385,9 +354,6 @@
             }
           }
         ],
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -434,7 +400,7 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
           },
           {
-            "$ref": "#/parameters/UdidSpatial"
+            "$ref": "#/parameters/SpatialUploadUdid"
           },
           {
             "name": "distances",
@@ -443,9 +409,6 @@
             "required": true,
             "type": "string"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -495,18 +458,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
           },
           {
-            "name": "lat",
-            "in": "query",
-            "description": "The base point latitude of the location being passed.  Example: 47.622942.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLatitude"
           },
           {
-            "name": "lon",
-            "in": "query",
-            "description": "The base point longitude of the location being passed.  Example: -122.316456.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLongitude"
           },
           {
             "name": "numberOfClosestPoints",
@@ -524,14 +479,11 @@
             }
           }
         ],
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PostClosestPointResponse"
+              "$ref": "#/definitions/ClosestPointResponse"
             }
           },
           "400": {
@@ -573,21 +525,13 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
           },
           {
-            "$ref": "#/parameters/UdidSpatial"
+            "$ref": "#/parameters/SpatialUploadUdid"
           },
           {
-            "name": "lat",
-            "in": "query",
-            "description": "The base point latitude of the location being passed.  Example: 47.622942.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLatitude"
           },
           {
-            "name": "lon",
-            "in": "query",
-            "description": "The base point longitude of the location being passed.  Example: -122.316456.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLongitude"
           },
           {
             "name": "numberOfClosestPoints",
@@ -596,14 +540,11 @@
             "type": "integer"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetClosestPointResponse"
+              "$ref": "#/definitions/ClosestPointResponse"
             }
           },
           "400": {
@@ -647,18 +588,10 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
           },
           {
-            "name": "lat",
-            "in": "query",
-            "description": "The base point latitude of the location being passed.  Example: 47.622942.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLatitude"
           },
           {
-            "name": "lon",
-            "in": "query",
-            "description": "The base point longitude of the location being passed.  Example: -122.316456.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLongitude"
           },
           {
             "name": "pointInPolygonRequestBody",
@@ -670,14 +603,11 @@
             }
           }
         ],
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PostPointInPolygonResponse"
+              "$ref": "#/definitions/PointInPolygonResponse"
             }
           },
           "400": {
@@ -719,31 +649,20 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
           },
           {
-            "$ref": "#/parameters/UdidSpatial"
+            "$ref": "#/parameters/SpatialUploadUdid"
           },
           {
-            "name": "lat",
-            "in": "query",
-            "description": "The base point latitude of the location being passed.  Example: 47.622942.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLatitude"
           },
           {
-            "name": "lon",
-            "in": "query",
-            "description": "The base point longitude of the location being passed.  Example: -122.316456.",
-            "required": true,
-            "type": "number"
+            "$ref": "#/parameters/SpatialLongitude"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetPointInPolygonResponse"
+              "$ref": "#/definitions/PointInPolygonResponse"
             }
           },
           "400": {
@@ -793,9 +712,6 @@
             "required": true,
             "type": "string"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
@@ -962,67 +878,20 @@
         }
       }
     },
-    "BoundingBoxResponse": {
-      "description": "This object is returned from a successful Spatial BoundingBox call.",
+    "ClosestPointResponse": {
+      "description": "This object is returned from a successful Spatial Closest Point call",
       "type": "object",
       "properties": {
         "summary": {
-          "description": "Summary of the call.",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "udid": {
-              "description": "The udid for the user data if one exists",
-              "type": "string",
-              "readOnly": true
-            },
-            "information": {
-              "description": "The information about what happened during the call.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        },
-        "result": {
-          "description": "The bounding box of the input feature collection.",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "feature": {
-              "description": "The resulting feature with bounding box geometry",
-              "type": "object",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
-    "GetClosestPointResponse": {
-      "description": "This object is returned from a successful Get Spatial Closest Point call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/GetClosestPointSummary"
+          "$ref": "#/definitions/ClosestPointSummary"
         },
         "result": {
           "$ref": "#/definitions/ClosestPointResult"
         }
       }
     },
-    "PostClosestPointResponse": {
-      "description": "This object is returned from a successful Post Spatial Closest Point call",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/PostClosestPointSummary"
-        },
-        "result": {
-          "$ref": "#/definitions/ClosestPointResult"
-        }
-      }
-    },
-    "GetClosestPointSummary": {
-      "description": "Get Closest Point Summary object",
+    "ClosestPointSummary": {
+      "description": "Closest Point Summary object",
       "type": "object",
       "readOnly": true,
       "properties": {
@@ -1031,26 +900,6 @@
         },
         "udid": {
           "description": "A unique data id (udid) for the uploaded content",
-          "type": "string",
-          "readOnly": true
-        },
-        "information": {
-          "description": "Processing information",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PostClosestPointSummary": {
-      "description": "Post Closest Point Summary object",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "sourcePoint": {
-          "$ref": "#/definitions/SpatialCoordinate"
-        },
-        "udid": {
-          "description": "A unique data id (udid) for the uploaded content. Udid is not applicable for POST spatial operations(set to null)",
           "type": "string",
           "readOnly": true
         },
@@ -1088,51 +937,19 @@
         }
       }
     },
-    "GetPointInPolygonResponse": {
+    "PointInPolygonResponse": {
       "description": "Returns true if point is within the polygon, false otherwise",
       "type": "object",
       "properties": {
         "summary": {
-          "$ref": "#/definitions/GetPointInPolygonSummary"
+          "$ref": "#/definitions/PointInPolygonSummary"
         },
         "result": {
           "$ref": "#/definitions/PointInPolygonResult"
         }
       }
     },
-    "PostPointInPolygonResponse": {
-      "description": "Returns true if point is within the polygon, false otherwise",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "$ref": "#/definitions/PostPointInPolygonSummary"
-        },
-        "result": {
-          "$ref": "#/definitions/PointInPolygonResult"
-        }
-      }
-    },
-    "GetPointInPolygonSummary": {
-      "description": "Point In Polygon Summary object",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "sourcePoint": {
-          "$ref": "#/definitions/SpatialCoordinate"
-        },
-        "udid": {
-          "description": "A unique data id (udid) for the uploaded content",
-          "type": "string",
-          "readOnly": true
-        },
-        "information": {
-          "description": "Processing information",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PostPointInPolygonSummary": {
+    "PointInPolygonSummary": {
       "description": "Point In Polygon Summary object",
       "type": "object",
       "readOnly": true,
@@ -1204,32 +1021,6 @@
               "readOnly": true
             }
           }
-        }
-      }
-    },
-    "UploadDataRequestBody": {
-      "description": "This type represents the request body for Spatial Data Upload.",
-      "type": "object"
-    },
-    "UploadDataResponse": {
-      "description": "The response model for the spatial data upload API. Returns a unique data id (udid) for the uploaded content.",
-      "type": "object",
-      "properties": {
-        "udid": {
-          "description": "A unique data id (udid) for the uploaded content.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "UploadDataAcceptedResponse": {
-      "description": "The response model for the spatial data upload API. Returns the current status and a status URI.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Current status of the long running upload operation.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }
