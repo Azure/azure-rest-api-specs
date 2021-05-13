@@ -43,10 +43,11 @@ APIs must only be added to this section when the API is publicly available in at
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
 - Microsoft.Sql/stable/2014-04-01/backups_legacy.json
+- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
-- Microsoft.Sql/stable/2014-04-01/replicationLinks_legacy.json
+- Microsoft.Sql/stable/2014-04-01/replicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core_legacy.json
@@ -124,7 +125,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateEndpointConnections.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/PrivateLinkResources.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RecoverableManagedDatabases.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RestorableDroppedDatabases.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/RestorePoints.json
