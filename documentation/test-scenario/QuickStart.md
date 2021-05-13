@@ -67,7 +67,7 @@ oav run-test-scenario /home/user/<xxx>/azure-rest-api-specs/specification/signal
 
 #### 4. Debug with postman
 
-Sometimes the command `oav run-test-scenario` failed due to non 2xx status. Now you need to debug the test scenario with postman.
+Sometimes the command `oav run-test-scenario` may fail due to non 2xx HTTP status code. Now you need to debug the test scenario with postman.
 
 When run `run-test-scenario`, it automatically generate postman collection and postman env in `generated/<providerNamespace>/<testScenarioFile>/<runId>/<testScenario>` folder. Here is the generated file folder structure. The `collection.json` and `env.json` is generated postman collection file and environment file. `202105120922-5c3x5` is current runId. For each run command it will generated unique runId.
 
