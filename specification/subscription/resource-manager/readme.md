@@ -57,14 +57,13 @@ title: SubscriptionClient
 description: The subscription client
 ```
 
-### Tag: package-2021-01-preview
+### Tag: package-2021-01-privatepreview
 
-These settings apply only when `--tag=package-2021-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-01-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-01-preview'
+``` yaml $(tag) == 'package-2021-01-privatepreview'
 input-file:
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
-- Microsoft.Subscription/preview/2021-01-01-preview/subscriptions.json
+- Microsoft.Subscription/preview/2021-01-01-privatepreview/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
