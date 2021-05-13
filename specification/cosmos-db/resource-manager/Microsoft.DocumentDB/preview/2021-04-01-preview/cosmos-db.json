@@ -8478,9 +8478,9 @@
       "type": "object",
       "description": "Cosmos DB Cassandra view definition Condition",
       "properties": {
-        "columnName": {
-          "type": "string",
-          "description": "Name of Cassandra view column"
+        "columnNames": {
+          "type": "object",
+          "description": "Names of Cassandra view columns(can have single ColumnName or list of ColumnNames based on Condition)"
         },
         "operator": {
           "type": "string",
@@ -8495,9 +8495,9 @@
           ],
           "description": "operator of view condition"
         },
-        "value": {
-          "type": "string",
-          "description": "operand value of view condition"
+        "values": {
+          "type": "object",
+          "description": "operand values of view condition(can have single value or list of values based on Condition)"
         }
       }
     },

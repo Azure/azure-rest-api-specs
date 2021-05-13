@@ -90,7 +90,7 @@
                   },
                   {
                     "name": "columnB",
-                    "type": "Ascii"
+                    "type": "Bigint"
                   },
                   {
                     "name": "columnC",
@@ -106,29 +106,33 @@
                   {
                     "name": "columnA",
                     "orderBy": "Asc"
+                  },
+                  {
+                    "name": "columnB",
+                    "orderBy": "Asc"
                   }
                 ]
               },
               "conditions": [
                 {
-                  "columnName": "columnA",
+                  "columnNames": "columnA",
                   "operator": "IS NOT",
-                  "value": "NULL"
+                  "values": "NULL"
                 },
                 {
-                  "columnName": "columnB",
+                  "columnNames": "columnB",
                   "operator": "IS NOT",
-                  "value": "NULL"
+                  "values": "NULL"
                 },
                 {
-                  "columnName": "columnC",
+                  "columnNames": "columnC",
                   "operator": "IS NOT",
-                  "value": "NULL"
+                  "values": "NULL"
                 },
                 {
-                  "columnName": "columnA",
-                  "operator": "=",
-                  "value": "valueA"
+                  "columnNames": ["ColumnA", "ColumnB"],
+                  "operator": "IN",
+                  "values": [["valueA", 100], ["valueA1", 100]]
                 }
               ]
             }
