@@ -11,8 +11,7 @@
   ],
   "consumes": [],
   "produces": [
-    "application/json",
-    "application/xml"
+    "application/json"
   ],
   "securityDefinitions": {
     "azure_auth": {
@@ -64,27 +63,6 @@
           {
             "value": "xml",
             "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "RasterTileFormat": {
-      "name": "format",
-      "description": "Desired format of the response. Possible value: png.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "enum": [
-        "png"
-      ],
-      "x-ms-enum": {
-        "name": "RasterTileFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "png",
-            "description": "An image in the png format. Supports zoom levels 0 through 18."
           }
         ]
       },
@@ -212,11 +190,26 @@
             "maximum": 20
           }
         ],
+        "produces": [
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/pbf",
+          "application/vnd.mapbox-vector-tile"
+        ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "This image is returned from a successful Traffic Flow Tile call",
             "schema": {
-              "$ref": "#/definitions/TrafficFlowTileResult"
+              "type": "object",
+              "format": "file",
+              "readOnly": true
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the response."
+              }
             }
           },
           "400": {
@@ -234,10 +227,7 @@
           "500": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/traffic/flow/segment/{format}": {
@@ -427,11 +417,26 @@
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/pbf",
+          "application/vnd.mapbox-vector-tile"
+        ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "This object is returned from a successful Traffic Incident Tile call",
             "schema": {
-              "$ref": "#/definitions/TrafficIncidentTileResult"
+              "type": "object",
+              "format": "file",
+              "readOnly": true
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the response."
+              }
             }
           },
           "400": {
@@ -449,10 +454,7 @@
           "500": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/traffic/incident/detail/{format}": {
@@ -720,12 +722,6 @@
     }
   },
   "definitions": {
-    "TrafficFlowTileResult": {
-      "description": "This image is returned from a successful Traffic Flow Tile call",
-      "type": "string",
-      "format": "binary",
-      "readOnly": true
-    },
     "TrafficFlowSegmentResult": {
       "description": "This object is returned from a successful Traffic Flow Segment call",
       "type": "object",
@@ -794,17 +790,6 @@
               "readOnly": true
             }
           }
-        }
-      }
-    },
-    "TrafficIncidentTileResult": {
-      "description": "This object is returned from a successful Traffic Incident Tile call",
-      "type": "object",
-      "properties": {
-        "image": {
-          "description": "Image property",
-          "type": "string",
-          "readOnly": true
         }
       }
     },

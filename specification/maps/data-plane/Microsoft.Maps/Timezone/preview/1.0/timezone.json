@@ -11,8 +11,7 @@
   ],
   "consumes": [],
   "produces": [
-    "application/json",
-    "application/xml"
+    "application/json"
   ],
   "securityDefinitions": {
     "azure_auth": {
@@ -177,10 +176,7 @@
           "500": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/timezone/byCoordinates/{format}": {
@@ -250,10 +246,7 @@
           "500": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/timezone/enumWindows/{format}": {
@@ -301,10 +294,7 @@
           "500": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/timezone/enumIana/{format}": {
@@ -352,10 +342,7 @@
           "500": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/timezone/ianaVersion/{format}": {
@@ -403,10 +390,7 @@
           "500": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/timezone/windowsToIana/{format}": {
@@ -449,7 +433,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TimezoneWindowToIanaResult"
+              "$ref": "#/definitions/TimezoneWindowsToIanaResult"
             }
           },
           "400": {
@@ -467,10 +451,7 @@
           "500": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/500"
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     }
   },
@@ -612,7 +593,7 @@
         }
       }
     },
-    "TimezoneWindowToIanaResult": {
+    "TimezoneWindowsToIanaResult": {
       "description": "This object is returned from a successful Timezone Windows To IANA call",
       "type": "array",
       "items": {
