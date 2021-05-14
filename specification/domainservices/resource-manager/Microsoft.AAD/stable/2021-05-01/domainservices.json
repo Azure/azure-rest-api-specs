@@ -3,7 +3,7 @@
   "info": {
     "title": "Domain Services Resource Provider",
     "description": "The AAD Domain Services API.",
-    "version": "2021-03-01"
+    "version": "2021-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -511,6 +511,10 @@
           "readOnly": true,
           "type": "string",
           "description": "the current deployment or provisioning state, which only appears in the response."
+        },
+        "configDiagnostics": {
+          "$ref": "#/definitions/ConfigDiagnostics",
+          "description": "Configuration diagnostics data containing latest execution from client."
         }
       }
     },
@@ -903,6 +907,77 @@
             "name": "KerberosArmoring",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "ConfigDiagnostics": {
+      "description": "Configuration Diagnostics",
+      "properties": {
+        "lastExecuted": {
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "description": "Last domain configuration diagnostics DateTime"
+        },
+        "validatorResults": {
+          "type": "array",
+          "description": "List of Configuration Diagnostics validator results.",
+          "items": {
+            "$ref": "#/definitions/ConfigDiagnosticsValidatorResult"
+          }
+        }
+      }
+    },
+    "ConfigDiagnosticsValidatorResult": {
+      "description": "Config Diagnostics validator result data",
+      "properties": {
+        "validatorId": {
+          "type": "string",
+          "description": "Validator identifier"
+        },
+        "replicaSetSubnetDisplayName": {
+          "type": "string",
+          "description": "Replica set location and subnet name"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Running",
+            "OK",
+            "Failure",
+            "Warning",
+            "Skipped"
+          ],
+          "default": "None",
+          "description": "Status for individual validator after running diagnostics.",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "issues": {
+          "type": "array",
+          "description": "List of resource config validation issues.",
+          "items": {
+            "$ref": "#/definitions/ConfigDiagnosticsValidatorResultIssue"
+          }
+        }
+      }
+    },
+    "ConfigDiagnosticsValidatorResultIssue": {
+      "description": "Specific issue for a particular config diagnostics validator",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Validation issue identifier."
+        },
+        "descriptionParams": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Single resource property involved in issue description."
+          },
+          "description": "List of domain resource property name or values used to compose a rich description."
         }
       }
     },
