@@ -9,7 +9,7 @@
     "hostTemplate": "{geography}.atlas.microsoft.com",
     "parameters": [
       {
-        "$ref": "#/parameters/GeographicResourceLocation"
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
       }
     ]
   },
@@ -49,33 +49,6 @@
   ],
   "responses": {},
   "parameters": {
-    "GeographicResourceLocation": {
-      "name": "geography",
-      "description": "This parameter specifies where the Azure Maps Creator resource is located.  Valid values are us and eu.",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "default": "us",
-      "enum": [
-        "us",
-        "eu"
-      ],
-      "x-ms-enum": {
-        "name": "GeographicResourceLocation",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "us",
-            "description": "Used to access an Azure Maps Creator resource in the United States"
-          },
-          {
-            "value": "eu",
-            "description": "Used to access an Azure Maps Creator resource in Europe"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "client"
-    },
     "FeatureStateSetDescription": {
       "name": "description",
       "description": "Description for the stateset. Max length allowed is 1000.",
