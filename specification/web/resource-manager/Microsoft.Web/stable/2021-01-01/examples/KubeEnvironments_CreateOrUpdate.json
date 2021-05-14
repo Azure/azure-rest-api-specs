@@ -4,16 +4,14 @@
     "resourceGroupName": "examplerg",
     "name": "testkubeenv",
     "api-version": "2021-01-01",
-    "properties": {
-      "kubeEnvironmentEnvelope": {
-        "kind": "kubernetes",
-        "location": "East US",
-        "extendedLocation": {
-          "type": "customLocation",
-          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation"
-        },
-        "staticIp": "1.2.3.4"
-      }
+    "kubeEnvironmentEnvelope": {
+      "kind": "kubernetes",
+      "location": "East US",
+      "extendedLocation": {
+        "type": "customLocation",
+        "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation"
+      },
+      "staticIp": "1.2.3.4"
     }
   },
   "responses": {
@@ -46,7 +44,7 @@
         "tags": {},
         "properties": {
           "extendedLocation": null,
-          "provisioningState": "Provisioning",
+          "provisioningState": "InitializationInProgress",
           "deploymentErrors": null,
           "internalLoadBalancerEnabled": false,
           "defaultDomain": "testkubeenv.k4apps.io",
