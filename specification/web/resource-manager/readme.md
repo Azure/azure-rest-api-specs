@@ -150,6 +150,9 @@ directive:
 - suppress: R4009
   from: ResourceHealthMetadata.json
   reason: SystemData will implement in next version.
+- suppress: R4009
+  from: KubeEnvironments.json
+  reason: SystemData will implement in next version.
 ```
 ### Tag: package-2020-12
 
