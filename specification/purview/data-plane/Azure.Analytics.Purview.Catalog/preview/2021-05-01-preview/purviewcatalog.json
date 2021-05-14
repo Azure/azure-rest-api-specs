@@ -3109,12 +3109,12 @@
         }
       }
     },
-    "/collections/{collection}/entity/moveEntities": {
+    "/collections/{collection}/entity/moveTo": {
       "post": {
         "tags": [
           "CatalogCollection"
         ],
-        "description": "Move existing entities to a collection",
+        "description": "Move existing entities to the target collection.",
         "operationId": "CatalogCollection_moveEntitiesToCollection",
         "x-ms-examples": {
           "CatalogCollection_moveEntitiesToCollection": {
@@ -3130,21 +3130,20 @@
           },
           {
             "in": "body",
-            "name": "entityObjectIds",
-            "description": "An array of entity object IDs to be moved.",
+            "name": "moveEntitiesRequest",
+            "description": "Entity guids to be moved to target collection.",
             "required": true,
             "schema": {
-              "type": "array",
-              "description": "An array of entity object IDs to be moved.",
-              "items": {
-                "$ref": "#/definitions/AtlasObjectId"
-              }
+              "$ref": "#/definitions/MoveEntitiesRequest"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "OK. If the entities are move successfully."
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
           }
         }
       }
@@ -4848,6 +4847,18 @@
       "x-ms-enum": {
         "name": "Condition",
         "modelAsString": true
+      }
+    },
+    "MoveEntitiesRequest": {
+      "type": "object",
+      "properties": {
+        "entityGuids": {
+          "type": "array",
+          "description": "An array of entity guids to be moved to target collection.",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "DateFormat": {
