@@ -4160,7 +4160,6 @@
           "clientSecret": "fake-client-secret",
           "tenantId": "12345678-1234-1234-1234-123456788888"
         },
-        "dataSourceCredentialId": "01234567-0000-0000-0000-000000000002",
         "dataSourceCredentialName": "A data source credential",
         "dataSourceCredentialDescription": "This is a data source credential",
         "dataSourceCredentialType": "ServicePrincipal"
@@ -4248,16 +4247,6 @@
         "parameters": {
           "$ref": "#/definitions/ServicePrincipalParam"
         }
-      },
-      "example": {
-        "parameters": {
-          "clientId": "88888888-8888-8888-8888-888888888888",
-          "clientSecret": "fake-client-secret",
-          "tenantId": "12345678-1234-1234-1234-123456788888"
-        },
-        "dataSourceCredentialName": "A data source credential",
-        "dataSourceCredentialDescription": "This is a data source credential",
-        "dataSourceCredentialType": "ServicePrincipal"
       },
       "x-ms-discriminator-value": "ServicePrincipal"
     },
@@ -4379,7 +4368,11 @@
           "type": "string"
         }
       },
-      "discriminator": "dataSourceCredentialType"
+      "discriminator": "dataSourceCredentialType",
+      "example": {
+        "dataSourceCredentialDescription": "This is a data source credential",
+        "dataSourceCredentialType": "AzureApplicationInsights"
+      }
     },
     "AzureSQLConnectionStringCredentialPatch": {
       "type": "object",
@@ -4437,10 +4430,6 @@
         "parameters": {
           "$ref": "#/definitions/ServicePrincipalParamPatch"
         }
-      },
-      "example": {
-        "dataSourceCredentialDescription": "This is a data source credential",
-        "dataSourceCredentialType": "AzureApplicationInsights"
       },
       "x-ms-discriminator-value": "ServicePrincipal"
     },
