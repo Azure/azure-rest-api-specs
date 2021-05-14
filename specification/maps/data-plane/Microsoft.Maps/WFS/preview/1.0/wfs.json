@@ -118,7 +118,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/LandingPage"
+              "$ref": "#/definitions/LandingPageResponse"
             }
           },
           "400": {
@@ -142,7 +142,7 @@
     "/wfs/datasets/{datasetId}/conformance": {
       "get": {
         "description": "Creator makes it possible to develop applications based on your private indoor  map data using Azure Maps API and SDK. The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Requirements Classes lists all requirements classes specified in the standard that the server conforms to.",
-        "operationId": "WFS_GetRequirementsClassesPreview",
+        "operationId": "WFS_GetConformancePreview",
         "x-ms-examples": {
           "GetConformance": {
             "$ref": "./examples/GetConformance.json"
@@ -166,7 +166,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/ReqClasses"
+              "$ref": "#/definitions/ConformanceResponse"
             }
           },
           "400": {
@@ -190,7 +190,7 @@
     "/wfs/datasets/{datasetId}/collections": {
       "get": {
         "description": "Creator makes it possible to develop applications based on your private indoor  map data using Azure Maps API and SDK. The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Collections Description API provides descriptions of all the collections in a given dataset.",
-        "operationId": "WFS_CollectionsDescriptionPreview",
+        "operationId": "WFS_GetCollectionsPreview",
         "x-ms-examples": {
           "GetCollections": {
             "$ref": "./examples/GetCollections.json"
@@ -238,7 +238,7 @@
     "/wfs/datasets/{datasetId}/collections/{collectionId}": {
       "get": {
         "description": "Creator makes it possible to develop applications based on your private indoor  map data using Azure Maps API and SDK. The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\n  \nThe Collection Description API provides the description of a given collection. It includes the links to the operations that can be performed on the collection.",
-        "operationId": "WFS_CollectionDescriptionPreview",
+        "operationId": "WFS_GetCollectionPreview",
         "x-ms-examples": {
           "GetCollection": {
             "$ref": "./examples/GetCollection.json"
@@ -289,7 +289,7 @@
     "/wfs/datasets/{datasetId}/collections/{collectionId}/definition": {
       "get": {
         "description": "Creator makes it possible to develop applications based on your private indoor  map data using Azure Maps API and SDK. The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\n \nThe Collection Definition API provides the detailed data model of a given collection.",
-        "operationId": "WFS_CollectionDefinitionPreview",
+        "operationId": "WFS_GetCollectionDefinitionPreview",
         "x-ms-examples": {
           "GetCollectionDefinition": {
             "$ref": "./examples/GetCollectionDefinition.json"
@@ -316,7 +316,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/CollectionDefinition"
+              "$ref": "#/definitions/CollectionDefinitionResponse"
             }
           },
           "400": {
@@ -342,8 +342,8 @@
         "description": "Creator makes it possible to develop applications based on your private indoor  map data using Azure Maps API and SDK. The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Get Features API returns the list of features in the given collection.",
         "operationId": "WFS_GetFeaturesPreview",
         "x-ms-examples": {
-          "Getitems": {
-            "$ref": "./examples/GetItems.json"
+          "GetFeatures": {
+            "$ref": "./examples/GetFeatures.json"
           }
         },
         "parameters": [
@@ -403,7 +403,7 @@
         "operationId": "WFS_GetFeaturePreview",
         "x-ms-examples": {
           "GetFeature": {
-            "$ref": "./examples/GetItem.json"
+            "$ref": "./examples/GetFeature.json"
           }
         },
         "parameters": [
@@ -451,8 +451,8 @@
         "description": "Creator makes it possible to develop applications based on your private indoor  map data using Azure Maps API and SDK. The Web Feature Service (WFS) API is part of  Creator. WFS API follows the [Open Geospatial Consortium API standard for Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/dataset/createpreview). \nA dataset consists of multiple feature collections. A feature collection is a collection of features of a similar type, based on a common schema.\nThe Delete Feature API deletes the feature identified by the provided id in the given collection. At this point this API supports only facility features. Deleting a facility feature deletes all the child features of that facility recursively.",
         "operationId": "WFS_DeleteFeaturePreview",
         "x-ms-examples": {
-          "GetFeature": {
-            "$ref": "./examples/DeleteItem.json"
+          "DeleteFeature": {
+            "$ref": "./examples/DeleteFeature.json"
           }
         },
         "parameters": [
@@ -496,7 +496,7 @@
     }
   },
   "definitions": {
-    "LandingPage": {
+    "LandingPageResponse": {
       "type": "object",
       "required": [
         "links"
@@ -511,7 +511,7 @@
         }
       }
     },
-    "ReqClasses": {
+    "ConformanceResponse": {
       "type": "object",
       "required": [
         "conformsTo"
@@ -607,53 +607,6 @@
         }
       }
     },
-    "Version": {
-      "type": "object",
-      "required": [
-        "version",
-        "revisionTimestamp",
-        "links"
-      ],
-      "properties": {
-        "version": {
-          "description": "version number of the dataset",
-          "type": "string",
-          "example": "1.0.0"
-        },
-        "revisionTimestamp": {
-          "description": "timestamp of the revision",
-          "type": "string",
-          "example": "2020-01-02T03:04:05"
-        },
-        "links": {
-          "description": "Links to other WFS endpoints.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WfsEndpointLink"
-          },
-          "example": [
-            {
-              "href": "http://data.example.org/collections.json",
-              "rel": "self",
-              "type": "application/json",
-              "title": "this document"
-            },
-            {
-              "href": "http://data.example.org/collections.html",
-              "rel": "alternate",
-              "type": "text/html",
-              "title": "this document as HTML"
-            },
-            {
-              "href": "http://schemas.example.org/1.0/foobar.xsd",
-              "rel": "describedBy",
-              "type": "application/xml",
-              "title": "XML schema for Acme Corporation data"
-            }
-          ]
-        }
-      }
-    },
     "CollectionInfo": {
       "type": "object",
       "required": [
@@ -699,7 +652,7 @@
         }
       }
     },
-    "CollectionDefinition": {
+    "CollectionDefinitionResponse": {
       "description": "collection of GeoJSON features",
       "type": "object",
       "required": [
