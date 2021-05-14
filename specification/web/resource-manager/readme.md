@@ -81,6 +81,7 @@ input-file:
   - Microsoft.Web/stable/2021-01-01/ResourceProvider.json
   - Microsoft.Web/stable/2021-01-01/StaticSites.json
   - Microsoft.Web/stable/2021-01-01/WebApps.json
+  - Microsoft.Web/stable/2021-01-01/KubeEnvironments.json
 directive:
   # suppress each RPC 3016 error
 - where: $.definitions.FunctionSecrets.properties.trigger_url
