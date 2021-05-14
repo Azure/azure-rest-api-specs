@@ -1881,10 +1881,10 @@
           "x-nullable": true
         },
         "references": {
-          "x-accessibility": "internal",
           "type": "array",
           "readOnly": true,
-          "description": "List of manifest attributes details",
+          "description": "List of manifests referenced by this manifest list.  List will be empty if this manifest is not a manifest list.",
+          "x-ms-client-name": "manifestReferences",
           "items": {
             "$ref": "#/definitions/ManifestAttributes_manifest_references",
             "description": "Manifest attributes details"
@@ -2262,7 +2262,7 @@
         "architecture",
         "os"
       ],
-      "x-accessibility": "internal",
+      "x-ms-client-name": "ArtifactManifestReference",
       "description": "Manifest attributes details",
       "properties": {
         "digest": {
