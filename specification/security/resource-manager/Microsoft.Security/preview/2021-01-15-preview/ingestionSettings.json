@@ -189,18 +189,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/ingestionSettings/{ingestionSettingName}/getToken": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/ingestionSettings/{ingestionSettingName}/listTokens": {
       "post": {
         "x-ms-examples": {
           "Get a ingestion setting on subscription": {
-            "$ref": "./examples/IngestionSettings/GetTokenIngestionSetting_example.json"
+            "$ref": "./examples/IngestionSettings/ListTokensIngestionSetting_example.json"
           }
         },
         "tags": [
           "Ingestion Settings"
         ],
         "description": "Returns the token that is used for correlating ingested telemetry with the resources in the subscription.",
-        "operationId": "IngestionSettings_GetToken",
+        "operationId": "IngestionSettings_ListTokens",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -216,7 +216,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IngestionSettingWithToken"
+              "$ref": "#/definitions/IngestionSettingToken"
             }
           },
           "default": {
@@ -303,29 +303,9 @@
         }
       ]
     },
-    "IngestionSettingWithToken": {
+    "IngestionSettingToken": {
       "type": "object",
       "description": "Configures how to correlate scan data and logs with resources associated with the subscription.",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Ingestion setting data",
-          "$ref": "#/definitions/IngestionSettingPropertiesWithToken"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/Resource"
-        }
-      ]
-    },
-    "IngestionSettingProperties": {
-      "type": "object",
-      "description": "Ingestion setting data"
-    },
-    "IngestionSettingPropertiesWithToken": {
-      "type": "object",
-      "description": "Ingestion setting data",
       "properties": {
         "token": {
           "type": "string",
@@ -334,6 +314,10 @@
           "description": "The token is used for correlating security data and logs with the resources in the subscription."
         }
       }
+    },
+    "IngestionSettingProperties": {
+      "type": "object",
+      "description": "Ingestion setting data"
     },
     "IngestionConnectionString": {
       "type": "object",
