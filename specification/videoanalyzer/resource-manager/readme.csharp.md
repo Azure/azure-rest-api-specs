@@ -11,4 +11,8 @@ csharp:
   clear-output-folder: true
   namespace: Microsoft.Azure.Management.VideoAnalyzer
   output-folder: $(csharp-sdks-folder)/videoanalyzer/Microsoft.Azure.Management.VideoAnalyzer/src/Generated
+  directive:
+  - rename-model:
+      from: VideoAnalyzer
+      to: VideoAnalyzerAccount
 ```
