@@ -1658,6 +1658,58 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/listUserRoles": {
+      "post": {
+        "tags": [
+          "Monitors"
+        ],
+        "summary": "List the user's roles configured on Logz.io side for the account corresponding to the monitor resource.",
+        "operationId": "Monitors_ListUserRoles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UserRoleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserRoleListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MainAccount_VMHosts_Update": {
+            "$ref": "./examples/MainAccount_listUserRoles.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1825,6 +1877,10 @@
         },
         "enterpriseAppId": {
           "description": "The Id of the Enterprise App used for Single sign on.",
+          "type": "string"
+        },
+        "singleSignOnUrl": {
+          "description": "The login URL specific to this Logz Organization.",
           "type": "string"
         }
       }
@@ -2304,6 +2360,52 @@
         "nextLink": {
           "description": "Link to the next set of results, if any.",
           "type": "string"
+        }
+      }
+    },
+    "UserRoleRequest": {
+      "description": "Request for checking user's role for Logz.io account.",
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "Email of the user used by Logz for contacting them if needed",
+          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+          "type": "string"
+        }
+      }
+    },
+    "UserRole": {
+      "description": "User roles on configured in Logz.io account.",
+      "enum": [
+        "None",
+        "User",
+        "Admin"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "UserRole"
+      }
+    },
+    "UserRoleResponse": {
+      "description": "Response for checking user's role for Logz.io account.",
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/UserRole"
+        }
+      }
+    },
+    "UserRoleListResponse": {
+      "description": "Response for list of user's role for Logz.io account.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of user roles for Logz.io account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserRoleResponse"
+          }
         }
       }
     }
