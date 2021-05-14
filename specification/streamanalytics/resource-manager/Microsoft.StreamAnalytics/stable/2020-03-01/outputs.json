@@ -489,10 +489,12 @@
           "description": "Describes the data source that output will be written to. Required on PUT (CreateOrReplace) requests."
         },
         "timeWindow": {
-          "type": "string"
+          "type": "string",
+          "description": "The time frame for filtering Stream Analytics job outputs."
         },
         "sizeWindow": {
-          "type": "number"
+          "type": "number",
+          "description": "The size window to constrain a Stream Analytics output to."
         },
         "serialization": {
           "$ref": "./inputs.json#/definitions/Serialization",
@@ -578,7 +580,8 @@
         },
         "accountKey": {
           "type": "string",
-          "description": "The account key for the Azure Storage account. Required on PUT (CreateOrReplace) requests."
+          "description": "The account key for the Azure Storage account. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-secret": true
         },
         "table": {
           "type": "string",
@@ -729,7 +732,8 @@
         },
         "password": {
           "type": "string",
-          "description": "The password that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests."
+          "description": "The password that will be used to connect to the Azure SQL database. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-secret": true
         }
       }
     },
@@ -815,9 +819,7 @@
         },
         "systemPropertyColumns": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "The system properties associated with the Service Bus Queue. The following system properties are supported: ReplyToSessionId, ContentType, To, Subject, CorrelationId, TimeToLive, PartitionKey, SessionId, ScheduledEnqueueTime, MessageId, ReplyTo, Label, ScheduledEnqueueTimeUtc."
         }
       }
     },
@@ -1007,7 +1009,7 @@
         },
         "maxWriterCount": {
           "type": "number",
-          "description": "Max Write r count, currently only 1(single writer) and 0(based on query partition) are available. Optional on PUT requests."
+          "description": "Max Writer count, currently only 1(single writer) and 0(based on query partition) are available. Optional on PUT requests."
         },
         "authenticationMode": {
           "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",

@@ -1032,15 +1032,15 @@
         },
         "password": {
           "description": "This element is associated with the datasource element. This is the password that will be used to connect to the SQL Database instance.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "table": {
           "description": "This element is associated with the datasource element. The name of the table in the Azure SQL database..",
           "type": "string"
         },
         "refreshType": {
-          "description": "This element is associated with the datasource element. This element is of enum type. It indicates what kind of data refresh option do we want to use:Static/RefreshPeriodicallyWithFull/RefreshPeriodicallyWithDelta",
-          "type": "string"
+          "$ref": "#/definitions/RefreshType"
         },
         "refreshRate": {
           "description": "This element is associated with the datasource element. This indicates how frequently the data will be fetched from the database. It is of DateTime format.",
@@ -1054,6 +1054,19 @@
           "description": "This element is associated with the datasource element. This query is used to fetch incremental changes from the SQL database. To use this option, we recommend using temporal tables in Azure SQL Database.",
           "type": "string"
         }
+      }
+    },
+    "RefreshType": {
+      "type": "string",
+      "description": "This element is associated with the datasource element. It indicates what kind of data refresh option do we want to use.",
+      "enum": [
+        "Static",
+        "RefreshPeriodicallyWithFull",
+        "RefreshPeriodicallyWithDelta"
+      ],
+      "x-ms-enum": {
+        "name": "RefreshType",
+        "modelAsString": true
       }
     },
     "EventSerializationType": {
