@@ -1124,14 +1124,17 @@
       }
     },
     "ExtendedLocation": {
+      "description": "Extended Location.",
       "type": "object",
       "properties": {
-        "customLocation": {
+        "name": {
+          "description": "Name of extended location.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of extended location.",
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "readOnly": true
         }
       }
     },
