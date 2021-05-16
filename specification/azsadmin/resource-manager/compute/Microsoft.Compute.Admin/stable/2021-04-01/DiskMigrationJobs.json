@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-07-30-preview",
+    "version": "2021-04-01",
     "title": "ComputeDiskAdminManagementClient",
     "description": "The Admin Compute Disk Management Client."
   },
@@ -30,10 +30,10 @@
         "description": "Returns a list of disk migration jobs.",
         "parameters": [
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Disks.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+            "$ref": "Disks.json#/parameters/LocationParameter"
           },
           {
             "$ref": "DiskMigrationJobs.json#/parameters/MigrationJobStatusParameter"
@@ -69,10 +69,10 @@
         "description": "Returns the requested disk migration job.",
         "parameters": [
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Disks.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+            "$ref": "Disks.json#/parameters/LocationParameter"
           },
           {
             "$ref": "DiskMigrationJobs.json#/parameters/MigrationIdParameter"
@@ -103,10 +103,10 @@
         "description": "Create a disk migration job.",
         "parameters": [
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Disks.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+            "$ref": "Disks.json#/parameters/LocationParameter"
           },
           {
             "$ref": "DiskMigrationJobs.json#/parameters/MigrationIdParameter"
@@ -137,7 +137,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskmigrationjobs/{migrationId}/Cancel": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/diskMigrationJobs/{migrationId}/cancel": {
       "post": {
         "x-ms-examples": {
           "Cancel a disk migration job.": {
@@ -151,10 +151,10 @@
         "description": "Cancel a disk migration job.",
         "parameters": [
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Disks.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+            "$ref": "Disks.json#/parameters/LocationParameter"
           },
           {
             "$ref": "DiskMigrationJobs.json#/parameters/MigrationIdParameter"
@@ -164,6 +164,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "OK --  Disk migration job cancellation is called.",
             "schema": {
@@ -175,6 +181,35 @@
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "description": "Error definition.",
+          "$ref": "#/definitions/ErrorDefinition"
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "readOnly": true,
+      "required": [
+        "message",
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "minimum": 100,
+          "maximum": 600
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string"
+        }
+      }
+    },
     "MigrationJobStatus": {
       "description": "Migration job status.",
       "type": "string",
@@ -334,7 +369,7 @@
       },
       "allOf": [
         {
-          "$ref": "../2015-12-01-preview/Compute.json#/definitions/Resource"
+          "$ref": "../../preview/2015-12-01-preview/Compute.json#/definitions/Resource"
         }
       ]
     },

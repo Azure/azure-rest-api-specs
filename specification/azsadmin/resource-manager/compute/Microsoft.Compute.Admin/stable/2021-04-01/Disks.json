@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-07-30-preview",
+    "version": "2021-04-01",
     "title": "ComputeDiskAdminManagementClient",
     "description": "The Admin Compute Disk Management Client."
   },
@@ -30,10 +30,10 @@
         "description": "Returns a list of disks.",
         "parameters": [
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Disks.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+            "$ref": "Disks.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Disks.json#/parameters/UserSubscriptionIdParameter"
@@ -73,7 +73,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/disks/{DiskId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/disks/{diskId}": {
       "get": {
         "x-ms-examples": {
           "Returns the requested disk.": {
@@ -87,19 +87,28 @@
         "description": "Returns the disk.",
         "parameters": [
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/SubscriptionIdParameter"
+            "$ref": "Disks.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../2015-12-01-preview/Compute.json#/parameters/LocationParameter"
+            "$ref": "Disks.json#/parameters/LocationParameter"
           },
           {
             "$ref": "Disks.json#/parameters/DiskIdParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/DiskSizeDetailParameter"
           },
           {
             "$ref": "Disks.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "OK -- The disk has been returned.",
             "schema": {
@@ -111,6 +120,35 @@
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "description": "Error definition.",
+          "$ref": "#/definitions/ErrorDefinition"
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "readOnly": true,
+      "required": [
+        "message",
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "minimum": 100,
+          "maximum": 600
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string"
+        }
+      }
+    },
     "DiskProperties": {
       "description": "Managed disk properties.",
       "type": "object",
@@ -158,6 +196,22 @@
           "description": "the disk sku.",
           "$ref": "Disks.json#/definitions/AccountType",
           "readOnly": true
+        },
+        "creationSourceUri": {
+          "description": "The disk creation source uri.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationOption": {
+          "description": "The disk creation option.",
+          "$ref": "Disks.json#/definitions/DiskCreationOption",
+          "readOnly": true
+        },
+        "exclusiveAllocatedSize": {
+          "description": "The exclusive allocated size for the disk.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
         }
       }
     },
@@ -173,7 +227,7 @@
       },
       "allOf": [
         {
-          "$ref": "../2015-12-01-preview/Compute.json#/definitions/Resource"
+          "$ref": "../../preview/2015-12-01-preview/Compute.json#/definitions/Resource"
         }
       ]
     },
@@ -245,16 +299,50 @@
         "name": "AccountType",
         "modelAsString": true
       }
+    },
+    "DiskCreationOption": {
+      "description": "Disk creation option.",
+      "type": "string",
+      "enum": [
+        "Empty",
+        "FromImage",
+        "Import",
+        "Copy",
+        "Restore",
+        "FromPreprovisioned",
+        "Undelete",
+        "Upload",
+        "RecoverFromBlob"
+      ],
+      "x-ms-enum": {
+        "name": "DiskCreationOption",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "LocationParameter": {
+      "description": "Location of the resource.",
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "description": "Client API Version.",
       "required": true,
       "type": "string",
-      "default": "2018-07-30-preview"
+      "default": "2021-04-01"
     },
     "UserSubscriptionIdParameter": {
       "description": "User Subscription Id which the resource belongs to.",
@@ -316,11 +404,20 @@
     },
     "DiskIdParameter": {
       "description": "The disk guid as identity.",
-      "name": "DiskId",
+      "name": "diskId",
       "type": "string",
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
+    },
+    "DiskSizeDetailParameter": {
+      "description": "Switch for whether summary or detailed disk size information is returned.",
+      "name": "showSizeDetail",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "default": false
     }
   },
   "securityDefinitions": {
