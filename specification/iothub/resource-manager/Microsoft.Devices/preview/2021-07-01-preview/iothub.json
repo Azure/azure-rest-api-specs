@@ -2271,6 +2271,30 @@
             "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
           }
         },
+        "disableLocalAuth": {
+          "description": "If true, local(non-AAD) authentication will be disabled on Iot hub.",
+          "type": "boolean"
+        },
+        "disableDeviceSAS": {
+          "description": "If true, all devices(including Edge devices but excluding modules) cannot authenticate using SAS.",
+          "type": "boolean"
+        },
+        "disableModuleSAS": {
+          "description": "If true, all modules cannot authenticate using SAS.",
+          "type": "boolean"
+        },
+        "restrictOutboundNetworkAccess": {
+          "description": "If true, egress from IotHub will be restricted to only the allowed FQDNs that are configured via allowedFQDNList.",
+          "type": "boolean"
+        },
+        "allowedFQDNList": {
+          "description": "List of allowed FQDNs(Fully Qualified Domain Name) for egress from Iot Hub.",
+          "type": "array",
+          "items": {
+            "description": "FQDN to be allowed for egress. Example: myeventhub.servicebus.windows.net",
+            "type": "string"
+          }
+        },
         "publicNetworkAccess": {
           "type": "string",
           "description": "Whether requests from Public Network are allowed",
