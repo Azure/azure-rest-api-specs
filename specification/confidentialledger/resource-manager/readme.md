@@ -39,12 +39,6 @@ input-file:
   - Microsoft.ConfidentialLedger/preview/2020-12-01-preview/confidentialledger.json
 ```
 
-```yaml
-openapi-type: arm
-openapi-subtype: rpaas
-tag: package-2021-05-13-preview
-```
-
 ### Tag: package-2021-05-13-preview
 
 These settings apply only when `--tag=package-2021-05-13-preview` is specified on the command line.
