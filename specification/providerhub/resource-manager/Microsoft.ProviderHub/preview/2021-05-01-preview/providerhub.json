@@ -3478,46 +3478,46 @@
           "items": {
             "$ref": "#/definitions/NotificationEndpoint"
           }
+        },
+        "provisioningState": {
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
-      },
-      "NotificationRegistration": {
-        "description": "The notification registration definition.",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
-          }
-        ],
+      }
+    },
+    "NotificationRegistration": {
+      "description": "The notification registration definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
         "properties": {
-          "properties": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/NotificationRegistrationProperties"
-              }
-            ],
-            "provisioningState": {
-              "enum": [
-                "NotSpecified",
-                "Accepted",
-                "Running",
-                "Creating",
-                "Created",
-                "Deleting",
-                "Deleted",
-                "Canceled",
-                "Failed",
-                "Succeeded",
-                "MovingResources",
-                "TransientFailure",
-                "RolloutInProgress"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "ProvisioningState",
-                "modelAsString": true
-              }
+          "allOf": [
+            {
+              "$ref": "#/definitions/NotificationRegistrationProperties"
             }
-          }
+          ]
         }
       },
       "x-ms-azure-resource": true
@@ -4843,29 +4843,7 @@
             {
               "$ref": "#/definitions/ResourceTypeSku"
             }
-          ],
-          "provisioningState": {
-            "enum": [
-              "NotSpecified",
-              "Accepted",
-              "Running",
-              "Creating",
-              "Created",
-              "Deleting",
-              "Deleted",
-              "Canceled",
-              "Failed",
-              "Succeeded",
-              "MovingResources",
-              "TransientFailure",
-              "RolloutInProgress"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ProvisioningState",
-              "modelAsString": true
-            }
-          }
+          ]
         }
       },
       "x-ms-azure-resource": true
