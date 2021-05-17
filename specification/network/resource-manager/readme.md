@@ -184,6 +184,7 @@ input-file:
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerEffectiveConfiguration.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerGroup.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkSecurityPerimeter.json
   - Microsoft.Network/stable/2020-08-01/networkProfile.json
   - Microsoft.Network/stable/2020-08-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2020-08-01/networkVirtualAppliance.json
