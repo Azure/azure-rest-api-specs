@@ -590,7 +590,15 @@
         },
         "entitiesFilter": {
           "description": "The query applied only to entities matching to all filters",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "description": "Filter field name",
+            "items": {
+              "description": "Filter field values",
+              "type": "string"
+            },
+            "type": "array"
+          }
         },
         "templateName": {
           "description": "The template id this activity was created from",
