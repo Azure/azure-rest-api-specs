@@ -3478,30 +3478,7 @@
           "items": {
             "$ref": "#/definitions/NotificationEndpoint"
           }
-        },
-        "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "MovingResources",
-            "TransientFailure",
-            "RolloutInProgress"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
         }
-      }
     },
     "NotificationRegistration": {
       "description": "The notification registration definition.",
@@ -3517,7 +3494,30 @@
             {
               "$ref": "#/definitions/NotificationRegistrationProperties"
             }
-          ]
+          ],
+          "provisioningState": {
+            "enum": [
+              "NotSpecified",
+              "Accepted",
+              "Running",
+              "Creating",
+              "Created",
+              "Deleting",
+              "Deleted",
+              "Canceled",
+              "Failed",
+              "Succeeded",
+              "MovingResources",
+              "TransientFailure",
+              "RolloutInProgress"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            }
+          }
+        }
         }
       },
       "x-ms-azure-resource": true
@@ -3767,14 +3767,6 @@
               "$ref": "#/definitions/OperationsDisplayDefinition"
             }
           ]
-        },
-        "qpsploc": {
-          "description": "Display information of the operation for qps-ploc locale.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/OperationsDisplayDefinition"
-            }
-          ]
         }
       }
     },
@@ -3822,12 +3814,12 @@
     "OperationsContentProperties": {
       "type": "object",
       "properties": {
-        "contents": {
+        "contents": [
           "type": "array",
           "items": {
             "$ref": "#/definitions/LocalizedOperationDefinition"
           }
-        }
+        ]
       }
     },
     "OperationsPutContent": {
@@ -4835,28 +4827,6 @@
           "items": {
             "$ref": "#/definitions/SkuSetting"
           }
-        },
-        "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "MovingResources",
-            "TransientFailure",
-            "RolloutInProgress"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -4873,7 +4843,29 @@
             {
               "$ref": "#/definitions/ResourceTypeSku"
             }
-          ]
+          ],
+          "provisioningState": {
+            "enum": [
+              "NotSpecified",
+              "Accepted",
+              "Running",
+              "Creating",
+              "Created",
+              "Deleting",
+              "Deleted",
+              "Canceled",
+              "Failed",
+              "Succeeded",
+              "MovingResources",
+              "TransientFailure",
+              "RolloutInProgress"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            }
+          }
         }
       },
       "x-ms-azure-resource": true
