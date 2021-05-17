@@ -247,6 +247,119 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/buildservice/default/builds/{buildName}": {
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create or update a KPack build.",
+        "operationId": "BuildService_CreateOrUpdateBuild",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildNameParameter"
+          },
+          {
+            "name": "buildResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Deployment.",
+            "schema": {
+              "$ref": "#/definitions/BuildResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new Deployment and contains a Location header to query the\r\noperation result.",
+            "schema": {
+              "$ref": "#/definitions/BuildResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Deployment is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/BuildResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/buildservice/default/builds/{buildName}/results/{buildResultName}": {
+      "Get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get a KPack build result.",
+        "operationId": "BuildService_GetBuildResult",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildResultNameParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters for the get operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildResultResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/BuildResultResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -384,6 +497,126 @@
         }
       },
       "x-ms-external": true
+    },
+    "BuildResource": {
+      "description": "Build resource payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildResourceProperties",
+          "description": "Properties of the build resource",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "BuildResourceProperties": {
+      "description": "Build resource properties payload",
+      "type": "object",
+      "properties": {
+        "Builder":{
+          "description": "The name of builder to build the source code",
+          "type": "string"
+        },
+        "Name":{
+          "description": "The name of this build",
+          "type": "string"
+        },
+        "RelativePath":{
+          "description": "The relative path of source code",
+          "type": "string"
+        },
+        "Env": {
+          "description": "The environment variables for this build",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "BuildResult": {
+          "$ref": "#/definitions/BuildResult",
+          "description": " The build result triggered by this build"
+        }
+      }
+    },
+    "BuildResult": {
+      "description": "The build result triggered by a build",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "The unique build id of this build result",
+          "type": "string"
+        }
+      }
+    },
+    "BuildResultResource": {
+      "description": "Build result resource payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildResultResourceProperties",
+          "description": "Properties of the build result resource",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "BuildResultResourceProperties": {
+      "description": "Build result resource properties payload",
+      "type": "object",
+      "properties": {
+        "Name":{
+          "description": "The name of this build result",
+          "type": "string"
+        },
+        "Status":{
+          "description": "Provisioning state of the KPack build result",
+          "enum": [
+            "Queuing",
+            "Building",
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "Deleted"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BuildResultResourceProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "ContainerImageReference": {
+          "$ref": "#/definitions/BuildContainerImageReference",
+          "description": "The generated container image reference"
+        }
+      }
+    },
+    "BuildContainerImageReference": {
+      "description": "The generated container image reference",
+      "type": "object",
+      "properties": {
+        "AcrName": {
+          "description": "The name of ACR",
+          "type": "string"
+        },
+        "ImageName": {
+          "description": "The name of image",
+          "type": "string"
+        },
+        "Digest": {
+          "description": "The digest of this acr image",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -414,6 +647,22 @@
       "name": "serviceName",
       "in": "path",
       "description": "The name of the Service resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildNameParameter": {
+      "name": "buildName",
+      "in": "path",
+      "description": "The name of the build resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildResultNameParameter": {
+      "name": "buildResultName",
+      "in": "path",
+      "description": "The name of the build result resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
