@@ -804,7 +804,7 @@
           "200": {
             "description": "Successfully created or updated the operation.",
             "schema": {
-              "$ref": "#/definitions/OperationsContent"
+              "$ref": "#/definitions/OperationsPutContent"
             }
           },
           "default": {
@@ -3596,9 +3596,223 @@
       },
       "x-ms-azure-resource": true
     },
-    "OperationsPutContent": {
+    "LocalizedOperationDisplayDefinition": {
       "required": [
-        "contents"
+        "default"
+      ],
+      "type": "object",
+      "properties": {
+        "default": {
+          "description": "Display information of the operation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "en": {
+          "description": "Display information of the operation for en locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "cs": {
+          "description": "Display information of the operation for cs locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "de": {
+          "description": "Display information of the operation for de locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "es": {
+          "description": "Display information of the operation for es locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "fr": {
+          "description": "Display information of the operation for fr locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "hu": {
+          "description": "Display information of the operation for hu locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "it": {
+          "description": "Display information of the operation for it locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ja": {
+          "description": "Display information of the operation for ja locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ko": {
+          "description": "Display information of the operation for ko locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "nl": {
+          "description": "Display information of the operation for nl locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "pl": {
+          "description": "Display information of the operation for pl locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ptBR": {
+          "description": "Display information of the operation for pt-BR locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ptPT": {
+          "description": "Display information of the operation for pt-PT locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "ru": {
+          "description": "Display information of the operation for ru locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "sv": {
+          "description": "Display information of the operation for sv locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "zhHans": {
+          "description": "Display information of the operation for zh-Hans locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "zhHant": {
+          "description": "Display information of the operation for zh-Hant locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        },
+        "qpsploc": {
+          "description": "Display information of the operation for qps-ploc locale.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsDisplayDefinition"
+            }
+          ]
+        }
+      }
+    },
+    "LocalizedOperationDefinition": {
+      "required": [
+        "display",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "origin": {
+          "enum": [
+            "NotSpecified",
+            "User",
+            "System"
+          ],
+          "type": "string"
+        },
+        "display": {
+          "description": "Display information of the operation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LocalizedOperationDisplayDefinition"
+            }
+          ]
+        },
+        "actionType": {
+          "enum": [
+            "NotSpecified",
+            "Internal"
+          ],
+          "type": "string"
+        },
+        "properties": {}
+      }
+    },
+    "OperationsContentProperties": {
+      "type": "object",
+      "properties": {
+        "contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalizedOperationDefinition"
+          }
+        }
+      }
+    },
+    "OperationsPutContent": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
       ],
       "type": "object",
       "properties": {
@@ -3606,9 +3820,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationsDefinition"
+          },
+          "properties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/definitions/OperationsContentProperties"
+              }
+            ]
           }
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "OperationsDefinitionArrayResponseWithContinuation": {
       "type": "object",
