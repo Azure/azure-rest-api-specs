@@ -206,6 +206,727 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/apps/{appName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get an App and its properties.",
+        "operationId": "Apps_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "syncStatus",
+            "in": "query",
+            "description": "Indicates whether sync status",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding App.",
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apps_Get": {
+            "$ref": "./examples/Apps_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create a new App or update an exiting App.",
+        "operationId": "Apps_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "appResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated App.",
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new App and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting App is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Apps_CreateOrUpdate": {
+            "$ref": "./examples/Apps_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Operation to delete an App.",
+        "operationId": "Apps_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the resource is deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Apps_Delete": {
+            "$ref": "./examples/Apps_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/apps": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Handles requests to list all resources in a Service.",
+        "operationId": "Apps_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Apps in the Service.",
+            "schema": {
+              "$ref": "#/definitions/AppResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apps_List": {
+            "$ref": "./examples/Apps_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/apps/{appName}/deployments/{deploymentName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get a Deployment and its properties.",
+        "operationId": "Deployments_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Deployment.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Get": {
+            "$ref": "./examples/Deployments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create a new Deployment or update an exiting Deployment.",
+        "operationId": "Deployments_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "deploymentResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Deployment.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new Deployment and contains a Location header to query the\r\noperation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Deployment is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Deployments_CreateOrUpdate": {
+            "$ref": "./examples/Deployments_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Operation to delete a Deployment.",
+        "operationId": "Deployments_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the resource is deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Deployments_Delete": {
+            "$ref": "./examples/Deployments_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/apps/{appName}/deployments": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Handles requests to list all resources in an App.",
+        "operationId": "Deployments_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Version of the deployments to be listed",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Deployments in the App.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Deployments_List": {
+            "$ref": "./examples/Deployments_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/deployments": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List deployments for a certain service",
+        "operationId": "Deployments_ListForCluster",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Version of the deployments to be listed",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Deployments_ListForCluster": {
+            "$ref": "./examples/Deployments_ListForCluster.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/apps/{appName}/deployments/{deploymentName}/start": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Start the deployment.",
+        "operationId": "Deployments_Start",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the Deployment is now starting and contains a Location header to\r\nquery the operation result."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Deployments_Start": {
+            "$ref": "./examples/Deployments_Start.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/apps/{appName}/deployments/{deploymentName}/stop": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Stop the deployment.",
+        "operationId": "Deployments_Stop",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the Deployment is now stopping and contains a Location header to\r\nquery the operation result."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Deployments_Stop": {
+            "$ref": "./examples/Deployments_Stop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/apps/{appName}/deployments/{deploymentName}/restart": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Restart the deployment.",
+        "operationId": "Deployments_Restart",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the Deployment is now restarting and contains a Location header\r\nto query the operation result."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Deployments_Restart": {
+            "$ref": "./examples/Deployments_Restart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/apps/{appName}/deployments/{deploymentName}/deploy": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Restart the deployment.",
+        "operationId": "Deployments_Deploy",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "deploymentDeployRequest",
+            "in": "body",
+            "required": true,
+            "description": "Parameters for deploy deployment action",
+            "schema": {
+              "$ref": "#/definitions/UserSourceInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the Deployment is now restarting and contains a Location header\r\nto query the operation result."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Deployments_Restart": {
+            "$ref": "./examples/Deployments_Deploy.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Tanzu/{serviceName}/buildservice/default/getUploadUrl": {
       "post": {
         "tags": [
@@ -336,6 +1057,255 @@
         }
       }
     },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
+    "AppResource": {
+      "description": "App resource payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppResourceProperties",
+          "description": "Properties of the App resource",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "AppResourceProperties": {
+      "description": "App resource properties payload",
+      "type": "object",
+      "properties": {
+        "public": {
+          "description": "Indicates whether the App exposes public endpoint",
+          "type": "boolean"
+        },
+        "url": {
+          "description": "URL of the App",
+          "type": "string",
+          "readOnly": true
+        },
+        "addonConfig": {
+          "description": "Collection of addons",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AddonProfile"
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the App",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Creating",
+            "Updating"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AppResourceProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AppResourceCollection": {
+      "description": "Object that includes an array of App resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of App resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentResource": {
+      "description": "Deployment resource payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentResourceProperties",
+          "description": "Properties of the Deployment resource",
+          "x-ms-client-flatten": false
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the Deployment resource"
+        }
+      }
+    },
+    "DeploymentResourceProperties": {
+      "description": "Deployment resource properties payload",
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/UserSourceInfo",
+          "description": "Uploaded source information of the deployment."
+        },
+        "deploymentSettings": {
+          "$ref": "#/definitions/DeploymentSettings",
+          "description": "Deployment settings of the Deployment"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Deployment",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DeploymentResourceProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Status of the Deployment",
+          "enum": [
+            "Stopped",
+            "Running"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DeploymentResourceStatus",
+            "modelAsString": true
+          }
+        },
+        "instances": {
+          "description": "Collection of instances belong to the Deployment",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentInstance"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "UserSourceInfo": {
+      "description": "Source information for a deployment",
+      "type": "object",
+      "properties": {
+        "buildIterationId": {
+          "description": "Resource id of a succeeded build iteration to deploy to this deployment.",
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentSettings": {
+      "description": "Deployment settings payload",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "description": "Required CPU, basic tier should be 1, standard tier should be in range (1, 4)",
+          "type": "string"
+        },
+        "memory": {
+          "description": "Required Memory, (1Gi, 2Gi, ..., 8Gi) for Tanzu",
+          "type": "string"
+        },
+        "environmentVariables": {
+          "description": "Collection of environment variables",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "serveTraffic": {
+          "description": "Indicates whether the Deployment serves traffic for App",
+          "type": "boolean"
+        },
+        "addonConfig": {
+          "description": "Collection of addons",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AddonProfile"
+          }
+        }
+      }
+    },
+    "AddonProfile": {
+      "description": "Deployment addon profile",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the add-on is enabled or not"
+        },
+        "properties": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs for configurations of add-on"
+        }
+      }
+    },
+    "DeploymentInstance": {
+      "description": "Deployment instance payload",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the deployment instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the deployment instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "deployedTime": {
+          "description": "Deployed time of the deployment instance",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DeploymentResourceCollection": {
+      "description": "Object that includes an array of App resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of Deployment resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
     "ResourceUploadDefinition": {
       "description": "Resource upload definition payload",
       "type": "object",
@@ -347,6 +1317,27 @@
         "uploadUrl": {
           "description": "Upload URL",
           "type": "string"
+        }
+      }
+    },
+    "Sku": {
+      "description": "Sku of Azure Spring Cloud Tanzu",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Sku",
+          "type": "string",
+          "default": "S0"
+        },
+        "tier": {
+          "description": "Tier of the Sku",
+          "type": "string",
+          "default": "Standard"
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Current capacity of the target resource",
+          "type": "integer"
         }
       }
     },
@@ -414,6 +1405,22 @@
       "name": "serviceName",
       "in": "path",
       "description": "The name of the Service resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AppNameParameter": {
+      "name": "appName",
+      "in": "path",
+      "description": "The name of the App resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DeploymentNameParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "description": "The name of the Deployment resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
