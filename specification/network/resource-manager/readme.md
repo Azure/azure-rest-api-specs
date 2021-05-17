@@ -471,6 +471,7 @@ input-file:
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityUserConfiguration.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityAdminConfiguration.json
   - Microsoft.Network/preview/2021-02-01-preview/networkSecurityPerimeter.json
+<<<<<<< HEAD
 ```
 
 ### Tag: package-2021-02-preview
@@ -596,6 +597,32 @@ input-file:
   - Microsoft.Network/stable/2021-02-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2021-02-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2021-02-01/webapplicationfirewall.json
+=======
+  - Microsoft.Network/stable/2020-11-01/networkProfile.json
+  - Microsoft.Network/stable/2020-11-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2020-11-01/networkVirtualAppliance.json
+  - Microsoft.Network/stable/2020-11-01/networkWatcher.json
+  - Microsoft.Network/stable/2020-11-01/operation.json
+  - Microsoft.Network/stable/2020-11-01/privateEndpoint.json
+  - Microsoft.Network/stable/2020-11-01/privateLinkService.json
+  - Microsoft.Network/stable/2020-11-01/publicIpAddress.json
+  - Microsoft.Network/stable/2020-11-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2020-11-01/routeFilter.json
+  - Microsoft.Network/stable/2020-11-01/routeTable.json
+  - Microsoft.Network/stable/2020-11-01/securityPartnerProvider.json
+  - Microsoft.Network/stable/2020-11-01/serviceCommunity.json
+  - Microsoft.Network/stable/2020-11-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2020-11-01/serviceTags.json
+  - Microsoft.Network/stable/2020-11-01/usage.json
+  - Microsoft.Network/stable/2020-11-01/virtualNetwork.json
+  - Microsoft.Network/stable/2020-11-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2020-11-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2020-11-01/virtualRouter.json
+  - Microsoft.Network/stable/2020-11-01/virtualWan.json
+  - Microsoft.Network/stable/2020-11-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2020-11-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2020-11-01/webapplicationfirewall.json
+>>>>>>> 87a694d3be (Defining the APIs for the new NSP resource)
 ```
 
 ### Tag: package-2020-08
