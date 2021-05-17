@@ -2272,26 +2272,26 @@
           }
         },
         "disableLocalAuth": {
-          "description": "If true, local(non-AAD) authentication will be disabled on Iot hub.",
+          "description": "If true, SAS tokens with Iot hub scoped SAS keys cannot be used for authentication.",
           "type": "boolean"
         },
         "disableDeviceSAS": {
-          "description": "If true, all devices(including Edge devices but excluding modules) cannot authenticate using SAS.",
+          "description": "If true, all device(including Edge devices but excluding modules) scoped SAS keys cannot be used for authentication.",
           "type": "boolean"
         },
         "disableModuleSAS": {
-          "description": "If true, all modules cannot authenticate using SAS.",
+          "description": "If true, all module scoped SAS keys cannot be used for authentication.",
           "type": "boolean"
         },
         "restrictOutboundNetworkAccess": {
-          "description": "If true, egress from IotHub will be restricted to only the allowed FQDNs that are configured via allowedFQDNList.",
+          "description": "If true, egress from IotHub will be restricted to only the allowed FQDNs that are configured via allowedFqdnList.",
           "type": "boolean"
         },
-        "allowedFQDNList": {
+        "allowedFqdnList": {
           "description": "List of allowed FQDNs(Fully Qualified Domain Name) for egress from Iot Hub.",
           "type": "array",
           "items": {
-            "description": "FQDN to be allowed for egress. Example: myeventhub.servicebus.windows.net",
+            "description": "FQDN to be allowed for egress. Example: my-eventhub.servicebus.windows.net",
             "type": "string"
           }
         },
