@@ -1284,6 +1284,7 @@
   "definitions": {
     "RepositoryAttributes": {
       "required": [
+      	"registry",
         "imageName",
         "createdTime",
         "lastUpdateTime",
@@ -1295,6 +1296,12 @@
       "type": "object",
       "description": "Repository attributes",
       "properties": {
+        "registry": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Registry login server name.  This is likely to be similar to {registry-name}.azurecr.io",
+          "x-ms-client-name": "registryLoginServer"
+        },
         "imageName": {
           "type": "string",
           "readOnly": true,
@@ -1328,8 +1335,7 @@
         "changeableAttributes": {
           "description": "Writeable properties of the resource",
           "$ref": "#/definitions/RepositoryChangeableAttributes",
-          "readOnly": true,
-          "x-ms-client-name": "writeableProperties"
+          "x-ms-client-flatten": true
         }
       },
       "example": {
@@ -1349,12 +1355,18 @@
     },
     "TagList": {
       "required": [
+      	"registry",
         "imageName",
         "tags"
       ],
       "description": "List of tag details",
       "x-accessibility": "internal",
       "properties": {
+        "registry": {
+          "type": "string",
+          "description": "Registry login server name.  This is likely to be similar to {registry-name}.azurecr.io",
+          "x-ms-client-name": "RegistryLoginServer"
+        },
         "imageName": {
           "type": "string",
           "description": "Image name",
@@ -1408,12 +1420,19 @@
     },
     "TagAttributes": {
       "required": [
+      	"registry",
         "imageName",
         "tag"
       ],
       "x-ms-client-name": "ArtifactTagProperties",
       "description": "Tag attributes",
       "properties": {
+        "registry": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Registry login server name.  This is likely to be similar to {registry-name}.azurecr.io",
+          "x-ms-client-name": "registryLoginServer"
+        },
         "imageName": {
           "type": "string",
           "readOnly": true,
@@ -1483,8 +1502,7 @@
         "changeableAttributes": {
           "$ref": "#/definitions/TagChangeableAttributes",
           "description": "Writeable properties of the resource",
-          "readOnly": true,
-          "x-ms-client-name": "writeableProperties"
+          "x-ms-client-flatten": true
         }
       },
       "example": {
@@ -1720,6 +1738,11 @@
     "AcrManifests": {
       "description": "Manifest attributes",
       "properties": {
+        "registry": {
+          "type": "string",
+          "description": "Registry login server name.  This is likely to be similar to {registry-name}.azurecr.io",
+          "x-ms-client-name": "registryLoginServer"
+        },
         "imageName": {
           "type": "string",
           "description": "Image name",
@@ -1796,6 +1819,12 @@
       "x-ms-client-name": "ArtifactManifestProperties",
       "description": "Manifest attributes details",
       "properties": {
+        "registry": {
+          "description": "Registry login server name.  This is likely to be similar to {registry-name}.azurecr.io",
+          "readOnly": true,
+          "type": "string",
+          "x-ms-client-name": "registryLoginServer"
+        },
         "imageName": {
           "description": "Repository name",
           "type": "string",
@@ -1835,7 +1864,9 @@
     },
     "ManifestAttributesBase": {
       "required": [
-        "digest"
+        "digest",
+        "createdTime",
+        "lastUpdateTime"
       ],
       "type": "object",
       "description": "Manifest details",
@@ -1902,8 +1933,7 @@
         "changeableAttributes": {
           "$ref": "#/definitions/ManifestChangeableAttributes",
           "description": "Writeable properties of the resource",
-          "readOnly": true,
-          "x-ms-client-name": "writeableProperties"
+          "x-ms-client-flatten": true
         }
       },
       "example": {
@@ -2215,6 +2245,7 @@
     "TagChangeableAttributes": {
       "description": "Changeable attributes",
       "x-ms-client-name": "TagWriteableProperties",
+      "x-accessibility": "internal",
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
@@ -2323,6 +2354,7 @@
     "ManifestChangeableAttributes": {
       "description": "Changeable attributes",
       "x-ms-client-name": "ManifestWriteableProperties",
+      "x-accessibility": "internal",
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
@@ -2367,6 +2399,7 @@
     "RepositoryChangeableAttributes": {
       "description": "Changeable attributes for Repository",
       "x-ms-client-name": "RepositoryWriteableProperties",
+      "x-accessibility": "internal",
       "properties": {
         "deleteEnabled": {
           "type": "boolean",
