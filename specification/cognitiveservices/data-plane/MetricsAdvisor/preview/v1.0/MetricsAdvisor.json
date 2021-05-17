@@ -3751,16 +3751,16 @@
       "properties": {
         "startTime": {
           "format": "date-time",
-          "description": "start time",
+          "description": "This is inclusive. The maximum number of data points (series number * time range) is 10000.",
           "type": "string"
         },
         "endTime": {
           "format": "date-time",
-          "description": "end time",
+          "description": "This is exclusive. The maximum number of data points (series number * time range) is 10000.",
           "type": "string"
         },
         "series": {
-          "description": "series",
+          "description": "The series to be queried. The identity must be able to define one single time series instead of a group of time series. The maximum number of series is 100.",
           "uniqueItems": true,
           "type": "array",
           "items": {
@@ -6632,16 +6632,16 @@
       "properties": {
         "startTime": {
           "format": "date-time",
-          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ",
+          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ. The maximum number of data points (series number * time range) is 10000.",
           "type": "string"
         },
         "endTime": {
           "format": "date-time",
-          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ",
+          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ. The maximum number of data points (series number * time range) is 10000.",
           "type": "string"
         },
         "series": {
-          "description": "query specific series",
+          "description": "query specific series. The maximum number of series is 100.",
           "type": "array",
           "items": {
             "type": "object",
