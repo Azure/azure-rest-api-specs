@@ -3479,45 +3479,45 @@
             "$ref": "#/definitions/NotificationEndpoint"
           }
         }
-    },
-    "NotificationRegistration": {
-      "description": "The notification registration definition.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
+      },
+      "NotificationRegistration": {
+        "description": "The notification registration definition.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          }
+        ],
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/NotificationRegistrationProperties"
-            }
-          ],
-          "provisioningState": {
-            "enum": [
-              "NotSpecified",
-              "Accepted",
-              "Running",
-              "Creating",
-              "Created",
-              "Deleting",
-              "Deleted",
-              "Canceled",
-              "Failed",
-              "Succeeded",
-              "MovingResources",
-              "TransientFailure",
-              "RolloutInProgress"
+          "properties": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/NotificationRegistrationProperties"
+              }
             ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ProvisioningState",
-              "modelAsString": true
+            "provisioningState": {
+              "enum": [
+                "NotSpecified",
+                "Accepted",
+                "Running",
+                "Creating",
+                "Created",
+                "Deleting",
+                "Deleted",
+                "Canceled",
+                "Failed",
+                "Succeeded",
+                "MovingResources",
+                "TransientFailure",
+                "RolloutInProgress"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              }
             }
           }
-        }
         }
       },
       "x-ms-azure-resource": true
@@ -3814,12 +3814,12 @@
     "OperationsContentProperties": {
       "type": "object",
       "properties": {
-        "contents": [
+        "contents": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LocalizedOperationDefinition"
           }
-        ]
+        }
       }
     },
     "OperationsPutContent": {
@@ -3834,15 +3834,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationsDefinition"
-          },
-          "properties": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/definitions/OperationsContentProperties"
-              }
-            ]
           }
+        },
+        "properties": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationsContentProperties"
+            }
+          ]
         }
       },
       "x-ms-azure-resource": true
