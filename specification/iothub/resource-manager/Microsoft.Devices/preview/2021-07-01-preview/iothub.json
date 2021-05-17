@@ -3665,7 +3665,10 @@
         "properties": {
           "$ref": "#/definitions/EventHubConsumerGroupName"
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "EventHubConsumerGroupName": {
       "description": "The EventHub consumer group name.",
@@ -3675,7 +3678,10 @@
           "description": "EventHub consumer group name",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "EventHubConsumerGroupInfo": {
       "description": "The properties of the EventHubConsumerGroupInfo object.",
@@ -3685,9 +3691,7 @@
         "properties": {
           "description": "The tags.",
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "id": {
           "description": "The Event Hub-compatible consumer group identifier.",
