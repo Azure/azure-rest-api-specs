@@ -60,6 +60,7 @@ These settings apply only when `--tag=package-preview-2020-04-full` is specified
 
 ``` yaml $(tag) == 'package-preview-2020-04-full'
 input-file:
+  - Microsoft.KeyVault/preview/2020-04-01-preview/keys.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
