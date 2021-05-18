@@ -109,8 +109,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyAlertingConfiguration"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -482,8 +485,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectionConfiguration"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -588,7 +594,7 @@
         "tags": [
           "AnomalyDetection"
         ],
-        "summary": "Query all anomaly alerting configurations for specific anomaly detection configuration",
+        "summary": "List all anomaly alerting configurations for specific anomaly detection configuration",
         "operationId": "getAnomalyAlertingConfigurationsByAnomalyDetectionConfiguration",
         "produces": [
           "application/json"
@@ -601,6 +607,20 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -617,8 +637,11 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
         "x-ms-examples": {
-          "Query all anomaly alerting configurations for specific anomaly detection configuration": {
+          "List all anomaly alerting configurations for specific anomaly detection configuration": {
             "$ref": "./examples/getAnomalyAlertingConfigurationsByAnomalyDetectionConfiguration.json"
           }
         }
@@ -1112,8 +1135,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSourceCredential"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -1443,8 +1469,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataFeedDetail"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -1821,8 +1850,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/WebhookHookInfo"
+            }
           },
           "default": {
             "description": "Client error or server error (4xx or 5xx)",
@@ -2233,7 +2265,7 @@
         "tags": [
           "Metric"
         ],
-        "summary": "Query all anomaly detection configurations for specific metric",
+        "summary": "List all anomaly detection configurations for specific metric",
         "operationId": "getAnomalyDetectionConfigurationsByMetric",
         "produces": [
           "application/json"
@@ -2246,6 +2278,20 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -2262,8 +2308,11 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
         "x-ms-examples": {
-          "Query all anomaly detection configurations for specific metric": {
+          "List all anomaly detection configurations for specific metric": {
             "$ref": "./examples/getAnomalyDetectionConfigurationsByMetric.json"
           }
         }
@@ -3681,63 +3730,24 @@
       "example": {
         "wholeMetricConfiguration": {
           "smartDetectionCondition": {
-            "sensitivity": 93.2,
-            "suppressCondition": {
-              "minNumber": 3
-            }
+            "sensitivity": 91.0
           }
-        },
-        "seriesOverrideConfigurations": [
-          {
-            "series": {
-              "dimension": {
-                "category": "Jewelry",
-                "city": "Beijing"
-              }
-            },
-            "conditionOperator": "AND",
-            "smartDetectionCondition": {
-              "sensitivity": 91.0,
-              "anomalyDetectorDirection": "Both",
-              "suppressCondition": {
-                "minNumber": 1,
-                "minRatio": 100.0
-              }
-            },
-            "hardThresholdCondition": {
-              "lowerBound": 1.0,
-              "upperBound": 100.0,
-              "anomalyDetectorDirection": "Both",
-              "suppressCondition": {
-                "minNumber": 1,
-                "minRatio": 100.0
-              }
-            },
-            "changeThresholdCondition": {
-              "changePercentage": 5.0,
-              "shiftPoint": 1,
-              "withinRange": false,
-              "anomalyDetectorDirection": "Both",
-              "suppressCondition": {
-                "minNumber": 1,
-                "minRatio": 100.0
-              }
-            }
-          }
-        ]
+        }
       }
     },
     "AnomalyAlertingConfigurationList": {
-      "required": [
-        "value"
-      ],
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AnomalyAlertingConfiguration"
-          }
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4339,23 +4349,14 @@
         "dataSourceCredentialType": {
           "description": "Type of data source credential",
           "enum": [
-            "AzureApplicationInsights",
-            "AzureBlob",
-            "AzureCosmosDB",
-            "AzureDataExplorer",
-            "AzureDataLakeStorageGen2",
-            "AzureEventHubs",
-            "AzureLogAnalytics",
-            "AzureTable",
-            "InfluxDB",
-            "MongoDB",
-            "MySql",
-            "PostgreSql",
-            "SqlServer"
+            "AzureSQLConnectionString",
+            "DataLakeGen2SharedKey",
+            "ServicePrincipal",
+            "ServicePrincipalInKV"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "DataSourceType",
+            "name": "DataSourceCredentialType",
             "modelAsString": true
           }
         },
@@ -4370,8 +4371,7 @@
       },
       "discriminator": "dataSourceCredentialType",
       "example": {
-        "dataSourceCredentialDescription": "This is a data source credential",
-        "dataSourceCredentialType": "AzureApplicationInsights"
+        "dataSourceCredentialDescription": "This is a data source credential"
       }
     },
     "AzureSQLConnectionStringCredentialPatch": {
@@ -5859,10 +5859,7 @@
         }
       },
       "example": {
-        "dataFeedName": "Sample - cost/revenue - city/category (modified)",
-        "viewers": [
-          "viewer@company.example"
-        ]
+        "dataFeedName": "Sample - cost/revenue - city/category"
       },
       "x-ms-discriminator-value": "SqlServer"
     },
@@ -6333,11 +6330,11 @@
           "type": "string"
         },
         "username": {
-          "description": "The password, if using basic authentication",
+          "description": "(Deprecated) The username, if using basic authentication",
           "type": "string"
         },
         "password": {
-          "description": "The password, if using basic authentication",
+          "description": "(Deprecated) The password, if using basic authentication",
           "type": "string"
         },
         "headers": {
@@ -6348,11 +6345,11 @@
           }
         },
         "certificateKey": {
-          "description": "The certificate key, if using client certificate",
+          "description": "The certificate key/URL, if using client certificate, please read documents for more informations.",
           "type": "string"
         },
         "certificatePassword": {
-          "description": "The certificate password, if using client certificate",
+          "description": "The certificate password, if using client certificate, please read documents for more informations.",
           "type": "string"
         }
       }
@@ -6504,7 +6501,7 @@
         }
       },
       "example": {
-        "description": "This is a webhook. (modified)"
+        "description": "This is a webhook."
       },
       "x-ms-discriminator-value": "Webhook"
     },
@@ -6803,16 +6800,18 @@
       }
     },
     "AnomalyDetectionConfigurationList": {
-      "required": [
-        "value"
-      ],
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AnomalyDetectionConfiguration"
-          }
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
