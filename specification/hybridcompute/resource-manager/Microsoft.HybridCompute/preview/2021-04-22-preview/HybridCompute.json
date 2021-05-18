@@ -617,6 +617,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/upgradeExtensions": {
+      "post": {
+        "tags": [
+          "MachineExtensions Upgrade"
+        ],
+        "operationId": "UpgradeExtensions",
+        "description": "The operation to Upgrade Machine Extensions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "name": "extensionUpgradeParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineExtensionUpgrade"
+            },
+            "description": "Parameters supplied to the Upgrade Extensions operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upgrade Machine Extensions": {
+            "$ref": "./examples/Extensions_Upgrade.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/providers/Microsoft.HybridCompute/operations": {
       "get": {
         "tags": [
@@ -1113,6 +1166,36 @@
         }
       },
       "description": "Describes the Machine Extensions List Result."
+    },
+    "TargetVersion": {
+      "type": "string",
+      "description": "Extension Upgrade Target Version."
+    },
+    "ExtensionTargetProperties": {
+      "properties": {
+        "targetVersion": {
+          "type": "object",
+          "$ref": "#/definitions/TargetVersion",
+          "description": "Properties for the specified Extension to Upgrade."
+        }
+      },
+      "description": "Describes the Machine Extension Target Version Properties"
+    },
+    "ExtensionTarget": {
+      "additionalProperties": {
+        "type": "object",
+        "$ref": "#/definitions/ExtensionTargetProperties"
+      },
+      "description": "Describes the Machine Extension Target Properties"
+    },
+    "MachineExtensionUpgrade": {
+      "properties": {
+        "extensionTargets": {
+          "$ref": "#/definitions/ExtensionTarget",
+          "description": "Describes the Extension Target Properties."
+        }
+      },
+      "description": "Describes the Machine Extension Upgrade Properties"
     }
   },
   "parameters": {}
