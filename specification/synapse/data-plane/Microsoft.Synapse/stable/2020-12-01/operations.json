@@ -23,98 +23,6 @@
     "application/json"
   ],
   "paths": {
-    "/libraryOperationResults/{operationId}": {
-      "get": {
-        "tags": [
-          "OperationResult"
-        ],
-        "operationId": "LibraryOperationResult_Get",
-        "description": "Get notebook operation result",
-        "x-ms-examples": {
-          "List Sql Pools": {
-            "$ref": "./examples/LibraryOperationResult_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Operation ID."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "201": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          },
-          "default": {
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
-          }
-        }
-      }
-    },
-    "/notebookOperationResults/{operationId}": {
-      "get": {
-        "tags": [
-          "OperationResult"
-        ],
-        "operationId": "NotebookOperationResult_Get",
-        "description": "Get notebook operation result",
-        "x-ms-examples": {
-          "List Sql Pools": {
-            "$ref": "./examples/NotebookOperationResult_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Operation ID."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "201": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          },
-          "default": {
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
-          }
-        }
-      }
-    },
     "/operationResults/{operationId}": {
       "get": {
         "tags": [
@@ -164,7 +72,7 @@
     "/operationStatuses/{operationId}": {
       "get": {
         "tags": [
-          "OperationStatus"
+          "OperationResult"
         ],
         "operationId": "OperationStatus_Get",
         "description": "Get operation status",

@@ -2648,6 +2648,52 @@
           }
         }
       }
+    },
+    "/notebookOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "OperationResult"
+        ],
+        "operationId": "NotebookOperationResult_Get",
+        "description": "Get notebook operation result",
+        "x-ms-examples": {
+          "List Sql Pools": {
+            "$ref": "./examples/NotebookOperationResult_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "201": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "./roleAssignments.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
