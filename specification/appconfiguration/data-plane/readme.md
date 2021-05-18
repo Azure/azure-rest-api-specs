@@ -99,6 +99,10 @@ directive:
     from: appconfiguration.json
     where: $.parameters.SyncTokens
     reason: The latest sync token should be used on every request. It is more proper to be globally stored per client rather than passed in for individual requests.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: featureManagement.json
+    where: $.definitions.FeatureFlagConditions.properties.client_filters
+    reason: Existing property names. The service uses snake casing for json properties.
 ```
 ## Multi-API/Profile support for AutoRest v3 generators 
 
