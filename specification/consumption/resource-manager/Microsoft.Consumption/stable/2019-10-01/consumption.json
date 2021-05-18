@@ -813,7 +813,7 @@
             "name": "startDate",
             "in": "query",
             "description": "Start date. Only applicable when querying with billing profile",
-            "required": false,
+            "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
           },
@@ -821,15 +821,15 @@
             "name": "endDate",
             "in": "query",
             "description": "End date. Only applicable when querying with billing profile",
-            "required": false,
+            "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
           },
           {
             "name": "$filter",
-            "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile",
+            "description": "The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
