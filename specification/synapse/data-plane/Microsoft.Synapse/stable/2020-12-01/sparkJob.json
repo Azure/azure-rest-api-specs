@@ -8,17 +8,11 @@
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/livyApi/versions/{livyApiVersion}/sparkPools/{sparkPoolName}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
-      },
-      {
-        "$ref": "#/parameters/LivyApiVersion"
-      },
-      {
-        "$ref": "#/parameters/SparkPoolName"
       }
     ]
   },
@@ -32,7 +26,7 @@
     "application/json"
   ],
   "paths": {
-    "/batches": {
+    "/livyApi/versions/{livyApiVersion}/sparkPools/{sparkPoolName}/batches": {
       "get": {
         "tags": [
           "SparkBatch"
@@ -51,6 +45,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
           {
             "name": "from",
             "in": "query",
@@ -103,6 +103,12 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
+          {
             "name": "detailed",
             "in": "query",
             "description": "Optional query param specifying whether detailed response is returned beyond plain livy.",
@@ -129,7 +135,7 @@
         }
       }
     },
-    "/batches/{batchId}": {
+    "/livyApi/versions/{livyApiVersion}/sparkPools/{sparkPoolName}/batches/{batchId}": {
       "get": {
         "tags": [
           "SparkBatch"
@@ -148,6 +154,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
           {
             "name": "batchId",
             "in": "path",
@@ -192,6 +204,12 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
+          {
             "name": "batchId",
             "in": "path",
             "description": "Identifier for the batch job.",
@@ -207,7 +225,7 @@
         }
       }
     },
-    "/sessions": {
+    "/livyApi/versions/{livyApiVersion}/sparkPools/{sparkPoolName}/sessions": {
       "get": {
         "tags": [
           "SparkSession"
@@ -226,6 +244,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
           {
             "name": "from",
             "in": "query",
@@ -304,7 +328,7 @@
         }
       }
     },
-    "/sessions/{sessionId}": {
+    "/livyApi/versions/{livyApiVersion}/sparkPools/{sparkPoolName}/sessions/{sessionId}": {
       "get": {
         "tags": [
           "SparkSession"
@@ -323,6 +347,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
           {
             "name": "sessionId",
             "in": "path",
@@ -367,6 +397,12 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
+          {
             "name": "sessionId",
             "in": "path",
             "description": "Identifier for the session.",
@@ -382,7 +418,7 @@
         }
       }
     },
-    "/sessions/{sessionId}/reset-timeout": {
+    "/livyApi/versions/{livyApiVersion}/sparkPools/{sparkPoolName}/sessions/{sessionId}/reset-timeout": {
       "put": {
         "tags": [
           "SparkSession"
@@ -402,6 +438,12 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
+          {
             "name": "sessionId",
             "in": "path",
             "description": "Identifier for the session.",
@@ -417,7 +459,7 @@
         }
       }
     },
-    "/sessions/{sessionId}/statements": {
+    "/livyApi/versions/{livyApiVersion}/sparkPools/{sparkPoolName}/sessions/{sessionId}/statements": {
       "get": {
         "tags": [
           "SparkSession"
@@ -436,6 +478,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
           {
             "name": "sessionId",
             "in": "path",
@@ -473,6 +521,12 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
+          {
             "name": "sessionId",
             "in": "path",
             "description": "Identifier for the session.",
@@ -500,7 +554,7 @@
         }
       }
     },
-    "/sessions/{sessionId}/statements/{statementId}": {
+    "/livyApi/versions/{livyApiVersion}/sparkPools/{sparkPoolName}/sessions/{sessionId}/statements/{statementId}": {
       "get": {
         "tags": [
           "SparkSession"
@@ -519,6 +573,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
           {
             "name": "sessionId",
             "in": "path",
@@ -546,7 +606,7 @@
         }
       }
     },
-    "/sessions/{sessionId}/statements/{statementId}/cancel": {
+    "/livyApi/versions/{livyApiVersion}/sparkPools/{sparkPoolName}/sessions/{sessionId}/statements/{statementId}/cancel": {
       "post": {
         "tags": [
           "SparkSession"
@@ -565,6 +625,12 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/LivyApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SparkPoolName"
+          },
           {
             "name": "sessionId",
             "in": "path",
