@@ -4,7 +4,7 @@
     "targetDBServerSubscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "targetDBServerResourceGroupName": "testrg",
     "targetDBServerName": "testtarget",
-    "nameAvailabilityRequest": {
+    "parameters": {
       "name": "name1",
       "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
     }
@@ -12,10 +12,11 @@
   "responses": {
     "200": {
       "body": {
-        "nameAvailable": true,
-        "message": "",
         "name": "name1",
-        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations",
+        "nameAvailable": true,
+        "migrationNameAvailabilityReason": null,
+        "message": null
       }
     }
   }

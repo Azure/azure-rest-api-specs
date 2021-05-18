@@ -280,7 +280,7 @@
         }
       }
     },
-    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{targetDBServerName}/checkNameAvailability": {
+    "/subscriptions/{targetDBServerSubscriptionId}/resourceGroups/{targetDBServerResourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{targetDBServerName}/checkMigrationNameAvailability": {
       "post": {
         "summary": "Check migration name validity and availability",
         "description": "This method checks whether a proposed migration name is valid and available.",
@@ -288,10 +288,10 @@
           "Custom operation",
           "POST"
         ],
-        "operationId": "Migrations_CheckNameAvailability",
+        "operationId": "CheckMigrationNameAvailability",
         "x-ms-examples": {
-          "Migrations_CheckNameAvailability": {
-            "$ref": "./examples/Migrations_CheckNameAvailability.json"
+          "CheckMigrationNameAvailability": {
+            "$ref": "./examples/CheckMigrationNameAvailability.json"
           }
         },
         "parameters": [
@@ -308,20 +308,20 @@
             "$ref": "#/parameters/TargetDBServerNameParameter"
           },
           {
-            "name": "nameAvailabilityRequest",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "#/definitions/MigrationNameAvailabilityResource"
             },
-            "description": "The required parameters for checking if resource name is available."
+            "description": "The required parameters for checking if a migration name is available."
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+              "$ref": "#/definitions/MigrationNameAvailabilityResource"
             }
           },
           "default": {
@@ -711,32 +711,24 @@
       ],
       "description": "Sku information related properties of a server."
     },
-    "CheckNameAvailabilityRequest": {
+    "MigrationNameAvailabilityReason": {
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "type": "string",
+      "description": "Migration name availability reason.",
+      "x-ms-enum": {
+        "name": "MigrationNameAvailabilityReason",
+        "modelAsString": true
+      }
+    },
+    "MigrationNameAvailabilityResource": {
       "required": [
-        "name"
+        "name",
+        "type"
       ],
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Resource name to verify."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type used for verification."
-        }
-      },
-      "description": "Request to check a resource name's availability."
-    },
-    "CheckNameAvailabilityResponse": {
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Error Message."
-        },
-        "nameAvailable": {
-          "type": "boolean",
-          "description": "Indicates whether the resource name is available."
-        },
         "name": {
           "type": "string",
           "description": "The resource name to verify."
@@ -744,9 +736,24 @@
         "type": {
           "type": "string",
           "description": "The type of the resource."
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates whether the resource name is available.",
+          "readOnly": true
+        },
+        "migrationNameAvailabilityReason": {
+          "$ref": "#/definitions/MigrationNameAvailabilityReason",
+          "description": "Migration name availability reason",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Migration name availability message.",
+          "readOnly": true
         }
       },
-      "description": "Represents a resource name's availability."
+      "description": "Represents a migration name's availability."
     },
     "CloudError": {
       "x-ms-external": true,
