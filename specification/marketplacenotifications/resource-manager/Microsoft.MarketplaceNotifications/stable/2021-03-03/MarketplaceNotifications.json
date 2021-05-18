@@ -188,29 +188,37 @@
     "Notification": {
       "description": "Review notification",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "offerId": {
-            "description": "legacy offer id of the notification (publisher.offer)",
-            "type": "string"
-          },
-          "date": {
-            "description": "date for creating the notification",
-            "type": "string"
-          },
-          "offerDisplayName": {
-            "description": "offer display name",
-            "type": "string"
-          },
-          "principalId": {
-            "description": "user's principal id",
-            "type": "string"
-          }
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerId": {
+          "description": "legacy offer id of the notification (publisher.offer)",
+          "type": "string"
+        },
+        "date": {
+          "description": "date for creating the notification",
+          "type": "string"
+        },
+        "offerDisplayName": {
+          "description": "offer display name",
+          "type": "string"
+        },
+        "principalId": {
+          "description": "user's principal id",
+          "type": "string"
         }
       }
     },
