@@ -29,21 +29,14 @@ openapi-type: data-plane
 tag: package-1-0
 ```
 
-### Tag: package-2021-05-02
-
-These settings apply only when `--tag=package-featureManagement-1-0` is specified on the command line.
-
-``` yaml $(tag) == 'package-featureManagement-1-0'
-input-file:
-- Microsoft.AppConfiguration/stable/1.0/featureManagement.json
-```
-
-### Tag: package-2021-05-01
+### Tag: package-2021-05
 
 These settings apply only when `--tag=package-keyVaultReference-1-0` is specified on the command line.
 
 ``` yaml $(tag) == 'package-keyVaultReference-1-0'
 input-file:
+- Microsoft.AppConfiguration/stable/1.0/featureManagement.json
+- Microsoft.AppConfiguration/stable/1.0/appconfiguration.json
 - Microsoft.AppConfiguration/stable/1.0/keyVaultReference.json
 ```
 
