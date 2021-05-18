@@ -69,6 +69,7 @@ These settings apply only when `--tag=package-2021-04-01-preview` is specified o
 ``` yaml $(tag) == 'package-2021-04-01-preview'
 input-file:
 - Microsoft.Databricks/preview/2021-04-01-preview/databricks.json
+- Microsoft.Databricks/stable/2018-04-01/vnetpeering.json
 ```
 
 ---
