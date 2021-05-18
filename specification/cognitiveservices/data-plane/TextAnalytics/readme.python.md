@@ -61,3 +61,9 @@ output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/
 namespace: azure.ai.textanalytics.v3_1_preview_4
 output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/v3_1_preview_4
 ```
+
+### Tag: release_3_1_preview_5
+``` yaml $(tag) == 'release_3_1_preview.5'
+namespace: azure.ai.textanalytics.v3_1_preview_5
+output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/v3_1_preview_5
+```
