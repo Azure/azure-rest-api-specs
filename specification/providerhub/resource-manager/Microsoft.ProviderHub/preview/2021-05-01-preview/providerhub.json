@@ -3480,26 +3480,8 @@
           }
         },
         "provisioningState": {
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "MovingResources",
-            "TransientFailure",
-            "RolloutInProgress"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "readOnly": true
         }
       }
     },
@@ -3816,6 +3798,8 @@
       "properties": {
         "contents": {
           "type": "array",
+          "description": "Operations content.",
+          "x-ms-client-flatten": true,
           "items": {
             "$ref": "#/definitions/LocalizedOperationDefinition"
           }
@@ -3830,12 +3814,6 @@
       ],
       "type": "object",
       "properties": {
-        "contents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationsDefinition"
-          }
-        },
         "properties": {
           "type": "object",
           "allOf": [
@@ -4827,6 +4805,10 @@
           "items": {
             "$ref": "#/definitions/SkuSetting"
           }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
