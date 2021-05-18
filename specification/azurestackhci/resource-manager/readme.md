@@ -37,7 +37,11 @@ tag: package-preview-2021-01
 ``` yaml
 directive:
   - suppress: R3020
-    from: azurestackhci.json
+    from:
+      - arcSettings.json
+      - clusters.json
+      - extensions.json
+      - operations.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
@@ -48,7 +52,10 @@ These settings apply only when `--tag=package-preview-2021-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-01'
 input-file:
-  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/azurestackhci.json
+  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2021-01-01-preview/operations.json
 ```
 ### Tag: package-2020-10
 
