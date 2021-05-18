@@ -728,6 +728,9 @@
           "Create an ComputeInstance Compute": {
             "$ref": "./examples/Compute/createOrUpdate/ComputeInstance.json"
           },
+          "Create an ComputeInstance Compute with Schedules": {
+            "$ref": "./examples/Compute/createOrUpdate/ComputeInstanceWithSchedules.json"
+          },
           "Create AKS Compute": {
             "$ref": "./examples/Compute/createOrUpdate/BasicAKSCompute.json"
           },
@@ -1154,6 +1157,56 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/updateSchedules": {
+      "post": {
+        "tags": [
+          "MachineLearningComputes"
+        ],
+        "operationId": "Compute_UpdateSchedules",
+        "description": "Updates schedules of a compute instance",
+        "x-ms-examples": {
+          "Update schedules of ComputeInstance": {
+            "$ref": "./examples/Compute/updateSchedules.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The object for updating schedules of specified ComputeInstance.",
+            "schema": {
+              "$ref": "#/definitions/ComputeSchedules"
+            }
           }
         ],
         "responses": {
@@ -3155,6 +3208,10 @@
                   "description": "The last operation on ComputeInstance.",
                   "$ref": "#/definitions/ComputeInstanceLastOperation",
                   "readOnly": true
+                },
+                "schedules": {
+                  "description": "The list of schedules to be applied on the compute instance.",
+                  "$ref": "#/definitions/ComputeSchedules"
                 }
               }
             }
@@ -4582,6 +4639,209 @@
               "type": "string"
             }
           }
+        }
+      }
+    },
+    "ComputeStartStopSchedule": {
+      "type": "object",
+      "description": "Compute start stop schedule properties",
+      "properties": {
+        "id": {
+          "description": "Schedule id.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningStatus": {
+          "type": "string",
+          "enum": [
+            "Completed",
+            "Provisioning",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningStatus",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current deployment state of schedule."
+        },
+        "status": {
+          "$ref": "#/definitions/ScheduleStatus"
+        },
+        "triggerType": {
+          "$ref": "#/definitions/TriggerType"
+        },
+        "action": {
+          "$ref": "#/definitions/ComputePowerAction"
+        },
+        "recurrence": {
+          "$ref": "#/definitions/Recurrence"
+        },
+        "cron": {
+          "$ref": "#/definitions/Cron"
+        }
+      }
+    },
+    "ScheduleStatus": {
+      "type": "string",
+      "description": "The schedule status.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleStatus",
+        "modelAsString": true
+      }
+    },
+    "ScheduleType": {
+      "type": "string",
+      "description": "The schedule type.",
+      "enum": [
+        "ComputeStartStop"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleType",
+        "modelAsString": true
+      }
+    },
+    "ComputePowerAction": {
+      "type": "string",
+      "description": "The compute power action.",
+      "enum": [
+        "Start",
+        "Stop"
+      ],
+      "x-ms-enum": {
+        "name": "ComputePowerAction",
+        "modelAsString": true
+      }
+    },
+    "TriggerType": {
+      "type": "string",
+      "description": "The schedule trigger type.",
+      "enum": [
+        "Recurrence",
+        "Cron"
+      ],
+      "x-ms-enum": {
+        "name": "TriggerType",
+        "modelAsString": true
+      }
+    },
+    "RecurrenceFrequency": {
+      "type": "string",
+      "description": "The recurrence frequency.",
+      "enum": [
+        "NotSpecified",
+        "Second",
+        "Minute",
+        "Hour",
+        "Day",
+        "Week",
+        "Month",
+        "Year"
+      ],
+      "x-ms-enum": {
+        "name": "RecurrenceFrequency",
+        "modelAsString": true
+      }
+    },
+    "RecurrenceSchedule": {
+      "type": "object",
+      "description": "The recurrence schedule",
+      "properties": {
+        "minutes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The minutes."
+        },
+        "hours": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The hours."
+        },
+        "weekDays": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "x-ms-enum": {
+              "name": "DaysOfWeek",
+              "modelAsString": false
+            }
+          },
+          "description": "The days of the week."
+        }
+      }
+    },
+    "Recurrence": {
+      "type": "object",
+      "description": "The workflow trigger recurrence for ComputeStartStop schedule type.",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/RecurrenceFrequency"
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone."
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurrenceSchedule"
+        }
+      }
+    },
+    "Cron": {
+      "type": "object",
+      "description": "The workflow trigger cron for ComputeStartStop schedule type.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "The start time."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone."
+        },
+        "expression": {
+          "type": "string",
+          "description": "The cron expression."
+        }
+      }
+    },
+    "ComputeSchedules": {
+      "type": "object",
+      "description": "The list of schedules to be applied on the computes",
+      "properties": {
+        "computeStartStop": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputeStartStopSchedule"
+          },
+          "description": "The list of compute start stop schedules to be applied."
         }
       }
     }
