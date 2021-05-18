@@ -2945,6 +2945,14 @@
           "type": "string",
           "readOnly": true
         },
+        "statuses": {
+          "description": "The resource status information.",
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceStatus"
+          }
+        },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
           "type": "string",
@@ -3048,6 +3056,43 @@
         }
       }
     },
+    "ResourceStatus": {
+      "description": "The resource status information.",
+      "properties": {
+        "status": {
+          "description": "Status of the condition.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason for the condition's status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "A human readable message indicating details about the status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "severity": {
+          "description": "Severity with which to treat failures of this type of condition.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startedAt": {
+          "description": "The time this condition was entered.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastTransitionTime": {
+          "description": "The last transition time.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
     "VCenterProperties": {
       "description": "Defines the resource properties.",
       "required": [
@@ -3094,6 +3139,14 @@
         "credentials": {
           "description": "Username / Password Credentials to connect to vcenter.",
           "$ref": "#/definitions/VICredential"
+        },
+        "statuses": {
+          "description": "The resource status information.",
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceStatus"
+          }
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -3577,6 +3630,14 @@
           "type": "string",
           "readOnly": true
         },
+        "statuses": {
+          "description": "The resource status information.",
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceStatus"
+          }
+        },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
           "type": "string",
@@ -3798,6 +3859,14 @@
           "type": "string",
           "readOnly": true
         },
+        "statuses": {
+          "description": "The resource status information.",
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceStatus"
+          }
+        },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
           "type": "string",
@@ -3912,6 +3981,14 @@
           "description": "Gets the name of the corresponding resource in Kubernetes.",
           "type": "string",
           "readOnly": true
+        },
+        "statuses": {
+          "description": "The resource status information.",
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceStatus"
+          }
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
