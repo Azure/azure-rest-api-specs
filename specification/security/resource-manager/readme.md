@@ -60,14 +60,6 @@ directive:
     from: onPremiseIotSensors.json
     where: $.definitions.OnPremiseIotSensor
     reason: The resource is managed in a subscription level (instead of inside a resource group)
-  - suppress: TopLevelResourcesListByResourceGroup
-    from: ingestionSettings.json
-    where: $.definitions.IngestionSetting
-    reason: The resource is managed in a subscription level (instead of inside a resource group)
-  - suppress: OperationsAPIImplementation
-    from: ingestionSettings.json
-    where: $.paths
-    reason: There is no consistent implementation of operations api across existing versions
   - suppress: SECRET_PROPERTY
     from: ingestionSettings.json
     where: $.definitions.IngestionSettingToken.properties.token
