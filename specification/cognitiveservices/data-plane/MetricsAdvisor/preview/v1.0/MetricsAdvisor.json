@@ -2706,53 +2706,53 @@
         }
       },
       "example": {
-  "name": "alerting configuration name",
-  "crossMetricsOperator": "AND",
-  "hookIds": [
-    "00000000-0000-0000-0000-000000000001"
-  ],
-  "metricAlertingConfigurations": [
-    {
-      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-      "anomalyScopeType": "All",
-      "negationOperation": false,
-      "severityFilter": {
-        "minAlertSeverity": "Medium",
-        "maxAlertSeverity": "High"
-      },
-      "snoozeFilter": {
-        "autoSnooze": 0,
-        "snoozeScope": "Series",
-        "onlyForSuccessive": true
+        "name": "alerting configuration name",
+        "crossMetricsOperator": "AND",
+        "hookIds": [
+          "00000000-0000-0000-0000-000000000001"
+        ],
+        "metricAlertingConfigurations": [
+          {
+            "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+            "anomalyScopeType": "All",
+            "negationOperation": false,
+            "severityFilter": {
+              "minAlertSeverity": "Medium",
+              "maxAlertSeverity": "High"
+            },
+            "snoozeFilter": {
+              "autoSnooze": 0,
+              "snoozeScope": "Series",
+              "onlyForSuccessive": true
+            }
+          },
+          {
+            "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000002",
+            "anomalyScopeType": "Dimension",
+            "negationOperation": false,
+            "dimensionAnomalyScope": {
+              "dimension": {
+                "city": "Beijing"
+              }
+            },
+            "severityFilter": {
+              "minAlertSeverity": "Low",
+              "maxAlertSeverity": "High"
+            },
+            "snoozeFilter": {
+              "autoSnooze": 0,
+              "snoozeScope": "Series",
+              "onlyForSuccessive": true
+            },
+            "valueFilter": {
+              "lower": 0.0,
+              "upper": 1000.0,
+              "direction": "Both",
+              "type": "Value"
+            }
+          }
+        ]
       }
-    },
-    {
-      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000002",
-      "anomalyScopeType": "Dimension",
-      "negationOperation": false,
-      "dimensionAnomalyScope": {
-        "dimension": {
-          "city": "Beijing"
-        }
-      },
-      "severityFilter": {
-        "minAlertSeverity": "Low",
-        "maxAlertSeverity": "High"
-      },
-      "snoozeFilter": {
-        "autoSnooze": 0,
-        "snoozeScope": "Series",
-        "onlyForSuccessive": true
-      },
-      "valueFilter": {
-        "lower": 0.0,
-        "upper": 1000.0,
-        "direction": "Both",
-        "type": "Value"
-      }
-    }
-  ]
-}
     },
     "AnomalyAlertingConfigurationPatch": {
       "type": "object",
@@ -2806,53 +2806,53 @@
         }
       },
       "example": {
-  "name": "alerting configuration name",
-  "description": "this is an anomaly alerting configuration",
-  "crossMetricsOperator": "AND",
-  "hookIds": [
-    "00000000-0000-0000-0000-000000000001"
-  ],
-  "metricAlertingConfigurations": [
-    {
-      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-      "anomalyScopeType": "All",
-      "negationOperation": false,
-      "severityFilter": {
-        "minAlertSeverity": "Medium",
-        "maxAlertSeverity": "High"
-      },
-      "snoozeFilter": {
-        "autoSnooze": 0,
-        "snoozeScope": "Series",
-        "onlyForSuccessive": true
+        "name": "alerting configuration name",
+        "description": "this is an anomaly alerting configuration",
+        "crossMetricsOperator": "AND",
+        "hookIds": [
+          "00000000-0000-0000-0000-000000000001"
+        ],
+        "metricAlertingConfigurations": [
+          {
+            "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+            "anomalyScopeType": "All",
+            "negationOperation": false,
+            "severityFilter": {
+              "minAlertSeverity": "Medium",
+              "maxAlertSeverity": "High"
+            },
+            "snoozeFilter": {
+              "autoSnooze": 0,
+              "snoozeScope": "Series",
+              "onlyForSuccessive": true
+            }
+          },
+          {
+            "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000002",
+            "anomalyScopeType": "Dimension",
+            "negationOperation": false,
+            "dimensionAnomalyScope": {
+              "dimension": {
+                "city": "Beijing"
+              }
+            },
+            "severityFilter": {
+              "minAlertSeverity": "Low",
+              "maxAlertSeverity": "High"
+            },
+            "snoozeFilter": {
+              "autoSnooze": 0,
+              "snoozeScope": "Series",
+              "onlyForSuccessive": true
+            },
+            "valueFilter": {
+              "lower": 0.0,
+              "upper": 1000.0,
+              "direction": "Both"
+            }
+          }
+        ]
       }
-    },
-    {
-      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000002",
-      "anomalyScopeType": "Dimension",
-      "negationOperation": false,
-      "dimensionAnomalyScope": {
-        "dimension": {
-          "city": "Beijing"
-        }
-      },
-      "severityFilter": {
-        "minAlertSeverity": "Low",
-        "maxAlertSeverity": "High"
-      },
-      "snoozeFilter": {
-        "autoSnooze": 0,
-        "snoozeScope": "Series",
-        "onlyForSuccessive": true
-      },
-      "valueFilter": {
-        "lower": 0.0,
-        "upper": 1000.0,
-        "direction": "Both"
-      }
-    }
-  ]
-}
     },
     "AlertingResultQuery": {
       "required": [
@@ -2887,10 +2887,10 @@
         }
       },
       "example": {
-  "startTime": "2020-01-01T00:00:00Z",
-  "endTime": "2020-02-01T00:00:00Z",
-  "timeMode": "AnomalyTime"
-}
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "timeMode": "AnomalyTime"
+      }
     },
     "AlertResult": {
       "type": "object",
@@ -3452,115 +3452,115 @@
         }
       },
       "example": {
-  "name": "Anomaly detection configuration name",
-  "description": "Anomaly detection configuration description",
-  "metricId": "22222222-2222-2222-2222-000000000001",
-  "wholeMetricConfiguration": {
-    "conditionOperator": "AND",
-    "smartDetectionCondition": {
-      "sensitivity": 91.0,
-      "anomalyDetectorDirection": "Both",
-      "suppressCondition": {
-        "minNumber": 1,
-        "minRatio": 100.0
+        "name": "Anomaly detection configuration name",
+        "description": "Anomaly detection configuration description",
+        "metricId": "22222222-2222-2222-2222-000000000001",
+        "wholeMetricConfiguration": {
+          "conditionOperator": "AND",
+          "smartDetectionCondition": {
+            "sensitivity": 91.0,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          },
+          "hardThresholdCondition": {
+            "lowerBound": 1.0,
+            "upperBound": 100.0,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          },
+          "changeThresholdCondition": {
+            "changePercentage": 5.0,
+            "shiftPoint": 1,
+            "withinRange": false,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          }
+        },
+        "dimensionGroupOverrideConfigurations": [
+          {
+            "group": {
+              "dimension": {
+                "city": "Beijing"
+              }
+            },
+            "conditionOperator": "AND",
+            "smartDetectionCondition": {
+              "sensitivity": 91.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "hardThresholdCondition": {
+              "lowerBound": 1.0,
+              "upperBound": 100.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "changeThresholdCondition": {
+              "changePercentage": 5.0,
+              "shiftPoint": 1,
+              "withinRange": false,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            }
+          }
+        ],
+        "seriesOverrideConfigurations": [
+          {
+            "series": {
+              "dimension": {
+                "category": "Jewelry",
+                "city": "Beijing"
+              }
+            },
+            "conditionOperator": "AND",
+            "smartDetectionCondition": {
+              "sensitivity": 91.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "hardThresholdCondition": {
+              "lowerBound": 1.0,
+              "upperBound": 100.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "changeThresholdCondition": {
+              "changePercentage": 5.0,
+              "shiftPoint": 1,
+              "withinRange": false,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            }
+          }
+        ]
       }
-    },
-    "hardThresholdCondition": {
-      "lowerBound": 1.0,
-      "upperBound": 100.0,
-      "anomalyDetectorDirection": "Both",
-      "suppressCondition": {
-        "minNumber": 1,
-        "minRatio": 100.0
-      }
-    },
-    "changeThresholdCondition": {
-      "changePercentage": 5.0,
-      "shiftPoint": 1,
-      "withinRange": false,
-      "anomalyDetectorDirection": "Both",
-      "suppressCondition": {
-        "minNumber": 1,
-        "minRatio": 100.0
-      }
-    }
-  },
-  "dimensionGroupOverrideConfigurations": [
-    {
-      "group": {
-        "dimension": {
-          "city": "Beijing"
-        }
-      },
-      "conditionOperator": "AND",
-      "smartDetectionCondition": {
-        "sensitivity": 91.0,
-        "anomalyDetectorDirection": "Both",
-        "suppressCondition": {
-          "minNumber": 1,
-          "minRatio": 100.0
-        }
-      },
-      "hardThresholdCondition": {
-        "lowerBound": 1.0,
-        "upperBound": 100.0,
-        "anomalyDetectorDirection": "Both",
-        "suppressCondition": {
-          "minNumber": 1,
-          "minRatio": 100.0
-        }
-      },
-      "changeThresholdCondition": {
-        "changePercentage": 5.0,
-        "shiftPoint": 1,
-        "withinRange": false,
-        "anomalyDetectorDirection": "Both",
-        "suppressCondition": {
-          "minNumber": 1,
-          "minRatio": 100.0
-        }
-      }
-    }
-  ],
-  "seriesOverrideConfigurations": [
-    {
-      "series": {
-        "dimension": {
-          "category": "Jewelry",
-          "city": "Beijing"
-        }
-      },
-      "conditionOperator": "AND",
-      "smartDetectionCondition": {
-        "sensitivity": 91.0,
-        "anomalyDetectorDirection": "Both",
-        "suppressCondition": {
-          "minNumber": 1,
-          "minRatio": 100.0
-        }
-      },
-      "hardThresholdCondition": {
-        "lowerBound": 1.0,
-        "upperBound": 100.0,
-        "anomalyDetectorDirection": "Both",
-        "suppressCondition": {
-          "minNumber": 1,
-          "minRatio": 100.0
-        }
-      },
-      "changeThresholdCondition": {
-        "changePercentage": 5.0,
-        "shiftPoint": 1,
-        "withinRange": false,
-        "anomalyDetectorDirection": "Both",
-        "suppressCondition": {
-          "minNumber": 1,
-          "minRatio": 100.0
-        }
-      }
-    }
-  ]
-}
     },
     "SuppressConditionPatch": {
       "type": "object",
@@ -3728,12 +3728,12 @@
         }
       },
       "example": {
-  "wholeMetricConfiguration": {
-    "smartDetectionCondition": {
-      "sensitivity": 91.0
-    }
-  }
-}
+        "wholeMetricConfiguration": {
+          "smartDetectionCondition": {
+            "sensitivity": 91.0
+          }
+        }
+      }
     },
     "AnomalyAlertingConfigurationList": {
       "type": "object",
@@ -3779,17 +3779,17 @@
         }
       },
       "example": {
-  "startTime": "2020-01-01T00:00:00Z",
-  "endTime": "2020-02-01T00:00:00Z",
-  "series": [
-    {
-      "dimension": {
-        "category": "Jewelry",
-        "city": "Beijing"
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "series": [
+          {
+            "dimension": {
+              "category": "Jewelry",
+              "city": "Beijing"
+            }
+          }
+        ]
       }
-    }
-  ]
-}
     },
     "SeriesResult": {
       "required": [
@@ -3951,22 +3951,22 @@
         }
       },
       "example": {
-  "startTime": "2020-01-01T00:00:00Z",
-  "endTime": "2020-02-01T00:00:00Z",
-  "filter": {
-    "dimensionFilter": [
-      {
-        "dimension": {
-          "city": "Beijing"
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "filter": {
+          "dimensionFilter": [
+            {
+              "dimension": {
+                "city": "Beijing"
+              }
+            }
+          ],
+          "severityFilter": {
+            "min": "Low",
+            "max": "High"
+          }
         }
       }
-    ],
-    "severityFilter": {
-      "min": "Low",
-      "max": "High"
-    }
-  }
-}
     },
     "AnomalyDimensionQuery": {
       "required": [
@@ -3995,15 +3995,15 @@
         }
       },
       "example": {
-  "startTime": "2020-01-01T00:00:00Z",
-  "endTime": "2020-02-01T00:00:00Z",
-  "dimensionName": "category",
-  "dimensionFilter": {
-    "dimension": {
-      "city": "Beijing"
-    }
-  }
-}
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "dimensionName": "category",
+        "dimensionFilter": {
+          "dimension": {
+            "city": "Beijing"
+          }
+        }
+      }
     },
     "AnomalyDimensionList": {
       "required": [
@@ -4058,18 +4058,18 @@
         }
       },
       "example": {
-  "startTime": "2020-01-01T00:00:00Z",
-  "endTime": "2020-02-01T00:00:00Z",
-  "filter": {
-    "dimensionFilter": [
-      {
-        "dimension": {
-          "city": "Beijing"
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "filter": {
+          "dimensionFilter": [
+            {
+              "dimension": {
+                "city": "Beijing"
+              }
+            }
+          ]
         }
       }
-    ]
-  }
-}
     },
     "RootCause": {
       "required": [
@@ -4165,15 +4165,15 @@
       },
       "discriminator": "dataSourceCredentialType",
       "example": {
-  "parameters": {
-    "clientId": "88888888-8888-8888-8888-888888888888",
-    "clientSecret": "fake-client-secret",
-    "tenantId": "12345678-1234-1234-1234-123456788888"
-  },
-  "dataSourceCredentialName": "A data source credential",
-  "dataSourceCredentialDescription": "This is a data source credential",
-  "dataSourceCredentialType": "ServicePrincipal"
-}
+        "parameters": {
+          "clientId": "88888888-8888-8888-8888-888888888888",
+          "clientSecret": "fake-client-secret",
+          "tenantId": "12345678-1234-1234-1234-123456788888"
+        },
+        "dataSourceCredentialName": "A data source credential",
+        "dataSourceCredentialDescription": "This is a data source credential",
+        "dataSourceCredentialType": "ServicePrincipal"
+      }
     },
     "AzureSQLConnectionStringCredential": {
       "required": [
@@ -4371,8 +4371,8 @@
       },
       "discriminator": "dataSourceCredentialType",
       "example": {
-  "dataSourceCredentialDescription": "This is a data source credential"
-}
+        "dataSourceCredentialDescription": "This is a data source credential"
+      }
     },
     "AzureSQLConnectionStringCredentialPatch": {
       "type": "object",
@@ -4828,47 +4828,47 @@
       },
       "discriminator": "dataSourceType",
       "example": {
-  "dataSourceParameter": {
-    "connectionString": "Server=PlaceholderSqlServer,1433;Initial Catalog=PlaceholderDatabase;User ID=PlaceholderUserName;Password=PlaceholderPassword;",
-    "query": "select * from your_table where timestamp = @StartTime"
-  },
-  "dataFeedName": "Sample - cost/revenue - city/category",
-  "dataFeedDescription": "This is a sample data feed.",
-  "granularityName": "Daily",
-  "metrics": [
-    {
-      "metricName": "cost",
-      "metricDisplayName": "cost"
-    },
-    {
-      "metricName": "revenue",
-      "metricDisplayName": "revenue"
-    }
-  ],
-  "dimension": [
-    {
-      "dimensionName": "category",
-      "dimensionDisplayName": "category"
-    },
-    {
-      "dimensionName": "city",
-      "dimensionDisplayName": "city"
-    }
-  ],
-  "timestampColumn": "timestamp",
-  "dataStartFrom": "2020-01-01T00:00:00Z",
-  "dataSourceType": "SqlServer",
-  "startOffsetInSeconds": 86400,
-  "maxConcurrency": 5,
-  "minRetryIntervalInSeconds": 3600,
-  "stopRetryAfterInSeconds": 604800,
-  "needRollup": "NeedRollup",
-  "rollUpMethod": "Sum",
-  "allUpIdentification": "__SUM__",
-  "fillMissingPointType": "SmartFilling",
-  "viewMode": "Private",
-  "authenticationType": "Basic"
-}
+        "dataSourceParameter": {
+          "connectionString": "Server=PlaceholderSqlServer,1433;Initial Catalog=PlaceholderDatabase;User ID=PlaceholderUserName;Password=PlaceholderPassword;",
+          "query": "select * from your_table where timestamp = @StartTime"
+        },
+        "dataFeedName": "Sample - cost/revenue - city/category",
+        "dataFeedDescription": "This is a sample data feed.",
+        "granularityName": "Daily",
+        "metrics": [
+          {
+            "metricName": "cost",
+            "metricDisplayName": "cost"
+          },
+          {
+            "metricName": "revenue",
+            "metricDisplayName": "revenue"
+          }
+        ],
+        "dimension": [
+          {
+            "dimensionName": "category",
+            "dimensionDisplayName": "category"
+          },
+          {
+            "dimensionName": "city",
+            "dimensionDisplayName": "city"
+          }
+        ],
+        "timestampColumn": "timestamp",
+        "dataStartFrom": "2020-01-01T00:00:00Z",
+        "dataSourceType": "SqlServer",
+        "startOffsetInSeconds": 86400,
+        "maxConcurrency": 5,
+        "minRetryIntervalInSeconds": 3600,
+        "stopRetryAfterInSeconds": 604800,
+        "needRollup": "NeedRollup",
+        "rollUpMethod": "Sum",
+        "allUpIdentification": "__SUM__",
+        "fillMissingPointType": "SmartFilling",
+        "viewMode": "Private",
+        "authenticationType": "Basic"
+      }
     },
     "AzureApplicationInsightsDataFeed": {
       "required": [
@@ -5868,8 +5868,8 @@
         }
       },
       "example": {
-  "dataFeedName": "Sample - cost/revenue - city/category"
-},
+        "dataFeedName": "Sample - cost/revenue - city/category"
+      },
       "x-ms-discriminator-value": "SqlServer"
     },
     "MongoDBParameterPatch": {
@@ -6024,20 +6024,20 @@
         }
       },
       "example": {
-  "startTime": "2020-01-01T00:00:00Z",
-  "endTime": "2020-01-01T00:00:00Z",
-  "value": {
-    "anomalyValue": "NotAnomaly"
-  },
-  "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-  "metricId": "22222222-2222-2222-2222-000000000001",
-  "dimensionFilter": {
-    "dimension": {
-      "city": "Beijing"
-    }
-  },
-  "feedbackType": "Anomaly"
-},
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-01-01T00:00:00Z",
+        "value": {
+          "anomalyValue": "NotAnomaly"
+        },
+        "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+        "metricId": "22222222-2222-2222-2222-000000000001",
+        "dimensionFilter": {
+          "dimension": {
+            "city": "Beijing"
+          }
+        },
+        "feedbackType": "Anomaly"
+      },
       "x-ms-discriminator-value": "Anomaly"
     },
     "ChangePointFeedbackValue": {
@@ -6224,12 +6224,12 @@
         }
       },
       "example": {
-  "metricId": "22222222-2222-2222-2222-000000000001",
-  "feedbackType": "Anomaly",
-  "startTime": "2020-01-01T00:00:00Z",
-  "endTime": "2020-01-01T00:00:00Z",
-  "timeMode": "MetricTimestamp"
-}
+        "metricId": "22222222-2222-2222-2222-000000000001",
+        "feedbackType": "Anomaly",
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-01-01T00:00:00Z",
+        "timeMode": "MetricTimestamp"
+      }
     },
     "MetricFeedbackList": {
       "type": "object",
@@ -6379,14 +6379,14 @@
         }
       },
       "example": {
-  "hookParameter": {
-    "endpoint": "https://localhost/demo/post"
-  },
-  "hookName": "A webhook",
-  "hookType": "Webhook",
-  "description": "This is a webhook.",
-  "externalLink": ""
-},
+        "hookParameter": {
+          "endpoint": "https://localhost/demo/post"
+        },
+        "hookName": "A webhook",
+        "hookType": "Webhook",
+        "description": "This is a webhook.",
+        "externalLink": ""
+      },
       "x-ms-discriminator-value": "Webhook"
     },
     "HookList": {
@@ -6510,8 +6510,8 @@
         }
       },
       "example": {
-  "description": "This is a webhook."
-},
+        "description": "This is a webhook."
+      },
       "x-ms-discriminator-value": "Webhook"
     },
     "IngestionStatusQueryOptions": {
@@ -6533,9 +6533,9 @@
         }
       },
       "example": {
-  "startTime": "2020-01-01T00:00:00Z",
-  "endTime": "2020-02-01T00:00:00Z"
-}
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z"
+      }
     },
     "IngestionStatus": {
       "type": "object",
@@ -6607,9 +6607,9 @@
         }
       },
       "example": {
-  "startTime": "2020-01-01T00:00:00Z",
-  "endTime": "2020-02-01T00:00:00Z"
-}
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z"
+      }
     },
     "DataFeedIngestionProgress": {
       "type": "object",
@@ -6658,15 +6658,15 @@
         }
       },
       "example": {
-  "startTime": "2020-01-01T00:00:00Z",
-  "endTime": "2020-02-01T00:00:00Z",
-  "series": [
-    {
-      "category": "__SUM__",
-      "city": "Beijing"
-    }
-  ]
-}
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "series": [
+          {
+            "category": "__SUM__",
+            "city": "Beijing"
+          }
+        ]
+      }
     },
     "MetricSeriesItem": {
       "type": "object",
@@ -6748,13 +6748,13 @@
         }
       },
       "example": {
-  "activeSince": "2020-01-01T00:00:00Z",
-  "dimensionFilter": {
-    "city": [
-      "Beijing"
-    ]
-  }
-}
+        "activeSince": "2020-01-01T00:00:00Z",
+        "dimensionFilter": {
+          "city": [
+            "Beijing"
+          ]
+        }
+      }
     },
     "MetricSeriesList": {
       "type": "object",
@@ -6788,8 +6788,8 @@
         }
       },
       "example": {
-  "dimensionName": "city"
-}
+        "dimensionName": "city"
+      }
     },
     "MetricDimensionList": {
       "type": "object",
@@ -6843,9 +6843,9 @@
         }
       },
       "example": {
-  "startTime": "2020-01-01T00:00:00Z",
-  "endTime": "2020-02-01T00:00:00Z"
-}
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z"
+      }
     },
     "EnrichmentStatus": {
       "type": "object",
@@ -6899,8 +6899,8 @@
   },
   "security": [
     {
-      "apim_key": [ ],
-      "ma_api_key": [ ]
+      "apim_key": [],
+      "ma_api_key": []
     }
   ],
   "parameters": {
