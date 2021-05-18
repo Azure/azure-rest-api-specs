@@ -29,6 +29,16 @@ openapi-type: data-plane
 tag: package-1-0
 ```
 
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-content-types-1-0` is specified on the command line.
+
+``` yaml $(tag) == 'package-content-types-1-0'
+input-file:
+- Microsoft.AppConfiguration/stable/1.0/featureManagement.json
+- Microsoft.AppConfiguration/stable/1.0/keyVaultReference.json
+```
+
 ### Tag: package-2019-07
 
 These settings apply only when `--tag=package-1-0` is specified on the command line.
