@@ -1,0 +1,69 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2018-07-15-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "GetUserTablesPostgreSqlTaskInput": {
+      "type": "object",
+      "description": "Input for the task that gets the list of tables for a provided list of PostgreSQL databases.",
+      "properties": {
+        "connectionInfo": {
+          "$ref": "./Common.json#/definitions/PostgreSqlConnectionInfo",
+          "description": "Information for connecting to PostgreSQL source"
+        },
+        "selectedDatabases": {
+          "type": "array",
+          "description": "List of PostgreSQL databases for which to collect tables",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "connectionInfo",
+        "selectedDatabases"
+      ]
+    },
+    "GetUserTablesPostgreSqlTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that gets the list of tables for a provided list of PostgreSQL databases.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The database this result is for",
+          "readOnly": true
+        },
+        "tables": {
+          "type": "array",
+          "description": "List of valid tables found for this database",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/DatabaseTable"
+          },
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Validation errors associated with the task",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
