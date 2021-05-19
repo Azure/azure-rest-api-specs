@@ -1135,6 +1135,22 @@
         "displayName": {
           "type": "string",
           "description": "Display name of dimension."
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Internal name of the dimension."
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "Internal metric name of the dimension."
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "Source Mdm Namespace of the dimension."
+        },
+        "toBeExportedToShoebox": {
+          "type": "boolean",
+          "description": "Flag to indicate exporting to Azure Monitor."
         }
       }
     },
@@ -1165,12 +1181,29 @@
       }
     },
     "LinkedResources": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string",
-        "description": "ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}'."
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/definitions/LinkedResource"
       },
-      "description": "The list of user associated resources to the Map account. The dictionary key references will be string names and the values will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}'."
+      "description": "The array of associated resources to the Map account. Linked resource in the array cannot individually update, you must update all linked resources in the array together. These resources may be used on operations on the Azure Maps REST API. Access is controlled by the Map Account Managed Identity(s) permissions to those resource(s)."
+    },
+    "LinkedResource": {
+      "type": "object",
+      "properties": {
+        "uniqueName": {
+          "type": "string",
+          "description": "A provided name which uniquely identifies the linked resource."
+        },
+        "id": {
+          "type": "string",
+          "description": "ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}'."
+        }
+      },
+      "required": [
+        "uniqueName",
+        "id"
+      ]
     },
     "CreatorProperties": {
       "description": "Creator resource properties",

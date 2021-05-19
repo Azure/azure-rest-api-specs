@@ -203,7 +203,7 @@ directive:
       - MapsAccount.properties is an arbitrary dictionary and cannot be flattened.
   - suppress: R2026
     from: maps-management.json
-    reason: standard property being applied to all azure resources.
+    reason: Managed identity is standard property being applied to all azure resources.
   - suppress: R3006
     where:
       - $.definitions.MapsAccount.properties

@@ -14,6 +14,14 @@
         "userAssignedIdentities": {
           "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName": {}
         }
+      },
+      "properties": {
+        "linkedResources": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}",
+            "uniqueName": "myBatchStorageAccount"
+          }
+        ]
       }
     }
   },
@@ -52,7 +60,12 @@
           "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c593",
           "provisioningState": "Succeeded",
           "disableLocalAuth": false,
-          "linkedResources": {}
+          "linkedResources": [
+            {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}",
+              "uniqueName": "myBatchStorageAccount"
+            }
+          ]
         }
       }
     }
