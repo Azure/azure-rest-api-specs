@@ -6406,6 +6406,19 @@
         }
       }
     },
+    "EmailHookParameterPatch": {
+      "type": "object",
+      "properties": {
+        "toList": {
+          "description": "Email TO: list.",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "HookInfoPatch": {
       "required": [
         "hookType"
@@ -6457,7 +6470,7 @@
       ],
       "properties": {
         "hookParameter": {
-          "$ref": "#/definitions/EmailHookParameter"
+          "$ref": "#/definitions/EmailHookParameterPatch"
         }
       },
       "x-ms-discriminator-value": "Email"
