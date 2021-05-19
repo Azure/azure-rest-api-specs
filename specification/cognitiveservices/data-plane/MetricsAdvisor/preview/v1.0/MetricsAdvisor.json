@@ -1853,7 +1853,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/WebhookHookInfo"
+              "$ref": "#/definitions/HookInfo"
             }
           },
           "default": {
@@ -6473,11 +6473,11 @@
           "type": "string"
         },
         "username": {
-          "description": "The password, if using basic authentication",
+          "description": "(Deprecated) The username, if using basic authentication",
           "type": "string"
         },
         "password": {
-          "description": "The password, if using basic authentication",
+          "description": "(Deprecated) The password, if using basic authentication",
           "type": "string"
         },
         "headers": {
@@ -6906,7 +6906,7 @@
   "parameters": {
     "Endpoint": {
       "name": "endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://<resource-name>.cognitiveservices.azure.com). ",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://<resource-name>.cognitiveservices.azure.com).",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
