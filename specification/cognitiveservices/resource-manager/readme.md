@@ -27,9 +27,18 @@ These are the global settings for the CognitiveServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2021-04
 ```
 
+
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04'
+input-file:
+- Microsoft.CognitiveServices/stable/2021-04-30/cognitiveservices.json
+```
 
 ### Tag: package-2017-04
 
