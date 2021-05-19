@@ -25,8 +25,6 @@ To see additional help and options, run:
 These are the global settings for the Azure Maintenance API.
 
 ``` yaml
-title: MaintenanceClient
-description: Maintenance Client
 openapi-type: arm
 tag: package-2021-05
 ```
@@ -93,8 +91,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js maintenance/resource-manager
 ```
 
 ## C#
@@ -108,7 +104,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Maintenance
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/Maintenance/Management.Maintenance/Generated
+  output-folder: $(csharp-sdks-folder)/maintenance/Microsoft.Azure.Management.Maintenance/src/Generated/
   clear-output-folder: true
 ```
 
@@ -124,6 +120,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
