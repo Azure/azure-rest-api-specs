@@ -4487,9 +4487,6 @@
     },
     "AzureApplicationInsightsParameter": {
       "required": [
-        "apiKey",
-        "applicationId",
-        "azureCloud",
         "query"
       ],
       "type": "object",
@@ -4890,7 +4887,6 @@
     "AzureBlobParameter": {
       "required": [
         "blobTemplate",
-        "connectionString",
         "container"
       ],
       "type": "object",
@@ -4929,7 +4925,6 @@
     "AzureCosmosDBParameter": {
       "required": [
         "collectionId",
-        "connectionString",
         "database",
         "sqlQuery"
       ],
@@ -5005,7 +5000,6 @@
     },
     "AzureDataLakeStorageGen2Parameter": {
       "required": [
-        "accountName",
         "directoryTemplate",
         "fileSystemName",
         "fileTemplate"
@@ -5053,7 +5047,6 @@
     },
     "AzureEventHubsParameter": {
       "required": [
-        "connectionString",
         "consumerGroup"
       ],
       "type": "object",
@@ -5087,10 +5080,7 @@
     },
     "AzureLogAnalyticsParameter": {
       "required": [
-        "clientId",
-        "clientSecret",
         "query",
-        "tenantId",
         "workspaceId"
       ],
       "type": "object",
@@ -5136,7 +5126,6 @@
     },
     "AzureTableParameter": {
       "required": [
-        "connectionString",
         "query",
         "table"
       ],
@@ -5175,11 +5164,7 @@
     },
     "InfluxDBParameter": {
       "required": [
-        "connectionString",
-        "database",
-        "password",
-        "query",
-        "userName"
+        "query"
       ],
       "type": "object",
       "properties": {
@@ -5275,9 +5260,7 @@
     },
     "MongoDBParameter": {
       "required": [
-        "command",
-        "connectionString",
-        "database"
+        "command"
       ],
       "type": "object",
       "properties": {
@@ -5623,9 +5606,6 @@
       "x-ms-discriminator-value": "AzureCosmosDB"
     },
     "SQLSourceParameterPatch": {
-      "required": [
-        "query"
-      ],
       "type": "object",
       "properties": {
         "connectionString": {
