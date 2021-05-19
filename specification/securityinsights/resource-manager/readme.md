@@ -57,6 +57,7 @@ input-file:
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/dataConnectors.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/AlertRules.json
 directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
@@ -83,6 +84,14 @@ directive:
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Incidents.json
     where: $.definitions.Incident
     reason: The Incident does not support list by subscription. It's not a top-level resource. To get the Incident, we should have a subscription as well as a resource group, Log Analytics workspace and incident ID.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/AlertRules.json
+    where: $.definitions.AlertRule
+    reason: The AlertRule does not support list by subscription. It's not a top-level resource. To get the AlertRule, we should have a subscription as well as a resource group and Log Analytics workspace.
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2021-03-01-preview/AlertRules.json
+    where: $.definitions.AlertRuleTemplate
+    reason: The AlertRuleTemplate does not support list by subscription. It's not a top-level resource. To get the AlertRuleTemplate, we should have a subscription as well as a resource group and Log Analytics workspace.  
 ```
 
 ---
