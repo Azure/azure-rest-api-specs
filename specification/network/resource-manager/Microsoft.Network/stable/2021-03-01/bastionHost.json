@@ -611,6 +611,38 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the bastion host resource."
+        },
+        "scaleUnits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The scale units for the Bastion Host resource.",
+          "minimum": 2,
+          "maximum": 50
+        },
+        "disableCopyPaste": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/Disable Copy/Paste feature of the Bastion Host resource."
+        },
+        "enableFileCopy": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/Disable File Copy feature of the Bastion Host resource."
+        },
+        "enableIpConnect": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/Disable IP Connect feature of the Bastion Host resource."
+        },
+        "enableShareableLink": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/Disable Shareable Link of the Bastion Host resource."
+        },
+        "enableTunneling": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/Disable Tunneling feature of the Bastion Host resource."
         }
       },
       "description": "Properties of the Bastion Host."
