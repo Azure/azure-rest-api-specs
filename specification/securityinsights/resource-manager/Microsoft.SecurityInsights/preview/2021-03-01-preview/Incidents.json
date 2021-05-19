@@ -243,6 +243,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/createTeam": {
+      "post": {
+        "x-ms-examples": {
+          "Creates incident teams group.": {
+            "$ref": "./examples/incidents/CreateTeam.json"
+          }
+        },
+        "tags": [
+          "IncidentTeam"
+        ],
+        "description": "Creates a Microsoft team to investigate the incident by sharing information and insights between participants.",
+        "operationId": "Incidents_CreateTeam",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/TeamProperties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TeamInformation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/1.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/alerts": {
       "post": {
         "x-ms-examples": {
@@ -254,7 +305,7 @@
           "IncidentAlerts"
         ],
         "description": "Gets all incident alerts.",
-        "operationId": "Incidents_ListOfAlerts",
+        "operationId": "Incidents_ListAlerts",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -302,7 +353,7 @@
           "IncidentBookmarks"
         ],
         "description": "Gets all incident bookmarks.",
-        "operationId": "Incidents_ListOfBookmarks",
+        "operationId": "Incidents_ListBookmarks",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -350,7 +401,7 @@
           "IncidentComments"
         ],
         "description": "Gets all incident comments.",
-        "operationId": "IncidentComments_ListByIncident",
+        "operationId": "IncidentComments_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -414,7 +465,7 @@
           "IncidentComments"
         ],
         "description": "Gets an incident comment.",
-        "operationId": "IncidentComments_GetComment",
+        "operationId": "IncidentComments_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -463,7 +514,7 @@
           "IncidentComments"
         ],
         "description": "Creates or updates the incident comment.",
-        "operationId": "IncidentComments_CreateComment",
+        "operationId": "IncidentComments_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -521,7 +572,7 @@
           "IncidentComments"
         ],
         "description": "Delete the incident comment.",
-        "operationId": "IncidentComments_DeleteComment",
+        "operationId": "IncidentComments_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -572,7 +623,7 @@
           "IncidentEntities"
         ],
         "description": "Gets all incident related entities.",
-        "operationId": "Incidents_ListOfEntities",
+        "operationId": "Incidents_ListEntities",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -684,7 +735,7 @@
           "IncidentRelations"
         ],
         "description": "Gets an incident relation.",
-        "operationId": "IncidentRelations_GetRelation",
+        "operationId": "IncidentRelations_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -733,7 +784,7 @@
           "IncidentRelations"
         ],
         "description": "Creates or updates the incident relation.",
-        "operationId": "IncidentRelations_CreateOrUpdateRelation",
+        "operationId": "IncidentRelations_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -791,7 +842,7 @@
           "IncidentRelations"
         ],
         "description": "Delete the incident relation.",
-        "operationId": "IncidentRelations_DeleteRelation",
+        "operationId": "IncidentRelations_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -889,7 +940,7 @@
           "type": "boolean"
         },
         "ntDomain": {
-          "description": "The NetBIOS domain name as it appears in the alert format – domain\\username. Examples: NT AUTHORITY.",
+          "description": "The NetBIOS domain name as it appears in the alert format domain\\username. Examples: NT AUTHORITY.",
           "readOnly": true,
           "type": "string"
         },
@@ -1244,7 +1295,7 @@
     "Entity": {
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../common/1.0/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1865,7 +1916,8 @@
       },
       "required": [
         "value"
-      ]
+      ],
+      "type": "object"
     },
     "IncidentBookmarkList": {
       "description": "List of incident bookmarks.",
@@ -1880,7 +1932,8 @@
       },
       "required": [
         "value"
-      ]
+      ],
+      "type": "object"
     },
     "IncidentComment": {
       "allOf": [
@@ -1916,7 +1969,8 @@
       },
       "required": [
         "value"
-      ]
+      ],
+      "type": "object"
     },
     "IncidentCommentProperties": {
       "description": "Incident comment property bag.",
@@ -1966,7 +2020,8 @@
             "$ref": "#/definitions/IncidentEntitiesResultsMetadata"
           }
         }
-      }
+      },
+      "type": "object"
     },
     "IncidentEntitiesResultsMetadata": {
       "description": "Information of a specific aggregation in the incident related entities result.",
@@ -2030,6 +2085,11 @@
               }
             ]
           }
+        },
+        "teamInformation": {
+          "$ref": "#/definitions/TeamInformation",
+          "description": "Describes a team for the incident",
+          "type": "object"
         },
         "title": {
           "description": "The title of the incident",
@@ -2096,7 +2156,8 @@
       },
       "required": [
         "value"
-      ]
+      ],
+      "type": "object"
     },
     "IncidentOwnerInfo": {
       "description": "Information on the user an incident is assigned to",
@@ -2117,6 +2178,34 @@
         "userPrincipalName": {
           "description": "The user principal name of the user the incident is assigned to.",
           "type": "string"
+        },
+        "ownerType": {
+          "readOnly": true,
+          "description": "The type of the owner the incident is assigned to.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "User",
+            "Group"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "OwnerType",
+            "values": [
+              {
+                "description": "The incident owner type is unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "The incident owner type is an AAD user",
+                "value": "User"
+              },
+              {
+                "description": "The incident owner type is an AAD group",
+                "value": "Group"
+              }
+            ]
+          }
         }
       },
       "type": "object"
@@ -3327,7 +3416,8 @@
       },
       "required": [
         "value"
-      ]
+      ],
+      "type": "object"
     },
     "RelationProperties": {
       "description": "Relation property bag.",
@@ -3887,6 +3977,73 @@
       },
       "type": "object"
     },
+    "TeamInformation": {
+      "description": "Describes team information",
+      "properties": {
+        "teamId": {
+          "description": "Team ID",
+          "readOnly": true,
+          "type": "string"
+        },
+        "primaryChannelUrl": {
+          "description": "The primary channel URL of the team",
+          "readOnly": true,
+          "type": "string"
+        },
+        "teamCreationTimeUtc": {
+          "description": "The time the team was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the team",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the team",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TeamProperties": {
+      "description": "Describes team properties",
+      "properties": {
+        "teamName": {
+          "description": "The name of the team",
+          "type": "string"
+        },
+        "teamDescription": {
+          "description": "The description of the team",
+          "type": "string"
+        },
+        "memberIds": {
+          "description": "List of member IDs to add to the team",
+          "items": {
+            "description": "A single-value attribute that is the unique identifier for the user, assigned by active directory.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "groupIds": {
+          "description": "List of group IDs to add their members to the team",
+          "items": {
+            "description": "A single-value attribute that is the unique identifier for the group, assigned by active directory.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "teamName"
+      ],
+      "type": "object"
+    },
     "ThreatIntelligence": {
       "description": "ThreatIntelligence property bag.",
       "properties": {
@@ -4066,6 +4223,16 @@
       "required": true,
       "type": "string",
       "description": "Relation Name",
+      "x-ms-parameter-location": "method"
+    },
+    "TeamProperties": {
+      "description": "Team properties",
+      "in": "body",
+      "name": "teamProperties",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/TeamProperties"
+      },
       "x-ms-parameter-location": "method"
     }
   }
