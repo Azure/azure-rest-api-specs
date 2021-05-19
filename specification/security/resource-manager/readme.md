@@ -20,7 +20,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
@@ -60,6 +60,14 @@ directive:
     from: onPremiseIotSensors.json
     where: $.definitions.OnPremiseIotSensor
     reason: The resource is managed in a subscription level (instead of inside a resource group)
+  - suppress: SECRET_PROPERTY
+    from: ingestionSettings.json
+    where: $.definitions.IngestionSettingToken.properties.token
+    reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from: ingestionSettings.json
+    where: $.definitions.IngestionConnectionString.properties.value
+    reason: Secrets are OK to return in a POST response.
 ```
 
 ### Basic Information
@@ -73,7 +81,7 @@ openapi-type: arm
 tag: package-composite-v3
 ```
 
-## Composite packages
+### Composite packages
 
 The following packages may be composed from multiple api-versions.
 
@@ -84,6 +92,9 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
@@ -110,6 +121,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
+- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -122,6 +134,9 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
@@ -150,6 +165,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
+- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -182,7 +198,6 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
@@ -193,17 +208,27 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
-- Microsoft.Security/stable/2020-01-01/alerts.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
-- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/stable/2020-01-01/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
+- Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
+- Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
+- Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
+- Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
+- Microsoft.Security/stable/2021-01-01/alerts.json
+- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -373,8 +398,25 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
-- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
+- Microsoft.Security/stable/2020-01-01/secureScore.json
+- Microsoft.Security/stable/2020-01-01/alerts.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2020-07-preview-only
+
+These settings apply only when `--tag=package-2020-07-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2020-07-preview-only'
+input-file:
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 
 # Needed when there is more than one input file
 override-info:
@@ -389,8 +431,26 @@ These settings apply only when `--tag=package-2020-08-preview-only` is specified
 input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
+- Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
+- Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
+- Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
+- Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
 
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2021-01-preview-only
+
+These settings apply only when `--tag=package-2021-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-01-preview-only'
+input-file:
+- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
@@ -413,8 +473,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js security/resource-manager
 ```
 
 ## C#
@@ -441,7 +499,4 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

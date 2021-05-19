@@ -422,6 +422,45 @@
         }
       }
     },
+    "/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions": {
+      "get": {
+        "tags": [
+          "MarketplaceRegistrationDefinitions"
+        ],
+        "operationId": "MarketplaceRegistrationDefinitionsWithoutScope_List",
+        "description": "Gets a list of the marketplace registration definitions for the marketplace identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Filter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of the marketplace registration definitions.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceRegistrationDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Marketplace Registration Definitions At Tenant Scope": {
+            "$ref": "./examples/GetMarketplaceRegistrationDefinitionsAtTenantScope.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions/{marketplaceIdentifier}": {
       "get": {
         "tags": [
@@ -457,6 +496,42 @@
         "x-ms-examples": {
           "Get Registration Definitions": {
             "$ref": "./examples/GetMarketplaceRegistrationDefinition.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions/{marketplaceIdentifier}": {
+      "get": {
+        "tags": [
+          "MarketplaceRegistrationDefinitions"
+        ],
+        "operationId": "MarketplaceRegistrationDefinitionsWithoutScope_Get",
+        "description": "Get the marketplace registration definition for the marketplace identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/MarketplaceIdentifier"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the details of the marketplace registration definition.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceRegistrationDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Marketplace Registration Definition At Tenant Scope": {
+            "$ref": "./examples/GetMarketplaceRegistrationDefinitionAtTenantScope.json"
           }
         }
       }
@@ -997,6 +1072,23 @@
       "type": "object",
       "description": "Eligible authorization tuple containing principle Id (of user/service principal/security group), role definition id, and the just-in-time access setting."
     },
+    "EligibleApprover": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal Id of the user or security group that will approve JIT activation requests for the eligible authorization."
+        },
+        "principalIdDisplayName": {
+          "type": "string",
+          "description": "Display name of the principal Id."
+        }
+      },
+      "required": [
+        "principalId"
+      ],
+      "type": "object",
+      "description": "A principal Id and user-friendly display name representing an eligible authorization approver."
+    },
     "JustInTimeAccessPolicy": {
       "properties": {
         "multiFactorAuthProvider": {
@@ -1009,12 +1101,21 @@
           "x-ms-enum": {
             "name": "MultiFactorAuthProvider",
             "modelAsString": true
-          }
+          },
+          "default": "None"
         },
         "maximumActivationDuration": {
           "type": "string",
           "format": "duration",
-          "description": "Maximum access duration in ISO 8601 format.  The default value is \"PT8H\"."
+          "description": "Maximum access duration in ISO 8601 format.",
+          "default": "PT8H"
+        },
+        "managedByTenantApprovers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EligibleApprover"
+          },
+          "description": "The list of managedByTenant approvers for the eligible authorization."
         }
       },
       "required": [
@@ -1023,29 +1124,40 @@
       "type": "object",
       "description": "Just-in-time access policy setting."
     },
-    "ErrorResponse": {
+    "ErrorDefinition": {
       "properties": {
-        "error": {
-          "readOnly": true,
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "Error code."
-            },
-            "message": {
-              "type": "string",
-              "description": "Error message indicating why the operation failed."
-            }
-          },
-          "required": [
-            "code",
-            "message"
-          ],
-          "type": "object",
-          "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message."
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          }
         }
       },
-      "description": "Error response."
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message."
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details.",
+          "type": "object"
+        }
+      }
     }
   },
   "parameters": {
@@ -1064,7 +1176,7 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string",
-      "description": "Market place identifer. Expected Formats - {publisher}.{product[-preview]}.{planName}.{version} or {publisher}.{product[-preview]}.{planName} or {publisher}.{product[-preview]} or {publisher})."
+      "description": "Market place identifier. Expected Formats - {publisher}.{product[-preview]}.{planName}.{version} or {publisher}.{product[-preview]}.{planName} or {publisher}.{product[-preview]} or {publisher})."
     },
     "ApiVersionParameter": {
       "name": "api-version",

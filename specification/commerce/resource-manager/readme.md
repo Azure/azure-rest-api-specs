@@ -39,6 +39,15 @@ input-file:
 - Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.Commerce/preview/2015-06-01-preview/commerce.json
+```
+
 ---
 # Code Generation
 
@@ -61,8 +70,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_commerce']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js commerce/resource-manager
 ```
 
 
@@ -146,7 +153,5 @@ generate-interface: true
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

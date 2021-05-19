@@ -31,6 +31,15 @@ openapi-type: arm
 tag: package-2020-06-25
 ```
 
+### Tag: package-2021-01-25
+
+These settings apply only when `--tag=package-2021-01-25` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-25'
+input-file:
+  - Microsoft.GuestConfiguration/stable/2021-01-25/guestconfiguration.json
+```
+
 ### Tag: package-2020-06-25
 
 These settings apply only when `--tag=package-2020-06-25` is specified on the command line.
@@ -112,10 +121,9 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-go
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js guestconfiguration/resource-manager
 ```
 
 
@@ -133,7 +141,5 @@ csharp:
   clear-output-folder: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

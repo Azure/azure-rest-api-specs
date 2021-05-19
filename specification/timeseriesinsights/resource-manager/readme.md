@@ -68,6 +68,15 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where: 
+      - $.definitions.EnvironmentUpdateParameters.properties.kind
+      - $.definitions.EventSourceUpdateParameters.properties.kind
+    from: timeseriesinsights.json
+    reason: This property is the discriminator for polymorph, but it can not be in request body.
+  - suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
+    from: timeseriesinsights.json
+    reason: kind is a non-settable property from the client in patch method.
   - suppress: R3025  # Tracked resource 'XXX' must have a get operation
     where:
       - $.definitions.StandardEnvironmentResource
@@ -102,13 +111,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-powershell
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js timeseriesinsights/resource-manager
 ```
 
 ## Go
@@ -195,7 +204,5 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -26,9 +26,26 @@ These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-07-preview
+tag: package-2020-12
 ```
 
+
+### Tag: package-2020-12
+
+These settings apply only when `--tag=package-2020-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-12'
+input-file:
+  - Microsoft.Cache/stable/2020-12-01/redis.json
+```
+### Tag: package-2020-06
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-06'
+input-file:
+  - Microsoft.Cache/stable/2020-06-01/redis.json
+```
 
 ### Tag: package-2019-07-preview
 
@@ -105,8 +122,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_redis']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js redis/resource-manager
 ```
 
 ## C#
@@ -130,7 +145,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python-mode: create
 python:
   azure-arm: true
@@ -142,13 +157,27 @@ python:
   clear-output-folder: true
 ```
 
+``` yaml $(python) && $(track2)
+python-mode: update
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.redis
+package-name: azure-mgmt-redis
+package-version: 5.0.0
+clear-output-folder: true
+```
+
 ``` yaml $(python) && $(python-mode) == 'update'
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis/azure/mgmt/redis
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis/azure/mgmt/redis
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis
@@ -222,6 +251,21 @@ directive:
       - $.definitions.RedisCommonProperties.properties.enableNonSslPort
     from: redis.json
     reason: this will result in breaking change
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isMaster."
+    where:
+      - $.definitions.RedisInstanceDetails.properties.isMaster
+    from: redis.json
+    reason: this will result in breaking change
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isPrimary"
+    where:
+      - $.definitions.RedisInstanceDetails.properties.isPrimary
+    from: redis.json
+    reason: this will result in breaking change
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isDataAction"
+    where:
+      - $.definitions.Operation.properties.isDataAction
+    from: types.json
+    reason: its per the RPC specification
   - suppress: R2017  # PUT request and response should be of same type "
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/linkedServers/{linkedServerName}"].put
@@ -236,7 +280,5 @@ directive:
     reason: This is false positive, 'linkedServers' is not a tracked resource.
 ```
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

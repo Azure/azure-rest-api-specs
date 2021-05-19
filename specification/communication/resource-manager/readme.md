@@ -28,7 +28,16 @@ These are the global settings for the Azure Communication Services API.
 title: CommunicationServiceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-08-20-preview
+tag: package-2020-08-20
+```
+
+### Tag: package-2020-08-20
+
+These settings apply only when `--tag=package-2020-08-20` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08-20'
+input-file:
+  - Microsoft.Communication/stable/2020-08-20/CommunicationService.json
 ```
 
 ### Tag: package-2020-08-20-preview
@@ -49,12 +58,13 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-powershell
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_vsonline']
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-java
+  - repo: azure-cli-extensions
 ```
 
 ## CSharp
@@ -68,3 +78,7 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Typescript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)

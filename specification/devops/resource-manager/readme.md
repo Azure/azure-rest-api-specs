@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2019-07-01-preview
 ```
 
+### Tag: package-2020-07-13-preview
+
+These settings apply only when `--tag=package-2020-07-13-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-13-preview'
+input-file:
+  - Microsoft.DevOps/preview/2020-07-13-preview/devops.json
+```
+
 ### Tag: package-2019-07-01-preview
 
 These settings apply only when `--tag=package-2019-07-01-preview` is specified on the command line.
@@ -60,8 +69,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_devops']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js devops/resource-manager
 ```
 
 ## Go
@@ -84,16 +91,14 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## trenton
+## Terraform
 
-These settings apply only when `--trenton` is specified on the command line.
+These settings apply only when `--terraform` is specified on the command line.
 
-``` yaml $(trenton)
-trenton:
+``` yaml $(terraform)
+terraform:
     cli-name: devops
     azure_arm: true
     license_header: MICROSOFT_MIT_NO_VERSION

@@ -26,13 +26,104 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "List Datadog marketplace agreements in the subscription.",
+        "operationId": "MarketplaceAgreements_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogAgreementResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_List": {
+            "$ref": "./examples/MarketplaceAgreements_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements/default": {
+      "put": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Create Datadog marketplace agreement in the subscription.",
+        "operationId": "MarketplaceAgreements_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DatadogAgreementResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogAgreementResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_CreateOrUpdate": {
+            "$ref": "./examples/MarketplaceAgreements_Create.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listApiKeys": {
       "post": {
         "tags": [
           "ApiKey"
         ],
         "summary": "List the api keys for a given monitor resource.",
-        "operationId": "ApiKeys_List",
+        "operationId": "Monitors_ListApiKeys",
         "produces": [
           "application/json"
         ],
@@ -68,7 +159,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ApiKeys_List": {
+          "Monitors_ListApiKeys": {
             "$ref": "./examples/ApiKeys_List.json"
           }
         }
@@ -80,7 +171,7 @@
           "ApiKey"
         ],
         "summary": "Get the default api key.",
-        "operationId": "ApiKeys_GetDefaultKey",
+        "operationId": "Monitors_GetDefaultKey",
         "produces": [
           "application/json"
         ],
@@ -113,7 +204,7 @@
           }
         },
         "x-ms-examples": {
-          "ApiKeys_GetDefaultKey": {
+          "Monitors_GetDefaultKey": {
             "$ref": "./examples/ApiKeys_GetDefaultKey.json"
           }
         }
@@ -125,7 +216,7 @@
           "ApiKey"
         ],
         "summary": "Set the default api key.",
-        "operationId": "ApiKeys_SetDefaultKey",
+        "operationId": "Monitors_SetDefaultKey",
         "consumes": [
           "application/json"
         ],
@@ -165,7 +256,7 @@
           }
         },
         "x-ms-examples": {
-          "ApiKeys_SetDefaultKey": {
+          "Monitors_SetDefaultKey": {
             "$ref": "./examples/ApiKeys_SetDefaultKey.json"
           }
         }
@@ -177,7 +268,7 @@
           "Hosts"
         ],
         "summary": "List the hosts for a given monitor resource.",
-        "operationId": "Hosts_List",
+        "operationId": "Monitors_ListHosts",
         "produces": [
           "application/json"
         ],
@@ -213,7 +304,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Hosts_List": {
+          "Monitors_ListHosts": {
             "$ref": "./examples/Hosts_List.json"
           }
         }
@@ -225,7 +316,7 @@
           "LinkedResources"
         ],
         "summary": "List all Azure resources associated to the same Datadog organization as the target resource.",
-        "operationId": "LinkedResources_List",
+        "operationId": "Monitors_ListLinkedResources",
         "produces": [
           "application/json"
         ],
@@ -261,7 +352,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "LinkedResources_List": {
+          "Monitors_ListLinkedResources": {
             "$ref": "./examples/LinkedResources_List.json"
           }
         }
@@ -273,7 +364,7 @@
           "MonitoredResources"
         ],
         "summary": "List the resources currently being monitored by the Datadog monitor resource.",
-        "operationId": "MonitoredResources_List",
+        "operationId": "Monitors_ListMonitoredResources",
         "produces": [
           "application/json"
         ],
@@ -309,7 +400,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MonitoredResources_List": {
+          "Monitors_ListMonitoredResources": {
             "$ref": "./examples/MonitoredResources_List.json"
           }
         }
@@ -655,7 +746,7 @@
           "RefreshSetPasswordLink"
         ],
         "summary": "Refresh the set password link and return a latest one.",
-        "operationId": "RefreshSetPassword_Get",
+        "operationId": "Monitors_RefreshSetPasswordLink",
         "produces": [
           "application/json"
         ],
@@ -688,7 +779,7 @@
           }
         },
         "x-ms-examples": {
-          "RefreshSetPassword_Get": {
+          "Monitors_RefreshSetPasswordLink": {
             "$ref": "./examples/RefreshSetPassword_Get.json"
           }
         }
@@ -766,6 +857,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
+            "description": "Rule set name",
             "in": "path",
             "name": "ruleSetName",
             "required": true,
@@ -822,6 +914,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
+            "description": "Rule set name",
             "in": "path",
             "name": "ruleSetName",
             "required": true,
@@ -924,6 +1017,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
+            "description": "Configuration name",
             "in": "path",
             "name": "configurationName",
             "required": true,
@@ -990,6 +1084,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
+            "description": "Configuration name",
             "in": "path",
             "name": "configurationName",
             "required": true,
@@ -1022,6 +1117,87 @@
     }
   },
   "definitions": {
+    "DatadogAgreementProperties": {
+      "description": "Terms properties.",
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "description": "Publisher identifier string.",
+          "type": "string"
+        },
+        "product": {
+          "description": "Product identifier string.",
+          "type": "string"
+        },
+        "plan": {
+          "description": "Plan identifier string.",
+          "type": "string"
+        },
+        "licenseTextLink": {
+          "description": "Link to HTML with Microsoft and Publisher terms.",
+          "type": "string"
+        },
+        "privacyPolicyLink": {
+          "description": "Link to the privacy policy of the publisher.",
+          "type": "string"
+        },
+        "retrieveDatetime": {
+          "format": "date-time",
+          "description": "Date and time in UTC of when the terms were accepted. This is empty if Accepted is false.",
+          "type": "string"
+        },
+        "signature": {
+          "description": "Terms signature.",
+          "type": "string"
+        },
+        "accepted": {
+          "description": "If any version of the terms have been accepted, otherwise false.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DatadogAgreementResource": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "ARM id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the agreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DatadogAgreementProperties",
+          "description": "Represents the properties of the resource."
+        }
+      }
+    },
+    "DatadogAgreementResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatadogAgreementResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
     "DatadogApiKey": {
       "required": [
         "key"
@@ -1329,7 +1505,8 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ProvisioningState"
-      }
+      },
+      "readOnly": true
     },
     "MonitoringStatus": {
       "description": "Flag specifying if the resource monitoring is enabled or disabled.",
@@ -1337,6 +1514,7 @@
         "Enabled",
         "Disabled"
       ],
+      "default": "Enabled",
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
@@ -1346,16 +1524,20 @@
     "MarketplaceSubscriptionStatus": {
       "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
       "enum": [
+        "Provisioning",
         "Active",
-        "Suspended"
+        "Suspended",
+        "Unsubscribed"
       ],
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "MarketplaceSubscriptionStatus"
-      }
+      },
+      "readOnly": true
     },
     "DatadogOrganizationProperties": {
+      "description": "Datadog organization properties",
       "type": "object",
       "properties": {
         "name": {
@@ -1373,14 +1555,39 @@
           "type": "string",
           "x-ms-mutability": [
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "linkingClientId": {
           "description": "The client_id from an existing in exchange for an auth token to link organization.",
           "type": "string",
           "x-ms-mutability": [
             "create"
+          ],
+          "x-ms-secret": true
+        },
+        "redirectUri": {
+          "description": "The redirect uri for linking.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
           ]
+        },
+        "apiKey": {
+          "description": "Api key associated to the Datadog organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "applicationKey": {
+          "description": "Application key associated to the Datadog organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "enterpriseAppId": {
           "description": "The Id of the Enterprise App used for Single sign on.",
@@ -1392,6 +1599,7 @@
       }
     },
     "UserInfo": {
+      "description": "User info",
       "type": "object",
       "properties": {
         "name": {
@@ -1409,7 +1617,8 @@
           "maxLength": 40,
           "type": "string"
         }
-      }
+      },
+      "x-ms-secret": true
     },
     "LiftrResourceCategories": {
       "enum": [
@@ -1459,6 +1668,7 @@
         "UserAssigned"
       ],
       "type": "string",
+      "description": "Identity type",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ManagedIdentityTypes"
@@ -1645,6 +1855,9 @@
       "description": "Definition of the properties for a TagRules resource.",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
         "logRules": {
           "$ref": "#/definitions/LogRules"
         },
@@ -1712,6 +1925,9 @@
     "DatadogSingleSignOnProperties": {
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
         "singleSignOnState": {
           "$ref": "#/definitions/SingleSignOnStates"
         },
@@ -1721,7 +1937,8 @@
         },
         "singleSignOnUrl": {
           "description": "The login URL specific to this Datadog Organization.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
