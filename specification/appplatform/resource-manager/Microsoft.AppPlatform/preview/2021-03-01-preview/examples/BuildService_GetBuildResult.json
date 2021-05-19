@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2021-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "buildServiceName": "default",
+    "buildName": "mybuild",
+    "buildResultName": "123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "name": "123",
+          "status": "Succeeded",
+          "containerImageReference": {
+            "ArcName": "myacr.azurecr.io",
+            "imageName": "myimage",
+            "Digest": "",
+            "Tag": "2021-0302-1218"
+          }
+        }
+      },
+      "type": "Microsoft.AppPlatform/Tanzu/buildservice/builds/results",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Tanzu/myservice/buildservice/default/builds/mybuild/results/123",
+      "name": "123"
+    }
+  }
+}
