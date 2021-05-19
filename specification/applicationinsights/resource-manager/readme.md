@@ -242,39 +242,13 @@ input-file:
   - Microsoft.Insights/preview/2021-03-03-preview/diagnosticServicesToken_API.json
 ```
 
-### Tag: package-2020-11-only
-
-These settings apply only when `--tag=package-2020-11-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-11-only'
-input-file:
-  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
-```
-
 ### Tag: package-2020-11-20
 
 These settings apply only when `--tag=package-2020-11-20` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-11-20'
 input-file:
-  - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
-  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
-  - Microsoft.Insights/stable/2015-05-01/components_API.json
-  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
-  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
-  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
-  - Microsoft.Insights/stable/2015-05-01/webTests_API.json
-  - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
-  - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
   - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
-  - Microsoft.Insights/preview/2018-05-01-preview/components_API.json
-  - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
-  - Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
 ```
 
 ### Tag: package-2020-10-only
