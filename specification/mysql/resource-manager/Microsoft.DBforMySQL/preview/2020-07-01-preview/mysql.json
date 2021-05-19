@@ -1467,6 +1467,91 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySql/flexibleServers/{serverName}/failover": {
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Failover",
+        "x-ms-examples": {
+          "List all configurations for a server": {
+            "$ref": "./examples/Failover.json"
+          }
+        },
+        "description": "HA server manual failover.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySql/flexibleServers/{serverName}/failoverEstimation": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_FailoverEstimation",
+        "x-ms-examples": {
+          "List all configurations for a server": {
+            "$ref": "./examples/FailoverEstimation.json"
+          }
+        },
+        "description": "HA server failover estimation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FailoverEstimationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2162,6 +2247,30 @@
         }
       },
       "description": "A list of server configurations."
+    },
+    "FailoverEstimationResult": {
+      "type": "object",
+      "properties": {
+        "failoverEstimationSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The estimated failover time."
+        },
+        "haHealthy": {
+          "type": "boolean",
+          "description": "If it is false, it means HA doesn't work for some reason. E.g. the standby server isn't ready, the standby server crashes. In such use case, the failover estimation time is nonsense"
+        },
+        "hasStaticConfigurationChanges": {
+          "type": "boolean",
+          "description": "If it is true, it means customer has changed some static configurations but not restart the server. If do failover, then the configurations are different between the primary and the standby (As the original standby switches to the new primary without restart, but the original primary restarts to switch to new standby).  It may cause  potential issues. We suggest customer to do restart before to failover."
+        },
+        "readReplicaPotentialBreakForFailover": {
+          "type": "boolean",
+          "description": "If it is true,  some read replica's replication may be break after failover. In such use case, we suggest customer to wait some time to do failover, reset up the replication broken read replicas after failover."
+        }
+      },
+      "description": "Manual failover result estimation."
     },
     "VirtualNetworkSubnetUsageParameter": {
       "type": "object",
