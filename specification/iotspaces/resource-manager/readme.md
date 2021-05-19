@@ -73,6 +73,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
 ```
 
@@ -96,4 +97,5 @@ csharp:
 See configuration in [readme.go.md](./readme.go.md)
 
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
