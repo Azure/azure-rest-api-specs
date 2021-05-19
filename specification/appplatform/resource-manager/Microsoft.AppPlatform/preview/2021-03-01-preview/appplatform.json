@@ -1027,6 +1027,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "BuildService_CreateOrUpdateBuild": {
+            "$ref": "./examples/BuildService_CreateOrUpdateBuild.json"
+          }
         }
       }
     },
@@ -1055,15 +1060,6 @@
           },
           {
             "$ref": "#/parameters/BuildResultNameParameter"
-          },
-          {
-            "name": "buildResult",
-            "in": "body",
-            "description": "Parameters for the get operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BuildResult"
-            }
           }
         ],
         "responses": {
@@ -1079,6 +1075,11 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        }
+      },
+      "x-ms-examples": {
+        "BuildService_GetBuildResult": {
+          "$ref": "./examples/BuildService_GetBuildResult.json"
         }
       }
     }
