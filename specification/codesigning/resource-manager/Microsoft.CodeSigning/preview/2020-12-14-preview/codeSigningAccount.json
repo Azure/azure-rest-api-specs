@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CodeSigningManagementClient",
-    "description": "Code Sign Resource Provider Account and Certificate Profile management API.",
+    "description": "Code Signing Resource Provider Account and Certificate Profile management API.",
     "version": "2020-12-14-preview"
   },
   "host": "management.azure.com",
@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSignAccounts/{accountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}": {
       "put": {
-        "operationId": "CodeSignAccount_Create",
-        "description": "Create a Code Sign Account",
+        "operationId": "CodeSigningAccount_Create",
+        "description": "Create a Code Signing Account",
         "x-ms-examples": {
-          "Create Code Sign Account": {
-            "$ref": "./examples/createCodeSignAccount.json"
+          "Create Code Signing Account": {
+            "$ref": "./examples/createCodeSigningAccount.json"
           }
         },
         "parameters": [
@@ -58,23 +58,24 @@
           },
           {
             "in": "body",
-            "name": "codeSignAccount",
+            "name": "codeSigningAccount",
             "schema": {
-              "$ref": "#/definitions/CodeSignAccount"
-            }
+              "$ref": "#/definitions/CodeSigningAccount"
+            },
+            "description": "Parameters to create the code signing account"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CodeSignAccount"
+              "$ref": "#/definitions/CodeSigningAccount"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/CodeSignAccount"
+              "$ref": "#/definitions/CodeSigningAccount"
             }
           },
           "default": {
@@ -85,7 +86,7 @@
           }
         },
         "tags": [
-          "CodeSignAccounts"
+          "CodeSigningAccounts"
         ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -93,11 +94,11 @@
         }
       },
       "patch": {
-        "operationId": "CodeSignAccount_Update",
-        "description": "Update a code sign account",
+        "operationId": "CodeSigningAccount_Update",
+        "description": "Update a code signing account",
         "x-ms-examples": {
-          "Update Code Sign Account": {
-            "$ref": "./examples/updateCodeSignAccount.json"
+          "Update Code Signing Account": {
+            "$ref": "./examples/updateCodeSigningAccount.json"
           }
         },
         "parameters": [
@@ -115,19 +116,19 @@
           },
           {
             "in": "body",
-            "name": "codeSignAccountPatch",
+            "name": "codeSigningAccountPatch",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CodeSignAccountPatch"
+              "$ref": "#/definitions/CodeSigningAccountPatch"
             },
-            "description": "Parameters supplied to update code sign account"
+            "description": "Parameters supplied to update code signing account"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CodeSignAccount"
+              "$ref": "#/definitions/CodeSigningAccount"
             }
           },
           "default": {
@@ -138,15 +139,15 @@
           }
         },
         "tags": [
-          "CodeSignAccounts"
+          "CodeSigningAccounts"
         ]
       },
       "get": {
-        "operationId": "CodeSignAccount_Get",
-        "description": "Get a Code Sign Account",
+        "operationId": "CodeSigningAccount_Get",
+        "description": "Get a Code Signing Account",
         "x-ms-examples": {
-          "Get Code Sign Account": {
-            "$ref": "./examples/getCodeSignAccount.json"
+          "Get Code Signing Account": {
+            "$ref": "./examples/getCodeSigningAccount.json"
           }
         },
         "parameters": [
@@ -167,7 +168,7 @@
           "200": {
             "description": "Retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/CodeSignAccount"
+              "$ref": "#/definitions/CodeSigningAccount"
             }
           },
           "default": {
@@ -178,15 +179,15 @@
           }
         },
         "tags": [
-          "CodeSignAccounts"
+          "CodeSigningAccounts"
         ]
       },
       "delete": {
-        "operationId": "CodeSignAccount_Delete",
-        "description": "Delete Code Sign Account",
+        "operationId": "CodeSigningAccount_Delete",
+        "description": "Delete Code Signing Account",
         "x-ms-examples": {
-          "Delete Code Sign Account": {
-            "$ref": "./examples/deleteCodeSignAccount.json"
+          "Delete Code Signing Account": {
+            "$ref": "./examples/deleteCodeSigningAccount.json"
           }
         },
         "parameters": [
@@ -221,15 +222,15 @@
           }
         },
         "tags": [
-          "CodeSignAccounts"
+          "CodeSigningAccounts"
         ],
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSignAccounts/{accountName}/certificateProfiles": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}/certificateProfiles": {
       "get": {
-        "operationId": "CertificateProfile_ListByCodeSignAccount",
-        "description": "List certificate profiles within a code sign account",
+        "operationId": "CertificateProfile_ListByCodeSigningAccount",
+        "description": "List certificate profiles within a code signing account",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -251,7 +252,7 @@
         },
         "responses": {
           "200": {
-            "description": "Gets all code sign accounts in the specified resource group",
+            "description": "Gets all code signing accounts in the specified resource group",
             "schema": {
               "$ref": "#/definitions/CertificateProfiles"
             }
@@ -268,7 +269,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSignAccounts/{accountName}/certificateProfiles/{profileName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}/certificateProfiles/{profileName}": {
       "put": {
         "operationId": "CertificateProfile_Create",
         "description": "Create a certificate profile",
@@ -299,7 +300,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/CertificateProfile"
-            }
+            },
+            "description": "Parameters to create the certificate profile"
           }
         ],
         "responses": {
@@ -476,13 +478,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CodeSigning/codeSignAccounts": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CodeSigning/codeSigningAccounts": {
       "get": {
-        "operationId": "CodeSignAccount_ListBySubscription",
-        "description": "Lists Code Sign Accounts within a subscription",
+        "operationId": "CodeSigningAccount_ListBySubscription",
+        "description": "Lists Code Signing Accounts within a subscription",
         "x-ms-examples": {
-          "List Code Sign Accounts by Subscription": {
-            "$ref": "./examples/listCodeSignAccountsBySubscription.json"
+          "List Code Signing Accounts by Subscription": {
+            "$ref": "./examples/listCodeSigningAccountsBySubscription.json"
           }
         },
         "parameters": [
@@ -495,9 +497,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets all code sign accounts in the specified subscription",
+            "description": "Gets all code signing accounts in the specified subscription",
             "schema": {
-              "$ref": "#/definitions/CodeSignAccounts"
+              "$ref": "#/definitions/CodeSigningAccounts"
             }
           },
           "default": {
@@ -508,20 +510,20 @@
           }
         },
         "tags": [
-          "CodeSignAccounts"
+          "CodeSigningAccounts"
         ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSignAccounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts": {
       "get": {
-        "operationId": "CodeSignAccount_ListByResourceGroup",
-        "description": "List Code Sign Accounts within a resource group",
+        "operationId": "CodeSigningAccount_ListByResourceGroup",
+        "description": "List Code Signing Accounts within a resource group",
         "x-ms-examples": {
-          "List Code Sign Accounts by Resource Group": {
-            "$ref": "./examples/listCodeSignAccountsByResourceGroup.json"
+          "List Code Signing Accounts by Resource Group": {
+            "$ref": "./examples/listCodeSigningAccountsByResourceGroup.json"
           }
         },
         "parameters": [
@@ -537,9 +539,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets all code sign accounts in the specified resource group",
+            "description": "Gets all code signing accounts in the specified resource group",
             "schema": {
-              "$ref": "#/definitions/CodeSignAccounts"
+              "$ref": "#/definitions/CodeSigningAccounts"
             }
           },
           "default": {
@@ -550,7 +552,7 @@
           }
         },
         "tags": [
-          "CodeSignAccounts"
+          "CodeSigningAccounts"
         ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -562,8 +564,8 @@
         "operationId": "Operations_List",
         "description": "Lists all of the available API operations for code signing resource.",
         "x-ms-examples": {
-          "List Code Sign Account operations": {
-            "$ref": "./examples/listCodeSignAccountOperations.json"
+          "List Code Signing Account operations": {
+            "$ref": "./examples/listCodeSigningAccountOperations.json"
           }
         },
         "parameters": [
@@ -595,30 +597,31 @@
     }
   },
   "definitions": {
-    "CodeSignAccounts": {
-      "description": "The paginated list of code sign accounts",
+    "CodeSigningAccounts": {
+      "description": "The paginated list of code signing accounts",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of code sign accounts",
+          "description": "List of code signing accounts",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CodeSignAccount"
+            "$ref": "#/definitions/CodeSigningAccount"
           }
         },
         "nextLink": {
-          "description": "The link to fetch the next page of code sign account",
+          "description": "The link to fetch the next page of code signing account",
           "type": "string"
         }
       }
     },
-    "CodeSignAccount": {
-      "description": "Code sign account resource",
+    "CodeSigningAccount": {
+      "description": "Code signing account resource",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CodeSignAccountProperties"
+          "$ref": "#/definitions/CodeSigningAccountProperties",
+          "description": "Code signing account properties"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -630,18 +633,14 @@
         }
       ]
     },
-    "CodeSignAccountProperties": {
-      "description": "Properties of the code sign account",
+    "CodeSigningAccountProperties": {
+      "description": "Properties of the code signing account",
       "type": "object",
       "properties": {
         "accountUri": {
-          "description": "The URI of the code sign account for performing operations on certificate profiles. This property is readonly",
+          "description": "The URI of the code signing account for performing operations on certificate profiles. This property is readonly",
           "readOnly": true,
           "type": "string"
-        },
-        "verificationStatus": {
-          "readOnly": true,
-          "$ref": "#/definitions/VerificationStatus"
         },
         "provisioningState": {
           "readOnly": true,
@@ -649,8 +648,8 @@
         }
       }
     },
-    "CodeSignAccountPatch": {
-      "description": "Parameters for creating or updating a code sign account",
+    "CodeSigningAccountPatch": {
+      "description": "Parameters for creating or updating a code signing account",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -663,19 +662,19 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CodeSignAccountPatchProperties",
-          "description": "Properties of the code sign account"
+          "$ref": "#/definitions/CodeSigningAccountPatchProperties",
+          "description": "Properties of the code signing account"
         }
       }
     },
-    "CodeSignAccountPatchProperties": {
-      "description": "Properties of the code sign account",
+    "CodeSigningAccountPatchProperties": {
+      "description": "Properties of the code signing account",
       "type": "object",
       "properties": {
         "accountUri": {
           "readOnly": true,
           "type": "string",
-          "description": "Account Uri of the code sign account"
+          "description": "Account Uri of the code signing account"
         }
       }
     },
@@ -780,7 +779,7 @@
       "description": "Properties of the certificate",
       "type": "object",
       "properties": {
-        "id": {
+        "serialNumber": {
           "description": "Id of the certificate",
           "type": "string"
         },
@@ -828,19 +827,6 @@
         }
       }
     },
-    "VerificationStatus": {
-      "type": "string",
-      "description": "Vetting status of the code sign account",
-      "enum": [
-        "Completed",
-        "InProgress",
-        "NotCompleted"
-      ],
-      "x-ms-enum": {
-        "name": "VerificationStatus",
-        "modelAsString": false
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning state of the vault",
@@ -862,9 +848,6 @@
       "description": "Profile type of the certificate",
       "type": "string",
       "enum": [
-        "Test",
-        "Trial",
-        "PrivateTrust",
         "PublicTrust"
       ],
       "x-ms-enum": {
@@ -876,7 +859,7 @@
       "description": "Rotation policy of the certificate",
       "type": "string",
       "enum": [
-        "Monthly"
+        "30 Days"
       ],
       "x-ms-enum": {
         "name": "RotationPolicy",
@@ -928,7 +911,7 @@
           "type": "string"
         },
         "resource": {
-          "description": "Code sign resource on which the operation is performed",
+          "description": "Code signing resource on which the operation is performed",
           "type": "string"
         },
         "operation": {
