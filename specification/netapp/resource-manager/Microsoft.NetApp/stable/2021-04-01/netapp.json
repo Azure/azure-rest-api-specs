@@ -207,40 +207,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/getQuotaLimits": {
-      "post": {
-        "tags": [
-          "NetApp Resource"
-        ],
-        "summary": "Get quota limits",
-        "description": "Get the default and current limits for quotas",
-        "operationId": "NetAppResource_GetQuotaLimits",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/QuotaLimitsResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-examples": {
-          "GetQuotaLimits": {
-            "$ref": "examples/GetQuotaLimits.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts": {
       "get": {
         "summary": "Describe all NetApp Accounts in a resource group",
@@ -3000,81 +2966,6 @@
         "resourceGroup": {
           "description": "Resource group name.",
           "type": "string"
-        }
-      }
-    },
-    "SubscriptionQuotaItem": {
-      "description": "Information regarding quota on subscription",
-      "type": "object",
-      "properties": {
-        "current": {
-          "description": "The current quota value.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "default": {
-          "description": "The default quota value.",
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "QuotaLimitsResponse": {
-      "description": "Information regarding quota limits on subscription",
-      "type": "object",
-      "properties": {
-        "subscriptionId": {
-          "description": "Subscription identifier.",
-          "type": "string"
-        },
-        "accountsPerSubscription": {
-          "description": "The quota for maximum number of accounts per subscription.",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/SubscriptionQuotaItem"
-          }
-        },
-        "poolsPerAccount": {
-          "description": "The quota for maximum number of capacity pools per account.",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/SubscriptionQuotaItem"
-          }
-        },
-        "volumesPerPool": {
-          "description": "The quota for maximum number of volumes per capacity pool.",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/SubscriptionQuotaItem"
-          }
-        },
-        "snapshotsPerVolume": {
-          "description": "The quota for maximum number of snapshots per volume",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/SubscriptionQuotaItem"
-          }
-        },
-        "totalTiBsPerSubscription": {
-          "description": "The quota for maximum number of Tebibytes per subscription",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/SubscriptionQuotaItem"
-          }
-        },
-        "totalDPVolumesPerSubscription": {
-          "description": "The quota for maximum number of data protection volumes per subscription.",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/SubscriptionQuotaItem"
-          }
-        },
-        "totalVolumesPerSubscription": {
-          "description": "The quota for maximum number of volumes per subscription.",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/SubscriptionQuotaItem"
-          }
         }
       }
     },
