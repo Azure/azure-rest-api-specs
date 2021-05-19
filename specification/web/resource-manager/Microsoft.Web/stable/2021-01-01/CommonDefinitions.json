@@ -305,6 +305,9 @@
         },
         "sku": {
           "$ref": "#/definitions/SkuDescription"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation"
         }
       }
     },
@@ -1117,6 +1120,21 @@
           "items": {
             "$ref": "#/definitions/RampUpRule"
           }
+        }
+      }
+    },
+    "ExtendedLocation": {
+      "description": "Extended Location.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of extended location.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of extended location.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2372,6 +2390,9 @@
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation"
         }
       }
     },
