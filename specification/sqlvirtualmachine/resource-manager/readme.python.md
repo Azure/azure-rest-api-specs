@@ -1,4 +1,4 @@
-### Python
+## Python
 
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
@@ -39,13 +39,11 @@ python:
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update' && $(track2)
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sqlvirtualmachine/azure/mgmt/sqlvirtualmachine
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/sql/azure-mgmt-sqlvirtualmachine/azure/mgmt/sqlvirtualmachine
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sqlvirtualmachine
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/sql/azure-mgmt-sqlvirtualmachine
 ```
