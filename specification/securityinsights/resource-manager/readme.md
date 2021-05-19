@@ -56,7 +56,7 @@ input-file:
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/dataConnectors.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Watchlists.json
-- Microsoft.SecurityInsights/preview/2021-03-01-preview/Metadata.json
+- Microsoft.SecurityInsights/preview/2021-05-01-preview/Metadata.json
 directive:
   - suppress: R4017
     from: Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
