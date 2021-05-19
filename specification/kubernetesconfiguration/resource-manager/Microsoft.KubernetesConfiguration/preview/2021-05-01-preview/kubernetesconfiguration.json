@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-03-01",
+    "version": "2021-05-01-preview",
     "title": "SourceControlConfigurationClient",
     "description": "Use these APIs to create Source Control Configuration resources through ARM, for Kubernetes Clusters."
   },
@@ -48,19 +48,19 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/SourceControlConfigurationNameParameter"
@@ -79,7 +79,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -97,19 +97,19 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/SourceControlConfigurationNameParameter"
@@ -143,7 +143,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -161,19 +161,19 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "#/parameters/SourceControlConfigurationNameParameter"
@@ -192,7 +192,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -213,19 +213,19 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2021-05-01-preview/definitions.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -241,7 +241,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -277,7 +277,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -288,44 +288,6 @@
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
-      "properties": {
-        "sampleProperty": {
-          "type": "string",
-          "description": "Sample property of type string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "description": "Error definition.",
-          "$ref": "#/definitions/ErrorDefinition"
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "readOnly": true,
-      "required": [
-        "message",
-        "code"
-      ],
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "minimum": 100,
-          "maximum": 600
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string"
-        }
-      }
-    },
     "ComplianceStatus": {
       "description": "Compliance Status details",
       "type": "object",
@@ -561,6 +523,10 @@
             }
           }
         },
+        "origin": {
+          "description": "The intended executor of the operation;governs the display of the operation in the RBAC UX and the audit logs UX",
+          "type": "string"
+        },
         "isDataAction": {
           "description": "The flag that indicates whether the operation applies to data plane.",
           "type": "boolean",
@@ -588,53 +554,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "ClusterRpParameter": {
-      "name": "clusterRp",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "Microsoft.ContainerService",
-        "Microsoft.Kubernetes"
-      ],
-      "description": "The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).",
-      "x-ms-parameter-location": "method"
-    },
-    "ClusterResourceNameParameter": {
-      "name": "clusterResourceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "managedClusters",
-        "connectedClusters"
-      ],
-      "description": "The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or connectedClusters (for OnPrem K8S clusters).",
-      "x-ms-parameter-location": "method"
-    },
-    "ClusterNameParameter": {
-      "name": "clusterName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the kubernetes cluster.",
-      "x-ms-parameter-location": "method"
-    },
     "SourceControlConfigurationNameParameter": {
       "name": "sourceControlConfigurationName",
       "in": "path",
