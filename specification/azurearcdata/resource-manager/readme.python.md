@@ -16,6 +16,17 @@ python:
 
 ```yaml $(python)
 python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: Microsoft.AzureArcData
+  package-name: azurearcdata
+  package-version: 2021-03-02
+  clear-output-folder: true
+```
+
+```yaml $(python)
+python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt/azurearcdata
 ```
