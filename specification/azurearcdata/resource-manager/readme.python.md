@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.AzureArcData
   package-name: azurearcdata
-  package-version: 2020-12-08
+  package-version: 2021-03-02
   clear-output-folder: true
 ```
 
