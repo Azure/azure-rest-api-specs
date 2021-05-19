@@ -800,6 +800,14 @@
           "readOnly": true,
           "description": "The Guid id of the private link scope.",
           "type": "string"
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "description": "The collection of associated Private Endpoint Connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionDataModel"
+          }
         }
       }
     },
@@ -885,6 +893,31 @@
             "type": "string"
           },
           "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionDataModel": {
+      "description": "The Data Model for a Private Endpoint Connection associated with a Private Link Scope",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ARM Resource Id of the Private Endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The Name of the Private Endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The Private Endpoint Connection properties."
         }
       }
     },
