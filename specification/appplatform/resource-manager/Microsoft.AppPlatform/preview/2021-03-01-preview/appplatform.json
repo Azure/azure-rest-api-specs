@@ -1088,7 +1088,7 @@
         "tags": [
           "AppPlatform"
         ],
-        "description": "Get the Application configuration service and its properties.",
+        "description": "Get the Application Configuration Service and its properties.",
         "operationId": "ConfigurationServices_Get",
         "parameters": [
           {
@@ -1186,65 +1186,6 @@
         "x-ms-examples": {
           "ConfigurationServices_CreateOrUpdate": {
             "$ref": "./examples/ConfigurationServices_CreateOrUpdate.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Update the Application Configuration Service, override existing Application Configuration Service settings.",
-        "operationId": "ConfigurationServices_UpdatePatch",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "ConfigurationServiceResource",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationServiceResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the updated Application Configuration Service.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationServiceResource"
-            }
-          },
-          "202": {
-            "description": "Accepted. The response indicates the exiting Application Configuration Service is now updating and contains a Location\r\nheader to query the operation result.",
-            "schema": {
-              "$ref": "#/definitions/ConfigurationServiceResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "ConfigurationServices_UpdatePatch": {
-            "$ref": "./examples/ConfigurationServices_UpdatePatch.json"
           }
         }
       },
@@ -1723,11 +1664,11 @@
       }
     },
     "ConfigurationServiceProperties": {
-      "description": "Application configuration service properties payload",
+      "description": "Application Configuration Service properties payload",
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "State of the Application configuration service.",
+          "description": "State of the Application Configuration Service.",
           "enum": [
             "Creating",
             "Updating",
@@ -1752,23 +1693,23 @@
       }
     },
     "ConfigurationServiceRuntimeState": {
-      "description": "Runtime state of the Application configuration service",
+      "description": "Runtime state of the Application Configuration Service",
       "type": "object",
       "readOnly": true,
       "properties": {
         "cpu": {
-          "description": "Cpu allocated to each application configuration service instance",
+          "description": "Cpu allocated to each Application Configuration Service instance",
           "type": "string",
           "readOnly": true
         },
         "memory": {
-          "description": "Memory allocated to each application configuration service instance",
+          "description": "Memory allocated to each Application Configuration Service instance",
           "type": "string",
           "readOnly": true
         },
         "instanceCount": {
           "format": "int32",
-          "description": "Instance count of the application configuration service",
+          "description": "Instance count of the Application Configuration Service",
           "type": "integer",
           "readOnly": true
         }
