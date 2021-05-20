@@ -183,6 +183,7 @@ swagger-to-sdk:
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-containerregistry
       - python ./scripts/trim_aio.py ./sdk/containerregistry/azure-mgmt-containerregistry
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -211,6 +212,9 @@ csharp:
   output-folder: $(csharp-sdks-folder)/containerregistry/Microsoft.Azure.Management.ContainerRegistry/src/Generated
   clear-output-folder: true
 ```
+## Pyhton
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
