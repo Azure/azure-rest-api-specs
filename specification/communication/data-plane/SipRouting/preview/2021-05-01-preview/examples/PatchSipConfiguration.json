@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2021-05-01-preview",
+    "body": {
+      "trunks": {
+        "vendor.xyz.biz": {
+          "sipSignalingPort": 5061
+        }
+      },
+      "routes": [
+        {
+          "name": "VendorXYZ",
+          "description": "External route XYZ",
+          "numberPattern": "^\\+?\\d+$",
+          "trunks": [
+            "vendor.xyz.biz"
+          ]
+        }
+      ]
+    },
+    "endpoint": "https://resourcename.region.dev.communications.azure.net/",
+    "locale": "en-us"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "trunks": {
+          "vendor.xyz.biz": {
+            "sipSignalingPort": 5061
+          }
+        },
+        "routes": [
+          {
+            "name": "VendorXYZ",
+            "description": "External route XYZ",
+            "numberPattern": "^\\+?\\d+$",
+            "trunks": [
+              "vendor.xyz.biz"
+            ]
+          }
+        ]
+      }
+    },
+    "400": {
+      "error": {
+        "code": "InvalidRegex",
+        "message": "Request failed: 'Not supported regex format provided’."
+      }
+    },
+    "415": {},
+    "422": {
+      "error": {
+        "code": "MissingGateway",
+        "message": "Request failed: 'The gateway FQDN ‘gateway_fqdn’ used in routing settings is not defined in the gateway list.’."
+      }
+    },
+    "500": {
+      "error": {
+        "code": "InternalServerError",
+        "message": "Internal Server Error."
+      }
+    }
+  }
+}
