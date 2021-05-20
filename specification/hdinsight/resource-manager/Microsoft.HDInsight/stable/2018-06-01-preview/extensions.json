@@ -184,7 +184,7 @@
         "description": "Enables the Azure Monitor on the HDInsight cluster.",
         "x-ms-examples": {
           "Enable cluster monitoring": {
-            "$ref": "./examples/EnableLinuxClusterMonitoring.json"
+            "$ref": "./examples/EnableLinuxClusterAzureMonitor.json"
           }
         },
         "operationId": "Extensions_EnableAzureMonitor",
@@ -237,7 +237,7 @@
         "description": "Gets the status of Azure Monitor on the HDInsight cluster.",
         "x-ms-examples": {
           "Enable cluster monitoring": {
-            "$ref": "./examples/GetLinuxClusterMonitoringStatus.json"
+            "$ref": "./examples/GetLinuxClusterAzureMonitorStatus.json"
           }
         },
         "operationId": "Extensions_GetAzureMonitorStatus",
@@ -277,7 +277,7 @@
         "description": "Disables the Azure Monitor on the HDInsight cluster.",
         "x-ms-examples": {
           "Enable cluster monitoring": {
-            "$ref": "./examples/DisableLinuxClusterMonitoring.json"
+            "$ref": "./examples/DisableLinuxClusterAzureMonitor.json"
           }
         },
         "operationId": "Extensions_DisableAzureMonitor",
@@ -559,14 +559,14 @@
       }
     },
     "AzureMonitorRequest": {
-      "description": "The cluster monitor parameters.",
+      "description": "The azure monitor parameters.",
       "properties": {
         "workspaceId": {
-          "description": "The cluster monitor workspace ID.",
+          "description": "The Log Analytics workspace ID.",
           "type": "string"
         },
         "primaryKey": {
-          "description": "The cluster monitor workspace key.",
+          "description": "The Log Analytics workspace key.",
           "type": "string"
         },
         "selectedConfigurations": {
@@ -576,7 +576,7 @@
       }
     },
     "AzureMonitorResponse": {
-      "description": "The cluster monitoring status response.",
+      "description": "The azure monitor status response.",
       "properties": {
         "clusterMonitoringEnabled": {
           "description": "The status of the monitor on the HDInsight cluster.",
