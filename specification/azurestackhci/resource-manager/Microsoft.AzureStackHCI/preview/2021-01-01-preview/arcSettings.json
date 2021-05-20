@@ -190,6 +190,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "OK"
+          },
           "204": {
             "description": "OK"
           },
@@ -280,25 +283,36 @@
         "aggregateState": {
           "description": "Aggregate state of Arc agent across the nodes in this HCI cluster",
           "type": "string",
+          "readOnly": true,
           "enum": [
+            "Not Specified",
+            "Error",
+            "Succeeded",
+            "Canceled",
+            "Failed",
             "Connected",
-            "Partially Connected",
             "Disconnected",
-            "Installing",
-            "Error"
+            "Deleted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress"
           ],
           "x-ms-enum": {
             "name": "aggregateState",
             "modelAsString": true
-          },
-          "readOnly": true
+          }
         },
         "perNodeDetails": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PerNodeState"
           },
-          "description": "State of Arc agent in each of the nodes"
+          "description": "State of Arc agent in each of the nodes",
+          "readOnly": true
         }
       }
     },
@@ -320,10 +334,18 @@
           "description": "State of Arc agent in this node",
           "type": "string",
           "enum": [
+            "Not Specified",
+            "Error",
+            "Succeeded",
+            "Canceled",
+            "Failed",
             "Connected",
             "Disconnected",
-            "Installing",
-            "Error"
+            "Deleted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving"
           ],
           "x-ms-enum": {
             "name": "perNodeArcState",

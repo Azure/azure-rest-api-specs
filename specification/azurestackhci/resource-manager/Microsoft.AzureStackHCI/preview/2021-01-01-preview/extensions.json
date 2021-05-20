@@ -268,6 +268,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "OK"
+          },
           "204": {
             "description": "OK"
           },
@@ -341,13 +344,21 @@
           "description": "Aggregate state of ArcExtension across the nodes in this HCI cluster",
           "type": "string",
           "enum": [
+            "Not Specified",
+            "Error",
             "Succeeded",
-            "Partially Succeeded",
+            "Canceled",
             "Failed",
-            "Not Started",
-            "Installing",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
+            "Updating",
             "Deleting",
-            "Error"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress"
           ],
           "x-ms-enum": {
             "name": "aggregateExtensionState",
@@ -360,7 +371,8 @@
           "items": {
             "$ref": "#/definitions/PerNodeExtensionState"
           },
-          "description": "State of Arc extension in each of the nodes"
+          "description": "State of Arc extension in each of the nodes",
+          "readOnly": true
         }
       }
     },
@@ -382,12 +394,18 @@
           "description": "State of ArcExtension in this node",
           "type": "string",
           "enum": [
+            "Not Specified",
+            "Error",
             "Succeeded",
+            "Canceled",
             "Failed",
-            "Not Started",
-            "Installing",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
+            "Updating",
             "Deleting",
-            "Error"
+            "Moving"
           ],
           "x-ms-enum": {
             "name": "perNodeExtensionState",
@@ -441,7 +459,8 @@
         },
         "protectedSettings": {
           "type": "object",
-          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+          "description": "Protected settings specific to the extension, these will not be returned in any calls",
+          "x-ms-secret": true
         },
         "provisioningState": {
           "readOnly": true,

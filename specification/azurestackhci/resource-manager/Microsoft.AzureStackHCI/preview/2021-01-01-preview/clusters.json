@@ -380,7 +380,9 @@
           "description": "Status of the cluster agent.",
           "type": "string",
           "enum": [
-            "Connected",
+            "NotYetRegistered",
+            "ConnectedRecently",
+            "NotConnectedRecently",
             "Disconnected",
             "Error"
           ],
@@ -396,8 +398,8 @@
           "readOnly": true
         },
         "cloudManagementEndpoint": {
-          "description": "Endpoint configured for management from the Azure portal",
-          "type": "string"
+          "type": "string",
+          "description": "Endpoint configured for management from the Azure portal"
         },
         "aadClientId": {
           "description": "App id of cluster AAD identity.",
@@ -424,6 +426,24 @@
           "description": "Type of billing applied to the resource.",
           "type": "string",
           "readOnly": true
+        },
+        "registrationTimestamp": {
+          "description": "First cluster sync timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "description": "Most recent cluster sync timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastBillingTimestamp": {
+          "description": "Most recent billing meter timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         }
       }
     },
@@ -432,8 +452,8 @@
       "type": "object",
       "properties": {
         "cloudManagementEndpoint": {
-          "description": "Endpoint configured for management from the Azure portal",
-          "type": "string"
+          "type": "string",
+          "description": "Endpoint configured for management from the Azure portal"
         },
         "aadClientId": {
           "description": "App id of cluster AAD identity.",
@@ -486,19 +506,6 @@
           "type": "string",
           "readOnly": true
         },
-        "imdsAttestation": {
-          "description": "IMDS attestation status of the cluster.",
-          "type": "string",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "ImdsAttestation",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
         "nodes": {
           "description": "List of nodes reported by the cluster.",
           "type": "array",
@@ -511,6 +518,19 @@
           "description": "Last time the cluster reported the data.",
           "type": "string",
           "format": "date-time",
+          "readOnly": true
+        },
+        "imdsAttestation": {
+          "description": "IMDS attestation status of the cluster.",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ImdsAttestation",
+            "modelAsString": true
+          },
           "readOnly": true
         }
       }
