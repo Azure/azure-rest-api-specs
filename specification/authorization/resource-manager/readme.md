@@ -97,7 +97,7 @@ These settings apply only when `--tag=package-preview-2021-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-04'
 input-file:
-  - Microsoft.Authorization/preview/2021-04-01-preview/authorization-UsageMetricsCalls.json
+  - Microsoft.Authorization/preview/2021-04-01-preview/authorization-RoleAssignmentPaginationCalls.json
 ```
 ### Tag: package-2021-03-01-preview-only
 
